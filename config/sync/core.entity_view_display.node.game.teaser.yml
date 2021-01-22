@@ -1,0 +1,100 @@
+uuid: 3267a5e9-f650-4b9d-bd5d-600399be1bbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.game.field_after_bye
+    - field.field.node.game.field_brady_attempts
+    - field.field.node.game.field_brady_completions
+    - field.field.node.game.field_brady_ints
+    - field.field.node.game.field_brady_played
+    - field.field.node.game.field_brady_tds
+    - field.field.node.game.field_brady_yards
+    - field.field.node.game.field_date
+    - field.field.node.game.field_game_links
+    - field.field.node.game.field_game_summary
+    - field.field.node.game.field_highlights
+    - field.field.node.game.field_home_away
+    - field.field.node.game.field_month
+    - field.field.node.game.field_opp_ot
+    - field.field.node.game.field_opp_q1
+    - field.field.node.game.field_opp_q2
+    - field.field.node.game.field_opp_q3
+    - field.field.node.game.field_opp_q4
+    - field.field.node.game.field_opponent
+    - field.field.node.game.field_opponent_score
+    - field.field.node.game.field_opposing_coach
+    - field.field.node.game.field_ot
+    - field.field.node.game.field_over_under
+    - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_score
+    - field.field.node.game.field_pats_ot
+    - field.field.node.game.field_pats_q1
+    - field.field.node.game.field_pats_q2
+    - field.field.node.game.field_pats_q3
+    - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_playoff_game
+    - field.field.node.game.field_result
+    - field.field.node.game.field_score_differential
+    - field.field.node.game.field_season
+    - field.field.node.game.field_surf
+    - field.field.node.game.field_temperature
+    - field.field.node.game.field_vegas_line
+    - field.field.node.game.field_week
+    - field.field.node.game.field_weekday
+    - field.field.node.game.field_youtube_highlights
+    - node.type.game
+  module:
+    - user
+id: node.game.teaser
+targetEntityType: node
+bundle: game
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_after_bye: true
+  field_brady_attempts: true
+  field_brady_completions: true
+  field_brady_ints: true
+  field_brady_played: true
+  field_brady_tds: true
+  field_brady_yards: true
+  field_date: true
+  field_game_links: true
+  field_game_summary: true
+  field_highlights: true
+  field_home_away: true
+  field_month: true
+  field_opp_ot: true
+  field_opp_q1: true
+  field_opp_q2: true
+  field_opp_q3: true
+  field_opp_q4: true
+  field_opponent: true
+  field_opponent_score: true
+  field_opposing_coach: true
+  field_ot: true
+  field_over_under: true
+  field_passer_rating: true
+  field_patriots_score: true
+  field_pats_ot: true
+  field_pats_q1: true
+  field_pats_q2: true
+  field_pats_q3: true
+  field_pats_q4: true
+  field_playoff_game: true
+  field_result: true
+  field_score_differential: true
+  field_season: true
+  field_surf: true
+  field_temperature: true
+  field_vegas_line: true
+  field_week: true
+  field_weekday: true
+  field_youtube_highlights: true

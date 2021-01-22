@@ -1,0 +1,29 @@
+uuid: a2e8f59e-5b9d-47c2-b04d-1c0b18ff6d1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_play_type
+    - paragraphs.paragraphs_type.highlight
+    - taxonomy.vocabulary.play_type
+id: paragraph.highlight.field_play_type
+field_name: field_play_type
+entity_type: paragraph
+bundle: highlight
+label: 'Play Type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      play_type: play_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

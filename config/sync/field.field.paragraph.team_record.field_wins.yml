@@ -1,0 +1,23 @@
+uuid: d6f6cc4b-e6cc-4bfa-8f7d-deb700a7155c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_wins
+    - paragraphs.paragraphs_type.team_record
+id: paragraph.team_record.field_wins
+field_name: field_wins
+entity_type: paragraph
+bundle: team_record
+label: Wins
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 16
+  prefix: ''
+  suffix: ''
+field_type: integer

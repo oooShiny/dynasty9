@@ -1,0 +1,23 @@
+uuid: 5af98e27-13b6-4338-b725-c3a81176d49d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vegas_line
+    - node.type.game
+id: node.game.field_vegas_line
+field_name: field_vegas_line
+entity_type: node
+bundle: game
+label: 'Vegas Line'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

@@ -1,0 +1,23 @@
+uuid: 09badb5e-bcbb-4099-bc8b-10dd3998d323
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_passer_rating
+    - node.type.game
+id: node.game.field_passer_rating
+field_name: field_passer_rating
+entity_type: node
+bundle: game
+label: 'Passer Rating'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

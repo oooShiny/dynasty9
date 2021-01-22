@@ -1,0 +1,70 @@
+uuid: 9d27f018-5f54-4759-a5b1-c00b48aa97a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.team.field_conference
+    - field.field.node.team.field_division
+    - field.field.node.team.field_pfr_id
+    - field.field.node.team.field_team_standings
+    - node.type.team
+  module:
+    - paragraphs
+    - path
+id: node.team.default
+targetEntityType: node
+bundle: team
+mode: default
+content:
+  field_conference:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_division:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_pfr_id:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_team_standings:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Standing
+      title_plural: Standings
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: team_record
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

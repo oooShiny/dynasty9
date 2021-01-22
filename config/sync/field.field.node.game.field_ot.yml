@@ -1,0 +1,23 @@
+uuid: 5299e8d7-f7c0-4b84-82a6-05abd71aa8a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ot
+    - node.type.game
+id: node.game.field_ot
+field_name: field_ot
+entity_type: node
+bundle: game
+label: 'Overtime Game'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

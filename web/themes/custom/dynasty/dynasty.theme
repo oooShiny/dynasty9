@@ -1,0 +1,63 @@
+<?php
+
+use \Drupal\node\Entity\Node;
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function dynasty_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  /**
+   * Game Node Overrides
+   */
+  if ($node->bundle() == 'game') {
+    if ($node->get('field_ot')->value == '0') {
+      $variables['ot'] = FALSE;
+    }
+    else {
+      $variables['ot'] = TRUE;
+    }
+    if ($node->get('field_home_away')->value == "Home") {
+      $variables['vs'] = 'vs';
+    }
+    else {
+      $variables['vs'] = 'at';
+    }
+    // Team name variations.
+    $opp = Node::load($node->get('field_opponent')->target_id);
+    $variables['team_css'] =  str_replace(' ', '-', strtolower($opp->label()));
+    $name_array = explode(' ', $opp->label());
+    $variables['team_short'] = end($name_array);
+
+    // Create pro-football-reference and NFL Gamepass links.
+    $game_date = new DateTime($node->get('field_date')->value);
+    $pfr_date = $game_date->format('Ymd');
+    $gp_date = $game_date->format('mdY');
+    $gp_opp = explode(' ', $opp->getTitle());
+    if ($node->get('field_home_away')->value == 'Home') {
+      $pfr_home = 'nwe';
+      $gp_home = 'patriots';
+      $gp_away = strtolower(end($gp_opp));
+    }
+    else {
+      $pfr_home = $opp->get('field_pfr_id')->value;
+      $gp_home = strtolower(end($gp_opp));
+      $gp_away = 'patriots';
+    }
+    $variables['pfr_link'] = 'https://www.pro-football-reference.com/boxscores/' . $pfr_date . '0' . $pfr_home . '.htm';
+    $game_season = $node->get('field_season')->value;
+    $variables['season'] = intval($game_season);
+    $variables['gamepass_link'] = 'https://gamepass.nfl.com/game/'.$gp_away.'-at-'.$gp_home.'-on-' . $gp_date;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function dynasty_preprocess_field(&$variables, $hook) {
+  if ($variables['field_name'] == 'field_game_video') {
+    $url = parse_url($variables['element'][0]['#context']['value']);
+    $path = explode('/', $url['path']);
+    $variables['video_type'] = $url['host'];
+    $variables['video_id'] = end($path);
+  }
+}

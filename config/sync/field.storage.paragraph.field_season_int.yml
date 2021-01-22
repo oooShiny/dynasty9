@@ -1,0 +1,20 @@
+uuid: 9d3a385f-4a10-4a0a-be90-a893ecf6437e
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_season_int
+field_name: field_season_int
+entity_type: paragraph
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

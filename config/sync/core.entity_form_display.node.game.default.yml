@@ -1,0 +1,508 @@
+uuid: c2d58ef2-191b-4445-98e9-a3f1a656f109
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.game.field_after_bye
+    - field.field.node.game.field_brady_attempts
+    - field.field.node.game.field_brady_completions
+    - field.field.node.game.field_brady_ints
+    - field.field.node.game.field_brady_played
+    - field.field.node.game.field_brady_tds
+    - field.field.node.game.field_brady_yards
+    - field.field.node.game.field_date
+    - field.field.node.game.field_game_links
+    - field.field.node.game.field_game_summary
+    - field.field.node.game.field_highlights
+    - field.field.node.game.field_home_away
+    - field.field.node.game.field_month
+    - field.field.node.game.field_opp_ot
+    - field.field.node.game.field_opp_q1
+    - field.field.node.game.field_opp_q2
+    - field.field.node.game.field_opp_q3
+    - field.field.node.game.field_opp_q4
+    - field.field.node.game.field_opponent
+    - field.field.node.game.field_opponent_score
+    - field.field.node.game.field_opposing_coach
+    - field.field.node.game.field_ot
+    - field.field.node.game.field_over_under
+    - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_score
+    - field.field.node.game.field_pats_ot
+    - field.field.node.game.field_pats_q1
+    - field.field.node.game.field_pats_q2
+    - field.field.node.game.field_pats_q3
+    - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_playoff_game
+    - field.field.node.game.field_result
+    - field.field.node.game.field_score_differential
+    - field.field.node.game.field_season
+    - field.field.node.game.field_surf
+    - field.field.node.game.field_temperature
+    - field.field.node.game.field_vegas_line
+    - field.field.node.game.field_week
+    - field.field.node.game.field_weekday
+    - field.field.node.game.field_youtube_highlights
+    - node.type.game
+  module:
+    - datetime
+    - field_group
+    - link
+    - paragraphs
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_boxscore:
+      children:
+        - field_pats_q1
+        - field_pats_q2
+        - field_pats_q3
+        - field_pats_q4
+        - field_pats_ot
+        - field_patriots_score
+        - field_opp_q1
+        - field_opp_q2
+        - field_opp_q3
+        - field_opp_q4
+        - field_opp_ot
+        - field_opponent_score
+        - field_result
+      parent_name: ''
+      weight: 1
+      format_type: details
+      region: content
+      format_settings:
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: Boxscore
+    group_tom_brady:
+      children:
+        - field_brady_attempts
+        - field_brady_completions
+        - field_brady_yards
+        - field_brady_tds
+        - field_brady_ints
+        - field_passer_rating
+      parent_name: ''
+      weight: 5
+      format_type: details
+      region: content
+      format_settings:
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: 'Tom Brady'
+    group_game_summary:
+      children:
+        - field_game_summary
+        - field_game_links
+      parent_name: ''
+      weight: 3
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: 'Game Summary'
+    group_game_details:
+      children:
+        - title
+        - field_season
+        - field_week
+        - field_after_bye
+        - field_playoff_game
+        - field_ot
+        - field_date
+        - field_home_away
+        - field_opponent
+        - field_opposing_coach
+      parent_name: ''
+      weight: 0
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: 'Game Details'
+    group_extras:
+      children:
+        - field_over_under
+        - field_vegas_line
+        - field_surf
+        - field_temperature
+      parent_name: ''
+      weight: 6
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: Extras
+    group_calculated_fields:
+      children:
+        - field_month
+        - field_score_differential
+        - field_weekday
+      parent_name: ''
+      weight: 7
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: 'Calculated Fields'
+    group_game_media:
+      children:
+        - field_youtube_highlights
+        - field_highlights
+      parent_name: ''
+      weight: 2
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: 'Game Media'
+id: node.game.default
+targetEntityType: node
+bundle: game
+mode: default
+content:
+  field_after_bye:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_brady_attempts:
+    weight: 15
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_brady_completions:
+    weight: 16
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_brady_ints:
+    weight: 19
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_brady_played:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_brady_tds:
+    weight: 18
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_brady_yards:
+    weight: 17
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_date:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_game_links:
+    weight: 14
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_game_summary:
+    weight: 13
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_highlights:
+    type: entity_reference_paragraphs
+    weight: 7
+    settings:
+      title: Highlight
+      title_plural: Highlights
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: highlight
+    third_party_settings: {  }
+    region: content
+  field_home_away:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_month:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_opp_ot:
+    weight: 22
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opp_q1:
+    weight: 18
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opp_q2:
+    weight: 19
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opp_q3:
+    weight: 20
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opp_q4:
+    weight: 21
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opponent:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_opponent_score:
+    weight: 23
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opposing_coach:
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_ot:
+    weight: 6
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_over_under:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_passer_rating:
+    weight: 20
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_patriots_score:
+    weight: 17
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pats_ot:
+    weight: 16
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pats_q1:
+    weight: 12
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pats_q2:
+    weight: 13
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pats_q3:
+    weight: 14
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pats_q4:
+    weight: 15
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_playoff_game:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_result:
+    weight: 24
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_score_differential:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_season:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_surf:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_temperature:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_vegas_line:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_week:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_weekday:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_youtube_highlights:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  path:
+    type: path
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 9
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  promote: true
+  sticky: true
+  uid: true

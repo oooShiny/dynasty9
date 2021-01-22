@@ -1,0 +1,23 @@
+uuid: 24e7df73-1a89-4156-9ccb-28e576a1d060
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pats_ot
+    - node.type.game
+id: node.game.field_pats_ot
+field_name: field_pats_ot
+entity_type: node
+bundle: game
+label: 'Pats OT'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

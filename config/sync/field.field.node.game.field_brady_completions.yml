@@ -1,0 +1,23 @@
+uuid: 379cdb40-df8b-48ba-aa9a-6c98f4766784
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_brady_completions
+    - node.type.game
+id: node.game.field_brady_completions
+field_name: field_brady_completions
+entity_type: node
+bundle: game
+label: Completions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

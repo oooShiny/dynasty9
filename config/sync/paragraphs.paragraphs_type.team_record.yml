@@ -1,0 +1,10 @@
+uuid: 7ad22009-0962-4110-9371-44f563fd28f3
+langcode: en
+status: true
+dependencies: {  }
+id: team_record
+label: 'Team Record'
+icon_uuid: null
+icon_default: null
+description: 'The team record (W-L-T) for a given season. Added to Team content type.'
+behavior_plugins: {  }

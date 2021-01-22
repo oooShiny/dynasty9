@@ -1,0 +1,8 @@
+uuid: a2c602b3-b605-4139-84ee-5ef1a747483e
+langcode: en
+status: true
+dependencies: {  }
+id: basic_date
+label: 'Basic Date'
+locked: false
+pattern: 'F j,  Y'

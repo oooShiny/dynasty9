@@ -1,0 +1,427 @@
+uuid: 0ed00225-cf7d-41f5-8efa-c8256535673e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.game.field_after_bye
+    - field.field.node.game.field_brady_attempts
+    - field.field.node.game.field_brady_completions
+    - field.field.node.game.field_brady_ints
+    - field.field.node.game.field_brady_played
+    - field.field.node.game.field_brady_tds
+    - field.field.node.game.field_brady_yards
+    - field.field.node.game.field_date
+    - field.field.node.game.field_game_links
+    - field.field.node.game.field_game_summary
+    - field.field.node.game.field_highlights
+    - field.field.node.game.field_home_away
+    - field.field.node.game.field_month
+    - field.field.node.game.field_opp_ot
+    - field.field.node.game.field_opp_q1
+    - field.field.node.game.field_opp_q2
+    - field.field.node.game.field_opp_q3
+    - field.field.node.game.field_opp_q4
+    - field.field.node.game.field_opponent
+    - field.field.node.game.field_opponent_score
+    - field.field.node.game.field_opposing_coach
+    - field.field.node.game.field_ot
+    - field.field.node.game.field_over_under
+    - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_score
+    - field.field.node.game.field_pats_ot
+    - field.field.node.game.field_pats_q1
+    - field.field.node.game.field_pats_q2
+    - field.field.node.game.field_pats_q3
+    - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_playoff_game
+    - field.field.node.game.field_result
+    - field.field.node.game.field_score_differential
+    - field.field.node.game.field_season
+    - field.field.node.game.field_surf
+    - field.field.node.game.field_temperature
+    - field.field.node.game.field_vegas_line
+    - field.field.node.game.field_week
+    - field.field.node.game.field_weekday
+    - field.field.node.game.field_youtube_highlights
+    - node.type.game
+  module:
+    - datetime
+    - entity_reference_revisions
+    - link
+    - options
+    - text
+    - user
+id: node.game.default
+targetEntityType: node
+bundle: game
+mode: default
+content:
+  field_after_bye:
+    weight: 108
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_brady_attempts:
+    weight: 123
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_brady_completions:
+    weight: 124
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_brady_ints:
+    weight: 126
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_brady_played:
+    weight: 135
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_brady_tds:
+    weight: 133
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_brady_yards:
+    weight: 138
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_date:
+    weight: 101
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: long_date
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_game_links:
+    weight: 125
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_game_summary:
+    weight: 103
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_highlights:
+    type: entity_reference_revisions_entity_view
+    weight: 140
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_home_away:
+    weight: 102
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_month:
+    weight: 127
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_opp_ot:
+    weight: 119
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_opp_q1:
+    weight: 115
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_opp_q2:
+    weight: 116
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_opp_q3:
+    weight: 117
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_opp_q4:
+    weight: 118
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_opponent:
+    weight: 104
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_opponent_score:
+    weight: 120
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_opposing_coach:
+    weight: 105
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_ot:
+    weight: 109
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_over_under:
+    weight: 128
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_passer_rating:
+    weight: 129
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_patriots_score:
+    weight: 121
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_pats_ot:
+    weight: 114
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_pats_q1:
+    weight: 110
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_pats_q2:
+    weight: 111
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_pats_q3:
+    weight: 112
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_pats_q4:
+    weight: 113
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_playoff_game:
+    weight: 130
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_result:
+    weight: 122
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_score_differential:
+    weight: 131
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_season:
+    weight: 106
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_surf:
+    weight: 132
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_temperature:
+    weight: 134
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_vegas_line:
+    weight: 136
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_week:
+    weight: 107
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_weekday:
+    weight: 137
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_youtube_highlights:
+    weight: 139
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

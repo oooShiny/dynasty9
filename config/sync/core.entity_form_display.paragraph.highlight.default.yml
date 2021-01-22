@@ -1,0 +1,269 @@
+uuid: 5a225af8-e671-42f8-9a8e-f48794c5fa78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.highlight.field_air_yards
+    - field.field.paragraph.highlight.field_distance
+    - field.field.paragraph.highlight.field_down
+    - field.field.paragraph.highlight.field_gfycat_id
+    - field.field.paragraph.highlight.field_minutes
+    - field.field.paragraph.highlight.field_muse_video_id
+    - field.field.paragraph.highlight.field_opponent
+    - field.field.paragraph.highlight.field_pass_length
+    - field.field.paragraph.highlight.field_pass_location
+    - field.field.paragraph.highlight.field_pass_thrown_from
+    - field.field.paragraph.highlight.field_play_title
+    - field.field.paragraph.highlight.field_play_type
+    - field.field.paragraph.highlight.field_players_involved
+    - field.field.paragraph.highlight.field_quarter
+    - field.field.paragraph.highlight.field_season
+    - field.field.paragraph.highlight.field_seconds
+    - field.field.paragraph.highlight.field_tag_play
+    - field.field.paragraph.highlight.field_td_scored
+    - field.field.paragraph.highlight.field_week
+    - field.field.paragraph.highlight.field_yards_gained
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - field_group
+    - inline_entity_form
+third_party_settings:
+  field_group:
+    group_pass_data:
+      children:
+        - field_pass_length
+        - field_pass_thrown_from
+        - field_pass_location
+        - field_air_yards
+      parent_name: group_play_info
+      weight: 6
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: false
+        required_fields: true
+      label: 'Pass Data'
+    group_video_info:
+      children:
+        - field_play_title
+        - field_gfycat_id
+        - field_muse_video_id
+      parent_name: ''
+      weight: 0
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: 'Video Info'
+    group_play_info:
+      children:
+        - field_players_involved
+        - field_play_type
+        - field_yards_gained
+        - field_td_scored
+        - group_pass_data
+        - field_tag_play
+      parent_name: ''
+      weight: 1
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: 'Play Info'
+    group_game_situation:
+      children:
+        - field_down
+        - field_distance
+        - field_quarter
+        - field_minutes
+        - field_seconds
+      parent_name: ''
+      weight: 2
+      format_type: details
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        open: true
+        required_fields: true
+      label: 'Game Situation'
+id: paragraph.highlight.default
+targetEntityType: paragraph
+bundle: highlight
+mode: default
+content:
+  field_air_yards:
+    weight: 10
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_distance:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_down:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_gfycat_id:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_minutes:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_muse_video_id:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_opponent:
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_pass_length:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_pass_location:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_pass_thrown_from:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_play_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_play_type:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_players_involved:
+    weight: 2
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: Player
+      label_plural: Players
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      revision: false
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
+  field_quarter:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_season:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_seconds:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_tag_play:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
+  field_td_scored:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_week:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_yards_gained:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

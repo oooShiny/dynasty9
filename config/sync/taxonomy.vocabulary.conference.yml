@@ -1,0 +1,8 @@
+uuid: 992e8fe6-3eb4-41b1-a9b9-c4183e0dfe50
+langcode: en
+status: true
+dependencies: {  }
+name: Conference
+vid: conference
+description: ''
+weight: 0

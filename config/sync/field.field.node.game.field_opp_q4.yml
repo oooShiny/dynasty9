@@ -1,0 +1,25 @@
+uuid: 4d1cbea0-23dd-45a9-941d-51a409c568b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opp_q4
+    - node.type.game
+id: node.game.field_opp_q4
+field_name: field_opp_q4
+entity_type: node
+bundle: game
+label: 'Opp Q4'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

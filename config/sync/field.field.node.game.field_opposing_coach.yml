@@ -1,0 +1,29 @@
+uuid: 465c5668-63d0-4d25-89f0-2061afb60722
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opposing_coach
+    - node.type.game
+    - taxonomy.vocabulary.head_coaches
+id: node.game.field_opposing_coach
+field_name: field_opposing_coach
+entity_type: node
+bundle: game
+label: 'Opposing Coach'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      head_coaches: head_coaches
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,23 @@
+uuid: fc80046c-ff91-47f3-8615-9ffd0f2b2773
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_season_int
+    - paragraphs.paragraphs_type.team_record
+id: paragraph.team_record.field_season_int
+field_name: field_season_int
+entity_type: paragraph
+bundle: team_record
+label: Season
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

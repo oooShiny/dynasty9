@@ -1,0 +1,23 @@
+uuid: ee07219c-a5a3-46fa-b786-783b4f6400f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_season
+    - node.type.game
+id: node.game.field_season
+field_name: field_season
+entity_type: node
+bundle: game
+label: Season
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 2000
+  max: 2020
+  prefix: ''
+  suffix: ''
+field_type: integer

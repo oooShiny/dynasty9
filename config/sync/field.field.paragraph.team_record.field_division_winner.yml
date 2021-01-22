@@ -1,0 +1,23 @@
+uuid: 75a9e404-390f-4811-939c-161b01cda318
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_division_winner
+    - paragraphs.paragraphs_type.team_record
+id: paragraph.team_record.field_division_winner
+field_name: field_division_winner
+entity_type: paragraph
+bundle: team_record
+label: 'Division Winner'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

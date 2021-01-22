@@ -1,0 +1,69 @@
+a:hover {
+  text-decoration: underline;
+}
+
+/*
+ * Game Summary Styles
+ */
+#game-summary p {
+  padding-bottom: 1em;
+}
+
+a[href*='gfycat.com']:after,
+a[href*='muse.ai']:after {
+  content: '';
+  background-image:url('/themes/custom/dynasty/icons/play.svg');
+  background-size: 100% 100%;
+  display: inline-block;
+  height: 0.8em;
+  width: 0.8em;
+}
+
+a[href*='gfycat.com'],
+a[href*='muse.ai']{
+  text-decoration: underline;
+}
+
+/**
+ * Patriots Colors
+ */
+
+.tw-text-blue-pats {
+  color: #002244 !important;
+}
+
+.tw-bg-blue-pats {
+  background-color: #002244 !important;
+}
+
+.tw-border-blue-pats {
+  border-color: #002244 !important;
+}
+
+.tw-text-red-pats {
+  color: #c60c30 !important;
+}
+
+.tw-bg-red-pats {
+  background-color: #c60c30 !important;
+}
+
+.tw-border-red-pats {
+  border-color: #c60c30 !important;
+}
+
+/**
+  Node Tab Colors
+ */
+#node-tabs li a.is-active,
+#node-tabs li a:hover{
+  color: blue;
+}
+
+.win {
+  color: green;
+}
+
+.loss {
+  color: red;
+}

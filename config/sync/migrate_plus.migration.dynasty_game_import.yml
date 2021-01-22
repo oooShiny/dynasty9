@@ -1,0 +1,192 @@
+uuid: 479b0f34-1d18-4303-8f06-e196b2e05bee
+langcode: en
+status: true
+dependencies: {  }
+id: dynasty_game_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: null
+label: 'JSON feed of games'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - 'https://patriotsdynasty.info/rest/games?page=0'
+    - 'https://patriotsdynasty.info/rest/games?page=1'
+    - 'https://patriotsdynasty.info/rest/games?page=2'
+    - 'https://patriotsdynasty.info/rest/games?page=3'
+  item_selector: /
+  fields:
+    -
+      name: nid
+      label: 'Node ID'
+      selector: nid/0/value
+    -
+      name: title
+      label: 'Node Title'
+      selector: title/0/value
+    -
+      name: field_brady_attempts
+      selector: field_brady_attempts/0/value
+    -
+      name: field_brady_played
+      selector: field_did_brady_play_/0/value
+    -
+      name: field_brady_completions
+      selector: field_brady_completions/0/value
+    -
+      name: field_date
+      selector: field_date/0/value
+    -
+      name: field_after_bye
+      selector: field_after_bye/0/value
+    -
+      name: field_home_away
+      selector: field_home_away/0/value
+    -
+      name: field_brady_ints
+      selector: field_brady_ints/0/value
+    -
+      name: field_month
+      selector: field_month/0/value
+    -
+      name: field_opponent
+      selector: field_opponent/0/target_id
+    -
+      name: field_opponent_score
+      selector: field_opponent_score/0/value
+    -
+      name: field_opposing_coach
+      selector: field_opposing_coach/0/target_id
+    -
+      name: field_opp_ot
+      selector: field_opp_ot/0/value
+    -
+      name: field_opp_q1
+      selector: field_opp_q1/0/value
+    -
+      name: field_opp_q2
+      selector: field_opp_q2/0/value
+    -
+      name: field_opp_q3
+      selector: field_opp_q3/0/value
+    -
+      name: field_opp_q4
+      selector: field_opp_q4/0/value
+    -
+      name: field_over_under
+      selector: field_over_under/0/value
+    -
+      name: field_ot
+      selector: field_ot/0/value
+    -
+      name: field_passer_rating
+      selector: field_passer_rating/0/value
+    -
+      name: field_patriots_score
+      selector: field_patriots_score/0/value
+    -
+      name: field_pats_ot
+      selector: field_pats_ot/0/value
+    -
+      name: field_pats_q1
+      selector: field_pats_q1/0/value
+    -
+      name: field_pats_q2
+      selector: field_pats_q2/0/value
+    -
+      name: field_pats_q3
+      selector: field_pats_q3/0/value
+    -
+      name: field_pats_q4
+      selector: field_pats_q4/0/value
+    -
+      name: field_playoff_game
+      selector: field_playoff_game/0/value
+    -
+      name: field_result
+      selector: field_result/0/value
+    -
+      name: field_score_differential
+      selector: field_score_differential/0/value
+    -
+      name: field_season
+      selector: field_season/0/value
+    -
+      name: field_surf
+      selector: field_turf/0/value
+    -
+      name: field_brady_tds
+      selector: field_brady_tds/0/value
+    -
+      name: field_temperature
+      selector: field_temperature/0/value
+    -
+      name: field_vegas_line
+      selector: field_vegas_line/0/value
+    -
+      name: field_week
+      selector: field_week/0/target_id
+    -
+      name: field_weekday
+      selector: field_weekday/0/value
+    -
+      name: field_brady_yards
+      selector: field_brady_yards/0/value
+  ids:
+    nid:
+      type: integer
+process:
+  title: title
+  field_brady_attempts: field_brady_attempts
+  field_brady_played: field_brady_played
+  field_brady_completions: field_brady_completions
+  field_date: field_date
+  field_after_bye: field_after_bye
+  field_home_away: field_home_away
+  field_brady_ints: field_brady_ints
+  field_month: field_month
+  field_opponent:
+    plugin: migration_lookup
+    migration: dynasty_team_import
+    source: field_opponent
+  field_opponent_score: field_opponent_score
+  field_opposing_coach:
+    plugin: migration_lookup
+    migration: dynasty_taxonomy_import
+    source: field_opposing_coach
+  field_opp_ot: field_opp_ot
+  field_opp_q1: field_opp_q1
+  field_opp_q2: field_opp_q2
+  field_opp_q3: field_opp_q3
+  field_opp_q4: field_opp_q4
+  field_over_under: field_over_under
+  field_ot: field_ot
+  field_passer_rating: field_passer_rating
+  field_patriots_score: field_patriots_score
+  field_pats_ot: field_pats_ot
+  field_pats_q1: field_pats_q1
+  field_pats_q2: field_pats_q2
+  field_pats_q3: field_pats_q3
+  field_pats_q4: field_pats_q4
+  field_playoff_game: field_playoff_game
+  field_result: field_result
+  field_score_differential: field_score_differential
+  field_season: field_season
+  field_surf: field_surf
+  field_brady_tds: field_brady_tds
+  field_temperature: field_temperature
+  field_vegas_line: field_vegas_line
+  field_week:
+    plugin: migration_lookup
+    migration: dynasty_taxonomy_import
+    source: field_week
+  field_weekday: field_weekday
+  field_brady_yards: field_brady_yards
+destination:
+  plugin: 'entity:node'
+  default_bundle: game
+migration_dependencies: null

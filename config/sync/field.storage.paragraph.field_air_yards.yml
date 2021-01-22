@@ -1,0 +1,20 @@
+uuid: 05f1b19c-299c-4a89-adde-0e6f0f17c45f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_air_yards
+field_name: field_air_yards
+entity_type: paragraph
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

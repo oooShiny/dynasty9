@@ -1,0 +1,19 @@
+uuid: 1fc1236b-a85a-4f3e-a5db-b016f95b9b89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_month
+    - node.type.game
+id: node.game.field_month
+field_name: field_month
+entity_type: node
+bundle: game
+label: Month
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

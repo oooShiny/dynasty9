@@ -1,0 +1,21 @@
+uuid: 592dfd8a-bd7e-4aac-8780-997bfd06bb48
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_month
+field_name: field_month
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,20 @@
+uuid: 0fc09ed0-4977-4adf-8bee-f31d66e740ef
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_player_position
+field_name: field_player_position
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

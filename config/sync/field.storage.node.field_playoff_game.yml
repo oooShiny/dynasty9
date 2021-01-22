@@ -1,0 +1,18 @@
+uuid: 385078c2-0c37-4029-8961-09243ca39e23
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_playoff_game
+field_name: field_playoff_game
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

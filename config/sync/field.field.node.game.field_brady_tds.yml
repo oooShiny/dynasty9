@@ -1,0 +1,23 @@
+uuid: cc97b7f6-479c-40bd-b5d4-394fd7dec0b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_brady_tds
+    - node.type.game
+id: node.game.field_brady_tds
+field_name: field_brady_tds
+entity_type: node
+bundle: game
+label: TDs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

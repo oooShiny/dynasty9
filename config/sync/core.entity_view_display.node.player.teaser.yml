@@ -1,0 +1,22 @@
+uuid: d4f58d5b-4042-46aa-a64d-79b1b9450eed
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.player.field_player_position
+    - node.type.player
+  module:
+    - user
+id: node.player.teaser
+targetEntityType: node
+bundle: player
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_player_position: true

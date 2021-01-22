@@ -1,0 +1,21 @@
+uuid: 9a6da4a3-d6b5-46a9-8d11-66f82bf03ea9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_surf
+    - node.type.game
+  module:
+    - options
+id: node.game.field_surf
+field_name: field_surf
+entity_type: node
+bundle: game
+label: 'Surface Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

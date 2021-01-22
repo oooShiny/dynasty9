@@ -1,0 +1,21 @@
+uuid: 9d758de0-f872-44e5-b6d8-39fb9a4bb46e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_game_summary
+    - node.type.game
+  module:
+    - text
+id: node.game.field_game_summary
+field_name: field_game_summary
+entity_type: node
+bundle: game
+label: 'Game Summary'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

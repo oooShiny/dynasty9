@@ -1,0 +1,20 @@
+uuid: 1ffc3c9d-4fc4-4bf5-a6c7-c005aa9d1f75
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - taxonomy
+id: paragraph.field_week
+field_name: field_week
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

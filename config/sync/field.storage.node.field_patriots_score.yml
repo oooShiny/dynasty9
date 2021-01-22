@@ -1,0 +1,20 @@
+uuid: 5954f8f8-4d22-4537-86f6-4d50a842b2a7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_patriots_score
+field_name: field_patriots_score
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

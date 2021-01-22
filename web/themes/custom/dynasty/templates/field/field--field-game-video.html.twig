@@ -1,0 +1,14 @@
+{% if video_type == 'muse.ai' %}
+  <div id="video-container" class="tw-m-auto"></div>
+  <script src="https://muse.ai/static/js/embed-player.min.js"></script>
+  <script>
+    const player = MusePlayer({
+      container: '#video-container',
+      video: '{{ video_id }}',
+      width: 800,
+      logo: false,
+      search: false,
+      title: false
+    });
+  </script>
+{% endif %}

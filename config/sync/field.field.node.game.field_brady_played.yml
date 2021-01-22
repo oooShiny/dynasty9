@@ -1,0 +1,23 @@
+uuid: ca6e8b62-2a0c-4fdb-b84c-46b7ea9750ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_brady_played
+    - node.type.game
+id: node.game.field_brady_played
+field_name: field_brady_played
+entity_type: node
+bundle: game
+label: 'Brady played'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

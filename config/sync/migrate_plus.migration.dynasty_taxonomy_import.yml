@@ -1,0 +1,41 @@
+uuid: 80c8513a-a820-48ed-8a02-bd0049ffd69e
+langcode: en
+status: true
+dependencies: {  }
+id: dynasty_taxonomy_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: null
+label: 'Custom term migration'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - 'https://patriotsdynasty.info/rest/taxonomy'
+  item_selector: /
+  fields:
+    -
+      name: term_id
+      label: 'Term ID'
+      selector: tid
+    -
+      name: term_name
+      label: 'Term Name'
+      selector: name
+    -
+      name: term_type
+      label: 'Taxonomy Type'
+      selector: vid
+  ids:
+    term_id:
+      type: integer
+process:
+  tid: term_id
+  name: term_name
+  vid: term_type
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: null

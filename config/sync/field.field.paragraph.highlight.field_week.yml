@@ -1,0 +1,29 @@
+uuid: 936509d5-3c1e-4c3f-b332-58288d2bae05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_week
+    - paragraphs.paragraphs_type.highlight
+    - taxonomy.vocabulary.week
+id: paragraph.highlight.field_week
+field_name: field_week
+entity_type: paragraph
+bundle: highlight
+label: Week
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      week: week
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

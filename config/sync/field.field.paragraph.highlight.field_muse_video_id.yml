@@ -1,0 +1,19 @@
+uuid: dcdb736f-aed6-4228-861a-ce83c88a8e2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_muse_video_id
+    - paragraphs.paragraphs_type.highlight
+id: paragraph.highlight.field_muse_video_id
+field_name: field_muse_video_id
+entity_type: paragraph
+bundle: highlight
+label: 'Muse Video ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,27 @@
+uuid: be19adfc-967b-47e0-a6c9-64e83ecbe0e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_pass_length
+field_name: field_pass_length
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: short
+      label: Short
+    -
+      value: deep
+      label: Deep
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

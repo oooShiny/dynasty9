@@ -1,0 +1,30 @@
+uuid: c405220f-7a76-45f3-afdb-2ff63703133d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_result
+field_name: field_result
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Win
+      label: Win
+    -
+      value: Loss
+      label: Loss
+    -
+      value: Tie
+      label: Tie
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

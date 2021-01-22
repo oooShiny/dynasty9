@@ -1,0 +1,23 @@
+uuid: 6f85ef8b-a636-4628-a6c8-d854e26fa9d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_losses
+    - paragraphs.paragraphs_type.team_record
+id: paragraph.team_record.field_losses
+field_name: field_losses
+entity_type: paragraph
+bundle: team_record
+label: Losses
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 16
+  prefix: ''
+  suffix: ''
+field_type: integer

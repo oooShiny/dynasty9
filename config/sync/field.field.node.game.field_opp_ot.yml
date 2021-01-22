@@ -1,0 +1,23 @@
+uuid: ef432441-5493-42b6-b4d8-9df66053902b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opp_ot
+    - node.type.game
+id: node.game.field_opp_ot
+field_name: field_opp_ot
+entity_type: node
+bundle: game
+label: 'Opp OT'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

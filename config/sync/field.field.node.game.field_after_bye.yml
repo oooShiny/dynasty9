@@ -1,0 +1,23 @@
+uuid: 46746e7d-4a88-43f1-a63c-854a986a59b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_after_bye
+    - node.type.game
+id: node.game.field_after_bye
+field_name: field_after_bye
+entity_type: node
+bundle: game
+label: 'Game is After a Bye'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

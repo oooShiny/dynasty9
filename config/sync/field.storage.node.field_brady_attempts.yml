@@ -1,0 +1,20 @@
+uuid: 6635600b-ba16-4cbe-b7bb-f54b4ec735a7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_brady_attempts
+field_name: field_brady_attempts
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

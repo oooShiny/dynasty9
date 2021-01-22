@@ -1,0 +1,23 @@
+uuid: 5df5fbce-65f3-4259-96fa-10a2bfb77edd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_brady_attempts
+    - node.type.game
+id: node.game.field_brady_attempts
+field_name: field_brady_attempts
+entity_type: node
+bundle: game
+label: Attempts
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

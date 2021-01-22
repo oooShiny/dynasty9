@@ -1,0 +1,17 @@
+uuid: 04079ce9-e34c-458f-af3a-34e90a5911e4
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Player
+type: player
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

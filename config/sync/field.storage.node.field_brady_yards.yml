@@ -1,0 +1,20 @@
+uuid: 70669211-9928-4345-b12e-389fdbb4669f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_brady_yards
+field_name: field_brady_yards
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

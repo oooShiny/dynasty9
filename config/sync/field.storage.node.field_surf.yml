@@ -1,0 +1,27 @@
+uuid: 0c06deae-5194-41a7-ba84-9305b59eaaeb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_surf
+field_name: field_surf
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: grass
+      label: 'Natural Grass'
+    -
+      value: turf
+      label: 'Artificial Turf'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

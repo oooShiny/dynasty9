@@ -1,0 +1,25 @@
+uuid: 82fbccce-be5a-4a2a-8855-4cffdabe9f70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_patriots_score
+    - node.type.game
+id: node.game.field_patriots_score
+field_name: field_patriots_score
+entity_type: node
+bundle: game
+label: 'Patriots Score'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

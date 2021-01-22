@@ -1,0 +1,23 @@
+uuid: 1d43ea0f-ffd7-4aff-898a-ec749b2ac174
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_seconds
+    - paragraphs.paragraphs_type.highlight
+id: paragraph.highlight.field_seconds
+field_name: field_seconds
+entity_type: paragraph
+bundle: highlight
+label: Seconds
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

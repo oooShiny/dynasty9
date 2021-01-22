@@ -1,0 +1,20 @@
+uuid: ec64c5f6-2365-493c-bbe0-8de7707d5f88
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_opp_q2
+field_name: field_opp_q2
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

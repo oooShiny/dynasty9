@@ -1,0 +1,21 @@
+uuid: 835032d3-70b9-4a76-a995-de36df37d07f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_down
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - options
+id: paragraph.highlight.field_down
+field_name: field_down
+entity_type: paragraph
+bundle: highlight
+label: Down
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

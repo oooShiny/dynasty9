@@ -1,0 +1,21 @@
+uuid: 77654cf6-b3a3-4454-8c72-bab6846bf544
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pass_length
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - options
+id: paragraph.highlight.field_pass_length
+field_name: field_pass_length
+entity_type: paragraph
+bundle: highlight
+label: 'Pass Length'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

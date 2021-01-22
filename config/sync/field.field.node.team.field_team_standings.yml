@@ -1,0 +1,31 @@
+uuid: 1f0d32fe-6772-4d33-8bc6-bf97c740f7d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_team_standings
+    - node.type.team
+    - paragraphs.paragraphs_type.team_record
+  module:
+    - entity_reference_revisions
+id: node.team.field_team_standings
+field_name: field_team_standings
+entity_type: node
+bundle: team
+label: 'Team Standings'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      team_record: team_record
+    target_bundles_drag_drop:
+      team_record:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

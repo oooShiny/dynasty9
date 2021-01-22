@@ -1,0 +1,27 @@
+uuid: 9d702a2a-4f3b-4342-be5e-8ef8c26c4084
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.team.field_conference
+    - field.field.node.team.field_division
+    - field.field.node.team.field_pfr_id
+    - field.field.node.team.field_team_standings
+    - node.type.team
+  module:
+    - user
+id: node.team.default
+targetEntityType: node
+bundle: team
+mode: default
+content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_conference: true
+  field_division: true
+  field_pfr_id: true
+  field_team_standings: true

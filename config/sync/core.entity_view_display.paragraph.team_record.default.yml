@@ -1,0 +1,63 @@
+uuid: f4d04ac6-503a-4e04-adea-07f55403429c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.team_record.field_division_winner
+    - field.field.paragraph.team_record.field_losses
+    - field.field.paragraph.team_record.field_season_int
+    - field.field.paragraph.team_record.field_ties
+    - field.field.paragraph.team_record.field_wins
+    - paragraphs.paragraphs_type.team_record
+id: paragraph.team_record.default
+targetEntityType: paragraph
+bundle: team_record
+mode: default
+content:
+  field_division_winner:
+    weight: 0
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_losses:
+    weight: 2
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_season_int:
+    weight: 4
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_ties:
+    weight: 3
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_wins:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

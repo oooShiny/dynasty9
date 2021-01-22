@@ -1,0 +1,20 @@
+uuid: 00f0fc56-95fb-4326-9f36-4ee95288d5eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_opposing_coach
+field_name: field_opposing_coach
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

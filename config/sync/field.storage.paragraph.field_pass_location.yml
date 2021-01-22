@@ -1,0 +1,48 @@
+uuid: b38b99eb-cd3d-4f36-b338-73dbd4242477
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_pass_location
+field_name: field_pass_location
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: leftside
+      label: 'Left Sideline'
+    -
+      value: leftoutnum
+      label: 'Left Outside Numbers'
+    -
+      value: leftnum
+      label: 'Left Numbers'
+    -
+      value: left
+      label: Left
+    -
+      value: middle
+      label: Middle
+    -
+      value: right
+      label: Right
+    -
+      value: rightnum
+      label: 'Right Numbers'
+    -
+      value: rightoutnum
+      label: 'Right Outside Numbers'
+    -
+      value: rightside
+      label: 'Right Sideline'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

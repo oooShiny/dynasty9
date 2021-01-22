@@ -1,0 +1,28 @@
+uuid: 5360057e-1566-4d1c-ab88-3fb9b20aab38
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.player.field_player_position
+    - node.type.player
+  module:
+    - user
+id: node.player.default
+targetEntityType: node
+bundle: player
+mode: default
+content:
+  field_player_position:
+    weight: 101
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

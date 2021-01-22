@@ -1,0 +1,21 @@
+uuid: 19a189cd-b587-4053-a562-5d3d3f6856eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quarter
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - options
+id: paragraph.highlight.field_quarter
+field_name: field_quarter
+entity_type: paragraph
+bundle: highlight
+label: Quarter
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,29 @@
+uuid: f045cbb8-b27b-46c4-9d2b-f2792163a94f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_players_involved
+    - node.type.player
+    - paragraphs.paragraphs_type.highlight
+id: paragraph.highlight.field_players_involved
+field_name: field_players_involved
+entity_type: paragraph
+bundle: highlight
+label: 'Player(s) Involved'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      player: player
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

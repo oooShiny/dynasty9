@@ -1,0 +1,25 @@
+uuid: 9f46752a-dac9-4e9b-80e7-24d642bf653a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opponent_score
+    - node.type.game
+id: node.game.field_opponent_score
+field_name: field_opponent_score
+entity_type: node
+bundle: game
+label: 'Opponent Score'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

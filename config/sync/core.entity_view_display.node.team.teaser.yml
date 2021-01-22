@@ -1,0 +1,28 @@
+uuid: f3ea1ac4-a5ac-4d07-8b01-67da126d2ca8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.team.field_conference
+    - field.field.node.team.field_division
+    - field.field.node.team.field_pfr_id
+    - field.field.node.team.field_team_standings
+    - node.type.team
+  module:
+    - user
+id: node.team.teaser
+targetEntityType: node
+bundle: team
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_conference: true
+  field_division: true
+  field_pfr_id: true
+  field_team_standings: true

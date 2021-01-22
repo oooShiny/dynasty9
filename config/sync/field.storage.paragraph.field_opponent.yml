@@ -1,0 +1,20 @@
+uuid: e796ec39-3789-4fe0-a5c0-c4a6d1d7acdb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs
+id: paragraph.field_opponent
+field_name: field_opponent
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

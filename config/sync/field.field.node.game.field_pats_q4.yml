@@ -1,0 +1,25 @@
+uuid: 1f8f90ef-d872-4844-89d1-4e00e09b5f5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pats_q4
+    - node.type.game
+id: node.game.field_pats_q4
+field_name: field_pats_q4
+entity_type: node
+bundle: game
+label: 'Pats Q4'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

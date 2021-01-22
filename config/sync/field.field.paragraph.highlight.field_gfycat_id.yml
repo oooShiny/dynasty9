@@ -1,0 +1,19 @@
+uuid: f55b6dca-4a84-4b39-aef3-854ebfa1c51e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_gfycat_id
+    - paragraphs.paragraphs_type.highlight
+id: paragraph.highlight.field_gfycat_id
+field_name: field_gfycat_id
+entity_type: paragraph
+bundle: highlight
+label: 'Gfycat ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

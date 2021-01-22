@@ -1,0 +1,21 @@
+uuid: 7990c030-91a3-4f5b-bff2-fdf9a51e8c8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pass_location
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - options
+id: paragraph.highlight.field_pass_location
+field_name: field_pass_location
+entity_type: paragraph
+bundle: highlight
+label: 'Pass Location'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

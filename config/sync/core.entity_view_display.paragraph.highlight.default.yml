@@ -1,0 +1,197 @@
+uuid: 3c3f478e-e20f-4f56-b045-d080fc6b215d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.highlight.field_air_yards
+    - field.field.paragraph.highlight.field_distance
+    - field.field.paragraph.highlight.field_down
+    - field.field.paragraph.highlight.field_gfycat_id
+    - field.field.paragraph.highlight.field_minutes
+    - field.field.paragraph.highlight.field_muse_video_id
+    - field.field.paragraph.highlight.field_opponent
+    - field.field.paragraph.highlight.field_pass_length
+    - field.field.paragraph.highlight.field_pass_location
+    - field.field.paragraph.highlight.field_pass_thrown_from
+    - field.field.paragraph.highlight.field_play_title
+    - field.field.paragraph.highlight.field_play_type
+    - field.field.paragraph.highlight.field_players_involved
+    - field.field.paragraph.highlight.field_quarter
+    - field.field.paragraph.highlight.field_season
+    - field.field.paragraph.highlight.field_seconds
+    - field.field.paragraph.highlight.field_tag_play
+    - field.field.paragraph.highlight.field_td_scored
+    - field.field.paragraph.highlight.field_week
+    - field.field.paragraph.highlight.field_yards_gained
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - options
+id: paragraph.highlight.default
+targetEntityType: paragraph
+bundle: highlight
+mode: default
+content:
+  field_air_yards:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_distance:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_down:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_gfycat_id:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_minutes:
+    weight: 4
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_muse_video_id:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_opponent:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_pass_length:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_pass_location:
+    weight: 9
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_pass_thrown_from:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_play_title:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_play_type:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_players_involved:
+    weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_quarter:
+    weight: 13
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_season:
+    weight: 14
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_seconds:
+    weight: 15
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_tag_play:
+    weight: 16
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_td_scored:
+    weight: 17
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_week:
+    weight: 18
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_yards_gained:
+    weight: 19
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden: {  }

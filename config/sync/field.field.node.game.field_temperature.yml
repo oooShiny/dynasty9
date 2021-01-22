@@ -1,0 +1,23 @@
+uuid: 3cdb1a09-787f-4409-8539-5eebdefaf325
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_temperature
+    - node.type.game
+id: node.game.field_temperature
+field_name: field_temperature
+entity_type: node
+bundle: game
+label: Temperature
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

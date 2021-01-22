@@ -1,0 +1,23 @@
+uuid: c95ebaa8-7891-4319-951b-b6c3997ed1f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_air_yards
+    - paragraphs.paragraphs_type.highlight
+id: paragraph.highlight.field_air_yards
+field_name: field_air_yards
+entity_type: paragraph
+bundle: highlight
+label: 'Air Yards'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
