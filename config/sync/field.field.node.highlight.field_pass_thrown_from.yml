@@ -1,0 +1,21 @@
+uuid: 611d33a3-c2ec-4635-9243-ac940f3324b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pass_thrown_from
+    - node.type.highlight
+  module:
+    - options
+id: node.highlight.field_pass_thrown_from
+field_name: field_pass_thrown_from
+entity_type: node
+bundle: highlight
+label: 'Pass Thrown From'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

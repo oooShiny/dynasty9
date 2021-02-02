@@ -12,7 +12,7 @@ dependencies:
 id: team_games_block
 theme: dynasty
 region: content
-weight: 0
+weight: -2
 provider: null
 plugin: 'views_block:team_games-block_1'
 settings:

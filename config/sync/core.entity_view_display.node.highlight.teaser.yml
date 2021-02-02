@@ -1,0 +1,74 @@
+uuid: fd07d2ec-0125-4e50-9515-2fb47d76f468
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.highlight.field_air_yards
+    - field.field.node.highlight.field_distance
+    - field.field.node.highlight.field_down
+    - field.field.node.highlight.field_game
+    - field.field.node.highlight.field_gfycat_id
+    - field.field.node.highlight.field_minutes
+    - field.field.node.highlight.field_muse_video_id
+    - field.field.node.highlight.field_opponent
+    - field.field.node.highlight.field_pass_length
+    - field.field.node.highlight.field_pass_location
+    - field.field.node.highlight.field_pass_thrown_from
+    - field.field.node.highlight.field_play_type
+    - field.field.node.highlight.field_players_involved
+    - field.field.node.highlight.field_quarter
+    - field.field.node.highlight.field_season
+    - field.field.node.highlight.field_seconds
+    - field.field.node.highlight.field_tag_play
+    - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_week
+    - field.field.node.highlight.field_yards_gained
+    - node.type.highlight
+  module:
+    - user
+id: node.highlight.teaser
+targetEntityType: node
+bundle: highlight
+mode: teaser
+content:
+  field_gfycat_id:
+    type: string
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_muse_video_id:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_air_yards: true
+  field_distance: true
+  field_down: true
+  field_game: true
+  field_minutes: true
+  field_opponent: true
+  field_pass_length: true
+  field_pass_location: true
+  field_pass_thrown_from: true
+  field_play_type: true
+  field_players_involved: true
+  field_quarter: true
+  field_season: true
+  field_seconds: true
+  field_tag_play: true
+  field_td_scored: true
+  field_week: true
+  field_yards_gained: true

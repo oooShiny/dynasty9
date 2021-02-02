@@ -1,0 +1,19 @@
+uuid: e829da4c-973b-4055-a80b-f6305dc9e03a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gfycat_id
+    - node.type.highlight
+id: node.highlight.field_gfycat_id
+field_name: field_gfycat_id
+entity_type: node
+bundle: highlight
+label: 'Gfycat ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

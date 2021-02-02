@@ -3,3 +3,9 @@ overrides:
     theme:
       css/overrides.css: {}
       css/team-colors.css: {}
+gfycat:
+  js:
+    js/gfycat_video.js: {}
+    js/gfycat_modal.js: {}
+  dependencies:
+    - core/jquery

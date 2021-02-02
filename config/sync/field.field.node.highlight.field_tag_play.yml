@@ -1,0 +1,29 @@
+uuid: 51e6beb5-83bd-4005-81c7-00b42206a49f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tag_play
+    - node.type.highlight
+    - taxonomy.vocabulary.tags
+id: node.highlight.field_tag_play
+field_name: field_tag_play
+entity_type: node
+bundle: highlight
+label: 'Tag Play'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

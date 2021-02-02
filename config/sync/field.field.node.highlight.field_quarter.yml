@@ -1,0 +1,21 @@
+uuid: 74d1218d-65ca-4e64-a829-e79d84041c6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_quarter
+    - node.type.highlight
+  module:
+    - options
+id: node.highlight.field_quarter
+field_name: field_quarter
+entity_type: node
+bundle: highlight
+label: Quarter
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

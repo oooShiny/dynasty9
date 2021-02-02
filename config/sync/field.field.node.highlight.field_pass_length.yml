@@ -1,0 +1,21 @@
+uuid: 3f23d530-b741-4fc4-8d61-5a63cd2d8757
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pass_length
+    - node.type.highlight
+  module:
+    - options
+id: node.highlight.field_pass_length
+field_name: field_pass_length
+entity_type: node
+bundle: highlight
+label: 'Pass Length'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

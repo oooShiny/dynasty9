@@ -1,0 +1,21 @@
+uuid: 48fe7b34-b7f7-4cda-9148-d8e408608988
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pass_location
+    - node.type.highlight
+  module:
+    - options
+id: node.highlight.field_pass_location
+field_name: field_pass_location
+entity_type: node
+bundle: highlight
+label: 'Pass Location'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

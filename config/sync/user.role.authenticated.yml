@@ -17,4 +17,6 @@ permissions:
   - 'search content'
   - 'skip comment approval'
   - 'use text format basic_html'
+  - 'view field_game_video'
   - 'view media'
+  - 'view own field_game_video'

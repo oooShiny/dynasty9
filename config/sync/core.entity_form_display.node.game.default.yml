@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.game.field_date
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
+    - field.field.node.game.field_game_video
     - field.field.node.game.field_highlights
     - field.field.node.game.field_home_away
     - field.field.node.game.field_month
@@ -171,6 +172,7 @@ third_party_settings:
       label: 'Calculated Fields'
     group_game_media:
       children:
+        - field_game_video
         - field_youtube_highlights
         - field_highlights
       parent_name: ''
@@ -260,9 +262,17 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  field_game_video:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_highlights:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 28
     settings:
       title: Highlight
       title_plural: Highlights
@@ -473,7 +483,7 @@ content:
     type: string_textfield
     region: content
   field_youtube_highlights:
-    weight: 6
+    weight: 27
     settings:
       placeholder_url: ''
       placeholder_title: ''

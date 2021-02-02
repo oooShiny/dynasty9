@@ -1,0 +1,196 @@
+uuid: ee440543-7bf7-4c10-9537-840f3990523f
+langcode: en
+status: true
+dependencies: {  }
+id: dynasty_highlight_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: null
+label: 'Custom paragraph migration to nodes'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls:
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=0'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=1'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=2'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=3'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=4'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=5'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=6'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=7'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=8'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=9'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=10'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=11'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=12'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=13'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=14'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=15'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=16'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=17'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=18'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=19'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=20'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=21'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=22'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=23'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=24'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=25'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=26'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=27'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=28'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=29'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=30'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=31'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=32'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=33'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=34'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=35'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=36'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=37'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=38'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=39'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=30'
+    - 'https://patriotsdynasty.info/paragraph/gifs?page=41'
+  item_selector: /
+  fields:
+    -
+      name: id
+      selector: id/0/value
+    -
+      name: title
+      selector: field_gif_title/0/value
+    -
+      name: field_air_yards
+      selector: field_air_yards/0/value
+    -
+      name: field_distance
+      selector: field_distance/0/value
+    -
+      name: field_down
+      selector: field_down/0/value
+    -
+      name: field_gfycat_id
+      selector: field_gfycat_embed_code/0/value
+    -
+      name: field_opponent
+      selector: field_opponent/0/target_id
+    -
+      name: field_play_type
+      selector: field_play_type/0/target_id
+    -
+      name: field_players
+      selector: field_players_involved
+    -
+      name: field_minutes
+      selector: field_play_min/0/value
+    -
+      name: field_muse_video_id
+      selector: field_muse_video_id/0/value
+    -
+      name: field_pass_length
+      selector: field_pass_length/0/value
+    -
+      name: field_pass_location
+      selector: field_pass_location/0/value
+    -
+      name: field_pass_thrown_from
+      selector: field_pass_thrown_from/0/value
+    -
+      name: field_quarter
+      selector: field_quarter/0/value
+    -
+      name: field_season
+      selector: field_season/0/value
+    -
+      name: field_seconds
+      selector: field_play_sec/0/value
+    -
+      name: field_td_scored
+      selector: field_td_scored/0/value
+    -
+      name: field_yards_gained
+      selector: field_yards_gained/0/value
+    -
+      name: field_week
+      selector: field_week/0/value
+  ids:
+    id:
+      type: integer
+process:
+  dump_sourcevar:
+    plugin: callback
+    callable: var_dump
+    source: title
+  title: title
+  field_air_yards: field_air_yards
+  field_distance: field_distance
+  field_down: field_down
+  field_gfycat_id: field_gfycat_id
+  field_minutes: field_minutes
+  field_muse_video_id: field_muse_video_id
+  field_opponent:
+    plugin: migration_lookup
+    migration: dynasty_team_import
+    source: field_opponent
+  field_players_involved:
+    -
+      plugin: sub_process
+      source: field_players
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: dynasty_player_import
+          source: target_id
+  field_play_type:
+    plugin: migration_lookup
+    migration: dynasty_taxonomy_import
+    source: field_play_type
+  field_pass_length: field_pass_length
+  field_pass_location: field_pass_location
+  field_pass_thrown_from: field_pass_thrown_from
+  field_quarter: field_quarter
+  field_season: field_season
+  field_seconds: field_seconds
+  field_td_scored: field_td_scored
+  field_yards_gained: field_yards_gained
+  field_week:
+    -
+      plugin: static_map
+      source: field_week
+      map:
+        1: 'Week 1'
+        2: 'Week 2'
+        3: 'Week 3'
+        4: 'Week 4'
+        5: 'Week 5'
+        6: 'Week 6'
+        7: 'Week 7'
+        8: 'Week 8'
+        9: 'Week 9'
+        10: 'Week 10'
+        11: 'Week 11'
+        12: 'Week 12'
+        13: 'Week 13'
+        14: 'Week 14'
+        15: 'Week 15'
+        16: 'Week 16'
+        17: 'Week 17'
+        18: Wildcard
+        19: 'AFC Divisional Round'
+        20: 'AFC Conference Championship'
+        21: 'Super Bowl'
+    -
+      plugin: entity_lookup
+      value_key: name
+      entity_type: taxonomy_term
+      bundle_key: vid
+      bundle: week
+destination:
+  plugin: 'entity:node'
+  default_bundle: highlight
+migration_dependencies: null

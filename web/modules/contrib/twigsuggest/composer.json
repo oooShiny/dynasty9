@@ -1,0 +1,13 @@
+{
+    "name": "drupal/twigsuggest",
+    "description": "Provides template suggestions for things Drupal doesn't.",
+    "keywords": ["drupal", "styling", "templates", "template suggestions", "theming"],
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "homepage": "https://www.drupal.org/project/twigsuggest",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/twigsuggest",
+        "source": "https://git.drupalcode.org/project/twigsuggest.git"
+    }
+}

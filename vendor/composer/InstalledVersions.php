@@ -14,12 +14,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'c798c6830cd18cdce5b541621694112d1d20101f',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -943,6 +943,15 @@ private static $installed = array (
         0 => '9.1.0',
       ),
     ),
+    'drupal/pager' => 
+    array (
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-1.4',
+    ),
     'drupal/paragraphs' => 
     array (
       'pretty_version' => '1.12.0',
@@ -1000,12 +1009,12 @@ private static $installed = array (
     ),
     'drupal/recommended-project' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => 'c798c6830cd18cdce5b541621694112d1d20101f',
     ),
     'drupal/responsive_image' => 
     array (
@@ -1150,6 +1159,24 @@ private static $installed = array (
       array (
         0 => '9.1.0',
       ),
+    ),
+    'drupal/twig_tweak' => 
+    array (
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3.0.0',
+    ),
+    'drupal/twigsuggest' => 
+    array (
+      'pretty_version' => '1.0.0-beta2',
+      'version' => '1.0.0.0-beta2',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-1.0-beta2',
     ),
     'drupal/update' => 
     array (

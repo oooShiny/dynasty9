@@ -1,0 +1,19 @@
+uuid: d433a667-f086-4984-9705-ab5b6ed5410a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_game_video
+    - node.type.game
+id: node.game.field_game_video
+field_name: field_game_video
+entity_type: node
+bundle: game
+label: 'Game Video'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: e8b44cac-0fed-4750-84c5-05e23148b20f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_yards_gained
+    - node.type.highlight
+id: node.highlight.field_yards_gained
+field_name: field_yards_gained
+entity_type: node
+bundle: highlight
+label: 'Yards Gained'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

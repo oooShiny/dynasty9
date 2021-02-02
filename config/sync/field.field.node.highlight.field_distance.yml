@@ -1,0 +1,23 @@
+uuid: 155c5948-ecd5-4441-a6a7-570789bb45de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_distance
+    - node.type.highlight
+id: node.highlight.field_distance
+field_name: field_distance
+entity_type: node
+bundle: highlight
+label: Distance
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

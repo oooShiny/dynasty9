@@ -2,7 +2,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/*
+/**
  * Game Summary Styles
  */
 #game-summary p {
@@ -25,35 +25,14 @@ a[href*='muse.ai']{
 }
 
 /**
- * Patriots Colors
+ * Change SVG images to white.
  */
-
-.tw-text-blue-pats {
-  color: #002244 !important;
-}
-
-.tw-bg-blue-pats {
-  background-color: #002244 !important;
-}
-
-.tw-border-blue-pats {
-  border-color: #002244 !important;
-}
-
-.tw-text-red-pats {
-  color: #c60c30 !important;
-}
-
-.tw-bg-red-pats {
-  background-color: #c60c30 !important;
-}
-
-.tw-border-red-pats {
-  border-color: #c60c30 !important;
+.svg-white {
+  filter: invert(93%) sepia(7%) saturate(0%) hue-rotate(101deg) brightness(107%) contrast(107%);
 }
 
 /**
-  Node Tab Colors
+ * Node Tab Colors
  */
 #node-tabs li a.is-active,
 #node-tabs li a:hover{

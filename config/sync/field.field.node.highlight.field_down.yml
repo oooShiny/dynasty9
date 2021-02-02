@@ -1,0 +1,21 @@
+uuid: 368681aa-41cd-484c-9166-7b9859a1b3c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_down
+    - node.type.highlight
+  module:
+    - options
+id: node.highlight.field_down
+field_name: field_down
+entity_type: node
+bundle: highlight
+label: Down
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

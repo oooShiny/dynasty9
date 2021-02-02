@@ -1,0 +1,23 @@
+uuid: c60f40ee-26b0-4cf0-81cb-589cc4c27748
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_td_scored
+    - node.type.highlight
+id: node.highlight.field_td_scored
+field_name: field_td_scored
+entity_type: node
+bundle: highlight
+label: 'TD Scored'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

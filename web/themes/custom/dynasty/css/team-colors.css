@@ -1,4 +1,31 @@
-/* Team Colors */
+/**
+ * Patriots Colors
+ */
+
+.tw-text-blue-pats {
+  color: #002244 !important;
+}
+
+.tw-bg-blue-pats {
+  background-color: #002244 !important;
+}
+
+.tw-border-blue-pats {
+  border-color: #002244 !important;
+}
+
+.tw-text-red-pats {
+  color: #c60c30 !important;
+}
+
+.tw-bg-red-pats {
+  background-color: #c60c30 !important;
+}
+
+.tw-border-red-pats {
+  border-color: #c60c30 !important;
+}
+
 .pats-red {
   color: #C60C30;
 }
@@ -28,6 +55,8 @@
   background: white;
   border: 0.25em solid #C60C30;
 }
+
+/* Team Colors */
 
 .miami-dolphins {
   color: white;

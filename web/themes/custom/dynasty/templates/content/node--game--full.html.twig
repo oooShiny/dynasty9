@@ -196,8 +196,8 @@
   <a id="highlights"></a>
   <div class="tw-bg-gray-400 tw-py-10">
     <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Highlights</h2>
-    <div class="tw-flex tw-items-center tw-justify-around">
-      {{ content.field_highlights }}
+    <div class="tw-flex tw-flex-wrap tw-justify-center tw-pt-10">
+      {{ drupal_view('game_highlights', 'block_1') }}
     </div>
   </div>
 
@@ -205,7 +205,9 @@
 
 {# Game Video #}
 {% if content.field_game_video|render %}
-  <div id="full-video" class="tw-w-1/2 tw-m-auto tw-py-10">
+  <div id="game-summary" class="tw-py-10">
+    <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Full Game Video</h2>
+    <div id="full-video" class="tw-w-1/2 tw-m-auto tw-pt-10">
     {{ content.field_game_video }}
   </div>
 {% endif %}
