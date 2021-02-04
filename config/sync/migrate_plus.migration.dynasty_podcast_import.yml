@@ -1,0 +1,93 @@
+uuid: ac19f299-f91e-443c-b2a0-cc7a9614b7bd
+langcode: en
+status: true
+dependencies: {  }
+id: dynasty_podcast_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: null
+label: 'Import podcast feed'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls: 'https://feeds.acast.com/public/shows/patriots-dynasty-podcast'
+  data_parser_plugin: simple_xml
+  item_selector: /rss/channel/item
+  fields:
+    -
+      name: guid
+      label: GUID
+      selector: guid
+    -
+      name: title
+      label: Title
+      selector: title
+    -
+      name: pub_date
+      label: 'Publication date'
+      selector: pubDate
+    -
+      name: summary
+      label: Summary
+      selector: 'itunes:summary'
+    -
+      name: season
+      label: Season
+      selector: 'itunes:season'
+    -
+      name: episode
+      label: Episode
+      selector: 'itunes:episode'
+    -
+      name: mp3
+      label: MP3
+      selector: enclosure
+    -
+      name: duration
+      label: Duration
+      selector: 'itunes:duration'
+  ids:
+    guid:
+      type: string
+process:
+  dump_sourcevar:
+    plugin: callback
+    callable: var_dump
+    source: title
+  title: title
+  body/format:
+    plugin: default_value
+    default_value: full_html
+  body/value:
+    plugin: remove_footer
+    source: summary
+  field_season:
+    plugin: skip_on_empty
+    method: row
+    source: season
+    message: 'This episode has no season'
+  field_episode:
+    plugin: skip_on_empty
+    method: row
+    source: episode
+    message: 'This episode has no episode number'
+  field_duration: duration
+  field_mp3:
+    plugin: get_mp3
+    source: mp3
+  created:
+    plugin: format_date
+    from_format: 'D, d M Y H:i:s T'
+    to_format: U
+    source: pub_date
+  status:
+    plugin: default_value
+    default_value: 1
+  type:
+    plugin: default_value
+    default_value: podcast_episode
+destination:
+  plugin: 'entity:node'
+migration_dependencies: null

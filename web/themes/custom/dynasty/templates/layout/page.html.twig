@@ -89,13 +89,19 @@
 {% if page.footer %}
   <footer class="tw-bg-blue-pats tw-text-white tw-p-6 tw-w-full tw-z-10">
     {{ page.footer }}
-    <div class="tw-flex">
-      <img src="/themes/custom/dynasty/icons/drupal.svg" alt="drupal" class="tw-h-6 svg-white">
-      &copy; Patriots Dynasty 2017-{{ 'now'|date('Y') }}
-      <img src="/themes/custom/dynasty/icons/twitter.svg" alt="twitter" class="tw-h-6 svg-white">
-      <img src="/themes/custom/dynasty/icons/facebook.svg" alt="facebook" class="tw-h-6 svg-white">
-      <img src="/themes/custom/dynasty/icons/instagram.svg" alt="instagram" class="tw-h-6 svg-white">
-      <img src="/themes/custom/dynasty/icons/reddit.svg" alt="reddit" class="tw-h-6 svg-white">
+    <div class="tw-border-gray-400 tw-border-t tw-flex tw-justify-between tw-mt-10 tw-pt-2 tw-text-gray-400">
+      <div>
+        <a href="https://drupal.org" target="_blank"><img src="/themes/custom/dynasty/icons/drupal.svg" alt="drupal" class="tw-h-6 svg-white"></a>
+      </div>
+      <div>
+        <span class="tw-pr-20">&copy; Patriots Dynasty 2017-{{ 'now'|date('Y') }}</span>
+      </div>
+      <div class="tw-flex">
+        <a href="https://twitter.com/PatsDynastyInfo" target="_blank"><img src="/themes/custom/dynasty/icons/twitter.svg" alt="twitter" class="tw-h-6 tw-pr-2 svg-white"></a>
+        <a href="https://www.facebook.com/patriotsdynasty2001" target="_blank"><img src="/themes/custom/dynasty/icons/facebook.svg" alt="facebook" class="tw-h-6 tw-pr-2 svg-white"></a>
+        <a href="https://www.instagram.com/patriotsdynasty2001/" target="_blank"><img src="/themes/custom/dynasty/icons/instagram.svg" alt="instagram" class="tw-h-6 tw-pr-2 svg-white"></a>
+        <a href="https://www.reddit.com/user/arbrown83/" target="_blank"><img src="/themes/custom/dynasty/icons/reddit.svg" alt="reddit" class="tw-h-6 tw-pr-2 svg-white"></a>
+      </div>
     </div>
   </footer>
 {% endif %}

@@ -1,0 +1,19 @@
+uuid: 73188be1-1f30-40dc-82ab-e1b10663780d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_duration
+    - node.type.podcast_episode
+id: node.podcast_episode.field_duration
+field_name: field_duration
+entity_type: node
+bundle: podcast_episode
+label: Duration
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

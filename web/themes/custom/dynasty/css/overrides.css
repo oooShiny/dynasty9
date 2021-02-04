@@ -28,7 +28,7 @@ a[href*='muse.ai']{
  * Change SVG images to white.
  */
 .svg-white {
-  filter: invert(93%) sepia(7%) saturate(0%) hue-rotate(101deg) brightness(107%) contrast(107%);
+  filter: invert(95%) sepia(2%) saturate(3007%) hue-rotate(180deg) brightness(100%) contrast(76%);
 }
 
 /**

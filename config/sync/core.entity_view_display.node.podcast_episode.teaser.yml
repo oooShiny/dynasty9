@@ -1,0 +1,44 @@
+uuid: d1875d66-e34b-4737-a4ff-387a4132d761
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.podcast_episode.body
+    - field.field.node.podcast_episode.field_duration
+    - field.field.node.podcast_episode.field_episode
+    - field.field.node.podcast_episode.field_game
+    - field.field.node.podcast_episode.field_mp3
+    - field.field.node.podcast_episode.field_podcast_guest
+    - field.field.node.podcast_episode.field_season
+    - field.field.node.podcast_episode.field_transcription
+    - node.type.podcast_episode
+  module:
+    - text
+    - user
+id: node.podcast_episode.teaser
+targetEntityType: node
+bundle: podcast_episode
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_duration: true
+  field_episode: true
+  field_game: true
+  field_mp3: true
+  field_podcast_guest: true
+  field_season: true
+  field_transcription: true

@@ -1,0 +1,23 @@
+uuid: 02c94a2c-ed2a-4c0f-b405-93ed2e4ba599
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_season
+    - node.type.podcast_episode
+id: node.podcast_episode.field_season
+field_name: field_season
+entity_type: node
+bundle: podcast_episode
+label: Season
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
