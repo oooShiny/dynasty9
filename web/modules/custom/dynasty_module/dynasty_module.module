@@ -21,6 +21,22 @@ function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entit
       // Get values from podcast node.
       $season = $entity->field_season->value;
       $week = $entity->field_episode->value;
+      // Adjust playoff episode weeks to actual week numbers.
+      if ($week > 17) {
+        $title = $entity->label();
+        if (strpos($title, 'Wildcard') !== FALSE) {
+          $week = 18;
+        }
+        elseif (strpos($title, 'Divisional') !== FALSE) {
+          $week = 19;
+        }
+        elseif (strpos($title, 'Championship') !== FALSE) {
+          $week = 20;
+        }
+        elseif (strpos($title, 'Super') !== FALSE) {
+          $week = 21;
+        }
+      }
       // Map podcast week to game week taxonomy term.
       $tids = \Drupal::entityQuery('taxonomy_term')
         ->condition('vid', 'week')

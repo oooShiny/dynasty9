@@ -43,7 +43,7 @@ source:
     -
       name: mp3
       label: MP3
-      selector: enclosure
+      selector: enclosure/@url
     -
       name: duration
       label: Duration
@@ -55,7 +55,7 @@ process:
   dump_sourcevar:
     plugin: callback
     callable: var_dump
-    source: title
+    source: mp3
   title: title
   body/format:
     plugin: default_value
@@ -65,18 +65,16 @@ process:
     source: summary
   field_season:
     plugin: skip_on_empty
-    method: row
+    method: process
     source: season
     message: 'This episode has no season'
   field_episode:
     plugin: skip_on_empty
-    method: row
+    method: process
     source: episode
     message: 'This episode has no episode number'
   field_duration: duration
-  field_mp3:
-    plugin: get_mp3
-    source: mp3
+  field_mp3: mp3
   created:
     plugin: format_date
     from_format: 'D, d M Y H:i:s T'

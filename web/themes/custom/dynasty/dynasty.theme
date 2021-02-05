@@ -48,6 +48,15 @@ function dynasty_preprocess_node(&$variables) {
     $variables['season'] = intval($game_season);
     $variables['gamepass_link'] = 'https://gamepass.nfl.com/game/'.$gp_away.'-at-'.$gp_home.'-on-' . $gp_date;
   }
+  /**
+   * Podcast Episode Node Overrides
+   */
+  if ($node->bundle() == 'podcast_episode') {
+    $mp3_link = $node->get('field_mp3')->value;
+    $link_array = parse_url($mp3_link);
+    $path_array = explode('/', $link_array['path']);
+    $variables['mp3'] = $path_array[6];
+  }
 }
 
 /**
