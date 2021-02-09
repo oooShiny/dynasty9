@@ -1,7 +1,7 @@
 dynasty.maphighlights:
   path: '/admin/dynasty/map-highlights'
   defaults:
-    _form: '\Drupal\dynasty\Form\MapHighlightsToGamesForm'
+    _form: '\Drupal\dynasty_module\Form\MapHighlightsToGamesForm'
     _title: 'Map Highlights to Games'
   requirements:
     _role: 'administrator'
