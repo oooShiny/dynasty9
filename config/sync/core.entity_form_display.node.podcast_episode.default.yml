@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
     - field.field.node.podcast_episode.field_season
+    - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_transcription
     - node.type.podcast_episode
   module:
@@ -22,7 +23,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 121
+    weight: 8
     settings:
       rows: 9
       summary_rows: 3
@@ -32,12 +33,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_duration:
-    weight: 122
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -45,14 +46,14 @@ content:
     type: string_textfield
     region: content
   field_episode:
-    weight: 123
+    weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_game:
-    weight: 124
+    weight: 11
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -62,7 +63,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_mp3:
-    weight: 125
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -70,7 +71,7 @@ content:
     type: string_textfield
     region: content
   field_podcast_guest:
-    weight: 126
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -78,14 +79,22 @@ content:
     type: string_textfield
     region: content
   field_season:
-    weight: 127
+    weight: 14
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
+  field_subtitle:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_transcription:
-    weight: 128
+    weight: 15
     settings:
       rows: 5
       placeholder: ''
@@ -94,7 +103,7 @@ content:
     region: content
   path:
     type: path
-    weight: 30
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -102,26 +111,26 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 4
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 7
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 5
     region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -129,7 +138,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60

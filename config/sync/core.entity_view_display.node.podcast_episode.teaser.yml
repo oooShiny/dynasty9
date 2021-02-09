@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
     - field.field.node.podcast_episode.field_season
+    - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_transcription
     - node.type.podcast_episode
   module:
@@ -41,4 +42,5 @@ hidden:
   field_mp3: true
   field_podcast_guest: true
   field_season: true
+  field_subtitle: true
   field_transcription: true

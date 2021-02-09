@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
     - field.field.node.podcast_episode.field_season
+    - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_transcription
     - node.type.podcast_episode
   module:
@@ -78,9 +79,17 @@ content:
     third_party_settings: {  }
     type: number_integer
     region: content
+  field_subtitle:
+    weight: 109
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_transcription:
     weight: 108
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default

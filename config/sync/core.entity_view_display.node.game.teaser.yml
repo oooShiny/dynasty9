@@ -60,8 +60,8 @@ content:
     region: content
     label: hidden
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: long_date
     third_party_settings: {  }
   field_opp_ot:
     type: number_integer

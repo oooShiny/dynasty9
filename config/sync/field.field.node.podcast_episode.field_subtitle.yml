@@ -1,0 +1,19 @@
+uuid: 4e419cf7-243f-4437-9ccb-a1de8f0aa32b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subtitle
+    - node.type.podcast_episode
+id: node.podcast_episode.field_subtitle
+field_name: field_subtitle
+entity_type: node
+bundle: podcast_episode
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

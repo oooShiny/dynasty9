@@ -25,6 +25,10 @@ source:
       label: Title
       selector: title
     -
+      name: subtitle
+      label: Subtitle
+      selector: 'itunes:subtitle'
+    -
       name: pub_date
       label: 'Publication date'
       selector: pubDate
@@ -55,24 +59,17 @@ process:
   dump_sourcevar:
     plugin: callback
     callable: var_dump
-    source: mp3
+    source: title
   title: title
+  field_subtitle: subtitle
   body/format:
     plugin: default_value
     default_value: full_html
   body/value:
     plugin: remove_footer
     source: summary
-  field_season:
-    plugin: skip_on_empty
-    method: process
-    source: season
-    message: 'This episode has no season'
-  field_episode:
-    plugin: skip_on_empty
-    method: process
-    source: episode
-    message: 'This episode has no episode number'
+  field_season: season
+  field_episode: episode
   field_duration: duration
   field_mp3: mp3
   created:
