@@ -30,7 +30,7 @@ content:
     region: content
   field_duration:
     weight: 102
-    label: hidden
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }

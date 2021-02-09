@@ -1,0 +1,22 @@
+uuid: 6895f14c-1958-403b-a116-1e988a0e626e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: highlight_path
+label: 'Highlight Path'
+type: 'canonical_entities:node'
+pattern: 'highlight/[node:title]'
+selection_criteria:
+  ddef547c-d516-45c3-b14f-d4bdcd53712e:
+    id: node_type
+    bundles:
+      highlight: highlight
+    negate: false
+    context_mapping:
+      node: node
+    uuid: ddef547c-d516-45c3-b14f-d4bdcd53712e
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,22 @@
+uuid: 4fefd589-3c07-44aa-8f25-c301312b9912
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: player_path
+label: 'Player Path'
+type: 'canonical_entities:node'
+pattern: 'player/[node:title]'
+selection_criteria:
+  b7100803-260d-4861-97d6-6d8c26147294:
+    id: node_type
+    bundles:
+      player: player
+    negate: false
+    context_mapping:
+      node: node
+    uuid: b7100803-260d-4861-97d6-6d8c26147294
+selection_logic: and
+weight: -5
+relationships: {  }
