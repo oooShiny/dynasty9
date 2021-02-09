@@ -68,7 +68,7 @@ class MapHighlightsToGamesForm extends ConfigFormBase {
           'highlight' => $video->id(),
           'game' => $game_node,
         ];
-        $operations[] = ['\Drupal\dynasty\MapHighlightToGame::updateNode', [$v]];
+        $operations[] = ['\Drupal\dynasty_module\MapHighlightToGame::updateNode', [$v]];
       }
     }
     $batch = [
