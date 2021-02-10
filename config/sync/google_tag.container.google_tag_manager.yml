@@ -1,0 +1,30 @@
+uuid: 56cba07b-6984-4295-b5f0-25ce9f24b2cb
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+id: google_tag_manager
+label: 'Google Tag Manager'
+weight: 0
+container_id: GTM-MJ9TLJP
+data_layer: dataLayer
+include_classes: false
+whitelist_classes: "google\nnonGooglePixels\nnonGoogleScripts\nnonGoogleIframes"
+blacklist_classes: "customScripts\ncustomPixels"
+include_environment: false
+environment_id: ''
+environment_token: ''
+path_toggle: 'exclude listed'
+path_list: "/admin*\n/batch*\n/node/add*\n/node/*/edit\n/node/*/delete\n/user/*/edit*\n/user/*/cancel*"
+role_toggle: 'exclude listed'
+role_list: {  }
+status_toggle: 'exclude listed'
+status_list: "403\n404"
+conditions:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles: {  }
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

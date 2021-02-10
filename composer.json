@@ -26,6 +26,7 @@
         "drupal/field_permissions": "^1.1",
         "drupal/gin": "^3.0@alpha",
         "drupal/gin_login": "^1.0@RC",
+        "drupal/google_tag": "^1.4",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/migrate_plus": "^5.1",
         "drupal/migrate_tools": "^5.0",
