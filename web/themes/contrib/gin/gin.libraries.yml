@@ -3,6 +3,11 @@ gin:
   css:
     theme:
       dist/css/gin.css: { minified: true }
+  dependencies:
+    - gin/gin_ckeditor
+
+gin_ckeditor:
+  version: VERSION
   js:
     dist/js/gin_ckeditor.js: { minified: true }
 
@@ -60,3 +65,5 @@ gin_custom_css:
   css:
     theme:
       public://gin-custom.css: { weight: 100 }
+  js:
+    public://gin-custom.js: { weight: -99 }

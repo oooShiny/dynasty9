@@ -1,0 +1,8 @@
+uuid: b836cb95-dc35-4a56-baf0-6a4518f42b46
+langcode: en
+status: true
+dependencies: {  }
+id: node__podcast_episode
+label: 'Content: Podcast Episode'
+tags:
+  apple_itunes_app: app-id=1497577531

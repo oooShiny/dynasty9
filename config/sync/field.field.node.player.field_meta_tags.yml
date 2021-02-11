@@ -1,0 +1,21 @@
+uuid: 6c0819a0-6dbe-4aac-bf09-f1742d5875cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.player
+  module:
+    - metatag
+id: node.player.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: player
+label: 'Meta tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

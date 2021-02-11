@@ -1,0 +1,192 @@
+uuid: 3484854f-b22f-4ea2-826c-90e81e37f341
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_solr
+    - node
+    - taxonomy
+    - search_api
+  config:
+    - field.storage.node.field_distance
+    - field.storage.node.field_down
+    - field.storage.node.field_minutes
+    - field.storage.node.field_opponent
+    - field.storage.node.field_players_involved
+    - field.storage.node.field_quarter
+    - field.storage.node.field_season
+    - field.storage.node.field_seconds
+    - field.storage.node.field_td_scored
+    - field.storage.node.field_week
+    - field.storage.node.field_yards_gained
+    - search_api.server.solr_server
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 3
+      fuzzy: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+id: highlight_index
+name: 'Highlight Index'
+description: ''
+read_only: false
+field_settings:
+  distance:
+    label: Distance
+    datasource_id: 'entity:node'
+    property_path: field_distance
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_distance
+  down:
+    label: Down
+    datasource_id: 'entity:node'
+    property_path: field_down
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_down
+  minutes:
+    label: Minutes
+    datasource_id: 'entity:node'
+    property_path: field_minutes
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_minutes
+  opponent:
+    label: 'Opponent » Content » Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_opponent:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_opponent
+      module:
+        - node
+  players_involved:
+    label: 'Player(s) Involved » Content » Title'
+    datasource_id: 'entity:node'
+    property_path: 'field_players_involved:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_players_involved
+      module:
+        - node
+  quarter:
+    label: Quarter
+    datasource_id: 'entity:node'
+    property_path: field_quarter
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_quarter
+  season:
+    label: Season
+    datasource_id: 'entity:node'
+    property_path: field_season
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_season
+  seconds:
+    label: Seconds
+    datasource_id: 'entity:node'
+    property_path: field_seconds
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_seconds
+  td_scored:
+    label: 'TD Scored'
+    datasource_id: 'entity:node'
+    property_path: field_td_scored
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_td_scored
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - node
+  week:
+    label: 'Week » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_week:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_week
+      module:
+        - taxonomy
+  yards_gained:
+    label: 'Yards Gained'
+    datasource_id: 'entity:node'
+    property_path: field_yards_gained
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_yards_gained
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - highlight
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+  solr_date_range: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: solr_server

@@ -7,7 +7,7 @@ base theme: stable
 libraries:
   - tailwindcss/global-styling
 
-# Information added by Drupal.org packaging script on 2020-06-12
-version: '8.x-2.7'
+# Information added by Drupal.org packaging script on 2021-02-05
+version: '8.x-2.8'
 project: 'tailwindcss'
-datestamp: 1592004824
+datestamp: 1612525874

@@ -70,7 +70,32 @@
  *   in different view modes.
  */
 #}
-
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type": "SportsEvent",
+    "name": "{{ schema_name }}",
+    "competitor": [
+      {
+        "@type": "SportsTeam",
+        "name": "New England Patriots"
+      },
+      {
+        "@type": "SportsTeam",
+        "name": "{{ schema_opp }}"
+      }
+    ],
+    "startDate": "{{ schema_date }}",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ schema_city }}",
+        "addressRegion": "{{ schema_state }}"
+      }
+    }
+  }
+</script>
 <article class="tw-mt-10">
 {# Teams and Score Boxes #}
   <div class="tw-flex tw-items-center tw-justify-center tw-py-10">

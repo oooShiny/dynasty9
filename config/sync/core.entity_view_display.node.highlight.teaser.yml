@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.highlight.field_down
     - field.field.node.highlight.field_game
     - field.field.node.highlight.field_gfycat_id
+    - field.field.node.highlight.field_meta_tags
     - field.field.node.highlight.field_minutes
     - field.field.node.highlight.field_muse_video_id
     - field.field.node.highlight.field_opponent
@@ -58,6 +59,7 @@ hidden:
   field_distance: true
   field_down: true
   field_game: true
+  field_meta_tags: true
   field_minutes: true
   field_opponent: true
   field_pass_length: true
@@ -72,3 +74,5 @@ hidden:
   field_td_scored: true
   field_week: true
   field_yards_gained: true
+  langcode: true
+  search_api_excerpt: true

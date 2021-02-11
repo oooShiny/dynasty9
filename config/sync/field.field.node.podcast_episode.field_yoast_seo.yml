@@ -1,0 +1,21 @@
+uuid: 2a426309-6b15-4277-b97f-98632b62f51b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_yoast_seo
+    - node.type.podcast_episode
+  module:
+    - yoast_seo
+id: node.podcast_episode.field_yoast_seo
+field_name: field_yoast_seo
+entity_type: node
+bundle: podcast_episode
+label: 'Real-time SEO'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: yoast_seo

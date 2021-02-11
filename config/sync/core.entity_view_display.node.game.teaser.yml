@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.game.field_game_video
     - field.field.node.game.field_highlights
     - field.field.node.game.field_home_away
+    - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
     - field.field.node.game.field_opp_ot
     - field.field.node.game.field_opp_q1
@@ -44,6 +45,7 @@ dependencies:
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
+    - field.field.node.game.field_yoast_seo
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -197,6 +199,7 @@ hidden:
   field_game_video: true
   field_highlights: true
   field_home_away: true
+  field_meta_tags: true
   field_month: true
   field_opposing_coach: true
   field_ot: true
@@ -211,4 +214,7 @@ hidden:
   field_vegas_line: true
   field_week: true
   field_weekday: true
+  field_yoast_seo: true
   field_youtube_highlights: true
+  langcode: true
+  search_api_excerpt: true

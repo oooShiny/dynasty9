@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.highlight.field_down
     - field.field.node.highlight.field_game
     - field.field.node.highlight.field_gfycat_id
+    - field.field.node.highlight.field_meta_tags
     - field.field.node.highlight.field_minutes
     - field.field.node.highlight.field_muse_video_id
     - field.field.node.highlight.field_opponent
@@ -26,6 +27,7 @@ dependencies:
     - node.type.highlight
   module:
     - field_group
+    - metatag
 third_party_settings:
   field_group:
     group_video_info:
@@ -141,6 +143,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_meta_tags:
+    weight: 27
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   field_minutes:
     weight: 9
@@ -259,6 +268,13 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 1

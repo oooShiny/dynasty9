@@ -1,7 +1,10 @@
 <div class="tw-flex tw-justify-center">
 <ul class="tw-mx-4">
 {% for season, link in seasons %}
-  <li><a href="{{ link }}">{{ season }} Season</a></li>
+  <li>
+    <a class="md:tw-block tw-hidden" href="{{ link }}">{{ season }} Season</a>
+    <a class="tw-block md:tw-hidden" href="{{ link }}">{{ season }}</a>
+  </li>
   {% if loop.index is divisible by(5) %}
     </ul><ul class="tw-mx-4">
   {% endif %}

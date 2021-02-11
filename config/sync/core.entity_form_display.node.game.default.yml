@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.game.field_game_video
     - field.field.node.game.field_highlights
     - field.field.node.game.field_home_away
+    - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
     - field.field.node.game.field_opp_ot
     - field.field.node.game.field_opp_q1
@@ -43,15 +44,18 @@ dependencies:
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
+    - field.field.node.game.field_yoast_seo
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
     - datetime
     - field_group
     - link
+    - metatag
     - paragraphs
     - path
     - text
+    - yoast_seo
 third_party_settings:
   field_group:
     group_boxscore:
@@ -288,6 +292,13 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_meta_tags:
+    weight: 29
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_month:
     weight: 8
     settings:
@@ -482,6 +493,13 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_yoast_seo:
+    weight: 30
+    settings:
+      body: body
+    third_party_settings: {  }
+    type: yoast_seo_widget
+    region: content
   field_youtube_highlights:
     weight: 27
     settings:
@@ -490,6 +508,13 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   path:
     type: path
     weight: 8

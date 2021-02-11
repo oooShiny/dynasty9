@@ -26,7 +26,8 @@ function dynasty_preprocess_node(&$variables) {
     $opp = Node::load($node->get('field_opponent')->target_id);
     $variables['team_css'] =  str_replace(' ', '-', strtolower($opp->label()));
     $name_array = explode(' ', $opp->label());
-    $variables['team_short'] = end($name_array);
+    $team_short = end($name_array);
+    $variables['team_short'] = $team_short;
 
     // Create pro-football-reference and NFL Gamepass links.
     $game_date = new DateTime($node->get('field_date')->value);
@@ -37,16 +38,26 @@ function dynasty_preprocess_node(&$variables) {
       $pfr_home = 'nwe';
       $gp_home = 'patriots';
       $gp_away = strtolower(end($gp_opp));
+      $variables['schema_city'] = 'Foxboro';
+      $variables['schema_state'] = 'MA';
     }
     else {
       $pfr_home = $opp->get('field_pfr_id')->value;
       $gp_home = strtolower(end($gp_opp));
       $gp_away = 'patriots';
+      $game_location = _get_team_location(strtolower($team_short));
+      $variables['schema_city'] = $game_location['city'];
+      $variables['schema_state'] = $game_location['state'];
     }
     $variables['pfr_link'] = 'https://www.pro-football-reference.com/boxscores/' . $pfr_date . '0' . $pfr_home . '.htm';
     $game_season = $node->get('field_season')->value;
     $variables['season'] = intval($game_season);
     $variables['gamepass_link'] = 'https://gamepass.nfl.com/game/'.$gp_away.'-at-'.$gp_home.'-on-' . $gp_date;
+
+    // Schema.org formatting.
+    $variables['schema_date'] = $game_date->format('c');
+    $variables['schema_opp'] = $opp->label();
+    $variables['schema_name'] = $node->label();
   }
   /**
    * Podcast Episode Node Overrides
@@ -69,4 +80,41 @@ function dynasty_preprocess_field(&$variables, $hook) {
     $variables['video_type'] = $url['host'];
     $variables['video_id'] = end($path);
   }
+}
+
+function _get_team_location($team) {
+$locations = [
+  'cardinals' => ['city' => 'Glendale' , 'state' => 'AZ'],
+  'falcons' => ['city' => 'Atlanta' , 'state' => 'GA'],
+  'ravens' => ['city' => 'Baltimore' , 'state' => 'MD'],
+  'bills' => ['city' => 'Orchard Park' , 'state' => 'NY'],
+  'panthers' => ['city' => 'Charlotte' , 'state' => 'NC'],
+  'bears' => ['city' => 'Chicago' , 'state' => 'IL'],
+  'bengals' => ['city' => 'Cincinnati' , 'state' => 'OH'],
+  'browns' => ['city' => 'Cleveland' , 'state' => 'OH'],
+  'cowboys' => ['city' => 'Arlington' , 'state' => 'TX'],
+  'broncos' => ['city' => 'Denver' , 'state' => 'CO'],
+  'lions' => ['city' => 'Detroit' , 'state' => 'MI'],
+  'packers' => ['city' => 'Green Bay' , 'state' => 'WI'],
+  'texans' => ['city' => 'Houston' , 'state' => 'TX'],
+  'colts' => ['city' => 'Indianapolis' , 'state' => 'IA'],
+  'jaguars' => ['city' => 'Jacksonville' , 'state' => 'FL'],
+  'chiefs' => ['city' => 'Kansas City' , 'state' => 'MO'],
+  'raiders' => ['city' => 'Oakland' , 'state' => 'CA'],
+  'chargers' => ['city' => 'San Diego' , 'state' => 'CA'],
+  'rams' => ['city' => 'Los Angeles' , 'state' => 'CA'],
+  'dolphins' => ['city' => 'Miami' , 'state' => 'FL'],
+  'vikings' => ['city' => 'Minneapolis' , 'state' => 'MN'],
+  'saints' => ['city' => 'New Orleans' , 'state' => 'LA'],
+  'giants' => ['city' => 'East Rutherford' , 'state' => 'NJ'],
+  'jets' => ['city' => 'East Rutherford' , 'state' => 'NJ'],
+  'eagles' => ['city' => 'Philadelphia' , 'state' => 'PA'],
+  'steelers' => ['city' => 'Pittsburgh' , 'state' => 'PA'],
+  '49ers' => ['city' => 'Santa Clara' , 'state' => 'CA'],
+  'seahawks' => ['city' => 'Seattle' , 'state' => 'WA'],
+  'buccaneers' => ['city' => 'Tampa' , 'state' => 'FL'],
+  'titans' => ['city' => 'Nashville' , 'state' => 'TN'],
+  'redskins' => ['city' => 'Landover' , 'state' => 'MD']
+];
+  return $locations[$team];
 }
