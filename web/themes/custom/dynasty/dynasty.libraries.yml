@@ -9,3 +9,4 @@ gfycat:
     js/gfycat_modal.js: {}
   dependencies:
     - core/jquery
+    - core/drupal.dialog

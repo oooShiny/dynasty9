@@ -40,9 +40,9 @@ a[href*='muse.ai']{
 }
 
 .win {
-  color: green;
+  color: #002244;
 }
 
 .loss {
-  color: red;
+  color: #C60C30;
 }
