@@ -88,13 +88,7 @@
     <div class="tw-bg-blue-pats tw-text-white tw-py-10">
       <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Listen Now</h2>
       <div class="tw-m-auto tw-pt-10 tw-w-2/3">
-        <div class="tw-hidden md:tw-block">
-          <iframe title="Embed Player" width="100%" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ mp3 }}?cover=true&accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>
-        </div>
-        <div class="tw-block md:tw-hidden">
-          <iframe title="Embed Player" width="300" height="300" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ mp3 }}?accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>
-        </div>
-{#        <iframe src="https://player.acast.com/5d23d6cdd5ef084d07ef59b9/episodes/{{ mp3 }}?theme=custom&cover=1&latest=1&primary=b0b7bc&background=002244" frameBorder="0" width="100%" height="110px" allow="autoplay"></iframe>#}
+        {{ content.field_mp3 }}
       </div>
     </div>
 

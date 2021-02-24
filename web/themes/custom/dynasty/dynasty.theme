@@ -59,26 +59,24 @@ function dynasty_preprocess_node(&$variables) {
     $variables['schema_opp'] = $opp->label();
     $variables['schema_name'] = $node->label();
   }
-  /**
-   * Podcast Episode Node Overrides
-   */
-  if ($node->bundle() == 'podcast_episode') {
-    $mp3_link = $node->get('field_mp3')->value;
-    $link_array = parse_url($mp3_link);
-    $path_array = explode('/', $link_array['path']);
-    $variables['mp3'] = $path_array[6];
-  }
 }
 
 /**
  * Implements hook_preprocess_HOOK().
  */
 function dynasty_preprocess_field(&$variables, $hook) {
+  // Game Video field.
   if ($variables['field_name'] == 'field_game_video') {
     $url = parse_url($variables['element'][0]['#context']['value']);
     $path = explode('/', $url['path']);
     $variables['video_type'] = $url['host'];
     $variables['video_id'] = end($path);
+  }
+  // Podcast MP3 field.
+  if ($variables['field_name'] == 'field_mp3') {
+    $link_array = parse_url($variables['element'][0]['#context']['value']);
+    $path_array = explode('/', $link_array['path']);
+    $variables['mp3'] = $path_array[6];
   }
 }
 
