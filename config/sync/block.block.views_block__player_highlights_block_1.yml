@@ -1,25 +1,25 @@
-uuid: e5d6a8da-3949-4667-912f-d90c8713b105
+uuid: a2285590-3476-475a-8045-ae74c83e6987
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.team_games
+    - views.view.player_highlights
   module:
     - ctools
     - views
   theme:
     - dynasty
-id: team_games_block
+id: views_block__player_highlights_block_1
 theme: dynasty
 region: content
-weight: -3
+weight: -2
 provider: null
-plugin: 'views_block:team_games-block_1'
+plugin: 'views_block:player_highlights-block_1'
 settings:
-  id: 'views_block:team_games-block_1'
+  id: 'views_block:player_highlights-block_1'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
   items_per_page: none
   context_mapping: {  }
@@ -27,7 +27,7 @@ visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
-      team: team
+      player: player
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

@@ -63,6 +63,15 @@ display:
             next: ››
       style:
         type: grid
+        options:
+          uses_fields: false
+          columns: 2
+          automatic_width: false
+          alignment: horizontal
+          col_class_default: false
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: search_api
         options:
@@ -177,7 +186,13 @@ display:
     display_options:
       display_extenders:
         metatag_display_extender: {  }
+        simple_sitemap_display_extender:
+          variants: {  }
       path: search/plays
+      cache:
+        type: none
+      defaults:
+        cache: false
     cache_metadata:
       max-age: -1
       contexts:

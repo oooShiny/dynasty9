@@ -1,0 +1,31 @@
+uuid: 5628162e-478f-41b2-9edd-c4f1b916d1f3
+langcode: en
+status: true
+dependencies:
+  module:
+    - facets_block
+    - system
+  theme:
+    - dynasty
+id: facetsblock
+theme: dynasty
+region: sidebar_first
+weight: 0
+provider: null
+plugin: facets_block
+settings:
+  id: facets_block
+  label: Filters
+  provider: facets_block
+  label_display: visible
+  show_title: true
+  exclude_empty_facets: true
+  facets_to_include:
+    'facet_block:opponent': 'facet_block:opponent'
+    'facet_block:player_s_involved': 'facet_block:player_s_involved'
+    'facet_block:td_scored': 'facet_block:td_scored'
+visibility:
+  request_path:
+    id: request_path
+    pages: /search/plays
+    negate: false

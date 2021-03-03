@@ -21,6 +21,8 @@ module:
   dynasty_module: 0
   editor: 0
   entity_reference_revisions: 0
+  facets: 0
+  facets_block: 0
   field: 0
   field_group: 0
   field_permissions: 0
@@ -64,6 +66,8 @@ module:
   search_api: 0
   search_api_solr: 0
   search_api_solr_admin: 0
+  select2: 0
+  select2_facets: 0
   shortcut: 0
   simple_sitemap: 0
   simple_sitemap_engines: 0
@@ -78,6 +82,7 @@ module:
   update: 0
   user: 0
   views_entity_form_field: 0
+  views_jump_menu: 0
   views_ui: 0
   yoast_seo: 0
   pathauto: 1
