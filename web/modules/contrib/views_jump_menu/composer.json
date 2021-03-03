@@ -1,0 +1,12 @@
+{
+  "name": "drupal/views_jump_menu",
+  "type": "drupal-module",
+  "description": "Displays Views results as a Select list that links to an entity when clicked.",
+  "homepage": "https://www.drupal.org/project/views_jump_menu",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/views_jump_menu",
+    "source": "https://git.drupalcode.org/project/views_jump_menu"
+  },
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev"
+}

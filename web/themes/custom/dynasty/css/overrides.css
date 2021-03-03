@@ -46,3 +46,23 @@ a[href*='muse.ai']{
 .loss {
   color: #C60C30;
 }
+
+/**
+ * Select2 Overrides
+ */
+
+.select2-container {
+  width: 16rem;
+}
+
+.select2-container--default .select2-selection--single {
+  border-radius: 0;
+  height: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  top: 11px;
+}

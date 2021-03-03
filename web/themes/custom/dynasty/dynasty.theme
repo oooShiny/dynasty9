@@ -1,10 +1,19 @@
 <?php
 
 use \Drupal\node\Entity\Node;
+
+function dynasty_theme_suggestions_node_alter(&$suggestions, $variables) {
+  // Create custom front page node template.
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $suggestions[] = 'node__front';
+  }
+}
+
 /**
  * Implements hook_preprocess_HOOK().
  */
 function dynasty_preprocess_node(&$variables) {
+
   $node = $variables['node'];
   /**
    * Game Node Overrides
@@ -77,6 +86,19 @@ function dynasty_preprocess_field(&$variables, $hook) {
     $link_array = parse_url($variables['element'][0]['#context']['value']);
     $path_array = explode('/', $link_array['path']);
     $variables['mp3'] = $path_array[6];
+  }
+}
+
+/**
+ * Implements template_preprocess_form().
+ */
+function dynasty_preprocess_form(&$variables) {
+  $flex_forms = [
+    'season-select-form',
+    'player-select-form',
+  ];
+  if (in_array($variables['attributes']['id'], $flex_forms)) {
+    $variables['attributes']['class'][] = 'tw-flex tw-spacing-between';
   }
 }
 
