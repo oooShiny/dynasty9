@@ -1,0 +1,10 @@
+<div class="tw-flex md:tw-block">
+  {% for facet in facets %}
+    <div class="facet-block tw-mx-6 md:tw-mx-0">
+      {% if show_title %}
+        <h2 class="facet-block__title tw-text-2xl ">{{ facet.title }}</h2>
+      {% endif %}
+      <div class="facet-block__content md:tw-ml-4">{{ facet.content }}</div>
+    </div>
+  {% endfor %}
+</div>

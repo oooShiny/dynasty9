@@ -1,0 +1,9 @@
+uuid: 50d4dec5-f4f8-4aa9-8acc-f14a392e32b2
+langcode: en
+status: true
+dependencies: {  }
+id: search_api__views_page__game_search__page_1
+name: 'search_api:views_page__game_search__page_1'
+filter_key: null
+url_processor: query_string
+breadcrumb: {  }

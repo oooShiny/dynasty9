@@ -4,14 +4,15 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - node
     - taxonomy
+    - node
     - search_api
   config:
-    - field.storage.node.field_date
     - field.storage.node.field_after_bye
+    - field.storage.node.field_date
     - field.storage.node.field_home_away
     - field.storage.node.field_month
+    - field.storage.node.field_opposing_coach
     - field.storage.node.field_opponent
     - field.storage.node.field_opponent_score
     - field.storage.node.field_ot
@@ -101,6 +102,37 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_month
+  opp_coach:
+    label: 'Opposing Coach (fulltext)'
+    datasource_id: 'entity:node'
+    property_path: 'field_opposing_coach:entity:name'
+    type: text
+    boost: 0.5
+    dependencies:
+      config:
+        - field.storage.node.field_opposing_coach
+      module:
+        - taxonomy
+  opp_coach_string:
+    label: 'Opposing Coach (string)'
+    datasource_id: 'entity:node'
+    property_path: 'field_opposing_coach:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_opposing_coach
+      module:
+        - taxonomy
+  opp_string:
+    label: 'Opponent (string)'
+    datasource_id: 'entity:node'
+    property_path: 'field_opponent:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_opponent
+      module:
+        - node
   opponent:
     label: 'Opponent (fulltext)'
     datasource_id: 'entity:node'
@@ -205,5 +237,5 @@ tracker_settings:
     indexing_order: fifo
 options:
   index_directly: true
-  cron_limit: 50
+  cron_limit: 100
 server: solr_server

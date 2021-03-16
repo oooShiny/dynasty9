@@ -91,7 +91,7 @@ field_settings:
       config:
         - field.storage.node.field_minutes
   opponent:
-    label: 'Opponent » Content » Title'
+    label: 'Opponent (string)'
     datasource_id: 'entity:node'
     property_path: 'field_opponent:entity:title'
     type: string
@@ -100,8 +100,18 @@ field_settings:
         - field.storage.node.field_opponent
       module:
         - node
+  players_fulltext:
+    label: 'Player(s) Involved (fulltext)'
+    datasource_id: 'entity:node'
+    property_path: 'field_players_involved:entity:title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_players_involved
+      module:
+        - node
   players_involved:
-    label: 'Player(s) Involved » Content » Title'
+    label: 'Player(s) Involved (string)'
     datasource_id: 'entity:node'
     property_path: 'field_players_involved:entity:title'
     type: string
@@ -143,10 +153,10 @@ field_settings:
       config:
         - field.storage.node.field_td_scored
   title:
-    label: Title
+    label: 'Title (fulltext)'
     datasource_id: 'entity:node'
     property_path: title
-    type: string
+    type: text
     dependencies:
       module:
         - node

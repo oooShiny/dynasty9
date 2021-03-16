@@ -71,81 +71,16 @@
  */
 #}
 
-  <article class="tw-mt-10">
-
-{# Intro Section #}
-    <section class="tw-w-full tw-px-8 tw-py-16 xl:tw-px-8">
-      <div class="tw-mx-auto tw-text-lg">
-        <p>
-          Throughout the history of the NFL there have been many dynasties, but none have been on the same level as
-          the Patriots' dominance since Bill Belichick took over in 2000. Since September 3rd, 2000 the Patriots have
-          an astounding win percentage against the rest of the league. In fact, no team in the NFL has a winning record
-          against the Patriots in this span.
-        </p>
-        <p>
-          This website was created to document this historical run by the most dominant team in the history of the
-          league.
-        </p>
-      </div>
-    </section>
-
-{# Quick Search Section #}
-    <section class="tw-w-full tw-px-8 tw-py-16 xl:tw-px-8">
-      <div class="tw-max-w-5xl tw-mx-auto">
-        <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light">Quick Search</h2>
-        <div class="tw-flex tw-flex-col tw-items-center md:tw-flex-row">
-
-          <div class="tw-w-full tw-mt-16 md:tw-mt-0 lg:tw-w-1/2 lg:tw-pr-16">
-            <div class="tw-relative tw-z-10 tw-h-auto tw-p-8 tw-py-10 tw-overflow-hidden tw-bg-white tw-border-b-2 tw-border-gray-300 tw-shadow-2xl tw-px-7 tw-rounded-none tw-rounded-sm">
-
-              <h3 class="tw-mb-6 tw-text-2xl tw-uppercase tw-font-light">Games</h3>
-
-              <div class="tw-relative tw-flex tw-items-center tw-max-w-md tw-mx-auto tw-mt-12 tw-overflow-hidden tw-text-center tw-rounded-sm">
-                {{ drupal_block('views_exposed_filter_block:game_search-page_1') }}
-              </div>
-
-              <div class="tw-relative tw-flex tw-items-center tw-max-w-md tw-mx-auto tw-mt-12 tw-overflow-hidden tw-text-center tw-rounded-sm">
-                {{ drupal_block('season_select_block') }}
-              </div>
-
-            </div>
-          </div>
-
-          <div class="tw-w-full tw-mt-16 md:tw-mt-0 lg:tw-w-1/2 lg:tw-pr-16">
-            <div class="tw-relative tw-z-10 tw-h-auto tw-p-8 tw-py-10 tw-overflow-hidden tw-bg-white tw-border-b-2 tw-border-gray-300 tw-shadow-2xl tw-px-7 tw-rounded-none tw-rounded-sm">
-
-              <h3 class="tw-mb-6 tw-text-2xl tw-uppercase tw-font-light">Plays</h3>
-
-              <div class="tw-relative tw-flex tw-items-center tw-max-w-md tw-mx-auto tw-mt-12 tw-overflow-hidden tw-text-center tw-rounded-sm">
-                {{ drupal_block('views_exposed_filter_block:highlight_search-page_1') }}
-              </div>
-
-              <div class="tw-relative tw-flex tw-items-center tw-max-w-md tw-mx-auto tw-mt-12 tw-overflow-hidden tw-text-center tw-rounded-sm">
-                {{ drupal_block('player_select_block') }}
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-{# Podcast Section #}
-    <section class="tw-w-full tw-py-16 tw-bg-blue-pats tw-text-white">
-      <div class="tw-px-8 xl:tw-px-8">
-        <div class="tw-max-w-5xl tw-mx-auto">
-          <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light">Podcast</h2>
-        </div>
-      </div>
-    </section>
-
-{# Brady Section #}
-    <section class="tw-w-full tw-py-16">
-      <div class="tw-px-8 xl:tw-px-8">
-        <div class="tw-max-w-5xl tw-mx-auto">
-          <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light">Tom Brady</h2>
-        </div>
-      </div>
-    </section>
-  </article>
+<div class="md:tw-w-1/2 lg:tw-w-1/4 tw-m-3 tw-bg-white tw-shadow-lg">
+  {% if content.field_muse_video_id|render %}
+      {{ content.field_muse_video_id }}
+  {% elseif content.field_gfycat_id|render %}
+      {{ content.field_gfycat_id }}
+  {% endif %}
+  <div class="tw-m-2">
+    <a href="{{ url }}">{{ label }}</a>
+    <div class="tw-flex">
+      <p class="tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs">{{ content.field_game }}</p>
+    </div>
+  </div>
+</div>

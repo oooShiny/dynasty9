@@ -1,0 +1,28 @@
+uuid: 9b7ad9da-7582-43bc-84a3-6eb2b8dc023e
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.game_search
+  module:
+    - system
+    - views
+  theme:
+    - dynasty
+id: exposedformgame_searchpage_1
+theme: dynasty
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:game_search-page_1'
+settings:
+  id: 'views_exposed_filter_block:game_search-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /search/games
+    negate: false

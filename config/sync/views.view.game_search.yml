@@ -40,7 +40,7 @@ display:
         type: basic
         options:
           submit_button: Search
-          reset_button: true
+          reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: false
@@ -579,7 +579,14 @@ display:
     display_options:
       display_extenders:
         metatag_display_extender: {  }
+        simple_sitemap_display_extender:
+          variants: {  }
       path: search/games
+      cache:
+        type: none
+      defaults:
+        cache: false
+      exposed_block: true
     cache_metadata:
       max-age: -1
       contexts:

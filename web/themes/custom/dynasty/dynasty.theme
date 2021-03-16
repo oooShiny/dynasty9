@@ -1,6 +1,7 @@
 <?php
 
 use \Drupal\node\Entity\Node;
+use Drupal\Core\Form\FormStateInterface;
 
 function dynasty_theme_suggestions_node_alter(&$suggestions, $variables) {
   // Create custom front page node template.
@@ -96,10 +97,33 @@ function dynasty_preprocess_form(&$variables) {
   $flex_forms = [
     'season-select-form',
     'player-select-form',
+    'views-exposed-form-game-search-page-1',
+    'views-exposed-form-highlight-search-page-1',
   ];
   if (in_array($variables['attributes']['id'], $flex_forms)) {
     $variables['attributes']['class'][] = 'tw-flex tw-spacing-between';
   }
+}
+
+function dynasty_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $id = $form['#id'];
+  $forms = [
+    'views-exposed-form-game-search-page-1',
+    'views-exposed-form-highlight-search-page-1',
+  ];
+  if (in_array($id, $forms)) {
+    $form['#info']['filter-search_api_fulltext']['label'] = '';
+  }
+}
+
+function dynasty_preprocess_input(&$variables) {
+  $element = $variables['element'];
+  // Adding classes to search text box since Drupal won't recognize the
+  // input--edit-search.html.twig file.
+  if (strpos($element['#id'], 'edit-search') !== FALSE && $element['#type'] == 'textfield') {
+    $variables['attributes']['class'][] = 'tw-h-12 tw-w-64';
+  }
+
 }
 
 function _get_team_location($team) {

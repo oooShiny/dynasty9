@@ -1,4 +1,4 @@
-uuid: 5628162e-478f-41b2-9edd-c4f1b916d1f3
+uuid: 00448dfe-169c-45a2-80c3-efa85e3b076b
 langcode: en
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
     - system
   theme:
     - dynasty
-id: facetsblock
+id: facetsblock_2
 theme: dynasty
 region: sidebar_first
 weight: 0
@@ -15,18 +15,18 @@ provider: null
 plugin: facets_block
 settings:
   id: facets_block
-  label: 'Play Filters'
+  label: 'Game Filters'
   provider: facets_block
   label_display: '0'
   show_title: true
   exclude_empty_facets: true
   facets_to_include:
-    'facet_block:player_s_involved': 'facet_block:player_s_involved'
     'facet_block:opponent': 'facet_block:opponent'
-    'facet_block:td_scored': 'facet_block:td_scored'
-    'facet_block:game_home_away': '0'
+    'facet_block:game_home_away': 'facet_block:game_home_away'
+    'facet_block:player_s_involved': '0'
+    'facet_block:td_scored': '0'
 visibility:
   request_path:
     id: request_path
-    pages: /search/plays
+    pages: /search/games
     negate: false
