@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '2535841f92c57eefbc98f8127cbffb4bfbd6eebd',
+    'reference' => '4cd0bfcabc72b014955ff56053d4178dda3b29e3',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -156,6 +156,15 @@ private static $installed = array (
       array (
         0 => '^1.2',
       ),
+    ),
+    'cweagans/composer-patches' => 
+    array (
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ae02121445ad75f4eaff800cc532b5e6233e2ddf',
     ),
     'dflydev/dot-access-data' => 
     array (
@@ -1050,7 +1059,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '2535841f92c57eefbc98f8127cbffb4bfbd6eebd',
+      'reference' => '4cd0bfcabc72b014955ff56053d4178dda3b29e3',
     ),
     'drupal/responsive_image' => 
     array (

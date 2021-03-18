@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^2.4",
         "drupal/auto_entitylabel": "^3.0@beta",
         "drupal/conditional_fields": "^1.0@alpha",
@@ -118,6 +119,12 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "enable-patching": "true",
+        "patches": {
+            "drupal/conditional_fields": {
+                "Notice: Trying to access array offset on value of type null": "https://www.drupal.org/files/issues/2021-01-21/3191984-3-notice-trying-to-access-offset-on-value-of-type-null.patch"
+            }
         }
     }
 }
