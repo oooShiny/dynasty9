@@ -7,3 +7,12 @@ dynasty.maphighlights:
     _role: 'administrator'
   options:
     _admin_route: TRUE
+dynasty.videoimport:
+  path: '/admin/gfycat/import'
+  defaults:
+    _form: '\Drupal\dynasty_module\Form\GfycatMuseImportForm'
+    _title: 'Import Gfycat Videos from Muse.ai'
+  requirements:
+    _permission: 'add muse videos'
+  options:
+    _admin_route: TRUE

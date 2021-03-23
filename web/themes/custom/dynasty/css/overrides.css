@@ -66,3 +66,15 @@ a[href*='muse.ai']{
 .select2-container--default .select2-selection--single .select2-selection__arrow {
   top: 11px;
 }
+
+/*
+ * Pager Overrides
+ */
+
+li.pager__item.is-active {
+  border-radius: 9999px!important;
+  background-color: #C60C30;
+  width: 1.5rem;
+  color: white;
+  text-align: center;
+}
