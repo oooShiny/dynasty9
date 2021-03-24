@@ -1,0 +1,128 @@
+uuid: b6f29f38-14e4-4378-8147-05c173433d6d
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_solr
+    - node
+    - search_api
+  config:
+    - field.storage.node.field_game
+    - field.storage.node.field_opponent
+    - field.storage.node.field_podcast_guest
+    - field.storage.node.field_season
+    - field.storage.node.field_subtitle
+    - search_api.server.solr_server
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 3
+      fuzzy: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+id: podcast_index
+name: 'Podcast Index'
+description: ''
+read_only: false
+field_settings:
+  pod_guest:
+    label: 'Podcast Guest (fulltext)'
+    datasource_id: 'entity:node'
+    property_path: field_podcast_guest
+    type: text
+    boost: 0.8
+    dependencies:
+      config:
+        - field.storage.node.field_podcast_guest
+  pod_opponent:
+    label: 'Opponent (string)'
+    datasource_id: 'entity:node'
+    property_path: 'field_game:entity:field_opponent:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_game
+        - field.storage.node.field_opponent
+      module:
+        - node
+  pod_season:
+    label: 'Season (string)'
+    datasource_id: 'entity:node'
+    property_path: field_season
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_season
+  pod_subtitle:
+    label: 'Subtitle (fulltext)'
+    datasource_id: 'entity:node'
+    property_path: field_subtitle
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_subtitle
+  pod_title:
+    label: 'Title (fulltext)'
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 2
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - podcast_episode
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+  solr_date_range: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: solr_server
