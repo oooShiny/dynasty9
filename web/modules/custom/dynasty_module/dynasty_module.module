@@ -9,7 +9,13 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
       'variables' => [
         'seasons' => ''
       ]
-    ]
+    ],
+    'prev_next_block' => [
+      'variables' => [
+        'previous' => '',
+        'next' => '',
+      ]
+    ],
   ];
 }
 /**

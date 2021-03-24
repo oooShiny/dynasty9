@@ -1,0 +1,13 @@
+<div class="tw-flex tw-justify-center">
+<ul class="tw-mx-4">
+
+  <li>
+    {% if previous is not empty %}
+      <a class="tw-p-4 tw-w-1/6 tw-bg-blue-pats tw-text-white tw-text-center" href="{{ previous }}">&laquo; Last Game</a>
+    {% endif %}
+    {% if next is not empty %}
+      <a class="tw-p-4 tw-w-1/6 tw-bg-blue-pats tw-text-white tw-text-center" href="{{ next }}">Next Game &raquo;</a>
+    {% endif %}
+  </li>
+</ul>
+</div>

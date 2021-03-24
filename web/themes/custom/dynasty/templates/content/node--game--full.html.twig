@@ -117,6 +117,11 @@
 {# Game Date #}
   <div class="tw-text-center tw-py-10 tw-text-xl">{{ content.field_date }}</div>
 
+{# Previous/Next Game buttons #}
+  <div class="tw-text-center tw-text-xl">
+    {{ drupal_block('prev_next_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
+  </div>
+
 {# Box Score #}
   <a id="boxscore"></a>
   <div id="boxscore" class="tw-flex tw-items-center tw-justify-around tw-py-10">
@@ -159,6 +164,7 @@
           </tr>
         </tbody>
       </table>
+
   </div>
 
 {# PFR, Youtube Highlight, and GamePass links #}
