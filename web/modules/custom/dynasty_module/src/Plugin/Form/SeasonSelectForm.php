@@ -50,7 +50,7 @@ class SeasonSelectForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    $path = '/games/' . $values['seasons'];
+    $path = '/search/games?search=&f[0]=game_season:' . $values['seasons'];
     $url = Url::fromUserInput($path);
     $form_state->setRedirectUrl($url);
   }
