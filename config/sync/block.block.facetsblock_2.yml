@@ -23,6 +23,7 @@ settings:
   facets_to_include:
     'facet_block:opponent': 'facet_block:opponent'
     'facet_block:game_home_away': 'facet_block:game_home_away'
+    'facet_block:game_season': 'facet_block:game_season'
     'facet_block:player_s_involved': '0'
     'facet_block:td_scored': '0'
 visibility:
