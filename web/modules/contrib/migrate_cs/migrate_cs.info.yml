@@ -1,0 +1,16 @@
+name: 'Migrate Cron Scheduler'
+descritption: 'Run migrations at cron with drush style options'
+package: 'Migration'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: migrate_cs.admin_settings_form
+dependencies:
+  - drupal:migrate (>=8.3)
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools
+
+# Information added by Drupal.org packaging script on 2020-08-17
+version: '8.x-1.0-beta4'
+project: 'migrate_cs'
+datestamp: 1597660340

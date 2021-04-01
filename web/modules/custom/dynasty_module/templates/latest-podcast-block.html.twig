@@ -1,7 +1,8 @@
-<h3>{{ episode.title }}</h3>
+<p>{{ episode.description|raw }}</p>
 <div class="tw-hidden md:tw-block">
   <iframe title="Embed Player" width="100%" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ episode.mp3 }}?cover=true&accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>
 </div>
 <div class="tw-block md:tw-hidden">
   <iframe title="Embed Player" width="300" height="300" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ episode.mp3 }}?accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>
 </div>
+

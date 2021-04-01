@@ -1,0 +1,5 @@
+migrate_cs.settings_form:
+  title: 'Migrate Cron Scheduler'
+  parent: system.admin_config_system
+  description: 'Configure migrations to run at intervals with drush flag options.'
+  route_name: migrate_cs.admin_settings_form
