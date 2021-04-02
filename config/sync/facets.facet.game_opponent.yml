@@ -1,4 +1,4 @@
-uuid: 743c5486-641a-48e7-a466-bad84fd702ed
+uuid: 817d72d4-4a3b-4239-a9c7-bc9a2fc5ed76
 langcode: en
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
     - views.view.game_search
   module:
     - search_api
-id: game_season
-name: Season
-url_alias: game_season
+id: game_opponent
+name: Opponent
+url_alias: opponent
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: season_int
+field_identifier: opp_string
 facet_source_id: 'search_api:views_page__game_search__page_1'
 widget:
   type: select2

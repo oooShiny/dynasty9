@@ -3,9 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_home_away
+    - field.storage.node.field_month
     - field.storage.node.field_opponent_score
     - field.storage.node.field_patriots_score
     - field.storage.node.field_result
+    - field.storage.node.field_weekday
     - search_api.index.game_index
   module:
     - options
@@ -62,23 +65,17 @@ display:
           summary: ''
           description: ''
           columns:
-            season: season
-            week: week
+            title: title
             patriots_score: patriots_score
             opponent_score: opponent_score
             opponent: opponent
+            opp_coach_string: opp_coach_string
             result: result
+            home_away: home_away
+            month: month
+            weekday: weekday
           info:
-            season:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            week:
-              sortable: true
-              default_sort_order: desc
+            title:
               align: ''
               separator: ''
               empty_column: false
@@ -104,7 +101,35 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            opp_coach_string:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             result:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            home_away:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            month:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            weekday:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -142,14 +167,14 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
-            word_boundary: true
+            max_length: 13
+            word_boundary: false
             ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
             strip_tags: false
-            trim: false
+            trim: true
             preserve_tags: ''
             html: false
           element_type: ''
@@ -178,10 +203,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          field_rendering: true
+          field_rendering: false
           fallback_handler: search_api
           fallback_options:
-            link_to_item: false
+            link_to_item: true
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
@@ -194,7 +219,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Patriots Score'
+          label: Pats
           exclude: false
           alter:
             alter_text: false
@@ -276,7 +301,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Opponent Score'
+          label: Opp
           exclude: false
           alter:
             alter_text: false
@@ -421,6 +446,76 @@ display:
             multi_type: separator
             multi_separator: ', '
           plugin_id: search_api_field
+        opp_coach_string:
+          id: opp_coach_string
+          table: search_api_index_game_index
+          field: opp_coach_string
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Opposing Coach'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
         result:
           id: result
           table: search_api_index_game_index
@@ -472,6 +567,215 @@ display:
           click_sort_column: value
           type: list_default
           settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        home_away:
+          id: home_away
+          table: search_api_index_game_index
+          field: home_away
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Home/Away
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        month:
+          id: month
+          table: search_api_index_game_index
+          field: month
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Month
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        weekday:
+          id: weekday
+          table: search_api_index_game_index
+          field: weekday
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Weekday
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -567,9 +871,12 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:field.storage.node.field_home_away'
+        - 'config:field.storage.node.field_month'
         - 'config:field.storage.node.field_opponent_score'
         - 'config:field.storage.node.field_patriots_score'
         - 'config:field.storage.node.field_result'
+        - 'config:field.storage.node.field_weekday'
         - 'config:search_api.index.game_index'
   page_1:
     display_plugin: page
@@ -596,7 +903,10 @@ display:
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:field.storage.node.field_home_away'
+        - 'config:field.storage.node.field_month'
         - 'config:field.storage.node.field_opponent_score'
         - 'config:field.storage.node.field_patriots_score'
         - 'config:field.storage.node.field_result'
+        - 'config:field.storage.node.field_weekday'
         - 'config:search_api.index.game_index'
