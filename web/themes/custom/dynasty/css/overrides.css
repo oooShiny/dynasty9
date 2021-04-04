@@ -78,3 +78,26 @@ li.pager__item.is-active {
   color: white;
   text-align: center;
 }
+
+/*
+ * Hiding table columns on smaller screens.
+*/
+@media (max-width:1024px) {
+  th.views-field-opp-coach-string,
+  td.views-field-opp-coach-string,
+  th.views-field-home-away,
+  td.views-field-home-away,
+  th.views-field-month,
+  td.views-field-month,
+  th.views-field-weekday,
+  td.views-field-weekday {
+    display: none;
+  }
+}
+
+/*
+ * Adding dash between scores.
+*/
+td.views-field-patriots-score:after {
+  content: "-";
+}

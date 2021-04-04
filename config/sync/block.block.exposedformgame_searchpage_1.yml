@@ -1,6 +1,6 @@
 uuid: 9b7ad9da-7582-43bc-84a3-6eb2b8dc023e
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.game_search
@@ -11,8 +11,8 @@ dependencies:
     - dynasty
 id: exposedformgame_searchpage_1
 theme: dynasty
-region: sidebar_first
-weight: 0
+region: content
+weight: -6
 provider: null
 plugin: 'views_exposed_filter_block:game_search-page_1'
 settings:

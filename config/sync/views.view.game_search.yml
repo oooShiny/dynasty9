@@ -57,7 +57,7 @@ display:
         type: table
         options:
           grouping: {  }
-          row_class: '{{ result|lower }}'
+          row_class: '{{ result|lower }} tw-py-5 tw-border tw-bg-white'
           default_row_class: false
           override: true
           sticky: false
@@ -76,35 +76,35 @@ display:
             weekday: weekday
           info:
             title:
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
             patriots_score:
               sortable: true
               default_sort_order: desc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
             opponent_score:
               sortable: true
               default_sort_order: desc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
             opponent:
               sortable: true
               default_sort_order: asc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
             opp_coach_string:
               sortable: true
               default_sort_order: asc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
@@ -118,21 +118,21 @@ display:
             home_away:
               sortable: true
               default_sort_order: asc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
             month:
               sortable: true
               default_sort_order: asc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
             weekday:
               sortable: true
               default_sort_order: asc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
@@ -174,17 +174,17 @@ display:
             more_link_text: ''
             more_link_path: ''
             strip_tags: false
-            trim: true
+            trim: false
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: 'tw-py-5 tw-pl-5'
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -249,7 +249,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: tw-ml-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -331,7 +331,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: tw-mr-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -413,7 +413,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: tw-px-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -559,7 +559,7 @@ display:
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -622,7 +622,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: tw-px-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -761,7 +761,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: tw-px-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true

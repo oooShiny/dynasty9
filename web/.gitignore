@@ -42,5 +42,5 @@ sites/simpletest
 # simpletest
 
 # Ignore docksal and phpstorm files
-../.docksal
-../.idea
+/.docksal
+/.idea
