@@ -60,33 +60,72 @@ class GfycatMuseImportForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
     // Get node defaults from form.
     $fields = $form_state->getValues();
-    // TODO: Get the collection from the form.
+    // Get the collection from the form.
     $collection = $fields['collection'];
     // Get list of videos from muse.ai.
     $muse_vids = $this->get_muse_videos($collection);
-
-    // Get list of videos in Drupal.
-    $vid_links = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','highlight')->execute();
-    $highlights =  Node::loadMultiple($nids);
-    foreach ($highlights as $video) {
-      $vid_links[strtolower($video->get('field_gfycat_id')->value)] = $video->id();
-    }
-
-    // Save the data as new video nodes.
     $operations = [];
-    foreach ($muse_vids->videos as $muse_video) {
-      $muse_title = strtolower($muse_video->title);
+    $vid_links = [];
+    // Check if highlights or full game videos were selected
+    if (strpos($muse_vids->name, 'Full') !== FALSE) {
+      // Get season from collection name.
+      $season_array = explode(': ', $muse_vids->name);
+      $season = $season_array[1];
+      // Get all Game nodes from that season.
+      $nids = \Drupal::entityQuery('node')
+        ->condition('type','game')
+        ->condition('field_season', $season)
+        ->execute();
+      $games =  Node::loadMultiple($nids);
+      foreach ($games as $video) {
+        $vid_links[strtolower($video->label())] = $video->id();
+      }
+      foreach ($muse_vids->videos as $muse_video) {
+        $muse_array = explode(':', strtolower($muse_video->title));
+        // TODO: Get node titles, format video titles, compare the 2, create list of nodes->video_ids
+        $muse_title = $muse_array[0];
 
-      if (array_key_exists($muse_title, $vid_links)) {
-        $v = [
-          'title' => $muse_video->title,
-          'muse_id' => $muse_video->svid,
-          'nid' => $vid_links[$muse_title],
-        ];
-        $operations[] = ['\Drupal\dynasty_module\AddMuseHighlight::updateNode', [$v, $fields]];
+        // Format the titles to match.
+        if (strpos($muse_title, 'championship') !== FALSE) {
+          $muse_title = $season . ' afc conference championship';
+        }
+        elseif (strpos($muse_title, 'divisional') !== FALSE) {
+          $muse_title = $muse_title . ' round';
+        }
+        if (array_key_exists($muse_title, $vid_links)) {
+          $v = [
+            'title' => $muse_video->title,
+            'muse_id' => $muse_video->svid,
+            'nid' => $vid_links[$muse_title],
+          ];
+          $operations[] = ['\Drupal\dynasty_module\AddMuseFullGame::updateNode', [$v, $fields]];
+        }
       }
     }
+    else {
+      // Get list of videos in Drupal.
+
+      $nids = \Drupal::entityQuery('node')->condition('type','highlight')->execute();
+      $highlights =  Node::loadMultiple($nids);
+      foreach ($highlights as $video) {
+        $vid_links[strtolower($video->get('field_gfycat_id')->value)] = $video->id();
+      }
+
+      // Save the data as new video nodes.
+      foreach ($muse_vids->videos as $muse_video) {
+        $muse_title = strtolower($muse_video->title);
+
+        if (array_key_exists($muse_title, $vid_links)) {
+          $v = [
+            'title' => $muse_video->title,
+            'muse_id' => $muse_video->svid,
+            'nid' => $vid_links[$muse_title],
+          ];
+          $operations[] = ['\Drupal\dynasty_module\AddMuseHighlight::updateNode', [$v, $fields]];
+        }
+      }
+    }
+
     $batch = [
       'title' => 'Adding Muse video to Highlight nodes',
       'operations' => $operations,

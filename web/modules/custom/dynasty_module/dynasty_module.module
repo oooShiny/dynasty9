@@ -29,64 +29,66 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
 function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
   switch ($entity->bundle()) {
     case 'podcast_episode':
-      // Get values from podcast node.
-      $season = $entity->field_season->value;
-      $week = $entity->field_episode->value;
-      // Adjust playoff episode weeks to actual week numbers.
-      if ($week > 17) {
-        $title = $entity->label();
-        if (strpos($title, 'Wildcard') !== FALSE) {
-          $week = 18;
-        }
-        elseif (strpos($title, 'Divisional') !== FALSE) {
-          $week = 19;
-        }
-        elseif (strpos($title, 'Championship') !== FALSE) {
-          $week = 20;
-        }
-        elseif (strpos($title, 'Super') !== FALSE) {
-          $week = 21;
-        }
-      }
-      // Map podcast week to game week taxonomy term.
-      $tids = \Drupal::entityQuery('taxonomy_term')
-        ->condition('vid', 'week')
-        ->execute();
-      $terms = Term::loadMultiple($tids);
-      $weeks = [];
-      foreach ($terms as $term) {
-        $name = $term->label();
-        if (strpos($term->label(), 'Week') !== FALSE) {
-          $week_array = explode(' ', $term->label());
-          $w = end($week_array);
-          $weeks[$w] = $term->id();
-        }
-        else {
-          switch ($term->label()) {
-            case 'Wildcard':
-              $weeks[18] = $term->id();
-              break;
-            case 'AFC Divisional Round':
-              $weeks[19] = $term->id();
-              break;
-            case 'AFC Conference Championship':
-              $weeks[20] = $term->id();
-              break;
-            case 'Super Bowl':
-              $weeks[21] = $term->id();
-              break;
+      if (!$entity->field_season->isEmpty() && !$entity->field_episode->isEmpty()) {
+        // Get values from podcast node.
+        $season = $entity->field_season->value;
+        $week = $entity->field_episode->value;
+        // Adjust playoff episode weeks to actual week numbers.
+        if ($week > 17) {
+          $title = $entity->label();
+          if (strpos($title, 'Wildcard') !== FALSE) {
+            $week = 18;
+          }
+          elseif (strpos($title, 'Divisional') !== FALSE) {
+            $week = 19;
+          }
+          elseif (strpos($title, 'Championship') !== FALSE) {
+            $week = 20;
+          }
+          elseif (strpos($title, 'Super') !== FALSE) {
+            $week = 21;
           }
         }
-      }
-      // Find game from season + week.
-      $game = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
-        'type' => 'game',
-        'field_season' => $season,
-        'field_week' => $weeks[$week]
-      ]);
-      $game_ref = reset($game);
-      if ($game_ref) {
-        $entity->field_game->target_id = $game_ref->id();
+        // Map podcast week to game week taxonomy term.
+        $tids = \Drupal::entityQuery('taxonomy_term')
+          ->condition('vid', 'week')
+          ->execute();
+        $terms = Term::loadMultiple($tids);
+        $weeks = [];
+        foreach ($terms as $term) {
+          $name = $term->label();
+          if (strpos($term->label(), 'Week') !== FALSE) {
+            $week_array = explode(' ', $term->label());
+            $w = end($week_array);
+            $weeks[$w] = $term->id();
+          }
+          else {
+            switch ($term->label()) {
+              case 'Wildcard':
+                $weeks[18] = $term->id();
+                break;
+              case 'AFC Divisional Round':
+                $weeks[19] = $term->id();
+                break;
+              case 'AFC Conference Championship':
+                $weeks[20] = $term->id();
+                break;
+              case 'Super Bowl':
+                $weeks[21] = $term->id();
+                break;
+            }
+          }
+        }
+        // Find game from season + week.
+        $game = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
+          'type' => 'game',
+          'field_season' => $season,
+          'field_week' => $weeks[$week]
+        ]);
+        $game_ref = reset($game);
+        if ($game_ref) {
+          $entity->field_game->target_id = $game_ref->id();
+        }
       }
       break;
   }

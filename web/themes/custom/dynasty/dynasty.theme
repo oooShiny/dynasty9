@@ -77,10 +77,16 @@ function dynasty_preprocess_node(&$variables) {
 function dynasty_preprocess_field(&$variables, $hook) {
   // Game Video field.
   if ($variables['field_name'] == 'field_game_video') {
-    $url = parse_url($variables['element'][0]['#context']['value']);
-    $path = explode('/', $url['path']);
-    $variables['video_type'] = $url['host'];
-    $variables['video_id'] = end($path);
+    for ($i = 0; $i < 4; $i++) {
+      if (isset($variables['element'][$i])) {
+        $url = parse_url($variables['element'][$i]['#context']['value']);
+        $path = explode('/', $url['path']);
+        $variables['video'][] = [
+          'video_type' => $url['host'],
+          'video_id' => end($path)
+        ];
+      }
+    }
   }
   // Podcast MP3 field.
   if ($variables['field_name'] == 'field_mp3') {
@@ -137,13 +143,13 @@ function dynasty_preprocess_views_view_table(&$variables) {
       'pats' => 0,
       'opp' => 0
     ];
-    $stats = [
-      'att' => 0,
-      'comp' => 0,
-      'yds' => 0,
-      'tds' => 0,
-      'int' => 0
-    ];
+//    $stats = [
+//      'att' => 0,
+//      'comp' => 0,
+//      'yds' => 0,
+//      'tds' => 0,
+//      'int' => 0
+//    ];
     $games = 0;
     foreach ($view->result as $id => $row) {
       foreach ($view->field as $fid => $field) {
