@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.podcast_episode.body
     - field.field.node.podcast_episode.field_duration
     - field.field.node.podcast_episode.field_episode
+    - field.field.node.podcast_episode.field_episode_cover_image
     - field.field.node.podcast_episode.field_game
     - field.field.node.podcast_episode.field_meta_tags
     - field.field.node.podcast_episode.field_mp3
@@ -55,6 +56,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_episode_cover_image:
+    weight: 51
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_game:
     weight: 11
@@ -171,4 +180,9 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden: {  }

@@ -1,0 +1,21 @@
+uuid: 3ac45aea-5523-45bb-be4a-06e79b8847ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_episode_cover_image
+    - node.type.podcast_episode
+id: node.podcast_episode.field_episode_cover_image
+field_name: field_episode_cover_image
+entity_type: node
+bundle: podcast_episode
+label: 'Episode Cover Image'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg'
+default_value_callback: ''
+settings: {  }
+field_type: string

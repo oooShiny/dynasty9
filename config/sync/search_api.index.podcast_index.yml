@@ -59,6 +59,14 @@ name: 'Podcast Index'
 description: ''
 read_only: false
 field_settings:
+  created:
+    label: Created
+    datasource_id: 'entity:node'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - node
   pod_guest:
     label: 'Podcast Guest (fulltext)'
     datasource_id: 'entity:node'

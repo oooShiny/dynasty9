@@ -214,7 +214,19 @@ display:
             multi_separator: ', '
           plugin_id: search_api_field
       filters: {  }
-      sorts: {  }
+      sorts:
+        created:
+          id: created
+          table: search_api_index_podcast_index
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       title: 'Podcast Search'
       header: {  }
       footer: {  }

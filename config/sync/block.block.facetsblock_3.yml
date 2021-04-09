@@ -17,15 +17,17 @@ settings:
   id: facets_block
   label: 'Podcast Filters'
   provider: facets_block
-  label_display: visible
+  label_display: '0'
   show_title: true
   exclude_empty_facets: true
   facets_to_include:
-    'facet_block:podcast_opponent': 'facet_block:podcast_opponent'
     'facet_block:podcast_season': 'facet_block:podcast_season'
+    'facet_block:podcast_opponent': 'facet_block:podcast_opponent'
     'facet_block:player_s_involved': '0'
     'facet_block:opponent': '0'
     'facet_block:game_home_away': '0'
+    'facet_block:game_opponent': '0'
+    'facet_block:game_opposing_coach': '0'
     'facet_block:game_season': '0'
     'facet_block:td_scored': '0'
 visibility:
