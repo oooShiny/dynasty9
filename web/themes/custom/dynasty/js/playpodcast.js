@@ -1,12 +1,14 @@
 let playing = true;
-let pPause = document.querySelector('#play-pause');
 function playPause(id) {
+  const pod_ep = document.querySelector('#'+id);
+  let pIcon = document.querySelector('#play'+id);
   if (playing) {
-    const pod_ep = document.querySelector('#'+id);
-    pod_ep.play(); //this will play the audio track
+    pod_ep.play();
     playing = false;
+    pIcon.src = '/themes/custom/dynasty/icons/pod-pause.svg';
   } else {
     pod_ep.pause();
     playing = true;
+    pIcon.src = '/themes/custom/dynasty/icons/pod-play.svg';
   }
 }

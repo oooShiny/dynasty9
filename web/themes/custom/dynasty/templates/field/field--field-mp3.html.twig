@@ -39,21 +39,19 @@
 {{ attach_library('dynasty/podcast') }}
 
 <audio id="pod-{{ mp3 }}" src="{{ mp3_url }}"></audio>
-<div class="tw-text-white">
-  <svg class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <path d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"/>
-  </svg>
-</div>
+{#<div class="tw-text-white">#}
+{#  <svg class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">#}
+{#    <path d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"/>#}
+{#  </svg>#}
+{#</div>#}
 <div class="tw-text-white tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
-  <svg onclick="playPause('pod-{{ mp3 }}')" class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/>
-  </svg>
+  <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ mp3 }}')" id="playpod-{{ mp3 }}" class="tw-w-5 tw-h-5" style="cursor: pointer" />
 </div>
-<div class="tw-text-white">
-  <svg class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <path d="M13 5h3v10h-3V5zM4 5l9 5-9 5V5z"/>
-  </svg>
-</div>
+{#<div class="tw-text-white">#}
+{#  <svg class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">#}
+{#    <path d="M13 5h3v10h-3V5zM4 5l9 5-9 5V5z"/>#}
+{#  </svg>#}
+{#</div>#}
 
 {#<div class="tw-hidden md:tw-block">#}
 {#  <iframe title="Embed Player" width="100%" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ mp3 }}?cover=true&accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>#}

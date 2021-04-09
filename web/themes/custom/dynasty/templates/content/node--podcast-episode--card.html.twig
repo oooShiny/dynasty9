@@ -77,8 +77,12 @@
   {% set cover_img = 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
 {% endif %}
 
-  <div class="tw-mt-1 tw-p-5 tw-bg-white tw-flex tw-h-64">
-    <div class="tw-w-1/4 tw-mr-1 tw-justify-evenly tw-items-center tw-flex" style="background-image: url('{{ cover_img }}'); background-size: cover">
+  <div class="tw-mt-1 tw-p-5 tw-bg-white tw-flex tw-h-48">
+    <div class="tw-w-1/4 tw-mr-1 tw-justify-evenly tw-items-center tw-flex"
+         style="background-image: url('{{ cover_img }}');
+           background-size: contain;
+           background-repeat: no-repeat;
+           background-position: center;">
       {{ content.field_mp3 }}
     </div>
     <div class="tw-w-3/4">
