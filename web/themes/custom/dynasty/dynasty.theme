@@ -93,6 +93,7 @@ function dynasty_preprocess_field(&$variables, $hook) {
     $link_array = parse_url($variables['element'][0]['#context']['value']);
     $path_array = explode('/', $link_array['path']);
     $variables['mp3'] = $path_array[6];
+    $variables['mp3_url'] = $variables['element'][0]['#context']['value'];
   }
 }
 

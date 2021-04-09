@@ -71,43 +71,27 @@
  */
 #}
 
-<article class="tw-mt-10">
+{% if content.field_episode_cover_image|render %}
+  {% set cover_img = content.field_episode_cover_image %}
+{% else %}
+  {% set cover_img = 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
+{% endif %}
 
-  {# White Row #}
-  <div class="tw-py-10">
-    {% if content.field_subtitle|render %}
-    <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">{{ content.field_subtitle }}</h2>
-    {% endif %}
-    <h3 class="tw-uppercase tw-font-light tw-text-center tw-text-l">({{ content.field_duration }})</h3>
-    <div class="tw-m-auto tw-pt-10 tw-w-2/3">
-      {{ content.body }}
+  <div class="tw-mt-1 tw-p-5 tw-bg-white tw-flex tw-h-64">
+    <div class="tw-w-1/4 tw-mr-1 tw-justify-evenly tw-items-center tw-flex" style="background-image: url('{{ cover_img }}'); background-size: cover">
+      {{ content.field_mp3 }}
+    </div>
+    <div class="tw-w-3/4">
+      <h2>
+        <a href="{{ url }}" rel="bookmark" class="tw-uppercase tw-font-light tw-text-l">{{ label }}</a>
+        <span class="tw-uppercase tw-font-light tw-text-l">({{ content.field_duration }})</span>
+      </h2>
+      {% if content.field_subtitle|render %}
+        <h3 class="tw-font-light tw-text-l">{{ content.field_subtitle }}</h3>
+      {% endif %}
+      <button type="button" onclick="window.open('{{ url }}', '_self')" class="tw-text-sm tw-p-1 tw-w-1/6 tw-bg-blue-pats tw-text-white tw-text-center">Episode Info</button>
+      {% if content.field_game|render %}
+        <button type="button" onclick="window.open('node/{{ content.field_game }}', '_self')" class="tw-text-sm tw-p-1 tw-w-1/6 tw-bg-blue-pats tw-text-white tw-text-center">Game Info</button>
+      {% endif %}
     </div>
   </div>
-
-  {# Blue Row #}
-    <div class="tw-bg-blue-pats tw-text-white tw-py-10">
-      <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Listen Now</h2>
-      <div class="tw-m-auto tw-pt-10 tw-w-2/3">
-        {{ content.field_mp3 }}
-      </div>
-    </div>
-
-{# White Row #}
-  {% if content.field_game|render %}
-  <div class="tw-py-10">
-    <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Game Info</h2>
-      {{ content.field_game }}
-  </div>
-  {% endif %}
-
-  {# Gray Row #}
-  {% if content.field_transcription|render %}
-    <div class="tw-bg-gray-400 tw-py-10">
-      <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Transcript</h2>
-      <div class="tw-m-auto tw-pt-10 tw-w-2/3">
-        {{ content.field_transcription }}
-      </div>
-    </div>
-  {% endif %}
-
-</article>
