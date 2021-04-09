@@ -7,7 +7,9 @@ gfycat:
   js:
     js/gfycat_video.js: {}
     js/gfycat_modal.js: {}
-    js/playpodcast.js: {}
   dependencies:
     - core/jquery
     - core/drupal.dialog
+podcast:
+  js:
+    js/playpodcast.js: {}

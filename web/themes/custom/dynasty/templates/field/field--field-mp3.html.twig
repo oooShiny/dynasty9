@@ -36,15 +36,16 @@
  * @see template_preprocess_field()
  */
 #}
+{{ attach_library('dynasty/podcast') }}
 
-<audio id="{{ mp3 }}" src="{{ mp3_url }}"></audio>
+<audio id="pod-{{ mp3 }}" src="{{ mp3_url }}"></audio>
 <div class="tw-text-white">
   <svg class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
     <path d="M4 5h3v10H4V5zm12 0v10l-9-5 9-5z"/>
   </svg>
 </div>
 <div class="tw-text-white tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
-  <svg onclick="playPause('{{ mp3 }}')" class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <svg onclick="playPause('pod-{{ mp3 }}')" class="tw-w-5 tw-h-5" style="cursor: pointer" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
     <path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/>
   </svg>
 </div>
