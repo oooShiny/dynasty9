@@ -39,14 +39,14 @@
 {{ attach_library('dynasty/podcast') }}
 
 <audio id="pod-{{ mp3 }}" src="{{ mp3_url }}"></audio>
-<div class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg">
-  <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer" />
+<div id="back-pod-{{ mp3}}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
+  <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
 </div>
 <div class="tw-text-white tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
   <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ mp3 }}')" id="playpod-{{ mp3 }}" class="tw-w-5 tw-h-5" style="cursor: pointer" />
 </div>
-<div class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg">
-  <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer" />
+<div id="fwd-pod-{{ mp3}}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
+  <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
 </div>
 
 {#<div class="tw-hidden md:tw-block">#}

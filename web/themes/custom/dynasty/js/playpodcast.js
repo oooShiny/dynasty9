@@ -8,6 +8,8 @@ function playPause(id) {
     pod_ep.play();
     playing = false;
     pIcon.src = '/themes/custom/dynasty/icons/pod-pause.svg';
+    document.querySelector('#back-'+id).classList.remove('tw-hidden');
+    document.querySelector('#fwd-'+id).classList.remove('tw-hidden');
   } else {
     pod_ep.pause();
     playing = true;
