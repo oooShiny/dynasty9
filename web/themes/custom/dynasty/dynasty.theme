@@ -17,7 +17,7 @@ function dynasty_preprocess_node(&$variables) {
 
   $node = $variables['node'];
   /**
-   * Game Node Overrides
+   * Game Node Overrides.
    */
   if ($node->bundle() == 'game') {
     if ($node->get('field_ot')->value == '0') {
@@ -69,6 +69,12 @@ function dynasty_preprocess_node(&$variables) {
     $variables['schema_opp'] = $opp->label();
     $variables['schema_name'] = $node->label();
   }
+  /**
+   * Podcast Episode Overrides.
+   */
+  if ($node->bundle() == 'podcast_episode') {
+    $variables['ep_art'] = $node->get('field_episode_cover_image')->value;
+  }
 }
 
 /**
@@ -94,6 +100,7 @@ function dynasty_preprocess_field(&$variables, $hook) {
     $path_array = explode('/', $link_array['path']);
     $variables['mp3'] = $path_array[6];
     $variables['mp3_url'] = $variables['element'][0]['#context']['value'];
+    $variables['view_mode'] = $variables['element']['#view_mode'];
   }
 }
 

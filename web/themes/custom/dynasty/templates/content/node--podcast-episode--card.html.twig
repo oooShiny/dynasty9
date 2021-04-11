@@ -70,9 +70,8 @@
  *   in different view modes.
  */
 #}
-
-{% if content.field_episode_cover_image|render %}
-  {% set cover_img = content.field_episode_cover_image %}
+{% if ep_art %}
+  {% set cover_img = ep_art %}
 {% else %}
   {% set cover_img = 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
 {% endif %}

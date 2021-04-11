@@ -52,14 +52,14 @@ source:
       name: duration
       label: Duration
       selector: 'itunes:duration'
+    -
+      name: artwork
+      label: Episode Artwork
+      selector: 'itunes:image/@href'
   ids:
     guid:
       type: string
 process:
-  dump_sourcevar:
-    plugin: callback
-    callable: var_dump
-    source: title
   title: title
   field_subtitle: subtitle
   body/format:
@@ -72,6 +72,7 @@ process:
   field_episode: episode
   field_duration: duration
   field_mp3: mp3
+  field_episode_cover_image: artwork
   created:
     plugin: format_date
     from_format: 'D, d M Y H:i:s T'
