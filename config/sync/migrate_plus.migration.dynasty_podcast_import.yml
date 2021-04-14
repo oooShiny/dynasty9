@@ -54,7 +54,7 @@ source:
       selector: 'itunes:duration'
     -
       name: artwork
-      label: Episode Artwork
+      label: 'Episode Artwork'
       selector: 'itunes:image/@href'
   ids:
     guid:

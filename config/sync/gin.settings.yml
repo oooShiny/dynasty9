@@ -1,9 +1,9 @@
-preset_accent_color: blue
-preset_focus_color: gin
+preset_accent_color: custom
+preset_focus_color: custom
 enable_darkmode: false
 classic_toolbar: horizontal
-icon_default: true
-icon_path: ''
+icon_default: false
+icon_path: 'public://dynasty-web.png'
 high_contrast_mode: false
 show_user_theme_settings: true
 third_party_settings:
@@ -18,6 +18,6 @@ features:
   favicon: true
 favicon:
   use_default: true
-accent_color: ''
-focus_color: ''
+accent_color: '#002244'
+focus_color: '#c60c30'
 icon_upload: ''

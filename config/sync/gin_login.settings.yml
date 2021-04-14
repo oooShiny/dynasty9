@@ -1,6 +1,7 @@
 logo:
-  use_default: true
+  use_default: 1
 brand_image:
-  use_default: true
+  use_default: 0
+  path: 'public://bruschi-snow.png'
 _core:
   default_config_hash: OhypfKr4_Eo8XwXg3Sios05lN-LjxOhSdSOSkEN9Ndo
