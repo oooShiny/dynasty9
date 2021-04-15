@@ -178,7 +178,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: 'tw-py-5 tw-pl-5'
+          element_class: tw-p-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -331,7 +331,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: tw-mr-5
+          element_class: tw-pr-10
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true

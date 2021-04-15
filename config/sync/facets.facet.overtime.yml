@@ -1,4 +1,4 @@
-uuid: 743c5486-641a-48e7-a466-bad84fd702ed
+uuid: 2b37bff7-5770-42c6-aaed-8d57ed262715
 langcode: en
 status: true
 dependencies:
@@ -7,21 +7,25 @@ dependencies:
     - views.view.game_search
   module:
     - search_api
-id: game_season
-name: Season
-url_alias: game_season
-weight: -1
+id: overtime
+name: Overtime
+url_alias: overtime
+weight: 1
 min_count: 1
 show_only_one_result: false
-field_identifier: season_int
+field_identifier: ot
 facet_source_id: 'search_api:views_page__game_search__page_1'
 widget:
-  type: select2
+  type: checkbox
   config:
     show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    soft_limit: 0
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
 expand_hierarchy: false
@@ -30,6 +34,25 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
+  active_widget_order:
+    processor_id: active_widget_order
+    weights:
+      sort: 20
+    settings:
+      sort: DESC
+  boolean_item:
+    processor_id: boolean_item
+    weights:
+      build: 35
+    settings:
+      on_value: 'Yes'
+      off_value: 'No'
+  count_widget_order:
+    processor_id: count_widget_order
+    weights:
+      sort: 30
+    settings:
+      sort: DESC
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:

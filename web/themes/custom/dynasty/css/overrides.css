@@ -101,3 +101,10 @@ li.pager__item.is-active {
 td.views-field-patriots-score:after {
   content: "-";
 }
+
+/**
+ * Facet Overrides
+ */
+.facets-checkbox {
+  margin: 0 .5em 0 1em;
+}
