@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.highlight.field_seconds
     - field.field.node.highlight.field_tag_play
     - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_video_file_id
     - field.field.node.highlight.field_week
     - field.field.node.highlight.field_yards_gained
     - node.type.highlight
@@ -251,6 +252,14 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_video_file_id:
+    weight: 51
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_week:
     weight: 7
     settings:
@@ -283,6 +292,11 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   created: true
   path: true

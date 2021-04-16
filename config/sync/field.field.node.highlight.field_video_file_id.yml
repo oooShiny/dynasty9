@@ -1,0 +1,19 @@
+uuid: ea8553ac-81ec-400a-8372-fd7399926114
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_file_id
+    - node.type.highlight
+id: node.highlight.field_video_file_id
+field_name: field_video_file_id
+entity_type: node
+bundle: highlight
+label: 'Video File ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

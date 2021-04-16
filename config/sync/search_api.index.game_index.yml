@@ -4,17 +4,17 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - node
     - taxonomy
+    - node
     - search_api
   config:
-    - field.storage.node.field_date
     - field.storage.node.field_after_bye
+    - field.storage.node.field_date
     - field.storage.node.field_home_away
     - field.storage.node.field_month
+    - field.storage.node.field_opposing_coach
     - field.storage.node.field_opponent
     - field.storage.node.field_opponent_score
-    - field.storage.node.field_opposing_coach
     - field.storage.node.field_ot
     - field.storage.node.field_patriots_score
     - field.storage.node.field_playoff_game
@@ -237,9 +237,12 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  entity_status: {  }
   language_with_fallback: {  }
   rendered_item: {  }
-  solr_date_range: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo

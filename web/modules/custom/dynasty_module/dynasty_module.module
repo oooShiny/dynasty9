@@ -21,6 +21,11 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'episode' => ''
       ]
     ],
+    'on_this_day_block' => [
+      'variables' => [
+        'games' => ''
+      ]
+    ],
   ];
 }
 /**

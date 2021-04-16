@@ -23,6 +23,7 @@ dependencies:
     - field.field.node.highlight.field_seconds
     - field.field.node.highlight.field_tag_play
     - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_video_file_id
     - field.field.node.highlight.field_week
     - field.field.node.highlight.field_yards_gained
     - node.type.highlight
@@ -44,6 +45,14 @@ content:
   field_muse_video_id:
     type: string
     weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_video_file_id:
+    type: string
+    weight: 3
     region: content
     label: hidden
     settings:

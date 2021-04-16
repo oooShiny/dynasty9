@@ -97,6 +97,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
             'title' => $muse_video->title,
             'muse_id' => $muse_video->svid,
             'nid' => $vid_links[$muse_title],
+            'fid' => $muse_video->fid,
           ];
           $operations[] = ['\Drupal\dynasty_module\AddMuseFullGame::updateNode', [$v, $fields]];
         }
@@ -120,6 +121,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
             'title' => $muse_video->title,
             'muse_id' => $muse_video->svid,
             'nid' => $vid_links[$muse_title],
+            'fid' => $muse_video->fid,
           ];
           $operations[] = ['\Drupal\dynasty_module\AddMuseHighlight::updateNode', [$v, $fields]];
         }

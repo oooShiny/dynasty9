@@ -72,18 +72,20 @@
 #}
 <article class="tw-mt-10">
 
-{# Game Date #}
   <div class="tw-flex tw-items-center tw-justify-around tw-py-10">
-  {% if content.field_muse_video_id|render %}
-    <div class="tw-w-1/2 tw-m-auto tw-py-10">
-      {{ content.field_muse_video_id }}
-    </div>
-  {% elseif content.field_gfycat_id|render %}
-    <div class="tw-w-1/2 tw-m-auto tw-py-10">
-      {{ content.field_gfycat_id }}
-    </div>
-  {% endif %}
+    {% if content.field_muse_video_id|render %}
+      <div class="tw-w-1/2 tw-m-auto tw-py-10">
+        {{ content.field_muse_video_id }}
+      </div>
+    {% elseif content.field_gfycat_id|render %}
+      <div class="tw-w-1/2 tw-m-auto tw-py-10">
+        {{ content.field_gfycat_id }}
+      </div>
+    {% endif %}
   </div>
-{{ content.field_game }}
 
+  {{ content.field_game }}
+
+  <a href="https://muse.ai/vc/{{ muse_id }}">Video Link</a>
+  <a href="https://cdn.muse.ai/w/{{ video_file }}/videos/video.mp4" download>Download</a>
 </article>

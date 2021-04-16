@@ -75,6 +75,14 @@ function dynasty_preprocess_node(&$variables) {
   if ($node->bundle() == 'podcast_episode') {
     $variables['ep_art'] = $node->get('field_episode_cover_image')->value;
   }
+
+  /**
+   * Highlight Overrides.
+   */
+  if ($node->bundle() == 'highlight') {
+    $variables['video_file'] = $node->get('field_video_file_id')->value;
+    $variables['muse_id'] = $node->get('field_muse_video_id')->value;
+  }
 }
 
 /**

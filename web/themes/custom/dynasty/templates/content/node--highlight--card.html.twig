@@ -79,8 +79,21 @@
   {% endif %}
   <div class="tw-m-2">
     <a href="{{ url }}">{{ label }}</a>
-    <div class="tw-flex">
+    <div class="tw-flex tw-justify-between">
       <p class="tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs">{{ content.field_game }}</p>
+      <div class="tw-flex">
+      {% if content.field_muse_video_id|render %}
+        <a href="https://muse.ai/vc/{{ muse_id }}" class="icon-link">
+          <img class="tw-h-5" src="/themes/custom/dynasty/icons/link.svg" alt="Video Link">
+        </a>
+      {% endif %}
+
+      {% if content.field_video_file_id|render %}
+        <a href="https://cdn.muse.ai/w/{{ video_file }}/videos/video.mp4" download>
+          <img class="tw-h-5 icon-link" src="/themes/custom/dynasty/icons/download.svg" alt="Download">
+        </a>
+      {% endif %}
+      </div>
     </div>
   </div>
 </div>

@@ -19,6 +19,11 @@ a[href*='muse.ai']:after {
   width: 0.8em;
 }
 
+a[href*='cdn.muse.ai']:after,
+.icon-link:after {
+  content: none !important;
+}
+
 a[href*='gfycat.com'],
 a[href*='muse.ai']{
   text-decoration: underline;

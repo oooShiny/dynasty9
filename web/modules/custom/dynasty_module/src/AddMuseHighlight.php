@@ -10,6 +10,7 @@ class AddMuseHighlight {
 
     $node = Node::load($video['nid']);
     $node->field_muse_video_id->value = $video['muse_id'];
+    $node->field_video_file_id->value = $video['fid'];
 
     $results[] = $node->save();
     $context['results'] = $results;
