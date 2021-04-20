@@ -774,7 +774,7 @@ display:
           admin_label: ''
           empty: false
           tokenize: false
-          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button button--primary\">Missing</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">URLs</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">Import</a>\r\n</div>"
+          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button button--primary\">Missing</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">URLs</a>\r\n<a href=\"/admin/gfycat/import\" class=\"button\">Import</a>\r\n</div>"
           plugin_id: text_custom
         result:
           id: result
@@ -1157,7 +1157,7 @@ display:
           admin_label: ''
           empty: false
           tokenize: false
-          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button \">Missing</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button button--primary\">URLs</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">Import</a>\r\n</div>"
+          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button \">Missing</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button button--primary\">URLs</a>\r\n<a href=\"/admin/gfycat/import\" class=\"button\">Import</a>\r\n</div>"
           plugin_id: text_custom
         result:
           id: result
