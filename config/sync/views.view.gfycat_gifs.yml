@@ -54,7 +54,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 24
+          items_per_page: 100
           offset: 0
           id: 0
           total_pages: null
@@ -248,6 +248,16 @@ display:
           tokenize: false
           content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button button--primary\">Missing Muse Videos</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button button--primary\">Gfycat URL List</a>\r\n</div>"
           plugin_id: text_custom
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: '@total highlights need to be converted'
+          plugin_id: result
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -764,8 +774,18 @@ display:
           admin_label: ''
           empty: false
           tokenize: false
-          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button\">Missing Muse Videos</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button button--primary\">Gfycat URL List</a>\r\n</div>"
+          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button button--primary\">Missing</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">URLs</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">Import</a>\r\n</div>"
           plugin_id: text_custom
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: '@total highlights need to be converted'
+          plugin_id: result
     cache_metadata:
       max-age: -1
       contexts:
@@ -1089,7 +1109,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: 'https://www.gifdeliverynetwork.com/{{field_gfycat_id}}'
+            text: 'https://www.gfycat.com/{{field_gfycat_id}}'
             make_link: false
             path: ''
             absolute: false
@@ -1137,8 +1157,18 @@ display:
           admin_label: ''
           empty: false
           tokenize: false
-          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button button--primary\">Missing Muse Videos</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">Gfycat URL List</a>\r\n</div>"
+          content: "<div class=\"ui-dialog-buttonset\">\r\n<a href=\"/admin/gfycat\" class=\"button \">Missing</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button button--primary\">URLs</a>\r\n<a href=\"/admin/gfycat/broken\" class=\"button\">Import</a>\r\n</div>"
           plugin_id: text_custom
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          content: '@total highlights need to be converted'
+          plugin_id: result
     cache_metadata:
       max-age: -1
       contexts:
