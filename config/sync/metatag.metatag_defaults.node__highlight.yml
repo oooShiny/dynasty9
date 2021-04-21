@@ -1,0 +1,8 @@
+uuid: e01b52e8-897a-41de-b03a-2cd0b51ce3cb
+langcode: en
+status: true
+dependencies: {  }
+id: node__highlight
+label: 'Content: Highlight'
+tags:
+  description: '[node:title]'
