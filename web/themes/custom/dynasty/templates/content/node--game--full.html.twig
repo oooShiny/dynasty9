@@ -99,14 +99,14 @@
 <article class="tw-mt-10">
 {# Teams and Score Boxes #}
   <div class="tw-flex tw-items-center tw-justify-center tw-py-10">
-    <div class="patriots tw-p-2 tw-w-1/4">
+    <div class="patriots tw-p-2 tw-w-1/3 md:tw-w-1/4">
       <div class="tw-text-2xl tw-text-center tw-hidden md:tw-block">New England Patriots</div>
       <div class="tw-text-2xl tw-text-center tw-block md:tw-hidden">Patriots</div>
       <br>
       <div class="tw-text-5xl tw-text-center">{{ content.field_patriots_score }}</div>
     </div>
-    <div class="tw-px-10 tw-text-4xl">{{ vs }}</div>
-    <div class="{{ team_css }} tw-p-2 tw-w-1/4">
+    <div class="tw-w-1/6 tw-text-4xl tw-text-center">{{ vs }}</div>
+    <div class="{{ team_css }} tw-p-2 tw-w-1/3 md:tw-w-1/4">
       <div class="tw-text-2xl tw-text-center tw-hidden md:tw-block">{{ content.field_opponent }}</div>
       <div class="tw-text-2xl tw-text-center tw-block md:tw-hidden">{{ team_short }}</div>
       <br>
@@ -169,15 +169,15 @@
 
 {# PFR, Youtube Highlight, and GamePass links #}
   <a id="game-links"></a>
-  <div id="game-links" class="tw-flex tw-items-center tw-justify-around tw-py-10">
-    <button type="button" onclick="window.open('{{ pfr_link }}')" class="tw-p-4 tw-w-1/6 tw-bg-green-900 tw-text-white tw-text-center">View game on PFR</button>
+  <div id="game-links" class="tw-flex tw-items-center tw-justify-evenly tw-py-10">
+    <button type="button" onclick="window.open('{{ pfr_link }}')" class="tw-p-4 tw-bg-green-900 tw-text-white tw-text-center">View game on PFR</button>
 
     {% if content.field_youtube_highlights|render %}
-      <button type="button" onclick="window.open('{{ content.field_youtube_highlights|render|trim }}')" class="tw-p-4 tw-w-1/6 tw-bg-red-600 tw-text-white tw-text-center">Youtube Highlights</button>
+      <button type="button" onclick="window.open('{{ content.field_youtube_highlights|render|trim }}')" class="tw-p-4 tw-bg-red-600 tw-text-white tw-text-center">Youtube Highlights</button>
     {% endif %}
 
     {% if season > 2008 %}
-      <button type="button" onclick="window.open('{{ gamepass_link }}')" class="tw-p-4 tw-w-1/6 tw-bg-blue-900 tw-text-white tw-text-center">Watch on GamePass</button>
+      <button type="button" onclick="window.open('{{ gamepass_link }}')" class="tw-p-4 tw-bg-blue-900 tw-text-white tw-text-center">Watch on GamePass</button>
     {% endif %}
   </div>
 
