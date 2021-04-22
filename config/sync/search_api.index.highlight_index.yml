@@ -13,6 +13,7 @@ dependencies:
     - field.storage.node.field_minutes
     - field.storage.node.field_opponent
     - field.storage.node.field_players_involved
+    - field.storage.node.field_play_type
     - field.storage.node.field_quarter
     - field.storage.node.field_season
     - field.storage.node.field_seconds
@@ -100,6 +101,16 @@ field_settings:
         - field.storage.node.field_opponent
       module:
         - node
+  play_type:
+    label: 'Play Type (string)'
+    datasource_id: 'entity:node'
+    property_path: 'field_play_type:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_play_type
+      module:
+        - taxonomy
   players_fulltext:
     label: 'Player(s) Involved (fulltext)'
     datasource_id: 'entity:node'
@@ -161,7 +172,7 @@ field_settings:
       module:
         - node
   week:
-    label: 'Week » Taxonomy term » Name'
+    label: Week
     datasource_id: 'entity:node'
     property_path: 'field_week:entity:name'
     type: string

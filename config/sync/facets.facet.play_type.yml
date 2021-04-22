@@ -1,4 +1,4 @@
-uuid: d088896f-7333-43ce-9de5-65376848835f
+uuid: 63966b32-66a3-47bd-bd5f-36baf3fd029c
 langcode: en
 status: true
 dependencies:
@@ -7,25 +7,21 @@ dependencies:
     - views.view.highlight_search
   module:
     - search_api
-id: td_scored
-name: 'TD Scored'
-url_alias: td_scored
-weight: 1
+id: play_type
+name: 'Play Type'
+url_alias: play_type
+weight: -1
 min_count: 1
 show_only_one_result: false
-field_identifier: td_scored
+field_identifier: play_type
 facet_source_id: 'search_api:views_page__highlight_search__page_1'
 widget:
-  type: checkbox
+  type: select2
   config:
     show_numbers: true
-    soft_limit: 0
-    soft_limit_settings:
-      show_less_label: 'Show less'
-      show_more_label: 'Show more'
-    show_reset_link: false
-    reset_text: 'Show all'
-    hide_reset_when_no_selection: false
+    width: 100%
+    autocomplete: false
+    match_operator: CONTAINS
 query_operator: or
 use_hierarchy: false
 expand_hierarchy: false
@@ -34,17 +30,16 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
-  boolean_item:
-    processor_id: boolean_item
+  count_widget_order:
+    processor_id: count_widget_order
     weights:
-      build: 35
+      sort: 30
     settings:
-      on_value: 'Yes'
-      off_value: 'No'
-  raw_value_widget_order:
-    processor_id: raw_value_widget_order
+      sort: DESC
+  display_value_widget_order:
+    processor_id: display_value_widget_order
     weights:
-      sort: 50
+      sort: 40
     settings:
       sort: ASC
   url_processor_handler:
