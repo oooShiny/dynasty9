@@ -11,7 +11,7 @@ jquery.ui.slider.pips:
     component:
       /libraries/jquery-ui-slider-pips/dist/jquery-ui-slider-pips.min.css: { minified: true }
   dependencies:
-    - core/jquery.ui.slider
+    - jquery_ui_slider/slider
 
 slider:
   version: VERSION

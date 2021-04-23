@@ -30,6 +30,7 @@ module:
   entity_reference_revisions: 0
   facets: 0
   facets_block: 0
+  facets_range_widget: 0
   field: 0
   field_group: 0
   field_permissions: 0
@@ -44,6 +45,8 @@ module:
   image: 0
   inline_entity_form: 0
   inline_form_errors: 0
+  jquery_ui: 0
+  jquery_ui_slider: 0
   language: 0
   link: 0
   media: 0

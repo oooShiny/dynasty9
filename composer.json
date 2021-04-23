@@ -32,6 +32,7 @@
         "drupal/gin_login": "^1.0@RC",
         "drupal/google_tag": "^1.4",
         "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/jquery_ui_slider": "^1.1",
         "drupal/metatag": "^1.15",
         "drupal/migrate_cs": "^1.0@beta",
         "drupal/migrate_plus": "^5.1",
@@ -127,6 +128,9 @@
         "patches": {
             "drupal/conditional_fields": {
                 "Notice: Trying to access array offset on value of type null": "https://www.drupal.org/files/issues/2021-01-21/3191984-3-notice-trying-to-access-offset-on-value-of-type-null.patch"
+            },
+            "drupal/facets": {
+                "Slider widgets do not work in D9": "https://www.drupal.org/files/issues/2021-01-08/facets-widget-range-slider.patch"
             }
         }
     }

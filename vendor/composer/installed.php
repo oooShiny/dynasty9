@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '8ec4d84d47082a7ee6a3f4548167e3df1a2190d0',
+    'reference' => '7400f8c8cbfd3fdf076997fb2ffab2019618eae6',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -824,6 +824,24 @@
         0 => '9.1.5',
       ),
     ),
+    'drupal/jquery_ui' => 
+    array (
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-1.4',
+    ),
+    'drupal/jquery_ui_slider' => 
+    array (
+      'pretty_version' => '1.1.0',
+      'version' => '1.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-1.1',
+    ),
     'drupal/jsonapi' => 
     array (
       'replaced' => 
@@ -1064,7 +1082,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '8ec4d84d47082a7ee6a3f4548167e3df1a2190d0',
+      'reference' => '7400f8c8cbfd3fdf076997fb2ffab2019618eae6',
     ),
     'drupal/redirect' => 
     array (

@@ -5,6 +5,7 @@ core_version_requirement: ^8.8 || ^9
 package: Search
 dependencies:
   - facets:facets
+  - jquery_ui_slider:jquery_ui_slider
 test_dependencies:
   - search_api:search_api
   - facets:facets
