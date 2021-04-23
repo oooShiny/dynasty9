@@ -1,8 +1,34 @@
-<p>{{ episode.description|raw }}</p>
-<div class="tw-hidden md:tw-block">
-  <iframe title="Embed Player" width="100%" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ episode.mp3 }}?cover=true&accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>
-</div>
-<div class="tw-block md:tw-hidden">
-  <iframe title="Embed Player" width="300" height="300" src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ episode.mp3 }}?accentColor=ffffff&bgColor=002244&logo=false&secondaryColor=c60c30" scrolling="no" frameBorder="0" style="border:none;overflow:hidden;"></iframe>
-</div>
+{% if ep_art %}
+  {% set cover_img = ep_art %}
+{% else %}
+  {% set cover_img = 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
+{% endif %}
 
+<div class="tw-mb-5 tw-flex tw-m-auto tw-pt-10">
+  <div class="tw-w-40 tw-h-40 tw-mr-5 tw-justify-center tw-items-center tw-flex"
+       style="background-image: url('{{ cover_img }}');
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-position: center;">
+    {{ attach_library('dynasty/podcast') }}
+    <audio id="pod-{{ episode.mp3 }}" src="{{ episode.mp3_url }}"></audio>
+    <div id="back-pod-{{ episode.mp3 }}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
+      <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ episode.mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
+    </div>
+    <div class="tw-text-white tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
+      <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ episode.mp3 }}')" id="playpod-{{ episode.mp3 }}" class="tw-w-5 tw-h-5" style="cursor: pointer" />
+    </div>
+    <div id="fwd-pod-{{ episode.mp3 }}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
+      <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ episode.mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
+    </div>
+  </div>
+  <div class="tw-w-2/3">
+    <h2 class="tw-uppercase tw-font-light tw-text-2xl">
+      {{ episode.title }} ({{ episode.duration }})
+    </h2>
+    {% if episode.subtitle is not empty %}
+      <h3 class="tw-font-light tw-text-xl">{{ episode.subtitle }}</h3>
+    {% endif %}
+  </div>
+</div>
+<div class="tw-text-l">{{ episode.description|raw }}</div>
