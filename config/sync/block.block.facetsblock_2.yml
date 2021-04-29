@@ -15,7 +15,7 @@ provider: null
 plugin: facets_block
 settings:
   id: facets_block
-  label: 'Game Filters'
+  label: 'Game Search Filters'
   provider: facets_block
   label_display: '0'
   show_title: true
@@ -29,9 +29,12 @@ settings:
     'facet_block:overtime': 'facet_block:overtime'
     'facet_block:playoff': 'facet_block:playoff'
     'facet_block:player_s_involved': '0'
-    'facet_block:opponent': '0'
+    'facet_block:play_type': '0'
     'facet_block:podcast_season': '0'
+    'facet_block:opponent': '0'
     'facet_block:podcast_opponent': '0'
+    'facet_block:week': '0'
+    'facet_block:yards_gained': '0'
     'facet_block:td_scored': '0'
 visibility:
   request_path:

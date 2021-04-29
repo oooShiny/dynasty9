@@ -15,7 +15,7 @@ provider: null
 plugin: facets_block
 settings:
   id: facets_block
-  label: 'Play Filters'
+  label: 'Play Search Filters'
   provider: facets_block
   label_display: '0'
   show_title: true
@@ -24,6 +24,7 @@ settings:
     'facet_block:player_s_involved': 'facet_block:player_s_involved'
     'facet_block:play_type': 'facet_block:play_type'
     'facet_block:opponent': 'facet_block:opponent'
+    'facet_block:week': 'facet_block:week'
     'facet_block:yards_gained': 'facet_block:yards_gained'
     'facet_block:td_scored': 'facet_block:td_scored'
     'facet_block:game_opponent': '0'
