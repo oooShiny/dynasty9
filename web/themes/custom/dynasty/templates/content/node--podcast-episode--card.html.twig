@@ -94,7 +94,7 @@
       {% endif %}
       <button type="button" onclick="window.open('{{ url }}', '_self')" class="tw-text-sm tw-p-1 tw-px-4 tw-bg-blue-pats tw-text-white tw-text-center">Episode Info</button>
       {% if content.field_game|render %}
-        <button type="button" onclick="window.open('node/{{ content.field_game|trim }}', '_self')" class="tw-text-sm tw-p-1 tw-px-4 tw-bg-blue-pats tw-text-white tw-text-center">Game Info</button>
+        <button type="button" onclick="window.open('node/{{ content.field_game|render|trim }}', '_self')" class="tw-text-sm tw-p-1 tw-px-4 tw-bg-blue-pats tw-text-white tw-text-center">Game Info</button>
       {% endif %}
     </div>
   </div>
