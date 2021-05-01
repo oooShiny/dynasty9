@@ -1,0 +1,29 @@
+uuid: 8635d3fa-22e9-4b10-9937-7f2ed33083d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.favorite_podcast_block
+    - field.storage.block_content.field_gregs_favorite
+    - node.type.podcast_episode
+id: block_content.favorite_podcast_block.field_gregs_favorite
+field_name: field_gregs_favorite
+entity_type: block_content
+bundle: favorite_podcast_block
+label: 'Greg''s Favorite'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      podcast_episode: podcast_episode
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

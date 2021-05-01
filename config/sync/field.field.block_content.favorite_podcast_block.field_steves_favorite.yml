@@ -1,0 +1,29 @@
+uuid: 532de961-e3c4-4e02-8740-399968197336
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.favorite_podcast_block
+    - field.storage.block_content.field_steves_favorite
+    - node.type.podcast_episode
+id: block_content.favorite_podcast_block.field_steves_favorite
+field_name: field_steves_favorite
+entity_type: block_content
+bundle: favorite_podcast_block
+label: 'Steve''s Favorite'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      podcast_episode: podcast_episode
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

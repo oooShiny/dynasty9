@@ -1,0 +1,30 @@
+uuid: e14356df-b04d-4f76-9c87-c812174b15a2
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f0679434-c1b5-4fc0-ad71-86af67572c3f'
+  module:
+    - block_content
+    - system
+  theme:
+    - dynasty
+id: podcastintrotext
+theme: dynasty
+region: highlighted
+weight: 0
+provider: null
+plugin: 'block_content:f0679434-c1b5-4fc0-ad71-86af67572c3f'
+settings:
+  id: 'block_content:f0679434-c1b5-4fc0-ad71-86af67572c3f'
+  label: 'Podcast Intro Text'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /podcast
+    negate: false

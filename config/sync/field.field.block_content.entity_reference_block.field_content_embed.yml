@@ -1,0 +1,39 @@
+uuid: 9db5fb60-7232-4b75-b7a4-ea58d741e8aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.entity_reference_block
+    - field.storage.block_content.field_content_embed
+    - node.type.article
+    - node.type.game
+    - node.type.highlight
+    - node.type.player
+    - node.type.podcast_episode
+    - node.type.team
+id: block_content.entity_reference_block.field_content_embed
+field_name: field_content_embed
+entity_type: block_content
+bundle: entity_reference_block
+label: 'Content Embed'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      game: game
+      highlight: highlight
+      player: player
+      podcast_episode: podcast_episode
+      team: team
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: game
+field_type: entity_reference

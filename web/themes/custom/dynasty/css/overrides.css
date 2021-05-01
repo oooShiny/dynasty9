@@ -113,3 +113,13 @@ td.views-field-patriots-score:after {
 .facets-checkbox {
   margin: 0 .5em 0 1em;
 }
+
+a.facets-soft-limit-link:after {
+  content: '▼';
+  padding-left: .25em;
+}
+
+a.facets-soft-limit-link.open:after {
+  content: '▲';
+  padding-left: .25em;
+}

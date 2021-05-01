@@ -1,0 +1,29 @@
+uuid: 8da5e20f-a984-4e9a-b828-ad312c05026e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.favorite_podcast_block
+    - field.storage.block_content.field_andys_favorite
+    - node.type.podcast_episode
+id: block_content.favorite_podcast_block.field_andys_favorite
+field_name: field_andys_favorite
+entity_type: block_content
+bundle: favorite_podcast_block
+label: 'Andy''s Favorite'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      podcast_episode: podcast_episode
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

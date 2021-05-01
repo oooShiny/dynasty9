@@ -1,0 +1,8 @@
+uuid: a46660af-8510-4382-8d55-0bf294d482d4
+langcode: en
+status: true
+dependencies: {  }
+id: favorite_podcast_block
+label: 'Favorite Podcast Block'
+revision: 0
+description: ''

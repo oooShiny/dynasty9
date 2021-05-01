@@ -1,0 +1,38 @@
+uuid: cbafc514-339d-490a-bb9a-d9ec0af39e07
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.entity_reference_block
+    - field.field.block_content.entity_reference_block.field_content_embed
+id: block_content.entity_reference_block.default
+targetEntityType: block_content
+bundle: entity_reference_block
+mode: default
+content:
+  field_content_embed:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

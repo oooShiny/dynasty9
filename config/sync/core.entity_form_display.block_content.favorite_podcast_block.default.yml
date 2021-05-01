@@ -1,0 +1,62 @@
+uuid: 5e03712f-5bd2-4a5e-a74a-7f33903537a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.favorite_podcast_block
+    - field.field.block_content.favorite_podcast_block.field_andys_favorite
+    - field.field.block_content.favorite_podcast_block.field_gregs_favorite
+    - field.field.block_content.favorite_podcast_block.field_steves_favorite
+  module:
+    - select2
+id: block_content.favorite_podcast_block.default
+targetEntityType: block_content
+bundle: favorite_podcast_block
+mode: default
+content:
+  field_andys_favorite:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_gregs_favorite:
+    weight: 28
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_steves_favorite:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

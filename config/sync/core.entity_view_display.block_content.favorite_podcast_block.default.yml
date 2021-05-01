@@ -1,0 +1,44 @@
+uuid: 423f6c01-91c0-4c6e-b07a-5dfb6eac136d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.favorite_podcast_block
+    - field.field.block_content.favorite_podcast_block.field_andys_favorite
+    - field.field.block_content.favorite_podcast_block.field_gregs_favorite
+    - field.field.block_content.favorite_podcast_block.field_steves_favorite
+id: block_content.favorite_podcast_block.default
+targetEntityType: block_content
+bundle: favorite_podcast_block
+mode: default
+content:
+  field_andys_favorite:
+    weight: 0
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_gregs_favorite:
+    weight: 2
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_steves_favorite:
+    weight: 1
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

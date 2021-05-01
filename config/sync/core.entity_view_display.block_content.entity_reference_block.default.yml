@@ -1,0 +1,24 @@
+uuid: ab7aa6dc-80c5-4154-bf4f-4284b13d074d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.entity_reference_block
+    - field.field.block_content.entity_reference_block.field_content_embed
+id: block_content.entity_reference_block.default
+targetEntityType: block_content
+bundle: entity_reference_block
+mode: default
+content:
+  field_content_embed:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

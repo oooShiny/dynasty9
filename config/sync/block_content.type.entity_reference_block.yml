@@ -1,0 +1,8 @@
+uuid: babf6efe-242c-4375-8f62-b00828be7f35
+langcode: en
+status: true
+dependencies: {  }
+id: entity_reference_block
+label: 'Entity Reference Block'
+revision: 0
+description: ''
