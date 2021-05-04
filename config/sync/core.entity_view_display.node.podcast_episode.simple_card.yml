@@ -1,0 +1,73 @@
+uuid: c7e8f9da-8b35-4fb4-aadf-00066fc4cf6f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.simple_card
+    - field.field.node.podcast_episode.body
+    - field.field.node.podcast_episode.field_duration
+    - field.field.node.podcast_episode.field_episode
+    - field.field.node.podcast_episode.field_episode_cover_image
+    - field.field.node.podcast_episode.field_game
+    - field.field.node.podcast_episode.field_meta_tags
+    - field.field.node.podcast_episode.field_mp3
+    - field.field.node.podcast_episode.field_podcast_guest
+    - field.field.node.podcast_episode.field_season
+    - field.field.node.podcast_episode.field_subtitle
+    - field.field.node.podcast_episode.field_transcription
+    - field.field.node.podcast_episode.field_yoast_seo
+    - node.type.podcast_episode
+  module:
+    - user
+id: node.podcast_episode.simple_card
+targetEntityType: node
+bundle: podcast_episode
+mode: simple_card
+content:
+  field_duration:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_game:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_entity_id
+    region: content
+  field_mp3:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_subtitle:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_episode: true
+  field_episode_cover_image: true
+  field_meta_tags: true
+  field_podcast_guest: true
+  field_season: true
+  field_transcription: true
+  field_yoast_seo: true
+  langcode: true
+  search_api_excerpt: true

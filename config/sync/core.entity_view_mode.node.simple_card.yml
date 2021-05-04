@@ -1,0 +1,10 @@
+uuid: 00001355-7855-4d4b-9bbe-a9bd45d8ef3d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.simple_card
+label: 'Simple Card'
+targetEntityType: node
+cache: true

@@ -1,23 +1,23 @@
-uuid: e14356df-b04d-4f76-9c87-c812174b15a2
+uuid: 7ba3d73c-9caf-465d-9c02-c0c40e7df462
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:f0679434-c1b5-4fc0-ad71-86af67572c3f'
+    - 'block_content:favorite_podcast_block:3df58732-07a1-430b-9631-493cb6e57a52'
   module:
     - block_content
     - system
   theme:
     - dynasty
-id: podcastintrotext
+id: favoritepodcastblock
 theme: dynasty
 region: highlighted
-weight: 0
+weight: -7
 provider: null
-plugin: 'block_content:f0679434-c1b5-4fc0-ad71-86af67572c3f'
+plugin: 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
 settings:
-  id: 'block_content:f0679434-c1b5-4fc0-ad71-86af67572c3f'
-  label: 'Podcast Intro Text'
+  id: 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
+  label: 'Favorite Podcast Block'
   provider: block_content
   label_display: '0'
   status: true

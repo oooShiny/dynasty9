@@ -12,7 +12,7 @@ dependencies:
 id: podcastintroblock
 theme: dynasty
 region: highlighted
-weight: 0
+weight: -8
 provider: null
 plugin: 'block_content:dfb1fb38-8180-445f-ae0a-a7ff50b637a3'
 settings:

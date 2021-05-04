@@ -25,8 +25,17 @@
  * @see template_preprocess_block()
  */
 #}
+<h2 class="tw-text-2xl tw-uppercase tw-font-thin tw-text-center">Our Favorites</h2>
+<div class="tw-p-10 tw-font-light tw-text-xl tw-text-center">
+  Don't know where to start? Here are our favorite episodes.
+</div>
 <div class="tw-flex tw-flex-wrap tw-justify-evenly">
   {% block content %}
     {{ content }}
   {% endblock %}
+</div>
+
+<h2 class="tw-text-2xl tw-uppercase tw-font-thin tw-text-center">All Episodes</h2>
+<div class="tw-p-10 tw-font-light tw-text-xl tw-text-center">
+  Looking to listen to us talk about a certain game? Use the search below to find it.
 </div>
