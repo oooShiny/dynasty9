@@ -10,6 +10,12 @@ gfycat:
   dependencies:
     - core/jquery
     - core/drupal.dialog
+muse_modal:
+  js:
+    js/muse_ai_modal.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.dialog
 podcast:
   js:
     js/playpodcast.js: {}

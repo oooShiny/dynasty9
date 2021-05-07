@@ -9,23 +9,19 @@ a:hover {
   padding-bottom: 1em;
 }
 
-a[href*='gfycat.com']:after,
-a[href*='muse.ai']:after {
+#game-summary a[href*='gfycat.com']:after,
+#game-summary a[href*='muse.ai']:after {
   content: '';
   background-image:url('/themes/custom/dynasty/icons/play.svg');
   background-size: 100% 100%;
   display: inline-block;
   height: 0.8em;
   width: 0.8em;
+  padding-left: 1em;
 }
 
-a[href*='cdn.muse.ai']:after,
-.icon-link:after {
-  content: none !important;
-}
-
-a[href*='gfycat.com'],
-a[href*='muse.ai']{
+#game-summary a[href*='gfycat.com'],
+#game-summary a[href*='muse.ai']{
   text-decoration: underline;
 }
 
