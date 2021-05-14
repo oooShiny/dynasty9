@@ -1,0 +1,24 @@
+.article h1 {
+  font-size: xx-large;
+  padding-left: 6rem!important;
+  padding-right: 6rem!important;
+}
+
+.article p,
+.article ol,
+.article ul {
+  padding: 1em 0;
+  padding-left: 6rem!important;
+  padding-right: 6rem!important;
+}
+
+.article ol {
+  list-style: decimal;
+}
+.article ul {
+  list-style: disc;
+}
+
+.article a {
+  text-decoration: underline;
+}

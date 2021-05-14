@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7400f8c8cbfd3fdf076997fb2ffab2019618eae6',
+    'reference' => '86ec363e0ad8ae7d44b8bffcae20980682405fd7',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -773,6 +773,15 @@
       ),
       'reference' => '8.x-1.4',
     ),
+    'drupal/gutenberg' => 
+    array (
+      'pretty_version' => '2.0.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-2.0',
+    ),
     'drupal/hal' => 
     array (
       'replaced' => 
@@ -1082,7 +1091,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7400f8c8cbfd3fdf076997fb2ffab2019618eae6',
+      'reference' => '86ec363e0ad8ae7d44b8bffcae20980682405fd7',
     ),
     'drupal/redirect' => 
     array (
