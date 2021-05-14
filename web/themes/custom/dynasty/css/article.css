@@ -4,6 +4,12 @@
   padding-right: 6rem!important;
 }
 
+.article h2 {
+  font-size: x-large;
+  padding-left: 6rem!important;
+  padding-right: 6rem!important;
+}
+
 .article p,
 .article ol,
 .article ul {

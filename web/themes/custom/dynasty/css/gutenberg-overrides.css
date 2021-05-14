@@ -14,3 +14,13 @@ hr.wp-block-separator {
 .wp-block-table th {
   border: none;
 }
+
+.wp-block-embed {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.wp-block-embed-twitter {
+  width: fit-content;
+  margin: 0 auto;
+}
