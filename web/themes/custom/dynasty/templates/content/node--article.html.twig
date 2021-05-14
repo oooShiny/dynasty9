@@ -74,20 +74,22 @@
 
   {{ title_prefix }}
   {% if not page %}
-    <h2{{ title_attributes }}>
+    <h2 class="tw-text-2xl">
       <a href="{{ url }}" rel="bookmark">{{ label }}</a>
     </h2>
+    {% else %}
+      {% if display_submitted %}
+        <footer class="tw-flex">
+          <div class="tw-bg-blue-pats tw-p-1 tw-p-2 tw-shadow-lg tw-text-white">
+            Written by {{ author_name }} on {{ node.getCreatedTime|format_date('custom', 'M d, Y') }}
+            {{ metadata }}
+          </div>
+        </footer>
+      {% endif %}
   {% endif %}
   {{ title_suffix }}
 
-  {% if display_submitted %}
-    <footer class="tw-flex">
-      <div class="tw-bg-blue-pats tw-p-1 tw-p-2 tw-shadow-lg tw-text-white">
-        Written by {{ author_name }} on {{ node.getCreatedTime|format_date('custom', 'M d, Y') }}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
+
 
   {{ attach_library('dynasty/gutenberg_overrides') }}
   <div{{ content_attributes.addClass('node-content article') }}>
