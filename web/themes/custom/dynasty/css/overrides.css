@@ -119,3 +119,13 @@ a.facets-soft-limit-link.open:after {
   content: '▲';
   padding-left: .25em;
 }
+
+/* Article Teaser Readmore link styles */
+.article-teaser .node-readmore {
+  float: right;
+  font-weight: 600;
+}
+
+.article-teaser .node-readmore:after {
+  content: ' › ';
+}
