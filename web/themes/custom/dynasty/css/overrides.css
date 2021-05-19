@@ -23,6 +23,8 @@ a:hover {
 #game-summary a[href*='gfycat.com'],
 #game-summary a[href*='muse.ai']{
   text-decoration: underline;
+  text-decoration-color: #c60b31;
+  text-decoration-thickness: .125em;
 }
 
 /**
