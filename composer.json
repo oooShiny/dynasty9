@@ -34,6 +34,7 @@
         "drupal/gutenberg": "^2.0",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jquery_ui_slider": "^1.1",
+        "drupal/linkit": "^6.0@beta",
         "drupal/metatag": "^1.15",
         "drupal/migrate_cs": "^1.0@beta",
         "drupal/migrate_plus": "^5.1",
