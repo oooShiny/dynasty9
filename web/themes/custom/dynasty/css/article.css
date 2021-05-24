@@ -18,6 +18,12 @@
   padding-right: 6rem!important;
 }
 
+.small-margin ol {
+  padding: 0;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
 .article ol {
   list-style: decimal;
 }

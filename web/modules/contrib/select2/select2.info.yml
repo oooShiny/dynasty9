@@ -4,7 +4,7 @@ description: Makes entity reference fields more user-friendly using <a href="htt
 package: User interface
 core_version_requirement: ^8.8 || ^9
 
-# Information added by Drupal.org packaging script on 2020-10-22
-version: '8.x-1.12'
+# Information added by Drupal.org packaging script on 2021-03-01
+version: '8.x-1.13'
 project: 'select2'
-datestamp: 1603365974
+datestamp: 1614609949

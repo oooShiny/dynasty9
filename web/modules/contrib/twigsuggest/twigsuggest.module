@@ -2,8 +2,7 @@
 
 /**
  * @file
- * Twig Template Suggester provides template suggestions for things Drupal
- *   doesn't.
+ * Twig Template Suggester module hook implementations.
  */
 
 use Drupal\block\Entity\Block;
@@ -29,8 +28,8 @@ function twigsuggest_theme_suggestions_block(array $variables) {
       $suggestions[] = 'block__' . $block->getRegion();
       $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#id'];
       if ($block->get('settings') && $provider = $block->get('settings')['provider']) {
-        // I'm pretty sure Drupal core is already providing provider as a suggestion.
-        // $suggestions[] = 'block__' . $provider;
+        // I'm pretty sure core is already providing provider as a suggestion.
+        // $suggestions[] = 'block__' . $provider;.
         $base_plugin = $variables['elements']['#base_plugin_id'];
         if ($base_plugin !== $provider) {
           $suggestions[] = 'block__' . $base_plugin;
@@ -40,7 +39,7 @@ function twigsuggest_theme_suggestions_block(array $variables) {
           $suggestions[] = 'block__' . $base_plugin . '__' . $block->getRegion();
         }
         if (isset($variables['elements']['content']['#menu_name'])) {
-          $menu_name = $variables['elements']['content']['#menu_name'];
+          $menu_name = str_replace("-", "_", $variables['elements']['content']['#menu_name']);
           $suggestions[] = 'block__' . $provider . '__' . $menu_name . '__' . $block->getRegion();
           if ($base_plugin !== $provider) {
             $suggestions[] = 'block__' . $base_plugin . '__' . $menu_name . '__' . $block->getRegion();
@@ -62,7 +61,8 @@ function twigsuggest_theme_suggestions_block(array $variables) {
   // Block Type Templates module over this earlier code snippet of his) does
   // preface with bundle:
   // if (isset($variables['elements']['content']['#block_content'])) {
-  // array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  // array_splice($suggestions, 1, 0, 'block__bundle__' .
+  // $variables['elements']['content']['#block_content']->bundle());
   // }
 }
 
@@ -74,7 +74,7 @@ function twigsuggest_theme_suggestions_block(array $variables) {
 function twigsuggest_theme_suggestions_layout_alter(array &$suggestions, array $variables) {
   // Sometimes this can be helpful but othertimes apparently not so this hook
   // is disabled by default but can be enabled in settings.php:
-  // $config['twigsuggest.settings']['alternate_ds_suggestions'] = TRUE;
+  // $config['twigsuggest.settings']['alternate_ds_suggestions'] = TRUE;.
   if (!\Drupal::config('twigsuggest.settings')->get('alternate_ds_suggestions')) {
     return;
   }
@@ -99,7 +99,7 @@ function twigsuggest_theme_suggestions_layout_alter(array &$suggestions, array $
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK for container templates.
+ * Implements hook_theme_suggestions_HOOK() for container templates.
  *
  * Add suggestions, as by default none are provided.
  */
@@ -150,7 +150,7 @@ function twigsuggest_theme_suggestions_container(array $variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK for form element templates.
+ * Implements hook_theme_suggestions_HOOK() for form element templates.
  *
  * Add suggestions, as by default none are provided.
  */
@@ -161,7 +161,7 @@ function twigsuggest_theme_suggestions_form_element(array $variables) {
   $element = $variables['element'];
 
   if (isset($element['#id'])) {
-    $suggestions[] = 'form_element__' . $element['#id'];
+    $suggestions[] = 'form_element__' . str_replace('-', '_', $element['#id']);
   }
 
   if (isset($element['#type'])) {
@@ -170,16 +170,15 @@ function twigsuggest_theme_suggestions_form_element(array $variables) {
 
   // Additional module-specific container templates.
   if (isset($element['#webform_id'])) {
-    $suggestions[] = 'form_element__webform__' . $element['#webform_id'];
+    $suggestions[] = 'form_element__webform__' . str_replace('-', '_', $element['#webform_id']);
   }
 
   return $suggestions;
 
 }
 
-
 /**
- * Implements hook_theme_suggestions_HOOK for form input element templates.
+ * Implements hook_theme_suggestions_HOOK() for form input element templates.
  */
 function twigsuggest_theme_suggestions_input(array $variables) {
 
@@ -195,9 +194,8 @@ function twigsuggest_theme_suggestions_input(array $variables) {
 
 }
 
-
 /**
- * Implements hook_theme_suggestions_HOOK_alter().
+ * Implements hook_theme_suggestions_HOOK() for user templates.
  *
  * Add template suggestions based on highest user role following the same
  * pattern as for nodes. @see https://www.drupal.org/node/2354645
@@ -227,7 +225,7 @@ function twigsuggest_theme_suggestions_user(array $variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK().
+ * Implements hook_theme_suggestions_HOOK() for the html template.
  *
  * Add additional template suggestion based on node type.
  */
@@ -246,7 +244,7 @@ function twigsuggest_theme_suggestions_html(array $variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK().
+ * Implements hook_theme_suggestions_HOOK() for page templates.
  *
  * Add additional template suggestion based on node type.
  */
@@ -265,7 +263,7 @@ function twigsuggest_theme_suggestions_page(array $variables) {
 }
 
 /**
- * Implements hook_theme_suggestions_HOOK.
+ * Implements hook_theme_suggestions_HOOK() for field templates.
  */
 function twigsuggest_theme_suggestions_field(array $variables) {
 
@@ -286,6 +284,23 @@ function twigsuggest_theme_suggestions_field(array $variables) {
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for field templates.
+ *
+ * Add entity reference target type template suggestion.
+ *
+ * @see https://git.drupalcode.org/project/adaptivetheme/-/blob/8.x-3.x/at_core/includes/suggestions.inc
+ */
+function twigsuggest_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  // Add the entity reference type as a field template suggestion.
+  if (isset($variables['element']['#items']) && is_object($variables['element']['#items'])) {
+    $target_type = $variables['element']['#items']->getSetting('target_type') ?: NULL;
+    if ($target_type !== NULL) {
+      array_splice($suggestions, 1, 0, 'field__entity_reference_type__' . $target_type);
+    }
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK() for taxonomy terms.
  *
  * Currently Drupal core's taxonomy term module only provides:
@@ -294,7 +309,6 @@ function twigsuggest_theme_suggestions_field(array $variables) {
  *
  * This is a very basic template suggestion that should be in core:
  * https://www.drupal.org/project/drupal/issues/2767243
- *
  */
 function twigsuggest_theme_suggestions_taxonomy_term(array $variables) {
   $term = $variables['elements']['#taxonomy_term'];
@@ -313,13 +327,12 @@ function twigsuggest_theme_suggestions_taxonomy_term(array $variables) {
  *
  * Remove duplicate template suggestions for blocks.
  */
-function twigsuggest_theme_suggestions_block_alter(array &$suggestions, array $variables)
-{
+function twigsuggest_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   $suggestions = array_unique($suggestions);
 }
 
 /**
- * Implements hook_preprocess() to add the base path variable to all templates.
+ * Implements hook_preprocess() for all templates.
  *
  * It's a variable themers should be able to rely on.  Now from any template we
  * can do things like <img src="{{ base_path ~ directory }}/images/icon.svg" />

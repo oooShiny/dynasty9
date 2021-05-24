@@ -1,0 +1,439 @@
+<div class="container">
+  <h2>Visualizing Every Tom Brady TD</h2>
+</div>
+  <div class="row">
+    <div class="col s4 m2">
+      <div class="card ">
+        <div class="card-content">
+          <span class="card-title black-text">Legend</span>
+          <ul>
+            <li><span class="blue-text">Blue:</span> Regular Season</li>
+            <li><span class="red-text">Red:</span> Playoffs</li>
+            <li><span class="yellow-text text-darken-4">Gold:</span> Super Bowl</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col s8 m10">
+        <h2>Filter Passes</h2>
+
+          <div class="row">
+              <a onclick="filterTDs('q-1')" class="btn blue darken-4 white-text">1Q</a>
+              <a onclick="filterTDs('q-2')" class="btn blue darken-4 white-text">2Q</a>
+              <a onclick="filterTDs('q-3')" class="btn blue darken-4 white-text">3Q</a>
+              <a onclick="filterTDs('q-4')" class="btn blue darken-4 white-text">4Q</a>
+          </div>
+
+          <div class="row">
+            <a onclick="filterTDs('reg-season')" class="btn blue darken-4 white-text">Reg Season</a>
+            <a onclick="filterTDs('playoffs')" class="btn blue darken-4 white-text">Playoffs</a>
+            <a onclick="filterTDs('super-bowl')" class="btn blue darken-4 white-text">Super Bowl</a>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <select class="opp_filter">
+              <option value="play">-- Select a Team --</option>
+              <option value='san-fransisco-49ers'>49ers</option>
+              <option value='chicago-bears'>Bears</option>
+              <option value='cincinnati-bengals'>Bengals</option>
+              <option value='buffalo-bills'>Bills</option>
+              <option value='denver-broncos'>Broncos</option>
+              <option value='cleveland-browns'>Browns</option>
+              <option value='tampa-bay-buccaneers'>Buccaneers</option>
+              <option value='arizona-cardinals'>Cardinals</option>
+              <option value='los-angeles-chargers'>Chargers</option>
+              <option value='kansas-city-chiefs'>Chiefs</option>
+              <option value='indianapolis-colts'>Colts</option>
+              <option value='dallas-cowboys'>Cowboys</option>
+              <option value='miami-dolphins'>Dolphins</option>
+              <option value='philadelphia-eagles'>Eagles</option>
+              <option value='atlanta-falcons'>Falcons</option>
+              <option value='new-york-giants'>Giants</option>
+              <option value='jacksonville-jaguars'>Jaguars</option>
+              <option value='new-york-jets'>Jets</option>
+              <option value='detroit-lions'>Lions</option>
+              <option value='green-bay-packers'>Packers</option>
+              <option value='carolina-panthers'>Panthers</option>
+              <option value='oakland-raiders'>Raiders</option>
+              <option value='los-angeles-rams'>Rams</option>
+              <option value='baltimore-ravens'>Ravens</option>
+              <option value='washington-redskins'>Redskins</option>
+              <option value='new-orleans-saints'>Saints</option>
+              <option value='seattle-seahawks'>Seahawks</option>
+              <option value='pittsburgh-steelers'>Steelers</option>
+              <option value='houston-texans'>Texans</option>
+              <option value='tennessee-titans'>Titans</option>
+              <option value='minnesota-vikings'>Vikings</option>
+            </select>
+            </div>
+            <div class="col">
+              <a onclick="clearFilters()" class=" btn red darken-4 white-text">Reset</a>
+            </div>`
+          </div>
+
+    </div>
+  </div>
+{% block content %}
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <div id="field" ></div>
+  <script>
+    var width = '100%';
+    var height = '100%';
+    var widthpx = 3600;
+    var heightpx = 1600;
+    var yellow = 'yellow';
+    var blue = '#002244';
+    var red = 'red';
+    var data = d3.json('/brady-td-json', function(error, data) {
+      // Create SVG element field
+      var field = d3.select("div#field")
+        .append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", function () {
+          return '0 0 ' + heightpx + ' ' + widthpx;
+        })
+        .attr('class', 'field-svg');
+
+      // Create top end zone
+      field.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width)
+        .attr("height", 300)
+        .attr('fill', 'rgba(255, 255, 255, 0.5)')
+        .attr('stroke', 'white')
+        .attr('stroke-width', '5');
+
+      // Create bottom end zone
+      field.append("rect")
+        .attr("x", 0)
+        .attr("y", 3300)
+        .attr("width", width)
+        .attr("height", 300)
+        .attr('fill', 'rgba(255, 255, 255, 0.5)')
+        .attr('stroke', 'white')
+        .attr('stroke-width', '5');
+
+      // Create yard lines
+      field.each(function(d){
+        var line = d3.select(this)
+          .attr('fill', 'rgba(255, 255, 255, 0.5)')
+          .attr('stroke', 'white')
+          .attr('stroke-width', '2.5');
+        for (var i = 1; i < 100; i++) {
+          line.append('line')
+            .attr('x1', 575)
+            .attr('y1', i*30 + 300)
+            .attr('x2', 625)
+            .attr('y2', i*30 + 300);
+          line.append('line')
+            .attr('x1', 975)
+            .attr('y1', i*30 + 300)
+            .attr('x2', 1025)
+            .attr('y2', i*30 + 300);
+          if (i % 5 === 0) {
+            line.append('line')
+              .attr('x1', 0)
+              .attr('y1', i*30 + 300)
+              .attr('x2', width)
+              .attr('y2', i*30 + 300);
+            if (i % 2 === 0) {
+              line.append("text")
+                .attr("x", 10)
+                .attr("y", i*30 + 300)
+                .attr("transform", function (d) {
+                  if (i < 50) {
+                    var y = i * 30 + 300;
+                    return "rotate(90,90," + y + ")";
+                  }
+                  else  if (i > 50) {
+                    var y = i * 30 + 320;
+                    return "rotate(90,70," + y + ")";
+                  }
+                  else {
+                    var y = i * 30 + 320;
+                    return "rotate(90,70," + y + ")";
+                  }
+                })
+                .attr('font-size', '5em')
+                .text(function(d) {
+                  if (i < 50) {
+                    return '<' + i;
+                  }
+                  else if (i > 50) {
+                    return 100 - i + '>';
+                  }
+                  else {
+                    return i;
+                  }
+                });
+            }
+          }
+        }
+      });
+
+
+
+      // Add the passing data
+      var pass = field.selectAll('g')
+        .data(data)
+        .enter()
+        .append('g');
+
+      // Add metadata classes for filtering
+      pass.attr('class', function (d) {
+        var team = d.field_opponent.replace(' ', '-').replace(' ', '-').toLowerCase();
+        if (d.field_week > 20) {
+          var gameweek = 'super-bowl';
+        }
+        else if (d.field_week > 17) {
+          var gameweek = 'playoffs';
+        }
+        else {
+          var gameweek = 'reg-season'
+        }
+        var classes = 'play q-' + d.field_quarter + ' ' + d.field_season + ' ' + gameweek + ' ' + team;
+        return classes;
+      });
+
+      pass.append('a')
+        .attr('onclick', function (d) {
+          return 'gifModal("' + d.field_gfycat_embed_code + '", "' + d.field_gif_title + '")';
+        })
+        .attr('class', 'gif-modal')
+        .append('line')
+        .attr("x1", function(d, i){
+          if (d.field_pass_location === "Left Sideline") {
+            return 100;
+          }
+          else if (d.field_pass_location === "Left Outside Numbers") {
+            return 300;
+          }
+          else if (d.field_pass_location === "Left Numbers") {
+            return 400;
+          }
+          else if (d.field_pass_location === "Left") {
+            return 500;
+          }
+          else if (d.field_pass_location === "Middle") {
+            return 800;
+          }
+          else if (d.field_pass_location === "Right") {
+            return 1100;
+          }
+          else if (d.field_pass_location === "Right Numbers") {
+            return 1200;
+          }
+          else if (d.field_pass_location === "Right Outside Numbers") {
+            return 1300;
+          }
+          else {
+            return 1500;
+          }
+        })
+        .attr("y1", function(d, i){
+            var yards = d.field_yards_gained - d.field_air_yards
+            return (yards * 30) + 300;
+        })
+        .attr("x2", function(d, i){
+          if (d.field_pass_thrown_from === "Left Sideline") {
+            return 400;
+          }
+          else if (d.field_pass_thrown_from === "Left Hash") {
+            return 600;
+          }
+          else if (d.field_pass_thrown_from === "Between Hashes (left)") {
+            return 725;
+          }
+          else if (d.field_pass_thrown_from === "Between Hashes") {
+            return 800;
+          }
+          else if (d.field_pass_thrown_from === "Between Hashes (right)") {
+            return 925;
+          }
+          else if (d.field_pass_thrown_from === "Right Hash") {
+            return 1000;
+          }
+          else if (d.field_pass_thrown_from === "Right Sideline") {
+            return 1200;
+          }
+        })
+        .attr("y2", function(d, i){
+          var yards = d.field_yards_gained
+          return (yards * 30 + 300);
+        })
+        .attr("stroke", function(d, i){
+          if (d.field_week == 21) {
+            return yellow;
+          }
+          else if (d.field_week > 17) {
+            return red;
+          }
+          else {
+            return blue;
+          }
+        })
+        .attr('stroke-width', '5')
+
+      // Starting circle
+      pass.append('circle')
+        .attr('cx', function(d, i){
+          if (d.field_pass_thrown_from === "Left Sideline") {
+            return 400;
+          }
+          else if (d.field_pass_thrown_from === "Left Hash") {
+            return 600;
+          }
+          else if (d.field_pass_thrown_from === "Between Hashes (left)") {
+            return 725;
+          }
+          else if (d.field_pass_thrown_from === "Between Hashes") {
+            return 800;
+          }
+          else if (d.field_pass_thrown_from === "Between Hashes (right)") {
+            return 925;
+          }
+          else if (d.field_pass_thrown_from === "Right Hash") {
+            return 1000;
+          }
+          else if (d.field_pass_thrown_from === "Right Sideline") {
+            return 1200;
+          }
+        })
+        .attr("cy", function(d, i){
+          var yards = d.field_yards_gained
+          return yards * 30 + 300;
+        })
+        .attr("r", 5)
+        .attr('fill', function(d, i){
+          return '#FFFFFF';
+        })
+      // End circle
+      pass.append("circle")
+        .attr("cx", function(d, i){
+          if (d.field_pass_location === "Left Sideline") {
+            return 100;
+          }
+          else if (d.field_pass_location === "Left Outside Numbers") {
+            return 300;
+          }
+          else if (d.field_pass_location === "Left Numbers") {
+            return 400;
+          }
+          else if (d.field_pass_location === "Left") {
+            return 500;
+          }
+          else if (d.field_pass_location === "Middle") {
+            return 800;
+          }
+          else if (d.field_pass_location === "Right") {
+            return 1100;
+          }
+          else if (d.field_pass_location === "Right Numbers") {
+            return 1200;
+          }
+          else if (d.field_pass_location === "Right Outside Numbers") {
+            return 1300;
+          }
+          else {
+            return 1500;
+          }
+        })
+        .attr("cy", function(d, i){
+            var yards = d.field_yards_gained - d.field_air_yards
+            return (yards * 30) + 300;
+        })
+        .attr("r", 5)
+        .attr('fill', function(d, i){
+          if (d.field_week == 21) {
+            return yellow;
+          }
+          else if (d.field_week > 17) {
+            return red;
+          }
+          else {
+            return blue;
+          }
+        })
+    });
+  </script>
+  <script>
+    jQuery(function($) {
+      $(document).ready(function () {
+        $('.opp_filter').change(function () {
+          if ($(this).val() != '') {
+            filterTDs($(this).val());
+          }
+        });
+      });
+    });
+  function filterTDs(c) {
+    jQuery(function($) {
+      $('g').hide();
+      $('g.'+c).show();
+    });
+  }
+  function clearFilters() {
+    jQuery(function($) {
+      $('g').show();
+    });
+  }
+
+  function gifModal(gif, title) {
+    jQuery(function ($) {
+          var modalSrc = '';
+          var url = 'https://api.gfycat.com/v1/gfycats/';
+          $.get( url+gif, function( data ) {
+            modalSrc = "<div><video controls muted autoplay preload='metadata' class='responsive-video'>" +
+              "<source src='" + data.gfyItem.mp4Url + "' type='video/mp4; codecs=' avc1.42e01e, mp4a.40.2''>" +
+              "<source src='" + data.gfyItem.webmUrl + "' type='video/webm; codecs=' vp8, vorbis''>" +
+              "</video>" +
+              "<p>" + title + "</p></div>";
+            // Create modal.
+            var imageModal = Drupal.dialog(modalSrc, {
+              resizable: false,
+              closeOnEscape: true,
+              position: { my: "left top", at: "left top+64", of: window },
+              height: 'auto',
+              width: 'auto',
+              beforeClose: false,
+              close: function (event) {
+                $(event.target).remove();
+              }
+            });
+            // Attach modal functionality to link on click.
+            imageModal.showModal();
+            $(document).find('.ui-widget-overlay').click(function () {
+              imageModal.close();
+            });
+          }).fail(function() {
+            var url = 'https://api.redgifs.com/v1/gfycats/'
+            $.get( url+gifID, function( data ) {
+              modalSrc = "<video controls muted autoplay preload='metadata' class='responsive-video'>" +
+                "<source src='" + data.gfyItem.mp4Url + "' type='video/mp4; codecs=' avc1.42e01e, mp4a.40.2''>" +
+                "<source src='" + data.gfyItem.webmUrl + "' type='video/webm; codecs=' vp8, vorbis''>" +
+                "</video>";
+              // Create modal.
+              var imageModal = Drupal.dialog(modalSrc, {
+                resizable: false,
+                closeOnEscape: true,
+                position: { my: "left top", at: "left top+64", of: window },
+                height: 'auto',
+                width: 'auto',
+                beforeClose: false,
+                close: function (event) {
+                  $(event.target).remove();
+                }
+              });
+              // Attach modal functionality to link on click.
+              imageModal.showModal();
+              $(document).find('.ui-widget-overlay').click(function () {
+                imageModal.close();
+              });
+            })
+          });
+      });
+  }
+  </script>
+{% endblock %}

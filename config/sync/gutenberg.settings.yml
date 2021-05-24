@@ -72,6 +72,9 @@ article_allowed_drupal_blocks:
   'entity_view:node': 0
   'entity_view:user': 0
   page_title_block: 0
+  'block_content:3df58732-07a1-430b-9631-493cb6e57a52': 0
+  'block_content:dfb1fb38-8180-445f-ae0a-a7ff50b637a3': 0
+  brady_total_tds: brady_total_tds
   footer_seasons_block: 0
   latest_podcast_block: 0
   on_this_day_block: 0
@@ -80,9 +83,9 @@ article_allowed_drupal_blocks:
   season_select_block: 0
   'facet_block:after_bye_we': 0
   'facet_block:game_home_away': 0
+  'facet_block:opponent': 0
   'facet_block:podcast_opponent': 0
   'facet_block:game_opponent': 0
-  'facet_block:opponent': 0
   'facet_block:game_opposing_coach': 0
   'facet_block:overtime': 0
   'facet_block:player_s_involved': 0

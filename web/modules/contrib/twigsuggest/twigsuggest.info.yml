@@ -5,7 +5,7 @@ package: "Theme"
 core: 8.x
 core_version_requirement: ^8 || ^9
 
-# Information added by Drupal.org packaging script on 2020-08-17
-version: '8.x-1.0-beta2'
+# Information added by Drupal.org packaging script on 2021-05-19
+version: '8.x-1.0-beta4'
 project: 'twigsuggest'
-datestamp: 1597689953
+datestamp: 1621454377

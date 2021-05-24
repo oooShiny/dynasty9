@@ -138,6 +138,10 @@ class MigrateCsAdminSettingsForm extends ConfigFormBase implements ContainerInje
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
     $configOptions = $this->config('migrate_cs.options');
+
+    // Remove old config to not have orphaned config in database.
+    $configOptions->delete();
+
     $migrations = $this->migratePluginManager->getDefinitions();
     if ($migrations) {
       foreach ($migrations as $migration) {

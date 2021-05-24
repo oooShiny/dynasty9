@@ -26,6 +26,19 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'games' => ''
       ]
     ],
+    'brady_viz' => [
+    ],
+    'brady_total_tds' => [
+      'variables' => [
+        'players' => '',
+        'playercount' => '',
+        'quarters' => '',
+        'q_count' => '',
+        'tdyards' => '',
+        'tdposition' => '',
+        'alltds' => ''
+      ]
+    ],
   ];
 }
 /**
