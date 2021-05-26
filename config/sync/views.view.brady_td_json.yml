@@ -6,10 +6,13 @@ dependencies:
     - field.storage.node.field_air_yards
     - field.storage.node.field_distance
     - field.storage.node.field_down
+    - field.storage.node.field_gfycat_id
+    - field.storage.node.field_muse_video_id
     - field.storage.node.field_opponent
     - field.storage.node.field_pass_length
     - field.storage.node.field_pass_location
     - field.storage.node.field_pass_thrown_from
+    - field.storage.node.field_players_involved
     - field.storage.node.field_quarter
     - field.storage.node.field_season
     - field.storage.node.field_week
@@ -920,6 +923,195 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: field
+        field_players_involved:
+          id: field_players_involved
+          table: node__field_players_involved
+          field: field_players_involved
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_gfycat_id:
+          id: field_gfycat_id
+          table: node__field_gfycat_id
+          field: field_gfycat_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_muse_video_id:
+          id: field_muse_video_id
+          table: node__field_muse_video_id
+          field: field_muse_video_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       filters:
         status:
           value: '1'
@@ -1170,10 +1362,13 @@ display:
         - 'config:field.storage.node.field_air_yards'
         - 'config:field.storage.node.field_distance'
         - 'config:field.storage.node.field_down'
+        - 'config:field.storage.node.field_gfycat_id'
+        - 'config:field.storage.node.field_muse_video_id'
         - 'config:field.storage.node.field_opponent'
         - 'config:field.storage.node.field_pass_length'
         - 'config:field.storage.node.field_pass_location'
         - 'config:field.storage.node.field_pass_thrown_from'
+        - 'config:field.storage.node.field_players_involved'
         - 'config:field.storage.node.field_quarter'
         - 'config:field.storage.node.field_season'
         - 'config:field.storage.node.field_week'
@@ -1200,7 +1395,52 @@ display:
         options:
           field_options:
             title:
-              alias: ''
+              alias: title
+              raw_output: false
+            field_air_yards:
+              alias: air_yards
+              raw_output: false
+            field_distance:
+              alias: distance
+              raw_output: false
+            field_down:
+              alias: down
+              raw_output: false
+            field_opponent:
+              alias: opponent
+              raw_output: false
+            field_pass_length:
+              alias: pass_length
+              raw_output: false
+            field_pass_location:
+              alias: pass_location
+              raw_output: false
+            field_pass_thrown_from:
+              alias: pass_thrown_from
+              raw_output: false
+            field_quarter:
+              alias: quarter
+              raw_output: false
+            field_season:
+              alias: season
+              raw_output: false
+            field_week:
+              alias: week
+              raw_output: false
+            field_yards_gained:
+              alias: yards_gained
+              raw_output: false
+            nid:
+              alias: id
+              raw_output: false
+            field_players_involved:
+              alias: players_involved
+              raw_output: false
+            field_gfycat_id:
+              alias: gfycat_id
+              raw_output: false
+            field_muse_video_id:
+              alias: muse_id
               raw_output: false
       pager:
         type: none
@@ -1219,10 +1459,13 @@ display:
         - 'config:field.storage.node.field_air_yards'
         - 'config:field.storage.node.field_distance'
         - 'config:field.storage.node.field_down'
+        - 'config:field.storage.node.field_gfycat_id'
+        - 'config:field.storage.node.field_muse_video_id'
         - 'config:field.storage.node.field_opponent'
         - 'config:field.storage.node.field_pass_length'
         - 'config:field.storage.node.field_pass_location'
         - 'config:field.storage.node.field_pass_thrown_from'
+        - 'config:field.storage.node.field_players_involved'
         - 'config:field.storage.node.field_quarter'
         - 'config:field.storage.node.field_season'
         - 'config:field.storage.node.field_week'
