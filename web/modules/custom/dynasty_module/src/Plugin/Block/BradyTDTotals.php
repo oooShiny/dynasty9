@@ -3,7 +3,10 @@
 namespace Drupal\dynasty_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
+use Drupal\views\Views;
+
 /**
  * Provides a 'Hello' Block.
  *
@@ -19,11 +22,12 @@ class BradyTdTotals extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    // Get the default info.
     $player_tds = [];
     $all_tds = [];
     $players = $this->get_players();
     $teams = $this->get_teams();
-    // Get all Gif paragraphs tagged with Brady + Pass + TD.
+    // Get all Highlight nodes tagged with Brady + Pass + TD.
     $nids = \Drupal::entityQuery('node')
       ->condition('type', 'highlight')
       ->condition('field_players_involved', '272')
@@ -31,8 +35,11 @@ class BradyTdTotals extends BlockBase {
       ->condition('field_play_type', '54')
       ->sort('field_season' , 'DESC')
       ->execute();
-    $node_stirage = \Drupal::entityTypeManager()->getStorage('node');
-    $gif_nodes = $node_stirage->loadMultiple($nids);
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $gif_nodes = $node_storage->loadMultiple($nids);
+
+    $config = $this->getConfiguration();
+
     // TDs sorted by player.
     foreach ($gif_nodes as $gif) {
       $players_involved = $gif->get('field_players_involved')->getValue();
@@ -154,6 +161,7 @@ class BradyTdTotals extends BlockBase {
 
     return [
       '#theme' => 'brady_total_tds',
+      '#td_type' => $config,
       '#players' => $player_tds,
       '#playercount' => $metadata,
       '#quarters' => $quarter_tds,
@@ -162,6 +170,39 @@ class BradyTdTotals extends BlockBase {
       '#tdposition' => $position_tds,
       '#alltds' => $ordered_games
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+
+    $form = parent::blockForm($form, $form_state);
+    $config = $this->getConfiguration();
+
+    $form['tb_block_type'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Brady TD Block Type'),
+      '#default_value' => isset($config['tb_block_type']) ? $config['tb_block_type'] : '',
+      '#options' => [
+        'by_wr' => 'TDs by WR',
+        'by_quarter' => 'TDs by Quarter',
+        'by_dist' => 'TDs by Distance',
+        'by_pos' => 'TDs by Position',
+        'by_season' => 'TDs by Season',
+      ],
+    ];
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    parent::blockSubmit($form, $form_state);
+    $values = $form_state->getValues();
+    $this->configuration['tb_block_type'] = $values['tb_block_type'];
   }
 
   /**

@@ -30,6 +30,7 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
     ],
     'brady_total_tds' => [
       'variables' => [
+        'td_type' => '',
         'players' => '',
         'playercount' => '',
         'quarters' => '',
