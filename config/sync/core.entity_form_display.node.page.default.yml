@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_content_rows
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_yoast_seo
     - node.type.page
   module:
+    - layout_paragraphs
     - metatag
     - path
     - text
@@ -35,6 +37,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_content_rows:
+    type: layout_paragraphs
+    weight: 123
+    settings:
+      preview_view_mode: default
+      nesting_depth: 0
+      require_layouts: 0
+    third_party_settings: {  }
+    region: content
   field_meta_tags:
     weight: 121
     settings:
@@ -100,5 +111,10 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

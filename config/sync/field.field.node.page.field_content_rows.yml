@@ -1,0 +1,52 @@
+uuid: 2e4c8f51-ebe0-4574-8387-23284ca10970
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_rows
+    - node.type.page
+    - paragraphs.paragraphs_type.block
+    - paragraphs.paragraphs_type.media
+    - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.text
+  module:
+    - entity_reference_revisions
+id: node.page.field_content_rows
+field_name: field_content_rows
+entity_type: node
+bundle: page
+label: 'Content Rows'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      section: section
+      block: block
+      text: text
+      media: media
+    target_bundles_drag_drop:
+      block:
+        enabled: true
+        weight: 7
+      highlight:
+        weight: 4
+        enabled: false
+      media:
+        enabled: true
+        weight: 9
+      section:
+        enabled: true
+        weight: 5
+      team_record:
+        weight: 6
+        enabled: false
+      text:
+        enabled: true
+        weight: 8
+field_type: entity_reference_revisions

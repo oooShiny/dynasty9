@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
+    - field.field.node.page.field_content_rows
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_yoast_seo
     - node.type.page
@@ -30,6 +31,7 @@ content:
     weight: 101
     region: content
 hidden:
+  field_content_rows: true
   field_meta_tags: true
   field_yoast_seo: true
   langcode: true

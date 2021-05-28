@@ -3,6 +3,10 @@ overrides:
     theme:
       css/overrides.css: {}
       css/team-colors.css: {}
+basic_page:
+  css:
+    theme:
+      css/basic-page.css: {}
 gutenberg_overrides:
   css:
     theme:
