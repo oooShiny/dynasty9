@@ -23,6 +23,7 @@ class BradyTdTotals extends BlockBase {
     $all_tds = [];
     $players = $this->get_players();
     $teams = $this->get_teams();
+    $weeks = $this->get_weeks();
     // Get all Gif paragraphs tagged with Brady + Pass + TD.
     $nids = \Drupal::entityQuery('node')
       ->condition('type', 'highlight')
@@ -41,25 +42,7 @@ class BradyTdTotals extends BlockBase {
         $receiver = array_pop($players_involved);
         $name = $players[$receiver['target_id']]['name'];
         $position = $players[$receiver['target_id']]['position'];
-        if ($gif->get('field_week')->value < 18) {
-          $week = 'Week ' . $gif->get('field_week')->value;
-        }
-        else {
-          switch ($gif->get('field_week')->value) {
-            case 18:
-              $week = 'Wildcard';
-              break;
-            case 19:
-              $week = 'AFC Divisional Round';
-              break;
-            case 20:
-              $week = 'AFC Conference Championship';
-              break;
-            case 21:
-              $week = 'Super Bowl';
-              break;
-          }
-        }
+        $week = $weeks[$gif->get('field_week')->target_id];
         $player_tds[$name][] = [
           'title' => $gif->label(),
           'link' => 'https://gfycat.com/' . $gif->get('field_gfycat_id')->value,
@@ -203,4 +186,12 @@ class BradyTdTotals extends BlockBase {
     return $positions;
   }
 
+  function get_weeks() {
+    $weeks = [];
+    $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('week');
+    foreach ($terms as $term) {
+      $weeks[$term->tid] = $term->name;
+    }
+    return $weeks;
+  }
 }
