@@ -45,6 +45,7 @@ settings:
           name: 'Block Formatting'
           items:
             - Format
+            - Styles
         -
           name: Tools
           items:
@@ -52,12 +53,17 @@ settings:
             - Source
   plugins:
     stylescombo:
-      styles: ''
+      styles: 'h2.tw-bg-blue-pats.tw-font-light.tw-py-3.tw-text-2xl.tw-text-center.tw-text-white|Header Block (blue)'
+    drupallink:
+      linkit_enabled: false
+      linkit_profile: ''
+    language:
+      language_list: un
 image_upload:
   status: true
   scheme: public
   directory: inline-images
   max_size: ''
   max_dimensions:
-    width: 0
-    height: 0
+    width: null
+    height: null
