@@ -1,0 +1,6 @@
+name: AFC East Module
+description: Blocks and functionality related to the AFC East content.
+package: Dynasty
+
+type: module
+core_version_requirement: ^8.8.0 || ^9.0
