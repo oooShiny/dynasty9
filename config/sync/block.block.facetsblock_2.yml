@@ -26,6 +26,7 @@ settings:
     'facet_block:game_season': 'facet_block:game_season'
     'facet_block:after_bye_we': 'facet_block:after_bye_we'
     'facet_block:game_home_away': 'facet_block:game_home_away'
+    'facet_block:game_week': 'facet_block:game_week'
     'facet_block:overtime': 'facet_block:overtime'
     'facet_block:playoff': 'facet_block:playoff'
     'facet_block:player_s_involved': '0'

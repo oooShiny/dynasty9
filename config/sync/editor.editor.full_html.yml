@@ -53,7 +53,7 @@ settings:
             - Source
   plugins:
     stylescombo:
-      styles: 'h2.tw-bg-blue-pats.tw-font-light.tw-py-3.tw-text-2xl.tw-text-center.tw-text-white|Header Block (blue)'
+      styles: 'h2.tw-bg-blue-pats.tw-font-light.tw-py-3.tw-my-3.tw-text-2xl.tw-text-center.tw-text-white|Header Block (blue)'
     drupallink:
       linkit_enabled: false
       linkit_profile: ''

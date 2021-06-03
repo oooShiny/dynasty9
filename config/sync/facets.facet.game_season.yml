@@ -10,7 +10,7 @@ dependencies:
 id: game_season
 name: Season
 url_alias: game_season
-weight: -1
+weight: -2
 min_count: 1
 show_only_one_result: false
 field_identifier: season_int
@@ -24,6 +24,7 @@ widget:
     match_operator: CONTAINS
 query_operator: or
 use_hierarchy: false
+keep_hierarchy_parents_active: false
 expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 0

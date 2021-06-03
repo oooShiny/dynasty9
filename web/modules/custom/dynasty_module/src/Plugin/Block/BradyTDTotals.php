@@ -4,6 +4,8 @@ namespace Drupal\dynasty_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\node\Entity\Node;
+use Drupal\dynasty_module\DynastyHelpers;
+
 /**
  * Provides a 'Hello' Block.
  *
@@ -22,7 +24,7 @@ class BradyTdTotals extends BlockBase {
     $player_tds = [];
     $all_tds = [];
     $players = $this->get_players();
-    $teams = $this->get_teams();
+    $teams = DynastyHelpers::get_teams();
     $weeks = $this->get_weeks();
     // Get all Gif paragraphs tagged with Brady + Pass + TD.
     $nids = \Drupal::entityQuery('node')
@@ -147,51 +149,5 @@ class BradyTdTotals extends BlockBase {
     ];
   }
 
-  /**
-   * Helper to get array of players.
-   */
-  function get_players() {
-    $players = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','player')->execute();
-    $nodes =  Node::loadMultiple($nids);
-    $positions = $this->get_positions();
-    foreach ($nodes as $player) {
-      $pos = $player->get('field_player_position')->target_id;
-      $players[$player->id()] = [
-        'name' => $player->getTitle(),
-        'position' => $positions[$pos],
-      ];
-    }
-    return $players;
-  }
 
-  function get_teams() {
-    $teams = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
-    $nodes =  Node::loadMultiple($nids);
-
-    foreach ($nodes as $team) {
-      $title = explode(' ', $team->getTitle());
-      $teams[$team->id()] = array_pop($title);
-    }
-    return $teams;
-  }
-
-  function get_positions() {
-    $positions = [];
-    $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('position');
-    foreach ($terms as $term) {
-      $positions[$term->tid] = $term->name;
-    }
-    return $positions;
-  }
-
-  function get_weeks() {
-    $weeks = [];
-    $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('week');
-    foreach ($terms as $term) {
-      $weeks[$term->tid] = $term->name;
-    }
-    return $weeks;
-  }
 }

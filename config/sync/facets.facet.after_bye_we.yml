@@ -10,7 +10,7 @@ dependencies:
 id: after_bye_we
 name: 'After Bye'
 url_alias: after_bye_we
-weight: 0
+weight: -1
 min_count: 1
 show_only_one_result: false
 field_identifier: bye
@@ -28,6 +28,7 @@ widget:
     hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
+keep_hierarchy_parents_active: false
 expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 0
