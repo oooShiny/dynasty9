@@ -23,9 +23,9 @@ class BradyTdTotals extends BlockBase {
   public function build() {
     $player_tds = [];
     $all_tds = [];
-    $players = $this->get_players();
+    $players = DynastyHelpers::get_players();
     $teams = DynastyHelpers::get_teams();
-    $weeks = $this->get_weeks();
+    $weeks = DynastyHelpers::get_weeks();
     // Get all Gif paragraphs tagged with Brady + Pass + TD.
     $nids = \Drupal::entityQuery('node')
       ->condition('type', 'highlight')
