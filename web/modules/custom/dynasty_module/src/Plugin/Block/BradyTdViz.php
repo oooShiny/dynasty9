@@ -2,6 +2,7 @@
 
 namespace Drupal\dynasty_module\Plugin\Block;
 
+use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 /**
  * Provides a Block that displays games from this date in history.
@@ -9,7 +10,7 @@ use Drupal\Core\Block\BlockBase;
  * @Block(
  *   id = "brady_td_viz",
  *   admin_label = @Translation("Brady TD Visualization"),
- *   category = @Translation("Custom"),
+ *   category = @Translation("Dynasty"),
  * )
  */
 class BradyTdViz extends BlockBase {
@@ -19,7 +20,7 @@ class BradyTdViz extends BlockBase {
    */
   public function build() {
       return [
-        '#theme' => 'brady_viz',
+        '#theme' => 'brady_td_viz',
       ];
     }
   }

@@ -6,9 +6,9 @@
         <div class="card-content">
           <span class="card-title black-text">Legend</span>
           <ul>
-            <li><span class="blue-text">Blue:</span> Regular Season</li>
-            <li><span class="red-text">Red:</span> Playoffs</li>
-            <li><span class="yellow-text text-darken-4">Gold:</span> Super Bowl</li>
+            <li><span class="tw-text-blue-pats">---</span> Regular Season</li>
+            <li><span class="tw-text-red-pats">---</span> Playoffs</li>
+            <li><span class="tw-text-yellow-400">---</span> Super Bowl</li>
           </ul>
         </div>
       </div>
@@ -17,10 +17,10 @@
         <h2>Filter Passes</h2>
 
           <div class="row">
-              <a onclick="filterTDs('q-1')" class="btn blue darken-4 white-text">1Q</a>
-              <a onclick="filterTDs('q-2')" class="btn blue darken-4 white-text">2Q</a>
-              <a onclick="filterTDs('q-3')" class="btn blue darken-4 white-text">3Q</a>
-              <a onclick="filterTDs('q-4')" class="btn blue darken-4 white-text">4Q</a>
+              <a onclick="filterTDs('q-1st')" class="btn blue darken-4 white-text">1Q</a>
+              <a onclick="filterTDs('q-2nd')" class="btn blue darken-4 white-text">2Q</a>
+              <a onclick="filterTDs('q-3rd')" class="btn blue darken-4 white-text">3Q</a>
+              <a onclick="filterTDs('q-4th')" class="btn blue darken-4 white-text">4Q</a>
           </div>
 
           <div class="row">
@@ -31,7 +31,7 @@
 
           <div class="row">
             <div class="col">
-              <select class="opp_filter">
+              <select id="opp_filter">
               <option value="play">-- Select a Team --</option>
               <option value='san-fransisco-49ers'>49ers</option>
               <option value='chicago-bears'>Bears</option>
@@ -68,12 +68,13 @@
             </div>
             <div class="col">
               <a onclick="clearFilters()" class=" btn red darken-4 white-text">Reset</a>
-            </div>`
+            </div>
           </div>
 
     </div>
   </div>
-{% block content %}
+
+  {{ attach_library('dynasty_module/brady_td_viz') }}
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <div id="field" ></div>
   <script>
@@ -83,7 +84,7 @@
     var heightpx = 1600;
     var yellow = 'yellow';
     var blue = '#002244';
-    var red = 'red';
+    var red = '#c60c30';
     var data = d3.json('/brady-td-json', function(error, data) {
       // Create SVG element field
       var field = d3.select("div#field")
@@ -182,49 +183,49 @@
 
       // Add metadata classes for filtering
       pass.attr('class', function (d) {
-        var team = d.field_opponent.replace(' ', '-').replace(' ', '-').toLowerCase();
-        if (d.field_week > 20) {
+        var team = d.opponent.replace(' ', '-').replace(' ', '-').toLowerCase();
+        if (d.week === 'Super Bowl') {
           var gameweek = 'super-bowl';
         }
-        else if (d.field_week > 17) {
+        else if (d.week.includes('AFC')) {
           var gameweek = 'playoffs';
         }
         else {
           var gameweek = 'reg-season'
         }
-        var classes = 'play q-' + d.field_quarter + ' ' + d.field_season + ' ' + gameweek + ' ' + team;
+        var classes = 'play q-' + d.quarter + ' ' + d.season + ' ' + gameweek + ' ' + team;
         return classes;
       });
 
       pass.append('a')
         .attr('onclick', function (d) {
-          return 'gifModal("' + d.field_gfycat_embed_code + '", "' + d.field_gif_title + '")';
+          return 'gifModal("' + d.gfycat_id + '", "' + d.title + '")';
         })
         .attr('class', 'gif-modal')
         .append('line')
         .attr("x1", function(d, i){
-          if (d.field_pass_location === "Left Sideline") {
+          if (d.pass_location === "Left Sideline") {
             return 100;
           }
-          else if (d.field_pass_location === "Left Outside Numbers") {
+          else if (d.pass_location === "Left Outside Numbers") {
             return 300;
           }
-          else if (d.field_pass_location === "Left Numbers") {
+          else if (d.pass_location === "Left Numbers") {
             return 400;
           }
-          else if (d.field_pass_location === "Left") {
+          else if (d.pass_location === "Left") {
             return 500;
           }
-          else if (d.field_pass_location === "Middle") {
+          else if (d.pass_location === "Middle") {
             return 800;
           }
-          else if (d.field_pass_location === "Right") {
+          else if (d.pass_location === "Right") {
             return 1100;
           }
-          else if (d.field_pass_location === "Right Numbers") {
+          else if (d.pass_location === "Right Numbers") {
             return 1200;
           }
-          else if (d.field_pass_location === "Right Outside Numbers") {
+          else if (d.pass_location === "Right Outside Numbers") {
             return 1300;
           }
           else {
@@ -232,41 +233,41 @@
           }
         })
         .attr("y1", function(d, i){
-            var yards = d.field_yards_gained - d.field_air_yards
+            var yards = d.yards_gained - d.air_yards
             return (yards * 30) + 300;
         })
         .attr("x2", function(d, i){
-          if (d.field_pass_thrown_from === "Left Sideline") {
+          if (d.pass_thrown_from === "Left Sideline") {
             return 400;
           }
-          else if (d.field_pass_thrown_from === "Left Hash") {
+          else if (d.pass_thrown_from === "Left Hash") {
             return 600;
           }
-          else if (d.field_pass_thrown_from === "Between Hashes (left)") {
+          else if (d.pass_thrown_from === "Between Hashes (left)") {
             return 725;
           }
-          else if (d.field_pass_thrown_from === "Between Hashes") {
+          else if (d.pass_thrown_from === "Between Hashes") {
             return 800;
           }
-          else if (d.field_pass_thrown_from === "Between Hashes (right)") {
+          else if (d.pass_thrown_from === "Between Hashes (right)") {
             return 925;
           }
-          else if (d.field_pass_thrown_from === "Right Hash") {
+          else if (d.pass_thrown_from === "Right Hash") {
             return 1000;
           }
-          else if (d.field_pass_thrown_from === "Right Sideline") {
+          else if (d.pass_thrown_from === "Right Sideline") {
             return 1200;
           }
         })
         .attr("y2", function(d, i){
-          var yards = d.field_yards_gained
+          var yards = d.yards_gained
           return (yards * 30 + 300);
         })
         .attr("stroke", function(d, i){
-          if (d.field_week == 21) {
+          if (d.week === 'Super Bowl') {
             return yellow;
           }
-          else if (d.field_week > 17) {
+          else if (d.week.includes('AFC')) {
             return red;
           }
           else {
@@ -278,30 +279,30 @@
       // Starting circle
       pass.append('circle')
         .attr('cx', function(d, i){
-          if (d.field_pass_thrown_from === "Left Sideline") {
+          if (d.pass_thrown_from === "Left Sideline") {
             return 400;
           }
-          else if (d.field_pass_thrown_from === "Left Hash") {
+          else if (d.pass_thrown_from === "Left Hash") {
             return 600;
           }
-          else if (d.field_pass_thrown_from === "Between Hashes (left)") {
+          else if (d.pass_thrown_from === "Between Hashes (left)") {
             return 725;
           }
-          else if (d.field_pass_thrown_from === "Between Hashes") {
+          else if (d.pass_thrown_from === "Between Hashes") {
             return 800;
           }
-          else if (d.field_pass_thrown_from === "Between Hashes (right)") {
+          else if (d.pass_thrown_from === "Between Hashes (right)") {
             return 925;
           }
-          else if (d.field_pass_thrown_from === "Right Hash") {
+          else if (d.pass_thrown_from === "Right Hash") {
             return 1000;
           }
-          else if (d.field_pass_thrown_from === "Right Sideline") {
+          else if (d.pass_thrown_from === "Right Sideline") {
             return 1200;
           }
         })
         .attr("cy", function(d, i){
-          var yards = d.field_yards_gained
+          var yards = d.yards_gained
           return yards * 30 + 300;
         })
         .attr("r", 5)
@@ -311,28 +312,28 @@
       // End circle
       pass.append("circle")
         .attr("cx", function(d, i){
-          if (d.field_pass_location === "Left Sideline") {
+          if (d.pass_location === "Left Sideline") {
             return 100;
           }
-          else if (d.field_pass_location === "Left Outside Numbers") {
+          else if (d.pass_location === "Left Outside Numbers") {
             return 300;
           }
-          else if (d.field_pass_location === "Left Numbers") {
+          else if (d.pass_location === "Left Numbers") {
             return 400;
           }
-          else if (d.field_pass_location === "Left") {
+          else if (d.pass_location === "Left") {
             return 500;
           }
-          else if (d.field_pass_location === "Middle") {
+          else if (d.pass_location === "Middle") {
             return 800;
           }
-          else if (d.field_pass_location === "Right") {
+          else if (d.pass_location === "Right") {
             return 1100;
           }
-          else if (d.field_pass_location === "Right Numbers") {
+          else if (d.pass_location === "Right Numbers") {
             return 1200;
           }
-          else if (d.field_pass_location === "Right Outside Numbers") {
+          else if (d.pass_location === "Right Outside Numbers") {
             return 1300;
           }
           else {
@@ -340,15 +341,15 @@
           }
         })
         .attr("cy", function(d, i){
-            var yards = d.field_yards_gained - d.field_air_yards
+            var yards = d.yards_gained - d.air_yards
             return (yards * 30) + 300;
         })
         .attr("r", 5)
         .attr('fill', function(d, i){
-          if (d.field_week == 21) {
+          if (d.week === 'Super Bowl') {
             return yellow;
           }
-          else if (d.field_week > 17) {
+          else if (d.week.includes('AFC')) {
             return red;
           }
           else {
@@ -358,15 +359,10 @@
     });
   </script>
   <script>
-    jQuery(function($) {
-      $(document).ready(function () {
-        $('.opp_filter').change(function () {
-          if ($(this).val() != '') {
-            filterTDs($(this).val());
-          }
-        });
-      });
+    document.getElementById('opp_filter').addEventListener('change', function() {
+      filterTDs(this.value);
     });
+
   function filterTDs(c) {
     jQuery(function($) {
       $('g').hide();
@@ -435,5 +431,4 @@
       });
   }
   </script>
-{% endblock %}
 </div>

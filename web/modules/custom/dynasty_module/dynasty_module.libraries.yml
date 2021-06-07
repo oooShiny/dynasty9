@@ -1,0 +1,7 @@
+brady_td_viz:
+  css:
+    theme:
+      css/td-viz.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.dialog

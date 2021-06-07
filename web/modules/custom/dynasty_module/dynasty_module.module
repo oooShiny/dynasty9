@@ -26,7 +26,8 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'games' => ''
       ]
     ],
-    'brady_viz' => [
+    'brady_td_viz' => [
+      'variables' => []
     ],
     'brady_total_tds' => [
       'variables' => [
