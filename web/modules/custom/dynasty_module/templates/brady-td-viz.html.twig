@@ -1,77 +1,66 @@
 <div id="viz">
-  <h2>Visualizing Every Tom Brady TD</h2>
-  <div class="row">
-    <div class="col s4 m2">
-      <div class="card ">
-        <div class="card-content">
-          <span class="card-title black-text">Legend</span>
-          <ul>
-            <li><span class="tw-text-blue-pats">---</span> Regular Season</li>
-            <li><span class="tw-text-red-pats">---</span> Playoffs</li>
-            <li><span class="tw-text-yellow-400">---</span> Super Bowl</li>
-          </ul>
+
+    <div class="tw-flex tw-justify-evenly tw-my-4">
+
+        <div class="tw-my-1">
+          <h3 class="tw-uppercase tw-font-light tw-text-xl">Quarter</h3>
+          <button onclick="filterTDs('q-1st')" class="tw-p-4 tw-bg-white hover:tw-bg-red-200 tw-text-red-pats tw-text-center">1Q</button>
+          <button onclick="filterTDs('q-2nd')" class="tw-p-4 tw-bg-white hover:tw-bg-red-200 tw-text-red-pats tw-text-center">2Q</button>
+          <button onclick="filterTDs('q-3rd')" class="tw-p-4 tw-bg-white hover:tw-bg-red-200 tw-text-red-pats tw-text-center">3Q</button>
+          <button onclick="filterTDs('q-4th')" class="tw-p-4 tw-bg-white hover:tw-bg-red-200 tw-text-red-pats tw-text-center">4Q</button>
+          <button onclick="filterTDs('q-OT')" class="tw-p-4 tw-bg-white hover:tw-bg-red-200 tw-text-red-pats tw-text-center">OT</button>
         </div>
-      </div>
-    </div>
-    <div class="col s8 m10">
-        <h2>Filter Passes</h2>
 
-          <div class="row">
-              <a onclick="filterTDs('q-1st')" class="btn blue darken-4 white-text">1Q</a>
-              <a onclick="filterTDs('q-2nd')" class="btn blue darken-4 white-text">2Q</a>
-              <a onclick="filterTDs('q-3rd')" class="btn blue darken-4 white-text">3Q</a>
-              <a onclick="filterTDs('q-4th')" class="btn blue darken-4 white-text">4Q</a>
-          </div>
+        <div class="tw-my-1">
+          <h3 class="tw-uppercase tw-font-light tw-text-xl">Reg/Post Season</h3>
+          <button onclick="filterTDs('reg-season')" class="tw-p-4 tw-bg-blue-pats hover:tw-bg-blue-800 tw-text-white tw-text-center">Reg Season</button>
+          <button onclick="filterTDs('playoffs')" class="tw-p-4 tw-bg-red-pats hover:tw-bg-red-800 tw-text-white tw-text-center">Playoffs</button>
+          <button onclick="filterTDs('super-bowl')" class="tw-p-4 tw-bg-yellow-500 hover:tw-bg-yellow-200 tw-text-black tw-text-center">Super Bowl</button>
+        </div>
 
-          <div class="row">
-            <a onclick="filterTDs('reg-season')" class="btn blue darken-4 white-text">Reg Season</a>
-            <a onclick="filterTDs('playoffs')" class="btn blue darken-4 white-text">Playoffs</a>
-            <a onclick="filterTDs('super-bowl')" class="btn blue darken-4 white-text">Super Bowl</a>
-          </div>
+        <div class="tw-my-1">
+          <h3 class="tw-uppercase tw-font-light tw-text-xl">Opponent</h3>
+            <select id="opp_filter">
+            <option value="play">-- Select a Team --</option>
+            <option value='san-fransisco-49ers'>49ers</option>
+            <option value='chicago-bears'>Bears</option>
+            <option value='cincinnati-bengals'>Bengals</option>
+            <option value='buffalo-bills'>Bills</option>
+            <option value='denver-broncos'>Broncos</option>
+            <option value='cleveland-browns'>Browns</option>
+            <option value='tampa-bay-buccaneers'>Buccaneers</option>
+            <option value='arizona-cardinals'>Cardinals</option>
+            <option value='los-angeles-chargers'>Chargers</option>
+            <option value='kansas-city-chiefs'>Chiefs</option>
+            <option value='indianapolis-colts'>Colts</option>
+            <option value='dallas-cowboys'>Cowboys</option>
+            <option value='miami-dolphins'>Dolphins</option>
+            <option value='philadelphia-eagles'>Eagles</option>
+            <option value='atlanta-falcons'>Falcons</option>
+            <option value='new-york-giants'>Giants</option>
+            <option value='jacksonville-jaguars'>Jaguars</option>
+            <option value='new-york-jets'>Jets</option>
+            <option value='detroit-lions'>Lions</option>
+            <option value='green-bay-packers'>Packers</option>
+            <option value='carolina-panthers'>Panthers</option>
+            <option value='oakland-raiders'>Raiders</option>
+            <option value='los-angeles-rams'>Rams</option>
+            <option value='baltimore-ravens'>Ravens</option>
+            <option value='washington-redskins'>Redskins</option>
+            <option value='new-orleans-saints'>Saints</option>
+            <option value='seattle-seahawks'>Seahawks</option>
+            <option value='pittsburgh-steelers'>Steelers</option>
+            <option value='houston-texans'>Texans</option>
+            <option value='tennessee-titans'>Titans</option>
+            <option value='minnesota-vikings'>Vikings</option>
+          </select>
+        </div>
 
-          <div class="row">
-            <div class="col">
-              <select id="opp_filter">
-              <option value="play">-- Select a Team --</option>
-              <option value='san-fransisco-49ers'>49ers</option>
-              <option value='chicago-bears'>Bears</option>
-              <option value='cincinnati-bengals'>Bengals</option>
-              <option value='buffalo-bills'>Bills</option>
-              <option value='denver-broncos'>Broncos</option>
-              <option value='cleveland-browns'>Browns</option>
-              <option value='tampa-bay-buccaneers'>Buccaneers</option>
-              <option value='arizona-cardinals'>Cardinals</option>
-              <option value='los-angeles-chargers'>Chargers</option>
-              <option value='kansas-city-chiefs'>Chiefs</option>
-              <option value='indianapolis-colts'>Colts</option>
-              <option value='dallas-cowboys'>Cowboys</option>
-              <option value='miami-dolphins'>Dolphins</option>
-              <option value='philadelphia-eagles'>Eagles</option>
-              <option value='atlanta-falcons'>Falcons</option>
-              <option value='new-york-giants'>Giants</option>
-              <option value='jacksonville-jaguars'>Jaguars</option>
-              <option value='new-york-jets'>Jets</option>
-              <option value='detroit-lions'>Lions</option>
-              <option value='green-bay-packers'>Packers</option>
-              <option value='carolina-panthers'>Panthers</option>
-              <option value='oakland-raiders'>Raiders</option>
-              <option value='los-angeles-rams'>Rams</option>
-              <option value='baltimore-ravens'>Ravens</option>
-              <option value='washington-redskins'>Redskins</option>
-              <option value='new-orleans-saints'>Saints</option>
-              <option value='seattle-seahawks'>Seahawks</option>
-              <option value='pittsburgh-steelers'>Steelers</option>
-              <option value='houston-texans'>Texans</option>
-              <option value='tennessee-titans'>Titans</option>
-              <option value='minnesota-vikings'>Vikings</option>
-            </select>
-            </div>
-            <div class="col">
-              <a onclick="clearFilters()" class=" btn red darken-4 white-text">Reset</a>
-            </div>
-          </div>
+        <div class="tw-my-1">
+            <button onclick="clearFilters()" class=" tw-p-4 tw-bg-red-pats hover:tw-bg-red-800 tw-text-white tw-text-center">Reset Filters</button>
+        </div>
 
-    </div>
+
   </div>
 
   {{ attach_library('dynasty_module/brady_td_viz') }}
