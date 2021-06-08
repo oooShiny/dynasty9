@@ -4,31 +4,37 @@
   {% set cover_img = 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
 {% endif %}
 
-<div class="tw-mb-5 tw-flex tw-m-auto tw-pt-10">
-  <div class="tw-w-40 tw-h-40 tw-mr-5 tw-justify-center tw-items-center tw-flex"
-       style="background-image: url('{{ cover_img }}');
-         background-size: contain;
-         background-repeat: no-repeat;
-         background-position: center;">
-    {{ attach_library('dynasty/podcast') }}
-    <audio id="pod-{{ episode.mp3 }}" src="{{ episode.mp3_url }}"></audio>
-    <div id="back-pod-{{ episode.mp3 }}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
-      <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ episode.mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
+<div class="tw-bg-blue-pats tw-text-white tw-px-8 tw-py-16">
+  <div class="tw-max-w-5xl tw-mx-auto">
+    <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light">Latest Podcast Episode</h2>
+    <div class="tw-float-left">
+      <div class="tw-w-40 tw-h-40 tw-mr-5 tw-justify-center tw-items-center tw-flex"
+           style="background-image: url('{{ cover_img }}');
+             background-size: contain;
+             background-repeat: no-repeat;
+             background-position: center;">
+        {{ attach_library('dynasty/podcast') }}
+        <audio id="pod-{{ episode.mp3 }}" src="{{ episode.mp3_url }}"></audio>
+        <div id="back-pod-{{ episode.mp3 }}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
+          <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ episode.mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
+        </div>
+        <div class="tw-text-white tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
+          <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ episode.mp3 }}')" id="playpod-{{ episode.mp3 }}" class="tw-w-5 tw-h-5" style="cursor: pointer" />
+        </div>
+        <div id="fwd-pod-{{ episode.mp3 }}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
+          <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ episode.mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
+        </div>
+      </div>
     </div>
-    <div class="tw-text-white tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
-      <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ episode.mp3 }}')" id="playpod-{{ episode.mp3 }}" class="tw-w-5 tw-h-5" style="cursor: pointer" />
+
+    <div>
+        <h2 class="tw-uppercase tw-font-light tw-text-2xl">
+          {{ episode.title }} ({{ episode.duration }})
+        </h2>
+        {% if episode.subtitle is not empty %}
+          <h3 class="tw-font-light tw-text-xl">{{ episode.subtitle }}</h3>
+        {% endif %}
+      <div class="tw-text-l">{{ episode.description|raw }}</div>
     </div>
-    <div id="fwd-pod-{{ episode.mp3 }}" class="tw-text-white tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg tw-hidden">
-      <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ episode.mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
-    </div>
-  </div>
-  <div class="tw-w-2/3">
-    <h2 class="tw-uppercase tw-font-light tw-text-2xl">
-      {{ episode.title }} ({{ episode.duration }})
-    </h2>
-    {% if episode.subtitle is not empty %}
-      <h3 class="tw-font-light tw-text-xl">{{ episode.subtitle }}</h3>
-    {% endif %}
   </div>
 </div>
-<div class="tw-text-l">{{ episode.description|raw }}</div>
