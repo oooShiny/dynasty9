@@ -8,11 +8,20 @@ dynasty.maphighlights:
   options:
     _admin_route: TRUE
 dynasty.videoimport:
-  path: '/admin/gfycat/import'
+  path: '/admin/dynasty/muse/import'
   defaults:
     _form: '\Drupal\dynasty_module\Form\GfycatMuseImportForm'
     _title: 'Import Gfycat Videos from Muse.ai'
   requirements:
     _permission: 'add muse videos'
+  options:
+    _admin_route: TRUE
+dynsty.podcastdownload:
+  path: '/admin/dynasty/podcast/analytics'
+  defaults:
+    _form: '\Drupal\dynasty_module\Form\ImportPodcastAnalytics'
+    _title: 'Upload Podcast Analytics'
+  requirements:
+    _permission: 'access administration pages'
   options:
     _admin_route: TRUE

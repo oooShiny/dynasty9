@@ -1,0 +1,23 @@
+uuid: 793fcfb8-1d35-41ae-9921-8ca04981255f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_month
+    - paragraphs.paragraphs_type.podcast_download
+id: paragraph.podcast_download.field_month
+field_name: field_month
+entity_type: paragraph
+bundle: podcast_download
+label: Month
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

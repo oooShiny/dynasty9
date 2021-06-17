@@ -1,0 +1,23 @@
+uuid: df2d39b2-3691-4c38-8a3c-46a30a9029b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_downloads
+    - paragraphs.paragraphs_type.podcast_download
+id: paragraph.podcast_download.field_downloads
+field_name: field_downloads
+entity_type: paragraph
+bundle: podcast_download
+label: Downloads
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

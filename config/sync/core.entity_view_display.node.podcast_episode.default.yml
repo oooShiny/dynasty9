@@ -9,14 +9,17 @@ dependencies:
     - field.field.node.podcast_episode.field_episode_cover_image
     - field.field.node.podcast_episode.field_game
     - field.field.node.podcast_episode.field_meta_tags
+    - field.field.node.podcast_episode.field_monthly_downloads
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
     - field.field.node.podcast_episode.field_season
     - field.field.node.podcast_episode.field_subtitle
+    - field.field.node.podcast_episode.field_total_downloads
     - field.field.node.podcast_episode.field_transcription
     - field.field.node.podcast_episode.field_yoast_seo
     - node.type.podcast_episode
   module:
+    - entity_reference_revisions
     - metatag
     - text
     - user
@@ -74,6 +77,15 @@ content:
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
+  field_monthly_downloads:
+    type: entity_reference_revisions_entity_view
+    weight: 113
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_mp3:
     weight: 105
     label: hidden
@@ -106,6 +118,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_total_downloads:
+    weight: 114
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_transcription:
     weight: 108

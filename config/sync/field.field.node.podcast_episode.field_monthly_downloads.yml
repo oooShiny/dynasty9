@@ -1,0 +1,49 @@
+uuid: 0c397224-4e28-4862-ad03-df2a465b91fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_monthly_downloads
+    - node.type.podcast_episode
+    - paragraphs.paragraphs_type.podcast_download
+  module:
+    - entity_reference_revisions
+id: node.podcast_episode.field_monthly_downloads
+field_name: field_monthly_downloads
+entity_type: node
+bundle: podcast_episode
+label: 'Monthly Downloads'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      podcast_download: podcast_download
+    target_bundles_drag_drop:
+      block:
+        weight: 8
+        enabled: false
+      highlight:
+        weight: 9
+        enabled: false
+      media:
+        weight: 10
+        enabled: false
+      podcast_download:
+        enabled: true
+        weight: 11
+      section:
+        weight: 12
+        enabled: false
+      team_record:
+        weight: 13
+        enabled: false
+      text:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

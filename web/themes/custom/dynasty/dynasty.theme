@@ -74,6 +74,25 @@ function dynasty_preprocess_node(&$variables) {
    */
   if ($node->bundle() == 'podcast_episode') {
     $variables['ep_art'] = $node->get('field_episode_cover_image')->value;
+    $downloads = [];
+    foreach ($node->field_monthly_downloads as $paragraph) {
+      $dl = $paragraph->entity;
+      $dateObj   = DateTime::createFromFormat('!m', $dl->field_month->value);
+      $monthName = $dateObj->format('F');
+      $downloads[$dl->field_year->value][$dl->field_month->value] = [
+        'dls' => $dl->field_downloads->value,
+        'month_name' => $monthName
+      ];
+    }
+    // Sort downloads by month.
+    $sorted_dls = [];
+    foreach ($downloads as $year => $month) {
+      ksort($month);
+      $sorted_dls[$year] = $month;
+    }
+    // Sort downloads by year.
+    ksort($sorted_dls);
+    $variables['downloads'] = $sorted_dls;
   }
 
   /**

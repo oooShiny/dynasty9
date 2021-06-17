@@ -1,0 +1,23 @@
+uuid: 50e5e627-cc5a-4b7f-a2d1-ec9a04c524c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_year
+    - paragraphs.paragraphs_type.podcast_download
+id: paragraph.podcast_download.field_year
+field_name: field_year
+entity_type: paragraph
+bundle: podcast_download
+label: Year
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

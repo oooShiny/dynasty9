@@ -131,4 +131,52 @@
     </div>
   {% endif %}
 
+  <div class="tw-py-10">
+    {{ content.field_total_downloads }}
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script type="application/javascript">
+      Highcharts.setOptions({
+        colors: ['#053c65', '#c41334']
+      });
+      Highcharts.chart('container', {
+        chart: {
+          type: 'spline'
+        },
+        title: {
+          text: 'Downloads per Month'
+        },
+        xAxis: {
+          categories: [
+            {% for year, month in downloads %}
+              {% for data in month %}
+                "{{ data.month_name }} {{ year }}",
+              {% endfor %}
+            {% endfor %}
+          ],
+          title: {
+            text: 'Month'
+          }
+        },
+        yAxis: {
+          title: {
+            text: 'Downloads'
+          }
+        },
+        series: [{
+          name: 'Downloads',
+          data: [
+            {% for year, month in downloads %}
+              {% for data in month %}
+               {{ data.dls }},
+              {% endfor %}
+            {% endfor %}
+          ]
+        }]
+      });
+    </script>
+
+  </div>
 </article>

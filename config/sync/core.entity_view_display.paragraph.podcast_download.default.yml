@@ -1,0 +1,43 @@
+uuid: 947a2789-95ff-44aa-95d5-cb98793a1bbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.podcast_download.field_downloads
+    - field.field.paragraph.podcast_download.field_month
+    - field.field.paragraph.podcast_download.field_year
+    - paragraphs.paragraphs_type.podcast_download
+id: paragraph.podcast_download.default
+targetEntityType: paragraph
+bundle: podcast_download
+mode: default
+content:
+  field_downloads:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_month:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_year:
+    weight: 2
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden:
+  search_api_excerpt: true
