@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '2425e5318fa30aea8121dbcd03d884c775431b45',
+    'reference' => '2599f5e0779675fb95ca3205e33a2acff8fc2916',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -31,12 +31,12 @@
     ),
     'composer/installers' => 
     array (
-      'pretty_version' => 'v1.10.0',
-      'version' => '1.10.0.0',
+      'pretty_version' => 'v1.11.0',
+      'version' => '1.11.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d',
+      'reference' => 'ae03311f45dfe194412081526be2e003960df74b',
     ),
     'composer/semver' => 
     array (
@@ -310,6 +310,15 @@
       array (
         0 => '9.1.8',
       ),
+    ),
+    'drupal/charts' => 
+    array (
+      'pretty_version' => '3.2.0',
+      'version' => '3.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-3.2',
     ),
     'drupal/ckeditor' => 
     array (
@@ -1118,7 +1127,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '2425e5318fa30aea8121dbcd03d884c775431b45',
+      'reference' => '2599f5e0779675fb95ca3205e33a2acff8fc2916',
     ),
     'drupal/redirect' => 
     array (
@@ -1458,6 +1467,60 @@
       array (
       ),
       'reference' => '53330f47520498c0ae1f61f7e2c90f55690c06a3',
+    ),
+    'highcharts/3d' => 
+    array (
+      'pretty_version' => '6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'highcharts/accessibility' => 
+    array (
+      'pretty_version' => '6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'highcharts/export-data' => 
+    array (
+      'pretty_version' => '6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'highcharts/exporting' => 
+    array (
+      'pretty_version' => '6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'highcharts/highcharts' => 
+    array (
+      'pretty_version' => '6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'highcharts/more' => 
+    array (
+      'pretty_version' => '6.1.0',
+      'version' => '6.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
     ),
     'laminas/laminas-diactoros' => 
     array (

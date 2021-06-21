@@ -14,13 +14,24 @@ class PodcastNodeUpdate {
     if (!is_null($node)) {
       $title = $node->label();
 
-      $dls = str_replace('"', '', $stats[$node->label()]);
-      $total = $node->get('field_total_downloads')->value;
+      if (array_key_exists($node->label(), $stats)) {
+        $dls = str_replace('"', '', $stats[$node->label()]);
+      }
+      else {
+        $dls = 0;
+      }
+
+      if ($node->hasField('field_total_downloads') && !$node->field_total_downloads->isEmpty()){
+        $total = $node->get('field_total_downloads')->value;
+      }
+      else {
+        $total = 0;
+      }
       $node->set('field_total_downloads', $total + $dls);
       // Create new paragraph.
       $paragraph = Paragraph::create([
         'type' => 'podcast_download',
-        'field_downloads' => $dls ?? 0,
+        'field_downloads' => $dls,
         'field_month' => $month,
         'field_year' => $year,
       ]);

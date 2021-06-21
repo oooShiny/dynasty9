@@ -1,0 +1,66 @@
+<div id="stackedchart" style="height: 800px"></div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script type="application/javascript">
+  Highcharts.chart('stackedchart', {
+    chart: {
+      type: 'area'
+    },
+    title: {
+      text: 'Total listens over time'
+    },
+    xAxis: {
+      categories: [
+        {% for m in months %}
+          "{{ m.month }} {{ m.year }}",
+        {% endfor %}
+      ],
+      tickmarkPlacement: 'off',
+      title: {
+        enabled: false
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Downloads'
+      },
+      labels: {
+        formatter: function () {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+      split: false,
+      valueSuffix: ' downloads'
+    },
+    plotOptions: {
+      area: {
+        stacking: 'normal',
+        lineColor: '#666666',
+        lineWidth: 1,
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+              enabled: true
+            }
+          }
+        }
+      }
+    },
+    series: [
+      {% for title, dls in downloads %}
+      {
+        name: '{{ title }}',
+        data: [
+          {% for dl in dls %}
+            {{ dl }},
+          {% endfor %}
+        ]
+      },
+      {% endfor %}
+    ]
+  });
+</script>

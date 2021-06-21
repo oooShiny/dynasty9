@@ -1,8 +1,30 @@
 <?php
 
 use Drupal\taxonomy\Entity\Term;
+use Drupal\node\Entity\Node;
+use Drupal\dynasty_module\DynastyHelpers;
 
+/**
+ * Calculating Brady QB Rating field for game nodes.
+ */
+function dynasty_module_update_8001() {
+  $games = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
+    'type' => 'game',
+    'field_brady_played' => TRUE,
+  ]);
 
+  foreach ($games as $game) {
+    $att = $game->get('field_brady_attempts')->value;
+    $comp = $game->get('field_brady_completions')->value;
+    $int = $game->get('field_brady_ints')->value;
+    $td = $game->get('field_brady_tds')->value;
+    $yds = $game->get('field_brady_yards')->value;
+
+    $rating = DynastyHelpers::passer_rating($att, $comp, $yds, $td, $int);
+    $game->set('field_passer_rating', $rating);
+    $game->save();
+  }
+}
 function dynasty_module_theme($existing, $type, $theme, $path) {
   return [
     'footer_seasons_block' => [
@@ -19,6 +41,12 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
     'latest_podcast_block' => [
       'variables' => [
         'episode' => ''
+      ]
+    ],
+    'total_podcast_downloads_block' => [
+      'variables' => [
+        'downloads' => '',
+        'months' => ''
       ]
     ],
     'on_this_day_block' => [
