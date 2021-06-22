@@ -28,4 +28,5 @@ settings:
       on_this_day_block: on_this_day_block
       record_vs_nfl: record_vs_nfl
       total_podcast_downloads_block: total_podcast_downloads_block
+      'views_block:most_popular_episodes-block_1': 'views_block:most_popular_episodes-block_1'
 field_type: block_field
