@@ -5,3 +5,13 @@ brady_td_viz:
   dependencies:
     - core/jquery
     - core/drupal.dialog
+highchart_js:
+  header: true
+  remote: https://code.highcharts.com/highcharts.js
+  version: VERSION
+  license:
+    name: Non-commercial
+    url: https://creativecommons.org/licenses/by-nc/3.0/
+    gpl-compatible: false
+  js:
+    https://code.highcharts.com/highcharts.js: { type: external, minified: true }

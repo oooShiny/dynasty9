@@ -57,6 +57,9 @@ class TotalPodcastDownloadsBlock extends BlockBase {
       '#theme' => 'total_podcast_downloads_block',
       '#downloads' => $downloads,
       '#months' => $months,
+      '#attached' => [
+        'library' => ['dynasty_module/highchart_js']
+      ],
     ];
   }
 

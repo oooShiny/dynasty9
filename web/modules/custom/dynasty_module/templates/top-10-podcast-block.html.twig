@@ -1,0 +1,46 @@
+<div id="top10" ></div>
+{{ attach_library('dynasty_module/highchart_js') }}
+<script type="application/javascript">
+  Highcharts.chart('top10', {
+    chart: {
+      type: 'bar'
+    },
+    title: {
+      text: 'Total Downloads by Episode (ranked)'
+    },
+    xAxis: {
+      categories: [
+        {% for ep, dls in downloads %}
+          '{{ ep }}',
+        {% endfor %}
+      ]
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Downloads'
+      }
+    },
+    tooltip: {
+      split: true,
+    },
+    legend: {
+      reversed: true
+    },
+    plotOptions: {
+      series: {
+        stacking: 'normal'
+      }
+    },
+    series: [
+      {
+        name: 'Downloads',
+        data: [
+          {% for ep, dls in downloads %}
+            {{ dls }},
+          {% endfor %}
+        ]
+      },
+    ]
+  });
+</script>

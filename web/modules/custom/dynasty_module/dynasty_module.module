@@ -67,6 +67,11 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'months' => ''
       ]
     ],
+    'top_10_podcast_block' => [
+      'variables' => [
+        'downloads' => ''
+      ]
+    ],
     'on_this_day_block' => [
       'variables' => [
         'games' => ''
