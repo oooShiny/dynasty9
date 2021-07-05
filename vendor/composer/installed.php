@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '20ecda2c34014f22a203ae577bee903a13288e09',
+    'reference' => '854f19afe1bad086c38c40d126478404472031be',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -929,6 +929,15 @@
         0 => '9.2.0',
       ),
     ),
+    'drupal/mailsystem' => 
+    array (
+      'pretty_version' => '4.3.0',
+      'version' => '4.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-4.3',
+    ),
     'drupal/media' => 
     array (
       'replaced' => 
@@ -1127,7 +1136,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '20ecda2c34014f22a203ae577bee903a13288e09',
+      'reference' => '854f19afe1bad086c38c40d126478404472031be',
     ),
     'drupal/redirect' => 
     array (
@@ -1185,6 +1194,15 @@
       array (
       ),
       'reference' => '8.x-1.13',
+    ),
+    'drupal/sendgrid_integration' => 
+    array (
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8.x-1.7',
     ),
     'drupal/serialization' => 
     array (
@@ -1423,6 +1441,15 @@
       ),
       'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
     ),
+    'fastglass/sendgrid' => 
+    array (
+      'pretty_version' => '1.0.12',
+      'version' => '1.0.12.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2f118ad67787899a84a95a870fb90a67949c3b82',
+    ),
     'grasmash/expander' => 
     array (
       'pretty_version' => '1.0.0',
@@ -1521,6 +1548,15 @@
       array (
       ),
       'reference' => NULL,
+    ),
+    'html2text/html2text' => 
+    array (
+      'pretty_version' => '4.3.1',
+      'version' => '4.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '61ad68e934066a6f8df29a3d23a6460536d0855c',
     ),
     'laminas/laminas-diactoros' => 
     array (
@@ -1784,6 +1820,29 @@
       'replaced' => 
       array (
         0 => 'v1.10.10',
+      ),
+    ),
+    'sendgrid/sendgrid-php' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
+    ),
+    'sendgrid/smtpapi' => 
+    array (
+      'pretty_version' => '0.6.7',
+      'version' => '0.6.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cf63bd353c25f775a1fb2654a0a3fff22f573a37',
+    ),
+    'sendgrid/smtpapi-php' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
       ),
     ),
     'shama/baton' => 

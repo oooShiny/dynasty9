@@ -15,8 +15,6 @@ module:
   block_content: 0
   block_field: 0
   breakpoint: 0
-  charts: 0
-  charts_highcharts: 0
   ckeditor: 0
   color: 0
   comment: 0
@@ -55,6 +53,7 @@ module:
   layout_paragraphs: 0
   link: 0
   linkit: 0
+  mailsystem: 0
   media: 0
   media_library: 0
   menu_link_content: 0
@@ -87,6 +86,8 @@ module:
   search_api_solr_admin: 0
   select2: 0
   select2_facets: 0
+  sendgrid_integration: 0
+  sendgrid_integration_reports: 0
   serialization: 0
   shortcut: 0
   simple_sitemap: 0
