@@ -1,0 +1,10 @@
+apikey: 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
+test_defaults:
+  to: arbrown83@gmail.com
+  subject: 'Testing Sendgrid integration'
+  body:
+    value: "<p>Test test test</p>\r\n"
+    format: basic_html
+  from_name: AndyB
+  to_name: Andy
+  reply_to: ''
