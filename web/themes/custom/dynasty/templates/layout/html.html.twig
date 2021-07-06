@@ -28,7 +28,10 @@
   <head>
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
-    <css-placeholder token="{{ placeholder_token|raw }}">
+      <link rel="icon" type="image/png" href="/themes/custom/dynasty/icons/lombardi-icon-16px.png" sizes="16x16">
+      <link rel="icon" type="image/png" href="/themes/custom/dynasty/icons/lombardi-icon-32px.png" sizes="32x32">
+      <link rel="icon" type="image/png" href="/themes/custom/dynasty/icons/lombardi-icon-96px.png" sizes="96x96">
+      <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
   <body {{ attributes.addClass('tw-bg-gray-200') }}>
