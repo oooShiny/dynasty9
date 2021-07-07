@@ -36,3 +36,8 @@
   text-decoration-color: #c60b31;
   text-decoration-thickness: .125em;
 }
+
+article[role='article'] p {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
