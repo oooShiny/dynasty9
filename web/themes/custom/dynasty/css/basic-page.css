@@ -8,3 +8,8 @@
   font-weight: 300;
 }
 
+.paragraph.paragraph--type--text p a {
+  text-decoration: underline;
+  text-decoration-color: #c60b31;
+  text-decoration-thickness: .125em;
+}
