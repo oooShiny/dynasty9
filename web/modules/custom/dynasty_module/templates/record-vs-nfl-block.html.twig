@@ -1,13 +1,85 @@
-<div class="tw-flex tw-justify-center">
-<ul class="tw-mx-4">
-{% for season, link in seasons %}
-  <li class="tw-py-2 md:tw-py-0">
-    <a class="md:tw-block tw-hidden" href="{{ link }}">{{ season }} Season</a>
-    <a class="tw-block md:tw-hidden" href="{{ link }}">{{ season }}</a>
-  </li>
-  {% if loop.index is divisible by(5) %}
-    </ul><ul class="tw-mx-4">
-  {% endif %}
-{% endfor %}
-</ul>
+<div class="actions tw-flex tw-justify-evenly">
+  <div class="button-group filter-button-group">
+      <h2 class="tw-text-2xl">Filter</h2>
+      <button class="tw-p-4 tw-bg-blue-pats tw-text-white tw-text-center" data-filter=":not(.conference, .division)">Entire NFL</button>
+      <button class="tw-p-4 tw-bg-red-pats tw-text-white tw-text-center" data-activates="drop_afc" data-beloworigin="true" data-hover="true" data-filter=".afc:not(.division)">AFC</button>
+      <button class="tw-p-4 tw-bg-red-pats tw-text-white tw-text-center" data-filter=".afc.north">North</button>
+      <button class="tw-p-4 tw-bg-red-pats tw-text-white tw-text-center" data-filter=".afc.south">South</button>
+      <button class="tw-p-4 tw-bg-red-pats tw-text-white tw-text-center" data-filter=".afc.east">East</button>
+      <button class="tw-p-4 tw-bg-red-pats tw-text-white tw-text-center" data-filter=".afc.west">West</button>
+
+      <button class="tw-p-4 tw-bg-blue-pats tw-text-white tw-text-center" data-activates="drop_nfc" data-beloworigin="true" data-hover="true" data-filter=".nfc:not(.division)">NFC</button>
+      <button class="tw-p-4 tw-bg-blue-pats tw-text-white tw-text-center" data-filter=".nfc.north">North</button>
+      <button class="tw-p-4 tw-bg-blue-pats tw-text-white tw-text-center" data-filter=".nfc.south">South</button>
+      <button class="tw-p-4 tw-bg-blue-pats tw-text-white tw-text-center" data-filter=".nfc.east">East</button>
+      <button class="tw-p-4 tw-bg-blue-pats tw-text-white tw-text-center" data-filter=".nfc.west">West</button>
+  </div>
+
+  <div class="button-group sort-by-button-group">
+      <h2 class="tw-text-2xl">Sort</h2>
+      <button class="tw-p-4 tw-bg-white tw-text-blue-pats tw-text-center" data-sort-by="name">Name</button>
+      <button class="tw-p-4 tw-bg-white tw-text-blue-pats tw-text-center" data-sort-by="wins">Most Wins</button>
+      <button class="tw-p-4 tw-bg-white tw-text-blue-pats tw-text-center" data-sort-by="losses">Most Losses</button>
+      <button class="tw-p-4 tw-bg-white tw-text-blue-pats tw-text-center" data-sort-by="pct">Highest Win %</button>
+  </div>
 </div>
+
+<div class="circles" style="min-height: 640px">
+  {% for id, team in records %}
+    <div class="team-circles {{ team.css}} {{ team.conf}} {{ team.div }}">
+      <a href="/team/{{ team.css }}">
+        <div class="circle-inner">
+          <span class="name">{{ team.name }}</span>
+          <br>
+          <span class="record">
+            <span class="wins">{{ team.w }}</span> - <span class="losses">{{ team.l }}</span>
+          </span>
+          <br>
+          <span class="pct">{{ team.pct|number_format(3) }}</span>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script type="application/javascript">
+    // init Isotope
+    var iso = new Isotope( '.circles', {
+      itemSelector: '.team-circles',
+      layoutMode: 'fitRows',
+      sortAscending: {
+        name: true,
+        wins: false,
+        losses: false,
+        pct: false
+      },
+
+      getSortData: {
+        name: '.name',
+        wins: '.wins parseInt',
+        losses: '.losses parseInt',
+        pct: '.pct parseFloat',
+      }
+    });
+    // Sort items on button click
+    var sortByGroup = document.querySelector('.sort-by-button-group');
+    sortByGroup.addEventListener( 'click', function( event ) {
+      // only button clicks
+      if ( !matchesSelector( event.target, 'button' ) ) {
+        return;
+      }
+      var sortValue = event.target.getAttribute('data-sort-by');
+      iso.arrange({ sortBy: sortValue });
+    });
+
+    var filterByGroup = document.querySelector('.filter-button-group');
+    filterByGroup.addEventListener( 'click', function( event ) {
+      // only button clicks
+      if ( !matchesSelector( event.target, 'button' ) ) {
+        return;
+      }
+      var filterValue = event.target.getAttribute('data-filter');
+      iso.arrange({ filter: filterValue });
+    });
+
+</script>

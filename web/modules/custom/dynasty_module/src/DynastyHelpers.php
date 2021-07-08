@@ -31,14 +31,41 @@ class DynastyHelpers {
     return $passer_rating;
   }
 
-  public static function get_teams() {
+  public static function win_pct($w, $l, $t) {
+    return $pct = $w / ($w + $l + $t);
+  }
+
+  public static function get_teams($data = FALSE) {
+    $teams = [];
+    $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
+    $nodes =  Node::loadMultiple($nids);
+    $divs = self::get_term_names('division');
+    $confs = self::get_term_names('conference');
+
+    foreach ($nodes as $team) {
+      $title = explode(' ', $team->getTitle());
+      if ($data === FALSE) {
+        $teams[$team->id()] = array_pop($title);
+      }
+      else {
+        $teams[$team->id()] = [
+          'name' => array_pop($title),
+          'div' => $divs[$team->get('field_division')->target_id],
+          'conf' => $confs[$team->get('field_conference')->target_id],
+        ];
+      }
+    }
+    return $teams;
+  }
+
+  public static function get_team_css() {
     $teams = [];
     $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
     $nodes =  Node::loadMultiple($nids);
 
     foreach ($nodes as $team) {
-      $title = explode(' ', $team->getTitle());
-      $teams[$team->id()] = array_pop($title);
+      $title = str_replace(' ', '-', $team->getTitle());
+      $teams[$team->id()] = strtolower($title);
     }
     return $teams;
   }
@@ -74,5 +101,14 @@ class DynastyHelpers {
       $weeks[$term->tid] = $term->name;
     }
     return $weeks;
+  }
+
+  public static function get_term_names($taxonomy) {
+    $term_names = [];
+    $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($taxonomy);
+    foreach ($terms as $term) {
+      $term_names[$term->tid] = $term->name;
+    }
+    return $term_names;
   }
 }

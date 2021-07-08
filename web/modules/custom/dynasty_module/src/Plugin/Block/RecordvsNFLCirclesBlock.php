@@ -29,17 +29,37 @@ class RecordvsNFLCirclesBlock extends BlockBase {
       ->getStorage('node')
       ->loadMultiple($game_nids);
     $records = [];
-    $teams = DynastyHelpers::get_teams();
+    $team_css = DynastyHelpers::get_team_css();
+    $teams = DynastyHelpers::get_teams(TRUE);
     foreach ($games as $game) {
-      $records[] = '';
+      $opp = $game->get('field_opponent')->target_id;
+      $css = $team_css[$opp];
+      if (!isset($records[$opp])) {
+        $records[$opp] = [
+          'name' => $teams[$opp]['name'],
+          'div' => strtolower($teams[$opp]['div']),
+          'conf' => strtolower($teams[$opp]['conf']),
+          'css' => $css,
+          'w' => 0,
+          'l' => 0,
+          'pct' => .000
+        ];
+      }
+      $result = strtolower($game->get('field_result')->value);
+      if ($result == 'win') {
+        $records[$opp]['w'] += 1;
+      }
+      else {
+        $records[$opp]['l'] += 1;
+      }
+      $records[$opp]['pct'] = DynastyHelpers::win_pct($records[$opp]['w'], $records[$opp]['l'], 0);
     }
 
 
     return [
       '#theme' => 'record_vs_nfl_block',
-
+      '#records' => $records,
     ];
   }
-
 
 }

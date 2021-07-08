@@ -61,6 +61,11 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'episode' => ''
       ]
     ],
+    'record_vs_nfl_block' => [
+      'variables' => [
+        'records' => ''
+      ]
+    ],
     'total_podcast_downloads_block' => [
       'variables' => [
         'downloads' => '',
