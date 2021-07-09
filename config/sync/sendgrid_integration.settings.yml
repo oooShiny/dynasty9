@@ -1,4 +1,4 @@
-apikey: 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
+apikey: sendgrid_api_key
 test_defaults:
   to: arbrown83@gmail.com
   subject: 'Testing Sendgrid integration'
