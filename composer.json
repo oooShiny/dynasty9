@@ -144,6 +144,7 @@
         "drupal/gutenberg": "^2.0",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jquery_ui_slider": "^1.1",
+        "drupal/key": "^1.14",
         "drupal/layout_paragraphs": "^1.0",
         "drupal/linkit": "^6.0@beta",
         "drupal/metatag": "^1.15",
