@@ -1,4 +1,4 @@
-uuid: 63966b32-66a3-47bd-bd5f-36baf3fd029c
+uuid: 14bd68ef-0c5e-4b62-a5ba-3a9be710e7e8
 langcode: en
 status: true
 dependencies:
@@ -7,21 +7,25 @@ dependencies:
     - views.view.highlight_search
   module:
     - search_api
-id: play_type
-name: 'Play Type'
-url_alias: play_type
-weight: -3
+id: play_season
+name: Season
+url_alias: season
+weight: 1
 min_count: 1
 show_only_one_result: false
-field_identifier: play_type
+field_identifier: season
 facet_source_id: 'search_api:views_page__highlight_search__page_1'
 widget:
-  type: select2
+  type: checkbox
   config:
     show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    soft_limit: 10
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
 keep_hierarchy_parents_active: false
@@ -31,18 +35,12 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
-  count_widget_order:
-    processor_id: count_widget_order
-    weights:
-      sort: 30
-    settings:
-      sort: DESC
   display_value_widget_order:
     processor_id: display_value_widget_order
     weights:
       sort: 40
     settings:
-      sort: ASC
+      sort: DESC
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

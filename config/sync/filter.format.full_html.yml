@@ -24,12 +24,6 @@ filters:
     status: true
     weight: 9
     settings: {  }
-  filter_htmlcorrector:
-    id: filter_htmlcorrector
-    provider: filter
-    status: true
-    weight: 10
-    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
@@ -42,8 +36,8 @@ filters:
     status: false
     weight: -10
     settings:
-      allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <h2 id class="tw-bg-blue-pats tw-font-light tw-py-3 tw-text-2xl tw-text-center tw-text-white"> <pre>'
-      filter_html_help: true
+      allowed_html: '<a href hreflang class> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p class> <h1> <h2 id class="tw-bg-blue-pats tw-font-light tw-py-3 tw-text-2xl tw-text-center tw-text-white"> <pre> <div class> <span class>'
+      filter_html_help: false
       filter_html_nofollow: false
   gutenberg:
     id: gutenberg
@@ -64,3 +58,9 @@ filters:
       default_view_mode: default
       allowed_media_types: {  }
       allowed_view_modes: {  }
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }

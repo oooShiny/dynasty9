@@ -29,5 +29,5 @@ settings:
       record_vs_nfl: record_vs_nfl
       top_10_podcast_block: top_10_podcast_block
       total_podcast_downloads_block: total_podcast_downloads_block
-      'views_block:most_popular_episodes-block_1': 'views_block:most_popular_episodes-block_1'
+      'system_menu_block:brady-page-menu': 'system_menu_block:brady-page-menu'
 field_type: block_field

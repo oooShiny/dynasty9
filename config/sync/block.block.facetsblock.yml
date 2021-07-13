@@ -23,6 +23,7 @@ settings:
   facets_to_include:
     'facet_block:player_s_involved': 'facet_block:player_s_involved'
     'facet_block:play_type': 'facet_block:play_type'
+    'facet_block:play_season': 'facet_block:play_season'
     'facet_block:opponent': 'facet_block:opponent'
     'facet_block:week': 'facet_block:week'
     'facet_block:yards_gained': 'facet_block:yards_gained'
@@ -36,6 +37,7 @@ settings:
     'facet_block:podcast_opponent': '0'
     'facet_block:overtime': '0'
     'facet_block:playoff': '0'
+    'facet_block:game_week': '0'
 visibility:
   request_path:
     id: request_path

@@ -12,8 +12,8 @@ dependencies:
     - field.storage.node.field_down
     - field.storage.node.field_minutes
     - field.storage.node.field_opponent
-    - field.storage.node.field_players_involved
     - field.storage.node.field_play_type
+    - field.storage.node.field_players_involved
     - field.storage.node.field_quarter
     - field.storage.node.field_season
     - field.storage.node.field_seconds
@@ -201,9 +201,12 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  entity_status: {  }
   language_with_fallback: {  }
   rendered_item: {  }
-  solr_date_range: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo

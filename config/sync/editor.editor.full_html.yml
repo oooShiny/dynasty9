@@ -53,12 +53,12 @@ settings:
             - Source
   plugins:
     stylescombo:
-      styles: 'h2.tw-bg-blue-pats.tw-font-light.tw-py-3.tw-my-3.tw-text-2xl.tw-text-center.tw-text-white|Header Block (blue)'
+      styles: "h2.tw-bg-blue-pats.tw-font-light.tw-py-3.tw-my-3.tw-text-2xl.tw-text-center.tw-text-white|Header Block (blue)\r\na.tw-bg-blue-pats.tw-no-underline.tw-p-4.tw-text-center.tw-text-white|Button Link (blue)"
+    language:
+      language_list: un
     drupallink:
       linkit_enabled: false
       linkit_profile: ''
-    language:
-      language_list: un
 image_upload:
   status: true
   scheme: public

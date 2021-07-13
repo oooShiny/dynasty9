@@ -1,0 +1,8 @@
+uuid: 83e6e4c5-9432-4bb1-bb3d-b7650d8079f6
+langcode: en
+status: true
+dependencies: {  }
+id: brady-page-menu
+label: 'Brady Page Menu'
+description: ''
+locked: false

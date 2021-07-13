@@ -6,6 +6,6 @@ test_defaults:
   body:
     value: "<p>Test test test</p>\r\n"
     format: basic_html
-  from_name: AndyB
+  from_name: ''
   to_name: Andy
   reply_to: ''
