@@ -2,6 +2,7 @@
 
 use \Drupal\node\Entity\Node;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\taxonomy\Entity\Term;
 
 function dynasty_theme_suggestions_node_alter(&$suggestions, $variables) {
   // Create custom front page node template.
@@ -101,6 +102,21 @@ function dynasty_preprocess_node(&$variables) {
   if ($node->bundle() == 'highlight') {
     $variables['video_file'] = $node->get('field_video_file_id')->value;
     $variables['muse_id'] = $node->get('field_muse_video_id')->value;
+    $play_desc = [];
+    if (!$node->field_yards_gained->isEmpty()) {
+      $play_desc['yards'] = $node->get('field_yards_gained')->value . ' yard';
+    }
+    else {
+      $play_desc['yards'] = '';
+    }
+
+    if (!$node->field_play_type->isEmpty()) {
+      $play_desc['type'] = Term::load($node->field_play_type->target_id)->get('name')->value;
+      foreach ($node->field_players_involved->referencedEntities() as $player) {
+        $play_desc['players'][] = $player->label();
+      }
+    }
+    $variables['play_desc'] = $play_desc;
   }
 }
 

@@ -83,10 +83,35 @@
       </div>
     {% endif %}
     <div>
+      <h2>
+        {{ play_desc.yards }} {{ play_desc.type }}
+
+        {% if play_desc.type == 'Pass' %}
+          from
+          {% for player in play_desc.players %}
+            {% if loop.last %}
+              {{ player }}
+            {% else %}
+              {{ player }} to
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          by
+          {% for player in play_desc.players %}
+            {% if loop.last %}
+              {{ player }}
+            {% else %}
+              {{ player }} and
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+      </h2>
       <ul>
         <li>{{ content.field_game }}</li>
-        <li><a href="https://muse.ai/vc/{{ muse_id }}" target="_blank">Video Link</a></li>
-        <li><a href="https://cdn.muse.ai/w/{{ video_file }}/videos/video.mp4" target="_blank">Right click to download</a></li>
+        <li><a href="https://muse.ai/vc/{{ muse_id }}" target="_blank">Shareable Video Link</a></li>
+        <li><a href="https://cdn.muse.ai/w/{{ video_file }}/videos/video.mp4" target="_blank">Download Video File</a> (Right click
+          &rarr; Save Link As)</li>
       </ul>
     </div>
   </div>

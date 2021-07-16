@@ -166,5 +166,20 @@ function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entit
         }
       }
       break;
+    case 'highlight':
+      // Automatically add game info to game fields.
+      if (!$entity->field_game->isEmpty()) {
+        $game = \Drupal::entityTypeManager()->getStorage('node')->load($entity->field_game->target_id);
+        $entity->field_season->value = $game->field_season->value;
+        $entity->field_week->target_id = $game->field_week->target_id;
+        $entity->field_opponent->target_id = $game->field_opponent->target_id;
+      }
+      // Format muse video ID field if a link is posted.
+      if (!$entity->field_video_file_id->isEmpty() && filter_var($entity->field_video_file_id->value, FILTER_VALIDATE_URL)) {
+        $url_array = parse_url($entity->field_video_file_id->value);
+        $path_array = explode('/', $url_array['path']);
+        $entity->field_video_file_id->value = $path_array[2];
+      }
+      break;
   }
 }
