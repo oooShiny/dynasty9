@@ -131,7 +131,7 @@ content:
     region: content
   field_play_type:
     weight: 112
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -206,7 +206,7 @@ content:
     region: content
   field_yards_gained:
     weight: 119
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true

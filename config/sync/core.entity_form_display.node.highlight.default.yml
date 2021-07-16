@@ -36,8 +36,9 @@ third_party_settings:
         - title
         - field_gfycat_id
         - field_muse_video_id
+        - field_video_file_id
       parent_name: ''
-      weight: 1
+      weight: 0
       format_type: details
       region: content
       format_settings:
@@ -51,12 +52,13 @@ third_party_settings:
       children:
         - field_players_involved
         - field_play_type
+        - group_pass_info
         - field_yards_gained
         - field_td_scored
         - field_down
         - field_distance
       parent_name: ''
-      weight: 2
+      weight: 1
       format_type: details
       region: content
       format_settings:
@@ -68,14 +70,12 @@ third_party_settings:
       label: 'Play Info'
     group_game_info:
       children:
-        - field_opponent
-        - field_season
-        - field_week
+        - field_game
         - field_quarter
         - field_minutes
         - field_seconds
       parent_name: ''
-      weight: 4
+      weight: 3
       format_type: details
       region: content
       format_settings:
@@ -91,8 +91,8 @@ third_party_settings:
         - field_pass_length
         - field_pass_location
         - field_pass_thrown_from
-      parent_name: ''
-      weight: 5
+      parent_name: group_play_info
+      weight: 18
       format_type: details
       region: content
       format_settings:
@@ -115,20 +115,20 @@ content:
     type: number
     region: content
   field_distance:
-    weight: 21
+    weight: 23
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_down:
-    weight: 20
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_game:
-    weight: 7
+    weight: 4
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -146,7 +146,7 @@ content:
     type: string_textfield
     region: content
   field_meta_tags:
-    weight: 8
+    weight: 5
     settings:
       sidebar: true
     third_party_settings: {  }
@@ -167,16 +167,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_opponent:
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_pass_length:
     weight: 5
     settings: {  }
@@ -190,7 +180,7 @@ content:
     type: options_select
     region: content
   field_pass_thrown_from:
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -221,13 +211,6 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_season:
-    weight: 6
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
-    region: content
   field_seconds:
     weight: 10
     settings:
@@ -236,7 +219,7 @@ content:
     type: number
     region: content
   field_tag_play:
-    weight: 6
+    weight: 4
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -246,32 +229,22 @@ content:
     type: entity_reference_autocomplete_tags
     region: content
   field_td_scored:
-    weight: 19
+    weight: 21
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_video_file_id:
-    weight: 10
+    weight: 4
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_week:
-    weight: 7
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_yards_gained:
-    weight: 18
+    weight: 20
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -279,17 +252,10 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 3
+    weight: 2
     region: content
     settings:
       include_locked: true
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 0
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -300,13 +266,17 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 9
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
+  field_opponent: true
+  field_season: true
+  field_week: true
   path: true
   promote: true
+  status: true
   sticky: true
   uid: true
