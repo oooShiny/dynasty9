@@ -257,7 +257,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: "<div class=\"tw-flex tw-justify-center tw-py-5 tw-w-full\">\r\n    <h2 class=\"tw-font-bold\">Popular Searches:</h2>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=butt+fumble\">butt fumble</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+amendola\">edelman amendola</a>\r\n</div>\r\n"
+          content: "<div class=\"tw-flex tw-justify-center tw-py-5 tw-w-full\">\r\n    <h2 class=\"tw-font-bold\">Popular Searches:</h2>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=butt+fumble\">Butt Fumble</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+amendola\">Edelman to Amendola</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+circus+catch\">The Catch</a>\r\n</div>"
           plugin_id: text_custom
         result:
           id: result
