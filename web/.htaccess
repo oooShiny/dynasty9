@@ -88,6 +88,10 @@ AddEncoding gzip svgz
   # downloaded.
   RewriteRule "/\.|^\.(?!well-known/)" - [F]
 
+  # Redirect patspod.com to the podcast page.
+  RewriteCond %{HTTP_HOST} ^patspod.com
+  RewriteRule .* /podcast [R=301,L]
+
   # If your site can be accessed both with and without the 'www.' prefix, you
   # can use one of the following settings to redirect users to your preferred
   # URL, either WITH or WITHOUT the 'www.' prefix. Choose ONLY one option:
