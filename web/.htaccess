@@ -62,9 +62,9 @@ AddEncoding gzip svgz
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
-  # Redirect patspod.com to the podcast page.
-  RewriteCond %{HTTP_HOST} ^patspod.com$
-  RewriteRule https://patsdynasty.com/podcast [R=301,L]
+  # Redirect patspod.com to the podcast page is done in nginx.
+  # RewriteCond %{HTTP_HOST} ^patspod.com$
+  # RewriteRule https://patsdynasty.com/podcast [R=301,L]
 
   # Set "protossl" to "s" if we were accessed via https://.  This is used later
   # if you enable "www." stripping or enforcement, in order to ensure that
