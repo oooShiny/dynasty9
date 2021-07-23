@@ -184,12 +184,12 @@
 {# Brady Stats #}
   {% if content.field_brady_attempts|render %}
     <a id="brady-stats"></a>
-    <div id="brady-stats" class="tw-bg-blue-pats tw-text-white tw-py-10">
+    <div id="brady-stats" class="tw-bg-gray-400 tw-text-blue-pats tw-py-10">
       <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Tom Brady's Game Stats</h2>
       <div class="tw-flex tw-justify-center">
         <table>
           <thead>
-            <tr class="tw-border-b tw-border-white">
+            <tr class="tw-border-b tw-border-blue-pats">
               <th class="tw-p-4">COM</th>
               <th class="tw-p-4">ATT</th>
               <th class="tw-p-4">YDS</th>
@@ -213,6 +213,8 @@
     </div>
   {% endif %}
 
+{# Podcast Episode #}
+  {{ drupal_view('podcast_episode_game_page', 'block_1') }}
 
 {# Game Summary #}
   {{ attach_library('dynasty/muse_modal') }}
@@ -232,8 +234,6 @@
       {{ drupal_view('game_highlights', 'block_1') }}
     </div>
   </div>
-
-{#  {{ content }}#}
 
 {# Game Video #}
 {% if content.field_game_video|render %}

@@ -1,0 +1,10 @@
+uuid: 6172d596-f405-465c-9a9a-d0c686273066
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.content_row
+label: 'Content Row'
+targetEntityType: node
+cache: true
