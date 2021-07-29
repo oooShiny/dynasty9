@@ -18,8 +18,10 @@
  * @see template_preprocess_views_view_field()
  */
 #}
-{% if output %}
-  <img src="/themes/custom/dynasty/icons/tv.svg" title="game has full video" alt="tv icon" class="tw-h-5 tw-pr-3">
-{% else %}
-  <img src="/themes/custom/dynasty/icons/tv-grey.svg" title="no game video" alt="disabled tv icon" class="tw-h-5 tw-pr-3">
+{% if logged_in == 1 %}
+  {% if output %}
+    <img src="/themes/custom/dynasty/icons/tv.svg" title="game has full video" alt="tv icon" class="tw-h-5 tw-pr-3">
+  {% else %}
+    <img src="/themes/custom/dynasty/icons/tv-grey.svg" title="no game video" alt="disabled tv icon" class="tw-h-5 tw-pr-3">
+  {% endif %}
 {% endif %}
