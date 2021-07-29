@@ -61,14 +61,16 @@
 {% for id, game in games %}
   {% if game.video == TRUE %}
     {% set video_css = 'blue' %}
+    {% set tooltip = 'game has full video' %}
   {% else %}
     {% set video_css = 'grey' %}
+    {% set tooltip = 'no game video' %}
   {% endif %}
   <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
     <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a></td>
     <td>
       <svg class="tw-h-5 tw-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313">
-        <title>game has full video</title>
+        <title>{{ tooltip }}</title>
         <style>
           .blue { fill: #002244 }
           .grey { fill: #cbd5e0 }
