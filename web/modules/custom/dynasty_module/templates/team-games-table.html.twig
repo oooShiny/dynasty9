@@ -59,16 +59,15 @@
   </thead>
   <tbody>
 {% for id, game in games %}
-  {% if game.video == TRUE %}
-    {% set video_css = 'blue' %}
-    {% set tooltip = 'game has full video' %}
-  {% else %}
-    {% set video_css = 'grey' %}
-    {% set tooltip = 'no game video' %}
-  {% endif %}
-  <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
-    <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a></td>
-    <td>
+  {% if game.video is not empty %}
+    {% if game.video == 1 %}
+      {% set video_css = 'blue' %}
+      {% set tooltip = 'game has full video' %}
+    {% else %}
+      {% set video_css = 'grey' %}
+      {% set tooltip = 'no game video' %}
+    {% endif %}
+    {% set icon %}
       <svg class="tw-h-5 tw-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313">
         <title>{{ tooltip }}</title>
         <style>
@@ -79,7 +78,14 @@
         <g>
           <path fill-rule="evenodd" class="{{ video_css }}" d="M175 198L175 72.4L278 135.2L175 198ZM195 108L195 162.4L239.6 135.2L195 108Z" />
         </g>
-      </svg></td>
+      </svg>
+    {% endset %}
+  {% else %}
+    {% set icon = '' %}
+  {% endif %}
+  <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
+    <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a></td>
+    <td>{{ icon }}</td>
     <td class="tw-p-5">{{ game.pats_score }}</td>
     <td class="tw-p-5">{{ game.opp_score }}</td>
     <td class="tw-p-5">{{ game.home_away }}</td>

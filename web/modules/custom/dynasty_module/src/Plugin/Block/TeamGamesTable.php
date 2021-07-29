@@ -25,7 +25,7 @@ class TeamGamesTable extends BlockBase {
    */
   public function build() {
     $team = $this->getContextValue('node');
-
+    $anonymous = \Drupal::currentUser()->isAnonymous();
     // Get opponent team info for block display.
     $opp['full'] = $team->label();
     $opp['css'] = strtolower(str_replace(' ', '-', $team->label()));
@@ -59,14 +59,18 @@ class TeamGamesTable extends BlockBase {
         'opp_coach' => $coaches[$game->get('field_opposing_coach')->target_id],
         'over_under' => $game->get('field_over_under')->value,
         'vegas_line' => $game->get('field_vegas_line')->value,
-        'highlights' => FALSE,
       ];
-      if (!$game->field_game_video->isEmpty()) {
-        $games[$game->id()]['video'] = TRUE;
+
+      // If the user is logged in, add the video icon.
+      if ($anonymous === FALSE) {
+        if (!$game->field_game_video->isEmpty()) {
+          $games[$game->id()]['video'] = 1;
+        }
+        else {
+          $games[$game->id()]['video'] = 0;
+        }
       }
-      else {
-        $games[$game->id()]['video'] = FALSE;
-      }
+
       $totals['games'] += 1;
       $totals['pf'] += $game->get('field_patriots_score')->value;
       $totals['pa'] += $game->get('field_opponent_score')->value;
