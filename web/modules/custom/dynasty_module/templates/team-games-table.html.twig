@@ -1,0 +1,91 @@
+<div class="tw-flex tw-items-center tw-justify-evenly tw-py-10">
+  <div class="tw-w-1/3">
+    <h2 class="tw-text-2xl tw-uppercase tw-font-thin tw-text-center">Cumulative Score</h2>
+    <div class="tw-flex tw-items-center tw-justify-evenly tw-space-x-1">
+      <div class="patriots tw-p-2 tw-w-1/2">
+        <div class="tw-text-2xl tw-text-center">Patriots</div>
+        <br>
+        <div class="tw-text-5xl tw-text-center">{{ totals.pf }}</div>
+      </div>
+
+      <div class="{{ opp.css }} tw-p-2 tw-w-1/2">
+        <div class="tw-text-2xl tw-text-center">{{ opp.short }}</div>
+        <br>
+        <div class="tw-text-5xl tw-text-center">{{ totals.pa }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-w-1/3">
+    <h2 class="tw-text-2xl tw-uppercase tw-font-thin tw-text-center">Average Score</h2>
+    <div class="tw-flex tw-items-center tw-justify-evenly tw-space-x-1">
+      <div class="patriots tw-p-2 tw-w-1/2">
+        <div class="tw-text-2xl tw-text-center">Patriots</div>
+        <br>
+        <div class="tw-text-5xl tw-text-center">{{ (totals.pf/totals.games)|number_format }}</div>
+      </div>
+
+      <div class="{{ opp.css }} tw-p-2 tw-w-1/2">
+        <div class="tw-text-2xl tw-text-center">{{ opp.short }}</div>
+        <br>
+        <div class="tw-text-5xl tw-text-center">{{ (totals.pa/totals.games)|number_format }}</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tw-flex tw-items-center tw-justify-evenly tw-py-10">
+  <div class="patriots tw-p-2 tw-w-1/2">
+    <div class="tw-text-2xl tw-text-center">Patriots vs {{ opp.short }}</div>
+    <br>
+    <div class="tw-text-5xl tw-text-center">{{ totals.w }} - {{ totals.l }}</div>
+  </div>
+</div>
+
+<table class="tw-m-auto">
+  <thead>
+    <tr><th></th><th colspan="2">Score</th><th colspan="5"></th></tr>
+    <tr>
+      <th>Game</th>
+      <th>Pats</th>
+      <th>Opp</th>
+      <th>Location</th>
+      <th>Date</th>
+      <th>Coach</th>
+      <th>O/U</th>
+      <th>Vegas</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for id, game in games %}
+  {% if game.video == TRUE %}
+    {% set video %}
+      <svg class="tw-h-5 tw-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313">
+        <title>game has full video</title>
+        <style>
+          .win { fill: #002244 }
+          .loss { fill: #C60C30 }
+        </style>
+        <path fill-rule="evenodd" class="{{ game.result|lower }}" d="M251 258L251 278L321 278L321 298L121 298L121 278L191 278L191 258L11 258L11 13L431 13L431 258L251 258ZM411 238L411 33L31 33L31 238L411 238Z" />
+        <g>
+          <path fill-rule="evenodd" class="{{ game.result|lower }}" d="M175 198L175 72.4L278 135.2L175 198ZM195 108L195 162.4L239.6 135.2L195 108Z" />
+        </g>
+      </svg>
+    {% endset %}
+  {% else %}
+    {% set video = '' %}
+  {% endif %}
+  <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
+    <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a> {{ video }}</td>
+    <td class="tw-p-5">{{ game.pats_score }}</td>
+    <td class="tw-p-5">{{ game.opp_score }}</td>
+    <td class="tw-p-5">{{ game.home_away }}</td>
+    <td class="tw-p-5">{{ game.date|date('F j,  Y') }}</td>
+    <td class="tw-p-5">{{ game.opp_coach }}</td>
+    <td class="tw-p-5">{{ game.over_under }}</td>
+    <td class="tw-p-5">{{ game.vegas_line }}</td>
+  </tr>
+{% endfor %}
+  </tbody>
+</table>

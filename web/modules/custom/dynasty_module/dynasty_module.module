@@ -85,6 +85,13 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
     'brady_td_viz' => [
       'variables' => []
     ],
+    'team_games_table' => [
+      'variables' => [
+        'games' => '',
+        'totals' => '',
+        'opp' => ''
+      ]
+    ],
     'brady_total_tds' => [
       'variables' => [
         'players' => '',

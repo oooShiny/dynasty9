@@ -10,6 +10,7 @@ dependencies:
   config:
     - field.storage.node.field_date
     - field.storage.node.field_after_bye
+    - field.storage.node.field_game_video
     - field.storage.node.field_home_away
     - field.storage.node.field_month
     - field.storage.node.field_opponent
@@ -207,6 +208,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_season
+  video:
+    label: 'Game Video'
+    datasource_id: 'entity:node'
+    property_path: field_game_video
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_game_video
   week:
     label: 'Week (fulltext)'
     datasource_id: 'entity:node'

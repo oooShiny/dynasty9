@@ -3,7 +3,6 @@
 namespace Drupal\dynasty_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
 
 /**

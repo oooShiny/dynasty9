@@ -1,0 +1,11 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313" width="444" height="313">
+	<title>tv2-svg</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #000000 } 
+	</style>
+	<path fill-rule="evenodd" class="shp0" d="M251 258L251 278L321 278L321 298L121 298L121 278L191 278L191 258L11 258L11 13L431 13L431 258L251 258ZM411 238L411 33L31 33L31 238L411 238Z" />
+	<g >
+		<path fill-rule="evenodd" class="shp0" d="M175 198L175 72.4L278 135.2L175 198ZM195 108L195 162.4L239.6 135.2L195 108Z" />
+	</g>
+</svg>

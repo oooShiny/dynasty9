@@ -1,28 +1,25 @@
-uuid: e5d6a8da-3949-4667-912f-d90c8713b105
+uuid: b7e9614d-45da-4418-8290-dada2bfed6cc
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.team_games
   module:
     - ctools
-    - views
+    - dynasty_module
   theme:
     - dynasty
-id: team_games_block
+id: teamgamestable
 theme: dynasty
 region: content
-weight: -3
+weight: 0
 provider: null
-plugin: 'views_block:team_games-block_1'
+plugin: team_games_table
 settings:
-  id: 'views_block:team_games-block_1'
-  label: ''
-  provider: views
+  id: team_games_table
+  label: 'Team Games Table'
+  provider: dynasty_module
   label_display: '0'
-  views_label: ''
-  items_per_page: none
-  context_mapping: {  }
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
