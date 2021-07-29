@@ -18,7 +18,7 @@
  * @see template_preprocess_views_view_field()
  */
 #}
-{% if output %}
+{% if output is not empty %}
   <img src="/themes/custom/dynasty/icons/tv.svg" title="game has full video" alt="tv icon" class="tw-h-5 tw-pr-3">
 {% else %}
   <img src="/themes/custom/dynasty/icons/tv-grey.svg" title="no game video" alt="disabled tv icon" class="tw-h-5 tw-pr-3">
