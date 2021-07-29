@@ -231,7 +231,7 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: true
+            alter_text: false
             text: "{% if video|render %}\r\n\t<img src=\"/themes/custom/dynasty/icons/tv.svg\" class=\"tw-h-5 tw-inline\" />\r\n{% else %}\r\n\t<img src=\"/themes/custom/dynasty/icons/tv-grey.svg\" class=\"tw-h-5 tw-inline\" />\r\n{% endif %}"
             make_link: false
             path: ''
