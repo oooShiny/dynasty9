@@ -45,9 +45,9 @@
 
 <table class="tw-m-auto">
   <thead>
-    <tr><th></th><th colspan="2">Score</th><th colspan="5"></th></tr>
+    <tr><th colspan="2"></th><th colspan="2">Score</th><th colspan="5"></th></tr>
     <tr>
-      <th>Game</th>
+      <th colspan="2">Game</th>
       <th>Pats</th>
       <th>Opp</th>
       <th>Location</th>
@@ -60,24 +60,24 @@
   <tbody>
 {% for id, game in games %}
   {% if game.video == TRUE %}
-    {% set video %}
+    {% set video_css = 'blue' %}
+  {% else %}
+    {% set video_css = 'grey' %}
+  {% endif %}
+  <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
+    <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a></td>
+    <td>
       <svg class="tw-h-5 tw-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313">
         <title>game has full video</title>
         <style>
-          .win { fill: #002244 }
-          .loss { fill: #C60C30 }
+          .blue { fill: #002244 }
+          .grey { fill: #cbd5e0 }
         </style>
-        <path fill-rule="evenodd" class="{{ game.result|lower }}" d="M251 258L251 278L321 278L321 298L121 298L121 278L191 278L191 258L11 258L11 13L431 13L431 258L251 258ZM411 238L411 33L31 33L31 238L411 238Z" />
+        <path fill-rule="evenodd" class="{{ video_css }}" d="M251 258L251 278L321 278L321 298L121 298L121 278L191 278L191 258L11 258L11 13L431 13L431 258L251 258ZM411 238L411 33L31 33L31 238L411 238Z" />
         <g>
-          <path fill-rule="evenodd" class="{{ game.result|lower }}" d="M175 198L175 72.4L278 135.2L175 198ZM195 108L195 162.4L239.6 135.2L195 108Z" />
+          <path fill-rule="evenodd" class="{{ video_css }}" d="M175 198L175 72.4L278 135.2L175 198ZM195 108L195 162.4L239.6 135.2L195 108Z" />
         </g>
-      </svg>
-    {% endset %}
-  {% else %}
-    {% set video = '' %}
-  {% endif %}
-  <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
-    <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a> {{ video }}</td>
+      </svg></td>
     <td class="tw-p-5">{{ game.pats_score }}</td>
     <td class="tw-p-5">{{ game.opp_score }}</td>
     <td class="tw-p-5">{{ game.home_away }}</td>

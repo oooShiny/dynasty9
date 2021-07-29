@@ -67,7 +67,7 @@ display:
           description: ''
           columns:
             title: title
-            video: title
+            video: video
             patriots_score: patriots_score
             opponent_score: opponent_score
             opponent: opponent
@@ -232,7 +232,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<img src="/themes/custom/dynasty/icons/tv.svg" class="tw-h-5 tw-inline" />'
+            text: "{% if video|render %}\r\n\t<img src=\"/themes/custom/dynasty/icons/tv.svg\" class=\"tw-h-5 tw-inline\" />\r\n{% else %}\r\n\t<img src=\"/themes/custom/dynasty/icons/tv-grey.svg\" class=\"tw-h-5 tw-inline\" />\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -282,8 +282,8 @@ display:
           delta_first_last: false
           multi_type: separator
           separator: ''
-          field_api_classes: false
-          field_rendering: false
+          field_api_classes: true
+          field_rendering: true
           fallback_handler: search_api
           fallback_options:
             link_to_item: false
@@ -506,7 +506,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
