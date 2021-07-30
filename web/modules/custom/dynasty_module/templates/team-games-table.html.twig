@@ -43,6 +43,61 @@
   </div>
 </div>
 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+{% set pats = [] %}
+{% set oppwl = [] %}
+{% for game in offset %}
+  {% if game > 0 %}
+    {% set pats = pats|merge([game]) %}
+    {% set oppwl = oppwl|merge([0]) %}
+  {% elseif game < 0 %}
+    {% set pats = pats|merge([0]) %}
+    {% set oppwl = oppwl|merge([game]) %}
+  {% else %}
+    {% set pats = pats|merge([0]) %}
+    {% set oppwl = oppwl|merge([0]) %}
+  {% endif %}
+{% endfor %}
+
+<div id="team-chart" ></div>
+<script type="application/javascript">
+  Highcharts.setOptions({
+    colors: ['#053c65', '#c41334']
+  });
+  Highcharts.chart('team-chart', {
+    chart: {
+      type: 'area'
+    },
+    title: {
+      text: 'Win/Loss Chart Over Time'
+    },
+    xAxis: {
+      title: {
+        text: 'Games'
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Wins'
+      }
+    },
+    series: [{
+      name: 'Patriots Wins',
+      data: [{% for p in pats %}
+        {{ p }},
+        {% endfor %}
+      ]
+    }, {
+      name: '{{ opp.short }} Wins',
+      data: [{% for p in oppwl %}
+        {{ p }},
+        {% endfor %}
+      ]
+    }]
+  });
+</script>
+
 <table class="tw-m-auto">
   <thead>
     <tr><th colspan="2"></th><th colspan="2">Score</th><th colspan="5"></th></tr>

@@ -47,6 +47,8 @@ class TeamGamesTable extends BlockBase {
       'w' => 0,
       'l' => 0
     ];
+    $g = 0;
+    $offset = [];
     foreach (Node::loadMultiple($game_nodes) as $game) {
       $games[$game->id()] = [
         'title' => $game->label(),
@@ -76,9 +78,13 @@ class TeamGamesTable extends BlockBase {
       $totals['pa'] += $game->get('field_opponent_score')->value;
       if ($game->get('field_result')->value == 'Win') {
         $totals['w'] += 1;
+        $g++;
+        $offset[] = $g;
       }
       else {
         $totals['l'] += 1;
+        $g--;
+        $offset[] = $g;
       }
     }
 
@@ -99,7 +105,8 @@ class TeamGamesTable extends BlockBase {
       '#theme' => 'team_games_table',
       '#games' => $games,
       '#totals' => $totals,
-      '#opp' => $opp
+      '#opp' => $opp,
+      '#offset' => $offset
     ];
   }
 
