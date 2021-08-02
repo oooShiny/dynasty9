@@ -194,6 +194,48 @@ function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entit
         $path_array = explode('/', $url_array['path']);
         $entity->field_video_file_id->value = $path_array[2];
       }
+
+      // Format play description automatically based on other fields.
+      $play_desc = [];
+      if (!$entity->field_yards_gained->isEmpty()) {
+        $play_desc['yards'] = $entity->get('field_yards_gained')->value . ' yard';
+      }
+      else {
+        $play_desc['yards'] = '';
+      }
+
+      if (!$entity->field_play_type->isEmpty()) {
+        $play_desc['type'] = Term::load($entity->field_play_type->target_id)->get('name')->value;
+        foreach ($entity->field_players_involved->referencedEntities() as $player) {
+          $play_desc['players'][] = $player->label();
+        }
+      }
+      $description = $play_desc['yards'] . ' ' . $play_desc['type'];
+      if ($play_desc['type'] == 'Pass') {
+        $description .= ' from ';
+        $count = count($play_desc['players']);
+        foreach ($play_desc['players'] as $player) {
+          if (--$count <= 0) {
+            $description .= $player;
+          }
+          else {
+            $description .= $player. ' to ';
+          }
+        }
+      }
+      else {
+        $description .= ' by ';
+        $count = count($play_desc['players']);
+        foreach ($play_desc['players'] as $player) {
+          if (--$count <= 0) {
+            $description .= $player;
+          }
+          else {
+            $description .= $player. ' and ';
+          }
+        }
+      }
+      $entity->field_play_description->value = $description;
       break;
   }
 }

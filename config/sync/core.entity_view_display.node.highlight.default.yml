@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.highlight.field_pass_length
     - field.field.node.highlight.field_pass_location
     - field.field.node.highlight.field_pass_thrown_from
+    - field.field.node.highlight.field_play_description
     - field.field.node.highlight.field_play_type
     - field.field.node.highlight.field_players_involved
     - field.field.node.highlight.field_quarter
@@ -37,7 +38,7 @@ mode: default
 content:
   field_air_yards:
     weight: 101
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -46,7 +47,7 @@ content:
     region: content
   field_distance:
     weight: 102
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -55,7 +56,7 @@ content:
     region: content
   field_down:
     weight: 103
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
@@ -70,7 +71,7 @@ content:
     region: content
   field_gfycat_id:
     weight: 104
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -85,7 +86,7 @@ content:
     region: content
   field_minutes:
     weight: 105
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -94,7 +95,7 @@ content:
     region: content
   field_muse_video_id:
     weight: 106
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -102,7 +103,7 @@ content:
     region: content
   field_opponent:
     weight: 107
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -110,24 +111,32 @@ content:
     region: content
   field_pass_length:
     weight: 108
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_pass_location:
     weight: 109
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_pass_thrown_from:
     weight: 110
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_play_description:
+    weight: 123
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_play_type:
     weight: 112
@@ -139,7 +148,7 @@ content:
     region: content
   field_players_involved:
     weight: 111
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -147,14 +156,14 @@ content:
     region: content
   field_quarter:
     weight: 113
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_season:
     weight: 114
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -163,7 +172,7 @@ content:
     region: content
   field_seconds:
     weight: 115
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -172,7 +181,7 @@ content:
     region: content
   field_tag_play:
     weight: 116
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -180,7 +189,7 @@ content:
     region: content
   field_td_scored:
     weight: 117
-    label: above
+    label: hidden
     settings:
       format: default
       format_custom_false: ''
@@ -198,7 +207,7 @@ content:
     region: content
   field_week:
     weight: 118
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }

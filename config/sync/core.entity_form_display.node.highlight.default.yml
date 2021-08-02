@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.highlight.field_pass_length
     - field.field.node.highlight.field_pass_location
     - field.field.node.highlight.field_pass_thrown_from
+    - field.field.node.highlight.field_play_description
     - field.field.node.highlight.field_play_type
     - field.field.node.highlight.field_players_involved
     - field.field.node.highlight.field_quarter
@@ -184,6 +185,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_play_description:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_play_type:
     weight: 17

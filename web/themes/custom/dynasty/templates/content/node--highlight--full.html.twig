@@ -84,27 +84,7 @@
     {% endif %}
     <div>
       <h2>
-        {{ play_desc.yards }} {{ play_desc.type }}
-
-        {% if play_desc.type == 'Pass' %}
-          from
-          {% for player in play_desc.players %}
-            {% if loop.last %}
-              {{ player }}
-            {% else %}
-              {{ player }} to
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          by
-          {% for player in play_desc.players %}
-            {% if loop.last %}
-              {{ player }}
-            {% else %}
-              {{ player }} and
-            {% endif %}
-          {% endfor %}
-        {% endif %}
+        {{ content.field_play_description }}
 
       </h2>
       <ul>
