@@ -7,15 +7,16 @@ label: 'Content: Podcast Episode'
 tags:
   image_src: '[node:field_episode_cover_image]'
   apple_itunes_app: app-id=1497577531
-  og_image_type: image/jpeg
   og_image_url: '[node:field_episode_cover_image]'
-  twitter_cards_description: '[node:summary]'
-  twitter_cards_image: '[node:field_episode_cover_image]'
-  twitter_cards_image_alt: 'Episode Cover Art'
-  twitter_cards_image_height: '3000'
-  twitter_cards_image_width: '3000'
+  og_image_type: image/jpeg
   twitter_cards_player_height: '400'
-  twitter_cards_player_stream: '[node:field_mp3]'
+  twitter_cards_player: '[node:field_mp3]'
   twitter_cards_player_stream_content_type: audio/mpeg
-  twitter_cards_player_width: '400'
+  twitter_cards_image_alt: 'Episode Cover Art'
   twitter_cards_type: player
+  twitter_cards_image: '[node:field_episode_cover_image]'
+  twitter_cards_description: '[node:summary]'
+  twitter_cards_image_height: '3000'
+  twitter_cards_player_width: '400'
+  twitter_cards_player_stream: '[node:field_mp3]'
+  twitter_cards_image_width: '3000'
