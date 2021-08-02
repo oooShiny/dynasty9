@@ -173,6 +173,12 @@ function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entit
           $entity->field_game->target_id = $game_ref->id();
         }
       }
+      // Convert MP3 URL to the one Acast uses for their iFrames.
+      if (!$entity->field_mp3->isEmpty()) {
+        $mp3 = parse_url($entity->field_mp3->value);
+        $path = explode('/', $mp3['path']);
+        $entity->field_iframe->value = 'https://embed.acast.com/' . $path[4];
+      }
       break;
     case 'highlight':
       // Automatically add game info to game fields.
