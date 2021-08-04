@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
-    - field.field.node.game.field_highlights
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
@@ -35,6 +34,7 @@ dependencies:
     - field.field.node.game.field_pats_q2
     - field.field.node.game.field_pats_q3
     - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_play_of_the_game
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
@@ -52,7 +52,6 @@ dependencies:
     - field_group
     - link
     - metatag
-    - paragraphs
     - path
     - text
     - yoast_seo
@@ -274,18 +273,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_highlights:
-    type: entity_reference_paragraphs
-    weight: 28
-    settings:
-      title: Highlight
-      title_plural: Highlights
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: highlight
-    third_party_settings: {  }
-    region: content
   field_home_away:
     weight: 8
     settings: {  }
@@ -432,6 +419,16 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  field_play_of_the_game:
+    weight: 51
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_playoff_game:
     weight: 5
     settings:
@@ -536,6 +533,11 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   created: true
   promote: true

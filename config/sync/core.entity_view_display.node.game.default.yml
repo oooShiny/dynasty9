@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
-    - field.field.node.game.field_highlights
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
@@ -35,6 +34,7 @@ dependencies:
     - field.field.node.game.field_pats_q2
     - field.field.node.game.field_pats_q3
     - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_play_of_the_game
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
@@ -49,7 +49,6 @@ dependencies:
     - node.type.game
   module:
     - datetime
-    - entity_reference_revisions
     - link
     - metatag
     - options
@@ -160,15 +159,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_highlights:
-    type: entity_reference_revisions_entity_view
-    weight: 140
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
     region: content
   field_home_away:
     weight: 102
@@ -347,6 +337,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_integer
+    region: content
+  field_play_of_the_game:
+    weight: 144
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_playoff_game:
     weight: 130

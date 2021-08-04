@@ -5,4 +5,13 @@ dependencies: {  }
 id: node__highlight
 label: 'Content: Highlight'
 tags:
-  description: '[node:title]'
+  description: '[node:description]'
+  twitter_cards_player_height: '400'
+  twitter_cards_site: '@PatsDynastyInfo'
+  twitter_cards_player: 'https://muse.ai/vc/[node:field_muse_video_id]'
+  twitter_cards_player_stream_content_type: mp4
+  twitter_cards_type: player
+  twitter_cards_title: '[node:title]'
+  twitter_cards_description: '[node:field_play_description]'
+  twitter_cards_player_width: '600'
+  twitter_cards_player_stream: 'https://cdn.muse.ai/w/[node:field_video_file_id]/videos/video.mp4'
