@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
-    - field.field.node.game.field_highlights
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
@@ -442,6 +441,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_highlights: true
   langcode: true
   search_api_excerpt: true
