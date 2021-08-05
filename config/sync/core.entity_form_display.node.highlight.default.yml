@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.highlight.field_pass_location
     - field.field.node.highlight.field_pass_thrown_from
     - field.field.node.highlight.field_play_description
+    - field.field.node.highlight.field_play_of_the_game
     - field.field.node.highlight.field_play_type
     - field.field.node.highlight.field_players_involved
     - field.field.node.highlight.field_quarter
@@ -38,6 +39,7 @@ third_party_settings:
         - field_gfycat_id
         - field_muse_video_id
         - field_video_file_id
+        - field_play_of_the_game
       parent_name: ''
       weight: 0
       format_type: details
@@ -93,7 +95,7 @@ third_party_settings:
         - field_pass_location
         - field_pass_thrown_from
       parent_name: group_play_info
-      weight: 18
+      weight: 19
       format_type: details
       region: content
       format_settings:
@@ -194,8 +196,15 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_play_of_the_game:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_play_type:
-    weight: 17
+    weight: 18
     settings:
       match_operator: CONTAINS
       match_limit: 10

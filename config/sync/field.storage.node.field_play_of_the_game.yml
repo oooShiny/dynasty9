@@ -1,4 +1,4 @@
-uuid: 8f43d570-3a6c-4e1f-89b7-f958824a0bd9
+uuid: 51416a91-64f7-474d-ae2f-b0d5aba11287
 langcode: en
 status: true
 dependencies:
@@ -11,9 +11,8 @@ third_party_settings:
 id: node.field_play_of_the_game
 field_name: field_play_of_the_game
 entity_type: node
-type: entity_reference
-settings:
-  target_type: node
+type: boolean
+settings: {  }
 module: core
 locked: false
 cardinality: 1

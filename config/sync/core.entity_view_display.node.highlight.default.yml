@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.highlight.field_pass_location
     - field.field.node.highlight.field_pass_thrown_from
     - field.field.node.highlight.field_play_description
+    - field.field.node.highlight.field_play_of_the_game
     - field.field.node.highlight.field_play_type
     - field.field.node.highlight.field_players_involved
     - field.field.node.highlight.field_quarter
@@ -137,6 +138,16 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_play_of_the_game:
+    weight: 124
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_play_type:
     weight: 112

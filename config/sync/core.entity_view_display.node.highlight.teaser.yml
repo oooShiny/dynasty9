@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.highlight.field_pass_location
     - field.field.node.highlight.field_pass_thrown_from
     - field.field.node.highlight.field_play_description
+    - field.field.node.highlight.field_play_of_the_game
     - field.field.node.highlight.field_play_type
     - field.field.node.highlight.field_players_involved
     - field.field.node.highlight.field_quarter
@@ -76,6 +77,7 @@ hidden:
   field_pass_location: true
   field_pass_thrown_from: true
   field_play_description: true
+  field_play_of_the_game: true
   field_play_type: true
   field_players_involved: true
   field_quarter: true
