@@ -53,7 +53,7 @@ class GinToolbar implements TrustedCallbackInterface {
     $manipulators = [
       ['callable' => 'menu.default_tree_manipulators:checkAccess'],
       ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
-      ['callable' => 'toolbar_tools_menu_navigation_links'],
+      ['callable' => 'gin_toolbar_tools_menu_navigation_links'],
     ];
     $tree = $menu_tree->transform($tree, $manipulators);
 

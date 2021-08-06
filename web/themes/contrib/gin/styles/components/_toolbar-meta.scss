@@ -56,6 +56,7 @@
           color: var(--colorGinTextLight);
           width: 39px;
           height: 39px;
+          margin: 0;
           border-radius: $borderSmall $borderSmall 0 0;
 
           &:before {
@@ -127,8 +128,8 @@
             }
           }
 
-          .toolbar-lining {
-            padding-right: 0;
+          .toolbar-lining:not(:empty) {
+            padding: .5rem;
           }
         }
 
@@ -151,7 +152,12 @@
           border-radius: $borderSmall 0 $borderSmall $borderSmall;
         }
 
+
         // If custom user image
+        &:not(.has-user-icon) {
+          margin-right: -1.333em;
+        }
+
         .icon-user ~ .toolbar-tray {
           border-radius: $borderSmall;
         }

@@ -73,7 +73,7 @@ class ImageStyleTest extends UnitTestCase {
       ->will($this->returnValue($effectManager));
     $image_style->expects($this->any())
       ->method('fileDefaultScheme')
-      ->will($this->returnCallback([$this, 'fileDefaultScheme']));
+      ->willReturnCallback([$this, 'fileDefaultScheme']);
 
     return $image_style;
   }
@@ -113,7 +113,7 @@ class ImageStyleTest extends UnitTestCase {
     $extensions = ['jpeg', 'gif', 'png'];
     foreach ($extensions as $extension) {
       $extensionReturned = $image_style->getDerivativeExtension($extension);
-      $this->assertEquals($extensionReturned, 'png');
+      $this->assertEquals('png', $extensionReturned);
     }
   }
 
