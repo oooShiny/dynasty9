@@ -12,11 +12,12 @@ dependencies:
     - field.storage.node.field_down
     - field.storage.node.field_minutes
     - field.storage.node.field_opponent
-    - field.storage.node.field_play_type
     - field.storage.node.field_players_involved
+    - field.storage.node.field_play_type
     - field.storage.node.field_quarter
     - field.storage.node.field_season
     - field.storage.node.field_seconds
+    - field.storage.node.field_tag_play
     - field.storage.node.field_td_scored
     - field.storage.node.field_week
     - field.storage.node.field_yards_gained
@@ -155,6 +156,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_seconds
+  tag:
+    label: Tag
+    datasource_id: 'entity:node'
+    property_path: 'field_tag_play:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_tag_play
+      module:
+        - taxonomy
   td_scored:
     label: 'TD Scored'
     datasource_id: 'entity:node'
