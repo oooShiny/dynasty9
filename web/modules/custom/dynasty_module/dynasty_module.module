@@ -43,6 +43,26 @@ function dynasty_module_update_8002() {
     }
   }
 }
+
+/**
+ * Re-save all Highlights to save play of the game data.
+ */
+function dynasty_module_update_8003() {
+  // Get an array of all 'article' node ids.
+  $play_nids = \Drupal::entityQuery('node')
+    ->condition('type', 'highlight')
+    ->execute();
+
+  // Load all the articles.
+  $plays = Node::loadMultiple($play_nids);
+  foreach ($plays as $play) {
+    if ($play->field_play_of_the_game->isEmpty()) {
+      $play->set('field_play_of_the_game', 0);
+    }
+    $play->save();
+  }
+}
+
 function dynasty_module_theme($existing, $type, $theme, $path) {
   return [
     'footer_seasons_block' => [
