@@ -22,6 +22,7 @@ gfycat:
 muse_video:
   remote: https://muse.ai
   version: 1.0
+  header: true
   license:
     name: MIT
     url: https://github.com/angular/angular.js/blob/master/LICENSE
