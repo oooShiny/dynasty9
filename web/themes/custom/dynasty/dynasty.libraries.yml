@@ -22,6 +22,10 @@ gfycat:
 muse_video:
   remote: https://muse.ai
   version: 1.0
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
   js:
     https://muse.ai/static/js/embed-player.min.js: { type: external, minified: true }
 muse_modal:
