@@ -103,6 +103,13 @@ function dynasty_preprocess_node(&$variables) {
     $variables['video_file'] = $node->get('field_video_file_id')->value;
     $variables['muse_id'] = $node->get('field_muse_video_id')->value;
   }
+
+  /**
+   * Player Page Overrides.
+   */
+  if ($node->bundle() == 'player') {
+    $variables['#attached']['library'][] =  'dynast/muse_video';
+  }
 }
 
 

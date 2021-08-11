@@ -19,6 +19,11 @@ gfycat:
   dependencies:
     - core/jquery
     - core/drupal.dialog
+muse_video:
+  remote: https://muse.ai
+  version: 1.0
+  js:
+    https://muse.ai/static/js/embed-player.min.js: { type: external, minified: true }
 muse_modal:
   js:
     js/muse_ai_modal.js: {}
