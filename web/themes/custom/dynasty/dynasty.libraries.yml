@@ -20,7 +20,7 @@ gfycat:
     - core/jquery
     - core/drupal.dialog
 muse_video:
-  remote: https://muse.ai
+  remote: https://muse.ai/static/js/embed-player.js
   version: 1.0
   header: true
   license:

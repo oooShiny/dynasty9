@@ -108,7 +108,7 @@ function dynasty_preprocess_node(&$variables) {
    * Player Page Overrides.
    */
   if ($node->bundle() == 'player') {
-    $variables['#attached']['library'][] =  'dynast/muse_video';
+    $variables['#attached']['library'][] =  'dynasty/muse_video';
   }
 }
 
