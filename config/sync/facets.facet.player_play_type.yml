@@ -1,0 +1,54 @@
+uuid: a8a5c404-c86b-4576-a18c-0be66dcf4e89
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.highlight_index
+    - views.view.player_page_highlight_search
+  module:
+    - search_api
+id: player_play_type
+name: 'Play Type'
+url_alias: player_play_type
+weight: 0
+min_count: 1
+show_only_one_result: false
+field_identifier: play_type
+facet_source_id: 'search_api:views_block__player_page_highlight_search__block_1'
+widget:
+  type: select2
+  config:
+    show_numbers: true
+    width: 100%
+    autocomplete: false
+    match_operator: CONTAINS
+query_operator: or
+use_hierarchy: false
+keep_hierarchy_parents_active: false
+expand_hierarchy: false
+enable_parent_when_child_gets_disabled: true
+hard_limit: 0
+exclude: false
+only_visible_when_facet_source_is_visible: false
+processor_configs:
+  count_widget_order:
+    processor_id: count_widget_order
+    weights:
+      sort: 30
+    settings:
+      sort: DESC
+  display_value_widget_order:
+    processor_id: display_value_widget_order
+    weights:
+      sort: 40
+    settings:
+      sort: ASC
+  url_processor_handler:
+    processor_id: url_processor_handler
+    weights:
+      pre_query: 50
+      build: 15
+    settings: {  }
+empty_behavior:
+  behavior: none
+show_title: false

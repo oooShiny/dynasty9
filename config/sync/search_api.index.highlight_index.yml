@@ -112,6 +112,16 @@ field_settings:
         - field.storage.node.field_play_type
       module:
         - taxonomy
+  player_id:
+    label: 'Player(s) Involved (ID)'
+    datasource_id: 'entity:node'
+    property_path: 'field_players_involved:entity:nid'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_players_involved
+      module:
+        - node
   players_fulltext:
     label: 'Player(s) Involved (fulltext)'
     datasource_id: 'entity:node'

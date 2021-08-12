@@ -1,0 +1,9 @@
+uuid: 393d21c9-1d29-4eb2-8bba-3cf1daa13808
+langcode: en
+status: true
+dependencies: {  }
+id: search_api__views_block__podcast_transcript_search__block_1
+name: 'search_api:views_block__podcast_transcript_search__block_1'
+filter_key: null
+url_processor: query_string
+breadcrumb: {  }

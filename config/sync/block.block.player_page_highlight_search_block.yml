@@ -1,28 +1,27 @@
-uuid: a2285590-3476-475a-8045-ae74c83e6987
+uuid: 214036c3-2c62-49ef-aa4e-3dc4d1479c11
 langcode: en
-status: false
+status: true
 dependencies:
   config:
-    - views.view.player_highlights
+    - views.view.player_page_highlight_search
   module:
     - ctools
     - views
   theme:
     - dynasty
-id: views_block__player_highlights_block_1
+id: player_page_highlight_search_block
 theme: dynasty
 region: content
-weight: -5
+weight: -6
 provider: null
-plugin: 'views_block:player_highlights-block_1'
+plugin: 'views_block:player_page_highlight_search-block_1'
 settings:
-  id: 'views_block:player_highlights-block_1'
+  id: 'views_block:player_page_highlight_search-block_1'
   label: ''
   provider: views
   label_display: '0'
   views_label: ''
   items_per_page: none
-  context_mapping: {  }
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
