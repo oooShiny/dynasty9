@@ -2,7 +2,7 @@
 
 use \Drupal\node\Entity\Node;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\taxonomy\Entity\Term;
+use Drupal\dynasty_module\DynastyHelpers;
 
 function dynasty_theme_suggestions_node_alter(&$suggestions, $variables) {
   // Create custom front page node template.
@@ -112,6 +112,22 @@ function dynasty_preprocess_node(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_page_title().
+ */
+function dynasty_preprocess_page_title(&$variables) {
+
+  $node = \Drupal::request()->attributes->get('node');
+
+  if ($node && $node->bundle() == 'player') {
+    $positions = DynastyHelpers::get_positions();
+    $player_pos = $positions[$node->get('field_player_position')->target_id];
+    $variables['title'] = t('@title (@pos)', [
+      '@title' => $node->getTitle(),
+      '@pos' => $player_pos,
+    ]);
+  }
+}
 
 /**
  * Implements hook_preprocess_HOOK().
