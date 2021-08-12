@@ -1,4 +1,4 @@
-uuid: 79fa3a52-3b2e-4e33-93f1-882d671fea2a
+uuid: 4797de16-f921-4f95-91aa-7cfd40015d48
 langcode: en
 status: true
 dependencies:
@@ -7,21 +7,25 @@ dependencies:
     - views.view.player_page_highlight_search
   module:
     - search_api
-id: player_opponent
-name: Opponent
-url_alias: player_opponent
-weight: -2
+id: player_season
+name: Season
+url_alias: player_season
+weight: 1
 min_count: 1
 show_only_one_result: false
-field_identifier: opponent
+field_identifier: season
 facet_source_id: 'search_api:views_block__player_page_highlight_search__block_1'
 widget:
-  type: select2
+  type: checkbox
   config:
     show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    soft_limit: 10
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
 keep_hierarchy_parents_active: false
@@ -36,7 +40,7 @@ processor_configs:
     weights:
       sort: 40
     settings:
-      sort: ASC
+      sort: DESC
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

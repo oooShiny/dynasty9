@@ -1,4 +1,4 @@
-uuid: 79fa3a52-3b2e-4e33-93f1-882d671fea2a
+uuid: fdd3a5f3-993f-4587-91b2-a7cb4cf8a683
 langcode: en
 status: true
 dependencies:
@@ -7,21 +7,25 @@ dependencies:
     - views.view.player_page_highlight_search
   module:
     - search_api
-id: player_opponent
-name: Opponent
-url_alias: player_opponent
-weight: -2
+id: player_yards_gained
+name: 'Yards Gained'
+url_alias: player_yards_gained
+weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: opponent
+field_identifier: yards_gained
 facet_source_id: 'search_api:views_block__player_page_highlight_search__block_1'
 widget:
-  type: select2
+  type: range_slider
   config:
-    show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    show_numbers: false
+    prefix: ''
+    suffix: ''
+    min_type: search_result
+    min_value: !!float 0
+    max_type: search_result
+    max_value: !!float 10
+    step: !!float 1
 query_operator: or
 use_hierarchy: false
 keep_hierarchy_parents_active: false
@@ -31,10 +35,17 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: false
 processor_configs:
-  display_value_widget_order:
-    processor_id: display_value_widget_order
+  range_slider:
+    processor_id: range_slider
     weights:
-      sort: 40
+      pre_query: 60
+      post_query: 60
+      build: 20
+    settings: {  }
+  raw_value_widget_order:
+    processor_id: raw_value_widget_order
+    weights:
+      sort: 50
     settings:
       sort: ASC
   url_processor_handler:

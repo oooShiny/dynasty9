@@ -1,4 +1,4 @@
-uuid: 79fa3a52-3b2e-4e33-93f1-882d671fea2a
+uuid: 875973a9-76f1-4f43-b067-f491416cc573
 langcode: en
 status: true
 dependencies:
@@ -7,21 +7,25 @@ dependencies:
     - views.view.player_page_highlight_search
   module:
     - search_api
-id: player_opponent
-name: Opponent
-url_alias: player_opponent
-weight: -2
+id: player_week
+name: Week
+url_alias: week
+weight: 2
 min_count: 1
 show_only_one_result: false
-field_identifier: opponent
+field_identifier: week
 facet_source_id: 'search_api:views_block__player_page_highlight_search__block_1'
 widget:
-  type: select2
+  type: checkbox
   config:
     show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    soft_limit: 10
+    soft_limit_settings:
+      show_less_label: 'Show less'
+      show_more_label: 'Show more'
+    show_reset_link: false
+    reset_text: 'Show all'
+    hide_reset_when_no_selection: false
 query_operator: or
 use_hierarchy: false
 keep_hierarchy_parents_active: false
@@ -31,10 +35,10 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: false
 processor_configs:
-  display_value_widget_order:
-    processor_id: display_value_widget_order
+  raw_value_widget_order:
+    processor_id: raw_value_widget_order
     weights:
-      sort: 40
+      sort: 50
     settings:
       sort: ASC
   url_processor_handler:

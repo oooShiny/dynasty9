@@ -10,7 +10,7 @@ dependencies:
 id: player_play_type
 name: 'Play Type'
 url_alias: player_play_type
-weight: 0
+weight: -3
 min_count: 1
 show_only_one_result: false
 field_identifier: play_type
