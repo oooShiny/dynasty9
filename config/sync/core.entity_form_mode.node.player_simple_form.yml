@@ -1,0 +1,10 @@
+uuid: fed0973c-594d-4ef8-b22e-5b42ff5692d0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.player_simple_form
+label: 'Player Simple Form'
+targetEntityType: node
+cache: true

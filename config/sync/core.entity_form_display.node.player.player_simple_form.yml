@@ -1,0 +1,44 @@
+uuid: ca767a46-2118-4fbe-a05c-28721b1c9885
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.player_simple_form
+    - field.field.node.player.field_meta_tags
+    - field.field.node.player.field_player_bio
+    - field.field.node.player.field_player_position
+    - node.type.player
+id: node.player.player_simple_form
+targetEntityType: node
+bundle: player
+mode: player_simple_form
+content:
+  field_player_position:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_meta_tags: true
+  field_player_bio: true
+  langcode: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true
+  url_redirects: true

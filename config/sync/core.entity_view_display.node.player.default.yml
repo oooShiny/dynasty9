@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.player.field_meta_tags
+    - field.field.node.player.field_player_bio
     - field.field.node.player.field_player_position
     - node.type.player
   module:
     - metatag
+    - text
     - user
 id: node.player.default
 targetEntityType: node
@@ -21,19 +23,26 @@ content:
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
+  field_player_bio:
+    weight: 103
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
   field_player_position:
     weight: 101
-    label: above
+    label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true
   search_api_excerpt: true
