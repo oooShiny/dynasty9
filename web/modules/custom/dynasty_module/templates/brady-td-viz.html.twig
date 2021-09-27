@@ -192,7 +192,7 @@
         })
         .attr('class', 'gif-modal')
         .append('line')
-        .attr("x1", function(d, i){
+        .attr("x2", function(d, i){
           if (d.pass_location === "Left Sideline") {
             return 100;
           }
@@ -221,11 +221,11 @@
             return 1500;
           }
         })
-        .attr("y1", function(d, i){
+        .attr("y2", function(d, i){
             var yards = d.yards_gained - d.air_yards
             return (yards * 30) + 300;
         })
-        .attr("x2", function(d, i){
+        .attr("x1", function(d, i){
           if (d.pass_thrown_from === "Left Sideline") {
             return 400;
           }
@@ -248,7 +248,7 @@
             return 1200;
           }
         })
-        .attr("y2", function(d, i){
+        .attr("y1", function(d, i){
           var yards = d.yards_gained
           return (yards * 30 + 300);
         })

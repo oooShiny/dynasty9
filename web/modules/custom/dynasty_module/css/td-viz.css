@@ -36,7 +36,6 @@ g.play {
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
   animation: dash 5s linear forwards;
-  animation-direction: reverse;
 }
 
 @keyframes dash {
