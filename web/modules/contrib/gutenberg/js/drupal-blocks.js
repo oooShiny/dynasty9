@@ -95,6 +95,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         blockId: {
           type: 'string'
         },
+        settings: {
+          type: 'object'
+        },
         align: {
           type: 'string'
         }
@@ -103,7 +106,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var attributes = _ref.attributes,
             className = _ref.className,
             setAttributes = _ref.setAttributes;
-        var align = attributes.align;
+        var align = attributes.align,
+            settings = attributes.settings;
 
         setAttributes({ blockId: id });
 
@@ -113,7 +117,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           React.createElement(DrupalBlock, {
             className: className,
             id: id,
-            url: Drupal.url('editor/blocks/load/' + id)
+            name: definition.admin_label,
+            settings: settings
           })
         );
       },

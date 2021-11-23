@@ -11,11 +11,16 @@
     return registerStore('drupal', {
       reducer(state = DEFAULT_STATE, action) {
         switch (action.type) {
+          /**
+           * @todo Either remove this action (solely used by DrupalBlock)
+           * or figure out a away to retrieve data cosidering block settings.
+           */
           case 'SET_BLOCK':
             return {
               ...state,
               blocks: {
                 ...state.blocks,
+                [action.item]: action.settings,
                 [action.item]: action.block,
               },
             };
@@ -33,10 +38,11 @@
       },
 
       actions: {
-        setBlock(item, block) {
+        setBlock(item, settings, block) {
           return {
             type: 'SET_BLOCK',
             item,
+            settings,
             block,
           };
         },
@@ -50,8 +56,9 @@
       },
 
       selectors: {
-        getBlock(state, item) {
+        getBlock(state, item, settings) {
           const { blocks } = state;
+          console.log(state, item, settings);
           return blocks[item];
         },
         getMediaEntity(state, item) {
@@ -61,16 +68,24 @@
       },
 
       resolvers: {
-        async getBlock(item) {
+        async getBlock(item, settings) {
           const response = await fetch(
             Drupal.url(`editor/blocks/load/${item}`),
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(settings),
+            }
           );
           const block = await response.json();
-          dispatch('drupal').setBlock(item, block);
+          dispatch('drupal').setBlock(item, settings, {...block, settings});
           return {
             type: 'GET_BLOCK',
             item,
-            block,
+            settings,
+            block: {...block, settings},
           };
         },
         async getMediaEntity(item) {
@@ -83,7 +98,6 @@
 
             if (mediaEntity && mediaEntity.view_modes) {
               dispatch('drupal').setMediaEntity(item, mediaEntity);
-              console.log('mediaEntity', mediaEntity);
               return {
                 type: 'GET_MEDIA_ENTITY',
                 item,

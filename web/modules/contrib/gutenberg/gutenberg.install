@@ -143,4 +143,21 @@ function gutenberg_update_8203(&$sandbox) {
 function gutenberg_uninstall() {
   // Delete text format settings.
   Drupal::configFactory()->getEditable('filter.format.gutenberg')->delete();
+
+  // Remove filter settings leftovers from the config to avoid "Plugin not
+  // found" errors after uninstall Gutenberg. This is required, because even
+  // disabled filters are part of the filter format configuration objects.
+  $formats = Drupal::configFactory()->listAll('filter.format.');
+  foreach ($formats as $format_id) {
+    $format_config = Drupal::configFactory()->getEditable($format_id);
+    $format_config->clear('filters.gutenberg');
+    $module_dependencies = $format_config->get('dependencies.module');
+    if (is_array($module_dependencies)) {
+      $module_dependencies = array_filter($module_dependencies, function($module) {
+        return ($module !== 'gutenberg');
+      });
+      $format_config->set('dependencies.module', $module_dependencies);
+    }
+    $format_config->save();
+  }
 }

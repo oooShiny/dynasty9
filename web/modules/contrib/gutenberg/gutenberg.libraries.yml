@@ -74,6 +74,9 @@ drupal-blocks:
     - gutenberg/blocks-edit
     - gutenberg/filters
     # - gutenberg/g-media-attributes
+drupal-block-settings:
+  js:
+    js/drupal-block-settings.js: {  }
 blocks-edit:
   dependencies:
     - gutenberg/edit-node
@@ -94,6 +97,15 @@ init:
   js:
     js/init.js: {  }
   dependencies:
+    - core/jquery
+    - core/jquery.ui
+    - core/drupal
+    - core/drupalSettings
+    - core/drupal.debounce
+    - core/drupal.displace
+    - core/drupal.ajax
+    - editor/drupal.editor
+    - core/ckeditor
     - gutenberg/regenerator-runtime
 edit-node:
   css:
@@ -101,8 +113,8 @@ edit-node:
       css/editor.css: {  }
       css/admin.css: {  }
   js:
-    js/components/drupal-block.js: {  }
     js/components/drupal-icon.js: {  }
+    js/components/drupal-block.js: {  }
     js/components/media-browser-details.js: {  }
     js/components/media-browser.js: {  }
     js/components/media-library.js: {  }
@@ -117,15 +129,9 @@ edit-node:
     js/admin.js: {  }
     js/welcome-guide.js: {  }
   dependencies:
-    - core/jquery
-    - core/drupal
-    - core/drupal.dialog.ajax
-    - core/drupalSettings
-    - core/drupal.debounce
-    - core/drupal.displace
-    - core/drupal.ajax
-    - editor/drupal.editor
     - gutenberg/init
+    - core/drupal.dialog
+    - core/drupal.dialog.ajax
     - gutenberg/url
     - gutenberg/drupal-api-fetch
     - gutenberg/drupal-url

@@ -60,8 +60,7 @@ class DrupalBlockProcessor implements GutenbergBlockProcessorInterface {
      */
     $plugin_id = $block_attributes['blockId'];
 
-    // TODO: load the config from the block attributes.
-    $config = $block_attributes['config'] ?? [];
+    $config = $block_attributes['settings'] ?? [];
 
     $plugin_block = $this->blocksRenderer->getBlockFromPluginId($plugin_id, $config);
 

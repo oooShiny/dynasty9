@@ -64,12 +64,15 @@
         blockId: {
           type: 'string',
         },
+        settings: {
+          type: 'object',
+        },
         align: {
           type: 'string',
         },
       },
       edit({ attributes, className, setAttributes }) {
-        const { align } = attributes;
+        const { align, settings } = attributes;
         setAttributes({ blockId: id });
 
         return (
@@ -77,7 +80,8 @@
             <DrupalBlock
               className={className}
               id={id}
-              url={Drupal.url(`editor/blocks/load/${id}`)}
+              name={definition.admin_label}
+              settings={settings}
             />
           </Fragment>
         );

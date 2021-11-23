@@ -74,7 +74,20 @@ gutenberg.blocks.load_single:
     # parameters:
     #   block:
     #     type: entity:block
-  methods: 'GET'
+  methods: 'POST'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+gutenberg.blocks.settings:
+  path: '/editor/blocks/settings/{plugin_id}'
+  defaults:
+    _form: '\Drupal\gutenberg\Form\BlockSettingsForm'
+    _title: 'Configure block'
+    # _controller: '\Drupal\gutenberg\Controller\BlocksController::settingsForm'
+    # parameters:
+    #   block:
+    #     type: entity:block
+  # methods: 'GET'
   requirements:
     _permission: 'use gutenberg'
     _format: json

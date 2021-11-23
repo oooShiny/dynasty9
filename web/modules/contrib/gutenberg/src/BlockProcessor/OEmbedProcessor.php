@@ -90,7 +90,8 @@ class OEmbedProcessor extends ConfigurableProcessorBase {
    */
   public function processBlock(array &$block, &$block_content, RefinableCacheableDependencyInterface $bubbleable_metadata) {
     $block_attributes = $block['attrs'];
-    $url = $block_attributes['url'];
+    $url = $block_attributes['url'] ?? '';
+    if (!$url) return;
 
     // Try and check against the cache as too many requests might lead to
     // the site being blacklisted.
@@ -219,12 +220,11 @@ class OEmbedProcessor extends ConfigurableProcessorBase {
       'oembed' => [
         'maxwidth' => 800,
         'providers' => <<<EOL
-#https?://(www\.)?youtube.com/watch.*#i | http://www.youtube.com/oembed | true
-#https?://youtu\.be/\w*#i | http://www.youtube.com/oembed | true
+#https?://(www\.)?youtube.com/watch.*#i | https://www.youtube.com/oembed | true
+#https?://youtu\.be/\w*#i | https://www.youtube.com/oembed | true
 #https?://(www\.)?vimeo\.com/\w*#i | http://vimeo.com/api/oembed.json | true
 #http://(www\.)?hulu\.com/watch/.*#i | http://www.hulu.com/api/oembed.json | true
 #https?://(www\.)?twitter.com/.+?/status(es)?/.*#i | https://api.twitter.com/1/statuses/oembed.json | true
-#https?://(www\.)?instagram.com/p/.*#i | https://api.instagram.com/oembed | true
 #https?:\/\/(www\.)?google\.com\/maps\/embed\?pb\=.*#i | http://open.iframe.ly/api/oembed | true
 #https?://maps.google.com/maps.*#i | google-maps | LOCAL
 #https?://docs.google.com/(document|spreadsheet)/.*#i | google-docs | LOCAL

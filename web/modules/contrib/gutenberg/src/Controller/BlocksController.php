@@ -5,6 +5,7 @@ namespace Drupal\gutenberg\Controller;
 use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Render\Renderer;
 use Drupal\gutenberg\BlocksRendererHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,6 +31,13 @@ class BlocksController extends ControllerBase {
   protected $configFactory;
 
   /**
+   * Drupal\Core\Render\Renderer instance.
+   *
+   * @var \Drupal\Core\Render\Renderer
+   */
+  protected $renderer;
+
+  /**
    * Drupal\gutenberg\BlocksRendererHelper instance.
    *
    * @var \Drupal\gutenberg\BlocksRendererHelper
@@ -43,15 +51,19 @@ class BlocksController extends ControllerBase {
    *   Block manager service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config factory service.
+   * @param \Drupal\Core\Render\Renderer $renderer
+   *   Render service.
    * @param \Drupal\gutenberg\BlocksRendererHelper $blocks_renderer
    *   Blocks renderer helper service.
    */
   public function __construct(
     BlockManagerInterface $block_manager,
     ConfigFactoryInterface $config_factory,
+    Renderer $renderer,
     BlocksRendererHelper $blocks_renderer) {
     $this->blockManager = $block_manager;
     $this->configFactory = $config_factory;
+    $this->renderer = $renderer;
     $this->blocksRenderer = $blocks_renderer;
   }
 
@@ -62,6 +74,7 @@ class BlocksController extends ControllerBase {
     return new static(
       $container->get('plugin.manager.block'),
       $container->get('config.factory'),
+      $container->get('renderer'),
       $container->get('gutenberg.blocks_renderer')
     );
   }
@@ -100,15 +113,22 @@ class BlocksController extends ControllerBase {
   /**
    * Returns JSON representing the loaded blocks.
    *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The request.
    * @param string $plugin_id
    *   Plugin ID.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The JSON response.
    */
-  public function loadById($plugin_id) {
-    /* TODO: We can get a specific instance/derivative of block and load it's config */
+  public function loadById(Request $request, $plugin_id) {
+    $request_content = $request->getContent();
+
     $config = [];
+    if (!empty($request_content)) {
+      $config = json_decode($request_content, TRUE);
+    }
+
     $plugin_block = $this->blocksRenderer->getBlockFromPluginId($plugin_id, $config);
 
     $content = '';
@@ -117,10 +137,16 @@ class BlocksController extends ControllerBase {
       $access_result = $this->blocksRenderer->getBlockAccess($plugin_block);
       if ($access_result->isForbidden()) {
         // You might need to add some cache tags/contexts.
-        return new JsonResponse(['html' => $this->t('Access to this block is denied.')]);
+        return new JsonResponse(['access' => FALSE, 'html' => $this->t('Unable to render block. Check block settings or permissions.')]);
       }
 
       $content = $this->blocksRenderer->getRenderFromBlockPlugin($plugin_block);
+
+      // Create a block entity.
+      // $entity = $this->entityTypeManager()->getStorage('block')->create(['plugin' => $plugin_id, 'theme' => NULL]);
+      // $form = $this->entityFormBuilder()->getForm($entity);
+      // Render block settings.
+      // $config = $this->renderer->render($form['settings']);
     }
 
     // If the block is a view with contexts defined, it may
@@ -130,7 +156,7 @@ class BlocksController extends ControllerBase {
       $content = $this->t('Unable to render the content possibly due to path restrictions.');
     }
 
-    return new JsonResponse(['html' => $content]);
+    return new JsonResponse(['access' => TRUE, 'html' => $content]); // , 'config' => $config
   }
 
 }

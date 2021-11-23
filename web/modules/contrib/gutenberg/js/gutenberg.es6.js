@@ -317,16 +317,35 @@
 
       let isFormValid = false;
 
-      // Calling openGeneralSidebar() is not working properly when sidebar
-      // is hidden. To overcome this we need to call it twice.
+
       $('#edit-submit, #edit-preview').on('mousedown', e => {
         const { openGeneralSidebar } = data.dispatch('core/edit-post');
 
-        isFormValid = element.form.reportValidity();
+        // is checkValidity supported? If not, validate the form. 
+        if (typeof element.form.checkValidity === 'function') {
+          isFormValid = element.form.checkValidity();
+        } else {
+          isFormValid = true;
+        }
 
         if (!isFormValid) {
-          openGeneralSidebar('edit-post/document');
-          openGeneralSidebar('edit-post/document');
+          let isMetaboxValid = true;
+
+          // Expand "More Settings" set on error.
+          $('#edit-metabox-fields :input').each(function (index, el) {
+            if (!el.checkValidity()) {
+              $('#edit-metabox-fields').attr('open', '');
+              isMetaboxValid = false;
+              return false;
+            }
+          });
+
+          if (isMetaboxValid) {
+            // Calling openGeneralSidebar() is not working properly when sidebar
+            // is hidden. To overcome this we need to call it twice.
+            openGeneralSidebar('edit-post/document');
+            openGeneralSidebar('edit-post/document');
+          }
 
           e.preventDefault();
           e.stopPropagation();

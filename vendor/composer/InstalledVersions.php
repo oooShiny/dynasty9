@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3e6f109244beba289d617bacfba3dadc40a90688',
+    'reference' => 'a056ecb63cfddf86463cd34731e854fd102440a8',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -215,17 +215,17 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/admin_toolbar' => 
     array (
-      'pretty_version' => '2.4.0',
-      'version' => '2.4.0.0',
+      'pretty_version' => '2.5.0',
+      'version' => '2.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.4',
+      'reference' => '8.x-2.5',
     ),
     'drupal/advagg' => 
     array (
@@ -240,7 +240,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/auto_entitylabel' => 
@@ -256,49 +256,49 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/ban' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/bartik' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/basic_auth' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/big_pipe' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/block' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/block_content' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/block_field' => 
@@ -314,14 +314,14 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/breakpoint' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/charts' => 
@@ -337,35 +337,35 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/claro' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/classy' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/color' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/comment' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/conditional_fields' => 
@@ -381,192 +381,192 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/config_translation' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/contact' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/content_moderation' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/content_translation' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/contextual' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core' => 
     array (
-      'pretty_version' => '9.2.3',
-      'version' => '9.2.3.0',
+      'pretty_version' => '9.2.9',
+      'version' => '9.2.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e9c75c8e2d1395aebb19cad17d6a514945636ecf',
+      'reference' => '2e2f015e881abccc32efcd264128e8a8444b2ec1',
     ),
     'drupal/core-annotation' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-assertion' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-bridge' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-class-finder' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-composer-scaffold' => 
     array (
-      'pretty_version' => '9.2.3',
-      'version' => '9.2.3.0',
+      'pretty_version' => '9.2.9',
+      'version' => '9.2.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e146f2d0bab60c798c7cc91eae79f25c43a96899',
+      'reference' => '3c9efe8e154acc2cadb86b51733be55556677b0b',
     ),
     'drupal/core-datetime' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-dependency-injection' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-diff' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-discovery' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-event-dispatcher' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-file-cache' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-file-security' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-filesystem' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-front-matter' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-gettext' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-graph' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-http-foundation' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-php-storage' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-plugin' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-project-message' => 
     array (
-      'pretty_version' => '9.2.3',
-      'version' => '9.2.3.0',
+      'pretty_version' => '9.2.9',
+      'version' => '9.2.9.0',
       'aliases' => 
       array (
       ),
@@ -576,58 +576,58 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-recommended' => 
     array (
-      'pretty_version' => '9.2.3',
-      'version' => '9.2.3.0',
+      'pretty_version' => '9.2.9',
+      'version' => '9.2.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => '20feef210c8506a8cc903bd5ef9ef90dec89e71e',
+      'reference' => 'a052e6f47864bb6597e6f449b9cfdb1aa4eea400',
     ),
     'drupal/core-render' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-serialization' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-transliteration' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-utility' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-uuid' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/core-version' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/ctools' => 
@@ -643,42 +643,42 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/datetime_range' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/dblog' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/dynamic_page_cache' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/editor' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/entity_reference' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/entity_reference_revisions' => 
@@ -712,7 +712,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/field_group' => 
@@ -728,7 +728,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/field_permissions' => 
@@ -744,38 +744,38 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/file' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/filter' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/forum' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/gin' => 
     array (
-      'pretty_version' => '3.0.0-alpha36',
-      'version' => '3.0.0.0-alpha36',
+      'pretty_version' => '3.0.0-alpha37',
+      'version' => '3.0.0.0-alpha37',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-3.0-alpha36',
+      'reference' => '8.x-3.0-alpha37',
     ),
     'drupal/gin_login' => 
     array (
@@ -806,46 +806,46 @@ private static $installed = array (
     ),
     'drupal/gutenberg' => 
     array (
-      'pretty_version' => '2.0.0',
-      'version' => '2.0.0.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8.x-2.0',
+      'reference' => '8.x-2.2',
     ),
     'drupal/hal' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/help' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/help_topics' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/history' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/image' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/inline_entity_form' => 
@@ -861,7 +861,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/jquery_ui' => 
@@ -886,7 +886,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/key' => 
@@ -902,21 +902,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/layout_builder' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/layout_discovery' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/layout_paragraphs' => 
@@ -932,23 +932,23 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/linkit' => 
     array (
-      'pretty_version' => '6.0.0-beta2',
-      'version' => '6.0.0.0-beta2',
+      'pretty_version' => '6.0.0-beta3',
+      'version' => '6.0.0.0-beta3',
       'aliases' => 
       array (
       ),
-      'reference' => '6.0.0-beta2',
+      'reference' => '6.0.0-beta3',
     ),
     'drupal/locale' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/mailsystem' => 
@@ -964,28 +964,28 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/media_library' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/menu_link_content' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/menu_ui' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/metatag' => 
@@ -1001,7 +1001,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/migrate_cs' => 
@@ -1017,21 +1017,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/migrate_drupal_multilingual' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/migrate_drupal_ui' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/migrate_plus' => 
@@ -1056,35 +1056,35 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/node' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/olivero' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/options' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/page_cache' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/pager' => 
@@ -1109,14 +1109,14 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/path_alias' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/pathauto' => 
@@ -1132,7 +1132,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/quicklink' => 
@@ -1148,7 +1148,7 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/recommended-project' => 
@@ -1158,7 +1158,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3e6f109244beba289d617bacfba3dadc40a90688',
+      'reference' => 'a056ecb63cfddf86463cd34731e854fd102440a8',
     ),
     'drupal/redirect' => 
     array (
@@ -1173,21 +1173,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/rest' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/search' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/search_api' => 
@@ -1230,28 +1230,28 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/settings_tray' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/seven' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/shortcut' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/simple_sitemap' => 
@@ -1267,35 +1267,35 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/stark' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/statistics' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/syslog' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/system' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/tailwindcss' => 
@@ -1311,21 +1311,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/telephone' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/text' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/token' => 
@@ -1341,21 +1341,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/tour' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/tracker' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/twig_tweak' => 
@@ -1380,21 +1380,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/user' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/views' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/views_entity_form_field' => 
@@ -1419,21 +1419,21 @@ private static $installed = array (
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/workflows' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/workspaces' => 
     array (
       'replaced' => 
       array (
-        0 => '9.2.3',
+        0 => '9.2.9',
       ),
     ),
     'drupal/yoast_seo' => 

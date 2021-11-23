@@ -24,13 +24,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     return registerStore('drupal', {
       reducer: function reducer() {
+        var _extends2;
+
         var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
         var action = arguments[1];
 
         switch (action.type) {
           case 'SET_BLOCK':
             return _extends({}, state, {
-              blocks: _extends({}, state.blocks, _defineProperty({}, action.item, action.block))
+              blocks: _extends({}, state.blocks, (_extends2 = {}, _defineProperty(_extends2, action.item, action.settings), _defineProperty(_extends2, action.item, action.block), _extends2))
             });
           case 'SET_MEDIA_ENTITY':
             return _extends({}, state, {
@@ -43,10 +45,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
       actions: {
-        setBlock: function setBlock(item, block) {
+        setBlock: function setBlock(item, settings, block) {
           return {
             type: 'SET_BLOCK',
             item: item,
+            settings: settings,
             block: block
           };
         },
@@ -60,9 +63,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
 
       selectors: {
-        getBlock: function getBlock(state, item) {
+        getBlock: function getBlock(state, item, settings) {
           var blocks = state.blocks;
 
+          console.log(state, item, settings);
           return blocks[item];
         },
         getMediaEntity: function getMediaEntity(state, item) {
@@ -73,7 +77,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
 
       resolvers: {
-        getBlock: function getBlock(item) {
+        getBlock: function getBlock(item, settings) {
           var _this = this;
 
           return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
@@ -83,7 +87,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 switch (_context.prev = _context.next) {
                   case 0:
                     _context.next = 2;
-                    return fetch(Drupal.url('editor/blocks/load/' + item));
+                    return fetch(Drupal.url('editor/blocks/load/' + item), {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(settings)
+                    });
 
                   case 2:
                     response = _context.sent;
@@ -93,11 +103,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   case 5:
                     block = _context.sent;
 
-                    dispatch('drupal').setBlock(item, block);
+                    dispatch('drupal').setBlock(item, settings, _extends({}, block, { settings: settings }));
                     return _context.abrupt('return', {
                       type: 'GET_BLOCK',
                       item: item,
-                      block: block
+                      settings: settings,
+                      block: _extends({}, block, { settings: settings })
                     });
 
                   case 8:
@@ -124,7 +135,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     response = _context2.sent;
 
                     if (!response.ok) {
-                      _context2.next = 11;
+                      _context2.next = 10;
                       break;
                     }
 
@@ -135,37 +146,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     mediaEntity = _context2.sent;
 
                     if (!(mediaEntity && mediaEntity.view_modes)) {
-                      _context2.next = 11;
+                      _context2.next = 10;
                       break;
                     }
 
                     dispatch('drupal').setMediaEntity(item, mediaEntity);
-                    console.log('mediaEntity', mediaEntity);
                     return _context2.abrupt('return', {
                       type: 'GET_MEDIA_ENTITY',
                       item: item,
                       mediaEntity: mediaEntity
                     });
 
-                  case 11:
+                  case 10:
                     if (!(response.status === 404)) {
-                      _context2.next = 14;
+                      _context2.next = 13;
                       break;
                     }
 
                     Drupal.notifyError("Media entity couldn't be found.");
                     return _context2.abrupt('return', null);
 
-                  case 14:
+                  case 13:
                     if (response.ok) {
-                      _context2.next = 17;
+                      _context2.next = 16;
                       break;
                     }
 
                     Drupal.notifyError('An error occurred while fetching data.');
                     return _context2.abrupt('return', null);
 
-                  case 17:
+                  case 16:
                   case 'end':
                     return _context2.stop();
                 }

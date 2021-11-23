@@ -5,78 +5,197 @@
 * @preserve
 **/'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 (function (wp, Drupal) {
-  var data = wp.data;
-  var withSelect = data.withSelect;
+  var getBlock = function () {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(item, settings) {
+      var response, block;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch(Drupal.url('editor/blocks/load/' + item), {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(settings)
+              });
 
-  var DrupalBlock = function (_wp$element$Component) {
-    _inherits(DrupalBlock, _wp$element$Component);
+            case 2:
+              response = _context.sent;
+              _context.next = 5;
+              return response.json();
 
-    function DrupalBlock() {
-      _classCallCheck(this, DrupalBlock);
+            case 5:
+              block = _context.sent;
+              return _context.abrupt('return', block);
 
-      return _possibleConstructorReturn(this, (DrupalBlock.__proto__ || Object.getPrototypeOf(DrupalBlock)).apply(this, arguments));
-    }
-
-    _createClass(DrupalBlock, [{
-      key: 'render',
-      value: function render() {
-        if (this.props.blockContent) {
-          return React.createElement(
-            'div',
-            null,
-            React.createElement('div', {
-              className: this.props.className,
-
-              dangerouslySetInnerHTML: { __html: this.props.blockContent.html }
-            })
-          );
+            case 7:
+            case 'end':
+              return _context.stop();
+          }
         }
+      }, _callee, this);
+    }));
 
-        return React.createElement(
-          'div',
-          { className: 'loading-drupal-block' },
-          Drupal.t('Loading'),
-          '...'
-        );
-      }
-    }]);
+    return function getBlock(_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
-    return DrupalBlock;
-  }(wp.element.Component);
+  var editor = wp.editor,
+      element = wp.element,
+      components = wp.components,
+      i18n = wp.i18n;
+  var __ = i18n.__;
+  var BlockControls = editor.BlockControls;
+  var Fragment = element.Fragment,
+      useState = element.useState,
+      useEffect = element.useEffect;
+  var Placeholder = components.Placeholder,
+      Toolbar = components.Toolbar,
+      IconButton = components.IconButton,
+      Button = components.Button,
+      Spinner = components.Spinner;
 
-  var createClass = withSelect(function (select, props) {
-    var _select = select('drupal'),
-        getBlock = _select.getBlock;
 
-    var id = props.id;
+  function openBlockSettings(id, settings) {
+    var ajaxSettings = {
+      url: '/editor/blocks/settings/' + id,
+      dialogType: 'modal',
+      dialog: {
+        width: 600,
+        position: { at: 'center center' }
+      },
+      submit: { settings: settings }
+    };
+    Drupal.ajax(ajaxSettings).execute();
+  }
 
-    var block = getBlock(id);
+  function processHtml(html) {
     var node = document.createElement('div');
+    node.innerHTML = html;
 
-    if (block && block.html) {
-      node.innerHTML = block.html;
-      var formElements = node.querySelectorAll('input, select, button, textarea');
-      formElements.forEach(function (element) {
-        element.setAttribute('readonly', true);
-        element.setAttribute('required', false);
-        element.setAttribute('disabled', true);
+    var formElements = node.querySelectorAll('input, select, button, textarea, checkbox, radio');
+    formElements.forEach(function (element) {
+      element.setAttribute('readonly', true);
+      element.setAttribute('required', false);
+      element.setAttribute('disabled', true);
+    });
+
+    return node.innerHTML;
+  }
+
+  function hasEmptyContent(html) {
+    var node = document.createElement('div');
+    node.innerHTML = html;
+
+    return node.innerText.trim() ? false : true;
+  }
+
+  function DrupalBlock(props) {
+    var _useState = useState(true),
+        _useState2 = _slicedToArray(_useState, 2),
+        loading = _useState2[0],
+        setLoading = _useState2[1];
+
+    var _useState3 = useState(''),
+        _useState4 = _slicedToArray(_useState3, 2),
+        html = _useState4[0],
+        setHtml = _useState4[1];
+
+    var _useState5 = useState(false),
+        _useState6 = _slicedToArray(_useState5, 2),
+        access = _useState6[0],
+        setAccess = _useState6[1];
+
+    var id = props.id,
+        settings = props.settings,
+        name = props.name,
+        className = props.className;
+
+
+    useEffect(function () {
+      setLoading(true);
+
+      getBlock(id, settings).then(function (block) {
+        setHtml(block.html);
+        setAccess(block.access);
+        setLoading(false);
+      }).catch(function (r) {
+        setHtml(__t('An error occured when loading the block.') + r);
+        setAccess(false);
+        setLoading(false);
       });
-    }
+    }, [id, settings]);
 
-    return {
-      blockContent: { html: node.innerHTML } };
-  })(DrupalBlock);
+    return React.createElement(
+      Fragment,
+      null,
+      React.createElement(
+        BlockControls,
+        null,
+        React.createElement(
+          Toolbar,
+          null,
+          React.createElement(IconButton, {
+            label: __('Open block settings'),
+            icon: 'admin-generic',
+            className: 'drupal-block-settings',
+            onClick: function onClick() {
+              return openBlockSettings(id, settings);
+            }
+          })
+        )
+      ),
+      loading && React.createElement(
+        Placeholder,
+        {
+          label: name + ' ' + __('block'),
+          instructions: __('Loading block...')
+        },
+        React.createElement(Spinner, null)
+      ),
+      (!access || !html) && React.createElement(
+        Placeholder,
+        {
+          label: name + ' ' + __('block'),
+          instructions: __('Unable to render the block. You might need to check block settings or permissions.')
+        },
+        React.createElement(
+          Button,
+          {
+            icon: 'admin-generic',
+            variant: 'primary',
+            onClick: function onClick() {
+              return openBlockSettings(id, settings);
+            }
+          },
+          __('Block settings')
+        )
+      ),
+      access && html && React.createElement(
+        Fragment,
+        null,
+        React.createElement('div', {
+          className: className,
+
+          dangerouslySetInnerHTML: { __html: processHtml(html) }
+        }),
+        hasEmptyContent(html) && React.createElement(Placeholder, {
+          label: name + ' ' + __('block'),
+          instructions: __('This block is rendering empty content.')
+        })
+      )
+    );
+  }
 
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
-  window.DrupalGutenberg.Components.DrupalBlock = createClass;
+  window.DrupalGutenberg.Components.DrupalBlock = DrupalBlock;
 })(wp, Drupal);

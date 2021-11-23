@@ -269,15 +269,32 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 isFormValid = false;
 
+
                 $('#edit-submit, #edit-preview').on('mousedown', function (e) {
                   var _data$dispatch = data.dispatch('core/edit-post'),
                       openGeneralSidebar = _data$dispatch.openGeneralSidebar;
 
-                  isFormValid = element.form.reportValidity();
+                  if (typeof element.form.checkValidity === 'function') {
+                    isFormValid = element.form.checkValidity();
+                  } else {
+                    isFormValid = true;
+                  }
 
                   if (!isFormValid) {
-                    openGeneralSidebar('edit-post/document');
-                    openGeneralSidebar('edit-post/document');
+                    var isMetaboxValid = true;
+
+                    $('#edit-metabox-fields :input').each(function (index, el) {
+                      if (!el.checkValidity()) {
+                        $('#edit-metabox-fields').attr('open', '');
+                        isMetaboxValid = false;
+                        return false;
+                      }
+                    });
+
+                    if (isMetaboxValid) {
+                      openGeneralSidebar('edit-post/document');
+                      openGeneralSidebar('edit-post/document');
+                    }
 
                     e.preventDefault();
                     e.stopPropagation();

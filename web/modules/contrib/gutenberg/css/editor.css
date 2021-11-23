@@ -92,6 +92,10 @@ body.is-fullscreen-mode .edit-post-layout {
   z-index: 999 !important;
 }
 
+body.is-fullscreen-mode .ui-autocomplete {
+  z-index: 1000;
+}
+
 input[type="search"] {
   box-sizing: border-box;
 }
@@ -195,6 +199,12 @@ ul.block-editor-block-navigation__list {
 
 .ui-dialog {
   z-index: 1000000 !important;
+}
+
+[data-type*="drupalblock/"] .no-access {
+  padding: 20px;
+  background-color: #e0e0e0;
+  text-align: center;
 }
 
 input, textarea {
