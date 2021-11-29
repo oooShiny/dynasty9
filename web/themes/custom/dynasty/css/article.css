@@ -10,6 +10,13 @@
   padding-right: 6rem!important;
 }
 
+.article h3 {
+  font-size: large;
+  padding-left: 6rem !important;
+  padding-right: 6rem !important;
+  font-weight: bold;
+}
+
 .article p,
 .article ol,
 .article ul {
