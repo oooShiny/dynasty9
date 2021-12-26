@@ -1,0 +1,23 @@
+uuid: 9a99a365-90cf-4dd4-a2af-baf9cb1ccfc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_in_blog_listing
+    - node.type.article
+id: node.article.field_show_in_blog_listing
+field_name: field_show_in_blog_listing
+entity_type: node
+bundle: article
+label: 'Show in Blog Listing'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
