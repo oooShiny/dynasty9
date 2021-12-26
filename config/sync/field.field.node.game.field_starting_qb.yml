@@ -1,0 +1,25 @@
+uuid: 9f032bbc-b581-4408-bafa-d5487c76d6ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_starting_qb
+    - node.type.game
+id: node.game.field_starting_qb
+field_name: field_starting_qb
+entity_type: node
+bundle: game
+label: 'Starting QB'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: quarterback_listing
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

@@ -1,7 +1,9 @@
 uuid: 16885100-35c1-4990-a5b1-df72b769bc19
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - gutenberg
 _core:
   default_config_hash: NIKBt6kw_uPhNI0qtR2DnRf7mSOgAQdx7Q94SKMjXbQ
 name: 'Plain text'
@@ -27,3 +29,10 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  gutenberg:
+    id: gutenberg
+    provider: gutenberg
+    status: false
+    weight: 0
+    settings:
+      processor_settings: {  }

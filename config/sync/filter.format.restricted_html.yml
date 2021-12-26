@@ -1,7 +1,9 @@
 uuid: 6d835519-97b4-4f4d-8bfe-e172ca84dded
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - gutenberg
 _core:
   default_config_hash: oz6NyPDAB4HB6N9hgH2LwNVtCd-sXbMG1fbn5KsRIDI
 name: 'Restricted HTML'
@@ -30,3 +32,10 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
+  gutenberg:
+    id: gutenberg
+    provider: gutenberg
+    status: false
+    weight: 0
+    settings:
+      processor_settings: {  }

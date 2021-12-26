@@ -93,7 +93,17 @@ li.pager__item.is-active {
   th.views-field-month,
   td.views-field-month,
   th.views-field-weekday,
-  td.views-field-weekday {
+  td.views-field-weekday,
+  th.views-field-brady-attempts,
+  td.views-field-brady-attempts,
+  th.views-field-brady-completions,
+  td.views-field-brady-completions,
+  th.views-field-brady-yards,
+  td.views-field-brady-yards,
+  th.views-field-brady-tds,
+  td.views-field-brady-tds,
+  th.views-field-brady-ints,
+  td.views-field-brady-ints {
     display: none;
   }
 }

@@ -63,6 +63,22 @@ function dynasty_module_update_8003() {
   }
 }
 
+/**
+ * Set Tom Brady as starting QB if "Brady Started" field is set.
+ */
+function dynasty_module_update_8004() {
+  $games = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
+    'type' => 'game',
+    'field_brady_played' => TRUE,
+  ]);
+
+
+  foreach ($games as $game) {
+    $game->field_starting_qb->target_id = 272;
+    $game->save();
+  }
+}
+
 function dynasty_module_theme($existing, $type, $theme, $path) {
   return [
     'footer_seasons_block' => [

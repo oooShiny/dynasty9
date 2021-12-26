@@ -1,0 +1,11 @@
+<?php
+function dynasty_timeline_theme($existing, $type, $theme, $path)
+{
+  return [
+    'season_games_list' => [
+      'variables' => [
+        'games' => ''
+      ]
+    ]
+  ];
+}

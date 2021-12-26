@@ -69,8 +69,8 @@
       <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
       {% set content_width = '' %}
       {% if page.sidebar_first %}
-        {% set content_width = 'md:tw-w-3/4' %}
-        <aside class="tw-w-screen md:tw-w-1/4 tw-px-4" role="complementary">
+        {% set content_width = 'md:tw-w-4/5' %}
+        <aside class="tw-w-screen md:tw-w-1/5 tw-px-4" role="complementary">
           {{ page.sidebar_first }}
         </aside>
       {% endif %}
@@ -81,7 +81,7 @@
           </div>
 
         {% if page.sidebar_second %}
-          <aside class="md:tw-w-1/4" role="complementary">
+          <aside class="md:tw-w-1/5" role="complementary">
             {{ page.sidebar_second }}
           </aside>
         {% endif %}

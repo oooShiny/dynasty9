@@ -38,6 +38,7 @@ dependencies:
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
     - field.field.node.game.field_season
+    - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
     - field.field.node.game.field_temperature
     - field.field.node.game.field_vegas_line
@@ -52,6 +53,7 @@ dependencies:
     - link
     - metatag
     - path
+    - select2
     - text
     - yoast_seo
 third_party_settings:
@@ -84,6 +86,8 @@ third_party_settings:
       label: Boxscore
     group_tom_brady:
       children:
+        - field_brady_played
+        - field_starting_qb
         - field_brady_attempts
         - field_brady_completions
         - field_brady_yards
@@ -100,7 +104,7 @@ third_party_settings:
         id: ''
         classes: ''
         open: false
-      label: 'Tom Brady'
+      label: 'Starting QB'
     group_game_summary:
       children:
         - field_game_summary
@@ -176,7 +180,6 @@ third_party_settings:
       children:
         - field_game_video
         - field_youtube_highlights
-        - field_highlights
       parent_name: ''
       weight: 2
       format_type: details
@@ -201,21 +204,21 @@ content:
     type: boolean_checkbox
     region: content
   field_brady_attempts:
-    weight: 15
+    weight: 6
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_brady_completions:
-    weight: 16
+    weight: 7
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_brady_ints:
-    weight: 19
+    weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -229,14 +232,14 @@ content:
     type: boolean_checkbox
     region: content
   field_brady_tds:
-    weight: 18
+    weight: 9
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_brady_yards:
-    weight: 17
+    weight: 8
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -370,7 +373,7 @@ content:
     type: number
     region: content
   field_passer_rating:
-    weight: 20
+    weight: 11
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -444,6 +447,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_starting_qb:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
     region: content
   field_surf:
     weight: 8
@@ -524,9 +537,9 @@ content:
     third_party_settings: {  }
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   promote: true

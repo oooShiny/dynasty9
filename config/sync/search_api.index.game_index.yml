@@ -8,22 +8,29 @@ dependencies:
     - taxonomy
     - search_api
   config:
+    - field.storage.node.field_brady_attempts
+    - field.storage.node.field_brady_completions
     - field.storage.node.field_date
     - field.storage.node.field_after_bye
     - field.storage.node.field_game_video
     - field.storage.node.field_home_away
+    - field.storage.node.field_brady_ints
     - field.storage.node.field_month
     - field.storage.node.field_opponent
     - field.storage.node.field_opponent_score
     - field.storage.node.field_opposing_coach
     - field.storage.node.field_ot
+    - field.storage.node.field_passer_rating
     - field.storage.node.field_patriots_score
     - field.storage.node.field_playoff_game
     - field.storage.node.field_result
     - field.storage.node.field_score_differential
     - field.storage.node.field_season
+    - field.storage.node.field_surf
+    - field.storage.node.field_brady_tds
     - field.storage.node.field_week
     - field.storage.node.field_weekday
+    - field.storage.node.field_brady_yards
     - search_api.server.solr_server
 third_party_settings:
   search_api_solr:
@@ -71,6 +78,54 @@ name: 'Game Index'
 description: ''
 read_only: false
 field_settings:
+  brady_attempts:
+    label: Attempts
+    datasource_id: 'entity:node'
+    property_path: field_brady_attempts
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_brady_attempts
+  brady_completions:
+    label: Completions
+    datasource_id: 'entity:node'
+    property_path: field_brady_completions
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_brady_completions
+  brady_ints:
+    label: INTs
+    datasource_id: 'entity:node'
+    property_path: field_brady_ints
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_brady_ints
+  brady_passer_rating:
+    label: 'Passer Rating'
+    datasource_id: 'entity:node'
+    property_path: field_passer_rating
+    type: decimal
+    dependencies:
+      config:
+        - field.storage.node.field_passer_rating
+  brady_tds:
+    label: TDs
+    datasource_id: 'entity:node'
+    property_path: field_brady_tds
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_brady_tds
+  brady_yards:
+    label: Yards
+    datasource_id: 'entity:node'
+    property_path: field_brady_yards
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_brady_yards
   bye:
     label: 'Game is After a Bye'
     datasource_id: 'entity:node'
@@ -208,6 +263,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_season
+  surface:
+    label: 'Surface Type'
+    datasource_id: 'entity:node'
+    property_path: field_surf
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_surf
   video:
     label: 'Game Video'
     datasource_id: 'entity:node'
