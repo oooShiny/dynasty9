@@ -185,11 +185,21 @@
   {% if content.field_brady_attempts|render %}
     <a id="brady-stats"></a>
     <div id="brady-stats" class="tw-bg-gray-400 tw-text-blue-pats tw-py-10">
-      <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">{{ content.field_starting_qb }} Game Stats</h2>
+      {% if qbs is not empty %}
+        {% set qbtitle = 'QB Passing Stats' %}
+      {% else %}
+        {% set qbtitle %}
+          {{ content.field_starting_qb }} Passing Stats
+        {% endset %}
+      {% endif %}
+      <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">{{ qbtitle }}</h2>
       <div class="tw-flex tw-justify-center">
         <table>
           <thead>
             <tr class="tw-border-b tw-border-blue-pats">
+              {% if qbs is not empty %}
+                <th class="tw-p-4">QB</th>
+              {% endif %}
               <th class="tw-p-4">COM</th>
               <th class="tw-p-4">ATT</th>
               <th class="tw-p-4">YDS</th>
@@ -200,6 +210,9 @@
           </thead>
           <tbody>
             <tr>
+              {% if qbs is not empty %}
+                <td class="tw-p-4">{{ content.field_starting_qb }}</td>
+              {% endif %}
               <td class="tw-p-4">{{ content.field_brady_completions }}</td>
               <td class="tw-p-4">{{ content.field_brady_attempts }}</td>
               <td class="tw-p-4">{{ content.field_brady_yards }}</td>
@@ -207,6 +220,19 @@
               <td class="tw-p-4">{{ content.field_brady_ints }}</td>
               <td class="tw-p-4">{{ content.field_passer_rating }}</td>
             </tr>
+            {% if qbs is not empty %}
+              {% for name, qb in qbs %}
+                <tr>
+                  <td class="tw-p-4">{{ name }}</td>
+                  <td class="tw-p-4">{{ qb.comp }}</td>
+                  <td class="tw-p-4">{{ qb.att }}</td>
+                  <td class="tw-p-4">{{ qb.yds }}</td>
+                  <td class="tw-p-4">{{ qb.tds }}</td>
+                  <td class="tw-p-4">{{ qb.ints }}</td>
+                  <td class="tw-p-4">{{ qb.qbr }}</td>
+                </tr>
+              {% endfor %}
+            {% endif %}
           </tbody>
         </table>
       </div>

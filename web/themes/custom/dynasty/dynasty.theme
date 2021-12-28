@@ -1,6 +1,6 @@
 <?php
 
-use \Drupal\node\Entity\Node;
+use Drupal\node\Entity\Node;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\dynasty_module\DynastyHelpers;
 
@@ -69,6 +69,22 @@ function dynasty_preprocess_node(&$variables) {
     $variables['schema_date'] = $game_date->format('c');
     $variables['schema_opp'] = $opp->label();
     $variables['schema_name'] = $node->label();
+
+    // Multiple QB stats.
+    if (!$node->get('field_other_qbs')->isEmpty()) {
+      foreach ($node->field_other_qbs->referencedEntities() as $qb) {
+        $name = Node::load($qb->field_qb->target_id)->label();
+        $qbs[$name] = [
+          'att' => $qb->field_attempts->value,
+          'comp' => $qb->field_completions->value,
+          'yds' => $qb->field_yards->value,
+          'tds' => $qb->field_tds->value,
+          'ints' => $qb->field_ints->value,
+          'qbr' => $qb->field_qbr->value,
+        ];
+      }
+      $variables['qbs'] = $qbs;
+    }
   }
   /**
    * Podcast Episode Overrides.

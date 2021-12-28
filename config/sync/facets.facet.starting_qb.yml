@@ -1,4 +1,4 @@
-uuid: 817d72d4-4a3b-4239-a9c7-bc9a2fc5ed76
+uuid: af242a74-30a2-4847-b989-9e61add74e54
 langcode: en
 status: true
 dependencies:
@@ -7,18 +7,18 @@ dependencies:
     - views.view.game_search
   module:
     - search_api
-id: game_opponent
-name: Opponent
-url_alias: opponent
-weight: -8
+id: starting_qb
+name: 'Starting QB'
+url_alias: starting_qb
+weight: 2
 min_count: 1
 show_only_one_result: false
-field_identifier: opp_string
+field_identifier: starting_qb
 facet_source_id: 'search_api:views_page__game_search__page_1'
 widget:
   type: select2
   config:
-    show_numbers: true
+    show_numbers: false
     width: 100%
     autocomplete: false
     match_operator: CONTAINS

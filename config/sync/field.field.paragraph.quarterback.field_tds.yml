@@ -1,0 +1,23 @@
+uuid: 7a6ec22e-ff59-493f-a0cf-b93b65b2484e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tds
+    - paragraphs.paragraphs_type.quarterback
+id: paragraph.quarterback.field_tds
+field_name: field_tds
+entity_type: paragraph
+bundle: quarterback
+label: TDs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

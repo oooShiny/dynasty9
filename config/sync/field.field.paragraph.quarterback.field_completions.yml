@@ -1,0 +1,23 @@
+uuid: 5ae60cb8-216e-4930-bcdf-e417ad527558
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_completions
+    - paragraphs.paragraphs_type.quarterback
+id: paragraph.quarterback.field_completions
+field_name: field_completions
+entity_type: paragraph
+bundle: quarterback
+label: Completions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

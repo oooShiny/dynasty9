@@ -26,6 +26,7 @@ dependencies:
     - field.field.node.game.field_opponent_score
     - field.field.node.game.field_opposing_coach
     - field.field.node.game.field_ot
+    - field.field.node.game.field_other_qbs
     - field.field.node.game.field_over_under
     - field.field.node.game.field_passer_rating
     - field.field.node.game.field_patriots_score
@@ -52,6 +53,7 @@ dependencies:
     - field_group
     - link
     - metatag
+    - paragraphs
     - path
     - select2
     - text
@@ -88,12 +90,13 @@ third_party_settings:
       children:
         - field_brady_played
         - field_starting_qb
-        - field_brady_attempts
         - field_brady_completions
+        - field_brady_attempts
         - field_brady_yards
         - field_brady_tds
         - field_brady_ints
         - field_passer_rating
+        - field_other_qbs
       parent_name: ''
       weight: 5
       format_type: details
@@ -110,7 +113,7 @@ third_party_settings:
         - field_game_summary
         - field_game_links
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: details
       region: content
       format_settings:
@@ -181,7 +184,7 @@ third_party_settings:
         - field_game_video
         - field_youtube_highlights
       parent_name: ''
-      weight: 2
+      weight: 3
       format_type: details
       region: content
       format_settings:
@@ -204,14 +207,14 @@ content:
     type: boolean_checkbox
     region: content
   field_brady_attempts:
-    weight: 6
+    weight: 7
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_brady_completions:
-    weight: 7
+    weight: 6
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -282,7 +285,7 @@ content:
     type: options_select
     region: content
   field_meta_tags:
-    weight: 29
+    weight: 10
     settings:
       sidebar: true
     third_party_settings: {  }
@@ -365,6 +368,25 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_other_qbs:
+    type: paragraphs
+    weight: 12
+    settings:
+      title: QB
+      title_plural: QBs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: quarterback
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings: {  }
+    region: content
   field_over_under:
     weight: 6
     settings:
@@ -435,7 +457,7 @@ content:
     type: options_select
     region: content
   field_score_differential:
-    weight: 9
+    weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -485,7 +507,7 @@ content:
     type: options_select
     region: content
   field_weekday:
-    weight: 10
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -493,7 +515,7 @@ content:
     type: string_textfield
     region: content
   field_yoast_seo:
-    weight: 30
+    weight: 11
     settings:
       body: body
     third_party_settings: {  }
@@ -536,7 +558,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }

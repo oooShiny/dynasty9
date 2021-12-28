@@ -1,4 +1,4 @@
-uuid: 817d72d4-4a3b-4239-a9c7-bc9a2fc5ed76
+uuid: 38d0a5a4-5391-413c-8984-de60b4dad8e1
 langcode: en
 status: true
 dependencies:
@@ -7,21 +7,25 @@ dependencies:
     - views.view.game_search
   module:
     - search_api
-id: game_opponent
-name: Opponent
-url_alias: opponent
-weight: -8
+id: qb_tds
+name: TDs
+url_alias: qb_tds
+weight: 5
 min_count: 1
 show_only_one_result: false
-field_identifier: opp_string
+field_identifier: brady_tds
 facet_source_id: 'search_api:views_page__game_search__page_1'
 widget:
-  type: select2
+  type: range_slider
   config:
-    show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    show_numbers: false
+    prefix: ''
+    suffix: ''
+    min_type: search_result
+    min_value: !!float 0
+    max_type: search_result
+    max_value: !!float 10
+    step: !!float 1
 query_operator: or
 use_hierarchy: false
 keep_hierarchy_parents_active: false
@@ -37,6 +41,13 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  range_slider:
+    processor_id: range_slider
+    weights:
+      pre_query: 60
+      post_query: 60
+      build: 20
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

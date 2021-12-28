@@ -10,7 +10,7 @@ dependencies:
 id: game_home_away
 name: Home/Away
 url_alias: home_away
-weight: 0
+weight: -4
 min_count: 1
 show_only_one_result: true
 field_identifier: home_away

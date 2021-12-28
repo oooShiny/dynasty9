@@ -1,0 +1,23 @@
+uuid: 656256e5-9c39-4f4c-a900-ae7cb3c05640
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_attempts
+    - paragraphs.paragraphs_type.quarterback
+id: paragraph.quarterback.field_attempts
+field_name: field_attempts
+entity_type: paragraph
+bundle: quarterback
+label: Attempts
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

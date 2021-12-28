@@ -26,6 +26,7 @@ dependencies:
     - field.storage.node.field_result
     - field.storage.node.field_score_differential
     - field.storage.node.field_season
+    - field.storage.node.field_starting_qb
     - field.storage.node.field_surf
     - field.storage.node.field_brady_tds
     - field.storage.node.field_week
@@ -263,6 +264,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_season
+  starting_qb:
+    label: 'Starting QB'
+    datasource_id: 'entity:node'
+    property_path: 'field_starting_qb:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_starting_qb
+      module:
+        - node
   surface:
     label: 'Surface Type'
     datasource_id: 'entity:node'

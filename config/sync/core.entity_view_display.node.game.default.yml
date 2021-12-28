@@ -26,6 +26,7 @@ dependencies:
     - field.field.node.game.field_opponent_score
     - field.field.node.game.field_opposing_coach
     - field.field.node.game.field_ot
+    - field.field.node.game.field_other_qbs
     - field.field.node.game.field_over_under
     - field.field.node.game.field_passer_rating
     - field.field.node.game.field_patriots_score
@@ -49,6 +50,7 @@ dependencies:
     - node.type.game
   module:
     - datetime
+    - entity_reference_revisions
     - link
     - metatag
     - options
@@ -262,6 +264,15 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
+  field_other_qbs:
+    type: entity_reference_revisions_entity_view
+    weight: 145
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
   field_over_under:
     weight: 128

@@ -1,0 +1,52 @@
+uuid: 907f105d-d5ac-4944-b1d7-a248f9171e4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_other_qbs
+    - node.type.game
+    - paragraphs.paragraphs_type.quarterback
+  module:
+    - entity_reference_revisions
+id: node.game.field_other_qbs
+field_name: field_other_qbs
+entity_type: node
+bundle: game
+label: 'Other QBs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      quarterback: quarterback
+    target_bundles_drag_drop:
+      block:
+        weight: 9
+        enabled: false
+      highlight:
+        weight: 10
+        enabled: false
+      media:
+        weight: 11
+        enabled: false
+      podcast_download:
+        weight: 12
+        enabled: false
+      quarterback:
+        enabled: true
+        weight: 13
+      section:
+        weight: 14
+        enabled: false
+      team_record:
+        weight: 15
+        enabled: false
+      text:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

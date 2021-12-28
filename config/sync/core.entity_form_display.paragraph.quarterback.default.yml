@@ -1,0 +1,75 @@
+uuid: 8d13f391-1294-4fe2-a749-1debbade8321
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.quarterback.field_attempts
+    - field.field.paragraph.quarterback.field_completions
+    - field.field.paragraph.quarterback.field_ints
+    - field.field.paragraph.quarterback.field_qb
+    - field.field.paragraph.quarterback.field_qbr
+    - field.field.paragraph.quarterback.field_tds
+    - field.field.paragraph.quarterback.field_yards
+    - paragraphs.paragraphs_type.quarterback
+  module:
+    - select2
+id: paragraph.quarterback.default
+targetEntityType: paragraph
+bundle: quarterback
+mode: default
+content:
+  field_attempts:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_completions:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_ints:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_qb:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_qbr:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_tds:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_yards:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

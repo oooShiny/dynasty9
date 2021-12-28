@@ -1,0 +1,25 @@
+uuid: da3e0bbc-1276-4ce1-abd9-3b6f1d7b7a9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_qb
+    - paragraphs.paragraphs_type.quarterback
+id: paragraph.quarterback.field_qb
+field_name: field_qb
+entity_type: paragraph
+bundle: quarterback
+label: QB
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: quarterback_listing
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference
