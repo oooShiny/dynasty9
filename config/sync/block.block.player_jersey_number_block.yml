@@ -12,7 +12,7 @@ dependencies:
 id: player_jersey_number_block
 theme: dynasty
 region: highlighted
-weight: -11
+weight: -12
 provider: null
 plugin: 'views_block:player_jersey_number-block_1'
 settings:
