@@ -12,7 +12,7 @@ dependencies:
 id: favoritepodcastblock
 theme: dynasty
 region: highlighted
-weight: -7
+weight: -8
 provider: null
 plugin: 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
 settings:

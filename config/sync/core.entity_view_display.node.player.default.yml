@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.player.field_jersey_number
     - field.field.node.player.field_meta_tags
     - field.field.node.player.field_player_bio
     - field.field.node.player.field_player_position
@@ -16,6 +17,15 @@ targetEntityType: node
 bundle: player
 mode: default
 content:
+  field_jersey_number:
+    weight: 3
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
   field_meta_tags:
     weight: 1
     label: above

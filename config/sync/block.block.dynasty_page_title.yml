@@ -9,7 +9,7 @@ _core:
 id: dynasty_page_title
 theme: dynasty
 region: highlighted
-weight: -10
+weight: -12
 provider: null
 plugin: page_title_block
 settings:

@@ -1,0 +1,10 @@
+uuid: a0132f44-4be1-464d-86c8-280b2b8f3689
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.jersey
+label: Jersey
+targetEntityType: node
+cache: true

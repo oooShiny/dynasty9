@@ -115,6 +115,10 @@ td.views-field-patriots-score:after {
   content: "-";
 }
 
+.jersey {
+  height: 4em;
+  width: 4em;
+}
 /**
  * Facet Overrides
  */

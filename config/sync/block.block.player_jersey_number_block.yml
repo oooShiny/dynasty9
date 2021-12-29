@@ -1,0 +1,33 @@
+uuid: a9efe452-fcfe-4ab7-8973-51d40c251058
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.player_jersey_number
+  module:
+    - ctools
+    - views
+  theme:
+    - dynasty
+id: player_jersey_number_block
+theme: dynasty
+region: highlighted
+weight: -11
+provider: null
+plugin: 'views_block:player_jersey_number-block_1'
+settings:
+  id: 'views_block:player_jersey_number-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      player: player
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

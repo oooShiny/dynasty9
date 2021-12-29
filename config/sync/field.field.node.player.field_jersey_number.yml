@@ -1,0 +1,23 @@
+uuid: 67796833-6f8c-45c5-a2f3-6f4f45f27363
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_jersey_number
+    - node.type.player
+id: node.player.field_jersey_number
+field_name: field_jersey_number
+entity_type: node
+bundle: player
+label: 'Jersey Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1
+  max: 99
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.player_simple_form
     - field.field.paragraph.quarterback.field_attempts
     - field.field.paragraph.quarterback.field_completions
     - field.field.paragraph.quarterback.field_ints
@@ -12,7 +13,7 @@ dependencies:
     - field.field.paragraph.quarterback.field_yards
     - paragraphs.paragraphs_type.quarterback
   module:
-    - select2
+    - inline_entity_form
 id: paragraph.quarterback.default
 targetEntityType: paragraph
 bundle: quarterback
@@ -42,12 +43,19 @@ content:
   field_qb:
     weight: 0
     settings:
+      form_mode: player_simple_form
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
-      width: 100%
+      revision: false
+      override_labels: false
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
     third_party_settings: {  }
-    type: select2_entity_reference
+    type: inline_entity_form_complex
     region: content
   field_qbr:
     weight: 6

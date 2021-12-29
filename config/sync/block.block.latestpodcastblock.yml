@@ -10,7 +10,7 @@ dependencies:
 id: latestpodcastblock
 theme: dynasty
 region: highlighted
-weight: -8
+weight: -9
 provider: null
 plugin: latest_podcast_block
 settings:

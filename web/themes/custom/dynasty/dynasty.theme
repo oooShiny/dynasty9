@@ -73,8 +73,10 @@ function dynasty_preprocess_node(&$variables) {
     // Multiple QB stats.
     if (!$node->get('field_other_qbs')->isEmpty()) {
       foreach ($node->field_other_qbs->referencedEntities() as $qb) {
-        $name = Node::load($qb->field_qb->target_id)->label();
-        $qbs[$name] = [
+        $qb_node = Node::load($qb->field_qb->target_id);
+
+        $qbs[$qb_node->label()] = [
+          'url' => $qb_node->toUrl(),
           'att' => $qb->field_attempts->value,
           'comp' => $qb->field_completions->value,
           'yds' => $qb->field_yards->value,
@@ -125,6 +127,8 @@ function dynasty_preprocess_node(&$variables) {
    */
   if ($node->bundle() == 'player') {
     $variables['#attached']['library'][] =  'dynasty/muse_video';
+    $names = explode(' ', $node->label());
+    $variables['lastname'] = end($names);
   }
 }
 

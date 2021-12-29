@@ -10,6 +10,7 @@ dependencies:
     - field.storage.node.field_brady_yards
     - field.storage.node.field_game_video
     - field.storage.node.field_home_away
+    - field.storage.node.field_jersey_number
     - field.storage.node.field_month
     - field.storage.node.field_opponent_score
     - field.storage.node.field_passer_rating
@@ -82,6 +83,8 @@ display:
             home_away: home_away
             month: month
             weekday: weekday
+            starting_qb: starting_qb
+            qb_jersey_number: starting_qb
             brady_attempts: brady_attempts
             brady_completions: brady_completions
             brady_yards: brady_yards
@@ -154,6 +157,20 @@ display:
               sortable: true
               default_sort_order: asc
               align: views-align-left
+              separator: ''
+              empty_column: false
+              responsive: ''
+            starting_qb:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            qb_jersey_number:
+              sortable: false
+              default_sort_order: asc
+              align: ''
               separator: ''
               empty_column: false
               responsive: ''
@@ -927,6 +944,158 @@ display:
             multi_type: separator
             multi_separator: ', '
           plugin_id: search_api_field
+        starting_qb:
+          id: starting_qb
+          table: search_api_index_game_index
+          field: starting_qb
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: QB
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{% set names = starting_qb|split(' ') %}\r\n<div class=\"patriots jersey tw-font-light tw-text-center tw-text-xs tw-uppercase\">{{ names|last }}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        qb_jersey_number:
+          id: qb_jersey_number
+          table: search_api_index_game_index
+          field: qb_jersey_number
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<div class=\"tw-font-bold tw-text-xl\">{{ qb_jersey_number }}</div>\r\n</div>"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api_numeric
+          fallback_options:
+            set_precision: false
+            precision: 0
+            decimal: .
+            separator: ','
+            format_plural: false
+            format_plural_string: !!binary MQNAY291bnQ=
+            prefix: ''
+            suffix: ''
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+            format_plural_values:
+              - '1'
+              - '@count'
+          plugin_id: search_api_field
         brady_attempts:
           id: brady_attempts
           table: search_api_index_game_index
@@ -1505,6 +1674,7 @@ display:
         - 'config:field.storage.node.field_brady_yards'
         - 'config:field.storage.node.field_game_video'
         - 'config:field.storage.node.field_home_away'
+        - 'config:field.storage.node.field_jersey_number'
         - 'config:field.storage.node.field_month'
         - 'config:field.storage.node.field_opponent_score'
         - 'config:field.storage.node.field_passer_rating'
@@ -1545,6 +1715,7 @@ display:
         - 'config:field.storage.node.field_brady_yards'
         - 'config:field.storage.node.field_game_video'
         - 'config:field.storage.node.field_home_away'
+        - 'config:field.storage.node.field_jersey_number'
         - 'config:field.storage.node.field_month'
         - 'config:field.storage.node.field_opponent_score'
         - 'config:field.storage.node.field_passer_rating'

@@ -13,7 +13,11 @@
  */
 #}
 {% if content %}
-  <div id="region-{{ region }}">
+  {% if region == 'highlighted' %}
+    <div id="region-{{ region }}" class="tw-flex tw-gap-1">
+  {% else %}
+      <div id="region-{{ region }}">
+  {% endif %}
     {{ content }}
   </div>
 {% endif %}

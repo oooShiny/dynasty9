@@ -223,7 +223,7 @@
             {% if qbs is not empty %}
               {% for name, qb in qbs %}
                 <tr>
-                  <td class="tw-p-4">{{ name }}</td>
+                  <td class="tw-p-4"><a href="{{ qb.url }}">{{ name }}</a></td>
                   <td class="tw-p-4">{{ qb.comp }}</td>
                   <td class="tw-p-4">{{ qb.att }}</td>
                   <td class="tw-p-4">{{ qb.yds }}</td>

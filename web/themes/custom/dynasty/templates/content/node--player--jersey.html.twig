@@ -70,33 +70,11 @@
  *   in different view modes.
  */
 #}
-<article class="tw-mt-10">
 
-  <div class="tw-flex tw-items-center tw-justify-around tw-py-10 tw-m-auto tw-w-3/4">
-    {% if content.field_muse_video_id|render %}
-      <div class="tw-w-1/2 tw-py-10">
-        {{ content.field_muse_video_id }}
-      </div>
-    {% elseif content.field_gfycat_id|render %}
-      <div class="tw-w-1/2 tw-py-10">
-        {{ content.field_gfycat_id }}
-      </div>
-    {% endif %}
-    <div>
-      <h2>
-        {{ content.field_play_description }}
-      </h2>
-      <div class="tw-flex tw-gap-1">
-        {{ content.field_players_involved }}
-      </div>
-      <ul>
-        <li>{{ content.field_game }}</li>
-        <li><a href="https://muse.ai/vc/{{ muse_id }}" target="_blank">Shareable Video Link</a></li>
-        <li><a href="https://cdn.muse.ai/w/{{ video_file }}/videos/video.mp4" target="_blank">Download Video File</a> (Right click
-          &rarr; Save Link As)</li>
-      </ul>
-    </div>
+
+<a href="{{ url }}">
+  <div class="tw-bg-blue-pats tw-border-4 tw-border-red-pats tw-font-thin tw-p-1 tw-text-center tw-text-white tw-uppercase">
+    <div>{{ lastname }}</div>
+    <div class="tw-font-bold tw-text-3xl">{{ content }}</div>
   </div>
-
-
-</article>
+</a>
