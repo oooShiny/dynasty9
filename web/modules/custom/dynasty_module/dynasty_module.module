@@ -79,6 +79,21 @@ function dynasty_module_update_8004() {
   }
 }
 
+/**
+ * Set "Brady Era" field to true for games between 2001-2019.
+ */
+function dynasty_module_update_8005() {
+  $games = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
+    'type' => 'game',
+  ]);
+
+
+  foreach ($games as $game) {
+    if ($game->field_season->value > 2000 || $game->field_season->value < 2020)
+      $game->set('field_brady_played', 1);
+      $game->save();
+  }
+}
 function dynasty_module_theme($existing, $type, $theme, $path) {
   return [
     'footer_seasons_block' => [

@@ -117,11 +117,11 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
-        open: true
-        required_fields: true
+        open: false
       label: 'Game Summary'
     group_game_details:
       children:
@@ -188,11 +188,11 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
-        open: true
-        required_fields: true
+        open: false
       label: 'Game Media'
 id: node.game.default
 targetEntityType: node

@@ -9,13 +9,13 @@ id: node.game.field_brady_played
 field_name: field_brady_played
 entity_type: node
 bundle: game
-label: 'Brady played'
+label: 'Brady Era Game'
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 1
+    value: 0
 default_value_callback: ''
 settings:
   on_label: 'Yes'
