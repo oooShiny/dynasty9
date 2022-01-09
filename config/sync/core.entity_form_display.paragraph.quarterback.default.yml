@@ -44,15 +44,15 @@ content:
     weight: 0
     settings:
       form_mode: player_simple_form
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
+      override_labels: true
+      label_singular: QB
+      label_plural: QBs
       allow_existing: true
       match_operator: CONTAINS
       revision: false
-      override_labels: false
       collapsible: false
       collapsed: false
+      allow_new: false
       allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
