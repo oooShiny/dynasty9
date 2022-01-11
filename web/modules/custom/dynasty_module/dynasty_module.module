@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
@@ -160,7 +161,7 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_entity_presave().
  */
-function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+function dynasty_module_entity_presave(EntityInterface $entity) {
   switch ($entity->bundle()) {
     case 'podcast_episode':
       if (!$entity->field_season->isEmpty() && !$entity->field_episode->isEmpty()) {
@@ -287,6 +288,22 @@ function dynasty_module_entity_presave(Drupal\Core\Entity\EntityInterface $entit
         }
       }
       $entity->field_play_description->value = $description;
+      break;
+    case 'game':
+      // Set month field from date.
+      if (!is_null($entity->field_date->value)) {
+        $date = $entity->field_date->value;
+        $entity->field_month->value = date('F', strtotime($date));
+        // Weekday field.
+        $entity->field_weekday->value = date('l', strtotime($date));
+      }
+
+      // Point differential field.
+      if (!is_null($entity->field_patriots_score->value)) {
+        $pats = $entity->field_patriots_score->value;
+        $opp = $entity->field_opponent_score->value;
+        $entity->field_score_differential->value = $pats - $opp;
+      }
       break;
   }
 }
