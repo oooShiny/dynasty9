@@ -10,7 +10,7 @@ dependencies:
 id: after_bye_we
 name: 'After Bye'
 url_alias: after_bye_we
-weight: -2
+weight: -1
 min_count: 1
 show_only_one_result: false
 field_identifier: bye

@@ -10,7 +10,7 @@ dependencies:
 id: brady_era_game
 name: 'Brady Era Game'
 url_alias: brady_era
-weight: 0
+weight: 1
 min_count: 1
 show_only_one_result: true
 field_identifier: brady_era

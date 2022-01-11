@@ -344,7 +344,7 @@ field_settings:
     label: Weekday
     datasource_id: 'entity:node'
     property_path: field_weekday
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_weekday

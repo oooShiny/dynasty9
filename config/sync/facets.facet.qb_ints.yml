@@ -10,7 +10,7 @@ dependencies:
 id: qb_ints
 name: INTs
 url_alias: qb_ints
-weight: 7
+weight: 8
 min_count: 1
 show_only_one_result: false
 field_identifier: brady_ints

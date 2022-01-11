@@ -10,7 +10,7 @@ dependencies:
 id: overtime
 name: Overtime
 url_alias: overtime
-weight: -1
+weight: 0
 min_count: 1
 show_only_one_result: false
 field_identifier: ot
