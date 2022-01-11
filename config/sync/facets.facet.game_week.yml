@@ -10,7 +10,7 @@ dependencies:
 id: game_week
 name: Week
 url_alias: game_week
-weight: 1
+weight: -3
 min_count: 1
 show_only_one_result: false
 field_identifier: week_string

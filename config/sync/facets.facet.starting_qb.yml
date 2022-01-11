@@ -10,7 +10,7 @@ dependencies:
 id: starting_qb
 name: 'Starting QB'
 url_alias: starting_qb
-weight: 2
+weight: 3
 min_count: 1
 show_only_one_result: false
 field_identifier: starting_qb

@@ -9,19 +9,23 @@ dependencies:
     - search_api
 id: game_season
 name: Season
-url_alias: game_season
+url_alias: season
 weight: -6
 min_count: 1
-show_only_one_result: false
+show_only_one_result: true
 field_identifier: season_int
 facet_source_id: 'search_api:views_page__game_search__page_1'
 widget:
-  type: select2
+  type: range_slider
   config:
-    show_numbers: true
-    width: 100%
-    autocomplete: false
-    match_operator: CONTAINS
+    show_numbers: false
+    prefix: ''
+    suffix: ''
+    min_type: search_result
+    min_value: !!float 0
+    max_type: search_result
+    max_value: !!float 10
+    step: !!float 1
 query_operator: or
 use_hierarchy: false
 keep_hierarchy_parents_active: false
@@ -37,6 +41,13 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  range_slider:
+    processor_id: range_slider
+    weights:
+      pre_query: 60
+      post_query: 60
+      build: 20
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

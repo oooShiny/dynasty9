@@ -31,6 +31,7 @@ dependencies:
     - field.storage.node.field_season
     - field.storage.node.field_surf
     - field.storage.node.field_brady_tds
+    - field.storage.node.field_temperature
     - field.storage.node.field_week
     - field.storage.node.field_weekday
     - field.storage.node.field_brady_yards
@@ -303,6 +304,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_surf
+  temp:
+    label: Temperature
+    datasource_id: 'entity:node'
+    property_path: field_temperature
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_temperature
   video:
     label: 'Game Video'
     datasource_id: 'entity:node'

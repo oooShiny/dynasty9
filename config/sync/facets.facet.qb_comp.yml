@@ -10,7 +10,7 @@ dependencies:
 id: qb_comp
 name: Completions
 url_alias: qb_comp
-weight: 3
+weight: 4
 min_count: 1
 show_only_one_result: false
 field_identifier: brady_completions

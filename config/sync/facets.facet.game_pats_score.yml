@@ -10,7 +10,7 @@ dependencies:
 id: game_pats_score
 name: 'Patriots Score'
 url_alias: pats_score
-weight: -2
+weight: -4
 min_count: 1
 show_only_one_result: false
 field_identifier: patriots_score

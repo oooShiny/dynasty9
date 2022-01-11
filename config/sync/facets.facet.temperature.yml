@@ -1,4 +1,4 @@
-uuid: 665394af-fddf-4506-ac5b-86c7ef8bcb23
+uuid: 5a296276-9113-4a7e-9f62-0f32c4246fe6
 langcode: en
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
     - views.view.game_search
   module:
     - search_api
-id: qb_att
-name: Attempts
-url_alias: qb_att
-weight: 5
+id: temperature
+name: Temperature
+url_alias: temperature
+weight: 2
 min_count: 1
 show_only_one_result: false
-field_identifier: brady_attempts
+field_identifier: temp
 facet_source_id: 'search_api:views_page__game_search__page_1'
 widget:
   type: range_slider
