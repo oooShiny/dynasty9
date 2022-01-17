@@ -29,5 +29,6 @@ dynasty.calendar:
   path: '/calendar'
   defaults:
     _controller: '\Drupal\dynasty_module\Controller\PatsCalendarController::content'
+    _title: 'Patriots Game Calendar'
   requirements:
     _permission: 'access content'
