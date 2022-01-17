@@ -134,6 +134,12 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'games' => ''
       ]
     ],
+    'pats_calendar' => [
+      'variables' => [
+        'months' => '',
+        'monthnames' => ''
+      ]
+    ],
     'brady_td_viz' => [
       'variables' => []
     ],

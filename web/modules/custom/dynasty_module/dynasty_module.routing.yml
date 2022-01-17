@@ -25,3 +25,9 @@ dynsty.podcastdownload:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
+dynasty.calendar:
+  path: '/calendar'
+  defaults:
+    _controller: '\Drupal\dynasty_module\Controller\PatsCalendarController::content'
+  requirements:
+    _permission: 'access content'
