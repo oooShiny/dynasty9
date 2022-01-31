@@ -95,13 +95,16 @@ class MigrateExecutable extends MigrateExecutableBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(MigrationInterface $migration, MigrateMessageInterface $message, array $options = []) {
+  public function __construct(MigrationInterface $migration, MigrateMessageInterface $message = NULL, array $options = []) {
     parent::__construct($migration, $message);
     if (isset($options['limit'])) {
       $this->itemLimit = $options['limit'];
     }
     if (isset($options['feedback'])) {
       $this->feedback = $options['feedback'];
+    }
+    if (isset($options['sync'])) {
+      $this->migration->set('syncSource', $options['sync']);
     }
     $this->idlist = MigrateTools::buildIdList($options);
 
@@ -237,6 +240,15 @@ class MigrateExecutable extends MigrateExecutableBase {
     $migrate_last_imported_store->set($event->getMigration()->id(), round(\Drupal::time()->getCurrentMicroTime() * 1000));
     $this->progressMessage();
     $this->removeListeners();
+
+    $unused_ids = $this->getSource()->getRemainingIdList();
+    if ($unused_ids) {
+      $this->message->display($this->t("The following specified IDs were not found in the source IDs: @idlist.", [
+        '@idlist' => implode(', ', array_map(static function ($ids) {
+          return implode(':', $ids);
+        }, $unused_ids)),
+      ]));
+    }
   }
 
   /**
@@ -244,7 +256,11 @@ class MigrateExecutable extends MigrateExecutableBase {
    */
   protected function removeListeners() {
     foreach ($this->listeners as $event => $listener) {
-      $this->getEventDispatcher()->removeListener($event, $listener);
+      // Don't remove the listener for the events that are currently being
+      // dispatched.
+      if ($event !== MigrateEvents::POST_IMPORT && $event !== MigrateEvents::POST_ROLLBACK) {
+        $this->getEventDispatcher()->removeListener($event, $listener);
+      }
     }
   }
 
@@ -375,7 +391,12 @@ class MigrateExecutable extends MigrateExecutableBase {
    * {@inheritdoc}
    */
   protected function getSource() {
-    return new SourceFilter(parent::getSource(), $this->idlist);
+    if (!isset($this->source)) {
+      // Re-set $this->source which the call to the parent will have set.
+      $this->source = new SourceFilter(parent::getSource(), $this->idlist);
+    }
+
+    return $this->source;
   }
 
   /**

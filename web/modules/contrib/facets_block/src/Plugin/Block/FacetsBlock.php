@@ -9,6 +9,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Template\Attribute;
 use Drupal\facets\FacetInterface;
 use Drupal\facets\FacetManager\DefaultFacetManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -115,6 +116,19 @@ class FacetsBlock extends BlockBase implements ContainerFactoryPluginInterface {
       '#default_value' => isset($this->configuration['exclude_empty_facets']) ? $this->configuration['exclude_empty_facets'] : TRUE,
     ];
 
+    $form['block_settings']['hide_empty_block'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Hide empty block'),
+      '#description' => $this->t("Don't render the Facets Block if no facets are available (for instance when no search results are found)."),
+      '#default_value' => isset($this->configuration['hide_empty_block']) ? $this->configuration['hide_empty_block'] : FALSE,
+    ];
+
+    $form['block_settings']['add_js_classes'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Add JS classes for Facets block'),
+      '#default_value' => $this->configuration['add_js_classes'] ?? FALSE,
+    ];
+
     $form['block_settings']['facets_to_include'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Facets to include'),
@@ -175,9 +189,26 @@ class FacetsBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['show_title'] = $form_state->getValue(['block_settings', 'show_title']);
-    $this->configuration['exclude_empty_facets'] = $form_state->getValue(['block_settings', 'exclude_empty_facets']);
-    $this->configuration['facets_to_include'] = $form_state->getValue(['block_settings', 'facets_to_include']);
+    $this->configuration['show_title'] = $form_state->getValue([
+      'block_settings',
+      'show_title',
+    ]);
+    $this->configuration['exclude_empty_facets'] = $form_state->getValue([
+      'block_settings',
+      'exclude_empty_facets',
+    ]);
+    $this->configuration['hide_empty_block'] = $form_state->getValue([
+      'block_settings',
+      'hide_empty_block',
+    ]);
+    $this->configuration['facets_to_include'] = $form_state->getValue([
+      'block_settings',
+      'facets_to_include',
+    ]);
+    $this->configuration['add_js_classes'] = $form_state->getValue([
+      'block_settings',
+      'add_js_classes',
+    ]);
   }
 
   /**
@@ -223,9 +254,14 @@ class FacetsBlock extends BlockBase implements ContainerFactoryPluginInterface {
             continue;
           }
 
+          if (empty($build['#attributes'])) {
+            $build['#attributes'] = [];
+          }
+
           $facets[] = [
             'title' => $facet_title,
             'content' => $build,
+            'attributes' => new Attribute($build['#attributes']),
           ];
         }
       }
@@ -240,11 +276,15 @@ class FacetsBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public function build() {
     $show_title = !isset($this->configuration['show_title']) ? TRUE : $this->configuration['show_title'];
     $facets_to_include = !isset($this->configuration['facets_to_include']) ? [] : $this->configuration['facets_to_include'];
+    $facets = $this->buildFacets($facets_to_include);
+
+    // Allow other modules to alter the facets array.
+    $this->moduleHandler->alter('facets_block_facets', $facets);
 
     return [
       '#theme' => 'facets_block',
       '#show_title' => $show_title,
-      '#facets' => $this->buildFacets($facets_to_include),
+      '#facets' => $facets,
     ];
   }
 
