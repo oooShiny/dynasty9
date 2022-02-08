@@ -78,7 +78,8 @@
   background: #B20032;
   border: 0.25em solid #F2C800;
 }
-.oakland-raiders {
+.oakland-raiders,
+.las-vegas-raiders {
   color: #C4C8CB;
   background: black;
   border: 0.25em solid #C4C8CB;
@@ -88,7 +89,7 @@
   background: #FB4F14;
   border: 0.25em solid #002244;
 }
-.los-angeles-chargers {
+.los-angeles-chargers{
   color: #0C2340;
   background: #FFB81C;
   border: 0.25em solid #0072CE;
@@ -143,7 +144,8 @@
   background: #192F6B;
   border: 0.25em solid #CA001A;
 }
-.washington-redskins {
+.washington-redskins,
+.washington-commanders {
   color: #FFB612;
   background: #773141;
   border: 0.25em solid #FFB612;
