@@ -38,10 +38,12 @@ function dynasty_preprocess_node(&$variables) {
     // Team name variations.
     $opp = Node::load($node->get('field_opponent')->target_id);
     $variables['team_css'] =  str_replace(' ', '-', strtolower($opp->label()));
+    $opp_name = _check_name_alts($opp, $game_season);
+    $name_array = explode(' ', $opp_name);
 
     $team_short = end($name_array);
     $variables['opp_short'] = $team_short;
-    $variables['opp_name'] = _check_name_alts($opp, $game_season);
+    $variables['opp_name'] = $opp_name;
 
 
     // Create pro-football-reference and NFL Gamepass links.
