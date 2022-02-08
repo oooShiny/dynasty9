@@ -31,11 +31,25 @@ class MigrateBatchExecutable extends MigrateExecutable {
   protected $checkDependencies = 0;
 
   /**
+   * Indicates if synchronization is needed.
+   *
+   * @var bool
+   */
+  protected $syncSource = FALSE;
+
+  /**
    * The current batch context.
    *
    * @var array
    */
   protected $batchContext = [];
+
+  /**
+   * Migration plugin configuration.
+   *
+   * @var array
+   */
+  protected $configuration = [];
 
   /**
    * Plugin manager for migration plugins.
@@ -57,7 +71,16 @@ class MigrateBatchExecutable extends MigrateExecutable {
       $this->checkDependencies = $options['force'];
     }
 
+    if (isset($options['sync'])) {
+      $this->syncSource = $options['sync'];
+    }
+
+    if (isset($options['configuration'])) {
+      $this->configuration = $options['configuration'];
+    }
+
     parent::__construct($migration, $message, $options);
+
     $this->migrationPluginManager = \Drupal::getContainer()->get('plugin.manager.migration');
   }
 
@@ -92,6 +115,8 @@ class MigrateBatchExecutable extends MigrateExecutable {
       'limit' => $this->itemLimit,
       'update' => $this->updateExistingRows,
       'force' => $this->checkDependencies,
+      'sync' => $this->syncSource,
+      'configuration' => $this->configuration,
     ]);
 
     if (count($operations) > 0) {
@@ -141,6 +166,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
             'limit' => 0,
             'update' => $options['update'],
             'force' => $options['force'],
+            'sync' => $options['sync'],
           ]));
         }
       }
@@ -177,7 +203,8 @@ class MigrateBatchExecutable extends MigrateExecutable {
     // Prepare the migration executable.
     $message = new MigrateMessage();
     /** @var \Drupal\migrate\Plugin\MigrationInterface $migration */
-    $migration = \Drupal::getContainer()->get('plugin.manager.migration')->createInstance($migration_id);
+    $migration = \Drupal::getContainer()->get('plugin.manager.migration')->createInstance($migration_id, isset($options['configuration']) ? $options['configuration'] : []);
+    unset($options['configuration']);
 
     // Each batch run we need to reinitialize the counter for the migration.
     if (!empty($options['limit']) && isset($context['results'][$migration->id()]['@numitems'])) {
@@ -291,7 +318,7 @@ class MigrateBatchExecutable extends MigrateExecutable {
    *   The batch limit.
    */
   public function calculateBatchLimit($context) {
-    // TODO Maybe we need some other more sophisticated logic here?
+    // @TODO Maybe we need some other more sophisticated logic here?
     return ceil($context['sandbox']['total'] / 100);
   }
 

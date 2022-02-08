@@ -1,0 +1,31 @@
+uuid: 6a614c65-501d-43e6-9aaa-320e0aa1d87d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.alternate_team_name.field_alternate_name
+    - field.field.paragraph.alternate_team_name.field_season
+    - paragraphs.paragraphs_type.alternate_team_name
+id: paragraph.alternate_team_name.default
+targetEntityType: paragraph
+bundle: alternate_team_name
+mode: default
+content:
+  field_alternate_name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_season:
+    type: number
+    weight: 0
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

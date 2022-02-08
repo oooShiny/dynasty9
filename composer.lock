@@ -4354,11 +4354,11 @@
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.8",
-                    "datestamp": "1612525872",
+                    "version": "4.0.0-rc2",
+                    "datestamp": "1612525509",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -4368,17 +4368,14 @@
             ],
             "authors": [
                 {
-                    "name": "Oliver Davies",
-                    "homepage": "https://www.oliverdavies.uk/",
-                    "role": "maintainer"
+                    "name": "opdavies",
+                    "homepage": "https://www.drupal.org/user/381388"
                 }
             ],
-            "description": "TailwindCSS starter theme",
+            "description": "A starter kit theme for Drupal 8 and Tailwind CSS.",
             "homepage": "https://www.drupal.org/project/tailwindcss",
             "support": {
-                "source": "https://cgit.drupalcode.org/tailwindcss",
-                "issues": "https://drupal.org/project/issues/tailwindcss",
-                "irc": "irc://irc.freenode.org/drupal-contribute"
+                "source": "https://git.drupalcode.org/project/tailwindcss"
             }
         },
         {

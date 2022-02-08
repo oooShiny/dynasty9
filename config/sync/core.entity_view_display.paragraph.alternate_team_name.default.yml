@@ -1,0 +1,32 @@
+uuid: cfc5b430-c7a4-4b43-b846-9280dfd042ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.alternate_team_name.field_alternate_name
+    - field.field.paragraph.alternate_team_name.field_season
+    - paragraphs.paragraphs_type.alternate_team_name
+id: paragraph.alternate_team_name.default
+targetEntityType: paragraph
+bundle: alternate_team_name
+mode: default
+content:
+  field_alternate_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_season:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

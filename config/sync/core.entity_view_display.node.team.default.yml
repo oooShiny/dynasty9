@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.team.field_alternate_team_name
     - field.field.node.team.field_conference
     - field.field.node.team.field_division
     - field.field.node.team.field_meta_tags
@@ -18,18 +19,19 @@ bundle: team
 mode: default
 content:
   field_meta_tags:
-    weight: 1
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 1
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
+  field_alternate_team_name: true
   field_conference: true
   field_division: true
   field_pfr_id: true

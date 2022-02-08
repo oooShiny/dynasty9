@@ -33,12 +33,16 @@ function dynasty_preprocess_node(&$variables) {
     else {
       $variables['vs'] = 'at';
     }
+    $game_season = $node->get('field_season')->value;
+
     // Team name variations.
     $opp = Node::load($node->get('field_opponent')->target_id);
     $variables['team_css'] =  str_replace(' ', '-', strtolower($opp->label()));
-    $name_array = explode(' ', $opp->label());
+
     $team_short = end($name_array);
-    $variables['team_short'] = $team_short;
+    $variables['opp_short'] = $team_short;
+    $variables['opp_name'] = _check_name_alts($opp, $game_season);
+
 
     // Create pro-football-reference and NFL Gamepass links.
     $game_date = new DateTime($node->get('field_date')->value);
@@ -61,7 +65,6 @@ function dynasty_preprocess_node(&$variables) {
       $variables['schema_state'] = $game_location['state'];
     }
     $variables['pfr_link'] = 'https://www.pro-football-reference.com/boxscores/' . $pfr_date . '0' . $pfr_home . '.htm';
-    $game_season = $node->get('field_season')->value;
     $variables['season'] = intval($game_season);
     $variables['gamepass_link'] = 'https://gamepass.nfl.com/game/'.$gp_away.'-at-'.$gp_home.'-on-' . $gp_date;
 
@@ -224,15 +227,18 @@ function dynasty_preprocess_views_view_table(&$variables) {
       'pats' => 0,
       'opp' => 0
     ];
-//    $stats = [
-//      'att' => 0,
-//      'comp' => 0,
-//      'yds' => 0,
-//      'tds' => 0,
-//      'int' => 0
-//    ];
     $games = 0;
     foreach ($view->result as $id => $row) {
+      // Check for alternate team names for this row.
+      $season = $row->_entity->field_season->value;
+      $opp = $row->_entity->field_opponent->referencedEntities();
+      $opp_name = _check_name_alts($opp[0], $season);
+      $markup = $variables['rows'][$id]['columns']['opponent']['content'][0]['field_output']['#markup']->__toString();
+      $href_array = explode('"', $markup);
+      $new_markup = '<a href="' . $href_array[1] . '" hreflang="en">' . $opp_name . '</a>';
+      $variables['rows'][$id]['columns']['opponent']['content'][0]['field_output'] = Drupal\Core\Render\Markup::create($new_markup);
+
+      // Add game results/scores to totals.
       foreach ($view->field as $fid => $field) {
         switch ($fid) {
           case 'result':
@@ -245,21 +251,6 @@ function dynasty_preprocess_views_view_table(&$variables) {
             }
             $games++;
             break;
-//          case 'brady_completions':
-//            $stats['comp'] += $field->getValue($row);
-//            break;
-//          case 'brady_attempts':
-//            $stats['att'] += $field->getValue($row);
-//            break;
-//          case 'brady_yards':
-//            $stats['yds'] += $field->getValue($row);
-//            break;
-//          case 'brady_tds':
-//            $stats['tds'] += $field->getValue($row);
-//            break;
-//          case 'brady_ints':
-//            $stats['int'] += $field->getValue($row);
-//            break;
           case 'opponent_score':
             $score['opp'] += $field->getValue($row);
             break;
@@ -277,17 +268,6 @@ function dynasty_preprocess_views_view_table(&$variables) {
       'opp' => $score['opp']/$games,
     ];
     $variables['avgscore'] = round($avgscore['pats']) . ' - ' . round($avgscore['opp']);
-//    $variables['passrating'] = passer_rating($stats['att'], $stats['comp'], $stats['yds'], $stats['tds'], $stats['int']);
-//    $variables['att'] = $stats['att'];
-//    $variables['comp'] = $stats['comp'];
-//    $variables['yds'] = $stats['yds'];
-//    $variables['tds'] = $stats['tds'];
-//    $variables['int'] = $stats['int'];
-//    $variables['avg_att'] = $stats['att']/$games;
-//    $variables['avg_comp'] = $stats['comp']/$games;
-//    $variables['avg_yds'] = $stats['yds']/$games;
-//    $variables['avg_tds'] = $stats['tds']/$games;
-//    $variables['avg_int'] = $stats['int']/$games;
   }
 
 }
@@ -327,4 +307,22 @@ $locations = [
   'redskins' => ['city' => 'Landover' , 'state' => 'MD']
 ];
   return $locations[$team];
+}
+
+/**
+ * Check a team node for a certain season to see if
+ * the team has a different name that season.
+ */
+function _check_name_alts($team_node, $season) {
+  // See if the team node has any alternate names.
+  if (!$team_node->field_alternate_team_name->isEmpty()) {
+    foreach ($team_node->field_alternate_team_name->referencedEntities() as $alt) {
+      if ($alt->field_season->value == $season) {
+        // If we have an alt for this season, return it.
+        return $alt->field_alternate_name->value;
+      }
+    }
+  }
+  // Nothing found, return null.
+  return $team_node->label();
 }

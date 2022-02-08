@@ -8,6 +8,7 @@ mix.postCss('src/tailwind.css', 'dist', [
 ])
 
 mix.purgeCss({
+  enabled: false, // Remove this line to enable PurgeCSS.
   paths: () => glob.sync([
     path.join(__dirname, '**/*.twig'),
     '/var/www/sites/*/{modules,themes}/custom/**/*.twig',

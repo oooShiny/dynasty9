@@ -7,7 +7,7 @@ core_version_requirement: ^8 || ^9
 dependencies:
   - facets:facets
 
-# Information added by Drupal.org packaging script on 2020-05-24
-version: '8.x-1.03'
+# Information added by Drupal.org packaging script on 2021-12-12
+version: '8.x-1.04'
 project: 'facets_block'
-datestamp: 1590346324
+datestamp: 1639331251
