@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.team.field_alternate_team_name
     - field.field.node.team.field_conference
     - field.field.node.team.field_division
     - field.field.node.team.field_meta_tags
@@ -18,11 +19,12 @@ bundle: team
 mode: teaser
 content:
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
+  field_alternate_team_name: true
   field_conference: true
   field_division: true
   field_meta_tags: true

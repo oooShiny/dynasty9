@@ -1,0 +1,55 @@
+uuid: 02c8478a-0fb6-4e24-a982-9efc72fcb775
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alternate_team_name
+    - node.type.team
+    - paragraphs.paragraphs_type.alternate_team_name
+  module:
+    - entity_reference_revisions
+id: node.team.field_alternate_team_name
+field_name: field_alternate_team_name
+entity_type: node
+bundle: team
+label: 'Alternate Team Name'
+description: 'Use this field to override the default team name for certain seasons'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      alternate_team_name: alternate_team_name
+    negate: 0
+    target_bundles_drag_drop:
+      alternate_team_name:
+        weight: 10
+        enabled: true
+      block:
+        weight: 11
+        enabled: false
+      highlight:
+        weight: 12
+        enabled: false
+      media:
+        weight: 13
+        enabled: false
+      podcast_download:
+        weight: 14
+        enabled: false
+      quarterback:
+        weight: 15
+        enabled: false
+      section:
+        weight: 16
+        enabled: false
+      team_record:
+        weight: 17
+        enabled: false
+      text:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

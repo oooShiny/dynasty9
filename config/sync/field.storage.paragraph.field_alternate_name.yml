@@ -1,4 +1,4 @@
-uuid: 4d3c5055-a86c-4bb4-a1d9-484a5e35dc50
+uuid: 71c9ba3c-325c-4abd-bdfb-db1863debe34
 langcode: en
 status: true
 dependencies:
@@ -8,13 +8,14 @@ dependencies:
 third_party_settings:
   field_permissions:
     permission_type: public
-id: paragraph.field_season
-field_name: field_season
+id: paragraph.field_alternate_name
+field_name: field_alternate_name
 entity_type: paragraph
-type: integer
+type: string
 settings:
-  unsigned: false
-  size: normal
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

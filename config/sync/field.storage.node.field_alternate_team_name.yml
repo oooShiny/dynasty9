@@ -1,0 +1,25 @@
+uuid: ff9dfed0-873d-4df0-ab17-bbf20f5a40a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - field_permissions
+    - node
+    - paragraphs
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.field_alternate_team_name
+field_name: field_alternate_team_name
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
