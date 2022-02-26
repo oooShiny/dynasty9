@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Install functions for the Patreon User module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function patreon_user_install() {
+  /** @var \Drupal\patreon\PatreonServiceInterface $service */
+  $service = \Drupal::service('patreon.api');
+  $service->createRoles();
+
+  \Drupal::messenger()->addWarning(t('The Patreon User module has been enabled. Please add the URL :url to your allowed redirects at https://www.patreon.com/portal/registration/register-clients.', [
+    ':url' => \Drupal::service('patreon_user.api')->getCallback()->toString(),
+  ]));
+}

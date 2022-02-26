@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - facets_block
+    - node
   theme:
     - dynasty
 id: facetsblock_4
@@ -16,8 +16,8 @@ plugin: facets_block
 settings:
   id: facets_block
   label: 'Player Search Filters'
-  provider: facets_block
   label_display: '0'
+  provider: facets_block
   show_title: true
   exclude_empty_facets: false
   facets_to_include:
@@ -50,8 +50,8 @@ settings:
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      player: player
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      player: player

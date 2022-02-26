@@ -3,6 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.user_patreon_id
+    - field.field.user.user.user_patreon_refresh_token
+    - field.field.user.user.user_patreon_token
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -20,13 +23,16 @@ content:
     region: content
   user_picture:
     type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
     weight: 0
     region: content
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
-    label: hidden
 hidden:
   langcode: true
   search_api_excerpt: true
+  user_patreon_id: true
+  user_patreon_refresh_token: true
+  user_patreon_token: true

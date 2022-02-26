@@ -5,7 +5,7 @@ dependencies:
   config:
     - views.view.player_page_highlight_search
   module:
-    - ctools
+    - node
     - views
   theme:
     - dynasty
@@ -18,15 +18,15 @@ plugin: 'views_block:player_page_highlight_search-block_1'
 settings:
   id: 'views_block:player_page_highlight_search-block_1'
   label: ''
-  provider: views
   label_display: '0'
+  provider: views
   views_label: ''
   items_per_page: none
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      player: player
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      player: player

@@ -1,0 +1,14 @@
+uuid: bc17e542-bc9c-4d74-8486-930eadc019cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.8156552_patron
+  module:
+    - user
+id: user_remove_role_action.8156552_patron
+label: 'Remove the 8156552 Patron role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: 8156552_patron

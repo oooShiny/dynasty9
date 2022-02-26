@@ -1,3 +1,6 @@
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
+langcode: en
 uuid: a110a13f-7233-4ecc-a0a5-51df9f1c276c
 name: 'Patriots Dynasty'
 mail: info@patsdynasty.com
@@ -8,8 +11,5 @@ page:
   front: /node/3321
 admin_compact_mode: false
 weight_select_max: 100
-langcode: en
 default_langcode: en
-_core:
-  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
 mail_notification: ''

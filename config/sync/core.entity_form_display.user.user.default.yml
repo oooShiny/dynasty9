@@ -3,6 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.user_patreon_id
+    - field.field.user.user.user_patreon_refresh_token
+    - field.field.user.user.user_patreon_token
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -36,11 +39,14 @@ content:
     region: content
   user_picture:
     type: image_image
+    weight: -1
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    weight: -1
-    region: content
 hidden:
   langcode: true
+  user_patreon_id: true
+  user_patreon_refresh_token: true
+  user_patreon_token: true

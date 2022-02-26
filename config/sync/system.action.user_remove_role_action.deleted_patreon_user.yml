@@ -1,0 +1,14 @@
+uuid: a536810f-8c48-4a49-9372-c513b637e275
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.deleted_patreon_user
+  module:
+    - user
+id: user_remove_role_action.deleted_patreon_user
+label: 'Remove the Deleted Patreon User role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: deleted_patreon_user

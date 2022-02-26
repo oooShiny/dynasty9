@@ -78,6 +78,9 @@ module:
   pager: 0
   path: 0
   path_alias: 0
+  patreon: 0
+  patreon_extras: 0
+  patreon_user: 0
   quickedit: 0
   quicklink: 0
   rdf: 0

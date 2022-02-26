@@ -1,0 +1,12 @@
+name: Patreon Extras
+type: module
+description: Extra functionality related to Patreon.
+core_version_requirement: ^8.8 || ^9
+package: Patreon
+dependencies:
+  - patreon:patreon_user
+
+# Information added by Drupal.org packaging script on 2022-01-24
+version: '3.0.0'
+project: 'patreon'
+datestamp: 1643042899

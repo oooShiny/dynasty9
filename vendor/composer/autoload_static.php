@@ -117,6 +117,7 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'PhpParser\\' => 10,
+            'Patreon\\' => 8,
         ),
         'M' => 
         array (
@@ -384,6 +385,10 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'Patreon\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/patreon/patreon/src',
         ),
         'MyCLabs\\Enum\\' => 
         array (

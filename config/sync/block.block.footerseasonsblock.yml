@@ -9,12 +9,12 @@ dependencies:
 id: footerseasonsblock
 theme: dynasty
 region: footer
-weight: 0
+weight: -10
 provider: null
 plugin: footer_seasons_block
 settings:
   id: footer_seasons_block
   label: 'Footer Seasons Block'
-  provider: dynasty_module
   label_display: '0'
+  provider: dynasty_module
 visibility: {  }

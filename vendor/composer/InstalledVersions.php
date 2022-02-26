@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '1ed49a46a9df989568fb643561d2fad2247cd9bd',
+    'reference' => '2e4d004e975a435bdb2fe6111bb392eb29e6f2a6',
     'name' => 'drupal/recommended-project',
   ),
   'versions' => 
@@ -1146,6 +1146,15 @@ private static $installed = array (
       ),
       'reference' => '8.x-1.8',
     ),
+    'drupal/patreon' => 
+    array (
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3.0.0',
+    ),
     'drupal/quickedit' => 
     array (
       'replaced' => 
@@ -1176,7 +1185,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '1ed49a46a9df989568fb643561d2fad2247cd9bd',
+      'reference' => '2e4d004e975a435bdb2fe6111bb392eb29e6f2a6',
     ),
     'drupal/redirect' => 
     array (
@@ -1694,6 +1703,15 @@ private static $installed = array (
       array (
         0 => '~2.0',
       ),
+    ),
+    'patreon/patreon' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '206575a16ce9a447b79b2367e1d4991ce76202d2',
     ),
     'pear/archive_tar' => 
     array (

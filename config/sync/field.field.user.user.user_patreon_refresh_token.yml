@@ -1,0 +1,25 @@
+uuid: 7be4066a-021a-4aa4-a76b-8064dac05751
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.user_patreon_refresh_token
+  module:
+    - user
+  enforced:
+    module:
+      - patreon_user
+_core:
+  default_config_hash: 1PCmvlaKiyL9hsBQHuRHoOJ06EThjEqNywnz2sC5EKc
+id: user.user.user_patreon_refresh_token
+field_name: user_patreon_refresh_token
+entity_type: user
+bundle: user
+label: 'Patreon Refresh Token'
+description: 'The Patreon Refresh Token of the User.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

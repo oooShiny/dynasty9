@@ -1,0 +1,25 @@
+uuid: ff7d0329-160f-4b6e-bb8a-e432c8ef609c
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  enforced:
+    module:
+      - patreon_user
+_core:
+  default_config_hash: w3CgOIrC-kp-nSel7hJzDFJNXjKC-ZiztVK3azyVsdg
+id: user.user_patreon_id
+field_name: user_patreon_id
+entity_type: user
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

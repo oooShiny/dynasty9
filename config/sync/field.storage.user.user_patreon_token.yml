@@ -1,0 +1,24 @@
+uuid: f8f21b5b-3962-4308-8c88-aa28f752f041
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  enforced:
+    module:
+      - patreon_user
+_core:
+  default_config_hash: g1zGsny19KTRQ_4FAzcSi3mAp6xrN-WTeWHu5xfsVc4
+id: user.user_patreon_token
+field_name: user_patreon_token
+entity_type: user
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

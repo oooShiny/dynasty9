@@ -1,0 +1,9 @@
+uuid: ab075d9c-84ea-45e6-b289-ed9f48642eb6
+langcode: en
+status: true
+dependencies: {  }
+id: deleted_patreon_user
+label: 'Deleted Patreon User'
+weight: 4
+is_admin: null
+permissions: {  }

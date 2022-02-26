@@ -1,0 +1,25 @@
+uuid: bb8532bf-aac3-41d5-be56-1963b94b48fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.user_patreon_token
+  module:
+    - user
+  enforced:
+    module:
+      - patreon_user
+_core:
+  default_config_hash: I1uXz3lQXjPgNTWtbkAn6w7O-ERfCerGnGui9q-OfY8
+id: user.user.user_patreon_token
+field_name: user_patreon_token
+entity_type: user
+bundle: user
+label: 'Patreon Token'
+description: 'The Patreon Token of the User.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

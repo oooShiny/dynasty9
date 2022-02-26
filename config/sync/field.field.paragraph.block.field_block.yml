@@ -31,4 +31,6 @@ settings:
       top_10_podcast_block: top_10_podcast_block
       total_podcast_downloads_block: total_podcast_downloads_block
       'system_menu_block:brady-page-menu': 'system_menu_block:brady-page-menu'
+      patreon_become_block: patreon_become_block
+      patreon_user_block: patreon_user_block
 field_type: block_field

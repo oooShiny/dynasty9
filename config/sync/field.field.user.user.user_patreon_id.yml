@@ -1,0 +1,29 @@
+uuid: 3a790930-7496-4738-996f-5b341012ecdf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.user_patreon_id
+  module:
+    - user
+  enforced:
+    module:
+      - patreon_user
+_core:
+  default_config_hash: 0zIwC_mdvX8JnLcxuRDjbgtJq8dM3G3jNQRG3svbm1Q
+id: user.user.user_patreon_id
+field_name: user_patreon_id
+entity_type: user
+bundle: user
+label: 'Patreon ID'
+description: 'The Patreon ID of the User.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: ''
+  max: ''
+  prefix: ''
+  suffix: ''
+field_type: integer

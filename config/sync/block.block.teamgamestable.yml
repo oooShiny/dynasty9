@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - dynasty_module
+    - node
   theme:
     - dynasty
 id: teamgamestable
@@ -16,15 +16,15 @@ plugin: team_games_table
 settings:
   id: team_games_table
   label: 'Team Games Table'
-  provider: dynasty_module
   label_display: '0'
+  provider: dynasty_module
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      team: team
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      team: team

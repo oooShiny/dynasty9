@@ -1,7 +1,17 @@
 uuid: 1ad6ce28-9e2b-4706-9555-2e18a54bfc9f
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - comment
+    - contact
+    - field_permissions
+    - filter
+    - media
+    - shortcut
+    - system
 _core:
   default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
 id: authenticated

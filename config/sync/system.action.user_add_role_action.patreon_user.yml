@@ -1,0 +1,14 @@
+uuid: 9e79334f-285c-40f9-9d4c-0de4e61800a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.patreon_user
+  module:
+    - user
+id: user_add_role_action.patreon_user
+label: 'Add the Patreon User role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: patreon_user

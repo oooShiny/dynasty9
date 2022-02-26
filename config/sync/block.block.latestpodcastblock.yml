@@ -16,10 +16,10 @@ plugin: latest_podcast_block
 settings:
   id: latest_podcast_block
   label: 'Latest Podcast Block'
-  provider: dynasty_module
   label_display: '0'
+  provider: dynasty_module
 visibility:
   request_path:
     id: request_path
-    pages: /podcast
     negate: false
+    pages: /podcast

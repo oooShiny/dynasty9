@@ -1,0 +1,5 @@
+services:
+  patreon.api:
+    class: Drupal\patreon\PatreonService
+    arguments: ['@path.current', '@serialization.json', '@config.factory', '@logger.factory', '@messenger', '@entity_type.manager', '@request_stack', '@state']
+

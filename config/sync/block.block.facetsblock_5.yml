@@ -16,8 +16,8 @@ plugin: facets_block
 settings:
   id: facets_block
   label: 'QB Filters'
-  provider: facets_block
   label_display: visible
+  provider: facets_block
   show_title: true
   exclude_empty_facets: true
   facets_to_include:
@@ -55,5 +55,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /search/games
     negate: false
+    pages: /search/games

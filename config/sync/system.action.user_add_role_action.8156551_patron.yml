@@ -1,0 +1,14 @@
+uuid: 1920a5a7-92d9-40ad-865b-18aa95886779
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.8156551_patron
+  module:
+    - user
+id: user_add_role_action.8156551_patron
+label: 'Add the 8156551 Patron role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: 8156551_patron

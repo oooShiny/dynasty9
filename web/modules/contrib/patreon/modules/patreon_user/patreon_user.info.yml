@@ -1,0 +1,13 @@
+name: Patreon User
+type: module
+description: Links Drupal User accounts to an account on the Patreon website
+core_version_requirement: ^8.8 || ^9
+package: Patreon
+dependencies:
+  - patreon:patreon
+configure: entity.user.admin_form
+
+# Information added by Drupal.org packaging script on 2022-01-24
+version: '3.0.0'
+project: 'patreon'
+datestamp: 1643042899

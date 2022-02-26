@@ -1,0 +1,9 @@
+uuid: c286e64d-d29f-47a6-8e7b-6ba8e143e867
+langcode: en
+status: true
+dependencies: {  }
+id: patreon_user
+label: 'Patreon User'
+weight: 3
+is_admin: null
+permissions: {  }

@@ -1,0 +1,20 @@
+uuid: 731a0ee5-cdd0-4c5d-a572-3c6538b3e915
+langcode: en
+status: true
+dependencies:
+  module:
+    - patreon_user
+  theme:
+    - dynasty
+id: patreonuserblock
+theme: dynasty
+region: footer
+weight: -12
+provider: null
+plugin: patreon_user_block
+settings:
+  id: patreon_user_block
+  label: 'Patreon user block'
+  label_display: '0'
+  provider: patreon_user
+visibility: {  }

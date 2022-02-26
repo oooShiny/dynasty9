@@ -1,0 +1,14 @@
+uuid: 55907110-0899-45d4-91e5-1abcb11f1df7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.patreon_user
+  module:
+    - user
+id: user_remove_role_action.patreon_user
+label: 'Remove the Patreon User role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: patreon_user
