@@ -176,6 +176,10 @@
       <button type="button" onclick="window.open('{{ content.field_youtube_highlights|render|trim }}')" class="tw-p-4 tw-bg-red-600 tw-text-white tw-text-center">Youtube Highlights</button>
     {% endif %}
 
+    {% if content.field_youtube_game_link|render %}
+      <button type="button" onclick="window.open('{{ content.field_youtube_game_link|render|trim }}')" class="tw-bg-white tw-border tw-border-red-600 tw-p-4 tw-text-center tw-text-red-600">Youtube Game Video</button>
+    {% endif %}
+
     {% if season > 2008 %}
       <button type="button" onclick="window.open('{{ gamepass_link }}')" class="tw-p-4 tw-bg-blue-900 tw-text-white tw-text-center">Watch on GamePass</button>
     {% endif %}
