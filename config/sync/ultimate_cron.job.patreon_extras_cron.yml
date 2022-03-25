@@ -1,0 +1,17 @@
+uuid: c1454fe0-5e93-43bf-b87d-5c835269a81e
+langcode: en
+status: true
+dependencies:
+  module:
+    - patreon_extras
+title: 'Default cron handler'
+id: patreon_extras_cron
+weight: 0
+module: patreon_extras
+callback: patreon_extras_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

@@ -126,6 +126,7 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         ),
         'L' => 
         array (
+            'League\\OAuth2\\Client\\' => 21,
             'League\\Container\\' => 17,
             'Laminas\\Stdlib\\' => 15,
             'Laminas\\Feed\\' => 13,
@@ -181,6 +182,7 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'A' => 
         array (
             'Asm89\\Stack\\' => 12,
+            'Abraham\\TwitterOAuth\\' => 21,
         ),
     );
 
@@ -398,6 +400,10 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
+        'League\\OAuth2\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/oauth2-client/src',
+        ),
         'League\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/container/src',
@@ -534,6 +540,10 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
+        ),
+        'Abraham\\TwitterOAuth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/abraham/twitteroauth/src',
         ),
     );
 

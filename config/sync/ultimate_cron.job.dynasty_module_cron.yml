@@ -1,0 +1,29 @@
+uuid: e8f8a37f-9365-452e-aff9-c8e9a2c34863
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_module
+title: 'Default cron handler'
+id: dynasty_module_cron
+weight: 0
+module: dynasty_module
+callback: dynasty_module_cron
+scheduler:
+  id: simple
+  configuration:
+    rules:
+      - '0+@ */12 * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

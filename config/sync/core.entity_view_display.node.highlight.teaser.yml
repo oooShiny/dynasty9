@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.highlight.field_seconds
     - field.field.node.highlight.field_tag_play
     - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_tweeted
     - field.field.node.highlight.field_video_file_id
     - field.field.node.highlight.field_week
     - field.field.node.highlight.field_yards_gained
@@ -38,33 +39,33 @@ mode: teaser
 content:
   field_gfycat_id:
     type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 2
     region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_muse_video_id:
     type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 1
     region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_video_file_id:
     type: string
-    weight: 3
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  links:
-    weight: 0
+    weight: 3
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_air_yards: true
   field_distance: true
@@ -85,6 +86,7 @@ hidden:
   field_seconds: true
   field_tag_play: true
   field_td_scored: true
+  field_tweeted: true
   field_week: true
   field_yards_gained: true
   langcode: true

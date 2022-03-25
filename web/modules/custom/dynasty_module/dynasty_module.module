@@ -1,9 +1,11 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Calculating Brady QB Rating field for game nodes.
@@ -247,7 +249,25 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
         $entity->field_opponent->target_id = $game->field_opponent->target_id;
       }
       // Format muse video ID field if a link is posted.
-      if (!$entity->field_video_file_id->isEmpty() && filter_var($entity->field_video_file_id->value, FILTER_VALIDATE_URL)) {
+      if ($entity->field_video_file_id->isEmpty()) {
+        $video_id = $entity->field_muse_video_id->value;
+        $url = 'https://muse.ai/api/files/videos/' . $video_id;
+        $client = \Drupal::httpClient();
+        $data = NULL;
+        try{
+          $response = $client->request('GET', $url, [
+            'headers' => ['Key' => 'vvjguqSQzGQu9cJXtRg1QfI85f7b9e4f']
+          ]);
+          $data = $response->getBody()->getContents();
+          $video_data = json_decode($data, true);
+          $entity->field_video_file_id->value = $video_data['fid'];
+        }
+        catch (RequestException $e) {
+          watchdog_exception('patsfilm', $e->getMessage());
+        }
+
+      }
+      elseif (filter_var($entity->field_video_file_id->value, FILTER_VALIDATE_URL)) {
         $url_array = parse_url($entity->field_video_file_id->value);
         $path_array = explode('/', $url_array['path']);
         $entity->field_video_file_id->value = $path_array[2];
@@ -312,4 +332,82 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
       }
       break;
   }
+}
+
+/**
+ * Implements hook_cron().
+ * Tweets out a random highlight node.
+ */
+function dynasty_module_cron() {
+  $plays = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties([
+      'type' => 'highlight'
+    ]);
+  $highlights = [];
+  foreach ($plays as $play) {
+    if ($play->field_tweeted->isEmpty() || $play->field_tweeted->value !== TRUE) {
+      $highlights[] =$play->id();
+    }
+  }
+
+  $key = array_rand($highlights);
+
+  $tweet_play = $highlights[$key];
+  $url = $plays[$tweet_play]->toUrl()->setAbsolute()->toString();
+  $tweet_title = $plays[$tweet_play]->label();
+  $video_id = $plays[$tweet_play]->get('field_video_file_id')->value;
+  $muse_url = 'https://cdn.muse.ai/w/'.$video_id.'/videos/video.mp4';
+
+  // Save video locally so we can send it to Twitter.
+  $video_file = system_retrieve_file($muse_url);
+  $file = File::create(['uri' => $video_file]);
+  $file->save();
+  $local_uri = $file->getFileUri();
+
+  $game = '';
+  $opp = '';
+  foreach ($plays[$tweet_play]->field_game->referencedEntities() as $g) {
+    $game = $g->label();
+    foreach ($g->field_opponent->referencedEntities() as $o) {
+      $opp_arr = explode(' ', $o->label());
+      $opp = end($opp_arr);
+    }
+  }
+
+  $tweet_text = 'A Random Dynasty Highlight:'
+    . chr(13) . chr(10)
+    . chr(13) . chr(10) .
+    $plays[$tweet_play]->label() . ' vs ' . $opp . ' in ' . $game
+    . chr(13) . chr(10)
+    . chr(13) . chr(10) .
+    $url
+    . chr(13) . chr(10)
+    . chr(13) . chr(10) .
+  '#Patriots #Dynasty';
+
+  $tweet = [
+    'status' => $tweet_text,
+    'media_paths' => [$local_uri]
+  ];
+  // Create and post manager instances.
+  $client = \Drupal::service('plugin.network.manager')->createInstance('social_post_twitter')->getSdk();
+  $post_manager = \Drupal::service('twitter_post.manager');
+
+  // Get accounts for the current user.
+  $accounts = \Drupal::service('social_post.user_manager')->getAccounts('social_post_twitter', 1);
+
+  foreach ($accounts as $account) {
+    // Set OAuth token for the account.
+    $token = json_decode($account->getToken());
+    $client->setOauthToken($token->oauth_token, $token->oauth_token_secret);
+
+    // Make a post to Twitter with the account!
+    $post_manager->setClient($client)->doPost($tweet);
+  }
+
+  // Clean up after the highlight has been tweeted.
+  $plays[$tweet_play]->field_tweeted = 1;
+  $file->delete();
+
 }

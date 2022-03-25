@@ -45,7 +45,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/pear/pear-core-minimal" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pear/pear_exception" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-escaper" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-zendframework-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-feed" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-stdlib" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-diactoros" />
@@ -91,6 +90,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/fastglass/sendgrid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/patreon/patreon" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/oauth2-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/abraham/twitteroauth" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

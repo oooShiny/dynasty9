@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.highlight.field_seconds
     - field.field.node.highlight.field_tag_play
     - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_tweeted
     - field.field.node.highlight.field_video_file_id
     - field.field.node.highlight.field_week
     - field.field.node.highlight.field_yards_gained
@@ -37,50 +38,50 @@ bundle: highlight
 mode: card
 content:
   field_game:
-    weight: 4
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 4
     region: content
   field_gfycat_id:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_muse_video_id:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_opponent:
-    weight: 3
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 3
     region: content
   field_video_file_id:
     type: string
-    weight: 5
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  links:
-    weight: 0
+    weight: 5
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_air_yards: true
   field_distance: true
@@ -99,6 +100,7 @@ hidden:
   field_seconds: true
   field_tag_play: true
   field_td_scored: true
+  field_tweeted: true
   field_week: true
   field_yards_gained: true
   langcode: true

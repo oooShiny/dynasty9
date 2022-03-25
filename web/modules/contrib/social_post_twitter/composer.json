@@ -1,0 +1,41 @@
+{
+    "name": "drupal/social_post_twitter",
+    "type": "drupal-module",
+    "description": "Social Post integration for Twitter",
+    "keywords": ["Drupal"],
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/social_post_twitter",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/social_post_twitter",
+        "source": "https://git.drupalcode.org/project/social_post_twitter"
+    },
+    "authors": [
+        {
+            "name": "Getulio Valentin Sánchez (gvso)",
+            "email": "valentin2507@gmail.com"
+        },
+        {
+            "name": "Chrsitopher C. Wells (wells)",
+            "email": "drupal.org@chris-wells.net"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "abraham/twitteroauth": "~0.7",
+        "drupal/core": "^8.8 || ^9.0",
+        "drupal/social_post": "^3.0@beta"
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "drupal/rules": "3.x-dev"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true
+    }
+}

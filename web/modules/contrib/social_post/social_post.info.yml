@@ -1,0 +1,13 @@
+name: Social Post
+type: module
+description: Allows posting content to different social networks automatically
+core_version_requirement: ^8.8 || ^9
+package: Social
+configure: social_post.integrations
+dependencies:
+  - social_api:social_api
+
+# Information added by Drupal.org packaging script on 2021-08-21
+version: '3.0.0-beta2'
+project: 'social_post'
+datestamp: 1629549392

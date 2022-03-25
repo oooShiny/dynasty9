@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.highlight.field_seconds
     - field.field.node.highlight.field_tag_play
     - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_tweeted
     - field.field.node.highlight.field_video_file_id
     - field.field.node.highlight.field_week
     - field.field.node.highlight.field_yards_gained
@@ -42,17 +43,17 @@ third_party_settings:
         - field_muse_video_id
         - field_video_file_id
         - field_play_of_the_game
+      label: 'Video Info'
+      region: content
       parent_name: ''
       weight: 0
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: true
+        description: ''
         required_fields: true
-      label: 'Video Info'
     group_play_info:
       children:
         - field_players_involved
@@ -62,161 +63,164 @@ third_party_settings:
         - field_td_scored
         - field_down
         - field_distance
+      label: 'Play Info'
+      region: content
       parent_name: ''
       weight: 1
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: true
+        description: ''
         required_fields: true
-      label: 'Play Info'
     group_game_info:
       children:
         - field_game
         - field_quarter
         - field_minutes
         - field_seconds
+      label: 'Game Info'
+      region: content
       parent_name: ''
       weight: 3
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: true
+        description: ''
         required_fields: true
-      label: 'Game Info'
     group_pass_info:
       children:
         - field_air_yards
         - field_pass_length
         - field_pass_location
         - field_pass_thrown_from
+      label: 'Pass Info'
+      region: content
       parent_name: group_play_info
       weight: 19
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: false
+        description: ''
         required_fields: true
-      label: 'Pass Info'
 id: node.highlight.default
 targetEntityType: node
 bundle: highlight
 mode: default
 content:
   field_air_yards:
+    type: number
     weight: 4
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_distance:
+    type: number
     weight: 23
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_down:
+    type: options_select
     weight: 22
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_game:
+    type: entity_reference_autocomplete
     weight: 4
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_gfycat_id:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_meta_tags:
+    type: metatag_firehose
     weight: 5
+    region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   field_minutes:
-    weight: 9
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
     type: number
+    weight: 9
     region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_muse_video_id:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_pass_length:
+    type: options_select
     weight: 5
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_pass_location:
+    type: options_select
     weight: 6
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_pass_thrown_from:
+    type: options_select
     weight: 8
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_play_description:
-    weight: 26
+    type: string_textfield
+    weight: 7
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_play_of_the_game:
+    type: boolean_checkbox
     weight: 5
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_play_type:
+    type: entity_reference_autocomplete
     weight: 18
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_players_involved:
+    type: inline_entity_form_complex
     weight: 16
+    region: content
     settings:
       form_mode: player_simple_form
       override_labels: true
@@ -225,58 +229,56 @@ content:
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      revision: false
+      allow_duplicate: false
       collapsible: false
       collapsed: false
-      allow_duplicate: false
+      revision: false
     third_party_settings: {  }
-    type: inline_entity_form_complex
-    region: content
   field_quarter:
+    type: options_select
     weight: 8
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_seconds:
+    type: number
     weight: 10
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_tag_play:
+    type: entity_reference_autocomplete_tags
     weight: 4
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete_tags
-    region: content
   field_td_scored:
+    type: boolean_checkbox
     weight: 21
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_video_file_id:
+    type: string_textfield
     weight: 4
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_yards_gained:
+    type: number
     weight: 20
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   langcode:
     type: language_select
     weight: 2
@@ -301,6 +303,7 @@ hidden:
   created: true
   field_opponent: true
   field_season: true
+  field_tweeted: true
   field_week: true
   path: true
   promote: true

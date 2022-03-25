@@ -83,6 +83,7 @@ module:
   patreon_user: 0
   quickedit: 0
   quicklink: 0
+  rate: 0
   rdf: 0
   redirect: 0
   rest: 0
@@ -99,6 +100,9 @@ module:
   simple_sitemap_engines: 0
   simple_sitemap_views: 0
   smart_trim: 0
+  social_api: 0
+  social_post: 0
+  social_post_twitter: 0
   system: 0
   taxonomy: 0
   text: 0
@@ -106,11 +110,13 @@ module:
   toolbar: 0
   tour: 0
   twig_tweak: 0
+  ultimate_cron: 0
   update: 0
   user: 0
   views_entity_form_field: 0
   views_jump_menu: 0
   views_ui: 0
+  votingapi: 0
   yoast_seo: 0
   pathauto: 1
   views: 10
