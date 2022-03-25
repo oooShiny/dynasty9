@@ -74,7 +74,7 @@ class TwitterPostManager implements TwitterPostManagerInterface {
 
     foreach ($paths as $path) {
       // Upload the media from the path.
-      $media = $this->client->upload('media/upload', ['media' => $path]);
+      $media = $this->client->upload('media/upload', ['media' => $path, 'media_type' => 'video/mp4'], TRUE);
 
       // The response contains the media_ids to attach the media to the post.
       $media_ids[] = $media->media_id_string;
