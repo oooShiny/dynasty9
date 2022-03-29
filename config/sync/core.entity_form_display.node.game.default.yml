@@ -46,7 +46,6 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_yoast_seo
-    - field.field.node.game.field_youtube_game_link
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -76,17 +75,17 @@ third_party_settings:
         - field_opp_ot
         - field_opponent_score
         - field_result
-      label: Boxscore
-      region: content
       parent_name: ''
       weight: 1
       format_type: details
+      region: content
       format_settings:
-        classes: ''
-        id: ''
-        open: false
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: Boxscore
     group_tom_brady:
       children:
         - field_brady_played
@@ -98,32 +97,32 @@ third_party_settings:
         - field_brady_ints
         - field_passer_rating
         - field_other_qbs
-      label: 'Starting QB'
-      region: content
       parent_name: ''
       weight: 5
       format_type: details
+      region: content
       format_settings:
-        classes: ''
-        id: ''
-        open: false
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: 'Starting QB'
     group_game_summary:
       children:
         - field_game_summary
         - field_game_links
-      label: 'Game Summary'
-      region: content
       parent_name: ''
       weight: 4
       format_type: details
+      region: content
       format_settings:
-        classes: ''
-        id: ''
-        open: false
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: 'Game Summary'
     group_game_details:
       children:
         - title
@@ -136,245 +135,242 @@ third_party_settings:
         - field_home_away
         - field_opponent
         - field_opposing_coach
-      label: 'Game Details'
-      region: content
       parent_name: ''
       weight: 0
       format_type: details
+      region: content
       format_settings:
-        classes: ''
         id: ''
-        open: true
+        classes: ''
         description: ''
+        open: true
         required_fields: true
+      label: 'Game Details'
     group_extras:
       children:
         - field_over_under
         - field_vegas_line
         - field_surf
         - field_temperature
-      label: Extras
-      region: content
       parent_name: ''
       weight: 6
       format_type: details
+      region: content
       format_settings:
-        classes: ''
         id: ''
-        open: false
+        classes: ''
         description: ''
+        open: false
         required_fields: true
+      label: Extras
     group_calculated_fields:
       children:
         - field_month
         - field_score_differential
         - field_weekday
-      label: 'Calculated Fields'
-      region: content
       parent_name: ''
       weight: 7
       format_type: details
+      region: content
       format_settings:
-        classes: ''
         id: ''
-        open: false
+        classes: ''
         description: ''
+        open: false
         required_fields: true
+      label: 'Calculated Fields'
     group_game_media:
       children:
         - field_game_video
         - field_youtube_highlights
-        - field_youtube_game_link
-      label: 'Game Media'
-      region: content
       parent_name: ''
       weight: 3
       format_type: details
+      region: content
       format_settings:
-        classes: ''
-        id: ''
-        open: false
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: 'Game Media'
 id: node.game.default
 targetEntityType: node
 bundle: game
 mode: default
 content:
   field_after_bye:
-    type: boolean_checkbox
     weight: 4
-    region: content
     settings:
       display_label: true
     third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_brady_attempts:
-    type: number
     weight: 7
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_brady_completions:
-    type: number
     weight: 6
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_brady_ints:
     type: number
-    weight: 10
     region: content
+  field_brady_ints:
+    weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_brady_played:
-    type: boolean_checkbox
-    weight: 4
+    type: number
     region: content
+  field_brady_played:
+    weight: 4
     settings:
       display_label: true
     third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_brady_tds:
-    type: number
     weight: 9
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_brady_yards:
     type: number
-    weight: 8
     region: content
+  field_brady_yards:
+    weight: 8
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_date:
-    type: datetime_default
-    weight: 7
+    type: number
     region: content
+  field_date:
+    weight: 7
     settings: {  }
     third_party_settings: {  }
-  field_game_links:
-    type: link_default
-    weight: 14
+    type: datetime_default
     region: content
+  field_game_links:
+    weight: 14
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_game_summary:
-    type: text_textarea
-    weight: 13
+    type: link_default
     region: content
+  field_game_summary:
+    weight: 13
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_game_video:
-    type: string_textfield
-    weight: 26
+    type: text_textarea
     region: content
+  field_game_video:
+    weight: 26
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_home_away:
-    type: options_select
-    weight: 8
+    type: string_textfield
     region: content
+  field_home_away:
+    weight: 8
     settings: {  }
     third_party_settings: {  }
-  field_meta_tags:
-    type: metatag_firehose
-    weight: 10
+    type: options_select
     region: content
+  field_meta_tags:
+    weight: 10
     settings:
       sidebar: true
-      use_details: true
     third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_month:
-    type: string_textfield
     weight: 8
-    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_opp_ot:
-    type: number
     weight: 22
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_opp_q1:
-    type: number
     weight: 18
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_opp_q2:
-    type: number
     weight: 19
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_opp_q3:
-    type: number
     weight: 20
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_opp_q4:
-    type: number
     weight: 21
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_opponent:
-    type: entity_reference_autocomplete
-    weight: 9
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_opponent_score:
     type: number
-    weight: 23
     region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_opposing_coach:
-    type: entity_reference_autocomplete
-    weight: 10
-    region: content
+  field_opponent:
+    weight: 9
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_ot:
-    type: boolean_checkbox
-    weight: 6
+    type: entity_reference_autocomplete
     region: content
+  field_opponent_score:
+    weight: 23
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_opposing_coach:
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_ot:
+    weight: 6
     settings:
       display_label: true
     third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_other_qbs:
     type: paragraphs
     weight: 12
-    region: content
     settings:
       title: QB
       title_plural: QBs
@@ -390,156 +386,149 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+    region: content
   field_over_under:
-    type: number
     weight: 6
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_passer_rating:
-    type: number
     weight: 11
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_patriots_score:
-    type: number
     weight: 17
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_pats_ot:
-    type: number
     weight: 16
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_pats_q1:
-    type: number
     weight: 12
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_pats_q2:
-    type: number
     weight: 13
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+    type: number
+    region: content
   field_pats_q3:
-    type: number
     weight: 14
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_pats_q4:
     type: number
-    weight: 15
     region: content
+  field_pats_q4:
+    weight: 15
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_playoff_game:
-    type: boolean_checkbox
-    weight: 5
+    type: number
     region: content
+  field_playoff_game:
+    weight: 5
     settings:
       display_label: true
     third_party_settings: {  }
-  field_result:
-    type: options_select
-    weight: 24
+    type: boolean_checkbox
     region: content
+  field_result:
+    weight: 24
     settings: {  }
     third_party_settings: {  }
+    type: options_select
+    region: content
   field_score_differential:
-    type: number
     weight: 10
-    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_season:
     type: number
-    weight: 2
     region: content
+  field_season:
+    weight: 2
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_starting_qb:
-    type: select2_entity_reference
-    weight: 5
+    type: number
     region: content
+  field_starting_qb:
+    weight: 5
     settings:
-      width: 100%
-      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
+      autocomplete: false
+      width: 100%
     third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
   field_surf:
-    type: options_select
     weight: 8
-    region: content
     settings: {  }
     third_party_settings: {  }
-  field_temperature:
-    type: number
-    weight: 9
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_vegas_line:
-    type: number
-    weight: 7
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_week:
     type: options_select
-    weight: 3
     region: content
+  field_temperature:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_vegas_line:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_week:
+    weight: 3
     settings: {  }
     third_party_settings: {  }
-  field_weekday:
-    type: string_textfield
-    weight: 11
+    type: options_select
     region: content
+  field_weekday:
+    weight: 11
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_yoast_seo:
-    type: yoast_seo_widget
-    weight: 11
+    type: string_textfield
     region: content
+  field_yoast_seo:
+    weight: 11
     settings:
       body: body
     third_party_settings: {  }
-  field_youtube_game_link:
-    type: link_default
-    weight: 28
+    type: yoast_seo_widget
     region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   field_youtube_highlights:
-    type: link_default
     weight: 27
-    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+    type: link_default
+    region: content
   langcode:
     type: language_select
     weight: 2
@@ -555,10 +544,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 9
-    region: content
     settings:
       display_label: true
+    weight: 9
+    region: content
     third_party_settings: {  }
   title:
     type: string_textfield

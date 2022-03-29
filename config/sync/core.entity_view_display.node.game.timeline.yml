@@ -47,7 +47,6 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_yoast_seo
-    - field.field.node.game.field_youtube_game_link
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -62,100 +61,100 @@ bundle: game
 mode: timeline
 content:
   field_date:
-    type: datetime_default
+    weight: 1
     label: hidden
     settings:
       timezone_override: ''
       format_type: long_date
     third_party_settings: {  }
-    weight: 1
+    type: datetime_default
     region: content
   field_game_summary:
-    type: smart_trim
+    weight: 3
     label: hidden
     settings:
       trim_length: 50
       trim_type: words
       trim_suffix: ...
-      wrap_output: false
       wrap_class: trimmed
-      more_link: false
-      more_class: more-link
       more_text: More
-      summary_handler: full
+      more_class: more-link
+      wrap_output: false
+      more_link: false
       trim_options:
         text: false
         trim_zero: false
+      summary_handler: full
     third_party_settings: {  }
-    weight: 3
+    type: smart_trim
     region: content
   field_home_away:
-    type: list_default
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    type: list_default
     region: content
   field_opponent:
-    type: entity_reference_label
+    weight: 4
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    weight: 4
+    type: entity_reference_label
     region: content
   field_opponent_score:
-    type: number_integer
+    weight: 7
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 7
+    type: number_integer
     region: content
   field_patriots_score:
-    type: number_integer
+    weight: 8
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 8
+    type: number_integer
     region: content
   field_season:
-    type: number_integer
+    weight: 5
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 5
+    type: number_integer
     region: content
   field_week:
-    type: entity_reference_label
+    weight: 6
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-    weight: 6
+    type: entity_reference_label
     region: content
   field_youtube_highlights:
-    type: link
+    weight: 9
     label: hidden
     settings:
       trim_length: 80
+      target: _blank
       url_only: false
       url_plain: false
       rel: '0'
-      target: _blank
     third_party_settings: {  }
-    weight: 9
+    type: link
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
     weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_after_bye: true
   field_brady_attempts: true
@@ -192,6 +191,5 @@ hidden:
   field_vegas_line: true
   field_weekday: true
   field_yoast_seo: true
-  field_youtube_game_link: true
   langcode: true
   search_api_excerpt: true

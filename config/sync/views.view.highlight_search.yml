@@ -16,82 +16,23 @@ base_table: search_api_index_highlight_index
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: false
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Search
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: false
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 10
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: grid
-        options:
-          uses_fields: false
-          columns: 2
-          automatic_width: false
-          alignment: horizontal
-          col_class_default: false
-          col_class_custom: ''
-          row_class_default: true
-          row_class_custom: ''
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:node':
-              highlight: card
+      title: 'Highlight Search'
       fields:
         distance:
+          id: distance
           table: search_api_index_highlight_index
           field: distance
-          id: distance
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api_field
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: search_api_field
           label: ''
           exclude: false
           alter:
@@ -162,6 +103,85 @@ display:
             multi_type: separator
             multi_separator: ', '
             format_plural_values: {  }
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Search
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        season:
+          id: season
+          table: search_api_index_highlight_index
+          field: season
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: season
+          exposed: false
+        week:
+          id: week
+          table: search_api_index_highlight_index
+          field: week
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: week
+          exposed: false
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_highlight_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: search_api_relevance
+          exposed: false
+      arguments: {  }
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -170,6 +190,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_fulltext
           operator: and
           value: ''
           group: 1
@@ -190,8 +211,8 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            placeholder: ''
             expose_fields: false
+            placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
           is_grouped: false
           group_info:
@@ -208,45 +229,30 @@ display:
           parse_mode: terms
           min_length: null
           fields: {  }
-          plugin_id: search_api_fulltext
-      sorts:
-        season:
-          id: season
-          table: search_api_index_highlight_index
-          field: season
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        week:
-          id: week
-          table: search_api_index_highlight_index
-          field: week
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-        search_api_relevance:
-          id: search_api_relevance
-          table: search_api_index_highlight_index
-          field: search_api_relevance
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      title: 'Highlight Search'
+      style:
+        type: grid
+        options:
+          uses_fields: false
+          columns: 2
+          automatic_width: false
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: false
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:node':
+              highlight: card
+      query:
+        type: views_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+      relationships: {  }
       header:
         area_text_custom:
           id: area_text_custom
@@ -255,10 +261,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
-          tokenize: false
-          content: "<div class=\"tw-flex tw-justify-center tw-py-5 tw-w-full\">\r\n    <h2 class=\"tw-font-bold\">Popular Searches:</h2>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=butt+fumble\">Butt Fumble</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+amendola\">Edelman to Amendola</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+circus+catch\">The Catch</a>\r\n</div>"
           plugin_id: text_custom
+          empty: true
+          content: "<div class=\"tw-flex tw-justify-center tw-py-5 tw-w-full\">\r\n    <h2 class=\"tw-font-bold\">Popular Searches:</h2>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=butt+fumble\">Butt Fumble</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+amendola\">Edelman to Amendola</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+circus+catch\">The Catch</a>\r\n</div>"
+          tokenize: false
         result:
           id: result
           table: views
@@ -266,13 +272,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: result
           empty: false
           content: "<div>\r\nDisplaying @start - @end of @total plays\r\n</div>"
-          plugin_id: result
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -286,21 +289,21 @@ display:
         - 'config:field.storage.node.field_distance'
         - 'config:search_api.index.highlight_index'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders:
-        metatag_display_extender: {  }
-        simple_sitemap_display_extender:
-          variants: {  }
-      path: search/plays
       cache:
         type: none
       defaults:
         cache: false
       exposed_block: true
+      display_extenders:
+        metatag_display_extender: {  }
+        simple_sitemap_display_extender:
+          variants: {  }
+      path: search/plays
     cache_metadata:
       max-age: -1
       contexts:

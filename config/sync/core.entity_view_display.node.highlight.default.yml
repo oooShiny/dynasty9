@@ -250,6 +250,11 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
+  rate_highlight_rating:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   langcode: true
   search_api_excerpt: true
