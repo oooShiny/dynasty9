@@ -35,8 +35,11 @@ class OnThisDayBlock extends BlockBase {
       '#games' => []
     ];
     foreach ($games as $game) {
-      $game_date = substr($game->get('field_date')->value, 5);
-      if ($game_date == $today) {
+      $game_date = '';
+      if ($game->field_date->hasField() && !$game->field_date->isEmpty()) {
+        $game_date = substr($game->field_date->value, 5);
+      }
+      if ($game_date !== '' && $game_date == $today) {
         // Find highlights for this game.
         $highlight_nid = \Drupal::entityQuery('node')
           ->condition('type', 'highlight')
