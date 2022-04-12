@@ -263,7 +263,7 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
           $entity->field_video_file_id->value = $video_data['fid'];
         }
         catch (RequestException $e) {
-          watchdog_exception('patsfilm', $e->getMessage());
+          watchdog_exception('patsdynasty', $e);
         }
 
       }
