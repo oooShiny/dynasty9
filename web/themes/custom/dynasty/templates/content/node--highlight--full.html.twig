@@ -72,13 +72,13 @@
 #}
 <article class="tw-mt-10">
 
-  <div class="tw-flex tw-items-center tw-justify-around tw-py-10 tw-m-auto tw-w-3/4">
+  <div class="lg:tw-flex tw-flex-1 tw-items-center tw-justify-around tw-py-10 tw-m-auto lg:tw-w-3/4">
     {% if content.field_muse_video_id|render %}
-      <div class="tw-w-1/2 tw-py-10">
+      <div class="lg:tw-w-1/2 tw-py-10">
         {{ content.field_muse_video_id }}
       </div>
     {% elseif content.field_gfycat_id|render %}
-      <div class="tw-w-1/2 tw-py-10">
+      <div class="lg:tw-w-1/2 tw-py-10">
         {{ content.field_gfycat_id }}
       </div>
     {% endif %}
