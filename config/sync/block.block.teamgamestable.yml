@@ -10,7 +10,7 @@ dependencies:
 id: teamgamestable
 theme: dynasty
 region: content
-weight: -3
+weight: -8
 provider: null
 plugin: team_games_table
 settings:

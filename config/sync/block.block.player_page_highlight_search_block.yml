@@ -11,8 +11,8 @@ dependencies:
     - dynasty
 id: player_page_highlight_search_block
 theme: dynasty
-region: content
-weight: -6
+region: sidebar_second
+weight: -14
 provider: null
 plugin: 'views_block:player_page_highlight_search-block_1'
 settings:

@@ -12,7 +12,7 @@ dependencies:
 id: exposedformgame_searchpage_1
 theme: dynasty
 region: content
-weight: -2
+weight: -6
 provider: null
 plugin: 'views_exposed_filter_block:game_search-page_1'
 settings:
