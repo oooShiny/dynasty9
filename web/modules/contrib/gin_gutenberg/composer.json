@@ -1,0 +1,20 @@
+{
+    "name": "drupal/gin_gutenberg",
+    "description": "The Gin Gutenberg module provides an integration between Gutenberg editor and Gin theme",
+    "type": "drupal-module",
+    "homepage": "https://drupal.org/project/gin_gutenberg",
+    "authors": [
+        {
+            "name": "Sohail Lajevardi",
+            "homepage": "https://www.drupal.org/u/doxigo",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://drupal.org/project/issues/gin_gutenberg",
+        "source": "https://git.drupalcode.org/project/gin_gutenberg"
+    },
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "require": {}
+}

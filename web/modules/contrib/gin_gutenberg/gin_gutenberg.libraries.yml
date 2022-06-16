@@ -1,0 +1,8 @@
+gin_gutenberg:
+  version: 1.0.0
+  js:
+    dist/gin_gutenberg.js: {}
+  css:
+    theme:
+      dist/gin_gutenberg.css: {weight: 1}
+

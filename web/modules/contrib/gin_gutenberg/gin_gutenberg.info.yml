@@ -1,0 +1,13 @@
+name: 'Gin Gutenberg: Integrate Gin theme with Gutenberg Editor'
+type: module
+description: 'The Gin Gutenberg module provides an integration between Gutenberg editor and Gin theme'
+package: User interface
+core_version_requirement: ^8 || ^9
+dependencies:
+  - gutenberg:gutenberg
+
+
+# Information added by Drupal.org packaging script on 2021-11-16
+version: '1.0.1'
+project: 'gin_gutenberg'
+datestamp: 1637059014

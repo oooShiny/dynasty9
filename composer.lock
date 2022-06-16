@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62944f52ced903127548def0c6ae5db1",
+    "content-hash": "abf48495329c5fc7e1df6307a4751745",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2731,6 +2731,69 @@
                     "url": "https://paypal.me/saschaeggi"
                 }
             ]
+        },
+        {
+            "name": "drupal/gin_gutenberg",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/gin_gutenberg.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/gin_gutenberg-1.0.1.zip",
+                "reference": "1.0.1",
+                "shasum": "806572216236d06bb0fe60927e790d2bdf53e617"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/gutenberg": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.1",
+                    "datestamp": "1637059011",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Sohail Lajevardi",
+                    "homepage": "https://www.drupal.org/u/doxigo",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "doxigo",
+                    "homepage": "https://www.drupal.org/user/1331334"
+                },
+                {
+                    "name": "kiss.jozsef",
+                    "homepage": "https://www.drupal.org/user/2848443"
+                },
+                {
+                    "name": "mnlund",
+                    "homepage": "https://www.drupal.org/user/80815"
+                },
+                {
+                    "name": "szeidler",
+                    "homepage": "https://www.drupal.org/user/767652"
+                }
+            ],
+            "description": "The Gin Gutenberg module provides an integration between Gutenberg editor and Gin theme",
+            "homepage": "https://drupal.org/project/gin_gutenberg",
+            "support": {
+                "source": "https://git.drupalcode.org/project/gin_gutenberg",
+                "issues": "https://drupal.org/project/issues/gin_gutenberg"
+            }
         },
         {
             "name": "drupal/gin_login",
@@ -10543,5 +10606,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

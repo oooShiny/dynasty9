@@ -199,6 +199,7 @@ function dynasty_preprocess_form(&$variables) {
     'player-select-form',
     'views-exposed-form-game-search-page-1',
     'views-exposed-form-highlight-search-page-1',
+    'views-exposed-form-podcast-search-page-1'
   ];
   if (in_array($variables['attributes']['id'], $flex_forms)) {
     $variables['attributes']['class'][] = 'tw-flex tw-spacing-between tw-justify-center';
@@ -210,6 +211,7 @@ function dynasty_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $forms = [
     'views-exposed-form-game-search-page-1',
     'views-exposed-form-highlight-search-page-1',
+    'views-exposed-form-podcast-search-page-1'
   ];
   if (in_array($id, $forms)) {
     $form['#info']['filter-search_api_fulltext']['label'] = '';

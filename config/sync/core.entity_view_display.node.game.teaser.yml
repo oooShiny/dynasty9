@@ -59,134 +59,134 @@ mode: teaser
 content:
   field_date:
     type: datetime_default
-    weight: 1
-    region: content
     label: hidden
     settings:
       timezone_override: ''
       format_type: long_date
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_opp_ot:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 14
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_opp_q1:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 10
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_opp_q2:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 11
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_opp_q3:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 12
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_opp_q4:
     type: number_integer
-    weight: 13
-    region: content
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
+    weight: 13
+    region: content
   field_opponent:
     type: entity_reference_label
-    weight: 4
-    region: content
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 4
+    region: content
   field_opponent_score:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 3
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_patriots_score:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 2
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_pats_ot:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 9
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_pats_q1:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 5
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_pats_q2:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 6
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_pats_q3:
     type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
     weight: 7
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_pats_q4:
     type: number_integer
-    weight: 8
-    region: content
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-  links:
-    weight: 0
+    weight: 8
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_after_bye: true
   field_brady_attempts: true
@@ -217,6 +217,7 @@ hidden:
   field_week: true
   field_weekday: true
   field_yoast_seo: true
+  field_youtube_game_link: true
   field_youtube_highlights: true
   langcode: true
   search_api_excerpt: true

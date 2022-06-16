@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '1082ecc2cb71950cb590f5759efdec7676606c09',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -718,6 +718,15 @@
             'reference' => '8.x-3.0-alpha37',
             'dev_requirement' => false,
         ),
+        'drupal/gin_gutenberg' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/gin_gutenberg',
+            'aliases' => array(),
+            'reference' => '1.0.1',
+            'dev_requirement' => false,
+        ),
         'drupal/gin_login' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -1082,12 +1091,12 @@
             ),
         ),
         'drupal/recommended-project' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '1082ecc2cb71950cb590f5759efdec7676606c09',
             'dev_requirement' => false,
         ),
         'drupal/redirect' => array(

@@ -21,50 +21,69 @@ dependencies:
     - field.field.node.podcast_episode.field_yoast_seo
     - node.type.podcast_episode
   module:
+    - smart_trim
     - user
 id: node.podcast_episode.card
 targetEntityType: node
 bundle: podcast_episode
 mode: card
 content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 300
+      trim_type: chars
+      trim_suffix: ...
+      wrap_output: true
+      wrap_class: trimmed
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: true
+        trim_zero: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
   field_duration:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_game:
-    weight: 3
+    type: entity_reference_entity_id
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: entity_reference_entity_id
+    weight: 3
     region: content
   field_mp3:
     type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 4
     region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_subtitle:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
-  body: true
   field_episode: true
   field_episode_cover_image: true
   field_iframe: true

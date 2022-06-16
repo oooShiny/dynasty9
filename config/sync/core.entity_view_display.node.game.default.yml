@@ -63,81 +63,81 @@ bundle: game
 mode: default
 content:
   field_after_bye:
-    weight: 108
+    type: boolean
     label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 108
     region: content
   field_brady_attempts:
-    weight: 123
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 123
     region: content
   field_brady_completions:
-    weight: 124
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 124
     region: content
   field_brady_ints:
-    weight: 126
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 126
     region: content
   field_brady_played:
-    weight: 135
+    type: boolean
     label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 135
     region: content
   field_brady_tds:
-    weight: 133
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 133
     region: content
   field_brady_yards:
-    weight: 138
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 138
     region: content
   field_date:
-    weight: 101
+    type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: long_date
     third_party_settings: {  }
-    type: datetime_default
+    weight: 101
     region: content
   field_game_links:
-    weight: 125
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -146,136 +146,136 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 125
     region: content
   field_game_summary:
-    weight: 103
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 103
     region: content
   field_game_video:
-    weight: 141
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 141
     region: content
   field_home_away:
-    weight: 102
+    type: list_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 102
     region: content
   field_meta_tags:
-    weight: 142
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 142
     region: content
   field_month:
-    weight: 127
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 127
     region: content
   field_opp_ot:
-    weight: 119
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 119
     region: content
   field_opp_q1:
-    weight: 115
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 115
     region: content
   field_opp_q2:
-    weight: 116
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 116
     region: content
   field_opp_q3:
-    weight: 117
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 117
     region: content
   field_opp_q4:
-    weight: 118
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 118
     region: content
   field_opponent:
-    weight: 104
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 104
     region: content
   field_opponent_score:
-    weight: 120
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 120
     region: content
   field_opposing_coach:
-    weight: 105
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 105
     region: content
   field_ot:
-    weight: 109
+    type: boolean
     label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 109
     region: content
   field_other_qbs:
     type: entity_reference_revisions_entity_view
-    weight: 145
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 145
     region: content
   field_over_under:
-    weight: 128
+    type: number_decimal
     label: hidden
     settings:
       thousand_separator: ''
@@ -283,10 +283,10 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_decimal
+    weight: 128
     region: content
   field_passer_rating:
-    weight: 129
+    type: number_decimal
     label: hidden
     settings:
       thousand_separator: ''
@@ -294,123 +294,123 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_decimal
+    weight: 129
     region: content
   field_patriots_score:
-    weight: 121
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 121
     region: content
   field_pats_ot:
-    weight: 114
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 114
     region: content
   field_pats_q1:
-    weight: 110
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 110
     region: content
   field_pats_q2:
-    weight: 111
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 111
     region: content
   field_pats_q3:
-    weight: 112
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 112
     region: content
   field_pats_q4:
-    weight: 113
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 113
     region: content
   field_playoff_game:
-    weight: 130
+    type: boolean
     label: hidden
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 130
     region: content
   field_result:
-    weight: 122
+    type: list_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 122
     region: content
   field_score_differential:
-    weight: 131
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 131
     region: content
   field_season:
-    weight: 106
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 106
     region: content
   field_starting_qb:
-    weight: 144
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 144
     region: content
   field_surf:
-    weight: 132
+    type: list_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 132
     region: content
   field_temperature:
-    weight: 134
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 134
     region: content
   field_vegas_line:
-    weight: 136
+    type: number_decimal
     label: hidden
     settings:
       thousand_separator: ''
@@ -418,48 +418,49 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_decimal
+    weight: 136
     region: content
   field_week:
-    weight: 107
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 107
     region: content
   field_weekday:
-    weight: 137
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 137
     region: content
   field_yoast_seo:
-    weight: 143
+    type: yoastseo_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: yoastseo_formatter
+    weight: 143
     region: content
   field_youtube_highlights:
-    weight: 139
+    type: link
     label: hidden
     settings:
       trim_length: 80
-      target: _blank
       url_only: false
       url_plain: false
       rel: '0'
+      target: _blank
     third_party_settings: {  }
-    type: link
+    weight: 139
     region: content
   links:
-    weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
+  field_youtube_game_link: true
   langcode: true
   search_api_excerpt: true

@@ -1,22 +1,22 @@
-uuid: 9b7ad9da-7582-43bc-84a3-6eb2b8dc023e
+uuid: 393a4a85-629c-42db-a5eb-0d4c4316cdd0
 langcode: en
-status: false
+status: true
 dependencies:
   config:
-    - views.view.game_search
+    - views.view.podcast_search
   module:
     - system
     - views
   theme:
     - dynasty
-id: exposedformgame_searchpage_1
+id: exposedformpodcast_searchpage_1
 theme: dynasty
 region: content
-weight: -5
+weight: -10
 provider: null
-plugin: 'views_exposed_filter_block:game_search-page_1'
+plugin: 'views_exposed_filter_block:podcast_search-page_1'
 settings:
-  id: 'views_exposed_filter_block:game_search-page_1'
+  id: 'views_exposed_filter_block:podcast_search-page_1'
   label: ''
   label_display: '0'
   provider: views
@@ -25,4 +25,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /search/games
+    pages: /podcast

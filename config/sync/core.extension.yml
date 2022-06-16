@@ -38,6 +38,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  gin_gutenberg: 0
   gin_login: 0
   gin_toolbar: 0
   google_tag: 0
