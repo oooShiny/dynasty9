@@ -87,29 +87,12 @@
   {# Blue Row #}
     <div class="tw-bg-blue-pats tw-text-white tw-py-10">
       <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Listen Now</h2>
-      {% if ep_art %}
-        {% set cover_img = ep_art %}
-      {% else %}
-        {% set cover_img = 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
-      {% endif %}
-
-      <div class="tw-mb-5 tw-flex tw-h-40 tw-m-auto tw-pt-10 tw-w-2/3">
-        <div class="tw-w-40 tw-h-40 tw-mr-5 tw-justify-center tw-items-center tw-flex"
-             style="background-image: url('{{ cover_img }}');
-               background-size: contain;
-               background-repeat: no-repeat;
-               background-position: center;">
-          {{ content.field_mp3 }}
-        </div>
-        <div class="tw-w-3/4 tw-p-5">
-          <h2>
-            <a href="{{ url }}" rel="bookmark" class="tw-uppercase tw-font-light tw-text-l">{{ label }}</a>
-            <span class="tw-uppercase tw-font-light tw-text-l">({{ content.field_duration }})</span>
-          </h2>
-          {% if content.field_subtitle|render %}
-            <h3 class="tw-font-light tw-text-l">{{ content.field_subtitle }}</h3>
-          {% endif %}
-        </div>
+      <div class="w-flex tw-h-40 tw-m-auto tw-mb-5 tw-pt-10 tw-w-2/3">
+        <iframe allow="autoplay"
+                src="https://embed.acast.com/5d23d6cdd5ef084d07ef59b9/{{ mp3 }}"
+                frameBorder="0"
+                width="100%">
+        </iframe>
       </div>
     </div>
 

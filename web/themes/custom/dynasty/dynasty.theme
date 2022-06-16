@@ -106,6 +106,10 @@ function dynasty_preprocess_node(&$variables) {
    * Podcast Episode Overrides.
    */
   if ($node->bundle() == 'podcast_episode') {
+    $mp3_field = $node->get('field_mp3')->value;
+    $link_array = parse_url($mp3_field);
+    $path_array = explode('/', $link_array['path']);
+    $variables['mp3'] = $path_array[6];
     $variables['ep_art'] = $node->get('field_episode_cover_image')->value;
     $downloads = [];
     foreach ($node->field_monthly_downloads as $paragraph) {
