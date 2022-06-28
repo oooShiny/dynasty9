@@ -29,6 +29,9 @@ dependencies:
     - field.field.node.game.field_other_qbs
     - field.field.node.game.field_over_under
     - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_dc
+    - field.field.node.game.field_patriots_head_coach
+    - field.field.node.game.field_patriots_oc
     - field.field.node.game.field_patriots_score
     - field.field.node.game.field_pats_ot
     - field.field.node.game.field_pats_q1
@@ -46,6 +49,7 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_yoast_seo
+    - field.field.node.game.field_youtube_game_link
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -295,6 +299,30 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 129
+    region: content
+  field_patriots_dc:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 148
+    region: content
+  field_patriots_head_coach:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 146
+    region: content
+  field_patriots_oc:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 147
     region: content
   field_patriots_score:
     type: number_integer

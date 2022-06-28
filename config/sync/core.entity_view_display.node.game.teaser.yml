@@ -30,6 +30,9 @@ dependencies:
     - field.field.node.game.field_other_qbs
     - field.field.node.game.field_over_under
     - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_dc
+    - field.field.node.game.field_patriots_head_coach
+    - field.field.node.game.field_patriots_oc
     - field.field.node.game.field_patriots_score
     - field.field.node.game.field_pats_ot
     - field.field.node.game.field_pats_q1
@@ -47,6 +50,7 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_yoast_seo
+    - field.field.node.game.field_youtube_game_link
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -206,6 +210,9 @@ hidden:
   field_other_qbs: true
   field_over_under: true
   field_passer_rating: true
+  field_patriots_dc: true
+  field_patriots_head_coach: true
+  field_patriots_oc: true
   field_playoff_game: true
   field_result: true
   field_score_differential: true

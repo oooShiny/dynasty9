@@ -1,0 +1,29 @@
+uuid: 708680e2-1436-4062-be6e-085a31dd9b81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_patriots_oc
+    - node.type.game
+    - taxonomy.vocabulary.head_coaches
+id: node.game.field_patriots_oc
+field_name: field_patriots_oc
+entity_type: node
+bundle: game
+label: 'Offensive Coordinator'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      head_coaches: head_coaches
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

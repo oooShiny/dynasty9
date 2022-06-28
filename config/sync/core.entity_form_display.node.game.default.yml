@@ -29,6 +29,9 @@ dependencies:
     - field.field.node.game.field_other_qbs
     - field.field.node.game.field_over_under
     - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_dc
+    - field.field.node.game.field_patriots_head_coach
+    - field.field.node.game.field_patriots_oc
     - field.field.node.game.field_patriots_score
     - field.field.node.game.field_pats_ot
     - field.field.node.game.field_pats_q1
@@ -46,6 +49,7 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_yoast_seo
+    - field.field.node.game.field_youtube_game_link
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -100,7 +104,7 @@ third_party_settings:
       label: 'Starting QB'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: details
       format_settings:
         classes: ''
@@ -155,7 +159,7 @@ third_party_settings:
       label: Extras
       region: content
       parent_name: ''
-      weight: 6
+      weight: 7
       format_type: details
       format_settings:
         classes: ''
@@ -171,7 +175,7 @@ third_party_settings:
       label: 'Calculated Fields'
       region: content
       parent_name: ''
-      weight: 7
+      weight: 8
       format_type: details
       format_settings:
         classes: ''
@@ -194,6 +198,23 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
+    group_patriots_coaches:
+      children:
+        - field_patriots_head_coach
+        - field_patriots_oc
+        - field_patriots_dc
+      label: 'Patriots Coaches'
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
 id: node.game.default
 targetEntityType: node
 bundle: game
@@ -208,42 +229,42 @@ content:
     third_party_settings: {  }
   field_brady_attempts:
     type: number
-    weight: 7
+    weight: 17
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_brady_completions:
     type: number
-    weight: 6
+    weight: 16
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_brady_ints:
     type: number
-    weight: 10
+    weight: 20
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_brady_played:
     type: boolean_checkbox
-    weight: 4
+    weight: 14
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_brady_tds:
     type: number
-    weight: 9
+    weight: 19
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_brady_yards:
     type: number
-    weight: 8
+    weight: 18
     region: content
     settings:
       placeholder: ''
@@ -286,10 +307,11 @@ content:
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
-    weight: 10
+    weight: 11
     region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
   field_month:
     type: string_textfield
@@ -370,7 +392,7 @@ content:
     third_party_settings: {  }
   field_other_qbs:
     type: paragraphs
-    weight: 12
+    weight: 22
     region: content
     settings:
       title: QB
@@ -396,9 +418,39 @@ content:
     third_party_settings: {  }
   field_passer_rating:
     type: number
-    weight: 11
+    weight: 21
     region: content
     settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_patriots_dc:
+    type: entity_reference_autocomplete_tags
+    weight: 16
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_patriots_head_coach:
+    type: entity_reference_autocomplete_tags
+    weight: 14
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_patriots_oc:
+    type: entity_reference_autocomplete_tags
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_patriots_score:
@@ -472,7 +524,7 @@ content:
     third_party_settings: {  }
   field_starting_qb:
     type: select2_entity_reference
-    weight: 5
+    weight: 15
     region: content
     settings:
       width: 100%
@@ -516,7 +568,7 @@ content:
     third_party_settings: {  }
   field_yoast_seo:
     type: yoast_seo_widget
-    weight: 11
+    weight: 12
     region: content
     settings:
       body: body
@@ -538,13 +590,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 9
+    weight: 10
     region: content
     settings:
       display_label: true
