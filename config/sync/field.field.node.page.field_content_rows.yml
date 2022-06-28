@@ -24,29 +24,29 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       section: section
       block: block
       text: text
       media: media
+    negate: 0
     target_bundles_drag_drop:
       block:
-        enabled: true
         weight: 7
+        enabled: true
       highlight:
         weight: 4
         enabled: false
       media:
-        enabled: true
         weight: 9
-      section:
         enabled: true
+      section:
         weight: 5
+        enabled: true
       team_record:
         weight: 6
         enabled: false
       text:
-        enabled: true
         weight: 8
+        enabled: true
 field_type: entity_reference_revisions

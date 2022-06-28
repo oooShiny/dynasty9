@@ -11,12 +11,12 @@ pattern: 'highlight/[node:title]'
 selection_criteria:
   ddef547c-d516-45c3-b14f-d4bdcd53712e:
     id: node_type
-    bundles:
-      highlight: highlight
     negate: false
+    uuid: ddef547c-d516-45c3-b14f-d4bdcd53712e
     context_mapping:
       node: node
-    uuid: ddef547c-d516-45c3-b14f-d4bdcd53712e
+    bundles:
+      highlight: highlight
 selection_logic: and
 weight: -5
 relationships: {  }

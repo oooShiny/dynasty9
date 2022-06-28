@@ -52,6 +52,7 @@ settings:
     'facet_block:week': '0'
     'facet_block:player_week': '0'
     'facet_block:play_tag': '0'
+  add_js_classes: true
 visibility:
   request_path:
     id: request_path

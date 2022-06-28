@@ -35,33 +35,33 @@ third_party_settings:
         - field_pass_thrown_from
         - field_pass_location
         - field_air_yards
+      label: 'Pass Data'
+      region: content
       parent_name: group_play_info
       weight: 6
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: false
+        description: ''
         required_fields: true
-      label: 'Pass Data'
     group_video_info:
       children:
         - field_play_title
         - field_gfycat_id
         - field_muse_video_id
+      label: 'Video Info'
+      region: content
       parent_name: ''
       weight: 0
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: true
+        description: ''
         required_fields: true
-      label: 'Video Info'
     group_play_info:
       children:
         - field_players_involved
@@ -70,17 +70,17 @@ third_party_settings:
         - field_td_scored
         - group_pass_data
         - field_tag_play
+      label: 'Play Info'
+      region: content
       parent_name: ''
       weight: 1
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: true
+        description: ''
         required_fields: true
-      label: 'Play Info'
     group_game_situation:
       children:
         - field_down
@@ -88,113 +88,115 @@ third_party_settings:
         - field_quarter
         - field_minutes
         - field_seconds
+      label: 'Game Situation'
+      region: content
       parent_name: ''
       weight: 2
       format_type: details
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         open: true
+        description: ''
         required_fields: true
-      label: 'Game Situation'
 id: paragraph.highlight.default
 targetEntityType: paragraph
 bundle: highlight
 mode: default
 content:
   field_air_yards:
+    type: number
     weight: 10
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_distance:
+    type: number
     weight: 4
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_down:
+    type: options_select
     weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_gfycat_id:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_minutes:
-    weight: 6
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
     type: number
+    weight: 6
     region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_muse_video_id:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_opponent:
+    type: entity_reference_autocomplete
     weight: 10
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_pass_length:
+    type: options_select
     weight: 7
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_pass_location:
+    type: options_select
     weight: 9
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_pass_thrown_from:
+    type: options_select
     weight: 8
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_play_title:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_play_type:
+    type: entity_reference_autocomplete
     weight: 3
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_players_involved:
+    type: inline_entity_form_complex
     weight: 2
+    region: content
     settings:
       form_mode: default
       override_labels: true
@@ -203,67 +205,65 @@ content:
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      revision: false
+      allow_duplicate: false
       collapsible: false
       collapsed: false
-      allow_duplicate: false
+      revision: false
     third_party_settings: {  }
-    type: inline_entity_form_complex
-    region: content
   field_quarter:
+    type: options_select
     weight: 5
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_season:
+    type: number
     weight: 9
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_seconds:
+    type: number
     weight: 7
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_tag_play:
+    type: entity_reference_autocomplete_tags
     weight: 7
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete_tags
-    region: content
   field_td_scored:
+    type: boolean_checkbox
     weight: 5
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_week:
+    type: entity_reference_autocomplete
     weight: 8
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_yards_gained:
+    type: number
     weight: 4
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
 hidden:
   created: true
   status: true

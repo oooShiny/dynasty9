@@ -21,9 +21,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       podcast_download: podcast_download
+    negate: 0
     target_bundles_drag_drop:
       block:
         weight: 8
@@ -35,8 +35,8 @@ settings:
         weight: 10
         enabled: false
       podcast_download:
-        enabled: true
         weight: 11
+        enabled: true
       section:
         weight: 12
         enabled: false

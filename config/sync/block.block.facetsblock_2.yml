@@ -55,6 +55,7 @@ settings:
     'facet_block:qb_att': '0'
     'facet_block:qb_tds': '0'
     'facet_block:qb_ints': '0'
+  add_js_classes: true
 visibility:
   request_path:
     id: request_path

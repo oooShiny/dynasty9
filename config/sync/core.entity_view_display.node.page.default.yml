@@ -22,40 +22,40 @@ bundle: page
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 100
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
   field_content_rows:
     type: layout_paragraphs
-    weight: 104
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 104
     region: content
   field_meta_tags:
-    weight: 102
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 102
     region: content
   field_yoast_seo:
-    weight: 103
+    type: yoastseo_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: yoastseo_formatter
+    weight: 103
     region: content
   links:
-    weight: 101
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 101
+    region: content
 hidden:
   langcode: true
   search_api_excerpt: true

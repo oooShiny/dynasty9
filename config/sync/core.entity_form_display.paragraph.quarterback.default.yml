@@ -20,64 +20,64 @@ bundle: quarterback
 mode: default
 content:
   field_attempts:
+    type: number
     weight: 2
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_completions:
+    type: number
     weight: 1
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_ints:
+    type: number
     weight: 5
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_qb:
+    type: inline_entity_form_complex
     weight: 0
+    region: content
     settings:
       form_mode: player_simple_form
       override_labels: true
       label_singular: QB
       label_plural: QBs
+      allow_new: false
       allow_existing: true
       match_operator: CONTAINS
-      revision: false
+      allow_duplicate: false
       collapsible: false
       collapsed: false
-      allow_new: false
-      allow_duplicate: false
+      revision: false
     third_party_settings: {  }
-    type: inline_entity_form_complex
-    region: content
   field_qbr:
+    type: number
     weight: 6
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_tds:
+    type: number
     weight: 4
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_yards:
+    type: number
     weight: 3
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
 hidden:
   created: true
   status: true

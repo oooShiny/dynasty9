@@ -29,49 +29,49 @@ bundle: podcast_episode
 mode: teaser
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 4
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 4
     region: content
   field_duration:
     type: string
-    weight: 2
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_game:
     type: entity_reference_label
-    weight: 5
-    region: content
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
+    weight: 5
+    region: content
   field_mp3:
     type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 3
     region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_subtitle:
     type: string
-    weight: 1
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  links:
-    weight: 0
+    weight: 1
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_episode: true
   field_episode_cover_image: true

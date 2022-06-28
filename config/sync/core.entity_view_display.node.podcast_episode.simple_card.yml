@@ -28,41 +28,41 @@ bundle: podcast_episode
 mode: simple_card
 content:
   field_duration:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_game:
-    weight: 2
+    type: entity_reference_entity_id
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: entity_reference_entity_id
+    weight: 2
     region: content
   field_mp3:
-    weight: 3
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 3
     region: content
   field_subtitle:
-    weight: 4
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 4
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   body: true
   field_episode: true

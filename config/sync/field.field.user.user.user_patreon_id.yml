@@ -22,8 +22,8 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  min: ''
-  max: ''
+  min: null
+  max: null
   prefix: ''
   suffix: ''
 field_type: integer

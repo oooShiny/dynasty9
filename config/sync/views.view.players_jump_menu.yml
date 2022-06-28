@@ -17,57 +17,11 @@ base_table: node_field_data
 base_field: nid
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: false
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: none
-        options:
-          offset: 0
-      style:
-        type: jump_menu
-        options:
-          grouping: {  }
-          wrapper_class: ''
-          class: ''
-          label_field: title
-          url_field: view_node
-          select_text: 'Select a Player'
-          select_label: 'Select a Player'
-      row:
-        type: fields
-        options:
-          inline: {  }
-          separator: ''
-          hide_empty: false
-          default_field_elements: true
       fields:
         title:
           id: title
@@ -76,6 +30,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -131,9 +88,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         view_node:
           id: view_node
           table: node
@@ -141,6 +95,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
           label: ''
           exclude: false
           alter:
@@ -185,54 +141,99 @@ display:
           text: view
           output_url_as_text: true
           absolute: false
-          entity_type: node
-          plugin_id: entity_link
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          value:
-            player: player
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
+      pager:
+        type: none
+        options:
+          offset: 0
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
       sorts:
         title:
           id: title
           table: node_field_data
           field: title
-          order: ASC
-          entity_type: node
-          entity_field: title
-          plugin_id: standard
           relationship: none
           group_type: group
           admin_label: ''
-          exposed: false
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
+          order: ASC
           expose:
             label: ''
+            field_identifier: title
+          exposed: false
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            player: player
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+      style:
+        type: jump_menu
+        options:
+          grouping: {  }
+          class: ''
+          wrapper_class: ''
+          label_field: title
+          url_field: view_node
+          select_text: 'Select a Player'
+          select_label: 'Select a Player'
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_tags: {  }
+      relationships: {  }
       header: {  }
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders:
         metatag_display_extender: {  }
         simple_sitemap_display_extender: {  }
@@ -245,9 +246,9 @@ display:
         - user.permissions
       tags: {  }
   embed:
-    display_plugin: embed
     id: embed
     display_title: Embed
+    display_plugin: embed
     position: 1
     display_options:
       display_extenders:

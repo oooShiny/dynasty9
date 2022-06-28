@@ -47,6 +47,7 @@ settings:
     'facet_block:week': '0'
     'facet_block:play_tag': '0'
     'facet_block:game_week': '0'
+  add_js_classes: true
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'

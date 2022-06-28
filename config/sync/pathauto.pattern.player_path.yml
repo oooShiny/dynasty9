@@ -11,12 +11,12 @@ pattern: 'player/[node:title]'
 selection_criteria:
   b7100803-260d-4861-97d6-6d8c26147294:
     id: node_type
-    bundles:
-      player: player
     negate: false
+    uuid: b7100803-260d-4861-97d6-6d8c26147294
     context_mapping:
       node: node
-    uuid: b7100803-260d-4861-97d6-6d8c26147294
+    bundles:
+      player: player
 selection_logic: and
 weight: -5
 relationships: {  }

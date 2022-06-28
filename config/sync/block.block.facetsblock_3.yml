@@ -36,6 +36,7 @@ settings:
     'facet_block:overtime': '0'
     'facet_block:td_scored': '0'
     'facet_block:playoff': '0'
+  add_js_classes: true
 visibility:
   request_path:
     id: request_path

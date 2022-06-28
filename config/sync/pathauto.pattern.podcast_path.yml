@@ -11,12 +11,12 @@ pattern: 'podcast/[node:title]'
 selection_criteria:
   41ca27b3-0f06-42c5-ba81-f53827195d00:
     id: node_type
-    bundles:
-      podcast_episode: podcast_episode
     negate: false
+    uuid: 41ca27b3-0f06-42c5-ba81-f53827195d00
     context_mapping:
       node: node
-    uuid: 41ca27b3-0f06-42c5-ba81-f53827195d00
+    bundles:
+      podcast_episode: podcast_episode
 selection_logic: and
 weight: -5
 relationships: {  }

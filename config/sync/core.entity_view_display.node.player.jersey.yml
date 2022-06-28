@@ -17,13 +17,13 @@ bundle: player
 mode: jersey
 content:
   field_jersey_number:
-    weight: 0
+    type: number_integer
     label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: false
     third_party_settings: {  }
-    type: number_integer
+    weight: 0
     region: content
 hidden:
   field_meta_tags: true

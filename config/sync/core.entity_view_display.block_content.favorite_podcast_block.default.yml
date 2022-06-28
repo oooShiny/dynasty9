@@ -13,31 +13,31 @@ bundle: favorite_podcast_block
 mode: default
 content:
   field_andys_favorite:
-    weight: 0
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: simple_card
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 0
     region: content
   field_gregs_favorite:
-    weight: 2
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: simple_card
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 2
     region: content
   field_steves_favorite:
-    weight: 1
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: simple_card
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
 hidden:
   langcode: true
