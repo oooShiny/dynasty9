@@ -380,7 +380,7 @@ content:
     region: content
   field_pfr_link:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
