@@ -97,6 +97,20 @@ function dynasty_module_update_8005() {
       $game->save();
   }
 }
+
+/**
+ * Set "Head Coach" field to Bill Belichick for all games.
+ */
+function dynasty_module_update_8006() {
+  $games = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties([
+    'type' => 'game',
+  ]);
+  foreach ($games as $game) {
+    $game->field_patriots_head_coach->target_id = 230;
+    $game->save();
+  }
+}
+
 function dynasty_module_theme($existing, $type, $theme, $path) {
   return [
     'footer_seasons_block' => [
