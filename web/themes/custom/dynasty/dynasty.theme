@@ -57,25 +57,21 @@ function dynasty_preprocess_node(&$variables) {
 
     // Create pro-football-reference and NFL Gamepass links.
     $game_date = new DateTime($node->get('field_date')->value);
-    $pfr_date = $game_date->format('Ymd');
     $gp_date = $game_date->format('mdY');
     $gp_opp = explode(' ', $opp->getTitle());
     if ($node->get('field_home_away')->value == 'Home') {
-      $pfr_home = 'nwe';
       $gp_home = 'patriots';
       $gp_away = strtolower(end($gp_opp));
       $variables['schema_city'] = 'Foxboro';
       $variables['schema_state'] = 'MA';
     }
     else {
-      $pfr_home = $opp->get('field_pfr_id')->value;
       $gp_home = strtolower(end($gp_opp));
       $gp_away = 'patriots';
       $game_location = _get_team_location(strtolower($team_short));
       $variables['schema_city'] = $game_location['city'];
       $variables['schema_state'] = $game_location['state'];
     }
-    $variables['pfr_link'] = 'https://www.pro-football-reference.com/boxscores/' . $pfr_date . '0' . $pfr_home . '.htm';
     $variables['season'] = intval($game_season);
     $variables['gamepass_link'] = 'https://gamepass.nfl.com/game/'.$gp_away.'-at-'.$gp_home.'-on-' . $gp_date;
 

@@ -38,6 +38,7 @@ dependencies:
     - field.field.node.game.field_pats_q2
     - field.field.node.game.field_pats_q3
     - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_pfr_link
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
@@ -376,6 +377,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 113
+    region: content
+  field_pfr_link:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 149
     region: content
   field_playoff_game:
     type: boolean

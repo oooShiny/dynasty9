@@ -344,6 +344,21 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
         $opp = $entity->field_opponent_score->value;
         $entity->field_score_differential->value = $pats - $opp;
       }
+
+      // PFR Link field.
+      if ($entity->field_pfr_link->isEmpty()) {
+        $game_date = new DateTime($entity->get('field_date')->value);
+        $pfr_date = $game_date->format('Ymd');
+        if ($entity->get('field_home_away')->value == 'Home') {
+          $pfr_home = 'nwe';
+        }
+        else {
+          $opp = Node::load($entity->get('field_opponent')->target_id);
+          $pfr_home = $opp->get('field_pfr_id')->value;
+        }
+        $entity->field_pfr_link->value = 'https://www.pro-football-reference.com/boxscores/' . $pfr_date . '0' . $pfr_home . '.htm';
+
+      }
       break;
   }
 }

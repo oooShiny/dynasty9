@@ -38,6 +38,7 @@ dependencies:
     - field.field.node.game.field_pats_q2
     - field.field.node.game.field_pats_q3
     - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_pfr_link
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
@@ -172,6 +173,7 @@ third_party_settings:
         - field_month
         - field_score_differential
         - field_weekday
+        - field_pfr_link
       label: 'Calculated Fields'
       region: content
       parent_name: ''
@@ -495,6 +497,14 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_pfr_link:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_playoff_game:
     type: boolean_checkbox
     weight: 5
@@ -510,7 +520,7 @@ content:
     third_party_settings: {  }
   field_score_differential:
     type: number
-    weight: 10
+    weight: 9
     region: content
     settings:
       placeholder: ''
@@ -560,7 +570,7 @@ content:
     third_party_settings: {  }
   field_weekday:
     type: string_textfield
-    weight: 11
+    weight: 10
     region: content
     settings:
       size: 60

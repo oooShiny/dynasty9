@@ -170,18 +170,20 @@
 {# PFR, Youtube Highlight, and GamePass links #}
   <a id="game-links"></a>
   <div id="game-links" class="tw-flex tw-items-center tw-justify-evenly tw-py-10">
-    <button type="button" onclick="window.open('{{ pfr_link }}')" class="tw-p-4 tw-bg-green-900 tw-text-white tw-text-center">View game on PFR</button>
+    {% if content.field_pfr_link|render %}
+      <a type="button" href="{{ content.field_pfr_link|render|trim }}" class="tw-p-4 tw-bg-green-900 tw-text-white tw-text-center">View game on PFR</a>
+    {% endif %}
 
     {% if content.field_youtube_highlights|render %}
-      <button type="button" onclick="window.open('{{ content.field_youtube_highlights|render|trim }}')" class="tw-p-4 tw-bg-red-600 tw-text-white tw-text-center">Youtube Highlights</button>
+      <a type="button" href="{{ content.field_youtube_highlights|render|trim }}" class="tw-p-4 tw-bg-red-600 tw-text-white tw-text-center">Youtube Highlights</a>
     {% endif %}
 
     {% if content.field_youtube_game_link|render %}
-      <button type="button" onclick="window.open('{{ content.field_youtube_game_link|render|trim }}')" class="tw-bg-white tw-border tw-border-red-600 tw-p-4 tw-text-center tw-text-red-600">Youtube Game Video</button>
+      <a type="button" href="{{ content.field_youtube_game_link|render|trim }}" class="tw-bg-white tw-border tw-border-red-600 tw-p-4 tw-text-center tw-text-red-600">Youtube Game Video</a>
     {% endif %}
 
     {% if season > 2008 %}
-      <button type="button" onclick="window.open('{{ gamepass_link }}')" class="tw-p-4 tw-bg-blue-900 tw-text-white tw-text-center">Watch on GamePass</button>
+      <a type="button" href="{{ gamepass_link }}" class="tw-p-4 tw-bg-blue-900 tw-text-white tw-text-center">Watch on GamePass</a>
     {% endif %}
   </div>
 
