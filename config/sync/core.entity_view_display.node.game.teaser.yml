@@ -50,7 +50,6 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_yoast_seo
-    - field.field.node.game.field_youtube_game_link
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -224,7 +223,6 @@ hidden:
   field_week: true
   field_weekday: true
   field_yoast_seo: true
-  field_youtube_game_link: true
   field_youtube_highlights: true
   langcode: true
   search_api_excerpt: true
