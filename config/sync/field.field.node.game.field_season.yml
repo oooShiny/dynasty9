@@ -16,7 +16,7 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  min: 2000
+  min: null
   max: null
   prefix: ''
   suffix: ''

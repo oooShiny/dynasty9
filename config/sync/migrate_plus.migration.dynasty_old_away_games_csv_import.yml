@@ -1,0 +1,85 @@
+uuid: f8d9384f-fba7-4155-b7af-6d331fa04e91
+langcode: en
+status: true
+dependencies: {  }
+id: dynasty_old_away_games_csv_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: null
+label: 'Import pre-2000 away games from CSV file'
+source:
+  plugin: csv
+  path: 'public://csv/patriots-games-pre-2000-away.csv'
+  header_row_count: 1
+  delimiter: ','
+  ids:
+    - id
+process:
+  field_date/value:
+    plugin: format_date
+    source: schedule_date
+    from_format: n/j/Y
+    to_format: Y-m-d
+  field_home_away:
+    plugin: default_value
+    default_value: Away
+  field_opponent:
+    -
+      plugin: entity_lookup
+      source: team_home
+      entity_type: node
+      bundle_key: type
+      bundle: team
+      value_key: title
+      access_check: 0
+  field_opponent_score: score_home
+  field_patriots_score: score_away
+  field_season: schedule_season
+  field_result:
+    plugin: calc_win_loss
+    location: away
+  field_week:
+    -
+      plugin: static_map
+      source: schedule_week
+      map:
+        1: 'Week 1'
+        2: 'Week 2'
+        3: 'Week 3'
+        4: 'Week 4'
+        5: 'Week 5'
+        6: 'Week 6'
+        7: 'Week 7'
+        8: 'Week 8'
+        9: 'Week 9'
+        10: 'Week 10'
+        11: 'Week 11'
+        12: 'Week 12'
+        13: 'Week 13'
+        14: 'Week 14'
+        15: 'Week 15'
+        16: 'Week 16'
+        17: 'Week 17'
+        Wildcard: Wildcard
+        Division: 'AFC Divisional Round'
+        Conference: 'AFC Conference Championship'
+        Superbowl: 'Super Bowl'
+    -
+      plugin: entity_lookup
+      value_key: name
+      entity_type: taxonomy_term
+      bundle_key: vid
+      bundle: week
+  field_patriots_head_coach:
+    plugin: entity_generate
+    source: head_coach
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: head_coaches
+    value_key: name
+destination:
+  plugin: 'entity:node'
+  default_bundle: game
+migration_dependencies: null
