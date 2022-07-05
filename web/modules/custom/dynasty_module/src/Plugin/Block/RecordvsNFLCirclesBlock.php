@@ -25,6 +25,7 @@ class RecordvsNFLCirclesBlock extends BlockBase {
     // Get all game win/loss data.
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'game')
+      ->condition('field_season', 1999, '>')
       ->condition('status', 1);
     if (isset($config['brady']) && $config['brady'] == 1) {
       $query->condition('field_brady_played', TRUE);
