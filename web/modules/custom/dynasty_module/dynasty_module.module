@@ -346,7 +346,7 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
       }
 
       // PFR Link field.
-      if ($entity->field_pfr_link->isEmpty()) {
+      if ($entity->field_pfr_link->isEmpty() && !$entity->field_opponent->isEmpty()) {
         $game_date = new DateTime($entity->get('field_date')->value);
         $pfr_date = $game_date->format('Ymd');
         if ($entity->get('field_home_away')->value == 'Home') {
