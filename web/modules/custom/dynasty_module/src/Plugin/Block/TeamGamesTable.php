@@ -38,6 +38,7 @@ class TeamGamesTable extends BlockBase {
       ->condition('type', 'game')
       ->condition('status', 1)
       ->condition('field_opponent', $team->id())
+      ->condition('field_season', 1999, '>')
       ->execute();
     $games = [];
     $totals = [
