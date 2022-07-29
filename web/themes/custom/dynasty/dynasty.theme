@@ -144,6 +144,13 @@ function dynasty_preprocess_node(&$variables) {
     $names = explode(' ', $node->label());
     $variables['lastname'] = end($names);
   }
+
+  /**
+   * Basic Page Overrides.
+   */
+  if ($node->bundle() == 'page') {
+    $variables['#attached']['library'][] =  'dynasty/gfycat';
+  }
 }
 
 /**
