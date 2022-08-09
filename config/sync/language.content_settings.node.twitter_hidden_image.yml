@@ -1,0 +1,11 @@
+uuid: 1ec330b4-df26-443b-acdd-1eaa2cdbbb23
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.twitter_hidden_image
+id: node.twitter_hidden_image
+target_entity_type_id: node
+target_bundle: twitter_hidden_image
+default_langcode: site_default
+language_alterable: false

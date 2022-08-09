@@ -1,0 +1,18 @@
+uuid: b98e13d9-51b8-470b-b57d-43c54d30d28a
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Twitter Hidden Image'
+type: twitter_hidden_image
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

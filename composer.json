@@ -130,6 +130,7 @@
         "drupal/auto_entitylabel": "^3.0@beta",
         "drupal/block_field": "^1.0@RC",
         "drupal/charts": "^3.2",
+        "drupal/color_field": "^2.5",
         "drupal/conditional_fields": "^1.0@alpha",
         "drupal/core-composer-scaffold": "^9.1",
         "drupal/core-project-message": "^9.1",

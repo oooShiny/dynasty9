@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\image\Entity\ImageStyle;
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
+
+/**
+ * @param $variables
+ */
+function dynasty_images_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  if ($node->bundle() == 'twitter_hidden_image') {
+    $id = $node->field_main_image->entity->getFileUri();
+    $url = ImageStyle::load('twitter_hidden_image')->buildUrl($id);
+    //Add a JS library
+    $variables['#attached']['library'][] = 'dynasty_images/dynasty_canvas';
+    // pass variable to Drupal.Settings
+    $variables['#attached']['drupalSettings']['dynasty_images'] = [
+      'main_img' => $url,
+      'bg_color' => $node->field_background_color->color,
+      'hidden_1' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_1->entity->getFileUri()),
+      'hidden_2' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_2->entity->getFileUri()),
+      'hidden_3' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_3->entity->getFileUri()),
+      'hidden_4' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_4->entity->getFileUri()),
+      'hidden_5' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_5->entity->getFileUri()),
+      'hidden_6' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_6->entity->getFileUri()),
+      'hidden_7' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_7->entity->getFileUri()),
+      'hidden_8' => \Drupal::service('file_url_generator')->generateAbsoluteString($node->field_hidden_image_8->entity->getFileUri()),
+    ];
+  }
+
+
+}

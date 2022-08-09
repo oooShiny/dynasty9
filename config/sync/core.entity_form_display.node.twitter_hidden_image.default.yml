@@ -1,0 +1,235 @@
+uuid: 282b0aaa-db1c-4ce3-bd7e-5c33070c94b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.twitter_hidden_image.field_background_color
+    - field.field.node.twitter_hidden_image.field_hidden_image_1
+    - field.field.node.twitter_hidden_image.field_hidden_image_2
+    - field.field.node.twitter_hidden_image.field_hidden_image_3
+    - field.field.node.twitter_hidden_image.field_hidden_image_4
+    - field.field.node.twitter_hidden_image.field_hidden_image_5
+    - field.field.node.twitter_hidden_image.field_hidden_image_6
+    - field.field.node.twitter_hidden_image.field_hidden_image_7
+    - field.field.node.twitter_hidden_image.field_hidden_image_8
+    - field.field.node.twitter_hidden_image.field_main_image
+    - image.style.thumbnail
+    - node.type.twitter_hidden_image
+  module:
+    - color_field
+    - field_group
+    - image
+    - path
+third_party_settings:
+  field_group:
+    group_top_left:
+      children:
+        - field_hidden_image_1
+        - field_hidden_image_2
+      label: 'Top Left'
+      region: content
+      parent_name: ''
+      weight: 11
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_top_right:
+      children:
+        - field_hidden_image_3
+        - field_hidden_image_4
+      label: 'Top Right'
+      region: content
+      parent_name: ''
+      weight: 12
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_bottom_left:
+      children:
+        - field_hidden_image_5
+        - field_hidden_image_6
+      label: 'Bottom Left'
+      region: content
+      parent_name: ''
+      weight: 13
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_bottom_right:
+      children:
+        - field_hidden_image_7
+        - field_hidden_image_8
+      label: 'Bottom Right'
+      region: content
+      parent_name: ''
+      weight: 14
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+id: node.twitter_hidden_image.default
+targetEntityType: node
+bundle: twitter_hidden_image
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_background_color:
+    type: color_field_widget_html5
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_hidden_image_1:
+    type: image_image
+    weight: 12
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_2:
+    type: image_image
+    weight: 13
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_3:
+    type: image_image
+    weight: 13
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_4:
+    type: image_image
+    weight: 14
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_5:
+    type: image_image
+    weight: 14
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_6:
+    type: image_image
+    weight: 15
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_7:
+    type: image_image
+    weight: 15
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hidden_image_8:
+    type: image_image
+    weight: 16
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_main_image:
+    type: image_image
+    weight: 9
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

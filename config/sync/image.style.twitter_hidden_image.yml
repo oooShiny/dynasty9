@@ -1,0 +1,15 @@
+uuid: 258a478e-2f57-46b5-919d-51b0a37edca3
+langcode: en
+status: true
+dependencies: {  }
+name: twitter_hidden_image
+label: 'Twitter Hidden Image'
+effects:
+  e14523df-2103-4ca4-9f1b-3b4707f14642:
+    uuid: e14523df-2103-4ca4-9f1b-3b4707f14642
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 2426
+      height: 1366
+      anchor: center-center

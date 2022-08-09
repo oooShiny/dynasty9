@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '679eb09a50d20f72e7fa36a94d0dca1fbcfa0058',
+        'reference' => '14ff9b941b3aa2be5adf48c86aff47c886db26e3',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -345,6 +345,15 @@
             'replaced' => array(
                 0 => '9.3.3',
             ),
+        ),
+        'drupal/color_field' => array(
+            'pretty_version' => '2.5.0',
+            'version' => '2.5.0.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/color_field',
+            'aliases' => array(),
+            'reference' => '8.x-2.5',
+            'dev_requirement' => false,
         ),
         'drupal/comment' => array(
             'dev_requirement' => false,
@@ -1105,7 +1114,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '679eb09a50d20f72e7fa36a94d0dca1fbcfa0058',
+            'reference' => '14ff9b941b3aa2be5adf48c86aff47c886db26e3',
             'dev_requirement' => false,
         ),
         'drupal/redirect' => array(

@@ -1,0 +1,5 @@
+dynasty_canvas:
+  js:
+    js/dynasty_canvas.js: {}
+  dependencies:
+    - core/drupalSettings

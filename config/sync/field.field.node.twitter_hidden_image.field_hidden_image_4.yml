@@ -1,0 +1,38 @@
+uuid: e0fd7778-c45e-4539-b970-3bf24a401d8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hidden_image_4
+    - node.type.twitter_hidden_image
+  module:
+    - image
+id: node.twitter_hidden_image.field_hidden_image_4
+field_name: field_hidden_image_4
+entity_type: node
+bundle: twitter_hidden_image
+label: 'Hidden Image 4'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: false
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

@@ -1,0 +1,41 @@
+uuid: d176ebc3-b06c-4fad-bcd4-e641a4d6af60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.twitter_hidden_image.field_background_color
+    - field.field.node.twitter_hidden_image.field_hidden_image_1
+    - field.field.node.twitter_hidden_image.field_hidden_image_2
+    - field.field.node.twitter_hidden_image.field_hidden_image_3
+    - field.field.node.twitter_hidden_image.field_hidden_image_4
+    - field.field.node.twitter_hidden_image.field_hidden_image_5
+    - field.field.node.twitter_hidden_image.field_hidden_image_6
+    - field.field.node.twitter_hidden_image.field_hidden_image_7
+    - field.field.node.twitter_hidden_image.field_hidden_image_8
+    - field.field.node.twitter_hidden_image.field_main_image
+    - node.type.twitter_hidden_image
+  module:
+    - user
+id: node.twitter_hidden_image.default
+targetEntityType: node
+bundle: twitter_hidden_image
+mode: default
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_background_color: true
+  field_hidden_image_1: true
+  field_hidden_image_2: true
+  field_hidden_image_3: true
+  field_hidden_image_4: true
+  field_hidden_image_5: true
+  field_hidden_image_6: true
+  field_hidden_image_7: true
+  field_hidden_image_8: true
+  field_main_image: true
+  langcode: true
+  search_api_excerpt: true
