@@ -204,6 +204,7 @@ function dynasty_preprocess_form(&$variables) {
   $flex_forms = [
     'season-select-form',
     'player-select-form',
+    'play-type-select-form',
     'views-exposed-form-game-search-page-1',
     'views-exposed-form-highlight-search-page-1',
     'views-exposed-form-podcast-search-page-1'
