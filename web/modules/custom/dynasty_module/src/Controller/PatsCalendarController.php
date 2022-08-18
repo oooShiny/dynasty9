@@ -39,6 +39,7 @@ class PatsCalendarController extends ControllerBase {
       rsort($months[$month][$day]);
     }
     $month_names = [
+      '08' => 'August',
       '09' => 'September',
       '10' => 'October',
       '11' => 'November',
@@ -56,6 +57,7 @@ class PatsCalendarController extends ControllerBase {
 
   private function populate_month_array($months) {
     $days = [
+      '08' => 31,
       '09' => 30,
       '10' => 31,
       '11' => 30,

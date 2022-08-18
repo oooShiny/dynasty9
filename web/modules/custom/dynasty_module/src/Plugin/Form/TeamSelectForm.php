@@ -10,12 +10,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use \Drupal\node\Entity\Node;
 
-class PlayerSelectForm extends FormBase {
+class TeamSelectForm extends FormBase {
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'player_select_form';
+    return 'team_select_form';
   }
 
   /**
@@ -23,16 +23,16 @@ class PlayerSelectForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $options = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','player')->execute();
+    $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
     $nodes =  Node::loadMultiple($nids);
     foreach ($nodes as $node) {
-      $options[$node->id()] = $node->label();
+      $options[rawurlencode($node->label())] = $node->label();
     }
-    $form['players'] = [
+    $form['team'] = [
       '#type' => 'select2',
-      '#default_value' => isset($config['players']) ? $config['players'] : '',
+      '#default_value' => isset($config['team']) ? $config['team'] : '',
       '#options' => $options,
-      '#empty_option' => 'Select a player',
+      '#empty_option' => 'Select a team',
       '#wrapper_attributes' => [
         'class' => ['tw-h-12 tw-w-64']
       ],
@@ -53,7 +53,7 @@ class PlayerSelectForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    $path = '/node/' . $values['players'];
+    $path = '/search/games?f[0]=opponent:' . $values['team'];
     $url = Url::fromUserInput($path);
     $form_state->setRedirectUrl($url);
   }
