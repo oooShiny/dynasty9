@@ -95,18 +95,23 @@
     </section>
 
 {# Quick Search Section #}
-    <section class="tw-w-full tw-px-8 tw-py-16 xl:tw-px-8">
+    <section class="tw-bg-blue-pats tw-w-full tw-px-8 tw-py-16 xl:tw-px-8">
       <div class="tw-max-w-5xl tw-mx-auto">
-        <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light">Quick Search</h2>
+        <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light tw-text-white">Quick Search</h2>
+        <p class="tw-text-white tw-pb-8">
+          Find any game or highlight from the dynasty era using the quick search boxes below, or visit the
+          <a href="/search/plays" class="tw-underline">Play Search</a> or <a href="/search/games" class="tw-underline">Game Search</a> pages for a
+          more detailed search.
+        </p>
         <div class="tw-flex tw-flex-col tw-items-center md:tw-flex-row">
 
           <div class="tw-mt-16 md:tw-mt-0 md:tw-w-1/2 md:tw-pr-16">
-            <div class="tw-relative tw-z-10 tw-h-auto tw-p-8 tw-py-10 tw-overflow-hidden tw-bg-white tw-border-b-2 tw-border-gray-300 tw-shadow-2xl tw-px-7 tw-rounded-none tw-rounded-sm">
+            <div class="tw-relative tw-z-10 tw-h-auto tw-p-8 tw-py-10 tw-overflow-hidden tw-bg-gray-400 tw-border-b-2 tw-border-gray-300 tw-shadow-2xl tw-px-7 tw-rounded-none tw-rounded-sm">
 
               <h3 class="tw-mb-6 tw-text-2xl tw-uppercase tw-font-light">Games</h3>
 
               <div class="tw-relative tw-flex tw-items-center tw-max-w-md tw-mx-auto tw-mt-12 tw-overflow-hidden tw-text-center tw-rounded-sm">
-                {{ drupal_block('views_exposed_filter_block:game_search-page_1') }}
+                {{ drupal_block('team_select_block') }}
               </div>
 
               <div class="tw-relative tw-flex tw-items-center tw-max-w-md tw-mx-auto tw-mt-12 tw-overflow-hidden tw-text-center tw-rounded-sm">
@@ -117,7 +122,7 @@
           </div>
 
           <div class="tw-mt-16 md:tw-mt-0 md:tw-w-1/2 md:tw-pr-16">
-            <div class="tw-relative tw-z-10 tw-h-auto tw-p-8 tw-py-10 tw-overflow-hidden tw-bg-white tw-border-b-2 tw-border-gray-300 tw-shadow-2xl tw-px-7 tw-rounded-none tw-rounded-sm">
+            <div class="tw-relative tw-z-10 tw-h-auto tw-p-8 tw-py-10 tw-overflow-hidden tw-bg-gray-400 tw-border-b-2 tw-border-gray-300 tw-shadow-2xl tw-px-7 tw-rounded-none tw-rounded-sm">
 
               <h3 class="tw-mb-6 tw-text-2xl tw-uppercase tw-font-light">Plays</h3>
 
@@ -165,9 +170,9 @@
 {# On This Day Section #}
     <section class="tw-w-full tw-py-16">
       <div class="tw-px-8 xl:tw-px-8">
-{#        <div class="tw-max-w-5xl tw-mx-auto">#}
-{#          {{ drupal_block('on_this_day_block') }}#}
-{#        </div>#}
+        <div class="tw-max-w-5xl tw-mx-auto">
+          {{ drupal_block('on_this_day_block') }}
+        </div>
       </div>
     </section>
   </article>

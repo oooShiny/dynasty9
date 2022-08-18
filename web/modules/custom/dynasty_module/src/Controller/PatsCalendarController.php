@@ -36,6 +36,7 @@ class PatsCalendarController extends ControllerBase {
         'title' => $game->getTitle(),
         'result' => strtolower($game->get('field_result')->value)
       ];
+      rsort($months[$month][$day]);
     }
     $month_names = [
       '09' => 'September',
