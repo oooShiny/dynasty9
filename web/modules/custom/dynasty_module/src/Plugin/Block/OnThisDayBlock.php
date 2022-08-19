@@ -36,7 +36,7 @@ class OnThisDayBlock extends BlockBase {
     ];
     foreach ($games as $game) {
       $game_date = '';
-      if (is_object($game) && !is_null($game->field_date->value)) {
+      if (is_object($game) && $game->hasField('field_date') && !is_null($game->field_date->value)) {
         $game_date = substr($game->field_date->value, 5);
       }
       if ($game_date !== '' && $game_date == $today) {
