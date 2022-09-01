@@ -87,9 +87,19 @@
     </div>
     <div class="tw-flex">
       {% for day, games in days %}
-        <div class="tw-border-b tw-border-blue-pats tw-border-collapse tw-border-r tw-p-1 tw-w-1/6">
+        {% set undefeated = '' %}
+        {% if games.record.w > 0 and games.record.l == 0 %}
+          {% set undefeated = 'undefeated' %}
+        {% endif %}
+
+        <div class="tw-border-b tw-border-blue-pats tw-border-collapse tw-border-r tw-p-1 tw-w-1/6 {{ undefeated }}">
           <span class="tw-font-bold">{{ day }}</span>
-          {% for game in games %}
+          {% if games.games|length > 0 %}
+          <div class="tw-bg-white tw-border-2 tw-border-red-pats tw-text-center">
+            {{ games.record.w }} - {{ games.record.l }} - {{ games.record.t }}
+          </div>
+          {% endif %}
+          {% for game in games.games %}
             {% if game.nid %}
               <div class="tw-text-center {{ game.result }}"><a href="{{ game.nid }}">{{ game.title }}</a></div>
             {% endif %}

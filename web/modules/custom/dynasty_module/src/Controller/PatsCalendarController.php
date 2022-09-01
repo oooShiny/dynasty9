@@ -32,12 +32,34 @@ class PatsCalendarController extends ControllerBase {
       $month = date('m', strtotime($date));
       $day = date('j', strtotime($date));
 
-      $months[$month][$day][] = [
+      $months[$month][$day]['games'][] = [
         'nid' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
         'title' => $game->getTitle(),
         'result' => strtolower($game->get('field_result')->value)
       ];
-      rsort($months[$month][$day]);
+      $result = substr(strtolower($game->get('field_result')->value), 0, 1);
+      $months[$month][$day]['record'] = [
+        'w' => $months[$month][$day]['record']['w'] ?? 0,
+        'l' => $months[$month][$day]['record']['l'] ?? 0,
+        't' => $months[$month][$day]['record']['t'] ?? 0,
+      ];
+      switch ($result) {
+        case 'w':
+          $months[$month][$day]['record']['w'] += 1;
+          break;
+        case 'l':
+          $months[$month][$day]['record']['l'] += 1;
+          break;
+        case 't':
+          $months[$month][$day]['record']['t'] += 1;
+          break;
+      }
+      $months[$month][$day]['record'] = [
+        'w' => $months[$month][$day]['record']['w'] ?? 0,
+        'l' => $months[$month][$day]['record']['l'] ?? 0,
+        't' => $months[$month][$day]['record']['t'] ?? 0,
+      ];
+      rsort($months[$month][$day]['games']);
     }
     $month_names = [
       '08' => 'August',

@@ -53,6 +53,12 @@ function dynasty_preprocess_node(&$variables) {
     $team_short = end($name_array);
     $variables['opp_short'] = $team_short;
     $variables['opp_name'] = $opp_name;
+    $variables['playoff'] = FALSE;
+    $variables['week_css'] = strtolower(str_replace(' ', '-', $node->get('field_week')->entity->label()));
+    if (str_contains($variables['week_css'], 'afc') ||
+    $variables['week_css'] == 'super-bowl') {
+      $variables['playoff'] = TRUE;
+    }
 
 
     // Create pro-football-reference and NFL Gamepass links.

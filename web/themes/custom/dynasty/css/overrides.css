@@ -27,6 +27,15 @@ a:hover {
   text-decoration-thickness: .125em;
 }
 
+.afc-wildcard,
+.afc-divisional-round,
+.afc-conference-championship {
+  background: #90cdf4;
+}
+
+.super-bowl {
+  background: #90cdf4;
+}
 /**
  * Change SVG images to white.
  */
@@ -48,6 +57,14 @@ a:hover {
 
 .loss {
   color: #C60C30;
+}
+
+.tie {
+  color: grey;
+}
+
+.undefeated {
+  background-color: #d5e6f7;
 }
 
 /**
