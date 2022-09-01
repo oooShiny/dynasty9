@@ -41,19 +41,38 @@ class OnThisDayBlock extends BlockBase {
       }
       if ($game_date !== '' && $game_date == $today) {
         // Find highlights for this game.
-        $highlight_nid = \Drupal::entityQuery('node')
+        $highlight_pog = \Drupal::entityQuery('node')
           ->condition('type', 'highlight')
           ->condition('field_play_of_the_game', 1)
           ->condition('field_game', $game->id())
           ->execute();
 
-        $highlight = \Drupal::entityTypeManager()
-          ->getStorage('node')
-          ->load(end($highlight_nid));
+        if (!empty($highlight_pog)) {
+          $highlight = \Drupal::entityTypeManager()
+            ->getStorage('node')
+            ->load(end($highlight_pog));
+          $muse_id = $highlight->field_muse_video_id->value;
+        }
+        else {
+          $highlight_nid = \Drupal::entityQuery('node')
+            ->condition('type', 'highlight')
+            ->condition('field_game', $game->id())
+            ->execute();
+          if (!empty($highlight_nid)) {
+            $highlight = \Drupal::entityTypeManager()
+              ->getStorage('node')
+              ->load($highlight_nid[array_rand($highlight_nid)]);
+            $muse_id = $highlight->field_muse_video_id->value;
+          }
+          else {
+            $muse_id = '';
+          }
+        }
+
 
         $opponent = explode(' ', $game->field_opponent->entity->label());
         $css = strtolower(implode('-', $opponent));
-        $muse_id = $highlight->field_muse_video_id->value ?? '';
+
         $build['#games'][] = [
           'alias' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
           'pats_score' => $game->field_patriots_score->value,
