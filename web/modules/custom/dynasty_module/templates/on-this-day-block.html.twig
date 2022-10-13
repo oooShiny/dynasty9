@@ -25,7 +25,6 @@
  * @see template_preprocess_block()
  */
 #}
-{#{{ dump(games) }}#}
 <h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light"><a href="/calendar">On This Day:</a> {{ 'now'|date('F jS') }}</h2>
 {% if games is not empty %}
 <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
@@ -68,6 +67,11 @@
             </script>
         {% endif %}
       </div>
+      {#  Start another row after 4 highlights. #}
+      {% if loop.index % 4 == 0 %}
+        </div>
+        <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
+      {% endif %}
     {% endfor %}
   {% endblock %}
 </div>
