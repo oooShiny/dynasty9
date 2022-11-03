@@ -10,8 +10,9 @@
 </div>
 
 <div class="md:tw-hidden tw-block">
-  <h2 id="filter-toggle" onclick="toggleFilters()" class="tw-bg-gray-500 tw-font-light tw-p-2 tw-text-center tw-text-white tw-text-xl tw-uppercase" style="cursor: pointer">Filters ▼</h2>
-  <div id="search-filters" class="tw-bg-gray-500 tw-hidden">
+  {% set block_id = 'search-filters-' ~ random() %}
+  <h2 id="filter-toggle" onclick="toggleFilters('{{ block_id }}')" class="tw-bg-gray-500 tw-font-light tw-p-2 tw-text-center tw-text-white tw-text-xl tw-uppercase" style="cursor: pointer">Filters ▼</h2>
+  <div id="{{ block_id }}" class="tw-bg-gray-500 tw-hidden">
   {% for facet in facets %}
     <div class="facet-block md:tw-my-5 md:tw-mx-0 tw-bg-white tw-border tw-border-gray-400 tw-m-4 tw-p-2 tw-shadow-lg">
       {% if show_title %}
@@ -24,8 +25,8 @@
 </div>
 
 <script type="application/javascript">
-  function toggleFilters() {
-    var x = document.getElementById("search-filters");
+  function toggleFilters(id) {
+    var x = document.getElementById(id);
     if (x.classList.contains('tw-hidden')) {
       x.classList.remove('tw-hidden');
       x.classList.add('tw-block');
