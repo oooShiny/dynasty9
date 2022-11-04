@@ -72,17 +72,29 @@ class OnThisDayBlock extends BlockBase {
 
         $opponent = explode(' ', $game->field_opponent->entity->label());
         $css = strtolower(implode('-', $opponent));
-
-        $build['#games'][] = [
-          'alias' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
-          'pats_score' => $game->field_patriots_score->value,
-          'opp_score' => $game->field_opponent_score->value,
-          'opponent' => end($opponent),
-          'season' => $game->field_season->value,
-          'week' => $game->field_week->entity->label(),
-          'css' => $css,
-          'highlight' => $muse_id,
-        ];
+        if ($muse_id) {
+          $build['#games_highlights'][] = [
+            'alias' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
+            'pats_score' => $game->field_patriots_score->value,
+            'opp_score' => $game->field_opponent_score->value,
+            'opponent' => end($opponent),
+            'season' => $game->field_season->value,
+            'week' => $game->field_week->entity->label(),
+            'css' => $css,
+            'highlight' => $muse_id,
+          ];
+        }
+        else {
+          $build['#games'][] = [
+            'alias' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
+            'pats_score' => $game->field_patriots_score->value,
+            'opp_score' => $game->field_opponent_score->value,
+            'opponent' => end($opponent),
+            'season' => $game->field_season->value,
+            'week' => $game->field_week->entity->label(),
+            'css' => $css,
+          ];
+        }
       }
     }
 

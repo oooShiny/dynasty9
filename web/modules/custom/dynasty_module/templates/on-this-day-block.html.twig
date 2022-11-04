@@ -29,7 +29,7 @@
 {% if games is not empty %}
 <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
   {% block content %}
-    {% for game in games %}
+    {% for game in games_highlights %}
       <div class="md:tw-w-1/4">
         <div class="tw-font-bold tw-text-center">
           <a href="{{ game.alias }}">
@@ -66,6 +66,33 @@
               });
             </script>
         {% endif %}
+      </div>
+      {#  Start another row after 4 highlights. #}
+      {% if loop.index % 4 == 0 %}
+        </div>
+        <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
+      {% endif %}
+    {% endfor %}
+
+    {% for game in games %}
+      <div class="md:tw-w-1/4">
+        <div class="tw-font-bold tw-text-center">
+          <a href="{{ game.alias }}">
+            {{ game.season }}
+            {{ game.week }}
+          </a>
+        </div>
+
+        <div class="tw-flex tw-pb-1">
+          <div class="{{ game.css }} tw-w-1/2 tw-text-center">
+            <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
+            <div>{{ game.opp_score }}</div>
+          </div>
+          <div class="patriots tw-w-1/2 tw-text-center">
+            <div>Patriots</div>
+            <div>{{ game.pats_score }}</div>
+          </div>
+        </div>
       </div>
       {#  Start another row after 4 highlights. #}
       {% if loop.index % 4 == 0 %}
