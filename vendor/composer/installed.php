@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '14ff9b941b3aa2be5adf48c86aff47c886db26e3',
+        'reference' => '7ab65e63d7d692f034d6117f60025ee6406303af',
         'name' => 'drupal/recommended-project',
         'dev' => true,
     ),
@@ -17,6 +17,15 @@
             'install_path' => __DIR__ . '/../abraham/twitteroauth',
             'aliases' => array(),
             'reference' => '28697071d270f9336ab590c1716cc0237ffeb5ee',
+            'dev_requirement' => false,
+        ),
+        'agaric/php-facebook' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../agaric/php-facebook',
+            'aliases' => array(),
+            'reference' => 'a0cc6954345d7d1cdf51c571e7950afa01127441',
             'dev_requirement' => false,
         ),
         'asm89/stack-cors' => array(
@@ -646,6 +655,15 @@
             'reference' => '8.x-1.9',
             'dev_requirement' => false,
         ),
+        'drupal/entity_usage' => array(
+            'pretty_version' => '2.0.0-beta7',
+            'version' => '2.0.0.0-beta7',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/entity_usage',
+            'aliases' => array(),
+            'reference' => '8.x-2.0-beta7',
+            'dev_requirement' => false,
+        ),
         'drupal/facets' => array(
             'pretty_version' => '2.0.1',
             'version' => '2.0.1.0',
@@ -1114,7 +1132,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '14ff9b941b3aa2be5adf48c86aff47c886db26e3',
+            'reference' => '7ab65e63d7d692f034d6117f60025ee6406303af',
             'dev_requirement' => false,
         ),
         'drupal/redirect' => array(
@@ -1238,6 +1256,17 @@
             'install_path' => __DIR__ . '/../../web/modules/contrib/social_post',
             'aliases' => array(),
             'reference' => '3.0.0-beta2',
+            'dev_requirement' => false,
+        ),
+        'drupal/social_post_facebook' => array(
+            'pretty_version' => 'dev-3.0.x',
+            'version' => 'dev-3.0.x',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/social_post_facebook',
+            'aliases' => array(
+                0 => '3.0.x-dev',
+            ),
+            'reference' => 'c73b349f194b2b9cb6fee290eef398592f5685fd',
             'dev_requirement' => false,
         ),
         'drupal/social_post_twitter' => array(
@@ -1628,6 +1657,15 @@
             'install_path' => __DIR__ . '/../league/oauth2-client',
             'aliases' => array(),
             'reference' => '2334c249907190c132364f5dae0287ab8666aa19',
+            'dev_requirement' => false,
+        ),
+        'league/oauth2-facebook' => array(
+            'pretty_version' => '2.2.0',
+            'version' => '2.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/oauth2-facebook',
+            'aliases' => array(),
+            'reference' => 'ec6d62a00b548c6cd56d7b734346b9e6befbfbbb',
             'dev_requirement' => false,
         ),
         'maennchen/zipstream-php' => array(

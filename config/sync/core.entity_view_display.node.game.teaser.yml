@@ -47,6 +47,7 @@ dependencies:
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
     - field.field.node.game.field_temperature
+    - field.field.node.game.field_uniform
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
@@ -221,6 +222,7 @@ hidden:
   field_starting_qb: true
   field_surf: true
   field_temperature: true
+  field_uniform: true
   field_vegas_line: true
   field_week: true
   field_weekday: true

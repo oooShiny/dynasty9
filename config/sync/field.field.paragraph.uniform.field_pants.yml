@@ -1,0 +1,29 @@
+uuid: e38c828d-b64f-4756-93fb-aa27b2169d06
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pants
+    - media.type.uniform_image
+    - paragraphs.paragraphs_type.uniform
+id: paragraph.uniform.field_pants
+field_name: field_pants
+entity_type: paragraph
+bundle: uniform
+label: Pants
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      uniform_image: uniform_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -3,7 +3,7 @@ _core:
 uri: 'public:/'
 compact_snippet: true
 include_file: true
-rebuild_snippets: true
+rebuild_snippets: false
 flush_snippets: false
 debug_output: false
 _default_container:

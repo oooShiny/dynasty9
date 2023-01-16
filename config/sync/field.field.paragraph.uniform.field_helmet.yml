@@ -1,0 +1,29 @@
+uuid: cb1088d8-fa6b-42d5-8572-e26e2f0c6dfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_helmet
+    - media.type.uniform_image
+    - paragraphs.paragraphs_type.uniform
+id: paragraph.uniform.field_helmet
+field_name: field_helmet
+entity_type: paragraph
+bundle: uniform
+label: Helmet
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      uniform_image: uniform_image
+    sort:
+      field: field_uniform_part
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

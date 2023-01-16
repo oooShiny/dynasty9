@@ -46,6 +46,7 @@ dependencies:
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
     - field.field.node.game.field_temperature
+    - field.field.node.game.field_uniform
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
@@ -554,6 +555,12 @@ content:
     region: content
     settings:
       placeholder: ''
+    third_party_settings: {  }
+  field_uniform:
+    type: options_select
+    weight: 28
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_vegas_line:
     type: number

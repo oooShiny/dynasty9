@@ -33,6 +33,7 @@ module:
   dynasty_timeline: 0
   editor: 0
   entity_reference_revisions: 0
+  entity_usage: 0
   facets: 0
   facets_block: 0
   facets_range_widget: 0
@@ -82,6 +83,7 @@ module:
   options: 0
   page_cache: 0
   pager: 0
+  paragraphs_library: 0
   path: 0
   path_alias: 0
   patreon: 0

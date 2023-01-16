@@ -1,0 +1,29 @@
+uuid: 48445e6c-84dc-4708-8f2f-74a438de8c9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_uniform_part
+    - media.type.uniform_image
+    - taxonomy.vocabulary.uniform_part
+id: media.uniform_image.field_uniform_part
+field_name: field_uniform_part
+entity_type: media
+bundle: uniform_image
+label: 'Uniform Part'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      uniform_part: uniform_part
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

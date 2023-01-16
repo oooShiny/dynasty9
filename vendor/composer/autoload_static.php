@@ -184,6 +184,7 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'A' => 
         array (
             'Asm89\\Stack\\' => 12,
+            'Agaric\\FacebookApi\\' => 19,
             'Abraham\\TwitterOAuth\\' => 21,
         ),
     );
@@ -405,6 +406,7 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'League\\OAuth2\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-client/src',
+            1 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
         ),
         'League\\Csv\\' => 
         array (
@@ -546,6 +548,10 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
+        ),
+        'Agaric\\FacebookApi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/agaric/php-facebook/src',
         ),
         'Abraham\\TwitterOAuth\\' => 
         array (

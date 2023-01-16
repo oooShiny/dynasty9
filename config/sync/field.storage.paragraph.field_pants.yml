@@ -1,0 +1,24 @@
+uuid: 3c6892e7-df39-4ba8-85b9-ad0cd36cba4b
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - media
+    - paragraphs
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: paragraph.field_pants
+field_name: field_pants
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

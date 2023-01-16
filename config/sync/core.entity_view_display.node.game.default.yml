@@ -46,6 +46,7 @@ dependencies:
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
     - field.field.node.game.field_temperature
+    - field.field.node.game.field_uniform
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
@@ -444,6 +445,15 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 134
+    region: content
+  field_uniform:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 150
     region: content
   field_vegas_line:
     type: number_decimal

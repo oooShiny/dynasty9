@@ -1,0 +1,10 @@
+uuid: 6217adab-c768-4115-813b-a6d007a47699
+langcode: en
+status: true
+dependencies: {  }
+id: uniform
+label: Uniform
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

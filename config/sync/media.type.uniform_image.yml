@@ -1,0 +1,13 @@
+uuid: 2e8d1c4e-d15e-496f-8ac8-a032dfcd28f0
+langcode: en
+status: true
+dependencies: {  }
+id: uniform_image
+label: 'Uniform Image'
+description: ''
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_1
+field_map: {  }

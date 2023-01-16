@@ -1,0 +1,11 @@
+uuid: b644bfb6-5f53-410f-8b6c-844874a97c6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.uniform_part
+id: taxonomy_term.uniform_part
+target_entity_type_id: taxonomy_term
+target_bundle: uniform_part
+default_langcode: site_default
+language_alterable: false

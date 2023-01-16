@@ -1,0 +1,40 @@
+uuid: aac7c062-7519-4292-a642-1bc1982eb70b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.uniform.field_helmet
+    - field.field.paragraph.uniform.field_jersey
+    - field.field.paragraph.uniform.field_pants
+    - paragraphs.paragraphs_type.uniform
+  module:
+    - media_library
+id: paragraph.uniform.default
+targetEntityType: paragraph
+bundle: uniform
+mode: default
+content:
+  field_helmet:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_jersey:
+    type: media_library_widget
+    weight: 1
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_pants:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

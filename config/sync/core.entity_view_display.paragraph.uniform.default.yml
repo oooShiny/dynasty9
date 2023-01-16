@@ -1,0 +1,43 @@
+uuid: 6688d61c-9db9-4f9a-8841-8372dfd6349c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.uniform.field_helmet
+    - field.field.paragraph.uniform.field_jersey
+    - field.field.paragraph.uniform.field_pants
+    - paragraphs.paragraphs_type.uniform
+id: paragraph.uniform.default
+targetEntityType: paragraph
+bundle: uniform
+mode: default
+content:
+  field_helmet:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_jersey:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_pants:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true
