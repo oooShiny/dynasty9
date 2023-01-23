@@ -56,6 +56,7 @@ dependencies:
   module:
     - datetime
     - field_group
+    - inline_entity_form
     - link
     - metatag
     - paragraphs
@@ -557,10 +558,21 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_uniform:
-    type: options_select
+    type: inline_entity_form_complex
     weight: 28
     region: content
-    settings: {  }
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: false
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
     third_party_settings: {  }
   field_vegas_line:
     type: number
