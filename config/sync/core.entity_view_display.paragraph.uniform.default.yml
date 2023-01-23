@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.uniform.field_helmet
     - field.field.paragraph.uniform.field_jersey
     - field.field.paragraph.uniform.field_pants
+    - field.field.paragraph.uniform.field_socks
     - paragraphs.paragraphs_type.uniform
 id: paragraph.uniform.default
 targetEntityType: paragraph
@@ -14,7 +15,7 @@ mode: default
 content:
   field_helmet:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
@@ -23,7 +24,7 @@ content:
     region: content
   field_jersey:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
@@ -32,12 +33,21 @@ content:
     region: content
   field_pants:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_socks:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 3
     region: content
 hidden:
   search_api_excerpt: true

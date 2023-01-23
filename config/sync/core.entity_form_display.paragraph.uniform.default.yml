@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.uniform.field_helmet
     - field.field.paragraph.uniform.field_jersey
     - field.field.paragraph.uniform.field_pants
+    - field.field.paragraph.uniform.field_socks
     - paragraphs.paragraphs_type.uniform
   module:
     - media_library
@@ -31,6 +32,13 @@ content:
   field_pants:
     type: media_library_widget
     weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_socks:
+    type: media_library_widget
+    weight: 3
     region: content
     settings:
       media_types: {  }

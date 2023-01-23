@@ -1,4 +1,4 @@
-uuid: c9573205-76a2-4dcf-8bcc-d61bf04e29b4
+uuid: 85cea353-a32e-426c-b6f8-dfb98d3662c8
 langcode: en
 status: true
 dependencies:
@@ -9,15 +9,15 @@ dependencies:
 third_party_settings:
   field_permissions:
     permission_type: public
-id: paragraph.field_helmet
-field_name: field_helmet
+id: paragraph.field_socks
+field_name: field_socks
 entity_type: paragraph
 type: entity_reference
 settings:
   target_type: media
 module: core
 locked: false
-cardinality: 2
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
