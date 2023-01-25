@@ -1,0 +1,10 @@
+uuid: ab9ff74c-5952-4b32-8332-25d136b60139
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs_library
+id: paragraphs_library_item.uniform_right
+label: 'Uniform - Right'
+targetEntityType: paragraphs_library_item
+cache: true

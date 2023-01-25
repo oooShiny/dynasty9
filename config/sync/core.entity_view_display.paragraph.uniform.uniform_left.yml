@@ -1,36 +1,28 @@
-uuid: 6688d61c-9db9-4f9a-8841-8372dfd6349c
+uuid: f8d0d421-bdfd-42c6-9eb5-1741ddf49739
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.uniform_left
     - field.field.paragraph.uniform.field_helmet_left
     - field.field.paragraph.uniform.field_helmet_right
     - field.field.paragraph.uniform.field_jersey
     - field.field.paragraph.uniform.field_pants
     - field.field.paragraph.uniform.field_socks
     - paragraphs.paragraphs_type.uniform
-id: paragraph.uniform.default
+id: paragraph.uniform.uniform_left
 targetEntityType: paragraph
 bundle: uniform
-mode: default
+mode: uniform_left
 content:
-  field_helmet_left:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_helmet_right:
     type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: default
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   field_jersey:
     type: entity_reference_entity_view
@@ -39,7 +31,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
   field_pants:
     type: entity_reference_entity_view
@@ -48,7 +40,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_socks:
     type: entity_reference_entity_view
@@ -57,7 +49,8 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
 hidden:
+  field_helmet_left: true
   search_api_excerpt: true

@@ -1,56 +1,56 @@
-uuid: aac7c062-7519-4292-a642-1bc1982eb70b
+uuid: ba4f4950-5d1d-44a3-b785-508ddeea5105
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.uniform_right
     - field.field.paragraph.uniform.field_helmet_left
     - field.field.paragraph.uniform.field_helmet_right
     - field.field.paragraph.uniform.field_jersey
     - field.field.paragraph.uniform.field_pants
     - field.field.paragraph.uniform.field_socks
     - paragraphs.paragraphs_type.uniform
-  module:
-    - media_library
-id: paragraph.uniform.default
+id: paragraph.uniform.uniform_right
 targetEntityType: paragraph
 bundle: uniform
-mode: default
+mode: uniform_right
 content:
   field_helmet_left:
-    type: media_library_widget
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
     weight: 0
     region: content
+  field_jersey:
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      media_types: {  }
+      view_mode: default
+      link: false
     third_party_settings: {  }
-  field_helmet_right:
-    type: media_library_widget
     weight: 1
     region: content
+  field_pants:
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      media_types: {  }
+      view_mode: default
+      link: false
     third_party_settings: {  }
-  field_jersey:
-    type: media_library_widget
     weight: 2
     region: content
+  field_socks:
+    type: entity_reference_entity_view
+    label: hidden
     settings:
-      media_types: {  }
+      view_mode: default
+      link: false
     third_party_settings: {  }
-  field_pants:
-    type: media_library_widget
     weight: 3
     region: content
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-  field_socks:
-    type: media_library_widget
-    weight: 4
-    region: content
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
 hidden:
-  created: true
-  status: true
+  field_helmet_right: true
+  search_api_excerpt: true

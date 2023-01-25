@@ -436,6 +436,25 @@ function dynasty_module_cron() {
     $post_manager->setClient($client)->doPost($tweet);
   }
 
+  /**
+   * Create Facebook post.
+   */
+  // Create and post manager instances.
+  $client = \Drupal::service('plugin.network.manager')->createInstance('social_post_facebook')->getSdk();
+  $post_manager = \Drupal::service('facebook_post.manager');
+
+  // Get accounts for the current user.
+  $accounts = \Drupal::service('social_post.user_manager')->getAccounts('social_post_facebook', 1);
+
+  foreach ($accounts as $account) {
+    // Set OAuth token for the account.
+    $token = json_decode($account->getToken());
+    $client->setOauthToken($token->oauth_token, $token->oauth_token_secret);
+
+    // Make a post to Facebook with the account!
+    $post_manager->setClient($client)->doPost($tweet);
+  }
+
   // Clean up after the highlight has been tweeted.
   $plays[$tweet_play]->field_tweeted = 1;
   $plays[$tweet_play]->save();

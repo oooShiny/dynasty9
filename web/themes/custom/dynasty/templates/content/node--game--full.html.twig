@@ -113,6 +113,11 @@
       <div class="tw-text-5xl tw-text-center">{{ content.field_opponent_score }}</div>
     </div>
   </div>
+  {% if content.field_uniform|render %}
+  <div class="tw-flex tw-justify-evenly tw-py-10">
+    {{ content.field_uniform }}
+  </div>
+  {% endif %}
 
 {# Game Date #}
   <div class="tw-text-center tw-py-10 tw-text-xl">{{ content.field_date }}</div>

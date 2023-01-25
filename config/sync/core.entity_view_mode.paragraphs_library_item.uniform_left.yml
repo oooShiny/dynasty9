@@ -1,0 +1,10 @@
+uuid: 76d3e1bd-8a43-4aa7-b47e-58d8da5a5cab
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs_library
+id: paragraphs_library_item.uniform_left
+label: 'Uniform - Left'
+targetEntityType: paragraphs_library_item
+cache: true

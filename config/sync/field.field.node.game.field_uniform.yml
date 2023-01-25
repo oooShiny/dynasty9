@@ -1,4 +1,4 @@
-uuid: 326fe96c-a49e-4604-9295-49867c4bf0a3
+uuid: 370e3b11-60c9-4c59-9006-7b4ca2fbbc96
 langcode: en
 status: true
 dependencies:
@@ -19,5 +19,10 @@ default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:paragraphs_library_item'
-  handler_settings: {  }
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: label
+      direction: ASC
+    auto_create: false
 field_type: entity_reference_revisions

@@ -55,8 +55,8 @@ dependencies:
     - node.type.game
   module:
     - datetime
+    - entity_reference_revisions
     - field_group
-    - inline_entity_form
     - link
     - metatag
     - paragraphs
@@ -558,21 +558,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_uniform:
-    type: inline_entity_form_complex
+    type: entity_reference_revisions_autocomplete
     weight: 28
     region: content
     settings:
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: false
-      allow_existing: true
       match_operator: CONTAINS
-      allow_duplicate: false
-      collapsible: false
-      collapsed: false
-      revision: false
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_vegas_line:
     type: number

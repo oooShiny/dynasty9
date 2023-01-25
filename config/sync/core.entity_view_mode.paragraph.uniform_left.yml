@@ -1,0 +1,10 @@
+uuid: fd2b56f3-568a-4921-9dc8-9415cfc33bc8
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.uniform_left
+label: 'Uniform - Left'
+targetEntityType: paragraph
+cache: true

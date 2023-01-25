@@ -1,22 +1,23 @@
-uuid: 3b17b71b-e8c0-4cc7-9f3b-5bf24952e6b5
+uuid: 5d6eb555-196b-47d9-878e-face118991d1
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.uniform_right
     - field.field.paragraph.from_library.field_reusable_paragraph
     - paragraphs.paragraphs_type.from_library
 _core:
   default_config_hash: cwuIPYXF5vCbzfY8wjj_shzx513Cwc122DIqGh2Uqho
-id: paragraph.from_library.default
+id: paragraph.from_library.uniform_right
 targetEntityType: paragraph
 bundle: from_library
-mode: default
+mode: uniform_right
 content:
   field_reusable_paragraph:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
-      view_mode: default
+      view_mode: uniform_right
       link: false
     third_party_settings: {  }
     weight: 0

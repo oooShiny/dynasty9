@@ -1,7 +1,12 @@
 uuid: 6217adab-c768-4115-813b-a6d007a47699
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - paragraphs_library
+third_party_settings:
+  paragraphs_library:
+    allow_library_conversion: true
 id: uniform
 label: Uniform
 icon_uuid: null

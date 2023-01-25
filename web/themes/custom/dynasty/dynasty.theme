@@ -3,6 +3,7 @@
 use Drupal\node\Entity\Node;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\dynasty_module\DynastyHelpers;
+use Drupal\paragraphs\Entity\Paragraph;
 
 function dynasty_theme_suggestions_node_alter(&$suggestions, $variables) {
   // Create custom front page node template.
@@ -159,6 +160,21 @@ function dynasty_preprocess_node(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function dynasty_preprocess_paragraph(&$variables) {
+  $v=1;
+  if (str_contains($variables['view_mode'], 'uniform')) {
+    $uniform = Paragraph::load($variables['content'][0]['#paragraph']->id());
+    $variables['uniform'] = [
+      'helmet' => '',
+      'jersey' => $uniform->get('jersey')->value,
+      'pants' => $uniform->get('pants')->value,
+      'socks' => $uniform->get('socks')->value
+    ];
+  }
+}
 /**
  * Implements hook_preprocess_page_title().
  */
