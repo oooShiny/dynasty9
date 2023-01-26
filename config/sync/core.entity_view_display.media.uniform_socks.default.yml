@@ -1,0 +1,31 @@
+uuid: d5ae21c4-bc9b-461d-8f79-104dc46f7af4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.uniform_socks.field_media_image_4
+    - image.style.uniform_socks
+    - media.type.uniform_socks
+  module:
+    - image
+id: media.uniform_socks.default
+targetEntityType: media
+bundle: uniform_socks
+mode: default
+content:
+  field_media_image_4:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: uniform_socks
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

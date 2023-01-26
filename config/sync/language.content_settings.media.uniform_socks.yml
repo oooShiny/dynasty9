@@ -1,0 +1,11 @@
+uuid: d868058d-6aa2-4e29-83b3-221bb9d2930f
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.uniform_socks
+id: media.uniform_socks
+target_entity_type_id: media
+target_bundle: uniform_socks
+default_langcode: site_default
+language_alterable: false

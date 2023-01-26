@@ -1,0 +1,27 @@
+uuid: 004d3aef-4c8f-45a2-8397-31244621332f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraphs_library_item.uniform_right
+  module:
+    - entity_reference_revisions
+    - paragraphs_library
+id: paragraphs_library_item.paragraphs_library_item.uniform_right
+targetEntityType: paragraphs_library_item
+bundle: paragraphs_library_item
+mode: uniform_right
+content:
+  paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: uniform_right
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  label: true
+  langcode: true
+  search_api_excerpt: true

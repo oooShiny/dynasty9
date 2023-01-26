@@ -1,0 +1,13 @@
+uuid: eaba5dd1-feff-4178-8d19-a4989ef5cea6
+langcode: en
+status: true
+dependencies: {  }
+id: uniform_helmet
+label: 'Uniform Helmet'
+description: ''
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_2
+field_map: {  }

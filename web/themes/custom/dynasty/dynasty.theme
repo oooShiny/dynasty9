@@ -166,13 +166,7 @@ function dynasty_preprocess_node(&$variables) {
 function dynasty_preprocess_paragraph(&$variables) {
   $v=1;
   if (str_contains($variables['view_mode'], 'uniform')) {
-    $uniform = Paragraph::load($variables['content'][0]['#paragraph']->id());
-    $variables['uniform'] = [
-      'helmet' => '',
-      'jersey' => $uniform->get('jersey')->value,
-      'pants' => $uniform->get('pants')->value,
-      'socks' => $uniform->get('socks')->value
-    ];
+
   }
 }
 /**

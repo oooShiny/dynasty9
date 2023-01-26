@@ -14,7 +14,7 @@ targetEntityType: paragraph
 bundle: uniform
 mode: default
 content:
-  field_helmet_left:
+  field_helmet_right:
     type: entity_reference_entity_view
     label: hidden
     settings:
@@ -23,7 +23,7 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_helmet_right:
+  field_jersey:
     type: entity_reference_entity_view
     label: hidden
     settings:
@@ -32,7 +32,7 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_jersey:
+  field_pants:
     type: entity_reference_entity_view
     label: hidden
     settings:
@@ -41,7 +41,7 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
-  field_pants:
+  field_socks:
     type: entity_reference_entity_view
     label: hidden
     settings:
@@ -50,14 +50,6 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
-  field_socks:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 4
-    region: content
 hidden:
+  field_helmet_left: true
   search_api_excerpt: true

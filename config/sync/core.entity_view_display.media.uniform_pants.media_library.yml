@@ -1,0 +1,32 @@
+uuid: ec0983ce-6959-4f77-8445-f0a0415c297e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.uniform_pants.field_media_image_3
+    - image.style.medium
+    - media.type.uniform_pants
+  module:
+    - image
+id: media.uniform_pants.media_library
+targetEntityType: media
+bundle: uniform_pants
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: medium
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_media_image_3: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

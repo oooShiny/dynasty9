@@ -1,13 +1,13 @@
-uuid: 2e8d1c4e-d15e-496f-8ac8-a032dfcd28f0
+uuid: 22e507e9-aa2c-48c7-a3b0-f0c778e3f567
 langcode: en
 status: true
 dependencies: {  }
-id: uniform_image
-label: 'Uniform Image'
+id: uniform_pants
+label: 'Uniform Pants'
 description: ''
 source: image
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:
-  source_field: field_media_image_1
+  source_field: field_media_image_3
 field_map: {  }

@@ -1,16 +1,16 @@
-uuid: c6a8e64d-8d5f-4bcd-8e3c-2082cdb571c8
+uuid: 0ebec993-513c-4d14-8123-a6ed09dd5532
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_media_image_1
-    - media.type.uniform_image
+    - field.storage.media.field_media_image_4
+    - media.type.uniform_socks
   module:
     - image
-id: media.uniform_image.field_media_image_1
-field_name: field_media_image_1
+id: media.uniform_socks.field_media_image_4
+field_name: field_media_image_4
 entity_type: media
-bundle: uniform_image
+bundle: uniform_socks
 label: Image
 description: ''
 required: true

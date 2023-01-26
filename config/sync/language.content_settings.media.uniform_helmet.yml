@@ -1,11 +1,11 @@
-uuid: ddf0b67c-e7b9-4fac-8981-505b82eb0b04
+uuid: bf654368-b20b-486b-9d10-33aa3338b0cd
 langcode: en
 status: true
 dependencies:
   config:
-    - media.type.uniform_image
-id: media.uniform_image
+    - media.type.uniform_helmet
+id: media.uniform_helmet
 target_entity_type_id: media
-target_bundle: uniform_image
+target_bundle: uniform_helmet
 default_langcode: site_default
 language_alterable: false

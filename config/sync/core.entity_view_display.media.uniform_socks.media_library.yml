@@ -1,17 +1,17 @@
-uuid: 161e2da9-22ac-4a8b-bab4-7d56f7b47cce
+uuid: e469a03c-e37b-40f5-8c2a-3f27de83c9eb
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
-    - field.field.media.uniform_image.field_media_image_1
+    - field.field.media.uniform_socks.field_media_image_4
     - image.style.medium
-    - media.type.uniform_image
+    - media.type.uniform_socks
   module:
     - image
-id: media.uniform_image.media_library
+id: media.uniform_socks.media_library
 targetEntityType: media
-bundle: uniform_image
+bundle: uniform_socks
 mode: media_library
 content:
   thumbnail:
@@ -25,7 +25,7 @@ content:
     region: content
 hidden:
   created: true
-  field_media_image_1: true
+  field_media_image_4: true
   langcode: true
   name: true
   search_api_excerpt: true

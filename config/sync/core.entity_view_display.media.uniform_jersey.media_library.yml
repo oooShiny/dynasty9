@@ -1,0 +1,32 @@
+uuid: 972d3f2d-5c56-4372-92a5-5d5f30985ff5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.uniform_jersey.field_media_image_1
+    - image.style.medium
+    - media.type.uniform_jersey
+  module:
+    - image
+id: media.uniform_jersey.media_library
+targetEntityType: media
+bundle: uniform_jersey
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: medium
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_media_image_1: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  uid: true

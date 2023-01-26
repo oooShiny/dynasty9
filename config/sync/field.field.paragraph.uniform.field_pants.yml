@@ -1,10 +1,10 @@
-uuid: e38c828d-b64f-4756-93fb-aa27b2169d06
+uuid: 14f22af4-ad17-4c55-b3fe-623ddb75f419
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_pants
-    - media.type.uniform_image
+    - media.type.uniform_pants
     - paragraphs.paragraphs_type.uniform
 id: paragraph.uniform.field_pants
 field_name: field_pants
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      uniform_image: uniform_image
+      uniform_pants: uniform_pants
     sort:
       field: _none
       direction: ASC

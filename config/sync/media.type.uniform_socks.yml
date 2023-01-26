@@ -1,0 +1,13 @@
+uuid: 844fa9db-40ff-4b67-b57c-692e8d3ddab3
+langcode: en
+status: true
+dependencies: {  }
+id: uniform_socks
+label: 'Uniform Socks'
+description: ''
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_4
+field_map: {  }

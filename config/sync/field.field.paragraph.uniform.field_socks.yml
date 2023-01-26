@@ -1,10 +1,10 @@
-uuid: 901bc3fa-c17f-411d-8f9e-5943d41e25f8
+uuid: 8ca68829-b86c-45a4-bb4d-5551a530fdf3
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_socks
-    - media.type.uniform_image
+    - media.type.uniform_socks
     - paragraphs.paragraphs_type.uniform
 id: paragraph.uniform.field_socks
 field_name: field_socks
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      uniform_image: uniform_image
+      uniform_socks: uniform_socks
     sort:
       field: _none
       direction: ASC

@@ -1,16 +1,16 @@
-uuid: 7661a117-f94b-4438-bfe2-943d44d740d9
+uuid: cae29d75-ba5c-4a2e-aebb-e71f04c3a607
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_helmet_left
-    - media.type.uniform_image
+    - media.type.uniform_helmet
     - paragraphs.paragraphs_type.uniform
 id: paragraph.uniform.field_helmet_left
 field_name: field_helmet_left
 entity_type: paragraph
 bundle: uniform
-label: 'Helmet - Left'
+label: 'Helmet - Left Facing'
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      uniform_image: uniform_image
+      uniform_helmet: uniform_helmet
     sort:
       field: _none
       direction: ASC

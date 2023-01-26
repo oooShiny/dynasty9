@@ -1,0 +1,11 @@
+uuid: 5f1cf48a-1d22-44df-a28e-ca8216336f06
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.uniform_pants
+id: media.uniform_pants
+target_entity_type_id: media
+target_bundle: uniform_pants
+default_langcode: site_default
+language_alterable: false

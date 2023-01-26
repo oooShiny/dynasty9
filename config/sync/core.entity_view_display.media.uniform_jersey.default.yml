@@ -1,16 +1,16 @@
-uuid: 6047eb8c-9417-4f03-8980-830b40a91e6e
+uuid: fe0801b6-dfb5-429b-bf2c-92c77510b9eb
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.uniform_image.field_media_image_1
+    - field.field.media.uniform_jersey.field_media_image_1
     - image.style.large
-    - media.type.uniform_image
+    - media.type.uniform_jersey
   module:
     - image
-id: media.uniform_image.default
+id: media.uniform_jersey.default
 targetEntityType: media
-bundle: uniform_image
+bundle: uniform_jersey
 mode: default
 content:
   field_media_image_1:

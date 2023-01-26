@@ -1,0 +1,15 @@
+uuid: f9d1741e-9e85-44f4-9b05-306b30038cb2
+langcode: en
+status: true
+dependencies: {  }
+name: uniform_socks
+label: 'Uniform Socks'
+effects:
+  3f81205d-c5ae-4e55-8b32-3d3482866f24:
+    uuid: 3f81205d-c5ae-4e55-8b32-3d3482866f24
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 240
+      anchor: center-center

@@ -1,0 +1,15 @@
+uuid: 78a55923-ca99-42e6-b8ed-94464f0416ba
+langcode: en
+status: true
+dependencies: {  }
+name: uniform_pants
+label: 'Uniform Pants'
+effects:
+  eb9f8764-4452-4a7d-a75c-0171381447ec:
+    uuid: eb9f8764-4452-4a7d-a75c-0171381447ec
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 480
+      height: 480
+      anchor: center-center

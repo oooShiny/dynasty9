@@ -1,0 +1,11 @@
+uuid: 1f59b60e-2835-4db0-9442-79072f93fad0
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.uniform_jersey
+id: media.uniform_jersey
+target_entity_type_id: media
+target_bundle: uniform_jersey
+default_langcode: site_default
+language_alterable: false

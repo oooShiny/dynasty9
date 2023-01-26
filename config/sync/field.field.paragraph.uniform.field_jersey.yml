@@ -1,10 +1,10 @@
-uuid: d99decc0-adbb-47a5-b429-80c6e9dba2c7
+uuid: d100fc18-b925-4e83-a6c1-2641f1698ae6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_jersey
-    - media.type.uniform_image
+    - media.type.uniform_jersey
     - paragraphs.paragraphs_type.uniform
 id: paragraph.uniform.field_jersey
 field_name: field_jersey
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      uniform_image: uniform_image
+      uniform_jersey: uniform_jersey
     sort:
       field: _none
       direction: ASC

@@ -18,35 +18,35 @@ mode: default
 content:
   field_helmet_left:
     type: media_library_widget
-    weight: 0
+    weight: 5
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_helmet_right:
     type: media_library_widget
-    weight: 1
+    weight: 6
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_jersey:
     type: media_library_widget
-    weight: 2
+    weight: 7
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_pants:
     type: media_library_widget
-    weight: 3
+    weight: 8
     region: content
     settings:
       media_types: {  }
     third_party_settings: {  }
   field_socks:
     type: media_library_widget
-    weight: 4
+    weight: 9
     region: content
     settings:
       media_types: {  }
