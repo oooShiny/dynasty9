@@ -9,7 +9,6 @@ dependencies:
     - field.storage.node.field_date
     - field.storage.node.field_after_bye
     - field.storage.node.field_game_video
-    - field.storage.node.field_patriots_head_coach
     - field.storage.node.field_home_away
     - field.storage.node.field_brady_ints
     - field.storage.node.field_jersey_number
@@ -20,6 +19,7 @@ dependencies:
     - field.storage.node.field_opposing_coach
     - field.storage.node.field_ot
     - field.storage.node.field_passer_rating
+    - field.storage.node.field_patriots_head_coach
     - field.storage.node.field_patriots_score
     - field.storage.node.field_playoff_game
     - field.storage.node.field_result
@@ -28,14 +28,16 @@ dependencies:
     - field.storage.node.field_surf
     - field.storage.node.field_brady_tds
     - field.storage.node.field_temperature
+    - field.storage.node.field_uniform
     - field.storage.node.field_week
     - field.storage.node.field_weekday
     - field.storage.node.field_brady_yards
     - search_api.server.solr_server
   module:
     - search_api_solr
-    - taxonomy
     - node
+    - taxonomy
+    - paragraphs_library
     - search_api
 third_party_settings:
   search_api_solr:
@@ -323,6 +325,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_temperature
+  uniform:
+    label: Uniform
+    datasource_id: 'entity:node'
+    property_path: 'field_uniform:entity:label'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_uniform
+      module:
+        - paragraphs_library
   video:
     label: 'Game Video'
     datasource_id: 'entity:node'
