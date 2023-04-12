@@ -16,7 +16,16 @@ dynasty.videoimport:
     _permission: 'add muse videos'
   options:
     _admin_route: TRUE
-dynsty.podcastdownload:
+dynasty.youtubehighlights:
+  path: '/admin/dynasty/muse/youtube'
+  defaults:
+    _form: '\Drupal\dynasty_module\Form\YoutubeHighlightVideoEmbedForm'
+    _title: 'Import Youtube Videos from Muse.ai'
+  requirements:
+    _permission: 'add muse videos'
+  options:
+    _admin_route: TRUE
+dynasty.podcastdownload:
   path: '/admin/dynasty/podcast/analytics'
   defaults:
     _form: '\Drupal\dynasty_module\Form\ImportPodcastAnalytics'

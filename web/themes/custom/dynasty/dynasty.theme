@@ -203,6 +203,12 @@ function dynasty_preprocess_field(&$variables, $hook) {
       }
     }
   }
+
+  // New embed field for youtube highlights.
+  if ($variables['field_name'] == 'field_highlight_video_url') {
+    $variables['video_id'] = $variables["element"][0]["#context"]["value"];
+  }
+
   // Podcast MP3 field.
   if ($variables['field_name'] == 'field_mp3') {
     $link_array = parse_url($variables['element'][0]['#context']['value']);
