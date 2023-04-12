@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
+    - field.field.node.game.field_highlight_video_url
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
@@ -191,6 +192,7 @@ third_party_settings:
       children:
         - field_game_video
         - field_youtube_highlights
+        - field_highlight_video_url
       label: 'Game Media'
       region: content
       parent_name: ''
@@ -298,6 +300,14 @@ content:
   field_game_video:
     type: string_textfield
     weight: 26
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_highlight_video_url:
+    type: string_textfield
+    weight: 28
     region: content
     settings:
       size: 60

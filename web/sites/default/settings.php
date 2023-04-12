@@ -780,11 +780,11 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 //  include $app_root . '/' . $site_path . '/settings.local.php';
 }
 $databases['default']['default'] = array (
-  'database' => 'default',
-  'username' => 'user',
-  'password' => 'user',
+  'database' => 'dynasty9',
+  'username' => 'dynasty9db',
+  'password' => 'p4t5Dyn457y2001!',
   'prefix' => '',
-  'host' => 'db',
+  'host' => 'localhost',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',

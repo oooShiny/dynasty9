@@ -1,0 +1,19 @@
+uuid: 08a82118-c380-43dc-9754-b49047e8c2d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_highlight_video_url
+    - node.type.game
+id: node.game.field_highlight_video_url
+field_name: field_highlight_video_url
+entity_type: node
+bundle: game
+label: 'Highlight Video URL'
+description: 'Videos copied from Youtube and uploaded to muse.ai. The video link here will be embedded on the page.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
