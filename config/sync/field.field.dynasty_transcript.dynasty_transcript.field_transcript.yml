@@ -1,0 +1,20 @@
+uuid: 32846d20-1042-4a18-85cd-e16c3b8dc37e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.dynasty_transcript.field_transcript
+  module:
+    - dynasty_transcript
+id: dynasty_transcript.dynasty_transcript.field_transcript
+field_name: field_transcript
+entity_type: dynasty_transcript
+bundle: dynasty_transcript
+label: Transcript
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

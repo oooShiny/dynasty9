@@ -1,0 +1,23 @@
+uuid: 7978c6b0-1fa0-43cf-935c-6a6c68570da8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_start_second
+    - paragraphs.paragraphs_type.transcript_line
+id: paragraph.transcript_line.field_start_second
+field_name: field_start_second
+entity_type: paragraph
+bundle: transcript_line
+label: 'Start (second)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 59
+  prefix: ''
+  suffix: ''
+field_type: integer

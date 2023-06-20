@@ -1,0 +1,19 @@
+uuid: 59cc0848-562d-47bb-b7a3-582169b0a916
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_start_timestamp
+    - paragraphs.paragraphs_type.podcast_transcript_text_block
+id: paragraph.podcast_transcript_text_block.field_start_timestamp
+field_name: field_start_timestamp
+entity_type: paragraph
+bundle: podcast_transcript_text_block
+label: 'Start Timestamp'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

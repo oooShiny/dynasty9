@@ -5,7 +5,7 @@ namespace Drupal\dynasty_module;
 
 use Drupal\node\Entity\Node;
 
-class MapHighlightToGame {
+class AddYoutubeHighlightToGame {
   public static function updateNode($nodes) {
     $results = [];
     $node = Node::load($nodes['highlight']);

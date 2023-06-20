@@ -1,0 +1,19 @@
+uuid: 9a7e42f8-e444-40c3-8aca-d9c6e9004ed5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_end_timestamp
+    - paragraphs.paragraphs_type.podcast_transcript_text_block
+id: paragraph.podcast_transcript_text_block.field_end_timestamp
+field_name: field_end_timestamp
+entity_type: paragraph
+bundle: podcast_transcript_text_block
+label: 'End Timestamp'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

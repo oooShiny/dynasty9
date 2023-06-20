@@ -41,3 +41,10 @@ dynasty.calendar:
     _title: 'Patriots Game Calendar'
   requirements:
     _permission: 'access content'
+dynasty.transcripts:
+  path: '/admin/transcripts'
+  defaults:
+    _form: '\Drupal\dynasty_module\Form\ImportTranscripts'
+    _title: 'Import Podcast Transcripts'
+  requirements:
+    _permission: 'access administration pages'

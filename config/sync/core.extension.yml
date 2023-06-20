@@ -27,10 +27,12 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
+  devel_generate: 0
   dynamic_page_cache: 0
   dynasty_images: 0
   dynasty_module: 0
   dynasty_timeline: 0
+  dynasty_transcript: 0
   editor: 0
   entity_reference_revisions: 0
   entity_usage: 0

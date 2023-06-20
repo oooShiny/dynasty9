@@ -1,0 +1,39 @@
+uuid: 49118e3d-dee5-4671-8561-b2a116d99d7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.podcast_transcript_text_block.field_end_timestamp
+    - field.field.paragraph.podcast_transcript_text_block.field_start_timestamp
+    - field.field.paragraph.podcast_transcript_text_block.field_transcript_text
+    - paragraphs.paragraphs_type.podcast_transcript_text_block
+id: paragraph.podcast_transcript_text_block.default
+targetEntityType: paragraph
+bundle: podcast_transcript_text_block
+mode: default
+content:
+  field_end_timestamp:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_start_timestamp:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_transcript_text:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

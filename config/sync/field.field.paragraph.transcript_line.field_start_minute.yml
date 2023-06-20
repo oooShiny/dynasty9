@@ -1,0 +1,23 @@
+uuid: 6aade8b5-b0d3-4663-b21d-633ece7f1329
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_start_minute
+    - paragraphs.paragraphs_type.transcript_line
+id: paragraph.transcript_line.field_start_minute
+field_name: field_start_minute
+entity_type: paragraph
+bundle: transcript_line
+label: 'Start (minute)'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 59
+  prefix: ''
+  suffix: ''
+field_type: integer

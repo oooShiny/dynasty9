@@ -94,8 +94,7 @@ count and clicking the <strong>Save configuration</strong> button below.</p>'
     batch_set($batch);
   }
 
-  private function parse_csv($csv)
-  {
+  private function parse_csv($csv) {
     $stats = [];
     $row = 1;
     if (($handle = fopen($csv, "r")) !== FALSE) {

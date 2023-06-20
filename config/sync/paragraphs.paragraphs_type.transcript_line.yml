@@ -1,0 +1,10 @@
+uuid: 2b0a9bcf-a9da-4095-968f-e7780c762486
+langcode: en
+status: true
+dependencies: {  }
+id: transcript_line
+label: 'Transcript Line'
+icon_uuid: null
+icon_default: null
+description: 'A line of a podcast transcript'
+behavior_plugins: {  }

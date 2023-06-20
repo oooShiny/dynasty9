@@ -1,0 +1,24 @@
+uuid: 3eaf6bed-06b5-42de-b323-186d1c7bb865
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.dynasty_transcript.field_milliseconds
+  module:
+    - dynasty_transcript
+id: dynasty_transcript.dynasty_transcript.field_milliseconds
+field_name: field_milliseconds
+entity_type: dynasty_transcript
+bundle: dynasty_transcript
+label: Milliseconds
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

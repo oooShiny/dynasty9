@@ -4,6 +4,7 @@ namespace Drupal\dynasty_module;
 
 
 use Drupal\node\Entity\Node;
+use Drupal\dynasty_transcript\Entity\DynastyTranscript;
 use Drupal\paragraphs\Entity\Paragraph;
 
 class PodcastNodeUpdate {
@@ -49,6 +50,52 @@ class PodcastNodeUpdate {
       $context['results'] = $results;
 
     }
+  }
+
+  /**
+   * Create a new dynasty_transcript custom entity.
+   *
+   * @param $episode
+   * @param $transcript
+   * @param $context
+   *
+   * @return void
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public static function createTranscriptLine($episode, $transcript, &$context) {
+    // Create a new transcript line entity.
+    $line = DynastyTranscript::create();
+
+    $start = $transcript['start']; // "01:03:37,060"
+    $time_pieces = explode(':', $start);
+
+    // If we have the hour marker, set it.
+    $hours = 0;
+    if (count($time_pieces) > 2) {
+      $hours = $time_pieces[0];
+      $minutes = $time_pieces[1];
+
+      // Break up the seconds.
+      $seconds = explode(',', $time_pieces[2]);
+    }
+    else {
+      $minutes = $time_pieces[0];
+      // Break up the seconds.
+      $seconds = explode(',', $time_pieces[1]);
+    }
+
+    $timestamp = ($hours * 3600) + ($minutes * 60) + $seconds[0];
+    $line->set('field_hours', $hours);
+    $line->set('field_minutes', $minutes);
+    $line->set('field_seconds', $seconds[0]);
+    $line->set('field_milliseconds', $seconds[1]);
+    $line->set('field_timestamp', $timestamp);
+    $line->set('field_transcript', $transcript['text']);
+    $line->set('field_podcast_episode', ['target_id' => $episode]);
+    $line->set('title', substr($transcript['text'], 0, 254));
+
+    $results[] = $line->save();
+    $context['results'] = $results;
   }
 
 }

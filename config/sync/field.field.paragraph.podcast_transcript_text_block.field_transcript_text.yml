@@ -1,0 +1,19 @@
+uuid: 0f25e663-d852-43f8-b298-aef0278c904d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_transcript_text
+    - paragraphs.paragraphs_type.podcast_transcript_text_block
+id: paragraph.podcast_transcript_text_block.field_transcript_text
+field_name: field_transcript_text
+entity_type: paragraph
+bundle: podcast_transcript_text_block
+label: 'Transcript Text'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

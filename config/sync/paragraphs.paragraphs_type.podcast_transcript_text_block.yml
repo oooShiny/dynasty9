@@ -1,0 +1,10 @@
+uuid: 6b2095b9-252a-45c5-8418-10b35882c4de
+langcode: en
+status: true
+dependencies: {  }
+id: podcast_transcript_text_block
+label: 'Podcast Transcript Text Block'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

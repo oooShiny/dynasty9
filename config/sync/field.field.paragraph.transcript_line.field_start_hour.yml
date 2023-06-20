@@ -1,0 +1,23 @@
+uuid: a2b83299-17f6-4225-a50d-71f2ad6e16eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_start_hour
+    - paragraphs.paragraphs_type.transcript_line
+id: paragraph.transcript_line.field_start_hour
+field_name: field_start_hour
+entity_type: paragraph
+bundle: transcript_line
+label: 'Start (hour)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

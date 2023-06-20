@@ -1,0 +1,22 @@
+entity.dynasty_transcript.settings:
+  title: Settings
+  route_name: entity.dynasty_transcript.settings
+  base_route: entity.dynasty_transcript.settings
+entity.dynasty_transcript.view:
+  title: View
+  route_name: entity.dynasty_transcript.canonical
+  base_route: entity.dynasty_transcript.canonical
+entity.dynasty_transcript.edit_form:
+  title: Edit
+  route_name: entity.dynasty_transcript.edit_form
+  base_route: entity.dynasty_transcript.canonical
+entity.dynasty_transcript.delete_form:
+  title: Delete
+  route_name: entity.dynasty_transcript.delete_form
+  base_route: entity.dynasty_transcript.canonical
+  weight: 10
+entity.dynasty_transcript.collection:
+  title: dynasty_transcript
+  route_name: entity.dynasty_transcript.collection
+  base_route: system.admin_content
+  weight: 10

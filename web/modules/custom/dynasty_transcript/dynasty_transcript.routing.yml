@@ -1,0 +1,7 @@
+entity.dynasty_transcript.settings:
+  path: 'admin/structure/dynasty-transcript'
+  defaults:
+    _form: '\Drupal\dynasty_transcript\Form\DynastyTranscriptSettingsForm'
+    _title: 'dynasty_transcript'
+  requirements:
+    _permission: 'administer dynasty_transcript'

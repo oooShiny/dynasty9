@@ -1,0 +1,64 @@
+uuid: ebeacb59-d894-4ed0-8273-3647f5d2ca17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_episode_transcript
+    - node.type.podcast_episode
+    - paragraphs.paragraphs_type.podcast_transcript_text_block
+  module:
+    - entity_reference_revisions
+id: node.podcast_episode.field_episode_transcript
+field_name: field_episode_transcript
+entity_type: node
+bundle: podcast_episode
+label: 'Episode Transcript'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      podcast_transcript_text_block: podcast_transcript_text_block
+    negate: 0
+    target_bundles_drag_drop:
+      alternate_team_name:
+        weight: 13
+        enabled: false
+      block:
+        weight: 14
+        enabled: false
+      from_library:
+        weight: 15
+        enabled: false
+      highlight:
+        weight: 16
+        enabled: false
+      media:
+        weight: 17
+        enabled: false
+      podcast_download:
+        weight: 18
+        enabled: false
+      podcast_transcript_text_block:
+        weight: 19
+        enabled: true
+      quarterback:
+        weight: 20
+        enabled: false
+      section:
+        weight: 21
+        enabled: false
+      team_record:
+        weight: 22
+        enabled: false
+      text:
+        weight: 23
+        enabled: false
+      uniform:
+        weight: 24
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,24 @@
+uuid: 869469d6-1be7-452d-b2db-14d07e010238
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.dynasty_transcript.field_minutes
+  module:
+    - dynasty_transcript
+id: dynasty_transcript.dynasty_transcript.field_minutes
+field_name: field_minutes
+entity_type: dynasty_transcript
+bundle: dynasty_transcript
+label: Minutes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 59
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,24 @@
+uuid: f784072d-3dba-4a0f-87df-9d09650e0e5f
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_transcript
+    - field_permissions
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: dynasty_transcript.field_hours
+field_name: field_hours
+entity_type: dynasty_transcript
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

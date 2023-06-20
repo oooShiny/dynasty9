@@ -1,0 +1,13 @@
+administer dynasty_transcript:
+  title: 'Administer dynasty_transcript settings'
+  restrict access: true
+access dynasty_transcript overview:
+  title: 'Access dynasty_transcript overview page'
+delete dynasty_transcript:
+  title: Delete dynasty_transcript
+create dynasty_transcript:
+  title: Create dynasty_transcript
+view dynasty_transcript:
+  title: View dynasty_transcript
+edit dynasty_transcript:
+  title: Edit dynasty_transcript

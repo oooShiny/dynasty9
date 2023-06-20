@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.podcast_episode.field_duration
     - field.field.node.podcast_episode.field_episode
     - field.field.node.podcast_episode.field_episode_cover_image
+    - field.field.node.podcast_episode.field_episode_transcript
     - field.field.node.podcast_episode.field_game
     - field.field.node.podcast_episode.field_iframe
     - field.field.node.podcast_episode.field_meta_tags
@@ -150,6 +151,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_episode_transcript: true
   field_iframe: true
   langcode: true
   search_api_excerpt: true

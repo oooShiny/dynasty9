@@ -1,0 +1,7 @@
+name: dynasty_transcript
+type: module
+description: 'Provides a dynasty_transcript entity.'
+package: Dynasty
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: entity.dynasty_transcript.settings

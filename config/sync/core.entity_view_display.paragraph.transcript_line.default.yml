@@ -1,0 +1,51 @@
+uuid: 8f9b0e0e-cbe5-4ba9-83a9-9bef55cf3867
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.transcript_line.field_start_hour
+    - field.field.paragraph.transcript_line.field_start_minute
+    - field.field.paragraph.transcript_line.field_start_second
+    - field.field.paragraph.transcript_line.field_transcript
+    - paragraphs.paragraphs_type.transcript_line
+id: paragraph.transcript_line.default
+targetEntityType: paragraph
+bundle: transcript_line
+mode: default
+content:
+  field_start_hour:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_start_minute:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_start_second:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_transcript:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true

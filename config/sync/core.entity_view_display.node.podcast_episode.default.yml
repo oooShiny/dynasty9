@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.podcast_episode.field_duration
     - field.field.node.podcast_episode.field_episode
     - field.field.node.podcast_episode.field_episode_cover_image
+    - field.field.node.podcast_episode.field_episode_transcript
     - field.field.node.podcast_episode.field_game
     - field.field.node.podcast_episode.field_iframe
     - field.field.node.podcast_episode.field_meta_tags
@@ -61,6 +62,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 112
+    region: content
+  field_episode_transcript:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 116
     region: content
   field_game:
     type: entity_reference_entity_view

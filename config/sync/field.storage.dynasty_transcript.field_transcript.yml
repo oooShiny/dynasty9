@@ -1,0 +1,23 @@
+uuid: ae0e9475-6e95-421c-9052-24c0ffc4042c
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_transcript
+    - field_permissions
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: dynasty_transcript.field_transcript
+field_name: field_transcript
+entity_type: dynasty_transcript
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

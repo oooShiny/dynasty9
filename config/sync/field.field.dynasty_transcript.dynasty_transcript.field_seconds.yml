@@ -1,0 +1,24 @@
+uuid: 24c4dcd0-80d2-4491-8d00-b6c924208b03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.dynasty_transcript.field_seconds
+  module:
+    - dynasty_transcript
+id: dynasty_transcript.dynasty_transcript.field_seconds
+field_name: field_seconds
+entity_type: dynasty_transcript
+bundle: dynasty_transcript
+label: Seconds
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: 59
+  prefix: ''
+  suffix: ''
+field_type: integer

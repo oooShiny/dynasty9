@@ -1,0 +1,94 @@
+uuid: ed9fe43b-3fed-4d14-aa3b-e3100319a001
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.dynasty_transcript.dynasty_transcript.field_hours
+    - field.field.dynasty_transcript.dynasty_transcript.field_milliseconds
+    - field.field.dynasty_transcript.dynasty_transcript.field_minutes
+    - field.field.dynasty_transcript.dynasty_transcript.field_podcast_episode
+    - field.field.dynasty_transcript.dynasty_transcript.field_seconds
+    - field.field.dynasty_transcript.dynasty_transcript.field_timestamp
+    - field.field.dynasty_transcript.dynasty_transcript.field_transcript
+  module:
+    - dynasty_transcript
+id: dynasty_transcript.dynasty_transcript.default
+targetEntityType: dynasty_transcript
+bundle: dynasty_transcript
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_hours:
+    type: number
+    weight: 21
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_milliseconds:
+    type: number
+    weight: 24
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_minutes:
+    type: number
+    weight: 22
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_podcast_episode:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_seconds:
+    type: number
+    weight: 23
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_timestamp:
+    type: number
+    weight: 27
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_transcript:
+    type: string_textarea
+    weight: 25
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: false
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

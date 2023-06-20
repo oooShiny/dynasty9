@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present a dynasty_transcript entity.
+ *
+ * This template is used when viewing a registered dynasty_transcript's page,
+ * e.g., /admin/content/dynasty-transcript)/123. 123 being the dynasty_transcript's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.title'.
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_dynasty_transcript()
+ */
+#}
+<article{{ attributes }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</article>

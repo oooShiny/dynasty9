@@ -1,0 +1,10 @@
+entity.dynasty_transcript.settings:
+  title: dynasty_transcript
+  description: Configure a dynasty_transcript entity type
+  route_name:  entity.dynasty_transcript.settings
+  parent: system.admin_structure
+entity.dynasty_transcript.collection:
+  title: dynasty_transcripts
+  description: List of dynasty_transcripts
+  route_name: entity.dynasty_transcript.collection
+  parent: system.admin_content

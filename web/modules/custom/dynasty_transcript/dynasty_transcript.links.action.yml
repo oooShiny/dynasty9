@@ -1,0 +1,5 @@
+dynasty_transcript.add_form:
+  route_name: entity.dynasty_transcript.add_form
+  title: 'Add dynasty_transcript'
+  appears_on:
+    - entity.dynasty_transcript.collection

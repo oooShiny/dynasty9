@@ -1,0 +1,24 @@
+uuid: 9bab6102-6850-4e9f-ba86-f1bf64d20086
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.dynasty_transcript.field_timestamp
+  module:
+    - dynasty_transcript
+id: dynasty_transcript.dynasty_transcript.field_timestamp
+field_name: field_timestamp
+entity_type: dynasty_transcript
+bundle: dynasty_transcript
+label: Timestamp
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
