@@ -27,7 +27,6 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
-  devel_generate: 0
   dynamic_page_cache: 0
   dynasty_images: 0
   dynasty_module: 0
