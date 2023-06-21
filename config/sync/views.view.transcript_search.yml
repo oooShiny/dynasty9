@@ -519,7 +519,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_field
-          label: ''
+          label: Text
           exclude: false
           alter:
             alter_text: false
@@ -588,7 +588,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_field
-          label: ''
+          label: Episode
           exclude: false
           alter:
             alter_text: false
@@ -736,7 +736,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: search_api_tag
         options: {  }
       empty: {  }
       sorts: {  }
@@ -804,8 +804,11 @@ display:
             minutes: minutes
             seconds: seconds
             milliseconds: milliseconds
+            mp3: mp3
+            timestamp: timestamp
             transcript: transcript
             pod_ep: pod_ep
+            nothing: nothing
           default: '-1'
           info:
             hours:
@@ -836,16 +839,35 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            transcript:
+            mp3:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            pod_ep:
+            timestamp:
               sortable: false
               default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            transcript:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            pod_ep:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nothing:
               align: ''
               separator: ''
               empty_column: false
