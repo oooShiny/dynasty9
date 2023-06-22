@@ -21,6 +21,9 @@
 {% set mp3 = random() %}
 
 <audio id="pod-{{ mp3 }}" src="{{ output -}}"></audio>
-<div class="tw-text-white tw-mx-10 tw-p-4 tw-rounded-full tw-bg-red-pats tw-shadow-lg">
-  <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ mp3 }}')" id="playpod-{{ mp3 }}" class="tw-w-5 tw-h-5" style="cursor: pointer" />
+<div class="tw-bg-red-pats tw-mx-10 tw-p-4 tw-rounded-full tw-shadow-lg tw-text-white tw-w-12">
+  <img src="/themes/custom/dynasty/icons/pod-play.svg"
+       onclick="playPause('pod-{{ mp3 }}')"
+       id="playpod-{{ mp3 }}"
+       class="tw-w-auto tw-h-auto" style="cursor: pointer" />
 </div>
