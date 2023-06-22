@@ -7,6 +7,7 @@ dependencies:
   module:
     - comment
     - contact
+    - dynasty_transcript
     - filter
     - media
     - system
@@ -21,4 +22,5 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'use text format restricted_html'
+  - 'view dynasty_transcript'
   - 'view media'

@@ -14,8 +14,27 @@
  * @see template_preprocess_dynasty_transcript()
  */
 #}
-<article{{ attributes }}>
+{{ attach_library('dynasty/podcast') }}
+
+<article{{ attributes.addClass('tw-px-20 tw-flex tw-py-4') }}>
   {% if content %}
-    {{- content -}}
+    {% set mp3 = random() %}
+    <div class="tw-w-1/5">
+      <audio id="pod-{{ mp3 }}" src="{{ mp3_time }}"></audio>
+      <div class="tw-bg-red-pats tw-mx-10 tw-p-4 tw-rounded-full tw-shadow-lg tw-text-white tw-w-12">
+        <img src="/themes/custom/dynasty/icons/pod-play.svg"
+             onclick="playPause('pod-{{ mp3 }}')"
+             id="playpod-{{ mp3 }}"
+             class="tw-w-auto tw-h-auto" style="cursor: pointer" />
+      </div>
+    </div>
+    <div class="tw-w-4/5">
+      <p>
+        {{ content.field_transcript }}
+      </p>
+      <p>
+        {{ content.field_podcast_episode }}
+      </p>
+    </div>
   {% endif %}
 </article>

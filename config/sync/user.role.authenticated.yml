@@ -7,6 +7,7 @@ dependencies:
   module:
     - comment
     - contact
+    - dynasty_transcript
     - field_permissions
     - filter
     - media
@@ -26,6 +27,7 @@ permissions:
   - 'post comments'
   - 'skip comment approval'
   - 'use text format basic_html'
+  - 'view dynasty_transcript'
   - 'view field_game_video'
   - 'view media'
   - 'view own field_game_video'

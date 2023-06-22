@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Render\Element;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_theme().
@@ -32,5 +33,11 @@ function dynasty_transcript_theme() {
 function template_preprocess_dynasty_transcript(array &$variables) {
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
+
+//    $variables['']
   }
+  $line = $variables['elements']['#dynasty_transcript'];
+  $pod_node = Node::load($line->get('field_podcast_episode')->target_id);
+  $mp3 = $pod_node->get('field_mp3')->value;
+  $variables['mp3_time'] = $mp3 . '#t=' . $line->get('field_timestamp')->value;
 }

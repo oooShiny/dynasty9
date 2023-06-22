@@ -29,7 +29,7 @@ content:
     region: content
   field_hours:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -38,7 +38,7 @@ content:
     region: content
   field_milliseconds:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -47,7 +47,7 @@ content:
     region: content
   field_minutes:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -56,7 +56,7 @@ content:
     region: content
   field_podcast_episode:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -64,7 +64,7 @@ content:
     region: content
   field_seconds:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -73,7 +73,7 @@ content:
     region: content
   field_timestamp:
     type: number_integer
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -82,7 +82,7 @@ content:
     region: content
   field_transcript:
     type: basic_string
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 25
