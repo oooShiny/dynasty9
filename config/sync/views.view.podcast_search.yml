@@ -283,7 +283,18 @@ display:
           skip_access: false
           preserve_facet_query_args: false
       relationships: {  }
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<a class="tw-bg-blue-pats tw-text-white tw-p-2 tw-my-2" href="/search/transcripts">Transcript Search</a>'
+          tokenize: false
       footer: {  }
       display_extenders: {  }
     cache_metadata:

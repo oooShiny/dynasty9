@@ -230,10 +230,11 @@ function dynasty_preprocess_form(&$variables) {
     'play-type-select-form',
     'views-exposed-form-game-search-page-1',
     'views-exposed-form-highlight-search-page-1',
-    'views-exposed-form-podcast-search-page-1'
+    'views-exposed-form-podcast-search-page-1',
+    'views-exposed-form-transcript-search-page-1',
   ];
   if (in_array($variables['attributes']['id'], $flex_forms)) {
-    $variables['attributes']['class'][] = 'tw-flex tw-spacing-between tw-justify-center';
+    $variables['attributes']['class'][] = 'tw-flex tw-justify-center';
   }
 }
 

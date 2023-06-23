@@ -430,7 +430,7 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Search to see results'
+          text_input_required: 'Search for text above to see results'
           text_input_required_format: basic_html
       access:
         type: none
@@ -482,7 +482,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Search
+            label: ''
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -502,7 +502,7 @@ display:
               8156552_patron: '0'
               8156553_patron: '0'
             expose_fields: false
-            placeholder: ''
+            placeholder: Search
             searched_fields_id: search_api_fulltext_searched_fields
           is_grouped: false
           group_info:
