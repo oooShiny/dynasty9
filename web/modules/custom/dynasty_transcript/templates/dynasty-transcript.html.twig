@@ -19,13 +19,19 @@
 <article{{ attributes.addClass('tw-px-20 tw-flex tw-py-4') }}>
   {% if content %}
     {% set mp3 = random() %}
-    <div class="tw-w-1/5">
+    <div class="tw-flex tw-gap-2 tw-justify-center tw-w-1/5">
       <audio id="pod-{{ mp3 }}" src="{{ mp3_time }}"></audio>
-      <div class="tw-bg-red-pats tw-mx-10 tw-p-4 tw-rounded-full tw-shadow-lg tw-text-white tw-w-12">
+      <div id="back-pod-{{ mp3 }}" class="tw-text-white tw-my-2 tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg">
+        <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
+      </div>
+      <div class="tw-bg-red-pats tw-p-4 tw-rounded-full tw-shadow-lg tw-text-white tw-w-12">
         <img src="/themes/custom/dynasty/icons/pod-play.svg"
              onclick="playPause('pod-{{ mp3 }}')"
              id="playpod-{{ mp3 }}"
              class="tw-w-auto tw-h-auto" style="cursor: pointer" />
+      </div>
+      <div id="fwd-pod-{{ mp3 }}" class="tw-text-white tw-my-2 tw-p-1 tw-rounded-full tw-bg-white tw-shadow-lg">
+        <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="tw-w-6 tw-h-6" style="cursor: pointer;" />
       </div>
     </div>
     <div class="tw-w-4/5">

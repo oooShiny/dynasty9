@@ -3,10 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.dynasty_transcript.field_hours
-    - field.storage.dynasty_transcript.field_milliseconds
-    - field.storage.dynasty_transcript.field_minutes
-    - field.storage.dynasty_transcript.field_seconds
     - field.storage.dynasty_transcript.field_timestamp
     - field.storage.dynasty_transcript.field_transcript
     - field.storage.node.field_mp3
@@ -29,336 +25,6 @@ display:
     display_options:
       title: 'Transcript Search'
       fields:
-        hours:
-          id: hours
-          table: search_api_index_podcast_transcript_index
-          field: hours
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api_field
-          label: Time
-          exclude: true
-          alter:
-            alter_text: true
-            text: '{{ hours }}:'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api_numeric
-          fallback_options:
-            set_precision: false
-            precision: 0
-            decimal: .
-            separator: ''
-            format_plural: false
-            format_plural_string: !!binary Aw==
-            prefix: ''
-            suffix: ''
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            format_plural_values:
-              - ''
-              - ''
-        minutes:
-          id: minutes
-          table: search_api_index_podcast_transcript_index
-          field: minutes
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api_numeric
-          fallback_options:
-            set_precision: false
-            precision: 0
-            decimal: .
-            separator: ''
-            format_plural: false
-            format_plural_string: !!binary MQNAY291bnQ=
-            prefix: ''
-            suffix: ''
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            format_plural_values:
-              - '1'
-              - '@count'
-        seconds:
-          id: seconds
-          table: search_api_index_podcast_transcript_index
-          field: seconds
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: "{% if seconds > 9 %}\r\n    {{ seconds }}\r\n{% else %}\r\n    0{{ seconds }}"
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api_numeric
-          fallback_options:
-            set_precision: false
-            precision: 0
-            decimal: .
-            separator: ''
-            format_plural: false
-            format_plural_string: !!binary MQNAY291bnQ=
-            prefix: ''
-            suffix: ''
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            format_plural_values:
-              - '1'
-              - '@count'
-        milliseconds:
-          id: milliseconds
-          table: search_api_index_podcast_transcript_index
-          field: milliseconds
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: false
-          fallback_handler: search_api_numeric
-          fallback_options:
-            set_precision: false
-            precision: 0
-            decimal: .
-            separator: ''
-            format_plural: false
-            format_plural_string: !!binary MQNAY291bnQ=
-            prefix: ''
-            suffix: ''
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            format_plural_values:
-              - '1'
-              - '@count'
         mp3:
           id: mp3
           table: search_api_index_podcast_transcript_index
@@ -549,7 +215,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: ''
+          element_class: tw-w-7/12
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -588,7 +254,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: search_api_field
-          label: Episode
+          label: 'Episode Info'
           exclude: false
           alter:
             alter_text: false
@@ -643,62 +309,13 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          field_rendering: true
+          field_rendering: false
           fallback_handler: search_api
           fallback_options:
-            link_to_item: false
+            link_to_item: true
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: custom
-          label: Time
-          exclude: false
-          alter:
-            alter_text: true
-            text: '{{ hours }}{{ minutes }}:{{ seconds }}'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: false
         id:
           id: id
           table: search_api_datasource_podcast_transcript_index_entity_dynasty_transcript
@@ -712,7 +329,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/dynasty_transcript/{{ id }}" target="_blank">Open</a>'
+            text: '<a class="tw-underline" href="/dynasty_transcript/{{ id }}" target="_blank">View Clip</a>'
             make_link: false
             path: ''
             absolute: false
@@ -822,7 +439,33 @@ display:
         type: search_api_tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        pod_ep:
+          id: pod_ep
+          table: search_api_index_podcast_transcript_index
+          field: pod_ep
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        timestamp:
+          id: timestamp
+          table: search_api_index_podcast_transcript_index
+          field: timestamp
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         search_api_fulltext:
@@ -890,8 +533,9 @@ display:
             mp3: mp3
             timestamp: timestamp
             transcript: transcript
+            nothing: pod_ep
             pod_ep: pod_ep
-            nothing: nothing
+            id: pod_ep
           default: '-1'
           info:
             hours:
@@ -943,14 +587,19 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            pod_ep:
-              sortable: true
-              default_sort_order: asc
+            nothing:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            nothing:
+            pod_ep:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: '<br>'
+              empty_column: false
+              responsive: ''
+            id:
               align: ''
               separator: ''
               empty_column: false
@@ -991,10 +640,6 @@ display:
         - url
         - url.query_args
       tags:
-        - 'config:field.storage.dynasty_transcript.field_hours'
-        - 'config:field.storage.dynasty_transcript.field_milliseconds'
-        - 'config:field.storage.dynasty_transcript.field_minutes'
-        - 'config:field.storage.dynasty_transcript.field_seconds'
         - 'config:field.storage.dynasty_transcript.field_timestamp'
         - 'config:field.storage.dynasty_transcript.field_transcript'
         - 'config:field.storage.node.field_mp3'
@@ -1020,10 +665,6 @@ display:
         - url
         - url.query_args
       tags:
-        - 'config:field.storage.dynasty_transcript.field_hours'
-        - 'config:field.storage.dynasty_transcript.field_milliseconds'
-        - 'config:field.storage.dynasty_transcript.field_minutes'
-        - 'config:field.storage.dynasty_transcript.field_seconds'
         - 'config:field.storage.dynasty_transcript.field_timestamp'
         - 'config:field.storage.dynasty_transcript.field_transcript'
         - 'config:field.storage.node.field_mp3'

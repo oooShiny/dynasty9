@@ -125,6 +125,11 @@ li.pager__item.is-active {
   }
 }
 
+/* Shrinking transcript text column in search. */
+td.views-field.views-field-transcript {
+  width: 58.333333%!important;
+}
+
 /*
  * Adding dash between scores.
 */
