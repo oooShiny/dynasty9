@@ -168,8 +168,9 @@ abstract class SocialApiTestBase extends BrowserTestBase {
   public function checkSettingsFormSubmission() {
     $this->drupalLogin($this->adminUser);
     $path = 'admin/config/social-api/' . $this->moduleType . '/' . $this->provider;
+    $this->drupalGet($path);
 
-    $this->drupalPostForm($path, $this->edit, $this->t('Save configuration'));
+    $this->submitForm($this->edit, $this->t('Save configuration'));
     $this->assertSession()->pageTextContains('The configuration options have been saved.');
   }
 

@@ -180,6 +180,7 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
             'Consolidation\\AnnotatedCommand\\' => 31,
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
+            'Composer\\CaBundle\\' => 18,
         ),
         'A' => 
         array (
@@ -544,6 +545,10 @@ class ComposerStaticInit421d9a6a021d328fb5aa7baca825491f
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
         'Asm89\\Stack\\' => 
         array (

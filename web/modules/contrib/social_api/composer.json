@@ -32,12 +32,11 @@
     ],
     "require" : {
         "ext-openssl": "*",
-        "drupal/core": "^8.8 || ^9.0",
-        "league/oauth2-client": "^2.0"
+        "league/oauth2-client": "^2.0",
+        "drupal/core": "^9.1 || ^10"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "drupal/social_auth": "^3.0@dev",
         "phpcompatibility/php-compatibility": "^9.3"
     },
     "config": {

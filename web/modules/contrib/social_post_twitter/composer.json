@@ -26,16 +26,20 @@
         }
     ],
     "require": {
-        "abraham/twitteroauth": "~0.7",
-        "drupal/core": "^8.8 || ^9.0",
-        "drupal/social_post": "^3.0@beta"
+        "abraham/twitteroauth": ">=2",
+        "drupal/core": "^8.8 || ^9.0 || ^10",
+        "drupal/social_post": "^3.0"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "drupal/rules": "3.x-dev"
+        "drupal/rules": "3.x-dev",
+        "phpcompatibility/php-compatibility": "10.x-dev"
     },
     "minimum-stability": "dev",
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

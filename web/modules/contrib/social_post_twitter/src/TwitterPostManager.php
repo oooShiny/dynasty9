@@ -71,17 +71,21 @@ class TwitterPostManager implements TwitterPostManagerInterface {
    */
   public function uploadMedia(array $paths) {
     $media_ids = [];
-
+  
     foreach ($paths as $path) {
       // Upload the media from the path.
-      $media = $this->client->upload('media/upload', ['media' => $path, 'media_type' => 'video/mp4'], TRUE);
-
-      // The response contains the media_ids to attach the media to the post.
-      $media_ids[] = $media->media_id_string;
+      $media = $this->client->post('media/upload', [
+        'media' => file_get_contents($path),
+        'type' => mime_content_type($path),
+      ]);
+  
+      // The response contains the media_key to attach the media to the post.
+      $media_ids[] = $media->media_key;
     }
-
+  
     return $media_ids;
   }
+  
 
   /**
    * Post the tweet with the client.
@@ -90,8 +94,14 @@ class TwitterPostManager implements TwitterPostManagerInterface {
    *   TRUE on success, FALSE otherwise (with a logger message).
    */
   protected function post() {
+    $post = $this->client->post('tweets', ['text' => $this->tweet['status']]);
 
-    $post = $this->client->post('statuses/update', $this->tweet);
+    $httpCode = $this->client->getLastHttpCode();
+    if ($httpCode !== 200 || $httpCode !== 201) {
+      $this->getLogger('social_post_twitter')->error("HTTP Error code: $httpCode");
+
+      return FALSE;
+    }
 
     if (isset($post->errors)) {
       $this->getLogger('social_post_twitter')->error($post->errors[0]->message);

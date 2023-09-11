@@ -18,15 +18,14 @@ class SocialPostTwitterSettingsFormTest extends SocialPostTestBase {
    *
    * @var array
    */
-  public static $modules = ['social_post_twitter'];
+  protected static $modules = ['social_post_twitter'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     $this->module = 'social_post_twitter';
     $this->provider = 'twitter';
-
     parent::setUp();
   }
 

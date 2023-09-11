@@ -66,13 +66,10 @@ EXAMPLE USAGE (API)
 <?php
 
 // Create and post manager instances.
-/** @var Abraham\TwitterOAuth\TwitterOAuth $client */
 $client = \Drupal::service('plugin.network.manager')->createInstance('social_post_twitter')->getSdk();
-/** @var Drupal\social_post_twitter\TwitterPostManager $post_manager */
 $post_manager = \Drupal::service('twitter_post.manager');
 
 // Get accounts for the current user.
-/* @var Drupal\social_post\Entity\SocialPost[] $accounts */
 $accounts = \Drupal::service('social_post.user_manager')->getAccounts('social_post_twitter');
 
 foreach ($accounts as $account) {
@@ -83,6 +80,8 @@ foreach ($accounts as $account) {
   // Make a post to Twitter with the account!
   $post_manager->setClient($client)->doPost('New post via Social Post Twitter!');
 }
+
+?>
 
 
 MAINTAINERS

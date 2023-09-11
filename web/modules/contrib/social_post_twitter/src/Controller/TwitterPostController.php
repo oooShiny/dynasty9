@@ -174,6 +174,7 @@ class TwitterPostController extends ControllerBase {
       // Gets the permanent access token.
       $access_token = $client->oauth('oauth/access_token', ['oauth_verifier' => $this->request->query->get('oauth_verifier')]);
       $client->setOauthToken($access_token['oauth_token'], $access_token['oauth_token_secret']);
+      $client->setApiVersion('1.1');
 
       // Gets user information.
       $params = [

@@ -39,7 +39,7 @@ class SocialApi extends ContentEntityBase implements ContentEntityInterface {
    * @param string $token
    *   The serialized access token.
    *
-   * @return \Drupal\social_auth\Entity\SocialApi
+   * @return \Drupal\social_api\Entity\SocialApi
    *   Drupal Social Auth Entity.
    */
   public function setToken($token) {

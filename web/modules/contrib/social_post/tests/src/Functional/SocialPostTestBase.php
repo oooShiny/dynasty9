@@ -14,7 +14,7 @@ abstract class SocialPostTestBase extends SocialApiTestBase {
    *
    * @var array
    */
-  protected static $modules = ['block', 'social_post'];
+  protected static $modules = ['block', 'link', 'social_post'];
 
   /**
    * {@inheritdoc}

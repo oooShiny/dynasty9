@@ -61,11 +61,13 @@ class UserManager extends SocialApiUserManager {
    *   The URL to the profile in the provider.
    * @param string $token
    *   Token to be used for autoposting.
+   * @param string $additional_data
+   *   A serialized array of extra information.
    *
    * @return bool
    *   True if User record was created or False otherwise
    */
-  public function addUserRecord($name, $user_id, $provider_user_id, $url, $token) {
+  public function addUserRecord($name, $user_id, $provider_user_id, $url, $token, $additional_data = '') {
 
     if ($this->getDrupalUserId($provider_user_id)) {
       return FALSE;
@@ -77,6 +79,7 @@ class UserManager extends SocialApiUserManager {
       'provider_user_id' => $provider_user_id,
       'name' => $name,
       'token' => $token,
+      'additional_data' => $additional_data,
     ];
 
     // If URL to profile is provided.
