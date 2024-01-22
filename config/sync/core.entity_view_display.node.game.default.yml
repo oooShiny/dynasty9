@@ -18,6 +18,8 @@ dependencies:
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
+    - field.field.node.game.field_opp_dc
+    - field.field.node.game.field_opp_oc
     - field.field.node.game.field_opp_ot
     - field.field.node.game.field_opp_q1
     - field.field.node.game.field_opp_q2
@@ -198,6 +200,22 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 127
+    region: content
+  field_opp_dc:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 153
+    region: content
+  field_opp_oc:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 152
     region: content
   field_opp_ot:
     type: number_integer

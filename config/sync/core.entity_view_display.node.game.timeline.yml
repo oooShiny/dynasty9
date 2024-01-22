@@ -19,6 +19,8 @@ dependencies:
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
+    - field.field.node.game.field_opp_dc
+    - field.field.node.game.field_opp_oc
     - field.field.node.game.field_opp_ot
     - field.field.node.game.field_opp_q1
     - field.field.node.game.field_opp_q2
@@ -174,6 +176,8 @@ hidden:
   field_highlight_video_url: true
   field_meta_tags: true
   field_month: true
+  field_opp_dc: true
+  field_opp_oc: true
   field_opp_ot: true
   field_opp_q1: true
   field_opp_q2: true

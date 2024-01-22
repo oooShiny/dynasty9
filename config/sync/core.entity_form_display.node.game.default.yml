@@ -18,6 +18,8 @@ dependencies:
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
+    - field.field.node.game.field_opp_dc
+    - field.field.node.game.field_opp_oc
     - field.field.node.game.field_opp_ot
     - field.field.node.game.field_opp_q1
     - field.field.node.game.field_opp_q2
@@ -143,6 +145,8 @@ third_party_settings:
         - field_home_away
         - field_opponent
         - field_opposing_coach
+        - field_opp_oc
+        - field_opp_dc
       label: 'Game Details'
       region: content
       parent_name: ''
@@ -335,6 +339,26 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_opp_dc:
+    type: entity_reference_autocomplete_tags
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_opp_oc:
+    type: entity_reference_autocomplete_tags
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_opp_ot:
     type: number
     weight: 22
@@ -388,7 +412,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_opposing_coach:
-    type: entity_reference_autocomplete
+    type: entity_reference_autocomplete_tags
     weight: 10
     region: content
     settings:
@@ -417,7 +441,7 @@ content:
       closed_mode_threshold: 0
       add_mode: button
       form_display_mode: default
-      default_paragraph_type: quarterback
+      default_paragraph_type: _none
       features:
         add_above: '0'
         collapse_edit_all: collapse_edit_all
