@@ -1,68 +1,69 @@
-uuid: 00448dfe-169c-45a2-80c3-efa85e3b076b
+uuid: d72f6143-e1ae-4010-854d-0415fad04b1f
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - facets_block
     - system
   theme:
     - dynasty
-id: facetsblock_2
+id: facetsblock_8
 theme: dynasty
 region: sidebar_first
-weight: -15
+weight: -13
 provider: null
 plugin: facets_block
 settings:
   id: facets_block
-  label: 'Game Search Filters'
-  label_display: '0'
+  label: 'Game Filters'
+  label_display: visible
   provider: facets_block
   show_title: true
   exclude_empty_facets: true
   hide_empty_block: false
   facets_to_include:
-    'facet_block:game_opponent': 'facet_block:game_opponent'
-    'facet_block:game_opposing_coach': 'facet_block:game_opposing_coach'
     'facet_block:game_home_away': 'facet_block:game_home_away'
     'facet_block:game_season': 'facet_block:game_season'
-    'facet_block:game_opp_score': 'facet_block:game_opp_score'
-    'facet_block:game_pats_score': 'facet_block:game_pats_score'
-    'facet_block:score_differential': 'facet_block:score_differential'
     'facet_block:game_week': 'facet_block:game_week'
     'facet_block:after_bye_we': 'facet_block:after_bye_we'
-    'facet_block:uniform': 'facet_block:uniform'
     'facet_block:overtime': 'facet_block:overtime'
-    'facet_block:brady_era_game': 'facet_block:brady_era_game'
     'facet_block:playoff': 'facet_block:playoff'
     'facet_block:temperature': 'facet_block:temperature'
+    'facet_block:game_opponent': '0'
+    'facet_block:game_opposing_coach': '0'
+    'facet_block:game_opp_score': '0'
+    'facet_block:game_pats_score': '0'
     'facet_block:player_s_involved': '0'
-    'facet_block:play_type': '0'
     'facet_block:player_play_type': '0'
-    'facet_block:player_opponent': '0'
+    'facet_block:play_type': '0'
+    'facet_block:score_differential': '0'
     'facet_block:opponent': '0'
+    'facet_block:player_opponent': '0'
+    'facet_block:player_td_scored': '0'
     'facet_block:podcast_season': '0'
     'facet_block:td_scored': '0'
-    'facet_block:player_td_scored': '0'
-    'facet_block:quarter': '0'
-    'facet_block:podcast_opponent': '0'
-    'facet_block:yards_gained': '0'
-    'facet_block:player_yards_gained': '0'
-    'facet_block:player_down': '0'
     'facet_block:air_yards': '0'
-    'facet_block:player_quarter': '0'
     'facet_block:down': '0'
-    'facet_block:play_season': '0'
+    'facet_block:js_players_involved': '0'
+    'facet_block:player_down': '0'
+    'facet_block:player_quarter': '0'
+    'facet_block:player_yards_gained': '0'
+    'facet_block:podcast_opponent': '0'
+    'facet_block:quarter': '0'
+    'facet_block:uniform': '0'
+    'facet_block:yards_gained': '0'
+    'facet_block:brady_era_game': '0'
     'facet_block:player_season': '0'
-    'facet_block:week': '0'
+    'facet_block:play_season': '0'
     'facet_block:player_week': '0'
+    'facet_block:week': '0'
     'facet_block:play_tag': '0'
     'facet_block:starting_qb': '0'
     'facet_block:qb_comp': '0'
     'facet_block:qb_att': '0'
     'facet_block:qb_tds': '0'
     'facet_block:qb_ints': '0'
-  add_js_classes: true
+  add_js_classes: false
 visibility:
   request_path:
     id: request_path

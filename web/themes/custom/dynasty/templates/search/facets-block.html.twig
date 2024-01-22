@@ -1,16 +1,19 @@
+{% set block_id = 'search-filters-' ~ random() %}
 <div class="tw-flex tw-flex-wrap md:tw-block tw-hidden">
-  {% for facet in facets %}
     <div class="facet-block md:tw-mb-5 md:tw-mx-0 tw-bg-white tw-border tw-border-gray-400 tw-mx-4 tw-p-2 tw-shadow-lg">
+  {% for facet in facets %}
+    <div class="tw-border-b tw-py-3">
       {% if show_title %}
         <h2 class="facet-block__title tw-text-xl tw-font-light">{{ facet.title }}</h2>
       {% endif %}
       <div class="facet-block__content">{{ facet.content }}</div>
     </div>
   {% endfor %}
+    </div>
 </div>
 
 <div class="md:tw-hidden tw-block">
-  {% set block_id = 'search-filters-' ~ random() %}
+
   <h2 id="filter-toggle" onclick="toggleFilters('{{ block_id }}')" class="tw-bg-gray-500 tw-font-light tw-p-2 tw-text-center tw-text-white tw-text-xl tw-uppercase" style="cursor: pointer">Filters ▼</h2>
   <div id="{{ block_id }}" class="tw-bg-gray-500 tw-hidden">
   {% for facet in facets %}
