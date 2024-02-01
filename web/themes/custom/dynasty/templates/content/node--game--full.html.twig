@@ -116,9 +116,10 @@
       <div class="tw-text-5xl tw-text-center">{{ content.field_opponent_score }}</div>
     </div>
   </div>
-  {% if content.field_uniform|render %}
+  {% if content.field_uniform|render or content.field_belichick_hoodie|render %}
   <div class="tw-flex tw-justify-evenly tw-py-10">
     {{ content.field_uniform }}
+    {{ content.field_belichick_hoodie }}
   </div>
   {% endif %}
 
