@@ -146,66 +146,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        form_field_field_patriots_dc:
-          id: form_field_field_patriots_dc
-          table: node_field_data
-          field: form_field_field_patriots_dc
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          plugin_id: entity_form_field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          plugin:
-            hide_title: 0
-            hide_description: 1
-            type: entity_reference_autocomplete
-            settings:
-              match_operator: CONTAINS
-              match_limit: '10'
-              size: '60'
-              placeholder: ''
-            third_party_settings: {  }
         form_field_field_patriots_oc:
           id: form_field_field_patriots_oc
           table: node_field_data
@@ -266,10 +206,10 @@ display:
               size: '60'
               placeholder: ''
             third_party_settings: {  }
-        form_field_field_opp_dc:
-          id: form_field_field_opp_dc
+        form_field_field_patriots_dc:
+          id: form_field_field_patriots_dc
           table: node_field_data
-          field: form_field_field_opp_dc
+          field: form_field_field_patriots_dc
           relationship: none
           group_type: group
           admin_label: ''
@@ -381,6 +321,66 @@ display:
             hide_description: 1
             type: entity_reference_autocomplete
             settings: {  }
+            third_party_settings: {  }
+        form_field_field_opp_dc:
+          id: form_field_field_opp_dc
+          table: node_field_data
+          field: form_field_field_opp_dc
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: entity_form_field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          plugin:
+            hide_title: 0
+            hide_description: 1
+            type: entity_reference_autocomplete_tags
+            settings:
+              match_operator: CONTAINS
+              match_limit: '10'
+              size: '60'
+              placeholder: ''
             third_party_settings: {  }
       pager:
         type: mini

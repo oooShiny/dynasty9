@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.game.field_after_bye
+    - field.field.node.game.field_belichick_hoodie
     - field.field.node.game.field_brady_attempts
     - field.field.node.game.field_brady_completions
     - field.field.node.game.field_brady_ints
@@ -197,6 +198,7 @@ content:
     region: content
 hidden:
   field_after_bye: true
+  field_belichick_hoodie: true
   field_brady_attempts: true
   field_brady_completions: true
   field_brady_ints: true

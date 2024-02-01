@@ -1,0 +1,35 @@
+uuid: 7e74f653-83ef-4ffe-a9b2-ebfe59bc453c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.belichick_hoodie.field_hoodie_image
+    - field.field.paragraph.belichick_hoodie.field_hoodie_name
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.belichick_hoodie
+  module:
+    - image
+id: paragraph.belichick_hoodie.default
+targetEntityType: paragraph
+bundle: belichick_hoodie
+mode: default
+content:
+  field_hoodie_image:
+    type: image_image
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_hoodie_name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.game.field_after_bye
+    - field.field.node.game.field_belichick_hoodie
     - field.field.node.game.field_brady_attempts
     - field.field.node.game.field_brady_completions
     - field.field.node.game.field_brady_ints
@@ -60,6 +61,7 @@ dependencies:
     - datetime
     - entity_reference_revisions
     - field_group
+    - inline_entity_form
     - link
     - metatag
     - paragraphs
@@ -211,6 +213,7 @@ third_party_settings:
     group_patriots_coaches:
       children:
         - field_patriots_head_coach
+        - field_belichick_hoodie
         - field_patriots_oc
         - field_patriots_dc
       label: 'Patriots Coaches'
@@ -236,6 +239,23 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_belichick_hoodie:
+    type: inline_entity_form_complex
+    weight: 15
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: true
+      collapsible: false
+      collapsed: false
+      revision: false
     third_party_settings: {  }
   field_brady_attempts:
     type: number
@@ -463,7 +483,7 @@ content:
     third_party_settings: {  }
   field_patriots_dc:
     type: entity_reference_autocomplete_tags
-    weight: 16
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
@@ -483,7 +503,7 @@ content:
     third_party_settings: {  }
   field_patriots_oc:
     type: entity_reference_autocomplete_tags
-    weight: 15
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -593,7 +613,7 @@ content:
     third_party_settings: {  }
   field_uniform:
     type: entity_reference_revisions_autocomplete
-    weight: 28
+    weight: 15
     region: content
     settings:
       match_operator: CONTAINS

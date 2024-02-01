@@ -1,0 +1,37 @@
+uuid: 85f1ff66-5bf2-4d82-a416-e78cc2a47897
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.belichick_hoodie.field_hoodie_image
+    - field.field.paragraph.belichick_hoodie.field_hoodie_name
+    - image.style.large
+    - paragraphs.paragraphs_type.belichick_hoodie
+  module:
+    - image
+id: paragraph.belichick_hoodie.default
+targetEntityType: paragraph
+bundle: belichick_hoodie
+mode: default
+content:
+  field_hoodie_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: file
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_hoodie_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true
