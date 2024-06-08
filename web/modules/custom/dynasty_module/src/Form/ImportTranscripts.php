@@ -35,6 +35,14 @@ class ImportTranscripts extends ConfigFormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
+    $episodes = [];
+    $storage = \Drupal::service('entity_type.manager')->getStorage('node');
+    foreach ($storage->loadByProperties([
+      'type' => 'podcast_episode',
+      'status' => 1,
+    ]) as $episode) {
+      $episodes[$episode->id()] = $episode->label();
+    }
 
     $form['instructions'] = [
       '#type' => 'item',
@@ -42,6 +50,20 @@ class ImportTranscripts extends ConfigFormBase
         Import podcast transcripts by clicking the
         <strong>Save configuration</strong> button below.</p>'
     ];
+    $form['podcast_csv'] = [
+      '#type' => 'managed_file',
+      '#title' => $this->t('Transcript CSV file'),
+      '#upload_location' => 'public://csv',
+      '#upload_validators' => [
+        'file_validate_extensions' => ['csv'],
+      ]
+    ];
+    $form['podcast_episode'] = [
+    '#type' => 'select',
+    '#title' => 'Podcast Episode',
+    '#options' => $episodes,
+    '#required' => true,
+  ];
 
     return parent::buildForm($form, $form_state);
   }
@@ -53,38 +75,24 @@ class ImportTranscripts extends ConfigFormBase
   {
     parent::submitForm($form, $form_state);
 
-    $operations = [];
-    $podcasts = [];
-    $pods = \Drupal::entityQuery('node')
-      ->condition('type', 'podcast_episode')
-      ->execute();
-    foreach (Node::loadMultiple($pods) as $pod) {
-      $podcasts[$pod->label()] = $pod->id();
-    }
+    $pod_id = $form_state->getValue('podcast_episode');
+    $form_file = $form_state->getValue('podcast_csv', 0);
+    // Save the CSV file.
+    if (!empty($form_file[0])) {
+      $csv = File::load($form_file[0]);
+      $csv->setPermanent();
+      $csv->save();
+      $uri = $csv->getFileUri();
 
-    // Get list of transcript csv files.
-    $folder = '/var/www/html/web/sites/default/files/transcripts';
-    $csvs = \Drupal::service('file_system')->scanDirectory($folder, '/.*/');
-    foreach ($csvs as $csv) {
-      // Figure out which episode this is.
-      $file = $csv->name; // "2001-week-1" or "2003-afc-championship"
-      $file_title = str_replace('-', ' ', $file);
-      $pod_id = '';
-      foreach ($podcasts as $title => $id) {
-        if (str_contains(strtolower($title), $file_title . ':')) {
-          $pod_id = $id;
-          // Get all transcript lines from CSV.
-          $transcript = $this->parse_csv($csv->uri);
-          foreach ($transcript as $line) {
-            // Add operation to batch.
-            $operations[] = ['\Drupal\dynasty_module\PodcastNodeUpdate::createTranscriptLine', [$pod_id, $line]];
-          }
-        }
+      $operations = [];
+      $transcript = $this->parse_csv($uri);
+      foreach ($transcript as $line) {
+        // Add operation to batch.
+        $operations[] = ['\Drupal\dynasty_module\PodcastNodeUpdate::createTranscriptLine', [$pod_id, $line]];
       }
     }
-
     $batch = [
-      'title' => 'Importing Podcast Transcript Lines',
+      'title' => 'Importing Podcast Transcript',
       'operations' => $operations,
       'progress_message' => 'Processed @current out of @total.',
     ];
