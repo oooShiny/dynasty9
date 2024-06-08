@@ -37,13 +37,15 @@ class ImportTranscripts extends ConfigFormBase
   {
     $episodes = [];
     $storage = \Drupal::service('entity_type.manager')->getStorage('node');
-    foreach ($storage->loadByProperties([
-      'type' => 'podcast_episode',
-      'status' => 1,
-    ]) as $episode) {
+    $ep_nodes = $storage->getQuery()
+      ->condition('type', 'podcast_episode')
+      ->condition('status', 1)
+      ->sort('created', 'DESC')
+      ->execute();
+
+    foreach ($storage->loadMultiple($ep_nodes) as $episode) {
       $episodes[$episode->id()] = $episode->label();
     }
-
     $form['instructions'] = [
       '#type' => 'item',
       '#markup' => '<p class="messages messages--status">
