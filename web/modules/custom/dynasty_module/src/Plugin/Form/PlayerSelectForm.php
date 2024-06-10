@@ -23,7 +23,7 @@ class PlayerSelectForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $options = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','player')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','player')->execute();
     $nodes =  Node::loadMultiple($nids);
     foreach ($nodes as $node) {
       $options[$node->id()] = $node->label();

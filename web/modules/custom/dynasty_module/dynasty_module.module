@@ -113,6 +113,11 @@ function dynasty_module_update_8006() {
 
 function dynasty_module_theme($existing, $type, $theme, $path) {
   return [
+    'dynasty_admin_page' => [
+      'variables' => [
+        'admin_links' => []
+      ]
+    ],
     'footer_seasons_block' => [
       'variables' => [
         'seasons' => ''

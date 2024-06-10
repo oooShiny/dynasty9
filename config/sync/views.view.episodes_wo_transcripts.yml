@@ -263,7 +263,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: '<a href="/admin/transcripts" class="button button--primary">+ Import New Transcript</a>'
+          content: '<a href="/admin/dynasty/podcast/transcripts" class="button button--primary">+ Import New Transcript</a>'
           tokenize: false
       footer: {  }
       display_extenders: {  }
@@ -288,7 +288,7 @@ display:
           tokenize: false
         simple_sitemap_display_extender:
           variants: {  }
-      path: admin/podcast/transcripts
+      path: admin/dynasty/podcast/no-transcripts
     cache_metadata:
       max-age: -1
       contexts:

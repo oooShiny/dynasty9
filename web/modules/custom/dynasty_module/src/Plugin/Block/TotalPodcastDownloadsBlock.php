@@ -25,6 +25,7 @@ class TotalPodcastDownloadsBlock extends BlockBase {
     $nids = \Drupal::entityQuery('node')
       ->condition('type','podcast_episode')
       ->condition('status', 1)
+      ->accessCheck(TRUE)
       ->sort('created' , 'ASC')
       ->execute();
 

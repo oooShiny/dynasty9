@@ -31,6 +31,7 @@ class BradyTdTotals extends BlockBase {
       ->condition('field_players_involved', '272')
       ->condition('field_td_scored', TRUE)
       ->condition('field_play_type', '54')
+      ->accessCheck(TRUE)
       ->sort('field_season' , 'DESC')
       ->execute();
     $node_stirage = \Drupal::entityTypeManager()->getStorage('node');

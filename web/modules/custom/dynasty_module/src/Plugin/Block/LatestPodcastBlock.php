@@ -22,6 +22,7 @@ class LatestPodcastBlock extends BlockBase {
   public function build() {
     $nid = \Drupal::entityQuery('node')
       ->condition('type','podcast_episode')
+      ->accessCheck(TRUE)
       ->sort('created' , 'DESC')
       ->range(0,1)
       ->execute();

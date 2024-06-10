@@ -37,7 +37,7 @@ class DynastyHelpers {
 
   public static function get_teams($data = FALSE) {
     $teams = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','team')->execute();
     $nodes =  Node::loadMultiple($nids);
     $divs = self::get_term_names('division');
     $confs = self::get_term_names('conference');
@@ -60,7 +60,7 @@ class DynastyHelpers {
 
   public static function get_team_css() {
     $teams = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','team')->execute();
     $nodes =  Node::loadMultiple($nids);
 
     foreach ($nodes as $team) {
@@ -72,7 +72,7 @@ class DynastyHelpers {
 
   public static function get_players() {
     $players = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','player')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','player')->execute();
     $nodes =  Node::loadMultiple($nids);
     $positions = DynastyHelpers::get_positions();
     foreach ($nodes as $player) {

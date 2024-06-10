@@ -28,7 +28,7 @@ class PrevNextGameBlock extends BlockBase {
     $date = $node->get('field_date')->value;
 
     // Get all game nodes.
-    $nids = \Drupal::entityQuery('node')->condition('type','game')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','game')->execute();
     $nodes = Node::loadMultiple($nids);
 
     $games = [];

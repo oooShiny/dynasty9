@@ -44,7 +44,9 @@ class ImportTranscripts extends ConfigFormBase
       ->execute();
 
     foreach ($storage->loadMultiple($ep_nodes) as $episode) {
-      $episodes[$episode->id()] = $episode->label();
+      if ($episode->field_episode_transcript->isEmpty()) {
+        $episodes[$episode->id()] = $episode->label();
+      }
     }
     $form['instructions'] = [
       '#type' => 'item',

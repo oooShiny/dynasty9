@@ -23,7 +23,7 @@ class TeamSelectForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $options = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','team')->execute();
+    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','team')->execute();
     $nodes =  Node::loadMultiple($nids);
     foreach ($nodes as $node) {
       $options[rawurlencode($node->label())] = $node->label();

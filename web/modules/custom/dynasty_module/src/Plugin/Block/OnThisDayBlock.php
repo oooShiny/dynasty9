@@ -24,6 +24,7 @@ class OnThisDayBlock extends BlockBase {
     $today = date('m-d');
     $game_nids = \Drupal::entityQuery('node')
       ->condition('type', 'game')
+      ->accessCheck(TRUE)
       ->execute();
 
     $games = \Drupal::entityTypeManager()
@@ -45,6 +46,7 @@ class OnThisDayBlock extends BlockBase {
           ->condition('type', 'highlight')
           ->condition('field_play_of_the_game', 1)
           ->condition('field_game', $game->id())
+          ->accessCheck(TRUE)
           ->execute();
 
         if (!empty($highlight_pog)) {
@@ -57,6 +59,7 @@ class OnThisDayBlock extends BlockBase {
           $highlight_nid = \Drupal::entityQuery('node')
             ->condition('type', 'highlight')
             ->condition('field_game', $game->id())
+            ->accessCheck(TRUE)
             ->execute();
           if (!empty($highlight_nid)) {
             $highlight = \Drupal::entityTypeManager()
