@@ -2,6 +2,7 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\Entity\File;
+use Drupal\gin\GinSettings;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
@@ -465,4 +466,40 @@ function dynasty_module_cron() {
   $plays[$tweet_play]->save();
   $file->delete();
 
+}
+
+
+/**
+ * Implements hook_page_attachments()
+ */
+function dynasty_module_page_attachments(array &$attachments) {
+  // Get theme settings (optional).
+  /** @var \Drupal\gin\GinSettings $settings */
+  $settings = \Drupal::classResolver(GinSettings::class);
+
+  // Toolbar example.
+  $toolbar = $settings->get('classic_toolbar');
+
+  // Attach the base library if the horizontal toolbar is set.
+  if ($toolbar === 'horizontal') {
+    // Attach your library.
+    $attachments['#attached']['library'][] = 'dynasty_library/dynasty_admin';
+  }
+
+  // Route specific example.
+  $route = \Drupal::routeMatch()->getRouteName();
+
+  if (
+    $route == 'user.login' ||
+    $route == 'user.pass' ||
+    $route == 'user.register'
+  ) {
+    // Attach your library.
+    $attachments['#attached']['library'][] = 'dynasty_library/dynasty_admin';
+  }
+
+  // attach the library if the active route is an admin one
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'dynasty_library/dynasty_admin';
+  }
 }

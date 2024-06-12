@@ -15,3 +15,7 @@ highchart_js:
     gpl-compatible: false
   js:
     https://code.highcharts.com/highcharts.js: { type: external, minified: true }
+dynasty_admin:
+  css:
+    theme:
+      css/dynasty-admin.css: {}
