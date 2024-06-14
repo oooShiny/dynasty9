@@ -1,4 +1,5 @@
-.toolbar-icon-menu-link-contentd6ce38d5-acfe-4d67-8d35-a6d339321723::before {
-  mask-image: url('/web/modules/custom/dynasty_module/images/helmet.png');
-  -webkit-mask-image: url('/web/modules/custom/dynasty_module/images/helmet.png');
+.toolbar-icon-menu-link-contentd6ce38d5-acfe-4d67-8d35-a6d339321723::before,
+.toolbar-icon-menu-link-content05aa42b4-32d5-44b1-902d-fa51e2b0edb9::before {
+  mask-image: url('/modules/custom/dynasty_module/images/helmet.png') !important;
+  -webkit-mask-image: url('/modules/custom/dynasty_module/images/helmet.png') !important;
 }
