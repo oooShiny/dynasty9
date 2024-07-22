@@ -1,0 +1,28 @@
+uuid: 6344b34d-1aa6-4669-9071-49da232b5bbd
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.podcast_search
+  module:
+    - system
+    - views
+  theme:
+    - dynasty_admin
+id: dynasty_admin_exposedformpodcast_searchpage_1
+theme: dynasty_admin
+region: content
+weight: -10
+provider: null
+plugin: 'views_exposed_filter_block:podcast_search-page_1'
+settings:
+  id: 'views_exposed_filter_block:podcast_search-page_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /podcast

@@ -1,0 +1,44 @@
+uuid: e52a84d1-c5d1-4c82-a964-f3b0253527ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - facets_block
+    - system
+  theme:
+    - dynasty_admin
+id: dynasty_admin_facetsblock_3
+theme: dynasty_admin
+region: sidebar_first
+weight: -9
+provider: null
+plugin: facets_block
+settings:
+  id: facets_block
+  label: 'Podcast Search Filters'
+  label_display: '0'
+  provider: facets_block
+  show_title: true
+  exclude_empty_facets: true
+  facets_to_include:
+    'facet_block:podcast_season': 'facet_block:podcast_season'
+    'facet_block:podcast_opponent': 'facet_block:podcast_opponent'
+    'facet_block:game_opponent': '0'
+    'facet_block:game_opposing_coach': '0'
+    'facet_block:player_s_involved': '0'
+    'facet_block:game_season': '0'
+    'facet_block:play_type': '0'
+    'facet_block:after_bye_we': '0'
+    'facet_block:game_home_away': '0'
+    'facet_block:opponent': '0'
+    'facet_block:week': '0'
+    'facet_block:yards_gained': '0'
+    'facet_block:overtime': '0'
+    'facet_block:td_scored': '0'
+    'facet_block:playoff': '0'
+  add_js_classes: true
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /podcast

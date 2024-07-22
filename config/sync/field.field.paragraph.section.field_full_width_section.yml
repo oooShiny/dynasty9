@@ -1,0 +1,23 @@
+uuid: 26bd6cc3-c2d5-43f3-bb6f-735af2b05e58
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_full_width_section
+    - paragraphs.paragraphs_type.section
+id: paragraph.section.field_full_width_section
+field_name: field_full_width_section
+entity_type: paragraph
+bundle: section
+label: 'Full Width Section'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

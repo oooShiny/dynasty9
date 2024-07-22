@@ -21,7 +21,6 @@ settings:
   selection: blocks
   selection_settings:
     plugin_ids:
-      'block_content:3df58732-07a1-430b-9631-493cb6e57a52': 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
       brady_td_viz: brady_td_viz
       brady_total_tds: brady_total_tds
       latest_podcast_block: latest_podcast_block
@@ -30,6 +29,7 @@ settings:
       season_game_block: season_game_block
       top_10_podcast_block: top_10_podcast_block
       total_podcast_downloads_block: total_podcast_downloads_block
+      'views_block:random_highlight-block_1': 'views_block:random_highlight-block_1'
       'system_menu_block:brady-page-menu': 'system_menu_block:brady-page-menu'
       patreon_become_block: patreon_become_block
       patreon_user_block: patreon_user_block

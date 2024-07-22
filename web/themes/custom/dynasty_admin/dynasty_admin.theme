@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function dynasty_admin_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  // Add styles to specific fields.
+  switch ($paragraph->bundle()) {
+    case 'section':
+      // bg-gray-200|None
+      // bg-gray-400 text-white|Gray
+      // bg-blue-pats text-white|Blue
+      // bg-red-pats text-white|Red
+      $variables['bg_color'] = $paragraph->field_background_color->value;
+      break;
+    case 'text':
+      $variables['attributes']['class'][] = 'py-6';
+      break;
+  }
+}

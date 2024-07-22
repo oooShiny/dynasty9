@@ -1,0 +1,33 @@
+uuid: dc898cad-cc63-4df2-84fd-34fc5b395b4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.featured_highlights
+  module:
+    - node
+    - views
+  theme:
+    - dynasty_admin
+id: dynasty_admin_views_block__featured_highlights_block_1
+theme: dynasty_admin
+region: content
+weight: -8
+provider: null
+plugin: 'views_block:featured_highlights-block_1'
+settings:
+  id: 'views_block:featured_highlights-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      player: player

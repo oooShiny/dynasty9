@@ -1,0 +1,9 @@
+name: Dynasty Admin Theme
+description: 'Overrides to the Gin admin theme'
+base theme: gin
+type: theme
+core_version_requirement: ^9 || ^10
+libraries:
+  - dynastyTW/global
+  - dynastyTW/overrides
+  - dynasty_admin/gin_overrides

@@ -3,6 +3,7 @@ overrides:
     theme:
       css/overrides.css: {}
       css/team-colors.css: {}
+      css/extend.css: {}
 basic_page:
   css:
     theme:

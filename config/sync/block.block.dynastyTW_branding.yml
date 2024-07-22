@@ -1,0 +1,25 @@
+uuid: eabad0e6-c6a4-400c-9570-9590a307c300
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - dynastyTW
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: dynastyTW_branding
+theme: dynastyTW
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

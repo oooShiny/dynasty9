@@ -3,12 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.player.field_birthday
     - field.field.node.player.field_jersey_number
     - field.field.node.player.field_meta_tags
     - field.field.node.player.field_player_bio
     - field.field.node.player.field_player_position
     - node.type.player
   module:
+    - datetime
     - metatag
     - path
     - text
@@ -20,6 +22,12 @@ content:
   created:
     type: datetime_timestamp
     weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_birthday:
+    type: datetime_default
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }

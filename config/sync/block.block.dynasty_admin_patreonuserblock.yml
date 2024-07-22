@@ -1,0 +1,20 @@
+uuid: d16ec530-4b28-40e6-8d53-f3576912ae2d
+langcode: en
+status: true
+dependencies:
+  module:
+    - patreon_user
+  theme:
+    - dynasty_admin
+id: dynasty_admin_patreonuserblock
+theme: dynasty_admin
+region: sidebar_first
+weight: -14
+provider: null
+plugin: patreon_user_block
+settings:
+  id: patreon_user_block
+  label: 'Patreon user block'
+  label_display: '0'
+  provider: patreon_user
+visibility: {  }

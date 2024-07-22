@@ -1,0 +1,25 @@
+uuid: a2b4dfe4-ec77-4294-8ce3-b47a4e731654
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - dynasty_admin
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: dynasty_admin_branding
+theme: dynasty_admin
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: false
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

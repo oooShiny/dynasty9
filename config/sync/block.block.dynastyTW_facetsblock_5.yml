@@ -1,0 +1,60 @@
+uuid: 2c203097-29c4-4275-abe5-b8a4de930e9c
+langcode: en
+status: true
+dependencies:
+  module:
+    - facets_block
+    - system
+  theme:
+    - dynastyTW
+id: dynastyTW_facetsblock_5
+theme: dynastyTW
+region: sidebar_first
+weight: -11
+provider: null
+plugin: facets_block
+settings:
+  id: facets_block
+  label: 'QB Filters'
+  label_display: visible
+  provider: facets_block
+  show_title: true
+  exclude_empty_facets: true
+  facets_to_include:
+    'facet_block:starting_qb': 'facet_block:starting_qb'
+    'facet_block:qb_comp': 'facet_block:qb_comp'
+    'facet_block:qb_att': 'facet_block:qb_att'
+    'facet_block:qb_tds': 'facet_block:qb_tds'
+    'facet_block:qb_ints': 'facet_block:qb_ints'
+    'facet_block:game_opponent': '0'
+    'facet_block:game_opposing_coach': '0'
+    'facet_block:game_season': '0'
+    'facet_block:after_bye_we': '0'
+    'facet_block:player_s_involved': '0'
+    'facet_block:game_home_away': '0'
+    'facet_block:player_play_type': '0'
+    'facet_block:play_type': '0'
+    'facet_block:player_opponent': '0'
+    'facet_block:opponent': '0'
+    'facet_block:game_opp_score': '0'
+    'facet_block:td_scored': '0'
+    'facet_block:podcast_season': '0'
+    'facet_block:game_pats_score': '0'
+    'facet_block:player_td_scored': '0'
+    'facet_block:podcast_opponent': '0'
+    'facet_block:yards_gained': '0'
+    'facet_block:player_yards_gained': '0'
+    'facet_block:overtime': '0'
+    'facet_block:play_season': '0'
+    'facet_block:playoff': '0'
+    'facet_block:player_season': '0'
+    'facet_block:game_week': '0'
+    'facet_block:week': '0'
+    'facet_block:player_week': '0'
+    'facet_block:play_tag': '0'
+  add_js_classes: true
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /search/games

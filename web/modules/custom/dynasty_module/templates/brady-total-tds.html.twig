@@ -15,8 +15,8 @@
 {% set total_tds = 0 %}
 <div id="charts">
     <div class="small-margin" id="td_rec">
-      <div class="md:tw-flex tw-py-10">
-        <div class="lg:tw-w-2/3 md:tw-w-1/2 sm:tw-w-full">
+      <div class="md:flex py-10">
+        <div class="lg:w-2/3 md:w-1/2 sm:w-full">
           <div id="brady_td_chart"></div>
           <script type="application/javascript">
               Highcharts.setOptions({
@@ -61,15 +61,15 @@
             });
           </script>
         </div>
-        <div class="lg:tw-w-1/3 md:tw-w-1/2 sm:tw-w-full">
-          <ol class="tw-block tw-mx-auto tw-overflow-y-scroll tw-list-decimal tw-bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
-            <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-              <h4 class="tw-px-5 tw-py-3 tw-bg-red-pats tw-text-white tw-text-center tw-inline-block">Total TDs ({{ total_tds }})</h4>
+        <div class="lg:w-1/3 md:w-1/2 sm:w-full">
+          <ol class="block mx-auto overflow-y-scroll list-decimal bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
+            <li class="flex align-center flex-col my-0.5 bg-white">
+              <h4 class="px-5 py-3 bg-red-pats text-white text-center inline-block">Total TDs ({{ total_tds }})</h4>
             </li>
           {% for player, gifs in players %}
-            <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-              <h4 onclick="hideShow('brady-td-wr-{{ loop.index }}')" class="tw-cursor-pointer tw-px-5 tw-py-3 tw-bg-blue-pats tw-text-white tw-text-center tw-inline-block hover:tw-opacity-75 hover:tw-shadow hover:tw--mb-3">{{ player }} ({{ gifs|length }})</h4>
-                  <ol class="tw-border tw-py-4 tw-pl-10 tw-list-decimal" id="brady-td-wr-{{ loop.index }}"  style="display: none; padding: 2em !important;">
+            <li class="flex align-center flex-col my-0.5 bg-white">
+              <h4 onclick="hideShow('brady-td-wr-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center inline-block hover:opacity-75 hover:shadow hover:-mb-3">{{ player }} ({{ gifs|length }})</h4>
+                  <ol class="border py-4 pl-10 list-decimal" id="brady-td-wr-{{ loop.index }}"  style="display: none; padding: 2em !important;">
                     {% for gif in gifs %}
                       <li><a href="{{ gif.link }}" class="collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
@@ -82,8 +82,8 @@
     </div>
 
     <div class="small-margin" id="td_quart">
-      <div class="md:tw-flex tw-py-10">
-        <div class="lg:tw-w-2/3 md:tw-w-1/2 sm:tw-w-full">
+      <div class="md:flex py-10">
+        <div class="lg:w-2/3 md:w-1/2 sm:w-full">
           <div id="brady_quarters_chart"></div>
           <script type="application/javascript">
               Highcharts.setOptions({
@@ -127,15 +127,15 @@
             });
           </script>
         </div>
-        <div class="lg:tw-w-1/3" >
-          <ol class="tw-block tw-mx-auto tw-overflow-y-scroll tw-list-decimal tw-bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
-            <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-              <h4 class="tw-px-5 tw-py-3 tw-bg-red-pats tw-text-white tw-text-center tw-inline-block">Total TDs ({{ total_tds }})</h4>
+        <div class="lg:w-1/3" >
+          <ol class="block mx-auto overflow-y-scroll list-decimal bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
+            <li class="flex align-center flex-col my-0.5 bg-white">
+              <h4 class="px-5 py-3 bg-red-pats text-white text-center inline-block">Total TDs ({{ total_tds }})</h4>
             </li>
             {% for quarter, gifs in quarters %}
-              <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-                <h4 onclick="hideShow('brady-td-q-{{ loop.index }}')" class="tw-cursor-pointer tw-px-5 tw-py-3 tw-bg-blue-pats tw-text-white tw-text-center tw-inline-block hover:tw-opacity-75 hover:tw-shadow hover:tw--mb-3">{{ quarter }} ({{ gifs|length }})</h4>
-                  <ol class="tw-border tw-py-4 tw-pl-10 tw-list-decimal" id="brady-td-q-{{ loop.index }}" style="display: none; padding: 2em !important;">
+              <li class="flex align-center flex-col my-0.5 bg-white">
+                <h4 onclick="hideShow('brady-td-q-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center inline-block hover:opacity-75 hover:shadow hover:-mb-3">{{ quarter }} ({{ gifs|length }})</h4>
+                  <ol class="border py-4 pl-10 list-decimal" id="brady-td-q-{{ loop.index }}" style="display: none; padding: 2em !important;">
                     {% for gif in gifs %}
                       <li><a href="{{ gif.link }}" class="collection-item blue-text">{{ gif.title }} ({{ gif.season }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
@@ -148,8 +148,8 @@
     </div>
 
     <div class="small-margin" id="td_yards">
-      <div class="md:tw-flex tw-py-10">
-        <div class="lg:tw-w-2/3 md:tw-w-1/2 sm:tw-w-full">
+      <div class="md:flex py-10">
+        <div class="lg:w-2/3 md:w-1/2 sm:w-full">
           <div id="brady_distance_chart"></div>
           <script type="application/javascript">
               Highcharts.setOptions({
@@ -207,15 +207,15 @@
               });
           </script>
         </div>
-        <div class="lg:tw-w-1/3 md:tw-w-1/2 sm:tw-w-full">
-          <ol class="tw-block tw-mx-auto tw-overflow-y-scroll tw-list-decimal tw-bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
-            <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-              <h4 class="tw-px-5 tw-py-3 tw-bg-red-pats tw-text-white tw-text-center tw-inline-block">Total TDs ({{ total_tds }})</h4>
+        <div class="lg:w-1/3 md:w-1/2 sm:w-full">
+          <ol class="block mx-auto overflow-y-scroll list-decimal bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
+            <li class="flex align-center flex-col my-0.5 bg-white">
+              <h4 class="px-5 py-3 bg-red-pats text-white text-center inline-block">Total TDs ({{ total_tds }})</h4>
             </li>
             {% for distance, gifs in tdyards %}
-              <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-                <h4 onclick="hideShow('brady-td-dist-{{ loop.index }}')" class="tw-cursor-pointer tw-px-5 tw-py-3 tw-bg-blue-pats tw-text-white tw-text-center tw-inline-block hover:tw-opacity-75 hover:tw-shadow hover:tw--mb-3">{{ distance }} yards ({{ gifs|length }})</h4>
-                <ol class="tw-border tw-py-4 tw-pl-10 tw-list-decimal" id="brady-td-dist-{{ loop.index }}" style="display: none; padding: 2em !important;">
+              <li class="flex align-center flex-col my-0.5 bg-white">
+                <h4 onclick="hideShow('brady-td-dist-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center inline-block hover:opacity-75 hover:shadow hover:-mb-3">{{ distance }} yards ({{ gifs|length }})</h4>
+                <ol class="border py-4 pl-10 list-decimal" id="brady-td-dist-{{ loop.index }}" style="display: none; padding: 2em !important;">
                     {% for gif in gifs %}
                       <li><a href="{{ gif.link }}" class="collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
@@ -228,8 +228,8 @@
     </div>
 
     <div class="small-margin" id="td_position">
-      <div class="md:tw-flex tw-py-10">
-        <div class="lg:tw-w-2/3 md:tw-w-1/2 sm:tw-w-full">
+      <div class="md:flex py-10">
+        <div class="lg:w-2/3 md:w-1/2 sm:w-full">
           <div id="brady_pos_chart"></div>
           <script type="application/javascript">
               Highcharts.setOptions({
@@ -273,15 +273,15 @@
               });
           </script>
         </div>
-        <div class="lg:tw-w-1/3 md:tw-w-1/2 sm:tw-w-full">
-          <ol class="tw-block tw-mx-auto tw-overflow-y-scroll tw-list-decimal tw-bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
-            <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-              <h4 class="tw-px-5 tw-py-3 tw-bg-red-pats tw-text-white tw-text-center tw-inline-block">Total TDs ({{ total_tds }})</h4>
+        <div class="lg:w-1/3 md:w-1/2 sm:w-full">
+          <ol class="block mx-auto overflow-y-scroll list-decimal bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
+            <li class="flex align-center flex-col my-0.5 bg-white">
+              <h4 class="px-5 py-3 bg-red-pats text-white text-center inline-block">Total TDs ({{ total_tds }})</h4>
             </li>
             {% for pos, gifs in tdposition %}
-              <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-                <h4 onclick="hideShow('brady-td-pos-{{ loop.index }}')" class="tw-cursor-pointer tw-px-5 tw-py-3 tw-bg-blue-pats tw-text-white tw-text-center tw-inline-block hover:tw-opacity-75 hover:tw-shadow hover:tw--mb-3">{{ pos }}s ({{ gifs|length }})</h4>
-                <ol class="tw-border tw-py-4 tw-pl-10 tw-list-decimal" id="brady-td-pos-{{ loop.index }}"  style="display: none; padding: 2em !important;">
+              <li class="flex align-center flex-col my-0.5 bg-white">
+                <h4 onclick="hideShow('brady-td-pos-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center inline-block hover:opacity-75 hover:shadow hover:-mb-3">{{ pos }}s ({{ gifs|length }})</h4>
+                <ol class="border py-4 pl-10 list-decimal" id="brady-td-pos-{{ loop.index }}"  style="display: none; padding: 2em !important;">
                     {% for gif in gifs %}
                       <li><a href="{{ gif.link }}" class="collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
@@ -294,8 +294,8 @@
     </div>
 
     <div class="small-margin" id="all_tds">
-      <div class="md:tw-flex tw-py-10">
-        <div class="lg:tw-w-2/3 md:tw-w-1/2 sm:tw-w-full">
+      <div class="md:flex py-10">
+        <div class="lg:w-2/3 md:w-1/2 sm:w-full">
           <div id="brady_season_chart"></div>
           <script type="application/javascript">
               Highcharts.setOptions({
@@ -357,15 +357,15 @@
               });
           </script>
         </div>
-        <div class="lg:tw-w-1/3 md:tw-w-1/2 sm:tw-w-full">
-          <ol class="tw-block tw-mx-auto tw-overflow-y-scroll tw-list-decimal tw-bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
-            <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-              <h4 class="tw-px-5 tw-py-3 tw-bg-red-pats tw-text-white tw-text-center tw-inline-block">Total TDs ({{ total_tds }})</h4>
+        <div class="lg:w-1/3 md:w-1/2 sm:w-full">
+          <ol class="block mx-auto overflow-y-scroll list-decimal bg-blue-pats" style="height: 25rem !important; padding-top: 0;">
+            <li class="flex align-center flex-col my-0.5 bg-white">
+              <h4 class="px-5 py-3 bg-red-pats text-white text-center inline-block">Total TDs ({{ total_tds }})</h4>
             </li>
             {% for season, weeks in alltds %}
-              <li class="tw-flex tw-align-center tw-flex-col tw-my-0.5 tw-bg-white">
-                <h4 onclick="hideShow('brady-td-season-{{ loop.index }}')" class="tw-cursor-pointer tw-px-5 tw-py-3 tw-bg-blue-pats tw-text-white tw-text-center tw-inline-block hover:tw-opacity-75 hover:tw-shadow hover:tw--mb-3">{{ season }}</h4>
-                <ol class="tw-border tw-py-4 tw-pl-10 tw-list-decimal" id="brady-td-season-{{ loop.index }}"  style="display: none; padding: 2em !important;">
+              <li class="flex align-center flex-col my-0.5 bg-white">
+                <h4 onclick="hideShow('brady-td-season-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center inline-block hover:opacity-75 hover:shadow hover:-mb-3">{{ season }}</h4>
+                <ol class="border py-4 pl-10 list-decimal" id="brady-td-season-{{ loop.index }}"  style="display: none; padding: 2em !important;">
                     {% set i = 0 %}
                     {% for gifs in weeks %}
                       {% for gif in gifs %}

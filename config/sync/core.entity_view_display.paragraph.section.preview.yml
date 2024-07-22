@@ -1,0 +1,35 @@
+uuid: fa57b283-1da7-4e03-b86c-ed24404dd08b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.section.field_background_color
+    - field.field.paragraph.section.field_full_width_section
+    - paragraphs.paragraphs_type.section
+  module:
+    - options
+id: paragraph.section.preview
+targetEntityType: paragraph
+bundle: section
+mode: preview
+content:
+  field_background_color:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_full_width_section:
+    type: boolean
+    label: hidden
+    settings:
+      format: true-false
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

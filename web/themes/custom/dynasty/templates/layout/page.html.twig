@@ -56,11 +56,13 @@
     {{ page.primary_menu }}
   </div>
 </header>
-
 <main class="tw-mb-auto">
+{% if page.highlighted %}
   <div class="tw-pt-10 tw-mb-5">
       {{ page.highlighted }}
   </div>
+  {% endif %}
+
   {{ page.help }}
   {{ page.breadcrumb }}
     {{ page.secondary_menu }}

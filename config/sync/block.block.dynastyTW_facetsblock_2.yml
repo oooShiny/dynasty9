@@ -1,0 +1,70 @@
+uuid: d8a1b0c2-d6bf-46e9-b91f-6b4a57900467
+langcode: en
+status: false
+dependencies:
+  module:
+    - facets_block
+    - system
+  theme:
+    - dynastyTW
+id: dynastyTW_facetsblock_2
+theme: dynastyTW
+region: sidebar_first
+weight: -15
+provider: null
+plugin: facets_block
+settings:
+  id: facets_block
+  label: 'Game Search Filters'
+  label_display: '0'
+  provider: facets_block
+  show_title: true
+  exclude_empty_facets: true
+  hide_empty_block: false
+  facets_to_include:
+    'facet_block:game_opponent': 'facet_block:game_opponent'
+    'facet_block:game_opposing_coach': 'facet_block:game_opposing_coach'
+    'facet_block:game_home_away': 'facet_block:game_home_away'
+    'facet_block:game_season': 'facet_block:game_season'
+    'facet_block:game_opp_score': 'facet_block:game_opp_score'
+    'facet_block:game_pats_score': 'facet_block:game_pats_score'
+    'facet_block:score_differential': 'facet_block:score_differential'
+    'facet_block:game_week': 'facet_block:game_week'
+    'facet_block:after_bye_we': 'facet_block:after_bye_we'
+    'facet_block:uniform': 'facet_block:uniform'
+    'facet_block:overtime': 'facet_block:overtime'
+    'facet_block:brady_era_game': 'facet_block:brady_era_game'
+    'facet_block:playoff': 'facet_block:playoff'
+    'facet_block:temperature': 'facet_block:temperature'
+    'facet_block:player_s_involved': '0'
+    'facet_block:play_type': '0'
+    'facet_block:player_play_type': '0'
+    'facet_block:player_opponent': '0'
+    'facet_block:opponent': '0'
+    'facet_block:podcast_season': '0'
+    'facet_block:td_scored': '0'
+    'facet_block:player_td_scored': '0'
+    'facet_block:quarter': '0'
+    'facet_block:podcast_opponent': '0'
+    'facet_block:yards_gained': '0'
+    'facet_block:player_yards_gained': '0'
+    'facet_block:player_down': '0'
+    'facet_block:air_yards': '0'
+    'facet_block:player_quarter': '0'
+    'facet_block:down': '0'
+    'facet_block:play_season': '0'
+    'facet_block:player_season': '0'
+    'facet_block:week': '0'
+    'facet_block:player_week': '0'
+    'facet_block:play_tag': '0'
+    'facet_block:starting_qb': '0'
+    'facet_block:qb_comp': '0'
+    'facet_block:qb_att': '0'
+    'facet_block:qb_tds': '0'
+    'facet_block:qb_ints': '0'
+  add_js_classes: true
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /search/games

@@ -1,0 +1,37 @@
+uuid: 86bb4d74-44e6-42e7-b7a3-1baaad3315b2
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - options
+    - paragraphs
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: paragraph.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: bg-gray-200
+      label: None
+    -
+      value: 'bg-gray-400 text-white'
+      label: Gray
+    -
+      value: 'bg-blue-pats text-white'
+      label: Blue
+    -
+      value: 'bg-red-pats text-white'
+      label: Red
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

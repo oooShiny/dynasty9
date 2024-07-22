@@ -1,0 +1,9 @@
+.tw-aspect-auto {
+  aspect-ratio: auto;
+}
+.tw-aspect-square {
+  aspect-ratio: 1 / 1;
+}
+.tw-aspect-video {
+  aspect-ratio: 16 / 9;
+}

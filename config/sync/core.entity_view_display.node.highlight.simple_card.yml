@@ -1,0 +1,97 @@
+uuid: 35747b31-ca02-43d1-8b2c-f05f7a6ebe17
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.simple_card
+    - field.field.node.highlight.field_air_yards
+    - field.field.node.highlight.field_distance
+    - field.field.node.highlight.field_down
+    - field.field.node.highlight.field_game
+    - field.field.node.highlight.field_gfycat_id
+    - field.field.node.highlight.field_meta_tags
+    - field.field.node.highlight.field_minutes
+    - field.field.node.highlight.field_muse_video_id
+    - field.field.node.highlight.field_opponent
+    - field.field.node.highlight.field_pass_length
+    - field.field.node.highlight.field_pass_location
+    - field.field.node.highlight.field_pass_thrown_from
+    - field.field.node.highlight.field_play_description
+    - field.field.node.highlight.field_play_of_the_game
+    - field.field.node.highlight.field_play_type
+    - field.field.node.highlight.field_players_involved
+    - field.field.node.highlight.field_quarter
+    - field.field.node.highlight.field_season
+    - field.field.node.highlight.field_seconds
+    - field.field.node.highlight.field_tag_play
+    - field.field.node.highlight.field_td_scored
+    - field.field.node.highlight.field_tweeted
+    - field.field.node.highlight.field_video_file_id
+    - field.field.node.highlight.field_week
+    - field.field.node.highlight.field_yards_gained
+    - node.type.highlight
+  module:
+    - user
+id: node.highlight.simple_card
+targetEntityType: node
+bundle: highlight
+mode: simple_card
+content:
+  field_game:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 120
+    region: content
+  field_muse_video_id:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_play_description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 123
+    region: content
+  field_video_file_id:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 122
+    region: content
+hidden:
+  field_air_yards: true
+  field_distance: true
+  field_down: true
+  field_gfycat_id: true
+  field_meta_tags: true
+  field_minutes: true
+  field_opponent: true
+  field_pass_length: true
+  field_pass_location: true
+  field_pass_thrown_from: true
+  field_play_of_the_game: true
+  field_play_type: true
+  field_players_involved: true
+  field_quarter: true
+  field_season: true
+  field_seconds: true
+  field_tag_play: true
+  field_td_scored: true
+  field_tweeted: true
+  field_week: true
+  field_yards_gained: true
+  langcode: true
+  links: true
+  rate_highlight_rating: true
+  search_api_excerpt: true

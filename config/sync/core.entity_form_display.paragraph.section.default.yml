@@ -1,0 +1,29 @@
+uuid: 4d18c5a0-b786-4236-b04a-7a5fb4f68a70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section.field_background_color
+    - field.field.paragraph.section.field_full_width_section
+    - paragraphs.paragraphs_type.section
+id: paragraph.section.default
+targetEntityType: paragraph
+bundle: section
+mode: default
+content:
+  field_background_color:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_full_width_section:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

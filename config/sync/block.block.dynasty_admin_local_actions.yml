@@ -1,0 +1,20 @@
+uuid: 350f9e84-bfce-4a17-99b1-7c79134efcff
+langcode: en
+status: true
+dependencies:
+  theme:
+    - dynasty_admin
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: dynasty_admin_local_actions
+theme: dynasty_admin
+region: content
+weight: -12
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

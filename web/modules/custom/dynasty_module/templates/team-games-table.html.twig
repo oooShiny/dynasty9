@@ -1,45 +1,45 @@
-<div class="tw-flex tw-items-center tw-justify-evenly tw-py-10">
-  <div class="tw-w-1/3">
-    <h2 class="tw-text-2xl tw-uppercase tw-font-thin tw-text-center">Cumulative Score</h2>
-    <div class="tw-flex tw-items-center tw-justify-evenly tw-space-x-1">
-      <div class="patriots tw-p-2 tw-w-1/2">
-        <div class="tw-text-2xl tw-text-center">Patriots</div>
+<div class="flex items-center justify-evenly py-10">
+  <div class="w-1/3">
+    <h2 class="text-2xl uppercase font-thin text-center">Cumulative Score</h2>
+    <div class="flex items-center justify-evenly space-x-1">
+      <div class="patriots p-2 w-1/2">
+        <div class="text-2xl text-center">Patriots</div>
         <br>
-        <div class="tw-text-5xl tw-text-center">{{ totals.pf }}</div>
+        <div class="text-5xl text-center">{{ totals.pf }}</div>
       </div>
 
-      <div class="{{ opp.css }} tw-p-2 tw-w-1/2">
-        <div class="tw-text-2xl tw-text-center">{{ opp.short }}</div>
+      <div class="{{ opp.css }} p-2 w-1/2">
+        <div class="text-2xl text-center">{{ opp.short }}</div>
         <br>
-        <div class="tw-text-5xl tw-text-center">{{ totals.pa }}</div>
+        <div class="text-5xl text-center">{{ totals.pa }}</div>
       </div>
     </div>
   </div>
 
-  <div class="tw-w-1/3">
-    <h2 class="tw-text-2xl tw-uppercase tw-font-thin tw-text-center">Average Score</h2>
-    <div class="tw-flex tw-items-center tw-justify-evenly tw-space-x-1">
-      <div class="patriots tw-p-2 tw-w-1/2">
-        <div class="tw-text-2xl tw-text-center">Patriots</div>
+  <div class="w-1/3">
+    <h2 class="text-2xl uppercase font-thin text-center">Average Score</h2>
+    <div class="flex items-center justify-evenly space-x-1">
+      <div class="patriots p-2 w-1/2">
+        <div class="text-2xl text-center">Patriots</div>
         <br>
-        <div class="tw-text-5xl tw-text-center">{{ (totals.pf/totals.games)|number_format }}</div>
+        <div class="text-5xl text-center">{{ (totals.pf/totals.games)|number_format }}</div>
       </div>
 
-      <div class="{{ opp.css }} tw-p-2 tw-w-1/2">
-        <div class="tw-text-2xl tw-text-center">{{ opp.short }}</div>
+      <div class="{{ opp.css }} p-2 w-1/2">
+        <div class="text-2xl text-center">{{ opp.short }}</div>
         <br>
-        <div class="tw-text-5xl tw-text-center">{{ (totals.pa/totals.games)|number_format }}</div>
+        <div class="text-5xl text-center">{{ (totals.pa/totals.games)|number_format }}</div>
       </div>
     </div>
   </div>
 
 </div>
 
-<div class="tw-flex tw-items-center tw-justify-evenly tw-py-10">
-  <div class="patriots tw-p-2 tw-w-1/2">
-    <div class="tw-text-2xl tw-text-center">Patriots vs {{ opp.short }}</div>
+<div class="flex items-center justify-evenly py-10">
+  <div class="patriots p-2 w-1/2">
+    <div class="text-2xl text-center">Patriots vs {{ opp.short }}</div>
     <br>
-    <div class="tw-text-5xl tw-text-center">{{ totals.w }} - {{ totals.l }}</div>
+    <div class="text-5xl text-center">{{ totals.w }} - {{ totals.l }}</div>
   </div>
 </div>
 
@@ -98,7 +98,7 @@
   });
 </script>
 
-<table class="tw-m-auto">
+<table class="m-auto">
   <thead>
     <tr><th colspan="2"></th><th colspan="2">Score</th><th colspan="5"></th></tr>
     <tr>
@@ -123,7 +123,7 @@
       {% set tooltip = 'no game video' %}
     {% endif %}
     {% set icon %}
-      <svg class="tw-h-5 tw-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313">
+      <svg class="h-5 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 444 313">
         <title>{{ tooltip }}</title>
         <style>
           .blue { fill: #002244 }
@@ -138,16 +138,16 @@
   {% else %}
     {% set icon = '' %}
   {% endif %}
-  <tr class="{{ game.result|lower }} tw-py-5 tw-border tw-bg-white">
-    <td class="tw-p-5"><a href="/node/{{ id }}">{{ game.title }}</a></td>
+  <tr class="{{ game.result|lower }} py-5 border bg-white">
+    <td class="p-5"><a href="/node/{{ id }}">{{ game.title }}</a></td>
     <td>{{ icon }}</td>
-    <td class="tw-p-5">{{ game.pats_score }}</td>
-    <td class="tw-p-5">{{ game.opp_score }}</td>
-    <td class="tw-p-5">{{ game.home_away }}</td>
-    <td class="tw-p-5">{{ game.date|date('F j,  Y') }}</td>
-    <td class="tw-p-5">{{ game.opp_coach }}</td>
-    <td class="tw-p-5">{{ game.over_under }}</td>
-    <td class="tw-p-5">{{ game.vegas_line }}</td>
+    <td class="p-5">{{ game.pats_score }}</td>
+    <td class="p-5">{{ game.opp_score }}</td>
+    <td class="p-5">{{ game.home_away }}</td>
+    <td class="p-5">{{ game.date|date('F j,  Y') }}</td>
+    <td class="p-5">{{ game.opp_coach }}</td>
+    <td class="p-5">{{ game.over_under }}</td>
+    <td class="p-5">{{ game.vegas_line }}</td>
   </tr>
 {% endfor %}
   </tbody>

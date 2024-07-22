@@ -1,0 +1,20 @@
+uuid: 02708116-f874-44a7-80e8-6cd81d8e02c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_module
+  theme:
+    - dynasty_admin
+id: dynasty_admin_footerseasonsblock
+theme: dynasty_admin
+region: footer
+weight: -16
+provider: null
+plugin: footer_seasons_block
+settings:
+  id: footer_seasons_block
+  label: 'Footer Seasons Block'
+  label_display: '0'
+  provider: dynasty_module
+visibility: {  }

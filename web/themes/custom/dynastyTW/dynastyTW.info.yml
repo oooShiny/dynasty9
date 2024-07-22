@@ -1,0 +1,22 @@
+name: Patriots Dynasty Theme 2024
+description: A new Patriots Dynasty theme based on Tailwind CSS.
+core_version_requirement: ^8 || ^9 || ^10
+type: theme
+base theme: stable9
+libraries:
+  - dynastyTW/global
+  - dynastyTW/overrides
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content: 'Content'
+  sidebar_first: 'Left sidebar'
+  sidebar_second: 'Right sidebar'
+  footer: 'Footer'
+  footer_menu: 'Footer Menu'
+  breadcrumb: 'Breadcrumb'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'

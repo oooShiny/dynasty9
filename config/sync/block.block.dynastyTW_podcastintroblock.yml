@@ -1,0 +1,27 @@
+uuid: 8625eb08-1a67-47fa-9cae-d3cebde550b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - dynastyTW
+id: dynastyTW_podcastintroblock
+theme: dynastyTW
+region: help
+weight: -12
+provider: null
+plugin: 'block_content:dfb1fb38-8180-445f-ae0a-a7ff50b637a3'
+settings:
+  id: 'block_content:dfb1fb38-8180-445f-ae0a-a7ff50b637a3'
+  label: 'Podcast Intro Block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /podcast

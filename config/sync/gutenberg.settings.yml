@@ -119,3 +119,4 @@ article_allowed_drupal_blocks:
   'views_exposed_filter_block:game_search-page_1': 0
   'views_exposed_filter_block:highlight_search-page_1': 0
 twitter_hidden_image_enable_full: 0
+event_enable_full: 0

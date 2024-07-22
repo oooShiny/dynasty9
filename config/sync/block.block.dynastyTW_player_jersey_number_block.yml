@@ -1,0 +1,33 @@
+uuid: 78e83ef4-5ef8-4db3-b66c-7ca321af2ec7
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.player_jersey_number
+  module:
+    - node
+    - views
+  theme:
+    - dynastyTW
+id: dynastyTW_player_jersey_number_block
+theme: dynastyTW
+region: highlighted
+weight: -12
+provider: null
+plugin: 'views_block:player_jersey_number-block_1'
+settings:
+  id: 'views_block:player_jersey_number-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      player: player

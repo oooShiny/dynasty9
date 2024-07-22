@@ -96,12 +96,17 @@
     }
   }
 </script>
-<article class="tw-mt-10">
+<article>
   {# Highlight Video #}
-  <div class="tw-text-center tw-py-10 tw-text-xl">{{ content.field_highlight_video_url }}</div>
+  <div class="tw-text-center tw-text-xl" style="min-height: 10em;">
+    <div class="tw-bg-blue-pats tw-p-2 tw-w-fill">
+      <h1 class="tw-text-3xl tw-uppercase tw-font-thin tw-text-white">{{ label }}</h1>
+    </div>
+    {{ content.field_highlight_video_url }}
+  </div>
 
 {# Teams and Score Boxes #}
-  <div class="tw-flex tw-items-center tw-justify-center tw-py-10">
+  <div class="tw-flex tw-items-center tw-justify-center score-box">
     <div class="patriots tw-p-2 tw-w-1/3 md:tw-w-1/4">
       <div class="tw-text-2xl tw-text-center tw-hidden md:tw-block">New England Patriots</div>
       <div class="tw-text-2xl tw-text-center tw-block md:tw-hidden">Patriots</div>
@@ -121,6 +126,7 @@
     {{ content.field_uniform }}
     {{ content.field_belichick_hoodie }}
   </div>
+
   {% endif %}
 
 {# Game Date #}
@@ -195,6 +201,7 @@
       <a type="button" href="{{ gamepass_link }}" class="tw-p-4 tw-bg-blue-900 tw-text-white tw-text-center">Watch on GamePass</a>
     {% endif %}
   </div>
+  <img class="tw-w-screen tw-float-left" src="/themes/custom/dynasty/images/divide-white.png" />
 
 {# Brady Stats #}
   {% if content.field_brady_attempts|render %}
@@ -252,12 +259,14 @@
         </table>
       </div>
     </div>
+    <img class="tw-w-screen tw-float-left" src="/themes/custom/dynasty/images/divide-gray.png" />
   {% endif %}
 
 {# Podcast Episode #}
   {{ drupal_view('podcast_episode_game_page', 'block_1') }}
-
+  <img class="tw-w-screen tw-float-left" src="/themes/custom/dynasty/images/divide-blue.png" />
 {# Game Summary #}
+  {% if content.field_game_summary|render %}
   {{ attach_library('dynasty/muse_modal') }}
   <a id="game-summary"></a>
   <div id="game-summary" class="tw-py-10">
@@ -266,6 +275,7 @@
     {{ content.field_game_summary }}
     </div>
   </div>
+  {% endif %}
 
 {# Highlights #}
   <a id="highlights"></a>
@@ -275,14 +285,25 @@
       {{ drupal_view('game_highlights', 'block_1') }}
     </div>
   </div>
+  <img class="tw-w-screen tw-float-left" src="/themes/custom/dynasty/images/divide-gray.png" />
 
 {# Game Video #}
 {% if content.field_game_video|render %}
   <div id="game-summary" class="tw-py-10">
     <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Full Game Video</h2>
     <div id="full-video" class="tw-w-1/2 tw-m-auto tw-pt-10">
-    {{ content.field_game_video }}
+      {{ content.field_game_video }}
+    </div>
   </div>
 {% endif %}
 
+  {# Other Videos #}
+  {% if content.field_other_media|render %}
+    <div id="other-media" class="tw-py-10">
+      <h2 class="tw-uppercase tw-font-light tw-text-center tw-text-xl">Other Videos</h2>
+      <div id="other-videos" class="tw-w-1/2 tw-m-auto tw-pt-10">
+        {{ content.field_other_media }}
+      </div>
+    </div>
+  {% endif %}
 </article>

@@ -34,7 +34,7 @@ class TeamSelectForm extends FormBase {
       '#options' => $options,
       '#empty_option' => 'Select a team',
       '#wrapper_attributes' => [
-        'class' => ['tw-h-12 tw-w-64']
+        'class' => ['h-12 w-64']
       ],
     ];
 
@@ -42,7 +42,7 @@ class TeamSelectForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Go'),
       '#attributes' => [
-        'class' => ['tw-h-12 tw-px-8 tw-text-white tw-bg-red-pats tw-border tw-border-transparent hover:tw-bg-red-800']
+        'class' => ['h-12 px-8 text-white bg-red-pats border border-transparent hover:bg-red-800']
       ],
     );
     return $form;

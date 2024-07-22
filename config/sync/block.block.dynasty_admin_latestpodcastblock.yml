@@ -1,0 +1,25 @@
+uuid: f8baae34-6e0e-41db-afdc-7fbb31bdf585
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_module
+    - system
+  theme:
+    - dynasty_admin
+id: dynasty_admin_latestpodcastblock
+theme: dynasty_admin
+region: help
+weight: -11
+provider: null
+plugin: latest_podcast_block
+settings:
+  id: latest_podcast_block
+  label: 'Latest Podcast Block'
+  label_display: '0'
+  provider: dynasty_module
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /podcast

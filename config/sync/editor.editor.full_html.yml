@@ -52,10 +52,10 @@ settings:
             - ShowBlocks
             - Source
   plugins:
-    stylescombo:
-      styles: "h2.tw-bg-blue-pats.tw-font-light.tw-py-3.tw-my-3.tw-text-2xl.tw-text-center.tw-text-white|Header Block (blue)\r\na.tw-bg-blue-pats.tw-no-underline.tw-p-4.tw-text-center.tw-text-white|Button Link (blue)"
     language:
       language_list: un
+    stylescombo:
+      styles: "h2.mb-6.text-3xl.uppercase.font-light.text-center|Section Header\r\nh2.bg-blue-pats.font-light.py-3.my-3.text-2xl.text-center.text-white|Header Block (blue)\r\na.bg-blue-pats.no-underline.p-4.text-center.text-white|Button Link (blue)"
     drupallink:
       linkit_enabled: false
       linkit_profile: ''

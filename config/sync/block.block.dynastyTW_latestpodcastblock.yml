@@ -1,0 +1,25 @@
+uuid: be6b2441-a902-4760-b861-198289859338
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_module
+    - system
+  theme:
+    - dynastyTW
+id: dynastyTW_latestpodcastblock
+theme: dynastyTW
+region: help
+weight: -11
+provider: null
+plugin: latest_podcast_block
+settings:
+  id: latest_podcast_block
+  label: 'Latest Podcast Block'
+  label_display: '0'
+  provider: dynasty_module
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /podcast

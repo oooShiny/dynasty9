@@ -40,19 +40,15 @@
 <script src="https://muse.ai/static/js/embed-player.min.js"></script>
 
 {% for item in items %}
-  {% set muse_id = video_id %}
-  {% set vid = 'vid-' ~ muse_id %}
-
-  <div id="{{ vid }}" class="tw-mx-auto lg:tw-w-1/2"></div>
-  <script>
-    MusePlayer({
-      container: document.getElementById('{{ vid }}'),
-      video: '{{ muse_id }}',
-      title: false,
-      search: false,
-      links: true,
-      logo: false,
-      sizing: '100%',
-    });
-  </script>
+  {% if video_id %}
+    {% set muse_id = video_id %}
+    {% set vid = 'vid-' ~ muse_id %}
+    <div class="muse-video-player"
+         data-video="{{ muse_id }}"
+         data-width="100%"
+         data-autoplay="visible"
+         data-controls="false"></div>
+  {% else %}
+    <div class="muse-video-player">&nbsp;</div>
+  {% endif %}
 {% endfor %}

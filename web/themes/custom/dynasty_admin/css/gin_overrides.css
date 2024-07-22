@@ -1,0 +1,8 @@
+.layout-paragraphs-field .layout-paragraphs-layout .layout, .erl-field .erl-layout .layout {
+  background: transparent !important;
+}
+.layout-paragraphs-item, .active-items .layout-paragraphs-item, .layout-paragraphs-field.is-moving .layout-paragraphs-item:hover, .erl-item, .erl-field .erl-layout .erl-item, .erl-field .erl-disabled-items .erl-item {
+  background: transparent !important;
+  border: 4px dashed #fff !important;
+  background-image: none !important;
+}

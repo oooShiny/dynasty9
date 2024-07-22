@@ -1,0 +1,27 @@
+uuid: 015654af-a4a1-4e9f-96f5-50e391b1f4f0
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - dynasty_admin
+id: dynasty_admin_favoritepodcastblock
+theme: dynasty_admin
+region: help
+weight: -10
+provider: null
+plugin: 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
+settings:
+  id: 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
+  label: 'Favorite Podcast Block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /podcast

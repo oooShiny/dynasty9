@@ -1,0 +1,4 @@
+gin_overrides:
+  css:
+    theme:
+      css/gin_overrides.css: {}

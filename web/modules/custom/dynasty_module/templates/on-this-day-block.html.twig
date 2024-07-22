@@ -25,25 +25,25 @@
  * @see template_preprocess_block()
  */
 #}
-<h2 class="tw-mb-6 tw-text-3xl tw-uppercase tw-font-light"><a href="/calendar">On This Day:</a> {{ 'now'|date('F jS') }}</h2>
+<h2 class="text-center mb-6 text-3xl uppercase font-light"><a href="/calendar">On This Day:</a> {{ 'now'|date('F jS') }}</h2>
 {% if games is not empty %}
-<div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
+<div class="md:flex justify-evenly lg:gap-2">
   {% block content %}
     {% for game in games_highlights %}
-      <div class="md:tw-w-1/4">
-        <div class="tw-font-bold tw-text-center">
+      <div class="md:w-1/4">
+        <div class="font-bold text-center">
           <a href="{{ game.alias }}">
           {{ game.season }}
           {{ game.week }}
           </a>
         </div>
 
-        <div class="tw-flex tw-pb-1">
-          <div class="{{ game.css }} tw-w-1/2 tw-text-center">
+        <div class="flex pb-1">
+          <div class="{{ game.css }} w-1/2 text-center">
             <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
             <div>{{ game.opp_score }}</div>
           </div>
-          <div class="patriots tw-w-1/2 tw-text-center">
+          <div class="patriots w-1/2 text-center">
             <div>Patriots</div>
             <div>{{ game.pats_score }}</div>
           </div>
@@ -70,26 +70,26 @@
       {#  Start another row after 4 highlights. #}
       {% if loop.index % 4 == 0 %}
         </div>
-        <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
+        <div class="md:flex justify-evenly lg:gap-2">
       {% endif %}
     {% endfor %}
     </div>
-    <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
+    <div class="md:flex justify-evenly lg:gap-2">
     {% for game in games %}
-      <div class="md:tw-w-1/4">
-        <div class="tw-font-bold tw-text-center">
+      <div class="md:w-1/4">
+        <div class="font-bold text-center">
           <a href="{{ game.alias }}">
             {{ game.season }}
             {{ game.week }}
           </a>
         </div>
 
-        <div class="tw-flex tw-pb-1">
-          <div class="{{ game.css }} tw-w-1/2 tw-text-center">
+        <div class="flex pb-1">
+          <div class="{{ game.css }} w-1/2 text-center">
             <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
             <div>{{ game.opp_score }}</div>
           </div>
-          <div class="patriots tw-w-1/2 tw-text-center">
+          <div class="patriots w-1/2 text-center">
             <div>Patriots</div>
             <div>{{ game.pats_score }}</div>
           </div>
@@ -98,7 +98,7 @@
       {#  Start another row after 4 highlights. #}
       {% if loop.index % 4 == 0 %}
         </div>
-        <div class="md:tw-flex tw-justify-evenly lg:tw-gap-2">
+        <div class="md:flex justify-evenly lg:gap-2">
       {% endif %}
     {% endfor %}
   {% endblock %}

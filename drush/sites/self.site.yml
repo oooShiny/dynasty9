@@ -1,0 +1,6 @@
+# File: self.site.yml
+live:
+  host: 161.35.13.171
+  user: root
+  root: /var/www/html/
+  uri: https://patsdynasty.com
