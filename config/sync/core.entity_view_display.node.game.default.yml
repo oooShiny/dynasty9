@@ -54,7 +54,6 @@ dependencies:
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
-    - field.field.node.game.field_yoast_seo
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -65,7 +64,6 @@ dependencies:
     - options
     - text
     - user
-    - yoast_seo
 id: node.game.default
 targetEntityType: node
 bundle: game
@@ -518,13 +516,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 37
-    region: content
-  field_yoast_seo:
-    type: yoastseo_formatter
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 42
     region: content
   field_youtube_highlights:
     type: link

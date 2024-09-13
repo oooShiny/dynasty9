@@ -8,9 +8,9 @@ dependencies:
     - node
     - views
   theme:
-    - dynasty_tw
+    - dynastyTW
 id: dynastyTW_views_block__player_highlights_block_1
-theme: dynasty_tw
+theme: dynastyTW
 region: content
 weight: -6
 provider: null

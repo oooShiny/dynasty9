@@ -168,7 +168,6 @@ display:
           title: ''
           default_argument_type: node
           default_argument_options: {  }
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -212,11 +211,16 @@ display:
             operator_limit_selection: false
             operator_list: {  }
       style:
-        type: default
+        type: grid
         options:
-          row_class: ''
-          default_row_class: false
           uses_fields: false
+          columns: 4
+          automatic_width: false
+          alignment: horizontal
+          row_class_custom: 'flex gap-2'
+          row_class_default: false
+          col_class_custom: 'md:w-1/2 lg:w-1/4'
+          col_class_default: false
       row:
         type: 'entity:node'
         options:
@@ -249,7 +253,11 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
     cache_metadata:
       max-age: -1
       contexts:

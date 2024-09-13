@@ -55,7 +55,6 @@ dependencies:
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
-    - field.field.node.game.field_yoast_seo
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -208,6 +207,5 @@ hidden:
   field_uniform: true
   field_vegas_line: true
   field_weekday: true
-  field_yoast_seo: true
   langcode: true
   search_api_excerpt: true

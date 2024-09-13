@@ -167,6 +167,22 @@
       <path value="$PROJECT_DIR$/web/modules/contrib/gutenberg/vendor/gutenberg/blocks" />
       <path value="$PROJECT_DIR$/web/modules/contrib/gutenberg/vendor/gutenberg/edit-post" />
       <path value="$PROJECT_DIR$/web/modules/contrib/gutenberg/vendor/gutenberg/token-list" />
+      <path value="$PROJECT_DIR$/vendor/halaxa/json-machine" />
+      <path value="$PROJECT_DIR$/vendor/mck89/peast" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/grasmash/yaml-cli" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/phootwork/lang" />
+      <path value="$PROJECT_DIR$/vendor/phootwork/collection" />
+      <path value="$PROJECT_DIR$/vendor/phpowermove/docblock" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/starkbank/ecdsa" />
+      <path value="$PROJECT_DIR$/vendor/tubalmartin/cssmin" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

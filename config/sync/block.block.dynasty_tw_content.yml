@@ -1,0 +1,22 @@
+uuid: 2b586c97-6574-4927-8695-3a31b23c355d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - dynasty_tw
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: dynasty_tw_content
+theme: dynasty_tw
+region: content
+weight: -11
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

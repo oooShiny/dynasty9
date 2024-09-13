@@ -1,0 +1,22 @@
+uuid: 2e6d873c-6daa-4cca-8c6d-652328b7804a
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - dynasty_tw
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: dynasty_tw_help
+theme: dynasty_tw
+region: help
+weight: -9
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

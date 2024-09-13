@@ -5,9 +5,9 @@ dependencies:
   module:
     - dynasty_module
   theme:
-    - dynasty_tw
+    - dynastyTW
 id: dynastyTW_footerseasonsblock
-theme: dynasty_tw
+theme: dynastyTW
 region: footer
 weight: -16
 provider: null

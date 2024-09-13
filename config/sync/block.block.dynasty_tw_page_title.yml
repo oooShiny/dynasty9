@@ -1,0 +1,20 @@
+uuid: c8189452-4494-4e93-90f2-6d9b1bfaaf2a
+langcode: en
+status: true
+dependencies:
+  theme:
+    - dynasty_tw
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: dynasty_tw_page_title
+theme: dynasty_tw
+region: highlighted
+weight: -13
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

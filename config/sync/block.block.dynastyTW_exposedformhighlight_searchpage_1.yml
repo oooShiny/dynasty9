@@ -8,9 +8,9 @@ dependencies:
     - system
     - views
   theme:
-    - dynasty_tw
+    - dynastyTW
 id: dynastyTW_exposedformhighlight_searchpage_1
-theme: dynasty_tw
+theme: dynastyTW
 region: content
 weight: -11
 provider: null

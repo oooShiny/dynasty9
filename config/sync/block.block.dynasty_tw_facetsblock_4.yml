@@ -1,0 +1,72 @@
+uuid: 98c58e28-9f59-4b9f-8950-36c6968ddb0e
+langcode: en
+status: true
+dependencies:
+  module:
+    - facets_block
+    - node
+  theme:
+    - dynasty_tw
+id: dynasty_tw_facetsblock_4
+theme: dynasty_tw
+region: sidebar_first
+weight: -9
+provider: null
+plugin: facets_block
+settings:
+  id: facets_block
+  label: 'Player Search Filters'
+  label_display: '0'
+  provider: facets_block
+  show_title: true
+  exclude_empty_facets: false
+  hide_empty_block: false
+  facets_to_include:
+    'facet_block:player_play_type': 'facet_block:player_play_type'
+    'facet_block:player_opponent': 'facet_block:player_opponent'
+    'facet_block:player_td_scored': 'facet_block:player_td_scored'
+    'facet_block:player_yards_gained': 'facet_block:player_yards_gained'
+    'facet_block:player_quarter': 'facet_block:player_quarter'
+    'facet_block:player_down': 'facet_block:player_down'
+    'facet_block:player_season': 'facet_block:player_season'
+    'facet_block:player_week': 'facet_block:player_week'
+    'facet_block:game_opponent': '0'
+    'facet_block:game_opposing_coach': '0'
+    'facet_block:game_home_away': '0'
+    'facet_block:game_season': '0'
+    'facet_block:game_opp_score': '0'
+    'facet_block:player_s_involved': '0'
+    'facet_block:game_pats_score': '0'
+    'facet_block:score_differential': '0'
+    'facet_block:play_type': '0'
+    'facet_block:game_week': '0'
+    'facet_block:opponent': '0'
+    'facet_block:after_bye_we': '0'
+    'facet_block:td_scored': '0'
+    'facet_block:podcast_season': '0'
+    'facet_block:yards_gained': '0'
+    'facet_block:overtime': '0'
+    'facet_block:air_yards': '0'
+    'facet_block:down': '0'
+    'facet_block:quarter': '0'
+    'facet_block:podcast_opponent': '0'
+    'facet_block:brady_era_game': '0'
+    'facet_block:play_season': '0'
+    'facet_block:playoff': '0'
+    'facet_block:week': '0'
+    'facet_block:play_tag': '0'
+    'facet_block:temperature': '0'
+    'facet_block:starting_qb': '0'
+    'facet_block:qb_comp': '0'
+    'facet_block:qb_att': '0'
+    'facet_block:qb_tds': '0'
+    'facet_block:qb_ints': '0'
+  add_js_classes: true
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      player: player

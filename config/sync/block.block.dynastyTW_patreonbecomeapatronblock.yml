@@ -5,9 +5,9 @@ dependencies:
   module:
     - patreon_user
   theme:
-    - dynasty_tw
+    - dynastyTW
 id: dynastyTW_patreonbecomeapatronblock
-theme: dynasty_tw
+theme: dynastyTW
 region: footer_menu
 weight: -15
 provider: null

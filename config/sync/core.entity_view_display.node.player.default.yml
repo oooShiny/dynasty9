@@ -21,25 +21,16 @@ mode: default
 content:
   field_birthday:
     type: datetime_default
-    label: above
+    label: hidden
     settings:
       timezone_override: ''
-      format_type: medium
+      format_type: basic_date
     third_party_settings: {  }
-    weight: 4
-    region: content
-  field_jersey_number:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_meta_tags:
     type: metatag_empty_formatter
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 1
@@ -49,7 +40,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   links:
     settings: {  }
@@ -57,6 +48,7 @@ content:
     weight: 0
     region: content
 hidden:
+  field_jersey_number: true
   field_player_position: true
   langcode: true
   search_api_excerpt: true

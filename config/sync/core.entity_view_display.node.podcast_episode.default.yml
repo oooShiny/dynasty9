@@ -18,14 +18,12 @@ dependencies:
     - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_total_downloads
     - field.field.node.podcast_episode.field_transcription
-    - field.field.node.podcast_episode.field_yoast_seo
     - node.type.podcast_episode
   module:
     - entity_reference_revisions
     - metatag
     - text
     - user
-    - yoast_seo
 id: node.podcast_episode.default
 targetEntityType: node
 bundle: podcast_episode
@@ -153,13 +151,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 108
-    region: content
-  field_yoast_seo:
-    type: yoastseo_formatter
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 111
     region: content
   links:
     settings: {  }

@@ -1,0 +1,32 @@
+uuid: 675dabb9-5336-43c0-8086-9185528e13ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.player_page_highlight_search
+  module:
+    - node
+    - views
+  theme:
+    - dynasty_tw
+id: dynasty_tw_player_page_highlight_search_block
+theme: dynasty_tw
+region: content
+weight: -7
+provider: null
+plugin: 'views_block:player_page_highlight_search-block_1'
+settings:
+  id: 'views_block:player_page_highlight_search-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      player: player

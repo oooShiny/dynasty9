@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - dynasty_tw
+    - dynastyTW
 _core:
   default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
 id: dynastyTW_page_title
-theme: dynasty_tw
+theme: dynastyTW
 region: highlighted
 weight: -13
 provider: null

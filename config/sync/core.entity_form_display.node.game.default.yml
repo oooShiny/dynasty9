@@ -54,7 +54,6 @@ dependencies:
     - field.field.node.game.field_vegas_line
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
-    - field.field.node.game.field_yoast_seo
     - field.field.node.game.field_youtube_highlights
     - node.type.game
   module:
@@ -68,7 +67,6 @@ dependencies:
     - path
     - select2
     - text
-    - yoast_seo
 third_party_settings:
   field_group:
     group_boxscore:
@@ -642,13 +640,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_yoast_seo:
-    type: yoast_seo_widget
-    weight: 12
-    region: content
-    settings:
-      body: body
-    third_party_settings: {  }
   field_youtube_highlights:
     type: link_default
     weight: 27
@@ -667,6 +658,11 @@ content:
   path:
     type: path
     weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }

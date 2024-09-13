@@ -6,9 +6,9 @@ dependencies:
     - facets_block
     - node
   theme:
-    - dynasty_tw
+    - dynastyTW
 id: dynastyTW_facetsblock_4
-theme: dynasty_tw
+theme: dynastyTW
 region: sidebar_first
 weight: -8
 provider: null

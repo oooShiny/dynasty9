@@ -1,0 +1,22 @@
+uuid: 9a0c1777-ef8d-4813-a4de-70a8e8dbb222
+langcode: en
+status: true
+dependencies:
+  theme:
+    - dynasty_tw
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: dynasty_tw_local_tasks
+theme: dynasty_tw
+region: content
+weight: -15
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

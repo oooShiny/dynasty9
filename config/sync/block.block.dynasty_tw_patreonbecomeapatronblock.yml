@@ -1,0 +1,22 @@
+uuid: 63206698-bc42-41fd-877c-9adc837a65f9
+langcode: en
+status: true
+dependencies:
+  module:
+    - patreon
+  theme:
+    - dynasty_tw
+id: dynasty_tw_patreonbecomeapatronblock
+theme: dynasty_tw
+region: footer_menu
+weight: -15
+provider: null
+plugin: patreon_become_block
+settings:
+  id: patreon_become_block
+  label: 'Patreon Become a Patron block'
+  label_display: '0'
+  provider: patreon_user
+  minimum_amount: '0'
+  log_user_in: true
+visibility: {  }

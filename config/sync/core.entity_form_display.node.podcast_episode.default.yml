@@ -18,7 +18,6 @@ dependencies:
     - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_total_downloads
     - field.field.node.podcast_episode.field_transcription
-    - field.field.node.podcast_episode.field_yoast_seo
     - node.type.podcast_episode
   module:
     - field_group
@@ -26,7 +25,6 @@ dependencies:
     - paragraphs
     - path
     - text
-    - yoast_seo
 third_party_settings:
   field_group:
     group_transcript:
@@ -184,13 +182,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_yoast_seo:
-    type: yoast_seo_widget
-    weight: 18
-    region: content
-    settings:
-      body: body
-    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -210,6 +201,11 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox

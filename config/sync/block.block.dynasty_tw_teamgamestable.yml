@@ -1,0 +1,30 @@
+uuid: 1168999d-01be-4a4b-b2f3-a247f7ba15d5
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_module
+    - node
+  theme:
+    - dynasty_tw
+id: dynasty_tw_teamgamestable
+theme: dynasty_tw
+region: content
+weight: -8
+provider: null
+plugin: team_games_table
+settings:
+  id: team_games_table
+  label: 'Team Games Table'
+  label_display: '0'
+  provider: dynasty_module
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      team: team

@@ -11,10 +11,14 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
+      - heading
       - style
+      - showBlocks
+      - '|'
       - bold
       - italic
       - underline
+      - removeFormat
       - '|'
       - bulletedList
       - numberedList
@@ -32,6 +36,13 @@ settings:
         - justify
         - left
         - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
     ckeditor5_imageResize:
       allow_resize: true
     ckeditor5_list:
@@ -43,6 +54,12 @@ settings:
       allowed_tags: {  }
     ckeditor5_style:
       styles:
+        -
+          label: 'Paragraph Text'
+          element: '<p class="py-5 font-light text-xl">'
+        -
+          label: 'Centered Text'
+          element: '<p class="text-center">'
         -
           label: 'Section Header'
           element: '<h2 class="section-header">'

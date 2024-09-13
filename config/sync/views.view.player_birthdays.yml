@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.player.field_birthday
     - node.type.player
+    - system.menu.admin
   module:
     - datetime
     - node
@@ -288,8 +289,21 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
       path: admin/dynasty/player-birthdays
+      menu:
+        type: normal
+        title: 'Player Birthdays'
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: admin
+        parent: 'menu_link_content:d6ce38d5-acfe-4d67-8d35-a6d339321723'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
