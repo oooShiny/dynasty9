@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\migrate_plus;
 
 use Drupal\Core\Plugin\PluginBase;
@@ -20,19 +22,17 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
    *
    * @var string[]
    */
-  protected $urls;
+  protected ?array $urls;
 
   /**
    * Index of the currently-open url.
-   *
-   * @var int
    */
-  protected $activeUrl;
+  protected ?int $activeUrl = NULL;
 
   /**
    * String indicating how to select an item's data from the source.
    *
-   * @var string
+   * @var string|int
    */
   protected $itemSelector;
 
@@ -45,17 +45,13 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
 
   /**
    * Value of the ID for the current item when iterating.
-   *
-   * @var string
    */
-  protected $currentId = NULL;
+  protected ?array $currentId = NULL;
 
   /**
    * The data retrieval client.
-   *
-   * @var \Drupal\migrate_plus\DataFetcherPluginInterface
    */
-  protected $dataFetcher;
+  protected DataFetcherPluginInterface $dataFetcher;
 
   /**
    * {@inheritdoc}
@@ -63,23 +59,20 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
   public function __construct(array $configuration, $plugin_id, $plugin_definition) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->urls = $configuration['urls'];
-    $this->itemSelector = $configuration['item_selector'];
+    $this->itemSelector = $configuration['item_selector'] ?? '';
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     return new static($configuration, $plugin_id, $plugin_definition);
   }
 
   /**
    * Returns the initialized data fetcher plugin.
-   *
-   * @return \Drupal\migrate_plus\DataFetcherPluginInterface
-   *   The data fetcher plugin.
    */
-  public function getDataFetcherPlugin() {
+  public function getDataFetcherPlugin(): DataFetcherPluginInterface {
     if (!isset($this->dataFetcher)) {
       $this->dataFetcher = \Drupal::service('plugin.manager.migrate_plus.data_fetcher')->createInstance($this->configuration['data_fetcher_plugin'], $this->configuration);
     }
@@ -89,15 +82,15 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
   /**
    * {@inheritdoc}
    */
-  public function rewind() {
+  public function rewind(): void {
     $this->activeUrl = NULL;
     $this->next();
   }
 
   /**
-   * Implementation of Iterator::next().
+   * {@inheritdoc}
    */
-  public function next() {
+  public function next(): void {
     $this->currentItem = $this->currentId = NULL;
     if (is_null($this->activeUrl)) {
       if (!$this->nextSource()) {
@@ -129,26 +122,18 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
    *
    * @param string $url
    *   URL to open.
-   *
-   * @return bool
-   *   TRUE if the URL was successfully opened, FALSE otherwise.
    */
-  abstract protected function openSourceUrl($url);
+  abstract protected function openSourceUrl(string $url): bool;
 
   /**
    * Retrieves the next row of data. populating currentItem.
-   *
-   * Retrieves from the open source URL.
    */
-  abstract protected function fetchNextRow();
+  abstract protected function fetchNextRow(): void;
 
   /**
    * Advances the data parser to the next source url.
-   *
-   * @return bool
-   *   TRUE if a valid source URL was opened
    */
-  protected function nextSource() {
+  protected function nextSource(): bool {
     if (empty($this->urls)) {
       return FALSE;
     }
@@ -166,6 +151,9 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
       }
 
       if ($this->openSourceUrl($this->urls[$this->activeUrl])) {
+        if (!empty($this->configuration['pager'])) {
+          $this->addNextUrls($this->activeUrl);
+        }
         // We have a valid source.
         return TRUE;
       }
@@ -175,9 +163,39 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
   }
 
   /**
+   * Add next page of source data following the active URL.
+   *
+   * @param int $activeUrl
+   *   The index within the source URL array to insert the next URL resource.
+   *   This is parameterized to enable custom plugins to control the ordering of
+   *   next URLs injected into the source URL backlog.
+   */
+  protected function addNextUrls(int $activeUrl = 0): void {
+    $next_urls = $this->getNextUrls($this->urls[$this->activeUrl]);
+
+    if (!empty($next_urls)) {
+      array_splice($this->urls, $activeUrl + 1, 0, $next_urls);
+      $this->urls = array_values(array_unique($this->urls));
+    }
+  }
+
+  /**
+   * Collected the next urls from a paged response.
+   *
+   * @param string $url
+   *   URL of the currently active source.
+   *
+   * @return array
+   *   Array of URLs representing next paged resources.
+   */
+  protected function getNextUrls(string $url): array {
+    return $this->getDataFetcherPlugin()->getNextUrls($url);
+  }
+
+  /**
    * {@inheritdoc}
    */
-  public function current() {
+  public function current(): mixed {
     return $this->currentItem;
   }
 
@@ -193,26 +211,22 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
   /**
    * {@inheritdoc}
    */
-  public function key() {
+  public function key(): ?array {
     return $this->currentId;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function valid() {
+  public function valid(): bool {
     return !empty($this->currentItem);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function count() {
-    $count = 0;
-    foreach ($this as $item) {
-      $count++;
-    }
-    return $count;
+  public function count(): int {
+    return iterator_count($this);
   }
 
   /**
@@ -221,7 +235,7 @@ abstract class DataParserPluginBase extends PluginBase implements DataParserPlug
    * @return string[]
    *   Array of selectors, keyed by field name.
    */
-  protected function fieldSelectors() {
+  protected function fieldSelectors(): array {
     $fields = [];
     foreach ($this->configuration['fields'] as $field_info) {
       if (isset($field_info['selector'])) {

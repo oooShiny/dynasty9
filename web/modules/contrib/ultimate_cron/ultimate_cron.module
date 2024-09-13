@@ -1,4 +1,8 @@
 <?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Database\Database;
+
 /**
  * @file
  * Ultimate Cron. Extend cron functionality in Drupal.
@@ -159,7 +163,7 @@ function ultimate_cron_hook_info() {
  * Implements hook_help().
  *
  */
-function ultimate_cron_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match) {
+function ultimate_cron_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.ultimate_cron':
       // Return a line-break version of the module README.
@@ -256,5 +260,5 @@ function _ultimate_cron_multi_column_sort($a, $b) {
  *   Connection target.
  */
 function _ultimate_cron_get_transactional_safe_connection() {
-  return !\Drupal::config('ultimate_cron.settings')->get('bypass_transactional_safe_connection') && \Drupal\Core\Database\Database::getConnection()->inTransaction() ? 'ultimate_cron' : 'default';
+  return !\Drupal::config('ultimate_cron.settings')->get('bypass_transactional_safe_connection') && Database::getConnection()->inTransaction() ? 'ultimate_cron' : 'default';
 }

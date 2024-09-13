@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Core\Url;
@@ -9,8 +11,9 @@ use Drupal\node\Entity\NodeType;
  * JSON:API integration test for the "NodeType" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class NodeTypeTest extends ResourceTestBase {
+class NodeTypeTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -106,6 +109,7 @@ class NodeTypeTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
   /**

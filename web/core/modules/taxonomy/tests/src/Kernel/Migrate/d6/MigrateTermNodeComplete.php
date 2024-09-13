@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\taxonomy\Kernel\Migrate\d6;
 
 use Drupal\Tests\migrate_drupal\Kernel\d6\MigrateDrupal6TestBase;
@@ -20,8 +22,6 @@ class MigrateTermNodeComplete extends MigrateDrupal6TestBase {
     'content_translation',
     'language',
     'menu_ui',
-    // A requirement for d6_node_translation.
-    'migrate_drupal_multilingual',
     'taxonomy',
   ];
 
@@ -49,7 +49,7 @@ class MigrateTermNodeComplete extends MigrateDrupal6TestBase {
   /**
    * Tests the Drupal 6 term-node association to Drupal 8 migration.
    */
-  public function testTermNode() {
+  public function testTermNode(): void {
     $this->container->get('entity_type.manager')
       ->getStorage('node')
       ->resetCache([1, 2]);

@@ -4,6 +4,7 @@ namespace Drupal\advagg_mod\Asset;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Component\Utility\Crypt;
+use Drupal\Core\Extension\ExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
@@ -33,6 +34,13 @@ class DeferJs {
   protected $moduleHandler;
 
   /**
+   * The module extension list service.
+   *
+   * @var \Drupal\Core\Extension\ExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
    * A list of file cids to skip.
    *
    * @var array
@@ -46,16 +54,19 @@ class DeferJs {
    *   The config factory.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The Drupal module handler.
+   * @param ExtensionList $module_extension_list
+   *   The module extension list service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ExtensionList $module_extension_list) {
     $this->deferType = $config_factory->get('advagg_mod.settings')->get('css_defer_js_code');
     $this->counter = $config_factory->get('advagg.settings')->get('global_counter');
     $this->moduleHandler = $module_handler;
     $this->skipList = [];
+    $this->moduleExtensionList = $module_extension_list;
 
     // Admin Toolbar 8x fails when deferred.
     if ($this->moduleHandler->moduleExists('admin_toolbar')) {
-      $this->skipList[] = Crypt::hashBase64(drupal_get_path('module', 'admin_toolbar') . '/js/admin_toolbar.js' . $this->counter);
+      $this->skipList[] = Crypt::hashBase64($this->moduleExtensionList->getPath('admin_toolbar') . '/js/admin_toolbar.js' . $this->counter);
     }
   }
 

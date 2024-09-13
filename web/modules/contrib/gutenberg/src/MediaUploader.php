@@ -5,6 +5,7 @@ namespace Drupal\gutenberg;
 use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Environment;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Utility\Token;
 use Drupal\editor\Entity\Editor;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -23,13 +24,21 @@ class MediaUploader implements MediaUploaderInterface {
   protected $fileSystem;
 
   /**
+   * Drupal token service container.
+   *
+   * @var \Drupal\Core\Utility\Token
+   */
+  protected $token;
+
+  /**
    * MediaUploader constructor.
    *
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   The file system service.
    */
-  public function __construct(FileSystemInterface $file_system) {
+  public function __construct(FileSystemInterface $file_system, Token $token) {
     $this->fileSystem = $file_system;
+    $this->token = $token;
   }
 
   /**
@@ -37,9 +46,12 @@ class MediaUploader implements MediaUploaderInterface {
    */
   public function upload(string $form_field_name, UploadedFile $uploaded_file, Editor $editor, array $file_settings = []) {
     $image_settings = $editor->getImageUploadSettings();
-    // @todo use the relevant media file settings over the Editor's "Image" plugin one?
-    //   Or ultimately just use Drupal's builtin file_managed in a modal to
-    //   handle all of this logic like CKeditor does.
+
+    $image_settings['directory'] = $this->token->replace($file_settings['file_directory'] ?: $image_settings['directory']);
+    $image_settings['scheme'] = $file_settings['uri_scheme'] ?: $image_settings['scheme'];
+    $image_settings['max_size'] = $file_settings['max_filesize'] ?: $image_settings['max_size'];
+    $image_settings['max_dimensions'] = $file_settings['max_resolution'] ?: $image_settings['max_dimensions'];
+
     $destination = $image_settings['scheme'] . '://' . $image_settings['directory'];
 
     if (!$this->fileSystem->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY)) {
@@ -57,13 +69,7 @@ class MediaUploader implements MediaUploaderInterface {
       else {
         $max_dimensions = 0;
       }
-      if (version_compare(\Drupal::VERSION, '9.1', '<')) {
-        // @see https://www.drupal.org/node/3162663
-        $max_filesize = min(Bytes::toInt($image_settings['max_size']), Environment::getUploadMaxSize());
-      }
-      else {
-        $max_filesize = min(Bytes::toNumber($image_settings['max_size']), Environment::getUploadMaxSize());
-      }
+      $max_filesize = min(Bytes::toNumber($image_settings['max_size']), Environment::getUploadMaxSize());
 
       $validators['file_validate_size'] = [$max_filesize];
       $validators['file_validate_image_resolution'] = [$max_dimensions];

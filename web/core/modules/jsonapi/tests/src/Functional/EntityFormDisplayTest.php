@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
@@ -10,8 +12,9 @@ use Drupal\node\Entity\NodeType;
  * JSON:API integration test for the "EntityFormDisplay" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class EntityFormDisplayTest extends ResourceTestBase {
+class EntityFormDisplayTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -173,6 +176,7 @@ class EntityFormDisplayTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
   /**

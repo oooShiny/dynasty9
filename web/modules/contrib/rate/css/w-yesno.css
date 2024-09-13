@@ -57,7 +57,7 @@ div.yesno-rating-wrapper > div > div.rating-option-result {
   vertical-align: baseline;
 }
 
-input.yesno-rating-input {
+input.yesno-rating-input[type="radio"] {
   display: none;
 }
 

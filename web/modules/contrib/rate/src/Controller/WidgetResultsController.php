@@ -6,6 +6,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\NodeInterface;
+use Drupal\rate\Plugin\RateWidgetBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,13 +23,23 @@ class WidgetResultsController extends ControllerBase {
   protected $entityTypeManager;
 
   /**
+   * The rate widget base service.
+   *
+   * @var \Drupal\rate\Plugin\RateWidgetBase
+   */
+  protected $rateWidgetBase;
+
+  /**
    * Constructs an EntityUntranslatableFieldsConstraintValidator object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param Drupal\rate\Plugin\RateWidgetBase $rate_widget_base
+   *   The rate widget base service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, RateWidgetBase $rate_widget_base) {
     $this->entityTypeManager = $entity_type_manager;
+    $this->rateWidgetBase = $rate_widget_base;
   }
 
   /**
@@ -36,7 +47,8 @@ class WidgetResultsController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('rate.vote_widget_base')
     );
   }
 
@@ -70,7 +82,37 @@ class WidgetResultsController extends ControllerBase {
         '#type' => '#markup',
         '#markup' => '<strong>' . $widget_variables->label() . '</strong>',
       ];
-      $page[] = views_embed_view('rate_widgets_results', 'node_summary_block', $node->id(), $node->getEntityTypeId(), $widget);
+
+      // Show the results per voting option for this node.
+      $header = [
+        ['data' => $this->t('Option')],
+        ['data' => $this->t('Count'), 'class' => 'views-align-right'],
+        ['data' => $this->t('Sum'), 'class' => 'views-align-right'],
+      ];
+      $rows = [];
+      $options = $widget_variables->get('options');
+
+      // Get the aggregated results grouped by option.
+      $aggregation = 'COUNT';
+      $values_count = $this->rateWidgetBase->getVotes($node->getEntityTypeId(), $node->bundle(), $node->id(), 'updown', $widget_variables->get('value_type'), $widget_variables->id(), NULL, $aggregation);
+      $aggregation = 'SUM';
+      $values_sum = $this->rateWidgetBase->getVotes($node->getEntityTypeId(), $node->bundle(), $node->id(), 'updown', $widget_variables->get('value_type'), $widget_variables->id(), NULL, $aggregation);
+
+      // Build up the rows and add class to the cells.
+      foreach ($options as $id => $option) {
+        $count = $values_count[$option['value']] ?? 0;
+        $sum = isset($values_sum[$option['value']]) ? number_format($values_sum[$option['value']], 2) : '0.00';
+        $rows[] = [
+          ['data' => $option['label']],
+          ['data' => $count, 'class' => 'views-align-right'],
+          ['data' => $sum, 'class' => 'views-align-right'],
+        ];
+      }
+      $page[] = [
+        '#type' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+      ];
       $page[] = views_embed_view('rate_widgets_results', 'node_results_block', $node->id(), $node->getEntityTypeId(), $widget);
     }
 

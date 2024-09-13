@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Kernel\Plugin;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\user\Entity\User;
 use Drupal\views\Views;
 
@@ -69,8 +72,8 @@ abstract class RelationshipJoinTestBase extends PluginKernelTestBase {
   protected function viewsData() {
     $data = parent::viewsData();
     $data['views_test_data']['uid'] = [
-      'title' => t('UID'),
-      'help' => t('The test data UID'),
+      'title' => new TranslatableMarkup('UID'),
+      'help' => new TranslatableMarkup('The test data UID'),
       'relationship' => [
         'id' => 'standard',
         'base' => 'users_field_data',

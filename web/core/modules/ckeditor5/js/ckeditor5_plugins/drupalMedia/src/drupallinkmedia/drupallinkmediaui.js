@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// cSpell:words linkui
+// cspell:ignore linkui
 import { Plugin } from 'ckeditor5/src/core';
 import { LINK_KEYSTROKE } from '@ckeditor/ckeditor5-link/src/utils';
 import { ButtonView } from 'ckeditor5/src/ui';
@@ -8,7 +8,7 @@ import linkIcon from '../../../../../icons/link.svg';
 /**
  * The link media UI plugin.
  *
- * @internal
+ * @private
  */
 export default class DrupalLinkMediaUI extends Plugin {
   /**
@@ -60,7 +60,6 @@ export default class DrupalLinkMediaUI extends Plugin {
    */
   _createToolbarLinkMediaButton() {
     const { editor } = this;
-    const { t } = editor;
 
     editor.ui.componentFactory.add('drupalLinkMedia', (locale) => {
       const button = new ButtonView(locale);
@@ -69,7 +68,7 @@ export default class DrupalLinkMediaUI extends Plugin {
 
       button.set({
         isEnabled: true,
-        label: t('Link media'),
+        label: Drupal.t('Link media'),
         icon: linkIcon,
         keystroke: LINK_KEYSTROKE,
         tooltip: true,

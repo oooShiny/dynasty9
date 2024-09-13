@@ -116,7 +116,7 @@ class CacheLogger extends LoggerBase implements ContainerFactoryPluginInterface 
 
     $settings = $this->getConfiguration();
 
-    $expire = $settings['timeout'] != Cache::PERMANENT ? REQUEST_TIME + $settings['timeout'] : $settings['timeout'];
+    $expire = $settings['timeout'] != Cache::PERMANENT ? \Drupal::time()->getRequestTime() + $settings['timeout'] : $settings['timeout'];
 
     $this->cache->set('uc-name:' . $log_entry->name, $log_entry->lid, $expire);
     $this->cache->set('uc-lid:' . $log_entry->lid, $log_entry->getData(), $expire);

@@ -1,13 +1,19 @@
 {
   "extends": [
     "airbnb",
-    "plugin:prettier/recommended"
+    "airbnb/hooks",
+    "prettier"
   ],
   "root": true,
   "env": {
     "browser": true,
     "es6": true,
     "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "18.2.0"
+    }
   },
   "globals": {
     "Drupal": true,
@@ -23,10 +29,10 @@
     "Backbone": true,
     "Modernizr": true,
     "CKEDITOR": true,
-    "moment": true
+    "moment": true,
+    "once": true
   },
   "rules": {
-    "prettier/prettier": "error",
     "consistent-return": ["off"],
     "no-underscore-dangle": ["off"],
     "max-nested-callbacks": ["warn", 3],

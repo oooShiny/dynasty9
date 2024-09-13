@@ -22,6 +22,7 @@ class CronRule {
   static private $instances = array();
   private $last_run;
   private $next_run;
+  private $parsed;
 
   /**
    * Factory method for CronRule instance.
@@ -272,8 +273,8 @@ class CronRule {
    *   UNIX timestamp of last schedule time.
    */
   public function getLastSchedule() {
-    if (isset($this->last_ran)) {
-      return $this->last_ran;
+    if (isset($this->last_run)) {
+      return $this->last_run;
     }
 
     // Current time round to last minute.
@@ -369,9 +370,9 @@ class CronRule {
     }
 
     // Create UNIX timestamp from derived date+time.
-    $this->last_ran = mktime($hour, $minute, 0, $month, $day, $year);
+    $this->last_run = mktime($hour, $minute, 0, $month, $day, $year);
 
-    return $this->last_ran;
+    return $this->last_run;
   }
 
   /**
@@ -381,89 +382,33 @@ class CronRule {
    *   UNIX timestamp of next schedule time.
    */
   public function getNextSchedule() {
-    if (isset($this->next_run)) {
-      return $this->next_run;
-    }
-
-    $intervals = $this->getIntervals();
+    $time = $this->time;
     $last_schedule = $this->getLastSchedule();
+    $next_schedule = NULL;
 
-    $next['minutes'] = (int) date('i', $last_schedule);
-    $next['hours'] = date('G', $last_schedule);
-    $next['days'] = date('j', $last_schedule);
-    $next['months'] = date('n', $last_schedule);
-    $year = date('Y', $last_schedule);
+    // Do a binary search for the next schedule.
+    $interval = 86400 * 30;
+    $offset = $interval;
+    do {
+      $test = new CronRule($this->rule, $time + (int) $offset, $this->skew);
+      $schedule = $test->getLastSchedule();
 
-    $check_weekday = count($intervals['weekdays']) != 7;
-    $check_both = $check_weekday && (count($intervals['days']) != 31) ? TRUE : FALSE;
-    $days = $intervals['days'];
-    $intervals['days'] = $check_both ? range(31, 1) : $intervals['days'];
-
-    $ranges = self::$ranges;
-    unset($ranges['weekdays']);
-
-    foreach ($ranges as $type => $range) {
-      $found = array_keys($intervals[$type], $next[$type]);
-      $idx[$type] = reset($found);
-    }
-
-    reset($ranges);
-    while ($type = key($ranges)) {
-      next($ranges);
-      $idx[$type]--;
-      if ($idx[$type] < 0) {
-        $found = array_keys($intervals[$type], end($intervals[$type]));
-        $idx[$type] = reset($found);
-        if ($type == 'months') {
-          $year--;
-          reset($ranges);
-        }
-        continue;
+      $interval /= 2;
+      if ($schedule > $last_schedule) {
+        $next_schedule = $schedule;
+        $offset -= $interval;
       }
-
-      if ($type == 'days' && $check_weekday) {
-        // Check days and weekdays using and/or logic.
-        $date_array = getdate(mktime(
-          $intervals['hours'][$idx['hours']],
-          $intervals['minutes'][$idx['minutes']],
-          0,
-          $intervals['months'][$idx['months']],
-          $intervals['days'][$idx['days']],
-          $year
-        ));
-        if ($check_both) {
-          if (
-            !in_array($intervals['days'][$idx['days']], $days) &&
-            !isset($intervals['weekdays'][$date_array['wday']])
-          ) {
-            reset($ranges);
-            next($ranges);
-            next($ranges);
-            continue;
-          }
-        }
-        else {
-          if (!isset($intervals['weekdays'][$date_array['wday']])) {
-            reset($ranges);
-            next($ranges);
-            next($ranges);
-            continue;
-          }
-        }
+      elseif ($next_schedule) {
+        $offset += $interval;
       }
+      else {
+        // Increase interval by doubling up.
+        // (we've already halved it, so now we quadrouple it).
+        $offset = $interval *= 4;
+      }
+    } while ($interval > 30);
 
-      break;
-    }
-
-    $this->next_run = mktime(
-      $intervals['hours'][$idx['hours']],
-      $intervals['minutes'][$idx['minutes']],
-      0,
-      $intervals['months'][$idx['months']],
-      $intervals['days'][$idx['days']],
-      $year
-    );
-    return $this->next_run;
+    return $next_schedule;
   }
 
   /**

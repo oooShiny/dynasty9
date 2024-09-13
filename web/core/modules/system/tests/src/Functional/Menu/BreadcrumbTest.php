@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Functional\Menu;
 
 use Drupal\block\Entity\Block;
@@ -23,7 +25,14 @@ class BreadcrumbTest extends BrowserTestBase {
    *
    * @var array
    */
-  protected static $modules = ['menu_test', 'block'];
+  protected static $modules = [
+    'block',
+    'dblog',
+    'field_ui',
+    'filter_test',
+    'menu_test',
+    'olivero_test',
+  ];
 
   /**
    * An administrative user.
@@ -40,32 +49,42 @@ class BreadcrumbTest extends BrowserTestBase {
   protected $webUser;
 
   /**
-   * Test paths in the Standard profile.
-   *
-   * @var string
+   * {@inheritdoc}
    */
-  protected $profile = 'standard';
+  protected $defaultTheme = 'olivero';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
+    // Install 'claro' and configure it as administrative theme.
+    $this->container->get('theme_installer')->install(['claro']);
+    $this->config('system.theme')->set('admin', 'claro')->save();
+
+    $this->config('system.site')->set('page.front', '/node')->save();
     $perms = array_keys(\Drupal::service('user.permissions')->getPermissions());
     $this->adminUser = $this->drupalCreateUser($perms);
     $this->drupalLogin($this->adminUser);
 
     // This test puts menu links in the Tools menu and then tests for their
     // presence on the page, so we need to ensure that the Tools block will be
-    // displayed in the admin theme.
+    // displayed in the admin theme and olivero.
     $this->drupalPlaceBlock('system_menu_block:tools', [
       'region' => 'content',
       'theme' => $this->config('system.theme')->get('admin'),
+    ]);
+    $this->drupalPlaceBlock('system_menu_block:tools', [
+      'region' => 'content',
+      'theme' => 'olivero',
     ]);
   }
 
   /**
    * Tests breadcrumbs on node and administrative paths.
    */
-  public function testBreadCrumbs() {
+  public function testBreadCrumbs(): void {
     // Prepare common base breadcrumb elements.
     $home = ['' => 'Home'];
     $admin = $home + ['admin' => 'Administration'];
@@ -149,12 +168,10 @@ class BreadcrumbTest extends BrowserTestBase {
     $this->assertBreadcrumb("admin/config/content/formats/manage/$format_id/disable", $trail);
 
     // Verify node breadcrumbs (without menu link).
-    $node1 = $this->drupalCreateNode();
+    $node1 = $this->drupalCreateNode(['type' => $type]);
     $nid1 = $node1->id();
     $trail = $home;
     $this->assertBreadcrumb("node/$nid1", $trail);
-    // Also verify that the node does not appear elsewhere (e.g., menu trees).
-    $this->assertSession()->linkNotExists($node1->getTitle());
     // Also verify that the node does not appear elsewhere (e.g., menu trees).
     $this->assertSession()->linkNotExists($node1->getTitle());
 
@@ -216,16 +233,6 @@ class BreadcrumbTest extends BrowserTestBase {
     ];
     $this->drupalGet('node/' . $parent->id() . '/edit');
     $this->submitForm($edit, 'Save');
-    $expected = [
-      "node" => $link->getTitle(),
-    ];
-    $trail = $home + $expected;
-    $tree = $expected + [
-      'node/' . $parent->id() => $parent->menu['title'],
-    ];
-    $trail += [
-      'node/' . $parent->id() => $parent->menu['title'],
-    ];
 
     // Add a taxonomy term/tag to last node, and add a link for that term to the
     // Tools menu.
@@ -256,13 +263,13 @@ class BreadcrumbTest extends BrowserTestBase {
       }
       $parent_tid = $term->id();
     }
-    $parent_mlid = '';
+    $parent_menu_link_id = '';
     foreach ($tags as $name => $data) {
       $term = $data['term'];
       $edit = [
         'title[0][value]' => "$name link",
         'link[0][uri]' => "/taxonomy/term/{$term->id()}",
-        'menu_parent' => "$menu:{$parent_mlid}",
+        'menu_parent' => "$menu:{$parent_menu_link_id}",
         'enabled[value]' => 1,
       ];
       $this->drupalGet("admin/structure/menu/manage/{$menu}/add");
@@ -272,7 +279,7 @@ class BreadcrumbTest extends BrowserTestBase {
         'link.uri' => 'internal:/taxonomy/term/' . $term->id(),
       ]);
       $tags[$name]['link'] = reset($menu_links);
-      $parent_mlid = $tags[$name]['link']->getPluginId();
+      $parent_menu_link_id = $tags[$name]['link']->getPluginId();
     }
 
     // Verify expected breadcrumbs for menu links.
@@ -290,7 +297,7 @@ class BreadcrumbTest extends BrowserTestBase {
       $tree += [
         $link_path => $link->getTitle(),
       ];
-      $this->assertBreadcrumb($link_path, $trail, $term->getName(), $tree);
+      $this->assertBreadcrumb($link_path, $trail, $term->getName(), $tree, TRUE, 'menu__item--active-trail');
       // Ensure that the tagged node is found.
       $this->assertSession()->assertEscaped($parent->getTitle());
 
@@ -298,11 +305,7 @@ class BreadcrumbTest extends BrowserTestBase {
       // untranslated menu links automatically generated from menu router items
       // ('taxonomy/term/%') should never be translated and appear in any menu
       // other than the breadcrumb trail.
-      $elements = $this->xpath('//nav[@id=:menu]/descendant::a[@href=:href]', [
-        ':menu' => 'block-bartik-tools',
-        ':href' => Url::fromUri('base:' . $link_path)->toString(),
-      ]);
-      $this->assertCount(1, $elements, "Link to {$link_path} appears only once.");
+      $this->assertSession()->elementsCount('xpath', '//nav[contains(@class, "menu--tools")]/descendant::a[@href="' . Url::fromUri('base:' . $link_path)->toString() . '"]', 1);
 
       // Next iteration should expect this tag as parent link.
       // Note: Term name, not link name, due to taxonomy_term_page().
@@ -392,7 +395,7 @@ class BreadcrumbTest extends BrowserTestBase {
   /**
    * Tests AssertBreadcrumbTrait works as expected.
    */
-  public function testAssertBreadcrumbTrait() {
+  public function testAssertBreadcrumbTrait(): void {
     // Ensure the test trait works as expected using menu_test routes.
     $home = ['' => 'Home'];
     $trail = $home + ['menu-test' => 'Menu test root'];
@@ -422,7 +425,7 @@ class BreadcrumbTest extends BrowserTestBase {
 
     // Remove the breadcrumb block to test the trait when breadcrumbs are not
     // shown.
-    Block::load('bartik_breadcrumbs')->delete();
+    Block::load('olivero_breadcrumbs')->delete();
 
     // If there is no trail, this should pass as there is no breadcrumb.
     $this->assertBreadcrumb('menu-test/breadcrumb1', []);

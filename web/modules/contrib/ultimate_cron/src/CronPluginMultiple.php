@@ -2,7 +2,7 @@
 
 namespace Drupal\ultimate_cron;
 
-class CronPluginMultiple extends \Drupal\ultimate_cron\CronPlugin {
+class CronPluginMultiple extends CronPlugin {
   static public $multiple = TRUE;
 
   /**

@@ -15,7 +15,7 @@ interface GutenbergBlockProcessorInterface {
    * The content and block can be manipulated here. Return FALSE
    * to ensure that no other plugins are ran after this instance.
    *
-   * @param array $block
+   * @param array<mixed> $block
    *   The block object.
    * @param string $block_content
    *   The inner block content.
@@ -30,7 +30,7 @@ interface GutenbergBlockProcessorInterface {
   /**
    * Whether the processor supports this block instance.
    *
-   * @param array $block
+   * @param array<mixed> $block
    *   The block array.
    * @param string $block_content
    *   The inner block content.

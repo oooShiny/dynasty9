@@ -81,7 +81,10 @@ count and clicking the <strong>Save configuration</strong> button below.</p>'
       $stats = $this->parse_csv($uri);
 
       $operations = [];
-      $pods = \Drupal::entityQuery('node')->condition('type', 'podcast_episode')->execute();
+      $pods = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
+        ->condition('type', 'podcast_episode')
+        ->execute();
       foreach ($pods as $id => $pod) {
         $operations[] = ['\Drupal\dynasty_module\PodcastNodeUpdate::updateNode', [$id, $stats, $month, $year]];
       }

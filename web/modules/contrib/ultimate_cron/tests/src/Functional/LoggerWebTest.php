@@ -44,7 +44,7 @@ class LoggerWebTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->user = $this->createUser([
       'administer ultimate cron',
@@ -66,8 +66,8 @@ class LoggerWebTest extends BrowserTestBase {
 
     // Check that the error message is displayed in its log page.
     $this->drupalGet('admin/config/system/cron/jobs/logs/ultimate_cron_logger_test_cron');
-    $this->assertRaw('/core/misc/icons/e32700/error.svg');
-    $this->assertRaw('<em class="placeholder">Exception</em>: Test cron exception in <em class="placeholder">ultimate_cron_logger_test_cron()</em> (line');
+    $this->assertSession()->responseContains('/core/misc/icons/e32700/error.svg');
+    $this->assertSession()->responseContains('<em class="placeholder">Exception</em>: Test cron exception in <em class="placeholder">ultimate_cron_logger_test_cron()</em> (line');
   }
 
   /**
@@ -84,8 +84,8 @@ class LoggerWebTest extends BrowserTestBase {
 
     // Check that the error message is displayed in its log page.
     $this->drupalGet('admin/config/system/cron/jobs/logs/ultimate_cron_logger_test_cron');
-    $this->assertRaw('/core/misc/icons/e32700/error.svg');
-    $this->assertRaw('Call to undefined function call_to_undefined_function');
+    $this->assertSession()->responseContains('/core/misc/icons/e32700/error.svg');
+    $this->assertSession()->responseContains('Call to undefined function call_to_undefined_function');
 
     // Empty the logfile, our fatal errors are expected.
     $filename = DRUPAL_ROOT . '/' . $this->siteDirectory . '/error.log';
@@ -107,7 +107,7 @@ class LoggerWebTest extends BrowserTestBase {
     $xpath = $this->xpath('//table/tbody/tr/td[4]');
     // The last 2 chars from xpath are not related to the message.
     $this->assertTrue(strlen(substr($xpath[0]->getText(), 0, -2)) == 5000);
-    $this->assertRaw('This is a v…');
+    $this->assertSession()->responseContains('This is a v…');
   }
 
   /**
@@ -122,8 +122,8 @@ class LoggerWebTest extends BrowserTestBase {
 
     // Check that the error message is displayed in its log page.
     $this->drupalGet('admin/config/system/cron/jobs/logs/ultimate_cron_logger_test_cron');
-    $this->assertRaw('/core/misc/icons/e29700/warning.svg');
-    $this->assertRaw('This is a warning message');
+    $this->assertSession()->responseContains('/core/misc/icons/e29700/warning.svg');
+    $this->assertSession()->responseContains('This is a warning message');
   }
 
 
@@ -136,8 +136,8 @@ class LoggerWebTest extends BrowserTestBase {
 
     // Check that the error message is displayed in its log page.
     $this->drupalGet('admin/config/system/cron/jobs/logs/ultimate_cron_logger_test_cron');
-    $this->assertRaw('/core/misc/icons/73b355/check.svg');
-    $this->assertText('Launched in thread 1');
+    $this->assertSession()->responseContains('/core/misc/icons/73b355/check.svg');
+    $this->assertSession()->pageTextContains('Launched in thread 1');
   }
 
   /**

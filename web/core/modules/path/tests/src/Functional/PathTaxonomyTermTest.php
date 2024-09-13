@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\path\Functional;
 
 use Drupal\taxonomy\Entity\Vocabulary;
@@ -23,6 +25,9 @@ class PathTaxonomyTermTest extends PathTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -45,7 +50,7 @@ class PathTaxonomyTermTest extends PathTestBase {
   /**
    * Tests alias functionality through the admin interfaces.
    */
-  public function testTermAlias() {
+  public function testTermAlias(): void {
     // Create a term in the default 'Tags' vocabulary with URL alias.
     $vocabulary = Vocabulary::load('tags');
     $description = $this->randomMachineName();
@@ -68,10 +73,8 @@ class PathTaxonomyTermTest extends PathTestBase {
     $this->assertSession()->pageTextContains($description);
 
     // Confirm the 'canonical' and 'shortlink' URLs.
-    $elements = $this->xpath("//link[contains(@rel, 'canonical') and contains(@href, '" . $edit['path[0][alias]'] . "')]");
-    $this->assertNotEmpty($elements, 'Term page contains canonical link URL.');
-    $elements = $this->xpath("//link[contains(@rel, 'shortlink') and contains(@href, 'taxonomy/term/" . $tid . "')]");
-    $this->assertNotEmpty($elements, 'Term page contains shortlink URL.');
+    $this->assertSession()->elementExists('xpath', "//link[contains(@rel, 'canonical') and contains(@href, '" . $edit['path[0][alias]'] . "')]");
+    $this->assertSession()->elementExists('xpath', "//link[contains(@rel, 'shortlink') and contains(@href, 'taxonomy/term/" . $tid . "')]");
 
     // Change the term's URL alias.
     $edit2 = [];

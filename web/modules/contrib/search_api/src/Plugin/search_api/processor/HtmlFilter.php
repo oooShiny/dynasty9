@@ -140,7 +140,7 @@ class HtmlFilter extends FieldsProcessorPluginBase {
         $tags = [];
       }
     }
-    catch (ParseException $exception) {
+    catch (ParseException) {
       $errors[] = $this->t('Tags is not a valid YAML map. See @link for information on how to write correctly formed YAML.', ['@link' => 'http://yaml.org']);
       $tags = [];
     }
@@ -195,16 +195,11 @@ class HtmlFilter extends FieldsProcessorPluginBase {
   protected function processFieldValue(&$value, $type) {
     // Remove invisible content.
     $text = preg_replace('@<(applet|audio|canvas|command|embed|iframe|map|menu|noembed|noframes|noscript|script|style|svg|video)[^>]*>.*</\1>@siU', ' ', $value);
-    // Let removed tags still delimit words.
     $is_text_type = $this->getDataTypeHelper()->isTextType($type);
     if ($is_text_type) {
+      // Let removed tags still delimit words.
       $text = str_replace(['<', '>'], [' <', '> '], $text);
-      if ($this->configuration['title']) {
-        $text = preg_replace('/(<[-a-z_]+[^>]*["\s])title\s*=\s*("([^"]+)"|\'([^\']+)\')([^>]*>)/i', '$1 $5 $3$4 ', $text);
-      }
-      if ($this->configuration['alt']) {
-        $text = preg_replace('/<[-a-z_]+[^>]*["\s]alt\s*=\s*("([^"]+)"|\'([^\']+)\')[^>]*>/i', ' <img>$2$3</img> ', $text);
-      }
+      $text = $this->handleAttributes($text);
     }
     if ($this->configuration['tags'] && $is_text_type) {
       $text = strip_tags($text, '<' . implode('><', array_keys($this->configuration['tags'])) . '>');
@@ -214,6 +209,81 @@ class HtmlFilter extends FieldsProcessorPluginBase {
       $text = strip_tags($text);
       $value = $this->normalizeText(trim($text));
     }
+  }
+
+  /**
+   * Copies configured attributes out of HTML tags so they are indexed.
+   *
+   * @param string $text
+   *   The text to process, with spaces added around all HTML tags.
+   *
+   * @return string
+   *   The same text, with the contents of attributes "alt" and/or "title" (as
+   *   configured) copied into their element contents so they can be indexed.
+   */
+  protected function handleAttributes(string $text): string {
+    // Determine which attributes should be indexed and bail early if it's none.
+    $handled_attributes = $xpath_expr = [];
+    foreach (['alt', 'title'] as $attr) {
+      if ($this->configuration[$attr]) {
+        $handled_attributes[] = $attr;
+        $xpath_expr[] = "//*[@$attr]";
+      }
+    }
+    if (!$handled_attributes) {
+      return $text;
+    }
+
+    $dom = Html::load($text);
+    $xpath = new \DOMXPath($dom);
+    /** @var \DOMElement $node */
+    foreach ($xpath->query(implode('|', $xpath_expr)) as $node) {
+      foreach ($handled_attributes as $attr_name) {
+        $attr = $node->attributes?->getNamedItem($attr_name);
+        if ($attr !== NULL) {
+          $node->prepend(" {$attr->textContent} ");
+        }
+      }
+    }
+
+    return static::serializeHtml($dom);
+  }
+
+  /**
+   * Converts the body of a \DOMDocument back to an HTML snippet.
+   *
+   * The function serializes the body part of a \DOMDocument back to an (X)HTML
+   * snippet. The resulting (X)HTML snippet will be properly formatted to be
+   * compatible with HTML user agents.
+   *
+   * Copied from the Drupal 10.1 version of
+   * \Drupal\Component\Utility\Html::serialize().
+   *
+   * @param \DOMDocument $document
+   *   A \DOMDocument object to serialize, only the tags below the first <body>
+   *   node will be converted.
+   *
+   * @return string
+   *   A valid (X)HTML snippet, as a string.
+   *
+   * @see \Drupal\Component\Utility\Html::serialize()
+   */
+  protected static function serializeHtml(\DOMDocument $document): string {
+    $body_node = $document->getElementsByTagName('body')->item(0);
+    $html = '';
+
+    if ($body_node !== NULL) {
+      foreach ($body_node->getElementsByTagName('script') as $node) {
+        Html::escapeCdataElement($node);
+      }
+      foreach ($body_node->getElementsByTagName('style') as $node) {
+        Html::escapeCdataElement($node, '/*', '*/');
+      }
+      foreach ($body_node->childNodes as $node) {
+        $html .= $document->saveXML($node);
+      }
+    }
+    return $html;
   }
 
   /**

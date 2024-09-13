@@ -8,20 +8,35 @@
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 use Drupal\node\NodeInterface;
 
-use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\core\Entity\EntityTypeInterface;
-use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\views\ViewExecutable;
-
-use Drupal\field\Entity\FieldConfig;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+/**
+ * Implements hook_help().
+ */
+function rate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.rate':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Rate module provides flexible voting widgets for nodes and comments. Administrators can add multiple widgets and define an unlimited number of buttons.</br>');
+      $output .= t('For detailed information, see the <a href="@README">README</a> for configuration instructions and examples, or browse the <a href="@project">Rate</a> project description and support queue.', [
+        '@project' => 'https://www.drupal.org/project/rate',
+        '@README' => Url::fromUri('base:' . \Drupal::service('extension.list.module')->getPath('rate') . '/README.txt')->toString(),
+      ]) . '</p>';
+      return $output;
+  }
+}
 
 /**
  * Implements hook_entity_extra_field_info().
@@ -146,7 +161,14 @@ function rate_entity_view(array &$build, EntityInterface $entity, EntityViewDisp
         $value_type = $widget->get('value_type') ? $widget->get('value_type') : 'percent';
         $settings = $widget;
         $vote_type = ($widget_template == 'fivestar') ? $widget_template : 'updown';
-        $form = $rate_widget_base_service->getForm($entity_type, $entity_bundle, $entity_id, $vote_type, $value_type, $widget_name, $settings);
+
+        // We can not generate the form without id (e.g. new entity in preview).
+        if ($entity->isNew()) {
+          $form['#markup'] = t('[Rate widget placeholder]');
+        }
+        else {
+          $form = $rate_widget_base_service->getForm($entity_type, $entity_bundle, $entity_id, $vote_type, $value_type, $widget_name, $settings);
+        }
 
         $form_container = [
           'rating' => [
@@ -178,7 +200,7 @@ function rate_entity_view(array &$build, EntityInterface $entity, EntityViewDisp
         // This field allows voting until the date set by the user.
         // "Use deadline" must be checked in the widget voting settings.
         $voting_settings = $widget->get('voting');
-        $use_deadline = isset($voting_settings['use_deadline']) ? $voting_settings['use_deadline'] : 0;
+        $use_deadline = $voting_settings['use_deadline'] ?? 0;
         if ($entity_type == 'node' && $use_deadline == 1) {
           $field_name = 'field_rate_vote_deadline';
 
@@ -236,10 +258,7 @@ function rate_entity_view(array &$build, EntityInterface $entity, EntityViewDisp
           /** @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface $display_repository */
           $display_repository = \Drupal::service('entity_display.repository');
           // Assign widget settings for the default form mode.
-          $display_repository->getFormDisplay($entity_type, $entity_bundle)
-            ->setComponent($field_name, [
-              'weight' => 300,
-            ])->save();
+          $display_repository->getFormDisplay($entity_type, $entity_bundle)->setComponent($field_name)->save();
         }
       }
     }
@@ -254,11 +273,11 @@ function rate_entity_view(array &$build, EntityInterface $entity, EntityViewDisp
 function rate_menu_local_tasks_alter(&$data, $route_name) {
   if (isset($data['tabs'][0]) && isset($data['tabs'][0]['entity.node.canonical'])) {
     $node = Drupal::request()->attributes->get('node');
-    if (!$node instanceof NodeInterface) {
+    if (is_int($node)) {
       $node = Drupal::entityTypeManager()->getStorage('node')->load($node);
     }
     // Rate widgets settings - disable results if no widgets enabled on node.
-    if ($node instanceof NodeInterface) {
+    if ($node instanceof NodeInterface && isset($data['tabs'][0]['rate.node_results_page'])) {
       $entity_type_id = $node->getEntityTypeId();
       $bundle = $node->bundle();
       $widgets = \Drupal::service('entity_type.manager')->getStorage('rate_widget')->loadMultiple();
@@ -280,9 +299,6 @@ function rate_menu_local_tasks_alter(&$data, $route_name) {
           unset($data['tabs'][0]['rate.node_results_page']);
         }
       }
-    }
-    else {
-      throw new NotFoundHttpException();
     }
   }
 }
@@ -413,8 +429,8 @@ function template_preprocess_rate_widget(&$variables) {
   $variables['widget_template'] = $variables['form']['#widget_template'];
   $variables['display_settings'] = $variables['form']['#display_settings'];
   $variables['results_settings'] = $variables['form']['#results_settings'];
-  $label_class = isset($variables['display_settings']['label_class']) ? $variables['display_settings']['label_class'] : '';
-  $description_class = isset($variables['display_settings']['description_class']) ? $variables['display_settings']['description_class'] : '';
+  $label_class = $variables['display_settings']['label_class'] ?? '';
+  $description_class = $variables['display_settings']['description_class'] ?? '';
   $variables['label_attributes'] = new Attribute();
   $variables['label_attributes']['class'] = [];
   $variables['label_attributes']['class'][] = $label_class;
@@ -444,8 +460,8 @@ function template_preprocess_rate_widget(&$variables) {
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function rate_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-  if ($variables['element']['#type'] == 'radio' && isset($variables['element']['#attributes']['twig-suggestion'])) {
-    if ($variables['element']['#attributes']['twig-suggestion'] == 'rating-input') {
+  if (isset($variables['element']['#attributes']['twig-suggestion']) && $variables['element']['#attributes']['twig-suggestion'] == 'rating-input') {
+    if (isset($variables['element']['#type']) && $variables['element']['#type'] == 'radio') {
       $suggestions[] = 'form_element__rating';
     }
   }
@@ -456,63 +472,10 @@ function rate_theme_suggestions_form_element_alter(array &$suggestions, array $v
  */
 function template_preprocess_form_element__rating(&$variables) {
   $element = $variables['element'];
-  $variables['option_result'] = isset($element['#option_result']) ? $element['#option_result'] : '';
-  $variables['label_attributes'] = isset($element['#label_attributes']) ? $element['#label_attributes'] : '';
-  $variables['title'] = isset($element['#title']) ? $element['#title'] : '';
-  $variables['children'] = isset($element['#children']) ? $element['#children'] : '';
-}
-
-/**
- * Implements hook_views_pre_render().
- */
-function rate_views_pre_render(ViewExecutable $view) {
-  // Used for the blocks, which show the results of rate widget votings.
-  // Currently used for nodes.
-  if (in_array($view->id(), ['rate_widgets_results'])) {
-    if (in_array($view->current_display, ['node_summary_block'])) {
-      $widget_id = $view->args[2];
-      $widget = \Drupal::service('entity_type.manager')->getStorage('rate_widget')->load($widget_id);
-      $options = isset($widget) ? $widget->get('options') : [];
-      $template = isset($widget) ? $widget->get('template') : '';
-
-      // Add missing options if not all options were used to vote.
-      if (isset($view->total_rows) && $view->total_rows < count($options) && $view->total_rows > 0) {
-        $options = ($template == 'fivestar') ? array_reverse($options) : $options;
-        foreach ($options as $key => $option) {
-          $new_row = new $view->result[0]();
-          $new_row->_entity = $view->result[0]->_entity;
-          // Set the variables.
-          $new_row->index = $key;
-          $new_row->votingapi_vote_value = $options[$key]['value'];
-          $new_row->votingapi_vote_value_1 = 0;
-          $new_row->node_field_data_votingapi_vote_nid = $view->result[0]->node_field_data_votingapi_vote_nid;
-          $temp[$key] = $new_row;
-        }
-        foreach ($view->result as $key => $value) {
-          $vote_value = $value->votingapi_vote_value;
-          $temp_key = array_search($vote_value, array_column($temp, 'votingapi_vote_value'));
-          if (isset($temp_key)) {
-            $temp[$temp_key] = $value;
-          }
-        }
-        $view->result = $temp;
-      }
-      foreach ($view->result as $row_num => $row_data) {
-        // Remove the empty rows.
-        $vote_value = $row_data->_entity->getValue();
-        if ($vote_value == 0) {
-          unset($view->result[$row_num]);
-          $view->total_rows = $view->total_rows - 1;
-        }
-        // Replace the vote value with the correct rate widget option label.
-        else {
-          $vote_value = $row_data->votingapi_vote_value;
-          $option_key = array_search($vote_value, array_column($options, 'value'));
-          $row_data->votingapi_vote_value = (string) $options[$option_key]['label'];
-        }
-      }
-    }
-  }
+  $variables['option_result'] = $element['#option_result'] ?? '';
+  $variables['label_attributes'] = $element['#label_attributes'] ?? '';
+  $variables['title'] = $element['#title'] ?? '';
+  $variables['children'] = $element['#children'] ?? '';
 }
 
 /**

@@ -20,12 +20,18 @@ class MetatagTrimmer {
    * @return string
    *   The trimmed string.
    */
-  public function trimAfterValue($string, $maxlength) {
-    $spacePos = strpos($string, ' ', $maxlength - 1);
+  public function trimAfterValue($string, $maxlength): string {
+    // If the string is shorter than the max length then skip the rest of the
+    // logic.
+    if ($maxlength > mb_strlen($string)) {
+      return $string;
+    }
+
+    $spacePos = mb_strpos($string, ' ', $maxlength - 1);
     if (FALSE === $spacePos) {
       return $string;
     }
-    $subString = substr($string, 0, $spacePos);
+    $subString = mb_substr($string, 0, $spacePos);
 
     return trim($subString);
   }
@@ -41,16 +47,22 @@ class MetatagTrimmer {
    * @return string
    *   The trimmed string.
    */
-  public function trimBeforeValue($string, $maxlength) {
-    $subString = substr($string, 0, $maxlength + 1);
-    if (' ' === substr($subString, -1)) {
+  public function trimBeforeValue($string, $maxlength): string {
+    // If the string is shorter than the max length then skip the rest of the
+    // logic.
+    if ($maxlength > mb_strlen($string)) {
+      return $string;
+    }
+
+    $subString = mb_substr($string, 0, $maxlength + 1);
+    if (' ' === mb_substr($subString, -1)) {
       return trim($subString);
     }
-    $spacePos = strrpos($subString, ' ', 0);
+    $spacePos = mb_strrpos($subString, ' ', 0);
     if (FALSE === $spacePos) {
       return $string;
     }
-    $returnedString = substr($string, 0, $spacePos);
+    $returnedString = mb_substr($string, 0, $spacePos);
 
     return trim($returnedString);
   }
@@ -66,7 +78,7 @@ class MetatagTrimmer {
    *   The trim method to use for the trimming.
    *   Allowed values: 'afterValue', 'onValue' and 'beforeValue'.
    */
-  public function trimByMethod($value, $maxlength, $method) {
+  public function trimByMethod($value, $maxlength, $method): string {
     if (empty($value) || empty($maxlength)) {
       return $value;
     }
@@ -76,7 +88,7 @@ class MetatagTrimmer {
         return $this->trimAfterValue($value, $maxlength);
 
       case 'onValue':
-        return trim(substr($value, 0, $maxlength));
+        return trim(mb_substr($value, 0, $maxlength));
 
       case 'beforeValue':
         return $this->trimBeforeValue($value, $maxlength);

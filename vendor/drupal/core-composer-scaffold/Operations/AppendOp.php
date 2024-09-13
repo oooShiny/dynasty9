@@ -59,16 +59,21 @@ class AppendOp extends AbstractOperation {
   /**
    * Constructs an AppendOp.
    *
-   * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath $prepend_path
-   *   The relative path to the prepend file.
-   * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath $append_path
-   *   The relative path to the append file.
+   * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath|null $prepend_path
+   *   (optional) The relative path to the prepend file.
+   * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath|null $append_path
+   *   (optional) The relative path to the append file.
    * @param bool $force_append
-   *   TRUE if is okay to append to a file that was not scaffolded.
-   * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath $default_path
-   *   The relative path to the default data.
+   *   (optional) TRUE if is okay to append to a file that was not scaffolded.
+   * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath|null $default_path
+   *   (optional) The relative path to the default data.
    */
-  public function __construct(ScaffoldFilePath $prepend_path = NULL, ScaffoldFilePath $append_path = NULL, $force_append = FALSE, ScaffoldFilePath $default_path = NULL) {
+  public function __construct(
+    ?ScaffoldFilePath $prepend_path = NULL,
+    ?ScaffoldFilePath $append_path = NULL,
+    $force_append = FALSE,
+    ?ScaffoldFilePath $default_path = NULL,
+  ) {
     $this->forceAppend = $force_append;
     $this->prepend = $prepend_path;
     $this->append = $append_path;
@@ -126,7 +131,6 @@ class AppendOp extends AbstractOperation {
       $io->write($interpolator->interpolate("  - Prepend to <info>[dest-rel-path]</info> from <info>[prepend-rel-path]</info>"));
     }
     // Notify that we are appending, if there is append data.
-    $append_contents = '';
     if (!empty($this->append)) {
       $this->append->addInterpolationData($interpolator, 'append');
       $io->write($interpolator->interpolate("  - Append to <info>[dest-rel-path]</info> from <info>[append-rel-path]</info>"));
@@ -187,10 +191,12 @@ class AppendOp extends AbstractOperation {
 
   /**
    * Check to see if the append/prepend data has already been applied.
+   *
    * @param string $contents
    *   The contents of the target file.
    * @param \Drupal\Composer\Plugin\Scaffold\ScaffoldFilePath $data_path
    *   The path to the data to append or prepend
+   *
    * @return bool
    *   'TRUE' if the append/prepend data already exists in contents.
    */
@@ -200,7 +206,7 @@ class AppendOp extends AbstractOperation {
     }
     $data = file_get_contents($data_path->fullPath());
 
-    return strpos($contents, $data) !== FALSE;
+    return str_contains($contents, $data);
   }
 
 }

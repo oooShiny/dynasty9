@@ -1,4 +1,3 @@
-
 /**
  * @file
  * Admin styling for the Filter module.
@@ -44,7 +43,7 @@
 [dir="rtl"] .filter-help a {
   margin: 0 0 0 20px;
 }
-.filter-help a:after {
+.filter-help a::after {
   position: absolute;
   top: 0;
   right: -20px; /* LTR */
@@ -54,7 +53,7 @@
   content: "";
   background: transparent url(../../../../../../misc/help.png);
 }
-[dir="rtl"] .filter-help a:after {
+[dir="rtl"] .filter-help a::after {
   right: auto;
   left: -20px;
 }

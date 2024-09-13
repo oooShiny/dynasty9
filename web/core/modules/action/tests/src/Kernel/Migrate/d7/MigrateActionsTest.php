@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\action\Kernel\Migrate\d7;
 
 use Drupal\system\Entity\Action;
@@ -25,25 +27,10 @@ class MigrateActionsTest extends MigrateDrupal7TestBase {
   /**
    * Tests Drupal 7 action migration to Drupal 8.
    */
-  public function testActions() {
-    // Test default actions.
-    $this->assertEntity('node_publish_action', 'Publish content', 'node', []);
-    $this->assertEntity('node_make_sticky_action', 'Make content sticky', 'node', []);
-    $this->assertEntity('user_block_user_action', 'Block current user', 'user', []);
-    $this->assertEntity('comment_publish_action', 'Publish comment', 'comment', []);
-
+  public function testActions(): void {
     // Test advanced actions.
     $this->assertEntity('unpublish_comment_containing_keyword_s_', 'Unpublish comment containing keyword(s)', 'comment', ["keywords" => [0 => "drupal"]]);
-    $this->assertEntity('change_the_author_of_content', 'Change the author of content', 'node', ["owner_uid" => "2"]);
     $this->assertEntity('unpublish_content_containing_keyword_s_', 'Unpublish content containing keyword(s)', 'node', ["keywords" => [0 => "drupal"]]);
-    $this->assertEntity('display_a_message_to_the_user', 'Display a message to the user', 'system', ["message" => "Drupal migration test"]);
-    $this->assertEntity('send_e_mail', 'Send e-mail', 'system', [
-      "recipient" => "test@example.com",
-      "subject" => "Drupal migration test",
-      "message" => "Drupal migration test",
-    ]);
-    $this->assertEntity('redirect_to_url', 'Redirect to URL', 'system', ["url" => "https://www.drupal.org"]);
-
   }
 
   /**

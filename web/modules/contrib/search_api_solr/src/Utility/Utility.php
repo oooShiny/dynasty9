@@ -4,6 +4,7 @@ namespace Drupal\search_api_solr\Utility;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Site\Settings;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\search_api\IndexInterface;
 use Drupal\search_api\ParseMode\ParseModeInterface;
@@ -14,6 +15,8 @@ use Drupal\search_api_solr\Entity\SolrRequestDispatcher;
 use Drupal\search_api_solr\Entity\SolrRequestHandler;
 use Drupal\search_api_solr\SearchApiSolrException;
 use Drupal\search_api_solr\SolrBackendInterface;
+use Drupal\search_api_solr\SolrCloudConnectorInterface;
+use Drupal\search_api_solr\SolrConnectorInterface;
 use Drupal\search_api_solr\SolrFieldTypeInterface;
 use Solarium\Core\Client\Request;
 
@@ -133,13 +136,30 @@ class Utility {
    *   A unique site hash, containing only alphanumeric characters.
    */
   public static function getSiteHash() {
-    // Copied from apachesolr_site_hash().
-    if (!($hash = \Drupal::state()->get('search_api_solr.site_hash', FALSE))) {
-      global $base_url;
-      $hash = substr(base_convert(hash('sha256', uniqid($base_url, TRUE)), 16, 36), 0, 6);
-      \Drupal::state()->set('search_api_solr.site_hash', $hash);
+    if (!($hash = Settings::get('search_api_solr.site_hash'))) {
+      // Copied from apachesolr_site_hash().
+      if (!($hash = \Drupal::state()
+        ->get('search_api_solr.site_hash', FALSE))) {
+        global $base_url;
+        $hash = substr(base_convert(hash('sha256', uniqid($base_url, TRUE)), 16, 36), 0, 6);
+        \Drupal::state()->set('search_api_solr.site_hash', $hash);
+      }
     }
+
     return $hash;
+  }
+
+  /**
+   * Returns a suitable name for a new configset.
+   *
+   * @param \Drupal\search_api\ServerInterface $server
+   *   The Solr server to generate the name for.
+   *
+   * @return string
+   *   A suitable name for a new configset.
+   */
+  public static function generateConfigsetName(ServerInterface $server): string {
+    return $server->id() . '_' . self::getSiteHash();
   }
 
   /**
@@ -159,10 +179,14 @@ class Utility {
    * @throws \Drupal\search_api\SearchApiException
    *   If a problem occurred while retrieving the files.
    */
-  public static function getServerFiles(ServerInterface $server, $dir_name = NULL) {
+  public static function getServerFiles(ServerInterface $server, string $dir_name = '') {
     /** @var \Drupal\search_api_solr\SolrBackendInterface $backend */
     $backend = $server->getBackend();
     $response = $backend->getSolrConnector()->getFile($dir_name);
+    if (is_array($response)) {
+      // A connector might return a prepared list.
+      return $response;
+    }
 
     // Search for directories and recursively merge directory files.
     $files_data = json_decode($response->getBody(), TRUE);
@@ -208,7 +232,11 @@ class Utility {
     $keys = [[]];
 
     foreach ($snippets as $snippet) {
-      if (preg_match_all('@\[HIGHLIGHT\](.+?)\[/HIGHLIGHT\]@', $snippet, $matches)) {
+      // Some filters like WordDelimiter seem to cause highlighted tokens like
+      // [HIGHLIGHT]foo[/HIGHLIGHT][HIGHLIGHT]bar[/HIGHLIGHT]. So we combine
+      // them to [HIGHLIGHT]foobar[/HIGHLIGHT] first, which is important for the
+      // highlighting field formatters in strict mode.
+      if (preg_match_all('@\[HIGHLIGHT](.+?)\[/HIGHLIGHT]@', preg_replace('@\[/HIGHLIGHT](\s*)\[HIGHLIGHT]@', '$1', $snippet), $matches)) {
         $keys[] = $matches[1];
       }
     }
@@ -535,7 +563,7 @@ class Utility {
    */
   public static function getSortableSolrField(string $field_name, array $solr_field_names, QueryInterface $query) {
     if (!isset($solr_field_names[$field_name])) {
-      throw new SearchApiSolrException(sprintf('Sort "%s" is not valid solr field.', $field_name));
+      throw new SearchApiSolrException(sprintf('Sorting by "%s" has no valid solr field.', $field_name));
     }
 
     $first_solr_field_name = reset($solr_field_names[$field_name]);
@@ -545,7 +573,7 @@ class Utility {
     }
 
     // First we need to handle special fields which are prefixed by
-    // 'search_api_'. Otherwise they will erroneously be treated as dynamic
+    // 'search_api_'. Otherwise, they will erroneously be treated as dynamic
     // string fields by the next detection below because they start with an
     // 's'. This way we for example ensure that search_api_relevance isn't
     // modified at all.
@@ -568,8 +596,14 @@ class Utility {
     elseif (strpos($first_solr_field_name, 's') === 0 || strpos($first_solr_field_name, 't') === 0) {
       // For string and fulltext fields use the dedicated sort field for faster
       // and language specific sorts. If multiple languages are specified, use
-      // the first one.
-      $language_ids = $query->getLanguages() ?? [LanguageInterface::LANGCODE_NOT_SPECIFIED];
+      // the first one or the universal collation field if enabled.
+      $index_third_party_settings = $query->getIndex()->getThirdPartySettings('search_api_solr') + search_api_solr_default_index_third_party_settings();
+      if (!($index_third_party_settings['multilingual']['use_universal_collation'] ?? FALSE)) {
+        $language_ids = $query->getLanguages() ?? [LanguageInterface::LANGCODE_NOT_SPECIFIED];
+      }
+      else {
+        $language_ids = [LanguageInterface::LANGCODE_NOT_SPECIFIED];
+      }
       return Utility::encodeSolrName('sort' . SolrBackendInterface::SEARCH_API_SOLR_LANGUAGE_SEPARATOR . reset($language_ids) . '_' . $field_name);
     }
     elseif (preg_match('/^([a-z]+)m(_.*)/', $first_solr_field_name, $matches)) {
@@ -581,6 +615,47 @@ class Utility {
 
     // We could not simply put this into an else condition because that would
     // miss fields like search_api_relevance.
+    return $first_solr_field_name;
+  }
+
+  /**
+   * Gets the boostable equivalent of a dynamic Solr field.
+   *
+   * @param string $field_name
+   *   The Search API field name.
+   * @param array $solr_field_names
+   *   The dynamic Solr field names.
+   * @param \Drupal\search_api\Query\QueryInterface $query
+   *   The Search API query.
+   *
+   * @return string
+   *   The sortable Solr field name.
+   *
+   * @throws \Drupal\search_api_solr\SearchApiSolrException
+   */
+  public static function getBoostableSolrField(string $field_name, array $solr_field_names, QueryInterface $query) {
+    if (!isset($solr_field_names[$field_name])) {
+      throw new SearchApiSolrException(sprintf('Boosting by "%s" has no valid solr field.', $field_name));
+    }
+
+    $first_solr_field_name = reset($solr_field_names[$field_name]);
+
+    if (!Utility::hasIndexJustSolrDocumentDatasource($query->getIndex())) {
+      if (strpos($first_solr_field_name, 'spellcheck') === 0 || strpos($first_solr_field_name, 'twm_suggest') === 0) {
+        throw new SearchApiSolrException("You should not boost by spellcheck or suggester catalogs.");
+      }
+      elseif (strpos($first_solr_field_name, 't') === 0) {
+        // For fulltext fields use the language specific field. If multiple
+        // languages are specified, use the first one as workaround.
+        $language_ids = $query->getLanguages() ?? [LanguageInterface::LANGCODE_NOT_SPECIFIED];
+        foreach ($language_ids as $language_id) {
+          if (!empty($solr_field_names[$field_name][$language_id])) {
+            return $solr_field_names[$field_name][$language_id];
+          }
+        }
+      }
+    }
+
     return $first_solr_field_name;
   }
 
@@ -618,7 +693,7 @@ class Utility {
    * ensure that stop words in boolean combinations don't lead to zero results.
    * Therefore this function will produce these queries:
    *
-   * Careful interpreting this, phrase  and sloppy phrase queries will represent
+   * Careful interpreting this, phrase and sloppy phrase queries will represent
    * different phrases as A & B. To be very clear, A could equal multiple words.
    *
    * @code
@@ -668,7 +743,8 @@ class Utility {
    * @param array $fields
    *   (optional) An array of field names.
    * @param string $parse_mode_id
-   *   (optional) The parse mode ID. Defaults to "phrase".
+   *   (optional) The parse mode ID. Defaults to "phrase". "keys" is not a real
+   *   parse mode ID but used internally by Search API Solr.
    * @param array $options
    *   (optional) An array of options.
    *
@@ -736,8 +812,8 @@ class Utility {
             // Using the 'phrase' or 'sloppy_phrase' parse mode, Search API
             // provides one big phrase as keys. Using the 'terms' parse mode,
             // Search API provides chunks of single terms as keys. But these
-            // chunks might contain not just real terms but again a phrase if
-            // you enter something like this in the search box:
+            // chunks might contain not just real terms but again an embedded
+            // phrase if you enter something like this in the search box:
             // term1 "term2 as phrase" term3.
             // This will be converted in this keys array:
             // ['term1', 'term2 as phrase', 'term3'].
@@ -780,6 +856,8 @@ class Utility {
     }
 
     if ($k) {
+      $k_without_fuzziness = $k;
+
       switch ($parse_mode_id) {
         case 'edismax':
           $query_parts[] = "({!edismax qf='" . implode(' ', $fields) . "'}" . $pre . implode(' ' . $pre, $k) . ')';
@@ -831,25 +909,37 @@ class Utility {
             if ($sloppiness && strpos($term_or_phrase, ' ') && strpos($term_or_phrase, '"') === 0) {
               $term_or_phrase .= $sloppiness;
             }
-            // Otherwise just add fuzziness when if we really have a term.
-            elseif ($fuzziness && !strpos($term_or_phrase, ' ') && strpos($term_or_phrase, '"') !== 0) {
+            // Otherwise, just add fuzziness when if we really have a term with
+            // at least 3 characters.
+            elseif ($fuzziness && !strpos($term_or_phrase, ' ') && strpos($term_or_phrase, '"') !== 0 && mb_strlen($term_or_phrase) >= 3) {
               $term_or_phrase .= $fuzziness;
             }
             unset($term_or_phrase);
           }
 
           if (count($fields) > 0) {
-            foreach ($fields as $f) {
-              $field = $f;
+            foreach ($fields as $field) {
               $boost = '';
               // Split on operators:
               // - boost (^)
               // - fixed score (^=)
-              if ($split = preg_split('/([\^])/', $f, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)) {
+              if ($split = preg_split('/([\^])/', $field, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)) {
                 $field = array_shift($split);
                 $boost = implode('', $split);
               }
-              $query_parts[] = $field . ':(' . $pre . implode(' ' . $pre, $k) . ')' . $boost;
+
+              // Fuzziness isn't "compatible" with analyzed fields. In fact, it turns off the analyzer. So we build the
+              // query part without fuzziness first and add a second query part with fuzziness applied. These parts will
+              // be combined using an OR conjunction. Additionally, fuzziness should never be applied to fields of
+              // "fulltext string" types. In case of embedded phrases (see above) we might get a duplicate query part.
+              // Therfore, an array_unique() is performed later.
+              // @see https://www.drupal.org/project/search_api_solr/issues/3404623
+              if (('fuzzy_terms' === $parse_mode_id && $options['fuzzy_analyzer']) || preg_match('/^t[^_]*string/', $field)) {
+                $query_parts[] = $field . ':(' . $pre . implode(' ' . $pre, $k_without_fuzziness) . ')' . $boost;
+              }
+              if (!preg_match('/^t[^_]*string/', $field)) {
+                $query_parts[] = $field . ':(' . $pre . implode(' ' . $pre, $k) . ')' . $boost;
+              }
             }
           }
           else {
@@ -857,6 +947,8 @@ class Utility {
           }
       }
     }
+    // Remove duplicate query parts.
+    $query_parts = array_unique($query_parts);
 
     if (count($query_parts) === 1) {
       return $neg . reset($query_parts);
@@ -875,7 +967,7 @@ class Utility {
    * @param array|string $keys
    *   The keys array to flatten, formatted as specified by
    *   \Drupal\search_api\Query\QueryInterface::getKeys() or a phrase string.
-   * @param ParseModeInterface $parse_mode
+   * @param \Drupal\search_api\ParseMode\ParseModeInterface $parse_mode
    *   (optional) The parse mode. Defaults to "terms" if null.
    *
    * @return string
@@ -911,6 +1003,7 @@ class Utility {
             switch ($parse_mode_id) {
               case 'terms':
               case "sloppy_terms":
+              case 'fuzzy_terms':
               case 'edismax':
                 $k[] = $queryHelper->escapePhrase(trim($key));
                 break;
@@ -1075,8 +1168,11 @@ class Utility {
    * collisions.
    *
    * @param string $checkpoint
+   *   The check point value.
    * @param string $index_id
+   *   The index-id.
    * @param string $site_hash
+   *   The site_hash.
    *
    * @return string
    *   The formatted checkpoint ID.
@@ -1142,6 +1238,125 @@ class Utility {
       return [$version_number, $document->saveXML()];
     }
     return ['', ''];
+  }
+
+  /**
+   * Gets the Solr connector configured for a server.
+   *
+   * @param \Drupal\search_api\ServerInterface $server
+   *   The Search API Server.
+   *
+   * @return \Drupal\search_api_solr\SolrConnectorInterface
+   *   Returns the Solr connector used for this backend.
+   *
+   * @throws \Drupal\search_api\SearchApiException
+   * @throws \Drupal\search_api_solr\SearchApiSolrException
+   */
+  public static function getSolrConnector(ServerInterface $server): SolrConnectorInterface {
+    $backend = $server->getBackend();
+    if (!($backend instanceof SolrBackendInterface)) {
+      throw new SearchApiSolrException(sprintf('Server %s is not a Solr server', $server->label()));
+    }
+
+    return $backend->getSolrConnector();
+  }
+
+  /**
+   * Gets the Solr Cloud connector configured for a server.
+   *
+   * @param \Drupal\search_api\ServerInterface $server
+   *   The Search API Server.
+   *
+   * @return \Drupal\search_api_solr\SolrCloudConnectorInterface
+   *   The Solr Cloud connector interface.
+   *
+   * @throws \Drupal\search_api\SearchApiException
+   * @throws \Drupal\search_api_solr\SearchApiSolrException
+   */
+  public static function getSolrCloudConnector(ServerInterface $server): SolrCloudConnectorInterface {
+    $connector = self::getSolrConnector($server);
+    if (!$connector->isCloud()) {
+      throw new SearchApiSolrException(sprintf('The configured connector for server %s (%s) is not a cloud connector.', $server->label(), $server->id()));
+    }
+
+    /** @var \Drupal\search_api_solr\SolrCloudConnectorInterface $connector */
+    return $connector;
+  }
+
+  /**
+   * Ensures the given Search API query has a language condition applied.
+   *
+   * @param \Drupal\search_api\Query\QueryInterface $query
+   *   The Search API query.
+   *
+   * @return array
+   *   An array of language IDs applied to the query.
+   */
+  public static function ensureLanguageCondition(QueryInterface $query) {
+    /** @var \Drupal\search_api\Entity\Index $index */
+    $index = $query->getIndex();
+
+    $settings = self::getIndexSolrSettings($index);
+    $language_ids = $query->getLanguages() ?? [];
+    // Included languages are set by the "languages with fallback" processor.
+    $fallback_languages = array_diff(
+      $query->getOption('search_api_included_languages', []),
+      array_merge($language_ids, [LanguageInterface::LANGCODE_NOT_SPECIFIED])
+    );
+
+    if (empty($fallback_languages)) {
+      // If there are no languages set, we need to set them. As an example, a
+      // language might be set by a filter in a search view.
+      if (empty($language_ids)) {
+        if (!$query->hasTag('views') && !$query->hasTag('server_index_status') && $settings['multilingual']['limit_to_content_language']) {
+          // Limit the language to the current content language being used.
+          $language_ids[] = \Drupal::languageManager()
+            ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
+            ->getId();
+        }
+        else {
+          // If the query is generated by views and/or the query isn't limited
+          // by any languages we have to search for all languages using their
+          // specific fields.
+          $language_ids = array_keys(\Drupal::languageManager()
+            ->getLanguages());
+        }
+      }
+    }
+
+    $specific_languages = array_keys(array_filter($index->getThirdPartySetting('search_api_solr', 'multilingual', ['specific_languages' => []])['specific_languages'] ?? []));
+    if (!empty($specific_languages)) {
+      $language_ids = array_intersect($language_ids, $specific_languages);
+      $fallback_languages = array_intersect($fallback_languages, $specific_languages);
+    }
+
+    array_walk($language_ids, function (&$item, $key) {
+      if (LanguageInterface::LANGCODE_NOT_APPLICABLE === $item) {
+        $item = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+      }
+    });
+
+    if ($settings['multilingual']['include_language_independent']) {
+      $language_ids[] = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+      // LanguageInterface::LANGCODE_NOT_APPLICABLE is mapped to
+      // LanguageInterface::LANGCODE_NOT_SPECIFIED above.
+    }
+
+    if (empty($fallback_languages)) {
+      $query->setLanguages(array_unique($language_ids));
+    }
+
+    $language_ids = array_unique(array_merge($language_ids, $fallback_languages));
+
+    // In case of wrong configurations of the site, it could happen that an
+    // index is limited to some languages but the fallback processor or an old
+    // link might request another language. Instead of returning an empty array
+    // we set language undefined to avoid exceptions.
+    if (empty($language_ids)) {
+      $language_ids[] = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+    }
+
+    return $language_ids;
   }
 
 }

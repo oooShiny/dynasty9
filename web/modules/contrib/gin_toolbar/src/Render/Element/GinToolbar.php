@@ -6,9 +6,9 @@ use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Security\TrustedCallbackInterface;
 
 /**
- * Class GinToolbar.
+ * Adds active trail to trail.
  *
- * @package Drupal\gin_toolbar\Render\Element
+ * * @package Drupal\gin_toolbar\Render\Element.
  */
 class GinToolbar implements TrustedCallbackInterface {
 
@@ -46,7 +46,9 @@ class GinToolbar implements TrustedCallbackInterface {
       ->onlyEnabledLinks();
 
     if (\Drupal::moduleHandler()->moduleExists('admin_toolbar')) {
-      $parameters->setMaxDepth(4);
+      $admin_toolbar_settings = \Drupal::config('admin_toolbar.settings');
+      $max_depth = $admin_toolbar_settings->get('menu_depth') ?? 4;
+      $parameters->setMaxDepth($max_depth);
     }
 
     $tree = $menu_tree->load('admin', $parameters);

@@ -14,6 +14,8 @@ use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\Core\Routing\RouteObjectInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+// cspell:ignore abempty
+
 /**
  * Defines an object that holds information about a URL.
  *
@@ -210,7 +212,7 @@ class Url implements TrustedCallbackInterface {
     // passed is a relative URI reference rather than an absolute URI,
     // because these are URI reserved characters that a scheme name may not
     // start with.
-    if ((strpos($user_input, '/') !== 0) && (strpos($user_input, '#') !== 0) && (strpos($user_input, '?') !== 0)) {
+    if (!str_starts_with($user_input, '/') && !str_starts_with($user_input, '#') && !str_starts_with($user_input, '?')) {
       throw new \InvalidArgumentException("The user-entered string '$user_input' must begin with a '/', '?', or '#'.");
     }
 
@@ -284,7 +286,7 @@ class Url implements TrustedCallbackInterface {
       throw new \InvalidArgumentException("The URI '$uri' is malformed.");
     }
     // We support protocol-relative URLs.
-    if (strpos($uri, '//') === 0) {
+    if (str_starts_with($uri, '//')) {
       $uri_parts['scheme'] = '';
     }
     elseif (empty($uri_parts['scheme'])) {
@@ -493,7 +495,7 @@ class Url implements TrustedCallbackInterface {
   }
 
   /**
-   * Sets this Url to encapsulate an unrouted URI.
+   * Sets this URL to encapsulate an unrouted URI.
    *
    * @return $this
    */
@@ -535,7 +537,7 @@ class Url implements TrustedCallbackInterface {
   }
 
   /**
-   * Indicates if this Url is external.
+   * Indicates if this URL is external.
    *
    * @return bool
    */
@@ -544,7 +546,7 @@ class Url implements TrustedCallbackInterface {
   }
 
   /**
-   * Indicates if this Url has a Drupal route.
+   * Indicates if this URL has a Drupal route.
    *
    * @return bool
    */
@@ -562,7 +564,7 @@ class Url implements TrustedCallbackInterface {
    */
   public function getRouteName() {
     if ($this->unrouted) {
-      throw new \UnexpectedValueException('External URLs do not have an internal route name.');
+      throw new \UnexpectedValueException($this->getUri() . ' has no corresponding route.');
     }
 
     return $this->routeName;
@@ -725,7 +727,7 @@ class Url implements TrustedCallbackInterface {
    * Sets the value of the absolute option for this Url.
    *
    * @param bool $absolute
-   *   (optional) Whether to make this Url absolute or not. Defaults to TRUE.
+   *   (optional) Whether to make this URL absolute or not. Defaults to TRUE.
    *
    * @return $this
    */
@@ -768,14 +770,20 @@ class Url implements TrustedCallbackInterface {
    *
    * @return array
    *   An associative array suitable for a render array.
+   *
+   * @deprecated in drupal:10.1.0 and is removed from drupal:11.0.0. There is no
+   *   replacement.
+   *
+   * @see https://www.drupal.org/node/3342977
    */
   public function toRenderArray() {
+    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.1.0 and is removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3342977', E_USER_DEPRECATED);
     $render_array = [
       '#url' => $this,
       '#options' => $this->getOptions(),
     ];
     if (!$this->unrouted) {
-      $render_array['#access_callback'] = [get_class(), 'renderAccess'];
+      $render_array['#access_callback'] = [self::class, 'renderAccess'];
     }
     return $render_array;
   }
@@ -819,7 +827,7 @@ class Url implements TrustedCallbackInterface {
    *   returned, i.e. TRUE means access is explicitly allowed, FALSE means
    *   access is either explicitly forbidden or "no opinion".
    */
-  public function access(AccountInterface $account = NULL, $return_as_object = FALSE) {
+  public function access(?AccountInterface $account = NULL, $return_as_object = FALSE) {
     if ($this->isRouted()) {
       return $this->accessManager()->checkNamedRoute($this->getRouteName(), $this->getRouteParameters(), $account, $return_as_object);
     }
@@ -827,15 +835,21 @@ class Url implements TrustedCallbackInterface {
   }
 
   /**
-   * Checks a Url render element against applicable access check services.
+   * Checks a URL render element against applicable access check services.
    *
    * @param array $element
    *   A render element as returned from \Drupal\Core\Url::toRenderArray().
    *
    * @return bool
-   *   Returns TRUE if the current user has access to the url, otherwise FALSE.
+   *   Returns TRUE if the current user has access to the URL, otherwise FALSE.
+   *
+   * @deprecated in drupal:10.1.0 and is removed from drupal:11.0.0. There is no
+   *   replacement.
+   *
+   * @see https://www.drupal.org/node/3342977
    */
   public static function renderAccess(array $element) {
+    @trigger_error(__METHOD__ . '() is deprecated in drupal:10.1.0 and is removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3342977', E_USER_DEPRECATED);
     return $element['#url']->access();
   }
 
@@ -883,7 +897,7 @@ class Url implements TrustedCallbackInterface {
    *
    * @return $this
    */
-  public function setUrlGenerator(UrlGeneratorInterface $url_generator = NULL) {
+  public function setUrlGenerator(?UrlGeneratorInterface $url_generator = NULL) {
     $this->urlGenerator = $url_generator;
     $this->internalPath = NULL;
     return $this;
@@ -906,6 +920,7 @@ class Url implements TrustedCallbackInterface {
    * {@inheritdoc}
    */
   public static function trustedCallbacks() {
+    // @todo Clean-up in https://www.drupal.org/i/3343153
     return ['renderAccess'];
   }
 

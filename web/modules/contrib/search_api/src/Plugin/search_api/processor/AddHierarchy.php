@@ -2,6 +2,8 @@
 
 namespace Drupal\search_api\Plugin\search_api\processor;
 
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\TypedData\EntityDataDefinitionInterface;
@@ -10,6 +12,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\TypedData\ComplexDataDefinitionInterface;
 use Drupal\search_api\IndexInterface;
 use Drupal\search_api\Item\FieldInterface;
+use Drupal\search_api\LoggerTrait;
 use Drupal\search_api\Plugin\PluginFormTrait;
 use Drupal\search_api\Plugin\search_api\data_type\value\TextValue;
 use Drupal\search_api\Processor\ProcessorPluginBase;
@@ -31,6 +34,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
 
+  use LoggerTrait;
   use PluginFormTrait;
 
   /**
@@ -57,6 +61,7 @@ class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
     $processor = parent::create($container, $configuration, $plugin_id, $plugin_definition);
 
     $processor->setEntityTypeManager($container->get('entity_type.manager'));
+    $processor->setLogger($container->get('logger.channel.search_api'));
 
     return $processor;
   }
@@ -119,7 +124,7 @@ class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
           $vars = [
             '%index' => $this->index->label(),
           ];
-          watchdog_exception('search_api', $e, '%type while trying to retrieve a list of hierarchical fields on index %index: @message in %function (line %line of %file).', $vars);
+          $this->logException($e, '%type while trying to retrieve a list of hierarchical fields on index %index: @message in %function (line %line of %file).', $vars);
           continue;
         }
         if ($definition instanceof ComplexDataDefinitionInterface) {
@@ -222,7 +227,7 @@ class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
       $form['fields'][$field_id]['property'] = [
         '#type' => 'radios',
         '#title' => $this->t('Hierarchy property to use'),
-        '#description' => $this->t("This field has several nested properties which look like they might contain hierarchy data for the field. Please pick the one that should be used."),
+        '#description' => $this->t("This field has several nested properties which look like they might contain hierarchy data for the field. Pick the one that should be used."),
         '#options' => $options,
         '#default_value' => $enabled ? $this->configuration['fields'][$field_id] : key($options),
         '#access' => count($options) > 1,
@@ -273,7 +278,7 @@ class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
         if (!$field) {
           continue;
         }
-        list ($entity_type_id, $property) = explode('-', $property_specifier);
+        [$entity_type_id, $property] = explode('-', $property_specifier);
         foreach ($field->getValues() as $entity_id) {
           if ($entity_id instanceof TextValue) {
             $entity_id = $entity_id->getOriginalText();
@@ -282,16 +287,13 @@ class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
             try {
               $this->addHierarchyValues($entity_type_id, $entity_id, $property, $field);
             }
-            // @todo Replace with multi-catch for
-            //   InvalidPluginDefinitionException and PluginNotFoundException
-            //   once we depend on PHP 7.1+.
-            catch (\Exception $e) {
+            catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
               $vars = [
                 '%index' => $this->index->label(),
                 '%field' => $field->getLabel(),
                 '%field_id' => $field->getFieldIdentifier(),
               ];
-              watchdog_exception('search_api', $e, '%type while trying to add hierarchy values to field %field (%field_id) on index %index: @message in %function (line %line of %file).', $vars);
+              $this->logException($e, '%type while trying to add hierarchy values to field %field (%field_id) on index %index: @message in %function (line %line of %file).', $vars);
               continue;
             }
           }
@@ -340,7 +342,7 @@ class AddHierarchy extends ProcessorPluginBase implements PluginFormInterface {
             $parents = array_merge($parents, $values);
           }
         }
-        catch (\InvalidArgumentException $e) {
+        catch (\InvalidArgumentException) {
           // Might happen, for example, if the property only exists on a certain
           // bundle, and this entity has the wrong one.
         }

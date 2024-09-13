@@ -186,3 +186,21 @@ function advagg_update_8302() {
     ->condition('name', 'advagg_bundler')
     ->execute();
 }
+
+/**
+ * Ensure old advagg_old_ie_compatibility module is uninstalled.
+ */
+function advagg_update_10001() {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $installer */
+    $installer = \Drupal::service('module_installer');
+    $installer->uninstall(['advagg_old_ie_compatibility']);
+}
+
+/**
+ * Uninstall Advagg CDN module.
+ */
+function advagg_update_10002() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $installer */
+  $installer = \Drupal::service('module_installer');
+  $installer->uninstall(['advagg_cdn']);
+}

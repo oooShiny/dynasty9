@@ -17,9 +17,9 @@ use Solarium\QueryType\Server\Collections\Query\Action\ClusterStatus;
 use Solarium\QueryType\Server\Collections\Query\Action\Create;
 use Solarium\QueryType\Server\Collections\Query\Action\Delete;
 use Solarium\QueryType\Server\Collections\Query\Action\Reload;
-use Solarium\QueryType\Server\Collections\ResponseParser;
 use Solarium\QueryType\Server\Query\Action\ActionInterface;
 use Solarium\QueryType\Server\Query\RequestBuilder;
+use Solarium\QueryType\Server\Query\ResponseParser;
 
 /**
  * Collections query.
@@ -57,6 +57,11 @@ class Query extends AbstractServerQuery
      * Delete a Shard.
      */
     const ACTION_DELETESHARD = 'DELETESHARD';
+
+    /**
+     * Install/Import Data to Shard.
+     */
+    const ACTION_INSTALLSHARDDATA = 'INSTALLSHARDDATA';
 
     /**
      * Create or Modify an Alias for a Collection.
@@ -218,6 +223,7 @@ class Query extends AbstractServerQuery
         self::ACTION_SPLITSHARD => 'Solarium\QueryType\Server\Collections\Query\Action\SplitShard',
         self::ACTION_CREATESHARD => 'Solarium\QueryType\Server\Collections\Query\Action\SplitShard',
         self::ACTION_DELETESHARD => 'Solarium\QueryType\Server\Collections\Query\Action\DeleteShard',
+        self::ACTION_INSTALLSHARDDATA => 'Solarium\QueryType\Server\Collections\Query\Action\InstallShardData',
         self::ACTION_CREATEALIAS => 'Solarium\QueryType\Server\Collections\Query\Action\CreateAlias',
         self::ACTION_LISTALIASES => 'Solarium\QueryType\Server\Collections\Query\Action\ListAliases',
         self::ACTION_ALIASPROP => 'Solarium\QueryType\Server\Collections\Query\Action\AliasProp',

@@ -1,5 +1,30 @@
 # Change Log
 
+### 3.1.0: 2024-04-04:
+
+- Symfony 7 support
+
+### 3.0.0: 2022-04-05:
+
+- psr/log ^3
+- Drop support for PHP versions prior to 8.0
+
+### 2.1.1: 2022-02-23:
+
+- psr/log ^2
+
+### 2.1.0: 2022-01-29:
+
+- SettableOutputStreamInterface
+
+### 2.0.4: 2021-12-30:
+
+- Symfony 6
+
+### 2.0.3: 2021-12-29
+
+- PHP 8.1
+
 ### 2.0.2: 2020-12-10:
 
 - PHP 8

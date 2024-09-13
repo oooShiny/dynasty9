@@ -5,6 +5,7 @@ namespace Drupal\search_api_solr_legacy\Plugin\SolrConnector;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\search_api_solr\SolrConnector\SolrConnectorPluginBase;
 use Solarium\Core\Client\Endpoint;
+use Solarium\QueryType\Select\Query\Query;
 
 /**
  * Class Solr36Connector.
@@ -58,7 +59,24 @@ class Solr36Connector extends SolrConnectorPluginBase {
       '#value' => TRUE,
     ];
 
+    $form['advanced']['jts'] = [
+      '#type' => 'value',
+      '#value' => FALSE,
+    ];
+
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function search(Query $query, ?Endpoint $endpoint = NULL) {
+    $params = $query->getParams();
+    if (!isset($params['q.op'])) {
+      $query->addParam('q.op', 'OR');
+    }
+
+    return parent::search($query, $endpoint);
   }
 
   /**
@@ -73,6 +91,19 @@ class Solr36Connector extends SolrConnectorPluginBase {
    */
   public function getServerInfo($reset = FALSE) {
     return $this->getCoreInfo($reset);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * Solr 3.6 doesn't support JSON which became the default in solarium 7. Force
+   * XML format for update queries.
+   */
+  public function getUpdateQuery() {
+    $query = parent::getUpdateQuery();
+    $query->setRequestFormat($query::REQUEST_FORMAT_XML);
+
+    return $query;
   }
 
   /**

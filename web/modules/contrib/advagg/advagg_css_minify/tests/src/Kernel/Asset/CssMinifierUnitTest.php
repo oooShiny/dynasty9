@@ -17,7 +17,7 @@ class CssMinifierUnitTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['advagg_css_minify'];
+  protected static $modules = ['advagg_css_minify'];
 
   /**
    * The Minifier.
@@ -29,7 +29,7 @@ class CssMinifierUnitTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installConfig('advagg_css_minify');
     $this->optimizer = \Drupal::service('advagg.css_minifier');

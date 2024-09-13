@@ -3,15 +3,14 @@
 namespace Drupal\rate\Plugin;
 
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\votingapi\VoteResultFunctionManager;
 use Drupal\Core\Entity\EntityFormBuilderInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\votingapi\VoteResultFunctionManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base class for Rate widget plugins.
@@ -47,13 +46,6 @@ class RateWidgetBase extends PluginBase {
   protected $account;
 
   /**
-   * The request stack.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
-   */
-  protected $requestStack;
-
-  /**
    * The config factory service.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
@@ -85,8 +77,6 @@ class RateWidgetBase extends PluginBase {
    *   The form builder service.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The account service.
-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
-   *   The request stack.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
@@ -94,12 +84,11 @@ class RateWidgetBase extends PluginBase {
    * @param \Drupal\rate\RateBotDetector $bot_detector
    *   The bot detector service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, VoteResultFunctionManager $vote_result, EntityFormBuilderInterface $form_builder, AccountInterface $account, RequestStack $request_stack, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, RateBotDetector $bot_detector) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, VoteResultFunctionManager $vote_result, EntityFormBuilderInterface $form_builder, AccountInterface $account, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, RateBotDetector $bot_detector) {
     $this->entityTypeManager = $entity_type_manager;
     $this->votingapiResult = $vote_result;
     $this->entityFormBuilder = $form_builder;
     $this->account = $account;
-    $this->requestStack = $request_stack;
     $this->configFactory = $config_factory;
     $this->moduleHandler = $module_handler;
     $this->botDetector = $bot_detector;
@@ -117,7 +106,6 @@ class RateWidgetBase extends PluginBase {
       $container->get('plugin.manager.votingapi.resultfunction'),
       $container->get('entity.form_builder'),
       $container->get('current_user'),
-      $container->get('request_stack'),
       $container->get('config.factory'),
       $container->get('module_handler'),
       $container->get('bot_detector')
@@ -166,8 +154,8 @@ class RateWidgetBase extends PluginBase {
 
     // For Fivestar we need only the values and labels, omit classes.
     foreach ($options as $option) {
-      $new_options[$option['value']] = isset($option['label']) ? $option['label'] : '';
-      $option_classes[$option['value']] = isset($option['class']) ? $option['class'] : '';
+      $new_options[$option['value']] = $option['label'] ?? '';
+      $option_classes[$option['value']] = $option['class'] ?? '';
     }
 
     // Add information if the form is built in a view.
@@ -288,14 +276,27 @@ class RateWidgetBase extends PluginBase {
     $timestamp_offset = $this->getWindow('user_window', $entity_type, $entity_bundle, $rate_widget, $voting_settings);
 
     if ($this->account->isAnonymous()) {
-      $vote_data['vote_source'] = hash('sha256', serialize($this->requestStack->getCurrentRequest()->getClientIp()));
+      $vote_data['vote_source'] = $vote->getSource();
       $timestamp_offset = $this->getWindow('anonymous_window', $entity_type, $entity_bundle, $rate_widget, $voting_settings);
     }
 
     $query = $this->entityTypeManager->getStorage('vote')->getQuery();
+    $query->accessCheck(TRUE);
 
+    // Get the votes for the user.
     foreach ($vote_data as $key => $value) {
-      $query->condition($key, $value);
+      // For anonymous users query also the vote source.
+      if ($this->account->isAnonymous()) {
+        if (in_array($key, ['entity_type', 'entity_id', 'type', 'value_type', 'rate_widget', 'user_id', 'vote_source'])) {
+          $query->condition($key, $value);
+        }
+      }
+      // Authenticated users should get their votes regardles the vote source.
+      else {
+        if (in_array($key, ['entity_type', 'entity_id', 'type', 'value_type', 'rate_widget', 'user_id'])) {
+          $query->condition($key, $value);
+        }
+      }
     }
 
     // Check if rollover is 'Immediately' or value in seconds.
@@ -328,7 +329,7 @@ class RateWidgetBase extends PluginBase {
       $resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()] = $this->votingapiResult->getResults($entity->getVotedEntityType(), $entity->getVotedEntityId());
     }
 
-    $result = isset($resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()]) ? $resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()] : [];
+    $result = $resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()] ?? [];
     $result = !empty($result) && array_key_exists($entity->bundle(), $result) ? $result[$entity->bundle()] : [];
     if ($result_function && array_key_exists($result_function, $result) && $result[$result_function]) {
       $result = $result[$result_function];
@@ -341,7 +342,7 @@ class RateWidgetBase extends PluginBase {
    */
   public function getWindow($window_type, $entity_type_id, $entity_bundle, $rate_widget, $voting_settings) {
     // Check for rollover window settings in widget or use votingapi setting.
-    $window_field_setting = isset($voting_settings[$window_type]) ? $voting_settings[$window_type] : -2;
+    $window_field_setting = $voting_settings[$window_type] ?? -2;
     $use_site_default = FALSE;
 
     // Use votingapi site-wide setting if requested or window not set.
@@ -362,8 +363,8 @@ class RateWidgetBase extends PluginBase {
    * Generate the result summary.
    */
   public function getVoteSummary(ContentEntityInterface $vote) {
-    $results = $this->getResults($vote);
     $widget_name = $vote->rate_widget->value;
+    $results = $this->getResults($vote);
     $widget = $this->entityTypeManager->getStorage('rate_widget')->load($widget_name);
     $field_results = [];
 
@@ -390,8 +391,7 @@ class RateWidgetBase extends PluginBase {
    * @return array
    *   Vote entity results.
    */
-  public function getVotes($entity_type, $entity_bundle, $entity_id, $vote_type, $value_type, $rate_widget, $user_id = FALSE) {
-    $storage = $this->entityTypeManager->getStorage('vote');
+  public function getVotes($entity_type, $entity_bundle, $entity_id, $vote_type, $value_type, $rate_widget, $user_id = FALSE, $aggregation = FALSE) {
     $vote_data = [
       'entity_type' => $entity_type,
       'entity_id' => $entity_id,
@@ -402,19 +402,56 @@ class RateWidgetBase extends PluginBase {
     if (!empty($user_id)) {
       $vote_data['user_id'] = $user_id;
     }
-    $query = $this->entityTypeManager->getStorage('vote')->getQuery();
-    foreach ($vote_data as $key => $value) {
-      $query->condition($key, $value);
+
+    // The default database column storing the rate value.
+    $value_column = 'value';
+
+    // Give other modules a chance to alter the rate value column.
+    $this->moduleHandler->invokeAll('rate_value_column',
+      [
+        &$value_column,
+        $entity_type,
+        $entity_bundle,
+        $entity_id,
+        $rate_widget,
+        $user_id,
+      ]
+    );
+
+    if (isset($aggregation)) {
+      $query = $this->entityTypeManager->getStorage('vote')->getAggregateQuery('vote');
+      $condition_group = $query->andConditionGroup();
+
+      foreach ($vote_data as $key => $value) {
+        $condition_group->condition($key, $value);
+      }
+
+      $query->condition($condition_group);
+      $query->aggregate($value_column, $aggregation);
+      $query->groupby('value');
     }
-    $votes = $query->execute();
-    $vote_values = [];
-    if ($votes && count($votes) > 0) {
-      foreach ($votes as $id) {
-        $vote = $storage->load($id);
-        $vote_values[$vote->getValue()][] = $vote->getValue();
+    else {
+      $query = $this->entityTypeManager->getStorage('vote')->getQuery();
+      foreach ($vote_data as $key => $value) {
+        $query->condition($key, $value);
       }
     }
-    return $vote_values;
+
+    $query->accessCheck(TRUE);
+
+    $votes = $query->execute();
+
+    $function = $value_column . '_' . strtolower($aggregation);
+    if (isset($votes) && count($votes) > 0) {
+      foreach ($votes as $vote) {
+        $result[$vote['value']] = $vote[$function];
+      }
+    }
+    else {
+      $result = [];
+    }
+
+    return $result;
   }
 
 }

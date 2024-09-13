@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\link\Functional\Views;
 
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Tests\views\Functional\ViewTestBase;
-use Drupal\views\Tests\ViewTestData;
 
 /**
  * Tests the views integration for link tokens.
@@ -43,9 +44,8 @@ class LinkViewsTokensTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
-    ViewTestData::createTestViews(static::class, ['link_test_views']);
+  protected function setUp($import_test_views = TRUE, $modules = ['link_test_views']): void {
+    parent::setUp($import_test_views, $modules);
 
     // Create Basic page node type.
     $this->drupalCreateContentType([
@@ -69,10 +69,10 @@ class LinkViewsTokensTest extends ViewTestBase {
 
   }
 
-  public function testLinkViewsTokens() {
+  public function testLinkViewsTokens(): void {
     // Array of URI's to test.
     $uris = [
-      'http://www.drupal.org' => 'Drupal.org',
+      'http://www.example.com' => 'example.com',
     ];
 
     // Add nodes with the URI's and titles.

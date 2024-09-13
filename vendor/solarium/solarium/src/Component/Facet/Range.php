@@ -14,7 +14,7 @@ use Solarium\Component\FacetSetInterface;
 /**
  * Facet range.
  *
- * @see https://lucene.apache.org/solr/guide/faceting.html#range-faceting
+ * @see https://solr.apache.org/guide/faceting.html#range-faceting
  */
 class Range extends AbstractRange
 {
@@ -55,8 +55,8 @@ class Range extends AbstractRange
     /**
      * Initialize options.
      *
-     * Several options need some extra checks or setup work, for these options
-     * the setters are called.
+     * {@internal Several options need some extra checks or setup work,
+     *            for these options the setters are called.}
      */
     protected function init()
     {
@@ -65,10 +65,18 @@ class Range extends AbstractRange
         foreach ($this->options as $name => $value) {
             switch ($name) {
                 case 'exclude':
+                    if (!\is_array($value)) {
+                        $value = preg_split('/(?<!\\\\),/', $value);
+                    }
+
                     $this->getLocalParameters()->addExcludes($value);
+                    unset($this->options[$name]);
+
+                    trigger_error('Setting local parameter using the "exclude" option is deprecated in Solarium 7 and will be removed in Solarium 8. Use "local_exclude" instead.', \E_USER_DEPRECATED);
                     break;
                 case 'pivot':
                     $this->setPivot(new Pivot($value));
+                    break;
             }
         }
     }

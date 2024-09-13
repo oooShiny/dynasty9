@@ -28,6 +28,7 @@ class GutenbergLibraryManager extends DefaultPluginManager implements GutenbergL
     'libraries-edit' => [],
     'libraries-view' => [],
     'dynamic-blocks' => [],
+    'custom-blocks' => []
   ];
 
   /**
@@ -216,6 +217,7 @@ class GutenbergLibraryManager extends DefaultPluginManager implements GutenbergL
       // TODO: A better way to do this?
       $module_path = $this->moduleHandler->getModule('gutenberg')->getPath();
       $config_file_path = $module_path . '/' . $theme_name . '.gutenberg.yml';
+
       if (file_exists($config_file_path)) {
         $default_theme_definitions = Yaml::parseFile($config_file_path);
       }
@@ -238,6 +240,13 @@ class GutenbergLibraryManager extends DefaultPluginManager implements GutenbergL
       $this->logger->error($e->getMessage());
     }
 
+    // Process style section on each theme definition.
+    foreach ($theme_definitions as $theme_name => &$theme_definition) {
+      if (!empty($theme_definition['theme-support']['styles'])) {
+        $this->processThemeSupportStyles($theme_definition, $active_theme);
+      }
+    }
+
     $this->cacheBackend->set(
       $cid,
       $theme_definitions,
@@ -245,7 +254,7 @@ class GutenbergLibraryManager extends DefaultPluginManager implements GutenbergL
       ['gutenberg']
     );
     $this->activeThemeDefinitions = $theme_definitions;
-
+    
     return $this->activeThemeDefinitions;
   }
 
@@ -323,4 +332,236 @@ class GutenbergLibraryManager extends DefaultPluginManager implements GutenbergL
     return $this->definitionsByExtension;
   }
 
+  /**
+   * Generate color css classes.
+   * 
+   * @return string|bool
+   */
+  public function generateThemeColorClasses() {
+    $definitions = $this->getActiveThemeMergedDefinition();
+
+    $disableGeneratedColorCssClasses =
+      isset($definitions['theme-support']['disableGeneratedColorCssClasses'])
+      && (
+        !empty($definitions['theme-support']['disableGeneratedColorCssClasses'])
+        || $definitions['theme-support']['disableGeneratedColorCssClasses']
+      );
+
+    // @todo: To deprecate.
+    $themeIncludesColors =
+      isset($definitions['theme-includes-colors'])
+      && !empty($definitions['theme-includes-colors']);
+
+    if ($disableGeneratedColorCssClasses && !$themeIncludesColors) {
+      return FALSE;
+    }
+
+    $themeColors = [];
+
+    if (!empty($definitions['theme-support']['colors'])) {
+      $themeColors = $definitions['theme-support']['colors'];
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['color']['palette']['default'])) {
+      $themeColors = array_merge($themeColors, $definitions['theme-support']['__experimentalFeatures']['color']['palette']['default']);
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['color']['palette']['theme'])) {
+      $themeColors = array_merge($themeColors, $definitions['theme-support']['__experimentalFeatures']['color']['palette']['theme']);
+    }
+
+    $css_markup = '';
+
+    // Generate color variables.
+    foreach ($themeColors as $color) {
+      $color_name = $color['slug'];
+      $color_value = $color['color'];
+      $css_markup .= "  .has-{$color_name}-color{ color:{$color_value} }";
+      $css_markup .= "  .has-{$color_name}-background-color{ background-color:{$color_value} }";
+      $css_markup .= "  .has-{$color_name}-border-color{ border-color:{$color_value} }";
+    }
+
+    if (empty($css_markup)) {
+      return FALSE;
+    }
+
+    return ":root { $css_markup }";
+  }
+
+  /**
+   * Generate gradient css classes.
+   * 
+   * @return string|bool
+   */
+  public function generateThemeGradientClasses() {
+    $definitions = $this->getActiveThemeMergedDefinition();
+
+    $disableGeneratedGradientCssClasses =
+      isset($definitions['theme-support']['disableGeneratedGradientCssClasses'])
+      && (
+        !empty($definitions['theme-support']['disableGeneratedGradientCssClasses'])
+        || $definitions['theme-support']['disableGeneratedGradientCssClasses']
+      );
+
+    if ($disableGeneratedGradientCssClasses) {
+      return FALSE;
+    }
+
+    $themeGradients = [];
+
+    // @todo: To deprecate.
+    if (!empty($definitions['theme-support']['gradients'])) {
+      $themeGradients = $definitions['theme-support']['gradients'];
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['color']['gradients']['default'])) {
+      $themeGradients = array_merge($themeGradients, $definitions['theme-support']['__experimentalFeatures']['color']['gradients']['default']);
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['color']['gradients']['theme'])) {
+      $themeGradients = array_merge($themeGradients, $definitions['theme-support']['__experimentalFeatures']['color']['gradients']['theme']);
+    }
+
+    $css_markup = '';
+
+    // Generate color variables.
+    foreach ($themeGradients as $gradient) {
+      $gradient_name = $gradient['slug'];
+      $gradient_value = $gradient['gradient'];
+      $css_markup .= "  .has-{$gradient_name}-gradient-background{ background:{$gradient_value} }";
+    }
+
+    if (empty($css_markup)) {
+      return FALSE;
+    }
+
+    return ":root { $css_markup }";
+  }
+
+  /**
+   * Generate font size css classes.
+   * 
+   * @return string|bool
+   */
+  public function generateThemeFontSizeClasses() {
+    $definitions = $this->getActiveThemeMergedDefinition();
+
+    $disableGeneratedFontSizeCssClasses =
+      isset($definitions['theme-support']['disableGeneratedFontSizeCssClasses'])
+      && (
+        !empty($definitions['theme-support']['disableGeneratedFontSizeCssClasses'])
+        || $definitions['theme-support']['disableGeneratedFontSizeCssClasses']
+      );
+
+    if ($disableGeneratedFontSizeCssClasses) {
+      return FALSE;
+    }
+
+    $themeFontSizes = [];
+
+    // @todo: To deprecate.
+    if (!empty($definitions['theme-support']['fontSizes'])) {
+      $themeFontSizes = $definitions['theme-support']['fontSizes'];
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['typography']['fontSizes']['default'])) {
+      $themeFontSizes = array_merge($themeFontSizes, $definitions['theme-support']['__experimentalFeatures']['typography']['fontSizes']['default']);
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['typography']['fontSizes']['theme'])) {
+      $themeFontSizes = array_merge($themeFontSizes, $definitions['theme-support']['__experimentalFeatures']['typography']['fontSizes']['theme']);
+    }
+
+    $css_markup = '';
+
+    // Generate color variables.
+    foreach ($themeFontSizes as $fontSize) {
+      $size_name = $fontSize['slug'];
+      $size_value = $fontSize['size'];
+      $css_markup .= "  .has-{$size_name}-font-size{ font-size:{$size_value} }";
+    }
+
+    if (empty($css_markup)) {
+      return FALSE;
+    }
+
+    return ":root { $css_markup }";
+  }
+
+  /**
+   * Process theme support styles.
+   * It checks for files in styles sections and loads them.
+   * 
+   * @param array $theme_definition
+   *  The theme definition.
+   * @param \Drupal\Core\Theme\ActiveTheme $active_theme
+   * The active theme.
+   * 
+   */
+  protected function processThemeSupportStyles(&$theme_definition, $active_theme) {
+    $path = $active_theme->getPath();
+    foreach ($theme_definition['theme-support']['styles'] as $key => &$style) {
+      if ($style['css'] && is_array($style['css'])) {
+        $resultCss = '';
+        foreach ($style['css'] as $filename => $file_settings) {
+          $style_file_path = \Drupal::root() . '/' . $path . '/' . $filename;
+          if (file_exists($style_file_path)) {
+            $css = file_get_contents($style_file_path);
+
+            // Get folder path from file path.
+            $folder_path = dirname($path . '/' . $filename);
+
+            // Process urls.
+            $re = '/url\((?![\'"]?(?:data):)[\'"]?([^\'"\)]*)[\'"]?\)/m';
+            $subst = "url(\"/" . $folder_path . "/$1\")";            
+            $resultCss .= preg_replace($re, $subst, $css) . "\n";
+          }
+        }
+        $style['css'] = $resultCss;
+      }
+    }
+  }
+
+  /**
+   * Generate spacing sizes CSS variables.
+   */
+  public function generateSpacingSizesCssVariables() {
+    $definitions = $this->getActiveThemeMergedDefinition();
+
+    $disableGeneratedSpacingSizesCssVariables =
+      isset($definitions['theme-support']['disableGeneratedSpacingSizesCssVariables'])
+      && (
+        !empty($definitions['theme-support']['disableGeneratedSpacingSizesCssVariables'])
+        || $definitions['theme-support']['disableGeneratedSpacingSizesCssVariables']
+      );
+
+    if ($disableGeneratedSpacingSizesCssVariables) {
+      return FALSE;
+    }
+
+    $themeSpacingSizes = [];
+
+    if (empty($definitions['theme-support']['__experimentalFeatures']['spacing'])) {
+      return FALSE;
+    }
+
+    if (!empty($definitions['theme-support']['__experimentalFeatures']['spacing']['spacingSizes'])) {
+      $themeSpacingSizes = $definitions['theme-support']['__experimentalFeatures']['spacing']['spacingSizes']['theme'];
+    }
+
+    $css_markup = '';
+
+    // Generate color variables.
+    foreach ($themeSpacingSizes as $size) {
+      $size_name = $size['slug'];
+      $size_value = $size['size'];
+      $css_markup .= "  --wp--preset--spacing--{$size_name}:{$size_value};";
+    }
+
+    if (empty($css_markup)) {
+      return FALSE;
+    }
+
+    return ":root { $css_markup }";
+  }
 }

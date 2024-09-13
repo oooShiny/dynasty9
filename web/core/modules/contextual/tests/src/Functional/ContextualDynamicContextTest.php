@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\contextual\Functional;
 
 use Drupal\Component\Serialization\Json;
@@ -10,8 +12,7 @@ use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests if contextual links are showing on the front page depending on
- * permissions.
+ * Tests contextual link display on the front page based on permissions.
  *
  * @group contextual
  */
@@ -20,7 +21,7 @@ class ContextualDynamicContextTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * A user with permission to access contextual links and edit content.
@@ -57,6 +58,9 @@ class ContextualDynamicContextTest extends BrowserTestBase {
     'menu_test',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -84,7 +88,7 @@ class ContextualDynamicContextTest extends BrowserTestBase {
    * Ensures that contextual link placeholders always exist, even if the user is
    * not allowed to use contextual links.
    */
-  public function testDifferentPermissions() {
+  public function testDifferentPermissions(): void {
     $this->drupalLogin($this->editorUser);
 
     // Create three nodes in the following order:
@@ -115,9 +119,9 @@ class ContextualDynamicContextTest extends BrowserTestBase {
     $response = $this->renderContextualLinks($ids, 'node');
     $this->assertSame(200, $response->getStatusCode());
     $json = Json::decode((string) $response->getBody());
-    $this->assertSame('<ul class="contextual-links"><li class="entitynodeedit-form"><a href="' . base_path() . 'node/1/edit">Edit</a></li></ul>', $json[$ids[0]]);
+    $this->assertSame('<ul class="contextual-links"><li><a href="' . base_path() . 'node/1/edit">Edit</a></li></ul>', $json[$ids[0]]);
     $this->assertSame('', $json[$ids[1]]);
-    $this->assertSame('<ul class="contextual-links"><li class="entitynodeedit-form"><a href="' . base_path() . 'node/3/edit">Edit</a></li></ul>', $json[$ids[2]]);
+    $this->assertSame('<ul class="contextual-links"><li><a href="' . base_path() . 'node/3/edit">Edit</a></li></ul>', $json[$ids[2]]);
     $this->assertSame('', $json[$ids[3]]);
 
     // Verify that link language is properly handled.
@@ -157,13 +161,18 @@ class ContextualDynamicContextTest extends BrowserTestBase {
     // Get a page where contextual links are directly rendered.
     $this->drupalGet(Url::fromRoute('menu_test.contextual_test'));
     $this->assertSession()->assertEscaped("<script>alert('Welcome to the jungle!')</script>");
-    $this->assertSession()->responseContains('<li class="menu-testcontextual-hidden-manage-edit"><a href="' . base_path() . 'menu-test-contextual/1/edit" class="use-ajax" data-dialog-type="modal" data-is-something>Edit menu - contextual</a></li>');
+    $this->assertSession()->responseContains('<li><a href="' . base_path() . 'menu-test-contextual/1/edit" class="use-ajax" data-dialog-type="modal" data-is-something>Edit menu - contextual</a></li>');
+    // Test contextual links respects the weight set in *.links.contextual.yml.
+    $firstLink = $this->assertSession()->elementExists('css', 'ul.contextual-links li:nth-of-type(1) a');
+    $secondLink = $this->assertSession()->elementExists('css', 'ul.contextual-links li:nth-of-type(2) a');
+    $this->assertEquals(base_path() . 'menu-test-contextual/1/edit', $firstLink->getAttribute('href'));
+    $this->assertEquals(base_path() . 'menu-test-contextual/1', $secondLink->getAttribute('href'));
   }
 
   /**
    * Tests the contextual placeholder content is protected by a token.
    */
-  public function testTokenProtection() {
+  public function testTokenProtection(): void {
     $this->drupalLogin($this->editorUser);
 
     // Create a node that will have a contextual link.

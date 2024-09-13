@@ -12,7 +12,6 @@ use Drupal\Core\Entity\Sql\SqlContentEntityStorageSchema;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\search_api\Entity\Server;
-use Drupal\search_api\Entity\TaskStorageSchema;
 
 /**
  * Implements hook_schema().
@@ -46,7 +45,7 @@ function search_api_schema() {
         'not null' => TRUE,
       ],
       'status' => [
-        'description' => 'Boolean indicating the reindexation status, "1" when we need to reindex, "0" otherwise',
+        'description' => 'Boolean indicating the indexing status: "1" if item needs to be indexed, "0" otherwise',
         'type' => 'int',
         'not null' => TRUE,
       ],
@@ -326,7 +325,7 @@ function search_api_update_8106() {
       ->condition('name', 'search_api_views_taxonomy')
       ->execute();
   }
-  catch (DatabaseException $e) {
+  catch (DatabaseException) {
     // The admin might have done this already to get rid of the warning
     // themselves. It's not really important enough to fail on this, in any
     // case. In the worst case, the warning just remains. So, just ignore any
@@ -338,10 +337,8 @@ function search_api_update_8106() {
  * Add a unique index to the task entity type's storage.
  */
 function search_api_update_8107() {
-  $manager = \Drupal::entityDefinitionUpdateManager();
-  $entity_type = $manager->getEntityType('search_api_task');
-  $entity_type->setHandlerClass('storage_schema', TaskStorageSchema::class);
-  $manager->updateEntityType($entity_type);
+  // This function body was removed since it was out-dated.
+  // See search_api_update_8110().
 }
 
 /**
@@ -406,6 +403,16 @@ function search_api_update_8109(): MarkupInterface {
 function search_api_update_8110() {
   $manager = \Drupal::entityDefinitionUpdateManager();
   $entity_type = $manager->getEntityType('search_api_task');
+  // Apparently, getEntityType() can return NULL under some circumstances.
+  if (!$entity_type) {
+    return;
+  }
+  // Do not bother resetting the storage schema handler in case it was not set
+  // in the first place.
+  $handler = $entity_type->getHandlerClass('storage_schema');
+  if (in_array($handler, [SqlContentEntityStorageSchema::class, NULL], TRUE)) {
+    return;
+  }
   $entity_type->setHandlerClass('storage_schema', SqlContentEntityStorageSchema::class);
   $manager->updateEntityType($entity_type);
 }

@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\filter\Functional;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
 
 /**
  * Tests access to text formats.
@@ -68,6 +72,9 @@ class FilterFormatAccessTest extends BrowserTestBase {
    */
   protected $disallowedFormat;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -89,7 +96,7 @@ class FilterFormatAccessTest extends BrowserTestBase {
     $formats = [];
     for ($i = 0; $i < 3; $i++) {
       $edit = [
-        'format' => mb_strtolower($this->randomMachineName()),
+        'format' => $this->randomMachineName(),
         'name' => $this->randomMachineName(),
       ];
       $this->drupalGet('admin/config/content/formats/add');
@@ -123,7 +130,7 @@ class FilterFormatAccessTest extends BrowserTestBase {
   /**
    * Tests the Filter format access permissions functionality.
    */
-  public function testFormatPermissions() {
+  public function testFormatPermissions(): void {
     // Make sure that a regular user only has access to the text formats for
     // which they were granted access.
     $fallback_format = FilterFormat::load(filter_fallback_format());
@@ -179,7 +186,7 @@ class FilterFormatAccessTest extends BrowserTestBase {
   /**
    * Tests if text format is available to a role.
    */
-  public function testFormatRoles() {
+  public function testFormatRoles(): void {
     // Get the role ID assigned to the regular user.
     $roles = $this->webUser->getRoles(TRUE);
     $rid = $roles[0];
@@ -196,7 +203,9 @@ class FilterFormatAccessTest extends BrowserTestBase {
     $this->assertNotContains($this->disallowedFormat->id(), array_keys(filter_get_formats_by_role($rid)), 'A text format which a role does not have access to does not appear in the list of formats available to that role.');
 
     // Check that the fallback format is always allowed.
-    $this->assertEquals(filter_get_roles_by_format(FilterFormat::load(filter_fallback_format())), user_role_names(), 'All roles have access to the fallback format.');
+    $roles = Role::loadMultiple();
+    $names = array_map(fn(RoleInterface $role) => $role->label(), $roles);
+    $this->assertEquals(filter_get_roles_by_format(FilterFormat::load(filter_fallback_format())), $names, 'All roles have access to the fallback format.');
     $this->assertContains(filter_fallback_format(), array_keys(filter_get_formats_by_role($rid)), 'The fallback format appears in the list of allowed formats for any role.');
   }
 
@@ -209,7 +218,7 @@ class FilterFormatAccessTest extends BrowserTestBase {
    * be edited by administrators only, but that the administrator is forced to
    * choose a new format before saving the page.
    */
-  public function testFormatWidgetPermissions() {
+  public function testFormatWidgetPermissions(): void {
     $body_value_key = 'body[0][value]';
     $body_format_key = 'body[0][format]';
 
@@ -282,7 +291,7 @@ class FilterFormatAccessTest extends BrowserTestBase {
     $edit['title[0][value]'] = $new_title;
     $this->drupalGet('node/' . $node->id() . '/edit');
     $this->submitForm($edit, 'Save');
-    $this->assertSession()->pageTextContains('Text format field is required.');
+    $this->assertSession()->statusMessageContains('Text format field is required.', 'error');
     $this->drupalGet('node/' . $node->id());
     $this->assertSession()->pageTextContains($old_title);
     $this->assertSession()->pageTextNotContains($new_title);
@@ -320,7 +329,7 @@ class FilterFormatAccessTest extends BrowserTestBase {
     $edit['title[0][value]'] = $new_title;
     $this->drupalGet('node/' . $node->id() . '/edit');
     $this->submitForm($edit, 'Save');
-    $this->assertSession()->pageTextContains('Text format field is required.');
+    $this->assertSession()->statusMessageContains('Text format field is required.', 'error');
     $this->drupalGet('node/' . $node->id());
     $this->assertSession()->pageTextContains($old_title);
     $this->assertSession()->pageTextNotContains($new_title);

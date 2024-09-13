@@ -46,7 +46,7 @@ class RateWidgetField extends FieldPluginBase {
     $field_list = [];
     $field_handlers = $this->view->getHandlers('field');
     foreach ($field_handlers as $field_name) {
-      if ($field_name['entity_type'] && $field_name['plugin_id'] != 'rate_widget_field') {
+      if (isset($field_name['entity_type']) && $field_name['plugin_id'] != 'rate_widget_field') {
         if (empty($field_name['label'])) {
           $field_list[$field_name['id']] = $field_name['id'];
         }
@@ -145,6 +145,7 @@ class RateWidgetField extends FieldPluginBase {
 
     // Check, if the field is in _entity (base table)
     if (isset($row->_entity->{$column})) {
+      $entity = $row->_entity;
       $entity_id = $row->_entity->id();
       $entity_type_id = $row->_entity->getEntityTypeId();
       if ($entity_type_id == 'user' || $entity_type_id == 'comment' || $entity_type_id == 'file') {
@@ -160,7 +161,7 @@ class RateWidgetField extends FieldPluginBase {
         $bundle = $row->_entity->getVocabularyId();
       }
       else {
-        $bundle = $row->_entity->getType();
+        $bundle = $row->_entity->bundle();
       }
     }
     // Check, if the field is in _relationship_entities.
@@ -168,6 +169,7 @@ class RateWidgetField extends FieldPluginBase {
       $relationship_entity = array_keys($row->_relationship_entities);
       foreach ($relationship_entity as $rel) {
         if (isset($row->_relationship_entities[$rel]->{$column})) {
+          $entity = $row->_relationship_entities[$rel];
           $entity_id = $row->_relationship_entities[$rel]->id();
           $entity_type_id = $row->_relationship_entities[$rel]->getEntityTypeId();
           if ($entity_type_id == 'user' || $entity_type_id == 'comment') {
@@ -183,18 +185,37 @@ class RateWidgetField extends FieldPluginBase {
             $bundle = $row->_relationship_entities[$rel]->getVocabularyId();
           }
           else {
-            $bundle = $row->_relationship_entities[$rel]->getType();
+            $bundle = $row->_relationship_entities[$rel]->bundle();
           }
         }
       }
     }
-    if (!isset($entity_id) || !isset($entity_type_id) || !isset($bundle)) {
+    if (!isset($entity) || !isset($entity_id) || !isset($entity_type_id) || !isset($bundle)) {
       return;
     }
     else {
       // Get the widgets assigned to this entity.
       $query = \Drupal::entityQuery('rate_widget');
-      $query->condition('entity_types.*', [$entity_type_id . '.' . $bundle], 'IN');
+      $query->accessCheck(TRUE);
+
+      // Prepare the query condition - special handling of comments.
+      if ($entity_type_id == 'comment') {
+        // Need to match the parent entity (e.g. node).
+        $parent_entity = $entity->entity_id->entity;
+        $parent_entity_type = $parent_entity->getEntityTypeId();
+        if (method_exists($parent_entity, 'bundle')) {
+          $parent_bundle = $parent_entity->bundle();
+        }
+        else {
+          $parent_bundle = $parent_entity_type;
+        }
+        $query->condition('comment_types.*', [$parent_entity_type . '.' . $parent_bundle], 'IN');
+      }
+      else {
+        // Get the widget types directly.
+        $query->condition('entity_types.*', [$entity_type_id . '.' . $bundle], 'IN');
+      }
+
       $widget_ids = $query->execute();
 
       // Exit if this entity:bundle has no rate widgets attached.
@@ -221,6 +242,7 @@ class RateWidgetField extends FieldPluginBase {
       if (!isset($widget)) {
         return;
       }
+
       $widget_name = $widget;
       $widget = $widget_storage->load($widget);
       $widget_template = $widget->get('template');
@@ -242,8 +264,12 @@ class RateWidgetField extends FieldPluginBase {
       $vote_type = ($widget_template == 'fivestar') ? $widget_template : 'updown';
 
       // Mark the widget being part of a view and add the view url.
-      $widget->set('isViewsField', FALSE);
-      $widget->set('viewsUrl', $this->view->getUrl());
+      $widget->set('isViewsField', TRUE);
+      if (is_null($widget->get('viewsUrl'))) {
+        if ($this->view->hasUrl()) {
+          $widget->set('viewsUrl', $this->view->getUrl());
+        }
+      }
 
       // Get the rate widget rating form.
       $form = $rate_widget_base_service->getForm($entity_type_id, $bundle, $entity_id, $vote_type, $value_type, $widget_name, $widget);
@@ -259,7 +285,10 @@ class RateWidgetField extends FieldPluginBase {
           ],
         ],
         '#attached' => [
-          'library' => ['rate/w-' . $widget_template],
+          'library' => [
+            'rate/unvote-helper',
+            'rate/w-' . $widget_template,
+          ],
         ],
       ];
       $build[$widget_name] = $form_container;

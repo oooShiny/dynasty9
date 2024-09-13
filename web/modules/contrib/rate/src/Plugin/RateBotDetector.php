@@ -215,7 +215,7 @@ class RateBotDetector {
 
     $threshold = $this->config->get('bot_minute_threshold');
 
-    if ($threshold && ($this->checkThreshold(60) > $threshold)) {
+    if ($threshold && ($this->checkThreshold(60) >= $threshold)) {
       $this->registerBot();
       return TRUE;
     }
@@ -225,7 +225,7 @@ class RateBotDetector {
     // Always count, even if threshold is disabled. This is to determine if we
     // can skip the BotScout check.
     $count = $this->checkThreshold(3600);
-    if ($threshold && ($count > $threshold)) {
+    if ($threshold && ($count >= $threshold)) {
       $this->registerBot();
       return TRUE;
     }

@@ -183,7 +183,7 @@ class HierarchicalFacetIntegrationTest extends FacetsTestBase {
     $this->assertSession()->linkNotExists('Child 3');
     $this->assertSession()->linkNotExists('Child 4');
 
-    // Click the the parent and make sure its children are not active, too.
+    // Click the parent and make sure its children are not active, too.
     $this->clickLink('Parent 1');
     $this->checkFacetIsNotActive('Parent 1');
     $this->assertSession()->linkNotExists('Child 1');
@@ -383,7 +383,7 @@ class HierarchicalFacetIntegrationTest extends FacetsTestBase {
    */
   public function testHierarchyBreadcrumb() {
     $this->drupalGet('admin/config/search/facets');
-    $this->clickLink('Configure', 1);
+    $this->clickLink('Configure', 2);
     $default_config = [
       'filter_key' => 'f',
       'url_processor' => 'query_string',

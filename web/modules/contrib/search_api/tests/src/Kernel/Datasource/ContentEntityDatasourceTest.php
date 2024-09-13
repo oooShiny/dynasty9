@@ -62,7 +62,7 @@ class ContentEntityDatasourceTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     // Enable translation for the entity_test module.
@@ -164,7 +164,7 @@ class ContentEntityDatasourceTest extends KernelTestBase {
       $this->assertInstanceOf(EntityAdapter::class, $item);
       $entity = $item->getValue();
       $this->assertInstanceOf(EntityTestMulRevChanged::class, $entity);
-      list($id, $langcode) = explode(':', $item_id);
+      [$id, $langcode] = explode(':', $item_id);
       $this->assertEquals($id, $entity->id());
       $this->assertEquals($langcode, $entity->language()->getId());
     }
@@ -178,6 +178,7 @@ class ContentEntityDatasourceTest extends KernelTestBase {
    */
   public function testItemViewing() {
     $loaded_items = $this->datasource->loadMultiple($this->allItemIds);
+    /** @var \Drupal\Core\Entity\EntityViewBuilder $builder */
     $builder = \Drupal::entityTypeManager()
       ->getViewBuilder('entity_test_mulrev_changed');
 
@@ -335,7 +336,6 @@ class ContentEntityDatasourceTest extends KernelTestBase {
       'languages' => $language_config,
     ]);
     $method = new \ReflectionMethod($this->datasource, 'getLanguages');
-    $method->setAccessible(TRUE);
     /** @var \Drupal\Core\Language\LanguageInterface[] $returned */
     $returned = $method->invoke($this->datasource);
     foreach ($returned as $langcode => $language) {
@@ -354,7 +354,7 @@ class ContentEntityDatasourceTest extends KernelTestBase {
    *
    * @see \Drupal\Tests\search_api\Kernel\Datasource\ContentEntityDatasourceTest::testGetLanguages()
    */
-  public function getLanguagesDataProvider(): array {
+  public static function getLanguagesDataProvider(): array {
     return [
       'all' => [
         'language_config' => [

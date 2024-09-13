@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Core\Url;
@@ -9,8 +11,9 @@ use Drupal\image\Entity\ImageStyle;
  * JSON:API integration test for the "ImageStyle" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class ImageStyleTest extends ResourceTestBase {
+class ImageStyleTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -130,6 +133,7 @@ class ImageStyleTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
 }

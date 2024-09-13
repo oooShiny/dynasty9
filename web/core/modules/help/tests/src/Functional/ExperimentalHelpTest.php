@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\help\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -42,20 +44,20 @@ class ExperimentalHelpTest extends BrowserTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->adminUser = $this->drupalCreateUser(['access administration pages']);
+    $this->adminUser = $this->drupalCreateUser(['access help pages']);
   }
 
   /**
    * Verifies that a warning message is displayed for experimental modules.
    */
-  public function testExperimentalHelp() {
+  public function testExperimentalHelp(): void {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('admin/help/experimental_module_test');
-    $this->assertSession()->pageTextContains('This module is experimental.');
+    $this->assertSession()->statusMessageContains('This module is experimental.', 'warning');
 
     // Regular modules should not display the message.
     $this->drupalGet('admin/help/help_page_test');
-    $this->assertSession()->pageTextNotContains('This module is experimental.');
+    $this->assertSession()->statusMessageNotContains('This module is experimental.');
 
     // Ensure the actual help page is displayed to avoid a false positive.
     $this->assertSession()->statusCodeEquals(200);

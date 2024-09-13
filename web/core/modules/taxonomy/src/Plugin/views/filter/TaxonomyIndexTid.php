@@ -8,6 +8,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermStorageInterface;
 use Drupal\taxonomy\VocabularyStorageInterface;
+use Drupal\views\Attribute\ViewsFilter;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\ManyToOne;
@@ -17,9 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Filter by term id.
  *
  * @ingroup views_filter_handlers
- *
- * @ViewsFilter("taxonomy_index_tid")
  */
+#[ViewsFilter("taxonomy_index_tid")]
 class TaxonomyIndexTid extends ManyToOne {
 
   /**
@@ -27,6 +27,7 @@ class TaxonomyIndexTid extends ManyToOne {
    *
    * @var array|null
    */
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $validated_exposed_input = NULL;
 
   /**
@@ -66,14 +67,10 @@ class TaxonomyIndexTid extends ManyToOne {
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, VocabularyStorageInterface $vocabulary_storage, TermStorageInterface $term_storage, AccountInterface $current_user = NULL) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, VocabularyStorageInterface $vocabulary_storage, TermStorageInterface $term_storage, AccountInterface $current_user) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->vocabularyStorage = $vocabulary_storage;
     $this->termStorage = $term_storage;
-    if (!$current_user) {
-      @trigger_error('The current_user service must be passed to ' . __NAMESPACE__ . '\TaxonomyIndexTid::__construct(). It was added in drupal:8.9.0 and will be required before drupal:10.0.0.', E_USER_DEPRECATED);
-      $current_user = \Drupal::service('current_user');
-    }
     $this->currentUser = $current_user;
   }
 
@@ -94,7 +91,7 @@ class TaxonomyIndexTid extends ManyToOne {
   /**
    * {@inheritdoc}
    */
-  public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
+  public function init(ViewExecutable $view, DisplayPluginBase $display, ?array &$options = NULL) {
     parent::init($view, $display, $options);
 
     if (!empty($this->definition['vocabulary'])) {
@@ -173,7 +170,7 @@ class TaxonomyIndexTid extends ManyToOne {
     $vocabulary = $this->vocabularyStorage->load($this->options['vid']);
     if (empty($vocabulary) && $this->options['limit']) {
       $form['markup'] = [
-        '#markup' => '<div class="js-form-item form-item">' . $this->t('An invalid vocabulary is selected. Please change it in the options.') . '</div>',
+        '#markup' => '<div class="js-form-item form-item">' . $this->t('An invalid vocabulary is selected. Change it in the options.') . '</div>',
       ];
       return;
     }
@@ -284,7 +281,7 @@ class TaxonomyIndexTid extends ManyToOne {
       $this->helper->buildOptionsForm($form, $form_state);
 
       // Show help text if not exposed to end users.
-      $form['value']['#description'] = t('Leave blank for all. Otherwise, the first selected term will be the default instead of "Any".');
+      $form['value']['#description'] = $this->t('Leave blank for all. Otherwise, the first selected term will be the default instead of "Any".');
     }
   }
 
@@ -348,6 +345,12 @@ class TaxonomyIndexTid extends ManyToOne {
     }
 
     $identifier = $this->options['expose']['identifier'];
+    $input = $form_state->getValue($identifier);
+
+    if ($this->options['is_grouped'] && isset($this->options['group_info']['group_items'][$input])) {
+      $this->validated_exposed_input = $this->options['group_info']['group_items'][$input]['value'];
+      return;
+    }
 
     // We only validate if they've chosen the text field style.
     if ($this->options['type'] != 'textfield') {
@@ -396,19 +399,6 @@ class TaxonomyIndexTid extends ManyToOne {
       }
     }
     return parent::adminSummary();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheContexts() {
-    $contexts = parent::getCacheContexts();
-    // The result potentially depends on term access and so is just cacheable
-    // per user.
-    // @todo See https://www.drupal.org/node/2352175.
-    $contexts[] = 'user';
-
-    return $contexts;
   }
 
   /**

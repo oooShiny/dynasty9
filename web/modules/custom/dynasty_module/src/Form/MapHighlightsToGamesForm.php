@@ -49,7 +49,10 @@ class MapHighlightsToGamesForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
     // Get list of games in Drupal.
     $game_links = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','game')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
+      ->condition('type','game')
+      ->execute();
     $games =  Node::loadMultiple($nids);
     foreach ($games as $game) {
       $game_links[$game->get('field_season')->value][$game->get('field_week')->target_id] = $game->id();
@@ -57,7 +60,10 @@ class MapHighlightsToGamesForm extends ConfigFormBase {
 
     // Save the data as new video nodes.
     $operations = [];
-    $nids = \Drupal::entityQuery('node')->condition('type','highlight')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
+      ->condition('type','highlight')
+      ->execute();
     $videos =  Node::loadMultiple($nids);
     foreach ($videos as $video) {
       if ($video->get('field_game')->isEmpty()) {

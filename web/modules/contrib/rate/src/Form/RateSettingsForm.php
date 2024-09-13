@@ -132,7 +132,9 @@ class RateSettingsForm extends ConfigFormBase implements ContainerInjectionInter
       '#type' => 'textfield',
       '#title' => $this->t('BotScout.com API key'),
       '#default_value' => $config->get('botscout_key'),
-      '#description' => $this->t('Rate will check the voters IP against the BotScout database if it has an API key. You can request a key at %url.', ['%url' => 'http://botscout.com/getkey.htm']),
+      '#description' => $this->t('Rate will check the voters IP against the BotScout database if it has an API key. You can request a key at <a href="@url">@url</a>.', [
+        '@url' => 'https://botscout.com/getkey.htm',
+      ]),
     ];
 
     return parent::buildForm($form, $form_state);

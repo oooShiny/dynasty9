@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
@@ -13,8 +14,9 @@ use GuzzleHttp\RequestOptions;
  * JSON:API integration test for the "ConfigurableLanguage" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class ConfigurableLanguageTest extends ResourceTestBase {
+class ConfigurableLanguageTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -105,12 +107,13 @@ class ConfigurableLanguageTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedCacheContexts(array $sparse_fieldset = NULL) {
+  protected function getExpectedCacheContexts(?array $sparse_fieldset = NULL) {
     return Cache::mergeContexts(parent::getExpectedCacheContexts(), ['languages:language_interface']);
   }
 
@@ -119,7 +122,7 @@ class ConfigurableLanguageTest extends ResourceTestBase {
    *
    * @see https://www.drupal.org/project/drupal/issues/2915539
    */
-  public function testGetIndividualDefaultConfig() {
+  public function testGetIndividualDefaultConfig(): void {
     // @todo Remove line below in favor of commented line in https://www.drupal.org/project/drupal/issues/2878463.
     $url = Url::fromRoute('jsonapi.configurable_language--configurable_language.individual', ['entity' => ConfigurableLanguage::load('en')->uuid()]);
     /* $url = ConfigurableLanguage::load('en')->toUrl('jsonapi'); */
@@ -130,7 +133,7 @@ class ConfigurableLanguageTest extends ResourceTestBase {
     $this->setUpAuthorization('GET');
     $response = $this->request('GET', $url, $request_options);
 
-    $normalization = Json::decode((string) $response->getBody());
+    $normalization = $this->getDocumentFromResponse($response);
     $this->assertArrayNotHasKey('_core', $normalization['data']['attributes']);
   }
 

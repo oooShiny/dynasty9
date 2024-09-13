@@ -40,13 +40,13 @@ $vendor_definitions = [
     'type' => JS_MIN,
   ],
   'react' => [
-    'version' => '17.0.2',
+    'version' => '18.2.0',
     'prod' => 'umd/react.production.min.js',
     'dev' => 'umd/react.development.js',
     'type' => JS_MIN,
   ],
   'react-dom' => [
-    'version' => '17.0.2',
+    'version' => '18.2.0',
     'prod' => 'umd/react-dom.production.min.js',
     'dev' => 'umd/react-dom.development.js',
     'type' => JS_MIN,
@@ -76,7 +76,7 @@ $vendor_definitions = [
 ];
 
 $temp_dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . '.gutenberg-temp' . DIRECTORY_SEPARATOR . 'drupal-vendors';
-$dest_dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR;
+$dest_dir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'js/vendor' . DIRECTORY_SEPARATOR;
 
 if (!is_dir($temp_dir)) {
   mkdir($temp_dir, 0777, TRUE);

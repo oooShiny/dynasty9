@@ -14,7 +14,7 @@ use Solarium\Core\Query\QueryInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * PreCreateRequest event, see Events for details.
+ * PreCreateRequest event, see {@see Events} for details.
  */
 class PreCreateRequest extends Event
 {
@@ -55,7 +55,7 @@ class PreCreateRequest extends Event
      *
      * @param Request $request
      *
-     * @return self
+     * @return self Provides fluent interface
      */
     public function setRequest(Request $request): self
     {

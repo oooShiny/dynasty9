@@ -7,7 +7,7 @@ dependencies:
   - drupal:views
   - votingapi:votingapi
 
-# Information added by Drupal.org packaging script on 2022-03-04
-version: '3.0.1'
+# Information added by Drupal.org packaging script on 2023-12-31
+version: '3.1.0'
 project: 'rate'
-datestamp: 1646428104
+datestamp: 1703991505

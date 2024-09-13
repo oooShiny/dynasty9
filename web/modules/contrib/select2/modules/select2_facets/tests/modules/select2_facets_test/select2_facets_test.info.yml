@@ -10,7 +10,7 @@ dependencies:
   - drupal:views
   - drupal:block
 
-# Information added by Drupal.org packaging script on 2021-03-01
-version: '8.x-1.13'
+# Information added by Drupal.org packaging script on 2023-05-05
+version: '8.x-1.15'
 project: 'select2'
-datestamp: 1614609949
+datestamp: 1683286915

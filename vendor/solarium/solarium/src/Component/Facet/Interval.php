@@ -14,7 +14,7 @@ use Solarium\Component\FacetSetInterface;
 /**
  * Facet interval.
  *
- * @see https://lucene.apache.org/solr/guide/faceting.html#interval-faceting
+ * @see https://solr.apache.org/guide/faceting.html#interval-faceting
  */
 class Interval extends AbstractFacet
 {
@@ -92,8 +92,8 @@ class Interval extends AbstractFacet
     /**
      * Initialize options.
      *
-     * Several options need some extra checks or setup work, for these options
-     * the setters are called.
+     * {@internal Several options need some extra checks or setup work,
+     *            for these options the setters are called.}
      */
     protected function init()
     {

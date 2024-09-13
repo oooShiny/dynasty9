@@ -2,12 +2,14 @@
 
 namespace Drupal\gutenberg;
 
-use \Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
+use Drupal\Core\Utility\Error;
 use Drupal\media\OEmbed\ProviderException;
 use Drupal\media\OEmbed\ResourceException;
 use GuzzleHttp\ClientInterface;
@@ -186,12 +188,22 @@ class OEmbedResolver implements OEmbedResolverInterface {
             '#gutenberg_embed_url' => $url,
           ];
 
-          $output = $this->renderer->renderPlain($render);
+          $output = DeprecationHelper::backwardsCompatibleCall(
+            currentVersion: \Drupal::VERSION,
+            deprecatedVersion: '10.3',
+            currentCallable: fn() => $this->renderer->renderInIsolation($render),
+            deprecatedCallable: fn() => $this->renderer->renderPlain($render),
+          );          
         }
       }
     }
     catch (RequestException $e) {
-      watchdog_exception('gutenberg_oembed', $e);
+      DeprecationHelper::backwardsCompatibleCall(
+        currentVersion: \Drupal::VERSION,
+        deprecatedVersion: '10.1.0',
+        currentCallable: fn() => Error::logException(\Drupal::logger('gutenberg_oembed'), $e),
+        deprecatedCallable: fn() => watchdog_exception('gutenberg_oembed', $e),
+      );
     }
 
     return $output;

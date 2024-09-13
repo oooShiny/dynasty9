@@ -17,6 +17,9 @@ use Solarium\Exception\InvalidArgumentException;
 use Solarium\QueryType\ManagedResources\RequestBuilder\Resource as RequestBuilder;
 use Solarium\QueryType\ManagedResources\Result\Command as CommandResult;
 
+/**
+ * Query base class.
+ */
 abstract class AbstractQuery extends BaseQuery implements Status4xxNoExceptionInterface
 {
     /**
@@ -123,7 +126,7 @@ abstract class AbstractQuery extends BaseQuery implements Status4xxNoExceptionIn
      *
      * @param string $name
      *
-     * @return self
+     * @return self Provides fluent interface
      */
     public function setName(string $name): self
     {
@@ -147,7 +150,7 @@ abstract class AbstractQuery extends BaseQuery implements Status4xxNoExceptionIn
      *
      * @param string $term
      *
-     * @return self
+     * @return self Provides fluent interface
      */
     public function setTerm(string $term): self
     {
@@ -159,7 +162,7 @@ abstract class AbstractQuery extends BaseQuery implements Status4xxNoExceptionIn
     /**
      * Remove the name of the child resource. This reverts to querying the entire managed resource.
      *
-     * @return self
+     * @return self Provides fluent interface
      */
     public function removeTerm(): self
     {

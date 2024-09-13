@@ -24,6 +24,7 @@ class SeasonGamesBlock extends BlockBase {
     $config = $this->getConfiguration();
     // Get all game win/loss data.
     $query = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('type', 'game')
       ->condition('status', 1)
       ->condition('field_season', $config['seasons'])

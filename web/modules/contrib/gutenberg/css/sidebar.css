@@ -1,0 +1,10 @@
+/**
+ * Don't edit this file. Generated from css/sidebar.scss.
+ **/
+#gutenberg-sidebar-dialog input[type=text] {
+  width: 100%;
+}
+
+.gutenberg.has-sidebar .interface-complementary-area.edit-post-sidebar {
+  width: 600px !important;
+}

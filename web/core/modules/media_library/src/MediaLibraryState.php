@@ -101,10 +101,10 @@ class MediaLibraryState extends ParameterBag implements CacheableDependencyInter
     // all validation runs.
     $state = static::create(
       $query->get('media_library_opener_id'),
-      $query->get('media_library_allowed_types', []),
+      $query->all('media_library_allowed_types'),
       $query->get('media_library_selected_type'),
       $query->get('media_library_remaining'),
-      $query->get('media_library_opener_parameters', [])
+      $query->all('media_library_opener_parameters')
     );
 
     // The request parameters need to contain a valid hash to prevent a
@@ -113,6 +113,9 @@ class MediaLibraryState extends ParameterBag implements CacheableDependencyInter
     if (!$state->isValidHash($query->get('hash'))) {
       throw new BadRequestHttpException("Invalid media library parameters specified.");
     }
+
+    // @todo Review parameters passed and remove irrelevant ones in
+    //   https://www.drupal.org/i/3396650
 
     // Once we have validated the required parameters, we restore the parameters
     // from the request since there might be additional values.
@@ -224,7 +227,7 @@ class MediaLibraryState extends ParameterBag implements CacheableDependencyInter
    *   The media type IDs.
    */
   public function getAllowedTypeIds() {
-    return $this->get('media_library_allowed_types');
+    return $this->all('media_library_allowed_types');
   }
 
   /**
@@ -268,7 +271,7 @@ class MediaLibraryState extends ParameterBag implements CacheableDependencyInter
    *   An associative array of all opener-specific parameter values.
    */
   public function getOpenerParameters() {
-    return $this->get('media_library_opener_parameters', []);
+    return $this->all('media_library_opener_parameters');
   }
 
   /**

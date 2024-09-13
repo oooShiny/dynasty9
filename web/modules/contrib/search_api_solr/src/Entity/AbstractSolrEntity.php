@@ -32,6 +32,8 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
   protected $minimum_solr_version;
 
   /**
+   * Recommended entity?
+   *
    * @var bool
    */
   protected $recommended = TRUE;
@@ -51,6 +53,13 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
   protected $text_files;
 
   /**
+   * Indicates if a concrete feature is disabled on a server.
+   *
+   * @var bool
+   */
+  protected $disabledOnServer = FALSE;
+
+  /**
    * {@inheritdoc}
    */
   abstract public function getName(): string;
@@ -66,15 +75,15 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
    * Formats a given array to an XML string.
    */
   protected function buildXmlFromArray($root_element_name, array $attributes) {
-    /** @noinspection PhpComposerExtensionStubsInspection */
+    /* @noinspection PhpComposerExtensionStubsInspection */
     $root = new \SimpleXMLElement('<' . $root_element_name . '/>');
     self::buildXmlFromArrayRecursive($root, $attributes);
 
     // Create formatted string.
-    /** @noinspection PhpComposerExtensionStubsInspection */
+    /* @noinspection PhpComposerExtensionStubsInspection */
     $dom = dom_import_simplexml($root)->ownerDocument;
     $dom->formatOutput = TRUE;
-    $formatted_xml_string = $dom->saveXML();
+    $formatted_xml_string = str_replace('__EMPTY_STRING_VALUE__', '', $dom->saveXML());
 
     // Remove the XML declaration before returning the XML fragment.
     return preg_replace('/<\?.*?\?>\s*\n?/', '', $formatted_xml_string);
@@ -90,8 +99,11 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
    */
   protected static function buildXmlFromArrayRecursive(\SimpleXMLElement $element, array $attributes) {
     foreach ($attributes as $key => $value) {
-      if (is_scalar($value)) {
-        if (is_bool($value) === TRUE) {
+      if (is_scalar($value) || is_null($value)) {
+        if (is_null($value)) {
+          $value = '__EMPTY_STRING_VALUE__';
+        }
+        elseif (is_bool($value) === TRUE) {
           // SimpleXMLElement::addAtribute() converts booleans to integers 0
           // and 1. But Solr requires the strings 'false' and 'true'.
           $value = $value ? 'true' : 'false';
@@ -207,8 +219,11 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
    * Get all available options.
    *
    * @param string $key
+   *   Key.
    * @param string $default
+   *   Default.
    * @param string $prefix
+   *   Prefix.
    *
    * @return string[]
    *   An array of options as strings.
@@ -227,12 +242,6 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
     sort($options);
     return $options;
   }
-
-  /**
-   * @return string[]
-   *   An array of environments as strings.
-   */
-  abstract public function getOptions();
 
   /**
    * {@inheritdoc}
@@ -258,6 +267,20 @@ abstract class AbstractSolrEntity extends ConfigEntityBase implements SolrConfig
    */
   public function isRecommended(): bool {
     return $this->recommended;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setDisabledOnServer(bool $disabled_on_server): void {
+    $this->disabledOnServer = $disabled_on_server;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isDisabledOnServer(): bool {
+    return $this->disabledOnServer;
   }
 
 }

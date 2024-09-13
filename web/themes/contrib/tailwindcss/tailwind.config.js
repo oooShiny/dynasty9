@@ -1,9 +1,10 @@
 module.exports = {
-  prefix: 'tw-',
-  important: true,
+  content: ["**/*.twig"],
   theme: {
     extend: {},
   },
-  variants: {},
-  plugins: []
-}
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};

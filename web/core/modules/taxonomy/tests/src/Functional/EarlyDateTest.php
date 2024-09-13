@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\taxonomy\Functional;
 
 use Drupal\Core\Datetime\DrupalDateTime;
@@ -25,6 +27,9 @@ class EarlyDateTest extends TaxonomyTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -61,7 +66,7 @@ class EarlyDateTest extends TaxonomyTestBase {
   /**
    * Tests taxonomy functionality with nodes prior to 1970.
    */
-  public function testTaxonomyEarlyDateNode() {
+  public function testTaxonomyEarlyDateNode(): void {
     // Posts an article with a taxonomy term and a date prior to 1970.
     $date = new DrupalDateTime('1969-01-01 00:00:00');
     $edit = [];

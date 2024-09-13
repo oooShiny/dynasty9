@@ -21,26 +21,18 @@ namespace Drupal\metatag\Plugin\metatag\Tag;
 class Title extends MetaNameBase {
 
   /**
-   * Override the output of this tag so it's an actual TITLE tag.
-   *
-   * @todo Override the existing title tag X-)
+   * {@inheritdoc}
    */
-  // {@code}
-  // public function output() {
-  //   if (empty($this->value)) {
-  //     // If there is no value, we don't want a tag output.
-  //     $element = '';
-  //   }
-  //   else {
-  //     $element = [
-  //       '#theme' => 'hidden',
-  //       // '#tag' => 'title',
-  //       '#value' => $this->value(),
-  //     ];
-  //   }
-  //
-  //   return $element;
-  // }
-  // {@endcode}
+  public function getTestOutputExistsXpath(): array {
+    return ["//title"];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTestOutputValuesXpath(array $values): array {
+    // @todo This isn't actually testing the output.
+    return ["//title"];
+  }
 
 }

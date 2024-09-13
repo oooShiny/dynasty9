@@ -5,6 +5,6 @@ dependencies:
     module:
       - gutenberg
 id: reusable_block
-label: 'Reusable block'
+label: Pattern
 revision: 0
-description: 'Build your block on Gutenberg editor and re-use it everywhere!'
+description: 'Build your pattern on Gutenberg editor and re-use it everywhere.'

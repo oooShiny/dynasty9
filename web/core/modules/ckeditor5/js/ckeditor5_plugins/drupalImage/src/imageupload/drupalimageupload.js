@@ -1,14 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* cspell:words drupalimageuploadediting drupalfilerepository */
+/* cspell:ignore drupalimageuploadediting drupalfilerepository */
 
 import { Plugin } from 'ckeditor5/src/core';
 import DrupalImageUploadEditing from './drupalimageuploadediting';
 import DrupalFileRepository from './drupalfilerepository';
 
 /**
- * Integrates the CKEditor image upload with the Drupal.
+ * Integrates the CKEditor image upload with Drupal.
  *
- * @internal
+ * @private
  */
 class DrupalImageUpload extends Plugin {
   /**

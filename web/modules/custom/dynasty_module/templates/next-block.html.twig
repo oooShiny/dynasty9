@@ -1,0 +1,13 @@
+<div class="flex justify-center">
+<ul class="mx-4">
+
+  <li>
+    {% if previous is not empty %}
+      <a class="p-4 w-1/6 bg-blue-pats text-white text-center" href="{{ previous }}">&lsaquo; Last Game</a>
+    {% endif %}
+    {% if next is not empty %}
+      <a class="p-4 w-1/6 bg-blue-pats text-white text-center" href="{{ next }}">Next Game &rsaquo;</a>
+    {% endif %}
+  </li>
+</ul>
+</div>

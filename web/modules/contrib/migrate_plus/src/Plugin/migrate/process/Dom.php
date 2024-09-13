@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\migrate_plus\Plugin\migrate\process;
 
 use Drupal\Component\Utility\Html;
@@ -8,6 +10,7 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Masterminds\HTML5;
 
 /**
  * Handles string to DOM and back conversions.
@@ -28,6 +31,10 @@ use Drupal\migrate\Row;
  *   declaration. Defaults to '1.0'.
  * - encoding: (optional) The encoding of the document as part of the XML
  *   declaration. Defaults to 'UTF-8'.
+ * - import_method: (optional) What parser to use. Possible values:
+ *   - 'html': (default) use dom extension parsing.
+ *   - 'html5': use html5 parsing.
+ *   - 'xml': use XML parsing.
  *
  * @codingStandardsIgnoreStart
  *
@@ -75,17 +82,13 @@ class Dom extends ProcessPluginBase {
 
   /**
    * If parsing warnings should be logged as migrate messages.
-   *
-   * @var bool
    */
-  protected $logMessages = TRUE;
+  protected bool $logMessages = TRUE;
 
   /**
    * The HTML contains only the piece inside the body element.
-   *
-   * @var bool
    */
-  protected $nonRoot = TRUE;
+  protected bool $nonRoot = TRUE;
 
   /**
    * {@inheritdoc}
@@ -97,6 +100,10 @@ class Dom extends ProcessPluginBase {
     if (!in_array($configuration['method'], ['import', 'export'])) {
       throw new \InvalidArgumentException('The "method" must be "import" or "export".');
     }
+    $configuration['import_method'] = $configuration['import_method'] ?? 'html';
+    if (!in_array($configuration['import_method'], ['html', 'html5', 'xml'])) {
+      throw new \InvalidArgumentException('The "import_method" must be "html", "html5", or "xml".');
+    }
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->configuration += $this->defaultValues();
     $this->logMessages = (bool) $this->configuration['log_messages'];
@@ -106,11 +113,10 @@ class Dom extends ProcessPluginBase {
   /**
    * Supply default values of all optional parameters.
    *
-   * @return array
    *   An array with keys the optional parameters and values the corresponding
    *   defaults.
    */
-  protected function defaultValues() {
+  protected function defaultValues(): array {
     return [
       'non_root' => TRUE,
       'log_messages' => TRUE,
@@ -138,19 +144,18 @@ class Dom extends ProcessPluginBase {
    *   The destination property currently worked on. This is only used together
    *   with the $row above.
    *
-   * @return \DOMDocument
    *   The document object based on the provided string.
    *
    * @throws \Drupal\migrate\MigrateException
    *   When the received $value is not a string.
    */
-  public function import($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+  public function import($value, MigrateExecutableInterface $migrate_executable, Row $row, string $destination_property): \DOMDocument {
     if (!is_string($value)) {
       throw new MigrateException('Cannot import a non-string value.');
     }
 
     if ($this->logMessages) {
-      set_error_handler(static function ($errno, $errstr) use ($migrate_executable) {
+      set_error_handler(static function ($errno, $errstr) use ($migrate_executable): void {
         $migrate_executable->saveMessage($errstr, MigrationInterface::MESSAGE_WARNING);
       });
     }
@@ -163,7 +168,23 @@ class Dom extends ProcessPluginBase {
     }
 
     $document = new \DOMDocument($this->configuration['version'], $this->configuration['encoding']);
-    $document->loadHTML($html);
+    switch ($this->configuration['import_method']) {
+      case 'html5':
+        $html5 = new HTML5([
+          'target_document' => $document,
+          'disable_html_ns' => TRUE,
+        ]);
+        $html5->loadHTML($html);
+        break;
+
+      case 'xml':
+        $document->loadXML($html);
+        break;
+
+      case 'html':
+      default:
+        $document->loadHTML($html);
+    }
 
     if ($this->logMessages) {
       restore_error_handler();
@@ -193,7 +214,7 @@ class Dom extends ProcessPluginBase {
    * @throws \Drupal\migrate\MigrateException
    *   When the received $value is not a \DOMDocument.
    */
-  public function export($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+  public function export($value, MigrateExecutableInterface $migrate_executable, Row $row, string $destination_property) {
     if (!$value instanceof \DOMDocument) {
       $value_description = (gettype($value) == 'object') ? get_class($value) : gettype($value);
       throw new MigrateException(sprintf('Cannot export a "%s".', $value_description));
@@ -212,7 +233,7 @@ class Dom extends ProcessPluginBase {
    *   A subset of a full html string. For instance the contents of the body
    *   element.
    */
-  protected function getNonRootHtml($partial) {
+  protected function getNonRootHtml(string $partial): string {
     $replacements = [
       "\n" => '',
       '!encoding' => strtolower($this->configuration['encoding']),

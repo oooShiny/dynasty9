@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\node\Kernel;
 
 use Drupal\Core\Database\Database;
@@ -11,8 +13,7 @@ use Drupal\user\Entity\User;
 use Drupal\field\Entity\FieldStorageConfig;
 
 /**
- * Tests node access functionality with multiple languages and two node access
- * modules.
+ * Tests node access with multiple languages and two node access modules.
  *
  * @group node
  */
@@ -28,6 +29,14 @@ class NodeAccessLanguageAwareCombinationTest extends NodeAccessTestBase {
     'node_access_test_language',
     'node_access_test',
   ];
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Remove and fix test to not rely on super user.
+   * @see https://www.drupal.org/project/drupal/issues/3437620
+   */
+  protected bool $usesSuperUserAccessPolicy = TRUE;
 
   /**
    * A set of nodes to use in testing.
@@ -50,6 +59,9 @@ class NodeAccessLanguageAwareCombinationTest extends NodeAccessTestBase {
    */
   protected $adminUser;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -175,7 +187,7 @@ class NodeAccessLanguageAwareCombinationTest extends NodeAccessTestBase {
     $this->nodes['public_no_language_private'] = $this->drupalCreateNode([
       'field_private' => [['value' => 1]],
       'private' => FALSE,
-        'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+      'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
     ]);
     $this->nodes['public_no_language_public'] = $this->drupalCreateNode([
       'field_private' => [['value' => 0]],
@@ -197,7 +209,7 @@ class NodeAccessLanguageAwareCombinationTest extends NodeAccessTestBase {
   /**
    * Tests node access and node access queries with multiple node languages.
    */
-  public function testNodeAccessLanguageAwareCombination() {
+  public function testNodeAccessLanguageAwareCombination(): void {
 
     $expected_node_access = ['view' => TRUE, 'update' => FALSE, 'delete' => FALSE];
     $expected_node_access_no_access = ['view' => FALSE, 'update' => FALSE, 'delete' => FALSE];

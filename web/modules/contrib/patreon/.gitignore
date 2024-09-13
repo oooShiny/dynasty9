@@ -1,3 +1,7 @@
 # Vendor files
 vendor
 composer.lock
+
+# Local dev files
+.idea
+.DS_Store

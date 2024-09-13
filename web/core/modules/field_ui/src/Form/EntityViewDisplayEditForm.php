@@ -8,6 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\field_ui\FieldUI;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\field\FieldLabelOptionsTrait;
 
 /**
  * Edit form for the EntityViewDisplay entity type.
@@ -15,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @internal
  */
 class EntityViewDisplayEditForm extends EntityDisplayFormBase {
-
+  use FieldLabelOptionsTrait;
   /**
    * {@inheritdoc}
    */
@@ -148,36 +149,24 @@ class EntityViewDisplayEditForm extends EntityDisplayFormBase {
   }
 
   /**
-   * Returns an array of visibility options for field labels.
-   *
-   * @return array
-   *   An array of visibility options.
-   */
-  protected function getFieldLabelOptions() {
-    return [
-      'above' => $this->t('Above'),
-      'inline' => $this->t('Inline'),
-      'hidden' => '- ' . $this->t('Hidden') . ' -',
-      'visually_hidden' => '- ' . $this->t('Visually Hidden') . ' -',
-    ];
-  }
-
-  /**
    * {@inheritdoc}
    */
   protected function thirdPartySettingsForm(PluginSettingsInterface $plugin, FieldDefinitionInterface $field_definition, array $form, FormStateInterface $form_state) {
     $settings_form = [];
     // Invoke hook_field_formatter_third_party_settings_form(), keying resulting
     // subforms by module name.
-    foreach ($this->moduleHandler->getImplementations('field_formatter_third_party_settings_form') as $module) {
-      $settings_form[$module] = $this->moduleHandler->invoke($module, 'field_formatter_third_party_settings_form', [
-        $plugin,
-        $field_definition,
-        $this->entity->getMode(),
-        $form,
-        $form_state,
-      ]);
-    }
+    $this->moduleHandler->invokeAllWith(
+      'field_formatter_third_party_settings_form',
+      function (callable $hook, string $module) use (&$settings_form, &$plugin, &$field_definition, &$form, &$form_state) {
+        $settings_form[$module] = $hook(
+          $plugin,
+          $field_definition,
+          $this->entity->getMode(),
+          $form,
+          $form_state,
+        );
+      }
+    );
     return $settings_form;
   }
 

@@ -15,7 +15,10 @@ class PatsCalendarController extends ControllerBase {
   public function content() {
 
     // Get all game nodes.
-    $nids = \Drupal::entityQuery('node')->condition('type','game')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
+      ->condition('type','game')
+      ->execute();
     $games = Node::loadMultiple($nids);
     $empty_months = [
       '08' => [],

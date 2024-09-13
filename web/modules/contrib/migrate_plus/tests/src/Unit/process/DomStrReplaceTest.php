@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Unit\process;
 
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
@@ -14,14 +16,14 @@ use Drupal\Tests\migrate\Unit\process\MigrateProcessTestCase;
  * @group migrate
  * @coversDefaultClass \Drupal\migrate_plus\Plugin\migrate\process\DomStrReplace
  */
-class DomStrReplaceTest extends MigrateProcessTestCase {
+final class DomStrReplaceTest extends MigrateProcessTestCase {
 
   /**
    * Example configuration for the dom_str_replace process plugin.
    *
    * @var array
    */
-  protected $exampleConfiguration = [
+  private static $exampleConfiguration = [
     'mode' => 'attribute',
     'xpath' => '//a',
     'attribute_options' => [
@@ -36,8 +38,8 @@ class DomStrReplaceTest extends MigrateProcessTestCase {
    *
    * @dataProvider providerTestConfigEmpty
    */
-  public function testConfigValidation(array $config_overrides, $message): void {
-    $configuration = $config_overrides + $this->exampleConfiguration;
+  public function testConfigValidation(array $config_overrides, string $message): void {
+    $configuration = $config_overrides + self::$exampleConfiguration;
     $value = '<p>A simple paragraph.</p>';
     $this->expectException(InvalidPluginDefinitionException::class);
     $this->expectExceptionMessage($message);
@@ -48,7 +50,7 @@ class DomStrReplaceTest extends MigrateProcessTestCase {
   /**
    * Dataprovider for testConfigValidation().
    */
-  public function providerTestConfigEmpty(): array {
+  public static function providerTestConfigEmpty(): array {
     $cases = [
       'xpath-null' => [
         ['xpath' => NULL],
@@ -104,7 +106,7 @@ class DomStrReplaceTest extends MigrateProcessTestCase {
    *
    * @dataProvider providerTestTransform
    */
-  public function testTransform($input_string, $configuration, $output_string): void {
+  public function testTransform(string $input_string, array $configuration, string $output_string): void {
     $value = Html::load($input_string);
     $document = (new DomStrReplace($configuration, 'dom_str_replace', []))
       ->transform($value, $this->migrateExecutable, $this->row, 'destinationproperty');
@@ -115,18 +117,18 @@ class DomStrReplaceTest extends MigrateProcessTestCase {
   /**
    * Dataprovider for testTransform().
    */
-  public function providerTestTransform(): array {
+  public static function providerTestTransform(): array {
     $cases = [
       'string:case_sensitive' => [
         '<a href="/foo/Foo/foo">text</a>',
-        $this->exampleConfiguration,
+        self::$exampleConfiguration,
         '<a href="/bar/Foo/bar">text</a>',
       ],
       'string:case_insensitive' => [
         '<a href="/foo/Foo/foo">text</a>',
         [
           'case_insensitive' => TRUE,
-        ] + $this->exampleConfiguration,
+        ] + self::$exampleConfiguration,
         '<a href="/bar/bar/bar">text</a>',
       ],
       'regex' => [
@@ -134,7 +136,7 @@ class DomStrReplaceTest extends MigrateProcessTestCase {
         [
           'search' => '/(.)\1/',
           'regex' => TRUE,
-        ] + $this->exampleConfiguration,
+        ] + self::$exampleConfiguration,
         '<a href="/fbar/Fbar/fbar">text</a>',
       ],
     ];

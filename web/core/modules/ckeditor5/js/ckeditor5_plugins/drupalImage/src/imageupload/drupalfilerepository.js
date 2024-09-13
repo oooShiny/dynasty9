@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* cspell:words uploadurl drupalimageuploadadapter  */
+/* cspell:ignore uploadurl drupalimageuploadadapter  */
 
 import { Plugin } from 'ckeditor5/src/core';
 import { FileRepository } from 'ckeditor5/src/upload';
@@ -7,7 +7,9 @@ import { logWarning } from 'ckeditor5/src/utils';
 import DrupalImageUploadAdapter from './drupalimageuploadadapter';
 
 /**
- * @internal
+ * Provides a Drupal upload adapter.
+ *
+ * @private
  */
 export default class DrupalFileRepository extends Plugin {
   /**

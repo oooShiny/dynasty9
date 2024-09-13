@@ -4,6 +4,7 @@ namespace Drupal\advagg_mod\Asset;
 
 use Drupal\advagg\Asset\SingleAssetOptimizerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Psr\Log\LoggerInterface;
 
@@ -19,11 +20,13 @@ class TranslateCss extends SingleAssetOptimizerBase {
    *
    * @param \Psr\Log\LoggerInterface $logger
    *   The logger service.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   A config factory for retrieving required config objects.
    */
-  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory) {
-    parent::__construct($logger);
+  public function __construct(LoggerInterface $logger, FileUrlGeneratorInterface $file_url_generator, ConfigFactoryInterface $config_factory) {
+    parent::__construct($logger, $file_url_generator);
     $this->config = $config_factory->get('advagg_mod.settings');
   }
 

@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall hooks for views_jump_menu.
+ */
+
+/**
+ * Adds the new_window config key to existing jump menu configurations.
+ */
+function views_jump_menu_update_8101(&$sandbox) {
+  $configFactory = \Drupal::configFactory();
+
+  // On the first run through the update hook, set up the batch process.
+  if (!isset($sandbox['viewsConfigNames'])
+  ) {
+    $viewsConfigNames = $configFactory->listAll('views.view');
+    $sandbox['viewsConfigNames'] = $viewsConfigNames;
+  }
+  // Process one view at a time on subsequent runs through the update hook.
+  else {
+    // Shift (pop) the current view off the front of the queue, and load it.
+    // Note array_shift can return NULL but ConfigFactory::getEditable() will
+    // return an empty Config object in that case.
+    $currentViewName = array_shift($sandbox['viewsConfigNames']);
+    $currentViewConfig = $configFactory->getEditable($currentViewName);
+    $currentViewConfigArray = $currentViewConfig->getOriginal();
+
+    // For each display in the view, check if it has the "jump_menu" style. If
+    // it does, but it does NOT have an "new_window" option, then add an
+    // "new_window" option.
+    $changeMade = FALSE;
+    if (isset($currentViewConfigArray['display'])) {
+      foreach ($currentViewConfigArray['display'] as $currentDisplayKey => $currentDisplayValue) {
+        if (isset($currentViewConfigArray['display'][$currentDisplayKey]['display_options']['style'])
+          && isset($currentViewConfigArray['display'][$currentDisplayKey]['display_options']['style']['type'])
+          && $currentViewConfigArray['display'][$currentDisplayKey]['display_options']['style']['type'] === 'jump_menu'
+          && isset($currentViewConfigArray['display'][$currentDisplayKey]['display_options']['style']['options'])
+          && !isset($currentViewConfigArray['display'][$currentDisplayKey]['display_options']['style']['options']['new_window'])
+        ) {
+          $currentViewConfigArray['display'][$currentDisplayKey]['display_options']['style']['options']['new_window'] = FALSE;
+          $changeMade = TRUE;
+        }
+      }
+
+      // Now save the current view, if we made a change.
+      if ($changeMade) {
+        $currentViewConfig->setData($currentViewConfigArray);
+        $currentViewConfig->save();
+      }
+    }
+  }
+
+  // If the list of views config names is empty, then we've processed all the
+  // views - signal to the Batch API that we're finished.
+  if (empty($sandbox['viewsConfigNames'])) {
+    $sandbox['#finished'] = 1;
+  }
+  // If we get here, there are still views to parse.
+  else {
+    $sandbox['#finished'] = 0;
+  }
+}

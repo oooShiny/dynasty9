@@ -66,11 +66,13 @@ class Highlight extends ProcessorPluginBase implements PluginFormInterface {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     if (!isset(static::$boundary)) {
+      // cspell:disable
       $cjk = '\x{1100}-\x{11FF}\x{3040}-\x{309F}\x{30A1}-\x{318E}' .
         '\x{31A0}-\x{31B7}\x{31F0}-\x{31FF}\x{3400}-\x{4DBF}\x{4E00}-\x{9FCF}' .
         '\x{A000}-\x{A48F}\x{A4D0}-\x{A4FD}\x{A960}-\x{A97F}\x{AC00}-\x{D7FF}' .
         '\x{F900}-\x{FAFF}\x{FF21}-\x{FF3A}\x{FF41}-\x{FF5A}\x{FF66}-\x{FFDC}' .
         '\x{20000}-\x{2FFFD}\x{30000}-\x{3FFFD}';
+      // cspell:enable
       static::$boundary = '(?:(?<=[' . Unicode::PREG_CLASS_WORD_BOUNDARY . $cjk . '])|(?=[' . Unicode::PREG_CLASS_WORD_BOUNDARY . $cjk . ']))';
       static::$split = '/[' . Unicode::PREG_CLASS_WORD_BOUNDARY . ']+/iu';
     }
@@ -265,7 +267,7 @@ class Highlight extends ProcessorPluginBase implements PluginFormInterface {
     if ($this->configuration['excerpt']) {
       $this->addExcerpts($result_items, $excerpt_fulltext_fields, $keys);
     }
-    if ($this->configuration['highlight'] != 'never') {
+    if ($this->configuration['highlight'] !== 'never' && !empty($keys)) {
       $highlighted_fields = $this->highlightFields($result_items, $keys);
       foreach ($highlighted_fields as $item_id => $item_fields) {
         $item = $result_items[$item_id];
@@ -655,8 +657,27 @@ class Highlight extends ProcessorPluginBase implements PluginFormInterface {
    *   The given text with all occurrences of search keywords highlighted.
    */
   protected function highlightField($text, array $keys, $html = TRUE) {
+    $text = "$text";
     if ($html) {
-      $texts = preg_split('#((?:</?[[:alpha:]](?:[^>"\']*|"[^"]*"|\'[^\']\')*>)+)#i', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+      $regex = <<<'REGEX'
+%
+  (                # Capturing group around the whole expression, so
+                   # PREG_SPLIT_DELIM_CAPTURE works correctly
+    \s*+           # Optional leading whitespace (possessive since backtracking
+                   # would make no sense here)
+    (?:            # One or more HTML tags
+      <            # Start of HTML tag
+      /?           # Could be a closing tag
+      [[:alpha:]]  # Tag names always start with a letter
+      [^>]*        # Anything except the angle bracket closing the tag
+      >            # End of HTML tag
+    )+             # End: One or more HTML tags
+    \s*            # Optional trailing whitespace
+  )                # End: Capturing group
+%ix
+REGEX;
+
+      $texts = preg_split($regex, $text, -1, PREG_SPLIT_DELIM_CAPTURE);
       if ($texts === FALSE) {
         $args = [
           '%error_num' => preg_last_error(),

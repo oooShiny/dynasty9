@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Core\Session\AccountProxy;
+use Drupal\votingapi\Entity\Vote;
+
 /**
  * @file
  * Provides hook documentation for the Rate module.
@@ -75,6 +78,35 @@ function hook_rate_widget_options_alter(array &$options, $entity_type, $entity_b
 }
 
 /**
+ * Assign an aleternative database column to retrieve the rate values from.
+ *
+ * The default database column to store the rate value is 'value'.
+ * Custom and contrib modules can add their own columns to the database
+ * and store the rate value there in addition to the default column.
+ * This hook is called when the results for a rate widget are retrieved.
+ *
+ * @param string $value_column
+ *   The database column which holds the rate value.
+ * @param string $entity_type
+ *   The voted entity type.
+ * @param string $entity_bundle
+ *   The voted entity bundle.
+ * @param int $entity_id
+ *   The voted entity id.
+ * @param string $rate_widget
+ *   The rate widget being used for voting.
+ * @param int $user_id
+ *   The user id casting the vote.
+ */
+function hook_rate_value_column(&$value_column, $entity_type, $entity_bundle, $entity_id, $rate_widget, $user_id) {
+  // Trigger only on articles and specific widgets.
+  if ($rate_widget == 'test_rate_widget' && $entity_bundle == 'article') {
+    // Overide the default database rate value column.
+    $value_column = 'custom_value';
+  }
+}
+
+/**
  * Define templates for rate widgets.
  *
  * @return array
@@ -123,7 +155,7 @@ function hook_rate_templates() {
  * @param \Drupal\Core\Session\AccountProxy $account
  *   The current user account.
  */
-function hook_rate_can_vote(&$can_vote, \Drupal\votingapi\Entity\Vote $vote, $entity, \Drupal\Core\Session\AccountProxy $account) {
+function hook_rate_can_vote(&$can_vote, Vote $vote, $entity, AccountProxy $account) {
   // Forbid user to vote on all other entities except for article.
   if ($entity->bundle() != 'article') {
     $can_vote = FALSE;

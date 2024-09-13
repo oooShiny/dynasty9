@@ -2,16 +2,17 @@
 
 namespace Drupal\metatag\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\metatag\MetatagManagerInterface;
 use Drupal\metatag\MetatagTagPluginManager;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Advanced widget for metatag field.
@@ -135,13 +136,21 @@ class MetatagFirehose extends WidgetBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+    // @todo Does this need to be rewritten to use $items->getValue()?
     $item = $items[$delta];
     $default_tags = metatag_get_default_tags($items->getEntity());
 
     // Retrieve the values for each metatag from the serialized array.
     $values = [];
     if (!empty($item->value)) {
-      $values = unserialize($item->value);
+      $values = metatag_data_decode($item->value);
+    }
+
+    // Make sure that this variable is always an array to avoid problems when
+    // unserializing didn't work correctly and it as returned as FALSE.
+    // @see https://www.php.net/unserialize
+    if (!is_array($values)) {
+      $values = [];
     }
 
     // Populate fields which have not been overridden in the entity.
@@ -193,6 +202,15 @@ class MetatagFirehose extends WidgetBase implements ContainerFactoryPluginInterf
       $element['#type'] = 'container';
     }
 
+    // Scroll height configuration.
+    $scroll_height = $settings->get('tag_scroll_max_height');
+    if (!empty($scroll_height)) {
+      $form['#attached']['drupalSettings']['metatag']['max_height'] = $scroll_height;
+      $form['#attached']['library'][] = 'metatag/firehose_widget';
+      $element['#attributes']['class'][] = 'metatags';
+      $element['#attributes']['style'][] = 'max-height:' . $scroll_height . ';';
+    }
+
     return $element;
   }
 
@@ -217,7 +235,7 @@ class MetatagFirehose extends WidgetBase implements ContainerFactoryPluginInterf
           }
         }
       }
-      $value = serialize($flattened_value);
+      $value = Json::encode($flattened_value);
     }
 
     return $values;

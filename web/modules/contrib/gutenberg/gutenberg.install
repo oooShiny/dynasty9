@@ -6,6 +6,10 @@
  */
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Database\SchemaObjectExistsException;
+use Drupal\Core\Utility\UpdateException;
+use Symfony\Component\Yaml\Yaml;
+use Drupal\gutenberg\ContentBlocksHandler;
 
 /**
  * Implements hook_schema().
@@ -28,20 +32,111 @@ function gutenberg_schema() {
         'not null' => FALSE,
       ],
     ],
+    'primary key' => ['fid'],
+  ];
+  $schema['gutenberg_content_block_usage'] = [
+    'description' => 'Stores information about content block entity usage within gutenberg',
+    'fields' => [
+      'entity_type' => [
+        'description' => 'Referencing entity type',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
+      'entity_id' => [
+        'description' => 'Referencing entity ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ],
+      'content_block_id' => [
+        'description' => 'The content block entity ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'created' => [
+        'description' => 'The Unix timestamp when the account information was last updated.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'active' => [
+        'default' => 0,
+        'description' => 'Used',
+        'not null' => TRUE,
+        'type' => 'int',
+        'size' => 'tiny',
+      ],
+    ],
+    'primary key' => ['content_block_id'],
+    'indexes' => [
+      'entity_block_id' => ['entity_type', 'entity_id', 'content_block_id'],
+      'source_entity' => ['entity_type', 'entity_id'],
+      'created' => ['created']
+    ],
   ];
 
   return $schema;
 }
 
 /**
+ * Implements hook_install().
+ */
+function gutenberg_install() {
+  _gutenberg_update_synced_patterns_view();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function gutenberg_uninstall() {
+  // Delete text format settings.
+  Drupal::configFactory()->getEditable('filter.format.gutenberg')->delete();
+
+  // Remove filter settings leftovers from the config to avoid "Plugin not
+  // found" errors after uninstall Gutenberg. This is required, because even
+  // disabled filters are part of the filter format configuration objects.
+  $formats = Drupal::configFactory()->listAll('filter.format.');
+  foreach ($formats as $format_id) {
+    $format_config = Drupal::configFactory()->getEditable($format_id);
+    $format_config->clear('filters.gutenberg');
+    $module_dependencies = $format_config->get('dependencies.module');
+    if (is_array($module_dependencies)) {
+      $module_dependencies = array_filter($module_dependencies, function ($module) {
+        return ($module !== 'gutenberg');
+      });
+      $format_config->set('dependencies.module', $module_dependencies);
+    }
+    $format_config->save();
+  }
+}
+
+/**
  * Add file_managed_data table to database when updating from RC1.
  */
 function gutenberg_update_8001() {
-  $spec = gutenberg_schema();
   $schema = Database::getConnection()->schema();
 
   if (!$schema->tableExists('file_managed_data')) {
-    $schema->createTable('file_managed_data', $spec['file_managed_data']);
+    $schema->createTable('file_managed_data', [
+      'description' => '',
+      'fields' => [
+        'fid' => [
+          'description' => 'The {file_managed}.fid this record affects.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'data' => [
+          'type' => 'blob',
+          'size' => 'big',
+          'description' => 'A serialized configuration object data.',
+          'not null' => FALSE,
+        ],
+      ],
+    ]);
   }
 }
 
@@ -138,26 +233,287 @@ function gutenberg_update_8203(&$sandbox) {
 }
 
 /**
- * Implements hook_uninstall().
+ * Change reusable blocks view body field format.
  */
-function gutenberg_uninstall() {
-  // Delete text format settings.
-  Drupal::configFactory()->getEditable('filter.format.gutenberg')->delete();
-
-  // Remove filter settings leftovers from the config to avoid "Plugin not
-  // found" errors after uninstall Gutenberg. This is required, because even
-  // disabled filters are part of the filter format configuration objects.
-  $formats = Drupal::configFactory()->listAll('filter.format.');
-  foreach ($formats as $format_id) {
-    $format_config = Drupal::configFactory()->getEditable($format_id);
-    $format_config->clear('filters.gutenberg');
-    $module_dependencies = $format_config->get('dependencies.module');
-    if (is_array($module_dependencies)) {
-      $module_dependencies = array_filter($module_dependencies, function ($module) {
-        return ($module !== 'gutenberg');
-      });
-      $format_config->set('dependencies.module', $module_dependencies);
-    }
-    $format_config->save();
+function gutenberg_update_8204() {
+  $admin_reusable_view = \Drupal::service('config.factory')->getEditable('views.view.reusable_blocks');
+  // Replacing text module dependency.
+  $module_dependencies = $admin_reusable_view->get('dependencies.module');
+  $text_key = array_search('text', $module_dependencies);
+  if ($text_key !== FALSE) {
+    unset($module_dependencies[$text_key]);
   }
+  $module_dependencies[] = 'gutenberg';
+  $admin_reusable_view->set('dependencies.module', $module_dependencies);
+  // Change field formatter to Gutenberg.
+  $admin_reusable_view->set('display.default.display_options.fields.body.type', 'gutenberg_text');
+  $formatter_settings = [
+    'format' => 'gutenberg',
+    'content_only' => FALSE,
+  ];
+  $admin_reusable_view->set('display.default.display_options.fields.body.settings', $formatter_settings);
+  // Saving changed config.
+  $admin_reusable_view->save();
+}
+
+/**
+ * Add a primary key to 'file_managed_data' table.
+ */
+function gutenberg_update_8205() {
+  try {
+    $schema = Database::getConnection()->schema();
+    $schema->addPrimaryKey('file_managed_data', ['fid']);
+    return t('Added a primary key to the {file_managed_data} table.');
+  }
+  catch (SchemaObjectExistsException $e) {
+    // Primary key was already added, maybe by a conscientious site admin.
+    // Nothing to do here in that case.
+  }
+  catch (\Exception $e) {
+    throw new UpdateException("Could not add a primary key to the {file_managed_data} table: " . $e->getMessage(), 0, $e);
+  }
+  return NULL;
+}
+
+/**
+ * Add media block to allowed list of blocks for all enabled content types.
+ */
+function gutenberg_update_8206() {
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $module_handler */
+  $module_handler = \Drupal::service('module_handler');
+  if (!$module_handler->moduleExists('media')) {
+    // Not really relevant then.
+    return;
+  }
+  $types = \Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+  /** @var \Drupal\gutenberg\GutenbergContentTypeManager $mng */
+  $mng = \Drupal::service('gutenberg.content_type_manager');
+  $config_editable = \Drupal::configFactory()->getEditable('gutenberg.settings');
+  $types_where_it_has_been_added = [];
+  foreach ($types as $entity) {
+    if (!$mng->isContentTypeSupported($entity->id())) {
+      continue;
+    }
+    $key = $entity->id() . '_allowed_drupal_blocks';
+    $allowed_blocks = $config_editable->get($key);
+    $allowed_blocks['drupalmedia/drupal-media-entity'] = 'drupalmedia/drupal-media-entity';
+    $config_editable->set($key, $allowed_blocks)->save();
+    $types_where_it_has_been_added[] = $entity->label();
+  }
+  if (!empty($types_where_it_has_been_added)) {
+    \Drupal::messenger()->addStatus(t('Added media block to allowed list of blocks for the following content types: @types', [
+      '@types' => implode(', ', $types_where_it_has_been_added),
+    ]));
+  }
+}
+
+/**
+ * Gutenberg 3.x
+ */
+
+/**
+ * Normalize array values within the "gutenberg.settings" config.
+ */
+function gutenberg_update_8301() {
+  $gutenberg_settings = Drupal::configFactory()->getEditable('gutenberg.settings');
+  $raw_data = $gutenberg_settings->getRawData();
+  foreach ($raw_data as $key => $raw_datum) {
+    if (str_ends_with($key, '_allowed_blocks') || str_ends_with($key, '_allowed_drupal_blocks') || str_ends_with($key, '_allowed_content_block_types')) {
+      $data = (array) $raw_datum;
+      // Convert into a normalized, sorted array list. Removing empty values.
+      $data = array_unique(array_filter($data));
+      sort($data, SORT_FLAG_CASE);
+      $raw_data[$key] = $data;
+    }
+  }
+  // Save the normalized config.
+  $gutenberg_settings
+    ->setData($raw_data)
+    ->save();
+
+  // Delete redundant mediaedit config.
+  Drupal::configFactory()->getEditable('gutenberg.mediaedit')->delete();
+}
+
+/**
+ * Update Synced Patterns view for Drupal 10 (if applicable).
+ */
+function gutenberg_update_8302() {
+  _gutenberg_update_synced_patterns_view();
+}
+
+/**
+ * Disable deprecated Gutenberg Cloud and Example Block modules and
+ * experimental module EditorsKit.
+ */
+function gutenberg_update_8303() {
+  $module_data = \Drupal::config('core.extension')->get('module');
+  $modules_to_uninstall = ['gutenberg_cloud', 'gutenberg_example_block', 'editorskit'];
+
+  foreach ($modules_to_uninstall as $module) {
+    if (isset($module_data[$module])) {
+      unset($module_data[$module]);
+    }
+  }
+
+  \Drupal::configFactory()->getEditable('core.extension')->set('module', $module_data)->save();
+}
+
+/**
+ * Add gutenberg_content_block_usage table to database to track content block usage
+ */
+function gutenberg_update_8304() {
+  $schema = Database::getConnection()->schema();
+
+  if (!$schema->tableExists('gutenberg_content_block_usage')) {
+    $schema->createTable('gutenberg_content_block_usage', [
+      'description' => 'Stores information about content block entity usage within gutenberg',
+      'fields' => [
+        'entity_type' => [
+          'description' => 'Referencing entity type',
+          'type' => 'varchar',
+          'length' => 128,
+          'not null' => TRUE,
+        ],
+        'entity_id' => [
+          'description' => 'Referencing entity ID',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => FALSE,
+        ],
+        'content_block_id' => [
+          'description' => 'The content block entity ID',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ],
+        'created' => [
+          'description' => 'The Unix timestamp when the account information was last updated.',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+        ],
+        'active' => [
+          'default' => 0,
+          'description' => 'Used',
+          'not null' => TRUE,
+          'type' => 'int',
+          'size' => 'tiny',
+        ],
+      ],
+      'primary key' => ['content_block_id'],
+      'indexes' => [
+        'entity_block_id' => ['entity_type', 'entity_id', 'content_block_id'],
+        'source_entity' => ['entity_type', 'entity_id'],
+        'created' => ['created']
+      ],
+    ]);
+  }
+}
+
+/**
+ * Save content block usage records for all blocks used in every gutenberg
+ * node type.
+ */
+function gutenberg_update_8305(&$sandbox) {
+
+  // Get all gutenberg enabled node types.
+  $node_types = \Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+  $enabled_node_types = array_filter(array_map(function ($type) {
+    $gutenberg_config = \Drupal::service('config.factory')->get('gutenberg.settings');
+    return $gutenberg_config->get($type . '_enable_full') ? $type : FALSE;
+  }, array_keys($node_types)));
+
+
+  // Initialize some variables during the first pass through.
+  if (!isset($sandbox['total'])) {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', $enabled_node_types, 'IN')
+      ->accessCheck(FALSE)
+      ->sort('nid')
+      ->execute();
+    $sandbox['total'] = count($nids);
+    $sandbox['current'] = 0;
+  }
+
+  $nodes_per_batch = 20;
+
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', $enabled_node_types, 'IN')
+    ->accessCheck(FALSE)
+    ->sort('nid')
+    ->range($sandbox['current'], $nodes_per_batch)
+    ->execute();
+
+  /** @var \Drupal\gutenberg\ContentBlocksHandler $contentBlocksHandler */
+  $contentBlocksHandler = \Drupal::service('class_resolver')
+    ->getInstanceFromDefinition(ContentBlocksHandler::class);
+
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+  $nodes = $nodeStorage->loadMultiple($nids);
+
+  foreach ($nodes as $node) {
+    $contentBlocksHandler->processBlocks($node);
+    $sandbox['current']++;
+  }
+
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+
+  return t(':count of :total nodes processed.', [':count' => $sandbox['current'], ':total' => $sandbox['total']]);
+
+}
+
+/**
+ * Add a 'active' field to the usage table.
+ * Allow 'entity_id' to be NULL.
+ * Drop 'content_block_bundle' field
+ */
+function gutenberg_update_8306() {
+  $schema = Database::getConnection()->schema();
+  if(!$schema->fieldExists('gutenberg_content_block_usage', 'active')) {
+    $spec = [
+      'default' => 0,
+      'description' => 'Used',
+      'not null' => TRUE,
+      'type' => 'int',
+      'size' => 'tiny',
+    ];
+    $schema->addField('gutenberg_content_block_usage', 'active', $spec);
+  }
+
+  // Make entity_id field optional
+  $fieldName = 'entity_id';
+  $spec = [
+    'description' => 'Referencing entity ID',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => FALSE,
+  ];
+  $schema->changeField('gutenberg_content_block_usage', $fieldName, $fieldName, $spec);
+
+  // drop block_bundle field
+  if($schema->fieldExists('gutenberg_content_block_usage', 'content_block_bundle')) {
+    $schema->dropField('gutenberg_content_block_usage', 'content_block_bundle');
+  }
+}
+
+/**
+ * Helper functions.
+ */
+
+/**
+ * Update Synced Patterns view for Drupal 10 (if applicable).
+ */
+function _gutenberg_update_synced_patterns_view() {
+  if (version_compare(\Drupal::VERSION, '10', '<')) {
+    return;
+  }
+
+  $module_cfg = \Drupal::configFactory()->getEditable('views.view.reusable_blocks');
+  $module_cfg->set('display.default.display_options.style.type', 'grid_responsive')->save();
 }

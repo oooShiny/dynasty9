@@ -205,7 +205,7 @@ abstract class AssetOptimizer {
     $cid = Crypt::hashBase64($asset['data'] . $this->config->get('global_counter'));
     $cached = $this->cache->get($cid);
     if ($cached && file_exists($cached->data['file'])) {
-      if ($this->config->get('css.combine_media') && isset($asset['media']) && $asset['media'] !== 'all') {
+      if ((int) \Drupal::VERSION < 10 && $this->config->get('css.combine_media') && isset($asset['media']) && $asset['media'] !== 'all') {
         $asset['media'] = 'all';
       }
       $asset['size'] = $cached->data['filesize'];

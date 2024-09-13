@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Kernel\Wizard;
 
 use Drupal\Core\Form\FormState;
@@ -29,6 +31,9 @@ class WizardPluginBaseKernelTest extends ViewsKernelTestBase {
    */
   protected $wizard;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp($import_test_views = TRUE): void {
     parent::setUp();
 
@@ -42,11 +47,11 @@ class WizardPluginBaseKernelTest extends ViewsKernelTestBase {
    *
    * @see \Drupal\views\Plugin\views\wizard\WizardPluginBase
    */
-  public function testCreateView() {
+  public function testCreateView(): void {
     $form = [];
     $form_state = new FormState();
     $form = $this->wizard->buildForm($form, $form_state);
-    $random_id = strtolower($this->randomMachineName());
+    $random_id = $this->randomMachineName();
     $random_label = $this->randomMachineName();
     $random_description = $this->randomMachineName();
 

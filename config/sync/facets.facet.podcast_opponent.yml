@@ -11,6 +11,8 @@ id: podcast_opponent
 name: Opponent
 weight: 0
 min_count: 1
+missing: false
+missing_label: others
 url_alias: podcast_opponent
 facet_source_id: 'search_api:views_page__podcast_search__page_1'
 field_identifier: pod_opponent

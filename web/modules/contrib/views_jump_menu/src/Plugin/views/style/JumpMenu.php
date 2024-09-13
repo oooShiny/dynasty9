@@ -40,10 +40,11 @@ class JumpMenu extends StylePluginBase {
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
-    $options['class'] = ['default' => ''];
     $options['wrapper_class'] = ['default' => ''];
+    $options['class'] = ['default' => ''];
     $options['label_field'] = ['default' => ''];
     $options['url_field'] = ['default' => ''];
+    $options['new_window'] = ['default' => FALSE];
     $options['select_text'] = ['default' => '-- Select --'];
     $options['select_label'] = ['default' => ''];
     return $options;
@@ -96,6 +97,12 @@ class JumpMenu extends StylePluginBase {
       '#type' => 'select',
       '#options' => $this->getFieldOptions(),
       '#default_value' => $this->options['url_field'],
+    ];
+
+    $form['new_window'] = [
+      '#title' => $this->t('Open link in new window'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->options['new_window'],
     ];
 
     $form['select_text'] = [

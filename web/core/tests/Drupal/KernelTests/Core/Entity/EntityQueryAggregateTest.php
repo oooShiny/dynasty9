@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\field\Entity\FieldConfig;
@@ -34,6 +36,9 @@ class EntityQueryAggregateTest extends EntityKernelTestBase {
    */
   protected $queryResult;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -110,7 +115,7 @@ class EntityQueryAggregateTest extends EntityKernelTestBase {
   /**
    * Tests aggregation support.
    */
-  public function testAggregation() {
+  public function testAggregation(): void {
     // Apply a simple groupby.
     $this->queryResult = $this->entityStorage->getAggregateQuery()
       ->accessCheck(FALSE)
@@ -588,7 +593,7 @@ class EntityQueryAggregateTest extends EntityKernelTestBase {
   /**
    * Tests preparing a query and executing twice.
    */
-  public function testRepeatedExecution() {
+  public function testRepeatedExecution(): void {
     $query = $this->entityStorage->getAggregateQuery()
       ->accessCheck(FALSE)
       ->groupBy('user_id');

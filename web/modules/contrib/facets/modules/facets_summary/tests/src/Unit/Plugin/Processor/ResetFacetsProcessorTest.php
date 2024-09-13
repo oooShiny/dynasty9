@@ -2,11 +2,11 @@
 
 namespace Drupal\Tests\facets_summary\Unit\Plugin\Processor;
 
+use Drupal\Tests\facets\Unit\Drupal10CompatibilityUnitTestCase;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\facets_summary\Entity\FacetsSummary;
 use Drupal\facets_summary\Plugin\facets_summary\processor\ResetFacetsProcessor;
-use Drupal\Tests\UnitTestCase;
 
 /**
  * Provides the ResetFacetsProcessorTest class.
@@ -14,7 +14,7 @@ use Drupal\Tests\UnitTestCase;
  * @group facets
  * @coversDefaultClass \Drupal\facets_summary\Plugin\facets_summary\processor\ResetFacetsProcessor
  */
-class ResetFacetsProcessorTest extends UnitTestCase {
+class ResetFacetsProcessorTest extends Drupal10CompatibilityUnitTestCase {
 
   /**
    * The processor we're testing.
@@ -34,7 +34,12 @@ class ResetFacetsProcessorTest extends UnitTestCase {
     $container->set('string_translation', $string_translation->reveal());
     \Drupal::setContainer($container);
 
-    $this->processor = new ResetFacetsProcessor(['settings' => ['link_text' => 'Text']], 'reset_facets', []);
+    $this->processor = new ResetFacetsProcessor([
+      'settings' => [
+        'link_text' => 'Text',
+        'position' => ResetFacetsProcessor::POSITION_BEFORE,
+      ],
+    ], 'reset_facets', []);
   }
 
   /**
@@ -66,7 +71,10 @@ class ResetFacetsProcessorTest extends UnitTestCase {
     $config = [
       'processor_id' => 'reset_facets',
       'weights' => [],
-      'settings' => ['link_text' => 'Text'],
+      'settings' => [
+        'link_text' => 'Text',
+        'position' => ResetFacetsProcessor::POSITION_BEFORE,
+      ],
     ];
     $summary->addProcessor($config);
 

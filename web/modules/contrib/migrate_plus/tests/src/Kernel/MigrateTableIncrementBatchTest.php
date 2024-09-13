@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Kernel;
 
 /**
@@ -7,13 +9,13 @@ namespace Drupal\Tests\migrate_plus\Kernel;
  *
  * @group migrate
  */
-class MigrateTableIncrementBatchTest extends MigrateTableIncrementTest {
+final class MigrateTableIncrementBatchTest extends MigrateTableIncrementTest {
 
   /**
    * The batch size to configure.
    *
    * @var int
    */
-  protected $batchSize = 2;
+  protected static int $batchSize = 2;
 
 }

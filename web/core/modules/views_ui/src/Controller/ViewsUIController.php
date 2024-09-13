@@ -11,7 +11,6 @@ use Drupal\views\ViewEntityInterface;
 use Drupal\views\Views;
 use Drupal\views_ui\ViewUI;
 use Drupal\views\ViewsData;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -38,15 +37,6 @@ class ViewsUIController extends ControllerBase {
    */
   public function __construct(ViewsData $views_data) {
     $this->viewsData = $views_data;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('views.views_data')
-    );
   }
 
   /**
@@ -121,7 +111,7 @@ class ViewsUIController extends ControllerBase {
     foreach ($rows as &$row) {
       $views = [];
       // Link each view name to the view itself.
-      foreach ($row['views'] as $row_name => $view) {
+      foreach ($row['views'] as $view) {
         $views[] = Link::fromTextAndUrl($view, new Url('entity.view.edit_form', ['view' => $view]))->toString();
       }
       unset($row['views']);

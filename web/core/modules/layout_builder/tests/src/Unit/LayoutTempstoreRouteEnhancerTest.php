@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\layout_builder\Unit;
 
+use Drupal\Core\Routing\RouteObjectInterface;
 use Drupal\layout_builder\LayoutTempstoreRepositoryInterface;
 use Drupal\layout_builder\Routing\LayoutTempstoreRouteEnhancer;
 use Drupal\layout_builder\SectionStorageInterface;
 use Drupal\Tests\UnitTestCase;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 
@@ -20,7 +22,7 @@ class LayoutTempstoreRouteEnhancerTest extends UnitTestCase {
   /**
    * @covers ::enhance
    */
-  public function testEnhance() {
+  public function testEnhance(): void {
     $section_storage = $this->prophesize(SectionStorageInterface::class);
     $layout_tempstore_repository = $this->prophesize(LayoutTempstoreRepositoryInterface::class);
     $layout_tempstore_repository->get($section_storage->reveal())->willReturn('the_return_value');

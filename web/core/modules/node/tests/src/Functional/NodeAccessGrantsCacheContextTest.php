@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\Core\Database\Database;
+use Drupal\user\Entity\User;
 
 /**
  * Tests the node access grants cache context service.
@@ -21,6 +24,14 @@ class NodeAccessGrantsCacheContextTest extends NodeTestBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @todo Remove and fix test to not rely on super user.
+   * @see https://www.drupal.org/project/drupal/issues/3437620
+   */
+  protected bool $usesSuperUserAccessPolicy = TRUE;
+
+  /**
+   * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
@@ -33,6 +44,18 @@ class NodeAccessGrantsCacheContextTest extends NodeTestBase {
    * User without permission to view content.
    */
   protected $noAccessUser;
+
+  /**
+   * User without permission to view content.
+   *
+   * @var \Drupal\user\Entity\User
+   */
+  protected User $noAccessUser2;
+
+  /**
+   * @var array
+   */
+  protected array $userMapping;
 
   /**
    * {@inheritdoc}
@@ -92,7 +115,7 @@ class NodeAccessGrantsCacheContextTest extends NodeTestBase {
   /**
    * Tests NodeAccessGrantsCacheContext::getContext().
    */
-  public function testCacheContext() {
+  public function testCacheContext(): void {
     $this->assertUserCacheContext([
       0 => 'view.all:0;node_access_test_author:0;node_access_all:0',
       1 => 'all',

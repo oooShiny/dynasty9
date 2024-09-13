@@ -1,0 +1,13 @@
+name: 'Views Jump Menu Test Config'
+type: module
+description: 'Provides default views for tests.'
+package: Testing
+hidden: true
+dependencies:
+  - drupal:views
+  - views_jump_menu:views_jump_menu
+
+# Information added by Drupal.org packaging script on 2024-05-08
+version: '8.x-1.0'
+project: 'views_jump_menu'
+datestamp: 1715127344

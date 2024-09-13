@@ -14,7 +14,7 @@ use Drupal\Core\Plugin\PluginBase;
  * handle table joins.
  *
  * Views join handlers extend \Drupal\views\Plugin\views\join\JoinPluginBase.
- * They must be annotated with \Drupal\views\Annotation\ViewsJoin annotation,
+ * They must be attributed with \Drupal\views\Attribute\ViewsJoin attribute,
  * and they must be in namespace directory Plugin\views\join.
  *
  * Here are some examples of configuration for the join plugins.
@@ -25,13 +25,13 @@ use Drupal\Core\Plugin\PluginBase;
  * @endcode
  * Use this configuration:
  * @code
- * $configuration = array(
+ * $configuration = [
  *   'table' => 'two',
  *   'field' => 'field_b',
  *   'left_table' => 'one',
  *   'left_field' => 'field_a',
  *   'operator' => '=',
- * );
+ * ];
  * $join = Views::pluginManager('join')->createInstance('standard', $configuration);
  * @endcode
  * Note that the default join type is a LEFT join when 'type' is not supplied in
@@ -45,19 +45,19 @@ use Drupal\Core\Plugin\PluginBase;
  * @endcode
  * Use this configuration:
  * @code
- * $configuration = array(
+ * $configuration = [
  *   'table' => 'two',
  *   'field' => 'field_b',
  *   'left_table' => 'one',
  *   'left_formula' => 'MAX(one.field_a)',
  *   'operator' => '=',
- *   'extra' => array(
- *     0 => array(
+ *   'extra' => [
+ *     0 => [
  *       'left_field' => 'field_c',
  *       'value' => 'some_val',
- *     ),
- *   ),
- * );
+ *     ],
+ *   ],
+ * ];
  * $join = Views::pluginManager('join')->createInstance('standard', $configuration);
  * @endcode
  *
@@ -67,20 +67,20 @@ use Drupal\Core\Plugin\PluginBase;
  * @endcode
  * Use this configuration:
  * @code
- * $configuration = array(
+ * $configuration = [
  *   'type' => 'INNER',
  *   'table' => 'two',
  *   'field' => 'field_b',
  *   'left_table' => 'one',
  *   'left_field' => 'field_a',
  *   'operator' => '=',
- *   'extra' => array(
- *     0 => array(
+ *   'extra' => [
+ *     0 => [
  *       'left_field' => 'field_c',
  *       'value' => 'some_val',
- *     ),
- *   ),
- * );
+ *     ],
+ *   ],
+ * ];
  * $join = Views::pluginManager('join')->createInstance('standard', $configuration);
  * @endcode
  *
@@ -90,20 +90,20 @@ use Drupal\Core\Plugin\PluginBase;
  * @endcode
  * Use this configuration:
  * @code
- * $configuration = array(
+ * $configuration = [
  *   'type' => 'INNER',
  *   'table' => 'two',
  *   'field' => 'field_b',
  *   'left_table' => 'one',
  *   'left_field' => 'field_a',
  *   'operator' => '=',
- *   'extra' => array(
- *     0 => array(
+ *   'extra' => [
+ *     0 => [
  *       'field' => 'field_d',
  *       'value' => 'other_val',
- *     ),
- *   ),
- * );
+ *     ],
+ *   ],
+ * ];
  * $join = Views::pluginManager('join')->createInstance('standard', $configuration);
  * @endcode
  *
@@ -113,20 +113,20 @@ use Drupal\Core\Plugin\PluginBase;
  * @endcode
  * Use this configuration:
  * @code
- * $configuration = array(
+ * $configuration = [
  *   'type' => 'INNER',
  *   'table' => 'two',
  *   'field' => 'field_b',
  *   'left_table' => 'one',
  *   'left_field' => 'field_a',
  *   'operator' => '=',
- *   'extra' => array(
- *     0 => array(
+ *   'extra' => [
+ *     0 => [
  *       'left_field' => 'field_c',
  *       'field' => 'field_d',
- *     ),
- *   ),
- * );
+ *     ],
+ *   ],
+ * ];
  * $join = Views::pluginManager('join')->createInstance('standard', $configuration);
  * @endcode
  *
@@ -258,6 +258,7 @@ class JoinPluginBase extends PluginBase implements JoinPluginInterface {
     $configuration += [
       'type' => 'LEFT',
       'extra_operator' => 'AND',
+      'operator' => '=',
     ];
     $this->configuration = $configuration;
 
@@ -310,7 +311,7 @@ class JoinPluginBase extends PluginBase implements JoinPluginInterface {
       $left_table = NULL;
     }
 
-    $condition = "$left_field = $table[alias].$this->field";
+    $condition = "$left_field " . $this->configuration['operator'] . " $table[alias].$this->field";
     $arguments = [];
 
     // Tack on the extra.

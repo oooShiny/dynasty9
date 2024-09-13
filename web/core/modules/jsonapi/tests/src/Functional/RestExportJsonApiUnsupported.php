@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Tests\views\Functional\ViewTestBase;
-use Drupal\views\Tests\ViewTestData;
 
 /**
  * Ensures that the 'api_json' format is not supported by the REST module.
@@ -32,9 +33,8 @@ class RestExportJsonApiUnsupported extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
-    ViewTestData::createTestViews(static::class, ['rest_test_views']);
+  protected function setUp($import_test_views = TRUE, $modules = ['rest_test_views']): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->drupalLogin($this->drupalCreateUser(['administer views']));
   }
@@ -42,7 +42,7 @@ class RestExportJsonApiUnsupported extends ViewTestBase {
   /**
    * Tests that 'api_json' is not a RestExport format option.
    */
-  public function testFormatOptions() {
+  public function testFormatOptions(): void {
     $this->assertSame(['json' => 'serialization', 'xml' => 'serialization'], $this->container->getParameter('serializer.format_providers'));
 
     $this->drupalGet('admin/structure/views/nojs/display/test_serializer_display_entity/rest_export_1/style_options');

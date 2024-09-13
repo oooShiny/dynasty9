@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\block_content\Functional\Views;
 
 use Drupal\field\Entity\FieldStorageConfig;
@@ -39,8 +41,8 @@ class BlockContentFieldFilterTest extends BlockContentTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = ['block_content_test_views']): void {
+    parent::setUp($import_test_views, $modules);
 
     // Add two new languages.
     ConfigurableLanguage::createFromLangcode('fr')->save();
@@ -71,7 +73,7 @@ class BlockContentFieldFilterTest extends BlockContentTestBase {
   /**
    * Tests body and info filters.
    */
-  public function testFilters() {
+  public function testFilters(): void {
     // Test the info filter page, which filters for info contains 'Comida'.
     // Should show just the Spanish translation, once.
     $this->assertPageCounts('test-info-filter', ['es' => 1, 'fr' => 0, 'en' => 0], 'Comida info filter');

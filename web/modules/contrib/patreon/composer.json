@@ -12,5 +12,8 @@
   },
   "require": {
     "patreon/patreon": "^1.0"
+  },
+  "suggest": {
+    "drupal/token": "Allows you to include your grand total patrons and/or income in content using placeholder tokens."
   }
 }

@@ -7,7 +7,9 @@ SCRIPTS_DIR=$(cd "$(dirname "$0")"; pwd)
 MODULE_DIR=$(realpath "${SCRIPTS_DIR}/..")
 # Use the GUTENBERG_REPO_DIR environment variable as the default if available.
 REPO_DIR=${GUTENBERG_REPO_DIR:-"$MODULE_DIR/.gutenberg"}
-GIT_REPO="https://github.com/WordPress/gutenberg.git"
+# Use the GUTENBERG_GIT_REPO environment variable as the default if available.
+GIT_REPO=${GUTENBERG_GIT_REPO:-"https://github.com/WordPress/gutenberg.git"}
+# GIT_REPO="https://github.com/WordPress/gutenberg.git"
 GIT_VERSION=master
 GIT_FETCH_ALL=${GIT_FETCH_ALL:-0}
 CHECKOUT_BRANCH="${GIT_VERSION}"
@@ -152,6 +154,16 @@ if [[ "${CLEAN_REPO}" = 1 ]]; then
   fi
 fi
 
+# fetch patch files list from get-patch-files.js and apply them.
+echo "Fetching patch files..."
+PATCHES=$(node "${SCRIPTS_DIR}/get-patch-files.js")
+if [[ ! -z "$PATCHES" ]]; then
+  for PATCH_FILE in $PATCHES; do
+    echo "🩹 Applying patch file: ${PATCH_FILE}"
+    patch -p1 < "${MODULE_DIR}/${PATCH_FILE}"
+  done
+fi
+
 # Run npm install.
 # npm 6.9+ is required due to https://github.com/WordPress/gutenberg/pull/18048#discussion_r337402830
 echo "Running npm install..."
@@ -173,8 +185,8 @@ cd "${MODULE_DIR}"
 echo "Copying compiled assets..."
 
 # Copy the built assets over to the vendor folder.
-rm -rf "${MODULE_DIR}/vendor/gutenberg" &&  \
- cp -r "${REPO_DIR}/build" "${MODULE_DIR}/vendor/gutenberg"
+rm -rf "${MODULE_DIR}/js/vendor/gutenberg" &&  \
+ cp -r "${REPO_DIR}/build" "${MODULE_DIR}/js/vendor/gutenberg"
 
 # Regenerate the dependencies.
 php "${SCRIPTS_DIR}/gutenberg-dependencies.php"

@@ -41,7 +41,7 @@ class CliTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->installSchema('search_api', ['search_api_item']);
@@ -73,6 +73,7 @@ class CliTest extends KernelTestBase {
       'name' => 'foo bar baz föö smile' . json_decode('"\u1F601"'),
       'body' => 'test test case Case casE',
       'type' => 'entity_test_mulrev_changed',
+      // cspell:disable-next-line
       'keywords' => ['Orange', 'orange', 'örange', 'Orange'],
       'category' => 'item_category',
     ])->save();

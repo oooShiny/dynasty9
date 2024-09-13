@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\user\Functional;
 
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests whether proper language is stored for new users and access to language
- * selector.
+ * Tests preferred language configuration and language selector access.
  *
  * @group user
  */
@@ -28,7 +29,7 @@ class UserLanguageCreationTest extends BrowserTestBase {
   /**
    * Functional test for language handling during user creation.
    */
-  public function testLocalUserCreation() {
+  public function testLocalUserCreation(): void {
     // User to add and remove language and create new users.
     $admin_user = $this->drupalCreateUser([
       'administer languages',

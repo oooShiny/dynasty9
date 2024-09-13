@@ -44,19 +44,19 @@ class CronJobInstallTest extends BrowserTestBase {
     // Check default modules
     \Drupal::service('module_installer')->install(array('field'));
     $this->drupalGet('admin/config/system/cron/jobs');
-    $this->assertText('Purges deleted Field API data');
-    $this->assertText('Cleanup (caches, batch, flood, temp-files, etc.)');
-    $this->assertNoText('Deletes temporary files');
+    $this->assertSession()->pageTextContains('Purges deleted Field API data');
+    $this->assertSession()->pageTextContains('Cleanup (caches, batch, flood, temp-files, etc.)');
+    $this->assertSession()->pageTextNotContains('Deletes temporary files');
 
     // Install new module.
     \Drupal::service('module_installer')->install(array('file'));
     $this->drupalGet('admin/config/system/cron/jobs');
-    $this->assertText('Deletes temporary files');
+    $this->assertSession()->pageTextContains('Deletes temporary files');
 
     // Uninstall new module.
     \Drupal::service('module_installer')->uninstall(array('file'));
     $this->drupalGet('admin/config/system/cron/jobs');
-    $this->assertNoText('Deletes temporary files');
+    $this->assertSession()->pageTextNotContains('Deletes temporary files');
   }
 
   /**
@@ -64,8 +64,8 @@ class CronJobInstallTest extends BrowserTestBase {
    */
   public function testRequirements() {
     $element = ultimate_cron_requirements('runtime')['cron_jobs'];
-    $this->assertEqual($element['value'], t("Cron is running properly."));
-    $this->assertEqual($element['severity'], REQUIREMENT_OK);
+    $this->assertEquals($element['value'], t("Cron is running properly."));
+    $this->assertEquals($element['severity'], REQUIREMENT_OK);
 
 
     $values = array(
@@ -75,7 +75,7 @@ class CronJobInstallTest extends BrowserTestBase {
       'callback' => 'ultimate_cron_fake_cron',
     );
 
-    $job = new CronJob($values, 'ultimate_cron_job');
+    $job = CronJob::create($values);
     $job->save();
 
     \Drupal::service('cron')->run();
@@ -93,15 +93,15 @@ class CronJobInstallTest extends BrowserTestBase {
       ->execute();
 
     // Check run counter, at this point there should be 0 run.
-    $this->assertEqual(1, \Drupal::state()->get('ultimate_cron.cron_run_counter'), 'Job has run once.');
+    $this->assertEquals(1, \Drupal::state()->get('ultimate_cron.cron_run_counter'), 'Job has run once.');
     $this->assertNotEmpty($job->isBehindSchedule(), 'Job is behind schedule.');
 
     $element = ultimate_cron_requirements('runtime')['cron_jobs'];
-    $this->assertEqual($element['value'], '1 job is behind schedule', '"1 job is behind schedule." is displayed');
-    $this->assertEqual($element['description']['#markup'], 'Some jobs are behind their schedule. Please check if <a href="' .
+    $this->assertEquals($element['value'], '1 job is behind schedule', '"1 job is behind schedule." is displayed');
+    $this->assertEquals($element['description']['#markup'], 'Some jobs are behind their schedule. Please check if <a href="' .
       Url::fromRoute('system.cron', ['key' => \Drupal::state()->get('system.cron_key')])->toString() .
       '">Cron</a> is running properly.', 'Description is correct.');
-    $this->assertEqual($element['severity'], REQUIREMENT_WARNING, 'Severity is of level "Error"');
+    $this->assertEquals($element['severity'], REQUIREMENT_WARNING, 'Severity is of level "Error"');
   }
 
 }

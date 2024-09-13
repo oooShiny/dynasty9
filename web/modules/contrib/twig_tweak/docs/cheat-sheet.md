@@ -4,10 +4,17 @@
 ```twig
 {{ drupal_view('who_s_new', 'block_1') }}
 ```
+```twig
+{# Specify additional parameters which map to contextual filters you have configured in your view. #}
+{{ drupal_view('who_s_new', 'block_1', arg_1, arg_2, arg_3) }}
+```
 
 ## Drupal View Result
+Checks results for a given view. Note that the results themselves are not printable.
 ```twig
-{{ drupal_view_result('who_s_new', 'block_1') }}
+{% if drupal_view_result('cart')|length == 0 %}
+  {{ 'Your cart is empty.'|t }}
+{% endif %}
 ```
 
 ## Drupal Block
@@ -25,6 +32,9 @@ drush ev "print_r(array_keys(\Drupal::service('plugin.manager.block')->getDefini
 
 {# Bypass block.html.twig theming. #}
 {{ drupal_block('system_branding_block', wrapper=false) }}
+
+{# For block plugin that has a required context supply a context mapping to tell the block instance where to get that context from. #}
+{{ drupal_block('plugin_id', {context_mapping: {node: '@node.node_route_context:node'}}) }}
 ```
 
 See [rendering blocks with Twig Tweak](blocks.md#block-plugin) for details.
@@ -64,10 +74,23 @@ See [rendering blocks with Twig Tweak](blocks.md#block-plugin) for details.
 ```
 
 ## Drupal Field
+Note that drupal_field() does not work for view modes powered by Layout Builder.
 ```twig
+{# Render field_image from node 1 in view_mode "full" (default). #}
 {{ drupal_field('field_image', 'node', 1) }}
+
+{# Render field_image from node 1 in view_mode "teaser". #}
 {{ drupal_field('field_image', 'node', 1, 'teaser') }}
+
+{# Render field_image from node 1 and instead of a view mode, provide an array of display options. #}
+{# @see https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Entity!EntityViewBuilderInterface.php/function/EntityViewBuilderInterface%3A%3AviewField #}
 {{ drupal_field('field_image', 'node', 1, {type: 'image_url', settings: {image_style: 'large'}}) }}
+
+{# Render field_image from node 1 in view_mode "teaser" in English with access check disabled. #}
+{{ drupal_field('field_image', 'node', 1, 'teaser', 'en', FALSE) }}
+
+{# Render field_image from node 1 in view_mode "full" (default) with access check disabled (named argument). #}
+{{ drupal_field('field_image', 'node', 1, check_access=false) }}
 ```
 
 ## Drupal Menu
@@ -98,7 +121,11 @@ See [rendering blocks with Twig Tweak](blocks.md#block-plugin) for details.
 {# Render image using 'thumbnail' image style and custom attributes. #}
 {{ drupal_image('public://ocean.jpg', 'thumbnail', {alt: 'The alternative text'|t, title: 'The title text'|t}) }}
 
-{# Render responsive image. #}
+{# Render image using 'thumbnail' image style with lazy/eager loading (by attribute). #}
+{{ drupal_image('public://ocean.jpg', 'thumbnail', {loading: 'lazy'}) }}
+{{ drupal_image('public://ocean.jpg', 'thumbnail', {loading: 'eager'}) }}
+
+{# Render responsive image (using a named argument). #}
 {{ drupal_image('public://ocean.jpg', 'wide', responsive=true) }}
 ```
 
@@ -132,6 +159,8 @@ See [rendering blocks with Twig Tweak](blocks.md#block-plugin) for details.
 
 ## Drupal URL
 ```twig
+{# The function accepts a valid internal path, such as "/node/1", "/taxonomy/term/1", a query string like "?query," or a fragment like "#anchor". #}
+
 {# Basic usage. #}
 {{ drupal_url('node/1') }}
 
@@ -168,12 +197,12 @@ See [rendering blocks with Twig Tweak](blocks.md#block-plugin) for details.
 ```twig
 {# Basic usage. #}
 <div class="contextual-region">
-  {{ drupal_contextual_links('entity.view.edit_form:view=frontpage&display_id=feed_1:') }}
+  {{ drupal_contextual_links('entity.view.edit_form:view=frontpage:display_id=feed_1') }}
   {{ drupal_view('frontpage') }}
 </div>
 {# Multiple links. #}
 <div class="contextual-region">
-  {{ drupal_contextual_links('node:node=123|block_content:block_content=123:') }}
+  {{ drupal_contextual_links('node:node=123:|block_content:block_content=123:') }}
   {{ content }}
 </div>
 ```
@@ -222,8 +251,9 @@ images when used in an `<img/>` tag.
 ```
 
 ## Format size
+Generates a string representation for the given byte count.
 ```twig
-{{ 12345|format_size() }}
+{{ 12345|format_size }}
 ```
 
 ## Truncate
@@ -248,13 +278,22 @@ images when used in an `<img/>` tag.
 ```
 
 ## With
-This is an opposite of core `without` filter.
+This is an opposite of core `without` filter and adds properties instead of removing it.
 ```twig
 {# Set top-level value. #}
 {{ content.field_image|with('#title', 'Photo'|t) }}
 
 {# Set nested value. #}
 {{ content|with(['field_image', '#title'], 'Photo'|t) }}
+```
+
+## Data URI
+The filter generates a URL using the data scheme as defined in [RFC 2397](https://datatracker.ietf.org/doc/html/rfc2397)
+```twig
+{# Inline image. #}
+<img src="{{ '<svg xmlns="http://www.w3.org/2000/svg"><rect width="100" height="50" fill="lime"/></svg>'|data_uri('image/svg+xml') }}" alt="{{ 'Rectangle'|t }}"/>
+{# Image from file system. #}
+<img src="{{ source(directory ~ '/images/logo.svg')|data_uri('image/svg+xml') }}" alt="{{ 'Logo'|t }}"/>
 ```
 
 ## Children
@@ -309,6 +348,28 @@ It is also possible to extract file URL directly from an entity.
 ```twig
 {{ image|file_url }}
 {{ media|file_url }}
+```
+
+## Entity URL
+Gets the URL object for the entity.
+See \Drupal\Core\Entity\EntityInterface::toUrl()
+```twig
+{# Creates canonical URL for the node. #}
+{{ node|entity_url }}
+
+{# Creates URL for the node edit form. #}
+{{ node|entity_url('edit-form') }}
+```
+
+## Entity Link
+Generates the HTML for a link to this entity.
+See \Drupal\Core\Entity\EntityInterface::toLink()
+```twig
+{# Creates a link to the node using the node's label. #}
+{{ node|entity_link }}
+
+{# Creates link to node comment form. #}
+{{ node|entity_link('Add new comment'|t, 'canonical', {fragment: 'comment-form'}) }}
 ```
 
 ## Entity translation

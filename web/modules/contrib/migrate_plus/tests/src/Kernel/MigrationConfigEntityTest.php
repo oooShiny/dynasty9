@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Kernel;
 
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
@@ -12,7 +14,7 @@ use Drupal\Tests\migrate\Kernel\MigrateTestBase;
  *
  * @group migrate_plus
  */
-class MigrationConfigEntityTest extends MigrateTestBase {
+final class MigrationConfigEntityTest extends MigrateTestBase {
 
   /**
    * {@inheritdoc}
@@ -61,11 +63,6 @@ class MigrationConfigEntityTest extends MigrateTestBase {
 
     $this->assertNotEmpty($this->pluginManager->getDefinition('test'));
     $this->assertSame('Label A', $this->pluginManager->getDefinition('test')['label']);
-
-    // Clear static cache in the plugin manager, the cache tag take care of the
-    // persistent cache.
-    $this->pluginManager->useCaches(FALSE);
-    $this->pluginManager->useCaches(TRUE);
 
     $config->set('label', 'Label B');
     $config->save();

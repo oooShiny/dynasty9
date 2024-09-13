@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\block_content\Functional;
 
 /**
@@ -19,12 +21,12 @@ class BlockContentPageViewTest extends BlockContentTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * Checks block edit and fallback functionality.
    */
-  public function testPageEdit() {
+  public function testPageEdit(): void {
     $this->drupalLogin($this->adminUser);
     $block = $this->createBlockContent();
 
@@ -34,7 +36,7 @@ class BlockContentPageViewTest extends BlockContentTestBase {
     // Ensure user was able to view the block.
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalGet('<front>');
-    $this->assertSession()->pageTextContains('This block is broken or missing. You may be missing content or you might need to enable the original module.');
+    $this->assertSession()->pageTextContains('This block is broken or missing. You may be missing content or you might need to install the original module.');
   }
 
 }

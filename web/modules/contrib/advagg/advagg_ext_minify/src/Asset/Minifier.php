@@ -5,6 +5,7 @@ namespace Drupal\advagg_ext_minify\Asset;
 use Drupal\advagg\Asset\SingleAssetOptimizerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -47,18 +48,21 @@ class Minifier extends SingleAssetOptimizerBase {
    *   Gets the app root.
    * @param \Psr\Log\LoggerInterface $logger
    *   The logger service.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   A config factory for retrieving required config objects.
    * @param \Drupal\Core\File\FileSystemInterface $file
    *   The filesystem service.
    */
-  public function __construct(string $root, LoggerInterface $logger, ConfigFactoryInterface $config_factory, FileSystemInterface $file) {
-    parent::__construct($logger);
+  public function __construct(string $root, LoggerInterface $logger, FileUrlGeneratorInterface $file_url_generator, ConfigFactoryInterface $config_factory, FileSystemInterface $file) {
+    parent::__construct($logger, $file_url_generator);
     $this->config = $config_factory->get('advagg_ext_minify.settings');
     $this->file = $file;
     $this->in = $file->realpath($file->tempnam('public://js/optimized', 'advagg_in'));
     $this->out = $file->realpath($file->tempnam('public://js/optimized', 'advagg_out'));
     $this->root = $root;
+    $this->fileUrlGenerator = $file_url_generator;
   }
 
   /**
@@ -123,7 +127,7 @@ class Minifier extends SingleAssetOptimizerBase {
     ], [
       $this->root,
       $this->in,
-      urlencode(file_create_url($this->in)),
+      urlencode($this->fileUrlGenerator->generateAbsoluteString($this->in)),
       escapeshellarg(realpath($this->out)),
     ], $run);
 

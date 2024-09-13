@@ -3,7 +3,6 @@
 namespace Drupal\search_api_solr\Solarium\Result;
 
 use Solarium\Core\Query\AbstractDocument;
-use Solarium\Core\Query\DocumentInterface;
 
 /**
  * Stream result Solr document.
@@ -30,6 +29,15 @@ class StreamDocument extends AbstractDocument {
    */
   public function __set($name, $value): void {
     $this->fields[$name] = $value;
+  }
+
+  #[\ReturnTypeWillChange]
+
+  /**
+   * {@inheritdoc}
+   */
+  public function jsonSerialize() {
+    return $this->getFields();
   }
 
 }

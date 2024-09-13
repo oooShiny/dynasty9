@@ -4,17 +4,18 @@ namespace Drupal\views\Plugin\views\filter;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\Attribute\ViewsFilter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Basic textfield filter to handle string filtering commands
- * including equality, like, not like, etc.
+ * Basic textfield filter to handle string filtering commands.
+ *
+ * Including equality, like, not like, etc.
  *
  * @ingroup views_filter_handlers
- *
- * @ViewsFilter("string")
  */
-class StringFilter extends FilterPluginBase {
+#[ViewsFilter("string")]
+class StringFilter extends FilterPluginBase implements FilterOperatorsInterface {
 
   /**
    * All words separated by spaces or sentences encapsulated by double quotes.
@@ -96,9 +97,7 @@ class StringFilter extends FilterPluginBase {
   }
 
   /**
-   * This kind of construct makes it relatively easy for a child class
-   * to add or remove functionality by overriding this function and
-   * adding/removing items from this array.
+   * {@inheritdoc}
    */
   public function operators() {
     $operators = [
@@ -178,6 +177,12 @@ class StringFilter extends FilterPluginBase {
         'title' => $this->t('Regular expression'),
         'short' => $this->t('regex'),
         'method' => 'opRegex',
+        'values' => 1,
+      ],
+      'not_regular_expression' => [
+        'title' => $this->t('Negated regular expression'),
+        'short' => $this->t('not regex'),
+        'method' => 'opNotRegex',
         'values' => 1,
       ],
     ];
@@ -345,6 +350,9 @@ class StringFilter extends FilterPluginBase {
     }
   }
 
+  /**
+   * Adds a where clause for the operation, 'equals'.
+   */
   public function opEqual($field) {
     $this->query->addWhere($this->options['group'], $field, $this->value, $this->operator());
   }
@@ -434,6 +442,16 @@ class StringFilter extends FilterPluginBase {
    */
   protected function opRegex($field) {
     $this->query->addWhere($this->options['group'], $field, $this->value, 'REGEXP');
+  }
+
+  /**
+   * Filters by a negated regular expression.
+   *
+   * @param string $field
+   *   The expression pointing to the queries field, for example "foo.bar".
+   */
+  protected function opNotRegex($field) {
+    $this->query->addWhere($this->options['group'], $field, $this->value, 'NOT REGEXP');
   }
 
   protected function opEmpty($field) {

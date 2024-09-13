@@ -3,6 +3,7 @@
 namespace Drupal\Core\Render\Element;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Attribute\FormElement;
 use Drupal\Component\Utility\Html as HtmlUtility;
 
 /**
@@ -14,21 +15,26 @@ use Drupal\Component\Utility\Html as HtmlUtility;
  *
  * Usage example:
  * @code
- * $form['settings']['active'] = array(
+ * $form['settings']['active'] = [
  *   '#type' => 'radios',
  *   '#title' => $this->t('Poll status'),
  *   '#default_value' => 1,
- *   '#options' => array(0 => $this->t('Closed'), 1 => $this->t('Active')),
- * );
+ *   '#options' => [0 => $this->t('Closed'), 1 => $this->t('Active')],
+ * ];
+ * @endcode
+ *
+ * Element properties may be set on single option items as follows.
+ *
+ * @code
+ * $form['settings']['active'][0]['#description'] = $this->t('Description for the Closed option.');
  * @endcode
  *
  * @see \Drupal\Core\Render\Element\Checkboxes
  * @see \Drupal\Core\Render\Element\Radio
  * @see \Drupal\Core\Render\Element\Select
- *
- * @FormElement("radios")
  */
-class Radios extends FormElement {
+#[FormElement('radios')]
+class Radios extends FormElementBase {
 
   use CompositeFormElementTrait;
 

@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\language\Kernel\Condition;
 
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Tests that the language condition, provided by the language module, is
- * working properly.
+ * Tests the language condition plugin.
  *
  * @group language
  */
@@ -34,6 +35,9 @@ class LanguageConditionTest extends KernelTestBase {
    */
   protected static $modules = ['system', 'language'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -47,7 +51,7 @@ class LanguageConditionTest extends KernelTestBase {
   /**
    * Tests the language condition.
    */
-  public function testConditions() {
+  public function testConditions(): void {
     // Grab the language condition and configure it to check the content
     // language.
     $language = \Drupal::languageManager()->getLanguage('en');

@@ -1,4 +1,0 @@
-social_post.integrations.tab:
-  title: 'Integrations'
-  route_name: social_post.integrations
-  base_route: social_post.integrations

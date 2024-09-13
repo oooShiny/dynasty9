@@ -16,7 +16,7 @@ use Drupal\Core\Cache\CacheableMetadata;
  * @see https://www.drupal.org/project/drupal/issues/3032787
  * @see jsonapi.api.php
  */
-class CacheableNormalization implements CacheableDependencyInterface {
+class CacheableNormalization extends TemporaryArrayObjectThrowingExceptions implements CacheableDependencyInterface {
 
   use CacheableDependencyTrait;
 
@@ -130,7 +130,7 @@ class CacheableNormalization implements CacheableDependencyInterface {
    */
   protected static function hasNoNestedInstances($array) {
     foreach ($array as $value) {
-      if ((is_array($value) || $value instanceof \Traversable) && !static::hasNoNestedInstances($value) || $value instanceof static) {
+      if (is_iterable($value) && !static::hasNoNestedInstances($value) || $value instanceof static) {
         return FALSE;
       }
     }

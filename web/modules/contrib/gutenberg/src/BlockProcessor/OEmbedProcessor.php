@@ -164,7 +164,7 @@ class OEmbedProcessor extends ConfigurableProcessorBase {
    * {@inheritdoc}
    */
   public function isSupported(array $block, $block_content = '') {
-    return $block['blockName'] === 'core/embed' || substr($block['blockName'], 0, 11) === 'core-embed/';
+    return $block['blockName'] === 'core/embed' || substr($block['blockName'] ?? '', 0, 11) === 'core-embed/';
   }
 
   /**
@@ -330,7 +330,7 @@ EOL
         '#attributes' => [
           'width' => $width,
           'height' => $height,
-          'src' => "${url}${url_separator}output=embed",
+          'src' => "{$url}{$url_separator}output=embed",
           'frameborder' => 0,
           'class' => [
             'gutenberg-oembed-google-maps',
@@ -339,7 +339,7 @@ EOL
         ],
         '#suffix' => sprintf(
           '<br /><small><a href="%s" style="color:#0000FF;text-align:left">%s</a></small>',
-          htmlentities("${url}${url_separator}source=embed", HTML_ENTITIES),
+          htmlentities("{$url}{$url_separator}source=embed", HTML_ENTITIES),
           $this->t('View Larger Map')->render()
         ),
         '#gutenberg_embed_local' => TRUE,
@@ -356,7 +356,7 @@ EOL
         '#attributes' => [
           'width' => $width,
           'height' => $height,
-          'src' => "${url}${url_separator}widget=true",
+          'src' => "{$url}{$url_separator}widget=true",
         ],
         'frameborder' => 0,
         'class' => [

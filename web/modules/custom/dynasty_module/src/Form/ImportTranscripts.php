@@ -38,6 +38,7 @@ class ImportTranscripts extends ConfigFormBase
     $episodes = [];
     $storage = \Drupal::service('entity_type.manager')->getStorage('node');
     $ep_nodes = $storage->getQuery()
+      ->accessCheck(FALSE)
       ->condition('type', 'podcast_episode')
       ->condition('status', 1)
       ->sort('created', 'DESC')

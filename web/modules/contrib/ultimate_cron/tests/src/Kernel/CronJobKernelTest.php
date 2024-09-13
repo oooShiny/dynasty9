@@ -19,7 +19,7 @@ class CronJobKernelTest extends KernelTestBase {
    */
   public static $modules = array('system', 'ultimate_cron');
 
-  protected function setup() {
+  protected function setup(): void {
     parent::setUp();
 
     $this->installSchema('ultimate_cron', [

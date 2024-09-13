@@ -59,7 +59,9 @@ class AdvaggCssCollectionGrouper extends CssCollectionGrouper implements AssetCo
       // information that determines when a new group is needed, but the order
       // of keys in the array doesn't matter, and we don't want a new group if
       // all that's different is that order.
-      ksort($item['browsers']);
+      if (isset($item['browsers'])) {
+        ksort($item['browsers']);
+      }
 
       // If the item can be grouped with other items, set $group_keys to an
       // array of information that must be the same for all items in its group.
@@ -77,7 +79,7 @@ class AdvaggCssCollectionGrouper extends CssCollectionGrouper implements AssetCo
           // Group file items if their 'preprocess' flag is TRUE.
           // Help ensure maximum reuse of aggregate files by only grouping
           // together items that share the same 'group' value.
-          $group_keys = $item['preprocess'] ? [$item['type'], $item['group'], $item['media'], $item['browsers']] : FALSE;
+          $group_keys = $item['preprocess'] ? [$item['type'], $item['group'], $item['media'], $item['browsers'] ?? NULL] : FALSE;
           break;
 
         case 'external':

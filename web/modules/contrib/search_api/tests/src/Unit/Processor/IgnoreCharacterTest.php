@@ -23,7 +23,7 @@ class IgnoreCharacterTest extends UnitTestCase {
   /**
    * Creates a new processor object for use in the tests.
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->processor = new IgnoreCharacters(['ignorable' => ''], 'ignore_character', []);
   }
@@ -49,7 +49,8 @@ class IgnoreCharacterTest extends UnitTestCase {
   /**
    * Data provider for testValueConfiguration().
    */
-  public function ignoreCharacterSetsDataProvider() {
+  public static function ignoreCharacterSetsDataProvider() {
+    // cspell:disable
     return [
       ['word_s', 'words', ['Pc' => 'Pc']],
       ['word⁔s', 'words', ['Pc' => 'Pc']],
@@ -105,6 +106,7 @@ class IgnoreCharacterTest extends UnitTestCase {
       ['woྰrds', 'words', ['Mn' => 'Mn', 'Pd' => 'Pd', 'Pe' => 'Pe']],
       ['worྵdྶs', 'words', ['Mn' => 'Mn', 'Pd' => 'Pd', 'Pe' => 'Pe']],
     ];
+    // cspell:enable
   }
 
   /**
@@ -131,12 +133,13 @@ class IgnoreCharacterTest extends UnitTestCase {
    * @return array
    *   Sets of arguments for testIgnorableCharacters().
    */
-  public function ignorableCharactersDataProvider() {
+  public static function ignorableCharactersDataProvider() {
     return [
       ['abcde', 'ace', '[bd]'],
       [['abcde', 'abcdef'], ['ace', 'ace'], '[bdf]'],
       ["ab.c'de", "a.'de", '[b-c]'],
       ['foo 13$%& (bar)[93]', 'foo $%& (bar)[]', '\d'],
+      ["foo.com n'd bar. baz.gv. bla.net.", 'foo.com nd bar baz.gv bla.net', '[\'¿¡!?,:;]|\.(?= |$)'],
     ];
   }
 
@@ -155,7 +158,7 @@ class IgnoreCharacterTest extends UnitTestCase {
 
     $passed_value = NULL;
     $this->invokeMethod('processConditionValue', [&$passed_value]);
-    $this->assertSame(NULL, $passed_value);
+    $this->assertNull($passed_value);
 
     $condition = new Condition('field', NULL);
     $conditions = [$condition];

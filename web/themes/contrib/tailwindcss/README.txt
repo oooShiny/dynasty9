@@ -19,13 +19,6 @@ npm install
 npm run build
 ```
 
-DEPENDENCIES
-------------
-
-- Laravel Mix (https://github.com/JeffreyWay/laravel-mix) for PostCSS compiling
-  and asset generation.
-- The Laravel Mix Tailwind plugin.
-
 BUILD COMMANDS
 --------------
 

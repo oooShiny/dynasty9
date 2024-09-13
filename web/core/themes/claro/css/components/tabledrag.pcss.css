@@ -7,8 +7,6 @@
  * @see tabledrag.js
  */
 
-@import "../base/variables.pcss.css";
-
 :root {
   --table-row--dragging-bg-color: #fe7;
   --table-row--last-dragged-bg-color: #ffb;
@@ -17,6 +15,10 @@
 body.drag {
   cursor: move;
 }
+body.drag-y {
+  cursor: row-resize;
+}
+
 /* The block region's title row in table. */
 .region-title {
   font-weight: bold;
@@ -105,17 +107,30 @@ body.drag {
   padding: var(--space-xs) var(--space-m);
   content: "";
   transition: transform 0.1s ease-in-out 0s;
-  background: url(../../images/icons/222330/tabledrag-handle.svg) no-repeat center;
+  background: url(../../images/icons/000f33/tabledrag-handle.svg) no-repeat center;
 }
 [dir="rtl"] .tabledrag-handle::after {
   margin-right: calc(var(--space-m) * -1);
   margin-left: 0;
 }
 
-@media screen and (-ms-high-contrast: active) {
+/* Change icon and cursor if only vertical drag is allowed. */
+.tabledrag-handle.tabledrag-handle-y {
+  cursor: row-resize;
+}
+
+.tabledrag-handle.tabledrag-handle-y::after {
+  background-image: url(../../images/icons/currentColor/tabledrag-handle-y.svg);
+  background-size: 16px 16px;
+}
+
+@media (forced-colors: active) {
   .tabledrag-handle::after {
-    content: url(../../images/icons/currentColor/tabledrag-handle.svg);
-    background: none;
+    content: "";
+    background: linktext;
+    mask-image: url(../../images/icons/000f33/tabledrag-handle.svg);
+    mask-repeat: no-repeat;
+    mask-position: center;
   }
 }
 
@@ -240,7 +255,7 @@ body.drag {
 }
 
 .tabledrag-cell-content .tree {
-  min-height: 100%; /* Using simply 'height: 100%' would make IE11 rendering ugly. */
+  min-height: 100%;
 }
 
 /**

@@ -26,7 +26,7 @@ abstract class AdvaggFunctionalTestBase extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['advagg'];
+  protected static $modules = ['advagg'];
 
   /**
    * A user with permission to administer site configuration.
@@ -43,7 +43,7 @@ abstract class AdvaggFunctionalTestBase extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->user = $this->drupalCreateUser([
       'administer site configuration',

@@ -90,7 +90,7 @@ class SolrFieldManager implements SolrFieldManagerInterface {
   /**
    * Builds the field definitions for a Solr server.
    *
-   * Initially the defintions will be built from a the response of a luke query
+   * Initially the definitions will be built from the response of a luke query
    * handler directly from Solr. But once added to the Drupal config, the
    * definitions will be a mix of the Drupal config and not yet used fields from
    * Solr. This strategy also covers scenarios when the Solr server is
@@ -109,13 +109,8 @@ class SolrFieldManager implements SolrFieldManagerInterface {
   protected function buildFieldDefinitions(IndexInterface $index) {
     $solr_fields = $this->buildFieldDefinitionsFromSolr($index);
     $config_fields = $this->buildFieldDefinitionsFromConfig($index);
-    $fields = $solr_fields + $config_fields;
-    /*** @var \Drupal\Core\TypedData\DataDefinitionInterface $field */
-    foreach ($config_fields as $key => $field) {
-      // Always use the type as already configured in Drupal previously.
-      $fields[$key]->setDataType($field->getDataType());
-    }
-    return $fields;
+    // Always prefer the type as already (re-)configured in Drupal.
+    return $config_fields + $solr_fields;
   }
 
   /**
@@ -126,16 +121,21 @@ class SolrFieldManager implements SolrFieldManagerInterface {
    *
    * @return \Drupal\Core\TypedData\DataDefinitionInterface[]
    *   The array of field definitions for the server, keyed by field name.
-   *
-   * @throws \Drupal\search_api\SearchApiException
    */
   protected function buildFieldDefinitionsFromConfig(IndexInterface $index) {
     $fields = [];
     foreach ($index->getFields() as $index_field) {
+      $type = $index_field->getType();
+      if ($type === 'text' || str_starts_with($type, 'solr_text_')) {
+        $type = 'search_api_text';
+      }
+      elseif ($type === 'date') {
+        $type = 'solr_date';
+      }
       $solr_field = $index_field->getPropertyPath();
       $field = new SolrFieldDefinition(['schema' => '']);
       $field->setLabel($index_field->getLabel());
-      $field->setDataType($index_field->getType());
+      $field->setDataType($type);
       $fields[$solr_field] = $field;
     }
     return $fields;
@@ -191,25 +191,29 @@ class SolrFieldManager implements SolrFieldManagerInterface {
           // matches point and trie variants as well, for example int, pint and
           // tint. Finally this function only feeds the presets for the config
           // form, so mismatches aren't critical.
-          if (strpos($field->getDataType(), 'text') !== FALSE) {
+          $type = $field->getDataType();
+          if (strpos($type, 'text') !== FALSE) {
             $field->setDataType('search_api_text');
           }
-          elseif (strpos($field->getDataType(), 'date') !== FALSE) {
-            $field->setDataType('timestamp');
+          elseif (strpos($type, 'date_range') !== FALSE) {
+            $field->setDataType('string');
           }
-          elseif (strpos($field->getDataType(), 'int') !== FALSE) {
+          elseif (strpos($type, 'date') !== FALSE) {
+            $field->setDataType('solr_date');
+          }
+          elseif (strpos($type, 'int') !== FALSE) {
             $field->setDataType('integer');
           }
-          elseif (strpos($field->getDataType(), 'long') !== FALSE) {
+          elseif (strpos($type, 'long') !== FALSE) {
             $field->setDataType('integer');
           }
-          elseif (strpos($field->getDataType(), 'float') !== FALSE) {
+          elseif (strpos($type, 'float') !== FALSE) {
             $field->setDataType('float');
           }
-          elseif (strpos($field->getDataType(), 'double') !== FALSE) {
+          elseif (strpos($type, 'double') !== FALSE) {
             $field->setDataType('float');
           }
-          elseif (strpos($field->getDataType(), 'bool') !== FALSE) {
+          elseif (strpos($type, 'bool') !== FALSE) {
             $field->setDataType('boolean');
           }
           else {

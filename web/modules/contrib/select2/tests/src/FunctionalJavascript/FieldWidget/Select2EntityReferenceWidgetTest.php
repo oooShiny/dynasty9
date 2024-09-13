@@ -3,11 +3,11 @@
 namespace Drupal\Tests\select2\FunctionalJavascript\FieldWidget;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\Core\Url;
 use Drupal\entity_test\Entity\EntityTestBundle;
 use Drupal\entity_test\Entity\EntityTestMulRevPub;
 use Drupal\entity_test\Entity\EntityTestWithBundle;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\FunctionalJavascriptTests\SortableTestTrait;
 use Drupal\Tests\select2\FunctionalJavascript\Select2JavascriptTestBase;
 use Drupal\Tests\TestFileCreationTrait;
 
@@ -17,7 +17,7 @@ use Drupal\Tests\TestFileCreationTrait;
  * @group select2
  */
 class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
-
+  use SortableTestTrait;
   use TestFileCreationTrait;
 
   /**
@@ -30,7 +30,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
    *
    * @dataProvider providerTestSingleValueWidget
    */
-  public function testSingleValueWidget($autocomplete, $match_operator, $count, $autocreate) {
+  public function testSingleValueWidget(bool $autocomplete, ?string $match_operator, int $count, bool $autocreate): void {
     $this->createField('select2', 'node', 'test', 'entity_reference', [
       'target_type' => 'entity_test_mulrevpub',
     ], [
@@ -101,7 +101,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
    * @return array
    *   The data.
    */
-  public function providerTestSingleValueWidget() {
+  public function providerTestSingleValueWidget(): array {
     return [
       [TRUE, 'STARTS_WITH', 2, TRUE],
       [FALSE, NULL, 3, TRUE],
@@ -116,7 +116,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
    *
    * @dataProvider providerTestMultiValueWidget
    */
-  public function testMultipleValueWidget($autocomplete, $autocreate) {
+  public function testMultipleValueWidget(bool $autocomplete, bool $autocreate): void {
     $this->createField('select2', 'node', 'test', 'entity_reference', [
       'target_type' => 'entity_test_mulrevpub',
       'cardinality' => -1,
@@ -196,7 +196,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
    * @return array
    *   The data.
    */
-  public function providerTestMultiValueWidget() {
+  public function providerTestMultiValueWidget(): array {
     return [
       [TRUE, TRUE],
       [TRUE, FALSE],
@@ -208,7 +208,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
   /**
    * Test autocreation for a multi value field.
    */
-  public function testMultipleAutocreation() {
+  public function testMultipleAutocreation(): void {
     EntityTestBundle::create([
       'id' => 'test1',
       'label' => 'Test1 label',
@@ -256,6 +256,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
     $this->assertNotEmpty($entity);
     $this->assertSame('test2', $entity->bundle());
 
+    /** @var \Drupal\Core\Field\FieldConfigInterface $field */
     $field = FieldConfig::loadByName('node', 'test', 'select2');
     $field->setSetting('handler_settings', [
       'target_bundles' => ['test1' => 'test1', 'test2' => 'test2'],
@@ -280,7 +281,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
   /**
    * Test selecting options of different bundles.
    */
-  public function testMultipleBundleSelection() {
+  public function testMultipleBundleSelection(): void {
 
     EntityTestBundle::create([
       'id' => 'test1',
@@ -331,7 +332,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
   /**
    * Test that in-between ajax calls are not creating new entities.
    */
-  public function testAjaxCallbacksInBetween() {
+  public function testAjaxCallbacksInBetween(): void {
 
     $this->container->get('module_installer')->install(['file']);
 
@@ -353,6 +354,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
     $this->drupalGet('/node/add/test');
     $page->fillField('title[0][value]', 'Test node');
 
+    /** @var \StdClass $test_file */
     $test_file = current($this->getTestFiles('text'));
     $page->attachFileToField("files[file_0]", \Drupal::service('file_system')->realpath($test_file->uri));
 
@@ -366,7 +368,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
   /**
    * Tests that the autocomplete ordering is alphabetically.
    */
-  public function testAutocompleteOrdering() {
+  public function testAutocompleteOrdering(): void {
     $this->createField('select2', 'node', 'test', 'entity_reference', [
       'target_type' => 'entity_test_mulrevpub',
     ], [
@@ -388,11 +390,8 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
     $this->drupalGet('/node/add/test');
     $settings = Json::decode($this->getSession()->getPage()->findField('select2')->getAttribute('data-select2-config'));
 
-    $url = Url::fromUserInput($settings['ajax']['url']);
-    $url->setAbsolute(TRUE);
-    $url->setRouteParameter('q', 'f');
-
-    $response = \Drupal::httpClient()->get($url->toString());
+    $target_url = $this->getAbsoluteUrl($settings['ajax']['url']);
+    $response = \Drupal::httpClient()->get($target_url, ['query' => ['q' => 'f']]);
 
     $results = Json::decode($response->getBody()->getContents())['results'];
 
@@ -403,7 +402,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
   /**
    * Tests that the autocomplete ordering is alphabetically.
    */
-  public function testAutocompleteMatchLimit() {
+  public function testAutocompleteMatchLimit(): void {
     $this->createField('select2', 'node', 'test', 'entity_reference', [
       'target_type' => 'entity_test_mulrevpub',
     ], [
@@ -425,11 +424,8 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
     $this->drupalGet('/node/add/test');
     $settings = Json::decode($this->getSession()->getPage()->findField('select2')->getAttribute('data-select2-config'));
 
-    $url = Url::fromUserInput($settings['ajax']['url']);
-    $url->setAbsolute(TRUE);
-    $url->setRouteParameter('q', 'f');
-
-    $response = \Drupal::httpClient()->get($url->toString());
+    $target_url = $this->getAbsoluteUrl($settings['ajax']['url']);
+    $response = \Drupal::httpClient()->get($target_url, ['query' => ['q' => 'f']]);
 
     $this->assertCount(3, Json::decode($response->getBody()->getContents())['results']);
   }
@@ -437,11 +433,8 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
   /**
    * Tests the autocomplete drag n drop.
    */
-  public function testAutocompleteDragnDrop() {
-    $this->markTestSkipped(
-      'Testing drag and drop is currently not possible due to a bug in chromedriver. See https://www.drupal.org/node/3084730.'
-    );
-
+  public function testAutocompleteDragnDrop(): void {
+    // @phpstan-ignore-next-line
     $this->createField('select2', 'node', 'test', 'entity_reference', [
       'target_type' => 'entity_test_mulrevpub',
       'cardinality' => -1,
@@ -480,8 +473,14 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
     $assert_session->waitForElement('xpath', '//li[contains(@class, "select2-results__option") and text()="gaga"]');
     $page->find('xpath', '//li[contains(@class, "select2-results__option") and text()="gaga"]')->click();
 
-    $this->dragDropElement($page->find('xpath', '//li[contains(@class, "select2-selection__choice") and text()="gaga"]'), -100, 0);
-    $this->dragDropElement($page->find('xpath', '//li[contains(@class, "select2-selection__choice") and text()="foo"]'), 50, 0);
+    // Testing drag and drop needs to use the sortable test trait due to a bug
+    // in chromedriver. See https://www.drupal.org/node/3084730.
+    // phpcs:disable
+    // $this->dragDropElement($page->find('xpath', '//li[contains(@class, "select2-selection__choice") and text()="gaga"]'), -100, 0);
+    // $this->dragDropElement($page->find('xpath', '//li[contains(@class, "select2-selection__choice") and text()="foo"]'), 50, 0);
+    // phpcs:enable
+    $this->sortableAfter('.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(2)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(3)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered');
+    $this->sortableAfter('.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(1)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(3)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered');
 
     $page->pressButton('Save');
 
@@ -491,6 +490,89 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
       ['target_id' => 2],
       ['target_id' => 1],
     ], $node->select2->getValue());
+  }
+
+  /**
+   * Tests the autocomplete drag n drop.
+   */
+  public function testNoAutocompleteDragnDrop(): void {
+    // @phpstan-ignore-next-line
+    $this->createField('select2', 'node', 'test', 'entity_reference', [
+      'target_type' => 'entity_test_mulrevpub',
+      'cardinality' => -1,
+    ], [
+      'handler' => 'default:entity_test_mulrevpub',
+      'handler_settings' => [
+        'auto_create' => FALSE,
+      ],
+    ], 'select2_entity_reference', [
+      'autocomplete' => FALSE,
+      'match_operator' => 'CONTAINS',
+    ]);
+
+    EntityTestMulRevPub::create(['name' => 'foo'])->save();
+    EntityTestMulRevPub::create(['name' => 'bar'])->save();
+    EntityTestMulRevPub::create(['name' => 'gaga'])->save();
+
+    $page = $this->getSession()->getPage();
+    $assert_session = $this->assertSession();
+
+    $this->drupalGet('/node/add/test');
+    $page->fillField('title[0][value]', 'Test node');
+
+    $this->click('.form-item-select2 .select2-selection.select2-selection--multiple');
+    $page->find('css', '.select2-search__field')->setValue('fo');
+    $assert_session->waitForElement('xpath', '//li[contains(@class, "select2-results__option") and text()="foo"]');
+    $page->find('xpath', '//li[contains(@class, "select2-results__option") and text()="foo"]')->click();
+
+    $this->click('.form-item-select2 .select2-selection.select2-selection--multiple');
+    $page->find('css', '.select2-search__field')->setValue('ba');
+    $assert_session->waitForElement('xpath', '//li[contains(@class, "select2-results__option") and text()="bar"]');
+    $page->find('xpath', '//li[contains(@class, "select2-results__option") and text()="bar"]')->click();
+
+    $this->click('.form-item-select2 .select2-selection.select2-selection--multiple');
+    $page->find('css', '.select2-search__field')->setValue('ga');
+    $assert_session->waitForElement('xpath', '//li[contains(@class, "select2-results__option") and text()="gaga"]');
+    $page->find('xpath', '//li[contains(@class, "select2-results__option") and text()="gaga"]')->click();
+
+    // Testing drag and drop needs to use the sortable test trait due to a bug
+    // in chromedriver. See https://www.drupal.org/node/3084730.
+    // phpcs:disable
+    // $this->dragDropElement($page->find('xpath', '//li[contains(@class, "select2-selection__choice") and text()="gaga"]'), -100, 0);
+    // $this->dragDropElement($page->find('xpath', '//li[contains(@class, "select2-selection__choice") and text()="foo"]'), 50, 0);
+    // phpcs:enable
+    $this->sortableAfter('.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(2)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(3)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered');
+    $this->sortableAfter('.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(1)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered > li:nth-child(3)', '.select2-selection.select2-selection--multiple ul.select2-selection__rendered');
+    $page->pressButton('Save');
+
+    $node = $this->getNodeByTitle('Test node', TRUE);
+    $this->assertEquals([
+      ['target_id' => 3],
+      ['target_id' => 2],
+      ['target_id' => 1],
+    ], $node->select2->getValue());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function sortableUpdate($item, $from, $to = NULL) {
+    $script = <<<'JS'
+(function ($) {
+    var select2_widgets = document.querySelectorAll('.select2-widget');
+    select2_widgets.forEach(function (widget) {
+        // See js/select2.js.
+        var $select = $(widget);
+        var $list = $select.next('.select2-container').find('ul.select2-selection__rendered');
+        $($list.find('.select2-selection__choice').get().reverse()).each(function () {
+            $select.prepend($select.find('option[value="' + $(this).data('optionValue') + '"]').first());
+        });
+    });
+})(jQuery)
+
+JS;
+
+    $this->getSession()->executeScript($script);
   }
 
 }

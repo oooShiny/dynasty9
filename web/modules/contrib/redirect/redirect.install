@@ -144,7 +144,7 @@ function redirect_update_8103() {
 
   // Only create if the redirect view doesn't exist and views is enabled.
   if (!View::load('redirect') && \Drupal::moduleHandler()->moduleExists('views')) {
-    $config_path = drupal_get_path('module', 'redirect') . '/config/install/views.view.redirect.yml';
+    $config_path = \Drupal::service('extension.list.module')->getPath('redirect') . '/config/install/views.view.redirect.yml';
     $data = Yaml::parse(file_get_contents($config_path));
     \Drupal::configFactory()->getEditable('views.view.redirect')->setData($data)->save(TRUE);
     $message = 'The new redirect view has been created.';
@@ -220,5 +220,19 @@ function redirect_update_8108() {
   $config = \Drupal::configFactory()->getEditable('redirect.settings');
   $config->clear('canonical');
   $config->clear('content_location_header');
+  $config->save();
+}
+
+/**
+ * Enable reset button for Redirect View.
+ */
+function redirect_update_8109() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('views.view.redirect');
+  if ($config->isNew()) {
+    return;
+  }
+  // Enable the reset button.
+  $config->set('display.default.display_options.exposed_form.options.reset_button', TRUE);
   $config->save();
 }

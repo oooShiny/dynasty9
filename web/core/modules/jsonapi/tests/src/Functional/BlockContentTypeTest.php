@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\block_content\Entity\BlockContentType;
@@ -9,8 +11,9 @@ use Drupal\Core\Url;
  * JSON:API integration test for the "BlockContentType" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class BlockContentTypeTest extends ResourceTestBase {
+class BlockContentTypeTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -43,7 +46,7 @@ class BlockContentTypeTest extends ResourceTestBase {
    * {@inheritdoc}
    */
   protected function setUpAuthorization($method) {
-    $this->grantPermissionsToTestedRole(['administer blocks']);
+    $this->grantPermissionsToTestedRole(['administer block types']);
   }
 
   /**
@@ -90,7 +93,7 @@ class BlockContentTypeTest extends ResourceTestBase {
           'description' => 'Provides a competitive alternative to the "basic" type',
           'label' => 'Pascal',
           'langcode' => 'en',
-          'revision' => 0,
+          'revision' => FALSE,
           'status' => TRUE,
           'drupal_internal__id' => 'pascal',
         ],
@@ -103,6 +106,7 @@ class BlockContentTypeTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
 }

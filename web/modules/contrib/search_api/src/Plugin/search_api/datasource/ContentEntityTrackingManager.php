@@ -158,13 +158,21 @@ class ContentEntityTrackingManager {
     foreach ($indexes as $index) {
       if ($inserted_ids) {
         $filtered_item_ids = static::filterValidItemIds($index, $datasource_id, $inserted_ids);
-        $index->trackItemsInserted($datasource_id, $filtered_item_ids);
+        if ($filtered_item_ids) {
+          $index->trackItemsInserted($datasource_id, $filtered_item_ids);
+        }
       }
       if ($updated_ids) {
-        $index->trackItemsUpdated($datasource_id, $updated_ids);
+        $filtered_item_ids = static::filterValidItemIds($index, $datasource_id, $updated_ids);
+        if ($filtered_item_ids) {
+          $index->trackItemsUpdated($datasource_id, $filtered_item_ids);
+        }
       }
       if ($deleted_ids) {
-        $index->trackItemsDeleted($datasource_id, $deleted_ids);
+        $filtered_item_ids = static::filterValidItemIds($index, $datasource_id, $deleted_ids);
+        if ($filtered_item_ids) {
+          $index->trackItemsDeleted($datasource_id, $filtered_item_ids);
+        }
       }
     }
   }
@@ -233,11 +241,7 @@ class ContentEntityTrackingManager {
       $indexes = $this->entityTypeManager->getStorage('search_api_index')
         ->loadMultiple();
     }
-    // @todo Replace with multi-catch once we depend on PHP 7.1+.
-    catch (InvalidPluginDefinitionException $e) {
-      // Can't really happen, but play it safe to appease static code analysis.
-    }
-    catch (PluginNotFoundException $e) {
+    catch (InvalidPluginDefinitionException | PluginNotFoundException) {
       // Can't really happen, but play it safe to appease static code analysis.
     }
 
@@ -252,7 +256,7 @@ class ContentEntityTrackingManager {
         try {
           $config = $index->getDatasource($datasource_id)->getConfiguration();
         }
-        catch (SearchApiException $e) {
+        catch (SearchApiException) {
           // Can't really happen, but play it safe to appease static code
           // analysis.
           unset($indexes[$index_id]);
@@ -392,7 +396,7 @@ class ContentEntityTrackingManager {
     try {
       $config = $index->getDatasource($datasource_id)->getConfiguration();
     }
-    catch (SearchApiException $e) {
+    catch (SearchApiException) {
       // Can't really happen, but play it safe to appease static code analysis.
       return $item_ids;
     }

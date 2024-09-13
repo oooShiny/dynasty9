@@ -9,10 +9,17 @@
 
 namespace Solarium\Plugin\ParallelExecution;
 
-use Solarium\Component\QueryInterface;
+use Solarium\Core\Client\Adapter\ConnectionTimeoutAwareInterface;
 use Solarium\Core\Client\Adapter\Curl;
+use Solarium\Core\Client\Adapter\TimeoutAwareInterface;
 use Solarium\Core\Client\Endpoint;
+use Solarium\Core\Event\PostExecute as PostExecuteEvent;
+use Solarium\Core\Event\PostExecuteRequest as PostExecuteRequestEvent;
+use Solarium\Core\Event\PreExecute as PreExecuteEvent;
+use Solarium\Core\Event\PreExecuteRequest as PreExecuteRequestEvent;
 use Solarium\Core\Plugin\AbstractPlugin;
+use Solarium\Core\Query\QueryInterface;
+use Solarium\Core\Query\Result\Result;
 use Solarium\Exception\HttpException;
 use Solarium\Exception\RuntimeException;
 use Solarium\Plugin\ParallelExecution\Event\ExecuteEnd as ExecuteEndEvent;
@@ -26,8 +33,6 @@ use Solarium\Plugin\ParallelExecution\Event\ExecuteStart as ExecuteStartEvent;
  *
  * While query execution is parallel, the results only become available as soon as all requests have finished. So the
  * time of the slowest query will be the effective execution time for all queries.
- *
- * @codeCoverageIgnoreStart
  */
 class ParallelExecution extends AbstractPlugin
 {
@@ -56,7 +61,7 @@ class ParallelExecution extends AbstractPlugin
      *
      * @return self Provides fluent interface
      */
-    public function addQuery(string $key, QueryInterface $query, $endpoint = null)
+    public function addQuery(string $key, QueryInterface $query, $endpoint = null): self
     {
         if (\is_object($endpoint)) {
             $endpoint = $endpoint->getKey();
@@ -96,14 +101,12 @@ class ParallelExecution extends AbstractPlugin
         return $this;
     }
 
-    // @codeCoverageIgnoreStart
-
     /**
      * Execute queries parallelly.
      *
      * @throws RuntimeException
      *
-     * @return \Solarium\Core\Query\Result\Result[]
+     * @return (Result|HttpException)[]
      */
     public function execute(): array
     {
@@ -112,12 +115,34 @@ class ParallelExecution extends AbstractPlugin
         if (!($adapter instanceof Curl)) {
             throw new RuntimeException('Parallel execution requires the CurlAdapter');
         }
+
         $multiHandle = curl_multi_init();
+
+        $requests = [];
+        $endpoints = [];
         $handles = [];
+        $overrideResponses = [];
+        $overrideResults = [];
+
         foreach ($this->queries as $key => $data) {
-            $request = $this->client->createRequest($data['query']);
-            $endpoint = $this->client->getEndpoint($data['endpoint']);
-            $handle = $adapter->createHandle($request, $endpoint);
+            $event = new PreExecuteEvent($data['query']);
+            $this->client->getEventDispatcher()->dispatch($event);
+            if (null !== $result = $event->getResult()) {
+                $overrideResults[$key] = $result;
+                continue;
+            }
+
+            $requests[$key] = $this->client->createRequest($data['query']);
+            $endpoints[$key] = $this->client->getEndpoint($data['endpoint']);
+
+            $event = new PreExecuteRequestEvent($requests[$key], $endpoints[$key]);
+            $this->client->getEventDispatcher()->dispatch($event);
+            if (null !== $response = $event->getResponse()) {
+                $overrideResponses[$key] = $response;
+                continue;
+            }
+
+            $handle = $adapter->createHandle($requests[$key], $endpoints[$key]);
             curl_multi_add_handle($multiHandle, $handle);
             $handles[$key] = $handle;
         }
@@ -133,7 +158,9 @@ class ParallelExecution extends AbstractPlugin
         $timeout = $this->getOption('curlmultiselecttimeout');
         while ($active && CURLM_OK === $mrc) {
             if (-1 === curl_multi_select($multiHandle, $timeout)) {
+                // @codeCoverageIgnoreStart
                 usleep(100);
+                // @codeCoverageIgnoreEnd
             }
 
             do {
@@ -141,18 +168,36 @@ class ParallelExecution extends AbstractPlugin
             } while (CURLM_CALL_MULTI_PERFORM === $mrc);
         }
 
+        while (false !== curl_multi_info_read($multiHandle)) {
+            // ↑ this loops over messages from the individual transfers so we can get curl_errno() for each handle
+        }
+
         $event = new ExecuteEndEvent();
         $this->client->getEventDispatcher()->dispatch($event);
 
         // get the results
         $results = [];
-        foreach ($handles as $key => $handle) {
-            try {
-                curl_multi_remove_handle($multiHandle, $handle);
-                $response = $adapter->getResponse($handle, curl_multi_getcontent($handle));
-                $results[$key] = $this->client->createResult($this->queries[$key]['query'], $response);
-            } catch (HttpException $e) {
-                $results[$key] = $e;
+
+        foreach ($this->queries as $key => $data) {
+            if (isset($overrideResults[$key])) {
+                $results[$key] = $overrideResults[$key];
+            } elseif (isset($overrideResponses[$key])) {
+                $results[$key] = $this->client->createResult($data['query'], $overrideResponses[$key]);
+            } else {
+                try {
+                    curl_multi_remove_handle($multiHandle, $handles[$key]);
+                    $response = $adapter->getResponse($handles[$key], curl_multi_getcontent($handles[$key]));
+
+                    $event = new PostExecuteRequestEvent($requests[$key], $endpoints[$key], $response);
+                    $this->client->getEventDispatcher()->dispatch($event);
+
+                    $results[$key] = $this->client->createResult($data['query'], $response);
+
+                    $event = new PostExecuteEvent($data['query'], $results[$key]);
+                    $this->client->getEventDispatcher()->dispatch($event);
+                } catch (HttpException $e) {
+                    $results[$key] = $e;
+                }
             }
         }
 
@@ -161,15 +206,26 @@ class ParallelExecution extends AbstractPlugin
         return $results;
     }
 
-    /*
-     * @codeCoverageIgnoreEnd
-     */
-
     /**
-     * Set cURL adapter (the only type that supports ParallelExecution).
+     * Set cURL adapter (the only type that supports ParallelExecution)
+     * if $this->client uses another adapter.
      */
     protected function initPluginType()
     {
-        $this->client->setAdapter(new Curl());
+        $adapter = $this->client->getAdapter();
+
+        if (!($adapter instanceof Curl)) {
+            $curlAdapter = new Curl();
+
+            if ($adapter instanceof TimeoutAwareInterface) {
+                $curlAdapter->setTimeout($adapter->getTimeout());
+            }
+
+            if ($adapter instanceof ConnectionTimeoutAwareInterface) {
+                $curlAdapter->setConnectionTimeout($adapter->getConnectionTimeout());
+            }
+
+            $this->client->setAdapter($curlAdapter);
+        }
     }
 }

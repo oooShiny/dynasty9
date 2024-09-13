@@ -2,34 +2,39 @@
 
 namespace Drupal\simple_sitemap\Queue;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Queue\DatabaseQueue;
-use Drupal\Component\Datetime\Time;
 
 /**
- * Class SimplesitemapQueue
- * @package Drupal\simple_sitemap\Queue
+ * Defines a Simple XML Sitemap queue handler.
  */
-class SimplesitemapQueue extends DatabaseQueue {
+class SimpleSitemapQueue extends DatabaseQueue {
 
   /**
-   * @var \Drupal\Component\Datetime\Time
+   * The time service.
+   *
+   * @var \Drupal\Component\Datetime\TimeInterface
    */
   protected $time;
 
   /**
-   * SimplesitemapQueue constructor.
-   * @param $name
+   * SimpleSitemapQueue constructor.
+   *
+   * @param string $name
+   *   The name of the queue.
    * @param \Drupal\Core\Database\Connection $connection
-   * @param \Drupal\Component\Datetime\Time $time
+   *   The Connection object containing the key-value tables.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
    */
-  public function __construct($name, Connection $connection, Time $time) {
+  public function __construct($name, Connection $connection, TimeInterface $time) {
     parent::__construct($name, $connection);
     $this->time = $time;
   }
 
   /**
-   * Overrides \Drupal\Core\Queue\DatabaseQueue::claimItem().
+   * {@inheritdoc}
    *
    * Unlike \Drupal\Core\Queue\DatabaseQueue::claimItem(), this method provides
    * a default lease time of 0 (no expiration) instead of 30. This allows the
@@ -39,7 +44,7 @@ class SimplesitemapQueue extends DatabaseQueue {
     try {
       $item = $this->connection->queryRange('SELECT data, item_id FROM {queue} q WHERE name = :name ORDER BY item_id ASC', 0, 1, [':name' => $this->name])->fetchObject();
       if ($item) {
-        $item->data = unserialize($item->data);
+        $item->data = unserialize($item->data, ['allowed_classes' => FALSE]);
         return $item;
       }
     }
@@ -59,13 +64,15 @@ class SimplesitemapQueue extends DatabaseQueue {
    *   - item_id: the unique ID returned from createItem().
    *   - created: timestamp when the item was put into the queue.
    *
+   * @throws \Exception
+   *
    * @see \Drupal\Core\Queue\QueueInterface::claimItem
    */
-  public function yieldItem() {
+  public function yieldItem(): \Generator {
     try {
       $query = $this->connection->query('SELECT data, item_id FROM {queue} q WHERE name = :name ORDER BY item_id ASC', [':name' => $this->name]);
       while ($item = $query->fetchObject()) {
-        $item->data = unserialize($item->data);
+        $item->data = unserialize($item->data, ['allowed_classes' => FALSE]);
         yield $item;
       }
     }
@@ -74,6 +81,16 @@ class SimplesitemapQueue extends DatabaseQueue {
     }
   }
 
+  /**
+   * Adds a queue items and store it directly to the queue.
+   *
+   * @param mixed $data_sets
+   *   Datasets to process.
+   *
+   * @return int|bool
+   *   A unique ID if the item was successfully created and was (best effort)
+   *   added to the queue, otherwise FALSE.
+   */
   public function createItems($data_sets) {
     $try_again = FALSE;
     try {
@@ -95,11 +112,21 @@ class SimplesitemapQueue extends DatabaseQueue {
     return $id;
   }
 
+  /**
+   * Adds a queue items and store it directly to the queue.
+   *
+   * @param mixed $data_sets
+   *   Datasets to process.
+   *
+   * @return int|bool
+   *   A unique ID if the item was successfully created and was (best effort)
+   *   added to the queue, otherwise FALSE.
+   */
   protected function doCreateItems($data_sets) {
     $query = $this->connection->insert(static::TABLE_NAME)
       ->fields(['name', 'data', 'created']);
 
-    foreach ($data_sets as $i => $data) {
+    foreach ($data_sets as $data) {
       $query->values([
         $this->name,
         serialize($data),
@@ -110,7 +137,13 @@ class SimplesitemapQueue extends DatabaseQueue {
     return $query->execute();
   }
 
-  public function deleteItems($item_ids) {
+  /**
+   * Deletes a finished items from the queue.
+   *
+   * @param mixed $item_ids
+   *   Item IDs to delete.
+   */
+  public function deleteItems($item_ids): void {
     try {
       $this->connection->delete(static::TABLE_NAME)
         ->condition('item_id', $item_ids, 'IN')

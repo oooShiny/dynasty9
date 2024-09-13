@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\responsive_image\Functional;
 
 use Drupal\field\Entity\FieldConfig;
@@ -47,8 +49,8 @@ class ViewsIntegrationTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->enableViewsTestModule();
 
@@ -93,7 +95,7 @@ class ViewsIntegrationTest extends ViewTestBase {
   /**
    * Tests integration with Views.
    */
-  public function testViewsAddResponsiveImageField() {
+  public function testViewsAddResponsiveImageField(): void {
     // Add the image field to the View.
     $this->drupalGet('admin/structure/views/nojs/add-handler/entity_test_row/default/field');
     $this->drupalGet('admin/structure/views/nojs/add-handler/entity_test_row/default/field');

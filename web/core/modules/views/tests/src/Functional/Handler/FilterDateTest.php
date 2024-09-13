@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Functional\Handler;
 
 use Drupal\field\Entity\FieldConfig;
@@ -34,7 +36,7 @@ class FilterDateTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'starterkit_theme';
 
   /**
    * The date formatter.
@@ -43,8 +45,21 @@ class FilterDateTest extends ViewTestBase {
    */
   public $dateFormatter;
 
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  /**
+   * @var array
+   */
+  protected array $nodes;
+
+  /**
+   * @var array
+   */
+  protected array $map;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
     $this->dateFormatter = $this->container->get('date.formatter');
 
     // Add a date field so we can test datetime handling.
@@ -84,7 +99,7 @@ class FilterDateTest extends ViewTestBase {
   /**
    * Runs other test methods.
    */
-  public function testDateFilter() {
+  public function testDateFilter(): void {
     $this->_testOffset();
     $this->_testBetween();
     $this->_testUiValidation();
@@ -328,7 +343,7 @@ class FilterDateTest extends ViewTestBase {
   /**
    * Tests that the exposed date filter is displayed without errors.
    */
-  public function testExposedFilter() {
+  public function testExposedFilter(): void {
     $this->drupalLogin($this->drupalCreateUser(['administer views']));
     $this->drupalGet('admin/structure/views/nojs/handler/test_filter_date_between/default/filter/created');
     $this->submitForm([], 'Expose filter');

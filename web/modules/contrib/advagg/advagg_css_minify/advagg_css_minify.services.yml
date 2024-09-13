@@ -4,7 +4,7 @@ services:
     arguments: ['advagg_css_minify']
   advagg.css_minifier:
     class: Drupal\advagg_css_minify\Asset\CssMinifier
-    arguments: [ '@logger.channel.advagg_css_minify',  '@config.factory' ]
+    arguments: [ '@logger.channel.advagg_css_minify',  '@file_url_generator', '@config.factory', '@extension.list.module']
   advagg.css_subscriber:
     class: Drupal\advagg_css_minify\EventSubscriber\MinificationSubscriber
     tags:

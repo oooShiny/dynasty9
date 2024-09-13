@@ -65,7 +65,7 @@ class IndexChangesTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->installSchema('search_api', [
@@ -197,9 +197,7 @@ class IndexChangesTest extends KernelTestBase {
       ->get('search_api.plugin_helper')
       ->createProcessorPlugin($this->index, 'search_api_test');
     $this->index->addProcessor($processor);
-    $this->setMethodOverride('processor', 'supportsIndex', function (IndexInterface $index) {
-      return in_array('entity:entity_test_mulrev_changed', $index->getDatasourceIds());
-    });
+    $this->setMethodOverride('processor', 'supportsIndex', [$this, 'supportsIndexOverride']);
 
     $this->index->save();
 
@@ -264,6 +262,23 @@ class IndexChangesTest extends KernelTestBase {
     sort($indexed_items);
     $this->assertEquals($expected, $indexed_items);
     $this->assertEquals(0, $tracker->getRemainingItemsCount());
+  }
+
+  /**
+   * Provides a custom implementation of ProcessorInterface::supportsIndex().
+   *
+   * Checks whether the processor is applicable for a certain index.
+   *
+   * @param \Drupal\search_api\IndexInterface $index
+   *   The index to check for.
+   *
+   * @return bool
+   *   TRUE if the processor can run on the given index; FALSE otherwise.
+   *
+   * @see \Drupal\search_api\Processor\ProcessorInterface::supportsIndex()
+   */
+  public function supportsIndexOverride(IndexInterface $index): bool {
+    return in_array('entity:entity_test_mulrev_changed', $index->getDatasourceIds());
   }
 
   /**

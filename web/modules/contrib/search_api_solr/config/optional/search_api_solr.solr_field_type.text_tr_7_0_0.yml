@@ -16,6 +16,7 @@ field_type:
   name: text_tr
   class: solr.TextField
   positionIncrementGap: 100
+  storeOffsetsWithPositions: true
   analyzers:
     -
       type: index
@@ -24,7 +25,7 @@ field_type:
           class: solr.MappingCharFilterFactory
           mapping: accents_tr.txt
       tokenizer:
-        class: solr.WhitespaceTokenizerFactory
+        class: solr.StandardTokenizerFactory
       filters:
         -
           class: solr.ApostropheFilterFactory
@@ -57,7 +58,7 @@ field_type:
           class: solr.MappingCharFilterFactory
           mapping: accents_tr.txt
       tokenizer:
-        class: solr.WhitespaceTokenizerFactory
+        class: solr.StandardTokenizerFactory
       filters:
         -
           class: solr.ApostropheFilterFactory
@@ -92,6 +93,7 @@ unstemmed_field_type:
   name: text_unstemmed_tr
   class: solr.TextField
   positionIncrementGap: 100
+  storeOffsetsWithPositions: true
   analyzers:
     -
       type: index
@@ -100,7 +102,7 @@ unstemmed_field_type:
           class: solr.MappingCharFilterFactory
           mapping: accents_tr.txt
       tokenizer:
-        class: solr.WhitespaceTokenizerFactory
+        class: solr.StandardTokenizerFactory
       filters:
         -
           class: solr.ApostropheFilterFactory
@@ -130,7 +132,7 @@ unstemmed_field_type:
           class: solr.MappingCharFilterFactory
           mapping: accents_tr.txt
       tokenizer:
-        class: solr.WhitespaceTokenizerFactory
+        class: solr.StandardTokenizerFactory
       filters:
         -
           class: solr.ApostropheFilterFactory
@@ -162,13 +164,14 @@ spellcheck_field_type:
   name: text_spell_tr
   class: solr.TextField
   positionIncrementGap: 100
+  storeOffsetsWithPositions: true
   analyzer:
     charFilters:
       -
         class: solr.MappingCharFilterFactory
         mapping: accents_tr.txt
     tokenizer:
-      class: solr.WhitespaceTokenizerFactory
+      class: solr.StandardTokenizerFactory
     filters:
       -
         class: solr.LengthFilterFactory
@@ -242,6 +245,9 @@ solr_configs:
               name: name
               VALUE: tr
             -
+              name: indexPath
+              VALUE: ./tr
+            -
               name: lookupImpl
               VALUE: AnalyzingInfixLookupFactory
             -
@@ -258,7 +264,7 @@ solr_configs:
               VALUE: sm_context_tags
             -
               name: buildOnCommit
-              VALUE: 'true'
+              VALUE: 'false'
             -
               name: buildOnStartup
               VALUE: 'false'
@@ -529,3 +535,24 @@ text_files:
     "\uFB05" => "st"
     # ﬆ => st
     "\uFB06" => "st"
+    # Māori macrons.
+    # Ā => A
+    "\u0100" => "A"
+    # Ē => E
+    "\u0112" => "E"
+    # Ī => I
+    "\u012A" => "I"
+    # Ō => O
+    "\u014C" => "O"
+    # Ū => U
+    "\u016A" => "U"
+    # ā => a
+    "\u0101" => "a"
+    # ē => e
+    "\u0113" => "e"
+    # ī => i
+    "\u012B" => "i"
+    # ō => o
+    "\u014D" => "o"
+    # ū => u
+    "\u016B" => "u"

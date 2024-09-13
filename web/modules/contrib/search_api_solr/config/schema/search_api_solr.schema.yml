@@ -13,6 +13,9 @@ search_api.index.*.third_party.search_api_solr:
     commit_after_finalize:
       type: boolean
       label: 'Wait for commit after last finalization'
+    debug_finalize:
+      type: boolean
+      label: 'Log debug messages for finalization'
     highlighter:
       type: mapping
       label: 'highlighter settings'
@@ -103,6 +106,9 @@ search_api.index.*.third_party.search_api_solr:
         fuzzy:
           type: integer
           label: 'Damerau-Levenshtein Distance or Edit Distance for fuzzy searches.'
+        fuzzy_analyzer:
+          type: boolean
+          label: 'Run analyzers in parallel to fuzzy searches.'
     advanced:
       type: mapping
       label: 'advanced settings'
@@ -126,7 +132,17 @@ search_api.index.*.third_party.search_api_solr:
         include_language_independent:
           type: boolean
           label: 'Include languages independent content in search results'
-
+        use_language_undefined_as_fallback_language:
+          type: boolean
+          label: 'Index language fallback fulltext fields using "language undefined"'
+        specific_languages:
+          type: sequence
+          label: 'Specific Languages'
+          sequence:
+            type: string
+        use_universal_collation:
+          type: boolean
+          label: 'Use universal UTF-8 collation'
 search_api_solr.solr_configs:
   type: mapping
   mapping:
@@ -178,3 +194,31 @@ search_api_solr.scalar_values:
       VALUE:
         type: string
         label: 'property value'
+
+field.formatter.settings.solr_highlighted_string:
+  type: mapping
+  label: 'Highlighted plain text (Search API Solr)'
+  mapping:
+    prefix:
+      type: string
+      label: 'Prefix'
+    suffix:
+      type: string
+      label: 'Suffix'
+    strict:
+      type: boolean
+      label: 'Strict'
+
+field.formatter.settings.solr_highlighted_text_default:
+  type: mapping
+  label: 'Highlighted text (Search API Solr)'
+  mapping:
+    prefix:
+      type: string
+      label: 'Prefix'
+    suffix:
+      type: string
+      label: 'Suffix'
+    strict:
+      type: boolean
+      label: 'Strict'

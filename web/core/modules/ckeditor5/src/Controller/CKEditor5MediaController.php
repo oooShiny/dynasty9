@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ckeditor5\Controller;
 
+use Drupal\Component\Uuid\Uuid;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Controller\ControllerBase;
@@ -12,7 +13,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\editor\Entity\Editor;
 use Drupal\image\Plugin\Field\FieldType\ImageItem;
 use Drupal\media\MediaInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -65,18 +65,7 @@ class CKEditor5MediaController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('current_user'),
-      $container->get('entity.repository'),
-      $container->get('request_stack')
-    );
-  }
-
-  /**
-   * Checks if media has a image field.
+   * Returns JSON response containing metadata about media entity.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request object.
@@ -89,9 +78,9 @@ class CKEditor5MediaController extends ControllerBase {
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    *   Thrown when no media with the provided UUID exists.
    */
-  public function isMediaImage(Request $request) {
+  public function mediaEntityMetadata(Request $request) {
     $uuid = $request->query->get('uuid');
-    if ($uuid == '') {
+    if (!$uuid || !Uuid::isValid($uuid)) {
       throw new BadRequestHttpException();
     }
     // Access is enforced on route level.
@@ -99,13 +88,28 @@ class CKEditor5MediaController extends ControllerBase {
     if (!$media = $this->entityRepository->loadEntityByUuid('media', $uuid)) {
       throw new NotFoundHttpException();
     }
+    $image_field = $this->getMediaImageSourceFieldName($media);
+    $response = [];
+    $response['type'] = $media->bundle();
+    // If this uses the image media source and the "alt" field is enabled,
+    // expose additional metadata.
+    // @see \Drupal\media\Plugin\media\Source\Image
+    // @see core/modules/ckeditor5/js/ckeditor5_plugins/drupalMedia/src/mediaimagetextalternative/mediaimagetextalternativeui.js
+    if ($image_field) {
+      $settings = $media->{$image_field}->getItemDefinition()->getSettings();
+      if (!empty($settings['alt_field'])) {
+        $response['imageSourceMetadata'] = [
+          'alt' => $this->entityRepository->getTranslationFromContext($media)->{$image_field}->alt,
+        ];
+      }
+    }
 
     // Note that we intentionally do not use:
     // - \Drupal\Core\Cache\CacheableResponse because caching it on the server
     //   side is wasteful, hence there is no need for cacheability metadata.
     // - \Drupal\Core\Render\HtmlResponse because there is no need for
     //   attachments nor cacheability metadata.
-    return (new JsonResponse($this->hasImageField($media), 200))
+    return (new JsonResponse($response, 200))
       // Do not allow any intermediary to cache the response, only the end user.
       ->setPrivate()
       // Allow the end user to cache it for up to 5 minutes.
@@ -140,7 +144,7 @@ class CKEditor5MediaController extends ControllerBase {
     // https://www.drupal.org/project/drupal/issues/2786941 has been resolved.
     $request = $this->requestStack->getCurrentRequest();
     $uuid = $request->query->get('uuid');
-    if (!$uuid) {
+    if (!$uuid || !Uuid::isValid($uuid)) {
       throw new BadRequestHttpException();
     }
     $media = $this->entityRepository->loadEntityByUuid('media', $uuid);
@@ -155,24 +159,23 @@ class CKEditor5MediaController extends ControllerBase {
   }
 
   /**
-   * Check if the media type of the entity has a image field.
+   * Gets the name of an image media item's source field.
    *
    * @param \Drupal\media\MediaInterface $media
    *   The media item being embedded.
    *
-   * @return bool
-   *   Flag indicating whether the media type has image field or not.
-   *
-   * @see \Drupal\media\Form\EditorMediaDialog::getMediaImageSourceFieldName()
+   * @return string|null
+   *   The name of the image source field configured for the media item, or
+   *   NULL if the source field is not an image field.
    */
-  protected function hasImageField(MediaInterface $media) {
+  protected function getMediaImageSourceFieldName(MediaInterface $media) {
     $field_definition = $media->getSource()
       ->getSourceFieldDefinition($media->bundle->entity);
     $item_class = $field_definition->getItemDefinition()->getClass();
     if (is_a($item_class, ImageItem::class, TRUE)) {
-      return TRUE;
+      return $field_definition->getName();
     }
-    return FALSE;
+    return NULL;
   }
 
 }

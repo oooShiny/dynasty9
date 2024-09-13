@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\field\Entity\FieldConfig;
@@ -12,6 +14,7 @@ use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
  * Ensures that node type functions work correctly.
  *
  * @group node
+ * @group #slow
  */
 class NodeTypeTest extends NodeTestBase {
 
@@ -28,14 +31,14 @@ class NodeTypeTest extends NodeTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * Ensures that node type functions (node_type_get_*) work correctly.
    *
    * Load available node types and validate the returned data.
    */
-  public function testNodeTypeGetFunctions() {
+  public function testNodeTypeGetFunctions(): void {
     $node_types = NodeType::loadMultiple();
     $node_names = node_type_get_names();
 
@@ -52,7 +55,7 @@ class NodeTypeTest extends NodeTestBase {
   /**
    * Tests creating a content type programmatically and via a form.
    */
-  public function testNodeTypeCreation() {
+  public function testNodeTypeCreation(): void {
     // Create a content type programmatically.
     $type = $this->drupalCreateContentType();
 
@@ -78,7 +81,7 @@ class NodeTypeTest extends NodeTestBase {
     $this->drupalGet('node/add');
     $this->assertSession()->responseHeaderContains('X-Drupal-Cache-Tags', 'config:node_type_list');
     $this->assertCacheContext('user.permissions');
-    $elements = $this->cssSelect('dl.node-type-list dt');
+    $elements = $this->cssSelect('dl dt');
     $this->assertCount(3, $elements);
 
     $edit = [
@@ -88,18 +91,22 @@ class NodeTypeTest extends NodeTestBase {
     ];
     $this->drupalGet('admin/structure/types/add');
     $this->submitForm($edit, 'Save and manage fields');
+
+    // Asserts that form submit redirects to the expected manage fields page.
+    $this->assertSession()->addressEquals('admin/structure/types/manage/' . $edit['name'] . '/fields');
+
     $type_exists = (bool) NodeType::load('foo');
     $this->assertTrue($type_exists, 'The new content type has been created in the database.');
 
     $this->drupalGet('node/add');
-    $elements = $this->cssSelect('dl.node-type-list dt');
+    $elements = $this->cssSelect('dl dt');
     $this->assertCount(4, $elements);
   }
 
   /**
    * Tests editing a node type using the UI.
    */
-  public function testNodeTypeEditing() {
+  public function testNodeTypeEditing(): void {
     $assert = $this->assertSession();
     $this->drupalPlaceBlock('system_breadcrumb_block');
     $web_user = $this->drupalCreateUser([
@@ -122,7 +129,7 @@ class NodeTypeTest extends NodeTestBase {
       'title_label' => 'Foo',
     ];
     $this->drupalGet('admin/structure/types/manage/page');
-    $this->submitForm($edit, 'Save content type');
+    $this->submitForm($edit, 'Save');
 
     $this->drupalGet('node/add/page');
     $assert->pageTextContains('Foo');
@@ -134,7 +141,7 @@ class NodeTypeTest extends NodeTestBase {
       'description' => 'Lorem ipsum.',
     ];
     $this->drupalGet('admin/structure/types/manage/page');
-    $this->submitForm($edit, 'Save content type');
+    $this->submitForm($edit, 'Save');
 
     $this->drupalGet('node/add');
     $assert->pageTextContains('Bar');
@@ -159,7 +166,7 @@ class NodeTypeTest extends NodeTestBase {
     $this->submitForm([], 'Delete');
     // Resave the settings for this type.
     $this->drupalGet('admin/structure/types/manage/page');
-    $this->submitForm([], 'Save content type');
+    $this->submitForm([], 'Save');
     $front_page_path = Url::fromRoute('<front>')->toString();
     $this->assertBreadcrumb('admin/structure/types/manage/page/fields', [
       $front_page_path => 'Home',
@@ -174,7 +181,7 @@ class NodeTypeTest extends NodeTestBase {
   /**
    * Tests deleting a content type that still has content.
    */
-  public function testNodeTypeDeletion() {
+  public function testNodeTypeDeletion(): void {
     $this->drupalPlaceBlock('page_title_block');
     // Create a content type programmatically.
     $type = $this->drupalCreateContentType();
@@ -206,8 +213,8 @@ class NodeTypeTest extends NodeTestBase {
     $locked = \Drupal::state()->get('node.type.locked');
     $locked['default'] = 'default';
     \Drupal::state()->set('node.type.locked', $locked);
-    // Call to flush all caches after installing the forum module in the same
-    // way installing a module through the UI does.
+    // Call to flush all caches after installing the node_test_config module in
+    // the same way installing a module through the UI does.
     $this->resetAll();
     $this->drupalGet('admin/structure/types/manage/default');
     $this->assertSession()->linkNotExists('Delete');
@@ -225,19 +232,21 @@ class NodeTypeTest extends NodeTestBase {
   }
 
   /**
-   * Tests Field UI integration for content types.
+   * Tests operations from Field UI and User modules for content types.
    */
-  public function testNodeTypeFieldUiPermissions() {
+  public function testNodeTypeOperations(): void {
     // Create an admin user who can only manage node fields.
     $admin_user_1 = $this->drupalCreateUser([
       'administer content types',
       'administer node fields',
+      'administer permissions',
     ]);
     $this->drupalLogin($admin_user_1);
 
     // Test that the user only sees the actions available to them.
     $this->drupalGet('admin/structure/types');
     $this->assertSession()->linkByHrefExists('admin/structure/types/manage/article/fields');
+    $this->assertSession()->linkByHrefExists('admin/structure/types/manage/article/permissions');
     $this->assertSession()->linkByHrefNotExists('admin/structure/types/manage/article/display');
 
     // Create another admin user who can manage node fields display.
@@ -250,13 +259,14 @@ class NodeTypeTest extends NodeTestBase {
     // Test that the user only sees the actions available to them.
     $this->drupalGet('admin/structure/types');
     $this->assertSession()->linkByHrefNotExists('admin/structure/types/manage/article/fields');
+    $this->assertSession()->linkByHrefNotExists('admin/structure/types/manage/article/permissions');
     $this->assertSession()->linkByHrefExists('admin/structure/types/manage/article/display');
   }
 
   /**
    * Tests for when there are no content types defined.
    */
-  public function testNodeTypeNoContentType() {
+  public function testNodeTypeNoContentType(): void {
     /** @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundle_info */
     $bundle_info = \Drupal::service('entity_type.bundle.info');
     $this->assertCount(2, $bundle_info->getBundleInfo('node'), 'The bundle information service has 2 bundles for the Node entity type.');

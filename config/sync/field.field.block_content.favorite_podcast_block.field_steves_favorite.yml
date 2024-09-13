@@ -10,7 +10,7 @@ id: block_content.favorite_podcast_block.field_steves_favorite
 field_name: field_steves_favorite
 entity_type: block_content
 bundle: favorite_podcast_block
-label: 'Steve''s Favorite'
+label: "Steve's Favorite"
 description: ''
 required: false
 translatable: false

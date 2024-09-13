@@ -22,12 +22,14 @@ use Solarium\Exception\RuntimeException;
  *
  * @author Intervals <info@myintervals.com>
  */
-class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterface
+class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterface, ConnectionTimeoutAwareInterface, ProxyAwareInterface
 {
     use TimeoutAwareTrait;
+    use ConnectionTimeoutAwareTrait;
+    use ProxyAwareTrait;
 
     /**
-     * Execute a Solr request using the cURL Http.
+     * Execute a Solr request using the cURL library.
      *
      * @param Request  $request
      * @param Endpoint $endpoint
@@ -42,27 +44,29 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
     /**
      * Get the response for a cURL handle.
      *
-     * @param resource $handle
-     * @param string   $httpResponse
+     * @param \CurlHandle  $handle
+     * @param string|false $httpResponse
+     *
+     * @throws HttpException
      *
      * @return Response
      */
-    public function getResponse($handle, $httpResponse): Response
+    public function getResponse(\CurlHandle $handle, $httpResponse): Response
     {
-        if (false !== $httpResponse && null !== $httpResponse) {
-            $data = $httpResponse;
-            $info = curl_getinfo($handle);
-            $headers = [];
-            $headers[] = 'HTTP/1.1 '.$info['http_code'].' OK';
-        } else {
-            $headers = [];
-            $data = '';
+        if (CURLE_OK !== curl_errno($handle)) {
+            $errno = curl_errno($handle);
+            $error = curl_error($handle);
+            curl_close($handle);
+            throw new HttpException(sprintf('HTTP request failed, %s', $error), $errno);
         }
 
-        $this->check($data, $headers, $handle);
+        $httpCode = curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
+        $headers = [];
+        $headers[] = 'HTTP/1.1 '.$httpCode.' OK';
+
         curl_close($handle);
 
-        return new Response($data, $headers);
+        return new Response($httpResponse, $headers);
     }
 
     /**
@@ -73,9 +77,9 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
      *
      * @throws InvalidArgumentException
      *
-     * @return resource|\CurlHandle
+     * @return \CurlHandle
      */
-    public function createHandle($request, $endpoint)
+    public function createHandle(Request $request, Endpoint $endpoint): \CurlHandle
     {
         $uri = AdapterHelper::buildUri($request, $endpoint);
 
@@ -84,25 +88,15 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
 
         $handler = curl_init();
         curl_setopt($handler, CURLOPT_URL, $uri);
-        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, $options['return_transfer']);
         if (!(\function_exists('ini_get') && ini_get('open_basedir'))) {
             curl_setopt($handler, CURLOPT_FOLLOWLOCATION, true);
         }
         curl_setopt($handler, CURLOPT_TIMEOUT, $options['timeout']);
-        curl_setopt($handler, CURLOPT_CONNECTTIMEOUT, $options['timeout']);
+        curl_setopt($handler, CURLOPT_CONNECTTIMEOUT, $options['connection_timeout']);
 
-        if (null !== ($proxy = $this->getOption('proxy'))) {
-            curl_setopt($handler, CURLOPT_PROXY, $proxy);
-        }
-
-        if (!isset($options['headers']['Content-Type'])) {
-            $charset = $request->getParam('ie') ?? 'utf-8';
-
-            if (Request::METHOD_GET === $method) {
-                $options['headers']['Content-Type'] = 'application/x-www-form-urlencoded; charset='.$charset;
-            } else {
-                $options['headers']['Content-Type'] = 'application/xml; charset='.$charset;
-            }
+        if (null !== $options['proxy']) {
+            curl_setopt($handler, CURLOPT_PROXY, $options['proxy']);
         }
 
         // Try endpoint authentication first, fallback to request for backwards compatibility
@@ -114,9 +108,16 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
         if (!empty($authData['username']) && !empty($authData['password'])) {
             curl_setopt($handler, CURLOPT_USERPWD, $authData['username'].':'.$authData['password']);
             curl_setopt($handler, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        } elseif (!isset($options['headers']) || !\array_key_exists('Authorization', $options['headers'])) {
+            // According to the specification, only one Authorization header is allowed.
+            // @see https://stackoverflow.com/questions/29282578/multiple-http-authorization-headers
+            $tokenData = $endpoint->getAuthorizationToken();
+            if (!empty($tokenData['tokenname']) && !empty($tokenData['token'])) {
+                $options['headers']['Authorization'] = $tokenData['tokenname'].' '.$tokenData['token'];
+            }
         }
 
-        if (\count($options['headers'])) {
+        if (0 !== \count($options['headers'] ?? [])) {
             $headers = [];
             foreach ($options['headers'] as $key => $value) {
                 $headers[] = $key.': '.$value;
@@ -155,22 +156,14 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
         return $handler;
     }
 
-    /**
-     * Check result of a request.
-     *
-     * @param string   $data
-     * @param array    $headers
-     * @param resource $handle
-     *
-     * @throws HttpException
-     */
-    public function check($data, $headers, $handle): void
+    public function setOption(string $name, $value): Configurable
     {
-        // if there is no data and there are no headers it's a total failure,
-        // a connection to the host was impossible.
-        if (empty($data) && 0 === \count($headers)) {
-            throw new HttpException(sprintf('HTTP request failed, %s', curl_error($handle)));
+        if ('proxy' === $name) {
+            $this->setProxy($value);
+            trigger_error('Setting proxy as an option is deprecated. Use setProxy() instead.', \E_USER_DEPRECATED);
         }
+
+        return parent::setOption($name, $value);
     }
 
     /**
@@ -181,7 +174,7 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
      *
      * @return Response
      */
-    protected function getData($request, $endpoint): Response
+    protected function getData(Request $request, Endpoint $endpoint): Response
     {
         $handle = $this->createHandle($request, $endpoint);
         $httpResponse = curl_exec($handle);
@@ -192,17 +185,23 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
     /**
      * Initialization hook.
      *
-     * Checks the availability of Curl_http
+     * {@internal Check if PHP was compiled with cURL support.
+     *            Check for deprecated use of 'proxy' option.}
      *
      * @throws RuntimeException
      */
     protected function init()
     {
         if (!\function_exists('curl_init')) {
+            // @codeCoverageIgnoreStart
             throw new RuntimeException('cURL is not available, install it to use the CurlHttp adapter');
+            // @codeCoverageIgnoreEnd
         }
 
-        parent::init();
+        if (isset($this->options['proxy'])) {
+            $this->setProxy($this->options['proxy']);
+            trigger_error('Setting proxy as an option is deprecated. Use setProxy() instead.', \E_USER_DEPRECATED);
+        }
     }
 
     /**
@@ -213,14 +212,17 @@ class Curl extends Configurable implements AdapterInterface, TimeoutAwareInterfa
      *
      * @return array
      */
-    protected function createOptions($request, $endpoint)
+    protected function createOptions(Request $request, Endpoint $endpoint): array
     {
-        $options = [
+        $options = $this->options + [
             'timeout' => $this->timeout,
+            'connection_timeout' => $this->connectionTimeout ?? $this->timeout,
+            'proxy' => $this->proxy,
+            'return_transfer' => true,
         ];
         foreach ($request->getHeaders() as $headerLine) {
             list($header, $value) = explode(':', $headerLine);
-            if ($header = trim($header)) {
+            if ('' !== $header = trim($header)) {
                 $options['headers'][$header] = trim($value);
             }
         }

@@ -2,11 +2,13 @@
 
 namespace Drupal\toolbar\Controller;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Menu\MenuTreeParameters;
+use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\toolbar\Ajax\SetSubtreesCommand;
 
@@ -16,12 +18,27 @@ use Drupal\toolbar\Ajax\SetSubtreesCommand;
 class ToolbarController extends ControllerBase implements TrustedCallbackInterface {
 
   /**
+   * Constructs a ToolbarController object.
+   *
+   * @param \Drupal\Component\Datetime\TimeInterface|null $time
+   *   The time service.
+   */
+  public function __construct(
+    protected ?TimeInterface $time = NULL,
+  ) {
+    if ($this->time === NULL) {
+      @trigger_error('Calling ' . __METHOD__ . ' without the $time argument is deprecated in drupal:10.3.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3112298', E_USER_DEPRECATED);
+      $this->time = \Drupal::service('datetime.time');
+    }
+  }
+
+  /**
    * Returns an AJAX response to render the toolbar subtrees.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
    */
   public function subtreesAjax() {
-    [$subtrees, $cacheability] = toolbar_get_rendered_subtrees();
+    [$subtrees] = toolbar_get_rendered_subtrees();
     $response = new AjaxResponse();
     $response->addCommand(new SetSubtreesCommand($subtrees));
 
@@ -34,7 +51,7 @@ class ToolbarController extends ControllerBase implements TrustedCallbackInterfa
     $response->setMaxAge($max_age);
 
     $expires = new \DateTime();
-    $expires->setTimestamp(REQUEST_TIME + $max_age);
+    $expires->setTimestamp($this->time->getRequestTime() + $max_age);
     $response->setExpires($expires);
 
     return $response;
@@ -91,6 +108,7 @@ class ToolbarController extends ControllerBase implements TrustedCallbackInterfa
    */
   public static function preRenderGetRenderedSubtrees(array $data) {
     $menu_tree = \Drupal::service('toolbar.menu_tree');
+    $renderer = \Drupal::service('renderer');
     // Load the administration menu. The first level is the "Administration"
     // link. In order to load the children of that link and the subsequent two
     // levels, start at the second level and end at the fourth.
@@ -106,13 +124,15 @@ class ToolbarController extends ControllerBase implements TrustedCallbackInterfa
     $tree = $menu_tree->transform($tree, $manipulators);
     $subtrees = [];
     // Calculated the combined cacheability of all subtrees.
-    $cacheability = new CacheableMetadata();
+    $cacheability = CacheableMetadata::createFromRenderArray($data);
     foreach ($tree as $element) {
       /** @var \Drupal\Core\Menu\MenuLinkInterface $link */
       $link = $element->link;
       if ($element->subtree) {
         $subtree = $menu_tree->build($element->subtree);
-        $output = \Drupal::service('renderer')->renderPlain($subtree);
+        $output = $renderer->executeInRenderContext(new RenderContext(), function () use ($renderer, $subtree) {
+          return $renderer->render($subtree);
+        });
         $cacheability = $cacheability->merge(CacheableMetadata::createFromRenderArray($subtree));
       }
       else {

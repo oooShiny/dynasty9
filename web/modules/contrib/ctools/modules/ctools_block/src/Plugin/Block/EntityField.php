@@ -108,7 +108,7 @@ class EntityField extends BlockBase implements ContextAwarePluginInterface, Cont
     $this->formatterManager = $formatter_manager;
 
     // Get the entity type and field name from the plugin id.
-    list (, $entity_type_id, $field_name) = explode(':', $plugin_id);
+    [, $entity_type_id, $field_name] = explode(':', $plugin_id);
     $this->entityTypeId = $entity_type_id;
     $this->fieldName = $field_name;
 
@@ -137,10 +137,13 @@ class EntityField extends BlockBase implements ContextAwarePluginInterface, Cont
     /** @var \Drupal\Core\Entity\FieldableEntityInterface $entity */
     $entity = $this->getContextValue('entity');
     $build = [];
-    /** @var \Drupal\Core\Field\FieldItemListInterface $field */
-    $field = $entity->{$this->fieldName};
-    $display_settings = $this->getConfiguration()['formatter'];
-    $build['field'] = $field->view($display_settings);
+
+    if ($entity->hasField($this->fieldName)) {
+      /** @var \Drupal\Core\Field\FieldItemListInterface $field */
+      $field = $entity->{$this->fieldName};
+      $display_settings = $this->getConfiguration()['formatter'];
+      $build['field'] = $field->view($display_settings);
+    }
 
     // Set the cache data appropriately.
     $build['#cache']['contexts'] = $this->getCacheContexts();
@@ -190,7 +193,7 @@ class EntityField extends BlockBase implements ContextAwarePluginInterface, Cont
     return [
       'formatter' => [
         'label' => 'above',
-        'type' => isset($field_type_definition['default_formatter']) ? $field_type_definition['default_formatter'] : '',
+        'type' => $field_type_definition['default_formatter'] ?? '',
         'settings' => [],
         'third_party_settings' => [],
         'weight' => 0,
@@ -316,7 +319,12 @@ class EntityField extends BlockBase implements ContextAwarePluginInterface, Cont
    */
   protected function getFieldStorageDefinition() {
     if (empty($this->fieldStorageDefinition)) {
-      $field_definitions = $this->entityFieldManager->getFieldStorageDefinitions($this->entityTypeId);
+      // Some base fields have no storage.
+      $field_definitions = array_merge(
+        $this->entityFieldManager->getBaseFieldDefinitions($this->entityTypeId),
+        $this->entityFieldManager->getFieldStorageDefinitions($this->entityTypeId)
+      );
+
       $this->fieldStorageDefinition = $field_definitions[$this->fieldName];
     }
     return $this->fieldStorageDefinition;
@@ -371,7 +379,7 @@ class EntityField extends BlockBase implements ContextAwarePluginInterface, Cont
   /**
    * {@inheritdoc}
    */
-  public function __wakeup() {
+  public function __wakeup(): void {
     parent::__wakeup();
     // @todo figure out why this happens.
     // prevent $fieldStorageDefinition being erroneously set to $this.

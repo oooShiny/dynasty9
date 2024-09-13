@@ -11,6 +11,8 @@ id: td_scored
 name: 'TD Scored'
 weight: -1
 min_count: 1
+missing: false
+missing_label: others
 url_alias: td_scored
 facet_source_id: 'search_api:views_page__highlight_search__page_1'
 field_identifier: td_scored

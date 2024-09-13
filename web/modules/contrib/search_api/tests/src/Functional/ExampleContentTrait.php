@@ -42,6 +42,7 @@ trait ExampleContentTrait {
       'name' => 'foo bar baz foobaz föö smile' . $smiley,
       'body' => 'test test case Case casE',
       'type' => 'item',
+      // cspell:disable-next-line
       'keywords' => ['Orange', 'orange', 'örange', 'Orange', $smiley],
       'category' => 'item_category',
     ]);
@@ -74,8 +75,8 @@ trait ExampleContentTrait {
       'width' => '2.0',
     ]);
     $count = \Drupal::entityQuery('entity_test_mulrev_changed')
-      ->accessCheck(FALSE)
       ->count()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertEquals(5, $count, "$count items inserted.");
   }

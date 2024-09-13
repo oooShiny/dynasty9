@@ -115,6 +115,9 @@ class LogEntry {
       $message = t($message, $variables);
     }
 
+    if (!empty($this->message)) {
+      $message = '<br/>' . $message;
+    }
     $this->message .= $message;
     if ($this->severity < 0 || $this->severity > $level) {
       $this->severity = $level;

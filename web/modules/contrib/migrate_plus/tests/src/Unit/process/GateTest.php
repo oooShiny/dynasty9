@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Unit\process;
 
-use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Row;
 use Drupal\migrate_plus\Plugin\migrate\process\Gate;
@@ -14,7 +15,7 @@ use Drupal\Tests\migrate\Unit\process\MigrateProcessTestCase;
  * @group migrate
  * @coversDefaultClass \Drupal\migrate_plus\Plugin\migrate\process\Gate
  */
-class GateTest extends MigrateProcessTestCase {
+final class GateTest extends MigrateProcessTestCase {
 
   /**
    * Test Gate plugin.
@@ -42,10 +43,8 @@ class GateTest extends MigrateProcessTestCase {
 
   /**
    * Row and plugin configuration for tests.
-   *
-   * @return array
    */
-  public function gateProvider() {
+  public static function gateProvider(): array {
     return [
       'Gate does not unlock' => [
         [
@@ -155,19 +154,16 @@ class GateTest extends MigrateProcessTestCase {
    *
    * @dataProvider badConfigurationProvider
    */
-  public function testGateBadConfigration($configuration, $message): void {
-    $this->expectException(MigrateException::class);
+  public function testGateBadConfiguration($configuration, string $message): void {
+    $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage($message);
-    $plugin = new Gate($configuration, 'gate', []);
-    $plugin->transform(NULL, $this->migrateExecutable, $this->row, 'destinationproperty');
+    new Gate($configuration, 'gate', []);
   }
 
   /**
    * Provider for bad configuration.
-   *
-   * @return array
    */
-  public function badConfigurationProvider() {
+  public static function badConfigurationProvider(): array {
     return [
       'Missing use_as_key' => [
         [
@@ -204,4 +200,5 @@ class GateTest extends MigrateProcessTestCase {
       ],
     ];
   }
+
 }

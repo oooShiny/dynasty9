@@ -51,6 +51,24 @@ abstract class AbstractResponseParser
     }
 
     /**
+     * Converts a flat key-value array (alternating rows) as used in Solr JSON results to a numerically indexed value array, disregarding keys.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function convertToValueArray(array $data): array
+    {
+        $dataCount = \count($data);
+        $result = [];
+        for ($i = 0; $i < $dataCount; $i += 2) {
+            $result[] = $data[$i + 1];
+        }
+
+        return $result;
+    }
+
+    /**
      * Parses HTTP status code and adds boolean wasSuccessful to result data.
      * Parses HTTP status message and adds string statusMessage to result data.
      *
@@ -65,29 +83,5 @@ abstract class AbstractResponseParser
         $data['statusMessage'] = $result->getResponse()->getStatusMessage();
 
         return $data;
-    }
-
-    /**
-     * Parses header data (if available) and adds it to result data.
-     *
-     * @param array $data
-     * @param array $result
-     *
-     * @return array
-     */
-    public function addHeaderInfo(array $data, array $result): array
-    {
-        $status = null;
-        $queryTime = null;
-
-        if (isset($data['responseHeader'])) {
-            $status = $data['responseHeader']['status'];
-            $queryTime = $data['responseHeader']['QTime'];
-        }
-
-        $result['status'] = $status;
-        $result['queryTime'] = $queryTime;
-
-        return $result;
     }
 }

@@ -25,9 +25,8 @@ QuicklinkExists = function () {
   this.command = function (callback) {
     const self = this;
     return this.api.execute(function () {
-      return typeof quicklink === "function";
+      return typeof quicklink === "object";
     }, [], function (result) {
-      console.log(result);
       callback.call(self, result)
     });
   }

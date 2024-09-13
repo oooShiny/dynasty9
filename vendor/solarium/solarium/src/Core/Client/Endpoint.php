@@ -30,6 +30,7 @@ class Endpoint extends Configurable
         'host' => '127.0.0.1',
         'port' => 8983,
         'path' => '/',
+        'context' => 'solr',
         'collection' => null,
         'core' => null,
         'leader' => false,
@@ -45,7 +46,7 @@ class Endpoint extends Configurable
      */
     public function __toString()
     {
-        $output = __CLASS__.'::__toString'."\n".'host: '.$this->getHost()."\n".'port: '.$this->getPort()."\n".'path: '.$this->getPath()."\n".'collection: '.$this->getCollection()."\n".'core: '.$this->getCore()."\n".'authentication: '.print_r($this->getAuthentication(), true);
+        $output = __CLASS__.'::__toString'."\n".'host: '.$this->getHost()."\n".'port: '.$this->getPort()."\n".'path: '.$this->getPath()."\n".'context: '.$this->getContext()."\n".'collection: '.$this->getCollection()."\n".'core: '.$this->getCore()."\n".'authentication: '.print_r($this->getAuthentication() + $this->getAuthorizationToken(), true);
 
         return $output;
     }
@@ -133,11 +134,7 @@ class Endpoint extends Configurable
      */
     public function setPath(string $path): self
     {
-        if ('/' === substr($path, -1)) {
-            $path = substr($path, 0, -1);
-        }
-
-        $this->setOption('path', $path);
+        $this->setOption('path', rtrim($path, '/'));
 
         return $this;
     }
@@ -150,6 +147,32 @@ class Endpoint extends Configurable
     public function getPath(): ?string
     {
         return $this->getOption('path');
+    }
+
+    /**
+     * Set context option.
+     *
+     * If the context has a leading or trailing slash it will be removed.
+     *
+     * @param string $context
+     *
+     * @return self Provides fluent interface
+     */
+    public function setContext(string $context): self
+    {
+        $this->setOption('context', trim($context, '/'));
+
+        return $this;
+    }
+
+    /**
+     * Get context option.
+     *
+     * @return string|null
+     */
+    public function getContext(): ?string
+    {
+        return $this->getOption('context');
     }
 
     /**
@@ -236,10 +259,11 @@ class Endpoint extends Configurable
     public function getCollectionBaseUri(): string
     {
         $uri = $this->getServerUri();
+        $context = $this->getContext();
         $collection = $this->getCollection();
 
         if ($collection) {
-            $uri .= 'solr/'.$collection.'/';
+            $uri .= $context.'/'.$collection.'/';
         } else {
             throw new UnexpectedValueException('No collection set.');
         }
@@ -259,11 +283,12 @@ class Endpoint extends Configurable
     public function getCoreBaseUri(): string
     {
         $uri = $this->getServerUri();
+        $context = $this->getContext();
         $core = $this->getCore();
 
         if ($core) {
             // V1 API
-            $uri .= 'solr/'.$core.'/';
+            $uri .= $context.'/'.$core.'/';
         } else {
             throw new UnexpectedValueException('No core set.');
         }
@@ -300,7 +325,7 @@ class Endpoint extends Configurable
      */
     public function getV1BaseUri(): string
     {
-        return $this->getServerUri().'solr/';
+        return $this->getServerUri().$this->getContext().'/';
     }
 
     /**
@@ -328,15 +353,16 @@ class Endpoint extends Configurable
     /**
      * Set HTTP basic auth settings.
      *
-     * If one or both values are NULL authentication will be disabled
-     *
      * @param string $username
      * @param string $password
      *
      * @return self Provides fluent interface
      */
-    public function setAuthentication(string $username, string $password): self
-    {
+    public function setAuthentication(
+        string $username,
+        #[\SensitiveParameter]
+        string $password
+    ): self {
         $this->setOption('username', $username);
         $this->setOption('password', $password);
 
@@ -353,6 +379,40 @@ class Endpoint extends Configurable
         return [
             'username' => $this->getOption('username'),
             'password' => $this->getOption('password'),
+        ];
+    }
+
+    /**
+     * Set authorization token.
+     *
+     * Used for JWT or simple token based authorization.
+     *
+     * @param string $tokenname
+     * @param string $token
+     *
+     * @return self Provides fluent interface
+     */
+    public function setAuthorizationToken(
+        string $tokenname,
+        #[\SensitiveParameter]
+        string $token
+    ): self {
+        $this->setOption('tokenname', $tokenname);
+        $this->setOption('token', $token);
+
+        return $this;
+    }
+
+    /**
+     * Get authorization token.
+     *
+     * @return array
+     */
+    public function getAuthorizationToken(): array
+    {
+        return [
+            'tokenname' => $this->getOption('tokenname'),
+            'token' => $this->getOption('token'),
         ];
     }
 
@@ -383,9 +443,11 @@ class Endpoint extends Configurable
     /**
      * Initialization hook.
      *
-     * In this case the path needs to be cleaned of trailing slashes.
+     * The path will be cleaned of trailing slashes.
+     * The context will be cleaned of leading and trailing slashes.
      *
      * @see setPath()
+     * @see setContext()
      */
     protected function init()
     {
@@ -393,6 +455,9 @@ class Endpoint extends Configurable
             switch ($name) {
                 case 'path':
                     $this->setPath($value);
+                    break;
+                case 'context':
+                    $this->setContext($value);
                     break;
             }
         }

@@ -35,7 +35,8 @@ class SearchController extends ControllerBase {
       return new JsonResponse([]);
     }
 
-    $query = \Drupal::entityQuery('node');
+    $query = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE);
     $query->condition('title', $search, 'CONTAINS')
       ->condition('status', 1)
       ->sort('created', 'DESC')

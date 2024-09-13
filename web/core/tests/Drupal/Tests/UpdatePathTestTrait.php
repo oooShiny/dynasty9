@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests;
 
 use Drupal\Core\Database\Database;
@@ -63,6 +65,7 @@ trait UpdatePathTestTrait {
       foreach (['update', 'post_update'] as $update_type) {
         switch ($update_type) {
           case 'update':
+            drupal_load_updates();
             $all_updates = update_get_update_list();
             break;
 

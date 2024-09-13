@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Solarium package.
  *
@@ -10,19 +12,28 @@
 namespace Solarium\Core\Client\Adapter;
 
 /**
- * Contract for Http Adapters that are aware of timeouts.
+ * Contract for Client Adapters that are aware of timeouts.
  */
 interface TimeoutAwareInterface
 {
     /**
-     * default timeout that should be respected by adapters implementing this interface.
+     * Default timeout that should be respected by adapters implementing this interface.
      */
     public const DEFAULT_TIMEOUT = 5;
 
     /**
-     * @param int $timeoutInSeconds
+     * Fast timeout that should be used if the client should not wait for the result.
+     *
+     * @see \Solarium\Plugin\NoWaitForResponseRequest
      */
-    public function setTimeout(int $timeoutInSeconds): void;
+    public const FAST_TIMEOUT = 1;
+
+    /**
+     * @param int $timeoutInSeconds
+     *
+     * @return self Provides fluent interface
+     */
+    public function setTimeout(int $timeoutInSeconds): self;
 
     /**
      * @return int

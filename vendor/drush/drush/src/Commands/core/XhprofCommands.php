@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drush\Commands\core;
 
 use Consolidation\AnnotatedCommand\AnnotationData;
 use Consolidation\AnnotatedCommand\CommandData;
-use Drush\Drush;
+use Consolidation\AnnotatedCommand\Hooks\HookManager;
+use Drush\Attributes as CLI;
+use Drush\Config\DrushConfig;
 use Symfony\Component\Console\Input\InputInterface;
 use Drush\Commands\DrushCommands;
 
 /**
- * Class XhprofCommands
- * @package Drush\Commands\core
- *
  * Supports profiling Drush commands using either XHProf or Tideways XHProf.
  *
  * Note that XHProf is compatible with PHP 5.6 and PHP 7+, you could also use
@@ -21,9 +22,8 @@ use Drush\Commands\DrushCommands;
  * @see https://pecl.php.net/package/xhprof
  * @see https://tideways.com/profiler/blog/releasing-new-tideways-xhprof-extension
  */
-class XhprofCommands extends DrushCommands
+final class XhprofCommands extends DrushCommands
 {
-
     const XH_PROFILE_MEMORY = false;
     const XH_PROFILE_CPU = false;
     const XH_PROFILE_BUILTINS = true;
@@ -32,63 +32,69 @@ class XhprofCommands extends DrushCommands
   // @todo Add a command for launching the built-in web server pointing to the HTML site of xhprof.
   // @todo Write a topic explaining how to use this.
 
-    /**
-     * @hook option *
-     *
-     * @option xh-link URL to your XHProf report site.
-     */
-    public function optionsetXhProf($options = ['xh-link' => self::REQ])
+    #[CLI\Hook(type: HookManager::OPTION_HOOK, target: '*')]
+    #[CLI\Option(name: 'xh-link', description: 'URL to your XHProf report site.')]
+    public function optionsetXhProf($options = ['xh-link' => self::REQ]): void
     {
     }
 
     /**
-     * Enable profiling via XHProf
-     *
-     * @hook post-command *
+     * Finish profiling and emit a link.
      */
-    public function xhprofPost($result, CommandData $commandData)
+    #[CLI\Hook(type: HookManager::POST_COMMAND_HOOK, target: '*')]
+    public function xhprofPost($result, CommandData $commandData): void
     {
-        if (self::xhprofIsEnabled()) {
+        $config = $this->getConfig();
+        if (self::xhprofIsEnabled($config)) {
             $namespace = 'Drush';
             $run_id = self::xhprofFinishRun($namespace);
-            $url = $this->getConfig()->get('xh.link') . '/index.php?run=' . urlencode($run_id) . '&source=' . urlencode($namespace);
+            $url = $config->get('xh.link') . '/index.php?run=' . urlencode($run_id) . '&source=' . urlencode($namespace);
             $this->logger()->notice(dt('XHProf run saved. View report at !url', ['!url' => $url]));
         }
     }
 
     /**
      * Enable profiling via XHProf
-     *
-     * @hook init *
      */
-    public function xhprofInitialize(InputInterface $input, AnnotationData $annotationData)
+    #[CLI\Hook(type: HookManager::INITIALIZE, target: '*')]
+    public function xhprofInitialize(InputInterface $input, AnnotationData $annotationData): void
     {
-        if (self::xhprofIsEnabled()) {
-            $config = $this->getConfig()->get('xh');
+        $config = $this->getConfig();
+        if (self::xhprofIsEnabled($config)) {
             $flags = self::xhprofFlags($config);
             self::xhprofEnable($flags);
         }
     }
 
-    public static function xhprofIsEnabled()
+    /**
+     * Determines if any profiler could be enabled.
+     *
+     * @param DrushConfig $config
+     *
+     *   TRUE when xh.link configured, FALSE otherwise.
+     *
+     * @throws \Exception
+     *   When no available profiler extension enabled.
+     */
+    public static function xhprofIsEnabled(DrushConfig $config): bool
     {
-        if (Drush::config()->get('xh.link')) {
-            if (!extension_loaded('xhprof') && !extension_loaded('tideways_xhprof')) {
-                if (extension_loaded('tideways')) {
-                    throw new \Exception(dt('You are using an older incompatible version of the tideways extension. Please upgrade to the new tideways_xhprof extension.'));
-                } else {
-                    throw new \Exception(dt('You must enable the xhprof or tideways_xhprof PHP extensions in your CLI PHP in order to profile.'));
-                }
-            }
-            return true;
+        if (!$config->get('xh.link')) {
+            return false;
         }
-        return false;
+        if (!extension_loaded('xhprof') && !extension_loaded('tideways_xhprof')) {
+            if (extension_loaded('tideways')) {
+                throw new \Exception(dt('You are using an older incompatible version of the tideways extension. Please upgrade to the new tideways_xhprof extension.'));
+            } else {
+                throw new \Exception(dt('You must enable the xhprof or tideways_xhprof PHP extensions in your CLI PHP in order to profile.'));
+            }
+        }
+        return true;
     }
 
     /**
      * Determines flags.
      */
-    public static function xhprofFlags(array $config)
+    public static function xhprofFlags(DrushConfig $config): int
     {
         if (extension_loaded('tideways_xhprof')) {
             $map = [
@@ -105,13 +111,13 @@ class XhprofCommands extends DrushCommands
         }
 
         $flags = 0;
-        if (!(isset($config['profile-builtins']) ? $config['profile-builtins']: self::XH_PROFILE_BUILTINS)) {
+        if (!$config->get('xh.profile-builtins', !self::XH_PROFILE_BUILTINS)) {
             $flags |= $map['no-builtins'];
         }
-        if (isset($config['profile-cpu']) ? $config['profile-cpu'] : self::XH_PROFILE_CPU) {
+        if ($config->get('xh.profile-cpu', self::XH_PROFILE_CPU)) {
             $flags |= $map['cpu'];
         }
-        if (isset($config['profile-memory']) ? $config['profile-memory'] : self::XH_PROFILE_MEMORY) {
+        if ($config->get('xh.profile-memory', self::XH_PROFILE_MEMORY)) {
             $flags |= $map['memory'];
         }
         return $flags;
@@ -120,7 +126,7 @@ class XhprofCommands extends DrushCommands
     /**
      * Enable profiling.
      */
-    public static function xhprofEnable($flags)
+    public static function xhprofEnable($flags): void
     {
         if (extension_loaded('tideways_xhprof')) {
             \tideways_xhprof_enable($flags);
@@ -136,14 +142,17 @@ class XhprofCommands extends DrushCommands
     {
         if (extension_loaded('tideways_xhprof')) {
             $data = \tideways_xhprof_disable();
-            $dir = $this->getConfig()->tmp();
-            $run_id = uniqid();
-            file_put_contents($dir . DIRECTORY_SEPARATOR . $run_id . '.' . $namespace . '.xhprof', serialize($data));
-            return $run_id;
         } else {
-            $xhprof_data = \xhprof_disable();
-            $xhprof_runs = new \XHProfRuns_Default();
-            return $xhprof_runs->save_run($xhprof_data, $namespace);
+            $data = \xhprof_disable();
+            if (class_exists('\XHProfRuns_Default')) {
+                $xhprof_runs = new \XHProfRuns_Default($this->getConfig()->get('xh.path'));
+                return $xhprof_runs->save_run($data, $namespace);
+            }
         }
+        $config = $this->getConfig();
+        $dir = $config->get('xh.path', $config->tmp());
+        $run_id = uniqid();
+        file_put_contents($dir . DIRECTORY_SEPARATOR . $run_id . '.' . $namespace . '.xhprof', serialize($data));
+        return $run_id;
     }
 }

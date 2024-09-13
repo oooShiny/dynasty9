@@ -18,7 +18,7 @@ use Solarium\Core\Query\LocalParameters\LocalParametersTrait;
 /**
  * Filterquery.
  *
- * @see https://lucene.apache.org/solr/guide/common-query-parameters.html#fq-filter-query-parameter
+ * @see https://solr.apache.org/guide/common-query-parameters.html#fq-filter-query-parameter
  */
 class FilterQuery extends Configurable implements QueryInterface
 {
@@ -165,6 +165,7 @@ class FilterQuery extends Configurable implements QueryInterface
     public function getCache(): bool
     {
         $cache = $this->getLocalParameters()->getCache();
+
         // The default is to cache the filter Query.
         return 'false' !== reset($cache);
     }
@@ -191,6 +192,7 @@ class FilterQuery extends Configurable implements QueryInterface
     public function getCost(): int
     {
         $cost = $this->getLocalParameters()->getCost();
+
         // The default cost for filter queries is 0.
         return (int) reset($cost);
     }

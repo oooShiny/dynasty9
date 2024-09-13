@@ -3,7 +3,6 @@
 namespace Drupal\Tests\search_api_solr_legacy\Kernel;
 
 use Drupal\search_api_solr\Controller\SolrConfigSetController;
-use Drupal\search_api_solr\SolrBackendInterface;
 use Drupal\search_api_solr_legacy_test\Plugin\SolrConnector\Solr36TestConnector;
 use Drupal\Tests\search_api_solr\Kernel\SearchApiSolrTest;
 
@@ -17,7 +16,7 @@ class SolrLegacyTest extends SearchApiSolrTest {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'search_api_solr_legacy',
     'search_api_solr_legacy_test',
   ];
@@ -54,9 +53,11 @@ class SolrLegacyTest extends SearchApiSolrTest {
    */
   public function testConfigGeneration(array $files) {
     $server = $this->getServer();
-    $solr_major_version = $server->getBackend()->getSolrConnector()->getSolrMajorVersion();
+    /** @var \Drupal\search_api_solr\SolrBackendInterface $backend */
+    $backend = $server->getBackend();
+    $solr_major_version = $backend->getSolrConnector()->getSolrMajorVersion();
     $backend_config = $server->getBackendConfig();
-    $solr_configset_controller = new SolrConfigSetController();
+    $solr_configset_controller = new SolrConfigSetController(\Drupal::service('extension.list.module'));
     $solr_configset_controller->setServer($server);
 
     $config_files = $solr_configset_controller->getConfigFiles();
@@ -68,7 +69,7 @@ class SolrLegacyTest extends SearchApiSolrTest {
       }
     }
 
-    $config_name = 'name="drupal-' . SolrBackendInterface::SEARCH_API_SOLR_SCHEMA_VERSION . '-solr-' . $solr_major_version . '.x-'. SEARCH_API_SOLR_JUMP_START_CONFIG_SET .'"';
+    $config_name = 'name="drupal-' . $backend->getPreferredSchemaVersion() . '-solr-' . $solr_major_version . '.x-' . SEARCH_API_SOLR_JUMP_START_CONFIG_SET . '"';
     $this->assertStringContainsString($config_name, $config_files['solrconfig.xml']);
     $this->assertStringContainsString($config_name, $config_files['schema.xml']);
     $this->assertStringContainsString($server->id(), $config_files['test.txt']);
@@ -77,8 +78,19 @@ class SolrLegacyTest extends SearchApiSolrTest {
     $this->assertStringNotContainsString('<statsCache', $config_files['solrconfig.xml']);
 
     $backend_config['connector_config']['jmx'] = TRUE;
-    $backend_config['disabled_field_types'] = ['text_foo_en_3_6_0', 'text_foo_en_4_5_0', 'text_foo_en_6_0_0', 'text_de_3_6_0', 'text_de_4_5_0', 'text_de_6_0_0', 'text_de_7_0_0'];
-    $backend_config['disabled_caches'] = ['cache_document_default_7_0_0', 'cache_filter_default_7_0_0'];
+    $backend_config['disabled_field_types'] = [
+      'text_foo_en_3_6_0',
+      'text_foo_en_4_5_0',
+      'text_foo_en_6_0_0',
+      'text_de_3_6_0',
+      'text_de_4_5_0',
+      'text_de_6_0_0',
+      'text_de_7_0_0',
+    ];
+    $backend_config['disabled_caches'] = [
+      'cache_document_default_7_0_0',
+      'cache_filter_default_7_0_0',
+    ];
     $server->setBackendConfig($backend_config);
     $server->save();
     // Reset static caches.
@@ -104,7 +116,7 @@ class SolrLegacyTest extends SearchApiSolrTest {
   /**
    * Data provider for testConfigGeneration method.
    */
-  public function configGenerationDataProvider() {
+  public static function configGenerationDataProvider() {
     // @codingStandardsIgnoreStart
     return [[[
       'schema.xml' => [

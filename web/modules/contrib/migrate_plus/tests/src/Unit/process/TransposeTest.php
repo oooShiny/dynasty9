@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Unit\process;
 
 use Drupal\migrate_plus\Plugin\migrate\process\Transpose;
@@ -11,7 +13,7 @@ use Drupal\Tests\migrate\Unit\process\MigrateProcessTestCase;
  * @group migrate
  * @coversDefaultClass \Drupal\migrate_plus\Plugin\migrate\process\Transpose
  */
-class TransposeTest extends MigrateProcessTestCase {
+final class TransposeTest extends MigrateProcessTestCase {
 
   /**
    * {@inheritdoc}
@@ -31,7 +33,7 @@ class TransposeTest extends MigrateProcessTestCase {
    *
    * @dataProvider transposeDataProvider
    */
-  public function testTranspose(array $input, $expected_output): void {
+  public function testTranspose(array $input, array $expected_output): void {
     $output = $this->plugin->transform($input, $this->migrateExecutable, $this->row, 'destinationproperty');
     $this->assertSame($output, $expected_output);
   }
@@ -42,7 +44,7 @@ class TransposeTest extends MigrateProcessTestCase {
    * @return array
    *   An array containing input values and expected output values.
    */
-  public function transposeDataProvider(): array {
+  public static function transposeDataProvider(): array {
     return [
       'empty array' => [
         'input' => [],
@@ -71,7 +73,7 @@ class TransposeTest extends MigrateProcessTestCase {
           ['e' => 5, 'f' => 6],
           ['g' => 7, 'h' => 8],
         ],
-        'output' => [[1, 3, 5, 7], [2, 4, 6, 8]],
+        'expected_output' => [[1, 3, 5, 7], [2, 4, 6, 8]],
       ],
     ];
   }

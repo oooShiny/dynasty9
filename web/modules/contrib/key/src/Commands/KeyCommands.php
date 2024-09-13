@@ -5,7 +5,6 @@ namespace Drupal\key\Commands;
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\key\KeyRepositoryInterface;
 use Drupal\key\Plugin\KeyPluginManager;
 use Drush\Commands\DrushCommands;
@@ -40,13 +39,6 @@ class KeyCommands extends DrushCommands {
   protected $entityTypeManager;
 
   /**
-   * Logger object.
-   *
-   * @var \Drupal\Core\Logger\LoggerChannelInterface
-   */
-  protected $logger;
-
-  /**
    * Key provider manager object.
    *
    * @var \Drupal\key\Plugin\KeyPluginManager
@@ -58,13 +50,11 @@ class KeyCommands extends DrushCommands {
    */
   public function __construct(
     KeyRepositoryInterface $repository,
-    LoggerChannelFactoryInterface $logger,
     KeyPluginManager $key_plugin_manager,
     EntityTypeManagerInterface $entity_type_manager,
     KeyPluginManager $provider_manager
   ) {
     $this->repository = $repository;
-    $this->logger = $logger->get('key');
     $this->keyTypePluginManager = $key_plugin_manager;
     $this->entityTypeManager = $entity_type_manager;
     $this->keyProviderPluginManager = $provider_manager;
@@ -120,7 +110,7 @@ class KeyCommands extends DrushCommands {
 
     if ($existing_key) {
       // Add a warning about overwriting a key.
-      $this->logger->warning('Be extremely careful when overwriting a key! It may result in losing access to a service or making encrypted data unreadable.');
+      $this->logger()->warning('Be extremely careful when overwriting a key! It may result in losing access to a service or making encrypted data unreadable.');
 
       // Confirm that the key should be saved.
       $this->output->writeln(dt('The following key will be overwritten: !id', ['!id' => $values['id']]));
@@ -182,7 +172,7 @@ class KeyCommands extends DrushCommands {
       throw new \Exception(dt('Key !id was not saved.', ['!id' => $values['id']]));
     }
 
-    $this->logger->info('Key !id was saved successfully.', ['!id' => $values['id']]);
+    $this->logger()->info('Key !id was saved successfully.', ['!id' => $values['id']]);
   }
 
   /**
@@ -208,7 +198,7 @@ class KeyCommands extends DrushCommands {
     }
 
     // Confirm that the key should be deleted.
-    $this->logger->warning('Be extremely careful when deleting a key! It may result in losing access to a service or making encrypted data unreadable.');
+    $this->logger()->warning('Be extremely careful when deleting a key! It may result in losing access to a service or making encrypted data unreadable.');
     $this->output->writeln(dt('The following key will be deleted: !id', ['!id' => $id]));
     if (!$this->io()->confirm(dt('Do you want to continue?'))) {
       // Removing drush_user_abort(), no current implementation of that.
@@ -226,7 +216,7 @@ class KeyCommands extends DrushCommands {
       throw new \Exception(dt('Key !id was not deleted.', ['!id' => $id]));
     }
 
-    $this->logger->info('Key !id was deleted successfully.', ['!id' => $id]);
+    $this->logger()->info('Key !id was deleted successfully.', ['!id' => $id]);
   }
 
   /**
@@ -310,18 +300,28 @@ class KeyCommands extends DrushCommands {
    * Display a list of available key providers.
    *
    * @command key:provider-list
-   * @option storage-method An optional key provider storage method on which to filter.
+   * @option tags Optional key provider tags, separated by comma, on which to filter.
+   * @option storage-method [DEPRECATED] An optional key provider storage method on which to filter.
    * @aliases key-provider-list
    * @format table
    */
-  public function providerList($options = ['storage-method' => NULL]) {
+  public function providerList($options = [
+    'tags' => NULL,
+    'storage-method' => NULL,
+  ]) {
     $result = [];
 
-    $storage_method = $options['storage-method'];
+    $tags = StringUtils::csvToArray($options['tags']);
+    if ($options['storage-method']) {
+      @trigger_error("The Drush --storage-method option is deprecated in key:1.18.0 and is removed from key:2.0.0. Use the --tags option instead. See https://www.drupal.org/node/3364701", E_USER_DEPRECATED);
+      \Drupal::logger('key')->log('warning', (dt("The Drush --storage-method option is deprecated in key:1.18.0 and is removed from key:2.0.0. Use the --tags option instead. See https://www.drupal.org/node/3364701", E_USER_DEPRECATED)));
+      $tags[] = $options['storage-method'];
+      $tags = array_unique($tags);
+    }
 
     $plugins = $this->keyProviderPluginManager->getDefinitions();
     foreach ($plugins as $id => $plugin) {
-      if (!isset($storage_method) || $plugin['storage_method'] == $storage_method) {
+      if (!$tags || array_intersect($plugin['tags'], $tags)) {
         $row = [];
         $row['id'] = $id;
         $row['description'] = $plugin['description'];

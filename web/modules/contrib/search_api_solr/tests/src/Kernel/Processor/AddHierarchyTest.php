@@ -20,7 +20,7 @@ class AddHierarchyTest extends SearchApiAddHierarchyTest {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'search_api_solr',
     'search_api_solr_test',
   ];
@@ -34,7 +34,7 @@ class AddHierarchyTest extends SearchApiAddHierarchyTest {
   }
 
   /**
-   *
+   * Tests regression.
    */
   public function testRegression3059312() {
     $this->markTestSkipped('This test makes no sense on Solr.');

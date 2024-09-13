@@ -289,7 +289,7 @@ Hooks for use in custom or contrib modules are documented in rate.api.php.
 
 9. Migration from previous versions
 --------------------------------------------------------------------------------
-Migration of Rate from preoviou
+Migration of Rate from preovious versions.
 
 * Upgrading from 7.x
   Migration from Rate 7.x. is supported, see the Migration API documentation for

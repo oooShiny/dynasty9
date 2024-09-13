@@ -17,7 +17,6 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Link;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -35,13 +34,6 @@ class DbLogController extends ControllerBase {
   protected $database;
 
   /**
-   * The module handler service.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
    * The date formatter service.
    *
    * @var \Drupal\Core\Datetime\DateFormatterInterface
@@ -49,30 +41,11 @@ class DbLogController extends ControllerBase {
   protected $dateFormatter;
 
   /**
-   * The form builder service.
-   *
-   * @var \Drupal\Core\Form\FormBuilderInterface
-   */
-  protected $formBuilder;
-
-  /**
    * The user storage.
    *
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('database'),
-      $container->get('module_handler'),
-      $container->get('date.formatter'),
-      $container->get('form_builder')
-    );
-  }
 
   /**
    * Constructs a DbLogController object.
@@ -136,9 +109,9 @@ class DbLogController extends ControllerBase {
 
     $classes = static::getLogLevelClassMap();
 
-    $this->moduleHandler->loadInclude('dblog', 'admin.inc');
+    $this->moduleHandler()->loadInclude('dblog', 'admin.inc');
 
-    $build['dblog_filter_form'] = $this->formBuilder->getForm('Drupal\dblog\Form\DblogFilterForm');
+    $build['dblog_filter_form'] = $this->formBuilder()->getForm('Drupal\dblog\Form\DblogFilterForm');
 
     $header = [
       // Icon column.
@@ -305,6 +278,12 @@ class DbLogController extends ControllerBase {
         ['data' => ['#markup' => $dblog->link]],
       ],
     ];
+    if (isset($dblog->backtrace)) {
+      $rows[] = [
+        ['data' => $this->t('Backtrace'), 'header' => TRUE],
+        $dblog->backtrace,
+      ];
+    }
     $build['dblog_table'] = [
       '#type' => 'table',
       '#rows' => $rows,
@@ -333,7 +312,7 @@ class DbLogController extends ControllerBase {
       return;
     }
 
-    $this->moduleHandler->loadInclude('dblog', 'admin.inc');
+    $this->moduleHandler()->loadInclude('dblog', 'admin.inc');
 
     $filters = dblog_filters();
 
@@ -364,6 +343,10 @@ class DbLogController extends ControllerBase {
    *   The record from the watchdog table. The object properties are: wid, uid,
    *   severity, type, timestamp, message, variables, link, name.
    *
+   *   If the variables contain a @backtrace_string placeholder which is not
+   *   used in the message, the formatted backtrace will be assigned to a new
+   *   backtrace property on the row object which can be displayed separately.
+   *
    * @return string|\Drupal\Core\StringTranslation\TranslatableMarkup|false
    *   The formatted log message or FALSE if the message or variables properties
    *   are not set.
@@ -386,6 +369,10 @@ class DbLogController extends ControllerBase {
           $variables['@backtrace_string'] = new FormattableMarkup(
             '<pre class="backtrace">@backtrace_string</pre>', $variables
           );
+          // Save a reference so the backtrace can be displayed separately.
+          if (!str_contains($row->message, '@backtrace_string')) {
+            $row->backtrace = $variables['@backtrace_string'];
+          }
         }
         $message = $this->t(Xss::filterAdmin($row->message), $variables);
       }

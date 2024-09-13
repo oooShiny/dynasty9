@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\migrate\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -77,7 +79,7 @@ class MigrateMessageTest extends KernelTestBase implements MigrateMessageInterfa
   /**
    * Tests migration interruptions.
    */
-  public function testMessagesNotTeed() {
+  public function testMessagesNotTeed(): void {
     // We don't ask for messages to be teed, so don't expect any.
     $executable = new MigrateExecutable($this->migration, $this);
     $executable->import();
@@ -87,7 +89,7 @@ class MigrateMessageTest extends KernelTestBase implements MigrateMessageInterfa
   /**
    * Tests migration interruptions.
    */
-  public function testMessagesTeed() {
+  public function testMessagesTeed(): void {
     // Ask to receive any messages sent to the idmap.
     \Drupal::service('event_dispatcher')->addListener(MigrateEvents::IDMAP_MESSAGE,
       [$this, 'mapMessageRecorder']);
@@ -95,7 +97,7 @@ class MigrateMessageTest extends KernelTestBase implements MigrateMessageInterfa
     $executable->import();
     $this->assertCount(1, $this->messages);
     $id = $this->migration->getPluginId();
-    $this->assertSame("source_message: $id:message: 'a message' is not an array", reset($this->messages));
+    $this->assertSame("source_message: $id:message:concat: 'a message' is not an array", reset($this->messages));
   }
 
   /**
@@ -104,7 +106,7 @@ class MigrateMessageTest extends KernelTestBase implements MigrateMessageInterfa
    * This method returns an iterator of StdClass objects. Check that these
    * objects have the expected keys.
    */
-  public function testGetMessages() {
+  public function testGetMessages(): void {
     $id = $this->migration->getPluginId();
     $expected_message = (object) [
       'src_name' => 'source_message',
@@ -112,7 +114,7 @@ class MigrateMessageTest extends KernelTestBase implements MigrateMessageInterfa
       'msgid' => '1',
       Sql::SOURCE_IDS_HASH => '170cde81762e22552d1b1578cf3804c89afefe9efbc7cc835185d7141060b032',
       'level' => '1',
-      'message' => "$id:message: 'a message' is not an array",
+      'message' => "$id:message:concat: 'a message' is not an array",
     ];
     $executable = new MigrateExecutable($this->migration, $this);
     $executable->import();

@@ -17,6 +17,7 @@ use Drupal\Core\Form\SubformState;
 use Drupal\Core\Render\Element;
 use Drupal\Core\TypedData\TranslationStatusInterface;
 use Drupal\field_group\FormatterHelper;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\ParagraphInterface;
 use Drupal\paragraphs\Plugin\EntityReferenceSelection\ParagraphSelection;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -27,8 +28,8 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  *
  * @FieldWidget(
  *   id = "paragraphs",
- *   label = @Translation("Paragraphs EXPERIMENTAL"),
- *   description = @Translation("An experimental paragraphs inline form widget."),
+ *   label = @Translation("Paragraphs (stable)"),
+ *   description = @Translation("The stable paragraphs inline form widget."),
  *   field_types = {
  *     "entity_reference_revisions"
  *   }
@@ -300,6 +301,7 @@ class ParagraphsWidget extends WidgetBase {
           // whenever this option is enabled in the widget configuration.
           // @see Drupal.behaviors.paragraphsAddAboveButton
           'add_above' => $this->t('Add above'),
+          'convert' => $this->t('Convert'),
         ];
         break;
     }
@@ -419,8 +421,7 @@ class ParagraphsWidget extends WidgetBase {
     if ($paragraphs_entity) {
       // Detect if we are translating.
       $this->initIsTranslating($form_state, $host);
-      $langcode = $form_state->get('langcode');
-
+      $langcode = $this->getCurrentLangcode($form_state, $items);
       if (!$this->isTranslating) {
         // Set the langcode if we are not translating.
         $langcode_key = $paragraphs_entity->getEntityType()->getKey('langcode');
@@ -612,6 +613,28 @@ class ParagraphsWidget extends WidgetBase {
           $item_mode = 'closed';
         }
 
+        $allowed_types = $this->getAllowedTypes();
+        if ($this->isFeatureEnabled('convert') && $item_mode != 'convert' && \Drupal::service('plugin.manager.paragraphs.conversion')->supportsConversion($paragraphs_entity, $allowed_types)) {
+          $widget_actions['dropdown_actions']['convert_button'] = [
+            '#type' => 'submit',
+            '#value' => $this->t('Convert…'),
+            '#name' => $id_prefix . '_convert',
+            '#weight' => 503,
+            '#submit' => [[get_class($this), 'paragraphsItemSubmit']],
+            '#limit_validation_errors' => [],
+            '#delta' => $delta,
+            '#ajax' => [
+              'callback' => [get_class($this), 'itemAjax'],
+              'wrapper' => $widget_state['ajax_wrapper_id'],
+            ],
+            '#access' => $this->allowReferenceChanges() && $paragraphs_entity->access('update'),
+            '#paragraphs_mode' => 'convert',
+            '#attributes' => [
+              'class' => ['button--small'],
+            ],
+          ];
+        }
+
         if ($item_mode != 'remove') {
           $widget_actions['dropdown_actions']['remove_button'] = [
             '#type' => 'submit',
@@ -659,27 +682,29 @@ class ParagraphsWidget extends WidgetBase {
           }
         }
         else {
-          $widget_actions['actions']['edit_button'] = $this->expandButton([
-            '#type' => 'submit',
-            '#value' => $this->t('Edit'),
-            '#name' => $id_prefix . '_edit',
-            '#weight' => 1,
-            '#submit' => [[get_class($this), 'paragraphsItemSubmit']],
-            '#limit_validation_errors' => [
-              array_merge($parents, [$field_name, $delta]),
-            ],
-            '#delta' => $delta,
-            '#ajax' => [
-              'callback' => [get_class($this), 'itemAjax'],
-              'wrapper' => $widget_state['ajax_wrapper_id'],
-            ],
-            '#access' => $paragraphs_entity->access('update') && !$translating_force_close,
-            '#paragraphs_mode' => 'edit',
-            '#attributes' => [
-              'class' => ['paragraphs-icon-button', 'paragraphs-icon-button-edit', 'button--extrasmall'],
-              'title' => $this->t('Edit'),
-            ],
-          ]);
+          if ($item_mode != 'convert') {
+            $widget_actions['actions']['edit_button'] = $this->expandButton([
+              '#type' => 'submit',
+              '#value' => $this->t('Edit'),
+              '#name' => $id_prefix . '_edit',
+              '#weight' => 1,
+              '#submit' => [[get_class($this), 'paragraphsItemSubmit']],
+              '#limit_validation_errors' => [
+                array_merge($parents, [$field_name, $delta]),
+              ],
+              '#delta' => $delta,
+              '#ajax' => [
+                'callback' => [get_class($this), 'itemAjax'],
+                'wrapper' => $widget_state['ajax_wrapper_id'],
+              ],
+              '#access' => $paragraphs_entity->access('update') && !$translating_force_close,
+              '#paragraphs_mode' => 'edit',
+              '#attributes' => [
+                'class' => ['paragraphs-icon-button', 'paragraphs-icon-button-edit', 'button--extrasmall'],
+                'title' => $this->t('Edit'),
+              ],
+            ]);
+          }
 
           if ($show_must_be_saved_warning && $paragraphs_entity->isChanged()) {
             $info['changed'] = [
@@ -885,6 +910,85 @@ class ParagraphsWidget extends WidgetBase {
           }
         }
       }
+      elseif ($item_mode == 'convert') {
+        $options = [];
+        $allowed_types = $this->getAllowedTypes();
+        $conversion_plugin_definitions = \Drupal::service('plugin.manager.paragraphs.conversion')->getApplicableDefinitions($paragraphs_entity, $allowed_types);
+        foreach ($conversion_plugin_definitions as $plugin_id => $plugin) {
+          $options[$plugin_id] = $plugin['label'];
+        }
+        $element['conversion_plugins']['action'] = [
+          '#type' => 'select',
+          '#title' => $this->t('Action'),
+          '#options' => $options,
+          '#ajax' => [
+            'callback' => [$this, 'updateConversionForm'],
+            'wrapper' => 'style-wrapper',
+          ],
+          '#submit' => [[$this, 'conversionTargetSubmit']],
+          '#executes_submit_callback' => TRUE,
+          '#limit_validation_errors' => [array_merge($parents, [$field_name, $delta])],
+        ];
+        $element['conversion_plugins']['form'] = [
+          '#type' => 'container',
+          '#prefix' => '<div id="style-wrapper">',
+          '#suffix' => '</div>',
+        ];
+
+        $plugin_id = NULL;
+        // Get the value of the action select.
+        if ($form_state->getTriggeringElement()['#type'] == 'select') {
+          $plugin_parents = $form_state->getTriggeringElement()['#parents'];
+          $plugin_id = $form_state->getValue($plugin_parents);
+        }
+
+        // Select the first option if the plugin is invalid.
+        if (!isset($options[$plugin_id]) || !is_string($plugin_id)) {
+          $plugin_ids = array_keys($options);
+          $plugin_id = reset($plugin_ids);
+        }
+        $element['conversion_plugins']['form'][$plugin_id] = [];
+        $subform_state = SubformState::createForSubform($element['conversion_plugins']['form'][$plugin_id], $form, $form_state);
+        $plugin = $conversion_plugin_definitions = \Drupal::service('plugin.manager.paragraphs.conversion')->createInstance($plugin_id);
+        $plugin->buildConversionForm($paragraphs_entity, $element['conversion_plugins']['form'][$plugin_id], $subform_state);
+
+        $element['conversion_plugins']['paragraphs_convert_submit'] = [
+          '#type' => 'submit',
+          '#value' => $this->t('Convert'),
+          '#name' => str_replace('-', '_', $id_prefix) . '_convert_submit',
+          '#weight' => 1,
+          '#limit_validation_errors' => [],
+          '#submit' => [[get_class($this), 'paragraphsConvertSubmit']],
+          '#delta' => $delta,
+          '#ajax' => [
+            'callback' => [get_class($this), 'itemAjaxConvert'],
+            'wrapper' => $widget_state['ajax_wrapper_id'],
+          ],
+          '#field_name' => $field_name,
+          '#button_type' => 'primary',
+          '#access' => $this->allowReferenceChanges(),
+          '#attributes' => ['class' => ['paragraphs-convert-button']],
+        ];
+        $element['conversion_plugins']['paragraphs_convert_cancel'] = [
+          '#type' => 'submit',
+          '#value' => $this->t('Cancel'),
+          '#name' => str_replace('-', '_', $id_prefix) . '_convert_cancel',
+          '#weight' => 2,
+          '#submit' => [[get_class($this), 'paragraphsConvertCancel']],
+          '#limit_validation_errors' => [],
+          '#delta' => $delta,
+          '#ajax' => [
+            'callback' => [get_class($this), 'itemAjaxConvert'],
+            'wrapper' => $widget_state['ajax_wrapper_id'],
+          ],
+          '#access' => $paragraphs_entity->access('update') && !$translating_force_close,
+          '#paragraphs_mode' => 'edit',
+          '#attributes' => ['class' => ['paragraphs-convert-button']],
+        ];
+
+        $element['subform'] = [];
+        $element['behavior_plugins'] = [];
+      }
       else {
         $element['subform'] = array();
       }
@@ -923,6 +1027,138 @@ class ParagraphsWidget extends WidgetBase {
   }
 
   /**
+   * Submit callback for the conversion.
+   */
+  public static function conversionTargetSubmit(array $form, FormStateInterface $form_state) {
+    $form_state->setRebuild();
+  }
+
+  /**
+   * Ajax callback for the style group dropdown.
+   */
+  public static function updateConversionForm(array $form, FormStateInterface $form_state) {
+    $group_select = $form_state->getTriggeringElement();
+    // Gets the behavior plugin settings form.
+    $settings_form = NestedArray::getValue($form, array_slice($group_select['#array_parents'], 0, -2));
+    return $settings_form['conversion_plugins']['form'];
+  }
+
+  /**
+   * The submit callback to complete the paragraphs conversion.
+   */
+  public static function paragraphsConvertSubmit(array $form, FormStateInterface $form_state) {
+    $button = $form_state->getTriggeringElement();
+    $conversion_manager = \Drupal::service('plugin.manager.paragraphs.conversion');
+
+    // Go one level up in the form, to the widgets container.
+    $element = NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -3));
+    $field_name = $element['#field_name'];
+    $parents = $element['#field_parents'];
+
+    // Replacing element in the array.
+    $widget_state = WidgetBase::getWidgetState($parents, $field_name, $form_state);
+    $delta = $button['#delta'];
+
+    /** @var \Drupal\paragraphs\ParagraphInterface $original_paragraph */
+    $original_paragraph = $widget_state['paragraphs'][$delta]['entity']->getUntranslated();
+
+    // Clean the user input of the original paragraph to avoid issues with
+    // default values. Keep the original weight only as it is used for ordering.
+    $user_input = NestedArray::getValue($form_state->getUserInput(), array_slice($button['#parents'], 0, -3));
+    $conversion_plugin_id = $user_input[$delta]['conversion_plugins']['action'];
+    $settings = [];
+    if (isset($user_input[$delta]['conversion_plugins']['form'][$conversion_plugin_id])) {
+      $settings = $user_input[$delta]['conversion_plugins']['form'][$conversion_plugin_id];
+    }
+    $user_input[$delta] = ['_weight' => ($user_input[$delta]['_weight'] ?? 0)];
+    NestedArray::setValue($form_state->getUserInput(), array_slice($button['#parents'], 0, -3), $user_input);
+
+    // Create an instance of the translation plugin to use.
+    $plugin = $conversion_plugin_definitions = \Drupal::service('plugin.manager.paragraphs.conversion')->createInstance($conversion_plugin_id);
+    $new_paragraphs_count = 0;
+    $converted_paragraphs = [];
+
+    // Make sure that the default language is the first one in the list.
+    $languages = array_merge([$original_paragraph->language()->getId()], array_keys($original_paragraph->getTranslationLanguages(FALSE)));
+    // Loop over all languages of the original paragraph.
+    foreach ($languages as $langcode) {
+      // Get the correct translation and convert with those values.
+      $translation_paragraph = $original_paragraph->getTranslation($langcode);
+      $paragraphs_values = $plugin->convert($settings, $translation_paragraph, $converted_paragraphs);
+
+      // If there are no converted paragraphs, skip this translation.
+      if (!$paragraphs_values) {
+        continue;
+      }
+
+      // Set the count for new paragraphs based on the default translation.
+      if ($original_paragraph->isDefaultTranslation()) {
+        $new_paragraphs_count = count($paragraphs_values) - 1;
+      }
+
+      // Loop over all returned paragraphs.
+      foreach ($paragraphs_values as $key => $paragraph_values) {
+        // Create a Paragraph from the default translation.
+        if ($translation_paragraph->isDefaultTranslation()) {
+          if (is_array($paragraph_values)) {
+            /** @var \Drupal\Paragraphs\ParagraphInterface $converted_paragraph */
+            $converted_paragraph = Paragraph::create($paragraph_values);
+            $converted_paragraphs[$key] = $converted_paragraph;
+            // Apply default paragraph values.
+            $conversion_manager->applyDefaultValues($original_paragraph, $converted_paragraph);
+          }
+          else {
+            $converted_paragraphs[$key] = $paragraph_values;
+          }
+        }
+        else {
+          $converted_paragraph = $converted_paragraphs[$key];
+          if (!$converted_paragraph->hasTranslation($langcode)) {
+            // Add the translation to the default translation paragraph.
+            $conversion_manager->addTranslation($converted_paragraph, $langcode, $paragraph_values);
+          }
+        }
+      }
+    }
+
+    $first = TRUE;
+    $display = $widget_state['paragraphs'][$delta]['display'];
+    $widget_state['items_count'] += $new_paragraphs_count;
+    $widget_state['real_item_count'] += $new_paragraphs_count;
+
+    // Loop over all converted paragraphs and place them where they should.
+    foreach ($converted_paragraphs as $converted_paragraph) {
+      // Allow modules to alter the converted paragraphs.
+      \Drupal::moduleHandler()->alter('paragraphs_conversion', $original_paragraph, $converted_paragraph);
+
+      // Replace original paragraph item with a converted one.
+      $paragraph_item = [
+        'entity' => $converted_paragraph,
+        'display' => $display,
+        'mode' => 'edit',
+      ];
+
+      if ($first) {
+        // The first returned paragraph should replace the one where the
+        // conversion is triggered.
+        $widget_state['paragraphs'][$delta] = $paragraph_item;
+        $first = FALSE;
+      }
+      else {
+        // All other paragraphs should be added at the end with the delta
+        // recalculated to follow the first one.
+        $widget_state['paragraphs'][] = $paragraph_item;
+        $field_path = array_slice($button['#parents'], 0, -3);
+        static::prepareDeltaPositionConvert($widget_state, $form_state, $field_path, $delta);
+      }
+      $delta++;
+    }
+
+    WidgetBase::setWidgetState($parents, $field_name, $form_state, $widget_state);
+    $form_state->setRebuild();
+  }
+
+  /**
    * Builds an add paragraph button for opening of modal form.
    *
    * @param array $element
@@ -950,22 +1186,10 @@ class ParagraphsWidget extends WidgetBase {
       '#name' => 'button_add_modal',
       '#attributes' => [
         'class' => [
+          'field-add-more-submit',
           'paragraph-type-add-modal-button',
           'js-show',
           'button--small',
-        ],
-      ],
-    ];
-
-    // Hidden field provided by "Modal" mode. Field is provided for additional
-    // integrations, where also position of addition can be specified. It should
-    // be used by sub-modules or other paragraphs integration. CSS class is used
-    // to support easier element selecting in JavaScript.
-    $element['add_modal_form_area']['add_more_delta'] = [
-      '#type' => 'hidden',
-      '#attributes' => [
-        'class' => [
-          'paragraph-type-add-modal-delta',
         ],
       ],
     ];
@@ -1062,7 +1286,7 @@ class ParagraphsWidget extends WidgetBase {
     $is_multiple = $this->fieldDefinition->getFieldStorageDefinition()->isMultiple();
 
     $field_title = $this->fieldDefinition->getLabel();
-    $description = FieldFilteredMarkup::create(\Drupal::token()->replace($this->fieldDefinition->getDescription()));
+    $description = FieldFilteredMarkup::create(\Drupal::token()->replace($this->fieldDefinition->getDescription() ?? ''));
 
     $elements = array();
     $tabs = '';
@@ -1074,7 +1298,7 @@ class ParagraphsWidget extends WidgetBase {
     $field_prefix = strtr($this->fieldIdPrefix, '_', '-');
     if (count($this->fieldParents) == 0) {
       if ($items->getEntity()->getEntityTypeId() != 'paragraph') {
-        $tabs = '<ul class="paragraphs-tabs tabs primary clearfix"><li id="content" class="tabs__tab"><a href="#' . $field_prefix . '-values">' . $this->t('Content', [], ['context' => 'paragraphs']) . '</a></li><li id="behavior" class="tabs__tab"><a href="#' . $field_prefix . '-values">' . $this->t('Behavior', [], ['context' => 'paragraphs']) . '</a></li></ul>';
+        $tabs = '<ul class="paragraphs-tabs tabs primary tabs--secondary paragraphs-tabs-hide clearfix"><li class="tabs__tab paragraphs_content_tab"><a href="#' . $field_prefix . '-values" class="tabs__link">' . $this->t('Content', [], ['context' => 'paragraphs']) . '</a></li><li class="tabs__tab paragraphs_behavior_tab"><a href="#' . $field_prefix . '-values" class="tabs__link">' . $this->t('Behavior', [], ['context' => 'paragraphs']) . '</a></li></ul>';
       }
     }
     if (count($this->fieldParents) > 0) {
@@ -1183,6 +1407,14 @@ class ParagraphsWidget extends WidgetBase {
 
     $host = $items->getEntity();
     $this->initIsTranslating($form_state, $host);
+    if (!$form_state->has('langcode')) {
+      // Entity forms usually have the langcode set, but it's not guaranteed.
+      // Any form object can embed entities with their field widgets.
+      // At this point, without knowing the langcode from the form state,
+      // it's not certain which language is chosen. Remember the host entity,
+      // to get the langcode at a stage when the chosen value is more certain.
+      $elements['#host'] = $host;
+    }
 
     $header_actions = $this->buildHeaderActions($field_state, $form_state);
     if ($header_actions) {
@@ -1200,11 +1432,29 @@ class ParagraphsWidget extends WidgetBase {
       $elements['add_more'] = $this->buildAddActions();
       // Add the class to hide the add actions in the Behavior perspective.
       $elements['add_more']['#attributes']['class'][] = 'paragraphs-add-wrapper';
+
+      // Hidden field is provided for additional integrations, where also
+      // position of addition can be specified. It should be used by sub-modules
+      // or other paragraphs integration. CSS class is used to support easier
+      // element selecting in JavaScript.
+      $elements['add_more']['add_more_delta'] = [
+        '#type' => 'hidden',
+        '#attributes' => [
+          'class' => [
+            'paragraph-type-add-delta',
+            $this->getSetting('add_mode')
+          ],
+        ],
+      ];
     }
 
     $elements['#allow_reference_changes'] = $this->allowReferenceChanges();
     $elements['#paragraphs_widget'] = TRUE;
     $elements['#attached']['library'][] = 'paragraphs/drupal.paragraphs.widget';
+
+    if (\Drupal::theme()->getActiveTheme()->getName() == 'seven') {
+      $elements['#attached']['library'][] = 'paragraphs/paragraphs.seven';
+    }
 
     return $elements;
   }
@@ -1585,6 +1835,7 @@ class ParagraphsWidget extends WidgetBase {
       // Even though operations are run through the "links" element type, the
       // theme system will render any render array passed as a link "title".
       '#links' => $operations,
+      '#dropbutton_type' => 'small',
     ];
 
     return $build + $elements;
@@ -1607,7 +1858,7 @@ class ParagraphsWidget extends WidgetBase {
         '#type' => 'submit',
         '#name' => $this->fieldIdPrefix . '_' . $machine_name . '_add_more',
         '#value' => $add_mode == 'modal' ? $label : $this->t('Add @type', ['@type' => $label]),
-        '#attributes' => ['class' => ['field-add-more-submit']],
+        '#attributes' => ['class' => ['field-add-more-submit', 'button--small']],
         '#limit_validation_errors' => [array_merge($this->fieldParents, [$this->fieldDefinition->getName(), 'add_more'])],
         '#submit' => [[get_class($this), 'addMoreSubmit']],
         '#ajax' => [
@@ -1696,6 +1947,25 @@ class ParagraphsWidget extends WidgetBase {
   }
 
   /**
+   * Gets current language code from the form state or item.
+   *
+   * Since the paragraph field is not set as translatable, the item language
+   * code is set to the source language. The intended translation language
+   * is only accessibly through the form state.
+   *
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
+   *   The field item list.
+   *
+   * @return string
+   *   The language code.
+   */
+  protected function getCurrentLangcode(FormStateInterface $form_state, FieldItemListInterface $items) {
+    return $form_state->has('langcode') ? $form_state->get('langcode') : $items->getEntity()->language()->getId();
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function addMoreAjax(array $form, FormStateInterface $form_state) {
@@ -1710,7 +1980,7 @@ class ParagraphsWidget extends WidgetBase {
     // Clear the Add more delta.
     NestedArray::setValue(
       $element,
-      ['add_more', 'add_modal_form_area', 'add_more_delta', '#value'],
+      ['add_more', 'add_more_delta', '#value'],
       ''
     );
 
@@ -1730,6 +2000,47 @@ class ParagraphsWidget extends WidgetBase {
     $element[$delta]['#suffix'] = (isset($element[$delta]['#suffix']) ? $element[$delta]['#suffix'] : '') . '</div>';
 
     return $element;
+  }
+
+  /**
+   * Prepares the widget state to add a new paragraph at a specific position.
+   *
+   * In addition to the widget state change, also user input could be modified
+   * to handle adding of a new paragraph at a specific position between existing
+   * paragraphs.
+   *
+   * @param array $widget_state
+   *   Widget state as reference, so that it can be updated.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state.
+   * @param array $field_path
+   *   Path to paragraph field.
+   * @param int|mixed $new_delta
+   *   Delta position in list of paragraphs, where new paragraph will be added.
+   */
+  protected static function prepareDeltaPositionConvert(array &$widget_state, FormStateInterface $form_state, array $field_path, $new_delta) {
+    // Limit delta between 0 and "number of items" in paragraphs widget.
+    $new_delta = max(intval($new_delta), 0);
+
+    // Change user input in order to create new delta position.
+    $user_input = NestedArray::getValue($form_state->getUserInput(), $field_path);
+
+    // Rearrange all original deltas to make one place for the new element.
+    $new_original_deltas = [];
+    foreach ($widget_state['original_deltas'] as $current_delta => $original_delta) {
+      $new_current_delta = $current_delta >= $new_delta ? $current_delta + 1 : $current_delta;
+
+      $new_original_deltas[$new_current_delta] = $original_delta;
+      $user_input[$original_delta]['_weight'] = $new_current_delta;
+    }
+
+    // Add information into delta mapping for the new element.
+    $original_deltas_size = count($widget_state['original_deltas']);
+    $new_original_deltas[$new_delta] = $original_deltas_size;
+    $user_input[$original_deltas_size]['_weight'] = $new_delta;
+
+    $widget_state['original_deltas'] = $new_original_deltas;
+    NestedArray::setValue($form_state->getUserInput(), $field_path, $user_input);
   }
 
   /**
@@ -1776,7 +2087,7 @@ class ParagraphsWidget extends WidgetBase {
     }
 
     // Add information into delta mapping for the new element.
-    $original_deltas_size = count($widget_state['original_deltas']);
+    $original_deltas_size = count($widget_state['original_deltas'] ?? []);
     $new_original_deltas[$new_delta] = $original_deltas_size;
     $user_input[$original_deltas_size]['_weight'] = $new_delta;
 
@@ -1794,7 +2105,7 @@ class ParagraphsWidget extends WidgetBase {
       $field_path = array_merge($submit['element']['#field_parents'], [$submit['element']['#field_name']]);
       $add_more_delta = NestedArray::getValue(
         $submit['element'],
-        ['add_more', 'add_modal_form_area', 'add_more_delta', '#value']
+        ['add_more', 'add_more_delta', '#value']
       );
 
       static::prepareDeltaPosition($submit['widget_state'], $form_state, $field_path, $add_more_delta);
@@ -1874,6 +2185,41 @@ class ParagraphsWidget extends WidgetBase {
     static::setWidgetState($submit['parents'], $submit['field_name'], $form_state, $submit['widget_state']);
 
     $form_state->setRebuild();
+  }
+
+  /**
+   * The submit callback to cancel the paragraphs conversion.
+   */
+  public static function paragraphsConvertCancel(array $form, FormStateInterface $form_state) {
+    $submit = ParagraphsWidget::getSubmitElementInfo($form, $form_state, ParagraphsWidget::ACTION_POSITION_HEADER);
+
+    $new_mode = $submit['button']['#paragraphs_mode'];
+
+    if ($new_mode === 'edit') {
+      $submit['widget_state'] = static::autocollapse($submit['widget_state']);
+    }
+
+    $submit['widget_state']['paragraphs'][$submit['button']['#delta']]['mode'] = $new_mode;
+
+    if (!empty($submit['button']['#paragraphs_show_warning'])) {
+      $submit['widget_state']['paragraphs'][$submit['button']['#delta']]['show_warning'] = $submit['button']['#paragraphs_show_warning'];
+    }
+
+    static::setWidgetState($submit['parents'], $submit['field_name'], $form_state, $submit['widget_state']);
+
+    $form_state->setRebuild();
+  }
+
+  /**
+   * The ajax callback for the paragraphs conversion.
+   */
+  public static function itemAjaxConvert(array $form, FormStateInterface $form_state) {
+    $submit = ParagraphsWidget::getSubmitElementInfo($form, $form_state, ParagraphsWidget::ACTION_POSITION_HEADER);
+
+    $submit['element']['#prefix'] = '<div class="ajax-new-content">' . (isset($submit['element']['#prefix']) ? $submit['element']['#prefix'] : '');
+    $submit['element']['#suffix'] = (isset($submit['element']['#suffix']) ? $submit['element']['#suffix'] : '') . '</div>';
+
+    return $submit['element'];
   }
 
   public static function itemAjax(array $form, FormStateInterface $form_state) {
@@ -2207,7 +2553,7 @@ class ParagraphsWidget extends WidgetBase {
     $widget_state = static::getWidgetState($elements['#field_parents'], $field_name, $form_state);
 
     if ($elements['#required'] && $widget_state['real_item_count'] < 1) {
-      $form_state->setError($elements, t('@name field is required.', ['@name' => $this->fieldDefinition->getLabel()]));
+      $form_state->setError($elements, $this->t('@name field is required.', ['@name' => $this->fieldDefinition->getLabel()]));
     }
 
     static::setWidgetState($elements['#field_parents'], $field_name, $form_state, $widget_state);
@@ -2236,7 +2582,7 @@ class ParagraphsWidget extends WidgetBase {
       return $values;
     }
 
-    foreach ($values as $delta => &$item) {
+    foreach ($values as &$item) {
       if (isset($widget_state['paragraphs'][$item['_original_delta']]['entity'])
         && $widget_state['paragraphs'][$item['_original_delta']]['mode'] != 'remove') {
         /** @var \Drupal\paragraphs\ParagraphInterface $paragraphs_entity */
@@ -2250,14 +2596,20 @@ class ParagraphsWidget extends WidgetBase {
         // A content entity form saves without any rebuild. It needs to set the
         // language to update it in case of language change.
         $langcode_key = $paragraphs_entity->getEntityType()->getKey('langcode');
-        if ($paragraphs_entity->get($langcode_key)->value != $form_state->get('langcode')) {
+        $langcode = $form_state->get('langcode');
+        if (!isset($langcode) && isset($element['#host'])) {
+          // Use the host entity as a last resort to determine the langcode.
+          // @see self::formMultipleElements
+          $langcode = $element['#host']->language()->getId();
+        }
+        if ($paragraphs_entity->get($langcode_key)->value != $langcode) {
           // If a translation in the given language already exists, switch to
           // that. If there is none yet, update the language.
-          if ($paragraphs_entity->hasTranslation($form_state->get('langcode'))) {
-            $paragraphs_entity = $paragraphs_entity->getTranslation($form_state->get('langcode'));
+          if ($paragraphs_entity->hasTranslation($langcode)) {
+            $paragraphs_entity = $paragraphs_entity->getTranslation($langcode);
           }
           else {
-            $paragraphs_entity->set($langcode_key, $form_state->get('langcode'));
+            $paragraphs_entity->set($langcode_key, $langcode);
           }
         }
         if (isset($item['behavior_plugins'])) {
@@ -2289,6 +2641,8 @@ class ParagraphsWidget extends WidgetBase {
         elseif (!$form_state->isValidationComplete() && $form_state->getLimitValidationErrors() === NULL) {
           $violations = $paragraphs_entity->validate();
           $violations->filterByFieldAccess();
+          $hidden_fields = (array) $display->get('hidden');
+          $violations->filterByFields(array_keys($hidden_fields));
           if (!empty($violations)) {
             /** @var \Symfony\Component\Validator\ConstraintViolationInterface $violation */
             foreach ($violations as $violation) {
@@ -2373,7 +2727,7 @@ class ParagraphsWidget extends WidgetBase {
       $this->isTranslating = TRUE;
     }
     $langcode = $form_state->get('langcode');
-    if ($host->hasTranslation($langcode) && $host->getTranslation($langcode)->get($default_langcode_key)->value == 0) {
+    if (isset($langcode) && $host->hasTranslation($langcode) && $host->getTranslation($langcode)->get($default_langcode_key)->value == 0) {
       // Editing a translation.
       $this->isTranslating = TRUE;
     }

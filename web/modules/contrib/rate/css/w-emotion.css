@@ -55,7 +55,7 @@ div.emotion-rating-wrapper > div > div.rating-option-result {
   vertical-align: baseline;
 }
 
-input.emotion-rating-input {
+input.emotion-rating-input[type="radio"] {
   display: none;
 }
 button.emotion-rating-submit {

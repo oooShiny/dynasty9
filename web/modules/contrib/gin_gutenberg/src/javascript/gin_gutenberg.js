@@ -5,5 +5,8 @@
 
 import '../sass/gin_gutenberg.scss';
 
-(function ($, Drupal, drupalSettings, DrupalginGutenberg) {
-})(jQuery, Drupal, drupalSettings);
+if (document.body.classList.contains('gutenberg--enabled')) {
+  document.querySelector('.meta-sidebar__trigger').addEventListener('click', function () {
+    document.querySelector('.edit-post-header__settings .interface-pinned-items .components-button').click();
+  });
+}

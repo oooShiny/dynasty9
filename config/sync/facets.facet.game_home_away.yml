@@ -11,6 +11,8 @@ id: game_home_away
 name: Home/Away
 weight: -7
 min_count: 1
+missing: false
+missing_label: others
 url_alias: home_away
 facet_source_id: 'search_api:views_page__game_search__page_1'
 field_identifier: home_away

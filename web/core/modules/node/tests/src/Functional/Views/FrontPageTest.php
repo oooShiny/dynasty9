@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\node\Functional\Views;
 
-use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
+use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
 use Drupal\Tests\views\Functional\ViewTestBase;
 use Drupal\views\Tests\AssertViewsCacheTagsTrait;
 use Drupal\views\ViewExecutable;
@@ -19,17 +21,13 @@ use Drupal\views\Views;
  */
 class FrontPageTest extends ViewTestBase {
 
+  use AssertPageCacheContextsAndTagsTrait;
   use AssertViewsCacheTagsTrait;
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $dumpHeaders = TRUE;
+  protected $defaultTheme = 'stark';
 
   /**
    * The entity storage for nodes.
@@ -48,8 +46,8 @@ class FrontPageTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = []): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->nodeStorage = $this->container->get('entity_type.manager')
       ->getStorage('node');
@@ -58,7 +56,7 @@ class FrontPageTest extends ViewTestBase {
   /**
    * Tests the frontpage.
    */
-  public function testFrontPage() {
+  public function testFrontPage(): void {
     $site_name = $this->randomMachineName();
     $this->config('system.site')
       ->set('name', $site_name)
@@ -83,7 +81,7 @@ class FrontPageTest extends ViewTestBase {
     $this->executeView($view);
     $view->preview();
 
-    $this->assertEquals(new FormattableMarkup('Welcome to @site_name', ['@site_name' => $site_name]), $view->getTitle(), 'The welcome title is used for the empty view.');
+    $this->assertEquals('Welcome!', $view->getTitle(), 'The welcome title is used for the empty view.');
     $view->destroy();
 
     // Create some nodes on the frontpage view. Add more than 10 nodes in order
@@ -96,7 +94,7 @@ class FrontPageTest extends ViewTestBase {
       $values['promote'] = TRUE;
       $values['status'] = TRUE;
       // Test descending sort order.
-      $values['created'] = REQUEST_TIME - $i;
+      $values['created'] = \Drupal::time()->getRequestTime() - $i;
       // Test the sticky order.
       if ($i == 5) {
         $values['sticky'] = TRUE;
@@ -177,25 +175,9 @@ class FrontPageTest extends ViewTestBase {
   }
 
   /**
-   * Tests the frontpage when logged in as admin.
-   */
-  public function testAdminFrontPage() {
-    // When a user with sufficient permissions is logged in, views_ui adds
-    // contextual links to the homepage view. This verifies there are no errors.
-    \Drupal::service('module_installer')->install(['views_ui']);
-    // Log in root user with sufficient permissions.
-    $this->drupalLogin($this->rootUser);
-    // Test frontpage view.
-    $this->drupalGet('node');
-    $this->assertSession()->statusCodeEquals(200);
-    // Check that the frontpage view was rendered.
-    $this->assertSession()->responseMatches('/class=".+view-frontpage/');
-  }
-
-  /**
    * Tests the cache tags when using the "none" cache plugin.
    */
-  public function testCacheTagsWithCachePluginNone() {
+  public function testCacheTagsWithCachePluginNone(): void {
     $this->enablePageCaching();
     $this->doTestFrontPageViewCacheTags(FALSE);
   }
@@ -203,7 +185,7 @@ class FrontPageTest extends ViewTestBase {
   /**
    * Tests the cache tags when using the "tag" cache plugin.
    */
-  public function testCacheTagsWithCachePluginTag() {
+  public function testCacheTagsWithCachePluginTag(): void {
     $this->enablePageCaching();
 
     $view = Views::getView('frontpage');
@@ -219,7 +201,7 @@ class FrontPageTest extends ViewTestBase {
   /**
    * Tests the cache tags when using the "time" cache plugin.
    */
-  public function testCacheTagsWithCachePluginTime() {
+  public function testCacheTagsWithCachePluginTime(): void {
     $this->enablePageCaching();
 
     $view = Views::getView('frontpage');
@@ -268,7 +250,6 @@ class FrontPageTest extends ViewTestBase {
     ];
 
     $render_cache_tags = Cache::mergeTags($empty_node_listing_cache_tags, $cache_context_tags);
-    $render_cache_tags = Cache::mergeTags($render_cache_tags, ['config:system.site']);
     $this->assertViewsCacheTags(
       $view,
       $empty_node_listing_cache_tags,
@@ -276,7 +257,7 @@ class FrontPageTest extends ViewTestBase {
       $render_cache_tags
     );
     $expected_tags = Cache::mergeTags($empty_node_listing_cache_tags, $cache_context_tags);
-    $expected_tags = Cache::mergeTags($expected_tags, ['http_response', 'rendered', 'config:user.role.anonymous', 'config:system.site']);
+    $expected_tags = Cache::mergeTags($expected_tags, ['http_response', 'rendered', 'config:user.role.anonymous']);
     $this->assertPageCacheContextsAndTags(
       Url::fromRoute('view.frontpage.page_1'),
       $cache_contexts,
@@ -324,12 +305,11 @@ class FrontPageTest extends ViewTestBase {
     $cache_context_tags = \Drupal::service('cache_contexts_manager')->convertTokensToKeys($cache_contexts)->getCacheTags();
     $first_page_output_cache_tags = Cache::mergeTags($first_page_result_cache_tags, $cache_context_tags);
     $first_page_output_cache_tags = Cache::mergeTags($first_page_output_cache_tags, [
-        'config:filter.format.plain_text',
-        'node_view',
-        'user_view',
-        'user:0',
-      ]
-    );
+      'config:filter.format.plain_text',
+      'node_view',
+      'user_view',
+      'user:0',
+    ]);
     $view->setDisplay('page_1');
     $view->setCurrentPage(0);
     $this->assertViewsCacheTags(

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\contact\Kernel;
 
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
@@ -25,6 +27,9 @@ class MessageEntityTest extends EntityKernelTestBase {
     'contact_test',
   ];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->installConfig(['contact', 'contact_test']);
@@ -33,7 +38,7 @@ class MessageEntityTest extends EntityKernelTestBase {
   /**
    * Tests some of the methods.
    */
-  public function testMessageMethods() {
+  public function testMessageMethods(): void {
     $message_storage = $this->container->get('entity_type.manager')->getStorage('contact_message');
     $message = $message_storage->create(['contact_form' => 'feedback']);
 
@@ -58,14 +63,14 @@ class MessageEntityTest extends EntityKernelTestBase {
     $this->assertEquals('sender_mail', $message->getSenderMail());
     $this->assertTrue($message->copySender());
 
-    $no_access_user = $this->createUser(['uid' => 2]);
-    $access_user = $this->createUser(['uid' => 3], ['access site-wide contact form']);
-    $admin = $this->createUser(['uid' => 4], ['administer contact forms']);
+    $no_access_user = $this->createUser([], NULL, FALSE, ['uid' => 2]);
+    $access_user = $this->createUser(['access site-wide contact form'], NULL, FALSE, ['uid' => 3]);
+    $admin = $this->createUser(['administer contact forms'], NULL, FALSE, ['uid' => 4]);
 
     $this->assertFalse(\Drupal::entityTypeManager()->getAccessControlHandler('contact_message')->createAccess(NULL, $no_access_user));
     $this->assertTrue(\Drupal::entityTypeManager()->getAccessControlHandler('contact_message')->createAccess(NULL, $access_user));
-    $this->assertTrue($message->access('edit', $admin));
-    $this->assertFalse($message->access('edit', $access_user));
+    $this->assertTrue($message->access('update', $admin));
+    $this->assertFalse($message->access('update', $access_user));
   }
 
 }

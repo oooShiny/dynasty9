@@ -12,9 +12,9 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\inline_entity_form\InlineFormInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -54,6 +54,13 @@ class EntityInlineForm implements InlineFormInterface {
   protected $moduleHandler;
 
   /**
+   * The theme manager.
+   *
+   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   */
+  protected $themeManager;
+
+  /**
    * Constructs the inline entity form controller.
    *
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
@@ -64,12 +71,15 @@ class EntityInlineForm implements InlineFormInterface {
    *   The module handler.
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
    *   The entity type.
+   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
+   *   The theme manager.
    */
-  public function __construct(EntityFieldManagerInterface $entity_field_manager, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, EntityTypeInterface $entity_type) {
+  public function __construct(EntityFieldManagerInterface $entity_field_manager, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, EntityTypeInterface $entity_type, ThemeManagerInterface $theme_manager) {
     $this->entityFieldManager = $entity_field_manager;
     $this->entityTypeManager = $entity_type_manager;
     $this->moduleHandler = $module_handler;
     $this->entityType = $entity_type;
+    $this->themeManager = $theme_manager;
   }
 
   /**
@@ -80,7 +90,8 @@ class EntityInlineForm implements InlineFormInterface {
       $container->get('entity_field.manager'),
       $container->get('entity_type.manager'),
       $container->get('module_handler'),
-      $entity_type
+      $entity_type,
+      $container->get('theme.manager')
     );
   }
 
@@ -173,7 +184,10 @@ class EntityInlineForm implements InlineFormInterface {
     $entity = $entity_form['#entity'];
     $form_display = $this->getFormDisplay($entity, $entity_form['#form_mode']);
     $form_display->buildForm($entity, $entity_form, $form_state);
-    $entity_form['#ief_element_submit'][] = [get_class($this), 'submitCleanFormState'];
+    $entity_form['#ief_element_submit'][] = [
+      get_class($this),
+      'submitCleanFormState',
+    ];
     // Inline entities inherit the parent language.
     $langcode_key = $this->entityType->getKey('langcode');
     if ($langcode_key && isset($entity_form[$langcode_key])) {
@@ -199,8 +213,9 @@ class EntityInlineForm implements InlineFormInterface {
     // Determine the children of the entity form before it has been altered.
     $children_before = Element::children($entity_form);
 
-    // Allow other modules to alter the form.
+    // Allow other modules and themes to alter the form.
     $this->moduleHandler->alter('inline_entity_form_entity_form', $entity_form, $form_state);
+    $this->themeManager->alter('inline_entity_form_entity_form', $entity_form, $form_state);
 
     // Determine the children of the entity form after it has been altered.
     $children_after = Element::children($entity_form);
@@ -234,6 +249,7 @@ class EntityInlineForm implements InlineFormInterface {
         $entity_form[$child]['#group'] = implode('][', $entity_form[$entity_form[$child]['#group']]['#parents']);
       }
     }
+    $entity_form['#attached']['library'][] = 'core/drupal.form';
 
     return $entity_form;
   }
@@ -253,9 +269,10 @@ class EntityInlineForm implements InlineFormInterface {
       $form_display->validateFormValues($entity, $entity_form, $form_state);
       $entity->setValidationRequired(FALSE);
 
-      foreach ($form_state->getErrors() as $name => $message) {
+      foreach ($form_state->getErrors() as $message) {
         // $name may be unknown in $form_state and
-        // $form_state->setErrorByName($name, $message) may suppress the error message.
+        // $form_state->setErrorByName($name, $message) may suppress the error
+        // message.
         $form_state->setError($triggering_element, $message);
       }
     }
@@ -303,7 +320,10 @@ class EntityInlineForm implements InlineFormInterface {
     // Invoke all specified builders for copying form values to entity fields.
     if (isset($entity_form['#entity_builders'])) {
       foreach ($entity_form['#entity_builders'] as $function) {
-        call_user_func_array($function, [$entity->getEntityTypeId(), $entity, &$entity_form, &$form_state]);
+        call_user_func_array(
+          $function,
+          [$entity->getEntityTypeId(), $entity, &$entity_form, &$form_state]
+        );
       }
     }
   }
@@ -313,15 +333,16 @@ class EntityInlineForm implements InlineFormInterface {
    *
    * After field_attach_submit() has run and the form has been closed, the form
    * state still contains field data in $form_state->get('field'). Unless that
-   * data is removed, the next form with the same #parents (reopened add form,
-   * for example) will contain data (i.e. uploaded files) from the previous form.
+   * data is removed, the next form with the same #parents (reopened add
+   * form, for example) will contain data (i.e. uploaded files) from the
+   * previous form.
    *
-   * @param $entity_form
+   * @param array $entity_form
    *   The entity form.
-   * @param $form_state
+   * @param Drupal\Core\Form\FormStateInterface $form_state
    *   The form state of the parent form.
    */
-  public static function submitCleanFormState(&$entity_form, FormStateInterface $form_state) {
+  public static function submitCleanFormState(array &$entity_form, FormStateInterface $form_state) {
     /** @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $entity_form['#entity'];
     $bundle = $entity->bundle();

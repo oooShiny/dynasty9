@@ -12,7 +12,7 @@ field_name: field_background_color
 entity_type: node
 bundle: twitter_hidden_image
 label: 'Background color'
-description: 'Add a background color to fill if the main image isn''t big enough'
+description: "Add a background color to fill if the main image isn't big enough"
 required: false
 translatable: false
 default_value:

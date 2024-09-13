@@ -4,16 +4,17 @@ namespace Drupal\auto_entitylabel\Form;
 
 use Drupal\auto_entitylabel\AutoEntityLabelManager;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class AutoEntityLabelForm.
+ * Administrative form to enable/configure auto_entitylabel on an entity type.
  */
 class AutoEntityLabelForm extends ConfigFormBase {
 
@@ -83,6 +84,8 @@ class AutoEntityLabelForm extends ConfigFormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   Config Factory.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface|null $typed_config_manager
+   *   The typed config manager.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
@@ -94,12 +97,13 @@ class AutoEntityLabelForm extends ConfigFormBase {
    */
   public function __construct(
     ConfigFactoryInterface $config_factory,
+    TypedConfigManagerInterface $typed_config_manager,
     EntityTypeManagerInterface $entity_type_manager,
     RouteMatchInterface $route_match,
     ModuleHandlerInterface $moduleHandler,
-    AccountInterface $user
+    AccountInterface $user,
   ) {
-    parent::__construct($config_factory);
+    parent::__construct($config_factory, $typed_config_manager);
     $this->entityTypeManager = $entity_type_manager;
     $this->routeMatch = $route_match;
     $route_options = $this->routeMatch->getRouteObject()->getOptions();
@@ -110,6 +114,20 @@ class AutoEntityLabelForm extends ConfigFormBase {
     $this->entityTypeBundleOf = $entity_type->getEntityType()->getBundleOf();
     $this->moduleHandler = $moduleHandler;
     $this->user = $user;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
+      $container->get('entity_type.manager'),
+      $container->get('current_route_match'),
+      $container->get('module_handler'),
+      $container->get('current_user')
+    );
   }
 
   /**
@@ -133,19 +151,6 @@ class AutoEntityLabelForm extends ConfigFormBase {
    */
   public function getFormId() {
     return 'auto_entitylabel_settings_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('entity_type.manager'),
-      $container->get('current_route_match'),
-      $container->get('module_handler'),
-      $container->get('current_user')
-    );
   }
 
   /**
@@ -213,7 +218,8 @@ class AutoEntityLabelForm extends ConfigFormBase {
     $form['auto_entitylabel']['pattern'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Pattern for the label'),
-      '#description' => $this->t('Leave blank for using the per default generated label. Otherwise this string will be used as label. Use the syntax [token] if you want to insert a replacement pattern.'),
+      '#description' => $this->t('Leave blank for using the per default generated label. Otherwise this string will be used as label. Use the syntax [token] if you want to insert a replacement pattern.
+      <br>Pattern string can be translated via User interface translation by searching fot the string <b>@pattern</b>.'),
       '#default_value' => $config->get('pattern') ?: '',
       '#attributes' => ['class' => ['pattern-label']],
       '#states' => $invisible_state,
@@ -284,7 +290,15 @@ class AutoEntityLabelForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->configFactory->getEditable($this->getConfigName());
     $form_state->cleanValues();
-    foreach (['status', 'pattern', 'escape', 'preserve_titles', 'save', 'chunk'] as $key) {
+    foreach (
+      [
+        'status',
+        'pattern',
+        'escape',
+        'preserve_titles',
+        'save',
+        'chunk',
+      ] as $key) {
       $config->set($key, $form_state->getValue($key));
     }
 
@@ -305,6 +319,16 @@ class AutoEntityLabelForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
   }
 
+  /**
+   * Prepares a batch for resaving all labels.
+   *
+   * @param string $entity_type
+   *   The entity type.
+   * @param string|null $bundle
+   *   The bundle.
+   * @param int $chunk
+   *   The chunk to handle in the batch.
+   */
   protected function setBatch($entity_type, $bundle, $chunk) {
     $ids = $this->getIds($entity_type, $bundle);
     $chunks = array_chunk($ids, $chunk);
@@ -323,14 +347,25 @@ class AutoEntityLabelForm extends ConfigFormBase {
       'title' => $this->t('Re-saving labels'),
       'progress_message' => $this->t('Completed @current out of @total chunks.'),
       'finished' => '\Drupal\auto_entitylabel\Batch\ResaveBatch::batchFinished',
-      'operations' => $operations
+      'operations' => $operations,
     ];
 
     batch_set($batch);
   }
 
+  /**
+   * Get the IDs for for an entity type.
+   *
+   * @param string $entity_type
+   *   The entity type to get the IDs for.
+   * @param string|null $bundle
+   *   The bundle to get the IDs for.
+   *
+   * @return array
+   *   An array with IDs.
+   */
   public function getIds($entity_type, $bundle) {
-    $query = $this->entityTypeManager->getStorage($bundle)->getQuery();
+    $query = $this->entityTypeManager->getStorage($bundle)->getQuery()->accessCheck(TRUE);
     switch ($bundle) {
       case 'taxonomy_term':
         return $query->condition('vid', $entity_type, 'IN')->execute();

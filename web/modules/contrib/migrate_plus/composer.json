@@ -30,14 +30,8 @@
     "config": {
         "preferred-install": "dist"
     },
-    "require-dev": {
-        "drush/drush": "^10"
-    },
-    "extra": {
-        "drush": {
-            "services": {
-                "drush.services.yml": "^9 || ^10"
-            }
-        }
+    "require": {
+        "php": ">=7.4",
+        "drupal/core": ">=9.1"
     }
 }

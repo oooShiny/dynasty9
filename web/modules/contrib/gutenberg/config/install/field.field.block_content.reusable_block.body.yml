@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.reusable_block
     - field.storage.block_content.body
+    - filter.format.plain_text
   module:
     - text
   enforced:
@@ -21,4 +22,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   display_summary: false
+  required_summary: false
+  allowed_formats:
+    - plain_text
 field_type: text_with_summary

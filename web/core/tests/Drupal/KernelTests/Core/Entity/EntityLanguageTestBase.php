@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\KernelTests\Core\Entity;
 
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -41,7 +43,10 @@ abstract class EntityLanguageTestBase extends EntityKernelTestBase {
 
   protected static $modules = ['language', 'entity_test'];
 
-  protected function setUp() {
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
     parent::setUp();
 
     $this->languageManager = $this->container->get('language_manager');
@@ -56,17 +61,17 @@ abstract class EntityLanguageTestBase extends EntityKernelTestBase {
     $this->installConfig(['language']);
 
     // Create the test field.
-    module_load_install('entity_test');
+    $this->container->get('module_handler')->loadInclude('entity_test', 'install');
     entity_test_install();
 
     // Enable translations for the test entity type.
     $this->state->set('entity_test.translation', TRUE);
 
     // Create a translatable test field.
-    $this->fieldName = mb_strtolower($this->randomMachineName() . '_field_name');
+    $this->fieldName = $this->randomMachineName() . '_field_name';
 
     // Create an untranslatable test field.
-    $this->untranslatableFieldName = mb_strtolower($this->randomMachineName() . '_field_name');
+    $this->untranslatableFieldName = $this->randomMachineName() . '_field_name';
 
     // Create field fields in all entity variations.
     foreach (entity_test_entity_types() as $entity_type) {

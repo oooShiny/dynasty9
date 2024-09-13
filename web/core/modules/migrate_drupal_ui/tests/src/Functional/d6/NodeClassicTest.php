@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\migrate_drupal_ui\Functional\d6;
 
 use Drupal\migrate_drupal\NodeMigrateType;
@@ -27,12 +29,6 @@ class NodeClassicTest extends MigrateUpgradeExecuteTestBase {
     'config_translation',
     'migrate_drupal_ui',
     'telephone',
-    'aggregator',
-    'book',
-    'forum',
-    'statistics',
-    // Required for translation migrations.
-    'migrate_drupal_multilingual',
   ];
 
   /**
@@ -54,30 +50,34 @@ class NodeClassicTest extends MigrateUpgradeExecuteTestBase {
    * {@inheritdoc}
    */
   protected function getEntityCounts() {
+    return [];
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getEntityCountsIncremental() {
+    return [];
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getAvailablePaths() {
+    return [];
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getMissingPaths() {
+    return [];
   }
 
   /**
    * Tests node classic migration via the UI.
    */
-  public function testNodeClassicUpgrade() {
+  public function testNodeClassicUpgrade(): void {
     // Add a node classic migrate table to d8.
     $this->makeNodeMigrateMapTable(NodeMigrateType::NODE_MIGRATE_TYPE_CLASSIC, '6');
 

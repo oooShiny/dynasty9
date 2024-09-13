@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\node\Kernel;
 
 use Drupal\Core\Database\Database;
@@ -10,8 +12,7 @@ use Drupal\user\Entity\User;
 use Drupal\field\Entity\FieldStorageConfig;
 
 /**
- * Tests node_access and select queries with node_access tag functionality with
- * multiple languages with node_access_test_language which is language-aware.
+ * Tests multilingual node access with a language-aware module.
  *
  * @group node
  */
@@ -23,6 +24,14 @@ class NodeAccessLanguageAwareTest extends NodeAccessTestBase {
    * @var array
    */
   protected static $modules = ['language', 'node_access_test_language'];
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Remove and fix test to not rely on super user.
+   * @see https://www.drupal.org/project/drupal/issues/3437620
+   */
+  protected bool $usesSuperUserAccessPolicy = TRUE;
 
   /**
    * A set of nodes to use in testing.
@@ -45,6 +54,9 @@ class NodeAccessLanguageAwareTest extends NodeAccessTestBase {
    */
   protected $webUser;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -149,7 +161,7 @@ class NodeAccessLanguageAwareTest extends NodeAccessTestBase {
   /**
    * Tests node access and node access queries with multiple node languages.
    */
-  public function testNodeAccessLanguageAware() {
+  public function testNodeAccessLanguageAware(): void {
     // The node_access_test_language module only grants view access.
     $expected_node_access = ['view' => TRUE, 'update' => FALSE, 'delete' => FALSE];
     $expected_node_access_no_access = ['view' => FALSE, 'update' => FALSE, 'delete' => FALSE];

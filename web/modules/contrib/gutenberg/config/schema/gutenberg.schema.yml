@@ -2,7 +2,9 @@ action.configuration.reusable_block_delete_action:
   type: action_configuration_default
   label: 'Delete reusable block'
 
-# TODO normalize the gutenberg.settings schema so its mappable.
+gutenberg.settings:
+  type: config_object
+  label: 'Gutenberg settings'
 
 # \Drupal\gutenberg\Plugin\Editor\Gutenberg plugin
 editor.settings.gutenberg:

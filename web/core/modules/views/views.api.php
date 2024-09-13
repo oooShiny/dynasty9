@@ -420,6 +420,25 @@ function hook_views_data() {
     ],
   ];
 
+  // Computed field example. Computed fields are not associated with actual data
+  // tables and fields, and therefore have no schema. Instead, they are computed
+  // when the value is read from the entity. Here's the definition of a computed
+  // field that exists for a particular entity type. The value of the field will
+  // be calculated by a defined class. If the defined class for the computed
+  // fields differs between multiple bundles of the same entity type, then each
+  // of those fields should be added separately.
+  // @see \Drupal\Core\TypedData\DataDefinitionInterface::setComputed().
+  // @see \Drupal\Core\TypedData\DataDefinitionInterface::setClass().
+  $data['example_table']['computed_bundle_field'] = [
+    'title' => t('Computed Bundle Field'),
+    'help' => t('The computed bundle field'),
+    'field' => [
+      'id' => 'field',
+      'default_formatter' => 'string',
+      'field_name' => 'computed_bundle_field',
+    ],
+  ];
+
   // Area example. Areas are not generally associated with actual data
   // tables and fields. This example is from views_views_data(), which defines
   // the "Global" table (not really a table, but a group of Fields, Filters,
@@ -501,9 +520,11 @@ function hook_views_data_alter(array &$data) {
 /**
  * Override the default Views data for a Field API field.
  *
- * The field module's implementation of hook_views_data() invokes this for each
- * field storage, in the module that defines the field type. It is not invoked
- * in other modules.
+ * When collecting the views data, views_views_data() invokes this hook for each
+ * field storage definition, on the module that provides the field storage
+ * definition. If the return value is empty, the result of
+ * views_field_default_views_data() is used instead. Then the result is altered
+ * by invoking hook_field_views_data_alter() on all modules.
  *
  * If no hook implementation exists, hook_views_data() falls back to
  * views_field_default_views_data().
@@ -585,7 +606,7 @@ function hook_field_views_data_alter(array &$data, \Drupal\field\FieldStorageCon
 /**
  * Alter the Views data on a per field basis.
  *
- * The field module's implementation of hook_views_data_alter() invokes this for
+ * The Views module's implementation of hook_views_data_alter() invokes this for
  * each field storage, in the module that defines the field type. It is not
  * invoked in other modules.
  *
@@ -611,7 +632,7 @@ function hook_field_views_data_alter(array &$data, \Drupal\field\FieldStorageCon
 function hook_field_views_data_views_data_alter(array &$data, \Drupal\field\FieldStorageConfigInterface $field) {
   $field_name = $field->getName();
   $data_key = 'field_data_' . $field_name;
-  $entity_type_id = $field->entity_type;
+  $entity_type_id = $field->getTargetEntityTypeId();
   $entity_type = \Drupal::entityTypeManager()->getDefinition($entity_type_id);
   $pseudo_field_name = 'reverse_' . $field_name . '_' . $entity_type_id;
   [$label] = views_entity_field_label($entity_type_id, $field_name);
@@ -659,7 +680,7 @@ function hook_views_query_substitutions(ViewExecutable $view) {
   // Example from views_views_query_substitutions().
   return [
     '***CURRENT_VERSION***' => \Drupal::VERSION,
-    '***CURRENT_TIME***' => REQUEST_TIME,
+    '***CURRENT_TIME***' => \Drupal::time()->getRequestTime(),
     '***LANGUAGE_language_content***' => \Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId(),
     PluginBase::VIEWS_QUERY_LANGUAGE_SITE_DEFAULT => \Drupal::languageManager()->getDefaultLanguage()->getId(),
   ];

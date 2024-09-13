@@ -1,9 +1,6 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\Core\Extension\ThemeHandlerTest.
- */
+declare(strict_types=1);
 
 namespace Drupal\Tests\Core\Extension;
 
@@ -64,7 +61,7 @@ class ThemeHandlerTest extends UnitTestCase {
     $container->expects($this->any())
       ->method('get')
       ->with('class_loader')
-      ->will($this->returnValue($this->createMock(ClassLoader::class)));
+      ->willReturn($this->createMock(ClassLoader::class));
     \Drupal::setContainer($container);
   }
 
@@ -72,33 +69,35 @@ class ThemeHandlerTest extends UnitTestCase {
    * Tests rebuilding the theme data.
    *
    * @see \Drupal\Core\Extension\ThemeHandler::rebuildThemeData()
+   * @group legacy
    */
-  public function testRebuildThemeData() {
+  public function testRebuildThemeData(): void {
+    $this->expectDeprecation("\Drupal\Core\Extension\ThemeHandlerInterface::rebuildThemeData() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. Use \Drupal::service('extension.list.theme')->reset()->getList() instead. See https://www.drupal.org/node/3413196");
     $this->themeList->expects($this->once())
       ->method('reset')
       ->willReturnSelf();
     $this->themeList->expects($this->once())
       ->method('getList')
-      ->will($this->returnValue([
-        'seven' => new Extension($this->root, 'theme', 'core/themes/seven/seven.info.yml', 'seven.theme'),
-      ]));
+      ->willReturn([
+        'stark' => new Extension($this->root, 'theme', 'core/themes/stark/stark.info.yml', 'stark.theme'),
+      ]);
 
     $theme_data = $this->themeHandler->rebuildThemeData();
     $this->assertCount(1, $theme_data);
-    $info = $theme_data['seven'];
+    $info = $theme_data['stark'];
 
     // Ensure some basic properties.
     $this->assertInstanceOf('Drupal\Core\Extension\Extension', $info);
-    $this->assertEquals('seven', $info->getName());
-    $this->assertEquals('core/themes/seven/seven.info.yml', $info->getPathname());
-    $this->assertEquals('core/themes/seven/seven.theme', $info->getExtensionPathname());
+    $this->assertEquals('stark', $info->getName());
+    $this->assertEquals('core/themes/stark/stark.info.yml', $info->getPathname());
+    $this->assertEquals('core/themes/stark/stark.theme', $info->getExtensionPathname());
 
   }
 
   /**
    * Tests empty libraries in theme.info.yml file.
    */
-  public function testThemeLibrariesEmpty() {
+  public function testThemeLibrariesEmpty(): void {
     $theme = new Extension($this->root, 'theme', 'core/modules/system/tests/themes/test_theme_libraries_empty', 'test_theme_libraries_empty.info.yml');
     try {
       $this->themeHandler->addTheme($theme);

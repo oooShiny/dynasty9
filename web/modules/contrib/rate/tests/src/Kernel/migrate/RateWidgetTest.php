@@ -172,7 +172,7 @@ class RateWidgetTest extends MigrateSqlSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $id = $this->randomMachineName(16);
     $this->migration->id()->willReturn($id);

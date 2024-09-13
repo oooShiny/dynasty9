@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\field\Functional\Views;
 
 use Drupal\field\Entity\FieldConfig;
@@ -43,8 +45,8 @@ class FieldUITest extends FieldTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = ['field_test_views']): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->account = $this->drupalCreateUser(['administer views']);
     $this->drupalLogin($this->account);
@@ -56,7 +58,7 @@ class FieldUITest extends FieldTestBase {
   /**
    * Tests basic field handler settings in the UI.
    */
-  public function testHandlerUI() {
+  public function testHandlerUI(): void {
     $url = "admin/structure/views/nojs/handler/test_view_fieldapi/default/field/field_name_0";
     $this->drupalGet($url);
 
@@ -105,7 +107,7 @@ class FieldUITest extends FieldTestBase {
   /**
    * Tests the basic field handler form when aggregation is enabled.
    */
-  public function testHandlerUIAggregation() {
+  public function testHandlerUIAggregation(): void {
     // Enable aggregation.
     $edit = ['group_by' => '1'];
     $this->drupalGet('admin/structure/views/nojs/display/test_view_fieldapi/default/group_by');
@@ -127,7 +129,7 @@ class FieldUITest extends FieldTestBase {
   /**
    * Tests adding a boolean field filter handler.
    */
-  public function testBooleanFilterHandler() {
+  public function testBooleanFilterHandler(): void {
     // Create a boolean field.
     $field_name = 'field_boolean';
     $field_storage = FieldStorageConfig::create([

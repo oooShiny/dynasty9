@@ -37,8 +37,8 @@ class CronJobListBuilder extends DraggableListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var \Drupal\ultimate_cron\CronJobInterface $entity */
-    $icon = drupal_get_path('module', 'ultimate_cron') . '/icons/hourglass.png';
-    $behind_icon = ['#prefix' => ' ', '#theme' => 'image', '#uri' => file_create_url($icon), '#title' => t('Job is behind schedule!')];
+    $icon = \Drupal::service('extension.list.module')->getPath('ultimate_cron') . '/icons/hourglass.png';
+    $behind_icon = ['#prefix' => ' ', '#theme' => 'image', '#uri' => \Drupal::service('file_url_generator')->generateAbsoluteString($icon), '#title' => t('Job is behind schedule!')];
 
     $log_entry = $entity->loadLatestLogEntry();
     $row['label'] = $entity->label();
@@ -49,7 +49,7 @@ class CronJobListBuilder extends DraggableListBuilder {
       $row['scheduled']['behind'] = $behind_icon;
     }
     // If the start time is 0, the jobs have never been run.
-    $row['started']['#markup'] = $log_entry->start_time ? \Drupal::service('date.formatter')->format($log_entry->start_time, "short") : $this->t('Never');
+    $row['started']['#markup'] = $log_entry->start_time ? \Drupal::service('date.formatter')->format((int) $log_entry->start_time, "short") : $this->t('Never');
 
     // Display duration
     $progress = $entity->isLocked() ? $entity->formatProgress() : '';
@@ -128,6 +128,19 @@ class CronJobListBuilder extends DraggableListBuilder {
     }
 
     return $operations;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function load() {
+    $entity_ids = $this->getEntityIds();
+    $entities = $this->storage->loadMultiple($entity_ids);
+
+    // Sort the entities using the entity class's sort() method.
+    // See \Drupal\Core\Config\Entity\ConfigEntityBase::sort().
+    uasort($entities, [$this->entityType->getClass(), 'sort']);
+    return $entities;
   }
 
 }

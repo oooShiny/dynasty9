@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\field\Functional\Rest;
 
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\NodeType;
-use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
+use Drupal\Tests\rest\Functional\EntityResource\ConfigEntityResourceTestBase;
 
-abstract class FieldConfigResourceTestBase extends EntityResourceTestBase {
+abstract class FieldConfigResourceTestBase extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -82,7 +84,9 @@ abstract class FieldConfigResourceTestBase extends EntityResourceTestBase {
       'label' => 'field_llama',
       'langcode' => 'en',
       'required' => FALSE,
-      'settings' => [],
+      'settings' => [
+        'allowed_formats' => [],
+      ],
       'status' => TRUE,
       'translatable' => TRUE,
       'uuid' => $this->entity->uuid(),
@@ -94,6 +98,7 @@ abstract class FieldConfigResourceTestBase extends EntityResourceTestBase {
    */
   protected function getNormalizedPostEntity() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
   /**

@@ -2,20 +2,20 @@
 
 namespace Drupal\search_api\Plugin\search_api\processor;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Core\Entity\Entity\EntityViewMode;
 use Drupal\Core\Link;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Session\UserSession;
-use Drupal\Core\Theme\ThemeInitializationInterface;
-use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Core\Url;
 use Drupal\search_api\Datasource\DatasourceInterface;
 use Drupal\search_api\Item\ItemInterface;
 use Drupal\search_api\LoggerTrait;
 use Drupal\search_api\Plugin\search_api\processor\Property\RenderedItemProperty;
 use Drupal\search_api\Processor\ProcessorPluginBase;
+use Drupal\search_api\Utility\ThemeSwitcherInterface;
+use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -53,25 +53,11 @@ class RenderedItem extends ProcessorPluginBase {
   protected $renderer;
 
   /**
-   * Theme manager service.
+   * The theme switcher.
    *
-   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   * @var \Drupal\search_api\Utility\ThemeSwitcherInterface|null
    */
-  protected $themeManager;
-
-  /**
-   * Theme initialization service.
-   *
-   * @var \Drupal\Core\Theme\ThemeInitializationInterface
-   */
-  protected $themeInitialization;
-
-  /**
-   * Theme settings config.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
+  protected $themeSwitcher;
 
   /**
    * {@inheritdoc}
@@ -82,10 +68,8 @@ class RenderedItem extends ProcessorPluginBase {
 
     $plugin->setAccountSwitcher($container->get('account_switcher'));
     $plugin->setRenderer($container->get('renderer'));
+    $plugin->setThemeSwitcher($container->get('search_api.theme_switcher'));
     $plugin->setLogger($container->get('logger.channel.search_api'));
-    $plugin->setThemeManager($container->get('theme.manager'));
-    $plugin->setThemeInitializer($container->get('theme.initialization'));
-    $plugin->setConfigFactory($container->get('config.factory'));
 
     return $plugin;
   }
@@ -137,71 +121,25 @@ class RenderedItem extends ProcessorPluginBase {
   }
 
   /**
-   * Retrieves the theme manager.
+   * Retrieves the theme switcher.
    *
-   * @return \Drupal\Core\Theme\ThemeManagerInterface
-   *   The theme manager.
+   * @return \Drupal\search_api\Utility\ThemeSwitcherInterface
+   *   The theme switcher.
    */
-  protected function getThemeManager() {
-    return $this->themeManager ?: \Drupal::theme();
+  public function getThemeSwitcher(): ThemeSwitcherInterface {
+    return $this->themeSwitcher ?: \Drupal::service('search_api.theme_switcher');
   }
 
   /**
-   * Sets the theme manager.
+   * Sets the theme switcher.
    *
-   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
-   *   The theme manager.
+   * @param \Drupal\search_api\Utility\ThemeSwitcherInterface $theme_switcher
+   *   The new theme switcher.
    *
    * @return $this
    */
-  protected function setThemeManager(ThemeManagerInterface $theme_manager) {
-    $this->themeManager = $theme_manager;
-    return $this;
-  }
-
-  /**
-   * Retrieves the theme initialization service.
-   *
-   * @return \Drupal\Core\Theme\ThemeInitializationInterface
-   *   The theme initialization service.
-   */
-  protected function getThemeInitializer() {
-    return $this->themeInitialization ?: \Drupal::service('theme.initialization');
-  }
-
-  /**
-   * Sets the theme initialization service.
-   *
-   * @param \Drupal\Core\Theme\ThemeInitializationInterface $theme_initialization
-   *   The theme initialization service.
-   *
-   * @return $this
-   */
-  protected function setThemeInitializer(ThemeInitializationInterface $theme_initialization) {
-    $this->themeInitialization = $theme_initialization;
-    return $this;
-  }
-
-  /**
-   * Retrieves the config factory service.
-   *
-   * @return \Drupal\Core\Config\ConfigFactoryInterface
-   *   The config factory.
-   */
-  protected function getConfigFactory() {
-    return $this->configFactory ?: \Drupal::configFactory();
-  }
-
-  /**
-   * Sets the config factory service.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The config factory.
-   *
-   * @return $this
-   */
-  protected function setConfigFactory(ConfigFactoryInterface $config_factory) {
-    $this->configFactory = $config_factory;
+  public function setThemeSwitcher(ThemeSwitcherInterface $theme_switcher): self {
+    $this->themeSwitcher = $theme_switcher;
     return $this;
   }
 
@@ -233,20 +171,7 @@ class RenderedItem extends ProcessorPluginBase {
   public function addFieldValues(ItemInterface $item) {
     // Switch to the default theme in case the admin theme (or any other theme)
     // is enabled.
-    $active_theme = $this->getThemeManager()->getActiveTheme();
-    $default_theme = $this->getConfigFactory()
-      ->get('system.theme')
-      ->get('default');
-    $default_theme = $this->getThemeInitializer()
-      ->getActiveThemeByName($default_theme);
-    $active_theme_switched = FALSE;
-    if ($default_theme->getName() !== $active_theme->getName()) {
-      $this->getThemeManager()->setActiveTheme($default_theme);
-      // Ensure that static cached default variables are set correctly,
-      // especially the directory variable.
-      drupal_static_reset('template_preprocess');
-      $active_theme_switched = TRUE;
-    }
+    $previous_theme = $this->getThemeSwitcher()->switchToDefault();
 
     // Fields for which some view mode config is missing.
     $unset_view_modes = [];
@@ -256,10 +181,18 @@ class RenderedItem extends ProcessorPluginBase {
     foreach ($fields as $field) {
       $configuration = $field->getConfiguration();
 
+      // If a (non-anonymous) role is selected, then also add the authenticated
+      // user role.
+      $roles = $configuration['roles'];
+      $authenticated = RoleInterface::AUTHENTICATED_ID;
+      if (array_diff($roles, [$authenticated, RoleInterface::ANONYMOUS_ID])) {
+        $roles[$authenticated] = $authenticated;
+      }
+
       // Change the current user to our dummy implementation to ensure we are
       // using the configured roles.
       $this->getAccountSwitcher()
-        ->switchTo(new UserSession(['roles' => $configuration['roles']]));
+        ->switchTo(new UserSession(['roles' => array_values($roles)]));
 
       $datasource_id = $item->getDatasourceId();
       $datasource = $item->getDatasource();
@@ -271,6 +204,10 @@ class RenderedItem extends ProcessorPluginBase {
         if (!isset($configuration['view_mode'][$datasource_id][$bundle])) {
           $unset_view_modes[$field->getFieldIdentifier()] = $field->getLabel();
         }
+
+        // Restore the original user.
+        $this->getAccountSwitcher()->switchBack();
+
         continue;
       }
       $view_mode = (string) $configuration['view_mode'][$datasource_id][$bundle];
@@ -280,13 +217,17 @@ class RenderedItem extends ProcessorPluginBase {
         if ($build) {
           // Add the excerpt to the render array to allow adding it to view modes.
           $build['#search_api_excerpt'] = $item->getExcerpt();
-          $value = (string) $this->getRenderer()->renderPlain($build);
+          $value = (string) DeprecationHelper::backwardsCompatibleCall(
+            \Drupal::VERSION, '10.3.0',
+            fn () => $this->getRenderer()->renderInIsolation($build),
+            fn () => $this->getRenderer()->renderPlain($build),
+          );
           if ($value) {
             $field->addValue($value);
           }
         }
       }
-      catch (\Exception $e) {
+      catch (\Throwable $e) {
         // This could throw all kinds of exceptions in specific scenarios, so we
         // just catch all of them here. Not having a field value for this field
         // probably makes sense in that case, so we just log an error and
@@ -298,34 +239,28 @@ class RenderedItem extends ProcessorPluginBase {
         ];
         $this->logException($e, '%type while trying to render item %item_id with view mode %view_mode for search index %index: @message in %function (line %line of %file).', $variables);
       }
-    }
 
-    // Restore the original user.
-    $this->getAccountSwitcher()->switchBack();
+      // Restore the original user.
+      $this->getAccountSwitcher()->switchBack();
+    }
 
     // Restore the original theme if themes got switched before.
-    if ($active_theme_switched) {
-      $this->getThemeManager()->setActiveTheme($active_theme);
-      // Ensure that static cached default variables are set correctly,
-      // especially the directory variable.
-      drupal_static_reset('template_preprocess');
-    }
+    $this->getThemeSwitcher()->switchBack($previous_theme);
 
-    if ($unset_view_modes > 0) {
-      foreach ($unset_view_modes as $field_id => $field_label) {
-        $url = new Url('entity.search_api_index.field_config', [
-          'search_api_index' => $this->index->id(),
-          'field_id' => $field_id,
-        ]);
-        $context = [
-          '%index' => $this->index->label(),
-          '%field_id' => $field_id,
-          '%field_label' => $field_label,
-          'link' => (new Link($this->t('Field settings'), $url))->toString(),
-        ];
-        $this->getLogger()
-          ->warning('The field %field_label (%field_id) on index %index is missing view mode configuration for some datasources or bundles. Please review (and re-save) the field settings.', $context);
-      }
+    // Log a warning for any unset view modes.
+    foreach ($unset_view_modes as $field_id => $field_label) {
+      $url = new Url('entity.search_api_index.field_config', [
+        'search_api_index' => $this->index->id(),
+        'field_id' => $field_id,
+      ]);
+      $context = [
+        '%index' => $this->index->label(),
+        '%field_id' => $field_id,
+        '%field_label' => $field_label,
+        'link' => (new Link($this->t('Field settings'), $url))->toString(),
+      ];
+      $this->getLogger()
+        ->warning('The field %field_label (%field_id) on index %index is missing view mode configuration for some datasources or bundles. Review (and re-save) the field settings.', $context);
     }
   }
 

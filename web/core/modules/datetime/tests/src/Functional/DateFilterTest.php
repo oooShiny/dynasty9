@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\datetime\Functional;
 
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
@@ -7,7 +9,6 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\views\Functional\ViewTestBase;
-use Drupal\views\Tests\ViewTestData;
 
 /**
  * Test exposed datetime filters functionality.
@@ -50,9 +51,8 @@ class DateFilterTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
-    ViewTestData::createTestViews(static::class, ['datetime_test']);
+  protected function setUp($import_test_views = TRUE, $modules = ['datetime_test']): void {
+    parent::setUp($import_test_views, $modules);
 
     // Add a date field to page nodes.
     $node_type = NodeType::create([
@@ -82,7 +82,7 @@ class DateFilterTest extends ViewTestBase {
   /**
    * Tests the limit of the expose operator functionality.
    */
-  public function testLimitExposedOperators() {
+  public function testLimitExposedOperators(): void {
 
     $this->drupalGet('test_exposed_filter_datetime');
     $this->assertSession()->statusCodeEquals(200);

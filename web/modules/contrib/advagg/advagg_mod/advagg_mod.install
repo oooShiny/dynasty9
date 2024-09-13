@@ -29,6 +29,17 @@ function advagg_mod_update_8301() {
 }
 
 /**
+ * Add missing configuration parameter for unified_multisite_dir when undefined.
+ */
+function advagg_mod_update_8501() {
+  $config = \Drupal::configFactory()->getEditable('advagg_mod.settings');
+  if (!is_string($config->get('unified_multisite_dir'))) {
+    $config->set('unified_multisite_dir', '');
+    $config->save();
+  }
+}
+
+/**
  * Implements hook_install().
  *
  * Clear caches.

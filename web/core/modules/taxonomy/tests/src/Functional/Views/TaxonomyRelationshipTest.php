@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\taxonomy\Functional\Views;
 
 use Drupal\node\NodeInterface;
@@ -35,8 +37,8 @@ class TaxonomyRelationshipTest extends TaxonomyTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = []): void {
+    parent::setUp($import_test_views, $modules);
 
     // Make term2 parent of term1.
     $this->term1->set('parent', $this->term2->id());
@@ -57,7 +59,7 @@ class TaxonomyRelationshipTest extends TaxonomyTestBase {
   /**
    * Tests the taxonomy parent plugin UI.
    */
-  public function testTaxonomyRelationships() {
+  public function testTaxonomyRelationships(): void {
 
     // Check the generated views data of taxonomy_index.
     $views_data = Views::viewsData()->get('taxonomy_index');

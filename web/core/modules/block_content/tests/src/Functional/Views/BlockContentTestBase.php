@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\block_content\Functional\Views;
 
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\block_content\Entity\BlockContentType;
-use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Tests\views\Functional\ViewTestBase;
-use Drupal\views\Tests\ViewTestData;
 
 /**
  * Base class for all block_content tests.
@@ -27,6 +27,8 @@ abstract class BlockContentTestBase extends ViewTestBase {
    */
   protected $permissions = [
     'administer blocks',
+    'administer block content',
+    'access block library',
   ];
 
   /**
@@ -40,26 +42,25 @@ abstract class BlockContentTestBase extends ViewTestBase {
     'block_content_test_views',
   ];
 
-  protected function setUp($import_test_views = TRUE) {
-    parent::setUp($import_test_views);
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp($import_test_views = TRUE, $modules = ['block_content_test_views']): void {
+    parent::setUp($import_test_views, $modules);
     // Ensure the basic bundle exists. This is provided by the standard profile.
     $this->createBlockContentType(['id' => 'basic']);
 
     $this->adminUser = $this->drupalCreateUser($this->permissions);
-
-    if ($import_test_views) {
-      ViewTestData::createTestViews(static::class, ['block_content_test_views']);
-    }
   }
 
   /**
-   * Creates a custom block.
+   * Creates a content block.
    *
    * @param array $values
    *   (optional) The values for the block_content entity.
    *
    * @return \Drupal\block_content\Entity\BlockContent
-   *   Created custom block.
+   *   Created content block.
    */
   protected function createBlockContent(array $values = []) {
     $status = 0;
@@ -71,24 +72,24 @@ abstract class BlockContentTestBase extends ViewTestBase {
     if ($block_content = BlockContent::create($values)) {
       $status = $block_content->save();
     }
-    $this->assertEquals(SAVED_NEW, $status, new FormattableMarkup('Created block content %info.', ['%info' => $block_content->label()]));
+    $this->assertEquals(SAVED_NEW, $status, "Created block content {$block_content->label()}.");
     return $block_content;
   }
 
   /**
-   * Creates a custom block type (bundle).
+   * Creates a block type (bundle).
    *
    * @param array $values
    *   An array of settings to change from the defaults.
    *
    * @return \Drupal\block_content\Entity\BlockContentType
-   *   Created custom block type.
+   *   Created block type.
    */
   protected function createBlockContentType(array $values = []) {
     // Find a non-existent random type name.
     if (!isset($values['id'])) {
       do {
-        $id = strtolower($this->randomMachineName(8));
+        $id = $this->randomMachineName(8);
       } while (BlockContentType::load($id));
     }
     else {
@@ -103,7 +104,7 @@ abstract class BlockContentTestBase extends ViewTestBase {
     $status = $bundle->save();
     block_content_add_body_field($bundle->id());
 
-    $this->assertEquals(SAVED_NEW, $status, new FormattableMarkup('Created block content type %bundle.', ['%bundle' => $bundle->id()]));
+    $this->assertEquals(SAVED_NEW, $status, sprintf('Created block content type %s.', $bundle->id()));
     return $bundle;
   }
 

@@ -26,8 +26,8 @@ need not match the current day).</p>
 <li>The dash ('-') operator specifies a range of values, for example: "1-6", which is equivalent to "1,2,3,4,5,6"</li>
 <li>The asterisk ('*') operator specifies all possible values for a field. For example, an asterisk in the hour time field would be equivalent to 'every hour' (subject to matching other specified fields).</li>
 <li>The slash ('/') operator (called "step") can be used to skip a given number of values. For example, "*/3" in the hour time field is equivalent to "0,3,6,9,12,15,18,21".</li>
-<li>The plus ('+') operator (called "offset") can be used as an offset to a given range. For example, "*/10+2" in the hour minute field is equivalent to "2,12,22,32,42,52".</li>
-<li>The at ('@') operator (called "skew") can be used as an auto calculated value for a given range. The value is calculated per job and is fixed per job. For example, if one job has the skew "2", the rule "*/10+@" in the hour minute field is equivalent to "2,12,22,32,42,52".</li>
+<li>The plus ('+') operator (called "offset") can be used as an offset to a given range. For example, "*/10+2" in the hour or minute field is equivalent to "2,12,22,32,42,52".</li>
+<li>The at ('@') operator (called "skew") can be used as an auto calculated value for a given range. The value is calculated per job and is fixed per job. For example, if one job has the skew "2", the rule "*/10+@" in the hour or minute field is equivalent to "2,12,22,32,42,52".</li>
 </ul>
 
 <h3>Examples</h3>

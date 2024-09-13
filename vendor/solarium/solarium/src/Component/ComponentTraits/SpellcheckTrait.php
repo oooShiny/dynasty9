@@ -32,7 +32,7 @@ trait SpellcheckTrait
      *
      * @return self Provides fluent interface
      */
-    public function setBuild(bool $build): SpellcheckInterface
+    public function setBuild(bool $build): self
     {
         return $this->setOption('build', $build);
     }
@@ -56,7 +56,7 @@ trait SpellcheckTrait
      *
      * @return self Provides fluent interface
      */
-    public function setReload(bool $reload): SpellcheckInterface
+    public function setReload(bool $reload): self
     {
         return $this->setOption('reload', $reload);
     }
@@ -145,6 +145,30 @@ trait SpellcheckTrait
     public function getOnlyMorePopular(): ?bool
     {
         return $this->getOption('onlymorepopular');
+    }
+
+    /**
+     * Set alternativetermcount option.
+     *
+     * The the number of suggestions to return for each query term existing in the index and/or dictionary.
+     *
+     * @param int $count
+     *
+     * @return SpellcheckInterface Provides fluent interface
+     */
+    public function setAlternativeTermCount(int $count): SpellcheckInterface
+    {
+        return $this->setOption('alternativetermcount', $count);
+    }
+
+    /**
+     * Get alternativetermcount option.
+     *
+     * @return int|null
+     */
+    public function getAlternativeTermCount(): ?int
+    {
+        return $this->getOption('alternativetermcount');
     }
 
     /**
@@ -242,7 +266,7 @@ trait SpellcheckTrait
      *
      * @return self Provides fluent interface
      */
-    public function setMaxCollationEvaluations(int $maxCollationEvaluations): SpellcheckInterface
+    public function setMaxCollationEvaluations(int $maxCollationEvaluations): self
     {
         return $this->setOption('maxcollationevaluations', $maxCollationEvaluations);
     }

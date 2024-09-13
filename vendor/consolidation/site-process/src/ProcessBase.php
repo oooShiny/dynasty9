@@ -125,20 +125,20 @@ class ProcessBase extends Process
     /**
      * @inheritDoc
      */
-    public function start(callable $callback = null, array $env = [])
+    public function start(callable $callback = null, array $env = []): void
     {
         $cmd = $this->getCommandLine();
         if ($this->isSimulated()) {
             $this->getLogger()->notice('Simulating: ' . $cmd);
             // Run a command that always succeeds (on Linux and Windows).
-            $this->setCommandLine('true');
+            $this->overrideCommandLine('true');
         } elseif ($this->isVerbose()) {
             $this->getLogger()->info('Executing: ' . $cmd);
         }
         parent::start($callback, $env);
         // Set command back to original value in case anyone asks.
         if ($this->isSimulated()) {
-            $this->setCommandLine($cmd);
+            $this->overrideCommandLine($cmd);
         }
     }
 
@@ -212,5 +212,24 @@ class ProcessBase extends Process
         $realTimeOutput = new RealtimeOutputHandler($this->realtimeStdout(), $this->realtimeStderr());
         $realTimeOutput->configure($this);
         return $realTimeOutput;
+    }
+
+    /**
+     * Overrides the command line to be executed.
+     *
+     * @param string|array $commandline The command to execute
+     *
+     * @return $this
+     *
+     * @todo refactor library so this hack to get around changes in
+     *   symfony/process 5 is unnecessary.
+     */
+    private function overrideCommandLine($commandline)
+    {
+        $commandlineSetter = function ($commandline) {
+            $this->commandline = $commandline;
+        };
+        $commandlineSetter->bindTo($this, Process::class)($commandline);
+        return $this;
     }
 }

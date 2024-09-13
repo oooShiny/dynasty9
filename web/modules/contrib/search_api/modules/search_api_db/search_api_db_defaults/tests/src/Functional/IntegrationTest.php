@@ -5,10 +5,16 @@ namespace Drupal\Tests\search_api_db_defaults\Functional;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\comment\Tests\CommentTestTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 use Drupal\search_api\Entity\Index;
 use Drupal\search_api\Entity\Server;
 use Drupal\Tests\BrowserTestBase;
+
+// Workaround to support tests against both Drupal 10.1 and Drupal 11.0.
+// @todo Remove once we depend on Drupal 10.2.
+if (!trait_exists(EntityReferenceFieldCreationTrait::class)) {
+  class_alias('\Drupal\Tests\field\Traits\EntityReferenceTestTrait', EntityReferenceFieldCreationTrait::class);
+}
 
 /**
  * Tests the correct installation of the default configs.
@@ -17,7 +23,7 @@ use Drupal\Tests\BrowserTestBase;
  */
 class IntegrationTest extends BrowserTestBase {
 
-  use StringTranslationTrait, CommentTestTrait, EntityReferenceTestTrait;
+  use StringTranslationTrait, CommentTestTrait, EntityReferenceFieldCreationTrait;
 
   /**
    * The profile to install as a basis for testing.
@@ -43,7 +49,7 @@ class IntegrationTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     // Create user with content access permission to see if the view is
@@ -61,6 +67,14 @@ class IntegrationTest extends BrowserTestBase {
     // Installation invokes a batch and this breaks it.
     \Drupal::state()->set('search_api_use_tracking_batch', FALSE);
 
+    // Uninstall the Core search module.
+    $edit_enable = [
+      'uninstall[search]' => TRUE,
+    ];
+    $this->drupalGet('admin/modules/uninstall');
+    $this->submitForm($edit_enable, 'Uninstall');
+    $this->submitForm([], 'Uninstall');
+
     // Install the search_api_db_defaults module.
     $edit_enable = [
       'modules[search_api_db_defaults][enable]' => TRUE,
@@ -68,11 +82,18 @@ class IntegrationTest extends BrowserTestBase {
     $this->drupalGet('admin/modules');
     $this->submitForm($edit_enable, 'Install');
 
-    $this->assertSession()->pageTextContains('Some required modules must be enabled');
+    $expected_page_title = 'Some required modules must be installed';
+    $expected_success_message = '3 modules have been installed: Database Search Defaults, Database Search, Search API';
+    // @todo Remove once we depend on Drupal 10.3.
+    if (version_compare(\Drupal::VERSION, '10.3', '<')) {
+      $expected_page_title = 'Some required modules must be enabled';
+      $expected_success_message = '3 modules have been enabled: Database Search Defaults, Database Search, Search API';
+    }
+    $this->assertSession()->pageTextContains($expected_page_title);
 
     $this->submitForm([], 'Continue');
 
-    $this->assertSession()->pageTextContains('3 modules have been enabled: Database Search Defaults, Database Search, Search API');
+    $this->assertSession()->pageTextContains($expected_success_message);
 
     $this->rebuildContainer();
 
@@ -101,15 +122,20 @@ class IntegrationTest extends BrowserTestBase {
 
     $this->drupalLogout();
     $this->drupalGet('search/content');
-    $this->assertSession()->pageTextContains('Please enter some keywords to search.');
+    $this->assertSession()->pageTextContains('Enter some keywords to search.');
     $this->assertSession()->pageTextNotContains($title);
     $this->assertSession()->responseNotContains('Error message');
-    $this->submitForm([], 'Search');
-    $this->assertSession()->pageTextNotContains($title);
-    $this->assertSession()->responseNotContains('Error message');
+    // @todo This suddenly stopped working due to #2568889. Figure out the new
+    //   optimal configuration for that form and then test for its behavior.
+    //   See #3313067.
+    // $this->submitForm([], 'Search');
+    // $this->assertSession()->pageTextNotContains($title);
+    // $this->assertSession()->responseNotContains('Error message');
     $this->submitForm(['keys' => 'test'], 'Search');
     $this->assertSession()->pageTextContains($title);
     $this->assertSession()->responseNotContains('Error message');
+    $this->assertSession()->pageTextNotContains('Enter some keywords.');
+    $this->assertSession()->pageTextNotContains('Your search yielded no results.');
 
     // Uninstall the module.
     $this->drupalLogin($this->adminUser);

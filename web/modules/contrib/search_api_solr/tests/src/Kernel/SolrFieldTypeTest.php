@@ -35,7 +35,7 @@ class SolrFieldTypeTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'language',
     'search_api',
     'search_api_solr',
@@ -48,7 +48,6 @@ class SolrFieldTypeTest extends KernelTestBase {
   public function setUp(): void {
     parent::setUp();
 
-    $fileSystem = \Drupal::service('file_system');
     $this->configNames = array_keys(\Drupal::service('file_system')->scanDirectory(__DIR__ . '/../../../config', '/search_api_solr.solr_field_type.text_/', ['key' => 'name']));
     foreach ($this->configNames as $config_name) {
       preg_match('/search_api_solr.solr_field_type.text_(.*)_\d+_\d+_\d+/', $config_name, $matches);
@@ -82,7 +81,9 @@ class SolrFieldTypeTest extends KernelTestBase {
 
     foreach ($this->configNames as $config_name) {
       $data = $default_config_storage->read($config_name);
-      $this->assertConfigSchema($typed_config, $config_name, $data);
+      if ($data !== FALSE) {
+        $this->assertConfigSchema($typed_config, $config_name, $data);
+      }
     }
   }
 

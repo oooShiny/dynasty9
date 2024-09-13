@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\history\Kernel\Views;
 
 use Drupal\Core\Database\Database;
@@ -40,16 +42,16 @@ class HistoryTimestampTest extends ViewsKernelTestBase {
     $this->installEntitySchema('node');
     $this->installEntitySchema('user');
     $this->installSchema('history', ['history']);
-    // Use classy theme because its marker is wrapped in a span so it can be
-    // easily targeted with xpath.
-    \Drupal::service('theme_installer')->install(['classy']);
-    \Drupal::theme()->setActiveTheme(\Drupal::service('theme.initialization')->initTheme('classy'));
+    // Use history_test_theme because its marker is wrapped in a span so it can
+    // be easily targeted with xpath.
+    \Drupal::service('theme_installer')->install(['history_test_theme']);
+    \Drupal::theme()->setActiveTheme(\Drupal::service('theme.initialization')->initTheme('history_test_theme'));
   }
 
   /**
    * Tests the handlers.
    */
-  public function testHandlers() {
+  public function testHandlers(): void {
     $nodes = [];
     $node = Node::create([
       'title' => 'n1',
@@ -69,18 +71,19 @@ class HistoryTimestampTest extends ViewsKernelTestBase {
     \Drupal::currentUser()->setAccount($account);
 
     $connection = Database::getConnection();
+    $requestTime = \Drupal::time()->getRequestTime();
     $connection->insert('history')
       ->fields([
         'uid' => $account->id(),
         'nid' => $nodes[0]->id(),
-        'timestamp' => REQUEST_TIME - 100,
+        'timestamp' => $requestTime - 100,
       ])->execute();
 
     $connection->insert('history')
       ->fields([
         'uid' => $account->id(),
         'nid' => $nodes[1]->id(),
-        'timestamp' => REQUEST_TIME + 100,
+        'timestamp' => $requestTime + 100,
       ])->execute();
 
     $column_map = [

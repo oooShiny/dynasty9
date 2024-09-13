@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
+  <meta charset="UTF-8">
+  <title>muse.ai | 404</title>
+  <meta name="description" content="Next-gen ad-free video hosting platform designed for simplicity.">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://muse.ai/static/imgs/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://muse.ai/static/imgs/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://muse.aistatic/imgs/favicons/favicon-16x16.png">
+  <link rel="manifest" href="https://muse.ai/manifest.json">
+  <link rel="mask-icon" href="https://muse.ai/static/imgs/favicons/safari-pinned-tab.svg" color="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="keywords" content="Next-gen Video Hosting Embedded Player Search Inside Video Artificial Intelligence">
+  <meta name="author" content="muse.ai &copy 2020">
+  <meta name="apple-mobile-web-app-title" content="muse.ai">
+  <meta name="application-name" content="muse.ai">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="muse.ai | The power of video made simple for you.">
+  <meta property="og:site_name" content="muse.ai">
+  <meta property="og:description" content="Next-gen ad-free video hosting platform designed for simplicity.">
+  <meta property="og:image" content="https://muse.ai/static/imgs/poster-img-fb.png">
+  <meta name="twitter:title" content="muse.ai | The power of video made simple for you.">
+  <meta name="twitter:description" content="Next-gen ad-free video hosting platform designed for simplicity.">
+  <meta name="twitter:image" content="https://muse.ai/static/imgs/poster-img-twitter.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex">
+  <style>
+    body
+    {
+      margin: 0;
+    }
+
+    .container
+    {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin: 0 auto;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      max-width: 1390px;
+      height: 100vh;
+    }
+
+    .content-box
+    {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 30px;
+    }
+
+    img
+    {
+      width: 140px;
+      margin-bottom: 30px;
+    }
+
+    h1
+    {
+      font-size: 70px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      margin-top: 0;
+      letter-spacing: -0.05rem;
+    }
+
+    h3
+    {
+      font-size: 30px;
+      text-align: center;
+      color: #9a9ca2;
+      font-weight: 200!important;
+    }
+
+    p, a
+    {
+      font-size: 18px;
+    }
+
+    a
+    {
+      color: #9a9ca2;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    a:hover
+    {
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content-box">
+      <img src="https://muse.ai/static/imgs/muse-logo.svg" alt="muse.ai logo">
+      <h1>404</h1>
+      <h3>The page you are looking for does not exist.</h3>
+      <div style="text-align: center;">
+        <p>
+          Go to <a href="https://muse.ai/">Home</a>,
+          <a href="https://muse.ai/video-artificial-intelligence">Video Artificial Intelligence</a>,
+          <a href="https://muse.ai/video-hosting">Video Hosting</a>,
+          <a href="https://muse.ai/search-inside-video">Video Search</a>,
+          <a href="https://muse.ai/about">About</a>,
+          <a href="https://muse.ai/docs">Docs</a>,
+          <a href="https://muse.ai/contact">Contact</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

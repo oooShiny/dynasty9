@@ -73,7 +73,7 @@ function hook_cronapi() {
   $items['example_my_cron_job_1'] = array(
     'title' => t('This is my cron job #1'),
     'file' => 'example.jobs.inc',
-    'file path' => drupal_get_path('module', 'example') . '/cron',
+    'file path' => \Drupal::service('extension.list.module')->getPath('example') . '/cron',
     'callback' => 'example_my_cron_job_callback',
     'callback arguments' => array('cronjob1'),
     'enabled' => FALSE,

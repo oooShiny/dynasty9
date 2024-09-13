@@ -2,14 +2,68 @@
 
 namespace Drupal\gin_login\Form;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteBuilderInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class SettingsForm.
  */
 class GinLoginConfigurationForm extends ConfigFormBase {
+
+  /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The File System service.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
+   * The route builder.
+   *
+   * @var \Drupal\Core\Routing\RouteBuilderInterface
+   */
+  protected $routeBuilder;
+
+  /**
+   * ConfirmDeleteForm constructor.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler service.
+   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
+   *   The file system service.
+   * @param \Drupal\Core\Routing\RouteBuilderInterface $router_builder
+   *   The route builder.
+   */
+  public function __construct(ModuleHandlerInterface $module_handler, FileSystemInterface $fileSystem, RouteBuilderInterface $router_builder) {
+    $this->moduleHandler = $module_handler;
+    $this->fileSystem = $fileSystem;
+    $this->routeBuilder = $router_builder;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('module_handler'),
+      $container->get('file_system'),
+      $container->get('router.builder')
+    );
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -34,12 +88,12 @@ class GinLoginConfigurationForm extends ConfigFormBase {
     $default_scheme = $this->config('system.file')->get('default_scheme');
     $form['logo'] = [
       '#type' => 'details',
-      '#title' => t('Logo image'),
+      '#title' => $this->t('Logo'),
       '#open' => TRUE,
     ];
     $form['logo']['default_logo'] = [
       '#type' => 'checkbox',
-      '#title' => t('Use default logo'),
+      '#title' => $this->t('Use default logo'),
       '#default_value' => $config->get('logo.use_default'),
       '#tree' => FALSE,
     ];
@@ -55,27 +109,28 @@ class GinLoginConfigurationForm extends ConfigFormBase {
 
     $form['logo']['settings']['logo_path'] = [
       '#type' => 'textfield',
-      '#title' => t('Path to custom logo'),
-      '#default_value' => $config->get('logo.path')? str_replace($default_scheme . '://',"",$config->get('logo.path')):'',
+      '#title' => $this->t('Path to custom logo'),
+      '#default_value' => $config->get('logo.path') ? str_replace($default_scheme . '://', "", $config->get('logo.path')) : '',
     ];
     $form['logo']['settings']['logo_upload'] = [
       '#type' => 'file',
-      '#title' => t('Upload logo image'),
-      '#maxlength' => 40,
-      '#description' => t("If you don't have direct file access to the server, use this field to upload your logo."),
+      '#title' => $this->t('Upload image'),
+      '#description' => $this->t("If you don't have direct file access to the server, use this field to upload your logo."),
       '#upload_validators' => [
-        'file_validate_is_image' => [],
+        'file_validate_extensions' => [
+          'png gif jpg jpeg apng webp avif svg',
+        ],
       ],
     ];
 
     $form['brand_image'] = [
       '#type' => 'details',
-      '#title' => t('Brand image'),
+      '#title' => $this->t('Wallpaper'),
       '#open' => TRUE,
     ];
     $form['brand_image']['default_brand_image'] = [
       '#type' => 'checkbox',
-      '#title' => t('Use random image'),
+      '#title' => $this->t('Use random image'),
       '#default_value' => $config->get('brand_image.use_default'),
       '#tree' => FALSE,
     ];
@@ -90,16 +145,18 @@ class GinLoginConfigurationForm extends ConfigFormBase {
     ];
     $form['brand_image']['settings']['brand_image_path'] = [
       '#type' => 'textfield',
-      '#title' => t('Path to custom brand image'),
-      '#default_value' => $config->get('brand_image.path')? str_replace($default_scheme . '://',"",$config->get('brand_image.path')):'',
+      '#title' => $this->t('Path to custom image'),
+      '#default_value' => $config->get('brand_image.path') ? str_replace($default_scheme . '://', "", $config->get('brand_image.path')) : '',
     ];
     $form['brand_image']['settings']['brand_image_upload'] = [
       '#type' => 'file',
-      '#title' => t('Upload Brand image'),
-      '#maxlength' => 40,
-      '#description' => t("If you don't have direct file access to the server, use this field to upload your brand image."),
+      '#title' => $this->t('Upload image'),
+      '#description' => $this->t("If you don't have direct file access to the server, use this field to upload your brand image."),
       '#upload_validators' => [
-          'file_validate_is_image' => [],
+        'file_validate_is_image' => [],
+        'file_validate_extensions' => [
+          'png gif jpg jpeg apng webp avif',
+        ],
       ],
     ];
     return parent::buildForm($form, $form_state);
@@ -110,7 +167,7 @@ class GinLoginConfigurationForm extends ConfigFormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
-    $moduleHandler = \Drupal::service('module_handler');
+    $moduleHandler = $this->moduleHandler;
 
     if ($moduleHandler->moduleExists('file')) {
       // Check for a new uploaded logo.
@@ -125,8 +182,8 @@ class GinLoginConfigurationForm extends ConfigFormBase {
       if ($form_state->getValue('default_logo')) {
         $form_state->unsetValue('logo_path');
       }
-      // If the user provided a path for a logo or favicon file, make sure a file
-      // exists at that path.
+      // If the user provided a path for a logo or favicon file,
+      // make sure a file exists at that path.
       if ($form_state->getValue('logo_path')) {
         $path = $this->validatePath($form_state->getValue('logo_path'));
         if (!$path) {
@@ -142,7 +199,8 @@ class GinLoginConfigurationForm extends ConfigFormBase {
           $form_state->setValue('brand_image_upload', $file);
         }
       }
-      // When intending to use the default brand image, unset the brand_image_path.
+      // When intending to use the default brand image,
+      // unset the brand_image_path.
       if ($form_state->getValue('default_brand_image')) {
         $form_state->unsetValue('brand_image_path');
       }
@@ -163,7 +221,7 @@ class GinLoginConfigurationForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
     $values = $form_state->getValues();
-    $file_system = \Drupal::service('file_system');
+    $file_system = $this->fileSystem;
     $default_scheme = $this->config('system.file')->get('default_scheme');
     $config = $this->config('gin_login.settings');
     try {
@@ -172,7 +230,8 @@ class GinLoginConfigurationForm extends ConfigFormBase {
         $values['default_logo'] = 0;
         $values['logo_path'] = $filename;
       }
-    } catch (FileException $e) {
+    }
+    catch (FileException $e) {
       // Ignore.
     }
 
@@ -182,7 +241,8 @@ class GinLoginConfigurationForm extends ConfigFormBase {
         $values['default_brand_image'] = 0;
         $values['brand_image_path'] = $filename;
       }
-    } catch (FileException $e) {
+    }
+    catch (FileException $e) {
       // Ignore.
     }
     unset($values['logo_upload']);
@@ -203,18 +263,21 @@ class GinLoginConfigurationForm extends ConfigFormBase {
     foreach ($values as $key => $value) {
       if ($key == 'default_logo') {
         $config->set('logo.use_default', $value);
-      } elseif ($key == 'logo_path') {
+      }
+      elseif ($key == 'logo_path') {
         $config->set('logo.path', $value);
-      } elseif ($key == 'default_brand_image') {
+      }
+      elseif ($key == 'default_brand_image') {
         $config->set('brand_image.use_default', $value);
-      } elseif ($key == 'brand_image_path') {
+      }
+      elseif ($key == 'brand_image_path') {
         $config->set('brand_image.path', $value);
       }
     }
 
     $config->save();
     // Rebuild the router.
-    \Drupal::service('router.builder')->rebuild();
+    $this->routeBuilder->rebuild();
   }
 
   /**
@@ -227,15 +290,16 @@ class GinLoginConfigurationForm extends ConfigFormBase {
    * @param string $path
    *   A path relative to the Drupal root or to the public files directory, or
    *   a stream wrapper URI.
+   *
    * @return mixed
    *   A valid path that can be displayed through the theme system, or FALSE if
    *   the path could not be validated.
    */
   protected function validatePath($path) {
-    $file_system = \Drupal::service('file_system');
+    $file_system = $this->fileSystem;
     // Absolute local file paths are invalid.
     if ($file_system->realpath($path) == $path) {
-    return FALSE;
+      return FALSE;
     }
     // A path relative to the Drupal root or a fully qualified URI is valid.
     if (is_file($path)) {
@@ -250,4 +314,5 @@ class GinLoginConfigurationForm extends ConfigFormBase {
     }
     return FALSE;
   }
+
 }

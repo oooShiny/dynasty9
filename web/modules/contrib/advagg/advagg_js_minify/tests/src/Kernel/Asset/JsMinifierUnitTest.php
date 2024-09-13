@@ -17,7 +17,7 @@ class JsMinifierUnitTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['advagg_js_minify'];
+  protected static $modules = ['advagg_js_minify'];
 
   /**
    * The Minifier.
@@ -29,7 +29,7 @@ class JsMinifierUnitTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installConfig('advagg_js_minify');
     $this->optimizer = \Drupal::service('advagg.js_minifier');
@@ -176,12 +176,6 @@ class JsMinifierUnitTest extends KernelTestBase {
    */
   public function testMinifyJsqueeze(array $js_asset, $contents) {
     $this->config('advagg_js_minify.settings')->set('minifier', 5)->save();
-
-    // Due to an odd bug we use a different test file for PHP5.x comparison.
-    // See https://www.drupal.org/node/2916193.
-    if (version_compare(phpversion(), '7', '<')) {
-      $js_asset['data'] .= '.php5';
-    }
     $expected = file_get_contents($js_asset['data'] . '.jsqueeze.js');
     $this->assertEquals($expected, $this->optimizer->optimize($contents, $js_asset, []));
   }

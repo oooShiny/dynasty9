@@ -137,4 +137,21 @@ class BlocksLibraryManager extends DefaultPluginManager {
     return NULL;
   }
 
+  /**
+   * Check if block has support for a feature.
+   * 
+   * @param array $block
+   *  Block definition.
+   * @param string $support
+   *  Feature to check.
+   * 
+   * @return bool
+   */
+  function blockHasSupport($block, $support) {
+    $definition = $this->getBlockDefinition($block['name']);
+    if (isset($definition['supports'][$support])) {
+      return TRUE;
+    }
+    return FALSE;
+  }
 }

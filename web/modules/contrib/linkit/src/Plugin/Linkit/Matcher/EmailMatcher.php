@@ -23,6 +23,9 @@ class EmailMatcher extends MatcherBase {
   public function execute($string) {
     $suggestions = new SuggestionCollection();
 
+    // Strip the mailto: prefix to match only the e-mail part of the string.
+    $string = str_replace('mailto:', '', $string);
+
     // Check for an e-mail address then return an e-mail match and create a
     // mail-to link if appropriate.
     if (filter_var($string, FILTER_VALIDATE_EMAIL)) {

@@ -193,27 +193,41 @@ class RateWidgetBaseForm extends ContentEntityForm {
     ];
 
     $vote_type = $entity->bundle();
-    $votes = [];
-
     $user_id = $entity->get('user_id')->target_id;
 
+    // Define which aggregation to use on the database query.
+    if ($value_type == 'points') {
+      $aggregation = 'SUM';
+    }
+    elseif ($value_type == 'percent') {
+      $aggregation = 'AVG';
+    }
+    else {
+      $aggregation = 'COUNT';
+    }
+
+    // Get the results for showing them in options.
     if (isset($results['result_type'])) {
       if ($results['result_type'] == 'user_vote_empty' || $results['result_type'] == 'user_vote_average') {
-        $votes = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, $user_id);
-        if ($results['result_type'] == 'user_vote_average' && count($votes) == 0) {
-          $votes = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget);
+        // Get the user votes first.
+        $option_values = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, $user_id, $aggregation);
+        if ($results['result_type'] == 'user_vote_average' && count($option_values) == 0) {
+          // Check if the options have the function field set.
+          $full_options = $settings->get('options');
+          foreach ($full_options as $option_id => $full_option) {
+            if (!empty($full_option['function'])) {
+              $function = $full_option['function'] . ':' . $voted_entity_type . '.' . $voted_entity->bundle() . '.' . $rate_widget;
+              $option_values[$full_option['value']] = $this->getResults($function);
+            }
+            else {
+              $option_values = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, NULL, $aggregation);
+            }
+          }
         }
       }
       else {
-        $votes = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget);
+        $option_values = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, NULL, $aggregation);
       }
-    }
-    // Sum of all options for numberupdown.
-    $all_votes = 0;
-    $count_votes = 0;
-    foreach ($votes as $vote) {
-      $all_votes += array_sum($vote);
-      $count_votes += count($vote);
     }
 
     // Save the results for each option separately and add classes.
@@ -226,23 +240,7 @@ class RateWidgetBaseForm extends ContentEntityForm {
         $form['value'][$key]['#attributes']['class'][] = $template . '-rating-input';
 
         // Set the option results.
-        if (isset($results['result_type']) && $results['result_type'] != 'vote_hidden') {
-          if ($template == 'numberupdown') {
-            if ($key > 0) {
-              $form['value'][$key]['#option_result'] = isset($all_votes) ? $all_votes : 0;
-            }
-          }
-          else {
-            // Use sum for points and count for option.
-            if ($value_type == 'option') {
-              $vote_sum[$key] = isset($votes[$key]) ? count($votes[$key]) : 0;
-            }
-            else {
-              $vote_sum[$key] = isset($votes[$key]) ? array_sum($votes[$key]) : 0;
-            }
-            $form['value'][$key]['#option_result'] = ($vote_sum[$key] < 0) ? ($vote_sum[$key]) * -1 : $vote_sum[$key];
-          }
-        }
+        $form['value'][$key]['#option_result'] = isset($option_values[$key]) ? round($option_values[$key], 2) : 0;
 
         if (isset($option_classes[$key]) && ($option_classes[$key] != NULL)) {
           $form['value'][$key]['#label_attributes']['class'][] = 'rating-label';
@@ -279,18 +277,18 @@ class RateWidgetBaseForm extends ContentEntityForm {
       $entity_value = $entity->getValue();
       if (isset($results['result_type']) && $results['result_type'] != 'vote_hidden') {
         if ($results['result_type'] == 'user_vote_empty') {
-          $vote_avg = isset($entity_value) ? $entity_value : 0;
+          $vote_avg = $entity_value ?? FALSE;
         }
         elseif ($results['result_type'] == 'user_vote_average') {
-          $vote_avg = isset($entity_value) ? $entity_value : number_format($this->getResults($result_function), 1);
+          $vote_avg = $entity_value ?? round($this->getResults($result_function), 1);
         }
         elseif ($results['result_type'] == 'vote_average') {
-          $vote_avg = number_format($this->getResults($result_function), 1);
+          $vote_avg = round($this->getResults($result_function), 1);
         }
         $form['value'][$key]['#option_result'] = $vote_avg;
         // Show the average value as stars.
         if ($entity->isNew()) {
-          if ($results['result_type'] == 'user_vote_average' || $results['result_type'] == 'vote_average') {
+          if ($results['result_type'] != 'user_vote_empty' && $vote_avg != FALSE) {
             foreach ($options as $option_id => $option) {
               if ($option_id <= $vote_avg) {
                 $form['value'][$option_id]['#label_attributes']['class']['average'] = 'average';
@@ -353,6 +351,7 @@ class RateWidgetBaseForm extends ContentEntityForm {
         'class' => [$template . '-rating-submit'],
       ],
       '#ajax' => [
+        'disable-refocus' => TRUE,
         'callback' => '::ajaxSubmit',
         'event' => 'click',
         'wrapper' => $form_id,
@@ -363,7 +362,7 @@ class RateWidgetBaseForm extends ContentEntityForm {
     ];
 
     // Set the url of the ajax call if the rate form is in a view.
-    if ($is_views_field == TRUE) {
+    if ($is_views_field == TRUE && !is_null($views_url)) {
       $form['submit']['#ajax']['url'] = $views_url;
       $form['submit']['#ajax']['options'] = [
         'query' => \Drupal::request()->query->all() + [FormBuilderInterface::AJAX_FORM_REQUEST => TRUE],
@@ -404,7 +403,7 @@ class RateWidgetBaseForm extends ContentEntityForm {
       $resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()] = $this->votingapiResult->getResults($entity->getVotedEntityType(), $entity->getVotedEntityId());
     }
 
-    $result = isset($resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()]) ? $resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()] : [];
+    $result = $resultCache[$entity->getVotedEntityType()][$entity->getVotedEntityId()] ?? [];
     $result = !empty($result) && array_key_exists($entity->bundle(), $result) ? $result[$entity->bundle()] : [];
 
     if ($result_function && array_key_exists($result_function, $result) && $result[$result_function]) {
@@ -436,6 +435,7 @@ class RateWidgetBaseForm extends ContentEntityForm {
     $value_type = $entity->get('value_type')->value;
     $user_id = $entity->get('user_id')->target_id;
     $disable_log = $this->config->get('disable_log');
+    $vote_type = $entity->bundle();
 
     $voted_entity = $this->entityTypeManager->getStorage($voted_entity_type)->load($voted_entity_id);
     $deadline_disabled = $this->checkDeadlineDisabled($voted_entity, $voting);
@@ -479,65 +479,66 @@ class RateWidgetBaseForm extends ContentEntityForm {
       $form['#results']['#deadline_disabled'] = $form['value']['#deadline_disabled'];
     }
 
-    // Get the votes to populate the option results.
-    $vote_type = $entity->bundle();
-    $votes = [];
+    // Define which aggregation to use on the database query.
+    if ($value_type == 'points') {
+      $aggregation = 'SUM';
+    }
+    elseif ($value_type == 'percent') {
+      $aggregation = 'AVG';
+    }
+    else {
+      $aggregation = 'COUNT';
+    }
+
+    // Get the results for showing them in options.
     if (isset($results['result_type'])) {
       if ($results['result_type'] == 'user_vote_empty' || $results['result_type'] == 'user_vote_average') {
-        $votes = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, $user_id);
-        if ($results['result_type'] == 'user_vote_average' && count($votes) == 0) {
-          $votes = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget);
+        // Get the user votes first.
+        $option_values = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, $user_id, $aggregation);
+        if ($results['result_type'] == 'user_vote_average' && count($option_values) == 0) {
+          // Check if the options have the function field set.
+          $full_options = $settings->get('options');
+          foreach ($full_options as $option_id => $full_option) {
+            if (!empty($full_option['function'])) {
+              $function = $full_option['function'] . ':' . $voted_entity_type . '.' . $voted_entity->bundle() . '.' . $rate_widget;
+              $option_values[$full_option['value']] = $this->getResults($function);
+            }
+            else {
+              $option_values = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, NULL, $aggregation);
+            }
+          }
         }
       }
       else {
-        $votes = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget);
+        $option_values = $plugin->getVotes($form_state->get('entity_type'), $form_state->get('entity_bundle'), $form_state->get('entity_id'), $vote_type, $value_type, $rate_widget, NULL, $aggregation);
       }
-    }
-    // Sum/count of all options for numberupdown/fivestar.
-    $all_votes = 0;
-    $count_votes = 0;
-    foreach ($votes as $vote) {
-      $all_votes += array_sum($vote);
-      $count_votes += count($vote);
     }
 
     // Handle the different templates/vote types.
     if (isset($template)) {
       if (isset($results['result_type']) && $results['result_type'] != 'vote_hidden') {
-        foreach ($options as $key => $option) {
-          if ($template == 'numberupdown') {
-            if ($key > 0) {
-              $form['value'][$key]['#option_result'] = isset($all_votes) ? $all_votes : 0;
-            }
-          }
-          elseif ($template != 'fivestar') {
-            if ($value_type == 'option') {
-              $vote_sum[$key] = isset($votes[$key]) ? count($votes[$key]) : 0;
-            }
-            else {
-              $vote_sum[$key] = isset($votes[$key]) ? array_sum($votes[$key]) : 0;
-            }
-            $form['value'][$key]['#option_result'] = ($vote_sum[$key] < 0) ? ($vote_sum[$key]) * -1 : $vote_sum[$key];
-          }
-        }
-        // Show the result after the last option (fivestar).
+        // Add the result after the last option (fivestar).
         if ($template == 'fivestar') {
           $entity_value = $entity->getValue();
           if ($results['result_type'] == 'user_vote_empty') {
-            $vote_avg = isset($entity_value) ? $entity_value : 0;
+            $vote_avg = $entity_value ?? FALSE;
           }
           elseif ($results['result_type'] == 'user_vote_average') {
-            $vote_avg = isset($entity_value) ? $entity_value : number_format($result_value, 1);
+            $vote_avg = $entity_value ?? round($result_value, 1);
           }
           elseif ($results['result_type'] == 'vote_average') {
-            $vote_avg = number_format($result_value, 1);
+            $vote_avg = round($result_value, 1);
           }
+          // Add the result to the last option.
+          $key = array_key_last($options);
           $form['value'][$key]['#option_result'] = $vote_avg;
 
           if ($entity->isNew()) {
-            foreach ($options as $option_id => $option) {
-              if ($option_id <= $vote_avg) {
-                $form['value'][$option_id]['#label_attributes']['class']['average'] = 'average';
+            if ($results['result_type'] != 'user_vote_empty' && $vote_avg != FALSE) {
+              foreach ($options as $option_id => $option) {
+                if ($option_id <= $vote_avg) {
+                  $form['value'][$option_id]['#label_attributes']['class']['average'] = 'average';
+                }
               }
             }
           }
@@ -549,6 +550,12 @@ class RateWidgetBaseForm extends ContentEntityForm {
                 }
               }
             }
+          }
+        }
+        // For all other templates - add the result to each option.
+        else {
+          foreach ($options as $key => $option) {
+            $form['value'][$key]['#option_result'] = isset($option_values[$key]) ? round($option_values[$key], 2) : 0;
           }
         }
       }

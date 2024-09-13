@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_tools\Kernel;
 
 use Drupal\migrate_tools\MigrateExecutable;
@@ -10,9 +12,9 @@ use Drupal\Tests\migrate\Kernel\MigrateTestBase;
 /**
  * Tests rolling back of imports.
  *
- * @group migrate
+ * @group migrate_tools
  */
-class MigrateRollbackTest extends MigrateTestBase {
+final class MigrateRollbackTest extends MigrateTestBase {
 
   /**
    * Modules to enable.

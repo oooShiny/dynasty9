@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\user\Functional\Rest;
 
 use Drupal\Core\Url;
@@ -136,7 +138,7 @@ abstract class UserResourceTestBase extends EntityResourceTestBase {
     return [
       'name' => [
         [
-          'value' => 'Dramallama',
+          'value' => 'Drama llama',
         ],
       ],
     ];
@@ -145,7 +147,7 @@ abstract class UserResourceTestBase extends EntityResourceTestBase {
   /**
    * Tests PATCHing security-sensitive base fields of the logged in account.
    */
-  public function testPatchDxForSecuritySensitiveBaseFields() {
+  public function testPatchDxForSecuritySensitiveBaseFields(): void {
     // The anonymous user is never allowed to modify itself.
     if (!static::$auth) {
       $this->markTestSkipped();
@@ -261,7 +263,7 @@ abstract class UserResourceTestBase extends EntityResourceTestBase {
   /**
    * Tests PATCHing security-sensitive base fields to change other users.
    */
-  public function testPatchSecurityOtherUser() {
+  public function testPatchSecurityOtherUser(): void {
     // The anonymous user is never allowed to modify other users.
     if (!static::$auth) {
       $this->markTestSkipped();
@@ -288,12 +290,12 @@ abstract class UserResourceTestBase extends EntityResourceTestBase {
 
     // Try changing user 1's email.
     $user1 = [
-        'mail' => [['value' => 'another_email_address@example.com']],
-        'uid' => [['value' => 1]],
-        'name' => [['value' => 'another_user_name']],
-        'pass' => [['existing' => $this->account->passRaw]],
-        'uuid' => [['value' => '2e9403a4-d8af-4096-a116-624710140be0']],
-      ] + $original_normalization;
+      'mail' => [['value' => 'another_email_address@example.com']],
+      'uid' => [['value' => 1]],
+      'name' => [['value' => 'another_user_name']],
+      'pass' => [['existing' => $this->account->passRaw]],
+      'uuid' => [['value' => '2e9403a4-d8af-4096-a116-624710140be0']],
+    ] + $original_normalization;
     $request_options[RequestOptions::BODY] = $this->serializer->encode($user1, static::$format);
     $response = $this->request('PATCH', $url, $request_options);
     // Ensure the email address has not changed.
@@ -307,7 +309,7 @@ abstract class UserResourceTestBase extends EntityResourceTestBase {
   protected function getExpectedUnauthorizedAccessMessage($method) {
     switch ($method) {
       case 'GET':
-        return "The 'access user profiles' permission is required and the user must be active.";
+        return "The 'access user profiles' permission is required.";
 
       case 'PATCH':
         return "Users can only update their own account, unless they have the 'administer users' permission.";
@@ -325,8 +327,13 @@ abstract class UserResourceTestBase extends EntityResourceTestBase {
    */
   protected function getExpectedUnauthorizedEntityAccessCacheability($is_authenticated) {
     // @see \Drupal\user\UserAccessControlHandler::checkAccess()
-    return parent::getExpectedUnauthorizedEntityAccessCacheability($is_authenticated)
-      ->addCacheTags(['user:3']);
+    $result = parent::getExpectedUnauthorizedEntityAccessCacheability($is_authenticated);
+
+    if (!\Drupal::currentUser()->hasPermission('access user profiles')) {
+      $result->addCacheContexts(['user']);
+    }
+
+    return $result;
   }
 
   /**

@@ -5,6 +5,8 @@ namespace Drupal\advagg_js_minify\Asset;
 use Drupal\Component\Utility\Unicode;
 use Drupal\advagg\Asset\SingleAssetOptimizerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ExtensionList;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Psr\Log\LoggerInterface;
 
@@ -16,16 +18,28 @@ class JsMinifier extends SingleAssetOptimizerBase {
   use StringTranslationTrait;
 
   /**
+   * The module extension list service.
+   *
+   * @var \Drupal\Core\Extension\ExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
    * Construct the optimizer instance.
    *
    * @param \Psr\Log\LoggerInterface $logger
    *   The logger service.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   A config factory for retrieving required config objects.
+   * @param ExtensionList $module_extension_list
+   *   The module extension list service.
    */
-  public function __construct(LoggerInterface $logger, ConfigFactoryInterface $config_factory) {
-    parent::__construct($logger);
+  public function __construct(LoggerInterface $logger, FileUrlGeneratorInterface $file_url_generator, ConfigFactoryInterface $config_factory, ExtensionList $module_extension_list) {
+    parent::__construct($logger, $file_url_generator);
     $this->config = $config_factory->get('advagg_js_minify.settings');
+    $this->moduleExtensionList = $module_extension_list;
   }
 
   /**
@@ -185,7 +199,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
 
     // Only include jsminplus.inc if the JSMinPlus class doesn't exist.
     if (!class_exists('\JSMinPlus')) {
-      include drupal_get_path('module', 'advagg_js_minify') . '/jsminplus.inc';
+      include $this->moduleExtensionList->getPath('advagg_js_minify') . '/jsminplus.inc';
       $nesting_level = ini_get('xdebug.max_nesting_level');
       if (!empty($nesting_level) && $nesting_level < 200) {
         ini_set('xdebug.max_nesting_level', 200);
@@ -219,7 +233,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
   public function minifyJspacker(&$contents) {
     // Use Packer on the contents of the aggregated file.
     if (!class_exists('\JavaScriptPacker')) {
-      include drupal_get_path('module', 'advagg_js_minify') . '/jspacker.inc';
+      include $this->moduleExtensionList->getPath('advagg_js_minify') . '/jspacker.inc';
     }
 
     // Add semicolons to the end of lines if missing.
@@ -241,7 +255,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
 
     // Only include jshrink.inc if the JShrink\Minifier class doesn't exist.
     if (!class_exists('\JShrink\Minifier')) {
-      include drupal_get_path('module', 'advagg_js_minify') . '/jshrink.inc';
+      include $this->moduleExtensionList->getPath('advagg_js_minify') . '/jshrink.inc';
       $nesting_level = ini_get('xdebug.max_nesting_level');
       if (!empty($nesting_level) && $nesting_level < 200) {
         ini_set('xdebug.max_nesting_level', 200);
@@ -278,7 +292,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
 
     // Only include jshrink.inc if the Patchwork\JSqueeze class doesn't exist.
     if (!class_exists('\Patchwork\JSqueeze')) {
-      include drupal_get_path('module', 'advagg_js_minify') . '/jsqueeze.inc';
+      include $this->moduleExtensionList->getPath('advagg_js_minify') . '/jsqueeze.inc';
       $nesting_level = ini_get('xdebug.max_nesting_level');
       if (!empty($nesting_level) && $nesting_level < 200) {
         ini_set('xdebug.max_nesting_level', 200);

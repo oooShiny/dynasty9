@@ -53,7 +53,7 @@ ultimate_cron.discover_jobs:
     _title: 'Discover jobs'
   requirements:
     _permission: 'administer ultimate cron'
-    _csrf: 'TRUE'
+    _csrf_token: 'TRUE'
 
 entity.ultimate_cron_job.edit_form:
   path: '/admin/config/system/cron/jobs/manage/{ultimate_cron_job}'

@@ -15,6 +15,6 @@ class TaggedSettings extends Settings {
    * Only valid for jobs tagged with the proper tag.
    */
   public function isValid($job = NULL) {
-    return $job ? in_array($this->name, $job->hook['tags']) : \Drupal\ultimate_cron\parent::isValid();
+    return $job ? in_array($this->name, $job->hook['tags']) : parent::isValid();
   }
 }

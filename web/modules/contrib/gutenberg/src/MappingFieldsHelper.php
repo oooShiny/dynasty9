@@ -5,7 +5,9 @@ namespace Drupal\gutenberg;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\gutenberg\Controller\UtilsController;
 use Drupal\gutenberg\Parser\BlockParser;
@@ -21,6 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MappingFieldsHelper implements ContainerInjectionInterface {
 
   use StringTranslationTrait;
+  use DependencySerializationTrait;
 
   /**
    * The config factory.
@@ -60,23 +63,51 @@ class MappingFieldsHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * Set the entity field values based on the mapping field settings.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The Drupal entity to presave.
+   * Validation callback that checks for empty required fields
    */
-  public function setFieldMappingValues(EntityInterface $entity) {
+  public function validateMappedFields(array $form, FormStateInterface $form_state) {
+    $entity = $form_state->getFormObject()->getEntity();
     $text_fields = UtilsController::getEntityTextFields($entity);
-
     if (count($text_fields) === 0) {
       return;
     }
+    $field_content = $form_state->getValue($text_fields[0])[0]['value'] ?? '';
 
-    $field_content = $entity->get($text_fields[0])->getString();
+    $fields = $this->getMappedValuesFromContent($field_content);
 
+    foreach ($fields as $key => $value) {
+      try {
+        $field_definition = $entity->get($key)->getFieldDefinition();
+
+        // Deal with translatable fields and node translations.
+        if ($field_definition->isRequired() && empty($value)) {
+          $form_state->setErrorByName($key, $this->t('%label field is required.', ['%label' => $field_definition->getLabel()]));
+        }
+      }
+        // The field/property might not exist.
+      catch (\Exception $e) {
+        $this->logger->error(
+          $this->t('Mapping field failed: @message', ['@message' => $e->getMessage()])
+        );
+      }
+    }
+  }
+
+  /**
+   * Parses gutenberg markup and returns an array of all the mapped
+   * blocks values.
+   *
+   * @param $field_content
+   *
+   * @return array
+   */
+  public function getMappedValuesFromContent(string $field_content) {
     // Fetch only blocks with mapping fields.
     $block_parser = new BlockParser();
-    $blocks = $block_parser->parse($field_content, [$this, 'filterMappingFieldsBlock']);
+    $blocks = $block_parser->parse($field_content, [
+      $this,
+      'filterMappingFieldsBlock',
+    ]);
 
     // Let's build the field's array of values.
     $fields = [];
@@ -142,12 +173,41 @@ class MappingFieldsHelper implements ContainerInjectionInterface {
         }
       }
     }
+    return $fields;
+  }
+
+  /**
+   * Set the entity field values based on the mapping field settings.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal entity to presave.
+   */
+  public function setFieldMappingValues(EntityInterface $entity) {
+    $text_fields = UtilsController::getEntityTextFields($entity);
+
+    if (count($text_fields) === 0) {
+      return;
+    }
+
+    $field_content = $entity->get($text_fields[0])->getString();
+
+    $original_field_content = '';
+    if ($entity->original) {
+      $original_field_content = $entity->original->get($text_fields[0])
+        ->getString();
+    }
+    // If content hasn't changed, no need to update fields.
+    if ($field_content === $original_field_content) {
+      return;
+    }
+
+    $fields = $this->getMappedValuesFromContent($field_content);
 
     foreach ($fields as $key => $value) {
       try {
         $entity->set($key, $value);
       }
-      // The field/property might not exist.
+        // The field/property might not exist.
       catch (\Exception $e) {
         $this->logger->error(
           $this->t('Mapping field failed: @message', ['@message' => $e->getMessage()])
@@ -223,6 +283,50 @@ class MappingFieldsHelper implements ContainerInjectionInterface {
       }
       if (isset($block[2])) {
         $result = array_merge($result, $this->getMappedFields($block[2]));
+      }
+    }
+
+    return $result;
+  }
+
+  /**
+   * Returns all mapping fields (recursively) from content.
+   *
+   * @param string $content
+   *   Content to check.
+   * @param array $blocks
+   *   Blocks to check.
+   *
+   * @return array
+   *   The list of mapping fields.
+   */
+  public function getMappedFieldsFromContent(string $content = NULL, array $blocks = []) {
+    $result = [];
+    if (empty($content) && empty($blocks)) {
+      return [];
+    }
+
+    if (!empty($content)) {
+      $block_parser = new BlockParser();
+      $blocks = $block_parser->parse($content);
+    }
+
+    foreach ($blocks as $block) {
+      $mapping_fields = $block['attrs']['mappingFields'] ?? [];
+
+      foreach ($mapping_fields as $field) {
+        $item = [];
+        $item['field'] = $field['field'];
+        if (isset($field['property'])) {
+          $item['property'] = $field['property'];
+        }
+        if (isset($field['attribute'])) {
+          $item['attribute'] = $field['attribute'];
+        }
+        $result[] = $item;
+      }
+      if (isset($block['innerBlocks']) && !empty($block['innerBlocks'])) {
+        $result = array_merge($result, $this->getMappedFieldsFromContent(NULL, $block['innerBlocks']));
       }
     }
 

@@ -12,10 +12,15 @@ use Drupal\Core\Routing\CurrentRouteMatch;
  * Implements hook_help().
  */
 function pager_help($route_name, CurrentRouteMatch $route_match) {
+  $x = [
+    '```php' => '<code>',
+    '```'    => '</code>',
+    "\n"     => "\n<br />",
+  ];
   switch ($route_name) {
     case 'help.page.pager':
-      $txt = file_get_contents(drupal_get_path('module', 'pager') . '/README.txt');
-      return str_replace("\n", "\n<br />", Html::escape($txt));
+      $txt = file_get_contents(\Drupal::service('extension.list.module')->getPath('pager') . '/README.md');
+      return str_replace(array_keys($x), array_values($x), Html::escape($txt));
   }
   return '';
 }

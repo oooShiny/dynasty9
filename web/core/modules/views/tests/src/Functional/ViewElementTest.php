@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Functional;
 
 use Drupal\views\Views;
@@ -21,13 +23,13 @@ class ViewElementTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'starterkit_theme';
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->enableViewsTestModule();
   }
@@ -35,7 +37,7 @@ class ViewElementTest extends ViewTestBase {
   /**
    * Tests the rendered output and form output of a view element.
    */
-  public function testViewElement() {
+  public function testViewElement(): void {
     $view = Views::getView('test_view_embed');
     $view->setDisplay();
     // Test a form.
@@ -73,10 +75,9 @@ class ViewElementTest extends ViewTestBase {
   }
 
   /**
-   * Tests the rendered output and form output of a view element, using the
-   * embed display plugin.
+   * Tests the rendered output and form output of the "embed" display plugin.
    */
-  public function testViewElementEmbed() {
+  public function testViewElementEmbed(): void {
     $view = Views::getView('test_view_embed');
     $view->setDisplay();
     // Test a form.

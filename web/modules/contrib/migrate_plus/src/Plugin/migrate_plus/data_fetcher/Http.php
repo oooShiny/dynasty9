@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\migrate_plus\Plugin\migrate_plus\data_fetcher;
 
+use Drupal\Component\Utility\NestedArray;
+use GuzzleHttp\Client;
+use Drupal\migrate_plus\AuthenticationPluginInterface;
+use Psr\Http\Message\ResponseInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate_plus\DataFetcherPluginBase;
@@ -32,24 +38,18 @@ class Http extends DataFetcherPluginBase implements ContainerFactoryPluginInterf
 
   /**
    * The HTTP client.
-   *
-   * @var \GuzzleHttp\Client
    */
-  protected $httpClient;
+  protected ?Client $httpClient;
 
   /**
    * The request headers.
-   *
-   * @var array
    */
-  protected $headers = [];
+  protected array $headers = [];
 
   /**
    * The data retrieval client.
-   *
-   * @var \Drupal\migrate_plus\AuthenticationPluginInterface
    */
-  protected $authenticationPlugin;
+  protected AuthenticationPluginInterface $authenticationPlugin;
 
   /**
    * {@inheritdoc}
@@ -61,15 +61,17 @@ class Http extends DataFetcherPluginBase implements ContainerFactoryPluginInterf
     // Ensure there is a 'headers' key in the configuration.
     $configuration += ['headers' => []];
     $this->setRequestHeaders($configuration['headers']);
+    // Set GET request-method by default.
+    $configuration += ['method' => 'GET'];
+    $this->configuration['method'] = $configuration['method'];
   }
 
   /**
    * Returns the initialized authentication plugin.
    *
-   * @return \Drupal\migrate_plus\AuthenticationPluginInterface
    *   The authentication plugin.
    */
-  public function getAuthenticationPlugin() {
+  public function getAuthenticationPlugin(): AuthenticationPluginInterface {
     if (!isset($this->authenticationPlugin)) {
       $this->authenticationPlugin = \Drupal::service('plugin.manager.migrate_plus.authentication')->createInstance($this->configuration['authentication']['plugin'], $this->configuration['authentication']);
     }
@@ -79,30 +81,31 @@ class Http extends DataFetcherPluginBase implements ContainerFactoryPluginInterf
   /**
    * {@inheritdoc}
    */
-  public function setRequestHeaders(array $headers) {
+  public function setRequestHeaders(array $headers): void {
     $this->headers = $headers;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getRequestHeaders() {
+  public function getRequestHeaders(): array {
     return !empty($this->headers) ? $this->headers : [];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getResponse($url) {
+  public function getResponse($url): ResponseInterface {
     try {
       $options = ['headers' => $this->getRequestHeaders()];
       if (!empty($this->configuration['authentication'])) {
-        $options = array_merge($options, $this->getAuthenticationPlugin()->getAuthenticationOptions());
+        $options = NestedArray::mergeDeep($options, $this->getAuthenticationPlugin()->getAuthenticationOptions());
       }
       if (!empty($this->configuration['request_options'])) {
-        $options = array_merge($options, $this->configuration['request_options']);
+        $options = NestedArray::mergeDeep($options, $this->configuration['request_options']);
       }
-      $response = $this->httpClient->get($url, $options);
+      $method = $this->configuration['method'] ?? 'GET';
+      $response = $this->httpClient->request($method, $url, $options);
       if (empty($response)) {
         throw new MigrateException('No response at ' . $url . '.');
       }
@@ -116,9 +119,29 @@ class Http extends DataFetcherPluginBase implements ContainerFactoryPluginInterf
   /**
    * {@inheritdoc}
    */
-  public function getResponseContent($url) {
-    $response = $this->getResponse($url);
-    return $response->getBody();
+  public function getResponseContent(string $url): string {
+    return (string) $this->getResponse($url)->getBody();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getNextUrls(string $url): array {
+    $next_urls = [];
+
+    $headers = $this->getResponse($url)->getHeader('Link');
+    if (!empty($headers)) {
+      $headers = explode(',', $headers[0]);
+      foreach ($headers as $header) {
+        $matches = [];
+        preg_match('/^<(.*)>; rel="next"$/', trim($header), $matches);
+        if (!empty($matches) && !empty($matches[1])) {
+          $next_urls[] = $matches[1];
+        }
+      }
+    }
+
+    return array_merge(parent::getNextUrls($url), $next_urls);
   }
 
 }

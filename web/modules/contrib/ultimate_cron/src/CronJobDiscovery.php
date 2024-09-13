@@ -137,7 +137,7 @@ class CronJobDiscovery {
     $titles['history_cron'] = t('Deletes history');
     $titles['search_cron'] = t('Updates indexable active search pages');
     $titles['system_cron'] = t('Cleanup (caches, batch, flood, temp-files, etc.)');
-    $titles['update_cron'] = t('Update indexes');
+    $titles['update_cron'] = t('Check for updates');
     $titles['node_cron'] = t('Updates search rankings for nodes');
     $titles['aggregator_cron'] = t('Refresh feeds');
     $titles['ultimate_cron_cron'] = t('Runs internal cleanup operations');
@@ -180,7 +180,13 @@ class CronJobDiscovery {
     $items = array();
 
     // Add hook_cron() if applicable.
-    if ($this->moduleHandler->implementsHook($module, 'cron')) {
+    if (method_exists($this->moduleHandler, 'hasImplementations')) {
+      $has_implementations = $this->moduleHandler->hasImplementations('cron', $module);
+    }
+    else {
+      $has_implementations = $this->moduleHandler->implementsHook($module, 'cron');
+    }
+    if ($has_implementations) {
       $info = $this->moduleExtensionList->getExtensionInfo($module);
       $callback = "{$module}_cron";
       $items[$callback] = array(

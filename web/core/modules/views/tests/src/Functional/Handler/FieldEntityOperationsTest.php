@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Functional\Handler;
 
 use Drupal\Core\Url;
@@ -33,8 +35,11 @@ class FieldEntityOperationsTest extends ViewTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
 
     // Create Article content type.
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
@@ -43,7 +48,7 @@ class FieldEntityOperationsTest extends ViewTestBase {
   /**
    * Tests entity operations field.
    */
-  public function testEntityOperations() {
+  public function testEntityOperations(): void {
     // Add languages and refresh the container so the entity type manager will
     // have fresh data.
     ConfigurableLanguage::createFromLangcode('hu')->save();

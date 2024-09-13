@@ -45,7 +45,7 @@ div.thumbsup-rating-wrapper > div > div.rating-option-result {
   padding: 5px;
 }
 
-input.thumbsup-rating-input {
+input.thumbsup-rating-input[type="radio"] {
   display: none;
 }
 

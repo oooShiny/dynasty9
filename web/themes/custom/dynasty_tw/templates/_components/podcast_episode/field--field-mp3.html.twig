@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * To override output, copy the "field.html.twig" from the templates directory
+ * to your theme's directory and customize it, just like customizing other
+ * Drupal templates such as page.html.twig or node.html.twig.
+ *
+ * Instead of overriding the theming for all fields, you can also just override
+ * theming for a subset of fields using
+ * @link themeable Theme hook suggestions. @endlink For example,
+ * here are some theme hook suggestions that can be used for a field_foo field
+ * on an article node type:
+ * - field--node--field-foo--article.html.twig
+ * - field--node--field-foo.html.twig
+ * - field--node--article.html.twig
+ * - field--field-foo.html.twig
+ * - field--text-with-summary.html.twig
+ * - field.html.twig
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ * @see template_preprocess_field()
+ */
+#}
+
+
+  {{ attach_library('dynasty/podcast') }}
+  <audio id="pod-{{ mp3 }}" src="{{ mp3_url }}"></audio>
+  <div id="back-pod-{{ mp3 }}" class="text-white p-1 rounded-full bg-white shadow-lg hidden">
+    <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
+  </div>
+  <div class="text-white p-4 rounded-full bg-red-pats shadow-lg">
+    <img src="/themes/custom/dynasty/icons/pod-play.svg" onclick="playPause('pod-{{ mp3 }}')" id="playpod-{{ mp3 }}" class="w-5 h-5" style="cursor: pointer" />
+  </div>
+  <div id="fwd-pod-{{ mp3 }}" class="text-white p-1 rounded-full bg-white shadow-lg hidden">
+    <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
+  </div>
+
+

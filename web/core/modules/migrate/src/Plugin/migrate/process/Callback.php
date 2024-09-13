@@ -2,6 +2,7 @@
 
 namespace Drupal\migrate\Plugin\migrate\process;
 
+use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -41,6 +42,17 @@ use Drupal\migrate\Row;
  *     source: source_field
  * @endcode
  *
+ * An example where the callback accepts no arguments:
+ *
+ * @code
+ * process:
+ *   time:
+ *     plugin: callback
+ *     callable: time
+ *     unpack_source: true
+ *     source: [  ]
+ * @endcode
+ *
  * An example where the callback accepts more than one argument:
  *
  * @code
@@ -61,11 +73,8 @@ use Drupal\migrate\Row;
  * This will remove the trailing '/', if any, from a URL.
  *
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
- *
- * @MigrateProcessPlugin(
- *   id = "callback"
- * )
  */
+#[MigrateProcess('callback')]
 class Callback extends ProcessPluginBase {
 
   /**

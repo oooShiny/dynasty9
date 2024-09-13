@@ -11,7 +11,7 @@ use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\search_api\IndexInterface;
 use Drupal\search_api\SearchApiException;
 use Drupal\search_api\ServerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Provides a service for managing pending tasks.
@@ -55,7 +55,7 @@ class TaskManager implements TaskManagerInterface {
   /**
    * The event dispatcher.
    *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   * @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface
    */
   protected $eventDispatcher;
 
@@ -71,7 +71,7 @@ class TaskManager implements TaskManagerInterface {
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
+   * @param \Symfony\Contracts\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher.
    * @param \Drupal\Core\StringTranslation\TranslationInterface $translation
    *   The string translation service.
@@ -124,15 +124,18 @@ class TaskManager implements TaskManagerInterface {
    * {@inheritdoc}
    */
   public function getTasksCount(array $conditions = []) {
-    return $this->getTasksQuery($conditions)->count()->execute();
+    return $this->getTasksQuery($conditions)
+      ->count()
+      ->accessCheck(FALSE)
+      ->execute();
   }
 
   /**
    * {@inheritdoc}
    */
   public function addTask($type, ServerInterface $server = NULL, IndexInterface $index = NULL, $data = NULL) {
-    $server_id = $server ? $server->id() : NULL;
-    $index_id = $index ? $index->id() : NULL;
+    $server_id = $server?->id();
+    $index_id = $index?->id();
     if (isset($data)) {
       if ($data instanceof EntityInterface) {
         $data = [
@@ -178,10 +181,7 @@ class TaskManager implements TaskManagerInterface {
    * {@inheritdoc}
    */
   public function deleteTask($task_id) {
-    $task = $this->getTaskStorage()->load($task_id);
-    if ($task) {
-      $task->delete();
-    }
+    $this->getTaskStorage()->load($task_id)?->delete();
   }
 
   /**
@@ -209,7 +209,7 @@ class TaskManager implements TaskManagerInterface {
    */
   public function executeSpecificTask(TaskInterface $task) {
     $event = new TaskEvent($task);
-    $this->eventDispatcher->dispatch('search_api.task.' . $task->getType(), $event);
+    $this->eventDispatcher->dispatch($event, 'search_api.task.' . $task->getType());
     if (!$event->isPropagationStopped()) {
       $id = $task->id();
       $type = $task->getType();
@@ -281,6 +281,12 @@ class TaskManager implements TaskManagerInterface {
    * {@inheritdoc}
    */
   public function setTasksBatch(array $conditions = []) {
+    // We don't want to set a batch during an installation or update hook.
+    if (defined('MAINTENANCE_MODE')
+        && in_array(MAINTENANCE_MODE, ['install', 'update'])) {
+      return;
+    }
+
     $task_ids = $this->getTasksQuery($conditions)->range(0, 100)->execute();
 
     if (!$task_ids) {
@@ -367,7 +373,14 @@ class TaskManager implements TaskManagerInterface {
     }
 
     $pending = $this->getTasksCount($conditions);
-    $context['finished'] = 1 - $pending / $context['results']['total'];
+    // Guard against a total count of 0, which sometimes happens.
+    $context['results']['total'] = max($context['results']['total'], $pending);
+    if ($context['results']['total'] > 0) {
+      $context['finished'] = 1 - $pending / $context['results']['total'];
+    }
+    else {
+      $context['finished'] = 1;
+    }
     $executed = $context['results']['total'] - $pending;
     if ($executed > 0) {
       $context['message'] = $this->formatPlural(

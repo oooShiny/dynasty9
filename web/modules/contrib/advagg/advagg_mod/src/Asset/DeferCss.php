@@ -4,6 +4,7 @@ namespace Drupal\advagg_mod\Asset;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Component\Utility\Crypt;
+use Drupal\Core\Extension\ExtensionList;
 
 /**
  * Modify stylesheet links to defer them. May lead to Flash of unstyled content.
@@ -32,15 +33,25 @@ class DeferCss {
   protected $external;
 
   /**
+   * The module extension list service.
+   *
+   * @var \Drupal\Core\Extension\ExtensionList
+   */
+  protected $moduleExtensionList;
+
+  /**
    * DeferCss constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
+   * @param ExtensionList $module_extension_list
+   *   The module extension list service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory) {
+  public function __construct(ConfigFactoryInterface $config_factory, ExtensionList $module_extension_list) {
     $this->deferMethod = $config_factory->get('advagg_mod.settings')->get('css_defer_js_code');
     $this->counter = $config_factory->get('advagg.settings')->get('global_counter');
     $this->external = $config_factory->get('advagg_mod.settings')->get('css_defer_external');
+    $this->moduleExtensionList = $module_extension_list;
   }
 
   /**
@@ -64,7 +75,7 @@ class DeferCss {
 
     // Put JS inline if configured.
     if ($this->deferMethod === 0) {
-      $path = drupal_get_path('module', 'advagg_mod') . '/js/loadCSS.js';
+      $path = $this->moduleExtensionList->getPath('advagg_mod') . '/js/loadCSS.js';
       if (!strpos($content, $path)) {
         $path = Crypt::hashBase64($path . $this->counter);
       }

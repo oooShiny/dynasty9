@@ -25,7 +25,7 @@ class DateDataTypeTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Make sure the default timezone isn't UTC.
@@ -57,7 +57,7 @@ class DateDataTypeTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\search_api\Unit\DateDataTypeTest::testGetValue()
    */
-  public function getValueTestDataProvider() {
+  public static function getValueTestDataProvider() {
     $t = 1400000000;
     $f = 'Y-m-d H:i:s';
     return [

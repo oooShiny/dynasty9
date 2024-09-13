@@ -1,20 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "npm run dev",
-    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "development": "npm run dev",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "dev": "npx tailwindcss --input src/tailwind.pcss --output dist/tailwind.css --watch",
+    "build": "npx tailwindcss --input src/tailwind.pcss --output dist/tailwind.css --minify"
   },
   "dependencies": {
-    "cross-env": "^5.2.0",
-    "laravel-mix": "^5.0.1",
-    "laravel-mix-purgecss": "^5.0.0-rc.1",
-    "tailwindcss": "^1.9.6"
-  },
-  "devDependencies": {
-    "glob-all": "^3.2.1"
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12"
   }
 }

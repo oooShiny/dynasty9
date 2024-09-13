@@ -25,6 +25,9 @@ function twigsuggest_theme_suggestions_block(array $variables) {
   if (isset($variables['elements']['#id']) || !empty($variables['elements']['#id'])) {
 
     if ($block = Block::load($variables['elements']['#id'])) {
+      if (isset($variables['elements']['content']['#block_content'])) {
+        $suggestions[] = 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle();
+      }
       $suggestions[] = 'block__' . $block->getRegion();
       $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#id'];
       if ($block->get('settings') && $provider = $block->get('settings')['provider']) {
@@ -150,6 +153,30 @@ function twigsuggest_theme_suggestions_container(array $variables) {
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK() for form templates.
+ *
+ * Add suggestions, as by default none are provided.
+ */
+function twigsuggest_theme_suggestions_form_alter(array &$suggestions, array $variables)
+{
+  $element_id = $variables['element']['#id'] ?? NULL;
+  if ($element_id) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $element_id);
+  }
+  $form_id = $variables['element']['#form_id'] ?? NULL;
+  if ($form_id) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $form_id);
+  }
+  $region = $variables['element']['#attributes']['region'] ?? NULL;
+  if ($region) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $region);
+    if ($form_id) {
+      $suggestions[] = 'form__' . str_replace('-', '_', $region) . '__' . str_replace('-', '_', $form_id);
+    }
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK() for form element templates.
  *
  * Add suggestions, as by default none are provided.
@@ -187,7 +214,7 @@ function twigsuggest_theme_suggestions_input(array $variables) {
   $element = $variables['element'];
 
   if (isset($element['#id'])) {
-    $suggestions[] = 'input__' . $element['#id'];
+    $suggestions[] = 'input__' . str_replace('-', '_', $element['#id']);
   }
 
   return $suggestions;
@@ -323,12 +350,41 @@ function twigsuggest_theme_suggestions_taxonomy_term(array $variables) {
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK() for book tree templates.
+ *
+ * * Suggest region-specific book tree templates.
+ *
+ */
+function twigsuggest_theme_suggestions_book_tree(array $variables) {
+  $suggestions = [];
+  if (isset($variables['attributes']['region'])) {
+    $suggestions[] = 'book_tree__' . $variables['attributes']['region'];
+  };
+  return $suggestions;
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter() for block templates.
  *
  * Remove duplicate template suggestions for blocks.
  */
 function twigsuggest_theme_suggestions_block_alter(array &$suggestions, array $variables) {
   $suggestions = array_unique($suggestions);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for menu templates
+ *
+ * Adds template suggestions based on region name.
+ */
+function twigsuggest_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+  $region = $variables['attributes']['region'] ?? NULL;
+  if ($region) {
+    // Add a theme suggestion for the specific menu in this region.
+    $suggestions[] = $variables['theme_hook_original'] . '__' . $variables['attributes']['region'];
+    // Add a theme suggestion for all menus in in this region.
+    $suggestions[] = 'menu__' . $variables['attributes']['region'];
+  }
 }
 
 /**

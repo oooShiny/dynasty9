@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\layout_builder\FunctionalJavascript;
 
 use Behat\Mink\Element\NodeElement;
@@ -9,6 +11,9 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\FunctionalJavascriptTests\JSWebAssert;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\contextual\FunctionalJavascript\ContextualLinkClickTrait;
+use Drupal\Tests\system\Traits\OffCanvasTestTrait;
+
+// cspell:ignore fieldbody
 
 /**
  * Tests the Layout Builder disables interactions of rendered blocks.
@@ -18,6 +23,7 @@ use Drupal\Tests\contextual\FunctionalJavascript\ContextualLinkClickTrait;
 class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
 
   use ContextualLinkClickTrait;
+  use OffCanvasTestTrait;
 
   /**
    * {@inheritdoc}
@@ -25,18 +31,20 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
   protected static $modules = [
     'block',
     'block_content',
+    'field_ui',
     'filter',
     'filter_test',
     'layout_builder',
     'node',
     'search',
     'contextual',
+    'off_canvas_test',
   ];
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'starterkit_theme';
 
   /**
    * {@inheritdoc}
@@ -87,7 +95,7 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
   /**
    * Tests that forms and links are disabled in the Layout Builder preview.
    */
-  public function testFormsLinksDisabled() {
+  public function testFormsLinksDisabled(): void {
     // Resize window due to bug in Chromedriver when clicking on overlays over
     // iFrames.
     // @see https://bugs.chromium.org/p/chromedriver/issues/detail?id=2758
@@ -170,14 +178,14 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
   }
 
   /**
-   * Checks if element is unclickable.
+   * Checks if element is not clickable.
    *
    * @param \Behat\Mink\Element\NodeElement $element
    *   Element being checked for.
    *
    * @internal
    */
-  protected function assertElementUnclickable(NodeElement $element): void {
+  protected function assertElementNotClickable(NodeElement $element): void {
     try {
       $element->click();
       $tag_name = $element->getTagName();
@@ -199,11 +207,11 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
 
     $this->assertNotEmpty($assert_session->waitForElement('css', '.block-search'));
     $searchButton = $assert_session->buttonExists('Search');
-    $this->assertElementUnclickable($searchButton);
+    $this->assertElementNotClickable($searchButton);
     $assert_session->linkExists('Take me away');
-    $this->assertElementUnclickable($page->findLink('Take me away'));
+    $this->assertElementNotClickable($page->findLink('Take me away'));
     $iframe = $assert_session->elementExists('css', '#iframe-that-should-be-disabled');
-    $this->assertElementUnclickable($iframe);
+    $this->assertElementNotClickable($iframe);
   }
 
   /**
@@ -218,6 +226,11 @@ class LayoutBuilderDisableInteractionsTest extends WebDriverTestBase {
 
     $this->clickContextualLink('.block-field-blocknodebundle-with-section-fieldbody [data-contextual-id^="layout_builder_block"]', 'Configure');
     $this->assertNotEmpty($assert_session->waitForElementVisible('css', '.ui-dialog-titlebar [title="Close"]'));
+    // We explicitly wait for the off-canvas area to be fully resized before
+    // trying to press the Close button, instead of waiting for the Close button
+    // itself to become visible. This is to prevent a regularly occurring random
+    // test failure.
+    $this->waitForOffCanvasArea();
     $page->pressButton('Close');
     $assert_session->assertNoElementAfterWait('css', '#drupal-off-canvas');
 

@@ -55,8 +55,8 @@ interface QueryAggregateInterface extends QueryInterface {
    *     same type as the column.
    *   - 'IN', 'NOT IN': These operators expect $value to be an array of
    *     literals of the same type as the column.
-   *   - 'BETWEEN': This operator expects $value to be an array of two literals
-   *     of the same type as the column.
+   *   - 'BETWEEN', 'NOT BETWEEN': These operators expect $value to be an array
+   *     of two literals of the same type as the column.
    * @param string $langcode
    *   (optional) The language code.
    *
@@ -145,8 +145,8 @@ interface QueryAggregateInterface extends QueryInterface {
    *   @endcode
    *   Will return:
    *   @code
-   *     $result[0] = array('count_nid' => 3, 'type' => 'page');
-   *     $result[1] = array('count_nid' => 4, 'type' => 'article');
+   *     $result[0] = ['count_nid' => 3, 'type' => 'page'];
+   *     $result[1] = ['count_nid' => 4, 'type' => 'article'];
    *   @endcode
    */
   public function execute();

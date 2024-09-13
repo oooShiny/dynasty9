@@ -14,7 +14,7 @@ class RateWidgetTranslationTest extends RateWidgetTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'language',
     'config_translation',
   ];

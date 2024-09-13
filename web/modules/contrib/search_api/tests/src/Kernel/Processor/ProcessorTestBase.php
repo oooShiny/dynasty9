@@ -25,7 +25,6 @@ abstract class ProcessorTestBase extends KernelTestBase {
     'search_api_test',
     'comment',
     'text',
-    'action',
     'system',
   ];
 
@@ -60,7 +59,7 @@ abstract class ProcessorTestBase extends KernelTestBase {
    *   (optional) The plugin ID of the processor that should be set up for
    *   testing.
    */
-  public function setUp($processor = NULL) {
+  public function setUp($processor = NULL): void {
     parent::setUp();
 
     $this->installSchema('node', ['node_access']);

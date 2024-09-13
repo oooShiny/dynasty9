@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Core\Url;
@@ -29,7 +31,7 @@ class LanguageConfigurationTest extends BrowserTestBase {
   /**
    * Functional tests for adding, editing and deleting languages.
    */
-  public function testLanguageConfiguration() {
+  public function testLanguageConfiguration(): void {
     // Ensure the after installing the language module the weight of the English
     // language is still 0.
     $this->assertEquals(0, ConfigurableLanguage::load('en')->getWeight(), 'The English language has a weight of 0.');
@@ -101,7 +103,7 @@ class LanguageConfigurationTest extends BrowserTestBase {
       'prefix[fr]' => '',
     ];
     $this->submitForm($edit, 'Save configuration');
-    $this->assertSession()->pageTextNotContains('The prefix may only be left blank for the selected detection fallback language.');
+    $this->assertSession()->statusMessageNotContains('The prefix may only be left blank for the selected detection fallback language.');
 
     // Change default negotiation language.
     $this->config('language.negotiation')->set('selected_langcode', 'fr')->save();
@@ -111,21 +113,21 @@ class LanguageConfigurationTest extends BrowserTestBase {
       'prefix[en]' => '',
     ];
     $this->submitForm($edit, 'Save configuration');
-    $this->assertSession()->pageTextContains('The prefix may only be left blank for the selected detection fallback language.');
+    $this->assertSession()->statusMessageContains('The prefix may only be left blank for the selected detection fallback language.', 'error');
 
     // Check that prefix cannot be changed to contain a slash.
     $edit = [
       'prefix[en]' => 'foo/bar',
     ];
     $this->submitForm($edit, 'Save configuration');
-    $this->assertSession()->pageTextContains('The prefix may not contain a slash.');
+    $this->assertSession()->statusMessageContains('The prefix may not contain a slash.', 'error');
 
     // Remove English language and add a new Language to check if langcode of
     // Language entity is 'en'.
     $this->drupalGet('admin/config/regional/language/delete/en');
     $this->submitForm([], 'Delete');
     $this->rebuildContainer();
-    $this->assertSession()->pageTextContains("The English (en) language has been removed.");
+    $this->assertSession()->statusMessageContains('The English (en) language has been removed.', 'status');
 
     // Ensure that French language has a weight of 1 after being created through
     // the UI.
@@ -160,12 +162,12 @@ class LanguageConfigurationTest extends BrowserTestBase {
   /**
    * Functional tests for setting system language weight on adding, editing and deleting languages.
    */
-  public function testLanguageConfigurationWeight() {
+  public function testLanguageConfigurationWeight(): void {
     // User to add and remove language.
     $admin_user = $this->drupalCreateUser([
       'administer languages',
       'access administration pages',
-      ]);
+    ]);
     $this->drupalLogin($admin_user);
     $this->checkConfigurableLanguageWeight();
 

@@ -1,26 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\ckeditor5\Kernel;
 
 use Composer\Autoload\ClassLoader;
-use Drupal\ckeditor5\HTMLRestrictionsUtilities;
+use Drupal\ckeditor5\Annotation\CKEditor5AspectsOfCKEditor5Plugin;
+use Drupal\ckeditor5\Annotation\DrupalAspectsOfCKEditor5Plugin;
+use Drupal\ckeditor5\HTMLRestrictions;
 use Drupal\ckeditor5\Plugin\CKEditor5Plugin\Heading;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\editor\Entity\Editor;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\SchemaCheckTestTrait;
+use Drupal\TestTools\Random;
 use org\bovigo\vfs\vfsStream;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
 use Symfony\Component\Yaml\Yaml;
 
-// cspell:ignore layercake everyblock justblockquote
+// cspell:ignore layercake everytextcontainer justheading
 
 /**
  * Tests different ways of enabling CKEditor 5 plugins.
  *
  * @group ckeditor5
+ * @group #slow
  * @internal
  */
 class CKEditor5PluginManagerTest extends KernelTestBase {
@@ -78,38 +86,54 @@ class CKEditor5PluginManagerTest extends KernelTestBase {
   }
 
   /**
-   * @covers \Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition::__construct()
-   * @dataProvider providerTestInvalidPluginDefinitions
+   * {@inheritdoc}
    */
-  public function testInvalidPluginDefinitions(string $yaml, ?string $expected_message, array $additional_files = []): void {
-    if ($expected_message) {
-      $this->expectException(InvalidPluginDefinitionException::class);
-      $this->expectExceptionMessage($expected_message);
-    }
+  protected function enableModules(array $modules) {
+    parent::enableModules($modules);
+    // Ensure the CKEditor 5 plugin manager instance on the test reflects the
+    // status after the module is installed.
+    $this->manager = $this->container->get('plugin.manager.ckeditor5.plugin');
+  }
 
+  /**
+   * Mocks a module providing a CKEditor 5 plugin in VFS.
+   *
+   * @param string $module_name
+   *   The name of the module.
+   * @param string $yaml
+   *   The YAML to be stored in the *.ckeditor5.yml file.
+   * @param array $additional_files
+   *   The additional files to create.
+   *
+   * @return \Symfony\Component\DependencyInjection\ContainerInterface
+   *   The container that has the VFS-mocked CKEditor 5 plugin-providing module
+   *   installed in it; this container must be used to simulate this module
+   *   being installed.
+   */
+  private function mockModuleInVfs(string $module_name, string $yaml, array $additional_files = []): ContainerInterface {
     $site_directory = ltrim(parse_url($this->siteDirectory)['path'], '/');
     vfsStream::create([
       'modules' => [
-        'ckeditor5_invalid_plugin' => [
-          'ckeditor5_invalid_plugin.info.yml' => <<<YAML
-name: CKEditor 5 Invalid Plugin Definition Test
+        $module_name => [
+          "$module_name.info.yml" => <<<YAML
+name: CKEditor 5 Test $module_name
 type: module
 core_version_requirement: ^9
 YAML,
-          'ckeditor5_invalid_plugin.ckeditor5.yml' => $yaml,
+          "$module_name.ckeditor5.yml" => $yaml,
         ] + $additional_files,
       ],
     ], $this->vfsRoot->getChild($site_directory));
 
     if (!empty($additional_files)) {
       $additional_class_loader = new ClassLoader();
-      $additional_class_loader->addPsr4("Drupal\\ckeditor5_invalid_plugin\\Plugin\\CKEditor5Plugin\\", vfsStream::url("root/$site_directory/modules/ckeditor5_invalid_plugin/src/Plugin/CKEditor5Plugin"));
+      $additional_class_loader->addPsr4("Drupal\\$module_name\\Plugin\\CKEditor5Plugin\\", vfsStream::url("root/$site_directory/modules/$module_name/src/Plugin/CKEditor5Plugin"));
       $additional_class_loader->register(TRUE);
     }
 
     $config_sync = \Drupal::service('config.storage');
     $config_data = $this->config('core.extension')->get();
-    $config_data['module']['ckeditor5_invalid_plugin'] = 1;
+    $config_data['module'][$module_name] = 1;
     $config_sync->write('core.extension', $config_data);
 
     // Construct a new container for testing a plugin definition in isolation,
@@ -123,12 +147,15 @@ YAML,
     $container = new ContainerBuilder(new FrozenParameterBag([
       'app.root' => $root,
       'container.modules' => [
-        'ckeditor5_invalid_plugin' => [
+        $module_name => [
           'type' => 'module',
-          'pathname' => 'modules/ckeditor5_invalid_plugin/ckeditor5_invalid_plugin.info.yml',
+          'pathname' => "modules/$module_name/$module_name.info.yml",
           'filename' => NULL,
         ] + $this->container->getParameter('container.modules'),
       ],
+      'container.namespaces' => [
+        "Drupal\\$module_name" => vfsStream::url("root/$site_directory/modules/$module_name/src"),
+      ] + $this->container->getParameter('container.namespaces'),
     ] + $this->container->getParameterBag()->all()));
     $container->setDefinitions($this->container->getDefinitions());
 
@@ -146,14 +173,30 @@ YAML,
     // only work-around possible is to manipulate the config schema definition
     // cache.
     // @todo Remove this in https://www.drupal.org/project/drupal/issues/2961541.
-    if (isset($additional_files['config']['schema']['ckeditor5_invalid_plugin.schema.yml'])) {
-      $cache = \Drupal::service('cache.discovery')->get('typed_config_definitions');
+    if (isset($additional_files['config']['schema']["$module_name.schema.yml"])) {
+      $cache = \Drupal::service('cache.discovery')
+        ->get('typed_config_definitions');
       $typed_config_definitions = $cache->data;
-      $typed_config_definitions += Yaml::parse($additional_files['config']['schema']['ckeditor5_invalid_plugin.schema.yml']);
+      $typed_config_definitions += Yaml::parse($additional_files['config']['schema']["$module_name.schema.yml"]);
       \Drupal::service('config.typed')->clearCachedDefinitions();
       \Drupal::service('cache.discovery')->set('typed_config_definitions', $typed_config_definitions, $cache->expire, $cache->tags);
     }
 
+    return $container;
+  }
+
+  /**
+   * @covers \Drupal\ckeditor5\Plugin\CKEditor5PluginManager::processDefinition
+   * @dataProvider providerTestInvalidPluginDefinitions
+   */
+  public function testInvalidPluginDefinitions(string $yaml, ?string $expected_exception = NULL, ?string $expected_message = NULL, ?array $additional_files = []): void {
+    if ($expected_exception) {
+      $this->expectException($expected_exception);
+    }
+    if ($expected_message) {
+      $this->expectExceptionMessage($expected_message);
+    }
+    $container = $this->mockModuleInVfs('ckeditor5_invalid_plugin', $yaml, $additional_files);
     $container->get('plugin.manager.ckeditor5.plugin')->getDefinitions();
   }
 
@@ -163,7 +206,7 @@ YAML,
    * @return \Generator
    *   Test scenarios.
    */
-  public function providerTestInvalidPluginDefinitions(): \Generator {
+  public static function providerTestInvalidPluginDefinitions(): \Generator {
     yield 'invalid plugin ID with everything else okay' => [
       <<<YAML
 foo_bar:
@@ -173,6 +216,7 @@ foo_bar:
     label: TEST
     elements: false
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "foo_bar" CKEditor 5 plugin definition must have a plugin ID that starts with "ckeditor5_invalid_plugin_".',
     ];
 
@@ -181,15 +225,18 @@ YAML,
 
     yield 'only plugin ID, nothing else' => [
       <<<YAML
-foo_bar: {}
-YAML,
-      'The "foo_bar" CKEditor 5 plugin definition must have a plugin ID that starts with "ckeditor5_invalid_plugin_".',
-    ];
-
-    yield 'fixed plugin ID' => [
-      <<<YAML
 ckeditor5_invalid_plugin_foo_bar: {}
 YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition must contain a "drupal" key.',
+    ];
+
+    yield 'added drupal' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  drupal: {}
+YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition must contain a "ckeditor5" key.',
     ];
 
@@ -197,7 +244,9 @@ YAML,
       <<<YAML
 ckeditor5_invalid_plugin_foo_bar:
   ckeditor5: {}
+  drupal: {}
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition must contain a "ckeditor5.plugins" key.',
     ];
 
@@ -206,17 +255,9 @@ YAML,
 ckeditor5_invalid_plugin_foo_bar:
   ckeditor5:
     plugins: {}
-YAML,
-      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition must contain a "drupal" key.',
-    ];
-
-    yield 'added drupal' => [
-      <<<YAML
-ckeditor5_invalid_plugin_foo_bar:
-  ckeditor5:
-    plugins: {}
   drupal: {}
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition must contain a "drupal.label" key.',
     ];
 
@@ -228,6 +269,7 @@ ckeditor5_invalid_plugin_foo_bar:
   drupal:
     label: {}
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has a "drupal.label" value that is not a string nor a TranslatableMarkup instance.',
     ];
 
@@ -239,6 +281,7 @@ ckeditor5_invalid_plugin_foo_bar:
   drupal:
     label: "Foo bar"
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition must contain a "drupal.elements" key.',
     ];
 
@@ -251,6 +294,7 @@ ckeditor5_invalid_plugin_foo_bar:
     label: "Foo bar"
     elements: {}
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has a "drupal.elements" value that is neither a list of HTML tags/attributes nor false.',
     ];
 
@@ -265,6 +309,7 @@ ckeditor5_invalid_plugin_foo_bar:
       - foo
       - bar
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has a value at "drupal.elements.0" that is not an HTML tag with optional attributes: "foo". Expected structure: "<tag allowedAttribute="allowedValue1 allowedValue2">".',
     ];
 
@@ -278,6 +323,7 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo> <bar>
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has a value at "drupal.elements.0": multiple tags listed, should be one: "<foo> <bar>".',
     ];
 
@@ -292,7 +338,21 @@ ckeditor5_invalid_plugin_foo_bar:
       - <foo>
       - <bar>
 YAML,
-      NULL,
+    ];
+
+    yield 'change plugin ID to something invalid' => [
+      <<<YAML
+foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "foo_bar" CKEditor 5 plugin definition must have a plugin ID that starts with "ckeditor5_invalid_plugin_".',
     ];
 
     yield 'alternative fix for drupal.elements' => [
@@ -304,7 +364,6 @@ ckeditor5_invalid_plugin_foo_bar:
     label: "Foo bar"
     elements: false
 YAML,
-      NULL,
     ];
 
     yield 'added invalid optional metadata: drupal.admin_library' => [
@@ -319,6 +378,7 @@ ckeditor5_invalid_plugin_foo_bar:
       - <bar>
     admin_library: ckeditor5/foo_bar
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has a "drupal.admin_library" key whose asset library "ckeditor5/foo_bar" does not exist.',
     ];
 
@@ -332,9 +392,195 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
-      NULL,
+    ];
+
+    // Add conditions.
+    yield 'unsupported condition type' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      foo: bar
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has a "drupal.conditions" value that contains some unsupported condition types: "foo". Only the following conditions types are supported: "toolbarItem", "imageUploadStatus", "filter", "requiresConfiguration", "plugins".',
+    ];
+    yield 'invalid condition: toolbarItem' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: [bold, italic]
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "toolbarItem" is set to an invalid value. A string corresponding to a CKEditor 5 toolbar item must be specified.',
+    ];
+    yield 'valid condition: toolbarItem' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+YAML,
+    ];
+    yield 'invalid condition: filter' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+      filter: true
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "filter" is set to an invalid value. A string corresponding to a filter plugin ID must be specified.',
+    ];
+    yield 'valid condition: filter' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+      filter: filter_caption
+YAML,
+    ];
+    yield 'invalid condition: imageUploadStatus' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+      filter: filter_caption
+      imageUploadStatus: 'true'
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "imageUploadStatus" is set to an invalid value. A boolean indicating whether image uploads must be enabled (true) or not (false) must be specified.',
+    ];
+    yield 'valid condition: imageUploadStatus' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+      filter: filter_caption
+      imageUploadStatus: true
+YAML,
+    ];
+    yield 'invalid condition: plugins' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+      filter: filter_caption
+      imageUploadStatus: true
+      plugins: ckeditor5_imageCaption
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "plugins" is set to an invalid value. A list of strings, each corresponding to a CKEditor 5 plugin ID must be specified.',
+    ];
+    yield 'valid condition: plugins' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions:
+      toolbarItem: bold
+      filter: filter_caption
+      imageUploadStatus: true
+      plugins: [ckeditor5_imageCaption]
+YAML,
+    ];
+    yield 'unconditional: for plugins that should always loaded' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions: []
+YAML,
+    ];
+    yield 'explicitly unconditional' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements:
+      - <foo>
+      - <bar>
+    admin_library: ckeditor5/internal.admin.basic
+    conditions: false
+YAML,
     ];
 
     // Add a plugin class; observe what additional requirements need to be met.
@@ -349,8 +595,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      InvalidPluginDefinitionException::class,
       'The CKEditor 5 "ckeditor5_invalid_plugin_foo_bar" provides a plugin class: "Drupal\ckeditor5_invalid_plugin\Plugin\CKEditor5Plugin\FooBar", but it does not exist.',
     ];
 
@@ -365,8 +612,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      InvalidPluginDefinitionException::class,
       'CKEditor 5 plugins must implement \Drupal\ckeditor5\Plugin\CKEditor5PluginInterface. "ckeditor5_invalid_plugin_foo_bar" does not.',
       [
         'src' => [
@@ -394,8 +642,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      NULL,
       NULL,
       [
         'src' => [
@@ -426,8 +675,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      NULL,
       NULL,
       [
         'src' => [
@@ -465,8 +715,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition is configurable, has non-empty default configuration but has no config schema. Config schema is required for validation.',
       [
         'src' => [
@@ -504,8 +755,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      NULL,
       NULL,
       [
         'config' => [
@@ -556,8 +808,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      InvalidPluginDefinitionException::class,
       'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition is configurable, but its default configuration does not match its config schema. The following errors were found: [foo] The configuration property foo.bar doesn\'t exist, [baz] missing schema.',
       [
         'config' => [
@@ -608,8 +861,9 @@ ckeditor5_invalid_plugin_foo_bar:
     elements:
       - <foo>
       - <bar>
-    admin_library: ckeditor5/admin.basic
+    admin_library: ckeditor5/internal.admin.basic
 YAML,
+      NULL,
       NULL,
       [
         'config' => [
@@ -651,27 +905,168 @@ PHP,
         ],
       ],
     ];
+
+    yield 'invalid condition: requiresConfiguration not specifying a configuration array' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements: false
+    conditions:
+      requiresConfiguration: true
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "requiresConfiguration" is set to an invalid value. An array structure matching the required configuration for this plugin must be specified.',
+    ];
+
+    yield 'invalid condition: requiresConfiguration without configurable plugin' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    label: "Foo bar"
+    elements: false
+    conditions:
+      requiresConfiguration:
+        allow_resize: true
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "requiresConfiguration" is set to an invalid value. This condition type is only available for CKEditor 5 plugins implementing CKEditor5PluginConfigurableInterface.',
+    ];
+
+    yield 'invalid condition: requiresConfiguration with configurable plugin but required configuration does not match config schema' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    class: Drupal\ckeditor5_invalid_plugin\Plugin\CKEditor5Plugin\FooBar
+    label: "Foo bar"
+    elements: false
+    conditions:
+      requiresConfiguration:
+        allow_resize: true
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_invalid_plugin_foo_bar" CKEditor 5 plugin definition has an invalid "drupal.conditions" item. "requiresConfiguration" is set to an invalid value. The required configuration does not match its config schema. The following errors were found: [allow_resize] The configuration property allow_resize doesn\'t exist.',
+      [
+        'config' => [
+          'schema' => [
+            'ckeditor5_invalid_plugin.schema.yml' => <<<YAML
+ckeditor5.plugin.ckeditor5_invalid_plugin_foo_bar:
+  type: mapping
+  label: 'Foo Bar'
+  mapping:
+    foo:
+      type: boolean
+      label: 'Foo'
+YAML,
+          ],
+        ],
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'FooBar.php' => <<<'PHP'
+<?php
+namespace Drupal\ckeditor5_invalid_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableInterface;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableTrait;
+use Drupal\Core\Form\FormStateInterface;
+class FooBar extends CKEditor5PluginDefault implements CKEditor5PluginConfigurableInterface {
+  use CKEditor5PluginConfigurableTrait;
+  public function defaultConfiguration() { return ['foo' => FALSE]; }
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) { return []; }
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {}
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {}
+}
+PHP,
+            ],
+          ],
+        ],
+      ],
+    ];
+
+    yield 'valid condition: requiresConfiguration' => [
+      <<<YAML
+ckeditor5_invalid_plugin_foo_bar:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    class: Drupal\ckeditor5_invalid_plugin\Plugin\CKEditor5Plugin\FooBar
+    label: "Foo bar"
+    elements: false
+    conditions:
+      requiresConfiguration:
+        foo: true
+YAML,
+      NULL,
+      NULL,
+      [
+        'config' => [
+          'schema' => [
+            'ckeditor5_invalid_plugin.schema.yml' => <<<YAML
+ckeditor5.plugin.ckeditor5_invalid_plugin_foo_bar:
+  type: mapping
+  label: 'Foo Bar'
+  mapping:
+    foo:
+      type: boolean
+      label: 'Foo'
+YAML,
+          ],
+        ],
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'FooBar.php' => <<<'PHP'
+<?php
+namespace Drupal\ckeditor5_invalid_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableInterface;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableTrait;
+use Drupal\Core\Form\FormStateInterface;
+class FooBar extends CKEditor5PluginDefault implements CKEditor5PluginConfigurableInterface {
+  use CKEditor5PluginConfigurableTrait;
+  public function defaultConfiguration() { return ['foo' => FALSE]; }
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) { return []; }
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {}
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {}
+}
+PHP,
+            ],
+          ],
+        ],
+      ],
+    ];
   }
 
   /**
-   * Tests detection of invalid CKEditor5PluginElementsSubsetInterface class.
+   * Tests detection of invalid CKEditor5PluginElementsSubsetInterface classes.
+   *
+   * @dataProvider providerProvidedElementsInvalidElementSubset
    */
-  public function testProvidedElementsInvalidElementSubset(): void {
+  public function testProvidedElementsInvalidElementSubset(array $configured_subset, string $expected_exception_message): void {
     $this->enableModules(['ckeditor5_plugin_elements_subset']);
 
-    // Configure the sneaky superset plugin to have a random tag as the subset.
+    // Configure the sneaky superset plugin.
     $sneaky_plugin_id = 'ckeditor5_plugin_elements_subset_sneakySuperset';
-    $random_tag = "<{$this->randomMachineName()}>";
     $text_editor = Editor::create([
       'format' => 'dummy',
       'editor' => 'ckeditor5',
       'settings' => [
         'plugins' => [
-          $sneaky_plugin_id => ['configured_subset' => [$random_tag]],
+          $sneaky_plugin_id => ['configured_subset' => $configured_subset],
         ],
       ],
-      'image_upload' => [],
     ]);
+
+    // Invalid subsets are allowed on unsaved Text Editor config entities,
+    // because they may have invalid configuration.
+    $text_editor->enforceIsNew(FALSE);
 
     // No exception when getting all provided elements.
     $this->assertGreaterThan(0, count($this->manager->getProvidedElements()));
@@ -683,33 +1078,64 @@ PHP,
     // editor config entity is passed: only then can a subset be generated based
     // on configuration.
     $this->expectException(\LogicException::class);
-    $this->expectExceptionMessage("The \"ckeditor5_plugin_elements_subset_sneakySuperset\" CKEditor 5 plugin implements ::getElementsSubset() and did not return a subset, the following tags are absent from the plugin definition: \"$random_tag\".");
+    $this->expectExceptionMessage($expected_exception_message);
     $this->manager->getProvidedElements([$sneaky_plugin_id], $text_editor);
+  }
+
+  /**
+   * Data provider.
+   *
+   * @return array
+   *   Test scenarios.
+   */
+  public static function providerProvidedElementsInvalidElementSubset(): array {
+    $random_tag_name = strtolower(Random::machineName());
+    $random_tag = "<$random_tag_name>";
+    return [
+      'superset: random tag not listed in the plugin definition' => [
+        [$random_tag],
+        "The \"ckeditor5_plugin_elements_subset_sneakySuperset\" CKEditor 5 plugin implements ::getElementsSubset() and did not return a subset, the following tags are absent from the plugin definition: \"$random_tag\".",
+      ],
+      'subset that omits the essential creatable tag' => [
+        ['<bar baz>'],
+        'The "ckeditor5_plugin_elements_subset_sneakySuperset" CKEditor 5 plugin implements ::getElementsSubset() and did return a subset ("<bar baz>") but the following tags can no longer be created: "<bar>".',
+      ],
+      'subset that tries to leverage the `<$any-html5-element>` wildcard tag but picks a concrete tag that the wildcard tag does not resolve into' => [
+        ['<drupal-media class="sensational">'],
+        'The "ckeditor5_plugin_elements_subset_sneakySuperset" CKEditor 5 plugin implements ::getElementsSubset() and did not return a subset, the following tags are absent from the plugin definition: "<drupal-media class="sensational">".',
+      ],
+    ];
   }
 
   /**
    * Tests the enabling of plugins.
    */
-  public function testEnabledPlugins() {
+  public function testEnabledPlugins(): void {
     $editor = Editor::load('basic_html');
 
     // Case 1: no extra CKEditor 5 plugins.
     $definitions = array_keys($this->manager->getEnabledDefinitions($editor));
     $default_plugins = [
+      'ckeditor5_autoformat',
       'ckeditor5_bold',
       'ckeditor5_emphasis',
       'ckeditor5_essentials',
+      'ckeditor5_globalAttributeDir',
+      'ckeditor5_globalAttributeLang',
       'ckeditor5_heading',
+      'ckeditor5_htmlComments',
       'ckeditor5_paragraph',
       'ckeditor5_pasteFromOffice',
     ];
     $this->assertSame($default_plugins, $definitions, 'No CKEditor 5 plugins found besides the built-in ones.');
     $default_libraries = [
-      'ckeditor5/drupal.ckeditor5',
-      'ckeditor5/drupal.ckeditor5.emphasis',
-      'ckeditor5/drupal.ckeditor5.internal',
+      'ckeditor5/internal.drupal.ckeditor5',
+      'ckeditor5/internal.drupal.ckeditor5.emphasis',
+      'ckeditor5/internal.drupal.ckeditor5.htmlEngine',
+      'core/ckeditor5.autoformat',
       'core/ckeditor5.basic',
-      'core/ckeditor5.internal',
+      'core/ckeditor5.essentials',
+      'core/ckeditor5.htmlSupport',
       'core/ckeditor5.pasteFromOffice',
     ];
     $this->assertSame($default_libraries, $this->manager->getEnabledLibraries($editor));
@@ -747,13 +1173,16 @@ PHP,
     // should be available now that the media_embed is enabled.
     $plugin_ids = array_keys($this->manager->getEnabledDefinitions($editor));
     $expected_plugins = array_merge($default_plugins, [
+      'ckeditor5_drupalMediaCaption',
       'ckeditor5_test_layercake',
       'media_media',
+      'media_mediaAlign',
     ]);
     sort($expected_plugins);
     $this->assertSame($expected_plugins, $plugin_ids);
     $expected_libraries = array_merge($default_libraries, [
-      'ckeditor5/drupal.ckeditor5.media',
+      'ckeditor5/internal.drupal.ckeditor5.media',
+      'ckeditor5/internal.drupal.ckeditor5.mediaAlign',
       'ckeditor5_test/layercake',
     ]);
     sort($expected_libraries);
@@ -781,34 +1210,55 @@ PHP,
     sort($expected_plugins);
     $this->assertSame(array_values($expected_plugins), $plugin_ids);
     $expected_libraries = array_merge($default_libraries, [
-      'ckeditor5/drupal.ckeditor5.media',
+      'ckeditor5/internal.drupal.ckeditor5.media',
+      'ckeditor5/internal.drupal.ckeditor5.mediaAlign',
       'ckeditor5_test/layercake',
       'core/ckeditor5.table',
     ]);
     sort($expected_libraries);
     $this->assertSame($expected_libraries, $this->manager->getEnabledLibraries($editor));
 
-    // Case 7: GHS is only enabled for Full HTML (or any other text format that
-    // has no TYPE_HTML_RESTRICTOR filters).
+    // Case 7: GHS is enabled for other text editors if they are using a
+    // CKEditor 5 plugin that uses wildcard tags.
+    $settings['toolbar']['items'][] = 'alignment';
+    $editor->setSettings($settings);
+    $plugin_ids = array_keys($this->manager->getEnabledDefinitions($editor));
+    $expected_plugins = array_merge($expected_plugins, [
+      'ckeditor5_alignment',
+      'ckeditor5_wildcardHtmlSupport',
+    ]);
+    sort($expected_plugins);
+    $this->assertSame(array_values($expected_plugins), $plugin_ids);
+    $expected_libraries = array_merge($expected_libraries, [
+      'core/ckeditor5.alignment',
+    ]);
+    sort($expected_libraries);
+    $this->assertSame($expected_libraries, $this->manager->getEnabledLibraries($editor));
+
+    // Case 8: GHS is enabled for Full HTML (or any other text format that has
+    // no TYPE_HTML_RESTRICTOR filters).
     $editor = Editor::load('full_html');
     $definitions = array_keys($this->manager->getEnabledDefinitions($editor));
     $default_plugins = [
+      'ckeditor5_arbitraryHtmlSupport',
+      'ckeditor5_autoformat',
       'ckeditor5_bold',
       'ckeditor5_emphasis',
       'ckeditor5_essentials',
       'ckeditor5_heading',
-      'ckeditor5_htmlSupport',
+      'ckeditor5_htmlComments',
       'ckeditor5_paragraph',
       'ckeditor5_pasteFromOffice',
     ];
     $this->assertSame($default_plugins, $definitions, 'No CKEditor 5 plugins found besides the built-in ones.');
     $default_libraries = [
-      'ckeditor5/drupal.ckeditor5',
-      'ckeditor5/drupal.ckeditor5.emphasis',
-      'ckeditor5/drupal.ckeditor5.internal',
+      'ckeditor5/internal.drupal.ckeditor5',
+      'ckeditor5/internal.drupal.ckeditor5.emphasis',
+      'ckeditor5/internal.drupal.ckeditor5.htmlEngine',
+      'core/ckeditor5.autoformat',
       'core/ckeditor5.basic',
+      'core/ckeditor5.essentials',
       'core/ckeditor5.htmlSupport',
-      'core/ckeditor5.internal',
       'core/ckeditor5.pasteFromOffice',
     ];
     $this->assertSame($default_libraries, $this->manager->getEnabledLibraries($editor));
@@ -829,34 +1279,43 @@ PHP,
    *   in the filter_html "Allowed tags" field.
    *
    * @covers \Drupal\ckeditor5\Plugin\CKEditor5PluginManager::getProvidedElements
-   * @covers \Drupal\ckeditor5\HTMLRestrictionsUtilities::toReadableElements
    * @dataProvider providerTestProvidedElements
    */
-  public function testProvidedElements(array $plugins, array $text_editor_settings, array $expected_elements, string $expected_readable_string) {
+  public function testProvidedElements(array $plugins, array $text_editor_settings, array $expected_elements, string $expected_readable_string): void {
     $this->enableModules(['ckeditor5_plugin_elements_test']);
 
     $text_editor = Editor::create([
       'format' => 'dummy',
       'editor' => 'ckeditor5',
       'settings' => $text_editor_settings,
-      'image_upload' => [],
+      'image_upload' => [
+        'status' => FALSE,
+      ],
     ]);
+    FilterFormat::create([
+      'format' => 'dummy',
+      'name' => 'dummy',
+    ])->save();
     $this->assertConfigSchema(
       $this->typedConfig,
       $text_editor->getConfigDependencyName(),
       $text_editor->toArray()
     );
+    // @todo Remove in https://www.drupal.org/project/drupal/issues/3361534, which moves this into ::assertConfigSchema()
+    $this->assertSame([], array_map(
+      fn ($v) => sprintf("[%s] %s", $v->getPropertyPath(), (string) $v->getMessage()),
+      iterator_to_array($this->typedConfig->createFromNameAndData($text_editor->getConfigDependencyName(), $text_editor->toArray())->validate())
+    ));
 
     $provided_elements = $this->manager->getProvidedElements($plugins, $text_editor);
     $this->assertSame($expected_elements, $provided_elements);
-    $readable_string = implode(' ', HTMLRestrictionsUtilities::toReadableElements($provided_elements));
-    $this->assertSame($expected_readable_string, $readable_string);
+    $this->assertSame($expected_readable_string, (new HTMLRestrictions($provided_elements))->toFilterHtmlAllowedTagsString());
   }
 
   /**
    * Provides uses cases enabling different elements and the expected results.
    */
-  public function providerTestProvidedElements(): array {
+  public static function providerTestProvidedElements(): array {
     $text_align_classes = [
       'text-align-left' => TRUE,
       'text-align-center' => TRUE,
@@ -867,6 +1326,12 @@ PHP,
     return [
       'sourceEditing' => [
         'plugins' => ['ckeditor5_sourceEditing'],
+        'text_editor_settings' => [],
+        'expected_elements' => [],
+        'expected_readable_string' => '',
+      ],
+      'imageResize' => [
+        'plugins' => ['ckeditor5_imageResize'],
         'text_editor_settings' => [],
         'expected_elements' => [],
         'expected_readable_string' => '',
@@ -952,26 +1417,28 @@ PHP,
         ],
         'expected_readable_string' => '<p class="text-align-left text-align-center text-align-right text-align-justify"> <h2 class> <h3 class> <h4 class> <h5 class> <h6 class> <h1 class>',
       ],
-      'blockquote combo' => [
+      'heading text container combo' => [
         'plugins' => [
-          'ckeditor5_plugin_elements_test_blockquoteCombo',
+          'ckeditor5_plugin_elements_test_headingCombo',
           'ckeditor5_paragraph',
         ],
         'text_editor_settings' => [
-          'plugins' => [
-            'ckeditor5_heading' => Heading::DEFAULT_CONFIGURATION,
-          ],
+          'plugins' => [],
+          // Deviate from the default toolbar items because that would cause
+          // the `ckeditor5_heading` plugin to be enabled.
+          // @see \Drupal\ckeditor5\Plugin\Editor\CKEditor5::getDefaultSettings()
+          'toolbar' => ['items' => ['bold', 'italic']],
         ],
         'expected_elements' => [
           'p' => [
-            'data-everyblock' => TRUE,
+            'data-everytextcontainer' => TRUE,
           ],
-          'blockquote' => [
-            'data-justblockquote' => TRUE,
-            'data-everyblock' => TRUE,
+          'h1' => [
+            'data-justheading' => TRUE,
+            'data-everytextcontainer' => TRUE,
           ],
         ],
-        'expected_readable_string' => '<p data-everyblock> <blockquote data-justblockquote data-everyblock>',
+        'expected_readable_string' => '<p data-everytextcontainer> <h1 data-justheading data-everytextcontainer>',
       ],
       'headings plus headings with attributes' => [
         'plugins' => [
@@ -1064,7 +1531,7 @@ PHP,
    *
    * @dataProvider providerTestPluginSupportingElement
    */
-  public function testPluginSupportingElement(string $tag, ?string $expected_plugin_id) {
+  public function testPluginSupportingElement(string $tag, ?string $expected_plugin_id): void {
     $this->enableModules(['ckeditor5_definition_supporting_element']);
     $plugin_id = $this->manager->findPluginSupportingElement($tag);
     $this->assertSame($expected_plugin_id, $plugin_id);
@@ -1073,43 +1540,496 @@ PHP,
   /**
    * Provides use cases for findPluginSupportingElement().
    */
-  public function providerTestPluginSupportingElement() {
+  public static function providerTestPluginSupportingElement() {
     return [
       'tag that belongs to a superset' => [
         'tag' => 'h2',
-        'expected_plugin' => 'ckeditor5_heading',
+        'expected_plugin_id' => 'ckeditor5_heading',
       ],
       'tag only available as tag' => [
         'tag' => 'nav',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_just_nav',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_just_nav',
       ],
       'between just tag, full use of class, and constrained use of class, return full use of class' => [
         'tag' => 'article',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_article_class',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_article_class',
       ],
       'between just tag and full use of class, return full use of class' => [
         'tag' => 'footer',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_footer_class',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_footer_class',
       ],
       'between just tag and constrained use of class, return constrained use of class' => [
         'tag' => 'aside',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_aside_class_with_values',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_aside_class_with_values',
       ],
       'between full use of class and constrained use of class, return full use of class' => [
         'tag' => 'main',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_main_class',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_main_class',
       ],
       'between one plugin allows one attribute, second allows two, return the one that allows two' => [
         'tag' => 'figure',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_figure_two_attrib',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_figure_two_attrib',
       ],
       'between one plugin allows one attribute, second allows two (but appearing in opposite order), still return the one that allows two' => [
         'tag' => 'dialog',
-        'expected_plugin' => 'ckeditor5_definition_supporting_element_dialog_two_attrib',
+        'expected_plugin_id' => 'ckeditor5_definition_supporting_element_dialog_two_attrib',
       ],
       'tag that belongs to a plugin with conditions' => [
         'tag' => 'drupal-media',
-        'expected_plugin' => NULL,
+        'expected_plugin_id' => NULL,
+      ],
+    ];
+  }
+
+  /**
+   * @covers \Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition::validateCKEditor5Aspects
+   */
+  public function testAutomaticLinkDecoratorsDisallowed(): void {
+    $this->expectException(InvalidPluginDefinitionException::class);
+    $this->expectExceptionMessage('The "ckeditor5_automatic_link_decorator_test_llamaClass" CKEditor 5 plugin definition specifies an automatic decorator, this is not supported. Use the Drupal filter system instead.');
+
+    $this->enableModules(['ckeditor5_automatic_link_decorator_test']);
+
+    $this->manager->getDefinitions();
+  }
+
+  /**
+   * @covers \Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition::validateCKEditor5Aspects
+   */
+  public function testExternalLinkAutomaticLinkDecoratorDisallowed(): void {
+    $this->expectException(InvalidPluginDefinitionException::class);
+    $this->expectExceptionMessage('The "ckeditor5_automatic_link_decorator_test_2_addTargetToExternalLinks" CKEditor 5 plugin definition specifies an automatic decorator, this is not supported. Use the Drupal filter system instead.');
+
+    $this->enableModules(['ckeditor5_automatic_link_decorator_test_2']);
+
+    $this->manager->getDefinitions();
+  }
+
+  /**
+   * @covers \Drupal\ckeditor5\Plugin\CKEditor5PluginManager::getDiscovery
+   * @dataProvider providerTestDerivedPluginDefinitions
+   */
+  public function testDerivedPluginDefinitions(string $yaml, ?string $expected_exception = NULL, ?string $expected_message = NULL, array $additional_files = [], ?array $expected_derived_plugin_definitions = NULL): void {
+    if ($expected_exception) {
+      $this->expectException($expected_exception);
+    }
+    if ($expected_message) {
+      $this->expectExceptionMessage($expected_message);
+    }
+    $container = $this->mockModuleInVfs('ckeditor5_derived_plugin', $yaml, $additional_files);
+
+    $actual_definitions = $container->get('plugin.manager.ckeditor5.plugin')->getDefinitions();
+    $this->assertEquals($expected_derived_plugin_definitions, $actual_definitions);
+  }
+
+  /**
+   * Data provider.
+   *
+   * @return \Generator
+   *   Test scenarios.
+   */
+  public static function providerTestDerivedPluginDefinitions(): \Generator {
+    // Defaults inherited from CKEditor5AspectsOfCKEditor5Plugin.
+    $ckeditor5_aspects_defaults = get_class_vars(CKEditor5AspectsOfCKEditor5Plugin::class);
+    // Defaults inherited from DrupalAspectsOfCKEditor5Plugin.
+    $drupal_aspects_defaults = get_class_vars(DrupalAspectsOfCKEditor5Plugin::class);
+
+    $simple_deriver_additional_files = [
+      'src' => [
+        'Plugin' => [
+          'CKEditor5Plugin' => [
+            'SimpleDeriver.php' => <<<'PHP'
+<?php
+namespace Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+use Drupal\Component\Plugin\Derivative\DeriverBase;
+class SimpleDeriver extends DeriverBase {
+  public function getDerivativeDefinitions($base_plugin_definition) {
+    assert($base_plugin_definition instanceof CKEditor5PluginDefinition);
+    foreach (['bar', 'baz'] as $id) {
+      $definition = $base_plugin_definition->toArray();
+      $definition['id'] = $id;
+      $definition['drupal']['label'] = sprintf("Foo %s", $id);
+      $this->derivatives[$id] = new CKEditor5PluginDefinition($definition);
+    }
+    return $this->derivatives;
+  }
+}
+PHP,
+          ],
+        ],
+      ],
+    ];
+
+    yield 'INVALID: simple deriver but without `drupal.elements` in the base definition and it not getting set by the deriver' => [
+      <<<YAML
+ckeditor5_derived_plugin_foo:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_derived_plugin_foo:bar" CKEditor 5 derived plugin definition must contain a "drupal.elements" key.',
+      $simple_deriver_additional_files,
+    ];
+
+    yield 'INVALID: simple deriver but without `ckeditor5.plugins` in the base definition and it not getting set by the deriver' => [
+      <<<YAML
+ckeditor5_derived_plugin_foo:
+  ckeditor5: {}
+  drupal:
+    elements: false
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver
+YAML,
+      \ArgumentCountError::class,
+      NULL,
+      $simple_deriver_additional_files,
+    ];
+
+    yield 'INVALID: simple deriver but without `ckeditor5` in the base definition and it not getting set by the deriver' => [
+      <<<YAML
+ckeditor5_derived_plugin_foo:
+  drupal:
+    elements: false
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_derived_plugin_foo:bar" CKEditor 5 derived plugin definition must contain a "ckeditor5" key.',
+      $simple_deriver_additional_files,
+    ];
+
+    yield 'INVALID: simple deriver which returns arrays instead of CKEditor5PluginDefinition instances' => [
+      <<<YAML
+ckeditor5_derived_plugin_foo:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    elements: false
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver
+YAML,
+      InvalidPluginDefinitionException::class,
+      'The "ckeditor5_derived_plugin_foo:bar" CKEditor 5 plugin definition must extend Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition',
+      [
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'SimpleDeriver.php' => <<<'PHP'
+<?php
+namespace Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+use Drupal\Component\Plugin\Derivative\DeriverBase;
+class SimpleDeriver extends DeriverBase {
+  public function getDerivativeDefinitions($base_plugin_definition) {
+    assert($base_plugin_definition instanceof CKEditor5PluginDefinition);
+    foreach (['bar', 'baz'] as $id) {
+      $definition = $base_plugin_definition->toArray();
+      $definition['id'] = $id;
+      $definition['drupal']['label'] = sprintf("Foo %s", $id);
+      $this->derivatives[$id] = $definition;
+    }
+    return $this->derivatives;
+  }
+}
+PHP,
+            ],
+          ],
+        ],
+      ],
+    ];
+
+    yield 'VALID: simple deriver, base definition in YAML' => [
+      <<<YAML
+ckeditor5_derived_plugin_foo:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    elements: false
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver
+YAML,
+      NULL,
+      NULL,
+      $simple_deriver_additional_files,
+      [
+        'ckeditor5_derived_plugin_foo:bar' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:bar',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'label' => 'Foo bar',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+        'ckeditor5_derived_plugin_foo:baz' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:baz',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'label' => 'Foo baz',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+      ],
+    ];
+
+    yield 'VALID: simple deriver, base definition in PHP with Attribute' => [
+      '',
+      NULL,
+      NULL,
+      [
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'Foo.php' => <<<'PHP'
+<?php
+declare(strict_types = 1);
+namespace Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Attribute\CKEditor5AspectsOfCKEditor5Plugin;
+use Drupal\ckeditor5\Attribute\CKEditor5Plugin;
+use Drupal\ckeditor5\Attribute\DrupalAspectsOfCKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+#[CKEditor5Plugin(
+  id: 'ckeditor5_derived_plugin_foo',
+  ckeditor5: new CKEditor5AspectsOfCKEditor5Plugin(
+    plugins: [],
+  ),
+  drupal: new DrupalAspectsOfCKEditor5Plugin(
+    elements: false,
+    deriver: 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+  ),
+)]
+class Foo extends CKEditor5PluginDefault {
+}
+PHP,
+              'SimpleDeriver.php' => $simple_deriver_additional_files['src']['Plugin']['CKEditor5Plugin']['SimpleDeriver.php'],
+            ],
+          ],
+        ],
+      ],
+      [
+        'ckeditor5_derived_plugin_foo:bar' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:bar',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'class' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\Foo',
+            'label' => 'Foo bar',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+        'ckeditor5_derived_plugin_foo:baz' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:baz',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'class' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\Foo',
+            'label' => 'Foo baz',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+      ],
+    ];
+
+    yield 'VALID: simple deriver, base definition in PHP with Annotation' => [
+      '',
+      NULL,
+      NULL,
+      [
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'Foo.php' => <<<'PHP'
+<?php
+declare(strict_types = 1);
+namespace Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;
+/**
+ * @CKEditor5Plugin(
+ *   id = "ckeditor5_derived_plugin_foo",
+ *   ckeditor5 = @CKEditor5AspectsOfCKEditor5Plugin(
+ *     plugins = {},
+ *   ),
+ *   drupal = @DrupalAspectsOfCKEditor5Plugin(
+ *     elements = false,
+ *     deriver = "Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver",
+ *   )
+ * )
+ */
+class Foo extends CKEditor5PluginDefault {
+}
+PHP,
+              'SimpleDeriver.php' => $simple_deriver_additional_files['src']['Plugin']['CKEditor5Plugin']['SimpleDeriver.php'],
+            ],
+          ],
+        ],
+      ],
+      [
+        'ckeditor5_derived_plugin_foo:bar' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:bar',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'class' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\Foo',
+            'label' => 'Foo bar',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+        'ckeditor5_derived_plugin_foo:baz' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:baz',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'class' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\Foo',
+            'label' => 'Foo baz',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\SimpleDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+      ],
+    ];
+
+    yield 'VALID: minimal base plugin definition, maximal deriver' => [
+      <<<YAML
+# Minimal annotation key-value pairs set in the YAML, most set in the deriver.
+ckeditor5_derived_plugin_foo:
+  drupal:
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\MaximalDeriver
+YAML,
+      NULL,
+      NULL,
+      [
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'MaximalDeriver.php' => <<<'PHP'
+<?php
+namespace Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+use Drupal\Component\Plugin\Derivative\DeriverBase;
+class MaximalDeriver extends DeriverBase {
+  public function getDerivativeDefinitions($base_plugin_definition) {
+    assert($base_plugin_definition instanceof CKEditor5PluginDefinition);
+    foreach (['A', 'B'] as $id) {
+      $definition = $base_plugin_definition->toArray();
+      $definition['id'] = $id;
+      $definition['drupal']['label'] = sprintf("Foo %s", $id);
+      $definition['drupal']['elements'] = FALSE;
+      $definition['ckeditor5']['plugins'] = [];
+      $this->derivatives[$id] = new CKEditor5PluginDefinition($definition);
+    }
+    return $this->derivatives;
+  }
+}
+PHP,
+            ],
+          ],
+        ],
+      ],
+      [
+        'ckeditor5_derived_plugin_foo:A' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:A',
+          'ckeditor5' => ['plugins' => []],
+          'drupal' => [
+            'label' => 'Foo A',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\MaximalDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+        'ckeditor5_derived_plugin_foo:B' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:B',
+          'ckeditor5' => ['plugins' => []],
+          'drupal' => [
+            'label' => 'Foo B',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\MaximalDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
+      ],
+    ];
+
+    yield 'VALID: container-dependent deriver' => [
+      <<<YAML
+ckeditor5_derived_plugin_foo:
+  ckeditor5:
+    plugins: {}
+  drupal:
+    elements: false
+    deriver: Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\ContainerDependentDeriver
+YAML,
+      NULL,
+      NULL,
+      [
+        'config' => [
+          'schema' => [
+            'ckeditor5_derived_plugin.schema.yml' => <<<YAML
+ckeditor5.plugin.ckeditor5_derived_plugin:
+  type: mapping
+  label: 'Foo'
+  mapping:
+    foo:
+      type: boolean
+      label: 'Foo'
+YAML,
+          ],
+        ],
+        'src' => [
+          'Plugin' => [
+            'CKEditor5Plugin' => [
+              'ContainerDependentDeriver.php' => <<<'PHP'
+<?php
+namespace Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+use Drupal\Component\Plugin\Derivative\DeriverBase;
+use Drupal\Core\Authentication\AuthenticationCollectorInterface;
+use Drupal\Core\Entity\EntityTypeRepositoryInterface;
+use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+class ContainerDependentDeriver extends DeriverBase implements ContainerDeriverInterface {
+  protected $authenticationCollector;
+  public function __construct(AuthenticationCollectorInterface $authentication_collector) {
+    $this->authenticationCollector = $authentication_collector;
+  }
+  public static function create(ContainerInterface $container, $base_plugin_id) {
+    assert($base_plugin_id === 'ckeditor5_derived_plugin_foo');
+    return new static($container->get('authentication_collector'));
+  }
+  public function getDerivativeDefinitions($base_plugin_definition) {
+    assert($base_plugin_definition instanceof CKEditor5PluginDefinition);
+    $authentication_providers = array_keys($this->authenticationCollector->getSortedProviders());
+    foreach ($authentication_providers as $id) {
+      $definition = $base_plugin_definition->toArray();
+      $definition['id'] = $id;
+      $definition['drupal']['label'] = sprintf("Foo %s", $id);
+      $this->derivatives[$definition['id']] = new CKEditor5PluginDefinition($definition);
+    }
+    return $this->derivatives;
+  }
+}
+PHP,
+            ],
+          ],
+        ],
+      ],
+      [
+        'ckeditor5_derived_plugin_foo:cookie' => new CKEditor5PluginDefinition([
+          'provider' => 'ckeditor5_derived_plugin',
+          'id' => 'ckeditor5_derived_plugin_foo:cookie',
+          'ckeditor5' => ['plugins' => []] + $ckeditor5_aspects_defaults,
+          'drupal' => [
+            'label' => 'Foo cookie',
+            'elements' => FALSE,
+            'deriver' => 'Drupal\ckeditor5_derived_plugin\Plugin\CKEditor5Plugin\ContainerDependentDeriver',
+          ] + $drupal_aspects_defaults,
+        ]),
       ],
     ];
   }

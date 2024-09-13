@@ -1,0 +1,12 @@
+diff --git a/packages/block-editor/src/components/iframe/index.js b/packages/block-editor/src/components/iframe/index.js
+index 28697324aa8..ab50e8adcf4 100644
+--- a/packages/block-editor/src/components/iframe/index.js
++++ b/packages/block-editor/src/components/iframe/index.js
+@@ -217,6 +217,7 @@ function Iframe( {
+ <html>
+ 	<head>
+ 		<meta charset="utf-8">
++		<base href="${ window.location.origin }">
+ 		<script>window.frameElement._load()</script>
+ 		<style>html{height:auto!important;min-height:100%;}body{margin:0}</style>
+ 		${ styles }

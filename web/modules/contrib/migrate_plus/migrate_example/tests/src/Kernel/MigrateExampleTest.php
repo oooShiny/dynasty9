@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_example\Kernel;
 
+use Drupal\node\Entity\NodeType;
 use Drupal\Tests\migrate_drupal\Kernel\MigrateDrupalTestBase;
 
 /**
@@ -9,7 +12,7 @@ use Drupal\Tests\migrate_drupal\Kernel\MigrateDrupalTestBase;
  *
  * @group migrate_plus
  */
-class MigrateExampleTest extends MigrateDrupalTestBase {
+final class MigrateExampleTest extends MigrateDrupalTestBase {
 
   /**
    * {@inheritdoc}
@@ -37,14 +40,17 @@ class MigrateExampleTest extends MigrateDrupalTestBase {
 
     $this->installSchema('comment', ['comment_entity_statistics']);
     $this->installSchema('node', ['node_access']);
+    $this->installSchema('user', ['users_data']);
 
     // Install the module via installer to trigger hook_install.
     \Drupal::service('module_installer')->install(['migrate_example_setup']);
     $this->installConfig(['migrate_example_setup']);
 
+    $this->startCollectingMessages();
+
     // Execute "beer" migrations from 'migrate_example' module.
+    $this->executeMigration('beer_user');
     $this->executeMigrations([
-      'beer_user',
       'beer_term',
       'beer_node',
       'beer_comment',
@@ -54,11 +60,9 @@ class MigrateExampleTest extends MigrateDrupalTestBase {
   /**
    * Tests the results of "Beer" example migration.
    */
-  public function testBeerMigration() {
+  public function testBeerMigration(): void {
     $users = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple();
-    // There are 4 users created in beer_user migration and 1 stub entity
-    // created during beer_node migration.
-    $this->assertCount(5, $users);
+    $this->assertCount(4, $users);
 
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple();
     $this->assertCount(3, $terms);
@@ -68,6 +72,22 @@ class MigrateExampleTest extends MigrateDrupalTestBase {
 
     $comments = \Drupal::entityTypeManager()->getStorage('comment')->loadMultiple();
     $this->assertCount(5, $comments);
+  }
+
+  /**
+   * Tests whether the module can be uninstalled and installed again.
+   *
+   * Also, checks whether the example configs are removed after uninstall.
+   */
+  public function testModuleCleanup(): void {
+    $test_node_type = 'migrate_example_beer';
+    // Prove that test content type existed before the uninstall process.
+    $this->assertInstanceOf(NodeType::class, NodeType::load($test_node_type));
+    \Drupal::service('module_installer')->uninstall(['migrate_example_setup']);
+    // Make sure the test content type was removed.
+    $this->assertNull(NodeType::load($test_node_type));
+    // Check whether the module can be installed again.
+    \Drupal::service('module_installer')->install(['migrate_example_setup']);
   }
 
 }

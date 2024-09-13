@@ -67,7 +67,7 @@ abstract class LauncherBase extends CronPlugin implements LauncherInterface {
    * {@inheritdoc}
    */
   public function formatRunning(CronJobInterface $job) {
-    $file = drupal_get_path('module', 'ultimate_cron') . '/icons/hourglass.png';
+    $file = \Drupal::service('extension.list.module')->getPath('ultimate_cron') . '/icons/hourglass.png';
     $status = ['#theme' => 'image', '#uri' => $file];
     $title = t('running');
     return array($status, $title);
@@ -77,7 +77,7 @@ abstract class LauncherBase extends CronPlugin implements LauncherInterface {
    * {@inheritdoc}
    */
   public function formatUnfinished(CronJobInterface $job) {
-    $file = drupal_get_path('module', 'ultimate_cron') . '/icons/lock_open.png';
+    $file = \Drupal::service('extension.list.module')->getPath('ultimate_cron') . '/icons/lock_open.png';
     $status = ['#theme' => 'image', '#uri' => $file];
     $title = t('unfinished but not locked?');
     return array($status, $title);

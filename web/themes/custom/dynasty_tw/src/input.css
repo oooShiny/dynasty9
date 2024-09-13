@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .bg-blue-pats {
+    background-color: #002244 !important;
+  }
+  .section-header {
+    @apply text-3xl uppercase font-thin text-center;
+  }
+  .header-block {
+    @apply bg-blue-pats font-light py-3 my-3 text-2xl text-center text-white;
+  }
+}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\field\Kernel;
 
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -30,6 +32,9 @@ class TestItemTest extends FieldKernelTestBase {
    */
   protected $fieldName = 'field_test';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -49,7 +54,7 @@ class TestItemTest extends FieldKernelTestBase {
   /**
    * Tests using entity fields of the test field type.
    */
-  public function testTestItem() {
+  public function testTestItem(): void {
     // Verify entity creation.
     $entity = EntityTest::create();
     $value = rand(1, 10);

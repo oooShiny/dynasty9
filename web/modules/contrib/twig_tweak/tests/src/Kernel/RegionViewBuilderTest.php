@@ -3,6 +3,7 @@
 namespace Drupal\Tests\twig_tweak\Kernel;
 
 use Drupal\block\Entity\Block;
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\Cache;
 use Drupal\Tests\user\Traits\UserCreationTrait;
@@ -33,12 +34,12 @@ final class RegionViewBuilderTest extends AbstractTestCase {
   public function setUp(): void {
     parent::setUp();
     $this->installEntitySchema('block');
-    $this->container->get('theme_installer')->install(['stable']);
+    $this->container->get('theme_installer')->install(['stark']);
 
     $values = [
       'id' => 'public_block',
       'plugin' => 'system_powered_by_block',
-      'theme' => 'stable',
+      'theme' => 'stark',
       'region' => 'sidebar_first',
     ];
     Block::create($values)->save();
@@ -46,7 +47,7 @@ final class RegionViewBuilderTest extends AbstractTestCase {
     $values = [
       'id' => 'private_block',
       'plugin' => 'system_powered_by_block',
-      'theme' => 'stable',
+      'theme' => 'stark',
       'region' => 'sidebar_first',
     ];
     Block::create($values)->save();
@@ -58,10 +59,11 @@ final class RegionViewBuilderTest extends AbstractTestCase {
   public function testRegionViewBuilder(): void {
 
     $view_builder = $this->container->get('twig_tweak.region_view_builder');
+    /** @var \Drupal\Core\Render\RendererInterface $renderer */
     $renderer = $this->container->get('renderer');
 
     $build = $view_builder->build('sidebar_first');
-    // The build should be empty because 'stable' is not a default theme.
+    // The build should be empty because 'stark' is not a default theme.
     $expected_build = [
       '#cache' => [
         'contexts' => [],
@@ -72,7 +74,7 @@ final class RegionViewBuilderTest extends AbstractTestCase {
     self::assertSame($expected_build, $build);
 
     // Specify the theme name explicitly.
-    $build = $view_builder->build('sidebar_first', 'stable');
+    $build = $view_builder->build('sidebar_first', 'stark');
     $expected_build = [
       // Only public_block should be rendered.
       // @see twig_tweak_test_block_access()
@@ -126,21 +128,29 @@ final class RegionViewBuilderTest extends AbstractTestCase {
         </div>
       </div>
     HTML;
-    $actual_html = $renderer->renderPlain($build);
+    $actual_html = DeprecationHelper::backwardsCompatibleCall(
+      \Drupal::VERSION, '10.3.0',
+      fn () => $renderer->renderInIsolation($build),
+      fn () => $renderer->renderPlain($build),
+    );
     self::assertSame(self::normalizeHtml($expected_html), self::normalizeHtml($actual_html));
 
-    // Set 'stable' as default site theme and check if the view builder without
+    // Set 'stark' as default site theme and check if the view builder without
     // 'theme' argument returns the same result.
     $this->container->get('config.factory')
       ->getEditable('system.theme')
-      ->set('default', 'stable')
+      ->set('default', 'stark')
       ->save();
 
     $build = $view_builder->build('sidebar_first');
     self::assertRenderArray($expected_build, $build);
 
     Html::resetSeenIds();
-    $actual_html = $renderer->renderPlain($expected_build);
+    $actual_html = DeprecationHelper::backwardsCompatibleCall(
+      \Drupal::VERSION, '10.3.0',
+      fn () => $renderer->renderInIsolation($build),
+      fn () => $renderer->renderPlain($expected_build),
+    );
     self::assertSame(self::normalizeHtml($expected_html), self::normalizeHtml($actual_html));
   }
 

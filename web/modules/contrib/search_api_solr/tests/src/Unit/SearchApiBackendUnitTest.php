@@ -2,11 +2,16 @@
 
 namespace Drupal\Tests\search_api_solr\Unit;
 
-use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
+use Drupal\Component\Datetime\TimeInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Lock\LockBackendInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\State\StateInterface;
 use Drupal\search_api\Plugin\search_api\data_type\value\TextToken;
 use Drupal\search_api\Plugin\search_api\data_type\value\TextValue;
 use Drupal\search_api\Utility\DataTypeHelperInterface;
@@ -14,9 +19,9 @@ use Drupal\search_api\Utility\FieldsHelperInterface;
 use Drupal\search_api_solr\Controller\AbstractSolrEntityListBuilder;
 use Drupal\search_api_solr\Plugin\search_api\backend\SearchApiSolrBackend;
 use Drupal\search_api_solr\Plugin\search_api\data_type\value\DateRangeValue;
+use Drupal\search_api_solr\SolrBackendInterface;
 use Drupal\search_api_solr\SolrConnector\SolrConnectorPluginManager;
 use Drupal\Tests\search_api_solr\Traits\InvokeMethodTrait;
-use Drupal\Tests\UnitTestCase;
 use Solarium\Core\Query\Helper;
 use Solarium\QueryType\Update\Query\Document;
 
@@ -27,34 +32,42 @@ use Solarium\QueryType\Update\Query\Document;
  *
  * @group search_api_solr
  */
-class SearchApiBackendUnitTest extends UnitTestCase {
+class SearchApiBackendUnitTest extends Drupal10CompatibilityUnitTestCase {
 
   use InvokeMethodTrait;
 
   /**
+   * Provides the Solr entities list builder.
+   *
    * @var \Drupal\search_api_solr\Controller\AbstractSolrEntityListBuilder|\Prophecy\Prophecy\ObjectProphecy
    */
   protected $listBuilder;
 
   /**
+   * The entity type manager object.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface|\Prophecy\Prophecy\ObjectProphecy
    */
   protected $entityTypeManager;
 
   /**
+   * The query helper object.
+   *
    * @var \Solarium\Core\Query\Helper
    */
   protected $queryHelper;
 
   /**
+   * Apache Solr backend.
+   *
    * @var \Drupal\search_api_solr\Plugin\search_api\backend\SearchApiSolrBackend
    */
   protected $backend;
 
   /**
-   *
+   * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->listBuilder = $this->prophesize(AbstractSolrEntityListBuilder::class);
@@ -77,7 +90,13 @@ class SearchApiBackendUnitTest extends UnitTestCase {
       $this->prophesize(DataTypeHelperInterface::class)->reveal(),
       $this->queryHelper,
       $this->entityTypeManager->reveal(),
-      $this->prophesize(ContainerAwareEventDispatcher::class)->reveal());
+      $this->prophesize(EventDispatcher::class)->reveal(),
+      $this->prophesize(TimeInterface::class)->reveal(),
+      $this->prophesize(StateInterface::class)->reveal(),
+      $this->prophesize(MessengerInterface::class)->reveal(),
+      $this->prophesize(LockBackendInterface::class)->reveal(),
+      $this->prophesize(ModuleExtensionList::class)->reveal()
+    );
   }
 
   /**
@@ -136,7 +155,50 @@ class SearchApiBackendUnitTest extends UnitTestCase {
   }
 
   /**
+   * @covers       ::addIndexField
    *
+   * @dataProvider addIndexEmptyFieldDataProvider
+   *
+   * @param mixed $input
+   *   Field value.
+   *
+   * @param string $type
+   *   Field type.
+   *
+   * @param mixed $expected
+   *   Expected result.
+   */
+  public function testIndexEmptyField($input, $type, $expected) {
+    $field = 'testField';
+    $document = $this->prophesize(Document::class);
+
+    $document
+      ->addField($field, $expected)
+      ->shouldBeCalled();
+
+    $boost_terms = [];
+    $args = [
+      $document->reveal(),
+      $field,
+      [$input],
+      $type,
+      &$boost_terms,
+    ];
+
+    $this->backend->setConfiguration(['index_empty_text_fields' => TRUE] + $this->backend->getConfiguration());
+
+    // addIndexField() should convert the $input according to $type and call
+    // Document::addField() with the correctly converted $input.
+    $this->invokeMethod(
+      $this->backend,
+      'addIndexField',
+      $args,
+      []
+    );
+  }
+
+  /**
+   * Provides test format date.
    */
   public function testFormatDate() {
     $this->assertFalse($this->backend->formatDate('asdf'));
@@ -146,7 +208,7 @@ class SearchApiBackendUnitTest extends UnitTestCase {
   /**
    * Data provider for testIndexField method.
    */
-  public function addIndexFieldDataProvider() {
+  public static function addIndexFieldDataProvider() {
     return [
       // addIndexField() should be called.
       ['0', 'boolean', 'false'],
@@ -181,6 +243,29 @@ class SearchApiBackendUnitTest extends UnitTestCase {
       ['', 'string', NULL],
       [new TextValue(''), 'text', NULL],
       [(new TextValue(''))->setTokens([new TextToken('')]), 'text', NULL],
+    ];
+  }
+
+  /**
+   * Data provider for testIndexEmptyField method.
+   */
+  public static function addIndexEmptyFieldDataProvider() {
+    return [
+      [
+        new TextValue(''),
+        'text',
+        SolrBackendInterface::EMPTY_TEXT_FIELD_DUMMY_VALUE,
+      ],
+      [
+        (new TextValue(''))->setTokens([new TextToken('')]),
+        'text',
+        SolrBackendInterface::EMPTY_TEXT_FIELD_DUMMY_VALUE,
+      ],
+      [
+        NULL,
+        'text',
+        SolrBackendInterface::EMPTY_TEXT_FIELD_DUMMY_VALUE,
+      ],
     ];
   }
 

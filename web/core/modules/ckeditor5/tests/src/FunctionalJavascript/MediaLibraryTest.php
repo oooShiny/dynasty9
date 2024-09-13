@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\ckeditor5\FunctionalJavascript;
 
 use Drupal\ckeditor5\Plugin\Editor\CKEditor5;
-use Drupal\Component\Utility\Html;
 use Drupal\editor\Entity\Editor;
 use Drupal\file\Entity\File;
 use Drupal\filter\Entity\FilterFormat;
@@ -13,6 +14,8 @@ use Drupal\Tests\media\Traits\MediaTypeCreationTrait;
 use Drupal\Tests\TestFileCreationTrait;
 use Drupal\Tests\ckeditor5\Traits\CKEditor5TestTrait;
 use Symfony\Component\Validator\ConstraintViolation;
+
+// cspell:ignore arrakis complote détruire harkonnen
 
 /**
  * @coversDefaultClass \Drupal\ckeditor5\Plugin\CKEditor5Plugin\MediaLibrary
@@ -28,7 +31,7 @@ class MediaLibraryTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'starterkit_theme';
 
   /**
    * The user to use during testing.
@@ -83,6 +86,9 @@ class MediaLibraryTest extends WebDriverTestBase {
         'plugins' => [
           'ckeditor5_sourceEditing' => [
             'allowed_tags' => [],
+          ],
+          'media_media' => [
+            'allow_view_mode_override' => FALSE,
           ],
         ],
       ],
@@ -146,13 +152,17 @@ class MediaLibraryTest extends WebDriverTestBase {
   /**
    * Tests using drupalMedia button to embed media into CKEditor 5.
    */
-  public function testButton() {
+  public function testButton(): void {
+    // Skipped due to frequent random test failures.
+    // @todo Fix this and stop skipping it at https://www.drupal.org/i/3351597.
+    $this->markTestSkipped();
+    $media_preview_selector = '.ck-content .ck-widget.drupal-media .media';
     $this->drupalGet('/node/add/blog');
     $this->waitForEditor();
-    $this->pressEditorButton('Insert Drupal Media');
+    $this->pressEditorButton('Insert Media');
     $assert_session = $this->assertSession();
     $page = $this->getSession()->getPage();
-    $this->assertNotEmpty($assert_session->waitForId('drupal-modal'));
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '#drupal-modal #media-library-content'));
 
     // Ensure that the tab order is correct.
     $tabs = $page->findAll('css', '.media-library-menu__link');
@@ -168,34 +178,52 @@ class MediaLibraryTest extends WebDriverTestBase {
     $assert_session->elementExists('css', '.js-media-library-item')->click();
     $assert_session->pageTextContains('1 of 1 item selected');
     $assert_session->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Insert selected');
-    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '.ck-content .ck-widget.drupal-media .media', 1000));
-    $this->pressEditorButton('Source');
-    $value = $assert_session->elementExists('css', '.ck-source-editing-area textarea')->getValue();
-    $dom = Html::load($value);
-    $xpath = new \DOMXPath($dom);
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', $media_preview_selector, 1000));
+    $xpath = new \DOMXPath($this->getEditorDataAsDom());
     $drupal_media = $xpath->query('//drupal-media')[0];
     $expected_attributes = [
       'data-entity-type' => 'media',
       'data-entity-uuid' => $this->media->uuid(),
-      'data-align' => 'center',
     ];
     foreach ($expected_attributes as $name => $expected) {
       $this->assertSame($expected, $drupal_media->getAttribute($name));
     }
-    $this->pressEditorButton('Source');
-    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '.ck-content .ck-widget.drupal-media .media', 1000));
     $this->assertEditorButtonEnabled('Undo');
     $this->pressEditorButton('Undo');
-    $this->assertEmpty($assert_session->waitForElementVisible('css', '.ck-content .ck-widget.drupal-media .media', 1000));
+    $this->assertEmpty($assert_session->waitForElementVisible('css', $media_preview_selector, 1000));
     $this->assertEditorButtonDisabled('Undo');
     $this->pressEditorButton('Redo');
     $this->assertEditorButtonEnabled('Undo');
+
+    // Ensure that data-align attribute is set by default when media is inserted
+    // while filter_align is enabled.
+    FilterFormat::load('test_format')
+      ->setFilterConfig('filter_align', ['status' => TRUE])
+      ->save();
+    $this->drupalGet('/node/add/blog');
+    $this->waitForEditor();
+    $this->pressEditorButton('Insert Media');
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '#drupal-modal #media-library-content'));
+    $assert_session->elementExists('css', '.js-media-library-item')->click();
+    $assert_session->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Insert selected');
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', $media_preview_selector, 1000));
+    $xpath = new \DOMXPath($this->getEditorDataAsDom());
+    $drupal_media = $xpath->query('//drupal-media')[0];
+    $expected_attributes = [
+      'data-entity-type' => 'media',
+      'data-entity-uuid' => $this->media->uuid(),
+    ];
+    foreach ($expected_attributes as $name => $expected) {
+      $this->assertSame($expected, $drupal_media->getAttribute($name));
+    }
+    // Ensure that by default, data-align attribute is not set.
+    $this->assertFalse($drupal_media->hasAttribute('data-align'));
   }
 
   /**
    * Tests the allowed media types setting on the MediaEmbed filter.
    */
-  public function testAllowedMediaTypes() {
+  public function testAllowedMediaTypes(): void {
     $test_cases = [
       'all_media_types' => [],
       'only_image' => ['image' => 'image'],
@@ -212,12 +240,7 @@ class MediaLibraryTest extends WebDriverTestBase {
         ->setFilterConfig('media_embed', [
           'status' => TRUE,
           'settings' => [
-            'default_view_mode' => 'view_mode_1',
             'allowed_media_types' => $allowed_media_types,
-            'allowed_view_modes' => [
-              'view_mode_1' => 'view_mode_1',
-              'view_mode_2' => 'view_mode_2',
-            ],
           ],
         ])->save();
 
@@ -225,29 +248,64 @@ class MediaLibraryTest extends WebDriverTestBase {
       // verify the expected behavior.
       $this->drupalGet('/node/add/blog');
       $this->waitForEditor();
-      $this->pressEditorButton('Insert Drupal Media');
+      $this->pressEditorButton('Insert Media');
 
       $assert_session = $this->assertSession();
-      $this->assertNotEmpty($assert_session->waitForId('media-library-wrapper'));
+      $this->assertNotEmpty($assert_session->waitForElementVisible('css', '#drupal-modal #media-library-wrapper'));
 
       if (empty($allowed_media_types) || count($allowed_media_types) === 2) {
-        $assert_session->elementExists('css', 'li.media-library-menu-image');
-        $assert_session->elementExists('css', 'li.media-library-menu-arrakis');
-        $assert_session->elementTextContains('css', '.media-library-item__name', 'Fear is the mind-killer');
+        $menu = $assert_session->elementExists('css', '.js-media-library-menu');
+        $assert_session->elementExists('named', ['link', 'Image'], $menu);
+        $assert_session->elementExists('named', ['link', 'Arrakis'], $menu);
+        $assert_session->elementTextContains('css', '.js-media-library-item', 'Fear is the mind-killer');
       }
       elseif (count($allowed_media_types) === 1 && !empty($allowed_media_types['image'])) {
         // No tabs should appear if there's only one media type available.
-        $assert_session->elementNotExists('css', 'li.media-library-menu-image');
-        $assert_session->elementNotExists('css', 'li.media-library-menu-arrakis');
-        $assert_session->elementTextContains('css', '.media-library-item__name', 'Fear is the mind-killer');
+        $assert_session->elementNotExists('css', '.js-media-library-menu');
+        $assert_session->elementTextContains('css', '.js-media-library-item', 'Fear is the mind-killer');
       }
       elseif (count($allowed_media_types) === 1 && !empty($allowed_media_types['arrakis'])) {
         // No tabs should appear if there's only one media type available.
-        $assert_session->elementNotExists('css', 'li.media-library-menu-image');
-        $assert_session->elementNotExists('css', 'li.media-library-menu-arrakis');
-        $assert_session->elementTextContains('css', '.media-library-item__name', 'Le baron Vladimir Harkonnen');
+        $assert_session->elementNotExists('css', '.js-media-library-menu');
+        $assert_session->elementTextContains('css', '.js-media-library-item', 'Le baron Vladimir Harkonnen');
       }
     }
+  }
+
+  /**
+   * Ensures that alt text can be changed on Media Library inserted Media.
+   */
+  public function testAlt(): void {
+    $page = $this->getSession()->getPage();
+    $assert_session = $this->assertSession();
+
+    $this->drupalGet('/node/add/blog');
+    $this->waitForEditor();
+    $this->pressEditorButton('Insert Media');
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '#drupal-modal #media-library-content'));
+    $assert_session->elementExists('css', '.js-media-library-item')->click();
+    $assert_session->elementExists('css', '.ui-dialog-buttonpane')->pressButton('Insert selected');
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '.ck-widget.drupal-media img'));
+
+    // Test that clicking the media widget triggers a CKEditor balloon panel
+    // with a single button to override the alt text.
+    $this->click('.ck-widget.drupal-media');
+    $this->assertVisibleBalloon('[aria-label="Drupal Media toolbar"]');
+    // Click the "Override media image text alternative" button.
+    $this->getBalloonButton('Override media image alternative text')->click();
+    $this->assertVisibleBalloon('.ck-media-alternative-text-form');
+    // Assert that the value is currently empty.
+    $alt_override_input = $page->find('css', '.ck-balloon-panel .ck-media-alternative-text-form input[type=text]');
+    $this->assertSame('', $alt_override_input->getValue());
+
+    $test_alt = 'Alt text override';
+    $alt_override_input->setValue($test_alt);
+    $this->getBalloonButton('Save')->click();
+
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', '.ck-widget.drupal-media img[alt*="' . $test_alt . '"]'));
+    $xpath = new \DOMXPath($this->getEditorDataAsDom());
+    $drupal_media = $xpath->query('//drupal-media')[0];
+    $this->assertEquals($test_alt, $drupal_media->getAttribute('alt'));
   }
 
 }

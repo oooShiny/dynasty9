@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Routing\RedirectDestinationTrait;
+use Drupal\views\Attribute\ViewsField;
 use Drupal\views\Entity\Render\EntityTranslationRenderTrait;
 use Drupal\views\ResultRow;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,9 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Renders all operations links for an entity.
  *
  * @ingroup views_field_handlers
- *
- * @ViewsField("entity_operations")
  */
+#[ViewsField("entity_operations")]
 class EntityOperations extends FieldPluginBase {
 
   use EntityTranslationRenderTrait;
@@ -127,7 +127,14 @@ class EntityOperations extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function render(ResultRow $values) {
-    $entity = $this->getEntityTranslation($this->getEntity($values), $values);
+    $entity = $this->getEntity($values);
+    // Allow for the case where there is no entity, if we are on a non-required
+    // relationship.
+    if (empty($entity)) {
+      return '';
+    }
+
+    $entity = $this->getEntityTranslationByRelationship($entity, $values);
     $operations = $this->entityTypeManager->getListBuilder($entity->getEntityTypeId())->getOperations($entity);
     if ($this->options['destination']) {
       foreach ($operations as &$operation) {

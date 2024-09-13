@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\KernelTests\Core\Render\Element;
 
 use Drupal\Component\Utility\Html;
@@ -20,6 +22,9 @@ class RenderElementTypesTest extends KernelTestBase {
    */
   protected static $modules = ['system', 'router_test'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $this->installConfig(['system']);
@@ -45,7 +50,7 @@ class RenderElementTypesTest extends KernelTestBase {
   /**
    * Tests system #type 'container'.
    */
-  public function testContainer() {
+  public function testContainer(): void {
     // Basic container with no attributes.
     $this->assertElements([
       '#type' => 'container',
@@ -73,7 +78,7 @@ class RenderElementTypesTest extends KernelTestBase {
   /**
    * Tests system #type 'html_tag'.
    */
-  public function testHtmlTag() {
+  public function testHtmlTag(): void {
     // Test void element.
     $this->assertElements([
       '#type' => 'html_tag',
@@ -111,7 +116,7 @@ class RenderElementTypesTest extends KernelTestBase {
   /**
    * Tests system #type 'more_link'.
    */
-  public function testMoreLink() {
+  public function testMoreLink(): void {
     $elements = [
       [
         'name' => "#type 'more_link' anchor tag generation without extra classes",
@@ -182,7 +187,7 @@ class RenderElementTypesTest extends KernelTestBase {
     ];
 
     foreach ($elements as $element) {
-      $xml = new \SimpleXMLElement(\Drupal::service('renderer')->renderRoot($element['value']));
+      $xml = new \SimpleXMLElement((string) \Drupal::service('renderer')->renderRoot($element['value']));
       $result = $xml->xpath($element['expected']);
       $this->assertNotEmpty($result, '"' . $element['name'] . '" input rendered correctly.');
     }
@@ -191,7 +196,7 @@ class RenderElementTypesTest extends KernelTestBase {
   /**
    * Tests system #type 'system_compact_link'.
    */
-  public function testSystemCompactLink() {
+  public function testSystemCompactLink(): void {
     $elements = [
       [
         'name' => "#type 'system_compact_link' when admin compact mode is off",
@@ -213,7 +218,7 @@ class RenderElementTypesTest extends KernelTestBase {
     ];
 
     foreach ($elements as $element) {
-      $xml = new \SimpleXMLElement(\Drupal::service('renderer')->renderRoot($element['value']));
+      $xml = new \SimpleXMLElement((string) \Drupal::service('renderer')->renderRoot($element['value']));
       $result = $xml->xpath($element['expected']);
       $this->assertNotEmpty($result, '"' . $element['name'] . '" is rendered correctly.');
     }
@@ -229,7 +234,7 @@ class RenderElementTypesTest extends KernelTestBase {
       'expected' => '//div[@class="compact-link"]/a[contains(@href, "admin/compact?") and text()="Show descriptions"]',
     ];
 
-    $xml = new \SimpleXMLElement(\Drupal::service('renderer')->renderRoot($element['value']));
+    $xml = new \SimpleXMLElement((string) \Drupal::service('renderer')->renderRoot($element['value']));
     $result = $xml->xpath($element['expected']);
     $this->assertNotEmpty($result, '"' . $element['name'] . '" is rendered correctly.');
   }

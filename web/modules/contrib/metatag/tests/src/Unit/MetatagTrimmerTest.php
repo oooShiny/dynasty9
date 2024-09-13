@@ -23,7 +23,7 @@ class MetatagTrimmerTest extends UnitTestCase {
   /**
    * {@inheritDoc}
    */
-  protected function setUp() : void {
+  protected function setUp(): void {
     parent::setUp();
     $this->metatagTrimmer = new MetatagTrimmer();
   }
@@ -40,6 +40,8 @@ class MetatagTrimmerTest extends UnitTestCase {
     $this->assertEquals('Test', $trimResult3);
     $trimResult4 = $this->metatagTrimmer->trimBeforeValue('Test 123 123', 10);
     $this->assertEquals('Test 123', $trimResult4);
+    $trimResult5 = $this->metatagTrimmer->trimBeforeValue('Test 123 123', 20);
+    $this->assertEquals('Test 123 123', $trimResult5);
   }
 
   /**
@@ -54,6 +56,8 @@ class MetatagTrimmerTest extends UnitTestCase {
     $this->assertEquals($trimResult3, 'Test');
     $trimResult4 = $this->metatagTrimmer->trimAfterValue('Test 123 123', 10);
     $this->assertEquals('Test 123 123', $trimResult4);
+    $trimResult5 = $this->metatagTrimmer->trimAfterValue('Test 123 123', 20);
+    $this->assertEquals('Test 123 123', $trimResult5);
   }
 
   /**

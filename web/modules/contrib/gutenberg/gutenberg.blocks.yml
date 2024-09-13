@@ -6,30 +6,28 @@ categories:
       - id: "core/paragraph"
         name: "Paragraph"
         default: true
+        disabled: true
       - id: "core/image"
         name: "Image"
         default: true
       - id: "core/heading"
         name: "Heading"
         default: true
+        disabled: true
       - id: "core/gallery"
         name: "Gallery"
         default: true
-      # - id: "core/legacy-widget"
-      #   name: "Legacy Widget (Experimental)"
-      #   default: false
       - id: "core/list"
         name: "List"
         default: true
+        disabled: true
+      - id: "core/list-item"
+        name: "List Item"
+        default: true
+        disabled: true
       - id: "core/quote"
         name: "Quote"
         default: true
-      - id: "core/shortcode"
-        name: "Shortcode"
-        default: false
-      - id: "core/archives"
-        name: "Archives"
-        default: false
       - id: "core/audio"
         name: "Audio"
         default: true
@@ -39,23 +37,20 @@ categories:
       - id: "core/buttons"
         name: "Buttons"
         default: true
-      - id: "core/calendar"
-        name: "Calendar"
-        default: false
-      - id: "core/categories"
-        name: "Categories"
-        default: false
       - id: "core/code"
         name: "Code"
-        default: true
-      - id: "core/columns"
-        name: "Columns"
         default: true
       - id: "core/column"
         name: "Column"
         default: true
+      - id: "core/columns"
+        name: "Columns"
+        default: true
       - id: "core/cover"
         name: "Cover"
+        default: true
+      - id: "core/details"
+        name: "Details"
         default: true
       - id: "core/embed"
         name: "Embed"
@@ -63,8 +58,8 @@ categories:
       - id: "core/file"
         name: "File"
         default: true
-      - id: "core/freeform"
-        name: "Freeform"
+      - id: "core/group"
+        name: "Group"
         default: true
       - id: "core/html"
         name: "HTML"
@@ -72,56 +67,47 @@ categories:
       - id: "core/media-text"
         name: "Media Text"
         default: true
-      - id: "core/latest-comments"
-        name: "Latest Comments"
-        default: false
-      - id: "core/latest-posts"
-        name: "Latest Posts"
-        default: false
-      # - id: "core/missing"
-      #   name: "Missing"
-      - id: "core/more"
-        name: "More"
-        default: false
-      - id: "core/navigation"
-        name: "Navigation"
-        default: true
-      - id: "core/nextpage"
-        name: "Next page"
-        default: false
+      # @todo: Add support for this block in Drupal.
+      #        Very useful for determining content excerpt.
+      # - id: "core/more"
+      #   name: "More"
+      #   default: false
       - id: "core/preformatted"
         name: "Preformatted"
         default: true
       - id: "core/pullquote"
         name: "Pull Quote"
         default: true
-      - id: "core/rss"
-        name: "RSS"
-        default: false
-      - id: "core/search"
-        name: "Search"
-        default: false
+      # @todo: Add support for this block in Drupal.
+      # - id: "core/rss"
+      #   name: "RSS"
+      #   default: false
+      # @todo: Add support for this block in Drupal.
+      # - id: "core/search"
+      #   name: "Search"
+      #   default: false
       - id: "core/separator"
         name: "Separator"
         default: true
       - id: "core/block"
         name: "Block"
         default: true
+      - id: "core/social-link"
+        name: "Social icon"
+        default: false
       - id: "core/social-links"
         name: "Social icons"
         default: false
       - id: "core/spacer"
         name: "Spacer"
         default: true
-      - id: "core/subhead"
-        name: "Subheading"
-        default: true
-      - id: "core/tag-cloud"
-        name: "Tag Cloud"
-        default: false
       - id: "core/table"
         name: "Table"
         default: true
+      # @todo: Add support for this block in Drupal.
+      # - id: "core/tag-cloud"
+      #   name: "Tag Cloud"
+      #   default: false
       # - id: "core/template"
       #   name: "Template"
       - id: "core/text-columns"
@@ -164,9 +150,6 @@ categories:
       - id: "core-embed/vimeo"
         name: "Vimeo"
         default: true
-      - id: "core-embed/amazon-kindle"
-        name: "Amazon Kindle"
-        default: false
       - id: "core-embed/animoto"
         name: "Animoto"
         default: false
@@ -182,12 +165,12 @@ categories:
       - id: "core-embed/dailymotion"
         name: "Daily Motion"
         default: false
-      - id: "embed"
-        name: "Embed"
-        default: true
-      - id: "core-embed/hulu"
-        name: "Hulu"
-        default: false
+      # - id: "embed"
+      #   name: "Embed"
+      #   default: true
+      # - id: "core-embed/hulu"
+      #   name: "Hulu"
+      #   default: false
       - id: "core-embed/imgur"
         name: "Imgur"
         default: false
@@ -197,14 +180,14 @@ categories:
       - id: "core-embed/kickstarter"
         name: "Kickstarter"
         default: false
-      - id: "core-embed/meetup-com"
-        name: "MeetUp"
-        default: false
+      # - id: "core-embed/meetup-com"
+      #   name: "MeetUp"
+      #   default: false
       - id: "core-embed/mixcloud"
         name: "MixCloud"
         default: false
-      - id: "core-embed/polldaddy"
-        name: "Poll Daddy"
+      - id: "core-embed/pocket-casts"
+        name: "Pocket Casts"
         default: false
       - id: "core-embed/reddit"
         name: "Reddit"
@@ -227,9 +210,9 @@ categories:
       - id: "core-embed/speaker-deck"
         name: "Speaker Deck"
         default: false
-      - id: "core-embed/speaker"
-        name: "Speaker"
-        default: false
+      # - id: "core-embed/speaker"
+      #   name: "Speaker"
+      #   default: false
       - id: "core-embed/tiktok"
         name: "TikTok"
         default: false
@@ -245,43 +228,20 @@ categories:
       - id: "core-embed/wordpress-tv"
         name: "WordPress TV"
         default: false
+      - id: "core-embed/amazon-kindle"
+        name: "Amazon Kindle"
+        default: false
+      - id: "core-embed/pinterest"
+        name: "Pinterest"
+        default: false
+      - id: "core-embed/wolfram-cloud"
+        name: "Wolfram"
+        default: false
+
 default_drupal_blocks:
   - drupalblock/system_breadcrumb_block
   - drupalblock/search_form_block
 blacklist:
-  - core/categories
-  - core/latest-posts
-  - core/latest-comments
-  - core/archives
-  - core/shortcode
-  - core/more
-  - core/nextpage
-  - core/rss
-  - core/calendar
-  - core/search
-  - core/tag-cloud
-  - core/social-links
-  - core/page-list
-  - core/site-logo
-  - core/site-tagline
-  - core/site-title
-  - core/query
-  - core/post-template
-  - core/query-title
-  - core/query-pagination
-  - core/query-pagination-next
-  - core/query-pagination-numbers
-  - core/query-pagination-previous
-  - core/post-title
-  - core/post-content
-  - core/post-date
-  - core/post-excerpt
-  - core/post-featured-image
-  - core/post-terms
-  - core/loginout
-  - core/navigation
-  - core/navigation-link
-  - core/home-link
   - drupalblock/system_main_block
   - drupalblock/system_menu_block:tools
   - drupalblock/local_actions_block

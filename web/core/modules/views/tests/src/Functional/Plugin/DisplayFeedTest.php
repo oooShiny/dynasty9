@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Functional\Plugin;
 
 use Drupal\Core\Url;
@@ -34,10 +36,13 @@ class DisplayFeedTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'starterkit_theme';
 
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->enableViewsTestModule();
 
@@ -48,7 +53,7 @@ class DisplayFeedTest extends ViewTestBase {
   /**
    * Tests the rendered output.
    */
-  public function testFeedOutput() {
+  public function testFeedOutput(): void {
     $this->drupalCreateContentType(['type' => 'page']);
 
     // Verify a title with HTML entities is properly escaped.
@@ -111,7 +116,7 @@ class DisplayFeedTest extends ViewTestBase {
   /**
    * Tests the rendered output for fields display.
    */
-  public function testFeedFieldOutput() {
+  public function testFeedFieldOutput(): void {
     $this->drupalCreateContentType(['type' => 'page']);
 
     // Verify a title with HTML entities is properly escaped.
@@ -153,7 +158,7 @@ class DisplayFeedTest extends ViewTestBase {
   /**
    * Tests that nothing is output when the feed display is disabled.
    */
-  public function testDisabledFeed() {
+  public function testDisabledFeed(): void {
     $this->drupalCreateContentType(['type' => 'page']);
     $this->drupalCreateNode();
 
@@ -165,9 +170,8 @@ class DisplayFeedTest extends ViewTestBase {
 
     // Check that the rss header is output on the page display.
     $this->drupalGet('/test-attached-disabled');
-    $feed_header = $this->xpath('//link[@rel="alternate"]');
-    $this->assertEquals('application/rss+xml', $feed_header[0]->getAttribute('type'), 'The feed link has the type application/rss+xml.');
-    $this->assertStringContainsString('test-attached-disabled.xml', $feed_header[0]->getAttribute('href'), 'Page display contains the correct feed URL.');
+    $this->assertSession()->elementAttributeContains('xpath', '//link[@rel="alternate"]', 'type', 'application/rss+xml');
+    $this->assertSession()->elementAttributeContains('xpath', '//link[@rel="alternate"]', 'href', 'test-attached-disabled.xml');
 
     // Disable the feed display.
     $view->displayHandlers->get('feed_1')->setOption('enabled', FALSE);
@@ -175,8 +179,7 @@ class DisplayFeedTest extends ViewTestBase {
 
     // Ensure there is no link rel present on the page.
     $this->drupalGet('/test-attached-disabled');
-    $result = $this->xpath('//link[@rel="alternate"]');
-    $this->assertEmpty($result, 'Page display does not contain a feed header.');
+    $this->assertSession()->elementNotExists('xpath', '//link[@rel="alternate"]');
 
     // Ensure the feed attachment returns 'Not found'.
     $this->drupalGet('/test-attached-disabled.xml');
@@ -186,7 +189,7 @@ class DisplayFeedTest extends ViewTestBase {
   /**
    * Tests that the feed display works when the linked display is disabled.
    */
-  public function testDisabledLinkedDisplay() {
+  public function testDisabledLinkedDisplay(): void {
     $view = Views::getView('test_attached_disabled');
     $view->setDisplay();
     // Disable the page and link the feed to the page.
@@ -201,6 +204,40 @@ class DisplayFeedTest extends ViewTestBase {
     // Ensure the feed can still be reached.
     $this->drupalGet('test-attached-disabled.xml');
     $this->assertSession()->statusCodeEquals(200);
+  }
+
+  /**
+   * Tests the cacheability of the feed display.
+   */
+  public function testFeedCacheability(): void {
+    // Test as an anonymous user.
+    $this->drupalLogout();
+
+    // Set the page cache max age to a value greater than zero.
+    $config = $this->config('system.performance');
+    $config->set('cache.page.max_age', 300);
+    $config->save();
+
+    // Uninstall all page cache modules that could cache the HTTP response
+    // headers.
+    \Drupal::service('module_installer')->uninstall([
+      'page_cache',
+      'dynamic_page_cache',
+    ]);
+
+    // Reset all so that the config and module changes are active.
+    $this->resetAll();
+
+    $url = 'test-feed-display.xml';
+    $this->drupalGet($url);
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->responseHeaderEquals('Cache-Control', 'max-age=300, public');
+    $this->assertSession()->responseHeaderEquals('Content-Type', 'application/rss+xml; charset=utf-8');
+
+    // Visit the page again to get the cached response.
+    $this->drupalGet($url);
+    $this->assertSession()->responseHeaderEquals('Cache-Control', 'max-age=300, public');
+    $this->assertSession()->responseHeaderEquals('Content-Type', 'application/rss+xml; charset=utf-8');
   }
 
 }

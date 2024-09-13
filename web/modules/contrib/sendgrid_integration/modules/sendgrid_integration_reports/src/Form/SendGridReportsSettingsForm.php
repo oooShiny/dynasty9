@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SendGridReportsSettingsForm.
+ * Class for Sendgrid reports settings form.
  *
  * @package Drupal\sendgrid_integration_reports\Form
  */
@@ -50,13 +50,6 @@ class SendGridReportsSettingsForm extends ConfigFormBase {
    */
   public function getFormId() {
     return 'sendgrid_integration_reports_settings';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEditableConfigNames() {
-    return ['sendgrid_integration_reports.settings'];
   }
 
   /**
@@ -141,6 +134,13 @@ class SendGridReportsSettingsForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
     // Clear the cache since the settings have been changed.
     \Drupal::cache('sendgrid_integration_reports')->deleteAll();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getEditableConfigNames() {
+    return ['sendgrid_integration_reports.settings'];
   }
 
 }

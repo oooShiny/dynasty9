@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\KernelTests\Core\Config;
 
 use Drupal\Core\Config\ConfigImporter;
@@ -28,6 +30,9 @@ class ConfigImportRecreateTest extends KernelTestBase {
    */
   protected static $modules = ['system', 'field', 'text', 'user', 'node'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -51,12 +56,13 @@ class ConfigImportRecreateTest extends KernelTestBase {
       $this->container->get('module_installer'),
       $this->container->get('theme_handler'),
       $this->container->get('string_translation'),
-      $this->container->get('extension.list.module')
+      $this->container->get('extension.list.module'),
+      $this->container->get('extension.list.theme')
     );
   }
 
-  public function testRecreateEntity() {
-    $type_name = mb_strtolower($this->randomMachineName(16));
+  public function testRecreateEntity(): void {
+    $type_name = $this->randomMachineName(16);
     $content_type = NodeType::create([
       'type' => $type_name,
       'name' => 'Node type one',

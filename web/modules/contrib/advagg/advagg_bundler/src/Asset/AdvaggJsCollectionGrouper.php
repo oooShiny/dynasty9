@@ -56,14 +56,16 @@ class AdvaggJsCollectionGrouper extends JsCollectionGrouper implements AssetColl
       // of the information that determines when a new group is needed, but the
       // order of keys in the array doesn't matter, and we don't want a new
       // group if all that's different is that order.
-      ksort($item['browsers']);
+      if (isset($item['browsers'])) {
+        ksort($item['browsers']);
+      }
 
       switch ($item['type']) {
         case 'file':
           // Group file items if their 'preprocess' flag is TRUE.
           // Help ensure maximum reuse of aggregate files by only grouping
           // together items that share the same 'group' value.
-          $arrayItems = [$item['type'], $item['group'], $item['browsers']];
+          $arrayItems = [$item['type'], $item['group'], $item['browsers'] ?? NULL];
           $group_keys = $item['preprocess'] ? $arrayItems : FALSE;
           break;
 

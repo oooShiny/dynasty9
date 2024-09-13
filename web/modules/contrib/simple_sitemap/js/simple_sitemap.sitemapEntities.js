@@ -2,31 +2,44 @@
  * @file
  * Attaches simple_sitemap behaviors to the sitemap entities form.
  */
-(function($) {
+(($, Drupal, once) => {
+  Drupal.behaviors.simpleSitemapEntities = {
+    attach() {
+      const $checkboxes = $(
+        once(
+          'simple-sitemap-entities',
+          'table tr input[type=checkbox][checked]',
+        ),
+      );
 
-  "use strict";
+      if ($checkboxes.length) {
+        $checkboxes.on('change', function change() {
+          const $row = $(this).closest('tr');
+          const $table = $row.closest('table');
 
-  Drupal.behaviors.simple_sitemapSitemapEntities = {
-    attach: function(context, settings) {
-      $.each(settings.simple_sitemap.all_entities, function(index, entityId) {
-        var target = '#edit-' + entityId + '-enabled';
-        triggerVisibility(target, entityId);
+          $row.toggleClass('color-success color-warning');
 
-        $(target).change(function() {
-          triggerVisibility(target, entityId);
+          const showWarning = $table.find('tr.color-warning').length > 0;
+          const $warning = $('.simple-sitemap-entities-warning');
+
+          if (showWarning && !$warning.length) {
+            $(Drupal.theme('simpleSitemapEntitiesWarning')).insertBefore(
+              $table,
+            );
+          }
+          if (!showWarning && $warning.length) {
+            $warning.remove();
+          }
         });
-      });
-
-      function triggerVisibility(target, entityId) {
-        if ($(target).is(':checked')) {
-          $('#warning-' + entityId).hide();
-          $('#indexed-bundles-' + entityId).show();
-        }
-        else {
-          $('#warning-' + entityId).show();
-          $('#indexed-bundles-' + entityId).hide();
-        }
       }
-    }
+    },
   };
-})(jQuery);
+
+  $.extend(Drupal.theme, {
+    simpleSitemapEntitiesWarning() {
+      return `<div class="simple-sitemap-entities-warning messages messages--warning" role="alert">${Drupal.t(
+        'The sitemap settings and any per-entity overrides will be deleted for the unchecked entity types.',
+      )}</div>`;
+    },
+  });
+})(jQuery, Drupal, once);

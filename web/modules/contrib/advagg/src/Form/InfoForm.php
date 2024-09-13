@@ -98,7 +98,6 @@ class InfoForm extends ConfigFormBase {
 
     // Get all hooks and variables.
     $core_hooks = $this->themeRegistry->get();
-    $advagg_hooks = advagg_hooks_implemented();
 
     // Output html preprocess functions hooks.
     $form['theme_info'] = [
@@ -110,26 +109,6 @@ class InfoForm extends ConfigFormBase {
     $form['theme_info']['advagg_theme_info'] = [
       '#markup' => '<p>preprocess functions on html.</p><pre>' . $data . '</pre>',
     ];
-
-    $form['hooks_implemented'] = [
-      '#type' => 'details',
-      '#open' => TRUE,
-      '#title' => $this->t('Core asset hooks implemented by modules'),
-    ];
-
-    // Output all advagg hooks implemented.
-    foreach ($advagg_hooks as $hook => $values) {
-      if (empty($values)) {
-        $form['hooks_implemented'][$hook] = [
-          '#markup' => '<div><strong>' . $hook . ':</strong> 0</div>',
-        ];
-      }
-      else {
-        $form['hooks_implemented'][$hook] = [
-          '#markup' => '<div><strong>' . $hook . ':</strong> ' . count($values) . $this->formatList($values) . '</div>',
-        ];
-      }
-    }
 
     // Get info about a file.
     $form['get_info_about_agg'] = [

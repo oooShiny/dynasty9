@@ -21,7 +21,7 @@ module.exports = {
           .click('[data-drupal-selector="edit-actions-submit"]')
           .waitForElementVisible('body');
       });
-    browser.resizeWindow(1600, 800);
+    browser.setWindowSize(1600, 800);
   },
   after(browser) {
     browser.drupalUninstall();
@@ -66,7 +66,7 @@ module.exports = {
       .waitForElementVisible(headerNavSelector)
       .assert.visible(headerNavSelector)
       .assert.not.visible(`#${linkSubMenuId}`)
-      .moveToElement(`[aria-controls="${linkSubMenuId}"]`, 0, 0)
+      .moveToElement(`[aria-controls="${linkSubMenuId}"]`, 1, 1)
       .assert.visible(`#${linkSubMenuId}`)
       .assert.attributeEquals(
         `[aria-controls="${linkSubMenuId}"]`,
@@ -74,12 +74,25 @@ module.exports = {
         'true',
       )
       .assert.not.visible(`#${buttonSubMenuId}`)
-      .moveToElement(`[aria-controls="${buttonSubMenuId}"]`, 0, 0)
+      .moveToElement(`[aria-controls="${buttonSubMenuId}"]`, 1, 1)
       .assert.visible(`#${buttonSubMenuId}`)
       .assert.attributeEquals(
         `[aria-controls="${buttonSubMenuId}"]`,
         'aria-expanded',
         'true',
       );
+  },
+  'Verify desktop menu converts to mobile if it gets too long': (browser) => {
+    browser
+      .drupalRelativeURL('/node')
+      .waitForElementVisible('body')
+      .assert.not.elementPresent('body.is-always-mobile-nav')
+      .setWindowSize(1220, 800)
+      .execute(() => {
+        // Directly modify the width of the site branding name so that it causes
+        // the primary navigation to be too long, and switch into mobile mode.
+        document.querySelector('.site-branding__name').style.width = '350px';
+      }, [])
+      .assert.elementPresent('body.is-always-mobile-nav');
   },
 };

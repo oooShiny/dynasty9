@@ -41,6 +41,7 @@ class UltimateCron extends Cron {
     // Load the cron jobs in the right order.
     $job_ids = \Drupal::entityQuery('ultimate_cron_job')
       ->condition('status', TRUE)
+      ->accessCheck(FALSE)
       ->sort('weight', 'ASC')
 
       ->execute();

@@ -7,6 +7,8 @@ use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
@@ -53,6 +55,20 @@ class GutenbergFilter extends FilterBase implements ContainerFactoryPluginInterf
   protected $configFactory;
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The theme manager.
+   *
+   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   */
+  protected $themeManager;
+
+  /**
    * Constructs a GutenbergFilter object.
    *
    * @param array $configuration
@@ -67,6 +83,10 @@ class GutenbergFilter extends FilterBase implements ContainerFactoryPluginInterf
    *   The library manager instance.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
+   * @param \Drupal\Core\Theme\ThemeManagerInterface $theme_manager
+   *   The theme manager.
    */
   public function __construct(
     array $configuration,
@@ -74,12 +94,16 @@ class GutenbergFilter extends FilterBase implements ContainerFactoryPluginInterf
     $plugin_definition,
     GutenbergBlockProcessorManager $block_processor_manager,
     GutenbergLibraryManagerInterface $library_manager,
-    ConfigFactoryInterface $config_factory
+    ConfigFactoryInterface $config_factory,
+    ModuleHandlerInterface $module_handler,
+    ThemeManagerInterface $theme_manager
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->blockProcessorManager = $block_processor_manager;
     $this->libraryManager = $library_manager;
     $this->configFactory = $config_factory;
+    $this->moduleHandler = $module_handler;
+    $this->themeManager = $theme_manager;
   }
 
   /**
@@ -92,7 +116,9 @@ class GutenbergFilter extends FilterBase implements ContainerFactoryPluginInterf
       $plugin_definition,
       $container->get('gutenberg.block_processor_manager'),
       $container->get('plugin.manager.gutenberg.library'),
-      $container->get('config.factory')
+      $container->get('config.factory'),
+      $container->get('module_handler'),
+      $container->get('theme.manager')
     );
   }
 
@@ -203,8 +229,57 @@ class GutenbergFilter extends FilterBase implements ContainerFactoryPluginInterf
       }
     }
 
+    // Allow other modules / themes to alter the block content.
+    $hooks = [
+      'gutenberg_render_block',
+      'gutenberg_render_block_' . str_replace('-', '_', Html::getClass($block['blockName'])),
+    ];
+
+    $this->moduleHandler->alter($hooks, $block_content, $block);
+    $this->themeManager->alter($hooks, $block_content, $block);
+
+    // Restore the inner container for the group block.
+    if ($block['blockName'] === 'core/group') {
+      $block_content = $this->restoreGroupInnerContainer($block, $block_content);
+    }
+
     return $block_content;
   }
+
+  /**
+   * Restore the Inner Container for the Group block.
+   *
+   * @param string $block_content
+   *   The Gutenberg block content.
+   *
+   * @return string
+   *   The block content with the Inner Container.
+   */
+  protected function restoreGroupInnerContainer(array $block, string $block_content): string {
+    $tag_name = $block['attrs']['tagName'] ?? 'div';
+
+    $inner_container_format = '/(^\s*<%1$s\b[^>]*wp-block-group(\s|")[^>]*>)(\s*<div\b[^>]*wp-block-group__inner-container(\s|")[^>]*>)((.|\S|\s)*)/U';
+    $group_with_inner_container_regex = sprintf($inner_container_format,
+      preg_quote($tag_name, '/'));
+
+    $is_inner_container = preg_match($group_with_inner_container_regex, $block_content) === 1;
+    $is_not_default = isset($block['attrs']['layout']['type']) && $block['attrs']['layout']['type'] !== 'default';
+    if ($is_inner_container || $is_not_default) {
+      return $block_content;
+    }
+
+    $format = '/(^\s*<%1$s\b[^>]*wp-block-group[^>]*>)(.*)(<\/%1$s>\s*$)/ms';
+    $replace_regex = sprintf($format, preg_quote($tag_name, '/'));
+
+    return preg_replace_callback(
+      $replace_regex,
+      static function($matches) {
+        return $matches[1] . '<div class="wp-block-group__inner-container">' . $matches[2] . '</div>' . $matches[3];
+      },
+      $block_content
+    );
+  }
+
 
   /**
    * Attach Gutenberg frontend libraries to the result.

@@ -4,8 +4,8 @@ namespace Drupal\Tests\rate\Functional;
 
 use Drupal\node\Entity\NodeType;
 use Drupal\rate\Entity\RateWidget;
-use Drupal\Tests\rate\Traits\RateWidgetCreateTrait;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\rate\Traits\RateWidgetCreateTrait;
 
 /**
  * Holds set of tools for the rate widget testing.

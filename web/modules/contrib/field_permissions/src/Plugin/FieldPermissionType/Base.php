@@ -2,6 +2,7 @@
 
 namespace Drupal\field_permissions\Plugin\FieldPermissionType;
 
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Session\AccountInterface;
@@ -65,9 +66,16 @@ abstract class Base extends PluginBase implements FieldPermissionTypeInterface, 
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function appliesToField(FieldDefinitionInterface $field_definition): bool {
+    return TRUE;
+  }
+
+  /**
    * Determines if the given account may view the field, regardless of entity.
    *
-   * This should only return TRUE if
+   * This should only return TRUE if:
    * @code
    * $this->hasFieldAccess('view', $entity, $account);
    * @endcode
@@ -85,4 +93,5 @@ abstract class Base extends PluginBase implements FieldPermissionTypeInterface, 
   public function hasFieldViewAccessForEveryEntity(AccountInterface $account) {
     return FALSE;
   }
+
 }

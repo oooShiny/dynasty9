@@ -1,0 +1,45 @@
+/**
+ * Don't edit this file. Generated from css/content-block-form.scss.
+ **/
+#content-block-form-wrapper .form-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: white;
+  border-top: solid 1px #ccc;
+}
+#content-block-form-wrapper .fieldset {
+  box-shadow: none;
+  border-bottom: solid 1px #ccc;
+}
+#content-block-form-wrapper .fieldset__wrapper {
+  margin: 0;
+}
+#content-block-form-wrapper .fieldset__label {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#content-block-form-wrapper th {
+  font-weight: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#content-block-form-wrapper .action-link--extrasmall {
+  font-size: 11px;
+  font-weight: normal;
+}
+#content-block-form-wrapper .form-element {
+  padding: 4px;
+  min-height: 34px;
+}
+#content-block-form-wrapper .tabledrag-changed-warning {
+  display: none !important;
+}
+#content-block-form-wrapper .form-item__label {
+  font-weight: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+}

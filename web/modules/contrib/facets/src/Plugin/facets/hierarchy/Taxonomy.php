@@ -2,8 +2,10 @@
 
 namespace Drupal\facets\Plugin\facets\hierarchy;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\facets\Hierarchy\HierarchyPluginBase;
+use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -96,7 +98,7 @@ class Taxonomy extends HierarchyPluginBase {
       $current_tid = $parent;
       $parents[$id][] = $parent;
     }
-    return isset($parents[$id]) ? $parents[$id] : [];
+    return $parents[$id] ?? [];
   }
 
   /**
@@ -145,13 +147,26 @@ class Taxonomy extends HierarchyPluginBase {
     $parentIds = [];
     $topLevelTerms = [];
 
-    foreach ($ids as $id) {
+    foreach ($ids as $key => $id) {
       if (!$activeIds || in_array($id, $activeIds)) {
         $currentParentIds = $this->getParentIds($id);
         if (!$currentParentIds) {
           if (!$topLevelTerms) {
             /** @var \Drupal\taxonomy\Entity\Term $term */
             $term = $this->getTermStorage()->load($id);
+
+            // Issue #3260603:
+            // Due to a bug in core
+            // https://www.drupal.org/project/drupal/issues/2723323
+            // it may happen that a taxonomy term is still referenced in a
+            // field, even though the term has been deleted. Not checking the
+            // term is empty produces a fatal error. The same could happen if
+            // someone manipulates the query parameter.
+            if (!$term instanceof TermInterface) {
+              unset($ids[$key]);
+              continue;
+            }
+
             $topLevelTerms = array_map(function ($term) {
               return $term->tid;
             }, $this->getTermStorage()->loadTree($term->bundle(), 0, 1));
@@ -195,6 +210,20 @@ class Taxonomy extends HierarchyPluginBase {
       return FALSE;
     }
     return $this->termParents[$tid] = reset($parents)->id();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    return Cache::mergeTags(parent::getCacheTags(), ['taxonomy_term_list']);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return Cache::PERMANENT;
   }
 
 }

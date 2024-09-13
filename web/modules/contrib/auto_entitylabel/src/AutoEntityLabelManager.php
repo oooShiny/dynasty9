@@ -2,14 +2,14 @@
 
 namespace Drupal\auto_entitylabel;
 
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Utility\Token;
-use Drupal\Component\Utility\Html;
 
 /**
  * Class for Auto Entity Label Manager.
@@ -126,7 +126,7 @@ class AutoEntityLabelManager implements AutoEntityLabelManagerInterface {
     ConfigFactoryInterface $config_factory,
     EntityTypeManagerInterface $entity_type_manager,
     Token $token,
-    ModuleHandlerInterface $module_handler
+    ModuleHandlerInterface $module_handler,
   ) {
     $this->entity = $entity;
     $this->entityType = $entity->getEntityType()->id();
@@ -227,7 +227,7 @@ class AutoEntityLabelManager implements AutoEntityLabelManagerInterface {
     $pattern = $this->getConfig('pattern') ?: '';
     $pattern = trim($pattern);
 
-    return $pattern;
+    return $this->t('@pattern', ['@pattern' => $pattern]);
   }
 
   /**
@@ -395,8 +395,7 @@ class AutoEntityLabelManager implements AutoEntityLabelManagerInterface {
    * @return bool
    *   TRUE if the label is rendered in the entity form, FALSE otherwise.
    *
-   * @todo
-   *   Find a generic way of determining the result of this function. This
+   * @todo Find a generic way of determining the result of this function. This
    *   will probably require access to more information about entity forms
    *   (entity api module?).
    *

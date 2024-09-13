@@ -26,6 +26,7 @@ interface SolrConfigInterface extends ConfigEntityInterface {
    *   associative array.
    *
    * @return self
+   *   Fluent interface.
    */
   public function setSolrConfigs(array $solr_configs);
 
@@ -58,6 +59,7 @@ interface SolrConfigInterface extends ConfigEntityInterface {
    *   A Solr version string.
    *
    * @return self
+   *   Fluent interface.
    */
   public function setMinimumSolrVersion($minimum_solr_version);
 
@@ -73,7 +75,7 @@ interface SolrConfigInterface extends ConfigEntityInterface {
    * Gets the identifier that describes Solr Entity's purpose.
    *
    * @return string
-   *   The Solr Entity puprpose ID.
+   *   The Solr Entity purpose ID.
    */
   public function getPurposeId(): string;
 
@@ -95,7 +97,32 @@ interface SolrConfigInterface extends ConfigEntityInterface {
    * Indicates if a Config Entity is recommended to be used.
    *
    * @return bool
+   *   Indicates if this configuration is recommended.
    */
   public function isRecommended(): bool;
+
+  /**
+   * Set if the configuration should be disabled on the server.
+   *
+   * @param bool $disabled_on_server
+   *   Set if the configuration should be disabled on the server.
+   */
+  public function setDisabledOnServer(bool $disabled_on_server): void;
+
+  /**
+   * Indicates if this configuration/feature is disabled on the server.
+   *
+   * @return bool
+   *   Indicates if this configuration/feature is disabled on the server.
+   */
+  public function isDisabledOnServer(): bool;
+
+  /**
+   * Get Options.
+   *
+   * @return string[]
+   *   An array of options as strings.
+   */
+  public function getOptions(): array;
 
 }

@@ -117,7 +117,12 @@ class FacetBlockAjaxController extends ControllerBase {
 
     // Rebuild the request and the current path, needed for facets.
     $path = $request->request->get('facet_link');
-    $facets_blocks = $request->request->get('facets_blocks');
+
+    // Remove base path if drupal is installed in a sub-directory.
+    $host = $request->getSchemeAndHttpHost();
+    $base_url = $host . base_path();
+    $path = preg_replace('/^' . str_replace('/', '\/', $base_url) . '/', '/', $path);
+    $facets_blocks = $request->request->all()['facets_blocks'] ?? [];
 
     if (empty($path) || empty($facets_blocks)) {
       throw new NotFoundHttpException('No facet link or facet blocks found.');
@@ -127,18 +132,12 @@ class FacetBlockAjaxController extends ControllerBase {
     $facets_blocks = array_unique($facets_blocks);
 
     $new_request = Request::create($path);
-    // Support 9.3+.
-    // @todo remove after 9.3 or greater is required.
-    if (class_exists(DrupalRequestStack::class)) {
-      $request_stack = new DrupalRequestStack();
-    }
-    // Legacy request stack.
-    else {
-      $request_stack = new SymfonyRequestStack();
-    }
-    $processed = $this->pathProcessor->processInbound($path, $new_request);
+    $request_stack = new DrupalRequestStack();
 
-    $this->currentPath->setPath($processed);
+    $processed = $this->pathProcessor->processInbound($path, $new_request);
+    $processed_request = Request::create($processed);
+
+    $this->currentPath->setPath($processed_request->getPathInfo());
     $request->attributes->add($this->router->matchRequest($new_request));
     $this->currentRouteMatch->resetRouteMatch();
     $request_stack->push($new_request);

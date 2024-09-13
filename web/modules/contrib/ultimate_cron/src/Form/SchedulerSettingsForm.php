@@ -69,7 +69,7 @@ class SchedulerSettingsForm extends ConfigFormBase {
       '#collapsed' => TRUE,
     );
     $form['crontab']['rules_help']['info'] = array(
-      '#markup' => file_get_contents(drupal_get_path('module', 'ultimate_cron') . '/help/rules.html'),
+      '#markup' => file_get_contents(\Drupal::service('extension.list.module')->getPath('ultimate_cron') . '/help/rules.html'),
     );
 
     // Settings for Simple scheduler.

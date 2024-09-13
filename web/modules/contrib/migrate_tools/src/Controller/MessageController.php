@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\migrate_tools\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Database\Query\PagerSelectExtender;
+use Drupal\Core\Database\Query\TableSortExtender;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
@@ -17,29 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class MessageController extends ControllerBase {
 
-  /**
-   * The database service.
-   *
-   * @var \Drupal\Core\Database\Connection
-   */
-  protected $database;
-
-  /**
-   * Plugin manager for migration plugins.
-   *
-   * @var \Drupal\migrate\Plugin\MigrationPluginManagerInterface
-   */
-  protected $migrationPluginManager;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('database'),
-      $container->get('plugin.manager.migration')
-    );
-  }
+  protected Connection $database;
+  protected MigrationPluginManagerInterface $migrationPluginManager;
 
   /**
    * Constructs a MessageController object.
@@ -55,12 +39,22 @@ class MessageController extends ControllerBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): self {
+    return new static(
+      $container->get('database'),
+      $container->get('plugin.manager.migration')
+    );
+  }
+
+  /**
    * Gets an array of log level classes.
    *
    * @return array
    *   An array of log level classes.
    */
-  public static function getLogLevelClassMap() {
+  public static function getLogLevelClassMap(): array {
     return [
       MigrationInterface::MESSAGE_INFORMATIONAL => 'migrate-message-4',
       MigrationInterface::MESSAGE_NOTICE => 'migrate-message-3',
@@ -82,7 +76,9 @@ class MessageController extends ControllerBase {
    * @return array
    *   A render array as expected by drupal_render().
    */
-  public function overview(MigrationGroupInterface $migration_group, MigratePlusMigrationInterface $migration) {
+  public function overview(MigrationGroupInterface $migration_group, MigratePlusMigrationInterface $migration): array {
+    $header = [];
+    $build = [];
     $rows = [];
     $classes = static::getLogLevelClassMap();
     $migration_plugin = $this->migrationPluginManager->createInstance($migration->id(), $migration->toArray());
@@ -114,8 +110,8 @@ class MessageController extends ControllerBase {
     if ($this->database->schema()->tableExists($message_table)) {
       $map_table = $migration_plugin->getIdMap()->mapTableName();
       $query = $this->database->select($message_table, 'msg')
-        ->extend('\Drupal\Core\Database\Query\PagerSelectExtender')
-        ->extend('\Drupal\Core\Database\Query\TableSortExtender');
+        ->extend(PagerSelectExtender::class)
+        ->extend(TableSortExtender::class);
       $query->innerJoin($map_table, 'map', 'msg.source_ids_hash=map.source_ids_hash');
       $query->fields('msg');
       $query->fields('map');
@@ -171,7 +167,7 @@ class MessageController extends ControllerBase {
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup
    *   The translated title.
    */
-  public function title(MigrationGroupInterface $migration_group, MigratePlusMigrationInterface $migration) {
+  public function title(MigrationGroupInterface $migration_group, MigratePlusMigrationInterface $migration): TranslatableMarkup {
     return $this->t(
       'Messages of %migration',
       ['%migration' => $migration->label()]

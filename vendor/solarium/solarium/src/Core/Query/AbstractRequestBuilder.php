@@ -10,6 +10,7 @@
 namespace Solarium\Core\Query;
 
 use Solarium\Core\Client\Request;
+use Solarium\Core\Query\LocalParameters\LocalParameter;
 use Solarium\QueryType\Server\AbstractServerQuery;
 
 /**
@@ -49,7 +50,7 @@ abstract class AbstractRequestBuilder implements RequestBuilderInterface
             $request->addParam('json.nl', 'flat');
         }
 
-        $isServerQuery = ($query instanceof AbstractServerQuery);
+        $isServerQuery = $query instanceof AbstractServerQuery;
         $request->setIsServerRequest($isServerQuery);
 
         return $request;
@@ -60,7 +61,7 @@ abstract class AbstractRequestBuilder implements RequestBuilderInterface
      *
      * LocalParams can be use in various Solr GET params.
      *
-     * @see https://lucene.apache.org/solr/guide/local-parameters-in-queries.html
+     * @see https://solr.apache.org/guide/local-parameters-in-queries.html
      *
      * @param string $value
      * @param array  $localParams in key => value format
@@ -70,8 +71,9 @@ abstract class AbstractRequestBuilder implements RequestBuilderInterface
     public function renderLocalParams(string $value, array $localParams = []): string
     {
         $params = '';
+        $helper = $this->getHelper();
 
-        if (0 === strpos($value, '{!')) {
+        if (str_starts_with($value, '{!')) {
             $params = substr($value, 2, strpos($value, '}') - 2).' ';
             $value = substr($value, strpos($value, '}') + 1);
         }
@@ -85,6 +87,12 @@ abstract class AbstractRequestBuilder implements RequestBuilderInterface
                 $paramValue = implode(',', $paramValue);
             } elseif (\is_bool($paramValue)) {
                 $paramValue = $paramValue ? 'true' : 'false';
+            }
+
+            if (LocalParameter::isSplitSmart($paramName)) {
+                $paramValue = $helper->escapeLocalParamValue($paramValue, ',');
+            } else {
+                $paramValue = $helper->escapeLocalParamValue($paramValue);
             }
 
             $params .= $paramName.'='.$paramValue.' ';
@@ -140,7 +148,7 @@ abstract class AbstractRequestBuilder implements RequestBuilderInterface
     /**
      * Get a helper instance.
      *
-     * Uses lazy loading: the helper is instantiated on first use
+     * Uses lazy loading: the helper is instantiated on first use.
      *
      * @return Helper
      */

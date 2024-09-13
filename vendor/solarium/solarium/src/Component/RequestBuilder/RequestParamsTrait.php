@@ -29,13 +29,15 @@ trait RequestParamsTrait
      *
      * @param string $key
      *
-     * @return string|array
+     * @return string|array|null
      */
     public function getParam(string $key)
     {
         if (isset($this->params[$key])) {
             return $this->params[$key];
         }
+
+        return null;
     }
 
     /**
@@ -55,7 +57,7 @@ trait RequestParamsTrait
      *
      * @return self Provides fluent interface
      */
-    public function setParams(array $params): RequestParamsInterface
+    public function setParams(array $params): self
     {
         $this->clearParams();
         $this->addParams($params);
@@ -78,7 +80,7 @@ trait RequestParamsTrait
      *
      * @return self Provides fluent interface
      */
-    public function addParam(string $key, $value, bool $overwrite = false): RequestParamsInterface
+    public function addParam(string $key, $value, bool $overwrite = false): self
     {
         if (null !== $value && [] !== $value) {
             if (!$overwrite && isset($this->params[$key])) {
@@ -109,7 +111,7 @@ trait RequestParamsTrait
      *
      * @return self Provides fluent interface
      */
-    public function addParams(array $params, bool $overwrite = false): RequestParamsInterface
+    public function addParams(array $params, bool $overwrite = false): self
     {
         foreach ($params as $key => $value) {
             $this->addParam($key, $value, $overwrite);
@@ -125,7 +127,7 @@ trait RequestParamsTrait
      *
      * @return self Provides fluent interface
      */
-    public function removeParam(string $key): RequestParamsInterface
+    public function removeParam(string $key): self
     {
         if (isset($this->params[$key])) {
             unset($this->params[$key]);
@@ -139,7 +141,7 @@ trait RequestParamsTrait
      *
      * @return self Provides fluent interface
      */
-    public function clearParams(): RequestParamsInterface
+    public function clearParams(): self
     {
         $this->params = [];
 
@@ -157,7 +159,7 @@ trait RequestParamsTrait
     {
         $queryString = '';
         if (\count($this->params) > 0) {
-            $queryString = http_build_query($this->params, null, $separator);
+            $queryString = http_build_query($this->params, '', $separator);
             $queryString = preg_replace(
                 '/%5B(?:\d|[1-9]\d+)%5D=/',
                 '=',

@@ -14,6 +14,9 @@ views.style.jump_menu:
     url_field:
       type: string
       label: 'URL field'
+    new_window:
+      type: boolean
+      label: 'Open link in new window'
     select_text:
       type: label
       label: 'Select text'

@@ -12,6 +12,7 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Tests the Search API bulk form Views field plugin.
  *
+ * @coversDefaultClass \Drupal\search_api\Plugin\views\field\SearchApiBulkForm
  * @group search_api
  */
 class SearchApiBulkFormTest extends BrowserTestBase {
@@ -38,7 +39,7 @@ class SearchApiBulkFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->index = Index::load('test_index');
@@ -254,7 +255,7 @@ class SearchApiBulkFormTest extends BrowserTestBase {
     $found = FALSE;
     /** @var \Behat\Mink\Element\NodeElement $row */
     foreach ($rows as $row) {
-      if (strpos($row->getText(), $text) !== FALSE) {
+      if (str_contains($row->getText(), $text)) {
         $found = TRUE;
         break;
       }

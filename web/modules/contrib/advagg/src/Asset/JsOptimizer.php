@@ -123,7 +123,7 @@ class JsOptimizer extends AssetOptimizer {
    */
   protected function optimizeFile(array &$asset, array $data) {
     $asset_event = new AssetOptimizationEvent($data['contents'], $asset, $data);
-    $this->eventDispatcher->dispatch(AssetOptimizationEvent::JS, $asset_event);
+    $this->eventDispatcher->dispatch($asset_event, AssetOptimizationEvent::JS);
     $contents = $asset_event->getContent();
     $asset = $asset_event->getAsset();
 

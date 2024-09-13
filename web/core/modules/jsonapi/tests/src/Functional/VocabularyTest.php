@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Core\Url;
@@ -9,8 +11,9 @@ use Drupal\taxonomy\Entity\Vocabulary;
  * JSON:API integration test for the "vocabulary" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class VocabularyTest extends ResourceTestBase {
+class VocabularyTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -87,6 +90,7 @@ class VocabularyTest extends ResourceTestBase {
           'status' => TRUE,
           'dependencies' => [],
           'name' => 'Llama',
+          'new_revision' => FALSE,
           'description' => NULL,
           'weight' => 0,
           'drupal_internal__vid' => 'llama',
@@ -100,6 +104,7 @@ class VocabularyTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
   /**

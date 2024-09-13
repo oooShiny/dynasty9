@@ -61,12 +61,14 @@ function advagg_cron($bypass = FALSE) {
   $outdated = ['css' => [], 'js' => []];
   $file_system = \Drupal::service('file_system');
   $cache = \Drupal::cache('advagg');
+  $stale_file_threshold = \Drupal::config('system.performance')->get('stale_file_threshold');
+
   foreach (['css', 'js'] as $type) {
     $path = $file_system->realpath("public://{$type}/optimized");
     if ($files = glob("{$path}/*.{$type}")) {
       foreach ($files as $file) {
-        // Only delete files older than 1 week.
-        if (filemtime($file) > ($time - 604800)) {
+        // Only delete files older than stale file threshold defined under Cron Options.
+        if (filemtime($file) > ($time - $stale_file_threshold)) {
           continue;
         }
         $filename = str_replace(['css_', 'js_'], '', pathinfo($file, PATHINFO_FILENAME));
@@ -202,32 +204,4 @@ function advagg_enabled() {
   }
 
   return $init['advagg'];
-}
-
-/**
- * Get back what core asset hooks are implemented.
- *
- * @return array
- *   List of hooks and what modules have implemented them.
- */
-function advagg_hooks_implemented() {
-  $module_handler = \Drupal::moduleHandler();
-
-  $hooks = [
-    'js_alter' => [],
-    'css_alter' => [],
-    'page_attachments_alter' => [],
-  ];
-
-  // Cache module_implements as this will load up .inc files.
-  $cid = 'advagg_hooks_implemented';
-  $cache = \Drupal::cache('advagg')->get($cid);
-  if (!empty($cache->data)) {
-    return $cache->data;
-  }
-  foreach ($hooks as $hook => $values) {
-    $hooks[$hook] = $module_handler->getImplementations($hook);
-  }
-  \Drupal::cache('advagg')->set($cid, $hooks, \Drupal::time()->getRequestTime() + 600);
-  return $hooks;
 }

@@ -2,13 +2,14 @@
 
 namespace Drupal\gutenberg\BlockProcessor;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\gutenberg\BlocksRendererHelper;
+use Drupal\gutenberg\Html\TagProcessor;
+use Drupal\gutenberg\StyleEngine;
 
 /**
  * Processes Drupal blocks than can be embedded.
@@ -87,10 +88,31 @@ class DrupalBlockProcessor implements GutenbergBlockProcessorInterface {
       $render = [
         'content' => $render_content,
       ];
-      // Render the css class if available.
-      if (!empty($block_attributes['className'])) {
-        $render['#prefix'] = sprintf('<div class="%s">', Html::escape($block_attributes['className']));
-        $render['#suffix'] = '</div>';
+
+      // Add extra CSS classes if available.
+      if (isset($block_attributes['className']) && !empty($block_attributes['className'])) {
+        $extra_classes = preg_split('/\s+/', $block_attributes['className']);
+        foreach ($extra_classes as $class) {
+          if (!empty($class)) {
+            $render['content']['#attributes']['class'][] = $class;
+          }
+        }
+      }
+
+      // Add the block styles if available.
+      if (!empty($block_attributes['style'])) {
+        $block_styles = StyleEngine::gutenberg_style_engine_get_styles($block_attributes['style']);
+        $render['content']['#attributes']['style'] = $block_styles['css'];
+      }
+
+      // Get classes from the block wrapper.
+      $tags = new TagProcessor($block_content);
+      if ($tags->next_tag('div')) {
+        $classes = $tags->get_attribute('class');
+        // Add each class to the block build.
+        foreach (explode(' ', $classes) as $class) {
+          $render['content']['#attributes']['class'][] = $class;
+        }
       }
 
       $block_content = $this->renderer->render($render);
@@ -106,7 +128,7 @@ class DrupalBlockProcessor implements GutenbergBlockProcessorInterface {
    * {@inheritdoc}
    */
   public function isSupported(array $block, $block_content = '') {
-    return substr($block['blockName'], 0, 12) === 'drupalblock/';
+    return substr($block['blockName'] ?? '', 0, 12) === 'drupalblock/';
   }
 
 }

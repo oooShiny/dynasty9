@@ -11,6 +11,8 @@ id: play_season
 name: Season
 weight: 1
 min_count: 1
+missing: false
+missing_label: others
 url_alias: season
 facet_source_id: 'search_api:views_page__highlight_search__page_1'
 field_identifier: season

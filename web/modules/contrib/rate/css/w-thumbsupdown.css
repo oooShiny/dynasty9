@@ -52,7 +52,7 @@ div.thumbsupdown-rating-wrapper > div > div.rating-option-result {
   padding: 5px;
 }
 
-input.thumbsupdown-rating-input {
+input.thumbsupdown-rating-input[type="radio"] {
   display: none;
 }
 button.thumbsupdown-rating-submit {

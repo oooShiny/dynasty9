@@ -11,6 +11,8 @@ id: player_week
 name: Week
 weight: 2
 min_count: 1
+missing: false
+missing_label: others
 url_alias: week
 facet_source_id: 'search_api:views_block__player_page_highlight_search__block_1'
 field_identifier: week

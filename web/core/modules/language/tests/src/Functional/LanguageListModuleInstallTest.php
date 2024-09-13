@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests enabling Language if a module exists that calls
- * LanguageManager::getLanguages() during installation.
+ * Tests that the language list is not empty when language is installed.
  *
  * @group language
  */
@@ -27,7 +28,7 @@ class LanguageListModuleInstallTest extends BrowserTestBase {
   /**
    * Tests enabling Language.
    */
-  public function testModuleInstallLanguageList() {
+  public function testModuleInstallLanguageList(): void {
     // Since LanguageManager::getLanguages() uses static caches we need to do
     // this by enabling the module using the UI.
     $admin_user = $this->drupalCreateUser([

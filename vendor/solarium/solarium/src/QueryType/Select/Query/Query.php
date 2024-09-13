@@ -38,11 +38,13 @@ use Solarium\Component\QueryTraits\SpatialTrait;
 use Solarium\Component\QueryTraits\SpellcheckTrait;
 use Solarium\Component\QueryTraits\StatsTrait;
 use Solarium\Component\QueryTraits\SuggesterTrait;
+use Solarium\Component\QueryTraits\TermVectorTrait;
 use Solarium\Component\ReRankQuery;
 use Solarium\Component\Spatial;
 use Solarium\Component\Spellcheck;
 use Solarium\Component\Stats\Stats;
 use Solarium\Component\Suggester;
+use Solarium\Component\TermVector;
 use Solarium\Core\Client\Client;
 use Solarium\Core\Query\AbstractQuery;
 use Solarium\Core\Query\RequestBuilderInterface;
@@ -80,6 +82,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
     use SpellcheckTrait;
     use StatsTrait;
     use SuggesterTrait;
+    use TermVectorTrait;
 
     /**
      * Solr sort mode descending.
@@ -166,6 +169,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
             ComponentAwareQueryInterface::COMPONENT_QUERYELEVATION => QueryElevation::class,
             ComponentAwareQueryInterface::COMPONENT_RERANKQUERY => ReRankQuery::class,
             ComponentAwareQueryInterface::COMPONENT_ANALYTICS => Analytics::class,
+            ComponentAwareQueryInterface::COMPONENT_TERMVECTOR => TermVector::class,
         ];
 
         parent::__construct($options);
@@ -556,11 +560,11 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
 
         $key = $filterQuery->getKey();
 
-        if (0 === \strlen($key)) {
+        if (null === $key || 0 === \strlen($key)) {
             throw new InvalidArgumentException('A filterquery must have a key value');
         }
 
-        //double add calls for the same FQ are ignored, but non-unique keys cause an exception
+        // double add calls for the same FQ are ignored, but non-unique keys cause an exception
         if (\array_key_exists($key, $this->filterQueries) && $this->filterQueries[$key] !== $filterQuery) {
             throw new InvalidArgumentException('A filterquery must have a unique key value within a query');
         }
@@ -786,7 +790,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
      *
      * @return self Provides fluent interface
      */
-    public function setCursormark(string $cursormark): self
+    public function setCursorMark(string $cursormark): self
     {
         $this->setOption('cursormark', $cursormark);
 
@@ -798,7 +802,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
      *
      * @return string|null
      */
-    public function getCursormark(): ?string
+    public function getCursorMark(): ?string
     {
         return $this->getOption('cursormark');
     }
@@ -808,7 +812,7 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
      *
      * @return self Provides fluent interface
      */
-    public function clearCursormark(): self
+    public function clearCursorMark(): self
     {
         $this->setOption('cursormark', null);
 
@@ -847,8 +851,8 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
     /**
      * Initialize options.
      *
-     * Several options need some extra checks or setup work, for these options
-     * the setters are called.
+     * {@internal Several options need some extra checks or setup work,
+     *            for these options the setters are called.}
      */
     protected function init()
     {
@@ -874,9 +878,6 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface, Query
                     break;
                 case 'component':
                     $this->createComponents($value);
-                    break;
-                case 'cursormark':
-                    $this->setCursormark($value);
                     break;
             }
         }

@@ -34,7 +34,7 @@ trait FacetSetTrait
      *
      * @return self Provides fluent interface
      */
-    public function addFacet($facet): FacetSetInterface
+    public function addFacet($facet): self
     {
         if (\is_array($facet)) {
             $facet = $this->createFacet($facet['type'], $facet, false);
@@ -42,11 +42,11 @@ trait FacetSetTrait
 
         $key = $facet->getKey();
 
-        if (0 === \strlen($key)) {
+        if (null === $key || 0 === \strlen($key)) {
             throw new InvalidArgumentException('A facet must have a key value');
         }
 
-        //double add calls for the same facet are ignored, but non-unique keys cause an exception
+        // double add calls for the same facet are ignored, but non-unique keys cause an exception
         if (\array_key_exists($key, $this->facets) && $this->facets[$key] !== $facet) {
             throw new InvalidArgumentException('A facet must have a unique key value within a query');
         }
@@ -63,7 +63,7 @@ trait FacetSetTrait
      *
      * @return self Provides fluent interface
      */
-    public function addFacets(array $facets): FacetSetInterface
+    public function addFacets(array $facets): self
     {
         foreach ($facets as $key => $facet) {
             // in case of a config array: add key to config
@@ -108,7 +108,7 @@ trait FacetSetTrait
      *
      * @return self Provides fluent interface
      */
-    public function removeFacet($facet): FacetSetInterface
+    public function removeFacet($facet): self
     {
         if (\is_object($facet)) {
             $facet = $facet->getKey();
@@ -126,7 +126,7 @@ trait FacetSetTrait
      *
      * @return self Provides fluent interface
      */
-    public function clearFacets(): FacetSetInterface
+    public function clearFacets(): self
     {
         $this->facets = [];
 
@@ -140,9 +140,9 @@ trait FacetSetTrait
      *
      * @param array $facets
      *
-     * @return self
+     * @return self Provides fluent interface
      */
-    public function setFacets(array $facets): FacetSetInterface
+    public function setFacets(array $facets): self
     {
         $this->clearFacets();
         $this->addFacets($facets);
@@ -160,9 +160,9 @@ trait FacetSetTrait
      * When no key is supplied the facet cannot be added, in that case you will need to add it manually
      * after setting the key, by using the addFacet method.
      *
-     * @param string            $type
-     * @param array|object|null $options
-     * @param bool              $add
+     * @param string                   $type
+     * @param array|object|string|null $options
+     * @param bool                     $add
      *
      * @throws OutOfBoundsException
      *
@@ -196,13 +196,10 @@ trait FacetSetTrait
     /**
      * Initialize options.
      *
-     * Several options need some extra checks or setup work, for these options
-     * the setters are called.
+     * {@internal The 'facet' option needs additional setup work.}
      */
     protected function init()
     {
-        parent::init();
-
         if (isset($this->options['facet'])) {
             foreach ($this->options['facet'] as $key => $config) {
                 if (!isset($config['local_key'])) {

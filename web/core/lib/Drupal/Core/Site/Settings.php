@@ -38,21 +38,13 @@ final class Settings {
    * @see self::handleDeprecations()
    */
   private static $deprecatedSettings = [
-    'sanitize_input_whitelist' => [
-      'replacement' => 'sanitize_input_safe_keys',
-      'message' => 'The "sanitize_input_whitelist" setting is deprecated in drupal:9.1.0 and will be removed in drupal:10.0.0. Use Drupal\Core\Security\RequestSanitizer::SANITIZE_INPUT_SAFE_KEYS instead. See https://www.drupal.org/node/3163148.',
+    'block_interest_cohort' => [
+      'replacement' => '',
+      'message' => 'The "block_interest_cohort" setting is deprecated in drupal:9.5.0. This setting should be removed from the settings file, since its usage has been removed. See https://www.drupal.org/node/3320787.',
     ],
-    'twig_sandbox_whitelisted_classes' => [
-      'replacement' => 'twig_sandbox_allowed_classes',
-      'message' => 'The "twig_sandbox_whitelisted_classes" setting is deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use "twig_sandbox_allowed_classes" instead. See https://www.drupal.org/node/3162897.',
-    ],
-    'twig_sandbox_whitelisted_methods' => [
-      'replacement' => 'twig_sandbox_allowed_methods',
-      'message' => 'The "twig_sandbox_whitelisted_methods" setting is deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use "twig_sandbox_allowed_methods" instead. See https://www.drupal.org/node/3162897.',
-    ],
-    'twig_sandbox_whitelisted_prefixes' => [
-      'replacement' => 'twig_sandbox_allowed_prefixes',
-      'message' => 'The "twig_sandbox_whitelisted_prefixes" setting is deprecated in drupal:9.1.0 and is removed from drupal:10.0.0. Use "twig_sandbox_allowed_prefixes" instead. See https://www.drupal.org/node/3162897.',
+    'yaml_parser_class' => [
+      'replacement' => '',
+      'message' => 'The "yaml_parser_class" setting is deprecated in drupal:10.3.0. This setting should be removed from the settings file, since its usage has been removed. See https://www.drupal.org/node/3415489.',
     ],
   ];
 
@@ -117,6 +109,7 @@ final class Settings {
     // If the caller is asking for the value of a deprecated setting, trigger a
     // deprecation message about it.
     if (isset(self::$deprecatedSettings[$name])) {
+      // phpcs:ignore Drupal.Semantics.FunctionTriggerError
       @trigger_error(self::$deprecatedSettings[$name]['message'], E_USER_DEPRECATED);
     }
     return self::$instance->storage[$name] ?? $default;
@@ -160,20 +153,7 @@ final class Settings {
     self::handleDeprecations($settings);
 
     // Initialize databases.
-    foreach ($databases as $key => $targets) {
-      foreach ($targets as $target => $info) {
-        Database::addConnectionInfo($key, $target, $info);
-        // If the database driver is provided by a module, then its code may
-        // need to be instantiated prior to when the module's root namespace
-        // is added to the autoloader, because that happens during service
-        // container initialization but the container definition is likely in
-        // the database. Therefore, allow the connection info to specify an
-        // autoload directory for the driver.
-        if (isset($info['autoload'])) {
-          $class_loader->addPsr4($info['namespace'] . '\\', $info['autoload']);
-        }
-      }
-    }
+    Database::setMultipleConnectionInfo($databases, $class_loader, $app_root);
 
     // Initialize Settings.
     new Settings($settings);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\comment\Functional;
 
 /**
@@ -16,6 +18,9 @@ class CommentLinksAlterTest extends CommentTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -26,7 +31,7 @@ class CommentLinksAlterTest extends CommentTestBase {
   /**
    * Tests comment links altering.
    */
-  public function testCommentLinksAlter() {
+  public function testCommentLinksAlter(): void {
     $this->drupalLogin($this->webUser);
     $comment_text = $this->randomMachineName();
     $subject = $this->randomMachineName();

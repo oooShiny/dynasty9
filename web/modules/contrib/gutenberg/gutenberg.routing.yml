@@ -57,6 +57,11 @@ gutenberg.media.dialog:
   path: '/editor/media/dialog'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\MediaController::dialog'
+  options:
+    # This will set this route as an _admin_route if the user has the 'Use the
+    # administration theme when editing or creating content' setting enabled.
+    # @see \Drupal\node\EventSubscriber\NodeAdminRouteSubscriber::alterRoutes()
+    _node_operation_route: TRUE
   methods: 'GET'
   requirements:
     _permission: 'use gutenberg'
@@ -65,6 +70,22 @@ gutenberg.media.render:
   path: '/editor/media/render/{media}'
   defaults:
     _controller: '\Drupal\gutenberg\Controller\MediaController::render'
+  methods: 'GET'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+gutenberg.entity.render:
+  path: '/editor/entity/render/{entity_type}/{entity_id}/{view_mode}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\EntityController::renderEntity'
+  methods: 'GET'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+gutenberg.entity.view_modes:
+  path: '/editor/entity/view_modes/{entity_type}/{bundle}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\EntityController::viewModes'
   methods: 'GET'
   requirements:
     _permission: 'use gutenberg'
@@ -89,6 +110,32 @@ gutenberg.blocks.load_single:
   requirements:
     _permission: 'use gutenberg'
     _format: json
+gutenberg.content_block_types.load:
+  path: '/editor/content_block_types/load/{content_type}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\BlocksController::loadContentBlockTypes'
+    content_type: 'none'
+  methods: 'GET'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+gutenberg.content_block.render:
+  path: '/editor/content_block/render/{content_block_id}/{view_mode}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\BlocksController::renderContentBlock'
+  requirements:
+    _permission: 'use gutenberg'
+
+gutenberg.content_block.clone_if_used:
+  path: '/editor/content_block/clone_if_used'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\BlocksController::cloneIfUsed'
+  methods: 'POST'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+#    _csrf_token: 'TRUE'
+
 gutenberg.blocks.settings:
   path: '/editor/blocks/settings/{plugin_id}'
   defaults:
@@ -102,6 +149,20 @@ gutenberg.blocks.settings:
   requirements:
     _permission: 'use gutenberg'
     _format: json
+gutenberg.content_block_type.settings:
+  path: '/editor/content_block_type/settings/{type}/{block_id}'
+  defaults:
+    _form: '\Drupal\gutenberg\Form\ContentBlockSettingsForm'
+    _title: 'Configure content block'
+    # _controller: '\Drupal\gutenberg\Controller\BlocksController::settingsForm'
+    # parameters:
+    #   block:
+    #     type: entity:block
+  # methods: 'GET'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+
 gutenberg.reusable_blocks.create:
   path: '/editor/reusable-blocks'
   defaults:
@@ -141,6 +202,33 @@ gutenberg.reusable_blocks.load_single:
   methods: 'GET'
   requirements:
     _custom_access: '\Drupal\gutenberg\Controller\ReusableBlocksController::access'
+    _format: json
+gutenberg.pattern_categories.load:
+  path: '/editor/patterns/categories'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::categoryLoad'
+  methods: 'GET'
+  requirements:
+    _permission: 'use gutenberg'
+    _format: json
+gutenberg.pattern_categories.load_single:
+  path: '/editor/patterns/categories/{category}'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::categoryLoad'
+    parameters:
+      category:
+        type: entity:taxonomy_term
+  methods: 'GET'
+  requirements:
+    _custom_access: '\Drupal\gutenberg\Controller\ReusableBlocksController::access'
+    _format: json
+gutenberg.pattern_categories.create:
+  path: '/editor/patterns/categories'
+  defaults:
+    _controller: '\Drupal\gutenberg\Controller\ReusableBlocksController::categoryCreate'
+  methods: 'POST'
+  requirements:
+    _permission: 'use gutenberg'
     _format: json
 gutenberg.oembed:
   path: '/editor/oembed'

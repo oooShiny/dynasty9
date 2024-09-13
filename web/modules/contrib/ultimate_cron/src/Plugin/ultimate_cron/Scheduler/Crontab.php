@@ -41,7 +41,7 @@ class Crontab extends SchedulerBase {
   public function formatLabelVerbose(CronJob $job) {
     $parsed = '';
     $next_schedule = NULL;
-    $time = REQUEST_TIME;
+    $time = \Drupal::time()->getRequestTime();
     $skew = $this->getSkew($job);
     foreach ($this->configuration['rules'] as $rule) {
       $cron = CronRule::factory($rule, $time, $skew);
@@ -83,7 +83,7 @@ class Crontab extends SchedulerBase {
     );
 
     $form['rules_help']['info'] = array(
-      '#markup' => file_get_contents(drupal_get_path('module', 'ultimate_cron') . '/help/rules.html'),
+      '#markup' => file_get_contents(\Drupal::service('extension.list.module')->getPath('ultimate_cron') . '/help/rules.html'),
     );
 
     $form['catch_up'] = array(
@@ -179,7 +179,7 @@ class Crontab extends SchedulerBase {
       $time = $cron->getNextSchedule();
       $next_schedule = is_null($next_schedule) || $time < $next_schedule ? $time : $next_schedule;
     }
-    $behind = REQUEST_TIME - $next_schedule;
+    $behind = \Drupal::time()->getRequestTime() - $next_schedule;
 
     return $behind > $this->configuration['catch_up'] ? $behind : FALSE;
   }

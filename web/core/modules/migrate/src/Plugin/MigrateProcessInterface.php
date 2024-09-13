@@ -15,7 +15,7 @@ use Drupal\migrate\Row;
  *
  * @see \Drupal\migrate\Plugin\MigratePluginManager
  * @see \Drupal\migrate\ProcessPluginBase
- * @see \Drupal\migrate\Annotation\MigrateProcessPlugin
+ * @see \Drupal\migrate\Attribute\MigrateProcess
  * @see plugin_api
  *
  * @ingroup migration
@@ -37,7 +37,7 @@ interface MigrateProcessInterface extends PluginInspectionInterface {
    *   The destination property currently worked on. This is only used together
    *   with the $row above.
    *
-   * @return string|array
+   * @return mixed
    *   The newly transformed value.
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property);
@@ -51,5 +51,18 @@ interface MigrateProcessInterface extends PluginInspectionInterface {
    *   is an array.
    */
   public function multiple();
+
+  /**
+   * Determines if the pipeline should stop processing.
+   *
+   * @return bool
+   *   A boolean value indicating if the pipeline processing should stop.
+   */
+  public function isPipelineStopped(): bool;
+
+  /**
+   * Resets the internal data of a plugin.
+   */
+  public function reset(): void;
 
 }

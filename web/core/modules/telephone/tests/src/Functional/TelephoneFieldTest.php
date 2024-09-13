@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\telephone\Functional;
 
 use Drupal\field\Entity\FieldConfig;
+use Drupal\telephone\Plugin\Field\FieldType\TelephoneItem;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\field\Entity\FieldStorageConfig;
 
@@ -10,6 +13,7 @@ use Drupal\field\Entity\FieldStorageConfig;
  * Tests the creation of telephone fields.
  *
  * @group telephone
+ * @group #slow
  */
 class TelephoneFieldTest extends BrowserTestBase {
 
@@ -86,9 +90,10 @@ class TelephoneFieldTest extends BrowserTestBase {
    *
    * @covers \Drupal\telephone\Plugin\Field\FieldWidget\TelephoneDefaultWidget::formElement
    */
-  public function testTelephoneWidget() {
+  public function testTelephoneWidget(): void {
     $this->drupalGet('node/add/article');
     $this->assertSession()->fieldValueEquals("field_telephone[0][value]", '');
+    $this->assertSession()->elementAttributeContains('css', 'input[name="field_telephone[0][value]"]', 'maxlength', (string) TelephoneItem::MAX_LENGTH);
     $this->assertSession()->responseContains('placeholder="123-456-7890"');
   }
 
@@ -99,7 +104,7 @@ class TelephoneFieldTest extends BrowserTestBase {
    *
    * @dataProvider providerPhoneNumbers
    */
-  public function testTelephoneFormatter($input, $expected) {
+  public function testTelephoneFormatter($input, $expected): void {
     // Test basic entry of telephone field.
     $edit = [
       'title[0][value]' => $this->randomMachineName(),
@@ -114,7 +119,7 @@ class TelephoneFieldTest extends BrowserTestBase {
   /**
    * Provides the phone numbers to check and expected results.
    */
-  public function providerPhoneNumbers() {
+  public static function providerPhoneNumbers() {
     return [
       'standard phone number' => ['123456789', '123456789'],
       'whitespace is removed' => ['1234 56789', '123456789'],

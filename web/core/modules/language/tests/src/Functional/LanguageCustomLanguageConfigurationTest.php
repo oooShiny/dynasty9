@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Core\Url;
@@ -29,7 +31,7 @@ class LanguageCustomLanguageConfigurationTest extends BrowserTestBase {
   /**
    * Functional tests for adding, editing and deleting languages.
    */
-  public function testLanguageConfiguration() {
+  public function testLanguageConfiguration(): void {
 
     // Create user with permissions to add and remove languages.
     $admin_user = $this->drupalCreateUser([
@@ -45,8 +47,8 @@ class LanguageCustomLanguageConfigurationTest extends BrowserTestBase {
     $this->drupalGet('admin/config/regional/language/add');
     $this->submitForm($edit, 'Add custom language');
     // Test validation on missing values.
-    $this->assertSession()->pageTextContains('Language code field is required.');
-    $this->assertSession()->pageTextContains('Language name field is required.');
+    $this->assertSession()->statusMessageContains('Language code field is required.', 'error');
+    $this->assertSession()->statusMessageContains('Language name field is required.', 'error');
     $empty_language = new Language();
     $this->assertSession()->checkboxChecked('edit-direction-' . $empty_language->getDirection());
     $this->assertSession()->addressEquals(Url::fromRoute('language.add'));
@@ -61,10 +63,10 @@ class LanguageCustomLanguageConfigurationTest extends BrowserTestBase {
     $this->drupalGet('admin/config/regional/language/add');
     $this->submitForm($edit, 'Add custom language');
 
-    $this->assertSession()->pageTextContains("Language code must be a valid language tag as defined by the W3C.");
+    $this->assertSession()->statusMessageContains('Language code must be a valid language tag as defined by the W3C.', 'error');
     $this->assertSession()->linkExists("defined by the W3C");
     $this->assertSession()->linkByHrefExists("http://www.w3.org/International/articles/language-tags/");
-    $this->assertSession()->pageTextContains("Language name cannot contain any markup.");
+    $this->assertSession()->statusMessageContains('Language name cannot contain any markup.', 'error');
     $this->assertSession()->addressEquals(Url::fromRoute('language.add'));
 
     // Test adding a custom language with a numeric region code.
@@ -77,7 +79,7 @@ class LanguageCustomLanguageConfigurationTest extends BrowserTestBase {
 
     $this->drupalGet('admin/config/regional/language/add');
     $this->submitForm($edit, 'Add custom language');
-    $this->assertSession()->pageTextContains("The language {$edit['label']} has been created and can now be used.");
+    $this->assertSession()->statusMessageContains("The language {$edit['label']} has been created and can now be used.", 'status');
     $this->assertSession()->addressEquals(Url::fromRoute('entity.configurable_language.collection'));
 
     // Test validation of existing language values.
@@ -91,13 +93,13 @@ class LanguageCustomLanguageConfigurationTest extends BrowserTestBase {
     // Add the language the first time.
     $this->drupalGet('admin/config/regional/language/add');
     $this->submitForm($edit, 'Add custom language');
-    $this->assertSession()->pageTextContains("The language {$edit['label']} has been created and can now be used.");
+    $this->assertSession()->statusMessageContains("The language {$edit['label']} has been created and can now be used.", 'status');
     $this->assertSession()->addressEquals(Url::fromRoute('entity.configurable_language.collection'));
 
     // Add the language a second time and confirm that this is not allowed.
     $this->drupalGet('admin/config/regional/language/add');
     $this->submitForm($edit, 'Add custom language');
-    $this->assertSession()->pageTextContains("The language {$edit['label']} ({$edit['langcode']}) already exists.");
+    $this->assertSession()->statusMessageContains("The language {$edit['label']} ({$edit['langcode']}) already exists.", 'error');
     $this->assertSession()->addressEquals(Url::fromRoute('language.add'));
   }
 

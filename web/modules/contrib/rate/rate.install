@@ -252,3 +252,25 @@ function rate_update_8201(&$sandbox) {
   \Drupal::entityDefinitionUpdateManager()
     ->installFieldStorageDefinition('rate_widget', 'vote', 'rate', $storage);
 }
+
+/**
+ * Updates the rate_widgets_results view and removes node_summary_block.
+ *
+ * Since core views aggregation is deprecated, the block node_summary_block
+ * needs to be removed (uses aggregation), the results per rate widget option
+ * should be retrieved programmatically.
+ */
+function rate_update_9001() {
+  if (\Drupal::moduleHandler()->moduleExists('views')) {
+    $view_id = 'rate_widgets_results';
+    $view = \Drupal::entityTypeManager()->getStorage('view')->load($view_id);
+    if (!$view->isNew()) {
+      // Delete the display.
+      $displays = $view->get('display');
+      unset($displays['node_summary_block']);
+      $view->set('display', $displays);
+      $view->save();
+    }
+    return t('Views display node_summary_block deleted.');
+  }
+}

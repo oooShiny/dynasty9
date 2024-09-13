@@ -4,8 +4,10 @@ dependencies:
   config:
     - block_content.type.reusable_block
     - field.field.block_content.reusable_block.body
+    - field.field.block_content.reusable_block.field_pattern_category
+    - field.field.block_content.reusable_block.field_pattern_sync_status
   module:
-    - text
+    - gutenberg
   enforced:
     module:
       - gutenberg
@@ -15,12 +17,21 @@ bundle: reusable_block
 mode: default
 content:
   body:
-    label: hidden
     type: gutenberg_text
-    weight: 0
+    label: hidden
     settings:
       format: gutenberg
-      content_only: true
+      content_only: false
     third_party_settings: {  }
+    weight: 1
     region: content
-hidden: {  }
+  field_pattern_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_pattern_sync_status: true

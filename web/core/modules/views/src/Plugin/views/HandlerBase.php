@@ -45,6 +45,8 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   public $tableAlias;
 
   /**
+   * The real field.
+   *
    * The actual field in the database table, maybe different
    * on other kind of query plugins/special handlers.
    *
@@ -81,6 +83,12 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   protected $viewsData;
 
   /**
+   * Tracks whether the plugin is a handler.
+   */
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  public bool $is_handler;
+
+  /**
    * Constructs a Handler object.
    *
    * @param array $configuration
@@ -98,7 +106,7 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   /**
    * {@inheritdoc}
    */
-  public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
+  public function init(ViewExecutable $view, DisplayPluginBase $display, ?array &$options = NULL) {
     parent::init($view, $display, $options);
 
     // Check to see if this handler type is defaulted. Note that
@@ -350,6 +358,7 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
 
   /**
    * Perform any necessary changes to the form values prior to storage.
+   *
    * There is no need for this function to actually store the data.
    */
   public function submitGroupByForm(&$form, FormStateInterface $form_state) {
@@ -357,6 +366,8 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   }
 
   /**
+   * Determines if the handler has extra options.
+   *
    * If a handler has 'extra options' it will get a little settings widget and
    * another form called extra_options.
    */
@@ -381,6 +392,7 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
 
   /**
    * Perform any necessary changes to the form values prior to storage.
+   *
    * There is no need for this function to actually store the data.
    */
   public function submitExtraOptionsForm($form, FormStateInterface $form_state) {}
@@ -393,8 +405,7 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   }
 
   /**
-   * Set new exposed option defaults when exposed setting is flipped
-   * on.
+   * Set new exposed option defaults when exposed setting is flipped on.
    */
   public function defaultExposeOptions() {}
 
@@ -430,6 +441,7 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
 
   /**
    * Perform any necessary changes to the form exposes prior to storage.
+   *
    * There is no need for this function to actually store the data.
    */
   public function submitExposeForm($form, FormStateInterface $form_state) {}
@@ -548,8 +560,9 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   public function adminSummary() {}
 
   /**
-   * Determine if this item is 'exposed', meaning it provides form elements
-   * to let users modify the view.
+   * Determine if this item is 'exposed'.
+   *
+   * Exposed means it provides form elements to let users modify the view.
    *
    * @return bool
    */
@@ -566,6 +579,7 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
 
   /**
    * Define if the exposed input has to be submitted multiple times.
+   *
    * This is TRUE when exposed filters grouped are using checkboxes as
    * widgets.
    */
@@ -781,6 +795,8 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   }
 
   /**
+   * Submits a temporary form.
+   *
    * A submit handler that is used for storing temporary items when using
    * multi-step changes, such as ajax requests.
    */

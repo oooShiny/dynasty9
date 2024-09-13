@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Extension\ModuleHandler;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Password\DefaultPasswordGenerator;
 use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\State\StateInterface;
@@ -48,6 +49,14 @@ class PatreonUserService extends PatreonService {
   protected ModuleHandler $handler;
 
   /**
+   * Password Generator service.
+   *
+   * @var \Drupal\Core\Password\DefaultPasswordGenerator
+   *   Password Generator service.
+   */
+  protected DefaultPasswordGenerator $passwordGenerator;
+
+  /**
    * A token for use with the API.
    *
    * @var string
@@ -86,13 +95,16 @@ class PatreonUserService extends PatreonService {
    *   The current user account.
    * @param \Drupal\Core\Extension\ModuleHandler $handler
    *   A Module Handler.
+   * @param \Drupal\Core\Password\DefaultPasswordGenerator $password_generator
+   *   Password Generator service.
    */
-  public function __construct(CurrentPathStack $path, SerializationInterface $serialization_json, ConfigFactoryInterface $configFactory, LoggerChannelFactoryInterface $logger, MessengerInterface $messenger, EntityTypeManager $entityTypeManager, RequestStack $stack, StateInterface $stateApi, AccountInterface $account, ModuleHandler $handler) {
-    parent::__construct($path, $serialization_json, $configFactory, $logger,  $messenger, $entityTypeManager, $stack, $stateApi);
+  public function __construct(CurrentPathStack $path, SerializationInterface $serialization_json, ConfigFactoryInterface $configFactory, LoggerChannelFactoryInterface $logger, MessengerInterface $messenger, EntityTypeManager $entityTypeManager, RequestStack $stack, StateInterface $stateApi, AccountInterface $account, ModuleHandler $handler, DefaultPasswordGenerator $password_generator) {
+    parent::__construct($path, $serialization_json, $configFactory, $logger, $messenger, $entityTypeManager, $stack, $stateApi);
 
     $this->config = $this->configFactory->getEditable('patreon_user.settings');
     $this->currentUser = $account;
     $this->handler = $handler;
+    $this->passwordGenerator = $password_generator;
   }
 
   /**
@@ -118,6 +130,7 @@ class PatreonUserService extends PatreonService {
    * Helper to store a fresh token against the service.
    *
    * @param string $token
+   *   The refresh token to store.
    */
   public function setRefresh(string $token) {
     $this->refreshToken = $token;
@@ -289,7 +302,7 @@ class PatreonUserService extends PatreonService {
    * @param int $patreon_id
    *   A valid patreon account id.
    *
-   * @return \Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface|bool
+   * @return \Drupal\user\UserInterface|bool
    *   A loaded user or FALSE on error.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -300,6 +313,7 @@ class PatreonUserService extends PatreonService {
     $return = FALSE;
     $result = $this->entityTypeManager->getStorage('user')->getQuery()
       ->condition('user_patreon_id', $patreon_id)
+      ->accessCheck(FALSE)
       ->execute();
 
     if (!empty($result)) {
@@ -311,6 +325,7 @@ class PatreonUserService extends PatreonService {
           $this->logger
             ->notice($this->t('Patreon user :id linked to User 1. This could cause security issues.', [':id' => $patreon_id]));
         }
+        /** @var \Drupal\user\UserInterface $return */
         $return = $account;
       }
     }
@@ -324,7 +339,7 @@ class PatreonUserService extends PatreonService {
    * @param array $data
    *   Results array from the user endpoint.
    *
-   * @return bool|\Drupal\Core\Entity\EntityInterface
+   * @return bool|\Drupal\user\UserInterface
    *   A Drupal user object, or FALSE on error.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
@@ -353,7 +368,7 @@ class PatreonUserService extends PatreonService {
           $return = $this->entityTypeManager->getStorage('user')->create([
             'mail' => $mail,
           ]);
-          $return->setPassword(user_password(20));
+          $return->setPassword($this->passwordGenerator->generate(20));
           $return->enforceIsNew();
           $return->activate();
         }

@@ -83,12 +83,12 @@ class CssOptimizer extends AssetOptimizer {
    */
   protected function optimizeFile(array &$asset, array $data) {
     $contents = $this->updateUrls($data['contents'], $asset['data']);
-    if ($this->config->get('css.combine_media') && $asset['media'] !== 'all') {
+    if ((int) \Drupal::VERSION < 10 && $this->config->get('css.combine_media') && $asset['media'] !== 'all') {
       $contents = "@media {$asset['media']}{{$contents}}";
       $asset['media'] = 'all';
     }
     $asset_event = new AssetOptimizationEvent($contents, $asset, $data);
-    $this->eventDispatcher->dispatch(AssetOptimizationEvent::CSS, $asset_event);
+    $this->eventDispatcher->dispatch($asset_event, AssetOptimizationEvent::CSS);
     $contents = $asset_event->getContent();
     $asset = $asset_event->getAsset();
 

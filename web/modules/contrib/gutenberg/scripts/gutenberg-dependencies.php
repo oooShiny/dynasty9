@@ -15,25 +15,7 @@ Generates Gutenberg's info.yml library dependencies.
 
 EOL;
 require_once __DIR__ . '/_cli_include.inc.php';
-
-/**
- * Gets the Drupal root directory.
- *
- * @return string
- *   The root directory.
- */
-function get_drupal_root_directory() {
-  $dirs = explode(DIRECTORY_SEPARATOR, __DIR__);
-
-  $root_dir = [];
-  foreach ($dirs as $key => $value) {
-    if ($value === 'modules') {
-      return implode(DIRECTORY_SEPARATOR, $root_dir);
-    }
-    $root_dir[] = $value;
-  }
-  throw new \RuntimeException('Could not find the Drupal root.');
-}
+require_once __DIR__ . '/utils.inc.php';
 
 /**
  * Gets the Drupal root directory.
@@ -46,15 +28,18 @@ function get_asset_id($asset) {
 
   $asset_ids = [
     "components/style$suffix.css" => "wp-components-css",
+    "block-editor/content$suffix.css" => "wp-block-editor-content-css",
     "block-editor/style$suffix.css" => "wp-block-editor-css",
     "nux/style$suffix.css" => "wp-nux-css",
     "reusable-blocks/style$suffix.css" => "wp-reusable-blocks-css",
+    "patterns/style$suffix.css" => "wp-patterns-css",
     "editor/style$suffix.css" => "wp-editor-css",
     "block-library/editor$suffix.css" => "wp-edit-blocks-css",
     "block-library/reset$suffix.css" => "wp-reset-editor-styles-css",
     "block-library/style$suffix.css" => "wp-block-library-css",
     "format-library/style$suffix.css" => "wp-format-library-css",
     "block-directory/style$suffix.css" => "wp-block-directory-css",
+    "edit-post/style$suffix.css" => "wp-edit-post-css",
   ];
 
   return isset($asset_ids[$asset]) ? $asset_ids[$asset] : null;
@@ -64,19 +49,19 @@ require_once get_drupal_root_directory() . '/autoload.php';
 // Could require bootstrap but maybe it's a "overkill"...?
 require_once __DIR__ . '/../src/ScanDir.php';
 
-$gutenberg_vendor_dir = realpath(dirname(__DIR__) . '/vendor/gutenberg');
+$gutenberg_vendor_dir = realpath(dirname(__DIR__) . '/js/vendor/gutenberg');
 $gutenberg_libraries_file = __DIR__ . '/../gutenberg.libraries.yml';
 
 $whitelisted_libraries = [
   // Global/3rd party libraries.
   'react', 'react-dom', 'lodash', 'moment', 'sprintf', 'regenerator-runtime', 'polyfill', 'g-media-attributes',
   // Drupal Gutenberg libraries.
-  'admin', 'bartik', 'seven', 'claro', 'olivero', 'filters', 'drupal-blocks', 'blocks-edit', 'blocks-view', 'init', 'edit-node', 'drupal-url',
+  'admin', 'claro', 'olivero', 'filters', 'drupal-blocks', 'blocks-edit', 'blocks-view', 'init', 'edit-node', 'drupal-url',
   'drupal-api-fetch', 'drupal-block-settings', 'drupal-data', 'drupal-i18n', 'special-media-selection',
-  'dashicons',
+  'dashicons', 'overrides', 'drupal.dialog.sidebar', 'drupal-content-block-utils',
 ];
 $ignore_dirs = [
-  'admin-manifest', 'edit-site', 'edit-navigation', 'edit-widgets', 'customize-widgets', 'react-i18n', 'widgets',
+  'admin-manifest', 'edit-site', 'edit-navigation', 'edit-widgets', 'customize-widgets', 'react-i18n', 'vendors', 'interactivity',
 ];
 
 $original_yaml = Yaml::parse(file_get_contents($gutenberg_libraries_file));
@@ -103,11 +88,11 @@ foreach ($directories as $directory) {
 foreach ($packages as $package) {
   unset($yaml[$package]);
 
-  $package_settings = require $gutenberg_vendor_dir . DIRECTORY_SEPARATOR . $package . DIRECTORY_SEPARATOR . 'index.asset.php';
+  $package_settings = require $gutenberg_vendor_dir . DIRECTORY_SEPARATOR . $package . DIRECTORY_SEPARATOR . 'index.min.asset.php';
   $deps = $package_settings['dependencies'];
   $version = $package_settings['version'];
 
-  $asset_prefix = "vendor/gutenberg/$package/";
+  $asset_prefix = "js/vendor/gutenberg/$package/";
   $js_files = ScanDir::scan($gutenberg_vendor_dir . DIRECTORY_SEPARATOR . $package, 'js');
   $css_files = ScanDir::scan($gutenberg_vendor_dir . DIRECTORY_SEPARATOR . $package, 'css');
 
@@ -135,9 +120,12 @@ foreach ($packages as $package) {
   
     if (!strpos($file, '-rtl')) {
       $css_id = get_asset_id("$package/$file");
-      $yaml[$package]['css'][$style_level][$asset_prefix . $file] = isset($css_id) ? ['attributes' => [
-        'id' => $css_id
-      ]]: [];
+      $yaml[$package]['css'][$style_level][$asset_prefix . $file] = isset($css_id) ? [
+        'preprocess' => FALSE,
+        'attributes' => [
+          'id' => $css_id,
+        ],
+      ]: [];
     }
   }
 
@@ -149,7 +137,7 @@ foreach ($packages as $package) {
 
 // Customize editor package sources.
 if (isset($yaml['editor'])) {
-  unset($yaml['editor']['css']['theme']['vendor/gutenberg/editor/editor-styles.css']);
+  unset($yaml['editor']['css']['theme']['js/vendor/gutenberg/editor/editor-styles.css']);
 }
 
 // Customize i18n package sources.

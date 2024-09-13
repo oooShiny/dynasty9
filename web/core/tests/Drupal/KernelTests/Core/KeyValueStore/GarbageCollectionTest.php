@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\KernelTests\Core\KeyValueStore;
 
 use Drupal\Component\Serialization\PhpSerialize;
@@ -24,10 +26,10 @@ class GarbageCollectionTest extends KernelTestBase {
   /**
    * Tests garbage collection.
    */
-  public function testGarbageCollection() {
+  public function testGarbageCollection(): void {
     $collection = $this->randomMachineName();
     $connection = Database::getConnection();
-    $store = new DatabaseStorageExpirable($collection, new PhpSerialize(), $connection);
+    $store = new DatabaseStorageExpirable($collection, new PhpSerialize(), $connection, \Drupal::time());
 
     // Insert some items and confirm that they're set.
     for ($i = 0; $i <= 3; $i++) {
@@ -39,12 +41,12 @@ class GarbageCollectionTest extends KernelTestBase {
     for ($i = 0; $i <= 3; $i++) {
       $connection->merge('key_value_expire')
         ->keys([
-            'name' => 'key_' . $i,
-            'collection' => $collection,
-          ])
+          'name' => 'key_' . $i,
+          'collection' => $collection,
+        ])
         ->fields([
-            'expire' => REQUEST_TIME - 1,
-          ])
+          'expire' => \Drupal::time()->getRequestTime() - 1,
+        ])
         ->execute();
     }
 

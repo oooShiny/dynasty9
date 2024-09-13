@@ -49,7 +49,7 @@ class WatchdogLogger implements PsrLoggerInterface {
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = array()) {
+  public function log($level, $message, array $context = array()): void {
 
     if ($this->logEntries) {
 

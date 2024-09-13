@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\user\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -30,7 +32,7 @@ class UserRoleAdminTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -41,18 +43,18 @@ class UserRoleAdminTest extends BrowserTestBase {
       'administer permissions',
       'administer users',
     ]);
-    $this->drupalPlaceBlock('local_tasks_block');
+    $this->drupalPlaceBlock('local_tasks_block', ['id' => 'test_role_admin_test_local_tasks_block']);
   }
 
   /**
    * Tests adding, renaming and deleting roles.
    */
-  public function testRoleAdministration() {
+  public function testRoleAdministration(): void {
     $this->drupalLogin($this->adminUser);
     $default_langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
     // Test presence of tab.
     $this->drupalGet('admin/people/permissions');
-    $this->assertSession()->elementsCount('xpath', '//ul[@class="tabs primary" and //a[contains(., "Roles")]]', 1);
+    $this->assertSession()->elementsCount('xpath', '//div[@id="block-test-role-admin-test-local-tasks-block"]/ul/li/a[contains(., "Roles")]', 1);
 
     // Test adding a role. (In doing so, we use a role name that happens to
     // correspond to an integer, to test that the role administration pages
@@ -67,6 +69,12 @@ class UserRoleAdminTest extends BrowserTestBase {
 
     // Check that the role was created in site default language.
     $this->assertEquals($default_langcode, $role->language()->getId());
+
+    // Verify permissions local task can be accessed when editing a role.
+    $this->drupalGet("admin/people/roles/manage/{$role->id()}");
+    $local_tasks_block = $this->assertSession()->elementExists('css', '#block-test-role-admin-test-local-tasks-block');
+    $local_tasks_block->clickLink('Permissions');
+    $this->assertSession()->fieldExists("{$role->id()}[change own username]");
 
     // Try adding a duplicate role.
     $this->drupalGet('admin/people/roles/add');
@@ -105,9 +113,9 @@ class UserRoleAdminTest extends BrowserTestBase {
   /**
    * Tests user role weight change operation and ordering.
    */
-  public function testRoleWeightOrdering() {
+  public function testRoleWeightOrdering(): void {
     $this->drupalLogin($this->adminUser);
-    $roles = user_roles();
+    $roles = Role::loadMultiple();
     $weight = count($roles);
     $new_role_weights = [];
     $saved_rids = [];
@@ -125,7 +133,7 @@ class UserRoleAdminTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('The role settings have been updated.');
 
     // Load up the user roles with the new weights.
-    $roles = user_roles();
+    $roles = Role::loadMultiple();
     $rids = [];
     // Test that the role weights have been correctly saved.
     foreach ($roles as $role) {

@@ -35,6 +35,7 @@ class TeamGamesTable extends BlockBase {
     $coaches = DynastyHelpers::get_term_names('head_coaches');
     // Get all games for this team node.
     $game_nodes = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('type', 'game')
       ->condition('status', 1)
       ->condition('field_opponent', $team->id())

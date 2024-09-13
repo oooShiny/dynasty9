@@ -2,8 +2,11 @@
 
 namespace Drupal\Tests\search_api\Unit\Processor;
 
+use Drupal\Component\Utility\Random;
 use Drupal\search_api\IndexInterface;
 use Drupal\search_api\Item\Field;
+use Drupal\search_api\Plugin\search_api\data_type\value\TextToken;
+use Drupal\search_api\Plugin\search_api\data_type\value\TextValue;
 use Drupal\search_api\Plugin\search_api\processor\HtmlFilter;
 use Drupal\search_api\Query\Condition;
 use Drupal\search_api\Utility\Utility;
@@ -24,7 +27,7 @@ class HtmlFilterTest extends UnitTestCase {
   /**
    * Creates a new processor object for use in the tests.
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->setUpMockContainer();
@@ -33,7 +36,7 @@ class HtmlFilterTest extends UnitTestCase {
   }
 
   /**
-   * Tests preprocessing field values with "title" settings.
+   * Tests preprocessing field values with different "title" settings.
    *
    * @param string $passed_value
    *   The value that should be passed into process().
@@ -51,8 +54,7 @@ class HtmlFilterTest extends UnitTestCase {
       'alt' => FALSE,
     ];
     $this->processor->setConfiguration($configuration);
-    $type = 'text';
-    $this->invokeMethod('processFieldValue', [&$passed_value, $type]);
+    $this->invokeMethod('processFieldValue', [&$passed_value, 'text']);
     $this->assertEquals($expected_value, $passed_value);
   }
 
@@ -62,7 +64,7 @@ class HtmlFilterTest extends UnitTestCase {
    * @return array
    *   An array of argument arrays for testTitleConfiguration().
    */
-  public function titleConfigurationDataProvider() {
+  public static function titleConfigurationDataProvider() {
     return [
       ['word', 'word', FALSE],
       ['word', 'word', TRUE],
@@ -75,7 +77,7 @@ class HtmlFilterTest extends UnitTestCase {
   }
 
   /**
-   * Tests preprocessing field values with "alt" settings.
+   * Tests preprocessing field values with different "alt" settings.
    *
    * @param string $passed_value
    *   The value that should be passed into process().
@@ -93,8 +95,7 @@ class HtmlFilterTest extends UnitTestCase {
       'alt' => $alt_config,
     ];
     $this->processor->setConfiguration($configuration);
-    $type = 'text';
-    $this->invokeMethod('processFieldValue', [&$passed_value, $type]);
+    $this->invokeMethod('processFieldValue', [&$passed_value, 'text']);
     $this->assertEquals($expected_value, $passed_value);
   }
 
@@ -104,7 +105,7 @@ class HtmlFilterTest extends UnitTestCase {
    * @return array
    *   An array of argument arrays for testAltConfiguration().
    */
-  public function altConfigurationDataProvider() {
+  public static function altConfigurationDataProvider() {
     return [
       ['word', [Utility::createTextToken('word')], FALSE],
       ['word', [Utility::createTextToken('word')], TRUE],
@@ -139,11 +140,12 @@ class HtmlFilterTest extends UnitTestCase {
         ],
         TRUE,
       ],
-      // Test fault tolerance.
+      // Test handling of very long tags.
       [
-        'a < b',
+        '<img alt="ALT" src="image/png;base64,' . str_repeat('1', 1000000) . '" /> word </a>',
         [
-          Utility::createTextToken('a < b'),
+          Utility::createTextToken('ALT', 2),
+          Utility::createTextToken('word'),
         ],
         TRUE,
       ],
@@ -151,7 +153,7 @@ class HtmlFilterTest extends UnitTestCase {
   }
 
   /**
-   * Tests preprocessing field values with "alt" settings.
+   * Tests preprocessing field values with different "tags" settings.
    *
    * @param string $passed_value
    *   The value that should be passed into process().
@@ -169,8 +171,7 @@ class HtmlFilterTest extends UnitTestCase {
       'alt' => TRUE,
     ];
     $this->processor->setConfiguration($configuration);
-    $type = 'text';
-    $this->invokeMethod('processFieldValue', [&$passed_value, $type]);
+    $this->invokeMethod('processFieldValue', [&$passed_value, 'text']);
     $this->assertEquals($expected_value, $passed_value);
   }
 
@@ -180,29 +181,7 @@ class HtmlFilterTest extends UnitTestCase {
    * @return array
    *   An array of argument arrays for testTagConfiguration().
    */
-  public function tagConfigurationDataProvider() {
-    $complex_test = [
-      '<h2>Foo Bar <em>Baz</em></h2>
-
-<p>Bla Bla Bla. <strong title="Foobar">Important:</strong> Bla.</p>
-<img src="/foo.png" alt="Some picture" />
-<span>This is hidden</span>',
-      [
-        Utility::createTextToken('Foo Bar', 3.0),
-        Utility::createTextToken('Baz', 4.5),
-        Utility::createTextToken('Bla Bla Bla.', 1.0),
-        Utility::createTextToken('Foobar Important:', 2.0),
-        Utility::createTextToken('Bla.', 1.0),
-        Utility::createTextToken('Some picture', 0.5),
-      ],
-      [
-        'em' => 1.5,
-        'strong' => 2.0,
-        'h2' => 3.0,
-        'img' => 0.5,
-        'span' => 0,
-      ],
-    ];
+  public static function tagConfigurationDataProvider() {
     $tags_config = ['h2' => '2'];
     return [
       ['h2word', 'h2word', []],
@@ -228,7 +207,39 @@ class HtmlFilterTest extends UnitTestCase {
         [Utility::createTextToken('word', 2)],
         ['div' => 2],
       ],
-      $complex_test,
+      [
+        '<h2>Foo Bar <em>Baz</em></h2>
+
+          <p>Bla Bla Bla. <strong title="Foobar">Important:</strong> Bla.</p>
+          <img src="image/png;base64,' . str_repeat('1', 1000000) . '" alt="Some picture" />
+          <span>This is hidden</span>',
+        [
+          Utility::createTextToken('Foo Bar', 3.0),
+          Utility::createTextToken('Baz', 4.5),
+          Utility::createTextToken('Bla Bla Bla.', 1.0),
+          Utility::createTextToken('Foobar Important:', 2.0),
+          Utility::createTextToken('Bla.', 1.0),
+          Utility::createTextToken('Some picture', 0.5),
+        ],
+        [
+          'em' => 1.5,
+          'strong' => 2.0,
+          'h2' => 3.0,
+          'img' => 0.5,
+          'span' => 0,
+        ],
+      ],
+      [
+        'foo <img src="img.png" alt="image" title = "check this out" /> bar',
+        [
+          Utility::createTextToken('foo', 1.0),
+          Utility::createTextToken('check this out image', 0.5),
+          Utility::createTextToken('bar', 1.0),
+        ],
+        [
+          'img' => 0.5,
+        ],
+      ],
     ];
   }
 
@@ -252,8 +263,7 @@ class HtmlFilterTest extends UnitTestCase {
 <span>This is hidden</span>';
     $expected_value = preg_replace('/\s+/', ' ', strip_tags($passed_value));
 
-    $type = 'string';
-    $this->invokeMethod('processFieldValue', [&$passed_value, $type]);
+    $this->invokeMethod('processFieldValue', [&$passed_value, 'string']);
     $this->assertEquals($expected_value, $passed_value);
   }
 
@@ -264,7 +274,7 @@ class HtmlFilterTest extends UnitTestCase {
    *   An array of argument arrays for testStringProcessing(), where each array
    *   contains a HTML filter configuration as the only value.
    */
-  public function stringProcessingDataProvider() {
+  public static function stringProcessingDataProvider() {
     $configs = [];
     $configs[] = [[]];
     $config['tags'] = [
@@ -297,12 +307,81 @@ class HtmlFilterTest extends UnitTestCase {
 
     $passed_value = NULL;
     $this->invokeMethod('processConditionValue', [&$passed_value]);
-    $this->assertSame(NULL, $passed_value);
+    $this->assertNull($passed_value);
 
     $condition = new Condition('field', NULL);
     $conditions = [$condition];
     $this->invokeMethod('processConditions', [&$conditions]);
     $this->assertSame([$condition], $conditions);
+  }
+
+  /**
+   * Tests empty values handling.
+   *
+   * @see https://www.drupal.org/project/search_api/issues/3212925
+   */
+  public function testEmptyValueHandling() {
+    $index = $this->createMock(IndexInterface::class);
+    $field = (new Field($index, 'field'))
+      ->setType('text');
+    $index->method('getFields')->willReturn([
+      'field' => $field,
+    ]);
+
+    $field->setValues([new TextValue('<p></p>')]);
+    $this->invokeMethod('processField', [$field]);
+    $this->assertEquals([], $field->getValues());
+
+    $value = new TextValue('<p></p>');
+    $value->setTokens([new TextToken('<p></p>')]);
+    $field->setValues([$value]);
+    $this->invokeMethod('processField', [$field]);
+    $this->assertEquals([], $field->getValues());
+
+    // In theory, setting the value of a "text" field to a string instead of a
+    // TextValue object is not allowed, but when it happens we might as well
+    // handle it graciously (though other parts of the framework might not).
+    $field->setValues(['<p></p>']);
+    $this->invokeMethod('processField', [$field]);
+    $this->assertEquals([], $field->getValues());
+
+    $field->setType('string');
+    $field->setValues(['<p></p>']);
+    $this->invokeMethod('processField', [$field]);
+    $this->assertEquals([], $field->getValues());
+  }
+
+  /**
+   * Tests that attribute handling is still fast even for large text values.
+   *
+   * @see https://www.drupal.org/project/search_api/issues/3388678
+   */
+  public function testLargeTextAttributesHandling(): void {
+    $this->processor->setConfiguration([
+      'tags' => [
+        'em' => 1.5,
+        'strong' => 2.0,
+        'h2' => 3.0,
+        'img' => 0.5,
+        'span' => 0,
+      ],
+      'title' => TRUE,
+      'alt' => TRUE,
+    ]);
+    $text = '';
+    $random = new Random();
+    for ($i = 0; $i < 2000; ++$i) {
+      $text .= ' ' . htmlspecialchars($random->sentences(10));
+      $tag = $random->name();
+      $attr = $random->name();
+      $value = htmlspecialchars($random->word(12));
+      $contents = htmlspecialchars($random->sentences(10));
+      $text .= " <$tag $attr=\"$value\">$contents</$tag>";
+    }
+    $start = microtime(TRUE);
+    $this->invokeMethod('processFieldValue', [&$text, 'text']);
+    $took = microtime(TRUE) - $start;
+    $this->assertLessThan(1.0, $took, 'Processing large field value took too long.');
   }
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\workspaces\FunctionalJavascript;
 
 use Drupal\Tests\system\FunctionalJavascript\OffCanvasTestBase;
@@ -37,7 +39,7 @@ class WorkspaceToolbarIntegrationTest extends OffCanvasTestBase {
   /**
    * Tests workspace canvas can be toggled with JavaScript.
    */
-  public function testWorkspaceCanvasToggling() {
+  public function testWorkspaceCanvasToggling(): void {
     $page = $this->getSession()->getPage();
     $assert_session = $this->assertSession();
 
@@ -61,7 +63,7 @@ class WorkspaceToolbarIntegrationTest extends OffCanvasTestBase {
   /**
    * Tests workspace switch and landing page behavior.
    */
-  public function testWorkspaceSwitch() {
+  public function testWorkspaceSwitch(): void {
     $page = $this->getSession()->getPage();
     $assert_session = $this->assertSession();
 
@@ -80,10 +82,8 @@ class WorkspaceToolbarIntegrationTest extends OffCanvasTestBase {
     $page->clickLink('Stage');
     $this->assertElementVisibleAfterWait('css', '.workspace-activate-form.workspace-confirm-form');
     $page->find('css', '.ui-dialog-buttonset .button--primary')->click();
-    $assert_session->waitForElementVisible('css', '.messages--status');
-
+    $assert_session->statusMessageContainsAfterWait('Stage is now the active workspace.', 'status');
     // Make sure we stay on same page after switch.
-    $assert_session->responseContains('<em class="placeholder">Stage</em> is now the active workspace.');
     $assert_session->addressEquals('admin');
   }
 

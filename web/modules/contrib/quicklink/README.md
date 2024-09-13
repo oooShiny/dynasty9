@@ -8,7 +8,7 @@ a Drupal administrative interface to configure it.
 
 ## REQUIREMENTS
 
-This module is tested on Drupal 8.6 and above.
+This module is tested on Drupal 8.9 and above.
 
 ## INSTALLATION
 
@@ -19,7 +19,7 @@ This module is tested on Drupal 8.6 and above.
 be hosted on Drupal.org.
 
 By default this module will load the Quicklink JavaScript library from a CDN at
-`https://unpkg.com/quicklink@1.0.1/dist/quicklink.umd.js`.
+`https://unpkg.com/quicklink@2.2.0/dist/quicklink.umd.js`.
 
 If you place a copy of this file into your local filesystem at
 `/libraries/quicklink/dist/quicklink.umd.js`, this module will serve the local
@@ -73,7 +73,7 @@ section of your composer.json file:
 4. Save your composer.json file.
 
 5. Back at the command line, install the library with
-`composer require oomphinc/composer-installers-extender npm-asset/quicklink`
+`composer require oomphinc/composer-installers-extender npm-asset/quicklink:^2.0`
 
 6. Install the module with `composer require drupal/quicklink`
 

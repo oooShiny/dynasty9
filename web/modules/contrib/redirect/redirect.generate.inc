@@ -5,7 +5,6 @@
  * Generate callbacks for the redirect module.
  */
 
-use Drupal\Component\Utility\Random;
 use Drupal\devel_generate\DevelGenerateBase;
 use Drupal\node\NodeInterface;
 use Drupal\redirect\Entity\Redirect;
@@ -52,7 +51,7 @@ function redirect_generate_redirects_batch_info($count, $delete = FALSE) {
   return [
     'operations' => $operations,
     'finished' => 'redirect_generate_batch_finished',
-    'file' => drupal_get_path('module', 'redirect') . '/redirect.generate.inc',
+    'file' => \Drupal::service('extension.list.module')->getPath('redirect') . '/redirect.generate.inc',
   ];
 }
 
@@ -94,7 +93,7 @@ function redirect_generate_batch_generate($num, array &$context) {
     $context['sandbox']['nids'] = $query->execute()->fetchAllKeyed(0, 0);
   }
 
-  module_load_include('inc', 'devel_generate');
+  \Drupal::moduleHandler()->loadInclude('devel_generate', 'inc');
 
   $limit = 20;
   $types = array_keys(redirect_status_code_options());

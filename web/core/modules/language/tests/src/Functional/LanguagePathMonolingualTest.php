@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -23,6 +25,9 @@ class LanguagePathMonolingualTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -70,7 +75,7 @@ class LanguagePathMonolingualTest extends BrowserTestBase {
   /**
    * Verifies that links do not have language prefixes in them.
    */
-  public function testPageLinks() {
+  public function testPageLinks(): void {
     // Navigate to 'admin/config' path.
     $this->drupalGet('admin/config');
 

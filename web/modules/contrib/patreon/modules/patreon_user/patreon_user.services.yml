@@ -1,5 +1,5 @@
 services:
   patreon_user.api:
     class: Drupal\patreon_user\PatreonUserService
-    arguments: [ '@path.current', '@serialization.json', '@config.factory', '@logger.factory', '@messenger', '@entity_type.manager', '@request_stack', '@state', '@current_user', '@module_handler']
+    arguments: [ '@path.current', '@serialization.json', '@config.factory', '@logger.factory', '@messenger', '@entity_type.manager', '@request_stack', '@state', '@current_user', '@module_handler', '@password_generator']
 

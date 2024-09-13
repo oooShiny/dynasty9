@@ -1,6 +1,6 @@
 .select2-container--gin {
-  @import "../../../libraries/select2/src/scss/theme/default/_single.scss";
-  @import "../../../libraries/select2/src/scss/theme/default/_multiple.scss";
+  @import "../../../../libraries/select2/src/scss/theme/default/_single.scss";
+  @import "../../../../libraries/select2/src/scss/theme/default/_multiple.scss";
   @import "default";
 }
 
@@ -11,7 +11,7 @@
    * 1. See form-element.
    */
   .select2-selection {
-    border: var(--input-border-size) solid var(--colorGinFormElementBorder);
+    border: var(--input-border-size) solid var(--gin-border-color-form-element);
     border-radius: 6px; /* gin $borderDefault */
   }
 
@@ -27,7 +27,7 @@
      */
     .select2-search--inline {
       box-sizing: border-box;
-      color: var(--colorGinText);
+      color: var(--gin-color-text);
       min-height: calc(((var(--input-padding-vertical) + var(--input-border-size)) * 2) + var(--input-line-height)); /* iOS. */
       padding: calc(0.75rem - 1px) 0; /* 1 */
       line-height: var(--input-line-height);
@@ -88,7 +88,7 @@
         }
 
         &:hover {
-          background-color: var(--colorGinText);
+          background-color: var(--gin-color-text);
         }
       }
     }
@@ -106,7 +106,7 @@
      * 2. Reset select2 styles.
      */
     .select2-selection__rendered {
-      color: var(--colorGinText); /* 1 */
+      color: var(--gin-color-text); /* 1 */
       padding-left: 0;  /* 2" */
       padding-right: 12px; /* 2 */
       line-height: var(--input-line-height); /* 1 */
@@ -120,20 +120,20 @@
       width: 25px;
 
       b {
-        border-color: var(--colorGinText) transparent transparent transparent; /* #222330 */
+        border-color: var(--gin-color-text) transparent transparent transparent; /* #222330 */
       }
     }
   }
 
   &.select2-container--open .select2-selection--single .select2-selection__arrow b {
-    border-color: transparent transparent var(--colorGinText) transparent; /* #222330 */
+    border-color: transparent transparent var(--gin-color-text) transparent; /* #222330 */
   }
 
   /*
    * Reset select2 border.
    */
   &.select2-container--focus .select2-selection--multiple {
-    border: var(--input-border-size) solid var(--colorGinText);
+    border: var(--input-border-size) solid var(--gin-color-text);
   }
 
   .select2-search__field:focus {
@@ -146,24 +146,24 @@
   .select2-search--dropdown .select2-search__field {
     min-height: calc(((var(--input-padding-vertical) + var(--input-border-size)) * 2) + var(--input-line-height)); /* iOS. */ /* 1 */
     padding: var(--input-padding-vertical) var(--input-padding-horizontal); /* 1 */
-    border-color: var(--colorGinFocus); /* #222330 */
+    border-color: var(--gin-color-focus); /* #222330 */
     border-radius: var(--input-border-radius-size); /* 0.125rem */
   }
 
   .select2-search--dropdown .select2-search__field:hover,
   .select2-selection:hover {
-    border-color: var(--colorGinText);
-    box-shadow: inset 0 0 0 var(--input-border-size) var(--colorGinText);
+    border-color: var(--gin-color-text);
+    box-shadow: inset 0 0 0 var(--input-border-size) var(--gin-color-text);
   }
 
   .select2-search--dropdown .select2-search__field:focus,
   &.select2-container--focus {
-    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 5px var(--colorGinFocus);
+    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 5px var(--gin-color-focus);
     outline: 0;
   }
   /* .form-element:hoiver:focus */
   .select2-search--dropdown .select2-search__field:hover:focus {
-    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 5px var(--colorGinFocus), inset 0 0 0 var(--input-border-size) var(--colorGinFocus);
+    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 5px var(--gin-color-focus), inset 0 0 0 var(--input-border-size) var(--gin-color-focus);
   }
 
   /*
@@ -179,7 +179,7 @@
     }
   }
   .select2-results__option--highlighted[aria-selected] {
-    background-color: var(--colorGinPrimaryActive); /* #003cc5  */
+    background-color: var(--gin-color-primary-active); /* #003cc5  */
     color: var(--color-white);
   }
 
@@ -189,18 +189,18 @@
     .select2-selection--multiple,
     .select2-search__field,
     .select2-dropdown {
-      background-color: var(--colorGinLayer2Background);
-      color: var(--colorGinText);
+      background-color: var(--gin-bg-layer2);
+      color: var(--gin-color-text);
     }
     .select2-results__option[aria-selected=true] {
-      background-color: var(--colorGinLayer4Background);
+      background-color: var(--gin-bg-layer4);
     }
     .select2-selection__choice,
     .select2-results__option--highlighted[aria-selected] {
-      background: var(--colorGinLayerBackground);
+      background: var(--gin-bg-layer);
     }
     .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove:before {
-      background: var(--colorGinLayerBackground);
+      background: var(--gin-bg-layer);
     }
   }
 }

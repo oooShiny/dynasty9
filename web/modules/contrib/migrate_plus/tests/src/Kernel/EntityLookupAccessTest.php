@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Kernel;
 
 use Drupal\entity_test\Entity\EntityTest;
@@ -14,7 +16,7 @@ use Drupal\user\Entity\User;
  *
  * @group migrate_plus
  */
-class EntityLookupAccessTest extends KernelTestBase {
+final class EntityLookupAccessTest extends KernelTestBase {
   use UserCreationTrait;
 
   /**
@@ -31,16 +33,14 @@ class EntityLookupAccessTest extends KernelTestBase {
   /**
    * A user.
    *
-   * @var \Drupal\user\Entity\User
+   * @var bool|\Drupal\user\Entity\User
    */
   protected $user;
 
   /**
    * A test entity.
-   *
-   * @var \Drupal\entity_test\Entity\EntityTest
    */
-  protected $entity;
+  protected ?EntityTest $entity;
 
   /**
    * {@inheritdoc}
@@ -52,7 +52,6 @@ class EntityLookupAccessTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installSchema('system', ['sequences']);
     $this->installEntitySchema('entity_test');
     $this->installEntitySchema('user');
     $this->installConfig('user');

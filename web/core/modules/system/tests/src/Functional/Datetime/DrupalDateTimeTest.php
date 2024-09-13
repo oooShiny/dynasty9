@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Functional\Datetime;
 
 use Drupal\Core\Datetime\DrupalDateTime;
@@ -32,26 +34,13 @@ class DrupalDateTimeTest extends BrowserTestBase {
   }
 
   /**
-   * Tests that the AJAX Timezone Callback can deal with various formats.
-   */
-  public function testSystemTimezone() {
-    $options = [
-      'query' => [
-        'date' => 'Tue+Sep+17+2013+21%3A35%3A31+GMT%2B0100+(BST)#',
-      ],
-    ];
-    // Query the AJAX Timezone Callback with a long-format date.
-    $response = $this->drupalGet('system/timezone/BST/3600/1', $options);
-    $this->assertEquals('"Europe\\/London"', $response, 'Timezone AJAX callback successfully identifies and responds to a long-format date.');
-  }
-
-  /**
    * Tests that DrupalDateTime can detect the right timezone to use.
+   *
    * Test with a variety of less commonly used timezone names to
    * help ensure that the system timezone will be different than the
    * stated timezones.
    */
-  public function testDateTimezone() {
+  public function testDateTimezone(): void {
     $date_string = '2007-01-31 21:00:00';
 
     // Make sure no site timezone has been set.
@@ -107,7 +96,7 @@ class DrupalDateTimeTest extends BrowserTestBase {
   /**
    * Tests the ability to override the time zone in the format method.
    */
-  public function testTimezoneFormat() {
+  public function testTimezoneFormat(): void {
     // Create a date in UTC
     $date = DrupalDateTime::createFromTimestamp(87654321, 'UTC');
 

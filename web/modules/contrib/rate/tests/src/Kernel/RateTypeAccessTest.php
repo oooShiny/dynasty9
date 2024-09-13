@@ -25,7 +25,7 @@ class RateTypeAccessTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'comment',
     'user',
     'system',

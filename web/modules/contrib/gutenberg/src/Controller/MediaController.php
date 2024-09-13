@@ -98,7 +98,7 @@ class MediaController extends ControllerBase {
       $container->get('gutenberg.media_selection_processor_manager'),
       $container->get('renderer'),
       $container->get('image.factory'),
-      $container->get('file_system'),
+      $container->get('file_system')
     );
   }
 
@@ -265,10 +265,16 @@ class MediaController extends ControllerBase {
       throw new NotFoundHttpException('File entity not found.');
     }
 
-    $x = $request->request->get('x');
-    $y = $request->request->get('y');
-    $width = $request->request->get('width');
-    $height = $request->request->get('height');
+    $payload = $request->request->all();
+
+    if (!isset($payload['modifiers'][0]['args']['left']) || !isset($payload['modifiers'][0]['args']['top']) || !isset($payload['modifiers'][0]['args']['width']) || !isset($payload['modifiers'][0]['args']['height'])) {
+      throw new BadRequestHttpException('Invalid payload.');
+    }
+
+    $x = $payload['modifiers'][0]['args']['left'];
+    $y = $payload['modifiers'][0]['args']['top'];
+    $width = $payload['modifiers'][0]['args']['width'];
+    $height = $payload['modifiers'][0]['args']['height'];
 
     $image = $this->imageFactory->get($file->getFileUri());
     $original_width = $image->getWidth();

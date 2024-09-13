@@ -16,7 +16,7 @@ function advagg_mod_js_alter(&$js) {
   }
   $config = \Drupal::config('advagg_mod.settings');
   // Use the current file system path for advagg_mod.
-  $module_path = drupal_get_path('module', 'advagg_mod');
+  $module_path = \Drupal::service('extension.list.module')->getPath('advagg_mod');
   if (isset($js[$module_path . '/js/loadCSS.js'])) {
     if ($config->get('css_defer_js_code') === 4) {
       $js[$module_path . '/js/loadCSS.js']['type'] = 'external';

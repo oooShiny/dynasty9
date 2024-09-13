@@ -1,56 +1,43 @@
 <?php
 
-namespace Drupal\KernelTests\Core\Theme;
+declare(strict_types=1);
 
-use Drupal\Core\Extension\ExtensionLifecycle;
-use Drupal\KernelTests\KernelTestBase;
+namespace Drupal\KernelTests\Core\Theme;
 
 /**
  * Tests Stable 9's library overrides.
  *
  * @group Theme
  */
-class Stable9LibraryOverrideTest extends KernelTestBase {
-
-  /**
-   * The theme manager.
-   *
-   * @var \Drupal\Core\Theme\ThemeManagerInterface
-   */
-  protected $themeManager;
-
-  /**
-   * The theme initialization.
-   *
-   * @var \Drupal\Core\Theme\ThemeInitializationInterface
-   */
-  protected $themeInitialization;
-
-  /**
-   * The library discovery service.
-   *
-   * @var \Drupal\Core\Asset\LibraryDiscoveryInterface
-   */
-  protected $libraryDiscovery;
-
-  /**
-   * A list of all core modules.
-   *
-   * @var string[]
-   */
-  protected $allModules;
+class Stable9LibraryOverrideTest extends StableLibraryOverrideTestBase {
 
   /**
    * A list of libraries to skip checking, in the format extension/library_name.
    *
    * @var string[]
    */
-  protected $librariesToSkip = [];
+  protected $librariesToSkip = [
+    'core/drupal.dialog.off_canvas',
+    'layout_builder/drupal.layout_builder',
+    'views/views.responsive-grid',
+    'field_ui/drupal.field_ui.manage_fields',
+    'comment/drupal.comment-icon',
+    'file/drupal.file-icon',
+    'text/drupal.text-icon',
+    'link/drupal.link-icon',
+    'media/drupal.media-icon',
+    'options/drupal.options-icon',
+    'telephone/drupal.telephone-icon',
+    // This library will be changed in https://www.drupal.org/i/3096017.
+    'workspaces/drupal.workspaces.toolbar',
+    // This library will be removed in https://www.drupal.org/i/3207233.
+    'workspaces/drupal.workspaces.overview',
+  ];
 
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['system', 'user', 'path_alias'];
+  protected static $modules = ['system', 'user'];
 
   /**
    * {@inheritdoc}
@@ -61,25 +48,7 @@ class Stable9LibraryOverrideTest extends KernelTestBase {
     $this->container->get('theme_installer')->install(['stable9']);
 
     // Enable all core modules.
-    $all_modules = $this->container->get('extension.list.module')->getList();
-    $all_modules = array_filter($all_modules, function ($module) {
-      // Filter contrib, hidden, experimental, already enabled modules, and
-      // modules in the Testing package.
-      if ($module->origin !== 'core' || !empty($module->info['hidden']) || $module->status == TRUE || $module->info['package'] == 'Testing' || $module->info[ExtensionLifecycle::LIFECYCLE_IDENTIFIER] === ExtensionLifecycle::EXPERIMENTAL) {
-        return FALSE;
-      }
-      return TRUE;
-    });
-    $this->allModules = array_keys($all_modules);
-    $this->allModules[] = 'system';
-    $this->allModules[] = 'user';
-    $this->allModules[] = 'path_alias';
-    $database_module = \Drupal::database()->getProvider();
-    if ($database_module !== 'core') {
-      $this->allModules[] = $database_module;
-    }
-    sort($this->allModules);
-    $this->container->get('module_installer')->install($this->allModules);
+    $this->enableVisibleAndStableCoreModules();
 
     $this->themeManager = $this->container->get('theme.manager');
     $this->themeInitialization = $this->container->get('theme.initialization');
@@ -89,7 +58,7 @@ class Stable9LibraryOverrideTest extends KernelTestBase {
   /**
    * Ensures that Stable 9 overrides all relevant core library assets.
    */
-  public function testStable9LibraryOverrides() {
+  public function testStable9LibraryOverrides(): void {
     // First get the clean library definitions with no active theme.
     $libraries_before = $this->getAllLibraries();
     $libraries_before = $this->removeVendorAssets($libraries_before);
@@ -105,6 +74,10 @@ class Stable9LibraryOverrideTest extends KernelTestBase {
       foreach ($libraries as $library_name => $library) {
         // Allow skipping libraries.
         if (in_array("$extension/$library_name", $this->librariesToSkip)) {
+          continue;
+        }
+        // Skip internal libraries.
+        if (str_starts_with($library_name, 'internal.')) {
           continue;
         }
         $library_after = $libraries_after[$extension][$library_name];
@@ -135,63 +108,6 @@ class Stable9LibraryOverrideTest extends KernelTestBase {
         }
       }
     }
-  }
-
-  /**
-   * Removes all vendor libraries and assets from the library definitions.
-   *
-   * @param array[] $all_libraries
-   *   An associative array of libraries keyed by extension, then by library
-   *   name, and so on.
-   *
-   * @return array[]
-   *   The reduced array of libraries.
-   */
-  protected function removeVendorAssets(array $all_libraries) {
-    foreach ($all_libraries as $extension => $libraries) {
-      foreach ($libraries as $library_name => $library) {
-        if (isset($library['remote'])) {
-          unset($all_libraries[$extension][$library_name]);
-        }
-        foreach (['css', 'js'] as $asset_type) {
-          foreach ($library[$asset_type] as $index => $asset) {
-            if (strpos($asset['data'], 'core/assets/vendor') !== FALSE) {
-              unset($all_libraries[$extension][$library_name][$asset_type][$index]);
-              // Re-key the array of assets. This is needed because
-              // libraries-override doesn't always preserve the order.
-              if (!empty($all_libraries[$extension][$library_name][$asset_type])) {
-                $all_libraries[$extension][$library_name][$asset_type] = array_values($all_libraries[$extension][$library_name][$asset_type]);
-              }
-            }
-          }
-        }
-      }
-    }
-    return $all_libraries;
-  }
-
-  /**
-   * Gets all libraries for core and all installed modules.
-   *
-   * @return array[]
-   *   An associative array of libraries keyed by extension, then by library
-   *   name, and so on.
-   */
-  protected function getAllLibraries() {
-    $modules = \Drupal::moduleHandler()->getModuleList();
-    $module_list = array_keys($modules);
-    sort($module_list);
-    $this->assertEquals($this->allModules, $module_list, 'All core modules are installed.');
-
-    $libraries['core'] = $this->libraryDiscovery->getLibrariesByExtension('core');
-
-    foreach ($modules as $module_name => $module) {
-      $library_file = $module->getPath() . '/' . $module_name . '.libraries.yml';
-      if (is_file($this->root . '/' . $library_file)) {
-        $libraries[$module_name] = $this->libraryDiscovery->getLibrariesByExtension($module_name);
-      }
-    }
-    return $libraries;
   }
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\Core\Plugin\Discovery;
 
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
@@ -30,6 +32,8 @@ class HookDiscoveryTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp(): void {
+    parent::setUp();
+
     $this->moduleHandler = $this->createMock('Drupal\Core\Extension\ModuleHandlerInterface');
     $this->hookDiscovery = new HookDiscovery($this->moduleHandler, 'test_plugin');
   }
@@ -39,12 +43,7 @@ class HookDiscoveryTest extends UnitTestCase {
    *
    * @see \Drupal\Core\Plugin\Discovery::getDefinitions()
    */
-  public function testGetDefinitionsWithoutPlugins() {
-    $this->moduleHandler->expects($this->once())
-      ->method('getImplementations')
-      ->with('test_plugin')
-      ->will($this->returnValue([]));
-
+  public function testGetDefinitionsWithoutPlugins(): void {
     $this->assertCount(0, $this->hookDiscovery->getDefinitions());
   }
 
@@ -53,18 +52,16 @@ class HookDiscoveryTest extends UnitTestCase {
    *
    * @see \Drupal\Core\Plugin\Discovery::getDefinitions()
    */
-  public function testGetDefinitions() {
-    $this->moduleHandler->expects($this->once())
-      ->method('getImplementations')
+  public function testGetDefinitions(): void {
+    $this->moduleHandler->expects($this->atLeastOnce())
+      ->method('invokeAllWith')
       ->with('test_plugin')
-      ->will($this->returnValue(['hook_discovery_test', 'hook_discovery_test2']));
-
-    $this->moduleHandler->expects($this->exactly(2))
-      ->method('invoke')
-      ->willReturnMap([
-        ['hook_discovery_test', 'test_plugin', [], $this->hookDiscoveryTestTestPlugin()],
-        ['hook_discovery_test2', 'test_plugin', [], $this->hookDiscoveryTest2TestPlugin()],
-      ]);
+      ->willReturnCallback(function (string $hook, callable $callback) {
+        $callback(\Closure::fromCallable([$this, 'hookDiscoveryTestTestPlugin']), 'hook_discovery_test');
+        $callback(\Closure::fromCallable([$this, 'hookDiscoveryTest2TestPlugin']), 'hook_discovery_test2');
+      });
+    $this->moduleHandler->expects($this->never())
+      ->method('invoke');
 
     $definitions = $this->hookDiscovery->getDefinitions();
 
@@ -84,28 +81,14 @@ class HookDiscoveryTest extends UnitTestCase {
    *
    * @see \Drupal\Core\Plugin\Discovery::getDefinition()
    */
-  public function testGetDefinition() {
+  public function testGetDefinition(): void {
     $this->moduleHandler->expects($this->exactly(4))
-      ->method('getImplementations')
+      ->method('invokeAllWith')
       ->with('test_plugin')
-      ->will($this->returnValue(['hook_discovery_test', 'hook_discovery_test2']));
-
-    $this->moduleHandler->expects($this->any())
-      ->method('invoke')
-      ->willReturnMap([
-        [
-          'hook_discovery_test',
-          'test_plugin',
-          [],
-          $this->hookDiscoveryTestTestPlugin(),
-        ],
-        [
-          'hook_discovery_test2',
-          'test_plugin',
-          [],
-          $this->hookDiscoveryTest2TestPlugin(),
-        ],
-      ]);
+      ->willReturnCallback(function (string $hook, callable $callback) {
+        $callback(\Closure::fromCallable([$this, 'hookDiscoveryTestTestPlugin']), 'hook_discovery_test');
+        $callback(\Closure::fromCallable([$this, 'hookDiscoveryTest2TestPlugin']), 'hook_discovery_test2');
+      });
 
     $this->assertNull($this->hookDiscovery->getDefinition('test_non_existent', FALSE));
 
@@ -127,11 +110,7 @@ class HookDiscoveryTest extends UnitTestCase {
    *
    * @see \Drupal\Core\Plugin\Discovery::getDefinition()
    */
-  public function testGetDefinitionWithUnknownID() {
-    $this->moduleHandler->expects($this->once())
-      ->method('getImplementations')
-      ->will($this->returnValue([]));
-
+  public function testGetDefinitionWithUnknownID(): void {
     $this->expectException(PluginNotFoundException::class);
     $this->hookDiscovery->getDefinition('test_non_existent', TRUE);
   }

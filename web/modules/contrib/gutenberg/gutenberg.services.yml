@@ -10,11 +10,12 @@ services:
     arguments: ['@module_handler', '@theme_handler', '@theme.initialization', '@cache.discovery', '@logger.channel.gutenberg']
   plugin.manager.gutenberg.blocks_library:
     class: Drupal\gutenberg\BlocksLibraryManager
-    arguments: ['@app.root', '@module_handler', '@theme_handler', '@theme.initialization', '@cache.discovery', '@logger.channel.gutenberg']
+    arguments: ['%app.root%', '@module_handler', '@theme_handler', '@theme.initialization', '@cache.discovery', '@logger.channel.gutenberg']
   gutenberg.block_processor_manager:
     class: Drupal\gutenberg\BlockProcessor\GutenbergBlockProcessorManager
     tags:
       - { name: service_collector, tag: gutenberg_block_processor, call: addProcessor }
+  # Processors
   gutenberg.block_processor_drupal_blocks:
     class: Drupal\gutenberg\BlockProcessor\DrupalBlockProcessor
     arguments: ['@gutenberg.blocks_renderer', '@renderer']
@@ -30,6 +31,16 @@ services:
     arguments: ['@entity_type.manager', '@renderer', '@logger.channel.gutenberg']
     tags:
       - { name: gutenberg_block_processor, priority: 50 }
+  gutenberg.block_processor_content_blocks:
+    class: Drupal\gutenberg\BlockProcessor\ContentBlockProcessor
+    arguments: ['@entity_type.manager', '@renderer', '@logger.channel.gutenberg']
+    tags:
+      - { name: gutenberg_block_processor, priority: 50 }
+  gutenberg.block_processor_layout_support:
+    class: Drupal\gutenberg\BlockProcessor\LayoutProcessor
+    arguments: ['@plugin.manager.gutenberg.library', '@plugin.manager.gutenberg.blocks_library', '@logger.channel.gutenberg']
+    tags:
+      - { name: gutenberg_block_processor, priority: 50 }
   gutenberg.block_processor_dynamic_render:
     class: Drupal\gutenberg\BlockProcessor\DynamicRenderProcessor
     arguments: ['@plugin.manager.gutenberg.library', '@renderer', '@module_handler']
@@ -42,9 +53,10 @@ services:
       - { name: gutenberg_block_processor, priority: -50 }
   gutenberg.block_processor_duotone:
     class: Drupal\gutenberg\BlockProcessor\DuotoneProcessor
-    arguments: ['@gutenberg.tiny_color', '@plugin.manager.gutenberg.blocks_library', '@logger.channel.gutenberg']
+    arguments: ['@gutenberg.tiny_color', '@plugin.manager.gutenberg.blocks_library', '@plugin.manager.gutenberg.library', '@logger.channel.gutenberg']
     tags:
       - { name: gutenberg_block_processor, priority: 50 }
+  # End Processors
   gutenberg.blocks_renderer:
     class: Drupal\gutenberg\BlocksRendererHelper
     arguments: ['@renderer', '@plugin.manager.block', '@current_user', '@context.repository', '@context.handler', '@title_resolver', '@logger.channel.gutenberg']
@@ -59,6 +71,8 @@ services:
     arguments: ['@renderer', '@entity_type.manager']
   gutenberg.media_library.opener:
     class: Drupal\gutenberg\MediaLibraryGutenbergOpener
+    tags:
+      - { name: media_library.opener }
   gutenberg.media_type.guesser:
     class: Drupal\gutenberg\MediaTypeGuesser
     arguments: ['@entity_type.manager', '@gutenberg.file_extension_guesser']
@@ -67,7 +81,7 @@ services:
     arguments: ['@entity_type.manager', '@current_user']
   gutenberg.media_uploader:
     class: Drupal\gutenberg\MediaUploader
-    arguments: ['@file_system']
+    arguments: ['@file_system', '@token']
   gutenberg.entity_type.data_provider_manager:
     class: Drupal\gutenberg\DataProvider\EntityDataProviderManager
     tags:
@@ -101,3 +115,14 @@ services:
     arguments: ['@entity_type.manager']
     tags:
       - { name: media_selection_processor, processor_name: default }
+  gutenberg.content_type_manager:
+    class: Drupal\gutenberg\GutenbergContentTypeManager
+    arguments: ['@module_handler', '@config.factory', '@entity_field.manager']
+  gutenberg.content_blocks_manager:
+    class: Drupal\gutenberg\GutenbergContentBlocksManager
+    arguments: [ '@entity_type.manager', '@config.factory', '@gutenberg.content_type_manager', '@database' ]
+  main_content_renderer.sidebar:
+    class: Drupal\gutenberg\Render\MainContent\SidebarRenderer
+    arguments: ['@title_resolver', '@renderer']
+    tags:
+      - { name: render.main_content_renderer, format: drupal_dialog.sidebar }

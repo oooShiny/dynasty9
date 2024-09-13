@@ -42,6 +42,19 @@ interface KeyRepositoryInterface {
   public function getKeysByType($key_type_id);
 
   /**
+   * Get keys that tagged with specified tags.
+   *
+   * Tags are annotation of a key's key provider plugin.
+   *
+   * @param array $tags
+   *   A list of tags of the key provider.
+   *
+   * @return \Drupal\key\Entity\Key[]
+   *   An array of key objects indexed by their IDs.
+   */
+  public function getKeysByTags(array $tags): array;
+
+  /**
    * Get keys that use the specified storage method.
    *
    * Storage method is an annotation of a key's key provider.
@@ -51,6 +64,11 @@ interface KeyRepositoryInterface {
    *
    * @return \Drupal\key\Entity\Key[]
    *   An array of key objects indexed by their ids.
+   *
+   * @deprecated in key:1.18.0 and is removed from key:2.0.0. Use
+   *   self::getKeysByTags() instead.
+   *
+   * @see https://www.drupal.org/node/3364701
    */
   public function getKeysByStorageMethod($storage_method);
 
@@ -73,8 +91,8 @@ interface KeyRepositoryInterface {
    * @param string $key_id
    *   The key ID to use.
    *
-   * @return \Drupal\key\Entity\Key
-   *   The key object with the given id.
+   * @return \Drupal\key\Entity\Key|null
+   *   The key object with the given id or null if no key was available.
    */
   public function getKey($key_id);
 

@@ -2,6 +2,7 @@
 
 namespace Drupal\advagg\Asset;
 
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -24,13 +25,23 @@ abstract class SingleAssetOptimizerBase {
   protected $config;
 
   /**
+   * The file URL generator.
+   *
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
+   */
+  protected $fileUrlGenerator;
+
+  /**
    * Construct the optimizer.
    *
    * @param \Psr\Log\LoggerInterface $logger
    *   A PSR compatible logger.
+   * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
+   *   The file URL generator.
    */
-  public function __construct(LoggerInterface $logger) {
+  public function __construct(LoggerInterface $logger, FileUrlGeneratorInterface $file_url_generator) {
     $this->logger = $logger;
+    $this->fileUrlGenerator = $file_url_generator;
   }
 
   /**
@@ -58,7 +69,7 @@ abstract class SingleAssetOptimizerBase {
    */
   public function addLicense(&$contents, $path) {
     if ($this->config->get('add_license')) {
-      $url = file_create_url($path);
+      $url = $this->fileUrlGenerator->generateAbsoluteString($path);
       $contents = "/* Source and licensing information for the line(s) below can be found at $url. */\n" . $contents . "\n/* Source and licensing information for the above line(s) can be found at $url. */";
     }
   }

@@ -54,6 +54,7 @@ function dynasty_module_update_8002() {
 function dynasty_module_update_8003() {
   // Get an array of all 'article' node ids.
   $play_nids = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
     ->condition('type', 'highlight')
     ->execute();
 
@@ -215,6 +216,7 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
         }
         // Map podcast week to game week taxonomy term.
         $tids = \Drupal::entityQuery('taxonomy_term')
+          ->accessCheck(FALSE)
           ->condition('vid', 'week')
           ->execute();
         $terms = Term::loadMultiple($tids);

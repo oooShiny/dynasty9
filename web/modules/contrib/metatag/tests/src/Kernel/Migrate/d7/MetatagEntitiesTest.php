@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\metatag\Kernel\Migrate\d7;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\node\Entity\Node;
@@ -53,7 +54,7 @@ class MetatagEntitiesTest extends MigrateDrupal7TestBase {
    * Copied from FileMigrationSetupTrait from 8.4 so that this doesn't have to
    * then also extend getFileMigrationInfo().
    */
-  protected function fileMigrationSetup() {
+  protected function fileMigrationSetup(): void {
     $this->installSchema('file', ['file_usage']);
     $this->installEntitySchema('file');
     $this->container->get('stream_wrapper_manager')
@@ -123,11 +124,11 @@ class MetatagEntitiesTest extends MigrateDrupal7TestBase {
     // This should have the "current revision" keywords value, indicating it is
     // the current revision.
     $expected = [
-      'keywords' => 'current revision',
       'canonical_url' => 'the-node',
+      'keywords' => 'current revision',
       'robots' => 'noindex, nofollow',
     ];
-    $this->assertSame(serialize($expected), $node->field_metatag->value);
+    $this->assertSame(Json::encode($expected), $node->field_metatag->value);
 
     $node = node_revision_load(998);
     $this->assertInstanceOf(NodeInterface::class, $node);
@@ -135,11 +136,11 @@ class MetatagEntitiesTest extends MigrateDrupal7TestBase {
     // This should have the "old revision" keywords value, indicating it is
     // a non-current revision.
     $expected = [
-      'keywords' => 'old revision',
       'canonical_url' => 'the-node',
+      'keywords' => 'old revision',
       'robots' => 'noindex, nofollow',
     ];
-    $this->assertSame(serialize($expected), $node->field_metatag->value);
+    $this->assertSame(Json::encode($expected), $node->field_metatag->value);
 
     /** @var \Drupal\user\Entity\User $user */
     $user = User::load(2);
@@ -147,21 +148,21 @@ class MetatagEntitiesTest extends MigrateDrupal7TestBase {
     $this->assertTrue($user->hasField('field_metatag'));
     // This should have the Utf8 converted description value.
     $expected = [
-      'keywords' => 'a user',
       'canonical_url' => 'the-user',
       'description' => 'Drupal™ user',
+      'keywords' => 'a user',
     ];
-    $this->assertSame(serialize($expected), $user->field_metatag->value);
+    $this->assertSame(Json::encode($expected), $user->field_metatag->value);
 
     /** @var \Drupal\taxonomy\Entity\Term $term */
     $term = Term::load(152);
     $this->assertInstanceOf(TermInterface::class, $term);
     $this->assertTrue($term->hasField('field_metatag'));
     $expected = [
-      'keywords' => 'a taxonomy',
       'canonical_url' => 'the-term',
+      'keywords' => 'a taxonomy',
     ];
-    $this->assertSame(serialize($expected), $term->field_metatag->value);
+    $this->assertSame(Json::encode($expected), $term->field_metatag->value);
   }
 
 }

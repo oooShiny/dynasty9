@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Kernel\Plugin\migrate\process;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -15,7 +17,7 @@ use Drupal\Tests\user\Traits\UserCreationTrait;
  * @coversDefaultClass \Drupal\migrate_plus\Plugin\migrate\process\DefaultEntityValue
  * @group migrate_plus
  */
-class DefaultEntityValueTest extends KernelTestBase {
+final class DefaultEntityValueTest extends KernelTestBase {
 
   use UserCreationTrait;
 
@@ -34,7 +36,6 @@ class DefaultEntityValueTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installSchema('system', ['sequences']);
     $this->installEntitySchema('user');
   }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Functional\Module;
 
 use Drupal\Component\Serialization\Yaml;
@@ -9,6 +11,7 @@ use Drupal\Component\Utility\Unicode;
  * Enable module without dependency enabled.
  *
  * @group Module
+ * @group #slow
  */
 class DependencyTest extends ModuleTestBase {
 
@@ -20,7 +23,7 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Checks functionality of project namespaces for dependencies.
    */
-  public function testProjectNamespaceForDependencies() {
+  public function testProjectNamespaceForDependencies(): void {
     $edit = [
       'modules[filter][enable]' => TRUE,
     ];
@@ -38,13 +41,13 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Attempts to enable the Content Translation module without Language enabled.
    */
-  public function testEnableWithoutDependency() {
+  public function testEnableWithoutDependency(): void {
     // Attempt to enable Content Translation without Language enabled.
     $edit = [];
     $edit['modules[content_translation][enable]'] = 'content_translation';
     $this->drupalGet('admin/modules');
     $this->submitForm($edit, 'Install');
-    $this->assertSession()->pageTextContains('Some required modules must be enabled');
+    $this->assertSession()->pageTextContains('Some required modules must be installed');
 
     $this->assertModules(['content_translation', 'language'], FALSE);
 
@@ -52,7 +55,7 @@ class DependencyTest extends ModuleTestBase {
     $this->assertNoModuleConfig('language');
 
     $this->submitForm([], 'Continue');
-    $this->assertSession()->pageTextContains('2 modules have been enabled: Content Translation, Language.');
+    $this->assertSession()->pageTextContains('2 modules have been installed: Content Translation, Language.');
     $this->assertModules(['content_translation', 'language'], TRUE);
 
     // Assert that the language YAML files were created.
@@ -63,7 +66,7 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Attempts to enable a module with a missing dependency.
    */
-  public function testMissingModules() {
+  public function testMissingModules(): void {
     // Test that the system_dependencies_test module is marked
     // as missing a dependency.
     $this->drupalGet('admin/modules');
@@ -73,10 +76,9 @@ class DependencyTest extends ModuleTestBase {
   }
 
   /**
-   * Tests enabling a module that depends on an incompatible version of a
-   * module.
+   * Tests enabling a module with an incompatible dependency version.
    */
-  public function testIncompatibleModuleVersionDependency() {
+  public function testIncompatibleModuleVersionDependency(): void {
     // Test that the system_incompatible_module_version_dependencies_test is
     // marked as having an incompatible dependency.
     $this->drupalGet('admin/modules');
@@ -88,7 +90,7 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Tests enabling a module that depends on a module with an incompatible core version.
    */
-  public function testIncompatibleCoreVersionDependency() {
+  public function testIncompatibleCoreVersionDependency(): void {
     // Test that the system_incompatible_core_version_dependencies_test is
     // marked as having an incompatible dependency.
     $this->drupalGet('admin/modules');
@@ -100,7 +102,7 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Tests visiting admin/modules when a module outside of core has no version.
    */
-  public function testNoVersionInfo() {
+  public function testNoVersionInfo(): void {
     // Create a module for testing. We set core_version_requirement to '*' for
     // the test so that it does not need to be updated between major versions.
     $info = [
@@ -112,14 +114,34 @@ class DependencyTest extends ModuleTestBase {
     mkdir($path, 0777, TRUE);
     file_put_contents("$path/system_no_module_version_dependency_test.info.yml", Yaml::encode($info));
 
+    // Include a version in the dependency definition, to test the 'incompatible
+    // with version' message when no version is given in the required module.
+    $info = [
+      'type' => 'module',
+      'core_version_requirement' => '*',
+      'name' => 'System no module version test',
+      'dependencies' => ['system_no_module_version_dependency_test(>1.x)'],
+    ];
+    $path = $this->siteDirectory . '/modules/system_no_module_version_test';
+    mkdir($path, 0777, TRUE);
+    file_put_contents("$path/system_no_module_version_test.info.yml", Yaml::encode($info));
+
+    // Ensure that the module list page is displayed without errors.
+    $this->drupalGet('admin/modules');
+    $this->assertSession()->pageTextContains('System no module version test');
+    $this->assertSession()->pageTextContains('System no module version dependency test (>1.x) (incompatible with version');
+    $this->assertSession()->fieldEnabled('modules[system_no_module_version_dependency_test][enable]');
+    $this->assertSession()->fieldDisabled('modules[system_no_module_version_test][enable]');
+
+    // Remove the version requirement from the dependency definition
     $info = [
       'type' => 'module',
       'core_version_requirement' => '*',
       'name' => 'System no module version test',
       'dependencies' => ['system_no_module_version_dependency_test'],
     ];
+
     $path = $this->siteDirectory . '/modules/system_no_module_version_test';
-    mkdir($path, 0777, TRUE);
     file_put_contents("$path/system_no_module_version_test.info.yml", Yaml::encode($info));
 
     $this->drupalGet('admin/modules');
@@ -131,7 +153,7 @@ class DependencyTest extends ModuleTestBase {
     $edit['modules[system_no_module_version_dependency_test][enable]'] = 'system_no_module_version_dependency_test';
     $this->drupalGet('admin/modules');
     $this->submitForm($edit, 'Install');
-    $this->assertSession()->pageTextContains('2 modules have been enabled: System no module version dependency test, System no module version test.');
+    $this->assertSession()->pageTextContains('2 modules have been installed: System no module version dependency test, System no module version test.');
 
     // Ensure status report is working.
     $this->drupalLogin($this->createUser(['administer site configuration']));
@@ -142,7 +164,7 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Tests failing PHP version requirements.
    */
-  public function testIncompatiblePhpVersionDependency() {
+  public function testIncompatiblePhpVersionDependency(): void {
     $this->drupalGet('admin/modules');
     $this->assertSession()->pageTextContains('This module requires PHP version 6502.* and is incompatible with PHP version ' . phpversion() . '.');
     $this->assertSession()->fieldDisabled('modules[system_incompatible_php_version_test][enable]');
@@ -151,7 +173,8 @@ class DependencyTest extends ModuleTestBase {
   /**
    * Tests enabling modules with different core version specifications.
    */
-  public function testCoreCompatibility() {
+  public function testCoreCompatibility(): void {
+    $this->markTestSkipped('Skipped due to major version-specific logic. See https://www.drupal.org/project/drupal/issues/3359322');
     $assert_session = $this->assertSession();
 
     // Test incompatible 'core_version_requirement'.
@@ -172,9 +195,24 @@ class DependencyTest extends ModuleTestBase {
   }
 
   /**
+   * Tests the dependency checks when core version contains '8.x' within it.
+   */
+  public function testCoreVersionContains8X(): void {
+    // Enable the helper module that alters the version and dependencies.
+    \Drupal::service('module_installer')->install(['dependency_version_test']);
+
+    // Check that the above module installed OK.
+    $this->drupalGet('admin/modules');
+    $this->assertModules(['dependency_version_test'], TRUE);
+
+    // Check that test_module dependencies are met and the box is not greyed.
+    $this->assertSession()->fieldEnabled('modules[test_module][enable]');
+  }
+
+  /**
    * Tests enabling a module that depends on a module which fails hook_requirements().
    */
-  public function testEnableRequirementsFailureDependency() {
+  public function testEnableRequirementsFailureDependency(): void {
     \Drupal::service('module_installer')->install(['comment']);
 
     $this->assertModules(['requirements1_test'], FALSE);
@@ -202,76 +240,36 @@ class DependencyTest extends ModuleTestBase {
    *
    * Dependencies should be enabled before their dependents.
    */
-  public function testModuleEnableOrder() {
+  public function testModuleEnableOrder(): void {
     \Drupal::service('module_installer')->install(['module_test'], FALSE);
     $this->resetAll();
     $this->assertModules(['module_test'], TRUE);
     \Drupal::state()->set('module_test.dependency', 'dependency');
     // module_test creates a dependency chain:
-    // - color depends on config
+    // - dblog depends on config
     // - config depends on help
-    $expected_order = ['help', 'config', 'color'];
+    $expected_order = ['help', 'config', 'dblog'];
 
     // Enable the modules through the UI, verifying that the dependency chain
     // is correct.
     $edit = [];
-    $edit['modules[color][enable]'] = 'color';
+    $edit['modules[dblog][enable]'] = 'dblog';
     $this->drupalGet('admin/modules');
     $this->submitForm($edit, 'Install');
-    $this->assertModules(['color'], FALSE);
+    $this->assertModules(['dblog'], FALSE);
     // Note that dependencies are sorted alphabetically in the confirmation
     // message.
-    $this->assertSession()->pageTextContains('You must enable the Configuration Manager, Help modules to install Color.');
+    $this->assertSession()->pageTextContains('You must install the Configuration Manager, Help modules to install Database Logging.');
 
     $edit['modules[config][enable]'] = 'config';
     $edit['modules[help][enable]'] = 'help';
     $this->drupalGet('admin/modules');
     $this->submitForm($edit, 'Install');
-    $this->assertModules(['color', 'config', 'help'], TRUE);
+    $this->assertModules(['dblog', 'config', 'help'], TRUE);
 
     // Check the actual order which is saved by module_test_modules_enabled().
     $module_order = \Drupal::state()->get('module_test.install_order', []);
     $this->assertSame($expected_order, $module_order);
-  }
-
-  /**
-   * Tests attempting to uninstall a module that has installed dependents.
-   */
-  public function testUninstallDependents() {
-    // Enable the forum module.
-    $edit = ['modules[forum][enable]' => 'forum'];
-    $this->drupalGet('admin/modules');
-    $this->submitForm($edit, 'Install');
-    $this->submitForm([], 'Continue');
-    $this->assertModules(['forum'], TRUE);
-
-    // Check that the comment module cannot be uninstalled.
-    $this->drupalGet('admin/modules/uninstall');
-    $this->assertSession()->fieldDisabled('uninstall[comment]');
-
-    // Delete any forum terms.
-    $vid = $this->config('forum.settings')->get('vocabulary');
-    // Ensure taxonomy has been loaded into the test-runner after forum was
-    // enabled.
-    \Drupal::moduleHandler()->load('taxonomy');
-    $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
-    $terms = $storage->loadByProperties(['vid' => $vid]);
-    $storage->delete($terms);
-
-    // Uninstall the forum module, and check that taxonomy now can also be
-    // uninstalled.
-    $edit = ['uninstall[forum]' => 'forum'];
-    $this->drupalGet('admin/modules/uninstall');
-    $this->submitForm($edit, 'Uninstall');
-    $this->submitForm([], 'Uninstall');
-    $this->assertSession()->pageTextContains('The selected modules have been uninstalled.');
-
-    // Uninstall comment module.
-    $edit = ['uninstall[comment]' => 'comment'];
-    $this->drupalGet('admin/modules/uninstall');
-    $this->submitForm($edit, 'Uninstall');
-    $this->submitForm([], 'Uninstall');
-    $this->assertSession()->pageTextContains('The selected modules have been uninstalled.');
   }
 
 }

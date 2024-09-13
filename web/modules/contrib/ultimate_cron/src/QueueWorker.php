@@ -7,6 +7,8 @@ use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Queue\RequeueException;
 use Drupal\Core\Queue\SuspendQueueException;
+use Drupal\Core\Queue\DelayableQueueInterface;
+use Drupal\Core\Queue\DelayedRequeueException;
 
 /**
  * Defines the queue worker.
@@ -114,12 +116,23 @@ class QueueWorker {
         // The worker requested the task be immediately requeued.
         $queue->releaseItem($item);
       }
+      catch (DelayedRequeueException $e) {
+        if ($queue instanceof DelayableQueueInterface) {
+          // This queue can handle a custom delay; use the duration provided
+          // by the exception.
+          $queue->delayItem($item, $e->getDelay());
+        }
+      }
       catch (SuspendQueueException $e) {
         // If the worker indicates there is a problem with the whole queue,
         // release the item and skip to the next queue.
         $queue->releaseItem($item);
 
         watchdog_exception('cron', $e);
+
+        // Rethrow the SuspendQueueException, so that the queue is correctly
+        // suspended for the current cron run to avoid infinite loops.
+        throw $e;
 
       }
       catch (\Exception $e) {

@@ -16,6 +16,7 @@ use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api\Query\ResultSet;
 use Drupal\search_api\Utility\Utility;
 use Drupal\Tests\UnitTestCase;
+use Psr\Log\LoggerInterface;
 
 /**
  * Tests the "Highlight" processor.
@@ -45,7 +46,7 @@ class HighlightTest extends UnitTestCase {
   /**
    * Creates a new processor object for use in the tests.
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->setUpMockContainer();
@@ -89,13 +90,13 @@ class HighlightTest extends UnitTestCase {
     $query = $this->createMock(QueryInterface::class);
 
     $results = $this->getMockBuilder(ResultSet::class)
-      ->setMethods(['getResultCount', 'getQuery', 'getResultItems'])
+      ->onlyMethods(['getResultCount', 'getQuery', 'getResultItems'])
       ->setConstructorArgs([$query])
       ->getMock();
 
     $results->expects($this->once())
       ->method('getResultCount')
-      ->will($this->returnValue(0));
+      ->willReturn(0);
     $results->expects($this->once())
       ->method('getQuery')
       ->willReturn(NULL);
@@ -116,7 +117,7 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_BASIC);
 
     $results = $this->getMockBuilder(ResultSet::class)
-      ->setMethods(['getResultCount', 'getQuery', 'getResultItems'])
+      ->onlyMethods(['getResultCount', 'getQuery', 'getResultItems'])
       ->setConstructorArgs([$query])
       ->getMock();
 
@@ -125,7 +126,7 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(1);
     $results->expects($this->once())
       ->method('getQuery')
-      ->will($this->returnValue($query));
+      ->willReturn($query);
     $results->expects($this->never())
       ->method('getResultItems');
     /** @var \Drupal\search_api\Query\ResultSet $results */
@@ -143,20 +144,20 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
 
     $results = $this->getMockBuilder(ResultSet::class)
-      ->setMethods(['getResultCount', 'getQuery', 'getResultItems'])
+      ->onlyMethods(['getResultCount', 'getQuery', 'getResultItems'])
       ->setConstructorArgs([$query])
       ->getMock();
 
     $query->expects($this->once())
       ->method('getOriginalKeys')
-      ->will($this->returnValue([]));
+      ->willReturn([]);
 
     $results->expects($this->once())
       ->method('getResultCount')
-      ->will($this->returnValue(1));
+      ->willReturn(1);
     $results->expects($this->once())
       ->method('getQuery')
-      ->will($this->returnValue($query));
+      ->willReturn($query);
     $results->expects($this->never())
       ->method('getResultItems');
     /** @var \Drupal\search_api\Query\ResultSet $results */
@@ -174,14 +175,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue('foo'));
+      ->willReturn('foo');
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -206,6 +207,50 @@ class HighlightTest extends UnitTestCase {
   }
 
   /**
+   * Tests empty search keys do not create empty highlight tags.
+   */
+  public function testPostprocessSearchResultsWithEmptyKeys(): void {
+    $this->processor->setConfiguration(['excerpt_always' => TRUE]);
+
+    $query = $this->createMock(QueryInterface::class);
+    $query->expects($this->once())
+      ->method('getProcessingLevel')
+      ->willReturn(QueryInterface::PROCESSING_FULL);
+    $query->expects($this->atLeastOnce())
+      ->method('getOriginalKeys')
+      ->willReturn('');
+    /** @var \Drupal\search_api\Query\QueryInterface $query */
+
+    $field = $this->createTestField('body', 'entity:node/body');
+
+    $this->index->expects($this->atLeastOnce())
+      ->method('getFields')
+      ->willReturn(['body' => $field]);
+
+    $this->processor->setIndex($this->index);
+
+    $body_values = ['Some foo value'];
+    $fields = [
+      'entity:node/body' => [
+        'type' => 'text',
+        'values' => $body_values,
+      ],
+    ];
+
+    $items = $this->createItems($this->index, 1, $fields);
+
+    $results = new ResultSet($query);
+    $results->setResultItems($items);
+    $results->setResultCount(1);
+
+    $this->processor->postprocessSearchResults($results);
+
+    $fields = $items[$this->itemIds[0]]->getExtraData('highlighted_fields');
+    // There should be no highlighted fields when keys are empty.
+    $this->assertNull($fields, 'Highlighted fields are not empty when keys are empty');
+  }
+
+  /**
    * Tests changing the prefix and suffix used for highlighting.
    */
   public function testPostprocessSearchResultsWithChangedPrefixSuffix() {
@@ -220,14 +265,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'foo']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -263,14 +308,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'foo']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -315,14 +360,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', $keywords]));
+      ->willReturn(['#conjunction' => 'AND', $keywords]);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -356,27 +401,21 @@ class HighlightTest extends UnitTestCase {
    *
    * @see \Drupal\Tests\search_api\Unit\Processor\HighlightTest::testPostprocessSearchResultsHighlightPartial()
    */
-  public function postprocessSearchResultsHighlightPartialDataProvider() {
-    $data_sets = [
+  public static function postprocessSearchResultsHighlightPartialDataProvider() {
+    // cspell:disable
+    return [
       'normal' => [
         'Some longwordtoshowpartialmatching value',
         'partial',
         'Some longwordtoshow<strong>partial</strong>matching value',
       ],
-    ];
-
-    // Test multi-byte support only if this PHP installation actually contains
-    // the necessary function. Otherwise, we can't really be blamed for not
-    // supporting them.
-    if (function_exists('mb_stripos')) {
-      $data_sets['multi-byte'] = [
+      'multi-byte' => [
         'Alle Angaben ohne Gewähr.',
         'Ähr',
         'Alle Angaben ohne Gew<strong>ähr</strong>.',
-      ];
-    }
-
-    return $data_sets;
+      ],
+    ];
+    // cspell:enable
   }
 
   /**
@@ -389,14 +428,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'foo']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -435,14 +474,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'congue']));
+      ->willReturn(['#conjunction' => 'AND', 'congue']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -478,14 +517,14 @@ class HighlightTest extends UnitTestCase {
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'foo']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -523,23 +562,82 @@ END;
   }
 
   /**
-   * Tests whether highlighting works on a longer text matching near the end.
+   * Tests whether fields highlighting correctly handles invalid HTML.
+   *
+   * @see https://www.drupal.org/node/3264239
    */
-  public function testPostprocessSearchResultsExerptMatchNearEnd() {
+  public function testPostprocessSearchResultsInvalidHtml() {
+    $logger = $this->createMock(LoggerInterface::class);
+    $logger->method('warning')->willReturnCallback(function (string $message, array $context = []) {
+      $context_json = json_encode($context, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+      trigger_error("$message\n$context_json", E_USER_WARNING);
+    });
+    $this->processor->setLogger($logger);
+
     $query = $this->createMock(QueryInterface::class);
     $query->expects($this->once())
       ->method('getProcessingLevel')
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'diam']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
+
+    $this->processor->setIndex($this->index);
+
+    $body_value = <<<'END'
+Sentence with foo keyword.
+<img src="" width="" alt="" "></img>
+More words.
+END;
+    $fields = [
+      'entity:node/body' => [
+        'type' => 'text',
+        'values' => [$body_value],
+      ],
+    ];
+
+    $items = $this->createItems($this->index, 1, $fields);
+
+    $results = new ResultSet($query);
+    $results->setResultItems($items);
+    $results->setResultCount(1);
+
+    $this->processor->postprocessSearchResults($results);
+
+    $expected = <<<'END'
+Sentence with <strong>foo</strong> keyword.
+<img src="" width="" alt="" "></img>
+More words.
+END;
+    $highlighted = reset($items)->getExtraData('highlighted_fields');
+    $this->assertEquals([$expected], $highlighted['body'] ?? NULL);
+  }
+
+  /**
+   * Tests whether highlighting works on a longer text matching near the end.
+   */
+  public function testPostprocessSearchResultsExcerptMatchNearEnd() {
+    $query = $this->createMock(QueryInterface::class);
+    $query->expects($this->once())
+      ->method('getProcessingLevel')
+      ->willReturn(QueryInterface::PROCESSING_FULL);
+    $query->expects($this->atLeastOnce())
+      ->method('getOriginalKeys')
+      ->willReturn(['#conjunction' => 'AND', 'diam']);
+    /** @var \Drupal\search_api\Query\QueryInterface $query */
+
+    $field = $this->createTestField('body', 'entity:node/body');
+
+    $this->index->expects($this->atLeastOnce())
+      ->method('getFields')
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -577,14 +675,14 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue('congue'));
+      ->willReturn('congue');
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -622,14 +720,14 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'congue']));
+      ->willReturn(['#conjunction' => 'AND', 'congue']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -664,14 +762,15 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'congues']));
+      // cspell:disable-next-line
+      ->willReturn(['#conjunction' => 'AND', 'congues']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 
@@ -684,6 +783,7 @@ END;
     ];
 
     $items = $this->createItems($this->index, 1, $fields);
+    // cspell:disable-next-line
     $items[$this->itemIds[0]]->setExtraData('highlighted_keys', ['congue']);
 
     $results = new ResultSet($query);
@@ -694,6 +794,7 @@ END;
 
     $output = $results->getResultItems();
     $excerpt = $output[$this->itemIds[0]]->getExcerpt();
+    // cspell:disable-next-line
     $correct_output = '… tristique, ligula sit amet condimentum dapibus, lorem nunc <strong>congue</strong> velit, et dictum augue leo sodales augue. Maecenas …';
     $this->assertEquals($correct_output, $excerpt, 'Excerpt was added.');
   }
@@ -723,14 +824,14 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue($keys));
+      ->willReturn($keys);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $body_field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $body_field]));
+      ->willReturn(['body' => $body_field]);
 
     $this->processor->setIndex($this->index);
 
@@ -768,7 +869,7 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'foo']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $body_field = $this->createTestField('body', 'entity:node/body');
@@ -776,10 +877,10 @@ END;
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue([
+      ->willReturn([
         'body' => $body_field,
         'title' => $title_field,
-      ]));
+      ]);
 
     $this->processor->setIndex($this->index);
 
@@ -826,14 +927,14 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'OR', 'foo']));
+      ->willReturn(['#conjunction' => 'OR', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $body_field = $this->createTestField('body', 'entity:node/body');
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $body_field]));
+      ->willReturn(['body' => $body_field]);
 
     $this->processor->setIndex($this->index);
 
@@ -879,7 +980,7 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue(['#conjunction' => 'AND', 'foo']));
+      ->willReturn(['#conjunction' => 'AND', 'foo']);
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $body_field = $this->createTestField('body', 'entity:node/body');
@@ -887,10 +988,10 @@ END;
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue([
+      ->willReturn([
         'body' => $body_field,
         'title' => $title_field,
-      ]));
+      ]);
 
     $this->processor->setIndex($this->index);
 
@@ -1079,7 +1180,6 @@ END;
    */
   public function testRegressionBug3022724($text, array $keys, $expected) {
     $method = new \ReflectionMethod($this->processor, 'createExcerpt');
-    $method->setAccessible(TRUE);
     $excerpt = $method->invoke($this->processor, $text, $keys);
     $this->assertEquals($expected, $excerpt);
   }
@@ -1090,7 +1190,8 @@ END;
    * @return array
    *   An array of argument arrays for testRegressionBug3022724().
    */
-  public function regressionBug3022724DataProvider() {
+  public static function regressionBug3022724DataProvider() {
+    // cspell:disable
     return [
       'multiple snippets' => [
         'text' => 'field value 1 … field value 2 … field value with first foo match … then long text of no matches, interspersed with some Hungarian: Jó napot kívánok! Hogy vagy? … then a field value with a second foo match – will it get highlighted?',
@@ -1103,6 +1204,22 @@ END;
         'expected' => '… nItWhichCanLeadToProblemsGettingAContextForHighlightingThis.<strong>Foo</strong>.Match …',
       ],
     ];
+    // cspell:enable
+  }
+
+  /**
+   * Provides a regression test for bug #3390450.
+   *
+   * The effect of the bug was undesired highlighting of HTML attribute values.
+   *
+   * @see https://www.drupal.org/node/3390450
+   */
+  public function testRegressionBug3390450(): void {
+    $method = new \ReflectionMethod($this->processor, 'highlightField');
+    $text = '<h1 title="agreement">Main</h1><a href="/underwriting-agreement">investment underwriting agreement</a>';
+    $excerpt = $method->invoke($this->processor, $text, ['agreement']);
+    $expected = '<h1 title="agreement">Main</h1><a href="/underwriting-agreement">investment underwriting <strong>agreement</strong></a>';
+    $this->assertEquals($expected, $excerpt);
   }
 
   /**
@@ -1115,7 +1232,7 @@ END;
       ->willReturn(QueryInterface::PROCESSING_FULL);
     $query->expects($this->atLeastOnce())
       ->method('getOriginalKeys')
-      ->will($this->returnValue('foo'));
+      ->willReturn('foo');
     /** @var \Drupal\search_api\Query\QueryInterface $query */
 
     $body = $this->createTestField('body', 'entity:node/body');
@@ -1123,7 +1240,7 @@ END;
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $body, 'title' => $title]));
+      ->willReturn(['body' => $body, 'title' => $title]);
 
     $this->processor->setIndex($this->index);
 
@@ -1185,7 +1302,7 @@ END;
 
     $this->index->expects($this->atLeastOnce())
       ->method('getFields')
-      ->will($this->returnValue(['body' => $field]));
+      ->willReturn(['body' => $field]);
 
     $this->processor->setIndex($this->index);
 

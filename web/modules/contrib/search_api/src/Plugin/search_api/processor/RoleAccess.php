@@ -2,6 +2,7 @@
 
 namespace Drupal\search_api\Plugin\search_api\processor;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Session\UserSession;
@@ -36,8 +37,7 @@ class RoleAccess extends ProcessorPluginBase {
   /**
    * The property added for the role-based access data.
    */
-  // @todo Make protected once we depend on PHP 7.1+.
-  const ROLE_ACCESS_FIELD = 'search_api_role_access';
+  protected const ROLE_ACCESS_FIELD = 'search_api_role_access';
 
   /**
    * The current user service used by this plugin.
@@ -45,6 +45,11 @@ class RoleAccess extends ProcessorPluginBase {
    * @var \Drupal\Core\Session\AccountProxyInterface|null
    */
   protected $currentUser;
+
+  /**
+   * The entity type manager.
+   */
+  protected ?EntityTypeManagerInterface $entityTypeManager = NULL;
 
   /**
    * The last UID assigned to a dummy account.
@@ -68,6 +73,7 @@ class RoleAccess extends ProcessorPluginBase {
     $processor = parent::create($container, $configuration, $plugin_id, $plugin_definition);
 
     $processor->setCurrentUser($container->get('current_user'));
+    $processor->setEntityTypeManager($container->get('entity_type.manager'));
     $processor->setLogger($container->get('logger.channel.search_api'));
 
     return $processor;
@@ -93,6 +99,29 @@ class RoleAccess extends ProcessorPluginBase {
    */
   public function setCurrentUser(AccountProxyInterface $current_user) {
     $this->currentUser = $current_user;
+    return $this;
+  }
+
+  /**
+   * Retrieves the entity type manager.
+   *
+   * @return \Drupal\Core\Entity\EntityTypeManagerInterface
+   *   The entity type manager.
+   */
+  public function getEntityTypeManager(): EntityTypeManagerInterface {
+    return $this->entityTypeManager ?: \Drupal::entityTypeManager();
+  }
+
+  /**
+   * Sets the entity type manager.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   *
+   * @return $this
+   */
+  public function setEntityTypeManager(EntityTypeManagerInterface $entity_type_manager): static {
+    $this->entityTypeManager = $entity_type_manager;
     return $this;
   }
 
@@ -125,7 +154,8 @@ class RoleAccess extends ProcessorPluginBase {
         ->getItemAccessResult($item->getOriginalObject(), $transient_account)
         ->isAllowed();
     };
-    $allowed_roles = array_filter(user_roles(), $role_has_access);
+    $roles = $this->getEntityTypeManager()->getStorage('user_role')->loadMultiple();
+    $allowed_roles = array_filter($roles, $role_has_access);
     $allowed_roles = array_map(function (RoleInterface $role) {
       return $role->id();
     }, $allowed_roles);
@@ -193,7 +223,7 @@ class RoleAccess extends ProcessorPluginBase {
     }
     else {
       $query->abort();
-      $this->getLogger()->warning('Role-based access checks could not be added to a search query on index %index since the required field is not available. Please re-save the index.', [
+      $this->getLogger()->warning('Role-based access checks could not be added to a search query on index %index since the required field is not available. You should re-save the index.', [
         '%index' => $query->getIndex()->label(),
       ]);
     }

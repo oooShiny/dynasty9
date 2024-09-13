@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\taxonomy\Functional\Rest;
 
 use Drupal\taxonomy\Entity\Vocabulary;
-use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
+use Drupal\Tests\rest\Functional\EntityResource\ConfigEntityResourceTestBase;
 
-abstract class VocabularyResourceTestBase extends EntityResourceTestBase {
+abstract class VocabularyResourceTestBase extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -55,6 +57,7 @@ abstract class VocabularyResourceTestBase extends EntityResourceTestBase {
       'name' => 'Llama',
       'description' => NULL,
       'weight' => 0,
+      'new_revision' => FALSE,
     ];
   }
 
@@ -63,6 +66,7 @@ abstract class VocabularyResourceTestBase extends EntityResourceTestBase {
    */
   protected function getNormalizedPostEntity() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
   /**

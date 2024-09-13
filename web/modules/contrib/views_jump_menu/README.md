@@ -1,17 +1,32 @@
-**SUMMARY**
+# Views Jump Menu
 
-Displays Views results as a Select list that links to an entity when clicked.
+Views Jump Menu offers a Views display style which lets you choose which
+field to use as both the label and the destination for each item, and then
+generates a <select> list that automatically redirects to whichever
+destination is selected.
 
-**REQUIREMENTS**
+There are similar modules but they are complex and not available for Drupal 8.
+If your needs are simple, and involve D8, this might just be the ticket.
 
-* Views (In core)
+For a full description of the module, visit the
+[project page](https://www.drupal.org/project/views_jump_menu).
 
-**INSTALLATION**
+Submit bug reports and feature suggestions, or track changes in the
+[issue queue](https://www.drupal.org/project/issues/views_jump_menu).
 
-Install as usual, see http://drupal.org/node/1897420 for further information.
 
-**CONTACT**
+## Requirements
 
-Current maintainers:
-* [bmcclure](https://www.drupal.org/u/bmcclure)
-* [jcnventura](https://www.drupal.org/u/jcnventura)
+This module requires no modules outside of Drupal core.
+
+
+## Installation
+
+Install as you would normally install a contributed Drupal module. For further
+information, see
+[Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules).
+
+
+## Configuration
+
+There are no configuration provided.

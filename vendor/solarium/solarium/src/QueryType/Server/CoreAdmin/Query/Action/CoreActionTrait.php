@@ -15,13 +15,13 @@ namespace Solarium\QueryType\Server\CoreAdmin\Query\Action;
 trait CoreActionTrait
 {
     /**
-     * Set the core name that should be reloaded.
+     * Set the core name for the action.
      *
      * @param string $core
      *
-     * @return self
+     * @return self Provides fluent interface
      */
-    public function setCore(string $core): CoreActionInterface
+    public function setCore(string $core): self
     {
         $this->setOption('core', $core);
 

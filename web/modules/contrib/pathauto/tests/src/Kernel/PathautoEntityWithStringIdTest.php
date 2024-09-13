@@ -6,10 +6,10 @@ use Drupal\Component\Serialization\PhpSerialize;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\KeyValueStore\KeyValueDatabaseFactory;
-use Drupal\pathauto\PathautoState;
-use Drupal\Tests\pathauto\Functional\PathautoTestHelperTrait;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\pathauto\PathautoState;
 use Drupal\pathauto_string_id_test\Entity\PathautoStringIdTest;
+use Drupal\Tests\pathauto\Functional\PathautoTestHelperTrait;
 
 /**
  * Tests auto-aliasing of entities that use string IDs.
@@ -59,13 +59,10 @@ class PathautoEntityWithStringIdTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
-    $this->installSchema('system', ['key_value']);
     $this->installConfig(['system', 'pathauto']);
-    if ($this->container->get('entity_type.manager')->hasDefinition('path_alias')) {
-      $this->installEntitySchema('path_alias');
-    }
+    $this->installEntitySchema('path_alias');
     $this->installEntitySchema('pathauto_string_id_test');
     $this->createPattern('pathauto_string_id_test', '/[pathauto_string_id_test:name]');
     /** @var \Drupal\pathauto\AliasTypeManager $alias_type_manager */

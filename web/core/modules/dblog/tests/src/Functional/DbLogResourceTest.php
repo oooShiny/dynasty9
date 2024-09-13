@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\dblog\Functional;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Url;
 use Drupal\Tests\rest\Functional\CookieResourceTestTrait;
@@ -25,16 +28,6 @@ class DbLogResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $format = 'hal_json';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected static $mimeType = 'application/hal+json';
-
-  /**
-   * {@inheritdoc}
-   */
   protected static $auth = 'cookie';
 
   /**
@@ -45,12 +38,19 @@ class DbLogResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['hal', 'dblog'];
+  protected static $modules = ['rest', 'dblog'];
+
+  /**
+   * The entity type ID.
+   *
+   * @var string
+   */
+  protected static $entityTypeId = '';
 
   /**
    * {@inheritdoc}
    */
-  public function setUp(): void {
+  protected function setUp(): void {
     parent::setUp();
 
     $auth = isset(static::$auth) ? [static::$auth] : [];
@@ -60,7 +60,7 @@ class DbLogResourceTest extends ResourceTestBase {
   /**
    * Writes a log messages and retrieves it via the REST API.
    */
-  public function testWatchdog() {
+  public function testWatchdog(): void {
     // Write a log message to the DB.
     $this->container->get('logger.channel.rest')->notice('Test message');
     // Get the ID of the written message.
@@ -73,18 +73,35 @@ class DbLogResourceTest extends ResourceTestBase {
       ->fetchField();
 
     $this->initAuthentication();
-    $url = Url::fromRoute('rest.dblog.GET', ['id' => $id, '_format' => static::$format]);
+    $url = Url::fromRoute(
+      'rest.dblog.GET',
+      ['id' => $id, '_format' => static::$format]
+    );
     $request_options = $this->getAuthenticationRequestOptions('GET');
 
     $response = $this->request('GET', $url, $request_options);
-    $this->assertResourceErrorResponse(403, "The 'restful get dblog' permission is required.", $response, ['4xx-response', 'http_response'], ['user.permissions'], FALSE, FALSE);
+    $this->assertResourceErrorResponse(
+      403,
+      "The 'restful get dblog' permission is required.",
+      $response,
+      ['4xx-response', 'http_response'],
+      ['user.permissions']
+    );
 
     // Create a user account that has the required permissions to read
     // the watchdog resource via the REST API.
     $this->setUpAuthorization('GET');
 
     $response = $this->request('GET', $url, $request_options);
-    $this->assertResourceResponse(200, FALSE, $response, ['config:rest.resource.dblog', 'http_response'], ['user.permissions'], FALSE, 'MISS');
+    $this->assertResourceResponse(
+      200,
+      FALSE,
+      $response,
+      ['config:rest.resource.dblog', 'http_response'],
+      ['user.permissions'],
+      FALSE,
+      'MISS'
+    );
     $log = Json::decode((string) $response->getBody());
     $this->assertEquals($id, $log['wid'], 'Log ID is correct.');
     $this->assertEquals('rest', $log['type'], 'Type of log message is correct.');
@@ -95,7 +112,8 @@ class DbLogResourceTest extends ResourceTestBase {
     $response = $this->request('GET', $url, $request_options);
     $this->assertResourceErrorResponse(404, "Log entry with ID '9999' was not found", $response);
 
-    // Make a bad request (a true malformed request would never be a route match).
+    // Make a bad request (a true malformed request would never be a route
+    // match).
     $url->setRouteParameter('id', 0);
     $response = $this->request('GET', $url, $request_options);
     $this->assertResourceErrorResponse(400, 'No log entry ID was provided', $response);
@@ -123,11 +141,31 @@ class DbLogResourceTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessMessage($method) {}
+  protected function getExpectedUnauthorizedAccessMessage($method) {
+    switch ($method) {
+      case 'GET':
+        return "The 'restful get dblog' permission is required.";
+
+      default:
+        return parent::getExpectedUnauthorizedAccessMessage($method);
+    }
+  }
 
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedUnauthorizedAccessCacheability() {}
+  protected function getExpectedUnauthorizedAccessCacheability() {
+    return (new CacheableMetadata())
+      ->setCacheTags(['4xx-response', 'http_response'])
+      ->setCacheContexts(['user.permissions']);
+  }
+
+  /**
+   * Empty function.
+   *
+   * Needed by PHPStan for unused function
+   * CookieResourceTestTrait::assertResponseWhenMissingAuthentication().
+   */
+  protected function getExpectedUnauthorizedEntityAccessCacheability($is_authenticated) {}
 
 }

@@ -51,4 +51,24 @@ interface GutenbergLibraryManagerInterface extends PluginManagerInterface {
    */
   public function getDefinitionsByExtension();
 
+  /**
+   * Generate color css classes.
+   * 
+   * @return string|bool
+   */
+  public function generateThemeColorClasses();
+
+  /**
+   * Generate gradient css classes.
+   * 
+   * @return string|bool
+   */
+  public function generateThemeGradientClasses();
+
+  /**
+   * Generate font size css classes.
+   * 
+   * @return string|bool
+   */
+  public function generateThemeFontSizeClasses();
 }

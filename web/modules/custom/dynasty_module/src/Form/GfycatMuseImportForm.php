@@ -73,6 +73,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
       $season = $season_array[1];
       // Get all Game nodes from that season.
       $nids = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
         ->condition('type','game')
         ->condition('field_season', $season)
         ->execute();
@@ -106,7 +107,10 @@ class GfycatMuseImportForm extends ConfigFormBase {
     else {
       // Get list of videos in Drupal.
 
-      $nids = \Drupal::entityQuery('node')->condition('type','highlight')->execute();
+      $nids = \Drupal::entityQuery('node')
+        ->accessCheck(FALSE)
+        ->condition('type','highlight')
+        ->execute();
       $highlights =  Node::loadMultiple($nids);
       foreach ($highlights as $video) {
         $vid_links[strtolower($video->get('field_gfycat_id')->value)] = $video->id();

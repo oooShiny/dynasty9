@@ -228,12 +228,14 @@ class SettingsForm extends ConfigFormBase {
       '#title' => $this->t('CSS Options'),
       '#open' => TRUE,
     ];
-    $form['css']['css_combine_media'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Combine CSS files by using media queries'),
-      '#default_value' => $config->get('css.combine_media'),
-      '#description' => $this->t('Will combine more CSS files together because different CSS media types can be used in the same file by using media queries. Use cores grouping logic needs to be unchecked in order for this to work. Also noted is that due to an issue with IE9, compatibility mode is forced off if this is enabled.'),
-    ];
+    if ((int) \Drupal::VERSION < 10) {
+      $form['css']['css_combine_media'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Combine CSS files by using media queries'),
+        '#default_value' => $config->get('css.combine_media'),
+        '#description' => $this->t('Will combine more CSS files together because different CSS media types can be used in the same file by using media queries. Use cores grouping logic needs to be unchecked in order for this to work. Also noted is that due to an issue with IE9, compatibility mode is forced off if this is enabled.'),
+      ];
+    }
     $form['css']['css_fix_type'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Fix improperly set type'),

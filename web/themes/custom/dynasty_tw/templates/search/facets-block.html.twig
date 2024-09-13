@@ -1,0 +1,41 @@
+{% set block_id = 'search-filters-' ~ random() %}
+<div class="flex flex-wrap md:block hidden">
+    <div class="facet-block md:mb-5 md:mx-0 bg-blue-pats text-gray-300 border border-gray-400 mx-4 p-2 shadow-lg divide-y">
+  {% for facet in facets %}
+    <div class="p-3">
+      {% if show_title %}
+        <h2 class="facet-block__title text-xl text-white pb-1">{{ facet.title }}</h2>
+      {% endif %}
+      <div class="facet-block__content">{{ facet.content }}</div>
+    </div>
+  {% endfor %}
+    </div>
+</div>
+
+<div class="md:hidden block">
+
+  <h2 id="filter-toggle" onclick="toggleFilters('{{ block_id }}')" class="bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters ▼</h2>
+  <div id="{{ block_id }}" class="bg-gray-500 hidden">
+  {% for facet in facets %}
+    <div class="facet-block md:my-5 md:mx-0 bg-white border border-gray-400 m-4 p-2 shadow-lg shadow-gray-500">
+      {% if show_title %}
+        <h2 class="facet-block__title text-xl font-light">{{ facet.title }}</h2>
+      {% endif %}
+      <div class="facet-block__content">{{ facet.content }}</div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+
+<script type="application/javascript">
+  function toggleFilters(id) {
+    var x = document.getElementById(id);
+    if (x.classList.contains('hidden')) {
+      x.classList.remove('hidden');
+      x.classList.add('block');
+    } else {
+      x.classList.remove('block');
+      x.classList.add('hidden');
+    }
+  }
+</script>

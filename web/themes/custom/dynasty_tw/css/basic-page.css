@@ -1,0 +1,30 @@
+.paragraph--type--section {
+  width: 90%;
+  margin: 4rem auto;
+}
+
+.paragraph.paragraph--type--text p {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.paragraph.paragraph--type--text p a,
+#block-seasongamelistblock a {
+  text-decoration: underline;
+  text-decoration-color: #c60b31;
+  text-decoration-thickness: .125em;
+}
+
+/* Gfycat modal link icon. */
+a.gyf:after {
+  content: "";
+  display: inline-block;
+  background: url("/themes/custom/dynasty/icons/play.svg") no-repeat;
+  width: 0.75em;
+  height: 0.75em;
+  margin-left: 0.25em;
+}
+
+a.gyf {
+  text-decoration-color: #002244 !important;
+}

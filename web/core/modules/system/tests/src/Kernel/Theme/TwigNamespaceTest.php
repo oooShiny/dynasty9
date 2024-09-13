@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Kernel\Theme;
 
 use Drupal\KernelTests\KernelTestBase;
@@ -29,9 +31,12 @@ class TwigNamespaceTest extends KernelTestBase {
    */
   protected $twig;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
-    \Drupal::service('theme_installer')->install(['test_theme', 'bartik']);
+    \Drupal::service('theme_installer')->install(['test_theme', 'olivero']);
     $this->twig = \Drupal::service('twig');
   }
 
@@ -47,18 +52,18 @@ class TwigNamespaceTest extends KernelTestBase {
   /**
    * Tests template discovery using namespaces.
    */
-  public function testTemplateDiscovery() {
+  public function testTemplateDiscovery(): void {
     // Tests resolving namespaced templates in modules.
     $this->assertTwigTemplate($this->twig->load('@node/node.html.twig'), 'Found node.html.twig in node module.');
 
     // Tests resolving namespaced templates in themes.
-    $this->assertTwigTemplate($this->twig->load('@bartik/page.html.twig'), 'Found page.html.twig in Bartik theme.');
+    $this->assertTwigTemplate($this->twig->load('@olivero/layout/page.html.twig'), 'Found page.html.twig in Olivero theme.');
   }
 
   /**
    * Tests template extension and includes using namespaces.
    */
-  public function testTwigNamespaces() {
+  public function testTwigNamespaces(): void {
     // Test twig @extends and @include in template files.
     $test = ['#theme' => 'twig_namespace_test'];
     $this->setRawContent(\Drupal::service('renderer')->renderRoot($test));

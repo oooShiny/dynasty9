@@ -8,20 +8,20 @@
 
       function hydrateQuicklinkConfig() {
         settings.quicklink.quicklinkConfig = settings.quicklink.quicklinkConfig || {};
-        settings.quicklink.ignoredSelectorsLog = settings.quicklink.ignoredSelectorsLog || [];
+        settings.quicklink.ignoredLinks = settings.quicklink.ignoredLinks || [];
 
         var quicklinkConfig = settings.quicklink.quicklinkConfig;
 
         quicklinkConfig.ignores = [];
 
-        // Loop through all the patters to ignore, and generate rules to ignore URL patterns.
+        // Loop through all the patterns to ignore, and generate rules to ignore URL patterns.
         for (var i = 0; i < settings.quicklink.url_patterns_to_ignore.length; i++) {
           var pattern = settings.quicklink.url_patterns_to_ignore[i];
 
           (function (i, pattern) {
             if (pattern.length) {
               quicklinkConfig.ignores.push(function (uri, elem) {
-                var ruleName = 'Pattern found in href. See ignored selectors log.';
+                var ruleName = 'Pattern found in href. See ignored URL patterns log.';
                 var ruleFunc = uri.includes(pattern);
 
                 outputDebugInfo(ruleFunc, ruleName, uri, elem, pattern);
@@ -30,6 +30,26 @@
               });
             }
           })(i, pattern);
+        }
+
+        // Loop through all the "ignore selectors", and generate rules.
+        if (settings.quicklink.ignore_selectors) {
+          for (var i = 0; i < settings.quicklink.ignore_selectors.length; i++) {
+            var pattern = settings.quicklink.ignore_selectors[i];
+
+            (function (i, pattern) {
+              if (pattern.length) {
+                quicklinkConfig.ignores.push(function (uri, elem) {
+                  var ruleName = 'Element matches custom selectors within "ignore selectors" array. See log.';
+                  var ruleFunc = elem.matches(pattern);
+
+                  outputDebugInfo(ruleFunc, ruleName, uri, elem, pattern);
+
+                  return ruleFunc;
+                });
+              }
+            })(i, pattern);
+          }
         }
 
         if (settings.quicklink.ignore_admin_paths) {
@@ -76,6 +96,22 @@
           });
         }
 
+        if (settings.quicklink.total_request_limit) {
+          quicklinkConfig.limit = parseInt(settings.quicklink.total_request_limit);
+        }
+
+        if (settings.quicklink.concurrency_throttle_limit) {
+          quicklinkConfig.throttle = parseInt(settings.quicklink.concurrency_throttle_limit);
+        }
+
+        if (settings.quicklink.idle_wait_timeout) {
+          quicklinkConfig.timeout = parseInt(settings.quicklink.idle_wait_timeout);
+        }
+
+        if (settings.quicklink.viewport_delay) {
+          quicklinkConfig.delay = parseInt(settings.quicklink.viewport_delay);
+        }
+
         quicklinkConfig.ignores.push(function (uri, elem) {
           var ruleName = 'Contains noprefetch attribute.';
           var ruleFunc = elem.hasAttribute('noprefetch');
@@ -95,7 +131,6 @@
         });
 
         quicklinkConfig.origins = (settings.quicklink.allowed_domains) ? settings.quicklink.allowed_domains : false;
-        quicklinkConfig.urls = (settings.quicklink.prefetch_only_paths) ? settings.quicklink.prefetch_only_paths : false;
       }
 
       function outputDebugInfo(ruleFunc, ruleName, uri, elem, pattern) {
@@ -118,7 +153,7 @@
           }
 
           (function (thisLog) {
-            settings.quicklink.ignoredSelectorsLog.push(thisLog);
+            settings.quicklink.ignoredLinks.push(thisLog);
           })(thisLog);
         }
       }
@@ -141,14 +176,24 @@
 
       settings.quicklink.quicklinkConfig.el = (settings.quicklink.selector) ? context.querySelector(settings.quicklink.selector) : context;
 
+      if (loadQuicklink()) {
+        if (settings.quicklink.prefetch_only_paths) {
+          quicklink.prefetch(settings.quicklink.prefetch_only_paths);
+        }
+        else {
+          try {
+            quicklink.listen(settings.quicklink.quicklinkConfig);
+          }
+          catch(err) {
+            console.error('quicklink.listen is not found. Please verify you are running version 2 of the Quicklink library.', err);
+          }
+        }
+      }
+
       if (debug) {
         console.info('Quicklink config object', settings.quicklink.quicklinkConfig); // eslint-disable-line no-console
         console.info('Quicklink module debug log', settings.quicklink.debug_log); // eslint-disable-line no-console
-        console.info('Quicklink ignored selectors', settings.quicklink.ignoredSelectorsLog); // eslint-disable-line no-console
-      }
-
-      if (loadQuicklink()) {
-        quicklink(settings.quicklink.quicklinkConfig);
+        console.info('Quicklink ignored links', settings.quicklink.ignoredLinks); // eslint-disable-line no-console
       }
     }
   };

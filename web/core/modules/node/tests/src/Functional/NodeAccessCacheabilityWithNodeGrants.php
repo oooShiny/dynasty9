@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\node\Functional;
 
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 
 /**
  * Tests node view access cacheability with node grants.
@@ -14,7 +16,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  */
 class NodeAccessCacheabilityWithNodeGrants extends BrowserTestBase {
 
-  use EntityReferenceTestTrait;
+  use EntityReferenceFieldCreationTrait;
 
   /**
    * {@inheritdoc}
@@ -29,8 +31,8 @@ class NodeAccessCacheabilityWithNodeGrants extends BrowserTestBase {
   /**
    * Tests node view access cacheability with node grants.
    */
-  public function testAccessCacheabilityWithNodeGrants() {
-    NodeType::create(['type' => 'page'])->save();
+  public function testAccessCacheabilityWithNodeGrants(): void {
+    NodeType::create(['type' => 'page', 'name' => 'Page'])->save();
     $this->createEntityReferenceField('node', 'page', 'ref', 'Ref', 'node');
     EntityViewDisplay::create([
       'targetEntityType' => 'node',
@@ -43,8 +45,7 @@ class NodeAccessCacheabilityWithNodeGrants extends BrowserTestBase {
     // Check that at least one module implements hook_node_grants() as this test
     // only tests this case.
     // @see \node_test_node_grants()
-    $node_grants_implementations = \Drupal::moduleHandler()->getImplementations('node_grants');
-    $this->assertNotEmpty($node_grants_implementations);
+    $this->assertTrue(\Drupal::moduleHandler()->hasImplementations('node_grants'));
 
     // Create an unpublished node.
     $referenced = $this->createNode(['status' => FALSE]);

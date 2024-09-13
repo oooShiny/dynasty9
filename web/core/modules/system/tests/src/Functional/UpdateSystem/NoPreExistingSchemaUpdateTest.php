@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Functional\UpdateSystem;
 
 use Drupal\Core\Database\Database;
@@ -20,6 +22,9 @@ class NoPreExistingSchemaUpdateTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     $connection = Database::getConnection();
@@ -44,7 +49,7 @@ class NoPreExistingSchemaUpdateTest extends BrowserTestBase {
   /**
    * Tests the system module updates with no dependencies installed.
    */
-  public function testNoPreExistingSchema() {
+  public function testNoPreExistingSchema(): void {
     $schema = \Drupal::service('update.update_hook_registry')->getAllInstalledVersions();
     $this->assertArrayNotHasKey('update_test_no_preexisting', $schema);
     $this->assertFalse(\Drupal::state()->get('update_test_no_preexisting_update_8001', FALSE));
@@ -63,6 +68,8 @@ class NoPreExistingSchemaUpdateTest extends BrowserTestBase {
     ]);
 
     $this->drupalGet($update_url);
+    $this->assertSession()->pageTextContains('Schema information for module update_test_no_preexisting was missing from the database. You should manually review the module updates and your database to check if any updates have been skipped up to, and including, update_test_no_preexisting_update_8001().');
+
     $this->updateRequirementsProblem();
 
     $schema = \Drupal::service('update.update_hook_registry')->getAllInstalledVersions();
@@ -70,7 +77,6 @@ class NoPreExistingSchemaUpdateTest extends BrowserTestBase {
     $this->assertEquals('8001', $schema['update_test_no_preexisting']);
     // The schema version has been fixed, but the update was never run.
     $this->assertFalse(\Drupal::state()->get('update_test_no_preexisting_update_8001', FALSE));
-    $this->assertSession()->pageTextContains('Schema information for module update_test_no_preexisting was missing from the database. You should manually review the module updates and your database to check if any updates have been skipped up to, and including, update_test_no_preexisting_update_8001().');
   }
 
 }

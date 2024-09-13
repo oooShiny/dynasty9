@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Functional;
 
 use Drupal\Component\Utility\Xss;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\views\Views;
+
+// cspell:ignore titel
 
 /**
  * Tests views title translation.
@@ -31,8 +35,8 @@ class ViewTranslationTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
 
     $this->enableViewsTestModule();
     $this->drupalPlaceBlock('system_breadcrumb_block');
@@ -49,7 +53,7 @@ class ViewTranslationTest extends ViewTestBase {
   /**
    * Tests that the view route title is translated.
    */
-  public function testViewTitleTranslation() {
+  public function testViewTitleTranslation(): void {
     $view = Views::getView('test_view');
 
     // Create a test display, add path and default language title.

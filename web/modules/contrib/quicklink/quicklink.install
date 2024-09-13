@@ -50,3 +50,30 @@ function quicklink_update_8502() {
     $config->set('no_load_content_types', [])->save();
   }
 }
+
+/**
+ * Save default settings for new version 2 throttling and selector options.
+ */
+function quicklink_update_8903() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('quicklink.settings');
+  if (is_null($config->get('total_request_limit'))) {
+    $config->set('total_request_limit', 0)->save();
+  }
+
+  if (is_null($config->get('concurrency_throttle_limit'))) {
+    $config->set('concurrency_throttle_limit', 0)->save();
+  }
+
+  if (is_null($config->get('idle_wait_timeout'))) {
+    $config->set('idle_wait_timeout', 2000)->save();
+  }
+
+  if (is_null($config->get('viewport_delay'))) {
+    $config->set('viewport_delay', 0)->save();
+  }
+
+  if (is_null($config->get('ignore_selectors'))) {
+    $config->set('ignore_selectors', '')->save();
+  }
+}

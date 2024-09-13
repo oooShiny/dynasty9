@@ -13,10 +13,7 @@ class TestSiteInstallTestScript implements TestSetupInterface {
    * {@inheritdoc}
    */
   public function setup() {
-    \Drupal::service('module_installer')->install(['quicklink']);
-    $quicklink_settings = \Drupal::configFactory()->getEditable('quicklink.settings');
-    $quicklink_settings->set('enable_debug_mode', TRUE);
-    $quicklink_settings->save();
+    \Drupal::service('module_installer')->install(['quicklink_test']);
   }
 
 }

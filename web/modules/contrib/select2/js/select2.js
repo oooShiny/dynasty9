@@ -2,12 +2,12 @@
  * @file
  * Select2 integration.
  */
-(function ($, drupalSettings, Sortable) {
+(function ($, drupalSettings, Sortable, once) {
   'use strict';
 
   Drupal.behaviors.select2 = {
     attach: function (context) {
-      $('.select2-widget', context).once('select2-init').each(function () {
+      $(once('select2-init', '.select2-widget', context)).each(function () {
         var config = $(this).data('select2-config');
         config.createTag = function (params) {
           var term = $.trim(params.term);
@@ -60,7 +60,7 @@
         $(this).select2(config);
 
         // Copied from https://github.com/woocommerce/woocommerce/blob/master/assets/js/admin/wc-enhanced-select.js#L118
-        if (Object.prototype.hasOwnProperty.call(config, 'ajax') && config.multiple) {
+        if (config.multiple) {
           var $select = $(this);
           var $list = $select.next('.select2-container').find('ul.select2-selection__rendered');
           Sortable.create($list[0], {
@@ -77,4 +77,4 @@
     }
   };
 
-})(jQuery, drupalSettings, Sortable);
+})(jQuery, drupalSettings, Sortable, once);

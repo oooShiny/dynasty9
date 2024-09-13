@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\image\Functional;
 
-use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileExists;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\TestFileCreationTrait;
@@ -29,21 +31,21 @@ class ImageDimensionsTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   protected $profile = 'testing';
 
   /**
    * Tests styled image dimensions cumulatively.
    */
-  public function testImageDimensions() {
+  public function testImageDimensions(): void {
     $image_factory = $this->container->get('image.factory');
     // Create a working copy of the file.
     $files = $this->drupalGetTestFiles('image');
     $file = reset($files);
     /** @var \Drupal\Core\File\FileSystemInterface $file_system */
     $file_system = \Drupal::service('file_system');
-    $original_uri = $file_system->copy($file->uri, 'public://', FileSystemInterface::EXISTS_RENAME);
+    $original_uri = $file_system->copy($file->uri, 'public://', FileExists::Rename);
 
     // Create a style.
     /** @var \Drupal\image\ImageStyleInterface $style */
@@ -79,7 +81,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" width="120" height="60" alt="" loading="lazy" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="120" height="60" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -100,7 +102,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" width="60" height="120" alt="" loading="lazy" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="60" height="120" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -122,7 +124,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -144,7 +146,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -162,7 +164,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -183,7 +185,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" alt="" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" alt="" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -202,7 +204,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" width="30" height="30" alt="" loading="lazy" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="30" height="30" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -248,7 +250,7 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEquals('<img src="' . $url . '" alt="" class="image-style-test" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" alt="" />', $this->getImageTag($variables));
 
     // Test URI dependent image effect.
     $style = ImageStyle::create(['name' => 'test_uri', 'label' => 'Test URI']);
@@ -269,7 +271,7 @@ class ImageDimensionsTest extends BrowserTestBase {
     // PNG original image. Should be resized to 100x100.
     $generated_uri = 'public://styles/test_uri/public/' . $file_system->basename($original_uri);
     $url = \Drupal::service('file_url_generator')->transformRelative($style->buildUrl($original_uri));
-    $this->assertEquals('<img src="' . $url . '" width="100" height="100" alt="" loading="lazy" class="image-style-test-uri" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="100" height="100" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -279,11 +281,11 @@ class ImageDimensionsTest extends BrowserTestBase {
     $this->assertEquals(100, $image_file->getHeight());
     // GIF original image. Should be resized to 50x50.
     $file = $files[1];
-    $original_uri = $file_system->copy($file->uri, 'public://', FileSystemInterface::EXISTS_RENAME);
+    $original_uri = $file_system->copy($file->uri, 'public://', FileExists::Rename);
     $generated_uri = 'public://styles/test_uri/public/' . $file_system->basename($original_uri);
     $url = $file_url_generator->transformRelative($style->buildUrl($original_uri));
     $variables['#uri'] = $original_uri;
-    $this->assertEquals('<img src="' . $url . '" width="50" height="50" alt="" loading="lazy" class="image-style-test-uri" />', $this->getImageTag($variables));
+    $this->assertEquals('<img src="' . $url . '" width="50" height="50" alt="" loading="lazy" />', $this->getImageTag($variables));
     $this->assertFileDoesNotExist($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
     $this->assertSession()->statusCodeEquals(200);
@@ -304,7 +306,7 @@ class ImageDimensionsTest extends BrowserTestBase {
    * altered and the element is re-rendered each time.
    */
   protected function getImageTag($variables) {
-    return str_replace("\n", '', \Drupal::service('renderer')->renderRoot($variables));
+    return str_replace("\n", '', (string) \Drupal::service('renderer')->renderRoot($variables));
   }
 
 }

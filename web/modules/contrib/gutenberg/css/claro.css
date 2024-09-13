@@ -1,5 +1,5 @@
 /**
- * Don't edit this file. Find all style at ./sass folder.
+ * Don't edit this file. Generated from css/claro.scss.
  **/
 :root {
   --wp-admin-theme-color: #003cc5 !important;
@@ -15,7 +15,6 @@
   height: 48px !important;
   line-height: 1rem !important;
 }
-
 .edit-post-header .components-button.has-icon {
   min-width: 48px !important;
 }
@@ -25,13 +24,14 @@
   border: 0;
   background: none;
 }
-
 .edit-post-layout fieldset:not(.fieldgroup) > legend {
   position: initial;
 }
-
 .edit-post-layout fieldset:not(.fieldgroup) > legend.components-visually-hidden {
   position: absolute;
+}
+.edit-post-layout__metaboxes .accordion__item.more-settings {
+  width: 100%;
 }
 
 .edit-post-fullscreen-mode-close.has-icon {
@@ -47,5 +47,3 @@
     width: 380px !important;
   }
 }
-
-/*# sourceMappingURL=claro.css.map */

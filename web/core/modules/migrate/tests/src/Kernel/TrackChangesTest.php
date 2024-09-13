@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\migrate\Kernel;
 
 /**
@@ -89,12 +91,26 @@ class TrackChangesTest extends MigrateTestBase {
   /**
    * Tests track changes property of SqlBase.
    */
-  public function testTrackChanges() {
+  public function testTrackChanges(): void {
     // Assert all of the terms have been imported.
     $this->assertTermExists('name', 'Item 1');
     $this->assertTermExists('name', 'Item 2');
     $this->assertTermExists('description', 'Text item 3');
     $this->assertTermExists('description', 'Text item 4');
+
+    // Save the original hash, rerun the migration and check that the hashes
+    // are the same.
+    $id_map = $this->migration->getIdMap();
+    for ($i = 1; $i < 5; $i++) {
+      $row = $id_map->getRowBySource(['tid' => $i]);
+      $original_hash[$i] = $row['hash'];
+    }
+    $this->executeMigration($this->migration);
+    for ($i = 1; $i < 5; $i++) {
+      $row = $id_map->getRowBySource(['tid' => $i]);
+      $new_hash[$i] = $row['hash'];
+    }
+    $this->assertEquals($original_hash, $new_hash);
 
     // Update Item 1 triggering its track_changes by name.
     $this->sourceDatabase->update('track_changes_term')
@@ -129,7 +145,18 @@ class TrackChangesTest extends MigrateTestBase {
       ->execute();
 
     // Execute migration again.
-    $this->executeMigration('track_changes_test');
+    $this->executeMigration($this->migration);
+
+    // Check that the all the hashes except for 'Item 2'and 'Item 4' have
+    // changed.
+    for ($i = 1; $i < 5; $i++) {
+      $row = $id_map->getRowBySource(['tid' => $i]);
+      $new_hash[$i] = $row['hash'];
+    }
+    $this->assertNotEquals($original_hash[1], $new_hash[1]);
+    $this->assertEquals($original_hash[2], $new_hash[2]);
+    $this->assertNotEquals($original_hash[3], $new_hash[3]);
+    $this->assertEquals($original_hash[4], $new_hash[4]);
 
     // Item with name changes should be updated.
     $this->assertTermExists('name', 'Item 1 updated');
@@ -144,6 +171,21 @@ class TrackChangesTest extends MigrateTestBase {
 
     // Item without field changes should not be updated.
     $this->assertTermExists('description', 'Text item 4');
+
+    // Test hashes again after forcing all rows to be re-imported.
+    $id_map->prepareUpdate();
+
+    // Execute migration again.
+    $this->executeMigration('track_changes_test');
+
+    for ($i = 1; $i < 5; $i++) {
+      $row = $id_map->getRowBySource(['tid' => $i]);
+      $newer_hash[$i] = $row['hash'];
+    }
+    $this->assertEquals($new_hash[1], $newer_hash[1]);
+    $this->assertEquals($new_hash[2], $newer_hash[2]);
+    $this->assertEquals($new_hash[3], $newer_hash[3]);
+    $this->assertEquals($new_hash[4], $newer_hash[4]);
   }
 
   /**

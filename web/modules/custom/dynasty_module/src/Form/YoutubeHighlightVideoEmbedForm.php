@@ -56,7 +56,10 @@ class YoutubeHighlightVideoEmbedForm extends ConfigFormBase {
 
     // Get list of games in Drupal.
     $game_links = [];
-    $nids = \Drupal::entityQuery('node')->condition('type', 'game')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
+      ->condition('type', 'game')
+      ->execute();
     foreach (Node::loadMultiple($nids) as $game) {
       // If we have a YouTube highlight link, but no local URL, add the video.
       if (!$game->get('field_youtube_highlights')->isEmpty()

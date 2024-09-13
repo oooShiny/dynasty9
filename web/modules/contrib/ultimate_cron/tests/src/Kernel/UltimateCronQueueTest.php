@@ -23,9 +23,9 @@ class UltimateCronQueueTest extends CronQueueTest {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
-    module_load_install('ultimate_cron');
+    \Drupal::moduleHandler()->loadInclude('ultimate_cron', 'install');
     ultimate_cron_install();
     $this->installSchema('ultimate_cron', [
       'ultimate_cron_log',
@@ -36,7 +36,7 @@ class UltimateCronQueueTest extends CronQueueTest {
   /**
    * {@inheritdoc}
    */
-  public function testExceptions() {
+  public function testSuspendQueueException(): void {
     // Get the queue to test the normal Exception.
     $queue = $this->container->get('queue')->get('cron_queue_test_exception');
 
@@ -58,7 +58,7 @@ class UltimateCronQueueTest extends CronQueueTest {
     // @see \Drupal\Core\Cron::processQueues()
     $this->connection->update('queue')
       ->condition('name', 'cron_queue_test_exception')
-      ->fields(['expire' => REQUEST_TIME - 1])
+      ->fields(['expire' => \Drupal::time()->getRequestTime() - 1])
       ->execute();
 
     // Has to be manually called for Ultimate Cron.
@@ -69,11 +69,11 @@ class UltimateCronQueueTest extends CronQueueTest {
 
     $this->assertEquals(0, $queue->numberOfItems(), 'Item was processed and removed from the queue.');
     // Get the queue to test the specific SuspendQueueException.
-    $queue = $this->container->get('queue')->get('cron_queue_test_broken_queue');
+    $queue = $this->container->get('queue')->get('cron_queue_test_suspend');
 
     // Enqueue several item for processing.
     $queue->createItem('process');
-    $queue->createItem('crash');
+    $queue->createItem('suspend');
     $queue->createItem('ignored');
 
     // Run cron; the worker for this queue should process as far as the crashing
@@ -86,7 +86,7 @@ class UltimateCronQueueTest extends CronQueueTest {
     // Check the items remaining in the queue. The item that throws the
     // exception gets released by cron, so we can claim it again to check it.
     $item = $queue->claimItem();
-    $this->assertEquals('crash', $item->data, 'Failing item remains in the queue.');
+    $this->assertEquals('suspend', $item->data, 'Failing item remains in the queue.');
     $item = $queue->claimItem();
     $this->assertEquals('ignored', $item->data, 'Item beyond the failing item remains in the queue.');
 
@@ -105,7 +105,7 @@ class UltimateCronQueueTest extends CronQueueTest {
    */
   public function testOverriddenProcessing() {
 
-    $job = CronJob::load(CronJobInterface::QUEUE_ID_PREFIX . 'cron_queue_test_broken_queue');
+    $job = CronJob::load(CronJobInterface::QUEUE_ID_PREFIX . 'cron_queue_test_suspend');
     $this->assertNull($job);
 
     $this->config('ultimate_cron.settings')
@@ -114,11 +114,11 @@ class UltimateCronQueueTest extends CronQueueTest {
 
     \Drupal::service('ultimate_cron.discovery')->discoverCronJobs();
 
-    $job = CronJob::load(CronJobInterface::QUEUE_ID_PREFIX . 'cron_queue_test_broken_queue');
+    $job = CronJob::load(CronJobInterface::QUEUE_ID_PREFIX . 'cron_queue_test_suspend');
     $this->assertTrue($job instanceof CronJobInterface);
 
     /** @var \Drupal\Core\Queue\QueueInterface $queue */
-    $queue = $this->container->get('queue')->get('cron_queue_test_broken_queue');
+    $queue = $this->container->get('queue')->get('cron_queue_test_suspend');
 
     // Enqueue several item for processing.
     $queue->createItem('process');
@@ -152,6 +152,20 @@ class UltimateCronQueueTest extends CronQueueTest {
 
     // @todo Test empty delay, causes a wait of 60 seconds with the test queue
     //   worker.
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function testLeaseTime() {
+    $this->markTestSkipped('Test does not support ultimate cron schedule logic');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function testUncaughtExceptions() {
+    $this->markTestSkipped('Logger expectations incompatible with ultimate_cron');
   }
 
 }

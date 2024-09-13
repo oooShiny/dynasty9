@@ -10,7 +10,7 @@ type: 'canonical_entities:node'
 pattern: 'game/[node:field_season]/[node:field_week:entity:name]'
 selection_criteria:
   5571d608-6ae0-4683-9f7b-da928699e248:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: 5571d608-6ae0-4683-9f7b-da928699e248
     context_mapping:

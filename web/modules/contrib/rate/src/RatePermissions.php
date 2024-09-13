@@ -2,11 +2,11 @@
 
 namespace Drupal\rate;
 
+use Drupal\comment\CommentManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\comment\CommentManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -97,7 +97,10 @@ class RatePermissions implements ContainerInjectionInterface {
           else {
             $perm_index = 'cast rate vote on ' . $entity_type_id . ' of ' . $bundle;
             $permissions[$perm_index] = [
-              'title' => $this->t('Can vote on :type type of :bundle', [':bundle' => $bundle, ':type' => $entity_type_id]),
+              'title' => $this->t('Can vote on :type type of :bundle', [
+                ':bundle' => $bundle,
+                ':type' => $entity_type_id,
+              ]),
             ];
           }
         }

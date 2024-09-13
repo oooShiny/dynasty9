@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\migrate_drupal_ui\Functional\d6;
 
 use Drupal\Tests\migrate_drupal_ui\Functional\NoMultilingualReviewPageTestBase;
@@ -9,8 +11,7 @@ use Drupal\Tests\migrate_drupal_ui\Functional\NoMultilingualReviewPageTestBase;
 /**
  * Tests migrate upgrade review page for Drupal 6 without translations.
  *
- * Tests with the translation modules and migrate_drupal_multilingual module
- * disabled.
+ * Tests with the translation modules disabled.
  *
  * @group migrate_drupal_6
  * @group migrate_drupal_ui
@@ -24,12 +25,7 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
     'datetime_range',
     'language',
     'telephone',
-    'aggregator',
-    'book',
-    'forum',
-    'statistics',
     'syslog',
-    'tracker',
     'update',
     // Test migrations states.
     'migrate_state_finished_test',
@@ -56,12 +52,9 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
    */
   protected function getAvailablePaths() {
     return [
-      'Aggregator',
       'Blog',
       'Blog API',
-      'Book',
       'Calendar Signup',
-      'Color',
       'Comment',
       'Contact',
       'Content',
@@ -86,7 +79,6 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'FileField',
       'FileField Meta',
       'Filter',
-      'Forum',
       'Help',
       'ImageAPI',
       'ImageAPI GD2',
@@ -100,9 +92,9 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'Node',
       'Nodeaccess',
       'Node Reference',
+      'Node Reference URL Widget',
       'Number',
       'OpenID',
-      'Option Widgets',
       'PHP filter',
       'Path',
       'Phone - CCK',
@@ -110,12 +102,12 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'Poll',
       'Profile',
       'Search',
-      'Statistics',
       'Syslog',
       'System',
       'Taxonomy',
       'Text',
       'Throttle',
+      // @todo Remove tracker in https://www.drupal.org/project/drupal/issues/3261452
       'Tracker',
       'Trigger',
       'Update status',
@@ -142,19 +134,26 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
    */
   protected function getMissingPaths() {
     return [
+      'Aggregator',
       // Block is set not_finished in migrate_state_not_finished_test.
       'Block',
       'Block translation',
+      'Book',
       'CCK translation',
+      'Color',
       'Content type translation',
       'Devel',
       'Devel generate',
       'Devel node access',
+      'Forum',
       'Internationalization',
       'Menu translation',
       'migrate_status_active_test',
+      // Option Widgets is set not_finished in migrate_state_not_finished_test.
+      'Option Widgets',
       'Poll aggregate',
       'Profile translation',
+      'Statistics',
       'String translation',
       'Synchronize translations',
       'Taxonomy translation',

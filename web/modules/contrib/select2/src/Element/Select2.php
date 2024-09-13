@@ -38,6 +38,7 @@ use Drupal\select2\Select2Trait;
  *       '3' => $this->t('Three'),
  *     ],
  *   ];
+ * @endcode
  *
  * If you want to prevent the rendering of all options and fetch the options via
  * ajax instead, you can use the '#autocomplete' property. It's also needed to
@@ -60,6 +61,7 @@ use Drupal\select2\Select2Trait;
  *       'target_bundles' => ['article', 'page'],
  *     ],
  *   ];
+ * @endcode
  *
  * If you want to allow an input of an entity label that does not exist yet but
  * can be created "on the fly" on form submission, the '#autocreate' property
@@ -78,6 +80,7 @@ use Drupal\select2\Select2Trait;
  *       'uid' => <a valid user ID>,
  *     ],
  *   ];
+ * @endcode
  *
  * The render element sets a bunch of default values to configure the select2
  * element. Nevertheless all select2 config values can be overwritten with the
@@ -89,6 +92,7 @@ use Drupal\select2\Select2Trait;
  *       'allowClear' => TRUE,
  *     ],
  *   ];
+ * @endcode
  *
  * @see https://select2.org/configuration/options-api
  *
@@ -101,7 +105,7 @@ class Select2 extends Select {
   /**
    * {@inheritdoc}
    */
-  public function getInfo() {
+  public function getInfo(): array {
     $info = parent::getInfo();
     $class = get_class($this);
 
@@ -128,9 +132,7 @@ class Select2 extends Select {
     // Potentially the #value is set directly, so it contains the 'target_id'
     // array structure instead of a string.
     if ($input !== FALSE && is_array($input)) {
-      $input = array_map(function ($item) {
-        return isset($item['target_id']) ? $item['target_id'] : $item;
-      }, $input);
+      $input = array_map(fn($item) => $item['target_id'] ?? $item, $input);
       return array_combine($input, $input);
     }
 
@@ -147,9 +149,9 @@ class Select2 extends Select {
    * @param array $complete_form
    *   The form array.
    */
-  public static function validateEntityAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
+  public static function validateEntityAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form): void {
     if ($element['#target_type'] && !$element['#autocreate']) {
-      $value_callable = isset($element['#autocomplete_options_callback']) ? $element['#autocomplete_options_callback'] : NULL;
+      $value_callable = $element['#autocomplete_options_callback'] ?? NULL;
       if (!$value_callable || !is_callable($value_callable)) {
         $value_callable = '\Drupal\select2\Element\Select2::getValidSelectedOptions';
       }
@@ -171,11 +173,11 @@ class Select2 extends Select {
   /**
    * {@inheritdoc}
    */
-  public static function processSelect(&$element, FormStateInterface $form_state, &$complete_form) {
+  public static function processSelect(&$element, FormStateInterface $form_state, &$complete_form): array {
     // Fill the options, because in autocomplete we cleared them and for the
     // validation the at least selected options are needed.
     if ($element['#autocomplete']) {
-      $value_callable = isset($element['#autocomplete_options_callback']) ? $element['#autocomplete_options_callback'] : NULL;
+      $value_callable = $element['#autocomplete_options_callback'] ?? NULL;
       if (!$value_callable || !is_callable($value_callable)) {
         $value_callable = '\Drupal\select2\Element\Select2::getValidSelectedOptions';
       }
@@ -209,6 +211,15 @@ class Select2 extends Select {
       $element['#options'] = $empty_option + $element['#options'];
     }
 
+    if ($element['#multiple']) {
+      $values = (array) ($element['#value'] ?? $element['#default_value']);
+      // Apply field values order on the options.
+      if (!empty($values)) {
+        $flipped_keys = array_intersect_key(array_flip($values), $element['#options']);
+        $element['#options'] = array_replace($flipped_keys, $element['#options']);
+      }
+    }
+
     // Set the type from select2 to select to get proper form validation.
     $element['#type'] = 'select';
 
@@ -229,7 +240,7 @@ class Select2 extends Select {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  protected static function getValidSelectedOptions(array $element, FormStateInterface $form_state) {
+  protected static function getValidSelectedOptions(array $element, FormStateInterface $form_state): array {
     $handler_settings = $element['#selection_settings'] + [
       'target_type' => $element['#target_type'],
       'handler' => $element['#selection_handler'],
@@ -240,8 +251,10 @@ class Select2 extends Select {
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line
    */
-  public static function preRenderSelect($element) {
+  public static function preRenderSelect($element): array {
     $element = parent::preRenderSelect($element);
     $required = isset($element['#states']['required']) ? TRUE : $element['#required'];
     $multiple = $element['#multiple'];
@@ -250,6 +263,8 @@ class Select2 extends Select {
       $element['#attributes']['multiple'] = 'multiple';
       $element['#attributes']['name'] = $element['#name'] . '[]';
     }
+    // Support for https://www.drupal.org/project/field_config_cardinality.
+    $cardinality = $element['#attributes']['data-fcc'] ?? $element['#cardinality'];
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage();
     $current_theme = \Drupal::theme()->getActiveTheme()->getName();
@@ -279,7 +294,7 @@ class Select2 extends Select {
       'language' => $current_language->getId(),
       'tags' => (bool) $element['#autocreate'],
       'theme' => $select2_theme_exists ? $current_theme : 'default',
-      'maximumSelectionLength' => $multiple ? $element['#cardinality'] : 0,
+      'maximumSelectionLength' => $multiple ? $cardinality : 0,
       'tokenSeparators' => $element['#autocreate'] ? [','] : [],
       'selectOnClose' => $element['#autocomplete'],
       'width' => '100%',
@@ -300,12 +315,12 @@ class Select2 extends Select {
   /**
    * Attach autocomplete behavior to the render element.
    */
-  public static function preRenderAutocomplete($element) {
+  public static function preRenderAutocomplete(array $element): array {
     if (!$element['#autocomplete']) {
       return $element;
     }
 
-    $value_callable = isset($element['#autocomplete_route_callback']) ? $element['#autocomplete_route_callback'] : NULL;
+    $value_callable = $element['#autocomplete_route_callback'] ?? NULL;
     if (!$value_callable || !is_callable($value_callable)) {
       $value_callable = '\Drupal\select2\Element\Select2::setAutocompleteRouteParameters';
     }
@@ -314,7 +329,7 @@ class Select2 extends Select {
     // Reduce options to the preselected ones and bring them in the correct
     // order.
     $options = OptGroup::flattenOptions($element['#options']);
-    $values = isset($element['#value']) ? $element['#value'] : $element['#default_value'];
+    $values = $element['#value'] ?? $element['#default_value'];
     $values = is_array($values) ? $values : [$values];
     $element['#options'] = [];
     foreach ($values as $value) {
@@ -352,7 +367,7 @@ class Select2 extends Select {
    * @return array
    *   The render element with autocomplete route parameters.
    */
-  protected static function setAutocompleteRouteParameters(array &$element) {
+  protected static function setAutocompleteRouteParameters(array &$element): array {
     $complete_form = [];
     $element = EntityAutocomplete::processEntityAutocomplete($element, new FormState(), $complete_form);
     $element['#autocomplete_route_name'] = 'select2.entity_autocomplete';
@@ -362,7 +377,7 @@ class Select2 extends Select {
   /**
    * Allows to modify the select2 settings.
    */
-  public static function preRenderOverwrites($element) {
+  public static function preRenderOverwrites(array $element): array {
     if (!$element['#multiple']) {
       $empty_option = [$element['#empty_value'] => ''];
       $element['#options'] = $empty_option + $element['#options'];

@@ -2,10 +2,15 @@
 
 namespace Drupal\smart_trim\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FormatterBase;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\smart_trim\Truncate\TruncateHTML;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Utility\Token;
+use Drupal\smart_trim\TruncateHTML;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'smart_trim' formatter.
@@ -19,33 +24,99 @@ use Drupal\smart_trim\Truncate\TruncateHTML;
  *     "text_with_summary",
  *     "string",
  *     "string_long"
- *   },
- *   settings = {
- *     "trim_length" = "300",
- *     "trim_type" = "chars",
- *     "trim_suffix" = "...",
- *     "more_link" = FALSE,
- *     "more_text" = "Read more",
- *     "summary_handler" = "full",
- *     "trim_options" = ""
  *   }
  * )
  */
-class SmartTrimFormatter extends FormatterBase {
+class SmartTrimFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The truncate HTML service.
+   *
+   * @var \Drupal\smart_trim\TruncateHTML
+   */
+  protected TruncateHTML $truncateHtml;
+
+  /**
+   * Token service.
+   *
+   * @var \Drupal\Core\Utility\Token
+   */
+  protected Token $token;
+
+  /**
+   * Module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected ModuleHandlerInterface $moduleHandler;
+
+  /**
+   * Constructs a FormatterBase object.
+   *
+   * @param string $plugin_id
+   *   The plugin_id for the formatter.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   The definition of the field to which the formatter is associated.
+   * @param array $settings
+   *   The formatter settings.
+   * @param string $label
+   *   The formatter label display setting.
+   * @param string $view_mode
+   *   The view mode.
+   * @param array $third_party_settings
+   *   Any third party settings.
+   * @param \Drupal\smart_trim\TruncateHTML $truncate_html
+   *   The truncate HTML service.
+   * @param \Drupal\Core\Utility\Token $token
+   *   The token service.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler service.
+   */
+  final public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, TruncateHTML $truncate_html, Token $token, ModuleHandlerInterface $module_handler) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
+    $this->truncateHtml = $truncate_html;
+    $this->token = $token;
+    $this->moduleHandler = $module_handler;
+  }
 
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['label'],
+      $configuration['view_mode'],
+      $configuration['third_party_settings'],
+      $container->get('smart_trim.truncate_html'),
+      $container->get('token'),
+      $container->get('module_handler'),
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultSettings(): array {
     return [
       'trim_length' => '600',
       'trim_type' => 'chars',
       'trim_suffix' => '',
-      'wrap_output' => 0,
+      'wrap_output' => FALSE,
       'wrap_class' => 'trimmed',
-      'more_link' => 0,
-      'more_class' => 'more-link',
-      'more_text' => 'More',
+      'more' => [
+        'display_link' => FALSE,
+        'class' => 'more-link',
+        'link_trim_only' => FALSE,
+        'target_blank' => FALSE,
+        'text' => 'More',
+        'aria_label' => 'Read more about [node:title]',
+      ],
       'summary_handler' => 'full',
       'trim_options' => [],
     ] + parent::defaultSettings();
@@ -54,8 +125,10 @@ class SmartTrimFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $element = parent::settingsForm($form, $form_state);
+
+    $field_name = $this->fieldDefinition->getFieldStorageDefinition()->getName();
 
     $element['trim_length'] = [
       '#title' => $this->t('Trim length'),
@@ -81,59 +154,7 @@ class SmartTrimFormatter extends FormatterBase {
       '#type' => 'textfield',
       '#size' => 10,
       '#default_value' => $this->getSetting('trim_suffix'),
-    ];
-
-    $element['wrap_output'] = [
-      '#title' => $this->t('Wrap trimmed content?'),
-      '#type' => 'checkbox',
-      '#default_value' => $this->getSetting('wrap_output'),
-      '#description' => $this->t('Adds a wrapper div to trimmed content.'),
-    ];
-
-    $element['wrap_class'] = [
-      '#title' => $this->t('Wrapped content class.'),
-      '#type' => 'textfield',
-      '#size' => 20,
-      '#default_value' => $this->getSetting('wrap_class'),
-      '#description' => $this->t('If wrapping, define the class name here.'),
-      '#states' => [
-        'visible' => [
-          ':input[name="fields[body][settings_edit_form][settings][wrap_output]"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
-
-    $element['more_link'] = [
-      '#title' => $this->t('Display more link?'),
-      '#type' => 'checkbox',
-      '#default_value' => $this->getSetting('more_link'),
-      '#description' => $this->t('Displays a link to the entity (if one exists)'),
-    ];
-
-    $element['more_text'] = [
-      '#title' => $this->t('More link text'),
-      '#type' => 'textfield',
-      '#size' => 20,
-      '#default_value' => $this->getSetting('more_text'),
-      '#description' => $this->t('If displaying more link, enter the text for the link.'),
-      '#states' => [
-        'visible' => [
-          ':input[name="fields[body][settings_edit_form][settings][more_link]"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
-
-    $element['more_class'] = [
-      '#title' => $this->t('More link class'),
-      '#type' => 'textfield',
-      '#size' => 20,
-      '#default_value' => $this->getSetting('more_class'),
-      '#description' => $this->t('If displaying more link, add a custom class for formatting.'),
-      '#states' => [
-        'visible' => [
-          ':input[name="fields[body][settings_edit_form][settings][more_link]"]' => ['checked' => TRUE],
-        ],
-      ],
+      '#description' => $this->t('Unicode character identifiers of the form \u2026 allowed.'),
     ];
 
     if ($this->fieldDefinition->getType() == 'text_with_summary') {
@@ -156,8 +177,105 @@ class SmartTrimFormatter extends FormatterBase {
       '#options' => [
         'text' => $this->t('Strip HTML'),
         'trim_zero' => $this->t('Honor a zero trim length'),
+        'replace_tokens' => $this->t('Replace tokens before trimming'),
       ],
       '#default_value' => empty($trim_options_value) ? [] : array_keys(array_filter($trim_options_value)),
+    ];
+
+    $element['wrap_output'] = [
+      '#title' => $this->t('Wrap trimmed content?'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->getSetting('wrap_output'),
+      '#description' => $this->t('Adds a wrapper div to trimmed content. This option is deprecated and will be removed in Smart Trim 3.0.0. Please override the smart-trim.html.twig template file to customize output.'),
+    ];
+
+    $element['wrap_class'] = [
+      '#title' => $this->t('Wrapped content class.'),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#default_value' => $this->getSetting('wrap_class'),
+      '#description' => $this->t('If wrapping, define the class name here.'),
+      '#states' => [
+        'visible' => [
+          ':input[name="fields[' . $field_name . '][settings_edit_form][settings][wrap_output]"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
+
+    $element['more'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => $this->t('<em>More</em> link'),
+      '#weight' => 10,
+    ];
+
+    $default_settings = self::defaultSettings();
+    $more_settings = $this->getSetting('more');
+    $more_states = [
+      'visible' => [
+        ':input[name="fields[body][settings_edit_form][settings][more][display_link]"]' => ['checked' => TRUE],
+      ],
+    ];
+    $more_required_states = $more_states + [
+      'required' => [
+        ':input[name="fields[body][settings_edit_form][settings][more][display_link]"]' => ['checked' => TRUE],
+      ],
+    ];
+
+    $element['more']['display_link'] = [
+      '#title' => $this->t('Display <em>More</em> link?'),
+      '#type' => 'checkbox',
+      '#default_value' => $more_settings['display_link'] ?? $default_settings['more']['display_link'],
+      '#description' => $this->t('Displays a link to the entity (if one exists)'),
+    ];
+
+    $element['more']['link_trim_only'] = [
+      '#title' => $this->t('Display <em>More</em> link only when content is trimmed?'),
+      '#type' => 'checkbox',
+      '#default_value' => $more_settings['link_trim_only'] ?? $default_settings['more']['link_trim_only'],
+      '#description' => $this->t('Only display <em>More</em> link if content is actually trimmed.'),
+      '#states' => $more_states,
+    ];
+
+    $element['more']['target_blank'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Open <em>More</em> link in new window'),
+      '#return_value' => '_blank',
+      '#default_value' => $more_settings['target_blank'] ?? $default_settings['more']['target_blank'],
+      '#states' => $more_states,
+    ];
+
+    $element['more']['text'] = [
+      '#title' => $this->t('<em>More</em> link text'),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#default_value' => $more_settings['text'] ?? $default_settings['more']['text'],
+      '#description' => $this->t('If displaying <em>More</em> link, enter the text for the link. This field supports tokens.'),
+      '#states' => $more_required_states,
+    ];
+
+    $element['more']['aria_label'] = [
+      '#title' => $this->t('<em>More</em> link aria-label'),
+      '#type' => 'textfield',
+      '#size' => 30,
+      '#default_value' => $more_settings['aria_label'] ?? $default_settings['more']['aria_label'],
+      '#description' => $this->t('If displaying <em>More</em> link, provide additional context for screen-reader users. In most cases, the aria-label value will be announced instead of the link text. This field supports tokens.'),
+      '#states' => $more_states,
+    ];
+
+    $element['more']['class'] = [
+      '#title' => $this->t('<em>More</em> link class'),
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#default_value' => $more_settings['class'] ?? $default_settings['more']['class'],
+      '#description' => $this->t('If displaying <em>More</em> link, add a custom class for formatting.'),
+      '#states' => $more_states,
+    ];
+
+    $element['more']['token_browser'] = [
+      '#theme' => 'token_tree_link',
+      '#token_types' => [$this->fieldDefinition->getTargetEntityTypeId()],
+      '#states' => $more_states,
     ];
 
     return $element;
@@ -166,21 +284,73 @@ class SmartTrimFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $summary = [];
+
     $type = $this->t('words');
     if ($this->getSetting('trim_type') == 'chars') {
       $type = $this->t('characters');
     }
     $trim_string = $this->getSetting('trim_length') . ' ' . $type;
+    $summary[] = $trim_string;
 
     if (mb_strlen((trim($this->getSetting('trim_suffix'))))) {
-      $trim_string .= " " . $this->t("with suffix");
+      $trim_string = $this->t("Suffix: %suffix", ['%suffix' => trim($this->getSetting('trim_suffix'))]);
+      $summary[] = $trim_string;
     }
-    if ($this->getSetting('more_link')) {
-      $trim_string .= ", " . $this->t("with more link");
+
+    // Summary message line regarding "more" link.
+    $more_settings = $this->getSetting('more');
+    if ($more_settings['display_link'] ?? FALSE) {
+      // Add more text to summary.
+      $summary[] = $this->t(
+        "<em>More</em> link enabled, text: %text",
+        ['%text' => $more_settings['text'] ?? '']
+      );
+
+      if ($more_settings['link_trim_only'] ?? FALSE) {
+        $summary[] = $this->t("Only display <em>More</em> link when trimmed");
+      }
+
+      if ($more_settings['target_blank'] ?? FALSE) {
+        $summary[] = $this->t("Open <em>More</em> link in new window");
+      }
+
+      $summary[] = $this->t(
+        "<em>More</em> link aria-label: %label",
+        ['%label' => $more_settings['aria_label'] ?? '']
+      );
+
+      $summary[] = $this->t(
+        "<em>More</em> link class: %class",
+        ['%class' => $more_settings['class'] ?? '']
+      );
     }
-    $summary[] = $trim_string;
+
+    if ($this->getSetting('trim_options')) {
+      $options = $this->getSetting('trim_options');
+      foreach ($options as $key => $option) {
+        if ($option) {
+          switch ($key) {
+            case 'text':
+              $trim_string = $this->t('Strip HTML');
+              $summary[] = $trim_string;
+              break;
+
+            case 'trim_zero':
+              $trim_string = $this->t('Honor a zero trim length');
+              $summary[] = $trim_string;
+              break;
+
+            case 'replace_tokens':
+              $trim_string = $this->t('Replace tokens before trimming');
+              $summary[] = $trim_string;
+              break;
+
+          }
+        }
+      }
+    }
 
     return $summary;
   }
@@ -188,19 +358,19 @@ class SmartTrimFormatter extends FormatterBase {
   /**
    * {@inheritdoc}
    */
-  public function viewElements(FieldItemListInterface $items, $langcode = NULL) {
-
+  public function viewElements(FieldItemListInterface $items, $langcode = NULL): array {
     $element = [];
     $setting_trim_options = $this->getSetting('trim_options');
     $settings_summary_handler = $this->getSetting('summary_handler');
     $entity = $items->getEntity();
+    $tokenData = [$entity->getEntityTypeId() => $entity];
 
     foreach ($items as $delta => $item) {
       if ($settings_summary_handler != 'ignore' && !empty($item->summary)) {
-        $output = $item->summary;
+        $output = trim($item->summary);
       }
       else {
-        $output = $item->value;
+        $output = trim($item->value);
       }
 
       // Process additional options (currently only HTML on/off).
@@ -216,12 +386,31 @@ class SmartTrimFormatter extends FormatterBase {
           }
         }
 
+        // Replace tokens before trimming.
+        if (!empty($setting_trim_options['replace_tokens'])) {
+          $output = $this->token->replace($output, $tokenData, [
+            'langcode' => $langcode,
+          ]);
+        }
+
         if (!empty($setting_trim_options['text'])) {
           // Strip caption.
-          $output = preg_replace('/<figcaption[^>]*>.*?<\/figcaption>/i', ' ', $output);
+          $output = preg_replace('/<figcaption[^>]*>.*?<\/figcaption>/is', ' ', $output);
+
+          // Strip script.
+          $output = preg_replace('/<script[^>]*>.*?<\/script>/is', ' ', $output);
+
+          // Strip style.
+          $output = preg_replace('/<style[^>]*>.*?<\/style>/is', ' ', $output);
 
           // Strip tags.
+          // Add space before each opening tag to ensure words don't run
+          // together. Used logic from:
+          // https://stackoverflow.com/questions/12824899/strip-tags-replace-tags-by-space-rather-than-deleting-them
+          $output = preg_replace('/<(\w+)(?![^>]*\/>)[^>]*>/', ' <\1>', $output);
           $output = strip_tags($output);
+          $output = str_replace('  ', ' ', $output);
+          $output = trim($output);
 
           // Strip out line breaks.
           $output = preg_replace('/\n|\r|\t/m', ' ', $output);
@@ -235,50 +424,89 @@ class SmartTrimFormatter extends FormatterBase {
         }
       }
 
+      // Store original output for later comparison.
+      $original_output = $output;
+
       // Make the trim, provided we're not showing a full summary.
       if ($this->getSetting('summary_handler') != 'full' || empty($item->summary)) {
-        $truncate = new TruncateHTML();
         $length = $this->getSetting('trim_length');
         $ellipse = $this->getSetting('trim_suffix');
         if ($this->getSetting('trim_type') == 'words') {
-          $output = $truncate->truncateWords($output, $length, $ellipse);
+          $output = $this->truncateHtml->truncateWords($output, $length, $ellipse);
         }
         else {
-          $output = $truncate->truncateChars($output, $length, $ellipse);
+          $output = $this->truncateHtml->truncateChars($output, $length, $ellipse);
         }
       }
-      $element[$delta] = [
-        '#type' => 'processed_text',
-        '#text' => $output,
-        '#format' => $item->format,
-      ];
 
-      // Wrap content in container div.
-      if ($this->getSetting('wrap_output')) {
-        $element[$delta]['#prefix'] = '<div class="' . $this->getSetting('wrap_class') . '">';
-        $element[$delta]['#suffix'] = '</div>';
-      }
+      // Re-encode HTML entities.
+      $output = html_entity_decode($output, ENT_QUOTES, 'UTF-8');
+
+      $element[$delta] = [
+        '#theme' => 'smart_trim',
+        '#output' => [
+          '#type' => 'processed_text',
+          '#text' => $output,
+          '#format' => $item->format,
+        ],
+        '#is_trimmed' => trim($original_output) != $output,
+        '#wrap_output' => $this->getSetting('wrap_output'),
+        '#wrapper_class' => $this->getSetting('wrap_class'),
+        '#field' => $item->getParent()->getName(),
+        '#entity_type' => $item->getParent()->getEntity()->getEntityTypeId(),
+        '#entity_bundle' => $item->getParent()->getEntity()->bundle(),
+      ];
 
       // Add the link, if there is one!
       // The entity must have an id already. Content entities usually get their
       // IDs by saving them. In some cases, eg: Inline Entity Form preview there
       // is no ID until everything is saved.
       // https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Entity!Entity.php/function/Entity%3A%3AtoUrl/8.2.x
-      if ($this->getSetting('more_link') && $entity->id() && $entity->hasLinkTemplate('canonical')) {
-        // But wait! Don't add a more link if the field ends in <!--break-->.
-        if (strpos(strrev($output), strrev('<!--break-->')) !== 0) {
-          $more = $this->t($this->getSetting('more_text'));
-          $class = $this->getSetting('more_class');
+      $more_settings = $this->getSetting('more');
+      if (($more_settings['display_link'] ?? FALSE) && $entity->id() && $entity->hasLinkTemplate('canonical')) {
+        if (
+          strpos(strrev($output), strrev('<!--break-->')) !== 0 &&
+          (($more_settings['link_trim_only'] ?? FALSE) !== TRUE) ||
+          ($original_output != $output)
+        ) {
+          // @todo Change to use config translation when #2546212 merged in core.
+          // phpcs:ignore
+          $more = $this->t($more_settings['text']);
+          $this->token->replace($more, $tokenData, [
+            'langcode' => $langcode,
+          ]);
+          $class = $more_settings['class'];
+          $target = $more_settings['target_blank'];
+          $link = $entity->toLink($more);
 
-          $project_link = $entity->toLink($more)->toRenderable();
-          $project_link['#attributes'] = [
-            'class' => [
-              $class,
-            ],
-          ];
-          $project_link['#prefix'] = '<div class="' . $class . '">';
-          $project_link['#suffix'] = '</div>';
-          $element[$delta]['more_link'] = $project_link;
+          // Allow other modules to modify the read more link before it's
+          // created.
+          $this->moduleHandler->invokeAll('smart_trim_link_modify', [
+            $entity,
+            &$more,
+            &$link,
+          ]);
+
+          // Update the link if the $more was changed in the hook.
+          $link->setText($more);
+
+          $project_link = $link->toRenderable();
+          $project_link['#attributes']['class'] = [$class];
+
+          // Ensure we don't create an empty aria-label attribute.
+          $aria_label = $more_settings['aria_label'];
+          if ($aria_label) {
+            $project_link['#attributes']['aria-label'] = $this->token->replace($aria_label, $tokenData, [
+              'langcode' => $langcode,
+            ]);
+          }
+
+          if ($target) {
+            $project_link['#attributes']['target'] = "_blank";
+          }
+
+          $element[$delta]['#more'] = $project_link;
+          $element[$delta]['#more_wrapper_class'] = $class;
         }
       }
     }

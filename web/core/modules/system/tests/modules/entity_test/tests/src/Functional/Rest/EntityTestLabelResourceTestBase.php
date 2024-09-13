@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\entity_test\Functional\Rest;
 
 use Drupal\entity_test\Entity\EntityTestLabel;
-use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
+use Drupal\Tests\rest\Functional\EntityResource\ConfigEntityResourceTestBase;
 use Drupal\user\Entity\User;
 
-abstract class EntityTestLabelResourceTestBase extends EntityResourceTestBase {
+abstract class EntityTestLabelResourceTestBase extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}

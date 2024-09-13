@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\migrate_plus\Kernel\Plugin\migrate\process;
 
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\Plugin\MigratePluginManagerInterface;
 use Drupal\migrate\Row;
 use Drupal\Tests\user\Traits\UserCreationTrait;
 
@@ -14,7 +17,7 @@ use Drupal\Tests\user\Traits\UserCreationTrait;
  * @coversDefaultClass \Drupal\migrate_plus\Plugin\migrate\process\FileBlob
  * @group migrate_plus
  */
-class FileBlobTest extends KernelTestBase {
+final class FileBlobTest extends KernelTestBase {
 
   use UserCreationTrait;
 
@@ -29,31 +32,28 @@ class FileBlobTest extends KernelTestBase {
 
   /**
    * The process plugin manager.
-   *
-   * @var \Drupal\migrate\Plugin\MigratePluginManagerInterface
    */
-  protected $pluginManager;
+  protected ?MigratePluginManagerInterface $pluginManager;
 
   /**
    * The blob representation of a cat image.
-   *
-   * @var string
    */
-  protected $blob;
+  protected ?string $blob;
+
+  /**
+   * The destination filename.
+   */
+  protected ?string $filename;
 
   /**
    * The sha1sum of the blob.
-   *
-   * @var string
    */
-  protected $sha1sum;
+  protected ?string $sha1sum;
 
   /**
    * The filesystem interface.
-   *
-   * @var \Drupal\Core\File\FileSystemInterface
    */
-  protected $filesystem;
+  protected ?FileSystemInterface $filesystem = NULL;
 
   /**
    * {@inheritdoc}
@@ -63,6 +63,7 @@ class FileBlobTest extends KernelTestBase {
 
     $this->pluginManager = $this->container->get('plugin.manager.migrate.process');
     $this->filesystem = $this->container->get('file_system');
+    $this->filename = 'public://subdir/cat.jpeg';
     $this->sha1sum = 'a8eb2b9a987cfda507356d884f0498289bd0f620';
     $this->blob = <<<EOT
 /9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcg
@@ -203,13 +204,23 @@ EOT;
   public function testFileCreation(): void {
     /** @var \Drupal\migrate\MigrateExecutableInterface $executable */
     $executable = $this->prophesize(MigrateExecutableInterface::class)->reveal();
+
+    // Delete the target directory in case it already exists
+    // to make sure target directories are automatically created
+    if (is_dir(dirname($this->filename))) {
+      rmdir(dirname($this->filename));
+    }
+
+    // Run the plugin
     $row = new Row([], []);
-    $value = ['public://cat.jpeg', base64_decode($this->blob, TRUE)];
+    $value = [$this->filename, base64_decode($this->blob, TRUE)];
     /** @var \Drupal\migrate_plus\Plugin\migrate\process\FileBlob $file_blob */
     $file_blob = $this->pluginManager->createInstance('file_blob');
     $file = $file_blob->transform($value, $executable, $row, 'destination_property');
-    $this->assertEquals('public://cat.jpeg', $file);
+    $this->assertEquals($this->filename, $file);
     $this->assertEquals($this->sha1sum, sha1_file($file));
+
+    // Run the plugin again, but error if the file already exists
     $configuration = [
       'reuse' => FileSystemInterface::EXISTS_ERROR,
     ];
@@ -217,7 +228,7 @@ EOT;
     $file_blob = $this->pluginManager->createInstance('file_blob', $configuration);
     /** @var \Drupal\migrate\MigrateExecutableInterface $executable */
     $file = $file_blob->transform($value, $executable, $row, 'destination_property');
-    $this->assertEquals('public://cat.jpeg', $file);
+    $this->assertEquals($this->filename, $file);
     $this->assertEquals($this->sha1sum, sha1_file($file));
   }
 

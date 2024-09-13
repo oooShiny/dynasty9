@@ -5,6 +5,7 @@
  * Contains views_jump_menu.module.
  */
 
+use Drupal\views\Plugin\views\field\EntityLink;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Template\Attribute;
@@ -65,22 +66,31 @@ function views_jump_menu_preprocess_views_jump_menu(&$variables) {
     $variables['attributes']['class'][] = $options['wrapper_class'];
   }
 
+  // Generate an HTML ID for this view. We need this so that multiple jump menus
+  // on the same page can have independent drupalSettings.
+  $view_id = Html::getUniqueId(implode('-', [$view->id(), $view->current_display, 'jump_menu']));
+
+  // Pass the setting about whether to open links in a new window to the front-
+  // end.
+  $variables['#attached']['drupalSettings']['viewsJumpMenu'][$view_id]['new_window'] = $options['new_window'] ?? FALSE;
+
   $select = [
     'select_text' => $options['select_text'],
     'select_label' => $options['select_label'],
     'attributes' => new Attribute([
       'class' => _views_jump_menu_get_select_classes($options),
       'title' => $options['select_text'],
+      'id' => $view_id,
     ]),
     'options' => [],
   ];
 
   if (!empty($options['label_field'])) {
+    // Check if the URL field is internal or has been altered.
+    $url_field = $view->field[$options['url_field']];
+    $is_internal_link = ($url_field instanceof EntityLink) && isset($url_field->options) && !$url_field->options['alter']['alter_text'];
+    $current_language = \Drupal::languageManager()->getCurrentLanguage();
 
-    /**
-     * @var string $id
-     * @var Drupal\views\ResultRow $row
-     */
     foreach ($rows as $id => $row) {
       $view->row_index = $row->index;
 
@@ -95,7 +105,7 @@ function views_jump_menu_preprocess_views_jump_menu(&$variables) {
 
       $select['options'][$id] = [
         'label' => Html::decodeEntities(strip_tags($view->field[$options['label_field']]->advancedRender($row))),
-        'url' => $view->field[$options['url_field']]->advancedRender($row),
+        'url' => $is_internal_link ? $url_field->getEntity($row)->toUrl('canonical', ['language' => $current_language]) : $url_field->advancedRender($row),
       ];
     }
   }

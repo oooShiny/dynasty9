@@ -608,8 +608,10 @@ class PatreonService implements PatreonServiceInterface {
     $config_data = [];
 
     if (isset($tokens['access_token'])) {
-      $campaigns = $this->fetchCampaign();
-      $this->storeCampaigns($campaigns);
+      if ($campaigns = $this->fetchCampaign()) {
+        $this->storeCampaigns($campaigns);
+      }
+
       $roles = $this->getPatreonRoleNames($campaigns);
       $all = user_role_names();
 

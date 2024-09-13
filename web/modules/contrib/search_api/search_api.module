@@ -12,6 +12,7 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Utility\Error;
 use Drupal\node\NodeInterface;
 use Drupal\search_api\Entity\Index;
 use Drupal\search_api\IndexInterface;
@@ -127,7 +128,7 @@ function search_api_cron() {
           // Therefore, don't index for any index on this server.
           $ignored_servers[$index->getServerId()] = TRUE;
           $vars['%index'] = $index->label();
-          watchdog_exception('search_api', $e, '%type while trying to index items on %index: @message in %function (line %line of %file).', $vars);
+          Error::logException(\Drupal::logger('search_api'), $e, '%type while trying to index items on %index: @message in %function (line %line of %file).', $vars);
         }
       }
       if (!$num) {
@@ -345,6 +346,11 @@ function search_api_theme() {
         'table' => NULL,
       ],
     ],
+    'search_api_excerpt' => [
+      'variables' => [
+        'excerpt' => NULL,
+      ],
+    ],
   ];
 }
 
@@ -420,23 +426,31 @@ function search_api_views_plugins_filter_alter(array &$plugins) {
  */
 function search_api_view_insert(ViewEntityInterface $view) {
   _search_api_view_crud_event($view);
+}
 
-  // Disable Views' default caching mechanisms on Search API views.
-  $displays = $view->get('display');
-  if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
-    $change = FALSE;
+/**
+ * Implements hook_ENTITY_TYPE_presave() for type "view".
+ */
+function search_api_view_presave(ViewEntityInterface $view) {
+  // Set query type to "search_api_query" and disable Views' default caching
+  // mechanisms on Search API views.
+  if (SearchApiQuery::getIndexFromTable($view->get('base_table'))) {
+    $displays = $view->get('display');
+    $changed_cache = FALSE;
     foreach ($displays as $id => $display) {
-      if (in_array($display['display_options']['cache']['type'] ?? '', ['tag', 'time'])) {
-        $displays[$id]['display_options']['cache']['type'] = 'none';
-        $change = TRUE;
+      if (($display['display_options']['query']['type'] ?? '') === 'views_query') {
+        $displays[$id]['display_options']['query']['type'] = 'search_api_query';
+      }
+      if (in_array($display['display_options']['cache']['type'] ?? '', ['none', 'tag', 'time'])) {
+        $displays[$id]['display_options']['cache']['type'] = 'search_api_none';
+        $changed_cache = TRUE;
       }
     }
+    $view->set('display', $displays);
 
-    if ($change) {
-      $warning = t('The selected caching mechanism does not work with views on Search API indexes. Please either use one of the Search API-specific caching options or "None". Caching was turned off for this view.');
+    if ($changed_cache) {
+      $warning = t('The selected caching mechanism does not work with views on Search API indexes. Use one of the Search API-specific caching options. The selected caching mechanism was changed accordingly for the view %view.', ['%view' => $view->label()]);
       \Drupal::messenger()->addWarning($warning);
-      $view->set('display', $displays);
-      $view->save();
     }
   }
 }
@@ -527,6 +541,7 @@ function search_api_form_views_ui_edit_display_form_alter(&$form, FormStateInter
   // Disable Views' default caching mechanisms on Search API views.
   $displays = $form_state->getStorage()['view']->get('display');
   if ($displays['default']['display_options']['query']['type'] === 'search_api_query') {
+    unset($form['options']['cache']['type']['#options']['none']);
     unset($form['options']['cache']['type']['#options']['tag']);
     unset($form['options']['cache']['type']['#options']['time']);
   }
@@ -594,7 +609,7 @@ function search_api_form_views_exposed_form_alter(&$form, FormStateInterface $fo
     }
 
     // Get the active facet filters from the query parameters.
-    $filters = \Drupal::request()->query->get($filter_key, []);
+    $filters = \Drupal::request()->query->all()[$filter_key] ?? [];
 
     // Do not iterate over facet filters if the parameter is not an array.
     if (!is_array($filters)) {
@@ -607,9 +622,10 @@ function search_api_form_views_exposed_form_alter(&$form, FormStateInterface $fo
         continue;
       }
       // Add a hidden form field for the facet parameter.
-      $form["{$filter_key}[$key]"] = [
+      $form[$filter_key][$key] = [
         '#type' => 'hidden',
         '#value' => $value,
+        '#name' => "{$filter_key}[$key]",
       ];
     }
   }
@@ -647,8 +663,11 @@ function search_api_entity_view(array &$build, EntityInterface $entity, EntityVi
   $excerpt_component = $display->getComponent('search_api_excerpt');
   if ($excerpt_component !== NULL && isset($build['#search_api_excerpt'])) {
     $build['search_api_excerpt'] = [
-      '#type' => 'markup',
-      '#markup' => $build['#search_api_excerpt'],
+      '#theme' => 'search_api_excerpt',
+      '#excerpt' => [
+        '#type' => 'markup',
+        '#markup' => $build['#search_api_excerpt'],
+      ],
       '#cache' => [
         'contexts' => ['url.query_args'],
       ],

@@ -39,6 +39,10 @@ search_api_solr.solr_field_type.*:
         positionIncrementGap:
           type: integer
           label: 'Solr field attribute positionIncrementGap'
+        storeOffsetsWithPositions:
+          type: boolean
+          label: 'Solr field attribute storeOffsetsWithPositions'
+          nullable: true
         analyzer:
           type: mapping
           mapping:
@@ -111,6 +115,9 @@ search_api_solr.solr_field_type.*:
         stoptags:
           type: string
           label: 'Stop tags'
+        pos:
+          type: string
+          label: 'Part of Speech'
 
 search_api_solr.solr_common_field_type:
   type: mapping
@@ -124,6 +131,10 @@ search_api_solr.solr_common_field_type:
     positionIncrementGap:
       type: integer
       label: 'Solr field attribute positionIncrementGap'
+    storeOffsetsWithPositions:
+      type: boolean
+      label: 'Solr field attribute storeOffsetsWithPositions'
+      nullable: true
     analyzers:
       type: sequence
       sequence:
@@ -157,6 +168,12 @@ search_api_solr.solr_common_field_type:
               mode:
                 type: string
                 label: 'JapaneseTokenizerFactory::'
+              sentenceModel:
+                type: string
+                label: 'OpenNLPTokenizerFactory::sentenceModel'
+              tokenizerModel:
+                type: string
+                label: 'OpenNLPTokenizerFactory::tokenizerModel'
           filters:
             type: search_api_solr.solr_field_type_filters
     similarity:
@@ -206,9 +223,9 @@ search_api_solr.solr_field_type_filters:
         label: 'WordDelimiterGraphFilter:: WordDelimiterFilter::generateWordParts'
         nullable: true
       preserveOriginal:
-        # @todo ASCIIFoldingFilter expects a boolean
+        # ASCIIFoldingFilter and EdgeNGramFilterFactory expect a boolean
         type: integer
-        label: 'WordDelimiterGraphFilter:: ASCIIFoldingFilter:: WordDelimiterFilter::preserveOriginal'
+        label: 'WordDelimiterGraphFilter:: ASCIIFoldingFilter:: EdgeNGramFilterFactory:: WordDelimiterFilter::preserveOriginal'
         nullable: true
       catenateAll:
         type: integer

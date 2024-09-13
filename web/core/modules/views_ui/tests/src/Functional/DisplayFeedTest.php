@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views_ui\Functional;
 
 /**
@@ -15,14 +17,14 @@ class DisplayFeedTest extends UITestBase {
    *
    * @var array
    */
-  public static $testViews = ['test_display_feed', 'test_style_opml'];
+  public static $testViews = ['test_display_feed'];
 
   /**
    * Modules to enable.
    *
    * @var array
    */
-  protected static $modules = ['views_ui', 'aggregator'];
+  protected static $modules = ['views_ui'];
 
   /**
    * {@inheritdoc}
@@ -32,8 +34,8 @@ class DisplayFeedTest extends UITestBase {
   /**
    * Tests feed display admin UI.
    */
-  public function testFeedUI() {
-    // Test both RSS and OPML feeds.
+  public function testFeedUI(): void {
+    // Test the RSS feed.
     foreach (self::$testViews as $view_name) {
       $this->checkFeedViewUi($view_name);
     }

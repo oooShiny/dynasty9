@@ -4,22 +4,19 @@ namespace Drupal\views\Plugin\views\argument;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\views\Attribute\ViewsArgument;
 
 /**
- * Basic argument handler for arguments that are numeric. Incorporates
- * break_phrase.
+ * Basic argument handler for arguments that are numeric.
+ *
+ * Incorporates break_phrase.
  *
  * @ingroup views_argument_handlers
- *
- * @ViewsArgument("numeric")
  */
+#[ViewsArgument(
+  id: 'numeric',
+)]
 class NumericArgument extends ArgumentPluginBase {
-
-  /**
-   * The operator used for the query: or|and.
-   * @var string
-   */
-  public $operator;
 
   /**
    * The actual value which is used for querying.

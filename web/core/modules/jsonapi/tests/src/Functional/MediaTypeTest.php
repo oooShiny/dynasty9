@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\jsonapi\Functional;
 
 use Drupal\Core\Url;
@@ -9,8 +11,9 @@ use Drupal\media\Entity\MediaType;
  * JSON:API integration test for the "MediaType" config entity type.
  *
  * @group jsonapi
+ * @group #slow
  */
-class MediaTypeTest extends ResourceTestBase {
+class MediaTypeTest extends ConfigEntityResourceTestBase {
 
   /**
    * {@inheritdoc}
@@ -52,7 +55,7 @@ class MediaTypeTest extends ResourceTestBase {
   protected function createEntity() {
     // Create a "Camelids" media type.
     $camelids = MediaType::create([
-      'name' => 'Camelids',
+      'label' => 'Camelids',
       'id' => 'camelids',
       'description' => 'Camelids are large, strictly herbivorous animals with slender necks and long legs.',
       'source' => 'file',
@@ -90,7 +93,7 @@ class MediaTypeTest extends ResourceTestBase {
           'dependencies' => [],
           'description' => 'Camelids are large, strictly herbivorous animals with slender necks and long legs.',
           'field_map' => [],
-          'label' => NULL,
+          'label' => 'Camelids',
           'langcode' => 'en',
           'new_revision' => FALSE,
           'queue_thumbnail_downloads' => FALSE,
@@ -110,6 +113,7 @@ class MediaTypeTest extends ResourceTestBase {
    */
   protected function getPostDocument() {
     // @todo Update in https://www.drupal.org/node/2300677.
+    return [];
   }
 
 }

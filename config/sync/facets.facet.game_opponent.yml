@@ -11,6 +11,8 @@ id: game_opponent
 name: Opponent
 weight: -9
 min_count: 1
+missing: false
+missing_label: others
 url_alias: opponent
 facet_source_id: 'search_api:views_page__game_search__page_1'
 field_identifier: opp_string

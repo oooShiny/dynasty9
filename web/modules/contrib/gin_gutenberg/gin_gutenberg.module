@@ -1,10 +1,7 @@
 <?php
 
-/**
- * @file
- * gin_gutenberg: Gin/Claro theme and Gutenberg editor integration
- */
-
+use Drupal\node\Entity\NodeType;
+use Drupal\node\Entity\Node;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -24,37 +21,18 @@ function gin_gutenberg_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_theme_registry_alter
- */
-function gin_gutenberg_theme_registry_alter(&$theme_registry) {
-  $template_uri = drupal_get_path('module', 'gin_gutenberg') . '/templates';
-  foreach ([
-    'media_library_wrapper',
-    'links',
-  ] as $template_name) {
-    $base = explode('__', $template_name);
-    $base = array_shift($base);
-    if (empty($theme_registry[$base])) {
-      continue;
-    }
-    $theme_registry[$template_name] = $theme_registry[$base];
-    $theme_registry[$template_name]['template'] = str_replace('_', '-', $template_name);
-    $theme_registry[$template_name]['path'] = $template_uri;
-  }
-}
-
-/**
  * Implements hook_preprocess_HOOK() for html.
  */
-
 function gin_gutenberg_preprocess_html(&$variables) {
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $route_entity = \Drupal::routeMatch()->getParameter('node');
+  if (!$route_entity) {
+    $route_entity = \Drupal::routeMatch()->getParameter('node_type');
+  }
 
-    // Check to see if Gutenberg is enabled and on a node edit form
-    // TODO: also needs to check if gutenberg is enabled but currently fails
-    if (_gin_gutenberg_is_content_form()) {
-      $variables['attributes']['class'][] = 'gutenberg--enabled';
-    }
+  // Check to see if Gutenberg is enabled and on a node edit form
+  if (_gin_gutenberg_is_content_form() && _is_gutenberg_enabled($route_entity)) {
+    $variables['attributes']['class'][] = 'gutenberg--enabled';
+  }
 }
 
 /**
@@ -63,12 +41,12 @@ function gin_gutenberg_preprocess_html(&$variables) {
 function gin_gutenberg_page_attachments_alter(array &$attachments) {
   $node = \Drupal::routeMatch()->getParameter('node');
   if (!$node && $node_type = \Drupal::routeMatch()->getParameter('node_type')) {
-    $type = $node_type instanceof Drupal\node\Entity\NodeType ? $node_type->id() : $node_type;
-    $node = \Drupal\node\Entity\Node::create(['type' => $type]);
+    $type = $node_type instanceof NodeType ? $node_type->id() : $node_type;
+    $node = Node::create(['type' => $type]);
   }
 
   // Check to see if Gutenberg is enabled on the node entity.
-  if (($node instanceof NodeInterface) && !_gin_gutenberg_is_gutenberg_enabled($node)) {
+  if (($node instanceof NodeInterface) && !_is_gutenberg_enabled($node)) {
     return;
   }
 
@@ -81,31 +59,123 @@ function gin_gutenberg_page_attachments_alter(array &$attachments) {
   }
 }
 
-// New node/add page
+/**
+ * Implements hook_form_FORM_ID_alter() for node forms.
+ */
 function gin_gutenberg_form_node_form_alter(&$form, FormStateInterface $form_state) {
   $node = $form_state->getFormObject()->getEntity();
 
   // Leave early if Gutenberg is not enabled for this entity.
-  if ($node instanceof NodeInterface) {
-    if (!_gin_gutenberg_is_gutenberg_enabled($node)) {
-      return;
-    }
+  if ($node instanceof NodeInterface && !_is_gutenberg_enabled($node)) {
+    return;
   }
 
   $form['metabox_fields']['#open'] = TRUE;
   $form['#attached']['library'][] = 'gin_gutenberg/gin_gutenberg';
+
+  // @todo There's a better way to change status element group?
+  //       It seems Gin alter always overrides the group change.
+  if (isset($form['status'])) {
+    unset($form['status']['#group']);
+    $form['meta']['status'] = $form['status'];
+    $form['meta']['status']['#weight'] = 1;
+    unset($form['status']);
+  }
 }
 
 /**
- * Implements hook_module_implements_alter().
+ * Implements hook_preprocess_HOOK() for page--node--edit--gutenberg.html.twig.
+ *
+ * @param array $variables
+ *   The variables array passed by reference.
  */
-function gin_gutenberg_module_implements_alter(&$implementations, $hook) {
-  if ($hook == 'form_alter' && isset($implementations['gin_gutenberg'])) {
-    // Move this module's implementation of form_alter to the end of the list.
-    $hookInit = $implementations['gin_gutenberg'];
-    unset($implementations['gin_gutenberg']);
-    $implementations['gin_gutenberg'] = $hookInit;
+function gin_gutenberg_preprocess_page__node__edit__gutenberg(&$variables) {
+  $node_type = _gin_gutenberg_get_node_type();
+  $variables['node_type'] = $node_type;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page--node--add--gutenberg.html.twig.
+ *
+ * @param array $variables
+ *   The variables array passed by reference.
+ */
+function gin_gutenberg_preprocess_page__node__add__gutenberg(&$variables) {
+  $node_type = _gin_gutenberg_get_node_type();
+  $variables['node_type'] = $node_type;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function gin_gutenberg_theme($existing, $type, $theme, $path) {
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'gin_gutenberg');
+
+  return [
+    'page__node__edit__gutenberg' => [
+      'render element' => 'elements',
+      'template' => 'page--node--edit--gutenberg',
+      'path' => $path . '/templates',
+    ],
+    'page__node__add__gutenberg' => [
+      'render element' => 'elements',
+      'template' => 'page--node--add--gutenberg',
+      'path' => $path . '/templates',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ */
+function gin_gutenberg_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if ($route_name === 'entity.node.edit_form' || $route_name === 'entity.node.content_translation_add') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    if ($node instanceof \Drupal\node\NodeInterface) {
+      if (_is_gutenberg_enabled($node)) {
+        $suggestions[] = 'page__node__edit__gutenberg';
+      }
+    }
   }
+  elseif ($route_name === 'entity.node.add_form') {
+    $node_type = \Drupal::routeMatch()->getParameter('node_type');
+    
+    if ($node_type instanceof NodeType) {
+      if (_is_gutenberg_enabled($node_type)) {
+        $suggestions[] = 'page__node__add__gutenberg';
+      }
+    }
+  }
+}
+/**
+ * Helper function to get the node type from the current route.
+ *
+ * @return string
+ *   The node type.
+ */
+function _gin_gutenberg_get_node_type() {
+  $route_match = \Drupal::routeMatch();
+  $node = $route_match->getParameter('node');
+
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    return $node->bundle();
+  }
+
+  $node_type_param = $route_match->getParameter('node_type');
+  if ($node_type_param instanceof NodeType) {
+    return $node_type_param->id();
+  }
+
+  $current_path = \Drupal::service('path.current')->getPath();
+  $path_args = explode('/', $current_path);
+  if (isset($path_args[1]) && $path_args[1] === 'node' && isset($path_args[2]) && $path_args[2] === 'add' && isset($path_args[3])) {
+    return $path_args[3];
+  }
+
+  return '';
 }
 
 /**
@@ -114,43 +184,31 @@ function gin_gutenberg_module_implements_alter(&$implementations, $hook) {
 function _gin_gutenberg_gin_is_active() {
   $logged_in = \Drupal::currentUser()->isAuthenticated();
   $theme_handler = \Drupal::service('theme_handler')->listInfo();
-
-  // Check if set as frontend theme.
   $frontend_theme_name = \Drupal::config('system.theme')->get('default');
 
-  // Check if base themes are set.
   if (isset($theme_handler[$frontend_theme_name]->base_themes)) {
     $frontend_base_themes = $theme_handler[$frontend_theme_name]->base_themes;
   }
 
-  // Add theme name to base theme array.
   $frontend_base_themes[$frontend_theme_name] = $frontend_theme_name;
-
-  // Check if set as admin theme.
   $admin_theme_name = \Drupal::config('system.theme')->get('admin');
 
-  // Admin theme will have no value if is set to use the default theme.
   if ($admin_theme_name && isset($theme_handler[$admin_theme_name]->base_themes)) {
     $admin_base_themes = $theme_handler[$admin_theme_name]->base_themes;
     $admin_base_themes[$admin_theme_name] = $admin_theme_name;
-  }
-  else {
+  } else {
     $admin_base_themes = $frontend_base_themes;
   }
 
-  // Check if Gin/Claro is activated in the frontend.
   if ($logged_in) {
     $gin_activated = array_key_exists('gin', $admin_base_themes);
     $claro_activated = array_key_exists('claro', $admin_base_themes) && !array_key_exists('gin', $admin_base_themes);
-  }
-  else {
+  } else {
     $gin_activated = array_key_exists('gin', $frontend_base_themes);
     $claro_activated = array_key_exists('claro', $frontend_base_themes) && !array_key_exists('gin', $frontend_base_themes);
   }
 
-  // Is Gin or Claro in the active chain?
   $theme_activated = $gin_activated || $claro_activated;
-
   return $theme_activated;
 }
 
@@ -170,14 +228,8 @@ function _gin_gutenberg_get_admin_theme_setting($setting) {
 
 /**
  * Checks whether Gutenberg is enabled for an entity.
- *
- * @param \Drupal\Core\Entity\EntityInterface $entity
- *   The entity to check.
- *
- * @return bool
- *   Whether the entity is supported.
  */
-function _gin_gutenberg_is_gutenberg_enabled(EntityInterface $entity = NULL) {
+function _is_gutenberg_enabled(EntityInterface $entity = NULL) {
   if (!$entity) {
     return FALSE;
   }
@@ -186,20 +238,17 @@ function _gin_gutenberg_is_gutenberg_enabled(EntityInterface $entity = NULL) {
     return FALSE;
   }
 
-  /*
-   * TODO look into a proper service solution, A WIP is here:
-   *  @see https://www.drupal.org/project/gutenberg/issues/3142648
-   */
   $config = \Drupal::service('config.factory')->get('gutenberg.settings');
   $node_type = $entity->bundle();
 
   return (bool) $config->get($node_type . '_enable_full');
 }
 
+
 /**
  * Check if were on a content edit form.
  */
-function _gin_gutenberg_is_content_form($form = NULL, $form_state = NULL, $form_id = NULL) {
+function _gin_gutenberg_is_content_form($form = NULL, $form_state = NULL, $form_id = '') {
   $is_content_form = FALSE;
 
   // Get route name.

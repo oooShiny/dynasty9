@@ -59,6 +59,9 @@ rate.rate_widget.*:
           class:
             type: string
             label: 'Option class'
+          function:
+            type: string
+            label: 'Option function'
     voting:
       type: mapping
       label: 'Voting settings'

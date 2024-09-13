@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\KernelTests\Core\Theme;
 
 use Drupal\Core\Extension\ExtensionLifecycle;
@@ -24,9 +26,12 @@ class Stable9TemplateOverrideTest extends KernelTestBase {
    * @var string[]
    */
   protected $templatesToSkip = [
+    // This is an internal template. See the file docblock.
+    'ckeditor5-settings-toolbar',
     // Registered as a template in the views_theme() function in views.module
     // but an actual template does not exist.
     'views-form-views-form',
+    'views-view-grid-responsive',
   ];
 
   /**
@@ -64,7 +69,12 @@ class Stable9TemplateOverrideTest extends KernelTestBase {
     $all_modules = array_filter($all_modules, function ($module) {
       // Filter contrib, hidden, experimental, already enabled modules, and
       // modules in the Testing package.
-      if ($module->origin !== 'core' || !empty($module->info['hidden']) || $module->status == TRUE || $module->info['package'] == 'Testing' || $module->info[ExtensionLifecycle::LIFECYCLE_IDENTIFIER] === ExtensionLifecycle::EXPERIMENTAL) {
+      if ($module->origin !== 'core'
+        || !empty($module->info['hidden'])
+        || $module->status == TRUE
+        || $module->info['package'] == 'Testing'
+        || $module->info[ExtensionLifecycle::LIFECYCLE_IDENTIFIER] === ExtensionLifecycle::EXPERIMENTAL
+        || $module->info[ExtensionLifecycle::LIFECYCLE_IDENTIFIER] === ExtensionLifecycle::DEPRECATED) {
         return FALSE;
       }
       return TRUE;
@@ -81,8 +91,8 @@ class Stable9TemplateOverrideTest extends KernelTestBase {
   /**
    * Ensures that Stable 9 overrides all relevant core templates.
    */
-  public function testStable9TemplateOverrides() {
-    $registry = new Registry($this->root, \Drupal::cache(), \Drupal::lock(), \Drupal::moduleHandler(), $this->themeHandler, \Drupal::service('theme.initialization'), 'stable9', NULL, \Drupal::service('extension.list.module'));
+  public function testStable9TemplateOverrides(): void {
+    $registry = new Registry($this->root, \Drupal::cache(), \Drupal::lock(), \Drupal::moduleHandler(), $this->themeHandler, \Drupal::service('theme.initialization'), \Drupal::service('cache.bootstrap'), \Drupal::service('extension.list.module'), \Drupal::service('kernel'), 'stable9');
     $registry->setThemeManager(\Drupal::theme());
 
     $registry_full = $registry->get();

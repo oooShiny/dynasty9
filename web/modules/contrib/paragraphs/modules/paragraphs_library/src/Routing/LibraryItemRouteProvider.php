@@ -15,9 +15,12 @@ class LibraryItemRouteProvider extends DefaultHtmlRouteProvider {
    */
   public function getRoutes(EntityTypeInterface $entity_type) {
     $route_collection = parent::getRoutes($entity_type);
-    // Display library items using default theme.
     if ($canonical_route = $route_collection->get("entity.{$entity_type->id()}.canonical")) {
+      // Display library items using default theme.
       $canonical_route->setOption('_admin_route', FALSE);
+
+      // Restrict access to users who are allowed to update the entity.
+      $canonical_route->setRequirement('_entity_access', "{$entity_type->id()}.update");
     }
     return $route_collection;
   }

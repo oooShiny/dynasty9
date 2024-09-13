@@ -12,8 +12,9 @@ use Drupal\search_api\Utility\FieldsHelper;
 use Drupal\search_api\Item\Item;
 use Drupal\search_api\Query\Query;
 use Drupal\search_api\Utility\QueryHelperInterface;
+use Drupal\search_api\Utility\ThemeSwitcherInterface;
 use Drupal\search_api\Utility\Utility;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Provides common methods for test cases that need to create search items.
@@ -94,7 +95,7 @@ trait TestItemsTrait {
         $item->setOriginalObject($object);
       }
       foreach ($fields as $combined_property_path => $field_info) {
-        list($field_info['datasource_id'], $field_info['property_path']) = Utility::splitCombinedId($combined_property_path);
+        [$field_info['datasource_id'], $field_info['property_path']] = Utility::splitCombinedId($combined_property_path);
         // Only add fields of the right datasource.
         if (!in_array($field_info['datasource_id'], [NULL, $datasource_id], TRUE)) {
           continue;
@@ -120,7 +121,7 @@ trait TestItemsTrait {
       ->disableOriginalConstructor()
       ->getMock();
     $dataTypeManager->method('getInstances')
-      ->will($this->returnValue([]));
+      ->willReturn([]);
 
     $moduleHandler = $this->getMockBuilder('Drupal\Core\Extension\ModuleHandlerInterface')
       ->disableOriginalConstructor()
@@ -138,7 +139,14 @@ trait TestItemsTrait {
     $entityBundleInfo = $this->getMockBuilder('Drupal\Core\Entity\EntityTypeBundleInfoInterface')
       ->disableOriginalConstructor()
       ->getMock();
-    $fieldsHelper = new FieldsHelper($entityTypeManager, $entityFieldManager, $entityBundleInfo, $dataTypeHelper);
+    $themeSwitcher = $this->createMock(ThemeSwitcherInterface::class);
+    $fieldsHelper = new FieldsHelper(
+      $entityTypeManager,
+      $entityFieldManager,
+      $entityBundleInfo,
+      $dataTypeHelper,
+      $themeSwitcher
+    );
 
     $queryHelper = $this->createMock(QueryHelperInterface::class);
     $queryHelper->method('createQuery')
@@ -146,7 +154,7 @@ trait TestItemsTrait {
         return Query::create($index, $options);
       });
     $queryHelper->method('getResults')
-      ->will($this->returnValue([]));
+      ->willReturn([]);
 
     $this->container = new ContainerBuilder();
     $this->container->set('plugin.manager.search_api.data_type', $dataTypeManager);

@@ -7,6 +7,7 @@ use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Psr\Log\LoggerInterface;
 use Drupal\gutenberg\TinyColor;
 use Drupal\gutenberg\BlocksLibraryManager;
+use Drupal\gutenberg\GutenbergLibraryManager;
 
 /**
  * Processes Gutenberg duotone style.
@@ -28,6 +29,13 @@ class DuotoneProcessor implements GutenbergBlockProcessorInterface {
   protected $blocksLibrary;
 
   /**
+   * Gutenberg library manager.
+   *
+   * @var \Drupal\gutenberg\GutenbergLibraryManager
+   */
+  protected $libraryManager;
+
+  /**
    * The Gutenberg logger.
    *
    * @var \Psr\Log\LoggerInterface
@@ -41,26 +49,82 @@ class DuotoneProcessor implements GutenbergBlockProcessorInterface {
    *   The renderer.
    * @param \Drupal\gutenberg\BlocksLibraryManager $blocks_library
    *   Blocks library manager.
+   * @param \Drupal\gutenberg\GutenbergLibraryManager $library_manager
+   *   Gutenberg library manager.
    * @param \Psr\Log\LoggerInterface $logger
    *   Gutenberg logger interface.
    */
   public function __construct(
     TinyColor $tiny_color,
     BlocksLibraryManager $blocks_library,
+    GutenbergLibraryManager $library_manager,
     LoggerInterface $logger
   ) {
     $this->tinyColor = $tiny_color;
     $this->blocksLibrary = $blocks_library;
+    $this->libraryManager = $library_manager;
     $this->logger = $logger;
+  }
+
+  /**
+   * Gets theme definition values for duotone.
+   * 
+   * @todo - move to service and check if possible to port from WP.
+   * 
+   * @param string $value
+   *   Value.
+   * @param array $theme_definition
+   *  Theme definition.
+   * @return array
+   *   Color values.
+   */
+  protected function getThemeDefinitionValues($value, $theme_definition) {
+    // Check if var is array.
+    if (is_array($value)) {
+      return $value;
+    }
+
+    // Check if value contains 'var:'.
+    if (strpos($value, 'var:') === FALSE) {
+      return [];
+    }
+
+    // Get duotone preset settings.
+    $duotone_preset_path = explode('|', str_replace('var:', '', $value));
+    $duotone_preset = end($duotone_preset_path);
+
+    // Check if duotone preset is set on theme definition.
+    $duotone_presets = $theme_definition['theme-support']['__experimentalFeatures']['color']['duotone']['theme'];
+    if (!$duotone_presets) {
+      $this->logger->warning('Duotone presets not found in theme definition.');
+      return [];
+    }
+
+    $presets = array_filter($duotone_presets, function ($preset) use ($duotone_preset) {
+      return isset($preset['slug']) && $preset['slug'] === $duotone_preset;
+    });
+
+    $preset = reset($presets);
+
+    // If $preset is empty, return empty array.
+    if (!$preset) {
+      $this->logger->warning("Duotone preset '$duotone_preset' not found in theme definition.");
+      return [];
+    }
+
+    return $preset['colors'];
   }
 
   /**
    * {@inheritdoc}
    */
   public function processBlock(array &$block, &$block_content, RefinableCacheableDependencyInterface $bubbleable_metadata) {
+    $theme_definitions = $this->libraryManager->getActiveThemeDefinitions();
+    $active_theme = \Drupal::theme()->getActiveTheme()->getName();
+
     $filter_preset   = [
       'slug'   => uniqid(),
-      'colors' => $block['attrs']['style']['color']['duotone'],
+      'colors' => $this->getThemeDefinitionValues($block['attrs']['style']['color']['duotone'], $theme_definitions[$active_theme]),
     ];
     $filter_id       = 'wp-duotone-' . $filter_preset['slug'];
     $filter_property = "url('#" . $filter_id . "')";
@@ -70,13 +134,12 @@ class DuotoneProcessor implements GutenbergBlockProcessorInterface {
     $selector = '';
     $scope = ".$filter_id";
 
-    if (isset($block_definition['supports']['color']['__experimentalDuotone'])) {
-      $duotone_support = $block_definition['supports']['color']['__experimentalDuotone'];
-      $selectors = explode(',', $duotone_support);
+    if (isset($block_definition['supports']['filter']['duotone'])) {
+      $selectors = explode(',', $block_definition['selectors']['filter']['duotone']);
       $scoped = [];
 
       foreach ($selectors as $sel) {
-        $scoped[] = $scope . ' ' . trim($sel);
+        $scoped[] = $scope . trim($sel);
       }
       $selector = implode(', ', $scoped);
     }

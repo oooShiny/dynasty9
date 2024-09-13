@@ -183,6 +183,18 @@ interface FacetInterface extends ConfigEntityInterface {
   public function getResults();
 
   /**
+   * Returns the flat result for the facet keyed by their raw values.
+   *
+   * @param \Drupal\facets\Result\ResultInterface[]|null $results
+   *   The results to be converted into a flat keyed by raw value array. If
+   *   not provided the entire current result set of the facet will be used.
+   *
+   * @return \Drupal\facets\Result\ResultInterface[]
+   *   The results of the facet.
+   */
+  public function getResultsKeyedByRawValue($results = NULL);
+
+  /**
    * Sets the results for the facet.
    *
    * @param \Drupal\facets\Result\ResultInterface[] $results
@@ -491,5 +503,37 @@ interface FacetInterface extends ConfigEntityInterface {
    *   Minimum count.
    */
   public function getMinCount();
+
+  /**
+   * Sets the missing parameter.
+   *
+   * @param bool $missing
+   *   Whether to show a missing item or not.
+   */
+  public function setMissing(bool $missing);
+
+  /**
+   * Returns the missing parameter.
+   *
+   * @return bool
+   *   Minimum count.
+   */
+  public function isMissing(): bool;
+
+  /**
+   * Sets the missing parameter label.
+   *
+   * @param string $label
+   *   The label.
+   */
+  public function setMissingLabel(string $label);
+
+  /**
+   * Returns the missing parameter label.
+   *
+   * @return string
+   *   The label.
+   */
+  public function getMissingLabel(): string;
 
 }

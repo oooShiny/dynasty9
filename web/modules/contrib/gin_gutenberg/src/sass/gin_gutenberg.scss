@@ -4,795 +4,839 @@
  */
 
 body.gutenberg--enabled {
-  svg {
+	.edit-post-header {
+		background-color: var(--colorGinLayerBackground);
+	}
 
-    path {
-      fill: currentColor;
+	.region-sticky,
+	.block-local-tasks-block,
+	.sticky-shadow,
+	.gin-sticky,
+	.filter-wrapper,
+	.gin-secondary-toolbar {
+		display: none;
+	}
 
-      &:hover,
-      &:focus {
-        fill: currentColor;
-      }
-    }
-  }
-
-  .edit-post-header {
-    background-color: var(--colorGinLayerBackground);
-  }
-
-  // TODO: remove the hack and fix it like a normal human being!
-  .gin-sticky {
-    position: absolute;
-    z-index: 9;
-    top: -74px;
-    right: 0;
-    height: 60px; // the height of GB header skleton
-
-    .field--name-status {
-      display: flex;
-      justify-content: flex-end;
-
-      >.form-item {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-    }
-
-    .form-actions {
-      display: none;
-    }
-  }
-
-  .page-wrapper {
-    .interface-interface-skeleton__content {
-
-      *:focus {
-        box-shadow: none;
-      }
-    }
-  }
-
-  &[class*='page-node-type-'] {
-    .gin-sticky {
-      right: 80px;
-    }
-  }
+	.page-wrapper {
+		.interface-interface-skeleton__content {
+			*:focus:not(.edit-post-layout__metaboxes *) {
+				box-shadow: none;
+			}
+		}
+	}
 }
 
 .gutenberg__editor {
+	// Fixes 'Search for a block' loop icon not being aligned
+	.components-visually-hidden {
+		position: absolute;
+	}
 
-  // Fixes 'Search for a block' loop icon not being aligned
-  .components-visually-hidden {
-    position: absolute;
-  }
+	// Fixes the offsets of the editor relative to the gin toolbars
+	@media (min-width: 782px) {
+		.interface-interface-skeleton {
+			top: 39px;
+			left: 0;
 
-  // Fixes the offsets of the editor relative to the gin toolbars
-  @media (min-width: 782px) {
-    .interface-interface-skeleton {
-      top: 39px;
-      left: 0;
+			.gin--horizontal-toolbar & {
+				top: 53px;
+				left: 0;
+			}
 
-      .gin--horizontal-toolbar & {
-        top: 53px;
-        left: 0;
-      }
+			.gin--vertical-toolbar & {
+				top: 0;
+				left: 80px;
+			}
+		}
+	}
 
-      .gin--vertical-toolbar & {
-        top: 0;
-        left: 80px;
-      }
-    }
-  }
+	.edit-post-layout {
+		.interface-interface-skeleton {
+			&__header {
+				border-color: var(--colorGinBorder);
 
-  .edit-post-layout {
-    .interface-interface-skeleton {
+				.components-accessible-toolbar {
+					.gin--dark-mode & {
+						svg {
+							color: var(--colorGinText);
+						}
+					}
+				}
 
-      &__header {
-        border-color: var(--colorGinBorder);
+				.edit-post-header__settings {
+					.gutenberg-header-settings {
+						.form-actions {
+							margin: 0;
+							align-items: center;
+						}
+					}
 
-        .components-accessible-toolbar {
-          .gin--dark-mode & {
-            svg {
-              color: var(--colorGinText);
-            }
+					button {
+						.gin--dark-mode & {
+							color: var(--colorGinPrimary);
+						}
+					}
+				}
+			}
+
+			&__body {
+				// * Gutenberg Main
+				.interface-interface-skeleton__content {
+					// * Gutenberg Meta fields
+					.edit-post-layout__metaboxes {
+						border-top: 1px solid var(--colorGinBorder);
+						background-color: var(--colorGinAppBackground);
+					}
+
+					.wp-block {
+						.components-placeholder {
+							&.block-editor-media-placeholder {
+								.components-placeholder__fieldset {
+									display: flex;
+									align-items: center;
+
+									button.block-editor-media-placeholder__button {
+										margin-bottom: 0;
+									}
+
+									button.components-button {
+										margin-right: 12px;
+									}
+								}
+							}
+						}
+					}
+
+					.edit-post-visual-editor {
+						.gin--dark-mode & {
+							color: var(--colorGinLayer4Background);
+						}
+					}
+				}
+
+				// * Gutenberg Sidebar
+				.interface-interface-skeleton__sidebar {
+					background-color: var(--colorGinAppBackground);
+					border-color: var(--colorGinBorder);
+
+          #edit-gin-sidebar {
+            display: none; // More info: https://www.drupal.org/project/gin/issues/3367004
           }
-        }
-
-        .edit-post-header__settings {
-          button {
-            .gin--dark-mode & {
-              color: var(--colorGinPrimary);
-            }
-          }
-        }
-      }
-
-      &__body {
-
-        // * Gutenberg Main
-        .interface-interface-skeleton__content {
-
-          // * Gutenberg Meta fields
-          .edit-post-layout__metaboxes {
-            border-top: 1px solid var(--colorGinBorder);
-            background-color: var(--colorGinAppBackground);
-          }
-
-          .edit-post-visual-editor {
-
-            .gin--dark-mode & {
-              color: var(--colorGinLayer4Background);
-            }
-          }
-        }
-
-        // * Gutenberg Sidebar
-        .interface-interface-skeleton__sidebar {
-          background-color: var(--colorGinAppBackground);
-          border-color: var(--colorGinBorder);
-
-          .interface-complementary-area {
-            background-color: var(--colorGinAppBackground);
-          }
-
-          .edit-post-sidebar {
-            @media screen and (min-width: 85em) {
-              min-width: 440px !important;
-            }
-
-            .components-panel {
-              border-color: var(--colorGinBorder);
-
-              &__header {
-                background-color: var(--colorGinAppBackground);
-
-                button {
-                  color: var(--colorGinPrimary);
-
-                  &.is-active {
-                    box-shadow: inset 0 0 0 1.5px transparent, inset 0 -4px 0 0 var(--colorGinPrimary);
-                  }
-                }
-              }
-
-              &__body {
-                border-color: var(--colorGinBorder);
-
-                .components-visually-hidden {
-                  display: none !important;
-                }
-
-                .components-custom-select-control {
-                  &__button {
-                    .gin--dark-mode & {
-                      color: var(--colorGinPrimary);
-
-                      &:focus:not(:disabled) {
-                        color: var(--colorGinText);
-                      }
-                    }
-                  }
-
-                  &__menu {
-                    .gin--dark-mode & {
-                      background-color: var(--colorGinLayer2Background);
-
-                      * {
-                        color: var(--colorGinText);
-                      }
-                    }
-                  }
-                }
-
-                &-toggle {
-                  .gin--dark-mode & {
-                    background-color: var(--colorGinAppBackground);
-                    color: var(--colorGinText);
-
-                    svg {
-                      color: var(--colorGinText);
-                    }
-
-                    &.components-button {
-
-                      &:focus {
-                        box-shadow: inset 0 0 0 1.5px var(--colorGinFocus);
-                      }
-                    }
-                  }
-                }
-              }
-
-              >* {
-                background-color: var(--colorGinAppBackground);
-                border-color: var(--colorGinBorder);
-                color: var(--colorGinText);
-              }
-
-              .block-editor-block-card {
-                h2,
-                h3 {
-                  color: var(--colorGinText);
-                }
-              }
-
-              .gin--dark-mode & {
-                input,
-                textarea,
-                select {
-                  background-color: var(--colorGinLayer2Background);
-                  color: var(--colorGinText);
-
-                  &:focus {
-                    outline: 2px solid var(--colorGinFocus);
-                  }
-                }
-
-                ::placeholder {
-                  color: var(--colorGinText);
-                }
-              }
-            }
-
-            .entity-meta {
-              max-width: 100%;
-              background-color: var(--colorGinAppBackground);
-
-              >* {
-                max-width: 100%;
-                background-color: var(--colorGinAppBackground);
-                border-color: var(--colorGinBorder);
-              }
-
-              .entity-meta__title {
-                &.form-item--meta-published {
-                  background-color: #d1eb6b;
-                  display: inline-block;
-                  padding: 2px 8px;
-                  border-radius: 8px;
-                  font-size: 0.875rem;
-                  text-shadow: none;
-                  text-transform: uppercase;
-                  margin-top: 0;
-                }
-              }
-
-              .field--name-moderation-state {
-                .form-item--moderation-state-0-current {
-                  display: none;
-                }
-              }
-
-              .form-type--item {
-                color: var(--colorGinText);
-              }
-            }
-
-            select {
-              width: 100%;
-            }
-
-            // Single Checkbox: show as toggle
-            .form-checkboxes {
-              >.form-type--checkbox {
-                position: relative;
-
-                .checkbox-toggle {
-                  z-index: 0;
-                  display: inline-block;
-                  vertical-align: top;
-                  width: 40px;
-                  height: 24px;
-                  background-color: #909090;
-                  border-radius: 12px;
-                  box-sizing: border-box;
-
-                  &__inner {
-                    position: relative;
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    clip-path: circle(24px at 50% 50%); // Fix Safari bug
-                    border: 4px solid transparent;
-                    border-radius: 12px;
-                    box-sizing: border-box;
-
-                    &:before {
-                      position: absolute;
-                      content: "";
-                      width: 100%;
-                      height: 100%;
-                      background-color: #fff;
-                      border-radius: 21px;
-                      transform: translateX(-16px);
-                      transition: transform .3s;
-
-                      .gin--dark-mode & {
-                        background-color: var(--colorGinLayer2Background);
-                      }
-                    }
-                  }
-                }
-
-                input {
-
-                  &:hover~.checkbox-toggle {
-                    opacity: 0.9;
-                    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
-                  }
-
-                  &:checked~.checkbox-toggle .checkbox-toggle__inner {
-                    background-color: var(--colorGinSwitch);
-
-                    &:before {
-                      transform: translateX(16px);
-                    }
-                  }
-
-                  &:active~.checkbox-toggle .checkbox-toggle__inner,
-                  &:focus~.checkbox-toggle .checkbox-toggle__inner {
-                    box-shadow: 0 0 0 2px var(--colorGinLayerBackground), 0 0 0 4px var(--colorGinFocus);
-                  }
-
-                  // Disabled state: set cursor to not-allowed
-                  &:disabled {
-                    cursor: not-allowed;
-                  }
-
-                  // Disabled styles
-                  &:disabled~.checkbox-toggle,
-                  &:disabled~.checkbox-toggle:hover,
-                  &:disabled:checked~.checkbox-toggle .checkbox-toggle__inner,
-                  &:disabled:checked~.checkbox-toggle:hover .checkbox-toggle__inner {
-                    background-color: var(--colorGinDisabled);
-                  }
-                }
-
-                label {
-                  z-index: 1;
-                  position: relative;
-                  padding-left: 4px;
-                  padding-bottom: 0;
-                  color: var(--colorGinText);
-                }
-              }
-            }
-
-            // Radio field overrides
-            .form-boolean--type-radio {
-
-              &,
-              &:hover,
-              &:active,
-              &:focus,
-              &:hover:focus {
-                background-image: none;
-                background-color: #fff;
-                border-color: var(--colorGinFormElementBorder);
-                border-radius: 50%;
-
-                .gin--dark-mode & {
-                  background-color: var(--colorGinLayer2Background);
-                }
-              }
-
-              &:hover {
-                box-shadow: inset 0 0 0 1px var(--colorGinLayer2Border);
-
-                &,
-                .gin--dark-mode & {
-                  border-color: var(--colorGinText);
-                }
-              }
-
-              &:checked {
-
-                &,
-                &:hover,
-                &:active,
-                &:focus,
-                &:hover:focus {
-                  background-image: none;
-                  background-color: #fff;
-                  box-shadow: inset 0 0 0 4px var(--colorGinPrimary);
-
-                  .gin--dark-mode & {
-                    background-color: var(--colorGinLayer2Background);
-                    border-color: var(--colorGinPrimary);
-                  }
-                }
-              }
-            }
-
-            .form-wrapper {
-              .form-wrapper:not(.paragraphs-dropbutton-wrapper):not(.accordion__item) {
-                margin-bottom: 1rem;
-              }
-            }
-
-            // Table fixes
-            table {
-
-              tr.draggable {
-                display: inherit;
-
-                td {
-                  padding: 0;
-
-                  // Make sure paragraphs behave properly in the sidebar
-                  .paragraph-top {
-                    grid-template-columns: 140px 1fr 1fr;
-                  }
-
-                  .paragraphs-subform {
-                    margin-right: 10px;
-                  }
-                }
-
-                .tabledrag-handle {
-                  min-width: 10px;
-                  padding-left: 15px;
-                }
-              }
-            }
-
-            // Multi-value items field
-            .form-item--multiple {
-
-              .layer-wrapper {
-                padding: 12px;
-                max-width: 100%;
-              }
-            }
-
-            // Field: Entity reference
-            .field--type-entity-reference {
-
-              // * Chosen widget
-              &.field--widget-chosen-select {
-
-                .chosen-container {
-                  border-radius: 0;
-                  box-shadow: none;
-
-                  &.form-element {
-
-                    // Single choice
-                    &.chosen-container-single {
-                      width: 100% !important;
-                    }
-
-                    // Multi choice
-                    &.chosen-container-multi {
-                      width: 100% !important;
-
-                      .chosen-drop {
-                        left: 0;
-                      }
-
-                      ul.chosen-choices {
-
-                        li.search-choice {
-                          background-color: var(--colorGinPrimaryLightActive);
-                          color: var(--colorGinText);
-                          padding: 5px 20px 5px 5px;
-                          background-image: none;
-                          box-shadow: none;
-                          border: none;
-
-                          span {
-                            line-height: 1;
-                          }
-
-                          .search-choice-close {
-                            top: 8px;
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  // Results dropdown
-                  &.chosen-with-drop {
-
-                    .chosen-drop {
-
-                      .chosen-results {
-
-                        li {
-                          padding: 8px 6px;
-                          line-height: 1rem;
-
-                          &.highlighted {
-                            background-color: var(--colorGinPrimaryActive);
-                            background-image: none;
-                          }
-                        }
+
+					.interface-complementary-area {
+						background-color: var(--colorGinAppBackground);
+					}
+
+					.edit-post-sidebar {
+						@media screen and (min-width: 85em) {
+							min-width: 440px !important;
+						}
+
+						.components-panel {
+							border-color: var(--colorGinBorder);
+
+							&__header {
+								background-color: var(--colorGinAppBackground);
+
+								button {
+									color: var(--colorGinPrimary);
+
+									&.is-active {
+										box-shadow: inset 0 0 0 1.5px transparent,
+											inset 0 -4px 0 0 var(--colorGinPrimary);
+									}
+								}
+							}
+
+							&__body {
+								border-color: var(--colorGinBorder);
+
+								.components-visually-hidden {
+									display: none !important;
+								}
+
+								.components-custom-select-control {
+									&__button {
+										.gin--dark-mode & {
+											color: var(--colorGinPrimary);
+
+											&:focus:not(:disabled) {
+												color: var(--colorGinText);
+											}
+										}
+									}
+
+									&__menu {
+										.gin--dark-mode & {
+											background-color: var(--colorGinLayer2Background);
+
+											* {
+												color: var(--colorGinText);
+											}
+										}
+									}
+								}
+
+								&-toggle {
+									.gin--dark-mode & {
+										background-color: var(--colorGinAppBackground);
+										color: var(--colorGinText);
+
+										svg {
+											color: var(--colorGinText);
+										}
+
+										&.components-button {
+											&:focus {
+												box-shadow: inset 0 0 0 1.5px var(--colorGinFocus);
+											}
+										}
+									}
+								}
+							}
+
+							&__row {
+								width: 100%;
+							}
+
+							.components-base-control {
+								width: 100%;
+							}
+
+              .components-radio-control {
+                .components-radio-control__option {
+                  display: flex;
+                  align-items: center;
+
+                  .components-radio-control__input {
+                    &:checked {
+                      &:not(:disabled) {
+                        background-image: none;
+                        background-color: var(--gin-bg-layer);
+                        box-shadow: inset 0 0 0 5px var(--gin-color-primary);
+                        border-color: var(--gin-color-primary);
                       }
                     }
                   }
                 }
               }
-            }
 
-            // Paragraphs in sidebar: space is limited, squeezing things a bit
-            [class*='paragraph-type-'] {
+							> * {
+								background-color: var(--colorGinAppBackground);
+								border-color: var(--colorGinBorder);
+								color: var(--colorGinText);
+							}
 
-              .paragraphs-actions {
+							.block-editor-block-card {
+								h2,
+								h3 {
+									color: var(--colorGinText);
+								}
+							}
 
-                .button {
+							.gin--dark-mode & {
+								input,
+								textarea,
+								select {
+									background-color: var(--colorGinLayer2Background);
+									color: var(--colorGinText);
 
-                  &.button--small {
-                    // Extending .button--extrasmall
-                    padding: .25rem .75rem;
-                  }
-                }
-              }
-            }
+									&:focus {
+										outline: 2px solid var(--colorGinFocus);
+									}
+								}
 
-            .components-font-size-picker__controls {
+								::placeholder {
+									color: var(--colorGinText);
+								}
+							}
+						}
 
-              .components-color-palette__clear {
-                margin-top: auto;
-              }
-            }
+						.entity-meta {
+							max-width: 100%;
+							background-color: var(--colorGinAppBackground);
 
+							> * {
+								max-width: 100%;
+								background-color: var(--colorGinAppBackground);
+								border-color: var(--colorGinBorder);
+							}
 
-            // TODO: Temporarily hide the form-actions in sidebar
-            .gin-sidebar {
-              display: none;
-            }
-          }
+							.entity-meta__title {
+								&.form-item--meta-published {
+									background-color: #d1eb6b;
+									display: inline-block;
+									padding: 2px 8px;
+									border-radius: 8px;
+									font-size: 0.875rem;
+									text-shadow: none;
+									text-transform: uppercase;
+									margin-top: 0;
+								}
+							}
 
-          .form-items-inline {
+							.field--name-moderation-state {
+								.form-item--moderation-state-0-current {
+									display: none;
+								}
+							}
 
-            div.form-item {
-              width: 49%;
+							.form-type--item {
+								color: var(--colorGinText);
+							}
+						}
 
-              input {
-                width: 100%;
-              }
-            }
-          }
+						select {
+							width: 100%;
+						}
 
-          fieldset {
-            color: var(--colorGinText);
-            padding-top: 0;
-            margin-bottom: 1rem;
+						// Single Checkbox: show as toggle
+						.form-checkboxes {
+							> .form-type--checkbox {
+								position: relative;
 
-            legend {
-              display: contents;
-              float: left;
-              width: 100%;
-              color: #545560;
-              font-weight: bold;
-              margin-bottom: 1rem;
+								.checkbox-toggle {
+									z-index: 0;
+									display: inline-block;
+									vertical-align: top;
+									width: 40px;
+									height: 24px;
+									background-color: #909090;
+									border-radius: 12px;
+									box-sizing: border-box;
 
-              @media screen and (min-width: 48em) {
-                margin-bottom: 1.5rem;
-              }
+									&__inner {
+										position: relative;
+										display: block;
+										width: 100%;
+										height: 100%;
+										overflow: hidden;
+										clip-path: circle(24px at 50% 50%); // Fix Safari bug
+										border: 4px solid transparent;
+										border-radius: 12px;
+										box-sizing: border-box;
 
-              >div {
-                margin-bottom: 0;
+										&:before {
+											position: absolute;
+											content: '';
+											width: 100%;
+											height: 100%;
+											background-color: #fff;
+											border-radius: 21px;
+											transform: translateX(-16px);
+											transition: transform 0.3s;
 
-                >span {
-                  margin-bottom: 0;
-                  display: block;
-                  padding: 1rem;
-                  line-height: 1rem;
-                  color: var(--colorGinText);
-                }
-              }
+											.gin--dark-mode & {
+												background-color: var(--colorGinLayer2Background);
+											}
+										}
+									}
+								}
 
-              &+div {
-                margin-bottom: 1rem;
-                min-width: 100%;
-                max-width: max-content;
+								input {
+									&:hover ~ .checkbox-toggle {
+										opacity: 0.9;
+										box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+									}
 
-                &.components-circular-option-picker {
-                  padding: 0 8px 4px 8px;
-                }
-              }
-            }
-          }
+									&:checked ~ .checkbox-toggle .checkbox-toggle__inner {
+										background-color: var(--colorGinSwitch);
 
-          .components-form-toggle {
+										&:before {
+											transform: translateX(16px);
+										}
+									}
 
-            &.is-checked {
+									&:active ~ .checkbox-toggle .checkbox-toggle__inner,
+									&:focus ~ .checkbox-toggle .checkbox-toggle__inner {
+										box-shadow: 0 0 0 2px var(--colorGinLayerBackground),
+											0 0 0 4px var(--colorGinFocus);
+									}
 
-              .components-form-toggle__track {
-                background-color: var(--colorGinPrimary);
-              }
-            }
+									// Disabled state: set cursor to not-allowed
+									&:disabled {
+										cursor: not-allowed;
+									}
 
-          }
+									// Disabled styles
+									&:disabled ~ .checkbox-toggle,
+									&:disabled ~ .checkbox-toggle:hover,
+									&:disabled:checked ~ .checkbox-toggle .checkbox-toggle__inner,
+									&:disabled:checked
+										~ .checkbox-toggle:hover
+										.checkbox-toggle__inner {
+										background-color: var(--colorGinDisabled);
+									}
+								}
 
+								label {
+									z-index: 1;
+									position: relative;
+									padding-left: 4px;
+									padding-bottom: 0;
+									color: var(--colorGinText);
+								}
+							}
+						}
 
-          .components-circular-option-picker__custom-clear-wrapper {
-            flex-basis: 100%;
-            margin-top: 1rem;
-          }
-        }
-      }
-    }
-  }
+						// Radio field overrides
+						.form-boolean--type-radio {
+							&,
+							&:hover,
+							&:active,
+							&:focus,
+							&:hover:focus {
+								background-image: none;
+								background-color: #fff;
+								border-color: var(--colorGinFormElementBorder);
+								border-radius: 50%;
 
-  // * Notices and alerts
-  .components-notice {
+								.gin--dark-mode & {
+									background-color: var(--colorGinLayer2Background);
+								}
+							}
 
-    &.is-dismissible {
+							&:hover {
+								box-shadow: inset 0 0 0 1px var(--colorGinLayer2Border);
 
-      .components-notice__content {
+								&,
+								.gin--dark-mode & {
+									border-color: var(--colorGinText);
+								}
+							}
 
-        .button--dismiss {
-          display: none;
-        }
-      }
-    }
-  }
+							&:checked {
+								&,
+								&:hover,
+								&:active,
+								&:focus,
+								&:hover:focus {
+									background-image: none;
+									background-color: #fff;
+									box-shadow: inset 0 0 0 4px var(--colorGinPrimary);
 
-  // * Stuff that popover open
-  .popover-slot {
+									.gin--dark-mode & {
+										background-color: var(--colorGinLayer2Background);
+										border-color: var(--colorGinPrimary);
+									}
+								}
+							}
+						}
 
-    @media screen and (min-width: 782px) {
-      .block-editor-inserter__popover {
-        >.components-popover__content {
-          height: 50vh;
-        }
-      }
-    }
+						.form-wrapper {
+							.form-wrapper:not(.paragraphs-dropbutton-wrapper):not(
+									.accordion__item
+								) {
+								margin-bottom: 1rem;
+							}
+						}
 
-    .components-dropdown-menu__menu {
+						// Table fixes
+						table {
+							tr.draggable {
+								display: inherit;
 
-      .components-button {
-        padding-left: 12px;
-      }
-    }
+								td {
+									padding: 0;
 
+									// Make sure paragraphs behave properly in the sidebar
+									.paragraph-top {
+										grid-template-columns: 140px 1fr 1fr;
+									}
 
-    fieldset {
+									.paragraphs-subform {
+										margin-right: 10px;
+									}
+								}
 
-      // Overrides the Gin global fieldset styling
-      &.block-editor-link-control__settings {
-        padding: 16px 24px;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-      }
-    }
-  }
+								.tabledrag-handle {
+									min-width: 10px;
+									padding-left: 15px;
+								}
+							}
+						}
 
-  .edit-post-layout__inserter-panel-content {
-    .gin--dark-mode & {
-      svg {
-        color: var(--colorGinText);
-      }
+						// Multi-value items field
+						.form-item--multiple {
+							.layer-wrapper {
+								padding: 12px;
+								max-width: 100%;
+							}
+						}
 
-      .block-editor-block-types-list__item {
-        &:focus {
-          box-shadow: 0 0 0 1.5px var(--colorGinFocus);
-        }
+						// Field: Entity reference
+						.field--type-entity-reference {
+							// * Chosen widget
+							&.field--widget-chosen-select {
+								.chosen-container {
+									border-radius: 0;
+									box-shadow: none;
 
-        &:hover {
-          border-color: var(--colorGinFocus);
-        }
-      }
+									&.form-element {
+										// Single choice
+										&.chosen-container-single {
+											width: 100% !important;
+										}
 
-      .block-editor-inserter__preview-container {
-        .block-editor-inserter__menu-preview-panel {
-          background-color: var(--colorGinAppBackground);
-          color: var(--colorGinText);
-        }
-      }
+										// Multi choice
+										&.chosen-container-multi {
+											width: 100% !important;
 
-      .block-editor-block-types-list__item-title {
-        color: var(--colorGinText);
-      }
+											.chosen-drop {
+												left: 0;
+											}
 
-      .block-editor-inserter__search {
-        background-color: var(--colorGinAppBackground);
-  
-        input {
-          background-color: var(--colorGinLayer2Background);
+											ul.chosen-choices {
+												li.search-choice {
+													background-color: var(--colorGinPrimaryLightActive);
+													color: var(--colorGinText);
+													padding: 5px 20px 5px 5px;
+													background-image: none;
+													box-shadow: none;
+													border: none;
 
-          &:focus {
-            outline: 2px solid var(--colorGinFocus);
-            box-shadow: 0 0 0 1.5px var(--colorGinFocus);
-          }
-        }
-      }
-      background-color: var(--colorGinAppBackground);
-    }
-  }
+													span {
+														line-height: 1;
+													}
+
+													.search-choice-close {
+														top: 8px;
+													}
+												}
+											}
+										}
+									}
+
+									// Results dropdown
+									&.chosen-with-drop {
+										.chosen-drop {
+											.chosen-results {
+												li {
+													padding: 8px 6px;
+													line-height: 1rem;
+
+													&.highlighted {
+														background-color: var(--colorGinPrimaryActive);
+														background-image: none;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+
+						// Paragraphs in sidebar: space is limited, squeezing things a bit
+						[class*='paragraph-type-'] {
+							.paragraphs-actions {
+								.button {
+									&.button--small {
+										// Extending .button--extrasmall
+										padding: 0.25rem 0.75rem;
+									}
+								}
+							}
+						}
+
+						.components-font-size-picker__controls {
+							.components-color-palette__clear {
+								margin-top: auto;
+							}
+						}
+					}
+
+					.form-items-inline {
+						div.form-item {
+							width: 49%;
+
+							input {
+								width: 100%;
+							}
+						}
+					}
+
+					fieldset {
+						color: var(--colorGinText);
+						padding-top: 0;
+						margin-bottom: 1rem;
+
+						legend {
+							display: contents;
+							float: left;
+							width: 100%;
+							color: #545560;
+							font-weight: bold;
+							margin-bottom: 1rem;
+
+							@media screen and (min-width: 48em) {
+								margin-bottom: 1.5rem;
+							}
+
+							> div {
+								margin-bottom: 0;
+
+								> span {
+									margin-bottom: 0;
+									display: block;
+									padding: 1rem;
+									line-height: 1rem;
+									color: var(--colorGinText);
+								}
+							}
+
+							& + div {
+								margin-bottom: 1rem;
+								min-width: 100%;
+								max-width: max-content;
+
+								&.components-circular-option-picker {
+									padding: 0 8px 4px 8px;
+								}
+							}
+						}
+					}
+
+					.block-editor-link-control {
+						fieldset {
+							&.block-editor-link-control__settings {
+								padding: 1rem;
+								background: var(--color-gray-100);
+								border: 0;
+
+								.components-base-control {
+									margin-bottom: 0;
+								}
+							}
+						}
+					}
+
+					.components-form-toggle {
+						&.is-checked {
+							.components-form-toggle__track {
+								background-color: var(--colorGinPrimary);
+							}
+						}
+					}
+
+					.components-circular-option-picker__custom-clear-wrapper {
+						flex-basis: 100%;
+						margin-top: 1rem;
+					}
+
+					.media-library-widget {
+						padding: 1rem;
+
+						.media-library-selection {
+							.media-library-item--grid {
+								width: 50%;
+							}
+
+							.media-library-item__attributes {
+								.media-library-item__name {
+									font-size: 0.75rem;
+									line-height: 1;
+									display: block;
+									white-space: nowrap;
+									overflow: hidden;
+									text-overflow: ellipsis;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// * Notices and alerts
+	.components-notice {
+		&.is-dismissible {
+			.components-notice__content {
+				.button--dismiss {
+					display: none;
+				}
+			}
+		}
+	}
+
+	// * Stuff that popover open
+	.popover-slot {
+		.components-dropdown-menu__menu {
+			.components-button {
+				padding-left: 12px;
+			}
+		}
+
+		fieldset {
+			// Overrides the Gin global fieldset styling
+			&.block-editor-link-control__settings {
+				padding: 16px 24px;
+				border-radius: 0;
+				border-left: none;
+				border-right: none;
+			}
+		}
+	}
+
+	.edit-post-layout__inserter-panel-content {
+		.gin--dark-mode & {
+			svg {
+				color: var(--colorGinText);
+			}
+
+			.block-editor-block-types-list__item {
+				&:focus {
+					box-shadow: 0 0 0 1.5px var(--colorGinFocus);
+				}
+
+				&:hover {
+					border-color: var(--colorGinFocus);
+				}
+			}
+
+			.block-editor-inserter__preview-container {
+				.block-editor-inserter__menu-preview-panel {
+					background-color: var(--colorGinAppBackground);
+					color: var(--colorGinText);
+				}
+			}
+
+			.block-editor-block-types-list__item-title {
+				color: var(--colorGinText);
+			}
+
+			.block-editor-inserter__search {
+				background-color: var(--colorGinAppBackground);
+
+				input {
+					background-color: var(--colorGinLayer2Background);
+
+					&:focus {
+						outline: 2px solid var(--colorGinFocus);
+						box-shadow: 0 0 0 1.5px var(--colorGinFocus);
+					}
+				}
+			}
+			background-color: var(--colorGinAppBackground);
+		}
+	}
 }
 
 // * Modal overlay
 .components-modal__screen-overlay {
+	// Gutenberg block manager modal
+	.components-modal__frame {
+		@media screen and (min-width: 85em) {
+			min-width: 500px;
+		}
 
-  // Gutenberg block manager modal
-  .components-modal__frame {
-    @media screen and (min-width: 85em) {
-      min-width: 500px;
-    }
+		.edit-post-manage-blocks-modal__content {
+			.edit-post-manage-blocks-modal__disabled-blocks-count {
+				border-top: 1px solid var(--colorGinBorder);
+				background-color: var(--colorGinAppBackground);
+			}
 
-    .edit-post-manage-blocks-modal__content {
+			input[type='checkbox'] {
+				border: 2px solid var(--colorGinBorder);
+				margin-right: 0;
+				box-shadow: none;
+				background: var(--colorGinLayer2Background);
 
-      .edit-post-manage-blocks-modal__disabled-blocks-count {
-        border-top: 1px solid var(--colorGinBorder);
-        background-color: var(--colorGinAppBackground);
-      }
+				&:hover {
+					background: var(--colorGinLayerBackground);
+				}
 
-      input[type=checkbox] {
-        border: 2px solid var(--colorGinBorder);
-        margin-right: 0;
-        box-shadow: none;
-        background: var(--colorGinLayer2Background);
+				&:checked {
+					background: var(--colorGinPrimary);
 
-        &:hover {
-          background: var(--colorGinLayerBackground);
-        }
+					&:focus {
+						outline: 2px solid var(--colorGinFocus);
+					}
+				}
 
-        &:checked {
-          background: var(--colorGinPrimary);
+				&[aria-checked='mixed'] {
+					&:before {
+						color: var(--colorGinPrimary);
+						display: flex;
+						height: 16px;
+						margin: -2px auto auto auto;
+					}
+				}
+			}
 
-          &:focus {
-            outline: 2px solid var(--colorGinFocus);
-          }
-        }
+			svg.components-checkbox-control__checked {
+				width: 18px;
+				height: 18px;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				margin: 0 auto;
 
-        &[aria-checked=mixed] {
+				path {
+					fill: var(--colorGinAppBackground);
+				}
+			}
 
-          &:before {
-            color: var(--colorGinPrimary);
-            display: flex;
-            height: 16px;
-            margin: -2px auto auto auto;
-          }
-        }
-      }
+			.block-editor-block-icon {
+				svg {
+					path {
+						fill: initial !important;
+					}
+				}
+			}
+		}
 
+		.edit-post-manage-blocks-modal__results {
+			ul.edit-post-manage-blocks-modal__checklist {
+				margin-left: 0;
 
+				li.edit-post-manage-blocks-modal__checklist-item {
+					list-style: none;
+				}
+			}
+		}
+	}
+}
+// * Welcome message
+.components-guide__container {
+  .components-guide__page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
-      svg.components-checkbox-control__checked {
-        width: 18px;
-        height: 18px;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
+    .edit-post-welcome-guide__page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .edit-post-welcome-guide__image {
         margin: 0 auto;
-
-        path {
-          fill: var(--colorGinAppBackground);
-        }
       }
 
-      .block-editor-block-icon {
-
-        svg {
-
-          path {
-            fill: initial !important;
-          }
+      .edit-post-welcome-guide__text {
+        .edit-post-welcome-guide__inserter-icon {
+          display: inline;
         }
       }
     }
+  }
+}
 
+.media-library-wrapper {
+  .media-library-menu {
+    min-width: 15%;
 
-    .edit-post-manage-blocks-modal__results {
-
-      ul.edit-post-manage-blocks-modal__checklist {
-        margin-left: 0;
-
-        li.edit-post-manage-blocks-modal__checklist-item {
-          list-style: none;
-        }
-      }
+    .media-library-menu__link {
+      padding: 1rem;
+      border-bottom: 1px solid var(--gin-border-color);
     }
   }
 }
 
 details.claro-details--accordion-item.accordion__item {
-  border-radius: 0;
+	border-radius: 0;
 }

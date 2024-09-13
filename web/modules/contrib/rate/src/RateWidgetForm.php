@@ -3,15 +3,16 @@
 namespace Drupal\rate;
 
 use Drupal\Core\Datetime\DateFormatter;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityForm;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Url;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\votingapi\VoteResultFunctionManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -55,6 +56,13 @@ class RateWidgetForm extends EntityForm {
   protected $messenger;
 
   /**
+   * The votingapi result manager.
+   *
+   * @var \Drupal\votingapi\VoteResultFunctionManager
+   */
+  protected $votingapiResult;
+
+  /**
    * Constructs the VoteTypeForm object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
@@ -67,13 +75,16 @@ class RateWidgetForm extends EntityForm {
    *   The date formatter service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger.
+   * @param \Drupal\votingapi\VoteResultFunctionManager $votingapi_result
+   *   The votingapi result function manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_manager, EntityFieldManagerInterface $entity_field_manager, ModuleHandlerInterface $module_handler, DateFormatter $date_formatter, MessengerInterface $messenger) {
+  public function __construct(EntityTypeManagerInterface $entity_manager, EntityFieldManagerInterface $entity_field_manager, ModuleHandlerInterface $module_handler, DateFormatter $date_formatter, MessengerInterface $messenger, VoteResultFunctionManager $votingapi_result) {
     $this->entityTypeManager = $entity_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->moduleHandler = $module_handler;
     $this->dateFormatter = $date_formatter;
     $this->messenger = $messenger;
+    $this->votingapiResult = $votingapi_result;
   }
 
   /**
@@ -85,7 +96,8 @@ class RateWidgetForm extends EntityForm {
       $container->get('entity_field.manager'),
       $container->get('module_handler'),
       $container->get('date.formatter'),
-      $container->get('messenger')
+      $container->get('messenger'),
+      $container->get('plugin.manager.votingapi.resultfunction')
     );
   }
 
@@ -104,9 +116,22 @@ class RateWidgetForm extends EntityForm {
       $form['#title'] = $this->t('Edit %label rate widget', ['%label' => $rate_widget->label()]);
     }
 
+    if (method_exists($this->moduleHandler, 'invokeAllWith')) {
+      $implementations = [];
+      $this->moduleHandler->invokeAllWith(
+        'rate_templates',
+        function (callable $hook, string $module) use (&$implementations) {
+          $implementations[] = $module;
+        }
+      );
+    }
+    else {
+      // Use the deprecated getImplementations() for Drupal < 9.4.
+      $implementations = $this->moduleHandler->getImplementations('rate_templates');
+    }
     // Collect rate widget templates from other modules.
     $template_list = [];
-    foreach ($this->moduleHandler->getImplementations('rate_templates') as $module) {
+    foreach ($implementations as $module) {
       foreach ($this->moduleHandler->invoke($module, 'rate_templates') as $name => $template) {
         $template_list[$name] = $template->template_title;
         if ($name == $widget_template) {
@@ -209,7 +234,7 @@ class RateWidgetForm extends EntityForm {
         }
         else {
           // We are editing an existing widget - use saved values.
-          $options_items = isset($rate_widget_options['table']) ? $rate_widget_options['table'] : $rate_widget_options;
+          $options_items = $rate_widget_options['table'] ?? $rate_widget_options;
         }
       }
       else {
@@ -234,6 +259,7 @@ class RateWidgetForm extends EntityForm {
         $this->t('Value'),
         $this->t('Label'),
         $this->t('Class'),
+        $this->t('Function'),
       ],
       '#responsive' => TRUE,
     ];
@@ -244,26 +270,41 @@ class RateWidgetForm extends EntityForm {
         '#type' => 'textfield',
         '#title' => $this->t('Value'),
         '#title_display' => 'invisible',
-        '#default_value' => isset($options_items[$i]['value']) ? $options_items[$i]['value'] : '',
+        '#default_value' => $options_items[$i]['value'] ?? '',
         '#size' => 8,
       ];
       $form['options']['table'][$i]['label'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Label'),
         '#title_display' => 'invisible',
-        '#default_value' => isset($options_items[$i]['label']) ? $options_items[$i]['label'] : '',
+        '#default_value' => $options_items[$i]['label'] ?? '',
         '#size' => 40,
       ];
       $form['options']['table'][$i]['class'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Class'),
         '#title_display' => 'invisible',
-        '#default_value' => isset($options_items[$i]['class']) ? $options_items[$i]['class'] : '',
+        '#default_value' => $options_items[$i]['class'] ?? '',
         '#size' => 40,
+      ];
+
+      $definitions = $this->votingapiResult->getDefinitions();
+      foreach ($definitions as $plugin_id => $plugin_definition) {
+        $options[$plugin_definition['id']] = $plugin_definition['provider'] . ': ' . $plugin_definition['id'];
+      }
+      $form['options']['table'][$i]['function'] = [
+        '#type' => 'select',
+        '#title' => $this->t('Function'),
+        '#title_display' => 'invisible',
+        '#options' => $options,
+        '#default_value' => $options_items[$i]['function'] ?? '',
+        '#empty_option' => $this->t('None'),
+        '#required' => FALSE,
       ];
       if (!$current_template->customizable) {
         $form['options']['table'][$i]['value']['#attributes'] = ['disabled' => 'disabled'];
         $form['options']['table'][$i]['label']['#attributes'] = ['disabled' => 'disabled'];
+        $form['options']['table'][$i]['function']['#attributes'] = ['disabled' => 'disabled'];
       }
     }
     // Hide the "Add another option" button, if template is not customizable.
@@ -388,7 +429,7 @@ class RateWidgetForm extends EntityForm {
     $form['voting']['use_deadline'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Use a vote deadline'),
-      '#default_value' => isset($voting['use_deadline']) ? $voting['use_deadline'] : 0,
+      '#default_value' => $voting['use_deadline'] ?? 0,
       '#description' => $this->t('Enables a deadline date field on the respective node. If deadline is set and date passed, the widget will be shown as disabled.'),
     ];
     // Additional settings for rollover 'Never' or 'Immediately'.
@@ -423,14 +464,14 @@ class RateWidgetForm extends EntityForm {
       '#title' => $this->t('Anonymous vote rollover'),
       '#description' => $this->t('The amount of time that must pass before two anonymous votes from the same computer are considered unique. Setting this to <i>never</i> will eliminate most double-voting, but will make it impossible for multiple anonymous on the same computer (like internet cafe customers) from casting votes.'),
       '#options' => $options,
-      '#default_value' => isset($voting['anonymous_window']) ? $voting['anonymous_window'] : -2,
+      '#default_value' => $voting['anonymous_window'] ?? -2,
     ];
     $form['voting']['user_window'] = [
       '#type' => 'select',
       '#title' => $this->t('Registered user vote rollover'),
       '#description' => $this->t('The amount of time that must pass before two registered user votes from the same user ID are considered unique. Setting this to <i>never</i> will eliminate most double-voting for registered users.'),
       '#options' => $options,
-      '#default_value' => isset($voting['user_window']) ? $voting['user_window'] : -2,
+      '#default_value' => $voting['user_window'] ?? -2,
     ];
 
     // Display settings.
@@ -443,13 +484,13 @@ class RateWidgetForm extends EntityForm {
     $form['display']['display_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
-      '#default_value' => isset($display['display_label']) ? $display['display_label'] : '',
+      '#default_value' => $display['display_label'] ?? '',
       '#description' => $this->t('Optional label for the rate widget.'),
     ];
     $form['display']['label_class'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label classes'),
-      '#default_value' => isset($display['label_class']) ? $display['label_class'] : '',
+      '#default_value' => $display['label_class'] ?? '',
       '#description' => $this->t('Enter classes, separated with space.'),
     ];
     $options = [
@@ -461,18 +502,18 @@ class RateWidgetForm extends EntityForm {
       '#type' => 'radios',
       '#title' => $this->t('Position of the label'),
       '#options' => $options,
-      '#default_value' => isset($display['label_position']) ? $display['label_position'] : 'above',
+      '#default_value' => $display['label_position'] ?? 'above',
     ];
     $form['display']['description'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Description'),
-      '#default_value' => isset($display['description']) ? $display['description'] : '',
+      '#default_value' => $display['description'] ?? '',
       '#description' => $this->t('Optional description which will be visible on the rate widget.'),
     ];
     $form['display']['description_class'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Description classes'),
-      '#default_value' => isset($display['description_class']) ? $display['description_class'] : '',
+      '#default_value' => $display['description_class'] ?? '',
       '#description' => $this->t('Enter classes, separated with space.'),
     ];
     $options = [
@@ -484,12 +525,12 @@ class RateWidgetForm extends EntityForm {
       '#type' => 'radios',
       '#title' => $this->t('Position of the description'),
       '#options' => $options,
-      '#default_value' => isset($display['description_position']) ? $display['description_position'] : 'below',
+      '#default_value' => $display['description_position'] ?? 'below',
     ];
     $form['display']['readonly'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Read only widget'),
-      '#default_value' => isset($display['readonly']) ? $display['readonly'] : 0,
+      '#default_value' => $display['readonly'] ?? 0,
     ];
 
     // Results settings.
@@ -509,7 +550,7 @@ class RateWidgetForm extends EntityForm {
       '#type' => 'radios',
       '#title' => $this->t('Position of the results summary'),
       '#options' => $options,
-      '#default_value' => isset($results['result_position']) ? $results['result_position'] : 'right',
+      '#default_value' => $results['result_position'] ?? 'right',
     ];
     $options = [
       'user_vote_empty' => $this->t('User vote if available, empty otherwise'),
@@ -521,7 +562,7 @@ class RateWidgetForm extends EntityForm {
       '#type' => 'radios',
       '#title' => $this->t('Which rating (option results) should be displayed?'),
       '#options' => $options,
-      '#default_value' => isset($results['result_type']) ? $results['result_type'] : 'user_vote_empty',
+      '#default_value' => $results['result_type'] ?? 'user_vote_empty',
       '#description' => $this->t('Option results: shown for each option and based on the value type function - average (percentage), count (option) or sum (points).'),
     ];
 
@@ -763,7 +804,10 @@ class RateWidgetForm extends EntityForm {
         $field_config = FieldConfig::loadByName($parameter[0], $parameter[1], $field_name);
         if (!empty($field_config)) {
           $field_config->delete();
-          $this->messenger->addStatus($this->t('Field %field removed from %entity.', ['%field' => 'Rate vote deadline', '%entity' => $entity]));
+          $this->messenger->addStatus($this->t('Field %field removed from %entity.', [
+            '%field' => 'Rate vote deadline',
+            '%entity' => $entity,
+          ]));
         }
       }
     }
@@ -774,7 +818,10 @@ class RateWidgetForm extends EntityForm {
         $field_config = FieldConfig::loadByName($parameter[0], $parameter[1], $field_name);
         if (!empty($field_config)) {
           $field_config->delete();
-          $this->messenger->addStatus($this->t('Field %field removed from %entity.', ['%field' => 'Rate vote deadline', '%entity' => $entity]));
+          $this->messenger->addStatus($this->t('Field %field removed from %entity.', [
+            '%field' => 'Rate vote deadline',
+            '%entity' => $entity,
+          ]));
         }
       }
     }

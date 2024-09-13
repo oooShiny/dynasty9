@@ -67,7 +67,7 @@ class Helper
      * If you want to use the input as a phrase please use the {@link escapePhrase()}
      * method, because a phrase requires much less escaping.
      *
-     * @see https://lucene.apache.org/solr/guide/the-standard-query-parser.html#escaping-special-characters
+     * @see https://solr.apache.org/guide/the-standard-query-parser.html#escaping-special-characters
      *
      * @param string $input
      *
@@ -75,9 +75,11 @@ class Helper
      */
     public function escapeTerm(string $input): string
     {
-        $pattern = '/( |\+|-|&&|\|\||!|\(|\)|\{|}|\[|]|\^|"|~|\*|\?|:|\/|\\\)/';
+        if (preg_match('/(^|\s)(AND|OR|TO)($|\s)/', strtoupper($input), $matches)) {
+            return $this->escapePhrase($input);
+        }
 
-        return preg_replace($pattern, '\\\$1', $input);
+        return preg_replace('/( |\+|-|&&|\|\||!|\(|\)|\{|}|\[|]|\^|"|~|\*|\?|:|\/|\\\)/', '\\\$1', $input);
     }
 
     /**
@@ -102,29 +104,65 @@ class Helper
     }
 
     /**
+     * Escape a local parameter value.
+     *
+     * This method wraps the value in single quotes if it contains a space,
+     * a single quote, a double quote, or a right curly bracket. It backslash
+     * escapes single quotes and backslashes within that quoted string.
+     *
+     * If an optional pre-escaped separator character is passed, a backslash
+     * preceding this character will not be escaped with another backslash.
+     * {@internal Based on splitSmart() in org.apache.solr.common.util.StrUtils}
+     *
+     * A value that doesn't require quoting is returned as is.
+     *
+     * @see https://solr.apache.org/guide/local-parameters-in-queries.html#basic-syntax-of-local-parameters
+     *
+     * @param string $value
+     * @param string $preEscapedSeparator Separator character that is already escaped with a backslash
+     *
+     * @return string
+     */
+    public function escapeLocalParamValue(string $value, string $preEscapedSeparator = null): string
+    {
+        if (preg_match('/[ \'"}]/', $value)) {
+            $pattern = "/('|\\\\)/";
+
+            if (null !== $preEscapedSeparator) {
+                $char = preg_quote(substr($preEscapedSeparator, 0, 1), '/');
+                $pattern = "/('|\\\\(?!$char))/";
+            }
+
+            $value = "'".preg_replace($pattern, '\\\$1', $value)."'";
+        }
+
+        return $value;
+    }
+
+    /**
      * Format a date to the expected formatting used in Solr.
      *
      * This format was derived to be standards compliant (ISO 8601).
      * A date field shall be of the form 1995-12-31T23:59:59Z.
      * The trailing "Z" designates UTC time and is mandatory.
      *
-     * @see https://lucene.apache.org/solr/guide/working-with-dates.html#date-formatting
+     * @see https://solr.apache.org/guide/working-with-dates.html#date-formatting
      *
      * @param int|string|\DateTimeInterface $input Accepted formats: timestamp, date string, DateTime or
      *                                             DateTimeImmutable
      *
-     * @return string|bool false is returned in case of invalid input
+     * @return string|false false is returned in case of invalid input
      */
     public function formatDate($input)
     {
         switch (true) {
-            // input of datetime object
             case $input instanceof \DateTimeInterface:
+                // input of DateTime or DateTimeImmutable object
                 $input = clone $input;
                 break;
-            // input of timestamp or date/time string
             case \is_string($input):
             case is_numeric($input):
+                // input of timestamp or date/time string
                 // if date/time string: convert to timestamp first
                 if (\is_string($input)) {
                     $input = strtotime($input);
@@ -137,26 +175,18 @@ class Helper
                     $input = false;
                 }
                 break;
-            // any other input formats can be added in additional cases here...
-            // case $input instanceof Zend_Date:
-
-            // unsupported input format
             default:
+                // unsupported input format
                 $input = false;
                 break;
         }
 
         // handle the filtered input
         if ($input) {
-            // when we get here the input is always a datetime object
+            // when we get here $input is always a DateTime or DateTimeImmutable object
             $input = $input->setTimezone(new \DateTimeZone('UTC'));
-            // Solr seems to require the format PHP erroneously declares as ISO8601.
-            /** @noinspection DateTimeConstantsUsageInspection */
-            $iso8601 = $input->format(\DateTimeInterface::ISO8601);
-            $iso8601 = strstr($iso8601, '+', true); //strip timezone
-            $iso8601 .= 'Z';
 
-            return $iso8601;
+            return $input->format('Y-m-d\TH:i:s\Z');
         }
 
         // unsupported input
@@ -329,7 +359,7 @@ class Helper
                     $value = $value ? 'true' : 'false';
                 }
 
-                $output .= ' '.$key.'='.$value;
+                $output .= ' '.$key.'='.$this->escapeLocalParamValue($value);
             }
         }
         $output .= '}';
@@ -397,7 +427,7 @@ class Helper
     /**
      * Render join localparams syntax.
      *
-     * @see https://lucene.apache.org/solr/guide/other-parsers.html#join-query-parser
+     * @see https://solr.apache.org/guide/other-parsers.html#join-query-parser
      *
      * @param string $from
      * @param string $to
@@ -418,7 +448,7 @@ class Helper
      *
      * This is a Solr 3.2+ feature.
      *
-     * @see https://lucene.apache.org/solr/guide/other-parsers.html#term-query-parser
+     * @see https://solr.apache.org/guide/other-parsers.html#term-query-parser
      *
      * @param string $field
      * @param float  $weight
@@ -435,7 +465,7 @@ class Helper
      *
      * This is a Solr 3.4+ feature.
      *
-     * @see https://lucene.apache.org/solr/guide/common-query-parameters.html#cache-parameter
+     * @see https://solr.apache.org/guide/common-query-parameters.html#cache-parameter
      *
      * @param bool       $useCache
      * @param float|null $cost
@@ -465,6 +495,12 @@ class Helper
      * Filters control characters that cause issues with servlet containers.
      *
      * Mainly useful to filter data before adding it to a document for the update query.
+     * Removing restricted XML chars:
+     * [#x1-#x8] | [#xB-#xC] | [#xE-#x1F] | [#x7F] | [#x80-#x84] | [#x86-#x9F].
+     * And [#xFDD0-#xFDDF] | [#xFFFE-#xFFFF] | [#xnFFFE-#xnFFFF] where n [1;10]
+     * Remove [#x0], this is not described in XML standard, but it was removed
+     * in previous version.
+     * Inspired by UTF8Utils::checkForIllegalCodepoints.
      *
      * @param string $data
      *
@@ -472,7 +508,19 @@ class Helper
      */
     public function filterControlCharacters(string $data): string
     {
-        return preg_replace('@[\x00-\x08\x0B\x0C\x0E-\x1F]@', ' ', $data);
+        return preg_replace('/
+          [\\x00-\\x08\\x0B\\x0C\\x0E-\\x1F\\x7F] # U+0000 to U+0008, U+000B, U+000C, U+000E to U+001F and U+007F
+        |
+          \\xC2[\\x80-\\x84\\x86\\x9F] # U+0080 to U+0084, U+0086 to U+009F
+        |
+          \\xED(?:\\xA0[\\x80-\\xFF]|[\\xA1-\\xBE][\\x00-\\xFF]|\\xBF[\\x00-\\xBF]) # U+D800 to U+DFFFF
+        |
+          \\xEF\\xB7[\\x90-\\xAF] # U+FDD0 to U+FDEF
+        |
+          \\xEF\\xBF[\\xBE\\xBF] # U+FFFE and U+FFFF
+        |
+          [\\xF0-\\xF4][\\x8F-\\xBF]\\xBF[\\xBE\\xBF] # U+nFFFE and U+nFFFF (1 <= n <= 10_{16})
+        /x', ' ', $data);
     }
 
     /**

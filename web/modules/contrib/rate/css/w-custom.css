@@ -55,7 +55,7 @@ div.custom-rating-wrapper > div > div.rating-option-result {
   vertical-align: baseline;
 }
 
-input.custom-rating-input {
+input.custom-rating-input[type="radio"] {
   display: none;
 }
 button.custom-rating-submit {

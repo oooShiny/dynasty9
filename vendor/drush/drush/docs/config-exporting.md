@@ -1,6 +1,6 @@
 # Exporting and Importing Configuration
 
-Drush provides commands to [export](commands/10.x/config_export.md), [pull](commands/10.x/config_pull.md), and [import](commands/10.x/config_import.md) Drupal configuration files.
+Drush provides commands to [export](commands/config_export.md), [pull](commands/config_pull.md), and [import](commands/config_import.md) Drupal configuration files.
 
 ## Simple - value changes
 
@@ -22,6 +22,5 @@ work for some things, such as enabling and disabling modules.
 
 ## Advanced - variation by environment
 
-- As of Drupal 8.8, Drupal supports [excluding development modules from enabling on higher environments](https://www.drupal.org/node/3079028).
-- See [Config Split](https://www.drupal.org/project/config_split) module for 
-more advanced needs.
+- Drupal supports [excluding development modules from enabling on higher environments](https://www.drupal.org/node/3079028).
+- See [Config Split](https://www.drupal.org/project/config_split) module for more advanced needs.

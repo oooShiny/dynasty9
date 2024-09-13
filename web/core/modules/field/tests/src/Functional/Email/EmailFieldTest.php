@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\field\Functional\Email;
 
 use Drupal\entity_test\Entity\EntityTest;
@@ -40,6 +42,9 @@ class EmailFieldTest extends BrowserTestBase {
    */
   protected $field;
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -53,9 +58,9 @@ class EmailFieldTest extends BrowserTestBase {
   /**
    * Tests email field.
    */
-  public function testEmailField() {
+  public function testEmailField(): void {
     // Create a field with settings to validate.
-    $field_name = mb_strtolower($this->randomMachineName());
+    $field_name = $this->randomMachineName();
     $this->fieldStorage = FieldStorageConfig::create([
       'field_name' => $field_name,
       'entity_type' => 'entity_test',
@@ -109,6 +114,15 @@ class EmailFieldTest extends BrowserTestBase {
     $content = $display->build($entity);
     $rendered_content = (string) \Drupal::service('renderer')->renderRoot($content);
     $this->assertStringContainsString('href="mailto:test@example.com"', $rendered_content);
+
+    // Test Email validation message.
+    $this->drupalGet('entity_test/add');
+    $value = 'abc.@in';
+    $edit = [
+      "{$field_name}[0][value]" => $value,
+    ];
+    $this->submitForm($edit, 'Save');
+    $this->assertSession()->statusMessageContains("The email address {$value} is not valid. Use the format user@example.com.", 'error');
   }
 
 }

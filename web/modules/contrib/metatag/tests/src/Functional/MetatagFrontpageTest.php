@@ -10,7 +10,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *
  * @group metatag
  */
-class MetatagFrontpageTest extends BrowserTestBase {
+class FrontpageTest extends BrowserTestBase {
 
   use MetatagHelperTrait;
   use StringTranslationTrait;
@@ -48,14 +48,19 @@ class MetatagFrontpageTest extends BrowserTestBase {
     $this->loginUser1();
 
     // Create content type.
-    $this->drupalCreateContentType(['type' => 'page', 'display_submitted' => FALSE]);
+    $this->drupalCreateContentType([
+      'type' => 'page',
+      'display_submitted' => FALSE,
+    ]);
     $this->nodeId = $this->drupalCreateNode(
       [
         'title' => $this->randomMachineName(8),
         'promote' => 1,
       ])->id();
 
-    $this->config('system.site')->set('page.front', '/node/' . $this->nodeId)->save();
+    $this->config('system.site')
+      ->set('page.front', '/node/' . $this->nodeId)
+      ->save();
   }
 
   /**

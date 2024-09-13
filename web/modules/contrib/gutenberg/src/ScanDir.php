@@ -69,6 +69,9 @@ class ScanDir {
         self::$extFilter = array_map('strtolower', $extension_filters);
       }
       elseif (is_string($extension_filters)) {
+        if (!self::$extFilter) {
+          self::$extFilter = [];
+        }
         self::$extFilter[] = strtolower($extension_filters);
       }
     }

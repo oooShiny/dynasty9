@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\pathauto\Functional;
 
-use Drupal\Tests\BrowserTestBase;
 use Drupal\comment\Tests\CommentTestTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests pathauto settings form.
@@ -19,14 +19,14 @@ class PathautoEnablingEntityTypesTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = ['node', 'pathauto', 'comment'];
+  protected static $modules = ['node', 'pathauto', 'comment'];
 
   /**
    * Admin user.
@@ -38,7 +38,7 @@ class PathautoEnablingEntityTypesTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'article']);
@@ -72,7 +72,7 @@ class PathautoEnablingEntityTypesTest extends BrowserTestBase {
     $edit = [
       'enabled_entity_types[comment]' => TRUE,
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm($edit, "Save configuration" );
     $this->createPattern('comment', '/comment/[comment:body]');
 
     // Create a node, a comment type and a comment entity.
@@ -81,7 +81,7 @@ class PathautoEnablingEntityTypesTest extends BrowserTestBase {
     $edit = [
       'comment_body[0][value]' => 'test-body',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save');
+    $this->submitForm($edit, 'Save');
 
     // Verify that an alias has been generated and that the type can no longer
     // be disabled.

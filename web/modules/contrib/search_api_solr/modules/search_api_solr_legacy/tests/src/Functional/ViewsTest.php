@@ -15,7 +15,7 @@ class ViewsTest extends SearchApiSolrViewsTest {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'search_api_solr_legacy',
     'search_api_solr_legacy_test',
   ];
@@ -34,4 +34,5 @@ class ViewsTest extends SearchApiSolrViewsTest {
   public function testViewsAdmin() {
     $this->markTestSkipped('This test fails on Solr 3.6. It requires some more debugging.');
   }
+
 }

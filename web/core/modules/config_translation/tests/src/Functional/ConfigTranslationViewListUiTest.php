@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\config_translation\Functional;
 
 use Drupal\language\Entity\ConfigurableLanguage;
@@ -34,8 +36,11 @@ class ConfigTranslationViewListUiTest extends UITestBase {
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp($import_test_views);
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp($import_test_views, $modules);
 
     $permissions = [
       'administer views',
@@ -51,7 +56,7 @@ class ConfigTranslationViewListUiTest extends UITestBase {
   /**
    * Tests views_ui list to see if translate link is added to operations.
    */
-  public function testTranslateOperationInViewListUi() {
+  public function testTranslateOperationInViewListUi(): void {
     // Views UI List 'admin/structure/views'.
     $this->drupalGet('admin/structure/views');
     $translate_link = 'admin/structure/views/view/test_view/translate';
@@ -69,7 +74,7 @@ class ConfigTranslationViewListUiTest extends UITestBase {
   /**
    * Test to ensure that TimestampFormatter translation works.
    */
-  public function testTimestampFormatterTranslation() {
+  public function testTimestampFormatterTranslation(): void {
     ConfigurableLanguage::createFromLangcode('de')->save();
 
     $this->drupalCreateContentType(['type' => 'article']);

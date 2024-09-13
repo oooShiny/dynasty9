@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\path\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -19,7 +21,10 @@ abstract class PathTestBase extends BrowserTestBase {
    */
   protected static $modules = ['node', 'path'];
 
-  protected function setUp() {
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
     parent::setUp();
 
     // Create Basic page and Article node types.

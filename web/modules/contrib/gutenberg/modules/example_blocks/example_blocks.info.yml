@@ -1,0 +1,12 @@
+name: Example Blocks (New and improved)
+type: module
+description: Example blocks for Gutenberg.
+package: Gutenberg
+core_version_requirement: ^9.5 || ^10
+dependencies:
+  - gutenberg
+
+# Information added by Drupal.org packaging script on 2024-07-06
+version: '3.0.2'
+project: 'gutenberg'
+datestamp: 1720280486

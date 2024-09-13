@@ -27,7 +27,7 @@ class RateWidgetMigrationTest extends MigrateDrupal7TestBase {
    */
   protected function getFixtureFilePath() {
     return implode(DIRECTORY_SEPARATOR, [
-      drupal_get_path('module', 'rate'),
+      \Drupal::service('extension.list.module')->getPath('rate'),
       'tests',
       'fixtures',
       'drupal7.php',
@@ -40,7 +40,10 @@ class RateWidgetMigrationTest extends MigrateDrupal7TestBase {
   public function testVoteMigration() {
     $this->installEntitySchema('vote');
     $this->startCollectingMessages();
-    $this->executeMigrations(['d7_vote']);
+    $this->executeMigrations([
+      'd7_vote_type',
+      'd7_vote',
+    ]);
     $this->assertNoMigrationMessages();
     $storage = \Drupal::entityTypeManager()->getStorage('vote');
     assert($storage instanceof EntityStorageInterface);

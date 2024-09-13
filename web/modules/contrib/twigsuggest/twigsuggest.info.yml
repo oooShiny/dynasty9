@@ -2,10 +2,9 @@ name: Twig Template Suggester
 type: module
 description: "Provides template suggestions for things Drupal doesn't."
 package: "Theme"
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 
-# Information added by Drupal.org packaging script on 2021-05-19
-version: '8.x-1.0-beta4'
+# Information added by Drupal.org packaging script on 2023-04-24
+version: '2.0.0-rc2'
 project: 'twigsuggest'
-datestamp: 1621454377
+datestamp: 1682356177

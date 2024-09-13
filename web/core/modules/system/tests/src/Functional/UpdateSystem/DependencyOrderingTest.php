@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Functional\UpdateSystem;
 
 use Drupal\Tests\BrowserTestBase;
@@ -28,6 +30,9 @@ class DependencyOrderingTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     require_once $this->root . '/core/includes/update.inc';
@@ -36,7 +41,7 @@ class DependencyOrderingTest extends BrowserTestBase {
   /**
    * Tests that updates within a single module run in the correct order.
    */
-  public function testUpdateOrderingSingleModule() {
+  public function testUpdateOrderingSingleModule(): void {
     $starting_updates = [
       'update_test_1' => 8001,
     ];
@@ -52,7 +57,7 @@ class DependencyOrderingTest extends BrowserTestBase {
   /**
    * Tests that dependencies between modules are resolved correctly.
    */
-  public function testUpdateOrderingModuleInterdependency() {
+  public function testUpdateOrderingModuleInterdependency(): void {
     $starting_updates = [
       'update_test_2' => 8001,
       'update_test_3' => 8001,

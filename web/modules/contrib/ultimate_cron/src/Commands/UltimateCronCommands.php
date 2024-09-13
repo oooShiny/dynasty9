@@ -16,13 +16,6 @@ use Drush\Commands\DrushCommands;
 class UltimateCronCommands extends DrushCommands {
 
   /**
-   * Logger object.
-   *
-   * @var \Drupal\Core\Logger\LoggerChannelInterface
-   */
-  protected $logger;
-
-  /**
    * Constructs an UltimateCronCommands object.
    *
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger

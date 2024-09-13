@@ -11,6 +11,8 @@ id: play_tag
 name: 'Play Tag'
 weight: 3
 min_count: 1
+missing: false
+missing_label: others
 url_alias: tag
 facet_source_id: 'search_api:views_page__highlight_search__page_1'
 field_identifier: tag

@@ -1,9 +1,17 @@
-// cSpell:words apos
+// cspell:ignore apos
 
 /**
  * HTML builder that converts document fragments into strings.
  *
- * @internal
+ * Escapes ampersand characters (`&`) and angle brackets (`<` and `>`) when
+ * transforming data to HTML. This is required because
+ * \Drupal\Component\Utility\Xss::filter fails to parse element attributes
+ * values containing unescaped HTML entities.
+ *
+ * @see https://www.drupal.org/project/drupal/issues/3227831
+ * @see DrupalHtmlBuilder._escapeAttribute
+ *
+ * @private
  */
 export default class DrupalHtmlBuilder {
   /**
@@ -28,6 +36,9 @@ export default class DrupalHtmlBuilder {
       'track',
       'wbr',
     ];
+
+    // @see https://html.spec.whatwg.org/multipage/syntax.html#raw-text-elements
+    this.rawTags = ['script', 'style'];
   }
 
   /**
@@ -41,7 +52,7 @@ export default class DrupalHtmlBuilder {
   }
 
   /**
-   * Converts document fragment into HTML string and appends to the value.
+   * Converts a document fragment into an HTML string appended to the value.
    *
    * @param {DocumentFragment} node
    *   A document fragment to be appended to the value.
@@ -53,11 +64,13 @@ export default class DrupalHtmlBuilder {
       this._appendElement(node);
     } else if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       this._appendChildren(node);
+    } else if (node.nodeType === Node.COMMENT_NODE) {
+      this._appendComment(node);
     }
   }
 
   /**
-   * Appends element node to the value.
+   * Appends an element node to the value.
    *
    * @param {DocumentFragment} node
    *   A document fragment to be appended to the value.
@@ -122,18 +135,41 @@ export default class DrupalHtmlBuilder {
    * @private
    */
   _appendText(node) {
-    // Text node doesn't have innerHTML property and textContent doesn't encode
+    // Repack the text into another node and extract using innerHTML. This
+    // works around text nodes not having an innerHTML property and textContent
+    // not encoding entities.
     // entities. That's why the text is repacked into another node and extracted
     // using innerHTML.
     const doc = document.implementation.createHTMLDocument('');
     const container = doc.createElement('p');
     container.textContent = node.textContent;
 
-    this._append(container.innerHTML);
+    if (
+      node.parentElement &&
+      this.rawTags.includes(node.parentElement.tagName.toLowerCase())
+    ) {
+      this._append(container.textContent);
+    } else {
+      this._append(container.innerHTML);
+    }
   }
 
   /**
-   * Appends string to the value.
+   * Appends a comment to the value.
+   *
+   * @param {DocumentFragment} node
+   *  A document fragment to be appended to the value.
+   *
+   * @private
+   */
+  _appendComment(node) {
+    this._append('<!--');
+    this._append(node.textContent);
+    this._append('-->');
+  }
+
+  /**
+   * Appends a string to the value.
    *
    * @param {string} str
    *  A string to be appended to the value.
@@ -156,6 +192,9 @@ export default class DrupalHtmlBuilder {
    *
    * @param {string} text
    *  A string to be escaped.
+   *
+   * @return {string}
+   *  Escaped string.
    *
    * @see https://www.w3.org/TR/2008/REC-xml-20081126/#NT-AttValue
    * @see https://html.spec.whatwg.org/multipage/parsing.html#attribute-value-(single-quoted)-state

@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Kernel\Theme;
 
-use Drupal\Component\Render\FormattableMarkup;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Component\Render\MarkupInterface;
 
@@ -36,29 +37,29 @@ class ThemeTest extends KernelTestBase {
    *   - the render element's #attributes
    *   - any attributes set in the template's preprocessing function
    */
-  public function testAttributeMerging() {
+  public function testAttributeMerging(): void {
     $theme_test_render_element = [
       'elements' => [
         '#attributes' => ['data-foo' => 'bar'],
       ],
       'attributes' => [
-        'id' => 'bazinga',
+        'id' => 'some_attribute',
       ],
     ];
-    $this->assertThemeOutput('theme_test_render_element', $theme_test_render_element, '<div id="bazinga" data-foo="bar" data-variables-are-preprocessed></div>' . "\n");
+    $this->assertThemeOutput('theme_test_render_element', $theme_test_render_element, '<div id="some_attribute" data-foo="bar" data-variables-are-preprocessed></div>' . "\n");
   }
 
   /**
    * Tests that ThemeManager renders the expected data types.
    */
-  public function testThemeDataTypes() {
+  public function testThemeDataTypes(): void {
     // theme_test_false is an implemented theme hook so \Drupal::theme() service
     // should return a string or an object that implements MarkupInterface,
     // even though the theme function itself can return anything.
-    $foos = ['null' => NULL, 'false' => FALSE, 'integer' => 1, 'string' => 'foo', 'empty_string' => ''];
-    foreach ($foos as $type => $example) {
+    $types = ['null' => NULL, 'false' => FALSE, 'integer' => 1, 'string' => 'foo', 'empty_string' => ''];
+    foreach ($types as $type => $example) {
       $output = \Drupal::theme()->render('theme_test_foo', ['foo' => $example]);
-      $this->assertTrue($output instanceof MarkupInterface || is_string($output), new FormattableMarkup('\Drupal::theme() returns an object that implements MarkupInterface or a string for data type @type.', ['@type' => $type]));
+      $this->assertTrue($output instanceof MarkupInterface || is_string($output), "\Drupal::theme() returns an object that implements MarkupInterface or a string for data type $type.");
       if ($output instanceof MarkupInterface) {
         $this->assertSame((string) $example, $output->__toString());
       }
@@ -67,16 +68,16 @@ class ThemeTest extends KernelTestBase {
       }
     }
 
-    // suggestionnotimplemented is not an implemented theme hook so \Drupal::theme() service
+    // suggestion_not_implemented is not an implemented theme hook so \Drupal::theme() service
     // should return FALSE instead of a string.
-    $output = \Drupal::theme()->render(['suggestionnotimplemented'], []);
+    $output = \Drupal::theme()->render(['suggestion_not_implemented'], []);
     $this->assertFalse($output, '\Drupal::theme() returns FALSE when a hook suggestion is not implemented.');
   }
 
   /**
    * Tests function theme_get_suggestions() for SA-CORE-2009-003.
    */
-  public function testThemeSuggestions() {
+  public function testThemeSuggestions(): void {
     // Set the front page as something random otherwise the CLI
     // test runner fails.
     $this->config('system.site')->set('page.front', '/nobody-home')->save();
@@ -103,7 +104,7 @@ class ThemeTest extends KernelTestBase {
   /**
    * Tests the listInfo() function.
    */
-  public function testListThemes() {
+  public function testListThemes(): void {
     $this->container->get('theme_installer')->install(['test_subtheme']);
     $theme_handler = $this->container->get('theme_handler');
     $themes = $theme_handler->listInfo();
@@ -128,7 +129,7 @@ class ThemeTest extends KernelTestBase {
   /**
    * Tests child element rendering for 'render element' theme hooks.
    */
-  public function testDrupalRenderChildren() {
+  public function testDrupalRenderChildren(): void {
     $element = [
       '#theme' => 'theme_test_render_element_children',
       'child' => [
@@ -149,10 +150,63 @@ class ThemeTest extends KernelTestBase {
   /**
    * Tests drupal_find_theme_templates().
    */
-  public function testFindThemeTemplates() {
+  public function testFindThemeTemplates(): void {
     $registry = $this->container->get('theme.registry')->get();
     $templates = drupal_find_theme_templates($registry, '.html.twig', $this->getThemePath('test_theme'));
     $this->assertEquals('node--1', $templates['node__1']['template'], 'Template node--1.html.twig was found in test_theme.');
+  }
+
+  /**
+   * Tests the update registry is correct during theme install and uninstall.
+   */
+  public function testThemeUpdateManagement(): void {
+    // Install modules the theme is dependent on and enable the post update
+    // function.
+    \Drupal::state()->set('test_theme_depending_on_modules.post_update', TRUE);
+    \Drupal::service('module_installer')->install([
+      'test_module_required_by_theme',
+      'test_another_module_required_by_theme',
+    ]);
+
+    /** @var \Drupal\Core\Update\UpdateRegistry $post_update_registry */
+    $post_update_registry = \Drupal::service('update.post_update_registry');
+    $this->assertEmpty($post_update_registry->getUpdateFunctions('test_theme_depending_on_modules'), 'No updates test_theme_depending_on_modules for prior to install.');
+    \Drupal::service('theme_installer')->install(['test_theme_depending_on_modules']);
+
+    // Ensure the post update function has been added to the list of
+    // existing updates.
+    $this->assertContains('test_theme_depending_on_modules_post_update_module_install', \Drupal::service('keyvalue')->get('post_update')->get('existing_updates'));
+
+    \Drupal::service('theme_installer')->uninstall(['test_theme_depending_on_modules']);
+    // Ensure the post update function has been removed from the list of
+    // existing updates.
+    $this->assertNotContains('test_theme_depending_on_modules_post_update_module_install', \Drupal::service('keyvalue')->get('post_update')->get('existing_updates'));
+  }
+
+  /**
+   * Tests the update registry is correct during theme install and uninstall.
+   */
+  public function testThemeUpdateManagementRemovedPostUpdates(): void {
+    // Install modules the theme is dependent on and enable the removed post
+    // updates function.
+    \Drupal::state()->set('test_theme_depending_on_modules.removed_post_updates', TRUE);
+    \Drupal::service('module_installer')->install([
+      'test_module_required_by_theme',
+      'test_another_module_required_by_theme',
+    ]);
+
+    $post_update_registry = \Drupal::service('update.post_update_registry');
+    $this->assertEmpty($post_update_registry->getUpdateFunctions('test_theme_depending_on_modules'), 'No updates test_theme_depending_on_modules for prior to install.');
+    \Drupal::service('theme_installer')->install(['test_theme_depending_on_modules']);
+
+    // Ensure the removed post update function has been added to the list of
+    // existing updates.
+    $this->assertContains('test_theme_depending_on_modules_post_update_foo', \Drupal::service('keyvalue')->get('post_update')->get('existing_updates'));
+
+    \Drupal::service('theme_installer')->uninstall(['test_theme_depending_on_modules']);
+    // Ensure the removed post update function has been removed from the list of
+    // existing updates.
+    $this->assertNotContains('test_theme_depending_on_modules_post_update_foo', \Drupal::service('keyvalue')->get('post_update')->get('existing_updates'));
   }
 
 }

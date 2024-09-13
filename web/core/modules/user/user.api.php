@@ -43,7 +43,7 @@ function hook_user_cancel($edit, UserInterface $account, $method) {
   switch ($method) {
     case 'user_cancel_block_unpublish':
       // Unpublish nodes (current revisions).
-      module_load_include('inc', 'node', 'node.admin');
+      \Drupal::moduleHandler()->loadInclude('node', 'inc', 'node.admin');
       $nodes = \Drupal::entityQuery('node')
         ->accessCheck(FALSE)
         ->condition('uid', $account->id())
@@ -53,7 +53,7 @@ function hook_user_cancel($edit, UserInterface $account, $method) {
 
     case 'user_cancel_reassign':
       // Anonymize nodes (current revisions).
-      module_load_include('inc', 'node', 'node.admin');
+      \Drupal::moduleHandler()->loadInclude('node', 'inc', 'node.admin');
       $nodes = \Drupal::entityQuery('node')
         ->accessCheck(FALSE)
         ->condition('uid', $account->id())
@@ -99,7 +99,7 @@ function hook_user_cancel_methods_alter(&$methods) {
   unset($methods['user_cancel_reassign']);
 
   // Add a custom zero-out method.
-  $methods['mymodule_zero_out'] = [
+  $methods['my_module_zero_out'] = [
     'title' => t('Delete the account and remove all content.'),
     'description' => t('All your content will be replaced by empty strings.'),
     // access should be used for administrative methods only.
