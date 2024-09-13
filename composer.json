@@ -255,6 +255,12 @@
         },
         "enable-patching": "true",
         "patches": {
+            "drupal/core": {
+                "Thousands marker in result total": "https://www.drupal.org/files/issues/2024-07-01/views-thousands-seperator-3034161-30--11.x.patch"
+            },
+            "drupal/layout_paragraphs": {
+                "3417765: Modal too big": "https://www.drupal.org/files/issues/2024-06-28/large-modal-exceeds-viewport-2.0.5-overscroll-fix-3417765-13.patch"
+            }
         }
     }
 }

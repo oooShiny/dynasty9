@@ -43,9 +43,10 @@
       const viewPortHeight =
         window.innerHeight || document.documentElement.clientHeight;
       if (bounding.bottom > viewPortHeight) {
-        const $dialog = $('.ui-dialog-content', dialog);
-        const pos = $dialog.dialog('option', 'position');
-        $dialog.dialog('option', 'position', pos);
+        var $dialog = $('.ui-dialog-content', dialog);
+        var height = viewPortHeight - 200;
+        $dialog.dialog('option', 'height', height);
+        $dialog.css('overscroll-behavior', 'contain');
       }
     });
   }

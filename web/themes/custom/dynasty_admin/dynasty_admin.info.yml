@@ -4,6 +4,6 @@ base theme: gin
 type: theme
 core_version_requirement: ^9 || ^10
 libraries:
-  - dynastyTW/global
-  - dynastyTW/overrides
+  - dynasty_tw/global
+  - dynasty_tw/overrides
   - dynasty_admin/gin_overrides

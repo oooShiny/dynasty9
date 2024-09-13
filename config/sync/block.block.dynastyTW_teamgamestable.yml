@@ -6,9 +6,9 @@ dependencies:
     - dynasty_module
     - node
   theme:
-    - dynastyTW
+    - dynasty_tw
 id: dynastyTW_teamgamestable
-theme: dynastyTW
+theme: dynasty_tw
 region: content
 weight: -7
 provider: null

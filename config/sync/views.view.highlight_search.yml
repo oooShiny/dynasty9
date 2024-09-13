@@ -107,6 +107,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 10
           total_pages: null
           id: 0
@@ -138,7 +139,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: search_api_none
         options: {  }
       empty: {  }
       sorts:
@@ -210,7 +211,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Search
+            label: ''
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -224,9 +225,15 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+              patreon_user: '0'
+              deleted_patreon_user: '0'
+              8156551_patron: '0'
+              8156552_patron: '0'
+              8156553_patron: '0'
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -260,11 +267,12 @@ display:
             'entity:node':
               highlight: card
       query:
-        type: views_query
+        type: search_api_query
         options:
           bypass_access: false
           skip_access: false
-          preserve_facet_query_args: false
+          preserve_facet_query_args: true
+          query_tags: {  }
       relationships: {  }
       header:
         area_text_custom:
@@ -276,7 +284,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: "<div class=\"tw-flex tw-justify-center tw-py-5 tw-w-full\">\r\n    <h2 class=\"tw-font-bold\">Popular Searches:</h2>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=butt+fumble\">Butt Fumble</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+amendola\">Edelman to Amendola</a>\r\n    <a class=\"tw-bg-gray-400 tw-p-1 tw-rounded-full tw-text-xs\" href=\"/search/plays?search=edelman+circus+catch\">The Catch</a>\r\n</div>"
+          content: "<div class=\"bg-gray-400 m-2 p-2 text-center\">\r\n<h2 class=\"font-bold\">Popular Searches</h2>\r\n<div class=\"flex justify-center py-5 w-full gap-2\">\r\n    <a class=\"badge badge-primary\" href=\"/search/plays?search=butt+fumble\">Butt Fumble</a>\r\n    <a class=\"badge badge-primary\" href=\"/search/plays?search=edelman+amendola\">Edelman to Amendola</a>\r\n    <a class=\"badge badge-primary\" href=\"/search/plays?search=edelman+circus+catch\">The Catch</a>\r\n</div>\r\n</div>"
           tokenize: false
         result:
           id: result
@@ -287,7 +295,7 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: "<div>\r\nDisplaying @start - @end of @total plays\r\n</div>"
+          content: "<div class=\"mx-auto p-2 patriots text-xl w-fit\">\r\nDisplaying @start - @end of @total plays\r\n</div>"
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -302,6 +310,7 @@ display:
       tags:
         - 'config:field.storage.node.field_distance'
         - 'config:search_api.index.highlight_index'
+        - 'search_api_list:highlight_index'
   page_1:
     id: page_1
     display_title: Page
@@ -309,14 +318,15 @@ display:
     position: 1
     display_options:
       cache:
-        type: none
+        type: search_api_none
       defaults:
         cache: false
       exposed_block: true
       display_extenders:
-        metatag_display_extender: {  }
-        simple_sitemap_display_extender:
-          variants: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
       path: search/plays
     cache_metadata:
       max-age: -1
@@ -330,3 +340,4 @@ display:
       tags:
         - 'config:field.storage.node.field_distance'
         - 'config:search_api.index.highlight_index'
+        - 'search_api_list:highlight_index'

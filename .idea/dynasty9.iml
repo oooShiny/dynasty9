@@ -2,7 +2,6 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/web/core/../drivers/lib/Drupal/Driver" isTestSource="false" packagePrefix="Drupal\Driver\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component" isTestSource="false" packagePrefix="Drupal\Component\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Annotation/" isTestSource="false" packagePrefix="Drupal\Component\Annotation\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Assertion/" isTestSource="false" packagePrefix="Drupal\Component\Assertion\" />
@@ -29,7 +28,6 @@
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Uuid/" isTestSource="false" packagePrefix="Drupal\Component\Uuid\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Version/" isTestSource="false" packagePrefix="Drupal\Component\Version\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Core" isTestSource="false" packagePrefix="Drupal\Core\" />
-      <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Bridge/" isTestSource="false" packagePrefix="Drupal\Component\Bridge\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />

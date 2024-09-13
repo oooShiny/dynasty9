@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - dynastyTW
+    - dynasty_tw
 _core:
   default_config_hash: ChCx7DYNUrPTt5uiRdQAPDKJQMc-_SyAQTrZh8H0o-c
 id: dynastyTW_main_menu
-theme: dynastyTW
+theme: dynasty_tw
 region: primary_menu
 weight: 0
 provider: null

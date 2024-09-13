@@ -39,6 +39,12 @@
   border: 0.25em solid #C60C30;
 }
 
+.patriots-otd {
+  color: white;
+  background: #002244;
+  border: 0.25em solid white;
+}
+
 .patriots a {
   color: white;
   text-decoration: underline;
@@ -54,6 +60,12 @@
   color: #002244;
   background: white;
   border: 0.25em solid #C60C30;
+}
+
+.patriots-blue {
+  color: #C60C30;
+  background: white;
+  border: 0.25em solid #002244;
 }
 
 .jersey-number-blue {

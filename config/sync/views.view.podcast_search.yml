@@ -167,6 +167,7 @@ display:
         type: full
         options:
           offset: 0
+          pagination_heading_level: h4
           items_per_page: 20
           total_pages: null
           id: 0
@@ -198,7 +199,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: search_api_none
         options: {  }
       empty: {  }
       sorts:
@@ -231,7 +232,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Search
+            label: ''
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -253,6 +254,7 @@ display:
             expose_fields: false
             placeholder: ''
             searched_fields_id: search_api_fulltext_searched_fields
+            value_maxlength: 128
           is_grouped: false
           group_info:
             label: ''
@@ -277,7 +279,7 @@ display:
             'entity:node':
               podcast_episode: card
       query:
-        type: views_query
+        type: search_api_query
         options:
           bypass_access: false
           skip_access: false
@@ -293,7 +295,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: '<a class="tw-bg-blue-pats tw-text-white tw-p-2 tw-my-2" href="/search/transcripts">Transcript Search</a>'
+          content: "<div class=\"flex justify-center py-3\">\r\n<a class=\"btn btn-primary\" href=\"/search/transcripts\">Transcript Search</a>\r\n</div>"
           tokenize: false
       footer: {  }
       display_extenders: {  }
@@ -308,6 +310,31 @@ display:
       tags:
         - 'config:field.storage.node.field_subtitle'
         - 'config:search_api.index.podcast_index'
+        - 'search_api_list:podcast_index'
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
+    position: 2
+    display_options:
+      exposed_block: true
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+      tags:
+        - 'config:field.storage.node.field_subtitle'
+        - 'config:search_api.index.podcast_index'
+        - 'search_api_list:podcast_index'
   page_1:
     id: page_1
     display_title: Page
@@ -315,7 +342,7 @@ display:
     position: 1
     display_options:
       cache:
-        type: none
+        type: search_api_none
       defaults:
         cache: false
       exposed_block: true
@@ -337,3 +364,4 @@ display:
       tags:
         - 'config:field.storage.node.field_subtitle'
         - 'config:search_api.index.podcast_index'
+        - 'search_api_list:podcast_index'

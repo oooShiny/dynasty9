@@ -4,8 +4,8 @@ core_version_requirement: ^8 || ^9 || ^10
 type: theme
 base theme: stable9
 libraries:
-  - dynastyTW/global
-  - dynastyTW/overrides
+  - dynasty_tw/global
+  - dynasty_tw/overrides
 regions:
   header: 'Header'
   primary_menu: 'Primary menu'

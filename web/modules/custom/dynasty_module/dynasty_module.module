@@ -131,6 +131,16 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
         'next' => '',
       ]
     ],
+    'prev_block' => [
+      'variables' => [
+        'previous' => '',
+      ]
+    ],
+    'next_block' => [
+      'variables' => [
+        'next' => '',
+      ]
+    ],
     'latest_podcast_block' => [
       'variables' => [
         'episode' => ''

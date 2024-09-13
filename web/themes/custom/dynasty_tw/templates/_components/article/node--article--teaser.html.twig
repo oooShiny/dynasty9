@@ -67,27 +67,13 @@
  *
  */
 #}
-<article{{ attributes }}>
+<article class="article-teaser bg-white mx-20 my-4 rounded-lg shadow-gray-500 shadow-lg">
 
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
+  <h2 class="bg-blue-pats text-2xl text-white p-4 rounded-t-lg">
+    <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+  </h2>
 
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
-
-  <div{{ content_attributes }}>
+  <div class="p-4">
     {{ content }}
   </div>
 

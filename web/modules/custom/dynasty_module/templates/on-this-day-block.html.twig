@@ -27,9 +27,9 @@
 #}
 <h2 class="text-center mb-6 text-3xl uppercase font-light"><a href="/calendar">On This Day:</a> {{ 'now'|date('F jS') }}</h2>
 {% if games is not empty %}
+  <h3 class="mb-6 text-xl uppercase font-light">Games on this day</h3>
 <div class="md:flex justify-evenly lg:gap-2">
-  {% block content %}
-    {% for game in games_highlights %}
+    {% for game in games.with_video %}
       <div class="md:w-1/4">
         <div class="font-bold text-center">
           <a href="{{ game.alias }}">
@@ -41,11 +41,11 @@
         <div class="flex pb-1">
           <div class="{{ game.css }} w-1/2 text-center">
             <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
-            <div>{{ game.opp_score }}</div>
+            <div class="text-3xl">{{ game.opp_score }}</div>
           </div>
-          <div class="patriots w-1/2 text-center">
+          <div class="patriots-otd w-1/2 text-center">
             <div>Patriots</div>
-            <div>{{ game.pats_score }}</div>
+            <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
           </div>
         </div>
 
@@ -75,7 +75,7 @@
     {% endfor %}
     </div>
     <div class="md:flex justify-evenly lg:gap-2">
-    {% for game in games %}
+    {% for game in games.no_video %}
       <div class="md:w-1/4">
         <div class="font-bold text-center">
           <a href="{{ game.alias }}">
@@ -87,11 +87,11 @@
         <div class="flex pb-1">
           <div class="{{ game.css }} w-1/2 text-center">
             <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
-            <div>{{ game.opp_score }}</div>
+            <div class="text-3xl">{{ game.opp_score }}</div>
           </div>
-          <div class="patriots w-1/2 text-center">
+          <div class="patriots-otd w-1/2 text-center">
             <div>Patriots</div>
-            <div>{{ game.pats_score }}</div>
+            <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
           </div>
         </div>
       </div>
@@ -101,6 +101,13 @@
         <div class="md:flex justify-evenly lg:gap-2">
       {% endif %}
     {% endfor %}
-  {% endblock %}
 </div>
+{% endif %}
+{% if events is not empty %}
+  <h3 class="mb-6 text-xl uppercase font-light">Events on this day</h3>
+  <div class="md:flex justify-evenly lg:gap-2">
+      {% for event in events %}
+        {{ event }}
+      {% endfor %}
+  </div>
 {% endif %}

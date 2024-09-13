@@ -6,9 +6,9 @@ dependencies:
     - dynasty_module
     - system
   theme:
-    - dynastyTW
+    - dynasty_tw
 id: dynastyTW_latestpodcastblock
-theme: dynastyTW
+theme: dynasty_tw
 region: help
 weight: -11
 provider: null

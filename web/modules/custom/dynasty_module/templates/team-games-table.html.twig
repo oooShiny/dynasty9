@@ -5,13 +5,13 @@
       <div class="patriots p-2 w-1/2">
         <div class="text-2xl text-center">Patriots</div>
         <br>
-        <div class="text-5xl text-center">{{ totals.pf }}</div>
+        <div class="text-5xl text-center">{{ totals.pf|number_format(0, ',') }}</div>
       </div>
 
       <div class="{{ opp.css }} p-2 w-1/2">
         <div class="text-2xl text-center">{{ opp.short }}</div>
         <br>
-        <div class="text-5xl text-center">{{ totals.pa }}</div>
+        <div class="text-5xl text-center">{{ totals.pa|number_format(0, ',') }}</div>
       </div>
     </div>
   </div>
@@ -146,8 +146,8 @@
     <td class="p-5">{{ game.home_away }}</td>
     <td class="p-5">{{ game.date|date('F j,  Y') }}</td>
     <td class="p-5">{{ game.opp_coach }}</td>
-    <td class="p-5">{{ game.over_under }}</td>
-    <td class="p-5">{{ game.vegas_line }}</td>
+    <td class="p-5 bg-opacity-50 {% if game.over %}text-green-700 bg-green-100{% else %}text-red-600 bg-red-100{% endif %}">{{ game.over_under }}</td>
+    <td class="p-5 bg-opacity-50 {% if game.spread %}text-green-700 bg-green-100{% else %}text-red-600 bg-red-100{% endif %}">{{ game.vegas_line }}</td>
   </tr>
 {% endfor %}
   </tbody>

@@ -1,10 +1,15 @@
 uuid: b2c76f8d-9487-44be-87c7-d9bcdbff1740
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_paragraphs
 id: block
 label: Block
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }

@@ -1,3 +1,0 @@
-services:
-  twitter_post.manager:
-    class: Drupal\social_post_twitter\TwitterPostManager

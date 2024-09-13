@@ -1,6 +1,3 @@
-article_enable_full: 1
-article_template: ''
-article_template_lock: none
 article_allowed_blocks:
   core/paragraph: core/paragraph
   core/image: core/image
@@ -30,7 +27,7 @@ article_allowed_blocks:
   core/text-columns: core/text-columns
   core/verse: core/verse
   core/video: core/video
-  core/all: 0
+  core/all: '0'
   core-embed/twitter: core-embed/twitter
   core-embed/youtube: core-embed/youtube
   core-embed/facebook: core-embed/facebook
@@ -42,81 +39,84 @@ article_allowed_blocks:
   embed: embed
   core-embed/reddit: core-embed/reddit
   core-embed/tiktok: core-embed/tiktok
-  core-embed/all: 0
-  core-embed/wordpress: 0
-  core-embed/amazon-kindle: 0
-  core-embed/animoto: 0
-  core-embed/cloudup: 0
-  core-embed/collegehumor: 0
-  core-embed/crowdsignal: 0
-  core-embed/dailymotion: 0
-  core-embed/hulu: 0
-  core-embed/imgur: 0
-  core-embed/issuu: 0
-  core-embed/kickstarter: 0
-  core-embed/meetup-com: 0
-  core-embed/mixcloud: 0
-  core-embed/polldaddy: 0
-  core-embed/reverbnation: 0
-  core-embed/screencast: 0
-  core-embed/scribd: 0
-  core-embed/slideshare: 0
-  core-embed/smugmug: 0
-  core-embed/speaker-deck: 0
-  core-embed/speaker: 0
-  core-embed/ted: 0
-  core-embed/tumblr: 0
-  core-embed/videopress: 0
-  core-embed/wordpress-tv: 0
+  core-embed/all: '0'
+  core-embed/wordpress: '0'
+  core-embed/amazon-kindle: '0'
+  core-embed/animoto: '0'
+  core-embed/cloudup: '0'
+  core-embed/collegehumor: '0'
+  core-embed/crowdsignal: '0'
+  core-embed/dailymotion: '0'
+  core-embed/hulu: '0'
+  core-embed/imgur: '0'
+  core-embed/issuu: '0'
+  core-embed/kickstarter: '0'
+  core-embed/meetup-com: '0'
+  core-embed/mixcloud: '0'
+  core-embed/polldaddy: '0'
+  core-embed/reverbnation: '0'
+  core-embed/screencast: '0'
+  core-embed/scribd: '0'
+  core-embed/slideshare: '0'
+  core-embed/smugmug: '0'
+  core-embed/speaker-deck: '0'
+  core-embed/speaker: '0'
+  core-embed/ted: '0'
+  core-embed/tumblr: '0'
+  core-embed/videopress: '0'
+  core-embed/wordpress-tv: '0'
 article_allowed_drupal_blocks:
-  'entity_view:node': 0
-  'entity_view:user': 0
-  page_title_block: 0
-  'block_content:3df58732-07a1-430b-9631-493cb6e57a52': 0
-  'block_content:dfb1fb38-8180-445f-ae0a-a7ff50b637a3': 0
+  'entity_view:node': '0'
+  'entity_view:user': '0'
+  page_title_block: '0'
+  'block_content:3df58732-07a1-430b-9631-493cb6e57a52': '0'
+  'block_content:dfb1fb38-8180-445f-ae0a-a7ff50b637a3': '0'
   brady_total_tds: brady_total_tds
-  footer_seasons_block: 0
-  latest_podcast_block: 0
-  on_this_day_block: 0
-  player_select_block: 0
-  prev_next_game: 0
-  season_select_block: 0
-  'facet_block:after_bye_we': 0
-  'facet_block:game_home_away': 0
-  'facet_block:opponent': 0
-  'facet_block:podcast_opponent': 0
-  'facet_block:game_opponent': 0
-  'facet_block:game_opposing_coach': 0
-  'facet_block:overtime': 0
-  'facet_block:player_s_involved': 0
-  'facet_block:playoff': 0
-  'facet_block:play_type': 0
-  'facet_block:game_season': 0
-  'facet_block:podcast_season': 0
-  'facet_block:td_scored': 0
-  'facet_block:week': 0
-  'facet_block:yards_gained': 0
-  facets_block: 0
-  user_login_block: 0
-  help_block: 0
-  'views_block:game_highlights-block_1': 0
-  'views_block:games_by_season-block_1': 0
-  'views_block:player_highlights-block_1': 0
-  'views_block:comments_recent-block_1': 0
-  'views_block:content_recent-block_1': 0
-  'views_block:team_games-block_1': 0
-  'views_block:who_s_online-who_s_online_block': 0
-  'system_menu_block:footer': 0
-  'system_menu_block:main': 0
-  'system_menu_block:account': 0
-  pager: 0
-  system_breadcrumb_block: 0
-  'language_block:language_interface': 0
-  system_messages_block: 0
-  system_powered_by_block: 0
-  system_branding_block: 0
-  node_syndicate_block: 0
-  'views_exposed_filter_block:game_search-page_1': 0
-  'views_exposed_filter_block:highlight_search-page_1': 0
-twitter_hidden_image_enable_full: 0
+  footer_seasons_block: '0'
+  latest_podcast_block: '0'
+  on_this_day_block: '0'
+  player_select_block: '0'
+  prev_next_game: '0'
+  season_select_block: '0'
+  'facet_block:after_bye_we': '0'
+  'facet_block:game_home_away': '0'
+  'facet_block:opponent': '0'
+  'facet_block:podcast_opponent': '0'
+  'facet_block:game_opponent': '0'
+  'facet_block:game_opposing_coach': '0'
+  'facet_block:overtime': '0'
+  'facet_block:player_s_involved': '0'
+  'facet_block:playoff': '0'
+  'facet_block:play_type': '0'
+  'facet_block:game_season': '0'
+  'facet_block:podcast_season': '0'
+  'facet_block:td_scored': '0'
+  'facet_block:week': '0'
+  'facet_block:yards_gained': '0'
+  facets_block: '0'
+  user_login_block: '0'
+  help_block: '0'
+  'views_block:game_highlights-block_1': '0'
+  'views_block:games_by_season-block_1': '0'
+  'views_block:player_highlights-block_1': '0'
+  'views_block:comments_recent-block_1': '0'
+  'views_block:content_recent-block_1': '0'
+  'views_block:team_games-block_1': '0'
+  'views_block:who_s_online-who_s_online_block': '0'
+  'system_menu_block:footer': '0'
+  'system_menu_block:main': '0'
+  'system_menu_block:account': '0'
+  pager: '0'
+  system_breadcrumb_block: '0'
+  'language_block:language_interface': '0'
+  system_messages_block: '0'
+  system_powered_by_block: '0'
+  system_branding_block: '0'
+  node_syndicate_block: '0'
+  'views_exposed_filter_block:game_search-page_1': '0'
+  'views_exposed_filter_block:highlight_search-page_1': '0'
+article_enable_full: true
+article_template: ''
+article_template_lock: none
+twitter_hidden_image_enable_full: false
 event_enable_full: 0

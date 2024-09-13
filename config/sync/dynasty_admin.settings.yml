@@ -7,8 +7,8 @@ favicon:
   use_default: 0
   path: themes/custom/dynasty/icons/lombardi-icon-16px.png
   mimetype: image/png
-enable_darkmode: 0
-preset_accent_color: null
+enable_darkmode: '0'
+preset_accent_color: blue
 accent_color: ''
 preset_focus_color: gin
 focus_color: ''
@@ -17,3 +17,9 @@ show_user_theme_settings: 0
 classic_toolbar: horizontal
 icon_default: 1
 icon_upload: ''
+logo:
+  use_default: 1
+sticky_action_buttons: 0
+secondary_toolbar_frontend: 0
+layout_density: ''
+show_description_toggle: 0

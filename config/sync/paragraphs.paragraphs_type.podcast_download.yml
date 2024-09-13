@@ -1,10 +1,15 @@
 uuid: e4c2a762-37a2-4308-90f3-8991ac212b4a
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_paragraphs
 id: podcast_download
 label: 'Podcast Download'
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }

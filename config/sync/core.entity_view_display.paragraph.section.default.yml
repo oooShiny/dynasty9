@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.section.field_2_column_widths
     - field.field.paragraph.section.field_background_color
     - field.field.paragraph.section.field_full_width_section
     - paragraphs.paragraphs_type.section
@@ -31,4 +32,5 @@ content:
     weight: 1
     region: content
 hidden:
+  field_2_column_widths: true
   search_api_excerpt: true

@@ -1,0 +1,17 @@
+uuid: bf42ba39-6be7-4563-a40b-33a2173b42cf
+langcode: en
+status: true
+dependencies:
+  module:
+    - gutenberg
+title: 'Default cron handler'
+id: gutenberg_cron
+weight: 0
+module: gutenberg
+callback: gutenberg_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

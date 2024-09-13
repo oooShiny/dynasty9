@@ -1,0 +1,21 @@
+uuid: 2b4bd305-065d-4b59-8409-cafbf2f6f586
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_2_column_widths
+    - paragraphs.paragraphs_type.section
+  module:
+    - options
+id: paragraph.section.field_2_column_widths
+field_name: field_2_column_widths
+entity_type: paragraph
+bundle: section
+label: '2 Column Widths'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

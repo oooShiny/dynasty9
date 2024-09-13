@@ -9,15 +9,15 @@ use Drupal\node\Entity\Node;
  * Provides a Block that displays games from this date in history.
  *
  * @Block(
- *   id = "prev_next_game",
- *   admin_label = @Translation("Previous/Next Game Block"),
+ *   id = "next_game",
+ *   admin_label = @Translation("Next Game Block"),
  *   category = @Translation("Dynasty"),
  *   context_definitions = {
  *     "node" = @ContextDefinition("entity:node", label = @Translation("Node"))
  *   }
  * )
  */
-class PrevNextGameBlock extends BlockBase {
+class NextGameBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
@@ -45,20 +45,10 @@ class PrevNextGameBlock extends BlockBase {
     else {
       $next = NULL;
     }
-    // Find the previous game by date.
-    krsort($games);
-    $nid = $this->get_adjacent_game($games, $date);
-    if ($nid) {
-    $previous_nid = $games[$nid];
-      $previous = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $previous_nid);
-    }
-    else {
-      $previous = NULL;
-    }
+
     // Display both as links.
     return [
-      '#theme' => 'prev_next_block',
-      '#previous' => $previous,
+      '#theme' => 'next_block',
       '#next' => $next
     ];
   }

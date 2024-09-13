@@ -32,6 +32,9 @@ views.field.counter:
     counter_start:
       type: integer
       label: 'Starting value'
+    thousand_separator:
+      type: text
+      label: 'Thousand marker'
 
 views.field.custom:
   type: views_field

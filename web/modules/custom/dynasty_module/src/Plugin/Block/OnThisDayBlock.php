@@ -25,12 +25,13 @@ class OnThisDayBlock extends BlockBase {
 
     // Get all games and see if the day/month matches up to today.
     $games = $this->getGames($today);
+    $events = $this->getEvents($today);
 
     return [
       '#theme' => 'on_this_day_block',
       '#games' => $games,
       '#birthdays' => [],
-      '#events' => [],
+      '#events' => $events,
     ];
   }
 
@@ -95,7 +96,7 @@ class OnThisDayBlock extends BlockBase {
         $opponent = explode(' ', $game->field_opponent->entity->label());
         $css = strtolower(implode('-', $opponent));
         if ($muse_id) {
-          $todays_games['#games_highlights'][] = [
+          $todays_games['with_video'][] = [
             'alias' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
             'pats_score' => $game->field_patriots_score->value,
             'opp_score' => $game->field_opponent_score->value,
@@ -107,7 +108,7 @@ class OnThisDayBlock extends BlockBase {
           ];
         }
         else {
-          $todays_games['#games'][] = [
+          $todays_games['no_video'][] = [
             'alias' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$game->id()),
             'pats_score' => $game->field_patriots_score->value,
             'opp_score' => $game->field_opponent_score->value,
@@ -119,8 +120,30 @@ class OnThisDayBlock extends BlockBase {
         }
       }
     }
-
     return $todays_games;
+  }
+
+  function getEvents($today) {
+    $todays_events = [];
+    $event_nids = \Drupal::entityQuery('node')
+      ->condition('type', 'event')
+      ->accessCheck(TRUE)
+      ->execute();
+
+    $events = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadMultiple(array_keys($event_nids));
+
+    foreach ($events as $event) {
+      $event_date = '';
+      if (is_object($event) && $event->hasField('field_date') && !is_null($event->field_date->value)) {
+        $event_date = substr($event->field_event_date->value, 5);
+      }
+      if ($event_date !== '' && $event_date == $today) {
+        $todays_events[] = $event;
+      }
+    }
+    return $todays_events;
   }
 }
 

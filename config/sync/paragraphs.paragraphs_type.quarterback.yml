@@ -1,10 +1,15 @@
 uuid: b2c27bc5-eac8-4e38-bb2c-a687cea18390
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_paragraphs
 id: quarterback
 label: Quarterback
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }

@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - dynastyTW
+    - dynasty_tw
 _core:
   default_config_hash: 8zRjTNbfNAJ94lQpZDu6MkyD87GYJ2zpH9VQPVmRbcM
 id: dynastyTW_footer
-theme: dynastyTW
+theme: dynasty_tw
 region: footer_menu
 weight: -13
 provider: null

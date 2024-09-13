@@ -8,7 +8,6 @@ dependencies:
     - field.storage.node.field_brady_ints
     - field.storage.node.field_brady_tds
     - field.storage.node.field_brady_yards
-    - field.storage.node.field_game_video
     - field.storage.node.field_home_away
     - field.storage.node.field_jersey_number
     - field.storage.node.field_month
@@ -76,7 +75,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: tw-p-5
+          element_class: p-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -105,76 +104,6 @@ display:
           fallback_handler: search_api
           fallback_options:
             link_to_item: true
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-        video:
-          id: video
-          table: search_api_index_game_index
-          field: video
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: search_api_field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: "{% if video|render %}\r\n\t<img src=\"/themes/custom/dynasty/icons/tv.svg\" class=\"tw-h-5 tw-inline\" />\r\n{% else %}\r\n\t<img src=\"/themes/custom/dynasty/icons/tv-grey.svg\" class=\"tw-h-5 tw-inline\" />\r\n{% endif %}"
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 1
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ''
-          field_api_classes: true
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
@@ -216,7 +145,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: tw-ml-5
+          element_class: ml-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -298,7 +227,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: tw-pr-5
+          element_class: pr-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -380,7 +309,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: tw-pr-5
+          element_class: pr-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -658,7 +587,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: tw-pr-5
+          element_class: pr-5
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -728,7 +657,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: ''
-          element_class: 'tw-border-r tw-pr-5'
+          element_class: 'border-r pr-5'
           element_label_type: ''
           element_label_class: ''
           element_label_colon: true
@@ -772,7 +701,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% set names = starting_qb|split(' ') %}\r\n<div class=\"patriots jersey tw-font-light tw-text-center tw-text-xs tw-uppercase\">{{ names|last }}"
+            text: "{% set names = starting_qb|split(' ') %}\r\n<div class=\"font-bold jersey text-blue-pats text-center text-xs uppercase\">{{ names|last }}"
             make_link: false
             path: ''
             absolute: false
@@ -842,7 +771,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"tw-font-bold tw-text-xl\">{{ qb_jersey_number }}</div>\r\n</div>"
+            text: "<div class=\"font-bold jersey-number-blue text-3xl\">{{ qb_jersey_number }}</div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
@@ -1406,6 +1335,75 @@ display:
             format_plural_values:
               - '1'
               - '@count'
+        result_1:
+          id: result_1
+          table: search_api_index_game_index
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api_field
+          label: ''
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{{ result_1__value }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
       pager:
         type: none
         options:
@@ -1424,7 +1422,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: search_api_none
         options: {  }
       empty: {  }
       sorts:
@@ -1489,19 +1487,19 @@ display:
           parse_mode: fuzzy_terms
           min_length: 2
           fields: {  }
-        patriots_hc:
-          id: patriots_hc
+        season_int:
+          id: season_int
           table: search_api_index_game_index
-          field: patriots_hc
+          field: season_int
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: search_api_string
-          operator: '='
+          plugin_id: search_api_numeric
+          operator: between
           value:
-            min: ''
-            max: ''
-            value: 'Bill Belichick'
+            min: '2000'
+            max: '2023'
+            value: ''
           group: 1
           exposed: false
           expose:
@@ -1537,7 +1535,7 @@ display:
         type: table
         options:
           grouping: {  }
-          row_class: '{{ result|lower }} tw-py-5 tw-border tw-bg-white'
+          row_class: '{{ result|lower }} py-5 border bg-white'
           default_row_class: false
           columns:
             title: title
@@ -1693,13 +1691,13 @@ display:
       row:
         type: fields
       query:
-        type: views_query
+        type: search_api_query
         options:
           bypass_access: false
           skip_access: false
           preserve_facet_query_args: false
       relationships: {  }
-      css_class: 'tw-m-auto tw-max-w-2xl'
+      css_class: 'm-auto max-w-2xl table table-md'
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -1717,7 +1715,6 @@ display:
         - 'config:field.storage.node.field_brady_ints'
         - 'config:field.storage.node.field_brady_tds'
         - 'config:field.storage.node.field_brady_yards'
-        - 'config:field.storage.node.field_game_video'
         - 'config:field.storage.node.field_home_away'
         - 'config:field.storage.node.field_jersey_number'
         - 'config:field.storage.node.field_month'
@@ -1727,6 +1724,7 @@ display:
         - 'config:field.storage.node.field_result'
         - 'config:field.storage.node.field_weekday'
         - 'config:search_api.index.game_index'
+        - 'search_api_list:game_index'
   page_1:
     id: page_1
     display_title: 'Game Search Page'
@@ -1734,15 +1732,16 @@ display:
     position: 1
     display_options:
       cache:
-        type: none
+        type: search_api_none
       defaults:
         cache: false
       display_description: ''
       exposed_block: true
       display_extenders:
-        metatag_display_extender: {  }
-        simple_sitemap_display_extender:
-          variants: {  }
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
+        simple_sitemap_display_extender: {  }
       path: search/games
     cache_metadata:
       max-age: -1
@@ -1758,7 +1757,6 @@ display:
         - 'config:field.storage.node.field_brady_ints'
         - 'config:field.storage.node.field_brady_tds'
         - 'config:field.storage.node.field_brady_yards'
-        - 'config:field.storage.node.field_game_video'
         - 'config:field.storage.node.field_home_away'
         - 'config:field.storage.node.field_jersey_number'
         - 'config:field.storage.node.field_month'
@@ -1768,3 +1766,4 @@ display:
         - 'config:field.storage.node.field_result'
         - 'config:field.storage.node.field_weekday'
         - 'config:search_api.index.game_index'
+        - 'search_api_list:game_index'

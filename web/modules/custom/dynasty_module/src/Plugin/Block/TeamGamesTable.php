@@ -40,7 +40,6 @@ class TeamGamesTable extends BlockBase {
       ->condition('status', 1)
       ->condition('field_opponent', $team->id())
       ->condition('field_season', 1999, '>')
-      ->accessCheck(TRUE)
       ->execute();
     $games = [];
     $totals = [
@@ -53,17 +52,37 @@ class TeamGamesTable extends BlockBase {
     $g = 0;
     $offset = [];
     foreach (Node::loadMultiple($game_nodes) as $game) {
+      $covered_spread = FALSE;
+      $pats_score = $game->get('field_patriots_score')->value;
+      $opp_score = $game->get('field_opponent_score')->value;
+      $diff = $pats_score - $opp_score;
+      $vegas = $game->get('field_vegas_line')->value;
+
+      if ($vegas < 0 && $diff > abs($vegas) // If the Pats are favored and they won by more than the spread.
+        || $vegas > 0 && abs($diff) < $vegas) { // Pats not favored, but diff is less than the spread.
+        $covered_spread = TRUE;
+      }
+
+      $over = FALSE;
+      $o_u = $game->get('field_over_under')->value;
+      if (($opp_score + $pats_score) > $o_u) {
+        $over = TRUE;
+      }
+
+
       $games[$game->id()] = [
         'title' => $game->label(),
         'home_away' => $game->get('field_home_away')->value,
         'date' => $game->get('field_date')->value,
         'month' => $game->get('field_month')->value,
-        'opp_score' => $game->get('field_opponent_score')->value,
-        'pats_score' => $game->get('field_patriots_score')->value,
+        'opp_score' => $opp_score,
+        'pats_score' => $pats_score,
         'result' => $game->get('field_result')->value,
         'opp_coach' => $coaches[$game->get('field_opposing_coach')->target_id],
-        'over_under' => $game->get('field_over_under')->value,
-        'vegas_line' => $game->get('field_vegas_line')->value,
+        'over_under' => $o_u,
+        'vegas_line' => $vegas,
+        'spread' => $covered_spread,
+        'over' => $over
       ];
 
       // If the user is logged in, add the video icon.
@@ -93,6 +112,7 @@ class TeamGamesTable extends BlockBase {
 
     // Get all highlights for these game nodes.
     $highlights = \Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('type', 'highlight')
       ->condition('status', 1)
       ->condition('field_game', array_keys($game_nodes), 'IN')

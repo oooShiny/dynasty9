@@ -1,10 +1,15 @@
 uuid: e91b0b85-42bb-491f-a792-7416358a3325
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_paragraphs
 id: alternate_team_name
 label: 'Alternate Team Name'
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }

@@ -8,9 +8,9 @@ dependencies:
     - system
     - views
   theme:
-    - dynastyTW
+    - dynasty_tw
 id: dynastyTW_exposedformpodcast_searchpage_1
-theme: dynastyTW
+theme: dynasty_tw
 region: content
 weight: -10
 provider: null

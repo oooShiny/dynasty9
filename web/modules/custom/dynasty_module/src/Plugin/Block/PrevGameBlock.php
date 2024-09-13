@@ -6,18 +6,18 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\node\Entity\Node;
 
 /**
- * Provides a Block that displays games from this date in history.
+ * Provides a Block that displays a link to the previous game.
  *
  * @Block(
- *   id = "prev_next_game",
- *   admin_label = @Translation("Previous/Next Game Block"),
+ *   id = "prev_game",
+ *   admin_label = @Translation("Previous Game Block"),
  *   category = @Translation("Dynasty"),
  *   context_definitions = {
  *     "node" = @ContextDefinition("entity:node", label = @Translation("Node"))
  *   }
  * )
  */
-class PrevNextGameBlock extends BlockBase {
+class PrevGameBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
@@ -35,16 +35,7 @@ class PrevNextGameBlock extends BlockBase {
     foreach ($nodes as $n) {
       $games[$n->get('field_date')->value] = $n->id();
     }
-    // Find the next game by date.
-    ksort($games);
-    $nid = $this->get_adjacent_game($games, $date);
-    if ($nid) {
-      $next_nid = $games[$nid];
-      $next = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $next_nid);
-    }
-    else {
-      $next = NULL;
-    }
+
     // Find the previous game by date.
     krsort($games);
     $nid = $this->get_adjacent_game($games, $date);
@@ -57,9 +48,8 @@ class PrevNextGameBlock extends BlockBase {
     }
     // Display both as links.
     return [
-      '#theme' => 'prev_next_block',
-      '#previous' => $previous,
-      '#next' => $next
+      '#theme' => 'prev_block',
+      '#previous' => $previous
     ];
   }
 

@@ -1,0 +1,9 @@
+uuid: 7f6f9acd-fe8f-4d40-99c5-34cb8e382797
+langcode: en
+status: true
+dependencies: {  }
+id: search_api__views_block__podcast_search__block_1
+name: 'search_api:views_block__podcast_search__block_1'
+filter_key: null
+url_processor: query_string
+breadcrumb: {  }

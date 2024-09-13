@@ -1,10 +1,15 @@
 uuid: deaff011-5ff6-45d9-99e2-1bb84a9179e1
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_paragraphs
 id: highlight
 label: Highlight
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins:
+  layout_paragraphs:
+    enabled: false
+    available_layouts: {  }
