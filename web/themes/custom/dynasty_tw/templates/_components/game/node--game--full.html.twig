@@ -196,15 +196,11 @@
     {% endif %}
 
     {% if content.field_youtube_highlights|render %}
-      <a type="button" href="{{ content.field_youtube_highlights|render|trim }}" class="p-4 bg-red-600 text-white text-center">Youtube Highlights</a>
+      <a type="button" href="{{ content.field_youtube_highlights[0]['#url'] }}" class="p-4 bg-red-600 text-white text-center">Youtube Highlights</a>
     {% endif %}
 
     {% if content.field_youtube_game_link|render %}
       <a type="button" href="{{ content.field_youtube_game_link|render|trim }}" class="bg-white border border-red-600 p-4 text-center text-red-600">Youtube Game Video</a>
-    {% endif %}
-
-    {% if season > 2008 %}
-      <a type="button" href="{{ gamepass_link }}" class="p-4 bg-blue-900 text-white text-center">Watch on GamePass</a>
     {% endif %}
   </div>
 
