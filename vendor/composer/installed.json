@@ -4068,6 +4068,61 @@
             "install-path": "../../web/modules/contrib/patreon"
         },
         {
+            "name": "drupal/plausible",
+            "version": "2.1.0",
+            "version_normalized": "2.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/plausible.git",
+                "reference": "2.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/plausible-2.1.0.zip",
+                "reference": "2.1.0",
+                "shasum": "7c9ab067bf07882aad4a2f8236050efc8376d66a"
+            },
+            "require": {
+                "drupal/core": "^8.8.6 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.1.0",
+                    "datestamp": "1687203441",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "DieterHolvoet",
+                    "homepage": "https://www.drupal.org/user/3567222"
+                },
+                {
+                    "name": "droces",
+                    "homepage": "https://www.drupal.org/user/2996575"
+                },
+                {
+                    "name": "opdavies",
+                    "homepage": "https://www.drupal.org/user/381388"
+                }
+            ],
+            "description": "Allows your site to be tracked using Plausible, by adding a Javascript tracking snippet to every page.",
+            "homepage": "https://www.drupal.org/project/plausible",
+            "support": {
+                "source": "https://git.drupalcode.org/project/plausible"
+            },
+            "install-path": "../../web/modules/contrib/plausible"
+        },
+        {
             "name": "drupal/quicklink",
             "version": "2.0.4",
             "version_normalized": "2.0.4.0",

@@ -1,0 +1,16 @@
+script:
+  domain: ''
+  api: ''
+  src: https://plausible.io/js/plausible.js
+dashboard:
+  shared_link: ''
+visibility:
+  enable: true
+  admin_route_mode: 0
+  request_path_mode: 0
+  request_path_pages: ''
+  user_role_mode: 0
+  user_role_roles: {  }
+events:
+  403: false
+  404: false

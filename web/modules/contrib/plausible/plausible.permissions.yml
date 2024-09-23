@@ -1,0 +1,6 @@
+administer plausible configuration:
+  title: 'Administer Plausible configuration'
+  description: 'Allows the user to configure the Plausible integration'
+view plausible dashboard:
+  title: 'View Plausible dashboard'
+  description: 'Allows the user to view the Plausible dashboard'

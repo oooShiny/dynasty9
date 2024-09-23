@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Drupal Module: Plausible.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Set default values for the new config options.
+ */
+function plausible_update_8001() {
+  $config = \Drupal::configFactory()->getEditable('plausible.settings');
+  $config->set('script.domain', $config->get('data_domain') ?? '');
+  $config->set('script.src', 'https://plausible.io/js/plausible.js');
+  $config->set('script.api', '');
+  $config->clear('data_domain');
+
+  $config->save();
+}
+
+/**
+ * Fix casing of 'administer plausible configuration' permission.
+ */
+function plausible_update_8002() {
+  /** @var \Drupal\user\Entity\Role $role */
+  foreach (Role::loadMultiple() as $role) {
+    if (!$role->hasPermission('administer Plausible configuration')) {
+      continue;
+    }
+
+    $role->revokePermission('administer Plausible configuration');
+    $role->grantPermission('administer plausible configuration');
+    $role->save();
+  }
+}
+
+/**
+ * Update visibility modes.
+ */
+function plausible_update_8003() {
+  $config = \Drupal::configFactory()->getEditable('plausible.settings');
+  $keys = [
+    'visibility.request_path_mode',
+    'visibility.user_role_mode',
+  ];
+
+  foreach ($keys as $key) {
+    $value = $config->get($key);
+
+    if (is_string($value)) {
+      $value = (int) $value;
+    }
+
+    if ($value === NULL) {
+      $value = 0;
+    }
+    else {
+      $value++;
+    }
+
+    $config->set($key, $value);
+  }
+
+  $config->save();
+}
+
+/**
+ * Set default value for the admin route visibility mode.
+ */
+function plausible_update_8004() {
+  $config = \Drupal::configFactory()->getEditable('plausible.settings');
+
+  if ($config->get('visibility.admin_route_mode') !== NULL) {
+    return;
+  }
+
+  $config->set('visibility.admin_route_mode', 0);
+  $config->save();
+}
+
+/**
+ * Set default value for the global tracking toggle.
+ */
+function plausible_update_8005() {
+  $config = \Drupal::configFactory()->getEditable('plausible.settings');
+
+  if ($config->get('visibility.enable') !== NULL) {
+    return;
+  }
+
+  $config->set('visibility.enable', TRUE);
+  $config->save();
+}
+
+/**
+ * Set default value for the 403 & 404 custom events settings.
+ */
+function plausible_update_8006() {
+  $config = \Drupal::configFactory()->getEditable('plausible.settings');
+
+  if ($config->get('events.403') === NULL) {
+    $config->set('events.403', FALSE);
+  }
+
+  if ($config->get('events.404') === NULL) {
+    $config->set('events.404', FALSE);
+  }
+
+  $config->save();
+}

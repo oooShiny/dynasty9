@@ -158,6 +158,7 @@
         "drupal/paragraphs": "^1.17",
         "drupal/pathauto": "^1.12",
         "drupal/patreon": "^4.0",
+        "drupal/plausible": "^2.1",
         "drupal/quicklink": "^2.0",
         "drupal/rate": "^3.1",
         "drupal/redirect": "^1.9",

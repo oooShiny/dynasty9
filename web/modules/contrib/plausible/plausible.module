@@ -1,0 +1,252 @@
+<?php
+
+/**
+ * @file
+ * Drupal Module: Plausible.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Url;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
+/**
+ * Implements hook_help().
+ */
+function plausible_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.plausible':
+      $text = file_get_contents(__DIR__ . '/README.md');
+      if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+        return '<pre>' . Html::escape($text) . '</pre>';
+      }
+
+      // Use the Markdown filter to render the README.
+      $filter_manager = \Drupal::service('plugin.manager.filter');
+      $settings = \Drupal::configFactory()->get('markdown.settings')->getRawData();
+      $config = ['settings' => $settings];
+      $filter = $filter_manager->createInstance('markdown', $config);
+
+      return $filter->process($text, 'en');
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * Inserts the JavaScript snippet into to <head> of each page before they are
+ * rendered.
+ */
+function plausible_page_attachments(array &$attachments) {
+  $account = \Drupal::currentUser();
+  $config = \Drupal::config('plausible.settings');
+
+  if (!$config->get('visibility.enable')) {
+    return;
+  }
+
+  $visibility_request_path_mode = (int) $config->get('visibility.request_path_mode');
+  if ($visibility_request_path_mode > 0) {
+    $attachments['#cache']['contexts'][] = 'url.path';
+  }
+
+  $visibility_user_role_mode = (int) $config->get('visibility.user_role_mode');
+  if ($visibility_user_role_mode > 0) {
+    $attachments['#cache']['contexts'][] = 'user.roles';
+  }
+
+  $visibility_admin_route_mode = (int) $config->get('visibility.admin_route_mode');
+  if ($visibility_admin_route_mode > 0) {
+    $attachments['#cache']['contexts'][] = 'route.is_admin';
+  }
+
+  $attachments['#cache']['tags'][] = 'config:plausible.settings';
+
+  if (!_plausible_visibility_pages() || !_plausible_visibility_roles($account) || !_plausible_visibility_admin_routes()) {
+    return;
+  }
+
+  $domain = $config->get('script.domain');
+  $api = $config->get('script.api');
+
+  if (empty($domain)) {
+    $url = Url::fromRoute('<front>')->setAbsolute()->toString();
+    $domain = parse_url($url, PHP_URL_HOST);
+  }
+
+  $attributes = [
+    'async' => TRUE,
+    'defer' => TRUE,
+    'data-domain' => $domain,
+    'src' => $config->get('script.src'),
+  ];
+
+  if (!empty($api)) {
+    $attributes['data-api'] = $api;
+  }
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'script',
+      '#attributes' => $attributes,
+    ],
+    'plausible_tracking_snippet',
+  ];
+
+  // Allow for tracking custom events.
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'script',
+      '#value' => 'window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }',
+    ],
+    'plausible_tracking_snippet_custom_events',
+  ];
+
+  $exception = \Drupal::requestStack()->getCurrentRequest()->attributes->get('exception');
+  if ($exception instanceof HttpExceptionInterface && $exception->getStatusCode() === 403 && $config->get('events.403')) {
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#tag' => 'script',
+        '#value' => 'plausible("403", { props: { path: document.location.pathname } });',
+      ],
+      'plausible_tracking_snippet_event_403',
+    ];
+  }
+  if ($exception instanceof HttpExceptionInterface && $exception->getStatusCode() === 404 && $config->get('events.404')) {
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#tag' => 'script',
+        '#value' => 'plausible("404", { props: { path: document.location.pathname } });',
+      ],
+      'plausible_tracking_snippet_event_404',
+    ];
+  }
+}
+
+/**
+ * Determines whether the page should be tracked based on current user's role.
+ *
+ * Based on visibility setting this function returns TRUE if JS code should
+ * be added for the current role and otherwise FALSE.
+ *
+ * @param object $account
+ *   A user object containing an array of roles to check.
+ *
+ * @return bool
+ *   TRUE if JS code should be added for the current role and otherwise FALSE.
+ */
+function _plausible_visibility_roles($account) {
+  $config = \Drupal::config('plausible.settings');
+  $visibility_user_role_mode = (int) $config->get('visibility.user_role_mode');
+
+  if ($visibility_user_role_mode === 0) {
+    return TRUE;
+  }
+
+  $visibility_user_role_roles = $config->get('visibility.user_role_roles');
+  $enabled = $visibility_user_role_mode === 2;
+
+  // If no role is selected for tracking, all roles should be tracked.
+  if (!$visibility_user_role_roles || count($visibility_user_role_roles) == 0) {
+    return TRUE;
+  }
+  $visibility_user_role_roles = array_values($visibility_user_role_roles);
+
+  foreach (array_values($account->getRoles()) as $user_role) {
+    // If the current user is a member of one of the selected roles.
+    if (in_array($user_role, $visibility_user_role_roles, TRUE)) {
+      // Current user is a member of a role that should be tracked / excluded
+      // from tracking.
+      $enabled = $visibility_user_role_mode !== 2;
+      break;
+    }
+  }
+
+  return $enabled;
+}
+
+/**
+ * Determines whether the current page should be tracked.
+ *
+ * Based on visibility setting this function returns TRUE if JS code should
+ * be added to the current page and otherwise FALSE.
+ */
+function _plausible_visibility_pages(): bool {
+  $config = \Drupal::config('plausible.settings');
+  $visibility_request_path_mode = (int) $config->get('visibility.request_path_mode');
+  $visibility_request_path_pages = $config->get('visibility.request_path_pages');
+
+  if ($visibility_request_path_mode === 0) {
+    return TRUE;
+  }
+
+  // If the visibility setting is 'Every page except the listed pages' and
+  // no paths are listed, add the script.
+  if (empty($visibility_request_path_pages) && $visibility_request_path_mode === 1) {
+    return TRUE;
+  }
+
+  // If the visibility setting is 'The listed pages only' and no paths are
+  // listed, don't add the script.
+  if (empty($visibility_request_path_pages) && $visibility_request_path_mode === 2) {
+    return FALSE;
+  }
+
+  // Convert path to lowercase. This allows comparison of the same path
+  // with different case. Ex: /Page, /page, /PAGE.
+  $pages = mb_strtolower($visibility_request_path_pages);
+  if ($visibility_request_path_mode >= 3) {
+    return FALSE;
+  }
+
+  // Compare the lowercase path alias (if any) and internal path.
+  $path = \Drupal::service('path.current')->getPath();
+  $page_match = \Drupal::service('path.matcher')->matchPath($path, $pages);
+
+  $path_alias = mb_strtolower(\Drupal::service('path_alias.manager')->getAliasByPath($path));
+  if (!$page_match && $path != $path_alias) {
+    $page_match = \Drupal::service('path.matcher')->matchPath($path, $pages);
+  }
+
+  $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  if (!$page_match && $is_front && $path != '/' && $path_alias != '/') {
+    $page_match = \Drupal::service('path.matcher')->matchPath('/', $pages);
+  }
+
+  // When $visibility_request_path_mode has a value of 1, the tracking
+  // code is displayed on all pages except those listed in $pages.
+  if ($visibility_request_path_mode === 1 && !$page_match) {
+    return TRUE;
+  }
+
+  // When set to 2, it is displayed only on those pages listed in $pages.
+  if ($visibility_request_path_mode === 2 && $page_match) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Determines whether the current page should be tracked.
+ *
+ * Based on admin route visibility setting this function returns TRUE if JS
+ * code should be added to the current page and otherwise FALSE.
+ */
+function _plausible_visibility_admin_routes(): bool {
+  $config = \Drupal::config('plausible.settings');
+  $admin_route_mode = (int) $config->get('visibility.admin_route_mode');
+  $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
+
+  if ($is_admin_route && $admin_route_mode === 1) {
+    return FALSE;
+  }
+
+  if (!$is_admin_route && $admin_route_mode === 2) {
+    return FALSE;
+  }
+
+  return TRUE;
+}

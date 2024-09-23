@@ -83,6 +83,7 @@ module:
   patreon: 0
   patreon_extras: 0
   patreon_user: 0
+  plausible: 0
   quicklink: 0
   rate: 0
   redirect: 0

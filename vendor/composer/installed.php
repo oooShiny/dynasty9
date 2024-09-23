@@ -3,7 +3,7 @@
         'name' => 'drupal/recommended-project',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0af22cfc48b8a1d70b48c260ab6907b92bd3f210',
+        'reference' => '2a43ff8c2daa28211b879975ee4aa6188cfdd1cc',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -667,6 +667,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/plausible' => array(
+            'pretty_version' => '2.1.0',
+            'version' => '2.1.0.0',
+            'reference' => '2.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/plausible',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/quicklink' => array(
             'pretty_version' => '2.0.4',
             'version' => '2.0.4.0',
@@ -688,7 +697,7 @@
         'drupal/recommended-project' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0af22cfc48b8a1d70b48c260ab6907b92bd3f210',
+            'reference' => '2a43ff8c2daa28211b879975ee4aa6188cfdd1cc',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

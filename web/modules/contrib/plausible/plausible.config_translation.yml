@@ -1,0 +1,5 @@
+plausible.settings:
+  title: 'Settings'
+  base_route_name: plausible.admin_settings_form
+  names:
+    - plausible.settings

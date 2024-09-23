@@ -1,0 +1,15 @@
+plausible.admin_settings_form:
+  path: '/admin/config/services/plausible'
+  defaults:
+    _form: '\Drupal\plausible\Form\PlausibleSettingsForm'
+    _title: 'Plausible'
+  requirements:
+    _permission: 'administer plausible configuration'
+
+plausible.admin_dashboard:
+  path: '/admin/reports/plausible'
+  defaults:
+    _controller: '\Drupal\plausible\Controller\DashboardController'
+    _title: 'Plausible Dashboard'
+  requirements:
+    _permission: 'view plausible dashboard'

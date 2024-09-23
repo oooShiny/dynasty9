@@ -1,0 +1,26 @@
+_core:
+  default_config_hash: 7ITcwwShhS7SG3SJdIqRQkzXEcEPNejdEnbeDVDeDY0
+script:
+  domain: patsdynasty.com
+  api: ''
+  src: 'https://plausible.io/js/plausible.js'
+dashboard:
+  shared_link: 'https://plausible.io/share/patsdynasty.com?auth=a4m6DIeY0P60ot_0NLgCF'
+visibility:
+  enable: true
+  admin_route_mode: 0
+  request_path_mode: 0
+  request_path_pages: ''
+  user_role_roles:
+    anonymous: '0'
+    authenticated: '0'
+    administrator: '0'
+    patreon_user: '0'
+    deleted_patreon_user: '0'
+    8156551_patron: '0'
+    8156552_patron: '0'
+    8156553_patron: '0'
+  user_role_mode: 0
+events:
+  403: true
+  404: true

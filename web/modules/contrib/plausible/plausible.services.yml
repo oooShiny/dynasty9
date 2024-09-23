@@ -1,0 +1,7 @@
+services:
+  cache_context.route.is_admin:
+    class: Drupal\plausible\Cache\Context\RouteIsAdminCacheContext
+    arguments:
+      - '@router.admin_context'
+    tags:
+      - { name: cache.context }

@@ -1,0 +1,10 @@
+plausible.admin_settings_form:
+  title: Plausible
+  route_name: plausible.admin_settings_form
+  parent: system.admin_config_services
+
+plausible.admin_dashboard:
+  title: Plausible Dashboard
+  description: 'View your site metrics from Plausible Analytics.'
+  route_name: plausible.admin_dashboard
+  parent: system.admin_reports
