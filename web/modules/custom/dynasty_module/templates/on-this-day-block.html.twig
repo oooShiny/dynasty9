@@ -28,7 +28,7 @@
 <h2 class="text-center mb-6 text-3xl uppercase font-light"><a href="/calendar">On This Day:</a> {{ 'now'|date('F jS') }}</h2>
 {% if games is not empty %}
   <h3 class="mb-6 text-xl uppercase font-light">Games on this day</h3>
-<div class="md:flex justify-evenly lg:gap-2">
+<div class="justify-evenly lg:gap-2 md:flex my-4">
     {% for game in games.with_video %}
       <div class="md:w-1/4">
         <div class="font-bold text-center">
@@ -70,11 +70,11 @@
       {#  Start another row after 4 highlights. #}
       {% if loop.index % 4 == 0 %}
         </div>
-        <div class="md:flex justify-evenly lg:gap-2">
+        <div class="justify-evenly lg:gap-2 md:flex my-4">
       {% endif %}
     {% endfor %}
     </div>
-    <div class="md:flex justify-evenly lg:gap-2">
+    <div class="justify-evenly lg:gap-2 md:flex my-4">
     {% for game in games.no_video %}
       <div class="md:w-1/4">
         <div class="font-bold text-center">
@@ -98,14 +98,14 @@
       {#  Start another row after 4 highlights. #}
       {% if loop.index % 4 == 0 %}
         </div>
-        <div class="md:flex justify-evenly lg:gap-2">
+        <div class="justify-evenly lg:gap-2 md:flex my-4">
       {% endif %}
     {% endfor %}
 </div>
 {% endif %}
 {% if events is not empty %}
   <h3 class="mb-6 text-xl uppercase font-light">Events on this day</h3>
-  <div class="md:flex justify-evenly lg:gap-2">
+  <div class="justify-evenly lg:gap-2 md:flex my-4">
       {% for event in events %}
         {{ event }}
       {% endfor %}
