@@ -8582,6 +8582,10 @@ html:has(.drawer-open.drawer-open) {
   aspect-ratio: 1 / 1;
 }
 
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
 .h-12 {
   height: 3rem;
 }
@@ -9758,11 +9762,6 @@ html:has(.drawer-open.drawer-open) {
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-blue-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
 }
 
 .bg-gray-200 {
