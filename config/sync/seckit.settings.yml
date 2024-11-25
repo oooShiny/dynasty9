@@ -14,7 +14,7 @@ seckit_xss:
     img-src: ''
     media-src: ''
     frame-src: ''
-    frame-ancestors: '*'
+    frame-ancestors: br0wn.net
     child-src: ''
     font-src: ''
     connect-src: ''
@@ -24,13 +24,13 @@ seckit_xss:
   x_xss:
     select: 0
 seckit_csrf:
-  origin: false
-  origin_whitelist: ''
+  origin: true
+  origin_whitelist: 'https://br0wn.net'
 seckit_clickjacking:
   js_css_noscript: false
   noscript_message: 'Sorry, you need to enable JavaScript to visit this website.'
-  x_frame: '1'
-  x_frame_allow_from: ''
+  x_frame: '3'
+  x_frame_allow_from: 'https://br0wn.net'
 seckit_ssl:
   hsts: false
   hsts_subdomains: false
