@@ -7,6 +7,10 @@ overrides:
     theme:
       css/overrides.css: {}
       css/team-colors.css: {}
+article:
+  css:
+    theme:
+      css/article.css: {}
 basic_page:
   css:
     theme:

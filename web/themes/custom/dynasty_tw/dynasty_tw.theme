@@ -103,6 +103,7 @@ function dynasty_tw_preprocess_node(&$variables) {
   switch ($node->bundle()) {
     case 'article':
       $variables['attributes']['class'][] = 'px-5';
+      $variables['#attached']['library'][] =  'dynasty_tw/article';
       break;
     case 'highlight':
       $variables['td'] = $node->field_td_scored->value;
@@ -211,12 +212,12 @@ function dynasty_tw_preprocess_node(&$variables) {
       $variables['downloads'] = $sorted_dls;
       break;
     case 'player':
-      $variables['#attached']['library'][] =  'dynasty/muse_video';
+      $variables['#attached']['library'][] =  'dynasty_tw/muse_video';
       $names = explode(' ', $node->label());
       $variables['lastname'] = end($names);
       break;
     case 'page':
-      $variables['#attached']['library'][] =  'dynasty/gfycat';
+      $variables['#attached']['library'][] =  'dynasty_tw/gfycat';
   }
 }
 
