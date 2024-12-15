@@ -102,7 +102,7 @@ function dynasty_tw_preprocess_node(&$variables) {
 
   switch ($node->bundle()) {
     case 'article':
-      $variables['attributes']['class'][] = 'px-5';
+      $variables['attributes']['class'][] = 'article px-5';
       $variables['#attached']['library'][] =  'dynasty_tw/article';
       break;
     case 'highlight':
