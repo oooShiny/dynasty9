@@ -1,7 +1,8 @@
 <?php
 
-use Drupal\Core\Render\Element;
 use Drupal\node\Entity\Node;
+use Drupal\views\ViewExecutable;
+
 
 /**
  * Implements hook_theme_suggestions_page_alter().
@@ -255,6 +256,19 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
     case 'text':
       $variables['attributes']['class'][] = 'py-5';
       break;
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function dynasty_tw_views_pre_render(ViewExecutable $view) {
+  $podcast_views = [
+    'transcript_search',
+    'podcast_search'
+  ];
+  if (in_array($view->storage->id(), $podcast_views)) {
+    $view->element['#attached']['library'][] = 'dynasty_tw/podcast';
   }
 }
 
