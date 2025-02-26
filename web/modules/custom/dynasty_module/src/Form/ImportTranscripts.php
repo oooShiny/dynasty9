@@ -68,7 +68,12 @@ class ImportTranscripts extends ConfigFormBase
     '#title' => 'Podcast Episode',
     '#options' => $episodes,
     '#required' => true,
-  ];
+    ];
+
+    $form['podcast_speaker'] = [
+      '#type' => 'checkbox',
+      '#title' => 'Transcript has a speaker column',
+    ];
 
     return parent::buildForm($form, $form_state);
   }
@@ -82,6 +87,7 @@ class ImportTranscripts extends ConfigFormBase
 
     $pod_id = $form_state->getValue('podcast_episode');
     $form_file = $form_state->getValue('podcast_csv', 0);
+    $speakers = $form_state->getValue('podcast_speaker');
     // Save the CSV file.
     if (!empty($form_file[0])) {
       $csv = File::load($form_file[0]);
@@ -90,7 +96,7 @@ class ImportTranscripts extends ConfigFormBase
       $uri = $csv->getFileUri();
 
       $operations = [];
-      $transcript = $this->parse_csv($uri);
+      $transcript = $this->parse_csv($uri, $speakers);
       foreach ($transcript as $line) {
         // Add operation to batch.
         $operations[] = ['\Drupal\dynasty_module\PodcastNodeUpdate::createTranscriptLine', [$pod_id, $line]];
@@ -104,22 +110,32 @@ class ImportTranscripts extends ConfigFormBase
     batch_set($batch);
   }
 
-  private function parse_csv($csv) {
+  private function parse_csv($csv, $speakers = FALSE) {
     $lines = [];
     $row = 1;
     if (($handle = fopen($csv, "r")) !== FALSE) {
       // Go through each row of the CSV.
       while (($data = fgetcsv($handle, 0, ";")) !== FALSE) {
         if ($row !== 1) {
-          $lines[] = [
-            'start' => $data[0],
-            'end' => $data[1],
-            'text' => $data[2],
-          ];
+          if ($speakers) {
+            $lines[] = [
+              'start' => $data[1],
+              'end' => $data[2],
+              'text' => $data[3],
+            ];
+          }
+          else {
+            $lines[] = [
+              'start' => $data[0],
+              'end' => $data[1],
+              'text' => $data[2],
+            ];
+          }
         }
         $row++;
       }
       return $lines;
     }
+    return FALSE;
   }
 }

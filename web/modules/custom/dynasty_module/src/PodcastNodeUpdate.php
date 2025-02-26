@@ -85,10 +85,11 @@ class PodcastNodeUpdate {
     }
 
     $timestamp = ($hours * 3600) + ($minutes * 60) + $seconds[0];
+
     $line->set('field_hours', $hours);
     $line->set('field_minutes', $minutes);
     $line->set('field_seconds', $seconds[0]);
-    $line->set('field_milliseconds', $seconds[1]);
+    $line->set('field_milliseconds', $seconds[1] ?? 0);
     $line->set('field_timestamp', $timestamp);
     $line->set('field_transcript', $transcript['text']);
     $line->set('field_podcast_episode', ['target_id' => $episode]);
