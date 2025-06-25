@@ -1,8 +1,0 @@
-name: Patriots Dynasty Theme
-description: A Patriots Dynasty theme based on Tailwind CSS.
-core: 8.x
-core_version_requirement: ^8 || ^9 || ^10
-type: theme
-base theme: tailwindcss
-libraries:
-  - dynasty/overrides
