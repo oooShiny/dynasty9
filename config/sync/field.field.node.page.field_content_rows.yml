@@ -9,6 +9,7 @@ dependencies:
     - paragraphs.paragraphs_type.media
     - paragraphs.paragraphs_type.section
     - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.video_highlight
   module:
     - entity_reference_revisions
 id: node.page.field_content_rows
@@ -29,17 +30,39 @@ settings:
       block: block
       text: text
       media: media
+      video_highlight: video_highlight
     negate: 0
     target_bundles_drag_drop:
+      alternate_team_name:
+        weight: 16
+        enabled: false
+      belichick_hoodie:
+        weight: 17
+        enabled: false
       block:
         weight: 7
         enabled: true
+      embedded_video:
+        weight: 19
+        enabled: false
+      from_library:
+        weight: 20
+        enabled: false
       highlight:
         weight: 4
         enabled: false
       media:
         weight: 9
         enabled: true
+      podcast_download:
+        weight: 23
+        enabled: false
+      podcast_transcript_text_block:
+        weight: 24
+        enabled: false
+      quarterback:
+        weight: 25
+        enabled: false
       section:
         weight: 5
         enabled: true
@@ -48,5 +71,14 @@ settings:
         enabled: false
       text:
         weight: 8
+        enabled: true
+      transcript_line:
+        weight: 29
+        enabled: false
+      uniform:
+        weight: 30
+        enabled: false
+      video_highlight:
+        weight: 32
         enabled: true
 field_type: entity_reference_revisions

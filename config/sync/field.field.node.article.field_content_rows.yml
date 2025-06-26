@@ -1,0 +1,82 @@
+uuid: 44f89a42-853c-4cf7-b802-8c1ce32b3db1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_rows
+    - node.type.article
+    - paragraphs.paragraphs_type.block
+    - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.video_highlight
+  module:
+    - entity_reference_revisions
+id: node.article.field_content_rows
+field_name: field_content_rows
+entity_type: node
+bundle: article
+label: 'Content Rows'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      section: section
+      block: block
+      text: text
+      video_highlight: video_highlight
+    negate: 0
+    target_bundles_drag_drop:
+      alternate_team_name:
+        weight: 15
+        enabled: false
+      belichick_hoodie:
+        weight: 16
+        enabled: false
+      block:
+        weight: 7
+        enabled: true
+      embedded_video:
+        weight: 19
+        enabled: false
+      from_library:
+        weight: 18
+        enabled: false
+      highlight:
+        weight: 4
+        enabled: false
+      media:
+        weight: 9
+        enabled: false
+      podcast_download:
+        weight: 21
+        enabled: false
+      podcast_transcript_text_block:
+        weight: 22
+        enabled: false
+      quarterback:
+        weight: 23
+        enabled: false
+      section:
+        weight: 5
+        enabled: true
+      team_record:
+        weight: 6
+        enabled: false
+      text:
+        weight: 8
+        enabled: true
+      transcript_line:
+        weight: 27
+        enabled: false
+      uniform:
+        weight: 28
+        enabled: false
+      video_highlight:
+        weight: 32
+        enabled: true
+field_type: entity_reference_revisions

@@ -1,0 +1,25 @@
+uuid: b6b8c024-08af-4add-860e-b9dba7a69c08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video_highlight.field_highlight
+    - paragraphs.paragraphs_type.video_highlight
+id: paragraph.video_highlight.default
+targetEntityType: paragraph
+bundle: video_highlight
+mode: default
+content:
+  field_highlight:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

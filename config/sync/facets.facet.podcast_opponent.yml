@@ -38,7 +38,9 @@ widget:
       show_less_label: 'Show less'
       show_more_label: 'Show more'
 empty_behavior:
-  behavior: none
+  behavior: text
+  text_format: plain_text
+  text: 'No Opponents to show'
 only_visible_when_facet_source_is_visible: true
 show_only_one_result: false
 show_title: false
@@ -49,6 +51,11 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

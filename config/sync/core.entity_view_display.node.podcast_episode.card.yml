@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.podcast_episode.field_episode_cover_image
     - field.field.node.podcast_episode.field_episode_transcript
     - field.field.node.podcast_episode.field_game
+    - field.field.node.podcast_episode.field_hosts
     - field.field.node.podcast_episode.field_iframe
     - field.field.node.podcast_episode.field_meta_tags
     - field.field.node.podcast_episode.field_monthly_downloads
@@ -87,6 +88,7 @@ hidden:
   field_episode: true
   field_episode_cover_image: true
   field_episode_transcript: true
+  field_hosts: true
   field_iframe: true
   field_meta_tags: true
   field_monthly_downloads: true

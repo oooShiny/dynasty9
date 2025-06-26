@@ -76,6 +76,14 @@ field_settings:
     dependencies:
       module:
         - node
+  game:
+    label: Game
+    datasource_id: 'entity:node'
+    property_path: field_game
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_game
   pod_guest:
     label: 'Podcast Guest (fulltext)'
     datasource_id: 'entity:node'
@@ -134,6 +142,8 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  auto_aggregated_fulltext_field: {  }
+  custom_value: {  }
   entity_type: {  }
   language_with_fallback: {  }
   rendered_item: {  }

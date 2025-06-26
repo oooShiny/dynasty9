@@ -1,0 +1,23 @@
+uuid: ae580140-447e-4d03-b6bf-b1fc088bbcd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video_highlight.field_highlight
+    - paragraphs.paragraphs_type.video_highlight
+id: paragraph.video_highlight.default
+targetEntityType: paragraph
+bundle: video_highlight
+mode: default
+content:
+  field_highlight:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: simple_card
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

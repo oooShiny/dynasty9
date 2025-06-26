@@ -1,0 +1,11 @@
+uuid: c3c72112-e9dc-4875-b401-0447067dea4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.podcast_host
+id: taxonomy_term.podcast_host
+target_entity_type_id: taxonomy_term
+target_bundle: podcast_host
+default_langcode: site_default
+language_alterable: false

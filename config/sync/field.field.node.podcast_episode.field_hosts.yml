@@ -1,0 +1,33 @@
+uuid: b4398970-9da9-4207-aa3e-8b4b76277961
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hosts
+    - node.type.podcast_episode
+    - taxonomy.vocabulary.podcast_host
+  content:
+    - 'taxonomy_term:podcast_host:24df2885-df92-4869-a36f-6b183e4e3a9d'
+id: node.podcast_episode.field_hosts
+field_name: field_hosts
+entity_type: node
+bundle: podcast_episode
+label: Hosts
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 24df2885-df92-4869-a36f-6b183e4e3a9d
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      podcast_host: podcast_host
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

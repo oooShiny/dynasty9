@@ -1,0 +1,33 @@
+uuid: 8b7745ee-61e7-4ebd-bd76-e2e81a3719f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.episode_transcripts
+  module:
+    - node
+    - views
+  theme:
+    - dynasty_tw
+id: episode_transcripts_block_1
+theme: dynasty_tw
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:episode_transcripts-block_1'
+settings:
+  id: 'views_block:episode_transcripts-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      podcast_episode: podcast_episode
