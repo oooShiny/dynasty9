@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.article.body
+    - field.field.node.article.field_content_rows
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_show_in_blog_listing
@@ -12,6 +13,7 @@ dependencies:
     - node.type.article
   module:
     - image
+    - layout_paragraphs
     - metatag
     - path
     - text
@@ -37,6 +39,18 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_content_rows:
+    type: layout_paragraphs
+    weight: 1
+    region: content
+    settings:
+      view_mode: default
+      preview_view_mode: preview
+      form_display_mode: default
+      nesting_depth: 0
+      require_layouts: 1
+      empty_message: ''
     third_party_settings: {  }
   field_image:
     type: image_image
@@ -92,6 +106,11 @@ content:
     third_party_settings: {  }
   simple_sitemap:
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
     region: content
     settings: {  }
     third_party_settings: {  }

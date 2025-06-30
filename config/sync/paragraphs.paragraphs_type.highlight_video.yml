@@ -1,0 +1,10 @@
+uuid: a272f402-6251-447d-bb30-68261504cbb0
+langcode: en
+status: true
+dependencies: {  }
+id: highlight_video
+label: 'Highlight Video'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
