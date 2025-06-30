@@ -33,9 +33,11 @@
 
 .article ol {
   list-style: decimal;
+  margin-left: 1rem;
 }
 .article ul {
   list-style: disc;
+  margin-left: 1rem;
 }
 
 .article a {
