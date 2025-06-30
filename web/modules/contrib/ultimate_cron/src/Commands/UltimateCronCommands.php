@@ -3,7 +3,6 @@
 namespace Drupal\ultimate_cron\Commands;
 
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\ultimate_cron\CronPlugin;
 use Drupal\ultimate_cron\Entity\CronJob;
 use Drush\Commands\DrushCommands;
@@ -14,16 +13,6 @@ use Drush\Commands\DrushCommands;
  * @package Drupal\ultimate_cron\Commands
  */
 class UltimateCronCommands extends DrushCommands {
-
-  /**
-   * Constructs an UltimateCronCommands object.
-   *
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
-   *   Logger factory object.
-   */
-  public function __construct(LoggerChannelFactoryInterface $logger) {
-    $this->logger = $logger->get('ultimate_cron');
-  }
 
   /**
    * Show a cron jobs logs.
@@ -83,13 +72,13 @@ class UltimateCronCommands extends DrushCommands {
       $legend = '';
       if ($lock_id && $log_entry->lid == $lock_id) {
         $legend .= 'R';
-        list(, $status) = $job->getPlugin('launcher')->formatRunning($job);
+        [, $status] = $job->getPlugin('launcher')->formatRunning($job);
       }
       elseif ($log_entry->start_time && !$log_entry->end_time) {
-        list(, $status) = $job->getPlugin('launcher')->formatUnfinished($job);
+        [, $status] = $job->getPlugin('launcher')->formatUnfinished($job);
       }
       else {
-        list(, $status) = $log_entry->formatSeverity();
+        [, $status] = $log_entry->formatSeverity();
       }
 
       $table[$log_entry->lid][] = $legend;
@@ -140,7 +129,7 @@ class UltimateCronCommands extends DrushCommands {
       'extended' => NULL,
       'name' => NULL,
       'scheduled' => NULL,
-    ]
+    ],
   ) {
     $modules = $options['module'];
     $enabled = $options['enabled'];
@@ -209,14 +198,14 @@ class UltimateCronCommands extends DrushCommands {
 
       if ($lock_id && $log_entry->lid == $lock_id) {
         $legend .= 'R';
-        list(, $status) = $job->getPlugin('launcher')->formatRunning($job);
+        [, $status] = $job->getPlugin('launcher')->formatRunning($job);
         $print_legend = TRUE;
       }
       elseif ($log_entry->start_time && !$log_entry->end_time) {
-        list(, $status) = $job->getPlugin('launcher')->formatUnfinished($job);
+        [, $status] = $job->getPlugin('launcher')->formatUnfinished($job);
       }
       else {
-        list(, $status) = $log_entry->formatSeverity();
+        [, $status] = $log_entry->formatSeverity();
       }
 
       if ($statuses && !in_array($status, $statuses)) {
@@ -271,7 +260,7 @@ class UltimateCronCommands extends DrushCommands {
     if ($o = $options['options']) {
       $pairs = explode(',', $o);
       foreach ($pairs as $pair) {
-        list($key, $value) = explode('=', $pair);
+        [$key, $value] = explode('=', $pair);
         CronPlugin::setGlobalOption(trim($key), trim($value));
       }
     }
@@ -310,21 +299,14 @@ class UltimateCronCommands extends DrushCommands {
    *   Enable the node_cron job
    * @aliases cre cron-enable
    */
-  public function enable($name, array $options = ['all' => NULL]) {
-    if (!$name) {
-      if (!$options['all']) {
-        throw new \Exception(dt('No job specified?'));
-      }
-      /** @var \Drupal\ultimate_cron\Entity\CronJob $job */
-      foreach (CronJob::loadMultiple() as $job) {
-        $job->enable()->save();
-      }
-      return;
-    }
+  public function enable($name = '', array $options = ['all' => NULL]) {
+    $jobs = $this->getJobs($name, $options);
 
-    $job = CronJob::load($name);
-    if ($job->enable()->save()) {
-      $this->output->writeln(dt('@name enabled', ['@name' => $name]));
+    /** @var \Drupal\ultimate_cron\Entity\CronJob $job */
+    foreach ($jobs as $job) {
+      if ($job->enable()->save()) {
+        $this->output->writeln(dt('@name enabled', ['@name' => $job->id()]));
+      }
     }
   }
 
@@ -343,20 +325,14 @@ class UltimateCronCommands extends DrushCommands {
    *   Disable the node_cron job
    * @aliases crd cron-disable
    */
-  public function disable($name, array $options = ['all' => NULL]) {
-    if (!$name) {
-      if (!$options['all']) {
-        throw new \Exception(dt('No job specified?'));
-      }
-      foreach (CronJob::loadMultiple() as $job) {
-        $job->disable()->save();
-      }
-      return;
-    }
+  public function disable($name = '', array $options = ['all' => NULL]) {
+    $jobs = $this->getJobs($name, $options);
 
-    $job = CronJob::load($name);
-    if ($job->disable()->save()) {
-      $this->output->writeln(dt('@name disabled', ['@name' => $name]));
+    /** @var \Drupal\ultimate_cron\Entity\CronJob $job */
+    foreach ($jobs as $job) {
+      if ($job->disable()->save()) {
+        $this->output->writeln(dt('@name disabled', ['@name' => $job->id()]));
+      }
     }
   }
 
@@ -375,47 +351,66 @@ class UltimateCronCommands extends DrushCommands {
    *   Unlock the node_cron job
    * @aliases cru cron-unlock
    */
-  public function unlock($name, array $options = ['all' => NULL]) {
-    if (!$name) {
+  public function unlock($name = '', array $options = ['all' => NULL]) {
+    $jobs = $this->getJobs($name, $options);
+
+    /** @var \Drupal\ultimate_cron\Entity\CronJob $job */
+    foreach ($jobs as $job) {
+
+      $lock_id = $job->isLocked();
+      if (!$lock_id) {
+        throw new \Exception(dt('@name is not running', ['@name' => $job->id()]));
+      }
+
+      // Unlock the process.
+      if ($job->unlock($lock_id, TRUE)) {
+        $log_entry = $job->resumeLog($lock_id);
+        global $user;
+        $this->logger->warning('@name manually unlocked by user @username (@uid)', [
+          '@name' => $job->id(),
+          '@username' => $user->getDisplayName(),
+          '@uid' => $user->id(),
+        ]);
+        $log_entry->finish();
+
+        $this->output->writeln(dt('Cron job @name unlocked', ['@name' => $job->id()]));
+      }
+      else {
+        throw new \Exception(dt('Could not unlock cron job @name', ['@name' => $job->id()]));
+      }
+    }
+  }
+
+  /**
+   * Helper function to return array of CronJob objects.
+   *
+   * @param string $name
+   *   Job to unlock.
+   * @param array $options
+   *   Options array.
+   *
+   * @return \Drupal\ultimate_cron\Entity\CronJob[]
+   *   Array of UltimateCron CronJob objects.
+   *
+   * @throws Exception If job does not exist or none was specified.
+   */
+  protected function getJobs($name, $options) {
+    $jobs = [];
+    if ($name) {
+      if ($job = CronJob::load($name)) {
+        $jobs[] = $job;
+      }
+      else {
+        throw new \Exception(dt('@name not found', ['@name' => $name]));
+      }
+    }
+    else {
       if (!$options['all']) {
         throw new \Exception(dt('No job specified?'));
       }
-      /** @var \Drupal\ultimate_cron\Entity\CronJob $job */
-      foreach (CronJob::loadMultiple() as $job) {
-        if ($job->isLocked()) {
-          $job->unlock();
-        }
-      }
-      return;
+      $jobs = CronJob::loadMultiple();
     }
-
-    /** @var \Drupal\ultimate_cron\Entity\CronJob $job */
-    $job = CronJob::load($name);
-    if (!$job) {
-      throw new \Exception(dt('@name not found', ['@name' => $name]));
-    }
-
-    $lock_id = $job->isLocked();
-    if (!$lock_id) {
-      throw new \Exception(dt('@name is not running', ['@name' => $name]));
-    }
-
-    // Unlock the process.
-    if ($job->unlock($lock_id, TRUE)) {
-      $log_entry = $job->resumeLog($lock_id);
-      global $user;
-      $this->logger->warning('@name manually unlocked by user @username (@uid)', [
-        '@name' => $job->id(),
-        '@username' => $user->getDisplayName(),
-        '@uid' => $user->id(),
-      ]);
-      $log_entry->finish();
-
-      $this->output->writeln(dt('Cron job @name unlocked', ['@name' => $name]));
-    }
-    else {
-      throw new \Exception(dt('Could not unlock cron job @name', ['@name' => $name]));
-    }
+    return $jobs;
   }
 
 }

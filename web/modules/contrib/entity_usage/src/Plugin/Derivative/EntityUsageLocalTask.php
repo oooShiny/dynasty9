@@ -56,7 +56,7 @@ class EntityUsageLocalTask extends DeriverBase implements ContainerDeriverInterf
   /**
    * {@inheritdoc}
    */
-  public function getDerivativeDefinitions($base_plugin_definition) {
+  public function getDerivativeDefinitions($base_plugin_definition): array {
     $this->derivatives = [];
     $configured_types = $this->config->get('entity_usage.settings')->get('local_task_enabled_entity_types') ?: [];
 

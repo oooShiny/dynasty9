@@ -17,6 +17,8 @@ class DrupalDateTimeTest extends BrowserTestBase {
 
   /**
    * Set up required modules.
+   *
+   * @var string[]
    */
   protected static $modules = [];
 
@@ -24,14 +26,6 @@ class DrupalDateTimeTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
-
-  /**
-   * Test setup.
-   */
-  protected function setUp(): void {
-    parent::setUp();
-
-  }
 
   /**
    * Tests that DrupalDateTime can detect the right timezone to use.

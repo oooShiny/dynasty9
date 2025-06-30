@@ -17,9 +17,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 class OptionsFieldTest extends OptionsFieldUnitTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['options'];
 
@@ -44,7 +42,7 @@ class OptionsFieldTest extends OptionsFieldUnitTestBase {
       $this->fieldStorage->save();
       $this->fail('Cannot update a list field storage to not include keys with existing data.');
     }
-    catch (FieldStorageDefinitionUpdateForbiddenException $e) {
+    catch (FieldStorageDefinitionUpdateForbiddenException) {
       // Expected exception; just continue testing.
     }
     // Empty the value, so that we can actually remove the option.

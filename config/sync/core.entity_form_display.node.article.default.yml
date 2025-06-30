@@ -4,21 +4,17 @@ status: true
 dependencies:
   config:
     - field.field.node.article.body
-    - field.field.node.article.field_content_rows
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_show_in_blog_listing
     - field.field.node.article.field_tags
-    - field.field.node.article.field_yoast_seo
     - image.style.thumbnail
     - node.type.article
   module:
     - image
-    - layout_paragraphs
     - metatag
     - path
     - text
-    - yoast_seo
 _core:
   default_config_hash: 6VUXB1jTUjK5zjkfMa2Kd2WW4sFUlgfBlfJSx01qLpU
 id: node.article.default
@@ -41,18 +37,6 @@ content:
     weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_content_rows:
-    type: layout_paragraphs
-    weight: 1
-    region: content
-    settings:
-      view_mode: default
-      preview_view_mode: preview
-      form_display_mode: default
-      nesting_depth: 0
-      require_layouts: 1
-      empty_message: ''
     third_party_settings: {  }
   field_image:
     type: image_image
@@ -85,13 +69,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_yoast_seo:
-    type: yoast_seo_widget
-    weight: 122
-    region: content
-    settings:
-      body: body
     third_party_settings: {  }
   langcode:
     type: language_select

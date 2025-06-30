@@ -115,6 +115,7 @@ class ContentBlocksHandler implements ContainerInjectionInterface {
       $this->contentBlocksManager->setBlockUsage($block_id, [
         'entity_type' => $entity->getEntityTypeId(),
         'entity_id' => $entity->id(),
+        'entity_bundle' => $entity->bundle(),
         'active' => 1,
       ]);
     }

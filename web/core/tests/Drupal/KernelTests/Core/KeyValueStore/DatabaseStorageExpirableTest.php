@@ -15,9 +15,7 @@ use Drupal\Core\KeyValueStore\KeyValueFactory;
 class DatabaseStorageExpirableTest extends StorageTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system'];
 
@@ -32,7 +30,7 @@ class DatabaseStorageExpirableTest extends StorageTestBase {
   /**
    * {@inheritdoc}
    */
-  public function register(ContainerBuilder $container) {
+  public function register(ContainerBuilder $container): void {
     parent::register($container);
 
     $parameter[KeyValueFactory::DEFAULT_SETTING] = 'keyvalue.expirable.database';

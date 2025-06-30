@@ -8,7 +8,7 @@ title: 'Default cron handler'
 id: dynasty_module_cron
 weight: 0
 module: dynasty_module
-callback: dynasty_module_cron
+callback: 'dynasty_module#cron'
 scheduler:
   id: simple
   configuration:

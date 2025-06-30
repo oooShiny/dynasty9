@@ -18,7 +18,7 @@ class UltimateCronQueueTest extends CronQueueTest {
    *
    * @var array
    */
-  public static $modules = array('ultimate_cron');
+  protected static $modules = array('ultimate_cron');
 
   /**
    * {@inheritdoc}
@@ -62,7 +62,8 @@ class UltimateCronQueueTest extends CronQueueTest {
       ->execute();
 
     // Has to be manually called for Ultimate Cron.
-    system_cron();
+    $job = CronJob::load('system_cron');
+    $job->run();
 
     $this->cron->run();
     $this->assertEquals(2, \Drupal::state()->get('cron_queue_test_exception'));
@@ -157,14 +158,14 @@ class UltimateCronQueueTest extends CronQueueTest {
   /**
    * {@inheritdoc}
    */
-  public function testLeaseTime() {
+  public function testLeaseTime(): void {
     $this->markTestSkipped('Test does not support ultimate cron schedule logic');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function testUncaughtExceptions() {
+  public function testUncaughtExceptions(): void {
     $this->markTestSkipped('Logger expectations incompatible with ultimate_cron');
   }
 

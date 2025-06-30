@@ -15,9 +15,7 @@ use Drupal\KernelTests\KernelTestBase;
 class FilterCrudTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['filter', 'filter_test', 'system', 'user'];
 
@@ -90,7 +88,7 @@ class FilterCrudTest extends KernelTestBase {
   /**
    * Verifies that a text format is properly stored.
    */
-  public function verifyTextFormat($format) {
+  public function verifyTextFormat($format): void {
     $default_langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
 
     // Verify the loaded filter has all properties.

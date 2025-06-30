@@ -15,9 +15,7 @@ use Drupal\KernelTests\KernelTestBase;
 class ConfigEntityStorageTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['config_test'];
 
@@ -43,7 +41,7 @@ class ConfigEntityStorageTest extends KernelTestBase {
       $entity->save();
       $this->fail('Exception thrown when attempting to save a configuration entity with a UUID that does not match the existing UUID.');
     }
-    catch (ConfigDuplicateUUIDException $e) {
+    catch (ConfigDuplicateUUIDException) {
       // Expected exception; just continue testing.
     }
 

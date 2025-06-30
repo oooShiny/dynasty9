@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.player_simple_form
 label: 'Player Simple Form'
+description: null
 targetEntityType: node
 cache: true

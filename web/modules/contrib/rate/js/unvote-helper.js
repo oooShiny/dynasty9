@@ -10,19 +10,15 @@
  */
 
 (function ($, Drupal) {
-
-  'use strict';
-
   Drupal.behaviors.rateUnvoteHelper = {
-    attach: function (context, settings) {
-
+    attach(context, settings) {
       $('table.rating-table', context).each(function () {
-        var $this = $(this);
-        var $ratesVotes = $this.find('.rate-voted');
+        const $this = $(this);
+        const $ratesVotes = $this.find('.rate-voted');
         if ($ratesVotes.length === 0) {
           $this.find('input:radio').attr('checked', false);
         }
       });
-    }
+    },
   };
 })(jQuery, Drupal);

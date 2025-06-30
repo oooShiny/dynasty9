@@ -16,7 +16,7 @@ dependencies:
   - drupal:options
   - drupal:taxonomy
 
-# Information added by Drupal.org packaging script on 2024-07-06
-version: '3.0.2'
+# Information added by Drupal.org packaging script on 2025-01-23
+version: '3.0.6'
 project: 'gutenberg'
-datestamp: 1720280486
+datestamp: 1737591151

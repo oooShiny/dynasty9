@@ -1,9 +1,9 @@
 rate.admin_settings:
   path: '/admin/config/search/votingapi/rate'
   defaults:
-   _title: 'Rate settings'
-   _description: 'Management options for the Rate module.'
-   _form: '\Drupal\rate\Form\RateSettingsForm'
+    _title: 'Rate settings'
+    _description: 'Management options for the Rate module.'
+    _form: '\Drupal\rate\Form\RateSettingsForm'
   requirements:
     _permission: 'administer rate'
 

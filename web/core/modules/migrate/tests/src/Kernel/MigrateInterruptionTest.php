@@ -18,9 +18,7 @@ use Drupal\KernelTests\KernelTestBase;
 class MigrateInterruptionTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['migrate', 'migrate_events_test'];
 
@@ -76,7 +74,7 @@ class MigrateInterruptionTest extends KernelTestBase {
    * @param string $name
    *   The event name.
    */
-  public function postRowSaveEventRecorder(MigratePostRowSaveEvent $event, $name) {
+  public function postRowSaveEventRecorder(MigratePostRowSaveEvent $event, $name): void {
     $event->getMigration()->interruptMigration(MigrationInterface::RESULT_INCOMPLETE);
   }
 

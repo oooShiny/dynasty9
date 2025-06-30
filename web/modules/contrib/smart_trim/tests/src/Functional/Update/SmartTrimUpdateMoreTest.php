@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\smart_trim\Functional\Update;
 
 use Drupal\FunctionalTests\Update\UpdatePathTestBase;
@@ -14,7 +16,21 @@ class SmartTrimUpdateMoreTest extends UpdatePathTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   protected function setDatabaseDumpFiles(): void {
+    // Database script for Drupal 10.3 or higher.
+    if (version_compare(\Drupal::VERSION, '10.3.2', '>')) {
+      $this->databaseDumpFiles = [
+        __DIR__ . '/../../../fixtures/update/drupal-10.3.2-smart_trim-2.0.php.gz',
+      ];
+      return;
+    }
+
+    // Database script for Drupal 10.0.
     $this->databaseDumpFiles = [
       __DIR__ . '/../../../fixtures/update/drupal-10.0.8-smart_trim-2.0.php.gz',
     ];

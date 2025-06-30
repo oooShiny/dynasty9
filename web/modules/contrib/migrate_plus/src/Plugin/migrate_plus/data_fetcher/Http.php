@@ -27,6 +27,11 @@ use GuzzleHttp\Exception\RequestException;
  *     User-Agent: Internet Explorer 6
  *     Authorization-Key: secret
  *     Arbitrary-Header: foobarbaz
+ *   # Guzzle request options can be added.
+ *   # See https://docs.guzzlephp.org/en/stable/request-options.html
+ *   request_options:
+ *     timeout: 300
+ *     allow_redirects: false
  * @endcode
  *
  * @DataFetcher(

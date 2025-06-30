@@ -19,7 +19,7 @@ services:
       - { name: event_subscriber }
     arguments:
       - '@event_dispatcher'
-      - '@state'
+      - '@migrate_tools.migrate_tools'
 
   plugin.manager.migrate_shared_config:
     class: Drupal\migrate_tools\MigrateSharedConfigPluginManager
@@ -28,3 +28,7 @@ services:
   migrate_tools.shared_config_include_handler:
     class: Drupal\migrate_tools\MigrateIncludeHandler
     arguments: ['@plugin.manager.migrate_shared_config']
+
+  migrate_tools.migrate_tools:
+    class: Drupal\migrate_tools\MigrateTools
+    arguments: ['@database']

@@ -14,26 +14,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class LayoutParagraphsModalSettingsForm extends ConfigFormBase {
 
   /**
-   * The typed config service.
-   *
-   * @var \Drupal\Core\Config\TypedConfigManagerInterface
-   */
-  protected $typedConfigManager;
-
-  /**
    * SettingsForm constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
-   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typed_config_manager
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
    *   The typed config service.
    */
   public function __construct(
     ConfigFactoryInterface $config_factory,
-    TypedConfigManagerInterface $typed_config_manager
+    TypedConfigManagerInterface $typedConfigManager,
   ) {
-    parent::__construct($config_factory);
-    $this->typedConfigManager = $typed_config_manager;
+    parent::__construct($config_factory, $typedConfigManager);
+    $this->typedConfigManager = $typedConfigManager;
   }
 
   /**

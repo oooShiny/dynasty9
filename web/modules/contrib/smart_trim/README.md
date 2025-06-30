@@ -38,11 +38,11 @@ available. Usage as follows:
   * `{{ text | smart_trim_chars(length, suffix, strip_html) }}`
     * length - the number of characters to retain.
     * suffix - to be appended if text trimmed (optional, blank if omitted).
-    * strip_html - strip HTML tags from the input (optional, defauld true).
+    * strip_html - strip HTML tags from the input (optional, default true).
   * `{{ text | smart_trim_words(length, suffix, strip_html) }}`
     * length - the number of words to retain.
     * suffix - to be appended if text trimmed (optional, blank if omitted).
-    * strip_html - strip HTML tags from the input (optional, defauld true).
+    * strip_html - strip HTML tags from the input (optional, default true).
 
 Note input text must be a single string. If it may contain an array or object,
 chain with `render`. E.g.: `{{ value | render | smart_trim_chars(25) }}`
@@ -86,10 +86,10 @@ The latest release is compatible with Drupal 9 and 10. Drupal 7 is minimally
 maintained.
 
 ## Maintainers
+
 * Mark Casias - [markie](https://www.drupal.org/u/markie)
 * Michael Anello - [ultimike](https://www.drupal.org/u/ultimike)
 * AmyJune Hineline - [volkswagenchick](https://www.drupal.org/u/volkswagenchick)
 
 ## Supporting organizations
-* [Kanopi Studios](https://www.drupal.org/kanopi-studios)
 * [DrupalEasy](https://www.drupal.org/drupaleasy)

@@ -26,9 +26,7 @@ class ContentTranslationMetadataFieldsTest extends ContentTranslationTestBase {
   protected $bundle = 'article';
 
   /**
-   * Modules to install.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['language', 'content_translation', 'node'];
 
@@ -40,7 +38,7 @@ class ContentTranslationMetadataFieldsTest extends ContentTranslationTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setupBundle() {
+  protected function setupBundle(): void {
     parent::setupBundle();
     $this->createContentType(['type' => $this->bundle]);
   }

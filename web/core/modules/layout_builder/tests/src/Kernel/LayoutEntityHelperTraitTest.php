@@ -24,7 +24,6 @@ use Prophecy\Argument;
  * @coversDefaultClass \Drupal\layout_builder\LayoutEntityHelperTrait
  *
  * @group layout_builder
- * @group #slow
  */
 class LayoutEntityHelperTraitTest extends KernelTestBase {
 
@@ -192,7 +191,7 @@ class LayoutEntityHelperTraitTest extends KernelTestBase {
       $entity->save();
       if ($has_original) {
         $original_entity = EntityTest::create(['name' => 'original']);
-        $entity->original = $original_entity;
+        $entity->setOriginal($original_entity);
       }
 
     }

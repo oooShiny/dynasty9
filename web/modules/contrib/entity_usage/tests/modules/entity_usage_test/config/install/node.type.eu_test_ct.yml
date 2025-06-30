@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - node
-name: eu_test_ct
+name: 'Entity Usage test content'
 type: eu_test_ct
 description: 'Entity Usage test content type'
 help: ''

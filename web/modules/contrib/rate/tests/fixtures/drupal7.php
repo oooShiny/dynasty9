@@ -743,7 +743,7 @@ $connection->insert('comment')
   'pid' => '0',
   'nid' => '8',
   'uid' => '1',
-  'subject' => 'asfasfasf',
+  'subject' => 'blah blah',
   'hostname' => '127.0.0.1',
   'created' => '1635168911',
   'changed' => '1635168911',

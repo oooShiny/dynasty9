@@ -1,5 +1,6 @@
 _core:
   default_config_hash: 7ITcwwShhS7SG3SJdIqRQkzXEcEPNejdEnbeDVDeDY0
+langcode: en
 script:
   domain: patsdynasty.com
   api: ''

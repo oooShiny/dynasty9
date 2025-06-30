@@ -6,8 +6,8 @@ namespace Drupal\Tests\pgsql\Kernel\pgsql;
 
 use Drupal\KernelTests\Core\Database\DriverSpecificSchemaTestBase;
 
-// cSpell:ignore relkind objid refobjid regclass attname attrelid attnum
-// cSpell:ignore refobjsubid
+// cSpell:ignore attname attnum attrelid objid refobjid refobjsubid regclass
+// cspell:ignore relkind relname
 
 /**
  * Tests schema API for the PostgreSQL driver.
@@ -236,7 +236,7 @@ class SchemaTest extends DriverSpecificSchemaTestBase {
   }
 
   /**
-   * @covers \Drupal\Core\Database\Driver\pgsql\Schema::extensionExists
+   * @covers \Drupal\pgsql\Driver\Database\pgsql\Schema::extensionExists
    */
   public function testPgsqlExtensionExists(): void {
     // Test the method for a non existing extension.
@@ -366,6 +366,35 @@ class SchemaTest extends DriverSpecificSchemaTestBase {
   }
 
   /**
+   * Tests renaming a table which name contains drupal_ with multiple indexes.
+   */
+  public function testRenameTableWithNameContainingDrupalUnderscoreAndMultipleIndexes(): void {
+    $table_name_old = 'field_drupal_foo';
+    $table_name_new = 'field_drupal_bar';
+    $table_specification = [
+      'fields' => [
+        'one'  => [
+          'type' => 'int',
+          'default' => NULL,
+        ],
+        'two'  => [
+          'type' => 'int',
+          'default' => NULL,
+        ],
+      ],
+      'indexes' => [
+        'one' => ['one'],
+        'two' => ['two'],
+      ],
+    ];
+    $this->schema->createTable($table_name_old, $table_specification);
+
+    $this->schema->renameTable($table_name_old, $table_name_new);
+
+    $this->assertTrue($this->schema->tableExists($table_name_new));
+  }
+
+  /**
    * Tests column name escaping in field constraints.
    */
   public function testUnsignedField(): void {
@@ -381,6 +410,7 @@ class SchemaTest extends DriverSpecificSchemaTestBase {
       'primary key' => ['order'],
     ];
     $this->schema->createTable($table_name, $table_spec);
+    $this->assertTrue($this->schema->tableExists($table_name));
   }
 
 }

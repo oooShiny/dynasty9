@@ -38,8 +38,8 @@ process:
     -
       plugin: rate_widgets_process_options
       source:
-       - options
-       - template
+        - options
+        - template
   entity_types:
     -
       plugin: rate_widgets_process_types

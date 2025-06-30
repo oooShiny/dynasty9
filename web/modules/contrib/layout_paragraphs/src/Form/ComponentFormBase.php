@@ -373,7 +373,7 @@ abstract class ComponentFormBase extends FormBase implements ComponentFormInterf
    *   The form element.
    */
   public function afterBuild(array $element, FormStateInterface $form_state) {
-    $parents = array_merge($element['#parents'], [$this->getFormId()]);
+    $parents = array_merge($element['#parents'], [$this->getFormId(), $element['#paragraph']->bundle()]);
     $unprocessed_id = 'edit-' . implode('-', $parents);
     $element['#attributes']['data-drupal-selector'] = Html::getId($unprocessed_id);
     $element['#dialog_id'] = $unprocessed_id . '-dialog';

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\smart_trim\Functional;
 
 use Drupal\Core\Session\AccountInterface;

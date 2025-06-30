@@ -27,7 +27,7 @@ function quicklink_library_info_build() {
   else {
     $libraries['quicklink'] = [
       'js' => [
-        'https://unpkg.com/quicklink@2.2.0/dist/quicklink.umd.js' => [
+        'https://unpkg.com/quicklink@2.3.0/dist/quicklink.umd.js' => [
           'minified' => TRUE,
           'type' => 'external',
           'weight' => -20,

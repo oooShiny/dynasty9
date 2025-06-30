@@ -6,6 +6,7 @@ namespace Drupal\Tests\file\Functional;
 
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\NodeType;
+use Drupal\Tests\node\Traits\NodeAccessTrait;
 use Drupal\user\RoleInterface;
 
 /**
@@ -15,10 +16,10 @@ use Drupal\user\RoleInterface;
  */
 class FilePrivateTest extends FileFieldTestBase {
 
+  use NodeAccessTrait;
+
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node_access_test', 'field_test'];
 
@@ -32,7 +33,7 @@ class FilePrivateTest extends FileFieldTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    node_access_test_add_field(NodeType::load('article'));
+    $this->addPrivateField(NodeType::load('article'));
     node_access_rebuild();
     \Drupal::state()->set('node_access_test.private', TRUE);
     // This test expects unused managed files to be marked as a temporary file.
@@ -54,7 +55,6 @@ class FilePrivateTest extends FileFieldTestBase {
 
     $test_file = $this->getTestFile('text');
     $nid = $this->uploadNodeFile($test_file, $field_name, $type_name, TRUE, ['private' => TRUE]);
-    \Drupal::entityTypeManager()->getStorage('node')->resetCache([$nid]);
     /** @var \Drupal\node\NodeInterface $node */
     $node = $node_storage->load($nid);
     $node_file = File::load($node->{$field_name}->target_id);
@@ -76,7 +76,6 @@ class FilePrivateTest extends FileFieldTestBase {
     // Test with the field that should deny access through field access.
     $this->drupalLogin($this->adminUser);
     $nid = $this->uploadNodeFile($test_file, $no_access_field_name, $type_name, TRUE, ['private' => TRUE]);
-    \Drupal::entityTypeManager()->getStorage('node')->resetCache([$nid]);
     $node = $node_storage->load($nid);
     $node_file = File::load($node->{$no_access_field_name}->target_id);
 

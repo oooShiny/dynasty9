@@ -49,7 +49,7 @@ class Json extends DataParserPluginBase implements ContainerFactoryPluginInterfa
    *
    * @throws \GuzzleHttp\Exception\RequestException
    */
-  protected function getSourceData(string $url, string|int $item_selector) {
+  protected function getSourceData(string $url, string|int $item_selector = '') {
     // Use cached source data if this is the first request or URL is same as the
     // last time we made the request.
     if ($this->currentUrl != $url || !$this->sourceData) {
@@ -69,11 +69,11 @@ class Json extends DataParserPluginBase implements ContainerFactoryPluginInterfa
 
     // Backwards-compatibility for depth selection.
     if (is_numeric($this->itemSelector)) {
-      return $this->selectByDepth($this->sourceData, (string) $item_selector);
+      return $this->selectByDepth($this->sourceData, (int) $item_selector);
     }
 
     // If the item_selector is an empty string, return all.
-    if ($item_selector == '') {
+    if ($item_selector === '') {
       return $this->sourceData;
     }
 
@@ -95,10 +95,12 @@ class Json extends DataParserPluginBase implements ContainerFactoryPluginInterfa
    *
    * @param array $raw_data
    *   Raw data from the JSON feed.
+   * @param int $item_selector
+   *   Depth within the data content at which useful data is found.
    *
    *   Selected items at the requested depth of the JSON feed.
    */
-  protected function selectByDepth(array $raw_data, string $item_selector): array {
+  protected function selectByDepth(array $raw_data, int $item_selector = 0): array {
     // Return the results in a recursive iterator that can traverse
     // multidimensional arrays.
     $iterator = new \RecursiveIteratorIterator(
@@ -112,7 +114,7 @@ class Json extends DataParserPluginBase implements ContainerFactoryPluginInterfa
     $iterator->rewind();
     while ($iterator->valid()) {
       $item = $iterator->current();
-      if (is_array($item) && $iterator->getDepth() == $identifierDepth) {
+      if (is_array($item) && $iterator->getDepth() === $identifierDepth) {
         $items[] = $item;
       }
       $iterator->next();

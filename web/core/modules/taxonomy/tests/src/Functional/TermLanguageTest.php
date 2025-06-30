@@ -14,6 +14,9 @@ use Drupal\language\Entity\ConfigurableLanguage;
  */
 class TermLanguageTest extends TaxonomyTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['language'];
 
   /**
@@ -49,6 +52,9 @@ class TermLanguageTest extends TaxonomyTestBase {
     }
   }
 
+  /**
+   * Tests the language of a term.
+   */
   public function testTermLanguage(): void {
     // Configure the vocabulary to not hide the language selector.
     $edit = [
@@ -87,6 +93,9 @@ class TermLanguageTest extends TaxonomyTestBase {
     $this->assertTrue($this->assertSession()->optionExists('edit-langcode-0-value', $edit['langcode[0][value]'])->isSelected());
   }
 
+  /**
+   * Tests the default language selection for taxonomy terms.
+   */
   public function testDefaultTermLanguage(): void {
     // Configure the vocabulary to not hide the language selector, and make the
     // default language of the terms fixed.

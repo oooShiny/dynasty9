@@ -1,9 +1,11 @@
 <?php
-
+// phpcs:ignoreFile
 /**
  * @file
- * Provides hook documentation for the VotingAPI module.
+ * Provides hook documentation for the Voting API module.
  */
+
+use Drupal\votingapi\VoteInterface;
 
 /**
  * @addtogroup hooks
@@ -28,7 +30,7 @@ function hook_vote_result_info_alter(&$results) {
 /**
  * Adds to or changes the calculated vote results for an entity.
  *
- * VotingAPI calculates a number of common aggregate functions automatically,
+ * Voting API calculates a number of common aggregate functions automatically,
  * including the average vote and total number of votes cast.
  *
  * @param array $vote_results
@@ -68,7 +70,7 @@ function hook_votingapi_results_alter(array &$vote_results, $entity_type, $entit
  *
  * If your module uses custom tags or value_types, or calculates custom
  * aggregate functions, please implement this hook so other modules can properly
- * interperet and display your data.
+ * interpret and display your data.
  *
  * Three major bins of data are stored: tags, value_types, and aggregate result
  * functions. Each entry in these bins is keyed by the value stored in the
@@ -85,25 +87,25 @@ function hook_votingapi_metadata_alter(&$data) {
   $data['tags']['bread'] = [
     'name' => t('Bread'),
     'description' => t('The quality of the food at a restaurant.'),
-    'module' => 'mymodule',
+    'module' => 'my_module',
     // This is optional; we can add it for our own purposes.
   ];
   $data['tags']['circuses'] = [
     'name' => t('Circuses'),
     'description' => t('The quality of the presentation and atmosphere at a restaurant.'),
-    'module' => 'mymodule',
+    'module' => 'my_module',
   ];
 
   // Document two custom aggregate function.
   $data['functions']['standard_deviation'] = [
     'name' => t('Standard deviation'),
     'description' => t('The standard deviation of all votes cast on a given piece of content. Use this to find controversial content.'),
-    'module' => 'mymodule',
+    'module' => 'my_module',
   ];
   $data['functions']['median'] = [
     'name' => t('Median vote'),
     'description' => t('The median vote value cast on a given piece of content. More accurate than a pure average when there are a few outlying votes.'),
-    'module' => 'mymodule',
+    'module' => 'my_module',
   ];
 }
 
@@ -127,29 +129,31 @@ function hook_votingapi_metadata_alter(&$data) {
  */
 function hook_votingapi_views_formatters($field) {
   if ($field->field == 'value') {
-    return ['mymodule_funky_formatter' => t('MyModule value formatter')];
+    return ['my_module_funky_formatter' => t('MyModule value formatter')];
   }
   if ($field->field == 'tag') {
-    return ['mymodule_funky_tags' => t('MyModule tag formatter')];
+    return ['my_module_funky_tags' => t('MyModule tag formatter')];
   }
 }
 
 /**
+ * Override the Voting API storage.
+ *
  * Voting API's vote storage can be overridden by setting the
  * 'votingapi_vote_storage' state variable to an alternative class.
  */
-\Drupal::state()->set('votingapi_vote_storage', 'Mongodb_VoteStorage');
+\Drupal::state()->set('votingapi_vote_storage', 'MongodbVoteStorage');
 
 /**
- *
+ * Example alternative storage class.
  */
-class Mongodb_VoteStorage {
+class MongodbVoteStorage {
 
   /**
    * Save a vote in the database.
    *
-   * @param $vote
-   *   instance of VotingApi_Vote.
+   * @param \Drupal\votingapi\VoteInterface $vote
+   *   Instance of a \Drupal\votingapi\Entity\Vote entity.
    */
   public function addVote(&$vote) {
     mongodb_collection('votingapi_vote')->insert($vote);
@@ -158,13 +162,13 @@ class Mongodb_VoteStorage {
   /**
    * Deletes votes from the database.
    *
-   * @param $votes
-   *   An array of VotingApi_Vote instances to delete.
+   * @param \Drupal\votingapi\VoteInterface $votes
+   *   An array of \Drupal\votingapi\Entity\Vote instances to delete.
    *   Minimally, each vote must have the 'vote_id' key set.
-   * @param $vids
+   * @param array $vids
    *   A list of the 'vote_id' values from $votes.
    */
-  public function deleteVotes($votes, $vids) {
+  public function deleteVotes(VoteInterface $votes, array $vids) {
     mongodb_collection('votingapi_vote')->delete(['vote_id' => ['$in' => array_map('intval', $vids)]]);
   }
 
@@ -173,11 +177,11 @@ class Mongodb_VoteStorage {
    *
    * @param $criteria
    *   instance of VotingApi_Criteria.
-   * @param $limit
+   * @param int $limit
    *   An integer specifying the maximum number of votes to return. 0 means
    *   unlimited and is the default.
    *
-   * @return
+   * @return array
    *   An array of VotingApi_Vote objects matching the criteria.
    */
   public function selectVotes($criteria, $limit) {
@@ -197,10 +201,10 @@ class Mongodb_VoteStorage {
   }
 
   /**
-   * TODO.
+   * @todo Write this.
    */
   public function standardResults($entity_id, $entity) {
-    // TODO.
+    // @todo Implement this.
   }
 
 }

@@ -3,18 +3,10 @@
 namespace Drupal\entity_usage\Plugin\EntityUsage\Track;
 
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
-use Drupal\Core\Block\BlockManagerInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldItemInterface;
-use Drupal\entity_usage\EntityUsageInterface;
 use Drupal\entity_usage\EntityUsageTrackBase;
 use Drupal\layout_builder\Plugin\Field\FieldType\LayoutSectionItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Path\PathValidatorInterface;
-use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 
 /**
  * Tracks usage of entities related in Layout Builder layouts.
@@ -24,6 +16,7 @@ use Drupal\Core\StreamWrapper\StreamWrapperInterface;
  *   label = @Translation("Layout builder"),
  *   description = @Translation("Tracks relationships in layout builder layouts."),
  *   field_types = {"layout_section"},
+ *   source_entity_class = "Drupal\Core\Entity\FieldableEntityInterface",
  * )
  */
 class LayoutBuilder extends EntityUsageTrackBase {
@@ -36,63 +29,23 @@ class LayoutBuilder extends EntityUsageTrackBase {
   protected $blockManager;
 
   /**
-   * Constructs a new LayoutBuilder plugin instance.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\entity_usage\EntityUsageInterface $usage_service
-   *   The usage tracking service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The EntityTypeManager service.
-   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
-   *   The EntityFieldManager service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
-   *   The EntityRepositoryInterface service.
-   * @param \Drupal\Core\Block\BlockManagerInterface $blockManager
-   *   Block manager.
-   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
-   *   The Drupal Path Validator service.
-   * @param \Drupal\Core\StreamWrapper\StreamWrapperInterface $public_stream
-   *   The Public Stream service.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityUsageInterface $usage_service, EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, ConfigFactoryInterface $config_factory, EntityRepositoryInterface $entity_repository, BlockManagerInterface $blockManager, PathValidatorInterface $path_validator, StreamWrapperInterface $public_stream) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $usage_service, $entity_type_manager, $entity_field_manager, $config_factory, $entity_repository, $path_validator, $public_stream);
-    $this->blockManager = $blockManager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('entity_usage.usage'),
-      $container->get('entity_type.manager'),
-      $container->get('entity_field.manager'),
-      $container->get('config.factory'),
-      $container->get('entity.repository'),
-      $container->get('plugin.manager.block'),
-      $container->get('path.validator'),
-      $container->get('stream_wrapper.public')
-    );
+    $plugin = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $plugin->blockManager = $container->get('plugin.manager.block');
+    return $plugin;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getTargetEntities(FieldItemInterface $item) {
+  public function getTargetEntities(FieldItemInterface $item): array {
     assert($item instanceof LayoutSectionItem);
 
     // We support both Content Blocks and Entity Browser Blocks.
     $blockContentRevisionIds = [];
+    $blockContentUuids = [];
     $ebbContentIds = [];
     $contentDependencyIds = [];
 
@@ -103,22 +56,28 @@ class LayoutBuilder extends EntityUsageTrackBase {
       foreach ($section->getComponents() as $component) {
         $configuration = $component->toArray()['configuration'];
         try {
-          $def = $this->blockManager->getDefinition($component->getPluginId());
+          ['id' => $pluginId] = $this->blockManager->getDefinition($component->getPluginId());
         }
         catch (PluginNotFoundException $e) {
           // Block has since been removed, continue.
           continue;
         }
-        if ($def['id'] === 'inline_block') {
+
+        if ($pluginId === 'inline_block') {
           $blockContentRevisionIds[] = $configuration['block_revision_id'];
         }
-        elseif ($def['id'] === 'entity_browser_block' && !empty($configuration['entity_ids'])) {
+        elseif ($pluginId === 'entity_browser_block' && !empty($configuration['entity_ids'])) {
           $ebbContentIds = array_unique(array_merge($ebbContentIds, (array) $configuration['entity_ids']));
+        }
+        elseif ($pluginId === 'block_content') {
+          [, $uuid] = explode(':', $configuration['id']);
+          $blockContentUuids[] = $uuid;
         }
 
         // Check the block plugin's content dependencies.
         /** @var \Drupal\Core\Block\BlockPluginInterface $plugin */
         $plugin = $component->getPlugin();
+        // @todo there might be hidden entity loading in here.
         $dependencies = $plugin->calculateDependencies();
         if (!empty($dependencies['content'])) {
           $contentDependencyIds = array_merge($contentDependencyIds, $dependencies['content']);
@@ -128,7 +87,10 @@ class LayoutBuilder extends EntityUsageTrackBase {
 
     $target_entities = [];
     if (count($blockContentRevisionIds) > 0) {
-      $target_entities = $this->prepareBlockContentIds($blockContentRevisionIds);
+      $target_entities = $this->checkAndPrepareEntityIds('block_content', $blockContentRevisionIds, 'revision');
+    }
+    if (count($blockContentUuids) > 0) {
+      $target_entities = array_merge($target_entities, $this->checkAndPrepareEntityIds('block_content', $blockContentUuids, 'uuid'));
     }
     if (count($ebbContentIds) > 0) {
       $target_entities = array_merge($target_entities, $this->prepareEntityBrowserBlockIds($ebbContentIds));
@@ -136,36 +98,8 @@ class LayoutBuilder extends EntityUsageTrackBase {
     if (count($contentDependencyIds) > 0) {
       $target_entities = array_merge($target_entities, $this->prepareContentDependencyIds($contentDependencyIds));
     }
-    return $target_entities;
+    return array_unique($target_entities);
 
-  }
-
-  /**
-   * Prepare block content target entity values to be in the correct format.
-   *
-   * @param array $blockContentRevisionIds
-   *   An array of block (content) revision IDs.
-   *
-   * @return array
-   *   An array of the corresponding block IDs from the revision IDs passed in,
-   *   each prefixed with the string "block_content|".
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  private function prepareBlockContentIds(array $blockContentRevisionIds) {
-    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface $blockContentStorage */
-    $blockContentStorage = $this->entityTypeManager->getStorage('block_content');
-
-    /** @var \Drupal\block_content\BlockContentInterface[] $blockContent */
-    $ids = $blockContentStorage->getQuery()
-      ->accessCheck(FALSE)
-      ->condition($blockContentStorage->getEntityType()->getKey('revision'), $blockContentRevisionIds, 'IN')
-      ->execute();
-
-    return array_map(function (string $id): string {
-      return 'block_content|' . $id;
-    }, $ids);
   }
 
   /**
@@ -181,36 +115,31 @@ class LayoutBuilder extends EntityUsageTrackBase {
    *   - The ":" character will be replaced by the "|" character.
    */
   private function prepareEntityBrowserBlockIds(array $ebbContentIds) {
-    // Only return loadable entities.
-    $ids = array_filter($ebbContentIds, function ($item) {
+    $return = $ids = [];
+
+    // Keys the IDs by entity type.
+    foreach ($ebbContentIds as $id) {
       // Entity Browser Block stores each entity in "entity_ids" in the format:
       // "{$entity_type_id}:{$entity_id}".
-      list($entity_type_id, $entity_id) = explode(":", $item);
-      $storage = $this->entityTypeManager->getStorage($entity_type_id);
-      if (!$storage) {
-        return FALSE;
-      }
-      $entity = $storage->load($entity_id);
-      if (!$entity) {
-        return FALSE;
-      }
-      return TRUE;
-    });
-
-    if (empty($ids)) {
-      return [];
+      [$entity_type_id, $entity_id] = explode(":", $id);
+      $ids[$entity_type_id][] = $entity_id;
     }
 
-    // Return items in the expected format, separating type and id with a "|".
-    return array_map(function (string $item): string {
-      return str_replace(":", "|", $item);
-    }, $ids);
+    foreach ($ids as $entity_type_id => $entity_ids) {
+      // Return items in the expected format, separating type and id with a "|".
+      $return = array_merge(
+        $return,
+        $this->checkAndPrepareEntityIds($entity_type_id, $entity_ids, 'id')
+      );
+    }
+
+    return $return;
   }
 
   /**
    * Prepare plugin content dependency IDs to be in the correct format.
    *
-   * @param array $ids
+   * @param array $dependency_ids
    *   An array of entity ID values as returned from the plugin dependency
    *   configuration. (Each value is expected to be in the format
    *   "media:image:4dd39aa2-068f-11ec-9a03-0242ac130003", etc).
@@ -222,19 +151,25 @@ class LayoutBuilder extends EntityUsageTrackBase {
    *   - The UUID will be converted to a regular ID.
    *   - The ":" character will be replaced by the "|" character.
    */
-  private function prepareContentDependencyIds(array $ids) {
-    // Only return loadable entities.
-    $ids = array_map(function ($item) {
+  private function prepareContentDependencyIds(array $dependency_ids) {
+    $return = $ids = [];
+
+    // Keys the UUIDs by entity type.
+    foreach ($dependency_ids as $id) {
       // Content dependencies are stored in the format:
       // "{$entity_type_id}:{$bundle_id}:{$entity_uuid}".
-      list($entity_type_id, , $entity_uuid) = explode(':', $item);
-      if ($entity = $this->entityRepository->loadEntityByUuid($entity_type_id, $entity_uuid)) {
-        return "{$entity_type_id}|{$entity->id()}";
-      }
-      return FALSE;
-    }, $ids);
+      [$entity_type_id, , $entity_uuid] = explode(':', $id);
+      $ids[$entity_type_id][] = $entity_uuid;
+    }
 
-    return array_filter($ids);
+    foreach ($ids as $entity_type_id => $entity_uuids) {
+      $return = array_merge(
+        $return,
+        $this->checkAndPrepareEntityIds($entity_type_id, $entity_uuids, 'uuid')
+      );
+    }
+
+    return $return;
   }
 
 }

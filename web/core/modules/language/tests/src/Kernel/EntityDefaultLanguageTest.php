@@ -16,9 +16,7 @@ use Drupal\KernelTests\KernelTestBase;
 class EntityDefaultLanguageTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'language',
@@ -110,7 +108,7 @@ class EntityDefaultLanguageTest extends KernelTestBase {
    * @param string $langcode
    *   Default language code of the nodes of this type.
    */
-  protected function createContentType($name, $langcode) {
+  protected function createContentType($name, $langcode): void {
     $content_type = $this->container->get('entity_type.manager')->getStorage('node_type')->create([
       'name' => 'Test ' . $name,
       'title_label' => 'Title',

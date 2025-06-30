@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\jsonapi\Functional;
 
+use Drupal\jsonapi\JsonApiSpec;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Cache\Cache;
@@ -18,7 +19,6 @@ use GuzzleHttp\RequestOptions;
  * JSON:API integration test for the "Term" content entity type.
  *
  * @group jsonapi
- * @group #slow
  */
 class TermTest extends ResourceTestBase {
 
@@ -66,7 +66,7 @@ class TermTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpAuthorization($method) {
+  protected function setUpAuthorization($method): void {
     switch ($method) {
       case 'GET':
         $this->grantPermissionsToTestedRole(['access content', 'view vocabulary labels']);
@@ -93,7 +93,7 @@ class TermTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpRevisionAuthorization($method) {
+  protected function setUpRevisionAuthorization($method): void {
     parent::setUpRevisionAuthorization($method);
     $this->grantPermissionsToTestedRole(['administer taxonomy']);
   }
@@ -126,7 +126,7 @@ class TermTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getExpectedDocument() {
+  protected function getExpectedDocument(): array {
     $base_url = Url::fromUri('base:/jsonapi/taxonomy_term/camelids/' . $this->entity->uuid())->setAbsolute();
     $self_url = clone $base_url;
     $version_identifier = 'id:' . $this->entity->getRevisionId();
@@ -250,10 +250,10 @@ class TermTest extends ResourceTestBase {
       'jsonapi' => [
         'meta' => [
           'links' => [
-            'self' => ['href' => 'http://jsonapi.org/format/1.0/'],
+            'self' => ['href' => JsonApiSpec::SUPPORTED_SPECIFICATION_PERMALINK],
           ],
         ],
-        'version' => '1.0',
+        'version' => JsonApiSpec::SUPPORTED_SPECIFICATION_VERSION,
       ],
       'links' => [
         'self' => ['href' => $base_url->toString()],
@@ -347,7 +347,7 @@ class TermTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getPostDocument() {
+  protected function getPostDocument(): array {
     return [
       'data' => [
         'type' => 'taxonomy_term--camelids',

@@ -16,9 +16,7 @@ use Drupal\Tests\BrowserTestBase;
 class MenuAccessTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['block', 'filter', 'toolbar', 'menu_ui'];
 
@@ -329,10 +327,11 @@ class MenuAccessTest extends BrowserTestBase {
       Url::fromRoute('menu_test.child_test_param_explicit', ['param' => 'my_default'])
     );
 
-    // If we try to access a route that takes a parameter but route is not in the
-    // with that parameter we should always be denied access because the sole
-    // purpose of \Drupal\system\Controller\SystemController::systemAdminMenuBlockPage
-    // is to display items in the menu.
+    // If we try to access a route that takes a parameter but route is not in
+    // the with that parameter we should always be denied access because the
+    // sole purpose of
+    // \Drupal\system\Controller\SystemController::systemAdminMenuBlockPage is
+    // to display items in the menu.
     $this->drupalLogin($parentUser);
     $this->assertMenuItemRoutesAccess(
       403,

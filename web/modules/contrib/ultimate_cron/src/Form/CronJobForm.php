@@ -57,15 +57,10 @@ class CronJobForm extends EntityForm {
       '#markup' => $job->getModule(),
     );
 
-    $callback = $job->getCallback();
-    if (is_array($callback)) {
-      $callback = get_class($callback[0]) . '::' . $callback[1];
-    }
-
     $form['callback_info'] = array(
       '#type' => 'item',
       '#title' => $this->t('Callback'),
-      '#markup' => $callback,
+      '#markup' => $job->getCallbackString(),
     );
 
     // Setup vertical tabs.
@@ -133,8 +128,6 @@ class CronJobForm extends EntityForm {
       $form[$plugin_type]['configuration']['#prefix'] = '<div id="' . $plugin_type . '_settings' . '">';
       $form[$plugin_type]['configuration']['#suffix'] = '</div>';
     }
-
-    //$form['#attached']['js'][] = drupal_get_path('module', 'ultimate_cron') . '/js/ultimate_cron.job.js';
 
     return $form;
   }

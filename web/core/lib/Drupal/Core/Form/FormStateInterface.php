@@ -117,7 +117,7 @@ interface FormStateInterface {
    * Sets the redirect for the form.
    *
    * @param string $route_name
-   *   The name of the route
+   *   The name of the route.
    * @param array $route_parameters
    *   (optional) An associative array of parameter names and values.
    * @param array $options
@@ -536,7 +536,7 @@ interface FormStateInterface {
    *   element is ['foo', 'bar', 'baz'] then you may set an error on 'foo'
    *   or 'foo][bar][baz'. Setting an error on 'foo' sets an error for every
    *   element where the #parents array starts with 'foo'.
-   * @param string $message
+   * @param string|\Stringable $message
    *   (optional) The error message to present to the user.
    *
    * @return $this
@@ -548,7 +548,7 @@ interface FormStateInterface {
    *
    * @param array $element
    *   The form element.
-   * @param string $message
+   * @param string|\Stringable $message
    *   (optional) The error message to present to the user.
    *
    * @return $this
@@ -748,6 +748,7 @@ interface FormStateInterface {
    * Returns references to details elements to render them within vertical tabs.
    *
    * @return array
+   *   References to details elements to render them within vertical tabs.
    */
   public function &getGroups();
 
@@ -924,6 +925,7 @@ interface FormStateInterface {
    * Determines if this form submission should bypass #access.
    *
    * @return bool
+   *   TRUE if this form bypassing access checked, otherwise FALSE.
    *
    * @see \Drupal\Core\Form\FormState::$programmed_bypass_access_check
    */

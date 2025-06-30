@@ -65,6 +65,11 @@ class CronJob extends ConfigEntityBase implements CronJobInterface {
   public $settings;
 
   /**
+   * @var array
+   */
+  protected $ids = [];
+
+  /**
    * @var int
    */
   protected $id;
@@ -190,7 +195,13 @@ class CronJob extends ConfigEntityBase implements CronJobInterface {
    * {@inheritdoc}
    */
   public function isValid() {
-    return is_callable($this->getCallback());
+    if (str_contains($this->callback, '#')) {
+      [$module, $hook] = explode('#', $this->callback, 2);
+      return \Drupal::moduleHandler()->hasImplementations($hook, [$module]);
+    }
+    else {
+      return is_callable($this->getCallback());
+    }
   }
 
   /**
@@ -279,13 +290,8 @@ class CronJob extends ConfigEntityBase implements CronJobInterface {
     //    if (isset($this->plugins[$plugin_type])) {
     //      return $this->plugins[$plugin_type];
     //    }
-    if ($name) {
-    }
     elseif (!empty($this->{$plugin_type}['id'])) {
       $name = $this->{$plugin_type}['id'];
-    }
-    else {
-      $name = $this->hook[$plugin_type]['name'];
     }
     /* @var \Drupal\Core\Plugin\DefaultPluginManager $manager */
     $manager = \Drupal::service('plugin.manager.ultimate_cron.' . $plugin_type);
@@ -321,8 +327,16 @@ class CronJob extends ConfigEntityBase implements CronJobInterface {
    * Invokes the jobs callback.
    */
   protected function invokeCallback() {
-    $callback = $this->getCallback();
-    return call_user_func($callback, $this);
+    // Custom format for cron hook implementations, invoke through
+    // the moduleHandler.
+    if (str_contains($this->callback, '#')) {
+      [$module, $hook] = explode('#', $this->callback, 2);
+      \Drupal::moduleHandler()->invoke($module, $hook);
+    }
+    else {
+      $callback = $this->getCallback();
+      call_user_func($callback, $this);
+    }
   }
 
   /**
@@ -341,19 +355,28 @@ class CronJob extends ConfigEntityBase implements CronJobInterface {
     // Controller in the service:method notation.
     $count = substr_count($callback, ':');
     if ($count == 1) {
-      list($class_or_service, $method) = explode(':', $callback, 2);
+      [$class_or_service, $method] = explode(':', $callback, 2);
     }
     // Controller in the class::method notation.
     elseif (strpos($callback, '::') !== FALSE) {
-      list($class_or_service, $method) = explode('::', $callback, 2);
+      [$class_or_service, $method] = explode('::', $callback, 2);
     }
+    // Other invokable, validity to be determined by the class resolver.
     else {
+      $class_or_service = $callback;
+    }
+
+    try {
+      $callback = $this->classResolver->getInstanceFromDefinition($class_or_service);
+    } catch (\InvalidArgumentException $e) {
       return $callback;
     }
 
-    $callback = $this->classResolver->getInstanceFromDefinition($class_or_service);
+    if (isset($method)) {
+      return [$callback, $method];
+    }
 
-    return array($callback, $method);
+    return $callback;
   }
 
   /**
@@ -811,6 +834,13 @@ class CronJob extends ConfigEntityBase implements CronJobInterface {
     else {
       return $this->resolveCallback($this->callback);
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCallbackString() {
+    return $this->callback;
   }
 
   /**

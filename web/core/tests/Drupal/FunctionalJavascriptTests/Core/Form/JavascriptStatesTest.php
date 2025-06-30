@@ -78,7 +78,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of elements triggered by a checkbox element.
    */
-  protected function doCheckboxTriggerTests() {
+  protected function doCheckboxTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 
@@ -138,20 +138,29 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $radios_checked_element = $page->findField('radios_checked_when_checkbox_trigger_checked');
     $this->assertNotEmpty($radios_checked_element);
 
-    // We want to select the specific radio buttons, not the whole radios field itself.
-    $radios_all_disabled_value1 = $this->xpath('//input[@name=:name][@value=:value]', [':name' => 'radios_all_disabled_when_checkbox_trigger_checked', ':value' => 'value1']);
+    // We want to select the specific radio buttons, not the whole radios field
+    // itself.
+    $radios_all_disabled_value1 = $this->xpath(
+      '//input[@name=:name][@value=:value]',
+      [':name' => 'radios_all_disabled_when_checkbox_trigger_checked', ':value' => 'value1']);
     $this->assertCount(1, $radios_all_disabled_value1);
     // We want to access the radio button directly for the rest of the test, so
     // take it out of the array we got back from xpath().
     $radios_all_disabled_value1 = reset($radios_all_disabled_value1);
-    $radios_all_disabled_value2 = $this->xpath('//input[@name=:name][@value=:value]', [':name' => 'radios_all_disabled_when_checkbox_trigger_checked', ':value' => 'value2']);
+    $radios_all_disabled_value2 = $this->xpath(
+      '//input[@name=:name][@value=:value]',
+      [':name' => 'radios_all_disabled_when_checkbox_trigger_checked', ':value' => 'value2']);
     $this->assertCount(1, $radios_all_disabled_value2);
     $radios_all_disabled_value2 = reset($radios_all_disabled_value2);
 
-    $radios_some_disabled_value1 = $this->xpath('//input[@name=:name][@value=:value]', [':name' => 'radios_some_disabled_when_checkbox_trigger_checked', ':value' => 'value1']);
+    $radios_some_disabled_value1 = $this->xpath(
+      '//input[@name=:name][@value=:value]',
+      [':name' => 'radios_some_disabled_when_checkbox_trigger_checked', ':value' => 'value1']);
     $this->assertCount(1, $radios_some_disabled_value1);
     $radios_some_disabled_value1 = reset($radios_some_disabled_value1);
-    $radios_some_disabled_value2 = $this->xpath('//input[@name=:name][@value=:value]', [':name' => 'radios_some_disabled_when_checkbox_trigger_checked', ':value' => 'value2']);
+    $radios_some_disabled_value2 = $this->xpath(
+      '//input[@name=:name][@value=:value]',
+      [':name' => 'radios_some_disabled_when_checkbox_trigger_checked', ':value' => 'value2']);
     $this->assertCount(1, $radios_some_disabled_value2);
     $radios_some_disabled_value2 = reset($radios_some_disabled_value2);
 
@@ -160,6 +169,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertFalse($details->hasAttribute('open'));
     $this->assertFalse($textfield_in_details->isVisible());
     $this->assertFalse($textfield_required_element->hasAttribute('required'));
+    $this->assertFalse($textfield_required_element->hasAttribute('aria-required'));
     $this->assertFalse($textfield_readonly_element->hasAttribute('readonly'));
     $this->assertFalse($textarea_readonly_element->hasAttribute('readonly'));
     $this->assertFalse($checkbox_checked_element->isChecked());
@@ -187,12 +197,15 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertFalse($radios_some_disabled_value2->hasAttribute('disabled'));
     // Check if the link is visible.
     $this->assertTrue($link->isVisible());
+    // Check enter password is visible.
+    $this->assertSession()->pageTextContains('Enter password');
 
     // Change state: check the checkbox.
     $trigger->check();
     // Verify triggered state.
     $this->assertFalse($textfield_invisible_element->isVisible());
     $this->assertEquals('required', $textfield_required_element->getAttribute('required'));
+    $this->assertFalse($textfield_required_element->hasAttribute('aria-required'));
     $this->assertTrue($textfield_readonly_element->hasAttribute('readonly'));
     $this->assertTrue($textarea_readonly_element->hasAttribute('readonly'));
     $this->assertTrue($details->hasAttribute('open'));
@@ -228,6 +241,8 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertFalse($radios_some_disabled_value2->hasAttribute('disabled'));
     // The link shouldn't be visible.
     $this->assertFalse($link->isVisible());
+    // Check enter password is not visible.
+    $this->assertSession()->pageTextNotContains('Enter password');
 
     // Change state: uncheck the checkbox.
     $trigger->uncheck();
@@ -263,12 +278,14 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertFalse($radios_some_disabled_value2->hasAttribute('disabled'));
     // Check if the link is turned back to visible state.
     $this->assertTrue($link->isVisible());
+    // Check enter password is visible.
+    $this->assertSession()->pageTextContains('Enter password');
   }
 
   /**
    * Tests states of elements triggered by a checkboxes element.
    */
-  protected function doCheckboxesTriggerTests() {
+  protected function doCheckboxesTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 
@@ -308,7 +325,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of elements triggered by a textfield element.
    */
-  protected function doTextfieldTriggerTests() {
+  protected function doTextfieldTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 
@@ -335,6 +352,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertTrue($select_invisible_target->isVisible());
     $this->assertFalse($select_visible_target->isVisible());
     $this->assertFalse($textfield_required_target->hasAttribute('required'));
+    $this->assertFalse($textfield_required_target->hasAttribute('aria-required'));
     $this->assertFalse($details->hasAttribute('open'));
     $this->assertFalse($textfield_in_details->isVisible());
 
@@ -346,6 +364,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertFalse($select_invisible_target->isVisible());
     $this->assertTrue($select_visible_target->isVisible());
     $this->assertEquals('required', $textfield_required_target->getAttribute('required'));
+    $this->assertFalse($textfield_required_target->hasAttribute('aria-required'));
     $this->assertTrue($details->hasAttribute('open'));
     $this->assertTrue($textfield_in_details->isVisible());
   }
@@ -353,7 +372,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of elements triggered by a radios element.
    */
-  protected function doRadiosTriggerTests() {
+  protected function doRadiosTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 
@@ -382,6 +401,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertTrue($checkbox_unchecked_target->isChecked());
     $this->assertTrue($textfield_invisible_target->isVisible());
     $this->assertFalse($select_required_target->hasAttribute('required'));
+    $this->assertFalse($select_required_target->hasAttribute('aria-required'));
     $this->assertFalse($details->hasAttribute('open'));
     $this->assertFalse($textfield_in_details->isVisible());
 
@@ -392,6 +412,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
     $this->assertTrue($textfield_in_fieldset->isVisible());
     $this->assertFalse($textfield_invisible_target->isVisible());
     $this->assertTrue($select_required_target->hasAttribute('required'));
+    $this->assertFalse($select_required_target->hasAttribute('aria-required'));
     // Checkboxes and details should not have changed state, yet.
     $this->assertFalse($checkbox_checked_target->isChecked());
     $this->assertTrue($checkbox_unchecked_target->isChecked());
@@ -405,6 +426,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
     // Textfield and select should revert to initial state.
     $this->assertTrue($textfield_invisible_target->isVisible());
     $this->assertFalse($select_required_target->hasAttribute('required'));
+    $this->assertFalse($select_required_target->hasAttribute('aria-required'));
     // Checkbox states should now change.
     $this->assertTrue($checkbox_checked_target->isChecked());
     $this->assertFalse($checkbox_unchecked_target->isChecked());
@@ -416,7 +438,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of elements triggered by a select element.
    */
-  protected function doSelectTriggerTests() {
+  protected function doSelectTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 
@@ -457,7 +479,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of elements triggered by a multiple select element.
    */
-  protected function doMultipleSelectTriggerTests() {
+  protected function doMultipleSelectTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
     // Find trigger and target elements.
@@ -514,7 +536,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of elements triggered by multiple elements.
    */
-  protected function doMultipleTriggerTests() {
+  protected function doMultipleTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 
@@ -538,7 +560,7 @@ class JavascriptStatesTest extends WebDriverTestBase {
   /**
    * Tests states of radios element triggered by other radios element.
    */
-  protected function doNestedTriggerTests() {
+  protected function doNestedTriggerTests(): void {
     $this->drupalGet('form-test/javascript-states-form');
     $page = $this->getSession()->getPage();
 

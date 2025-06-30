@@ -102,6 +102,10 @@ class DomStrReplace extends DomProcessBase {
     ];
     foreach ($options_validation as $option_name => $possible_values) {
       if (empty($this->configuration[$option_name])) {
+        if ($option_name === 'replace' && isset($this->configuration[$option_name])) {
+          // Allow empty string for replace.
+          continue;
+        }
         throw new InvalidPluginDefinitionException(
           $this->getPluginId(),
           "Configuration option '$option_name' is required."

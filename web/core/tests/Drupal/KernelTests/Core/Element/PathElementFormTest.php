@@ -28,9 +28,7 @@ class PathElementFormTest extends KernelTestBase implements FormInterface {
   protected $testUser;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system', 'user'];
 
@@ -116,7 +114,7 @@ class PathElementFormTest extends KernelTestBase implements FormInterface {
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => t('Submit'),
+      '#value' => 'Submit',
     ];
 
     return $form;

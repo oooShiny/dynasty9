@@ -14,7 +14,7 @@ class Select2Test extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system', 'select2'];
+  protected static $modules = ['system', 'select2'];
 
   /**
    * @covers ::preRenderSelect
@@ -29,7 +29,7 @@ class Select2Test extends KernelTestBase {
     ];
 
     $this->render($select);
-    $select2_js = $this->xpath("//script[contains(@src, 'select2/js/select2.js')]");
+    $select2_js = $this->xpath("//script[contains(@src, '" . $this->getModulePath('select2') . "/js/select2.js')]");
     $this->assertCount(1, $select2_js);
     $select2_js = $this->xpath("//script[contains(@src, 'select2/dist/js/select2.min.js')]");
     $this->assertCount(1, $select2_js);

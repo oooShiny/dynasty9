@@ -1,9 +1,12 @@
 uuid: bae8f261-6f59-4710-aadc-198d10d77911
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - file
 id: 8156553_patron
 label: '8156553 Patron'
 weight: 7
 is_admin: null
-permissions: {  }
+permissions:
+  - 'delete own files'

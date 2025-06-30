@@ -1,11 +1,11 @@
 name: Patreon
 type: module
 description: Connects a Drupal site to the Patreon API
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: Patreon
 configure: patreon.settings_form
 
-# Information added by Drupal.org packaging script on 2022-08-10
-version: '4.0.0'
+# Information added by Drupal.org packaging script on 2025-03-21
+version: '4.1.0'
 project: 'patreon'
-datestamp: 1660127648
+datestamp: 1742565094

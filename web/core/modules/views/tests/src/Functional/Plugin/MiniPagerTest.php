@@ -23,9 +23,7 @@ class MiniPagerTest extends ViewTestBase {
   public static $testViews = ['test_mini_pager'];
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node'];
 
@@ -175,7 +173,8 @@ class MiniPagerTest extends ViewTestBase {
       $this->assertEquals('h3', $this->assertSession()->elementExists('css', ".pager .visually-hidden")->getTagName());
     }
 
-    // The core views template and Stable9 use a different class structure than other core themes.
+    // The core views template and Stable9 use a different class structure than
+    // other core themes.
     $themes = ['stark', 'stable9'];
     $this->container->get('theme_installer')->install($themes);
     foreach ($themes as $theme) {

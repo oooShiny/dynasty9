@@ -71,7 +71,6 @@ class RateTypeAccessTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installSchema('system', 'sequences');
     $this->installEntitySchema('user');
     $this->installConfig('rate');
     $this->accessHandler = $this->container->get('entity_type.manager')

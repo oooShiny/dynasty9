@@ -19,9 +19,7 @@ class PathAliasTest extends PathTestBase {
   use WaitTerminateTestTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['path'];
 
@@ -46,8 +44,8 @@ class PathAliasTest extends PathTestBase {
     ]);
     $this->drupalLogin($web_user);
 
-    // The \Drupal\path_alias\AliasWhitelist service performs cache clears after
-    // Drupal has flushed the response to the client. We use
+    // The \Drupal\path_alias\AliasPrefixList service performs cache clears
+    // after Drupal has flushed the response to the client. We use
     // WaitTerminateTestTrait to wait for Drupal to do this before continuing.
     $this->setWaitForTerminate();
   }
@@ -66,10 +64,10 @@ class PathAliasTest extends PathTestBase {
     $this->drupalGet('admin/config/search/path/add');
     $this->submitForm($edit, 'Save');
 
-    // Check the path alias whitelist cache.
-    $whitelist = \Drupal::cache('bootstrap')->get('path_alias_whitelist');
-    $this->assertTrue($whitelist->data['node']);
-    $this->assertFalse($whitelist->data['admin']);
+    // Check the path alias prefix list cache.
+    $prefix_list = \Drupal::cache('bootstrap')->get('path_alias_prefix_list');
+    $this->assertTrue($prefix_list->data['node']);
+    $this->assertFalse($prefix_list->data['admin']);
 
     // Visit the system path for the node and confirm a cache entry is
     // created.
@@ -155,7 +153,7 @@ class PathAliasTest extends PathTestBase {
 
     // Set alias to second test node.
     $edit['path[0][value]'] = '/node/' . $node2->id();
-    // leave $edit['alias'] the same
+    // Leave $edit['alias'] the same
     $this->drupalGet('admin/config/search/path/add');
     $this->submitForm($edit, 'Save');
 

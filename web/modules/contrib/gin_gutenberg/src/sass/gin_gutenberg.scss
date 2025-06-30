@@ -5,7 +5,7 @@
 
 body.gutenberg--enabled {
 	.edit-post-header {
-		background-color: var(--colorGinLayerBackground);
+		background-color: var(--gin-bg-layer, var(--colorGinLayerBackground, #ffffff));
 	}
 
 	.region-sticky,
@@ -18,9 +18,15 @@ body.gutenberg--enabled {
 	}
 
 	.page-wrapper {
-		.interface-interface-skeleton__content {
-			*:focus:not(.edit-post-layout__metaboxes *) {
-				box-shadow: none;
+		.interface-interface-skeleton {
+			&__content {
+				*:focus:not(.edit-post-layout__metaboxes *) {
+					box-shadow: none;
+				}
+			}
+
+			&__header {
+				z-index: 99;
 			}
 		}
 	}
@@ -53,12 +59,12 @@ body.gutenberg--enabled {
 	.edit-post-layout {
 		.interface-interface-skeleton {
 			&__header {
-				border-color: var(--colorGinBorder);
+				border-color: var(--gin-border-color, var(--colorGinBorder));
 
 				.components-accessible-toolbar {
 					.gin--dark-mode & {
 						svg {
-							color: var(--colorGinText);
+							color: var(--gin-color-text, var(--colorGinText));
 						}
 					}
 				}
@@ -73,7 +79,7 @@ body.gutenberg--enabled {
 
 					button {
 						.gin--dark-mode & {
-							color: var(--colorGinPrimary);
+							color: var(--gin-color-primary, var(--colorGinPrimary));
 						}
 					}
 				}
@@ -84,8 +90,8 @@ body.gutenberg--enabled {
 				.interface-interface-skeleton__content {
 					// * Gutenberg Meta fields
 					.edit-post-layout__metaboxes {
-						border-top: 1px solid var(--colorGinBorder);
-						background-color: var(--colorGinAppBackground);
+						border-top: 1px solid var(--gin-border-color, var(--colorGinBorder));
+						background-color: var(--gin-bg-layer, var(--colorGinLayerBackground));
 					}
 
 					.wp-block {
@@ -109,22 +115,22 @@ body.gutenberg--enabled {
 
 					.edit-post-visual-editor {
 						.gin--dark-mode & {
-							color: var(--colorGinLayer4Background);
+							color: var(--gin-bg-layer, var(--colorGinLayerBackground));
 						}
 					}
 				}
 
 				// * Gutenberg Sidebar
 				.interface-interface-skeleton__sidebar {
-					background-color: var(--colorGinAppBackground);
-					border-color: var(--colorGinBorder);
+					background-color: var(--gin-bg-layer, var(--colorGinLayerBackground));
+					border-color: var(--gin-border-color, var(--colorGinBorder));
 
-          #edit-gin-sidebar {
-            display: none; // More info: https://www.drupal.org/project/gin/issues/3367004
-          }
+					#edit-gin-sidebar {
+						display: none; // More info: https://www.drupal.org/project/gin/issues/3367004
+					}
 
 					.interface-complementary-area {
-						background-color: var(--colorGinAppBackground);
+						background-color: var(--gin-bg-app, var(--colorGinAppBackground));
 					}
 
 					.edit-post-sidebar {
@@ -133,23 +139,23 @@ body.gutenberg--enabled {
 						}
 
 						.components-panel {
-							border-color: var(--colorGinBorder);
+							border-color: var(--gin-border-color, var(--colorGinBorder));
 
 							&__header {
-								background-color: var(--colorGinAppBackground);
+								background-color: var(--gin-bg-app, var(--colorGinAppBackground));
 
 								button {
-									color: var(--colorGinPrimary);
+									color: var(--gin-color-primary, var(--colorGinPrimary));
 
 									&.is-active {
 										box-shadow: inset 0 0 0 1.5px transparent,
-											inset 0 -4px 0 0 var(--colorGinPrimary);
+											inset 0 -4px 0 0 var(--gin-color-primary, var(--colorGinPrimary));
 									}
 								}
 							}
 
 							&__body {
-								border-color: var(--colorGinBorder);
+								border-color: var(--gin-border-color, var(--colorGinBorder));
 
 								.components-visually-hidden {
 									display: none !important;
@@ -158,20 +164,20 @@ body.gutenberg--enabled {
 								.components-custom-select-control {
 									&__button {
 										.gin--dark-mode & {
-											color: var(--colorGinPrimary);
+											color: var(--gin-color-primary, var(--colorGinPrimary));
 
 											&:focus:not(:disabled) {
-												color: var(--colorGinText);
+												color: var(--gin-color-text, var(--colorGinText));
 											}
 										}
 									}
 
 									&__menu {
 										.gin--dark-mode & {
-											background-color: var(--colorGinLayer2Background);
+											background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
 
 											* {
-												color: var(--colorGinText);
+												color: var(--gin-color-text, var(--colorGinText));
 											}
 										}
 									}
@@ -179,16 +185,16 @@ body.gutenberg--enabled {
 
 								&-toggle {
 									.gin--dark-mode & {
-										background-color: var(--colorGinAppBackground);
-										color: var(--colorGinText);
+										background-color: var(--gin-bg-app, var(--colorGinAppBackground));
+										color: var(--gin-color-text, var(--colorGinText));
 
 										svg {
-											color: var(--colorGinText);
+											color: var(--gin-color-text, var(--colorGinText));
 										}
 
 										&.components-button {
 											&:focus {
-												box-shadow: inset 0 0 0 1.5px var(--colorGinFocus);
+												box-shadow: inset 0 0 0 1.5px var(--gin-color-focus, var(--colorGinFocus));
 											}
 										}
 									}
@@ -203,34 +209,33 @@ body.gutenberg--enabled {
 								width: 100%;
 							}
 
-              .components-radio-control {
-                .components-radio-control__option {
-                  display: flex;
-                  align-items: center;
+							.components-radio-control {
+								.components-radio-control__option {
+									display: flex;
+									align-items: center;
 
-                  .components-radio-control__input {
-                    &:checked {
-                      &:not(:disabled) {
-                        background-image: none;
-                        background-color: var(--gin-bg-layer);
-                        box-shadow: inset 0 0 0 5px var(--gin-color-primary);
-                        border-color: var(--gin-color-primary);
-                      }
-                    }
-                  }
-                }
-              }
+									.components-radio-control__input {
+										&:checked {
+											&:not(:disabled) {
+												background-color: var(--gin-bg-layer, var(--colorGinLayerBackground));
+												box-shadow: inset 0 0 0 5px var(--gin-color-primary, var(--colorGinPrimary));
+												border-color: var(--gin-color-primary, var(--colorGinPrimary));
+											}
+										}
+									}
+								}
+							}
 
 							> * {
-								background-color: var(--colorGinAppBackground);
-								border-color: var(--colorGinBorder);
-								color: var(--colorGinText);
+								background-color: var(--gin-bg-app, var(--colorGinAppBackground));
+								border-color: var(--gin-border-color, var(--colorGinBorder));
+								color: var(--gin-color-text, var(--colorGinText));
 							}
 
 							.block-editor-block-card {
 								h2,
 								h3 {
-									color: var(--colorGinText);
+									color: var(--gin-color-text, var(--colorGinText));
 								}
 							}
 
@@ -238,33 +243,33 @@ body.gutenberg--enabled {
 								input,
 								textarea,
 								select {
-									background-color: var(--colorGinLayer2Background);
-									color: var(--colorGinText);
+									background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
+									color: var(--gin-color-text, var(--colorGinText));
 
 									&:focus {
-										outline: 2px solid var(--colorGinFocus);
+										outline: 2px solid var(--gin-color-focus, var(--colorGinFocus));
 									}
 								}
 
 								::placeholder {
-									color: var(--colorGinText);
+									color: var(--gin-color-text, var(--colorGinText));
 								}
 							}
 						}
 
 						.entity-meta {
 							max-width: 100%;
-							background-color: var(--colorGinAppBackground);
+							background-color: var(--gin-bg-app, var(--colorGinAppBackground));
 
 							> * {
 								max-width: 100%;
-								background-color: var(--colorGinAppBackground);
-								border-color: var(--colorGinBorder);
+								background-color: var(--gin-bg-app, var(--colorGinAppBackground));
+								border-color: var(--gin-border-color, var(--colorGinBorder));
 							}
 
 							.entity-meta__title {
 								&.form-item--meta-published {
-									background-color: #d1eb6b;
+									background-color: var(--gin-color-green-light, var(--colorGinGreenLight, #d1eb6b));
 									display: inline-block;
 									padding: 2px 8px;
 									border-radius: 8px;
@@ -282,7 +287,7 @@ body.gutenberg--enabled {
 							}
 
 							.form-type--item {
-								color: var(--colorGinText);
+								color: var(--gin-color-text, var(--colorGinText));
 							}
 						}
 
@@ -321,13 +326,13 @@ body.gutenberg--enabled {
 											content: '';
 											width: 100%;
 											height: 100%;
-											background-color: #fff;
+											background-color: var(--gin-bg-layer, var(--colorGinLayerBackground, #fff));
 											border-radius: 21px;
 											transform: translateX(-16px);
 											transition: transform 0.3s;
 
 											.gin--dark-mode & {
-												background-color: var(--colorGinLayer2Background);
+												background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
 											}
 										}
 									}
@@ -340,7 +345,7 @@ body.gutenberg--enabled {
 									}
 
 									&:checked ~ .checkbox-toggle .checkbox-toggle__inner {
-										background-color: var(--colorGinSwitch);
+										background-color: var(--gin-color-switch, var(--colorGinSwitch));
 
 										&:before {
 											transform: translateX(16px);
@@ -349,8 +354,8 @@ body.gutenberg--enabled {
 
 									&:active ~ .checkbox-toggle .checkbox-toggle__inner,
 									&:focus ~ .checkbox-toggle .checkbox-toggle__inner {
-										box-shadow: 0 0 0 2px var(--colorGinLayerBackground),
-											0 0 0 4px var(--colorGinFocus);
+										box-shadow: 0 0 0 2px var(--gin-bg-layer, var(--colorGinLayerBackground)),
+											0 0 0 4px var(--gin-color-focus, var(--colorGinFocus));
 									}
 
 									// Disabled state: set cursor to not-allowed
@@ -365,7 +370,7 @@ body.gutenberg--enabled {
 									&:disabled:checked
 										~ .checkbox-toggle:hover
 										.checkbox-toggle__inner {
-										background-color: var(--colorGinDisabled);
+										background-color: var(--gin-color-disabled, var(--colorGinDisabled));
 									}
 								}
 
@@ -374,7 +379,7 @@ body.gutenberg--enabled {
 									position: relative;
 									padding-left: 4px;
 									padding-bottom: 0;
-									color: var(--colorGinText);
+									color: var(--gin-color-text, var(--colorGinText));
 								}
 							}
 						}
@@ -387,21 +392,21 @@ body.gutenberg--enabled {
 							&:focus,
 							&:hover:focus {
 								background-image: none;
-								background-color: #fff;
-								border-color: var(--colorGinFormElementBorder);
+								background-color: var(--gin-bg-layer, var(--colorGinLayerBackground, #fff));
+								border-color: var(--gin-border-color, var(--colorGinFormElementBorder));
 								border-radius: 50%;
 
 								.gin--dark-mode & {
-									background-color: var(--colorGinLayer2Background);
+									background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
 								}
 							}
 
 							&:hover {
-								box-shadow: inset 0 0 0 1px var(--colorGinLayer2Border);
+								box-shadow: inset 0 0 0 1px var(--gin-border-color, var(--colorGinLayer2Border));
 
 								&,
 								.gin--dark-mode & {
-									border-color: var(--colorGinText);
+									border-color: var(--gin-color-text, var(--colorGinText));
 								}
 							}
 
@@ -412,12 +417,12 @@ body.gutenberg--enabled {
 								&:focus,
 								&:hover:focus {
 									background-image: none;
-									background-color: #fff;
-									box-shadow: inset 0 0 0 4px var(--colorGinPrimary);
+									background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
+									box-shadow: inset 0 0 0 4px var(--gin-color-primary, var(--colorGinPrimary));
 
 									.gin--dark-mode & {
-										background-color: var(--colorGinLayer2Background);
-										border-color: var(--colorGinPrimary);
+										background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
+										border-color: var(--gin-color-primary, var(--colorGinPrimary));
 									}
 								}
 							}
@@ -614,7 +619,7 @@ body.gutenberg--enabled {
 					.components-form-toggle {
 						&.is-checked {
 							.components-form-toggle__track {
-								background-color: var(--colorGinPrimary);
+								background-color: var(--gin-color-primary, var(--colorGinPrimary));
 							}
 						}
 					}
@@ -682,43 +687,43 @@ body.gutenberg--enabled {
 	.edit-post-layout__inserter-panel-content {
 		.gin--dark-mode & {
 			svg {
-				color: var(--colorGinText);
+				color: var(--gin-color-text, var(--colorGinText));
 			}
 
 			.block-editor-block-types-list__item {
 				&:focus {
-					box-shadow: 0 0 0 1.5px var(--colorGinFocus);
+					box-shadow: 0 0 0 1.5px var(--gin-color-focus, var(--colorGinFocus));
 				}
 
 				&:hover {
-					border-color: var(--colorGinFocus);
+					border-color: var(--gin-color-focus, var(--colorGinFocus));
 				}
 			}
 
 			.block-editor-inserter__preview-container {
 				.block-editor-inserter__menu-preview-panel {
-					background-color: var(--colorGinAppBackground);
-					color: var(--colorGinText);
+					background-color: var(--gin-bg-app, var(--colorGinAppBackground));
+					color: var(--gin-color-text, var(--colorGinText));
 				}
 			}
 
 			.block-editor-block-types-list__item-title {
-				color: var(--colorGinText);
+				color: var(--gin-color-text, var(--colorGinText));
 			}
 
 			.block-editor-inserter__search {
-				background-color: var(--colorGinAppBackground);
+				background-color: var(--gin-bg-app, var(--colorGinAppBackground));
 
 				input {
-					background-color: var(--colorGinLayer2Background);
+					background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
 
 					&:focus {
-						outline: 2px solid var(--colorGinFocus);
-						box-shadow: 0 0 0 1.5px var(--colorGinFocus);
+						outline: 2px solid var(--gin-color-focus, var(--colorGinFocus));
+						box-shadow: 0 0 0 1.5px var(--gin-color-focus, var(--colorGinFocus));
 					}
 				}
 			}
-			background-color: var(--colorGinAppBackground);
+			background-color: var(--gin-bg-app, var(--colorGinAppBackground));
 		}
 	}
 }
@@ -733,31 +738,31 @@ body.gutenberg--enabled {
 
 		.edit-post-manage-blocks-modal__content {
 			.edit-post-manage-blocks-modal__disabled-blocks-count {
-				border-top: 1px solid var(--colorGinBorder);
-				background-color: var(--colorGinAppBackground);
+				border-top: 1px solid var(--gin-border-color, var(--colorGinBorder));
+				background-color: var(--gin-bg-app, var(--colorGinAppBackground));
 			}
 
 			input[type='checkbox'] {
-				border: 2px solid var(--colorGinBorder);
+				border: 2px solid var(--gin-border-color, var(--colorGinBorder));
 				margin-right: 0;
 				box-shadow: none;
-				background: var(--colorGinLayer2Background);
+				background: var(--gin-bg-layer2, var(--colorGinLayer2Background));
 
 				&:hover {
-					background: var(--colorGinLayerBackground);
+					background: var(--gin-bg-layer, var(--colorGinLayerBackground));
 				}
 
 				&:checked {
-					background: var(--colorGinPrimary);
+					background: var(--gin-color-primary, var(--colorGinPrimary));
 
 					&:focus {
-						outline: 2px solid var(--colorGinFocus);
+						outline: 2px solid var(--gin-color-focus, var(--colorGinFocus));
 					}
 				}
 
 				&[aria-checked='mixed'] {
 					&:before {
-						color: var(--colorGinPrimary);
+						color: var(--gin-color-primary, var(--colorGinPrimary));
 						display: flex;
 						height: 16px;
 						margin: -2px auto auto auto;
@@ -775,7 +780,7 @@ body.gutenberg--enabled {
 				margin: 0 auto;
 
 				path {
-					fill: var(--colorGinAppBackground);
+					fill: var(--gin-bg-app, var(--colorGinAppBackground));
 				}
 			}
 
@@ -801,42 +806,69 @@ body.gutenberg--enabled {
 }
 // * Welcome message
 .components-guide__container {
-  .components-guide__page {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+	.components-guide__page {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
 
-    .edit-post-welcome-guide__page {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+		.edit-post-welcome-guide__page {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 
-      .edit-post-welcome-guide__image {
-        margin: 0 auto;
-      }
+			.edit-post-welcome-guide__image {
+				margin: 0 auto;
+			}
 
-      .edit-post-welcome-guide__text {
-        .edit-post-welcome-guide__inserter-icon {
-          display: inline;
-        }
-      }
-    }
-  }
+			.edit-post-welcome-guide__text {
+				.edit-post-welcome-guide__inserter-icon {
+					display: inline;
+				}
+			}
+		}
+	}
 }
 
 .media-library-wrapper {
-  .media-library-menu {
-    min-width: 15%;
+	.media-library-menu {
+		min-width: 15%;
 
-    .media-library-menu__link {
-      padding: 1rem;
-      border-bottom: 1px solid var(--gin-border-color);
-    }
-  }
+		.media-library-menu__link {
+			padding: 1rem;
+			border-bottom: 1px solid var(--gin-border-color, var(--colorGinBorder));
+		}
+	}
 }
 
 details.claro-details--accordion-item.accordion__item {
 	border-radius: 0;
+}
+
+// Update form elements in dark mode
+.gin--dark-mode {
+	input,
+	textarea,
+	select {
+		background-color: var(--gin-bg-layer2, var(--colorGinLayer2Background));
+		color: var(--gin-color-text, var(--colorGinText));
+
+		&:focus {
+			outline: 2px solid var(--gin-color-focus, var(--colorGinFocus));
+		}
+	}
+
+	::placeholder {
+		color: var(--gin-color-text, var(--colorGinText));
+	}
+}
+
+// Update media library menu
+.media-library-wrapper {
+	.media-library-menu {
+		.media-library-menu__link {
+			border-bottom: 1px solid var(--gin-border-color, var(--colorGinBorder));
+		}
+	}
 }

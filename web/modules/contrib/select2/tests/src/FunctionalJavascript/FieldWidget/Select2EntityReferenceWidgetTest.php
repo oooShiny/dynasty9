@@ -3,13 +3,13 @@
 namespace Drupal\Tests\select2\FunctionalJavascript\FieldWidget;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\FunctionalJavascriptTests\SortableTestTrait;
+use Drupal\Tests\TestFileCreationTrait;
+use Drupal\Tests\select2\FunctionalJavascript\Select2JavascriptTestBase;
 use Drupal\entity_test\Entity\EntityTestBundle;
 use Drupal\entity_test\Entity\EntityTestMulRevPub;
 use Drupal\entity_test\Entity\EntityTestWithBundle;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\FunctionalJavascriptTests\SortableTestTrait;
-use Drupal\Tests\select2\FunctionalJavascript\Select2JavascriptTestBase;
-use Drupal\Tests\TestFileCreationTrait;
 
 /**
  * Tests select2 entity reference widget.
@@ -101,7 +101,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
    * @return array
    *   The data.
    */
-  public function providerTestSingleValueWidget(): array {
+  public static function providerTestSingleValueWidget(): array {
     return [
       [TRUE, 'STARTS_WITH', 2, TRUE],
       [FALSE, NULL, 3, TRUE],
@@ -196,7 +196,7 @@ class Select2EntityReferenceWidgetTest extends Select2JavascriptTestBase {
    * @return array
    *   The data.
    */
-  public function providerTestMultiValueWidget(): array {
+  public static function providerTestMultiValueWidget(): array {
     return [
       [TRUE, TRUE],
       [TRUE, FALSE],

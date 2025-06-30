@@ -49,4 +49,14 @@ final class Events {
    */
   const DELETE_BY_TARGET_ENTITY = 'entity_usage.delete_by_target_entity';
 
+  /**
+   * Occurs when we need to convert a URL string to an entity.
+   *
+   * @var string
+   *
+   * @see \Drupal\entity_usage\UrlToEntity
+   * @see \Drupal\entity_usage\Events\UrlToEntityEvent
+   */
+  const URL_TO_ENTITY = 'entity_usage.url_to_entity';
+
 }

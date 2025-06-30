@@ -6,6 +6,7 @@
 namespace Drupal\dynasty_module\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Utility\Error;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use GuzzleHttp\Exception\RequestException;
@@ -150,8 +151,9 @@ class GfycatMuseImportForm extends ConfigFormBase {
       ]);
       $data = $response->getBody()->getContents();
     }
-    catch (RequestException $e) {
-      watchdog_exception('patsfilm', $e->getMessage());
+    catch (RequestException $exception) {
+      $logger = \Drupal::logger('patsfilm');
+      Error::logException($logger, $exception);
     }
   return json_decode($data);
   }
@@ -166,8 +168,9 @@ class GfycatMuseImportForm extends ConfigFormBase {
       ]);
       $data = $response->getBody()->getContents();
     }
-    catch (RequestException $e) {
-      watchdog_exception('dynasty_module', $e->getMessage());
+    catch (RequestException $exception) {
+      $logger = \Drupal::logger('dynasty_module');
+      Error::logException($logger, $exception);
     }
     $collections = [];
     foreach (json_decode($data) as $col) {

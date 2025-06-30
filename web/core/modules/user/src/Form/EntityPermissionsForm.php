@@ -93,11 +93,10 @@ class EntityPermissionsForm extends UserPermissionsForm {
     // Get the names of all config entities that depend on $this->bundle.
     $config_name = $this->bundle->getConfigDependencyName();
     $config_entities = $this->configManager
-      ->getConfigEntitiesToChangeOnDependencyRemoval('config', [$config_name]);
+      ->findConfigEntityDependencies('config', [$config_name]);
     $config_names = array_map(
-      function ($dependent_config) {
-        return $dependent_config->getConfigDependencyName();
-      }, $config_entities['delete'] ?? []
+      fn($dependent_config) => $dependent_config->getConfigDependencyName(),
+      $config_entities,
     );
     $config_names[] = $config_name;
 
@@ -159,8 +158,13 @@ class EntityPermissionsForm extends UserPermissionsForm {
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
+   *
+   * @deprecated in drupal:11.1.0 and is removed from drupal:12.0.0. Use
+   * a permissions check in the route definition instead.
+   * @see https://www.drupal.org/node/3384745
    */
   public function access(Route $route, RouteMatchInterface $route_match, $bundle = NULL): AccessResultInterface {
+    @trigger_error(__METHOD__ . '() is deprecated in drupal:11.1.0 and is removed from drupal:12.0.0. Use a permissions check on the route definition instead. See https://www.drupal.org/node/3384745', E_USER_DEPRECATED);
     $permission = $route->getRequirement('_permission');
     if ($permission && !$this->currentUser()->hasPermission($permission)) {
       return AccessResult::neutral()->cachePerPermissions();

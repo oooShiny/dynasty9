@@ -23,11 +23,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/psr-http-message-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
@@ -83,12 +81,10 @@
       <path value="$PROJECT_DIR$/vendor/consolidation/site-alias" />
       <path value="$PROJECT_DIR$/vendor/consolidation/annotated-command" />
       <path value="$PROJECT_DIR$/vendor/consolidation/output-formatters" />
-      <path value="$PROJECT_DIR$/vendor/consolidation/self-update" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/consolidation/log" />
       <path value="$PROJECT_DIR$/vendor/consolidation/site-process" />
       <path value="$PROJECT_DIR$/vendor/consolidation/config" />
-      <path value="$PROJECT_DIR$/vendor/webflo/drupal-finder" />
       <path value="$PROJECT_DIR$/vendor/grasmash/expander" />
       <path value="$PROJECT_DIR$/vendor/grasmash/yaml-expander" />
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
@@ -182,7 +178,19 @@
       <path value="$PROJECT_DIR$/vendor/phpowermove/docblock" />
       <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
       <path value="$PROJECT_DIR$/vendor/starkbank/ecdsa" />
-      <path value="$PROJECT_DIR$/vendor/tubalmartin/cssmin" />
+      <path value="$PROJECT_DIR$/vendor/fileeye/pel" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/php-tuf/composer-stager" />
+      <path value="$PROJECT_DIR$/vendor/drupal/rat" />
+      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/vendor/mglaman/phpstan-drupal" />
+      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan-deprecation-rules" />
+      <path value="$PROJECT_DIR$/vendor/dekor/php-array-table" />
+      <path value="$PROJECT_DIR$/vendor/laravel/prompts" />
+      <path value="$PROJECT_DIR$/vendor/revolt/event-loop" />
+      <path value="$PROJECT_DIR$/vendor/mglaman/composer-drupal-lenient" />
+      <path value="$PROJECT_DIR$/vendor/webflo/drupal-finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php84" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -293,6 +301,11 @@
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
+    </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />

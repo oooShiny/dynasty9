@@ -6,7 +6,7 @@ package: Testing
 dependencies:
   - quicklink
 
-# Information added by Drupal.org packaging script on 2024-07-14
-version: '2.0.4'
+# Information added by Drupal.org packaging script on 2025-04-02
+version: '2.0.5'
 project: 'quicklink'
-datestamp: 1720978308
+datestamp: 1743615206

@@ -5,6 +5,7 @@ namespace Drupal\search_api_solr\Controller;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\search_api\LoggerTrait;
 use Drupal\search_api\ServerInterface;
 use Drupal\search_api_solr\Event\PostConfigFilesGenerationEvent;
 use Drupal\search_api_solr\Event\PostConfigSetGenerationEvent;
@@ -28,6 +29,9 @@ class SolrConfigSetController extends ControllerBase {
 
   use BackendTrait;
   use EventDispatcherTrait;
+  use LoggerTrait {
+    getLogger as getSearchApiLogger;
+  }
 
   /**
    * The event dispatcher.
@@ -394,11 +398,15 @@ class SolrConfigSetController extends ControllerBase {
 
     if ($connector->isCloud() && isset($files['solrconfig.xml'])) {
       // solrcore.properties won’t work in SolrCloud mode (it is not read from
-      // ZooKeeper). Therefore we go for a more specific fallback to keep the
+      // ZooKeeper). Therefore, we go for a more specific fallback to keep the
       // possibility to set the property as parameter of the virtual machine.
       // @see https://lucene.apache.org/solr/guide/8_6/configuring-solrconfig-xml.html
       $files['solrconfig.xml'] = preg_replace('/solr.luceneMatchVersion:LUCENE_\d+/', 'solr.luceneMatchVersion:' . $solrcore_properties['solr.luceneMatchVersion'], $files['solrconfig.xml']);
       unset($files['solrcore.properties']);
+    }
+
+    if (version_compare($connector->getSolrVersion(), '9.8.0', '>=')) {
+      $files['solrconfig.xml'] = preg_replace('@<lib .*?/modules/([^/]+/).*?/>@', "<!-- <lib/> directives are deprecated and will be removed in Solr 10.0.\nEnsure to load the required module in your Solr server, for example by appending it to the comma-separated module list enviroment variable like SOLR_MODULES=\"\${SOLR_MODULES},$1\" -->\n<!-- $0 -->", $files['solrconfig.xml']);
     }
 
     $connector->alterConfigFiles($files, $solrcore_properties['solr.luceneMatchVersion'], $this->serverId);
@@ -478,7 +486,7 @@ class SolrConfigSetController extends ControllerBase {
       $this->messenger()->addError($this->t('Some enabled parts of the configuration conflict with others: @conflicts', ['@conflicts' => new FormattableMarkup($e, [])]));
     }
     catch (\Exception $e) {
-      \Drupal\Component\Utility\DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => \Drupal\Core\Utility\Error::logException(\Drupal::logger('search_api'), $e), fn() => watchdog_exception('search_api', $e));
+      $this->logException($e);
       $this->messenger()->addError($this->t('An error occurred during the creation of the config.zip. Look at the logs for details.'));
     }
 
@@ -535,7 +543,7 @@ class SolrConfigSetController extends ControllerBase {
       exit();
     }
     catch (\Exception $e) {
-      \Drupal\Component\Utility\DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => \Drupal\Core\Utility\Error::logException(\Drupal::logger('search_api'), $e), fn() => watchdog_exception('search_api', $e));
+      $this->logException($e);
       $this->messenger()->addError($this->t('An error occurred during the creation of the config.zip. Look at the logs for details.'));
     }
 
@@ -587,6 +595,19 @@ class SolrConfigSetController extends ControllerBase {
       $list_builder->setBackend($this->getBackend());
     }
     return $list_builder;
+  }
+
+  /**
+   * Get Logger.
+   *
+   * @param string $channel
+   *   The log channel.
+   *
+   * @return \Psr\Log\LoggerInterface
+   *   The logger.
+   */
+  protected function getLogger($channel = '') {
+    return $this->getSearchApiLogger();
   }
 
 }

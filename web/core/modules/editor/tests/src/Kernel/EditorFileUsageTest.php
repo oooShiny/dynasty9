@@ -22,9 +22,7 @@ use Drupal\filter\Entity\FilterFormat;
 class EditorFileUsageTest extends EntityKernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['editor', 'editor_test', 'node', 'file'];
 
@@ -56,6 +54,9 @@ class EditorFileUsageTest extends EntityKernelTestBase {
     $editor = Editor::create([
       'format' => 'filtered_html',
       'editor' => 'unicorn',
+      'image_upload' => [
+        'status' => FALSE,
+      ],
     ]);
     $editor->save();
 

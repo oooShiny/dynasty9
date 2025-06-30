@@ -1,84 +1,76 @@
-CONTENTS OF THIS FILE
----------------------
+# Gutenberg
 
- * Introduction
- * Requirements
- * Installation
- * Configuration
- * Maintainers
-
-
-INTRODUCTION
-------------
-
- * Drupal Gutenberg brings the powerful content editing experience of Gutenberg
+ - Drupal Gutenberg brings the powerful content editing experience of Gutenberg
    to Drupal.
 
- * [Drupal](https://www.drupal.org/) +
+ - [Drupal](https://www.drupal.org/) +
    [Gutenberg](https://wordpress.org/gutenberg/) is a powerful combo. Drupal 8 is a rock solid CMS framework packed with powerful admin features.
    Our only complaint? Drupal 8 is missing a modern UI for rich content
    creation. Let’s change this!
 
- * More functionality wrapped in a smooth UI. Hundreds of hours with user
+ - More functionality wrapped in a smooth UI. Hundreds of hours with user
    testing. Decoupled. React.js. Clean output. Open source.
 
- * [Gutenberg on GitHub](https://github.com/WordPress/gutenberg/)
+ - [Gutenberg on GitHub](https://github.com/WordPress/gutenberg/)
 
- * For a full description:
-   https://www.drupal.org/project/gutenberg
+ - For a full description of the module, visit the
+[project page](https://www.drupal.org/project/gutenberg)
 
- * Issue queue for Gutenberg:
-   https://www.drupal.org/project/issues/gutenberg
+ - To submit bug reports and feature suggestions, or to track changes
+[issue queue](https://www.drupal.org/project/issues/gutenberg)
 
-  * Also check [Gutenberg-JS](https://www.npmjs.com/package/@frontkom/gutenberg-js), a stand-alone Gutenberg editor for your custom sites or web apps.
+  - Also check [Gutenberg-JS](https://www.npmjs.com/package/@frontkom/gutenberg-js), a stand-alone Gutenberg editor for your custom sites or web apps.
 
-REQUIREMENTS
-------------
+## Contents of this file
+
+ - Requirements
+ - Installation
+ - Configuration
+ - Maintainers
+
+
+## Requirements
 
 No specific requirements.
 
+## Installation
 
-INSTALLATION
-------------
+Install as you would normally install a contributed Drupal module. For further
+information, see
+[Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules).
 
- * Install normally as other modules are installed. For Support:
-   https://www.drupal.org/docs/8/extending-drupal/installing-contributed-modules
 
-CONFIGURATION
--------------
+## Configuration
 
- * To test the module, simply download it from the
+ - To test the module, simply download it from the
    [Drupal Gutenberg project page](https://www.drupal.org/project/gutenberg)
    and enable it.
 
- * Then go to any content type edit page and enable *Gutenberg Experience*.
+ - Then go to any content type edit page and enable *Gutenberg Experience*.
 
- * Assign the `use gutenberg` permission and access to the "Gutenberg" text format to all desired user roles.
+ - Assign the `use gutenberg` permission and access to the "Gutenberg" text format to all desired user roles.
 
-DEVELOPMENT
------------
+## Development
 
   NodeJS 8.11+ and NPM 6.0+ are required. Alternatively Yarn 1.6+ can be used.
-  * `npm install`
-  * Watching file while developing: `npm start`
-  * Build: `npm run build`
+  - `npm install`
+  - Watching file while developing: `npm start`
+  - Build: `npm run build`
 
 For custom block development, check the `example_block` sub-module.
 
-Updating WordPress Gutenberg Packages
------
+## Updating WordPress Gutenberg Packages
 
 This module uses the compiled JS packages from WordPress Gutenberg. Basically we just need to copy the files to `vendor/gutenberg`.
 
 Steps to update WordPress Gutenberg packages:
- * Update `gutenberg-version` to the relevant version in the module's `package.json` (the `v` prefix is important).
- * Review the external vendor dependencies definitions in `scripts/generate-vendor.php` in case they need updating.
- * Run `npm run build:gutenbergjs` to build the Gutenberg JS scripts - it will also update the `gutenberg.libraries.yml` and `gutenberg.module` file.
- * Clear the Drupal cache and test that all core features are still functional.
- * Perform a full production release by running `npm run release`.
+ - Update `gutenberg-version` to the relevant version in the module's `package.json` (the `v` prefix is important).
+ - Review the external vendor dependencies definitions in `scripts/generate-vendor.php` in case they need updating.
+ - Run `npm run build:gutenbergjs` to build the Gutenberg JS scripts - it will also update the `gutenberg.libraries.yml` and `gutenberg.module` file.
+ - Clear the Drupal cache and test that all core features are still functional.
+ - Perform a full production release by running `npm run release`.
 
-Vendor packages
------
+## Vendor packages
 
 - React: [Build file](https://unpkg.com/react@16.8.6/umd/react.production.min.js), [project page](https://github.com/facebook/react)
 - React DOM: [Build file](https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js), [project page](https://github.com/facebook/react)
@@ -90,13 +82,12 @@ Vendor packages
 - Gutenberg: [Project page](https://github.com/WordPress/gutenberg)
   Drupal Gutenberg relies on some JSON files (dependencies tree) generated when building Gutenberg. So, to get the correct files, the git repository must be cloned and built.
 
-MAINTAINERS
------------
+## Maintainers
 
 Current maintainers:
 
- * Marco Fernandes (marcofernandes) - https://www.drupal.org/u/marcofernandes
- * Thor Andre Gretland (thorandre) - https://www.drupal.org/u/thorandre
- * Roberto Ornelas (roborn) - https://www.drupal.org/u/roborn
- * Paweł Pregiel (ppregiel) - https://www.drupal.org/u/ppregiel
- * codebymikey - https://www.drupal.org/u/codebymikey
+ - Marco Fernandes - [marcofernandes](https://www.drupal.org/u/marcofernandes)
+ - Thor Andre Gretland - [thorandre](https://www.drupal.org/u/thorandre)
+ - Roberto Ornelas - [roborn](https://www.drupal.org/u/roborn)
+ - Paweł Pregiel - [ppregiel](https://www.drupal.org/u/ppregiel)
+ - codebymikey - [codebymikey](https://www.drupal.org/u/codebymikey)

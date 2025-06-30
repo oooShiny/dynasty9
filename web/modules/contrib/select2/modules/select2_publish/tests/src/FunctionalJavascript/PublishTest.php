@@ -3,8 +3,8 @@
 namespace Drupal\Tests\select2_publish\FunctionalJavascript;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\entity_test\Entity\EntityTestMulRevPub;
 use Drupal\Tests\select2\FunctionalJavascript\Select2JavascriptTestBase;
+use Drupal\entity_test\Entity\EntityTestMulRevPub;
 
 /**
  * Tests select2_publish integration.
@@ -45,14 +45,14 @@ class PublishTest extends Select2JavascriptTestBase {
     $this->click('.form-item-select2 .select2-selection.select2-selection--multiple');
 
     $page->find('css', '.select2-search__field')->setValue('fo');
-    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[@class="select2-results__option published select2-results__option--highlighted" and text()="foo"]'));
-    $page->find('xpath', '//li[@class="select2-results__option published select2-results__option--highlighted" and text()="foo"]')->click();
-    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[@class="select2-selection__choice published" and text()="foo"]'));
+    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[contains(@class, "select2-results__option") and contains(@class, "published") and contains(@class, "select2-results__option--highlighted") and text()="foo"]'));
+    $page->find('xpath', '//li[contains(@class, "select2-results__option") and contains(@class, "published") and contains(@class, "select2-results__option--highlighted") and text()="foo"]')->click();
+    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[contains(@class, "select2-selection__choice") and contains(@class, "published") and .//span[@class="select2-selection__choice__display" and text()="foo"]]'));
 
     $page->find('css', '.select2-search__field')->setValue('ba');
-    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[@class="select2-results__option unpublished select2-results__option--highlighted" and text()="bar"]'));
-    $page->find('xpath', '//li[@class="select2-results__option unpublished select2-results__option--highlighted" and text()="bar"]')->click();
-    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[@class="select2-selection__choice unpublished" and text()="bar"]'));
+    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[contains(@class, "select2-results__option") and contains(@class, "unpublished") and contains(@class, "select2-results__option--highlighted") and text()="bar"]'));
+    $page->find('xpath', '//li[contains(@class, "select2-results__option") and contains(@class, "unpublished") and contains(@class, "select2-results__option--highlighted") and text()="bar"]')->click();
+    $this->assertNotEmpty($assert_session->waitForElement('xpath', '//li[contains(@class, "select2-selection__choice") and contains(@class, "unpublished") and .//span[@class="select2-selection__choice__display" and text()="bar"]]'));
   }
 
   /**
@@ -99,7 +99,7 @@ class PublishTest extends Select2JavascriptTestBase {
 
     $page->find('css', '.select2-search__field')->setValue('gag');
     $assert_session->waitForElement('xpath', '//li[@class="select2-results__option unpublished select2-results__option--highlighted" and text()="gaga"]');
-    $page->find('xpath', '//li[@class="select2-results__option unpublished select2-results__option--highlighted" and text()="gaga"]')->click();
+    $page->find('xpath', '//li[contains(@class, "select2-results__option") and contains(@class, "unpublished") and contains(@class, "select2-results__option--highlighted") and text()="gaga"]')->click();
     $page->pressButton('Save');
 
     $node = $this->getNodeByTitle('Test node', TRUE);

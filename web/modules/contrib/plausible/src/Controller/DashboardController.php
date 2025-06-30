@@ -30,12 +30,20 @@ class DashboardController implements ContainerInjectionInterface {
   protected $themeManager;
 
   /**
+   * The class resolver.
+   *
+   * @var \Drupal\Core\DependencyInjection\ClassResolver
+   */
+  protected $classResolver;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = new static();
     $instance->configFactory = $container->get('config.factory');
     $instance->themeManager = $container->get('theme.manager');
+    $instance->classResolver = $container->get('class_resolver');
 
     return $instance;
   }
@@ -65,13 +73,13 @@ class DashboardController implements ContainerInjectionInterface {
     $hasGinSettings = class_exists(GinSettings::class);
 
     if ($isGinInstalled && $hasGinSettings) {
-      $ginSettings = \Drupal::classResolver(GinSettings::class);
-      $enableDarkmode = $ginSettings->get('enable_darkmode');
+      $ginSettings = $this->classResolver->getInstanceFromDefinition(GinSettings::class);
+      $enableDarkMode = $ginSettings->get('enable_darkmode');
 
-      if ($enableDarkmode === 'auto') {
+      if ($enableDarkMode === 'auto') {
         $params['theme'] = 'system';
       }
-      elseif ($enableDarkmode) {
+      elseif ($enableDarkMode) {
         $params['theme'] = 'dark';
       }
     }

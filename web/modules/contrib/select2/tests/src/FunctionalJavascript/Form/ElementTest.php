@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\select2\FunctionalJavascript\Form;
 
-use Drupal\entity_test\Entity\EntityTestMulRevPub;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+use Drupal\entity_test\Entity\EntityTestMulRevPub;
 
 /**
  * Tests the select2 element.
@@ -75,7 +75,7 @@ class ElementTest extends WebDriverTestBase {
 
     $this->assertSession()->elementExists('css', '.select2-container--claro');
 
-    $select2_js = $this->xpath("//script[contains(@src, 'select2/js/select2.js')]");
+    $select2_js = $this->xpath("//script[contains(@src, '" . $this->getModulePath('select2') . "/js/select2.js')]");
     $this->assertEquals(1, count($select2_js));
     $select2_js = $this->xpath("//script[contains(@src, 'select2/dist/js/select2.min.js')]");
     $this->assertEquals(1, count($select2_js));

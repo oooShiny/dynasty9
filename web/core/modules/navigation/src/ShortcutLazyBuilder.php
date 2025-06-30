@@ -53,14 +53,17 @@ final class ShortcutLazyBuilder implements TrustedCallbackInterface {
       [
         'title' => $label,
         'class' => 'shortcuts',
+        'icon' => [
+          'icon_id' => 'shortcuts',
+        ],
         'below' => $shortcut_links['shortcuts']['#links'],
       ],
     ];
 
     return [
-      '#title' => $label,
       '#theme' => 'navigation_menu',
       '#menu_name' => 'shortcuts',
+      '#title' => $label,
       '#items' => $shortcuts_items,
       '#cache' => $shortcut_links['#cache'],
     ];

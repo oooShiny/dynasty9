@@ -6,14 +6,13 @@ namespace Drupal\Tests\file\Functional;
 
 /**
  * Tests file formatter access.
+ *
  * @group file
  */
 class FileFieldFormatterAccessTest extends FileFieldTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node', 'file', 'field_ui', 'file_test'];
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\Tests\language\Functional;
 
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\entity_test\EntityTestHelper;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\language\Entity\ContentLanguageSettings;
 use Drupal\taxonomy\Entity\Vocabulary;
@@ -18,9 +19,7 @@ use Drupal\Tests\BrowserTestBase;
 class LanguageConfigurationElementTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'taxonomy',
@@ -109,8 +108,8 @@ class LanguageConfigurationElementTest extends BrowserTestBase {
     }
 
     // Ensure the bundles under test exist, to avoid config validation errors.
-    entity_test_create_bundle('custom_bundle');
-    entity_test_create_bundle('some_bundle');
+    EntityTestHelper::createBundle('custom_bundle');
+    EntityTestHelper::createBundle('some_bundle');
 
     // Fixed language.
     ContentLanguageSettings::loadByEntityTypeBundle('entity_test', 'custom_bundle')

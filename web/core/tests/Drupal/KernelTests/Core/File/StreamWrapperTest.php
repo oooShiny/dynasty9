@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class StreamWrapperTest extends FileTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['file_test'];
 
@@ -76,8 +74,6 @@ class StreamWrapperTest extends FileTestBase {
    * Tests the getViaUri() and getViaScheme() methods and target functions.
    */
   public function testUriFunctions(): void {
-    $config = $this->config('system.file');
-
     /** @var \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager */
     $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
 

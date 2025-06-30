@@ -26,7 +26,7 @@ final class MigrateToolsTest extends UnitTestCase {
   /**
    * Data provider for testBuildIdList.
    */
-  public function dataProviderIdList(): array {
+  public static function dataProviderIdList(): array {
     $cases = [];
     $cases[] = [
       'options' => [],

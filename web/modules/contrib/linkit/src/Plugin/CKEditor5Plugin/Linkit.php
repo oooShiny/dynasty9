@@ -92,12 +92,12 @@ class Linkit extends CKEditor5PluginDefault implements CKEditor5PluginElementsSu
    */
   public static function requireProfileIfEnabled(array $values, ExecutionContextInterface $context): void {
     if ($values['linkit_enabled'] === TRUE && empty($values['linkit_profile'])) {
-      $context->buildViolation(t('Linkit is enabled, please select the Linkit profile you wish to use.'))
+      $context->buildViolation('Linkit is enabled, please select the Linkit profile you wish to use.')
         ->atPath('linkit_profile')
         ->addViolation();
     }
     elseif ($values['linkit_enabled'] === FALSE && !empty($values['linkit_profile'])) {
-      $context->buildViolation(t('Linkit is disabled; it does not make sense to associate a Linkit profile.'))
+      $context->buildViolation('Linkit is disabled; it does not make sense to associate a Linkit profile.')
         ->atPath('linkit_profile')
         ->addViolation();
     }
@@ -157,7 +157,7 @@ class Linkit extends CKEditor5PluginDefault implements CKEditor5PluginElementsSu
         'profile' => $this->configuration['linkit_profile'],
         'autocompleteUrl' => Url::fromRoute('linkit.autocomplete', ['linkit_profile_id' => $this->configuration['linkit_profile']])
           ->toString(TRUE)
-          ->getGeneratedUrl()
+          ->getGeneratedUrl(),
       ],
     ];
   }

@@ -213,12 +213,12 @@ class SmartTrimFormatter extends FormatterBase implements ContainerFactoryPlugin
     $more_settings = $this->getSetting('more');
     $more_states = [
       'visible' => [
-        ':input[name="fields[body][settings_edit_form][settings][more][display_link]"]' => ['checked' => TRUE],
+        ':input[name="fields[' . $field_name . '][settings_edit_form][settings][more][display_link]"]' => ['checked' => TRUE],
       ],
     ];
     $more_required_states = $more_states + [
       'required' => [
-        ':input[name="fields[body][settings_edit_form][settings][more][display_link]"]' => ['checked' => TRUE],
+        ':input[name="fields[' . $field_name . '][settings_edit_form][settings][more][display_link]"]' => ['checked' => TRUE],
       ],
     ];
 
@@ -274,6 +274,7 @@ class SmartTrimFormatter extends FormatterBase implements ContainerFactoryPlugin
 
     $element['more']['token_browser'] = [
       '#theme' => 'token_tree_link',
+      '#type' => 'token_tree_link',
       '#token_types' => [$this->fieldDefinition->getTargetEntityTypeId()],
       '#states' => $more_states,
     ];

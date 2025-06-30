@@ -18,9 +18,7 @@ class PageNotFoundTest extends BrowserTestBase {
   use AssertPageCacheContextsAndTagsTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system_test'];
 
@@ -29,6 +27,11 @@ class PageNotFoundTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * The test user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
   protected $adminUser;
 
   /**
@@ -49,6 +52,9 @@ class PageNotFoundTest extends BrowserTestBase {
     user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['access user profiles']);
   }
 
+  /**
+   * Tests page not found.
+   */
   public function testPageNotFound(): void {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet($this->randomMachineName(10));

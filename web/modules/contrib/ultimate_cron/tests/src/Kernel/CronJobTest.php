@@ -13,7 +13,7 @@ use Drupal\ultimate_cron\Entity\CronJob;
  */
 class CronJobTest extends KernelTestBase {
 
-  public static $modules = array('ultimate_cron');
+  protected static $modules = array('ultimate_cron');
 
   public function setup(): void {
     parent::setUp();

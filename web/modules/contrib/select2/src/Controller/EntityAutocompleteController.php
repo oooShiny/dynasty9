@@ -21,7 +21,7 @@ class EntityAutocompleteController extends ControllerBase {
    *
    * @var \Drupal\select2\EntityAutocompleteMatcher
    */
-  protected $matcher;
+  protected EntityAutocompleteMatcher $matcher;
 
   /**
    * {@inheritdoc}

@@ -24,9 +24,7 @@ class LinkUriTest extends KernelTestBase {
   use UserCreationTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node', 'user'];
 
@@ -75,9 +73,21 @@ class LinkUriTest extends KernelTestBase {
     $expected = 'internal:/';
     $tests['front'] = [$value, $expected];
 
+    $value = '';
+    $expected = 'route:<nolink>';
+    $tests['empty'] = [$value, $expected];
+
+    $value = '<none>';
+    $expected = 'route:<nolink>';
+    $tests['none'] = [$value, $expected];
+
     $value = '<nolink>';
     $expected = 'route:<nolink>';
     $tests['nolink'] = [$value, $expected];
+
+    $value = '<button>';
+    $expected = 'route:<button>';
+    $tests['button'] = [$value, $expected];
 
     return $tests;
   }

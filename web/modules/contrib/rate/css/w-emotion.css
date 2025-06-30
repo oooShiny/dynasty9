@@ -2,7 +2,7 @@
 
 .emotion-rating-wrapper {
   display: inline;
-  padding: 0px;
+  padding: 0;
 }
 
 div.emotion > form > table > tbody > tr.rating-table-tr {
@@ -10,31 +10,31 @@ div.emotion > form > table > tbody > tr.rating-table-tr {
 }
 
 div.emotion > form > table > tbody > tr > td.rating-table-td {
+  padding: 0;
   border: none;
-  padding: 0px;
 }
 
 div.emotion-rating-wrapper > div.form-type-radio {
   display: inline;
-  padding: 0px;
+  padding: 0;
 }
 
-/* Deafault button styles, override in widget settings */
+/* Default button styles, override in widget settings */
 div.emotion-rating-wrapper > div > label.rating-label {
   display: inline-block;
-  vertical-align: baseline;
-  text-align: center;
-  padding-left: 10px;
   padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+  vertical-align: baseline;
 }
 
 div.emotion-rating-wrapper > div > label.emotion-rating-label {
-  background: #eee;
+  display: inline-block;
   padding: 0 5px;
+  text-align: center;
   color: #666;
   border: 1px solid #ccc;
-  text-align: center;
-  display: inline-block;
+  background: #eee;
 }
 
 div.emotion-rating-wrapper > div > label.emotion-rating-label:hover,
@@ -44,14 +44,14 @@ div.emotion-rating-wrapper > div > label.emotion-rating-label:focus {
 }
 
 div.emotion-rating-wrapper > div > label.emotion-rating-label:hover {
-  background: #ddd;
   text-decoration: none;
+  background: #ddd;
 }
 
 div.emotion-rating-wrapper > div > div.rating-option-result {
   display: inline;
-  text-align: center;
   padding: 5px;
+  text-align: center;
   vertical-align: baseline;
 }
 

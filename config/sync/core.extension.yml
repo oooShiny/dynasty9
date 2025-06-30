@@ -1,10 +1,9 @@
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
 module:
+  auto_entitylabel: -100
   admin_toolbar: 0
   admin_toolbar_tools: 0
-  advagg: 0
-  auto_entitylabel: 0
   automated_cron: 0
   big_pipe: 0
   block: 0
@@ -37,11 +36,8 @@ module:
   field_ui: 0
   file: 0
   filter: 0
-  gin_gutenberg: 0
   gin_login: 0
   gin_toolbar: 0
-  google_tag: 0
-  gutenberg: 0
   help: 0
   history: 0
   image: 0
@@ -73,6 +69,7 @@ module:
   migrate_plus: 0
   migrate_source_csv: 0
   migrate_tools: 0
+  mysql: 0
   node: 0
   options: 0
   page_cache: 0
@@ -83,6 +80,7 @@ module:
   patreon: 0
   patreon_extras: 0
   patreon_user: 0
+  phpass: 0
   plausible: 0
   quicklink: 0
   rate: 0
@@ -107,16 +105,15 @@ module:
   text: 0
   token: 0
   toolbar: 0
-  tour: 0
   twig_tweak: 0
   ultimate_cron: 0
   update: 0
+  upgrade_status: 0
   user: 0
   views_entity_form_field: 0
   views_jump_menu: 0
   views_ui: 0
   votingapi: 0
-  yoast_seo: 0
   pathauto: 1
   views: 10
   paragraphs: 11
@@ -126,7 +123,6 @@ theme:
   claro: 0
   gin: 0
   tailwindcss: 0
-  dynasty: 0
   stable9: 0
   dynasty_admin: 0
   dynasty_tw: 0

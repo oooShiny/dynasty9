@@ -22,9 +22,7 @@ use Drupal\views\Views;
 class RowEntityRenderersTest extends ViewsKernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'field',
@@ -212,7 +210,7 @@ class RowEntityRenderersTest extends ViewsKernelTestBase {
    *   associated with language keys appropriate for the translation of that
    *   node.
    */
-  protected function checkLanguageRenderers($display, $values) {
+  protected function checkLanguageRenderers($display, $values): void {
     $expected = [
       $values[0]['en'],
       $values[0]['en'],
@@ -296,7 +294,7 @@ class RowEntityRenderersTest extends ViewsKernelTestBase {
    *   associated with language keys appropriate for the translation of that
    *   node.
    */
-  protected function checkLanguageRenderersRelationship($display, $values) {
+  protected function checkLanguageRenderersRelationship($display, $values): void {
     $expected = [
       $values[1]['en'],
       $values[1]['en'],

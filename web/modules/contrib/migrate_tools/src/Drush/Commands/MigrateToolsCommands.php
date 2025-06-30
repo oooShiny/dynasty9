@@ -774,6 +774,7 @@ class MigrateToolsCommands extends DrushCommands {
     }
     $table = [];
 
+    $level_mapping = MigrateTools::getLogLevelLabelMapping();
     foreach ($map->getMessages() as $row) {
       unset($row->msgid);
       $array_row = (array) $row;
@@ -790,8 +791,9 @@ class MigrateToolsCommands extends DrushCommands {
           $destination_ids[$name] = $item;
         }
       }
-      $array_row['source_ids'] = implode(':', $source_ids);
-      $array_row['destination_ids'] = implode(':', $destination_ids);
+      $array_row['level'] = $level_mapping[$array_row['level']];
+      $array_row['source_ids'] = implode(MigrateTools::DEFAULT_ID_LIST_DELIMITER, $source_ids);
+      $array_row['destination_ids'] = array_filter($destination_ids) ? implode(MigrateTools::DEFAULT_ID_LIST_DELIMITER, $destination_ids) : '';
       $table[] = $array_row;
     }
     if (empty($table)) {

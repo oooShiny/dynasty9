@@ -22,6 +22,7 @@ use Drupal\migrate_tools\Form\MigrationEditForm;
 use Drupal\migrate_tools\Form\MigrationGroupAddForm;
 use Drupal\migrate_tools\Form\MigrationGroupDeleteForm;
 use Drupal\migrate_tools\Form\MigrationGroupEditForm;
+use Drupal\migrate_tools\MigrateTools;
 
 /**
  * Implements hook_entity_type_build().
@@ -54,7 +55,7 @@ function migrate_tools_entity_type_build(array &$entity_types): void {
 /**
  * Implements hook_menu_links_discovered_alter().
  */
-function migrate_tools_menu_links_discovered_alter(&$links) {
+function migrate_tools_menu_links_discovered_alter(&$links): void {
   if (\Drupal::moduleHandler()->moduleExists('migrate_plus')) {
     $links['migrate_tools.menu'] = [
       'title' => 'Migrations',
@@ -81,19 +82,20 @@ function migrate_tools_migration_plugins_alter(array &$migrations): void {
 /**
  * Implements hook_migrate_prepare_row().
  *
+ * @throws \Exception
+ *
  * @see \Drupal\migrate_tools\EventSubscriber\MigrationImportSync
  * @see \Drupal\migrate\Plugin\migrate\source\SourcePluginBase::next()
  */
-function migrate_tools_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
-
-  if (!empty($migration->syncSource)) {
+function migrate_tools_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
+  /** @var MigrateTools $migrateTools */
+  $migrateTools = \Drupal::service('migrate_tools.migrate_tools');
+  // Act on migrations that have a Sync source, and that are currently in the
+  // phase of Syncing their IDs.
+  if (!empty($migration->syncSource) && $migrateTools->isMigrationSyncing($migration->getPluginId())) {
     // Keep track of all source rows here, as SourcePluginBase::next() might
     // skip some rows, and we need them all to detect missing items in source to
     // delete in destination.
-    $source_id_values = \Drupal::state()->get('migrate_tools_sync', []);
-
-    $source_id_values[] = $row->getSourceIdValues();
-
-    \Drupal::state()->set('migrate_tools_sync', $source_id_values);
+    $migrateTools->addToSyncSourceIds($migration->getPluginId(), $row->getSourceIdValues());
   }
 }

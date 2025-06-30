@@ -18,7 +18,7 @@ class CountUp extends VoteResultFunctionBase {
   /**
    * {@inheritdoc}
    */
-  public function calculateResult($votes) {
+  public function calculateResult($votes): float {
     $up = 0;
     foreach ($votes as $vote) {
       if ($vote->getValue() > 0) {

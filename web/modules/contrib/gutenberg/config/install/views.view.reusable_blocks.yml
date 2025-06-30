@@ -470,7 +470,7 @@ display:
             group_items: {  }
           reduce_duplicates: false
       style:
-        type: grid
+        type: grid_responsive
         options:
           grouping: {  }
           columns: 3

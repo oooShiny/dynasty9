@@ -5,8 +5,8 @@
  * Drupal Module: Plausible.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
@@ -147,12 +147,6 @@ function _plausible_visibility_roles($account) {
 
   $visibility_user_role_roles = $config->get('visibility.user_role_roles');
   $enabled = $visibility_user_role_mode === 2;
-
-  // If no role is selected for tracking, all roles should be tracked.
-  if (!$visibility_user_role_roles || count($visibility_user_role_roles) == 0) {
-    return TRUE;
-  }
-  $visibility_user_role_roles = array_values($visibility_user_role_roles);
 
   foreach (array_values($account->getRoles()) as $user_role) {
     // If the current user is a member of one of the selected roles.

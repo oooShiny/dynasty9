@@ -19,7 +19,7 @@ class RateAverage extends RateVoteResultBase {
   /**
    * {@inheritdoc}
    */
-  public function calculateResult($votes) {
+  public function calculateResult($votes): float {
     $total = 0;
     $votes = $this->getVotesForField($votes);
     foreach ($votes as $vote) {

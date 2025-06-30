@@ -23,9 +23,7 @@ use Drupal\Core\Entity\Entity\EntityViewMode;
 class FieldRenderedEntityTest extends ViewsKernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['entity_test', 'field'];
 
@@ -46,7 +44,7 @@ class FieldRenderedEntityTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpFixtures() {
+  protected function setUpFixtures(): void {
     $this->installEntitySchema('user');
     $this->installEntitySchema('entity_test');
     $this->installConfig(['entity_test']);
@@ -167,7 +165,7 @@ class FieldRenderedEntityTest extends ViewsKernelTestBase {
    * Ensures that the expected cacheability metadata is applied.
    *
    * @param array $build
-   *   The render array
+   *   The render array.
    *
    * @internal
    */

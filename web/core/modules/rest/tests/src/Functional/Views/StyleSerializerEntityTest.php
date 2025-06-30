@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
  * Tests the serializer style plugin.
  *
  * @group rest
- * @group #slow
  * @see \Drupal\rest\Plugin\views\display\RestExport
  * @see \Drupal\rest\Plugin\views\style\Serializer
  * @see \Drupal\rest\Plugin\views\row\DataEntityRow
@@ -32,9 +31,7 @@ class StyleSerializerEntityTest extends ViewTestBase {
   use AssertPageCacheContextsAndTagsTrait;
 
   /**
-   * Modules to install.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'views_ui',
@@ -59,7 +56,11 @@ class StyleSerializerEntityTest extends ViewTestBase {
   public static $testViews = ['test_serializer_display_field', 'test_serializer_display_entity', 'test_serializer_display_entity_translated', 'test_serializer_node_display_field', 'test_serializer_node_exposed_filter', 'test_serializer_shared_path'];
 
   /**
-   * A user with administrative privileges to look at test entity and configure views.
+   * A user with permissions to look at test entity and configure views.
+   *
+   * @var \Drupal\user\Entity\User|false
+   *
+   * @see \Drupal\Tests\user\Traits\UserCreationTrait::createUser
    */
   protected $adminUser;
 
@@ -206,7 +207,7 @@ class StyleSerializerEntityTest extends ViewTestBase {
    * @param string $format
    *   The new request format.
    */
-  protected function addRequestWithFormat($format) {
+  protected function addRequestWithFormat($format): void {
     $request = \Drupal::request();
     $request = clone $request;
     $request->setRequestFormat($format);
@@ -219,6 +220,11 @@ class StyleSerializerEntityTest extends ViewTestBase {
    */
   public function testRestRenderCaching(): void {
     $this->drupalLogin($this->adminUser);
+
+    /** @var \Drupal\Core\Cache\VariationCacheFactoryInterface $vc_factory */
+    $variation_cache_factory = \Drupal::service('variation_cache_factory');
+    $variation_cache = $variation_cache_factory->get('render');
+
     /** @var \Drupal\Core\Render\RenderCacheInterface $render_cache */
     $render_cache = \Drupal::service('render_cache');
 
@@ -267,6 +273,10 @@ class StyleSerializerEntityTest extends ViewTestBase {
     $this->assertSession()->responseHeaderEquals('content-type', 'application/json');
     $this->assertCacheContexts($cache_contexts);
     $this->assertCacheTags($cache_tags);
+
+    // Because we warm caches in different requests, we do not properly populate
+    // the internal properties of our variation cache. Reset it.
+    $variation_cache->reset();
     $this->assertNotEmpty($render_cache->get($original));
 
     $result_xml = $this->drupalGet('test/serialize/entity', ['query' => ['_format' => 'xml']]);

@@ -14,6 +14,9 @@ use Drupal\views\Views;
  */
 class HandlerAliasTest extends ViewsKernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['user'];
 
   /**
@@ -45,6 +48,9 @@ class HandlerAliasTest extends ViewsKernelTestBase {
     return $data;
   }
 
+  /**
+   * Tests the behavior of plugin aliases in Views filters.
+   */
   public function testPluginAliases(): void {
     $view = Views::getView('test_filter');
     $view->initDisplay();

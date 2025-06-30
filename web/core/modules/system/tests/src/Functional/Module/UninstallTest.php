@@ -20,9 +20,7 @@ use Drupal\user\RoleInterface;
 class UninstallTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['module_test', 'user', 'views', 'node'];
 
@@ -198,7 +196,7 @@ class UninstallTest extends BrowserTestBase {
       $this->container->get('module_installer')->install(['module_installer_config_test']);
       $this->fail($message);
     }
-    catch (EntityMalformedException $e) {
+    catch (EntityMalformedException) {
       // Expected exception; just continue testing.
     }
 

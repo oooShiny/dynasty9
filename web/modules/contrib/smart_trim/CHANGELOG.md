@@ -1,7 +1,45 @@
 # Smart Trim Changelog
 
+## Smart Trim 2.2.0
+
+* Issue [#3464514](https://dgo.to/3464514): 2.2.0 Release Plan
+* Issue [#3464532](https://dgo.to/3464532) by ankitv18, lostcarpark, ultimike:
+    Update fixtures for run updates
+* Issue [#2782455](https://dgo.to/2782455) by heddn, duncan.moo, voleger,
+    ankitv18, ultimike, Chris Matthews, ruloweb, g33kg1rl, Anybody, akalata:
+    Smart Trim Tokens for text with summary fields
+* Issue [#3451530](https://dgo.to/3451530) by markie, arousseau: Warning:
+    Undefined array key "#type" in Drupal\Core\Form\FormHelper::processStates()
+* Issue [#3464515](https://dgo.to/3464515) by ankitv18: Restoring the cspell
+    projects words file to handle cspell issues
+* Issue [#3463406](https://dgo.to/3463406) by deepak5423, lostcarpark:
+    "--verbose" not supported by phpunit for "next-major" tests
+* Issue [#3434655](https://dgo.to/3434655): Automated Drupal 11
+    compatibility fixes for smart_trim
+* Issue [#3418812](https://dgo.to/3418812): Add strict type to test module
+* Issue [#3426730](https://dgo.to/3426730) by lostcarpark: Integrate CSPELL into
+    linting checks in GitLab CI
+* Issue [#3439845](https://dgo.to/3439845) by fjgarlin, markie, lostcarpark: Fix
+    deprecated variable in GitLab CI
+* Issue [#3426215](https://dgo.to/3426215) by joshf, vensires: More link form
+    elements only appear for fields named "body"
+* Issue [#3423678](https://dgo.to/3423678) by KurtTrowbridge, lostcarpark: PHPCS
+    issue breaking CI
+* Issue [#3418812](https://dgo.to/3418812) by sumit-k, markie: Add strict type
+    to test module
+* Issue [#3426730](https://dgo.to/3426730) by lostcarpark: Integrate CSPELL into
+    linting checks in GitLab CI
+* Issue [#3439845](https://dgo.to/3439845) by fjgarlin, markie, lostcarpark: Fix
+    deprecated variable in GitLab CI
+* Issue [#3426215](https://dgo.to/3426215) by joshf, vensires: More link form
+    elements only appear for fields named "body"
+* Issue [#3423678](https://dgo.to/3423678) by KurtTrowbridge, lostcarpark: PHPCS
+    issue breaking CI
+
 ## Smart Trim 2.1.1
 
+* Issue [#3379072](https://dgo.to/3379072) by markie, ultimike, lostcarpark:
+    2.1.1 Release Plan
 * Issue #[3013628](https://dgo.to/3013628) by ultimike, idimopoulos, PCate,
    sbesselsen: Maximum function nesting level reached for elements with many
    children on environments with XDebug

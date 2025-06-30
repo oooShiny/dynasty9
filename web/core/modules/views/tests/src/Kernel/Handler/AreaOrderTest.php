@@ -19,9 +19,7 @@ class AreaOrderTest extends ViewsKernelTestBase {
   use BlockCreationTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['user', 'block'];
 
@@ -35,7 +33,7 @@ class AreaOrderTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpFixtures() {
+  protected function setUpFixtures(): void {
     // Install the themes used for this test.
     $this->container->get('theme_installer')->install(['olivero']);
 

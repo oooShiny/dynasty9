@@ -15,6 +15,11 @@ use Drupal\FunctionalTests\Update\UpdatePathTestBase;
 class UpdateTest extends UpdatePathTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * The database connection.
    */
   protected Connection $connection;
@@ -34,7 +39,7 @@ class UpdateTest extends UpdatePathTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    /** @var \Drupal\Core\Database\Connection $connection */
+
     $this->connection = \Drupal::service('database');
     if ($this->connection->databaseType() == 'pgsql') {
       $this->databaseName = 'public';
@@ -49,44 +54,30 @@ class UpdateTest extends UpdatePathTestBase {
    * {@inheritdoc}
    */
   protected function setDatabaseDumpFiles(): void {
-    $this->databaseDumpFiles = [
-      DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-9.4.0.bare.standard.php.gz',
-      __DIR__ . '/../../../fixtures/update/update_8206.php',
-    ];
+    if (file_exists(DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-10.3.0.bare.standard.php.gz')) {
+      $this->databaseDumpFiles = [
+        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-10.3.0.bare.standard.php.gz',
+      ];
+    }
+    else {
+      $this->databaseDumpFiles = [
+        DRUPAL_ROOT . '/core/modules/system/tests/fixtures/update/drupal-9.4.0.bare.standard.php.gz',
+      ];
+    }
+    $this->databaseDumpFiles[] = __DIR__ . '/../../../fixtures/update/post_update_test.php';
   }
 
   /**
-   * @covers \entity_usage_update_8206
-   * @see https://www.drupal.org/project/entity_usage/issues/3335488
+   * @covers \entity_usage_post_update_clean_up_regenerate_queue
+   * @covers \entity_usage_post_update_remove_unsupported_source_entity_types
    */
-  public function testUpdate8206(): void {
-    if (\Drupal::service('database')->databaseType() == 'sqlite') {
-      $this->markTestSkipped('This test does not support the SQLite database driver.');
-    }
+  public function testPostUpdates(): void {
+    $this->assertSame(1, \Drupal::queue('entity_usage_regenerate_queue')->numberOfItems());
+    $this->assertSame(['filter_format', 'node'], \Drupal::config('entity_usage.settings')->get('track_enabled_source_entity_types'));
 
-    $this->assertColumnLength(128);
     $this->runUpdates();
-    $this->assertColumnLength(255);
-  }
-
-  /**
-   * Asserts the string entity ID columns max length.
-   *
-   * @param int $expected_length
-   *   The expected max length.
-   */
-  protected function assertColumnLength(int $expected_length): void {
-    $query = <<<QUERY
-    SELECT character_maximum_length
-    FROM information_schema.columns
-    WHERE table_schema = '%s'
-      AND table_name = '%s'
-      AND column_name = '%s';
-    QUERY;
-    foreach (['target_id_string', 'source_id_string'] as $column) {
-      $actual_length = $this->connection->query(sprintf($query, $this->databaseName, $this->tableName, $column))->fetchField();
-      $this->assertEquals($expected_length, $actual_length);
-    }
+    $this->assertSame(0, \Drupal::queue('entity_usage_regenerate_queue')->numberOfItems());
+    $this->assertSame(['node'], \Drupal::config('entity_usage.settings')->get('track_enabled_source_entity_types'));
   }
 
 }

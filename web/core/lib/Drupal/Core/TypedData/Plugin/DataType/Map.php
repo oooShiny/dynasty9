@@ -2,6 +2,7 @@
 
 namespace Drupal\Core\TypedData\Plugin\DataType;
 
+use Drupal\Component\Utility\FilterArray;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\Attribute\DataType;
 use Drupal\Core\TypedData\ComplexDataInterface;
@@ -106,7 +107,7 @@ class Map extends TypedData implements \IteratorAggregate, ComplexDataInterface 
       $strings[] = $property->getString();
     }
     // Remove any empty strings resulting from empty items.
-    return implode(', ', array_filter($strings, 'mb_strlen'));
+    return implode(', ', FilterArray::removeEmptyStrings($strings));
   }
 
   /**
@@ -143,7 +144,7 @@ class Map extends TypedData implements \IteratorAggregate, ComplexDataInterface 
    *
    * @param string $property_name
    *   The name of the property to be written.
-   * @param $value
+   * @param mixed $value
    *   The value to set.
    */
   protected function writePropertyValue($property_name, $value) {
@@ -183,8 +184,7 @@ class Map extends TypedData implements \IteratorAggregate, ComplexDataInterface 
   /**
    * {@inheritdoc}
    */
-  #[\ReturnTypeWillChange]
-  public function getIterator() {
+  public function getIterator(): \ArrayIterator {
     return new \ArrayIterator($this->getProperties());
   }
 
@@ -221,7 +221,7 @@ class Map extends TypedData implements \IteratorAggregate, ComplexDataInterface 
   /**
    * {@inheritdoc}
    *
-   * @param $property_name
+   * @param string $property_name
    *   The name of the property.
    * @param bool $notify
    *   (optional) Whether to forward the notification to the parent. Defaults to

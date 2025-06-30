@@ -33,13 +33,13 @@ class SmartTrimTwigExtension extends AbstractExtension {
    */
   public function getFilters() {
     return [
-      new TwigFilter('smart_trim_chars', [$this, 'smartTrimChars'], ['is_safe' => ['html']]),
-      new TwigFilter('smart_trim_words', [$this, 'smartTrimWords'], ['is_safe' => ['html']]),
+      new TwigFilter('smart_trim_chars', $this->smartTrimChars(...), ['is_safe' => ['html']]),
+      new TwigFilter('smart_trim_words', $this->smartTrimWords(...), ['is_safe' => ['html']]),
     ];
   }
 
   /**
-   * Applys a smart trim to the specified number of characters.
+   * Applies a smart trim to the specified number of characters.
    *
    * @param string|null $value
    *   The string to trim.
@@ -61,7 +61,7 @@ class SmartTrimTwigExtension extends AbstractExtension {
   }
 
   /**
-   * Applys a smart trim to the specified number of words.
+   * Applies a smart trim to the specified number of words.
    *
    * @param string|null $value
    *   The string to trim.

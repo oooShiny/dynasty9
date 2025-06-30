@@ -23,7 +23,7 @@ class EntityUsageTrack extends Plugin {
   /**
    * The human-readable name of the tracking method.
    *
-   * @var \Drupal\Core\Annotation\Translation
+   * @var \Drupal\Core\Annotation\Translation|string
    *
    * @ingroup plugin_translatable
    */
@@ -32,7 +32,7 @@ class EntityUsageTrack extends Plugin {
   /**
    * A brief description of the tracking method.
    *
-   * @var \Drupal\Core\Annotation\Translation
+   * @var \Drupal\Core\Annotation\Translation|string
    *
    * @ingroup plugin_translatable
    */
@@ -44,5 +44,15 @@ class EntityUsageTrack extends Plugin {
    * @var string[]
    */
   public $field_types = [];
+
+  /**
+   * Determines what source entities the plugins support.
+   *
+   * Plugins that extend from \Drupal\entity_usage\EntityUsageTrackBase should
+   * use \Drupal\Core\Entity\FieldableEntityInterface.
+   *
+   * @var class-string
+   */
+  public $source_entity_class;
 
 }

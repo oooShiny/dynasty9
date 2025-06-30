@@ -24,9 +24,7 @@ class AreaTest extends ViewTestBase {
   public static $testViews = ['test_example_area'];
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node', 'views_ui'];
 
@@ -44,6 +42,9 @@ class AreaTest extends ViewTestBase {
     $this->enableViewsTestModule();
   }
 
+  /**
+   * Provides additional Views data for testing.
+   */
   protected function viewsData() {
     $data = parent::viewsData();
     $data['views']['test_example'] = [

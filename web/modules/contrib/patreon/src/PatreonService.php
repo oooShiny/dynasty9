@@ -171,7 +171,7 @@ class PatreonService implements PatreonServiceInterface {
    *
    * @inheritDoc
    */
-  public function getScopes() {
+  public function getScopes(): array {
     return $this->scopes;
   }
 
@@ -184,7 +184,7 @@ class PatreonService implements PatreonServiceInterface {
    * @return string[]
    *   The current scopes.
    */
-  private function setScopes(array $scopes = []) {
+  private function setScopes(array $scopes = []): array {
     $this->scopes = $scopes;
 
     return $this->getScopes();
@@ -198,7 +198,7 @@ class PatreonService implements PatreonServiceInterface {
    *
    * @throws \Drupal\patreon\PatreonMissingTokenException
    */
-  public function getToken() {
+  public function getToken(): string {
     if ($tokens = $this->getStoredTokens()) {
       if (isset($tokens['access_token'])) {
         return $tokens['access_token'];
@@ -340,7 +340,7 @@ class PatreonService implements PatreonServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function storeTokens($tokens, UserInterface $account = NULL) {
+  public function storeTokens($tokens, ?UserInterface $account = NULL) {
     $this->stateApi->set('patreon.access_token', $tokens['access_token']);
     $this->stateApi->set('patreon.refresh_token', $tokens['refresh_token']);
   }
@@ -348,7 +348,7 @@ class PatreonService implements PatreonServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getStoredTokens(UserInterface $account = NULL): array {
+  public function getStoredTokens(?UserInterface $account = NULL): array {
     return [
       'refresh_token' => $this->stateApi->get('patreon.refresh_token'),
       'access_token' => $this->stateApi->get('patreon.access_token'),
@@ -456,8 +456,6 @@ class PatreonService implements PatreonServiceInterface {
     try {
       $client = new API($this->getToken());
 
-      $return = NULL;
-
       if (method_exists($client, $function)) {
         if ($parameters) {
           if (count($parameters) < 3) {
@@ -478,7 +476,7 @@ class PatreonService implements PatreonServiceInterface {
           }
           if ($error = $this->getValueByKey($api_response, ['errors', '0'])) {
             if (isset($error['status']) && $error['status'] == '401') {
-              if ($this->refreshTried == FALSE) {
+              if (!$this->refreshTried) {
                 $this->retry($function, $parameters);
               }
               else {
@@ -612,8 +610,11 @@ class PatreonService implements PatreonServiceInterface {
         $this->storeCampaigns($campaigns);
       }
 
+      $storage = $this->entityTypeManager->getStorage('user_role');
       $roles = $this->getPatreonRoleNames($campaigns);
-      $all = user_role_names();
+      $all = array_map(function ($item) {
+        return $item->label();
+      }, $storage->loadMultiple());
 
       foreach ($roles as $label => $patreon_id) {
         $id = strtolower(str_replace(' ', '_', $label));
@@ -623,7 +624,7 @@ class PatreonService implements PatreonServiceInterface {
             'label' => $label,
           ];
 
-          $role = $this->entityTypeManager->getStorage('user_role')->create($data);
+          $role = $storage->create($data);
           $role->save();
         }
 
@@ -646,7 +647,7 @@ class PatreonService implements PatreonServiceInterface {
    * @return array
    *   An array of reward titles plus default roles.
    */
-  public function getPatreonRoleNames(array $campaigns = NULL): array {
+  public function getPatreonRoleNames(?array $campaigns = NULL): array {
     $roles = [
       'Patreon User' => NULL,
       'Deleted Patreon User' => NULL,

@@ -2,9 +2,12 @@
 
 namespace Drupal\rate\Plugin\views\field;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\rate\Plugin\RateWidgetBase;
 use Drupal\views\Plugin\views\field\FieldPluginBase;
 use Drupal\views\ResultRow;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Views field handler for the rate widget.
@@ -14,6 +17,55 @@ use Drupal\views\ResultRow;
  * @ViewsField("rate_widget_field")
  */
 class RateWidgetField extends FieldPluginBase {
+
+  /**
+   * The entity type manager.
+   */
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * Rate widget base service.
+   */
+  protected RateWidgetBase $rateWidgetBaseService;
+
+  /**
+   * Constructs a RateWidgetField object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\rate\Plugin\RateWidgetBase $rate_widget_base_service
+   *   Rate widget base service.
+   */
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    EntityTypeManagerInterface $entity_type_manager,
+    RateWidgetBase $rate_widget_base_service,
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->entityTypeManager = $entity_type_manager;
+    $this->rateWidgetBaseService = $rate_widget_base_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+      $container->get('rate.vote_widget_base'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -65,7 +117,7 @@ class RateWidgetField extends FieldPluginBase {
     ];
 
     // Handle multiple widgets per entity.
-    $widgets = \Drupal::service('entity_type.manager')->getStorage('rate_widget')->loadMultiple();
+    $widgets = $this->entityTypeManager->getStorage('rate_widget')->loadMultiple();
     $entity_types = [];
     $widget_count = 0;
     foreach ($widgets as $id => $widget) {
@@ -115,7 +167,6 @@ class RateWidgetField extends FieldPluginBase {
       '#type' => 'select',
       '#default_value' => $this->options['widget_display'],
       '#options' => $widget_display_options,
-      '#default_value' => $this->options['widget_display'],
     ];
     // Override rate widget display settings.
     $form['display_overrides'] = [
@@ -140,8 +191,7 @@ class RateWidgetField extends FieldPluginBase {
     $widgets = $this->options['widgets'];
     $display_overrides = $this->options['display_overrides'];
     $widget_display = $this->options['widget_display'];
-    $widget_storage = \Drupal::service('entity_type.manager')->getStorage('rate_widget');
-    $rate_widget_base_service = \Drupal::service('rate.vote_widget_base');
+    $widget_storage = $this->entityTypeManager->getStorage('rate_widget');
 
     // Check, if the field is in _entity (base table)
     if (isset($row->_entity->{$column})) {
@@ -195,7 +245,7 @@ class RateWidgetField extends FieldPluginBase {
     }
     else {
       // Get the widgets assigned to this entity.
-      $query = \Drupal::entityQuery('rate_widget');
+      $query = $this->entityTypeManager->getStorage('rate_widget')->getQuery();
       $query->accessCheck(TRUE);
 
       // Prepare the query condition - special handling of comments.
@@ -272,7 +322,7 @@ class RateWidgetField extends FieldPluginBase {
       }
 
       // Get the rate widget rating form.
-      $form = $rate_widget_base_service->getForm($entity_type_id, $bundle, $entity_id, $vote_type, $value_type, $widget_name, $widget);
+      $form = $this->rateWidgetBaseService->getForm($entity_type_id, $bundle, $entity_id, $vote_type, $value_type, $widget_name, $widget);
       $form = ($widget_display === 'summary') ? $form['#results'] : $form;
       $form_container = [
         'rating' => [

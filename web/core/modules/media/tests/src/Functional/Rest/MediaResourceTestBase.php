@@ -16,12 +16,15 @@ use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
 use GuzzleHttp\RequestOptions;
 
+/**
+ * Resource test base for the media entity.
+ */
 abstract class MediaResourceTestBase extends EntityResourceTestBase {
 
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['media'];
+  protected static $modules = ['content_translation', 'media'];
 
   /**
    * {@inheritdoc}
@@ -292,7 +295,7 @@ abstract class MediaResourceTestBase extends EntityResourceTestBase {
    */
   protected function getExpectedUnauthorizedAccessMessage($method) {
     switch ($method) {
-      case 'GET';
+      case 'GET':
         return "The 'view media' permission is required when the media item is published.";
 
       case 'POST':
@@ -307,6 +310,17 @@ abstract class MediaResourceTestBase extends EntityResourceTestBase {
       default:
         return parent::getExpectedUnauthorizedAccessMessage($method);
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getExpectedCacheContexts() {
+    return [
+      'languages:language_interface',
+      'url.site',
+      'user.permissions',
+    ];
   }
 
   /**

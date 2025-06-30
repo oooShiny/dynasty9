@@ -44,7 +44,7 @@ abstract class PathPluginBase extends DisplayPluginBase implements DisplayRouter
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
    * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
+   *   The plugin ID for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
@@ -103,7 +103,10 @@ abstract class PathPluginBase extends DisplayPluginBase implements DisplayRouter
   }
 
   /**
-   * Overrides \Drupal\views\Plugin\views\display\DisplayPluginBase:defineOptions().
+   * Overrides view display plugin base.
+   *
+   * Overrides display plugin definition options with
+   * \Drupal\views\Plugin\views\display\DisplayPluginBase:defineOptions().
    */
   protected function defineOptions() {
     $options = parent::defineOptions();

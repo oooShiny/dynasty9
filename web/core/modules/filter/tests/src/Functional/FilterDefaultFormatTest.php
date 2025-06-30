@@ -15,9 +15,7 @@ use Drupal\Tests\BrowserTestBase;
 class FilterDefaultFormatTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['filter'];
 
@@ -84,7 +82,7 @@ class FilterDefaultFormatTest extends BrowserTestBase {
   /**
    * Rebuilds text format and permission caches in the thread running the tests.
    */
-  protected function resetFilterCaches() {
+  protected function resetFilterCaches(): void {
     filter_formats_reset();
   }
 

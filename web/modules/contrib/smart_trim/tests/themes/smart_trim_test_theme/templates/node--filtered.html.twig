@@ -16,7 +16,7 @@
     {{ content.body | render | smart_trim_chars(20, '', FALSE) }}
   </div>
   <div id="body-trim-5-words">{{ content.body | render | smart_trim_words(5) }}</div>
-  <div id="body-trim-7-words-elipses-html">
+  <div id="body-trim-7-words-ellipses-html">
     {{ content.body | render | smart_trim_words(7, '...', FALSE) }}
   </div>
 </article>

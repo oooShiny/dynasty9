@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\smart_trim\Unit;
 
 use Drupal\smart_trim\TruncateHTML;
 use Drupal\Tests\UnitTestCase;
 
-;
+// cspell:ignore quickedit
 
 /**
  * Unit Test coverage.
@@ -31,7 +33,7 @@ class TruncateHTMLTest extends UnitTestCase {
   /**
    * Data provider for testTruncateChars().
    */
-  public function truncateCharsDataProvider(): array {
+  public static function truncateCharsDataProvider(): array {
     return [
       [
         'A test string',
@@ -117,7 +119,7 @@ class TruncateHTMLTest extends UnitTestCase {
   /**
    * Data provider for testTruncateWords().
    */
-  public function truncateWordsDataProvider(): array {
+  public static function truncateWordsDataProvider(): array {
     return [
       [
         'A test string',

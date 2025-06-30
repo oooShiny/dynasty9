@@ -46,7 +46,7 @@ class MediaSourceOEmbedVideoTest extends MediaSourceTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function initConfig(ContainerInterface $container) {
+  protected function initConfig(ContainerInterface $container): void {
     parent::initConfig($container);
 
     // Enable twig debugging to make testing template usage easy.
@@ -150,6 +150,7 @@ class MediaSourceOEmbedVideoTest extends MediaSourceTestBase {
     // correctly, regardless of whatever its width attribute may be (the fixture
     // hard-codes it to 480).
     $inner_frame = 'frames[0].document.querySelector("iframe")';
+    $page->waitFor(10, fn () => $session->evaluateScript("$inner_frame !== null"));
     $this->assertSame('480', $session->evaluateScript("$inner_frame.getAttribute('width')"));
     $this->assertLessThanOrEqual(240, $session->evaluateScript("$inner_frame.clientWidth"));
 
@@ -219,7 +220,7 @@ class MediaSourceOEmbedVideoTest extends MediaSourceTestBase {
     $no_hash_query = array_diff_key($query, ['hash' => '']);
     $this->drupalGet('media/oembed', ['query' => $no_hash_query]);
     $assert_session->pageTextNotContains('Vimeo works!');
-    $assert_session->pageTextContains('Client error');
+    $assert_session->pageTextContains('This resource is not available');
 
     // A correct query should be allowed because the anonymous role has the
     // 'view media' permission.

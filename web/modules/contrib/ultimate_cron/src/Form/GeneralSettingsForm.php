@@ -1,11 +1,8 @@
 <?php
 
 namespace Drupal\ultimate_cron\Form;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Datetime\DateFormatter;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\State\StateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -35,30 +32,13 @@ class GeneralSettingsForm extends ConfigFormBase {
   protected $dateFormatter;
 
   /**
-   * Constructs a GeneralSettingsForm object.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\Core\State\StateInterface $state
-   *   The state key value store.
-   * @param \Drupal\Core\Datetime\DateFormatter $date_formatter
-   *   The date formatter service.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory, StateInterface $state, DateFormatter $date_formatter) {
-    parent::__construct($config_factory);
-    $this->state = $state;
-    $this->dateFormatter = $date_formatter;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('state'),
-      $container->get('date.formatter')
-    );
+    $form = parent::create($container);
+    $form->state = $container->get('state');
+    $form->dateFormatter = $container->get('date.formatter');
+    return $form;
   }
 
   /**

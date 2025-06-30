@@ -62,14 +62,15 @@ variables:
 
   # Broaden test coverage.
   OPT_IN_TEST_PREVIOUS_MAJOR: 1
+  CORE_PREVIOUS_PHP_MIN: 8.1
   OPT_IN_TEST_MAX_PHP: 1
   OPT_IN_TEST_PREVIOUS_MINOR: 1
   OPT_IN_TEST_NEXT_MINOR: 1
   OPT_IN_TEST_NEXT_MAJOR: 1
-  # Show more log output
-  _PHPUNIT_EXTRA: --verbose
   # Convenient, and we have no secrets.
   _SHOW_ENVIRONMENT_VARIABLES: 1
+  # Speed up the test execution.
+  _PHPUNIT_CONCURRENT: 1
 
 #
 # Require phpcs and phpstan tests to pass.
@@ -80,9 +81,13 @@ phpcs:
 phpstan:
   allow_failure: false
 
-composer (next major):
+#
+# Require spellcheck to pass, but ignore changelog.
+#
+cspell:
+  allow_failure: false
   variables:
-    LENIENT_ALLOW_LIST: token, token_filter
+    _CSPELL_IGNORE_PATHS: '"CHANGELOG.md"'
 
 phpunit (next major):
   before_script:

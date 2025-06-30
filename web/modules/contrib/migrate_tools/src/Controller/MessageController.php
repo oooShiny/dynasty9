@@ -10,11 +10,11 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Database\Query\PagerSelectExtender;
 use Drupal\Core\Database\Query\TableSortExtender;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\migrate\Plugin\MigrateIdMapInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
 use Drupal\migrate_plus\Entity\MigrationGroupInterface;
 use Drupal\migrate_plus\Entity\MigrationInterface as MigratePlusMigrationInterface;
+use Drupal\migrate_tools\MigrateTools;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -81,6 +81,7 @@ class MessageController extends ControllerBase {
     $build = [];
     $rows = [];
     $classes = static::getLogLevelClassMap();
+    /** @var \Drupal\migrate\Plugin\MigrationInterface $migration_plugin */
     $migration_plugin = $this->migrationPluginManager->createInstance($migration->id(), $migration->toArray());
     $source_id_field_names = array_keys($migration_plugin->getSourcePlugin()->getIds());
     $column_number = 1;
@@ -99,6 +100,10 @@ class MessageController extends ControllerBase {
     $header[] = [
       'data' => $this->t('Message'),
       'field' => 'message',
+    ];
+    $header[] = [
+      'data' => $this->t('Destination ID'),
+      'field' => 'destid',
     ];
     $header[] = [
       'data' => $this->t('Status'),
@@ -121,27 +126,38 @@ class MessageController extends ControllerBase {
         ->execute();
     }
 
-    $status_strings = [
-      MigrateIdMapInterface::STATUS_IMPORTED => $this->t('Imported'),
-      MigrateIdMapInterface::STATUS_NEEDS_UPDATE => $this->t('Pending'),
-      MigrateIdMapInterface::STATUS_IGNORED => $this->t('Ignored'),
-      MigrateIdMapInterface::STATUS_FAILED => $this->t('Failed'),
-    ];
+    $level_mapping = MigrateTools::getLogLevelLabelMapping();
+    $status_mapping = MigrateTools::getStatusLevelLabelMapping();
 
     foreach ($result as $message_row) {
       $column_number = 1;
+      $data = [];
       foreach ($source_id_field_names as $source_id_field_name) {
         $column_name = 'sourceid' . $column_number++;
-        $row[$column_name] = $message_row->$column_name;
+        $data[$column_name] = $message_row->$column_name;
       }
-      $row['level'] = $message_row->level;
-      $row['message'] = $message_row->message;
-      $row['status'] = $status_strings[$message_row->source_row_status];
-      $row['class'] = [
-        Html::getClass('migrate-message-' . $message_row->level),
-        $classes[$message_row->level],
+      $data['level'] = $level_mapping[$message_row->level] ?: $message_row->level;
+      $data['message'] = $message_row->message;
+      $column_number = 1;
+      foreach ($migration_plugin->getDestinationPlugin()->getIds() as $dest_id_field_name => $dest_id_schema) {
+        $column_name = 'destid' . $column_number++;
+        $data['destid']['data'][] = $message_row->$column_name;
+        $data['destid']['#destination_fields'][$dest_id_field_name] =
+        $data['destid']['#destination_fields'][$column_name] = $message_row->$column_name;
+      }
+      $destid = array_filter($data['destid']['data']);
+      $data['destid']['data'] = [
+        '#markup' => $destid ? implode(MigrateTools::DEFAULT_ID_LIST_DELIMITER, $data['destid']['data']) : '',
       ];
-      $rows[] = $row;
+
+      $data['status'] = $status_mapping[$message_row->source_row_status];
+      $rows[] = [
+        'class' => [
+          Html::getClass('migrate-message-' . $message_row->level),
+          $classes[$message_row->level],
+        ],
+        'data' => $data,
+      ];
     }
 
     $build['message_table'] = [

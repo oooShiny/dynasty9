@@ -11,20 +11,32 @@ use Drupal\Core\Installer\Form\SelectProfileForm;
 
 /**
  * Provides a base class for testing installing from existing configuration.
+ *
+ * @deprecated in drupal:10.4.0 and is removed from drupal:12.0.0. Use
+ *   \Drupal\FunctionalTests\Installer\InstallerConfigDirectoryTestBase
+ *   instead.
+ *
+ * @see https://www.drupal.org/node/3460001
  */
 abstract class InstallerExistingConfigTestBase extends InstallerTestBase {
 
   /**
-   * This is set by the profile in the core.extension extracted.
-   *
-   * If set to FALSE, then the install will proceed without an install profile.
+   * {@inheritdoc}
    */
   protected $profile = NULL;
 
   /**
-   * @todo Fill out docblock.
+   * @var bool
    */
   protected $existingSyncDirectory = FALSE;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(string $name) {
+    @trigger_error(__CLASS__ . ' is deprecated in drupal:10.4.0 and is removed from drupal:12.0.0. Use \Drupal\FunctionalTests\Installer\InstallerConfigDirectoryTestBase instead. See https://www.drupal.org/node/3460001');
+    parent::__construct($name);
+  }
 
   /**
    * {@inheritdoc}
@@ -39,8 +51,9 @@ abstract class InstallerExistingConfigTestBase extends InstallerTestBase {
     }
 
     if ($this->profile !== FALSE) {
-      // Create a profile for testing. We set core_version_requirement to '*' for
-      // the test so that it does not need to be updated between major versions.
+      // Create a profile for testing. We set core_version_requirement to '*'
+      // for the test so that it does not need to be updated between major
+      // versions.
       $info = [
         'type' => 'profile',
         'core_version_requirement' => '*',

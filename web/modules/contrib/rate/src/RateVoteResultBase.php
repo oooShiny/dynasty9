@@ -26,7 +26,7 @@ class RateVoteResultBase extends VoteResultFunctionBase implements RateVoteResul
   /**
    * Calculate results.
    */
-  public function calculateResult($votes) {
+  public function calculateResult($votes): float {
     return count($votes);
   }
 

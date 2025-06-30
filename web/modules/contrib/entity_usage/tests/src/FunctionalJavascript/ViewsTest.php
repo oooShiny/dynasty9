@@ -23,14 +23,14 @@ class ViewsTest extends EntityUsageJavascriptTestBase {
   /**
    * Tests the views integration.
    */
-  public function testViewsIntegration() {
+  public function testViewsIntegration(): void {
     $page = $this->getSession()->getPage();
 
     // Create node 1.
     $this->drupalGet('/node/add/eu_test_ct');
     $page->fillField('title[0][value]', 'Node 1');
     $page->pressButton('Save');
-    $this->assertSession()->pageTextContains('eu_test_ct Node 1 has been created.');
+    $this->assertSession()->pageTextContains('Entity Usage test content Node 1 has been created.');
     $this->saveHtmlOutput();
 
     // Create node 2 referencing node 1 using reference field.
@@ -38,7 +38,7 @@ class ViewsTest extends EntityUsageJavascriptTestBase {
     $page->fillField('title[0][value]', 'Node 2');
     $page->fillField('field_eu_test_related_nodes[0][target_id]', 'Node 1 (1)');
     $page->pressButton('Save');
-    $this->assertSession()->pageTextContains('eu_test_ct Node 2 has been created.');
+    $this->assertSession()->pageTextContains('Entity Usage test content Node 2 has been created.');
     $node2 = Node::load(2);
     $this->saveHtmlOutput();
 
@@ -47,7 +47,7 @@ class ViewsTest extends EntityUsageJavascriptTestBase {
     $page->fillField('title[0][value]', 'Node 3');
     $page->fillField('field_eu_test_related_nodes[0][target_id]', 'Node 1 (1)');
     $page->pressButton('Save');
-    $this->assertSession()->pageTextContains('eu_test_ct Node 3 has been created.');
+    $this->assertSession()->pageTextContains('Entity Usage test content Node 3 has been created.');
     $this->saveHtmlOutput();
 
     // Visit the view and check that the usage is correctly tracked there.

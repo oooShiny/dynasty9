@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\smart_trim\Functional;
 
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Tests\BrowserTestBase;
+
+// cspell:ignore womp MMMMMOOOORRRREEEE
 
 /**
  * Class to test Smart Trim translations.

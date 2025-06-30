@@ -213,14 +213,9 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
   /**
    * {@inheritdoc}
    */
-  public function getForm($form_arg) {
+  public function getForm($form_arg, mixed ...$args) {
     $form_state = new FormState();
-
-    $args = func_get_args();
-    // Remove $form_arg from the arguments.
-    unset($args[0]);
-    $form_state->addBuildInfo('args', array_values($args));
-
+    $form_state->addBuildInfo('args', $args);
     return $this->buildForm($form_arg, $form_state);
   }
 
@@ -473,13 +468,10 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
   /**
    * {@inheritdoc}
    */
-  public function submitForm($form_arg, FormStateInterface &$form_state) {
+  public function submitForm($form_arg, FormStateInterface &$form_state, mixed ...$args) {
     $build_info = $form_state->getBuildInfo();
     if (empty($build_info['args'])) {
-      $args = func_get_args();
-      // Remove $form and $form_state from the arguments.
-      unset($args[0], $args[1]);
-      $form_state->addBuildInfo('args', array_values($args));
+      $form_state->addBuildInfo('args', $args);
     }
 
     // Populate FormState::$input with the submitted values before retrieving
@@ -610,16 +602,16 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
         return;
       }
 
-      // If $form_state->isRebuilding() has been set and input has been
+      // If $form_state->setRebuild(TRUE) was called and input has been
       // processed without validation errors, we are in a multi-step workflow
-      // that is not yet complete. A new $form needs to be constructed based on
-      // the changes made to $form_state during this request. Normally, a submit
-      // handler sets $form_state->isRebuilding() if a fully executed form
-      // requires another step. However, for forms that have not been fully
-      // executed (e.g., Ajax submissions triggered by non-buttons), there is no
-      // submit handler to set $form_state->isRebuilding(). It would not make
-      // sense to redisplay the identical form without an error for the user to
-      // correct, so we also rebuild error-free non-executed forms, regardless
+      // that is not yet complete. A new $form needs to be constructed based
+      // on the changes made to $form_state during this request.
+      //
+      // Typically, a submit handler calls $form_state->setRebuild(TRUE) when
+      // a fully executed form requires another step. However, for forms that
+      // have not been fully executed (e.g., AJAX submissions triggered by
+      // non-buttons), there is no submit handler to call setRebuild(). In
+      // that case, we also rebuild error-free, non-executed forms, regardless
       // of $form_state->isRebuilding().
       // @todo Simplify this logic; considering Ajax and non-HTML front-ends,
       //   along with element-level #submit properties, it makes no sense to
@@ -737,6 +729,11 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
       // submitted form value appears literally, regardless of custom #tree
       // and #parents being set elsewhere.
       '#parents' => ['form_build_id'],
+      // Certain browsers such as Firefox retain form input data after reload.
+      // This can result in the form being in a strange state if the page is
+      // reloaded after an AJAX request. Setting the form build ID field's
+      // autocomplete off prevents the input from being retained.
+      '#attributes' => ['autocomplete' => 'off'],
     ];
 
     // Add a token, based on either #token or form_id, to any form displayed to
@@ -778,10 +775,17 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
               ],
             ],
           ],
-          '#cache' => [
-            'max-age' => 0,
-          ],
         ];
+
+        // If a form hasn't explicitly opted in to caching by setting max-age at
+        // the top level, then make it uncacheable in case it doesn't have the
+        // correct cacheability metadata.
+        // @todo Remove this in the next major version, after the deprecation
+        //   process from https://www.drupal.org/project/drupal/issues/3395157
+        //   has ended.
+        if (!isset($form['#cache']['max-age'])) {
+          $form['form_token']['#cache']['max-age'] = 0;
+        }
       }
     }
 
@@ -1003,7 +1007,11 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
     if (isset($element['#process']) && !$element['#processed']) {
       foreach ($element['#process'] as $callback) {
         $complete_form = &$form_state->getCompleteForm();
-        $element = call_user_func_array($form_state->prepareCallback($callback), [&$element, &$form_state, &$complete_form]);
+        $element = call_user_func_array($form_state->prepareCallback($callback), [
+          &$element,
+          &$form_state,
+          &$complete_form,
+        ]);
       }
       $element['#processed'] = TRUE;
     }
@@ -1186,8 +1194,8 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
     // of how the element is themed or whether JavaScript is used to change the
     // control's attributes. However, it's good UI to let the user know that
     // input is not wanted for the control. HTML supports two attributes for:
-    // this: http://www.w3.org/TR/html401/interact/forms.html#h-17.12. If a form
-    // wants to start a control off with one of these attributes for UI
+    // this: https://www.w3.org/TR/html401/interact/forms.html#h-17.12. If a
+    // form wants to start a control off with one of these attributes for UI
     // purposes, only, but still allow input to be processed if it's submitted,
     // it can set the desired attribute in #attributes directly rather than
     // using #disabled. However, developers should think carefully about the
@@ -1330,7 +1338,7 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
    * element. If the name alone doesn't identify the element uniquely, the input
    * key '_triggering_element_value' may also be set to require a match on
    * element value. An example where this is needed is if there are several
-   * // buttons all named 'op', and only differing in their value.
+   * // buttons all named 'op', and only different in their value.
    */
   protected function elementTriggeredScriptedSubmission($element, FormStateInterface &$form_state) {
     $input = $form_state->getUserInput();
@@ -1372,7 +1380,7 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
     // The input value attribute is treated as CDATA by browsers. This means
     // that they replace character entities with characters. Therefore, we need
     // to decode the value in $element['#value']. For more details see
-    // http://www.w3.org/TR/html401/types.html#type-cdata.
+    // https://www.w3.org/TR/html401/types.html#type-cdata.
     if (isset($input[$element['#name']]) && $input[$element['#name']] == Html::decodeEntities($element['#value'])) {
       return TRUE;
     }

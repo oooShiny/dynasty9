@@ -26,12 +26,15 @@ class DisplayPageTest extends ViewsKernelTestBase {
    *
    * @var array
    */
-  public static $testViews = ['test_page_display', 'test_page_display_route', 'test_page_display_menu', 'test_display_more'];
+  public static $testViews = [
+    'test_page_display',
+    'test_page_display_route',
+    'test_page_display_menu',
+    'test_display_more',
+  ];
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'system',
@@ -162,7 +165,7 @@ class DisplayPageTest extends ViewsKernelTestBase {
   }
 
   /**
-   * Tests the readmore functionality.
+   * Tests the 'read more' functionality.
    */
   public function testReadMore(): void {
     /** @var \Drupal\Core\Render\RendererInterface $renderer */

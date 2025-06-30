@@ -76,9 +76,9 @@ class ThemeUiTest extends BrowserTestBase {
    * @param string $theme_name
    *   The name of the theme being tested.
    * @param string[] $first_modules
-   *   Machine names of first modules to enable.
+   *   Machine names of first modules to install.
    * @param string[] $second_modules
-   *   Machine names of second modules to enable.
+   *   Machine names of second modules to install.
    * @param string[] $required_by_messages
    *   Expected messages when attempting to uninstall $module_names.
    * @param string $base_theme_to_uninstall
@@ -171,7 +171,7 @@ class ThemeUiTest extends BrowserTestBase {
    * @param string[] $module_names
    *   An array of module machine names.
    */
-  protected function uninstallModules(array $module_names) {
+  protected function uninstallModules(array $module_names): void {
     $assert_session = $this->assertSession();
     $this->drupalGet('admin/modules/uninstall');
     foreach ($module_names as $attribute) {
@@ -200,7 +200,7 @@ class ThemeUiTest extends BrowserTestBase {
    * @param string $theme_name
    *   The theme name.
    */
-  protected function uninstallTheme($theme_name) {
+  protected function uninstallTheme($theme_name): void {
     $this->drupalGet('admin/appearance');
     $this->clickLink("Uninstall $theme_name theme");
     $this->assertSession()->pageTextContains("The $theme_name theme has been uninstalled.");
@@ -297,7 +297,7 @@ class ThemeUiTest extends BrowserTestBase {
     $requires_list_items = $theme_container->findAll('css', '.theme-info__requires li');
     $this->assertSameSize($expected_requires_list_items, $requires_list_items);
 
-    foreach ($requires_list_items as $key => $item) {
+    foreach ($requires_list_items as $item) {
       $this->assertContains($item->getText(), $expected_requires_list_items);
     }
 

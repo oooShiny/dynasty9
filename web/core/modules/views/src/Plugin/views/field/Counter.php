@@ -57,7 +57,7 @@ class Counter extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function query() {
-    // do nothing -- to override the parent query.
+    // Do nothing -- to override the parent query.
   }
 
   /**

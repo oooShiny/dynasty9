@@ -22,9 +22,7 @@ class AreaEntityTest extends ViewsKernelTestBase {
   use BlockCreationTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['entity_test', 'user', 'block'];
 
@@ -45,7 +43,7 @@ class AreaEntityTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUpFixtures() {
+  protected function setUpFixtures(): void {
     // Install the themes used for this test.
     $this->container->get('theme_installer')->install(['olivero']);
     $this->container->get('config.factory')->getEditable('system.theme')->set('default', 'olivero')->save();
@@ -121,7 +119,7 @@ class AreaEntityTest extends ViewsKernelTestBase {
    * @param \Drupal\Core\Entity\EntityInterface[] $entities
    *   The entities.
    */
-  public function doTestRender($entities) {
+  public function doTestRender($entities): void {
     /** @var \Drupal\Core\Render\RendererInterface $renderer */
     $renderer = $this->container->get('renderer');
     $view = Views::getView('test_entity_area');
@@ -190,7 +188,7 @@ class AreaEntityTest extends ViewsKernelTestBase {
   /**
    * Tests the calculation of the rendered dependencies.
    */
-  public function doTestCalculateDependencies() {
+  public function doTestCalculateDependencies(): void {
     $view = View::load('test_entity_area');
 
     $dependencies = $view->calculateDependencies()->getDependencies();

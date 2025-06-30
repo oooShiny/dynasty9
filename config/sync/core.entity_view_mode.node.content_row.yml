@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.content_row
 label: 'Content Row'
+description: ''
 targetEntityType: node
 cache: true

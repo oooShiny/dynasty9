@@ -16,9 +16,7 @@ use Drupal\KernelTests\KernelTestBase;
 class ThemeSettingsTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system'];
 
@@ -47,7 +45,7 @@ class ThemeSettingsTest extends KernelTestBase {
    * Tests that $theme.settings are imported and used as default theme settings.
    */
   public function testDefaultConfig(): void {
-    $name = 'test_basetheme';
+    $name = 'test_base_theme';
     $path = $this->availableThemes[$name]->getPath();
     $this->assertFileExists("$path/" . InstallStorage::CONFIG_INSTALL_DIRECTORY . "/$name.settings.yml");
     $this->container->get('theme_installer')->install([$name]);

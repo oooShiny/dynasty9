@@ -21,9 +21,7 @@ class EntitySchemaTest extends EntityKernelTestBase {
   use EntityDefinitionTestTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['entity_test_update'];
 
@@ -92,7 +90,7 @@ class EntitySchemaTest extends EntityKernelTestBase {
    * @param bool $alter
    *   Whether the original definition should be altered or not.
    */
-  protected function updateEntityType($alter) {
+  protected function updateEntityType($alter): void {
     $this->state->set('entity_schema_update', $alter);
     $updated_entity_type = $this->getUpdatedEntityTypeDefinition($alter, $alter);
     $updated_field_storage_definitions = $this->getUpdatedFieldStorageDefinitions($alter, $alter);
@@ -296,7 +294,7 @@ class EntitySchemaTest extends EntityKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function refreshServices() {
+  protected function refreshServices(): void {
     parent::refreshServices();
     $this->database = $this->container->get('database');
   }

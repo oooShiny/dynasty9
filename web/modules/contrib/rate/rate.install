@@ -63,7 +63,7 @@ function rate_update_last_removed() {
  */
 function rate_update_8001(&$sandbox) {
   // Ideally recreating the votes and results would go through th APIs
-  // (deleting, creating, recalulating results), but as the number of votes can
+  // (deleting, creating, recalculating results), but as the number of votes can
   // grow quickly, the overhead of going through the API can quickly reach an
   // unreasonable amount of time for the hook to run (e.g. days), so we're
   // opting for the slightly less safe method of direct database updates. Also,

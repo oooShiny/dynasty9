@@ -8,7 +8,10 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class HelperFunctions.
+ * Helper class for TwigSuggest.
+ *
+ * Currently has one method, getCurrentNode(), which retrieves the current node
+ * entity in various Drupal contexts.
  *
  * @package Drupal\twigsuggest\Utils
  */

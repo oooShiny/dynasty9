@@ -12,7 +12,6 @@ use Drupal\layout_builder\SectionListTrait;
  * @coversDefaultClass \Drupal\layout_builder\SectionListTrait
  *
  * @group layout_builder
- * @group #slow
  */
 class SectionListTraitTest extends SectionListTestBase {
 
@@ -34,6 +33,9 @@ class SectionListTraitTest extends SectionListTestBase {
 
 }
 
+/**
+ * Test item list class for layout section fields.
+ */
 class TestSectionList implements SectionListInterface {
 
   use SectionListTrait {
@@ -61,7 +63,7 @@ class TestSectionList implements SectionListInterface {
   /**
    * {@inheritdoc}
    */
-  protected function setSections(array $sections) {
+  protected function setSections(array $sections): array {
     $this->sections = array_values($sections);
     return $sections;
   }

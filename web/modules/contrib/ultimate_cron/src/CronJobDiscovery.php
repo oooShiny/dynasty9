@@ -130,19 +130,45 @@ class CronJobDiscovery {
   protected function getJobTitle($id) {
     $titles = array();
 
+    $titles['aggregator_cron'] = t('Refresh feeds');
     $titles['comment_cron'] = t('Store the maximum possible comments per thread');
     $titles['dblog_cron'] = t('Remove expired log messages and flood control events');
-    $titles['field_cron'] = t('Purges deleted Field API data');
-    $titles['file_cron'] = t('Deletes temporary files');
-    $titles['history_cron'] = t('Deletes history');
-    $titles['search_cron'] = t('Updates indexable active search pages');
-    $titles['system_cron'] = t('Cleanup (caches, batch, flood, temp-files, etc.)');
-    $titles['update_cron'] = t('Check for updates');
-    $titles['node_cron'] = t('Updates search rankings for nodes');
-    $titles['aggregator_cron'] = t('Refresh feeds');
-    $titles['ultimate_cron_cron'] = t('Runs internal cleanup operations');
+    $titles['field_cron'] = t('Purge deleted Field API data');
+    $titles['file_cron'] = t('Delete temporary files');
+    $titles['history_cron'] = t('Delete history');
+    $titles['layout_builder_cron'] = t('Remove unused inline block entity operations');
+    $titles['locale_cron'] = t('Update translations');
+    $titles['node_cron'] = t('Update search rankings for nodes');
+    $titles['search_cron'] = t('Update indexable active search pages');
     $titles['statistics_cron'] = t('Reset counts and clean up');
+    $titles['system_cron'] = t('Cleanup (caches, batch, flood, temp-files, etc.)');
     $titles['tracker_cron'] = t('Update tracker index');
+    $titles['update_cron'] = t('Check for updates');
+    $titles['workspaces_cron'] = t('Purge deleted workspaces');
+
+    // Contrib modules.
+    $titles['backup_migrate_cron'] = t('Run scheduled backups');
+    $titles['captcha_cron'] = t('Remove old sessions');
+    $titles['content_lock_timeout_cron'] = t('Release stale locks');
+    $titles['core_event_dispatcher_cron'] = t('Dispatch cron events');
+    $titles['flysystem_cron'] = t('Check the sanity of installed filesystems');
+    $titles['hook_event_dispatcher_cron'] = t('Dispatch cron events');
+    $titles['mailchimp_cron'] = t('Send queued (un)subscribe actions to Mailchimp');
+    $titles['password_policy_cron'] = t('Indicate expired passwords for users');
+    $titles['preview_link_cron'] = t('Delete expired preview links');
+    $titles['purge_processor_cron_cron'] = t('Invalidate cache items');
+    $titles['redirect_404_cron'] = t('Delete old 404 errors');
+    $titles['scheduler_cron'] = t('(Un)publish scheduled entities');
+    $titles['search_api_cron'] = t('Execute pending server tasks and update indexes');
+    $titles['search_api_solr_cron'] = t('Optimize Solr servers');
+    $titles['simple_oauth_cron'] = t('Delete expired tokens');
+    $titles['simple_sitemap_cron'] = t('Generate sitemaps');
+    $titles['simple_sitemap_engines_cron'] = t('Submit sitemaps to search engines');
+    $titles['ultimate_cron_cron'] = t('Run internal cleanup operations');
+    $titles['webform_cron'] = t('Purge old submissions');
+    $titles['webform_scheduled_email_cron'] = t('Sends scheduled emails for submissions');
+    $titles['xmlsitemap_cron'] = t('Regenerate XML sitemaps');
+    $titles['xmlsitemap_engines_cron'] = t('Submit XML sitemaps to search engines');
 
     if (isset($titles[$id])) {
       return $titles[$id];
@@ -188,16 +214,15 @@ class CronJobDiscovery {
     }
     if ($has_implementations) {
       $info = $this->moduleExtensionList->getExtensionInfo($module);
-      $callback = "{$module}_cron";
-      $items[$callback] = array(
+      $id = "{$module}_cron";
+      $items[$id] = [
         'module' => $module,
-        'title' =>  isset($titles[$callback]) ? $titles[$callback] : 'Default cron handler',
+        'title' => isset($titles[$id]) ? $titles[$id] : 'Default cron handler',
         'configure' => empty($info['configure']) ? NULL : $info['configure'],
-        'callback' => $callback,
-        'tags' => array(),
+        'callback' => "{$module}#cron",
+        'tags' => ['core'],
         'pass job argument' => FALSE,
-      );
-      $items["{$module}_cron"]['tags'][] = 'core';
+      ];
     }
 
     return $items;

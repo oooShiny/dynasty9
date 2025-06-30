@@ -42,6 +42,11 @@ class EntityUsageTrackFileTest extends KernelTestBase {
   protected function setUp(): void {
     parent::setUp();
 
+    $this->installEntitySchema('entity_test');
+    $this->installEntitySchema('file');
+    $this->installSchema('entity_usage', ['entity_usage']);
+    $this->installSchema('file', ['file_usage']);
+
     // Add a file field.
     $this->createFileField(
       'file',
@@ -87,11 +92,6 @@ class EntityUsageTrackFileTest extends KernelTestBase {
         'allowed_html' => '<img src alt data-entity-uuid data-entity-type height width>',
       ],
     ])->save();
-
-    $this->installEntitySchema('entity_test');
-    $this->installEntitySchema('file');
-    $this->installSchema('entity_usage', ['entity_usage']);
-    $this->installSchema('file', ['file_usage']);
 
     $this->config('entity_usage.settings')
       ->set('track_enabled_source_entity_types', ['entity_test'])

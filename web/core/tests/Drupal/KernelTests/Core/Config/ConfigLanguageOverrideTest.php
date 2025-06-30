@@ -15,9 +15,7 @@ use Drupal\KernelTests\KernelTestBase;
 class ConfigLanguageOverrideTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'user',
@@ -40,8 +38,8 @@ class ConfigLanguageOverrideTest extends KernelTestBase {
    */
   public function testConfigLanguageOverride(): void {
     // The language module implements a config factory override object that
-    // overrides configuration when the Language module is enabled. This test ensures that
-    // English overrides work.
+    // overrides configuration when the Language module is enabled. This test
+    // ensures that English overrides work.
     \Drupal::languageManager()->setConfigOverrideLanguage(\Drupal::languageManager()->getLanguage('en'));
     $config = \Drupal::config('config_test.system');
     $this->assertSame('en bar', $config->get('foo'));

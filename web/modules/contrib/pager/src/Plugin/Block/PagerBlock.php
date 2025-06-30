@@ -23,10 +23,34 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
-  protected $dbh;
+
+  /**
+   * The manager used to load a node.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManager
+   */
   protected $entityMgr;
+
+  /**
+   * Image property access.
+   *
+   * @var \Drupal\Core\Image\ImageFactory
+   */
   protected $imgFactory;
+
+  /**
+   * The current route service.
+   *
+   * @var \Drupal\Core\Routing\CurrentRouteMatch
+   */
   protected $route;
+
+  /**
+   * SQL queries.
+   *
+   * @var \Drupal\pager\PagerStorage
+   */
+  protected $sql;
 
   /**
    * Extended constructor for the PageBlock class.
@@ -41,17 +65,17 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
    *   The current route service.
    * @param \Drupal\Core\Entity\EntityTypeManager $entityMgr
    *   The manager used to load a node.
-   * @param \Drupal\pager\PagerStorage $dbh
+   * @param \Drupal\pager\PagerStorage $sql
    *   The storage interface.
    * @param \Drupal\Core\Image\ImageFactory $imgFactory
    *   Image property access.
    */
-  public function __construct(array $config, $plugin_id, $plugin_def, CurrentRouteMatch $route, EntityTypeManager $entityMgr, PagerStorage $dbh, ImageFactory $imgFactory) {
+  public function __construct(array $config, $plugin_id, $plugin_def, CurrentRouteMatch $route, EntityTypeManager $entityMgr, PagerStorage $sql, ImageFactory $imgFactory) {
     parent::__construct($config, $plugin_id, $plugin_def);
-    $this->dbh = $dbh;
     $this->entityMgr = $entityMgr;
     $this->imgFactory = $imgFactory;
     $this->route = $route;
+    $this->sql = $sql;
   }
 
   /**
@@ -66,8 +90,8 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * @param string $plugin_def
    *   The plugin definition.
    */
-  public static function create(ContainerInterface $container, array $config, $plugin_id, $plugin_def) {
-    return new static($config, $plugin_id, $plugin_def, $container->get('current_route_match'), $container->get('entity_type.manager'), $container->get('pager.storage'), $container->get('image.factory'));
+  public static function create(ContainerInterface $c, array $config, $plugin_id, $plugin_def) {
+    return new static($config, $plugin_id, $plugin_def, $c->get('current_route_match'), $c->get('entity_type.manager'), $c->get('pager.storage'), $c->get('image.factory'));
   }
 
   /**
@@ -282,7 +306,7 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
   protected function getContentTypes() {
     $types = [];
 
-    foreach ($this->dbh->selectContentTypes() as $type) {
+    foreach ($this->sql->selectContentTypes() as $type) {
       if (preg_match('/^[a-z][a-z_]+[a-z]$/', $type)) {
         $types[$type] = ucwords($type);
       }
@@ -319,8 +343,8 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
   protected function getImgFields() {
     $fields = [];
 
-    foreach ($this->dbh->selectImgData() as $data) {
-      $obj = (object) unserialize($data);
+    foreach ($this->sql->selectImgData() as $data) {
+      $obj = (object) unserialize($data, ['allowed_classes' => TRUE]);
 
       if (empty($obj->field_type) || $obj->field_type != 'image') {
         continue;
@@ -442,20 +466,20 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
    */
   protected function getNext($nid, $created, $tid) {
     if ($this->configuration['interm']) {
-      $next = $this->dbh->selectNext($created, [$tid], $this->configuration['types']);
+      $next = $this->sql->selectNext($created, [$tid], $this->configuration['types']);
 
       if (!$next && $this->configuration['behavior'] == 'loop') {
-        $next = $this->dbh->selectFirst($created, [$tid], $this->configuration['types']);
+        $next = $this->sql->selectFirst($created, [$tid], $this->configuration['types']);
       }
       elseif (!$next && $this->configuration['behavior'] == 'current') {
         $next = $nid;
       }
     }
     else {
-      $next = $this->dbh->selectNext($created, $this->configuration['terms'], $this->configuration['types']);
+      $next = $this->sql->selectNext($created, $this->configuration['terms'], $this->configuration['types']);
 
       if (!$next && $this->configuration['behavior'] == 'loop') {
-        $next = $this->dbh->selectFirst($created, $this->configuration['terms'], $this->configuration['types']);
+        $next = $this->sql->selectFirst($created, $this->configuration['terms'], $this->configuration['types']);
       }
       elseif (!$next && $this->configuration['behavior'] == 'current') {
         $next = $nid;
@@ -509,20 +533,20 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
    */
   protected function getPrevious($nid, $created, $tid) {
     if ($this->configuration['interm']) {
-      $prev = $this->dbh->selectPrev($created, [$tid], $this->configuration['types']);
+      $prev = $this->sql->selectPrev($created, [$tid], $this->configuration['types']);
 
       if (!$prev && $this->configuration['behavior'] == 'loop') {
-        $prev = $this->dbh->selectLast($created, [$tid], $this->configuration['types']);
+        $prev = $this->sql->selectLast($created, [$tid], $this->configuration['types']);
       }
       elseif (!$prev && $this->configuration['behavior'] == 'current') {
         $prev = $nid;
       }
     }
     else {
-      $prev = $this->dbh->selectPrev($created, $this->configuration['terms'], $this->configuration['types']);
+      $prev = $this->sql->selectPrev($created, $this->configuration['terms'], $this->configuration['types']);
 
       if (!$prev && $this->configuration['behavior'] == 'loop') {
-        $prev = $this->dbh->selectLast($created, $this->configuration['terms'], $this->configuration['types']);
+        $prev = $this->sql->selectLast($created, $this->configuration['terms'], $this->configuration['types']);
       }
       elseif (!$prev && $this->configuration['behavior'] == 'current') {
         $prev = $nid;
@@ -540,7 +564,7 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
   protected function getTerms() {
     $terms = [];
 
-    foreach ($this->dbh->selectTerms() as $obj) {
+    foreach ($this->sql->selectTerms() as $obj) {
       $terms[$obj->tid] = ucwords(preg_replace('/[^a-z]+/', ' ', $obj->vid)) . ': ' . $obj->name;
     }
     return $terms;
@@ -574,7 +598,7 @@ class PagerBlock extends BlockBase implements ContainerFactoryPluginInterface {
     if (!in_array($node->getType(), $this->configuration['types'])) {
       return 0;
     }
-    return $this->dbh->selectTid($node->id(), $this->configuration['terms']);
+    return $this->sql->selectTid($node->id(), $this->configuration['terms']);
   }
 
 }

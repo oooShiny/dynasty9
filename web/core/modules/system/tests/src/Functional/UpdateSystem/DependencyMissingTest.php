@@ -14,9 +14,7 @@ use Drupal\Tests\BrowserTestBase;
 class DependencyMissingTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['update_test_0', 'update_test_2'];
 
@@ -35,6 +33,9 @@ class DependencyMissingTest extends BrowserTestBase {
     require_once $this->root . '/core/includes/update.inc';
   }
 
+  /**
+   * Tests updating with a missing dependency.
+   */
   public function testMissingUpdate(): void {
     $starting_updates = [
       'update_test_2' => 8001,

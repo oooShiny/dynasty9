@@ -1,5 +1,5 @@
 // eslint-disable-next-line func-names
-(function (Drupal, wp) {
+(function (Drupal, wp, drupalSettings) {
   const { blockEditor, components, element } = wp;
   const { useState, useEffect, useCallback } = element;
   const { InspectorControls } = blockEditor;
@@ -7,8 +7,11 @@
   const __ = Drupal.t;
 
   function openBlockSettings(type, contentBlockId) {
+    const entityId = drupalSettings.gutenberg.entityId || null;
+    const entityType = 'node';
+    const entityBundle = drupalSettings.gutenberg.nodeType;
     const ajaxSettings = {
-      url: Drupal.url(`editor/content_block_type/settings/${type}/${contentBlockId}`),
+      url: Drupal.url(`editor/content_block_type/settings/${type}/${contentBlockId}/${entityType}/${entityId}/${entityBundle}`),
       dialogType: 'dialog',
       dialogRenderer: 'sidebar',
     };
@@ -101,4 +104,4 @@
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
   window.DrupalGutenberg.Components.ContentBlock = ContentBlock; // createClass;
-})(Drupal, wp);
+})(Drupal, wp, drupalSettings);

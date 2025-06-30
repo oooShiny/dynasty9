@@ -164,7 +164,7 @@ final class DrushCommandsTest extends BrowserTestBase {
     $this->drush('mmsg', ['fruit_terms'], ['format' => 'json']);
     $expected = [
       [
-        'level' => '1',
+        'level' => 'Error',
         'message' => 'You picked a bad one.',
         'source_ids' => 'Apple',
         'destination_ids' => '1',
@@ -174,7 +174,7 @@ final class DrushCommandsTest extends BrowserTestBase {
     $this->drush('mmsg', ['fruit_terms'], ['format' => 'csv']);
     $expected = <<<EOT
 "Source ID(s)","Destination ID(s)",Level,Message
-Apple,1,1,"You picked a bad one."
+Apple,1,Error,"You picked a bad one."
 EOT;
     $this->assertEquals($expected, $this->getOutput());
   }

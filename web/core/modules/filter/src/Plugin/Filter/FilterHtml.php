@@ -196,6 +196,7 @@ class FilterHtml extends FilterBase {
    *   The name to find or match against a prefix.
    *
    * @return bool|array
+   *   The allowed value if found, or FALSE if no match is found.
    */
   protected function findAllowedValue(array $allowed, $name) {
     if (isset($allowed['exact'][$name])) {
@@ -220,6 +221,8 @@ class FilterHtml extends FilterBase {
    *   TRUE, FALSE, or an array of allowed values.
    *
    * @return bool|array
+   *   An array containing 'exact' and 'prefix' lists of allowed values,
+   *   or TRUE/FALSE if all or no values are allowed.
    */
   protected function prepareAttributeValues($attribute_values) {
     if ($attribute_values === TRUE || $attribute_values === FALSE) {
@@ -264,6 +267,10 @@ class FilterHtml extends FilterBase {
     $scanner = new Scanner('<body>' . $html);
     $parser = new class($scanner, $events) extends Tokenizer {
 
+      /**
+       * phpcs:ignore Drupal.Commenting.FunctionComment.Missing
+       * @phpstan-ignore-next-line
+       */
       public function setTextMode($textMode, $untilTag = NULL) {
         // Do nothing, we never enter text mode.
       }
@@ -346,7 +353,7 @@ class FilterHtml extends FilterBase {
     // added by hand to content, and especially the class attribute can have
     // undesired visual effects by allowing content authors to apply any
     // available style, so specific values should be explicitly allowed.
-    // @see http://www.w3.org/TR/html5/dom.html#global-attributes
+    // @see https://www.w3.org/TR/html5/dom.html#global-attributes
     $restrictions['allowed']['*'] = [
       'style' => FALSE,
       'on*' => FALSE,
@@ -455,7 +462,7 @@ class FilterHtml extends FilterBase {
     $output .= \Drupal::service('renderer')->render($table);
 
     $output .= '<p>' . $this->t('Most unusual characters can be directly entered without any problems.') . '</p>';
-    $output .= '<p>' . $this->t('If you do encounter problems, try using HTML character entities. A common example looks like &amp;amp; for an ampersand &amp; character. For a full list of entities see HTML\'s <a href=":html-entities">entities</a> page. Some of the available characters include:', [':html-entities' => 'http://www.w3.org/TR/html4/sgml/entities.html']) . '</p>';
+    $output .= '<p>' . $this->t('If you do encounter problems, try using HTML character entities. A common example looks like &amp;amp; for an ampersand &amp; character. For a full list of entities see HTML\'s <a href=":html-entities">entities</a> page. Some of the available characters include:', [':html-entities' => 'https://www.w3.org/TR/html4/sgml/entities.html']) . '</p>';
 
     $entities = [
       [$this->t('Ampersand'), '&amp;'],

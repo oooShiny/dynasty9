@@ -24,9 +24,7 @@ class ConfigImportRecreateTest extends KernelTestBase {
   protected $configImporter;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system', 'field', 'text', 'user', 'node'];
 
@@ -61,6 +59,9 @@ class ConfigImportRecreateTest extends KernelTestBase {
     );
   }
 
+  /**
+   * Tests re-creating a config entity with the same name but different UUID.
+   */
   public function testRecreateEntity(): void {
     $type_name = $this->randomMachineName(16);
     $content_type = NodeType::create([

@@ -3,7 +3,7 @@ type: module
 description: Pager block.
 package: Other
 configure: pager.admin
-core_version_requirement: ^9.3 || ^10
+core_version_requirement: ^9.3 || ^10 || ^11
 dependencies:
   - drupal:block
   - drupal:filter
@@ -13,7 +13,7 @@ dependencies:
   - drupal:text
   - drupal:user
 
-# Information added by Drupal.org packaging script on 2023-06-26
-version: '3.0.0'
+# Information added by Drupal.org packaging script on 2024-10-13
+version: '3.0.1'
 project: 'pager'
-datestamp: 1687821578
+datestamp: 1728856412

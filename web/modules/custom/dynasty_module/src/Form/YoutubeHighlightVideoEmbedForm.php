@@ -6,6 +6,7 @@
 namespace Drupal\dynasty_module\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Utility\Error;
 use Drupal\node\Entity\Node;
 use GuzzleHttp\Exception\RequestException;
 
@@ -87,8 +88,9 @@ class YoutubeHighlightVideoEmbedForm extends ConfigFormBase {
       ]);
       $data = $response->getBody()->getContents();
     }
-    catch (RequestException $e) {
-      watchdog_exception('highlights', $e->getMessage());
+    catch (RequestException $exception) {
+      $logger = \Drupal::logger('highlights');
+      Error::logException($logger, $exception);
     }
     $json = json_decode($data);
     $videos = [];

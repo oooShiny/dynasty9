@@ -4,6 +4,12 @@
   const {addFilter} = hooks;
   const {createHigherOrderComponent} = compose;
 
+  /**
+   * Retrieves the Gutenberg CSRF token.
+   */
+  function getCsrfToken() {
+    return drupalSettings.gutenberg.csrfToken;
+  }
 
   async function cloneIfUsed(contentBlockId, isDuplicate) {
 
@@ -15,10 +21,13 @@
       entityBundle: drupalSettings.gutenberg.nodeType
     };
 
+    const csrfToken = getCsrfToken();
+
     const response = await fetch(Drupal.url(`editor/content_block/clone_if_used`), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken,
       },
       body: JSON.stringify(options),
     });

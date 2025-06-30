@@ -2,17 +2,17 @@
 
 namespace Drupal\Tests\select2\Unit\Element;
 
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Asset\LibraryDiscoveryInterface;
+use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\StringTranslation\TranslationManager;
 use Drupal\Core\Theme\ActiveTheme;
 use Drupal\Core\Theme\ThemeManagerInterface;
-use Drupal\Core\Asset\LibraryDiscoveryInterface;
-use Drupal\Core\StringTranslation\TranslationManager;
-use Drupal\Component\Serialization\Json;
-use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\select2\Element\Select2;
 use Drupal\Tests\UnitTestCase;
+use Drupal\select2\Element\Select2;
 
 /**
  * @coversDefaultClass \Drupal\select2\Element\Select2
@@ -29,29 +29,29 @@ class Select2Test extends UnitTestCase {
     $language = $this->createMock(LanguageInterface::class);
     $language->expects($this->any())
       ->method('getDirection')
-      ->will($this->returnValue('rtl'));
+      ->willReturn('rtl');
     $language->method('getId')
-      ->will($this->returnValue('en'));
+      ->willReturn('en');
 
     $language_manager = $this->createMock(LanguageManagerInterface::class);
     $language_manager->expects($this->any())
       ->method('getCurrentLanguage')
-      ->will($this->returnValue($language));
+      ->willReturn($language);
 
     $theme = $this->createMock(ActiveTheme::class);
     $theme->expects($this->any())
       ->method('getName')
-      ->will($this->returnValue('seven'));
+      ->willReturn('seven');
 
     $theme_manager = $this->createMock(ThemeManagerInterface::class);
     $theme_manager->expects($this->any())
       ->method('getActiveTheme')
-      ->will($this->returnValue($theme));
+      ->willReturn($theme);
 
     $library_discovery = $this->createMock(LibraryDiscoveryInterface::class);
     $library_discovery->expects($this->any())
       ->method('getLibraryByName')
-      ->will($this->returnValue(TRUE));
+      ->willReturn(TRUE);
 
     $string_translation = $this->createMock(TranslationManager::class);
 
@@ -92,7 +92,7 @@ class Select2Test extends UnitTestCase {
   /**
    * Data provider for testPreRenderSelect().
    */
-  public function providerTestPreRenderSelect(): array {
+  public static function providerTestPreRenderSelect(): array {
     $data = [];
     $data[] = [TRUE, TRUE, [],
       [
@@ -209,6 +209,7 @@ class Select2Test extends UnitTestCase {
       '#attributes' => ['data-drupal-selector' => 'field-foo'],
       '#placeholder' => $placeholder,
       '#select2' => [],
+      '#cardinality' => 0,
     ];
 
     $element = Select2::preRenderSelect($element);
@@ -223,7 +224,7 @@ class Select2Test extends UnitTestCase {
   /**
    * Data provider for testPlaceholderPropertyRendering().
    */
-  public function providerTestPlaceholderPropertyRendering(): array {
+  public static function providerTestPlaceholderPropertyRendering(): array {
     $data = [];
     $data[] = [TRUE, '', '', '',
       ['id' => '', 'text' => '- Select -'],

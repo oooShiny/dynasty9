@@ -15,9 +15,7 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 class SerializationTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['serialization', 'serialization_test'];
 
@@ -52,7 +50,7 @@ class SerializationTest extends KernelTestBase {
       $this->serializer->serialize($object, 'unsupported_format');
       $this->fail('The serializer was expected to throw an exception for an unsupported format, but did not.');
     }
-    catch (UnexpectedValueException $e) {
+    catch (UnexpectedValueException) {
       // Expected exception; just continue testing.
     }
   }

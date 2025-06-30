@@ -99,7 +99,6 @@ th {
 
 @media (forced-colors: active) {
   [dir="rtl"] :is(.sortable-heading > a::after) {
-    -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3e%3cpath d='M1.75.25v1.5h10.5V.25zm0 3v1.5h7.5v-1.5zm0 3v1.5h4.5v-1.5z' fill='%23000f33'/%3e%3c/svg%3e") no-repeat 50% 50%;
     mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3e%3cpath d='M1.75.25v1.5h10.5V.25zm0 3v1.5h7.5v-1.5zm0 3v1.5h4.5v-1.5z' fill='%23000f33'/%3e%3c/svg%3e") no-repeat 50% 50%;
   }
 }
@@ -108,7 +107,6 @@ th {
   .sortable-heading > a::after {
     opacity: 1;
     background: linktext;
-    -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3e%3cpath d='M1.75.25v1.5h10.5V.25zm0 3v1.5h7.5v-1.5zm0 3v1.5h4.5v-1.5z' fill='%23000f33'/%3e%3c/svg%3e") no-repeat 50% 50%;
     mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3e%3cpath d='M1.75.25v1.5h10.5V.25zm0 3v1.5h7.5v-1.5zm0 3v1.5h4.5v-1.5z' fill='%23000f33'/%3e%3c/svg%3e") no-repeat 50% 50%;
   }
 }
@@ -176,6 +174,21 @@ td.is-active {
  * Target every .form-element input that parent is a form-item of a table cell.
  * This ignores the filter format select of the textarea editor.
  */
+
+td > .form-item {
+  display: flex;
+  align-items: center;
+}
+
+td > .form-item > .form-item__prefix {
+  margin-inline-end: var(--space-xs);
+  white-space: nowrap;
+}
+
+td > .form-item > .form-item__suffix {
+  margin-inline-start: var(--space-xs);
+  white-space: nowrap;
+}
 
 td > .form-item > .form-element,
 td > .ajax-new-content > .form-item > .form-element,

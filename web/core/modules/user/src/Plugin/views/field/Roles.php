@@ -31,7 +31,7 @@ class Roles extends PrerenderList {
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
    * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
+   *   The plugin ID for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    * @param \Drupal\Core\Database\Connection $database
@@ -59,11 +59,17 @@ class Roles extends PrerenderList {
     $this->additional_fields['uid'] = ['table' => 'users_field_data', 'field' => 'uid'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function query() {
     $this->addAdditionalFields();
     $this->field_alias = $this->aliases['uid'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function preRender(&$values) {
     $uids = [];
     $this->items = [];
@@ -91,15 +97,24 @@ class Roles extends PrerenderList {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function render_item($count, $item) {
     return $item['role'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function documentSelfTokens(&$tokens) {
-    $tokens['{{ ' . $this->options['id'] . '__role' . ' }}'] = $this->t('The name of the role.');
-    $tokens['{{ ' . $this->options['id'] . '__rid' . ' }}'] = $this->t('The role machine-name of the role.');
+    $tokens['{{ ' . $this->options['id'] . '__role }}'] = $this->t('The name of the role.');
+    $tokens['{{ ' . $this->options['id'] . '__rid }}'] = $this->t('The role machine-name of the role.');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function addSelfTokens(&$tokens, $item) {
     if (!empty($item['role'])) {
       $tokens['{{ ' . $this->options['id'] . '__role }}'] = $item['role'];

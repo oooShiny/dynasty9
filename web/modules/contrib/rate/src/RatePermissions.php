@@ -48,7 +48,7 @@ class RatePermissions implements ContainerInjectionInterface {
    * @param \Drupal\comment\CommentManagerInterface $comment_manager
    *   The comment manager service, or NULL if not available.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, CommentManagerInterface $comment_manager = NULL) {
+  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, ?CommentManagerInterface $comment_manager = NULL) {
     $this->config = $config_factory->get('rate.settings');
     $this->entityTypeManager = $entity_type_manager;
     $this->commentManager = $comment_manager;

@@ -2,8 +2,8 @@
 
 namespace Drupal\select2\Plugin\better_exposed_filters\filter;
 
-use Drupal\better_exposed_filters\Plugin\better_exposed_filters\filter\FilterWidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\better_exposed_filters\Plugin\better_exposed_filters\filter\FilterWidgetBase;
 
 /**
  * Select2 widget implementation.
@@ -18,7 +18,7 @@ class Select2 extends FilterWidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration() {
+  public function defaultConfiguration(): array {
     $config = parent::defaultConfiguration();
     $config['advanced']['placeholder_text'] = (string) $this->t('- None -');
     return $config;
@@ -50,7 +50,7 @@ class Select2 extends FilterWidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
 
     $form = parent::buildConfigurationForm($form, $form_state);
 

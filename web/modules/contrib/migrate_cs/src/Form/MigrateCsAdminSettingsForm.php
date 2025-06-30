@@ -107,12 +107,12 @@ class MigrateCsAdminSettingsForm extends ConfigFormBase implements ContainerInje
         $form[$migrationId]["{$migrationId}_type"] = [
           '#type' => 'radios',
           '#title' => $this->t('Migration option'),
-          '#description' => $this->t("If selected adds the flag to the migration.<br>Update: In addition to processing unimported items from the source, update previously-imported items with new data.<br>Sync: Like 'update' but also removes items missing from the source."),
+          '#description' => $this->t("If selected adds the flag to the migration.<br>Update: In addition to processing unprocessed items from the source, update previously-imported items with the current data.<br>Delete: Delete destination records missed from the source."),
           '#default_value' => ($configOptions->get("{$migrationId}_type") ? $configOptions->get("{$migrationId}_type") : 'normal'),
           '#options' => [
             'normal' => $this->t('Normal'),
             'update' => $this->t('Update'),
-            'sync' => $this->t('Sync'),
+            'delete' => $this->t('Delete'),
           ],
           '#attributes' => $attributes,
           '#states' => [

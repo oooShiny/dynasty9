@@ -26,19 +26,20 @@ function twigsuggest_theme_suggestions_block(array $variables) {
 
     if ($block = Block::load($variables['elements']['#id'])) {
       if (isset($variables['elements']['content']['#block_content'])) {
-        $suggestions[] = 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle();
+        $bundle = $variables['elements']['content']['#block_content']->bundle();
+        $suggestions[] = 'block__bundle__' . $bundle;
+        $suggestions[] = 'block__bundle__' . $bundle . '__' . $block->getRegion();
       }
       $suggestions[] = 'block__' . $block->getRegion();
       $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#id'];
       if ($block->get('settings') && $provider = $block->get('settings')['provider']) {
         // I'm pretty sure core is already providing provider as a suggestion.
         // $suggestions[] = 'block__' . $provider;.
+        $suggestions[] = 'block__' . $provider . '__' . $block->getRegion();
+
         $base_plugin = $variables['elements']['#base_plugin_id'];
         if ($base_plugin !== $provider) {
           $suggestions[] = 'block__' . $base_plugin;
-        }
-        $suggestions[] = 'block__' . $provider . '__' . $block->getRegion();
-        if ($variables['elements']['#base_plugin_id'] != $provider) {
           $suggestions[] = 'block__' . $base_plugin . '__' . $block->getRegion();
         }
         if (isset($variables['elements']['content']['#menu_name'])) {
@@ -384,6 +385,38 @@ function twigsuggest_theme_suggestions_menu_alter(array &$suggestions, array $va
     $suggestions[] = $variables['theme_hook_original'] . '__' . $variables['attributes']['region'];
     // Add a theme suggestion for all menus in in this region.
     $suggestions[] = 'menu__' . $variables['attributes']['region'];
+  }
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter for menu local actions.
+ *
+ * Adds template suggestions based on menu local action link's route.
+ *
+ * Note that we do *not* have access to region, block, or anything else in here.
+ * And in case you are wondering twigsuggest_theme_suggestions_menu_local_action
+ * does not get any more.  We could do unholy things with the stack trace or
+ * with global variables if more suggestions are truly needed here.
+ */
+function twigsuggest_theme_suggestions_menu_local_action_alter(array &$suggestions, array $variables) {
+  $url = $variables['element']['#link']['url'] ?? NULL;
+  if ($url) {
+    $route = $url->getRouteName();
+    if ($route) {
+      $key = array_key_last($suggestions) ?? -1;
+      $route_pieces = explode('.', $route);
+      foreach ($route_pieces as $position => $piece) {
+        if ($position) {
+          $last_suggestion = $suggestions[$key];
+        }
+        else {
+          $last_suggestion = 'menu_local_action';
+        }
+        $key++;
+        $suggestions[$key] = $last_suggestion . '__' . $piece;
+      }
+    }
   }
 }
 

@@ -13,6 +13,7 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
  * BigPipe regression tests.
  *
  * @group big_pipe
+ * @group #slow
  */
 class BigPipeRegressionTest extends WebDriverTestBase {
 
@@ -21,6 +22,7 @@ class BigPipeRegressionTest extends WebDriverTestBase {
    */
   protected static $modules = [
     'big_pipe',
+    'big_pipe_messages_test',
     'big_pipe_regression_test',
   ];
 
@@ -114,12 +116,21 @@ JS;
   }
 
   /**
+   * Tests edge cases with placeholder HTML.
+   */
+  public function testPlaceholderHtmlEdgeCases(): void {
+    $this->drupalLogin($this->drupalCreateUser());
+    $this->doTestPlaceholderInParagraph_2802923();
+    $this->doTestBigPipeLargeContent();
+    $this->doTestMultipleReplacements();
+  }
+
+  /**
    * Ensure default BigPipe placeholder HTML cannot split paragraphs.
    *
    * @see https://www.drupal.org/node/2802923
    */
-  public function testPlaceholderInParagraph_2802923(): void {
-    $this->drupalLogin($this->drupalCreateUser());
+  protected function doTestPlaceholderInParagraph_2802923(): void {
     $this->drupalGet(Url::fromRoute('big_pipe_regression_test.2802923'));
 
     $this->assertJsCondition('document.querySelectorAll(\'p\').length === 1');
@@ -131,9 +142,7 @@ JS;
    * Repeat loading of same page for two times, after second time the page is
    * cached and the bug consistently reproducible.
    */
-  public function testBigPipeLargeContent(): void {
-    $user = $this->drupalCreateUser();
-    $this->drupalLogin($user);
+  public function doTestBigPipeLargeContent(): void {
     $assert_session = $this->assertSession();
 
     $this->drupalGet(Url::fromRoute('big_pipe_test_large_content'));
@@ -159,7 +168,7 @@ JS;
    *
    * @see https://www.drupal.org/node/3390178
    */
-  public function testMultipleReplacements(): void {
+  protected function doTestMultipleReplacements(): void {
     $user = $this->drupalCreateUser();
     $this->drupalLogin($user);
 

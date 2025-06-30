@@ -1,0 +1,9 @@
+name: test super empty theme
+type: theme
+base theme: false
+core_version_requirement: ^10 || ^11
+
+# Information added by Drupal.org packaging script on 2025-01-23
+version: '3.0.6'
+project: 'gutenberg'
+datestamp: 1737591151

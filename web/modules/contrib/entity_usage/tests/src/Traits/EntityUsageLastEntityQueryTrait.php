@@ -15,7 +15,7 @@ trait EntityUsageLastEntityQueryTrait {
    * @param string $entity_type_id
    *   The storage name of the entity.
    * @param bool $load
-   *   (optional) Whether or not the return thould be the loaded entity.
+   *   (optional) Whether or not the return should be the loaded entity.
    *   Defaults to FALSE.
    *
    * @return mixed

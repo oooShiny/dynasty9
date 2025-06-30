@@ -5,11 +5,11 @@
  * Contains migate_manager.module.
  */
 
+use Consolidation\SiteAlias\SiteAliasManager;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\migrate\MigrateMessage;
 use Drupal\migrate\Plugin\MigrationInterface;
-use Drupal\migrate_tools\MigrateTools;
-use Drupal\migrate_tools\MigrateExecutable;
+use Drush\Drush;
 
 /**
  * Implements hook_help().
@@ -30,64 +30,37 @@ function migrate_cs_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_cron().
  */
 function migrate_cs_cron() {
-  // Base options array for import.
-  $importOptions = [
-    'all' => NULL,
-    'group' => NULL,
-    'tag' => NULL,
-    'limit' => NULL,
-    'feedback' => NULL,
-    'idlist' => NULL,
-    'idlist-delimiter' => MigrateTools::DEFAULT_ID_LIST_DELIMITER,
-    'update' => NULL,
-    'force' => NULL,
-    'execute-dependencies' => FALSE,
-    'skip-progress-bar' => FALSE,
-    'continue-on-failure' => FALSE,
-    'sync' => FALSE,
-  ];
-
-  $configOptions = \Drupal::config('migrate_cs.options');
-
-  $pluginManager = \Drupal::service('plugin.manager.migration');
+  $configOptions = Drupal::config('migrate_cs.options');
+  $aliasManager = Drush::service('site.alias.manager');
+  $pluginManager = Drupal::service('plugin.manager.migration');
   $migrations = $pluginManager->getDefinitions();
 
-  if ($migrations) {
-    $time = \Drupal::time()->getRequestTime();
+  $time = \Drupal::time()->getRequestTime();
 
-    foreach ($migrations as $migration) {
-      $migrationId = $migration['id'];
-      $migrationCS = $configOptions->get("{$migrationId}_cs");
+  foreach ($migrations as $id => $migration) {
+    $migrationCS = $configOptions->get("{$id}_cs");
 
-      if ($migrationCS) {
-        $lastRun = \Drupal::state()->get('migrate_cs.last_run.' . $migrationId, 0);
+    if ($migrationCS) {
+      $lastRun = \Drupal::state()->get('migrate_cs.last_run.' . $id, 0);
+      $setInterval = $configOptions->get("{$id}_interval") ? $configOptions->get("{$id}_interval") : 0;
 
-        $migrationInstance = $pluginManager->createInstance($migrationId);
-        $setInterval = $configOptions->get("{$migrationId}_interval") ? $configOptions->get("{$migrationId}_interval") : 0;
+      $interval = $time - $lastRun;
 
-        $interval = $time - $lastRun;
+      if ($interval >= $setInterval) {
+        $args = [$id];
+        $flag = $configOptions->get("{$id}_type") ? $configOptions->get("{$id}_type") : 'normal';
 
-        if ($interval >= $setInterval) {
-          if ($migrationInstance->getStatus() != MigrationInterface::STATUS_IDLE) {
-            $migrationInstance->setStatus(MigrationInterface::STATUS_IDLE);
-          }
-
-          \Drupal::state()->set('migrate_cs.last_run.' . $migrationId, $time);
-
-          $flag = $configOptions->get("{$migrationId}_type") ? $configOptions->get("{$migrationId}_type") : 'normal';
-
-          if ($flag == 'update') {
-            $migrationInstance->getIdMap()->prepareUpdate();
-            $importOptions['update'] = TRUE;
-          }
-          elseif ($flag == 'sync') {
-            $migrationInstance->set('syncSource', TRUE);
-            $importOptions['sync'] = TRUE;
-          }
-
-          $migrateExecutable = new MigrateExecutable($migrationInstance, new MigrateMessage(), $importOptions);
-          $migrateExecutable->import();
+        if ($flag == 'update') {
+          $args[] = '--update';
         }
+        elseif ($flag == 'delete') {
+          $args[] = '--delete';
+        }
+
+        $process = Drush::drush($aliasManager->getSelf(), 'migrate:import', $args);
+        $process->run();
+
+        Drupal::state()->set('migrate_cs.last_run.' . $id, $time);
       }
     }
   }

@@ -126,3 +126,8 @@ services:
     arguments: ['@title_resolver', '@renderer']
     tags:
       - { name: render.main_content_renderer, format: drupal_dialog.sidebar }
+  gutenberg.content_block_event_subscriber:
+    class: Drupal\gutenberg\EventSubscriber\SetContentBlockDependency
+    arguments: ['@entity_type.manager', '@gutenberg.content_blocks_manager', '@current_user']
+    tags:
+      - { name: 'event_subscriber' }

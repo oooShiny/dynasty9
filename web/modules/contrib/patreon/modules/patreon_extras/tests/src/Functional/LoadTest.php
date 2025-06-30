@@ -13,11 +13,16 @@ use Drupal\Tests\BrowserTestBase;
 class LoadTest extends BrowserTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = ['patreon_extras'];
+  protected static $modules = ['patreon_extras'];
 
   /**
    * A user with permission to administer site configuration.

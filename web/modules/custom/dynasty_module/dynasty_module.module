@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Utility\Error;
 use Drupal\file\Entity\File;
 use Drupal\gin\GinSettings;
 use Drupal\taxonomy\Entity\Term;
@@ -295,8 +296,9 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
           $video_data = json_decode($data, true);
           $entity->field_video_file_id->value = $video_data['fid'];
         }
-        catch (RequestException $e) {
-          watchdog_exception('patsdynasty', $e);
+        catch (RequestException $exception) {
+            $logger = \Drupal::logger('patsdynasty');
+            Error::logException($logger, $exception);
         }
 
       }
@@ -381,105 +383,6 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
       break;
   }
 }
-
-/**
- * Implements hook_cron().
- * Tweets out a random highlight node.
- */
-function dynasty_module_cron() {
-  $plays = \Drupal::entityTypeManager()
-    ->getStorage('node')
-    ->loadByProperties([
-      'type' => 'highlight'
-    ]);
-  $highlights = [];
-  foreach ($plays as $play) {
-    if ($play->field_tweeted->isEmpty() || $play->field_tweeted->value !== TRUE) {
-      $highlights[] =$play->id();
-    }
-  }
-
-  $key = array_rand($highlights);
-
-  $tweet_play = $highlights[$key];
-  $url = $plays[$tweet_play]->toUrl()->setAbsolute()->toString();
-  $tweet_title = $plays[$tweet_play]->label();
-  $video_id = $plays[$tweet_play]->get('field_video_file_id')->value;
-  $muse_url = 'https://cdn.muse.ai/w/'.$video_id.'/videos/video.mp4';
-
-  // Save video locally so we can send it to Twitter.
-  $video_file = system_retrieve_file($muse_url);
-  $file = File::create(['uri' => $video_file]);
-  $file->save();
-  $local_uri = $file->getFileUri();
-
-  $game = '';
-  $opp = '';
-  foreach ($plays[$tweet_play]->field_game->referencedEntities() as $g) {
-    $game = $g->label();
-    foreach ($g->field_opponent->referencedEntities() as $o) {
-      $opp_arr = explode(' ', $o->label());
-      $opp = end($opp_arr);
-    }
-  }
-
-  $tweet_text = 'A Random Dynasty Highlight:'
-    . chr(13) . chr(10)
-    . chr(13) . chr(10) .
-    $plays[$tweet_play]->label() . ' vs ' . $opp . ' in ' . $game
-    . chr(13) . chr(10)
-    . chr(13) . chr(10) .
-    $url
-    . chr(13) . chr(10)
-    . chr(13) . chr(10) .
-  '#Patriots #Dynasty';
-
-  $tweet = [
-    'status' => $tweet_text,
-    'media_paths' => [$local_uri]
-  ];
-  // Create and post manager instances.
-  $client = \Drupal::service('plugin.network.manager')->createInstance('social_post_twitter')->getSdk();
-  $post_manager = \Drupal::service('twitter_post.manager');
-
-  // Get accounts for the current user.
-  $accounts = \Drupal::service('social_post.user_manager')->getAccounts('social_post_twitter', 1);
-
-  foreach ($accounts as $account) {
-    // Set OAuth token for the account.
-    $token = json_decode($account->getToken());
-    $client->setOauthToken($token->oauth_token, $token->oauth_token_secret);
-
-    // Make a post to Twitter with the account!
-    $post_manager->setClient($client)->doPost($tweet);
-  }
-
-  /**
-   * Create Facebook post.
-   */
-  // Create and post manager instances.
-  $client = \Drupal::service('plugin.network.manager')->createInstance('social_post_facebook')->getSdk();
-  $post_manager = \Drupal::service('facebook_post.manager');
-
-  // Get accounts for the current user.
-  $accounts = \Drupal::service('social_post.user_manager')->getAccounts('social_post_facebook', 1);
-
-  foreach ($accounts as $account) {
-    // Set OAuth token for the account.
-    $token = json_decode($account->getToken());
-    $client->setOauthToken($token->oauth_token, $token->oauth_token_secret);
-
-    // Make a post to Facebook with the account!
-    $post_manager->setClient($client)->doPost($tweet);
-  }
-
-  // Clean up after the highlight has been tweeted.
-  $plays[$tweet_play]->field_tweeted = 1;
-  $plays[$tweet_play]->save();
-  $file->delete();
-
-}
-
 
 /**
  * Implements hook_page_attachments()

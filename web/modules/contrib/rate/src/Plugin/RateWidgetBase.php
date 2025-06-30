@@ -116,6 +116,8 @@ class RateWidgetBase extends PluginBase {
    * Return label.
    */
   public function getLabel() {
+    // @todo investigate this later.
+    // @phpstan-ignore-next-line
     return $this->label;
   }
 
@@ -291,7 +293,7 @@ class RateWidgetBase extends PluginBase {
           $query->condition($key, $value);
         }
       }
-      // Authenticated users should get their votes regardles the vote source.
+      // Authenticated users should get their votes regardless the vote source.
       else {
         if (in_array($key, ['entity_type', 'entity_id', 'type', 'value_type', 'rate_widget', 'user_id'])) {
           $query->condition($key, $value);
@@ -311,7 +313,7 @@ class RateWidgetBase extends PluginBase {
     else {
       // On a new vote, set value to NULL, so we can trigger on and store zero.
       if ($vote->isNew()) {
-        $vote->setValue(NULL);
+        $vote->setValue(0);
       }
     }
     return $vote;

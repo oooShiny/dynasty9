@@ -3,11 +3,11 @@
 namespace Drupal\Tests\entity_usage\FunctionalJavascript;
 
 use Drupal\Core\Entity\ContentEntityTypeInterface;
+use Drupal\Tests\media\Traits\MediaTypeCreationTrait;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
-use Drupal\Tests\media\Traits\MediaTypeCreationTrait;
 
 /**
  * Tests the configuration form.
@@ -34,7 +34,7 @@ class ConfigurationFormTest extends EntityUsageJavascriptTestBase {
   /**
    * Tests the config form.
    */
-  public function testConfigForm() {
+  public function testConfigForm(): void {
     $this->drupalPlaceBlock('local_tasks_block');
     $session = $this->getSession();
     $page = $session->getPage();
@@ -340,6 +340,41 @@ class ConfigurationFormTest extends EntityUsageJavascriptTestBase {
     $assert_session->elementExists('css', 'textarea[name="site_domains"]');
     $assert_session->elementContains('css', '#edit-generic-settings', 'Domains for this website');
     $assert_session->elementContains('css', '#edit-generic-settings', 'A comma or new-line separated list of domain names for this website. Absolute URL\'s in content will be checked against these domains to allow usage tracking.');
+
+    $this->assertNotContains('filter_format', $this->config('entity_usage.settings')->get('track_enabled_source_entity_types'));
+    // Enable all source entity types.
+    $this->drupalGet('/admin/config/entity-usage/settings');
+    $source_entity_types_details = $page->find('css', '#edit-track-enabled-source-entity-types');
+    $source_entity_types_details->click();
+    foreach ($entity_types as $entity_type_id => $entity_type) {
+      $field_name = "track_enabled_source_entity_types[entity_types][$entity_type_id]";
+      $assert_session->fieldExists($field_name);
+      $page->checkField($field_name);
+    }
+    $this->submitForm([], 'Save configuration');
+    $this->rebuildAll();
+    $this->assertContains('filter_format', $this->config('entity_usage.settings')->get('track_enabled_source_entity_types'));
+    $this->assertContains('entity_usage_test', $this->config('entity_usage.settings')->get('track_enabled_plugins'));
+
+    // Disable the entity_usage_test module to ensure that the source entity
+    // options are then restrict to content entity types only.
+    \Drupal::service('module_installer')->uninstall(['entity_usage_test']);
+    $this->rebuildAll();
+    $this->assertNotContains('filter_format', $this->config('entity_usage.settings')->get('track_enabled_source_entity_types'));
+    $this->assertNotContains('entity_usage_test', $this->config('entity_usage.settings')->get('track_enabled_plugins'));
+    $this->drupalGet('/admin/config/entity-usage/settings');
+    foreach ($entity_types as $entity_type_id => $entity_type) {
+      $field_name = "track_enabled_source_entity_types[entity_types][$entity_type_id]";
+      if (
+        in_array($entity_type_id, array_keys($content_entity_types), TRUE) ||
+        in_array($entity_type_id, ['file', 'user'], TRUE)
+      ) {
+        $assert_session->fieldExists($field_name);
+      }
+      else {
+        $assert_session->fieldNotExists($field_name);
+      }
+    }
   }
 
 }

@@ -29,7 +29,7 @@ class RateWidgetTest extends MigrateSqlSourceTestBase {
    * @return array
    *   Array containing the expected data.
    */
-  public function providerSource(): array {
+  public static function providerSource(): array {
     return [
       'first test case' => [
         'source_data' => [

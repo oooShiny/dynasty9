@@ -12,30 +12,14 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 class EntityAutocompleteMatcher {
 
   /**
-   * The entity reference selection handler plugin manager.
-   *
-   * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
-   */
-  protected $selectionManager;
-
-  /**
-   * The module handler service.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
    * Constructs a EntityAutocompleteMatcher object.
    *
-   * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_manager
+   * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selectionManager
    *   The entity reference selection handler plugin manager.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
    */
-  public function __construct(SelectionPluginManagerInterface $selection_manager, ModuleHandlerInterface $module_handler) {
-    $this->selectionManager = $selection_manager;
-    $this->moduleHandler = $module_handler;
+  public function __construct(protected readonly SelectionPluginManagerInterface $selectionManager, protected readonly ModuleHandlerInterface $moduleHandler) {
   }
 
   /**
@@ -91,7 +75,9 @@ class EntityAutocompleteMatcher {
           ];
         }
       }
-      $matches = array_slice($matches, 0, $match_limit, TRUE);
+      if ($match_limit >= 1) {
+        $matches = array_slice($matches, 0, $match_limit, TRUE);
+      }
 
       $this->moduleHandler->alter('select2_autocomplete_matches', $matches, $options);
     }

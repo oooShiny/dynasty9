@@ -5,7 +5,7 @@ package: Testing
 dependencies:
   - select2:select2
 
-# Information added by Drupal.org packaging script on 2023-05-05
-version: '8.x-1.15'
+# Information added by Drupal.org packaging script on 2025-01-09
+version: '2.0.0'
 project: 'select2'
-datestamp: 1683286915
+datestamp: 1736434231

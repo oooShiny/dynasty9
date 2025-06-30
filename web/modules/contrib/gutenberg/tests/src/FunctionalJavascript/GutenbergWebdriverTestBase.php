@@ -47,6 +47,7 @@ abstract class GutenbergWebdriverTestBase extends WebDriverTestBase {
     $this->config('gutenberg.settings')
       ->set('article_enable_full', TRUE)->save();
     $this->account = $this->drupalCreateUser([
+      'view the administration theme',
       'create article content',
       'edit any article content',
       'use text format gutenberg',
@@ -103,6 +104,17 @@ abstract class GutenbergWebdriverTestBase extends WebDriverTestBase {
       }
     }
     return $blocks;
+  }
+
+  /**
+   * Helper method to get reusable blocks available.
+   */
+  protected function getReusableBlocks() {
+    $block_storage = $this->container->get('entity_type.manager')->getStorage('block_content');
+    // Reset cache as the result might have changed within another PHP thread.
+    $block_storage->resetCache();
+    return $block_storage
+      ->loadByProperties(['type' => 'reusable_block']);
   }
 
 }

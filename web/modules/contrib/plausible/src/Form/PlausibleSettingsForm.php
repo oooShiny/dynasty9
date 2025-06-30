@@ -2,10 +2,12 @@
 
 namespace Drupal\plausible\Form;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
+use Drupal\user\Entity\Role;
 
 /**
  * Configure Plausible settings for this site.
@@ -220,12 +222,16 @@ class PlausibleSettingsForm extends ConfigFormBase {
       ],
       '#default_value' => $config->get('visibility.user_role_mode'),
     ];
+
+    $options = array_map(function (Role $role) {
+      return Html::escape($role->label());
+    }, Role::loadMultiple());
+
     $form['tracking']['role_visibility_settings']['visibility_user_role_roles'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Roles'),
       '#default_value' => !empty($visibility_user_role_roles) ? $visibility_user_role_roles : [],
-      '#options' => array_map('\Drupal\Component\Utility\Html::escape', user_role_names()),
-      '#description' => $this->t('If none of the roles are selected, all users will be tracked. If a user has any of the roles checked, that user will be tracked (or excluded, depending on the setting above).'),
+      '#options' => $options,
       '#states' => [
         'visible' => [
           ':input[name="visibility_user_role_mode"]' => ['!value' => '0'],

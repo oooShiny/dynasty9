@@ -420,6 +420,7 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+          pagination_heading_level: h4
       exposed_form:
         type: input_required
         options:
@@ -494,13 +495,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              patreon_user: '0'
-              deleted_patreon_user: '0'
-              8156551_patron: '0'
-              8156552_patron: '0'
-              8156553_patron: '0'
             expose_fields: false
             placeholder: Search
             searched_fields_id: search_api_fulltext_searched_fields
@@ -572,10 +566,11 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
-        type: views_query
+        type: search_api_query
         options:
           bypass_access: false
           skip_access: false

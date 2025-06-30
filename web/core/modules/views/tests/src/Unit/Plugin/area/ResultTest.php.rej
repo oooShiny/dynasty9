@@ -1,0 +1,29 @@
+--- modules/views/tests/src/Unit/Plugin/area/ResultTest.php
++++ modules/views/tests/src/Unit/Plugin/area/ResultTest.php
+@@ -140,19 +159,23 @@ public static function providerTestResultArea() {
+    *
+    * @param int $items_per_page
+    *   The value to return from getItemsPerPage().
++   * @param int $current_page
++   *   The value to return from getCurrentPage()
++   * @param int $total_rows
++   *   The value to set the view total_rows property
+    */
+-  protected function setupViewPager($items_per_page = 0) {
++  protected function setupViewPager($items_per_page = 0, $current_page = 0, $total_rows = 1000) {
+     $pager = $this->prophesize(PagerPluginBase::class);
+     $pager->getItemsPerPage()
+       ->willReturn($items_per_page)
+       ->shouldBeCalledTimes(1);
+     $pager->getCurrentPage()
+-      ->willReturn(0)
++      ->willReturn($current_page)
+       ->shouldBeCalledTimes(1);
+ 
+     $this->view->pager = $pager->reveal();
+     $this->view->style_plugin = new \stdClass();
+-    $this->view->total_rows = 100;
++    $this->view->total_rows = $total_rows;
+     $this->view->result = [1, 2, 3, 4, 5];
+   }
+ 

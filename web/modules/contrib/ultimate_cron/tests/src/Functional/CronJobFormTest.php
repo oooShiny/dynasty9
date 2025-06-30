@@ -20,7 +20,7 @@ class CronJobFormTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = array('ultimate_cron', 'block', 'cron_queue_test');
+  protected static $modules = array('ultimate_cron', 'block', 'cron_queue_test');
 
   /**
    * A user with permission to create and edit books and to administer blocks.

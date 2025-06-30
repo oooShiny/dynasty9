@@ -103,6 +103,47 @@ final class EntityLookupTest extends KernelTestBase {
   }
 
   /**
+   * Lookup an entity on an entity_reference field.
+   *
+   * @covers ::transform
+   */
+  public function testLookupEntityOnEntityReferenceField(): void {
+    $migration = \Drupal::service('plugin.manager.migration')
+      ->createStubMigration([
+        'id' => 'test',
+        'source' => [],
+        'process' => [],
+        'destination' => [
+          'plugin' => 'entity:node',
+        ],
+      ]);
+
+    // Create a user.
+    $known_user = $this->createUser([], 'lucuma');
+    // Create a node owned by this user.
+    $known_node = $this->createNode([
+      'title' => 'Node test',
+      'uid' => $known_user->id(),
+    ]);
+
+    $configuration = [
+      'entity_type' => 'node',
+      'value_key' => 'uid',
+    ];
+    $plugin = \Drupal::service('plugin.manager.migrate.process')
+      ->createInstance('entity_lookup', $configuration, $migration);
+    $row = new Row();
+
+    // Check the known node is found.
+    $value = $plugin->transform($known_user->id(), $this->migrateExecutable, $row, 'nid');
+    $this->assertSame($known_node->id(), $value);
+
+    // Check an unknown node is not found.
+    $value = $plugin->transform('not-an-id', $this->migrateExecutable, $row, 'nid');
+    $this->assertNull($value);
+  }
+
+  /**
    * Tests a lookup of config entity.
    */
   public function testConfigEntityLookup(): void {

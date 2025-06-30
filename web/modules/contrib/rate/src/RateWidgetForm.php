@@ -352,7 +352,7 @@ class RateWidgetForm extends EntityForm {
 
     foreach ($entity_types as $entity_type_id => $entity_type) {
       // Restrict voting on certain content types - not shown in the list.
-      // Comments are handled throu the content types, blocks, menu items etc.
+      // Comments are handled through the content types, blocks, menu items etc.
       // Also, don't allow voting on votes, that would be weird.
       $restrict_entities = [
         'comment',
@@ -612,7 +612,7 @@ class RateWidgetForm extends EntityForm {
         '#type' => 'submit',
         '#button_type' => 'primary',
         '#value' => $this->t('Next'),
-        // Custom validation handler for the template_selectos.
+        // Custom validation handler for the template_selectors.
         '#validate' => ['::templateSelectorNextValidate'],
         // Custom submission handler for the template_selector.
         '#submit' => ['::templateSelectorNextSubmit'],
@@ -688,7 +688,7 @@ class RateWidgetForm extends EntityForm {
     // Ensure the options are properly defined.
     if ($form_state->hasValue('options')) {
       $options = $form_state->getValue('options');
-      // Need at least one otion with value and label defined.
+      // Need at least one option with value and label defined.
       if (is_array($options['table']) && count($options['table']) == 1) {
         $element = $form['options']['table'][0];
         $message = $this->t('You need at least one option with value and label defined.');
@@ -742,7 +742,7 @@ class RateWidgetForm extends EntityForm {
     unset($options['actions']);
     $options = $options['table'];
 
-    // Remove empty optons.
+    // Remove empty options.
     foreach ($options as $key => $value) {
       if ($options[$key]['value'] == NULL) {
         unset($options[$key]);
@@ -850,6 +850,7 @@ class RateWidgetForm extends EntityForm {
     }
     $this->entityFieldManager->clearCachedFieldDefinitions();
     $form_state->setRedirect('entity.rate_widget.collection');
+    return $status;
   }
 
 }

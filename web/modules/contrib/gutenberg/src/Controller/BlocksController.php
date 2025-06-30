@@ -371,7 +371,7 @@ class BlocksController extends ControllerBase {
 
     if ($data['isDuplicate']) {
       // 'isDuplicate' means we already know this is a duplicate, so clone it.
-      $cloned_block = $this->contentBlocksManager->cloneBlock($data['contentBlockId'], $data['entityId'], $data['entityType']);
+      $cloned_block = $this->contentBlocksManager->cloneBlock($data['contentBlockId'], $data['entityId'], $data['entityType'], $data['entityBundle']);
       // return the cloned blocks id or 0 if it wasn't cloned
       $cloned_block_id = $cloned_block ? $cloned_block->id() : 0;
       return new JsonResponse(['id' => $cloned_block_id]);
@@ -381,7 +381,7 @@ class BlocksController extends ControllerBase {
       $usage = $this->contentBlocksManager->getBlockUsage($data['contentBlockId']);
 
       if ($usage && $usage['entity_id'] != $data['entityId']) {
-        $cloned_block = $this->contentBlocksManager->cloneBlock($data['contentBlockId'], $data['entityId'], $data['entityType']);
+        $cloned_block = $this->contentBlocksManager->cloneBlock($data['contentBlockId'], $data['entityId'], $data['entityType'], $data['entityBundle']);
         // return the cloned blocks id or 0 if it wasn't cloned
         $cloned_block_id = $cloned_block ? $cloned_block->id() : 0;
         return new JsonResponse(['id' => $cloned_block_id]);

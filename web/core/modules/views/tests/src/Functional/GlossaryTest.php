@@ -21,9 +21,7 @@ class GlossaryTest extends ViewTestBase {
   use AssertViewsCacheTagsTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node'];
 
@@ -85,7 +83,6 @@ class GlossaryTest extends ViewTestBase {
         'url',
         'user.node_grants:view',
         'user.permissions',
-        'route',
       ],
       [
         'config:views.view.glossary',
@@ -121,7 +118,7 @@ class GlossaryTest extends ViewTestBase {
       // Get the summary link for a certain character. Filter by label and href
       // to ensure that both of them are correct.
       $result = $this->assertSession()->elementExists('xpath', "//a[contains(@href, '{$href}') and normalize-space(text())='{$label}']/..");
-      // The rendered output looks like "<a href=''>X</a> | (count)" so let's
+      // The rendered output looks like "<a href="">X</a> | (count)" so let's
       // figure out the int.
       $result_count = explode(' ', trim(str_replace(['|', '(', ')'], '', $result->getText())))[1];
       $this->assertEquals($count, $result_count, 'The expected number got rendered.');

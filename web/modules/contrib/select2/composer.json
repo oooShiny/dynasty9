@@ -9,9 +9,14 @@
             "email": "christian.fritsch@burda.com"
         }
     ],
+    "require": {
+        "php": ">=8.1"
+    },
     "require-dev": {
-        "drupal/facets": "2.0.x-dev",
-        "drupal/search_api": "^1.28",
-        "drupal/form_options_attributes": "^2.0"
+        "drupal/facets": "^2.0",
+        "drupal/search_api": "^1.35",
+        "drupal/form_options_attributes": "^2.0",
+        "drupal/gin": "^3.0",
+        "drupal/better_exposed_filters": "^6.0 || ^7.0"
     }
 }

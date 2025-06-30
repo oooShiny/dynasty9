@@ -150,13 +150,15 @@ class QueueWorker {
    * @param \Drupal\Core\Lock\LockBackendInterface $lock
    *   The lock backend that should be used.
    */
-  public function __construct(Settings $settings,
-                              KeyValueFactoryInterface $key_value,
-                              SimpleSitemapQueue $element_queue,
-                              Logger $logger,
-                              ModuleHandlerInterface $module_handler,
-                              EntityTypeManagerInterface $entity_type_manager,
-                              LockBackendInterface $lock) {
+  public function __construct(
+    Settings $settings,
+    KeyValueFactoryInterface $key_value,
+    SimpleSitemapQueue $element_queue,
+    Logger $logger,
+    ModuleHandlerInterface $module_handler,
+    EntityTypeManagerInterface $entity_type_manager,
+    LockBackendInterface $lock,
+  ) {
     $this->settings = $settings;
     $this->store = $key_value->get('simple_sitemap');
     $this->queue = $element_queue;
@@ -323,7 +325,7 @@ class QueueWorker {
         }
       }
       catch (\Exception $e) {
-        watchdog_exception('simple_sitemap', $e);
+        $this->logger->logException($e);
       }
 
       // @todo May want to use deleteItems() instead.
@@ -425,7 +427,7 @@ class QueueWorker {
   /**
    * Resets the local cache.
    */
-  protected function resetWorker() {
+  protected function resetWorker(): void {
     $this->results = [];
     $this->processedPaths = [];
     $this->processedResults = [];

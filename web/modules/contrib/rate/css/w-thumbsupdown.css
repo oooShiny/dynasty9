@@ -2,7 +2,7 @@
 
 .thumbsupdown-rating-wrapper {
   display: inline;
-  padding: 0px;
+  padding: 0;
 }
 
 div.thumbsupdown > form > table > tbody > tr.rating-table-tr {
@@ -10,46 +10,46 @@ div.thumbsupdown > form > table > tbody > tr.rating-table-tr {
 }
 
 div.thumbsupdown > form > table > tbody > tr > td.rating-table-td {
+  padding: 0;
   border: none;
-  padding: 0px;
 }
 
 div.thumbsupdown-rating-wrapper > div.form-type-radio {
   display: inline;
-  padding: 0px;
+  padding: 0;
 }
 
-/* Deafault button styles, override in widget settings */
+/* Default button styles, override in widget settings */
 div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label {
   display: inline-block;
-  padding: 0px;
+  padding: 0;
 }
 
-div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label-up:before {
+div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label-up::before {
   display: inline;
-  font-size: 1.8em;
-  font-family: FontAwesome;
   content: "\f087";
+  font-family: FontAwesome, serif;
+  font-size: 1.8em;
 }
 
-div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label-down:before {
+div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label-down::before {
   display: inline;
-  font-size: 1.8em;
-  font-family: FontAwesome;
   content: "\f088";
+  font-family: FontAwesome, serif;
+  font-size: 1.8em;
 }
 
 div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label:hover,
 div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label:active,
 div.thumbsupdown-rating-wrapper > div > label.thumbsupdown-rating-label:focus {
-  color: #666;
   cursor: pointer;
+  color: #666;
 }
 
 div.thumbsupdown-rating-wrapper > div > div.rating-option-result {
   display: inline;
-  text-align: center;
   padding: 5px;
+  text-align: center;
 }
 
 input.thumbsupdown-rating-input[type="radio"] {

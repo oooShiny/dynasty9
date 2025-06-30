@@ -8,7 +8,7 @@
 /**
  * Implements hook_entity_usage_block_tracking().
  */
-function entity_usage_test_entity_usage_block_tracking($target_id, $target_type, $source_id, $source_type, $source_langcode, $source_vid, $method, $field_name, $count) {
+function entity_usage_test_entity_usage_block_tracking(string $target_id, string $target_type, string $source_id, string $source_type, string $source_langcode, string $source_vid, string $method, string $field_name, string $count) {
   if ($count == 31) {
     return TRUE;
   }

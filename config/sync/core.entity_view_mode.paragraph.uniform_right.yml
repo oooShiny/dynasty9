@@ -6,5 +6,6 @@ dependencies:
     - paragraphs
 id: paragraph.uniform_right
 label: 'Uniform - Right'
+description: ''
 targetEntityType: paragraph
 cache: true

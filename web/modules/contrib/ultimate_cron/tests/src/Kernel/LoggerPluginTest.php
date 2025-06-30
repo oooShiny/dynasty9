@@ -20,7 +20,7 @@ class LoggerPluginTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = array('ultimate_cron', 'ultimate_cron_logger_test', 'system');
+  protected static $modules = array('ultimate_cron', 'ultimate_cron_logger_test', 'system');
 
   /**
    * Tests that scheduler plugins are discovered correctly.

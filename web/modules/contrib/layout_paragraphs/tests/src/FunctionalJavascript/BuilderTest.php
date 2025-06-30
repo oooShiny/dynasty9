@@ -178,7 +178,8 @@ class BuilderTest extends BuilderTestBase {
     $this->htmlOutput($this->getSession()->getPage()->getHtml());
 
     $this->assertSession()->elementExists('css', '.layout__region--first .js-lpb-component');
-    $this->assertSession()->assertWaitOnAjaxRequest();
+//    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->getSession()->wait(1000);
     $this->submitForm([
       'title[0][value]' => 'Node title',
     ], 'Save');

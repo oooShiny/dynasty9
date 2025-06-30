@@ -17,9 +17,7 @@ use Drupal\language\Entity\ConfigurableLanguage;
 class ConfigEntityListMultilingualTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['config_test', 'language', 'block'];
 
@@ -62,7 +60,8 @@ class ConfigEntityListMultilingualTest extends BrowserTestBase {
       'langcode' => 'hu',
     ];
     $this->submitForm($edit, 'Save');
-    // Ensure that operations for editing the Hungarian entity appear in English.
+    // Ensure that operations for editing the Hungarian entity appear in
+    // English.
     $this->assertSession()->linkByHrefExists('admin/structure/config_test/manage/antilop');
 
     // Get the list page in Hungarian and assert Hungarian admin links

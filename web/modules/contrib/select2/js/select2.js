@@ -10,7 +10,7 @@
       $(once('select2-init', '.select2-widget', context)).each(function () {
         var config = $(this).data('select2-config');
         config.createTag = function (params) {
-          var term = $.trim(params.term);
+          var term = params.term.trim();
           if (term === '') {
             return null;
           }
@@ -65,11 +65,12 @@
           var $list = $select.next('.select2-container').find('ul.select2-selection__rendered');
           Sortable.create($list[0], {
             draggable: 'li:not(.select2-search)',
-            forceFallback: true,
-            onEnd: function () {
-              $($list.find('.select2-selection__choice').get().reverse()).each(function () {
-                $select.prepend($select.find('option[value="' + $(this).data('optionValue') + '"]').first());
-              });
+            onEnd: function (event) {
+              if (event.newIndex != event.oldIndex) {
+                $($list.find('.select2-selection__choice').get().reverse()).each(function () {
+                  $select.prepend($select.find('option[value="' + $(this).data('optionValue') + '"]').first());
+                });
+              }
             }
           });
         }

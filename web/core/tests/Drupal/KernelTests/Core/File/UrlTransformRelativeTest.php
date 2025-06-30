@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
  */
 class UrlTransformRelativeTest extends KernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['file_test'];
 
   /**
@@ -45,6 +48,9 @@ class UrlTransformRelativeTest extends KernelTestBase {
     $this->assertSame($expected, \Drupal::service('file_url_generator')->transformRelative($url, $root_relative));
   }
 
+  /**
+   * Provides data for testing URL transformation.
+   */
   public static function providerFileUrlTransformRelative() {
     $data = [
       'http' => [

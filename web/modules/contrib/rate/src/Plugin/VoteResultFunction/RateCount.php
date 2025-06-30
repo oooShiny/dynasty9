@@ -19,7 +19,7 @@ class RateCount extends RateVoteResultBase {
   /**
    * {@inheritdoc}
    */
-  public function calculateResult($votes) {
+  public function calculateResult($votes): float {
     $votes = $this->getVotesForField($votes);
     return count($votes);
   }

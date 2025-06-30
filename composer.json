@@ -126,14 +126,14 @@
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.4",
-        "drupal/advagg": "^6.0",
         "drupal/auto_entitylabel": "^3.2",
         "drupal/block_field": "^1.0@RC",
         "drupal/charts": "^5.0",
+        "drupal/cloudflare_purge": "^2.0",
         "drupal/color_field": "^3.0",
-        "drupal/core-composer-scaffold": "^10.3",
-        "drupal/core-project-message": "^10.3",
-        "drupal/core-recommended": "^10.3",
+        "drupal/core-composer-scaffold": "^11",
+        "drupal/core-project-message": "^11",
+        "drupal/core-recommended": "^11",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/facets": "^2.0",
         "drupal/facets_block": "^2.0",
@@ -146,11 +146,12 @@
         "drupal/gutenberg": "^3.0",
         "drupal/inline_entity_form": "^3.0@RC",
         "drupal/jquery_ui_slider": "^2.1",
+        "drupal/jquery_ui_touch_punch": "^1.1",
         "drupal/key": "^1.19",
         "drupal/layout_paragraphs": "^2.0",
-        "drupal/linkit": "^6.1",
+        "drupal/linkit": "^7",
         "drupal/metatag": "^2.0",
-        "drupal/migrate_cs": "^1.1",
+        "drupal/migrate_cs": "^2",
         "drupal/migrate_plus": "^6.0",
         "drupal/migrate_source_csv": "^3.6",
         "drupal/migrate_tools": "^6.0",
@@ -160,12 +161,12 @@
         "drupal/patreon": "^4.0",
         "drupal/plausible": "^2.1",
         "drupal/quicklink": "^2.0",
-        "drupal/rate": "^3.1",
+        "drupal/rate": "^3.2",
         "drupal/redirect": "^1.9",
         "drupal/search_api": "^1.35",
         "drupal/search_api_solr": "^4.3",
         "drupal/seckit": "^2.0",
-        "drupal/select2": "^1.15",
+        "drupal/select2": "^2",
         "drupal/sendgrid_integration": "^2.2",
         "drupal/simple_sitemap": "^4.1",
         "drupal/smart_trim": "^2.1",
@@ -173,10 +174,12 @@
         "drupal/twig_tweak": "^3.4",
         "drupal/twigsuggest": "^2.0@RC",
         "drupal/ultimate_cron": "^2.0@alpha",
+        "drupal/upgrade_status": "^4.3",
         "drupal/views_entity_form_field": "^1.0@beta",
         "drupal/views_jump_menu": "^1.0",
-        "drupal/yoast_seo": "^1.8",
-        "drush/drush": "^12.5",
+        "drupal/votingapi": "^4",
+        "drush/drush": "^13",
+        "mglaman/composer-drupal-lenient": "^1.0",
         "symfony/finder": "^6 || ^7"
     },
     "conflict": {
@@ -190,7 +193,8 @@
             "composer/installers": true,
             "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true
+            "drupal/core-project-message": true,
+            "mglaman/composer-drupal-lenient": true
         }
     },
     "extra": {
@@ -257,12 +261,10 @@
         },
         "enable-patching": "true",
         "patches": {
-            "drupal/core": {
-                "Thousands marker in result total": "https://www.drupal.org/files/issues/2024-07-01/views-thousands-seperator-3034161-30--11.x.patch"
-            },
-            "drupal/layout_paragraphs": {
-                "3417765: Modal too big": "https://www.drupal.org/files/issues/2024-06-28/large-modal-exceeds-viewport-2.0.5-overscroll-fix-3417765-13.patch"
-            }
+
+        },
+        "drupal-lenient": {
+            "allowed-list": ["drupal/migrate_cs"]
         }
     }
 }

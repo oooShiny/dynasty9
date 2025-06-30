@@ -5,20 +5,27 @@
     }
   }, Drupal.ginStickyFormActions = {
     init: function(context) {
-      var _context$classList;
       const newParent = document.querySelector(".gin-sticky-form-actions");
-      null !== (_context$classList = context.classList) && void 0 !== _context$classList && _context$classList.contains("gin--has-sticky-form-actions") && context.getAttribute("id") && this.updateFormId(newParent, context), 
+      newParent && (context.classList?.contains("gin--has-sticky-form-actions") && context.getAttribute("id") && this.updateFormId(newParent, context), 
       once("ginEditForm", ".region-content form.gin--has-sticky-form-actions", context).forEach((form => {
         this.updateFormId(newParent, form), this.moveFocus(newParent, form);
       })), once("ginMoreActionsToggle", ".gin-more-actions__trigger", context).forEach((el => el.addEventListener("click", (e => {
         e.preventDefault(), this.toggleMoreActions(), document.addEventListener("click", this.closeMoreActionsOnClickOutside, !1);
-      }))));
+      })))));
     },
     updateFormId: function(newParent, form) {
-      const actionButtons = newParent.querySelectorAll("button, input, select, textarea"), formId = form.getAttribute("id");
-      actionButtons.length > 0 && actionButtons.forEach((el => {
-        el.setAttribute("form", formId);
-      }));
+      const formActions = form.querySelector('[data-drupal-selector="edit-actions"]'), actionButtons = Array.from(formActions.children);
+      if (actionButtons.length > 0) {
+        const formId = form.getAttribute("id");
+        actionButtons.forEach((el => {
+          const formElement = el.dataset.drupalSelector, buttonId = el.id, buttonSelector = newParent.querySelector(`[data-drupal-selector="gin-sticky-${formElement}"]`);
+          buttonSelector && (buttonSelector.setAttribute("form", formId), buttonSelector.setAttribute("data-gin-sticky-form-selector", buttonId), 
+          buttonSelector.addEventListener("click", (e => {
+            null !== document.querySelector(`[data-drupal-selector="${formId}"] [data-drupal-selector="${buttonId}"]`) && (e.preventDefault(), 
+            document.querySelector(`[data-drupal-selector="${formId}"] [data-drupal-selector="${buttonId}"]`).click());
+          })));
+        }));
+      }
     },
     moveFocus: function(newParent, form) {
       once("ginMoveFocusToStickyBar", "[gin-move-focus-to-sticky-bar]", form).forEach((el => el.addEventListener("focus", (e => {

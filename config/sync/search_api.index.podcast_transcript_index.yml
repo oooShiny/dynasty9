@@ -7,16 +7,15 @@ dependencies:
     - field.storage.dynasty_transcript.field_milliseconds
     - field.storage.dynasty_transcript.field_minutes
     - field.storage.dynasty_transcript.field_podcast_episode
-    - field.storage.node.field_mp3
     - field.storage.dynasty_transcript.field_seconds
     - field.storage.dynasty_transcript.field_timestamp
     - field.storage.dynasty_transcript.field_transcript
+    - field.storage.node.field_mp3
     - search_api.server.solr_server
   module:
-    - search_api_solr
-    - node
-    - search_api
     - dynasty_transcript
+    - node
+    - search_api_solr
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -58,6 +57,9 @@ third_party_settings:
     multilingual:
       limit_to_content_language: false
       include_language_independent: true
+      specific_languages: {  }
+      use_language_undefined_as_fallback_language: false
+      use_universal_collation: false
 id: podcast_transcript_index
 name: 'Podcast Transcript Index'
 description: ''

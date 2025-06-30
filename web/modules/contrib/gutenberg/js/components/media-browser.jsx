@@ -1,4 +1,4 @@
-((wp, Drupal, DrupalGutenberg) => {
+((wp, Drupal, DrupalGutenberg, $) => {
   const { components, element, editor } = wp;
   const { Component, Fragment, createPortal } = element;
   const { MediaBrowserDetails } = DrupalGutenberg.Components;
@@ -91,10 +91,18 @@
       });
     }
 
+    /**
+     * Retrieves the Gutenberg CSRF token.
+     */
+    getCsrfToken() {
+      return drupalSettings.gutenberg.csrfToken;
+    }
+
     async selectMedia() {
       const { selected, data } = this.state;
       const { onSelect } = this.props;
       const medias = data.filter(item => selected[item.id]);
+      const csrfToken = this.getCsrfToken();
 
       medias.map(async media => {
         const title = typeof media.title === 'string' ? media.title : '';
@@ -104,6 +112,9 @@
 
         await fetch(Drupal.url(`editor/media/update_data/${media.id}`), {
           method: 'post',
+          headers: {
+            'X-CSRF-Token': csrfToken,
+          },
           body: JSON.stringify({
             title,
             caption,
@@ -311,4 +322,4 @@
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
   window.DrupalGutenberg.Components.MediaBrowser = MediaBrowser;
-})(wp, Drupal, DrupalGutenberg, drupalSettings);
+})(wp, Drupal, DrupalGutenberg, jQuery);

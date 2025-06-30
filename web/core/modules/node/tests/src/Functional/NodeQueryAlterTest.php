@@ -11,14 +11,11 @@ use Drupal\user\Entity\User;
  * Tests that node access queries are properly altered by the node module.
  *
  * @group node
- * @group #slow
  */
 class NodeQueryAlterTest extends NodeTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node_access_test'];
 
@@ -29,11 +26,15 @@ class NodeQueryAlterTest extends NodeTestBase {
 
   /**
    * User with permission to view content.
+   *
+   * @var \Drupal\user\Entity\User|false
    */
   protected $accessUser;
 
   /**
    * User without permission to view content.
+   *
+   * @var \Drupal\user\Entity\User|false
    */
   protected $noAccessUser;
 
@@ -93,7 +94,7 @@ class NodeQueryAlterTest extends NodeTestBase {
       $result = $query->execute()->fetchAll();
       $this->assertCount(4, $result, 'User with access can see correct nodes');
     }
-    catch (\Exception $e) {
+    catch (\Exception) {
       $this->fail('Altered query is malformed');
     }
   }
@@ -112,7 +113,7 @@ class NodeQueryAlterTest extends NodeTestBase {
 
       $this->assertCount(4, $result, 'User with access can see correct nodes');
     }
-    catch (\Exception $e) {
+    catch (\Exception) {
       $this->fail('Altered query is malformed');
     }
   }
@@ -135,7 +136,7 @@ class NodeQueryAlterTest extends NodeTestBase {
       $result = $query->execute()->fetchAll();
       $this->assertCount(0, $result, 'User with no access cannot see nodes');
     }
-    catch (\Exception $e) {
+    catch (\Exception) {
       $this->fail('Altered query is malformed');
     }
   }
@@ -199,7 +200,7 @@ class NodeQueryAlterTest extends NodeTestBase {
       $result = $query->execute()->fetchAll();
       $this->assertCount(0, $result, 'User view privileges are not overridden');
     }
-    catch (\Exception $e) {
+    catch (\Exception) {
       $this->fail('Altered query is malformed');
     }
 
@@ -221,7 +222,7 @@ class NodeQueryAlterTest extends NodeTestBase {
       $result = $query->execute()->fetchAll();
       $this->assertCount(4, $result, 'User view privileges are overridden');
     }
-    catch (\Exception $e) {
+    catch (\Exception) {
       $this->fail('Altered query is malformed');
     }
     \Drupal::state()->delete('node_access_test.no_access_uid');

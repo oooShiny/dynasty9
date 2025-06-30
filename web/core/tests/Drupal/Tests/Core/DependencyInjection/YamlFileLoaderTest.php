@@ -40,10 +40,10 @@ services:
   Drupal\Core\ExampleClass: ~
   example_tagged_iterator:
     class: \Drupal\Core\ExampleClass
-    arguments: [!tagged_iterator foo.bar]"
+    arguments: [!tagged_iterator foo.bar]
   example_service_closure:
     class: \Drupal\Core\ExampleClass
-    arguments: [!service_closure '@example_service_1']"
+    arguments: [!service_closure '@example_service_1']
 YAML;
 
     vfsStream::setup('drupal', NULL, [
@@ -199,6 +199,38 @@ YAML,
         do: this
       YAML,
         'The service file "vfs://drupal/modules/example/example.yml" is not valid: it contains invalid root key(s) "do not". Services have to be added under "services" and Parameters under "parameters".',
+      ],
+      'decorates must be without @' => [<<<YAML
+      services:
+        example_service_1:
+          class: \Drupal\Core\ExampleClass
+        example_decoration:
+          class: \Drupal\Core\ExampleClass
+          decorates: "@example_service_1"
+      YAML,
+        'The value of the "decorates" option for the "example_decoration" service must be the id of the service without the "@" prefix (replace "@example_service_1" with "example_service_1").',
+      ],
+      'decorates_on_invalid may not be "null" with quotes' => [<<<YAML
+      services:
+        example_service_1:
+          class: \Drupal\Core\ExampleClass
+        example_decoration:
+          class: \Drupal\Core\ExampleClass
+          decorates: example_service_1
+          decoration_on_invalid: "null"
+      YAML,
+        'Invalid value "null" for attribute "decoration_on_invalid" on service "example_decoration". Did you mean null (without quotes) in "vfs://drupal/modules/example/example.yml"?',
+      ],
+      'decoration_on_invalid must be valid' => [<<<YAML
+      services:
+        example_service_1:
+          class: \Drupal\Core\ExampleClass
+        example_decoration:
+          class: \Drupal\Core\ExampleClass
+          decorates: example_service_1
+          decoration_on_invalid: foo
+      YAML,
+        'Invalid value "foo" for attribute "decoration_on_invalid" on service "example_decoration". Did you mean "exception", "ignore" or null in "vfs://drupal/modules/example/example.yml"?',
       ],
     ];
   }

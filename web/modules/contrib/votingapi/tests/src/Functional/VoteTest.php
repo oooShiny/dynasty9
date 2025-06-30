@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\votingapi\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -14,7 +16,11 @@ class VoteTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected static $modules = ['node', 'votingapi', 'votingapi_test'];
+  protected static $modules = [
+    'node',
+    'votingapi',
+    'votingapi_test',
+  ];
 
   /**
    * {@inheritdoc}
@@ -49,6 +55,7 @@ class VoteTest extends BrowserTestBase {
     $vote->save();
     $votes = $query->execute();
     $this->assertCount(1, $votes, 'After a vote is cast on a node, it can be retrieved.');
+    /** @var \Drupal\votingapi\VoteInterface $vote */
     $vote = $vote_storage->load(reset($votes));
     $this->assertNotNull($vote, 'Node vote was loaded.');
     $this->assertEquals($user->id(), $vote->getOwnerId(), 'Node vote has correct user.');
@@ -69,6 +76,7 @@ class VoteTest extends BrowserTestBase {
       ->accessCheck(TRUE);
     $votes = $query->execute();
     $this->assertCount(1, $votes, 'After a vote is cast on a user, it can be retrieved.');
+    /** @var \Drupal\votingapi\VoteInterface $vote */
     $vote = $vote_storage->load(reset($votes));
     $this->assertNotNull($vote, 'User vote was loaded.');
     $this->assertEquals(0, $vote->getOwnerId(), 'A vote with no explicit user received the default value.');
@@ -103,7 +111,7 @@ class VoteTest extends BrowserTestBase {
       ])->save();
     }
 
-    $results = $manager->getResults('node', $node->id());
+    $results = $manager->getResults('node', (int) $node->id());
 
     // Standard results are available and correct.
     $this->assertNotEmpty($results['vote'], 'Results for test vote type are available.');
@@ -129,7 +137,7 @@ class VoteTest extends BrowserTestBase {
     $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
     $entities = $storage_handler->loadMultiple([$node->id()]);
     $storage_handler->delete($entities);
-    $results = $manager->getResults('node', $node->id());
+    $results = $manager->getResults('node', (int) $node->id());
     $this->assertEmpty($results, 'When an entity is deleted, the voting results are also deleted.');
   }
 
@@ -137,6 +145,7 @@ class VoteTest extends BrowserTestBase {
    * Test voting by anonymous users.
    */
   public function testAnonymousVoting(): void {
+    /** @var \Drupal\votingapi\VoteStorageInterface $vote_storage */
     $vote_storage = $this->container->get('entity_type.manager')->getStorage('vote');
     $node = $this->drupalCreateNode();
 
@@ -169,6 +178,47 @@ class VoteTest extends BrowserTestBase {
     $votes_from_source_2 = $vote_storage->getUserVotes(0, 'vote', 'node', 1, 'source_2');
     $this->assertCount(1, $votes_from_source_1, 'There is still 1 vote from the first source.');
     $this->assertCount(0, $votes_from_source_2, 'There are now 0 votes from the second source.');
+  }
+
+  /**
+   * Test vote results storage method.
+   */
+  public function testVoteResultsStorage(): void {
+    $vote_storage = $this->container->get('entity_type.manager')->getStorage('vote');
+    $node = $this->drupalCreateNode();
+    $user = $this->drupalCreateUser();
+    $vote_result_storage = $this->container->get('entity_type.manager')->getStorage('vote_result');
+
+    // Save a few votes so that we have data.
+    $values = [10, 20, 60];
+    foreach ($values as $value) {
+      $vote_storage->create([
+        'type' => 'like',
+        'entity_id' => $node->id(),
+        'entity_type' => 'node',
+        'user_id' => $user->id(),
+        'value' => $value,
+      ])->save();
+    }
+
+    $vote_likes_sum = $vote_result_storage->getEntityResults('node', $node->id(), 'like', 'vote_sum');
+    $likes_sum = !empty($vote_likes_sum) ? (int) current($vote_likes_sum)->getValue() : 0;
+    $this->assertEquals(90, $likes_sum, 'Vote sum is correct.');
+
+    $vote_likes_avg = $vote_result_storage->getEntityResults('node', $node->id(), 'like', 'vote_average');
+    $likes_avg = !empty($vote_likes_avg) ? (int) current($vote_likes_avg)->getValue() : 0;
+    $this->assertEquals(30, $likes_avg, 'Vote avg is correct.');
+
+    $vote_likes_count = $vote_result_storage->getEntityResults('node', $node->id(), 'like', 'vote_count');
+    $likes_count = !empty($vote_likes_count) ? (int) current($vote_likes_count)->getValue() : 0;
+    $this->assertEquals(3, $likes_count, 'Vote count is correct.');
+
+    // Deleting entity removes results.
+    $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
+    $entities = $storage_handler->loadMultiple([$node->id()]);
+    $storage_handler->delete($entities);
+    $vote_likes_sum = $vote_result_storage->getEntityResults('node', $node->id(), 'like', 'vote_sum');
+    $this->assertEmpty($vote_likes_sum, 'When an entity is deleted, the voting results are also deleted.');
   }
 
 }

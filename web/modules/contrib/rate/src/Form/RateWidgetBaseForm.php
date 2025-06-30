@@ -365,7 +365,7 @@ class RateWidgetBaseForm extends ContentEntityForm {
     if ($is_views_field == TRUE && !is_null($views_url)) {
       $form['submit']['#ajax']['url'] = $views_url;
       $form['submit']['#ajax']['options'] = [
-        'query' => \Drupal::request()->query->all() + [FormBuilderInterface::AJAX_FORM_REQUEST => TRUE],
+        'query' => $this->getRequest()->query->all() + [FormBuilderInterface::AJAX_FORM_REQUEST => TRUE],
       ];
     }
 

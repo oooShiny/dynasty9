@@ -1,6 +1,6 @@
 name: Patriots Dynasty Theme 2024
 description: A new Patriots Dynasty theme based on Tailwind CSS.
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^8 || ^9 || ^10 || ^11
 type: theme
 base theme: stable9
 libraries:

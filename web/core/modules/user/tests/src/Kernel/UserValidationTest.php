@@ -20,9 +20,7 @@ use Drupal\user\UserInterface;
 class UserValidationTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['field', 'user', 'system'];
 
@@ -52,7 +50,7 @@ class UserValidationTest extends KernelTestBase {
       'Foo O\'Bar'             => ['Valid username', 'assertNull'],
       'foo@bar'                => ['Valid username', 'assertNull'],
       'foo@example.com'        => ['Valid username', 'assertNull'],
-      // invalid domains are allowed in usernames.
+      // Invalid domains are allowed in usernames.
       'foo@-example.com'       => ['Valid username', 'assertNull'],
       'þòøÇßªř€'               => ['Valid username', 'assertNull'],
       // '+' symbol is allowed.
@@ -70,7 +68,7 @@ class UserValidationTest extends KernelTestBase {
       'foo' . chr(13) . 'bar'  => ['Invalid username containing chr(13)', 'assertNotNull'],
       str_repeat('x', UserInterface::USERNAME_MAX_LENGTH + 1) => ['Invalid excessively long username', 'assertNotNull'],
     ];
-    $this->expectDeprecation('user_validate_name() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. Use \Drupal\user\UserValidator::validateName() instead. See https://www.drupal.org/node/3431205');
+    $this->expectDeprecation('user_validate_name() is deprecated in drupal:10.3.0 and is removed from drupal:12.0.0. Use \Drupal\user\UserNameValidator::validateName() instead. See https://www.drupal.org/node/3431205');
     // cSpell:enable
     foreach ($test_cases as $name => $test_case) {
       [$description, $test] = $test_case;
@@ -139,6 +137,14 @@ class UserValidationTest extends KernelTestBase {
     $this->assertCount(1, $violations, 'Violation found when email already exists.');
     $this->assertEquals('mail', $violations[0]->getPropertyPath());
     $this->assertEquals('The email address existing@example.com is already taken.', $violations[0]->getMessage());
+
+    // Ensure case-insensitive uniqueness of email.
+    $user->set('mail', 'EXISTING@example.com');
+    $violations = $user->validate();
+    $this->assertCount(1, $violations, 'Violation found when email already exists.');
+    $this->assertEquals('mail', $violations[0]->getPropertyPath());
+    $this->assertEquals('The email address EXISTING@example.com is already taken.', $violations[0]->getMessage());
+
     $user->set('mail', NULL);
     $violations = $user->validate();
     $this->assertCount(1, $violations, 'Email addresses may not be removed');

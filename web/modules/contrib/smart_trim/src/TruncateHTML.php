@@ -140,11 +140,11 @@ class TruncateHTML {
   /**
    * Truncates a DOMNode by character count.
    *
-   * @param \DOMNode $domnode
+   * @param \DOMNode $domNode
    *   Object to be truncated.
    */
-  protected function domNodeTruncateChars(\DOMNode $domnode): void {
-    foreach ($domnode->childNodes as $node) {
+  protected function domNodeTruncateChars(\DOMNode $domNode): void {
+    foreach ($domNode->childNodes as $node) {
 
       if ($this->foundBreakpoint) {
         return;
@@ -175,11 +175,11 @@ class TruncateHTML {
   /**
    * Truncates a DOMNode by words.
    *
-   * @param \DOMNode $domnode
+   * @param \DOMNode $domNode
    *   Object to be truncated.
    */
-  protected function domNodeTruncateWords(\DOMNode $domnode): void {
-    foreach ($domnode->childNodes as $node) {
+  protected function domNodeTruncateWords(\DOMNode $domNode): void {
+    foreach ($domNode->childNodes as $node) {
 
       if ($this->foundBreakpoint) {
         return;
@@ -221,46 +221,46 @@ class TruncateHTML {
   /**
    * Removes certain punctuation from the end of the node value.
    *
-   * @param \DOMNode $domnode
+   * @param \DOMNode $domNode
    *   Node to be altered.
    */
-  protected function removeTrailingPunctuation(\DOMNode $domnode): void {
-    while (preg_match('/[\.,:;\?!…]$/u', $domnode->nodeValue)) {
-      $domnode->nodeValue = mb_substr($domnode->nodeValue, 0, -1);
+  protected function removeTrailingPunctuation(\DOMNode $domNode): void {
+    while (preg_match('/[\.,:;\?!…]$/u', $domNode->nodeValue)) {
+      $domNode->nodeValue = mb_substr($domNode->nodeValue, 0, -1);
     }
   }
 
   /**
    * Removes preceding sibling node.
    *
-   * @param \DOMNode $domnode
+   * @param \DOMNode $domNode
    *   Node to be altered.
    */
-  protected function removeProceedingNodes(\DOMNode $domnode): void {
-    $nextnode = $domnode->nextSibling;
+  protected function removeProceedingNodes(\DOMNode $domNode): void {
+    $nextNode = $domNode->nextSibling;
 
-    if ($nextnode !== NULL) {
+    if ($nextNode !== NULL) {
       // Run in a while loop to prevent hitting the maximum recursion limit
       // when processing DOM elements with many children at the same level.
-      while ($nextnode->nextSibling !== NULL) {
-        $node = $nextnode;
-        $nextnode = $nextnode->nextSibling;
+      while ($nextNode->nextSibling !== NULL) {
+        $node = $nextNode;
+        $nextNode = $nextNode->nextSibling;
         $node->parentNode->removeChild($node);
       }
-      $this->removeProceedingNodes($nextnode);
-      $domnode->parentNode->removeChild($nextnode);
+      $this->removeProceedingNodes($nextNode);
+      $domNode->parentNode->removeChild($nextNode);
     }
     else {
       // Scan upwards till we find a sibling.
-      $curnode = $domnode->parentNode;
-      while ($curnode !== $this->startNode) {
-        if ($curnode->nextSibling !== NULL) {
-          $curnode = $curnode->nextSibling;
-          $this->removeProceedingNodes($curnode);
-          $curnode->parentNode->removeChild($curnode);
+      $currentNode = $domNode->parentNode;
+      while ($currentNode !== $this->startNode) {
+        if ($currentNode->nextSibling !== NULL) {
+          $currentNode = $currentNode->nextSibling;
+          $this->removeProceedingNodes($currentNode);
+          $currentNode->parentNode->removeChild($currentNode);
           break;
         }
-        $curnode = $curnode->parentNode;
+        $currentNode = $currentNode->parentNode;
       }
     }
   }
@@ -268,22 +268,22 @@ class TruncateHTML {
   /**
    * Inserts the ellipsis character to the node.
    *
-   * @param \DOMNode $domnode
+   * @param \DOMNode $domNode
    *   Node to be altered.
    */
-  protected function insertEllipsis(\DOMNode $domnode): void {
+  protected function insertEllipsis(\DOMNode $domNode): void {
     // HTML tags to avoid appending the ellipsis to.
     $avoid = ['a', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5'];
 
-    if (in_array($domnode->parentNode->nodeName, $avoid) && ($domnode->parentNode->parentNode !== NULL || $domnode->parentNode->parentNode !== $this->startNode)) {
+    if (in_array($domNode->parentNode->nodeName, $avoid) && ($domNode->parentNode->parentNode !== NULL || $domNode->parentNode->parentNode !== $this->startNode)) {
       // Append as text node to parent instead.
-      $textnode = new \DOMText($this->ellipsis);
+      $textNode = new \DOMText($this->ellipsis);
 
-      if ($domnode->parentNode->parentNode->nextSibling) {
-        $domnode->parentNode->parentNode->insertBefore($textnode, $domnode->parentNode->parentNode->nextSibling);
+      if ($domNode->parentNode->parentNode->nextSibling) {
+        $domNode->parentNode->parentNode->insertBefore($textNode, $domNode->parentNode->parentNode->nextSibling);
       }
       else {
-        $domnode->parentNode->parentNode->appendChild($textnode);
+        $domNode->parentNode->parentNode->appendChild($textNode);
       }
     }
     else {
@@ -291,7 +291,7 @@ class TruncateHTML {
       $this->ellipsis = Html::escape(json_decode('"' . $this->ellipsis . '"'));
 
       // Append to current node.
-      $domnode->nodeValue = rtrim($domnode->nodeValue) . $this->ellipsis;
+      $domNode->nodeValue = rtrim($domNode->nodeValue) . $this->ellipsis;
     }
   }
 
@@ -312,11 +312,11 @@ class TruncateHTML {
   /**
    * Removes all comment elements.
    *
-   * @param \DOMNode $domnode
+   * @param \DOMNode $domNode
    *   Node to be altered.
    */
-  protected function removeHtmlComments(&$domnode): void {
-    $nodes = $domnode->childNodes;
+  protected function removeHtmlComments(&$domNode): void {
+    $nodes = $domNode->childNodes;
     for ($i = 0; $i < $nodes->length; $i++) {
       $node = $nodes->item($i);
       if ($node->nodeName == '#comment') {

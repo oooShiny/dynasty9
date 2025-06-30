@@ -7,7 +7,7 @@ dependencies:
   - gutenberg:gutenberg
 
 
-# Information added by Drupal.org packaging script on 2024-07-06
-version: '1.1.11'
+# Information added by Drupal.org packaging script on 2025-03-18
+version: '1.1.16'
 project: 'gin_gutenberg'
-datestamp: 1720248752
+datestamp: 1742293960

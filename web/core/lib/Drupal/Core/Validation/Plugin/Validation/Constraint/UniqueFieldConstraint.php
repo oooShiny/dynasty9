@@ -15,14 +15,27 @@ use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 )]
 class UniqueFieldConstraint extends SymfonyConstraint {
 
+  /**
+   * The default violation message.
+   *
+   * @var string
+   */
   public $message = 'A @entity_type with @field_name %value already exists.';
 
   /**
-   * Returns the name of the class that validates this constraint.
+   * This constraint is case-insensitive by default.
    *
-   * @return string
+   * For example "FOO" and "foo" would be considered as equivalent, and
+   * validation of the constraint would fail.
+   *
+   * @var bool
    */
-  public function validatedBy() {
+  public $caseSensitive = FALSE;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validatedBy(): string {
     return '\Drupal\Core\Validation\Plugin\Validation\Constraint\UniqueFieldValueValidator';
   }
 

@@ -36,11 +36,6 @@ class RateWidgetCrudTest extends RateWidgetTestBase {
     // Reset any static cache.
     drupal_static_reset();
 
-    // A rate widget was configured. The node rating page now returns a valid
-    // response.
-    $this->drupalGet(sprintf('node/%s/node-rating', $this->nodes['article'][1]->id()));
-    $this->assertSession()->statusCodeEquals(200);
-
     // Load the rate widget and verify its structure.
     $rate_widget = $this->loadRateWidget('dummy_rate_widget');
 

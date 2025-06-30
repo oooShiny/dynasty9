@@ -7,13 +7,13 @@ function playPause(id) {
   if (playing) {
     pod_ep.play();
     playing = false;
-    pIcon.src = '/themes/custom/dynasty/icons/pod-pause.svg';
+    pIcon.src = '/themes/custom/dynasty_tw/icons/pod-pause.svg';
     document.querySelector('#back-'+id).classList.remove('tw-hidden');
     document.querySelector('#fwd-'+id).classList.remove('tw-hidden');
   } else {
     pod_ep.pause();
     playing = true;
-    pIcon.src = '/themes/custom/dynasty/icons/pod-play.svg';
+    pIcon.src = '/themes/custom/dynasty_tw/icons/pod-play.svg';
   }
 }
 

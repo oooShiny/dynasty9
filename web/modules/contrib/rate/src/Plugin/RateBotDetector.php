@@ -5,8 +5,10 @@ namespace Drupal\rate\Plugin;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Utility\Error;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -17,6 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class RateBotDetector {
   use StringTranslationTrait;
   use MessengerTrait;
+  use LoggerChannelTrait;
 
   /**
    * Client IP.
@@ -147,7 +150,7 @@ class RateBotDetector {
    *   Interval in seconds.
    *
    * @return int
-   *   Number of votes between not and internval.
+   *   Number of votes between not and interval.
    */
   protected function checkThreshold($interval) {
     $sql = 'SELECT COUNT(*) FROM {votingapi_vote} WHERE vote_source = :ip AND timestamp > :time';
@@ -179,7 +182,7 @@ class RateBotDetector {
       }
       catch (RequestException $e) {
         $this->messenger()->addMessage($this->t('An error occurred contacting BotScout.'), 'warning');
-        watchdog_exception('rate', $e);
+        Error::logException($this->getLogger('rate'), $e);
       }
     }
 

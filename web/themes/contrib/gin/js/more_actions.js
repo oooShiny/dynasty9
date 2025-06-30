@@ -12,6 +12,7 @@
   Drupal.ginStickyFormActions = {
     init: function (context) {
       const newParent = document.querySelector('.gin-sticky-form-actions');
+      if (!newParent) { return }
 
       // If form updates, update form IDs.
       if (context.classList?.contains('gin--has-sticky-form-actions') && context.getAttribute('id')) {
@@ -36,12 +37,33 @@
 
     updateFormId: function (newParent, form) {
       // Attach form elements to main form
-      const actionButtons = newParent.querySelectorAll('button, input, select, textarea');
-      const formId = form.getAttribute('id');
+      const formActions = form.querySelector('[data-drupal-selector="edit-actions"]');
+      const actionButtons = Array.from(formActions.children);
 
+      // Keep buttons in sync.
       if (actionButtons.length > 0) {
+        const formId = form.getAttribute('id');
+
         actionButtons.forEach((el) => {
-          el.setAttribute('form', formId);
+          const formElement = el.dataset.drupalSelector;
+          const buttonId = el.id;
+          const buttonSelector = newParent.querySelector(`[data-drupal-selector="gin-sticky-${formElement}"]`);
+
+          if (buttonSelector) {
+            // Update form id.
+            buttonSelector.setAttribute('form', formId);
+            buttonSelector.setAttribute('data-gin-sticky-form-selector', buttonId);
+
+            // Trigger original button from within the form.
+            buttonSelector.addEventListener('click', (e) => {
+              const button = document.querySelector(`[data-drupal-selector="${formId}"] [data-drupal-selector="${buttonId}"]`);
+              if (button === null) {
+                return;
+              }
+              e.preventDefault();
+              document.querySelector(`[data-drupal-selector="${formId}"] [data-drupal-selector="${buttonId}"]`).click();
+            });
+          }
         });
       }
     },

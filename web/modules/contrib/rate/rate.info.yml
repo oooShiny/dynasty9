@@ -1,6 +1,6 @@
 name: Rate
 description: Flexible voting options for content entity types.
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^10.1 || ^11
 package: Voting
 dependencies:
   - drupal:node
@@ -10,7 +10,7 @@ dependencies:
 type: module
 configure: rate.admin_settings
 
-# Information added by Drupal.org packaging script on 2023-12-31
-version: '3.1.0'
+# Information added by Drupal.org packaging script on 2025-02-27
+version: '3.2.0-rc2'
 project: 'rate'
-datestamp: 1703991505
+datestamp: 1740638892

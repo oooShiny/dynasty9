@@ -21,6 +21,9 @@ class FieldBooleanTest extends ViewsKernelTestBase {
    */
   public static $testViews = ['test_view'];
 
+  /**
+   * Modifies the default dataset by removing the age for specific entries.
+   */
   public function dataSet() {
     // Use default dataset but remove the age from john and paul
     $data = parent::dataSet();
@@ -29,12 +32,18 @@ class FieldBooleanTest extends ViewsKernelTestBase {
     return $data;
   }
 
+  /**
+   * Provides Views data definition for the 'age' field as a boolean.
+   */
   public function viewsData() {
     $data = parent::viewsData();
     $data['views_test_data']['age']['field']['id'] = 'boolean';
     return $data;
   }
 
+  /**
+   * Tests different display formats for a boolean field in Views.
+   */
   public function testFieldBoolean(): void {
     $view = Views::getView('test_view');
     $view->setDisplay();
@@ -66,7 +75,7 @@ class FieldBooleanTest extends ViewsKernelTestBase {
     $this->assertEquals('False', $view->field['age']->advancedRender($view->result[0]));
     $this->assertEquals('True', $view->field['age']->advancedRender($view->result[1]));
 
-    // test awesome unicode.
+    // Test awesome unicode.
     $view->field['age']->options['type'] = 'unicode-yes-no';
     $this->assertEquals('✖', $view->field['age']->advancedRender($view->result[0]));
     $this->assertEquals('✔', $view->field['age']->advancedRender($view->result[1]));

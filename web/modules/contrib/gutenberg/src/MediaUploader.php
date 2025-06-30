@@ -71,13 +71,26 @@ class MediaUploader implements MediaUploaderInterface {
       }
       $max_filesize = min(Bytes::toNumber($image_settings['max_size']), Environment::getUploadMaxSize());
 
-      $validators['file_validate_size'] = [$max_filesize];
-      $validators['file_validate_image_resolution'] = [$max_dimensions];
+      // @todo: Remove when Drupal 10.2 is the minimum requirement.
+      if (version_compare(\Drupal::VERSION, '10.2.0', '<')) {
+        $validators['file_validate_size'] = [$max_filesize];
+        $validators['file_validate_image_resolution'] = [$max_dimensions];
+      }
+      else {
+        $validators['FileSizeLimit'] = ['fileLimit' => $max_filesize];
+        $validators['FileImageDimensions'] = ['maxDimensions' => $max_dimensions];
+      }
     }
 
     if (!empty($file_settings['file_extensions'])) {
       // Validate the media file extensions.
-      $validators['file_validate_extensions'] = [$file_settings['file_extensions']];
+      // @todo: Remove when Drupal 10.2 is the minimum requirement.
+      if (version_compare(\Drupal::VERSION, '10.2.0', '<')) {
+        $validators['file_validate_extensions'] = [$file_settings['file_extensions']];
+      }
+      else {
+        $validators['FileExtension'] = ['extensions' => $file_settings['file_extensions']];
+      }
     }
 
     // Upload a temporary file.

@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\entity_usage\FunctionalJavascript;
 
+use Drupal\Tests\entity_usage\Traits\EntityUsageLastEntityQueryTrait;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\node\Entity\Node;
-use Drupal\Tests\entity_usage\Traits\EntityUsageLastEntityQueryTrait;
 use Drupal\user\Entity\Role;
 
 /**
@@ -43,7 +43,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
    *
    * @covers \Drupal\entity_usage\Controller\ListUsageController::listUsagePage
    */
-  public function testListController() {
+  public function testListController(): void {
     $session = $this->getSession();
     $page = $session->getPage();
     $assert_session = $this->assertSession();
@@ -54,7 +54,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $page->pressButton('Save');
     $session->wait(500);
     $this->saveHtmlOutput();
-    $assert_session->pageTextContains('eu_test_ct Node 1 has been created.');
+    $assert_session->pageTextContains('Entity Usage test content Node 1 has been created.');
     /** @var \Drupal\node\NodeInterface $node1 */
     $node1 = $this->getLastEntityOfType('node', TRUE);
 
@@ -65,7 +65,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $page->pressButton('Save');
     $session->wait(500);
     $this->saveHtmlOutput();
-    $assert_session->pageTextContains('eu_test_ct Node 2 has been created.');
+    $assert_session->pageTextContains('Entity Usage test content Node 2 has been created.');
     $node2 = $this->getLastEntityOfType('node', TRUE);
 
     // Create node 3 also referencing node 1 in an embed text field.
@@ -97,7 +97,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals('Node 3', $first_row_title_link->getText());
     $this->assertStringContainsString($node3->toUrl()->toString(), $first_row_title_link->getAttribute('href'));
     $first_row_type = $this->xpath('//table/tbody/tr[1]/td[2]')[0];
-    $this->assertEquals('Content', $first_row_type->getText());
+    $this->assertEquals('Content: Entity Usage test content', $first_row_type->getText());
     $first_row_langcode = $this->xpath('//table/tbody/tr[1]/td[3]')[0];
     $this->assertEquals('English', $first_row_langcode->getText());
     $first_row_field_label = $this->xpath('//table/tbody/tr[1]/td[4]')[0];
@@ -109,7 +109,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals('Node 2', $second_row_title_link->getText());
     $this->assertStringContainsString($node2->toUrl()->toString(), $second_row_title_link->getAttribute('href'));
     $second_row_type = $this->xpath('//table/tbody/tr[2]/td[2]')[0];
-    $this->assertEquals('Content', $second_row_type->getText());
+    $this->assertEquals('Content: Entity Usage test content', $second_row_type->getText());
     $second_row_langcode = $this->xpath('//table/tbody/tr[2]/td[3]')[0];
     $this->assertEquals('English', $second_row_langcode->getText());
     $second_row_field_label = $this->xpath('//table/tbody/tr[2]/td[4]')[0];
@@ -153,10 +153,13 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     // When all usages are shown on their default revisions, we don't see the
     // extra column.
     $assert_session->pageTextNotContains('Used in');
-    $assert_session->pageTextNotContains('Translations or previous revisions');
+    $assert_session->pageTextNotContains('Old revision(s)');
+    $assert_session->pageTextNotContains('Pending revision(s) / Draft(s)');
+    $assert_session->pageTextNotContains('Default:');
 
     // If some sources reference our entity in a previous revision, an
     // additional column is shown.
+    // @phpstan-ignore-next-line
     $node2->field_eu_test_related_nodes = NULL;
     $node2->setNewRevision();
     $node2->save();
@@ -165,7 +168,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $second_row_used_in = $this->xpath('//table/tbody/tr[1]/td[6]')[0];
     $this->assertEquals('Default', $second_row_used_in->getText());
     $second_row_used_in = $this->xpath('//table/tbody/tr[2]/td[6]')[0];
-    $this->assertEquals('Translations or previous revisions', $second_row_used_in->getText());
+    $this->assertEquals('Old revision(s)', $second_row_used_in->getText());
 
     // Make sure we only have 2 rows (so no previous revision shows up).
     $this->assertEquals(2, count($this->xpath('//table/tbody/tr')));
@@ -189,6 +192,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     // Set our content type as translatable.
     $this->drupalGet('/admin/config/regional/content-language');
     $page->checkField('entity_types[node]');
+    $assert_session->elementExists('css', '#edit-settings-node')->click();
     $page->checkField('settings[node][eu_test_ct][translatable]');
     $page->pressButton('Save configuration');
     $session->wait(500);
@@ -206,15 +210,15 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $page->pressButton('Save (this translation)');
     $session->wait(500);
     $this->saveHtmlOutput();
-    $assert_session->pageTextContains('eu_test_ct Node 2 has been updated.');
+    $assert_session->pageTextContains('Entity Usage test content Node 2 has been updated.');
 
     // Usage now should be the same as before.
     $this->drupalGet("/admin/content/entity-usage/node/{$node1->id()}");
     $assert_session->pageTextContains('Used in');
-    $second_row_used_in = $this->xpath('//table/tbody/tr[1]/td[6]')[0];
-    $this->assertEquals('Default', $second_row_used_in->getText());
+    $first_row_used_in = $this->xpath('//table/tbody/tr[1]/td[6]')[0];
+    $this->assertEquals('Default', $first_row_used_in->getText());
     $second_row_used_in = $this->xpath('//table/tbody/tr[2]/td[6]')[0];
-    $this->assertEquals('Translations or previous revisions', $second_row_used_in->getText());
+    $this->assertEquals('Default: ES. Old revision(s)', $second_row_used_in->getText());
     $this->assertEquals(2, count($this->xpath('//table/tbody/tr')));
 
     // Verify that it's possible to control the number of items per page.
@@ -240,6 +244,19 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
     $first_row_title_link = $assert_session->elementExists('xpath', '//table/tbody/tr[1]/td[1]/a');
     $this->assertEquals('Node 2', $first_row_title_link->getText());
     $assert_session->elementNotExists('xpath', '//table/tbody/tr[2]');
+
+    // Set reference on bundleless user entity referencing node 1.
+    $this->loggedInUser->set('field_eu_test_related_nodes', [
+      'target_id' => $node1->id(),
+    ])->save();
+
+    // Check this reference shows up on usage page, without bundle label.
+    $this->drupalGet("/admin/content/entity-usage/node/{$node1->id()}", ['query' => ['page' => '2']]);
+    $first_row_title_link = $assert_session->elementExists('xpath', '//table/tbody/tr[1]/td[1]/a');
+    $this->assertEquals($this->loggedInUser->getDisplayName(), $first_row_title_link->getText());
+    $this->assertStringContainsString($this->loggedInUser->toUrl()->toString(), $first_row_title_link->getAttribute('href'));
+    $first_row_type = $this->xpath('//table/tbody/tr[1]/td[2]')[0];
+    $this->assertEquals('User', $first_row_type->getText());
   }
 
 }

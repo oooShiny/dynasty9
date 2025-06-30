@@ -28,9 +28,7 @@ class DbLogFormInjectionTest extends KernelTestBase implements FormInterface {
   protected $logger;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system', 'dblog', 'user'];
 
@@ -45,7 +43,7 @@ class DbLogFormInjectionTest extends KernelTestBase implements FormInterface {
    * Process callback.
    *
    * @param array $element
-   *   Form element
+   *   Form element.
    *
    * @return array
    *   Processed element.
@@ -70,7 +68,7 @@ class DbLogFormInjectionTest extends KernelTestBase implements FormInterface {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $form_state->setRebuild();
   }
 

@@ -21,7 +21,7 @@
         "source": "https://git.drupalcode.org/project/migrate_tools"
     },
     "license": "GPL-2.0-or-later",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": false,
     "config": {
         "preferred-install": "dist"

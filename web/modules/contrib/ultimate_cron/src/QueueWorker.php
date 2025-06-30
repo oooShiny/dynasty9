@@ -2,13 +2,15 @@
 
 namespace Drupal\ultimate_cron;
 
-use Drupal\Core\Queue\QueueWorkerManager;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Queue\QueueFactory;
-use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Queue\QueueWorkerManagerInterface;
 use Drupal\Core\Queue\RequeueException;
 use Drupal\Core\Queue\SuspendQueueException;
 use Drupal\Core\Queue\DelayableQueueInterface;
 use Drupal\Core\Queue\DelayedRequeueException;
+use Drupal\Core\Utility\Error;
 
 /**
  * Defines the queue worker.
@@ -16,37 +18,9 @@ use Drupal\Core\Queue\DelayedRequeueException;
 class QueueWorker {
 
   /**
-   * Queue worker plugin manager
-   *
-   * @var Drupal\Core\Queue\QueueWorkerManager
-   */
-  protected $pluginManagerQueueWorker;
-
-  /**
-   * Queue Factory.
-   *
-   * @var Drupal\Core\Queue\QueueFactory
-   */
-  protected $queue;
-
-  /**
-   * Config Factory.
-   *
-   * @var Drupal\Core\Config\ConfigFactory
-   */
-  protected $configFactory;
-
-  /**
    * Constructs a QueueWorker object.
-   *
-   * @param \Drupal\Core\Queue\QueueWorkerManager $plugin_manager_queue_worker
-   * @param \Drupal\Core\Queue\QueueFactory $queue
-   * @param \Drupal\Core\Config\ConfigFactory $config_factory
    */
-  public function __construct(QueueWorkerManager $plugin_manager_queue_worker, QueueFactory $queue, ConfigFactory $config_factory) {
-    $this->pluginManagerQueueWorker = $plugin_manager_queue_worker;
-    $this->queue = $queue;
-    $this->configFactory = $config_factory;
+  public function __construct(protected QueueWorkerManagerInterface $pluginManagerQueueWorker, protected QueueFactory $queue, protected ConfigFactoryInterface $configFactory, protected LoggerChannelFactoryInterface $loggerFactory) {
   }
 
   /**
@@ -76,7 +50,7 @@ class QueueWorker {
     while (microtime(TRUE) < $end) {
       // Check kill signal.
       if ($job->getSignal('kill')) {
-        \Drupal::logger('ultimate_cron')->warning('Kill signal received for job @job_id', ['@job_id' => $job->id()]);
+        $this->loggerFactory->get('ultimate_cron')->warning('Kill signal received for job @job_id', ['@job_id' => $job->id()]);
         break;
       }
 
@@ -128,7 +102,13 @@ class QueueWorker {
         // release the item and skip to the next queue.
         $queue->releaseItem($item);
 
-        watchdog_exception('cron', $e);
+        if (method_exists(Error::class, 'logException')) {
+          Error::logException($this->loggerFactory->get('cron'), $e);
+        }
+        else {
+          // @phpstan-ignore-next-line
+          watchdog_exception('cron', $e);
+        }
 
         // Rethrow the SuspendQueueException, so that the queue is correctly
         // suspended for the current cron run to avoid infinite loops.
@@ -138,7 +118,13 @@ class QueueWorker {
       catch (\Exception $e) {
         // In case of any other kind of exception, log it and leave the item
         // in the queue to be processed again later.
-        watchdog_exception('ultimate_cron_queue', $e);
+        if (method_exists(Error::class, 'logException')) {
+          Error::logException($this->loggerFactory->get('cron'), $e);
+        }
+        else {
+          // @phpstan-ignore-next-line
+          watchdog_exception('cron', $e);
+        }
       }
     }
   }

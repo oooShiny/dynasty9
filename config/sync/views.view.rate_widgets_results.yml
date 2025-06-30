@@ -307,7 +307,7 @@ display:
           admin_label: ''
           entity_type: vote
           entity_field: entity_id
-          plugin_id: numeric
+          plugin_id: entity_target_id
           default_action: 'not found'
           exception:
             value: all
@@ -333,6 +333,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
+          target_entity_type_id: node
         entity_type:
           id: entity_type
           table: votingapi_vote
@@ -456,6 +457,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
+          class: ''
       row:
         type: fields
       query:
@@ -774,181 +776,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user.permissions
-      tags: {  }
-  node_summary_block:
-    id: node_summary_block
-    display_title: Block
-    display_plugin: block
-    position: 2
-    display_options:
-      title: 'Voting Summary'
-      fields:
-        value_1:
-          id: value_1
-          table: votingapi_vote
-          field: value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: vote
-          entity_field: value
-          plugin_id: field
-          label: 'Vote value'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_unformatted
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        value:
-          id: value
-          table: votingapi_vote
-          field: value
-          relationship: none
-          group_type: count
-          admin_label: ''
-          entity_type: vote
-          entity_field: value
-          plugin_id: field
-          label: Total
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_decimal
-          settings:
-            thousand_separator: ''
-            decimal_separator: .
-            scale: 0
-            prefix_suffix: true
-          group_column: null
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ','
-          field_api_classes: false
-      empty: {  }
-      sorts:
-        value:
-          id: value
-          table: votingapi_vote
-          field: value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: vote
-          entity_field: value
-          plugin_id: standard
-          order: DESC
-          expose:
-            label: ''
-            field_identifier: value
-          exposed: false
-      defaults:
-        empty: false
-        title: false
-        group_by: false
-        fields: false
-        sorts: false
-        header: false
-      group_by: true
-      header: {  }
-      display_extenders: {  }
-      block_description: 'Rate Voting Summary'
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
         - user.permissions
       tags: {  }

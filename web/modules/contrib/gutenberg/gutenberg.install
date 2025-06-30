@@ -49,6 +49,12 @@ function gutenberg_schema() {
         'unsigned' => TRUE,
         'not null' => FALSE,
       ],
+      'entity_bundle' => [
+        'description' => 'Referencing entity bundle',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+      ],
       'content_block_id' => [
         'description' => 'The content block entity ID',
         'type' => 'int',
@@ -78,13 +84,6 @@ function gutenberg_schema() {
   ];
 
   return $schema;
-}
-
-/**
- * Implements hook_install().
- */
-function gutenberg_install() {
-  _gutenberg_update_synced_patterns_view();
 }
 
 /**
@@ -501,6 +500,23 @@ function gutenberg_update_8306() {
     $schema->dropField('gutenberg_content_block_usage', 'content_block_bundle');
   }
 }
+
+/**
+ * Add a 'entity_bundle' field to the content block usage table.
+ */
+function gutenberg_update_8307() {
+  $schema = Database::getConnection()->schema();
+  if(!$schema->fieldExists('gutenberg_content_block_usage', 'entity_bundle')) {
+    $spec = [
+      'description' => 'Referencing entity bundle',
+      'type' => 'varchar',
+      'length' => 128,
+      'not null' => FALSE,
+    ];
+    $schema->addField('gutenberg_content_block_usage', 'entity_bundle', $spec);
+  }
+}
+
 
 /**
  * Helper functions.

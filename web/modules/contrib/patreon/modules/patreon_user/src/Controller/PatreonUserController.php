@@ -112,7 +112,7 @@ class PatreonUserController extends ControllerBase {
                     if ($account = $this->service->getUser($patreon_data)) {
                       $this->service->storeTokens($tokens, $account);
 
-                      if (!user_is_blocked($account->getAccountName())) {
+                      if (!$account->isBlocked()) {
                         $this->service->assignRoles($account, $patreon_data);
                         $login_method = $config->get('patreon_user_login_method');
                         if ($state = $this->stack->getCurrentRequest()->query->get('state')) {

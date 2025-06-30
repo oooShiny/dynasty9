@@ -25,42 +25,42 @@ class FacetApiAutocompleteController extends ControllerBase {
    *
    * @var \Drupal\facets\FacetManager\DefaultFacetManager
    */
-  protected $facetManager;
+  protected DefaultFacetManager $facetManager;
 
   /**
    * The request stack.
    *
    * @var \Symfony\Component\HttpFoundation\RequestStack
    */
-  protected $requestStack;
+  protected RequestStack $requestStack;
 
   /**
    * The current path stack.
    *
    * @var \Drupal\Core\Path\CurrentPathStack
    */
-  protected $currentPathStack;
+  protected CurrentPathStack $currentPathStack;
 
   /**
    * The current router.
    *
    * @var \Drupal\Core\Routing\AccessAwareRouterInterface
    */
-  protected $router;
+  protected AccessAwareRouterInterface $router;
 
   /**
    * The processor manager.
    *
    * @var \Drupal\Core\PathProcessor\InboundPathProcessorInterface
    */
-  protected $pathProcessor;
+  protected InboundPathProcessorInterface $pathProcessor;
 
   /**
    * Array of request.
    *
    * @var array
    */
-  protected $storedRequests = [];
+  protected array $storedRequests = [];
 
   /**
    * {@inheritdoc}

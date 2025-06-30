@@ -16,9 +16,7 @@ use Drupal\taxonomy\Entity\Vocabulary;
 class MigrateBundleTest extends MigrateTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['taxonomy', 'text', 'user', 'system'];
 
@@ -102,7 +100,8 @@ class MigrateBundleTest extends MigrateTestBase {
 
     $term_migration = \Drupal::service('plugin.manager.migration')->createStubMigration($definition);
 
-    // Import and validate the term entities were created with the correct bundle.
+    // Import and validate the term entities were created with the correct
+    // bundle.
     $term_executable = new MigrateExecutable($term_migration, $this);
     $term_executable->import();
     /** @var \Drupal\taxonomy\Entity\Term $term */
@@ -144,7 +143,8 @@ class MigrateBundleTest extends MigrateTestBase {
 
     $term_migration = \Drupal::service('plugin.manager.migration')->createStubMigration($definition);
 
-    // Import and validate the term entities were created with the correct bundle.
+    // Import and validate the term entities were created with the correct
+    // bundle.
     $term_executable = new MigrateExecutable($term_migration, $this);
     $term_executable->import();
     /** @var \Drupal\taxonomy\Entity\Term $term */

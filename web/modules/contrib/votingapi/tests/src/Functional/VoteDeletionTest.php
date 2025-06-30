@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\votingapi\Functional;
 
 use Drupal\Tests\BrowserTestBase;
@@ -56,6 +58,7 @@ class VoteDeletionTest extends BrowserTestBase {
    */
   public function testVoteDeletion(): void {
     $session = $this->assertSession();
+    /** @var \Drupal\votingapi\VoteStorageInterface $vote_storage */
     $vote_storage = $this->container->get('entity_type.manager')->getStorage('vote');
 
     // Save a few votes.
@@ -82,6 +85,7 @@ class VoteDeletionTest extends BrowserTestBase {
       ->accessCheck(TRUE)
       ->execute();
 
+    /** @var \Drupal\votingapi\VoteInterface $vote */
     $vote = $vote_storage->load(reset($vote_id));
     $vote_owner = $vote->getOwner()->getDisplayName();
     $entity_type = $this->node->getEntityType()->getSingularLabel();
@@ -89,19 +93,9 @@ class VoteDeletionTest extends BrowserTestBase {
 
     // Delete a vote.
     $this->drupalGet('admin/vote/' . reset($vote_id) . '/delete');
-    $session->pageTextContains(
-      t('You are about to delete a vote by @user on @entity-type @label. This action cannot be undone.', [
-        '@user' => $vote_owner,
-        '@entity-type' => $entity_type,
-        '@label' => $label,
-      ]));
+    $session->pageTextContains('You are about to delete a vote by ' . $vote_owner . ' on ' . $entity_type . ' ' . $label . '. This action cannot be undone.');
     $this->submitForm([], 'Delete');
-    $session->pageTextContains(
-      t('The vote by @user on @entity-type @label has been deleted.', [
-        '@user' => $vote_owner,
-        '@entity-type' => $entity_type,
-        '@label' => $label,
-      ]));
+    $session->pageTextContains('The vote by ' . $vote_owner . ' on ' . $entity_type . ' ' . $label . ' has been deleted.');
 
     // Assert that the vote got deleted and other votes remain.
     $source_1_votes = $vote_storage->getUserVotes(0, 'vote', 'node', 1, 'source_1');

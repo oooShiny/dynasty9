@@ -17,9 +17,7 @@ use Drupal\Tests\BrowserTestBase;
 class LanguageConfigurationTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['language'];
 
@@ -201,7 +199,7 @@ class LanguageConfigurationTest extends BrowserTestBase {
    *   description of the state of the check, for example: 'after re-ordering'.
    *   Defaults to 'by default'.
    */
-  protected function checkConfigurableLanguageWeight($state = 'by default') {
+  protected function checkConfigurableLanguageWeight($state = 'by default'): void {
     // Reset language list.
     \Drupal::languageManager()->reset();
     $max_configurable_language_weight = $this->getHighestConfigurableLanguageWeight();
@@ -216,7 +214,7 @@ class LanguageConfigurationTest extends BrowserTestBase {
    * @return int
    *   Maximum weight of configurable languages.
    */
-  protected function getHighestConfigurableLanguageWeight() {
+  protected function getHighestConfigurableLanguageWeight(): int {
     $max_weight = 0;
 
     $storage = $this->container->get('entity_type.manager')

@@ -5,6 +5,7 @@ namespace Drupal\quicklink\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -27,9 +28,16 @@ class QuicklinkConfigForm extends ConfigFormBase {
    *   The factory for configuration objects.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface|null $typed_config_manager
+   *   The typed config manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager) {
-    parent::__construct($config_factory);
+  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, ?TypedConfigManagerInterface $typed_config_manager = null) {
+    if (version_compare(\Drupal::VERSION, '10.2.0', '>=')) {
+      parent::__construct($config_factory, $typed_config_manager);
+    }
+    else {
+      parent::__construct($config_factory);
+    }
     $this->entityTypeManager = $entity_type_manager;
   }
 
@@ -39,7 +47,8 @@ class QuicklinkConfigForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->has('config.typed') ? $container->get('config.typed') : NULL
     );
   }
 

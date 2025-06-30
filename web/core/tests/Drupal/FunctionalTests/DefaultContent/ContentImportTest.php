@@ -8,13 +8,16 @@ use ColinODell\PsrTestLogger\TestLogger;
 use Drupal\block_content\BlockContentInterface;
 use Drupal\block_content\Entity\BlockContentType;
 use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\DefaultContent\PreImportEvent;
 use Drupal\Core\DefaultContent\Existing;
 use Drupal\Core\DefaultContent\Finder;
 use Drupal\Core\DefaultContent\Importer;
 use Drupal\Core\DefaultContent\ImportException;
 use Drupal\Core\DefaultContent\InvalidEntityException;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\File\FileExists;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -22,6 +25,7 @@ use Drupal\file\FileInterface;
 use Drupal\FunctionalTests\Core\Recipe\RecipeTestTrait;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\language\Entity\ContentLanguageSettings;
+use Drupal\layout_builder\Section;
 use Drupal\media\MediaInterface;
 use Drupal\menu_link_content\MenuLinkContentInterface;
 use Drupal\node\NodeInterface;
@@ -30,12 +34,15 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 use Drupal\Tests\media\Traits\MediaTypeCreationTrait;
 use Drupal\Tests\taxonomy\Traits\TaxonomyTestTrait;
+use Drupal\user\UserInterface;
 use Psr\Log\LogLevel;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @covers \Drupal\Core\DefaultContent\Importer
  * @group DefaultContent
  * @group Recipe
+ * @group #slow
  */
 class ContentImportTest extends BrowserTestBase {
 
@@ -56,6 +63,7 @@ class ContentImportTest extends BrowserTestBase {
     'block_content',
     'content_translation',
     'entity_test',
+    'layout_builder',
     'media',
     'menu_link_content',
     'node',
@@ -66,14 +74,22 @@ class ContentImportTest extends BrowserTestBase {
     'user',
   ];
 
+  /**
+   * The directory with the source data.
+   */
   private readonly string $contentDir;
+
+  /**
+   * The admin account.
+   */
+  private UserInterface $adminAccount;
 
   /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->setUpCurrentUser(admin: TRUE);
+    $this->adminAccount = $this->setUpCurrentUser(admin: TRUE);
 
     BlockContentType::create(['id' => 'basic', 'label' => 'Basic'])->save();
     block_content_add_body_field('basic');
@@ -107,10 +123,18 @@ class ContentImportTest extends BrowserTestBase {
 
     $this->contentDir = $this->getDrupalRoot() . '/core/tests/fixtures/default_content';
     \Drupal::service('file_system')->copy($this->contentDir . '/file/druplicon_copy.png', $this->publicFilesDirectory . '/druplicon_copy.png', FileExists::Error);
+
+    // Enable Layout Builder for the Page content type, with custom overrides.
+    \Drupal::service(EntityDisplayRepositoryInterface::class)
+      ->getViewDisplay('node', 'page')
+      ->enableLayoutBuilder()
+      ->setOverridable()
+      ->save();
   }
 
   /**
    * @return array<array<mixed>>
+   *   An array of test cases, each containing an existing entity handling mode.
    */
   public static function providerImportEntityThatAlreadyExists(): array {
     return [
@@ -145,7 +169,7 @@ class ContentImportTest extends BrowserTestBase {
     $importer->setLogger($logger);
     $importer->importContent(new Finder($this->contentDir));
 
-    $this->assertContentWasImported();
+    $this->assertContentWasImported($this->adminAccount);
     // We should see a warning about importing a file entity associated with a
     // file that doesn't exist.
     $predicate = function (array $record): bool {
@@ -156,6 +180,16 @@ class ContentImportTest extends BrowserTestBase {
       );
     };
     $this->assertTrue($logger->hasRecordThatPasses($predicate, LogLevel::WARNING));
+  }
+
+  /**
+   * Tests importing content directly, via the API, with a different user.
+   */
+  public function testDirectContentImportWithDifferentUser(): void {
+    $user = $this->createUser();
+    $importer = $this->container->get(Importer::class);
+    $importer->importContent(new Finder($this->contentDir), account: $user);
+    $this->assertContentWasImported($user);
   }
 
   /**
@@ -179,8 +213,11 @@ class ContentImportTest extends BrowserTestBase {
 
   /**
    * Asserts that the default content was imported as expected.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The account that should own the imported content.
    */
-  private function assertContentWasImported(): void {
+  private function assertContentWasImported(AccountInterface $account): void {
     /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
     $entity_repository = $this->container->get(EntityRepositoryInterface::class);
 
@@ -247,10 +284,10 @@ class ContentImportTest extends BrowserTestBase {
     $this->assertSame("I'd love to put some useful info here.", $block_content->body->value);
 
     // A node with a non-existent owner should be reassigned to the current
-    // user.
+    // user or the user provided to the importer.
     $node = $entity_repository->loadEntityByUuid('node', '7f1dd75a-0be2-4d3b-be5d-9d1a868b9267');
     $this->assertInstanceOf(NodeInterface::class, $node);
-    $this->assertSame(\Drupal::currentUser()->id(), $node->getOwner()->id());
+    $this->assertSame($account->id(), $node->getOwner()->id());
 
     // Ensure a node with a translation is imported properly.
     $node = $entity_repository->loadEntityByUuid('node', '2d3581c3-92c7-4600-8991-a0d4b3741198');
@@ -258,6 +295,58 @@ class ContentImportTest extends BrowserTestBase {
     $translation = $node->getTranslation('fr');
     $this->assertSame('Perdu en traduction', $translation->label());
     $this->assertSame("Içi c'est la version français.", $translation->body->value);
+
+    // Layout data should be imported.
+    $node = $entity_repository->loadEntityByUuid('node', '32650de8-9edd-48dc-80b8-8bda180ebbac');
+    $this->assertInstanceOf(NodeInterface::class, $node);
+    $section = $node->layout_builder__layout[0]->section;
+    $this->assertInstanceOf(Section::class, $section);
+    $this->assertCount(2, $section->getComponents());
+    $this->assertSame('system_powered_by_block', $section->getComponent('03b45f14-cf74-469a-8398-edf3383ce7fa')->getPluginId());
+  }
+
+  /**
+   * Tests that the pre-import event allows skipping certain entities.
+   */
+  public function testPreImportEvent(): void {
+    $invalid_uuid_detected = FALSE;
+
+    $listener = function (PreImportEvent $event) use (&$invalid_uuid_detected): void {
+      $event->skip('3434bd5a-d2cd-4f26-bf79-a7f6b951a21b', 'Decided not to!');
+      try {
+        $event->skip('not-a-thing');
+      }
+      catch (\InvalidArgumentException) {
+        $invalid_uuid_detected = TRUE;
+      }
+    };
+    \Drupal::service(EventDispatcherInterface::class)
+      ->addListener(PreImportEvent::class, $listener);
+
+    $finder = new Finder($this->contentDir);
+    $this->assertSame('menu_link_content', $finder->data['3434bd5a-d2cd-4f26-bf79-a7f6b951a21b']['_meta']['entity_type']);
+
+    /** @var \Drupal\Core\DefaultContent\Importer $importer */
+    $importer = \Drupal::service(Importer::class);
+    $logger = new TestLogger();
+    $importer->setLogger($logger);
+    $importer->importContent($finder, Existing::Error);
+
+    // The entity we skipped should not be here, and the reason why should have
+    // been logged.
+    $menu_link = \Drupal::service(EntityRepositoryInterface::class)
+      ->loadEntityByUuid('menu_link_content', '3434bd5a-d2cd-4f26-bf79-a7f6b951a21b');
+    $this->assertNull($menu_link);
+    $this->assertTrue($logger->hasInfo([
+      'message' => 'Skipped importing @entity_type @uuid because: %reason',
+      'context' => [
+        '@entity_type' => 'menu_link_content',
+        '@uuid' => '3434bd5a-d2cd-4f26-bf79-a7f6b951a21b',
+        '%reason' => 'Decided not to!',
+      ],
+    ]));
+    // We should have caught an exception for trying to skip an invalid UUID.
+    $this->assertTrue($invalid_uuid_detected);
   }
 
 }

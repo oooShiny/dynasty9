@@ -8,7 +8,7 @@ title: 'Default cron handler'
 id: patreon_extras_cron
 weight: 0
 module: patreon_extras
-callback: patreon_extras_cron
+callback: 'patreon_extras#cron'
 scheduler:
   id: simple
 launcher:

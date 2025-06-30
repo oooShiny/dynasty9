@@ -1,12 +1,12 @@
 <?php
 
-use Drupal\Core\Session\AccountProxy;
-use Drupal\votingapi\Entity\Vote;
-
 /**
  * @file
  * Provides hook documentation for the Rate module.
  */
+
+use Drupal\Core\Session\AccountProxy;
+use Drupal\votingapi\Entity\Vote;
 
 /**
  * Alter the vote data before a vote is created.
@@ -78,7 +78,7 @@ function hook_rate_widget_options_alter(array &$options, $entity_type, $entity_b
 }
 
 /**
- * Assign an aleternative database column to retrieve the rate values from.
+ * Assign an alternative database column to retrieve the rate values from.
  *
  * The default database column to store the rate value is 'value'.
  * Custom and contrib modules can add their own columns to the database
@@ -101,7 +101,7 @@ function hook_rate_widget_options_alter(array &$options, $entity_type, $entity_b
 function hook_rate_value_column(&$value_column, $entity_type, $entity_bundle, $entity_id, $rate_widget, $user_id) {
   // Trigger only on articles and specific widgets.
   if ($rate_widget == 'test_rate_widget' && $entity_bundle == 'article') {
-    // Overide the default database rate value column.
+    // Override the default database rate value column.
     $value_column = 'custom_value';
   }
 }

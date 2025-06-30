@@ -6,7 +6,15 @@
 import '../sass/gin_gutenberg.scss';
 
 if (document.body.classList.contains('gutenberg--enabled')) {
-  document.querySelector('.meta-sidebar__trigger').addEventListener('click', function () {
-    document.querySelector('.edit-post-header__settings .interface-pinned-items .components-button').click();
-  });
+  const metaSidebarTrigger = document.querySelector('.meta-sidebar__trigger');
+  if (metaSidebarTrigger) {
+    metaSidebarTrigger.addEventListener('click', function () {
+      const interfacePinnedItemsButton = document.querySelector(
+        '.edit-post-header__settings .interface-pinned-items .components-button',
+      );
+      if (interfacePinnedItemsButton) {
+        interfacePinnedItemsButton.click();
+      }
+    });
+  }
 }

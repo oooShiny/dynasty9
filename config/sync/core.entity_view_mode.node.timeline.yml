@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.timeline
 label: Timeline
+description: ''
 targetEntityType: node
 cache: true

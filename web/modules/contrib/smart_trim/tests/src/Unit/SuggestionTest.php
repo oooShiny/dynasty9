@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\smart_trim\Unit;
 
 use Drupal\Tests\UnitTestCase;
@@ -34,7 +36,7 @@ class SuggestionTest extends UnitTestCase {
   /**
    * Data provider for testSuggestion().
    */
-  public function suggestionProvider(): array {
+  public static function suggestionProvider(): array {
     return [
       [
         [

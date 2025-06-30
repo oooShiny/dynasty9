@@ -339,15 +339,14 @@ class PatreonUserService extends PatreonService {
    * @param array $data
    *   Results array from the user endpoint.
    *
-   * @return bool|\Drupal\user\UserInterface
+   * @return \Drupal\user\UserInterface
    *   A Drupal user object, or FALSE on error.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\patreon_user\PatreonUserUserException
    */
-  public function createUserFromReturn(array $data) {
-    $return = FALSE;
+  public function createUserFromReturn(array $data): UserInterface {
     if ($patreon_id = $this->getValueByKey($data, ['data', 'id'])) {
 
       // We need an email address, or we can't continue.
@@ -505,7 +504,11 @@ class PatreonUserService extends PatreonService {
       'attributes',
       'is_suspended',
     ]) == TRUE ||
-    user_is_blocked($drupal_account_name) == TRUE;
+      (bool) $this->entityTypeManager->getStorage('user')->getQuery()
+        ->accessCheck(FALSE)
+        ->condition('name', $drupal_account_name)
+        ->condition('status', 0)
+        ->execute() == TRUE;
   }
 
   /**

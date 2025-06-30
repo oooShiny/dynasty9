@@ -2,12 +2,12 @@
 
 namespace Drupal\Tests\entity_usage\FunctionalJavascript;
 
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\media\Entity\Media;
 use Drupal\Tests\entity_usage\Traits\EntityUsageLastEntityQueryTrait;
 use Drupal\Tests\media\Traits\MediaTypeCreationTrait;
 use Drupal\Tests\paragraphs\FunctionalJavascript\ParagraphsTestBaseTrait;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\media\Entity\Media;
 use Drupal\user\Entity\Role;
 
 /**
@@ -35,7 +35,7 @@ class ParagraphsTest extends EntityUsageJavascriptTestBase {
   /**
    * Tests the integration with paragraphs.
    */
-  public function testParagraphsUsage() {
+  public function testParagraphsUsage(): void {
     $session = $this->getSession();
     $page = $session->getPage();
     $assert_session = $this->assertSession();
@@ -204,7 +204,7 @@ class ParagraphsTest extends EntityUsageJavascriptTestBase {
     // The link points to the host node.
     $this->assertEquals($node1->toUrl()->toString(), $first_row_title_link->getAttribute('href'));
     $first_row_type = $this->xpath('//table/tbody/tr[1]/td[2]')[0];
-    $this->assertEquals('Content', $first_row_type->getText());
+    $this->assertEquals('Content: paragraphed_test', $first_row_type->getText());
     $first_row_langcode = $this->xpath('//table/tbody/tr[1]/td[3]')[0];
     $this->assertEquals('English', $first_row_langcode->getText());
     $first_row_field_label = $this->xpath('//table/tbody/tr[1]/td[4]')[0];
@@ -215,7 +215,7 @@ class ParagraphsTest extends EntityUsageJavascriptTestBase {
     // The link points to the host node.
     $this->assertEquals($node1->toUrl()->toString(), $second_row_title_link->getAttribute('href'));
     $second_row_type = $this->xpath('//table/tbody/tr[2]/td[2]')[0];
-    $this->assertEquals('Paragraph', $second_row_type->getText());
+    $this->assertEquals('Paragraph: single_media', $second_row_type->getText());
     $second_row_langcode = $this->xpath('//table/tbody/tr[2]/td[3]')[0];
     $this->assertEquals('English', $second_row_langcode->getText());
     $second_row_field_label = $this->xpath('//table/tbody/tr[2]/td[4]')[0];
@@ -226,7 +226,7 @@ class ParagraphsTest extends EntityUsageJavascriptTestBase {
     // The link points to the host node.
     $this->assertEquals($node1->toUrl()->toString(), $third_row_title_link->getAttribute('href'));
     $third_row_type = $this->xpath('//table/tbody/tr[3]/td[2]')[0];
-    $this->assertEquals('Paragraph', $third_row_type->getText());
+    $this->assertEquals('Paragraph: single_media', $third_row_type->getText());
     $third_row_langcode = $this->xpath('//table/tbody/tr[3]/td[3]')[0];
     $this->assertEquals('English', $third_row_langcode->getText());
     $third_row_field_label = $this->xpath('//table/tbody/tr[3]/td[4]')[0];
@@ -286,7 +286,7 @@ class ParagraphsTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals('Node 1', $first_row_title_link->getText());
     $this->assertEquals($node1->toUrl()->toString(), $first_row_title_link->getAttribute('href'));
     $first_row_type = $this->xpath('//table/tbody/tr[1]/td[2]')[0];
-    $this->assertEquals('Content', $first_row_type->getText());
+    $this->assertEquals('Content: paragraphed_test', $first_row_type->getText());
     $first_row_langcode = $this->xpath('//table/tbody/tr[1]/td[3]')[0];
     $this->assertEquals('English', $first_row_langcode->getText());
     $first_row_field_label = $this->xpath('//table/tbody/tr[1]/td[4]')[0];

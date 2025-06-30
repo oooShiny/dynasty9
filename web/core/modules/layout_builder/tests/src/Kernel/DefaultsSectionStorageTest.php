@@ -9,6 +9,7 @@ use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\Plugin\Context\EntityContext;
 use Drupal\Core\Plugin\Context\EntityContextDefinition;
 use Drupal\entity_test\Entity\EntityTest;
+use Drupal\entity_test\EntityTestHelper;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
 use Drupal\layout_builder\Plugin\SectionStorage\DefaultsSectionStorage;
@@ -20,7 +21,6 @@ use Drupal\layout_builder\SectionStorage\SectionStorageDefinition;
  * @coversDefaultClass \Drupal\layout_builder\Plugin\SectionStorage\DefaultsSectionStorage
  *
  * @group layout_builder
- * @group #slow
  */
 class DefaultsSectionStorageTest extends KernelTestBase {
 
@@ -50,7 +50,7 @@ class DefaultsSectionStorageTest extends KernelTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    entity_test_create_bundle('bundle_with_extra_fields');
+    EntityTestHelper::createBundle('bundle_with_extra_fields');
     $this->installEntitySchema('entity_test');
     $this->installEntitySchema('user');
     $this->installConfig(['layout_builder_defaults_test']);

@@ -4,10 +4,11 @@ declare(strict_types = 1);
 
 namespace Drupal\migrate_plus\Plugin\migrate\process;
 
-use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
@@ -174,7 +175,7 @@ class EntityLookup extends ProcessPluginBase implements ContainerFactoryPluginIn
           case 'entity_reference':
             if (empty($this->lookupBundle)) {
               $handlerSettings = $fieldConfig->getSetting('handler_settings');
-              $bundles = array_filter((array) $handlerSettings['target_bundles']);
+              $bundles = array_filter((array) ($handlerSettings['target_bundles'] ?? []));
               if (count($bundles) == 1) {
                 $this->lookupBundle = reset($bundles);
               }
@@ -227,11 +228,11 @@ class EntityLookup extends ProcessPluginBase implements ContainerFactoryPluginIn
    *   Entity id if the queried entity exists. Otherwise NULL.
    */
   protected function query($value) {
-    // Entity queries typically are case-insensitive. Therefore, we need to
-    // handle case-sensitive filtering as a post-query step. By default, it
-    // filters case-insensitive. Change to true if that is not the desired
-    // outcome.
-    $ignoreCase = !empty($this->configuration['ignore_case']) ?: FALSE;
+    $query = $this->doGetQuery($value);
+    return $this->processResults($query->execute(), $value);
+  }
+
+  private function doGetQuery($value): QueryInterface {
     $operator = !empty($this->configuration['operator']) ? $this->configuration['operator'] : '=';
     $multiple = is_array($value);
 
@@ -253,19 +254,37 @@ class EntityLookup extends ProcessPluginBase implements ContainerFactoryPluginIn
     if ($this->lookupBundleKey) {
       $query->condition($this->lookupBundleKey, (array) $this->lookupBundle, 'IN');
     }
-    $results = $query->execute();
+    return $query;
+  }
 
+  private function processResults($results, $original_value) {
     if (empty($results)) {
       return NULL;
     }
+
+    // Entity queries typically are case-insensitive. Therefore, we need to
+    // handle case-sensitive filtering as a post-query step. By default, it
+    // filters case-insensitive. Change to true if that is not the desired
+    // outcome.
+    $ignoreCase = !empty($this->configuration['ignore_case']) ?: FALSE;
+    $operator = !empty($this->configuration['operator']) ? $this->configuration['operator'] : '=';
+    $multiple = is_array($original_value);
 
     // Do a case-sensitive comparison only for strict operators.
     if (!$ignoreCase && in_array($operator, ['=', 'IN'], TRUE)) {
       // Returns the entity's identifier.
       foreach ($results as $k => $identifier) {
         $entity = $this->entityTypeManager->getStorage($this->lookupEntityType)->load($identifier);
-        $result_value = $entity instanceof ConfigEntityInterface ? $entity->get($this->lookupValueKey) : $entity->get($this->lookupValueKey)->value;
-        if (($multiple && !in_array($result_value, $value, TRUE)) || (!$multiple && $result_value !== $value)) {
+        $result_value = $entity->get($this->lookupValueKey);
+        // If the value is a non-empty field, extract its first value's main
+        // property (most of the time "value" but sometimes "target_id" or
+        // anything declared by the field item).
+        if ($result_value instanceof FieldItemList && !$result_value->isEmpty()) {
+          $property = $result_value->first()->mainPropertyName();
+          $result_value = $result_value->{$property};
+        }
+
+        if (($multiple && !in_array($result_value, $original_value, TRUE)) || (!$multiple && $result_value !== $original_value)) {
           unset($results[$k]);
         }
       }

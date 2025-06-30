@@ -4,15 +4,18 @@
  */
 /* eslint-disable */
 
-(function(Drupal2, wp2) {
+(function(Drupal2, wp2, drupalSettings2) {
   const { blockEditor, components, element } = wp2;
   const { useState, useEffect, useCallback } = element;
   const { InspectorControls } = blockEditor;
   const { SelectControl, Card, CardBody, Placeholder, Spinner } = components;
   const __ = Drupal2.t;
   function openBlockSettings(type, contentBlockId) {
+    const entityId = drupalSettings2.gutenberg.entityId || null;
+    const entityType = "node";
+    const entityBundle = drupalSettings2.gutenberg.nodeType;
     const ajaxSettings = {
-      url: Drupal2.url(`editor/content_block_type/settings/${type}/${contentBlockId}`),
+      url: Drupal2.url(`editor/content_block_type/settings/${type}/${contentBlockId}/${entityType}/${entityId}/${entityBundle}`),
       dialogType: "dialog",
       dialogRenderer: "sidebar"
     };
@@ -65,4 +68,4 @@
   window.DrupalGutenberg = window.DrupalGutenberg || {};
   window.DrupalGutenberg.Components = window.DrupalGutenberg.Components || {};
   window.DrupalGutenberg.Components.ContentBlock = ContentBlock;
-})(Drupal, wp);
+})(Drupal, wp, drupalSettings);

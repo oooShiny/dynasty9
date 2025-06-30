@@ -36,6 +36,9 @@ class ViewExecutableTest extends ViewsKernelTestBase {
 
   use CommentTestTrait;
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'system',
     'node',
@@ -89,7 +92,10 @@ class ViewExecutableTest extends ViewsKernelTestBase {
     'parent_views',
   ];
 
-  protected function setUpFixtures() {
+  /**
+   * Sets up the necessary fixtures for the test environment.
+   */
+  protected function setUpFixtures(): void {
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
     $this->installEntitySchema('comment');
@@ -204,6 +210,9 @@ class ViewExecutableTest extends ViewsKernelTestBase {
     $this->assertEquals([], $view->getExposedInput());
   }
 
+  /**
+   * Tests setting a display with an invalid display ID.
+   */
   public function testSetDisplayWithInvalidDisplay(): void {
     \Drupal::service('module_installer')->install(['dblog']);
     $view = Views::getView('test_executable_displays');

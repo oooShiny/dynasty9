@@ -12,7 +12,7 @@ module.exports = {
   '@tags': ['quicklink'],
   before: function (browser) {
     browser.drupalInstall({
-      setupFile: 'modules/contrib/quicklink/tests/src/Nightwatch/TestSiteInstallTestScript.php',
+      setupFile: `${__dirname}/../TestSiteInstallTestScript.php`,
     });
   },
   after: function (browser) {

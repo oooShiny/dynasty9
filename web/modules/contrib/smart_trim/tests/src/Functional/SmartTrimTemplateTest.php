@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\smart_trim\Functional;
 
 use Drupal\Core\Session\AccountInterface;
@@ -248,7 +250,7 @@ class SmartTrimTemplateTest extends BrowserTestBase {
     $this->assertCount(1, $query);
     $query = $this->xpath('//div[@id="body-trim-5-words" and text()="Playful pup fetches joy, wagging"]');
     $this->assertCount(1, $query);
-    $query = $this->xpath('//div[@id="body-trim-7-words-elipses-html"]/div/p[text()="Playful pup fetches joy, wagging tail brightens..."]');
+    $query = $this->xpath('//div[@id="body-trim-7-words-ellipses-html"]/div/p[text()="Playful pup fetches joy, wagging tail brightens..."]');
     $this->assertCount(1, $query);
   }
 
@@ -275,7 +277,7 @@ class SmartTrimTemplateTest extends BrowserTestBase {
     $this->drupalGet('/node/1');
     $this->assertSession()->responseContains('This text is trimmed.');
 
-    // Check that is_trimmed not set for untrimmed ourput.
+    // Check that is_trimmed not set for untrimmed output.
     $display_repository = \Drupal::service('entity_display.repository');
     $display_repository->getViewDisplay('node', 'article')
       ->setComponent('field_wrapped', [

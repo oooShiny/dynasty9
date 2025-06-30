@@ -62,7 +62,7 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
   protected $adminUser;
 
   /**
-   * Modules to enable.
+   * Modules to install.
    *
    * We marginally use interface translation functionality here, so need to use
    * the locale module instead of language only, but the 90% of the test is
@@ -126,10 +126,10 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
     $file->save();
 
     // Setup the site languages by installing two languages.
-    // Set the default language in order for the translated string to be registered
-    // into database when seen by t(). Without doing this, our target string
-    // is for some reason not found when doing translate search. This might
-    // be some bug.
+    // Set the default language in order for the translated string to be
+    // registered into database when seen by t(). Without doing this, our target
+    // string is for some reason not found when doing translate search. This
+    // might be some bug.
     $default_language = \Drupal::languageManager()->getDefaultLanguage();
     ConfigurableLanguage::createFromLangcode($langcode_browser_fallback)->save();
     $this->config('system.site')->set('default_langcode', $langcode_browser_fallback)->save();
@@ -414,7 +414,10 @@ class LanguageUILanguageNegotiationTest extends BrowserTestBase {
     }
   }
 
-  protected function doRunTest($test) {
+  /**
+   * Runs common tests for the language user interface.
+   */
+  protected function doRunTest($test): void {
     $test += ['path_options' => []];
     if (!empty($test['language_negotiation'])) {
       $method_weights = array_flip($test['language_negotiation']);

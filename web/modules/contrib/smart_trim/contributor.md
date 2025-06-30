@@ -17,7 +17,7 @@ First off, thanks for taking the time to contribute!
   * [Your First Code Contribution](#your-first-code-contribution)
   * [Local Development](#local-development)
 
-[Styleguides](#styleguides)
+[Style Guides](#style-guides)
   * [Git Commit Messages](#git-commit-messages)
   * [JavaScript Styleguide](#javascript-styleguide)
   * [PHP Styleguide](#php-styleguide)
@@ -78,7 +78,7 @@ listing steps, **don't just say what you did, but explain how you did it**.
 For example, if you moved the cursor to the end of a line, explain
 if you used the mouse, or a keyboard shortcut, and if so which one?
 * **Provide specific examples to demonstrate the steps**. Include links to
-files or GitHub projects, or copy/pasteable snippets, which you use in
+files or GitHub projects, or copy/pasted snippets, which you use in
 those examples. If you're providing snippets in the issue, use[Markdowncode blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and
 point out what exactly is the problem with that behavior.
@@ -156,8 +156,8 @@ provide the following information:
 suggestion.
 * **Provide a step-by-step description of the suggested enhancement** in
 as many details as possible.
-* **Provide specific examples to demonstrate the steps**. Include copy/
-pasteable snippets which you use in those examples, as \<code\> blocks.
+* **Provide specific examples to demonstrate the steps**. Include copy/pasted
+snippets which you use in those examples, as \<code\> blocks.
 * **Describe the current behavior** and explain which behavior you
 expected to see instead and why.
 * **Include screenshots and animated GIFs** which help you demonstrate the
@@ -186,7 +186,7 @@ contributed Drupal module.
 [Visit Drupal Installing Modules](https://www.drupal.org/node/1897420) for
 further information.
 
-### Styleguides
+### Style Guides
 
 #### Git Commit Messages
 

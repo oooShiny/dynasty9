@@ -3,6 +3,13 @@
   const { t } = Drupal;
 
   /**
+   * Retrieves the Gutenberg CSRF token.
+   */
+  function getCsrfToken() {
+    return drupalSettings.gutenberg.csrfToken;
+  }
+
+  /**
    * Parse query strings into an object.
    * @see https://stackoverflow.com/a/2880929
    *
@@ -426,6 +433,7 @@
       method: 'POST',
       regex: /\/wp\/v2\/media/g,
       process(matches, data, options) {
+        const csrfToken = getCsrfToken();
         return new Promise((resolve, reject) => {
           let file;
           const entries = options.body.entries();
@@ -451,6 +459,9 @@
             method: 'POST',
             // TODO match the current editor instance dynamically.
             url: Drupal.url('editor/media/upload/gutenberg'),
+            headers: {
+              'X-CSRF-Token': csrfToken,
+            },
             data: formData,
             dataType: 'json',
             cache: false,
@@ -657,10 +668,14 @@
       method: 'PUT',
       regex: /\/wp\/v2\/blocks\/(\d+)/g,
       process(matches, data) {
+        const csrfToken = getCsrfToken();
         return new Promise((resolve, reject) => {
           $.ajax({
             method: 'PUT',
             url: Drupal.url(`editor/reusable-blocks/${data.id}`),
+            headers: {
+              'X-CSRF-Token': csrfToken,
+            },
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             dataType: 'json',
@@ -694,10 +709,14 @@
       method: 'POST',
       regex: /\/wp\/v2\/blocks/g,
       process(matches, data) {
+        const csrfToken = getCsrfToken();
         return new Promise((resolve, reject) => {
           $.ajax({
             method: 'POST',
             url: Drupal.url('editor/reusable-blocks'),
+            headers: {
+              'X-CSRF-Token': csrfToken,
+            },
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             dataType: 'json',
@@ -766,10 +785,14 @@
       method: 'POST', // /wp/v2/wp_pattern_category
       regex: /\/wp\/v2\/wp_pattern_category/g,
       process(matches, data) {
+        const csrfToken = getCsrfToken();
         return new Promise((resolve, reject) => {
           $.ajax({
             method: 'POST',
             url: Drupal.url('editor/patterns/categories'),
+            headers: {
+              'X-CSRF-Token': csrfToken,
+            },
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             dataType: 'json',
@@ -910,7 +933,12 @@
           ((options.method && options.method === requestPath.method) ||
             requestPath.method === 'GET')
         ) {
-          return requestPath.process(matches, options.data, options);
+          try {
+            return requestPath.process(matches, options.data, options);
+          } catch (error) {
+            // Handle unexpected exceptions.
+            return Promise.reject(error);
+          }
         }
       }
     }

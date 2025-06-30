@@ -5,12 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.article.body
-    - field.field.node.article.field_content_rows
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_show_in_blog_listing
     - field.field.node.article.field_tags
-    - field.field.node.article.field_yoast_seo
     - image.style.medium
     - node.type.article
   module:
@@ -53,11 +51,9 @@ content:
     weight: 100
     region: content
 hidden:
-  field_content_rows: true
   field_image: true
   field_meta_tags: true
   field_show_in_blog_listing: true
   field_tags: true
-  field_yoast_seo: true
   langcode: true
   search_api_excerpt: true

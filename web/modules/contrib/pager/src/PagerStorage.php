@@ -8,6 +8,12 @@ use Drupal\Core\Database\Connection;
  * Defines the pager storage service.
  */
 class PagerStorage {
+
+  /**
+   * The database handle.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
   protected $dbh;
 
   /**

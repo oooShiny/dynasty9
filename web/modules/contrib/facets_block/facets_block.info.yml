@@ -2,11 +2,11 @@ name: 'Facets Block'
 description: 'Render Facets in a single block.'
 package: 'Other'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - facets:facets
 
-# Information added by Drupal.org packaging script on 2024-06-13
-version: '2.0.1'
+# Information added by Drupal.org packaging script on 2024-12-26
+version: '2.0.3'
 project: 'facets_block'
-datestamp: 1718265989
+datestamp: 1735239766

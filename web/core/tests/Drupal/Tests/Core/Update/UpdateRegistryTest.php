@@ -13,11 +13,13 @@ use Drupal\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 
 /**
- * @coversDefaultClass \Drupal\Core\Update\UpdateRegistry
- * @group Update
+ * Tests UpdateRegistry.
  *
  * Note we load code, so isolate the tests.
  *
+ * @coversDefaultClass \Drupal\Core\Update\UpdateRegistry
+ * @group Update
+ * @group #slow
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
@@ -37,7 +39,7 @@ class UpdateRegistryTest extends UnitTestCase {
   /**
    * Sets up some extensions with some update functions.
    */
-  protected function setupBasicExtensions() {
+  protected function setupBasicExtensions(): void {
     $info_a = <<<'EOS'
 type: module
 name: Module A
@@ -59,6 +61,7 @@ EOS;
     $info_d = <<<'EOS'
 type: theme
 name: Theme D
+core_version_requirement: '*'
 EOS;
 
     $module_a = <<<'EOS'
@@ -89,7 +92,7 @@ function module_b_post_update_a() {
 /**
  * Implements hook_removed_post_updates().
  */
-function module_b_removed_post_updates() {
+function module_b_removed_post_updates(): array {
   return [
     'module_b_post_update_b' => '8.9.0',
     'module_b_post_update_c' => '8.9.0',
@@ -116,7 +119,7 @@ function module_c_post_update_b() {
 /**
  * Implements hook_removed_post_updates().
  */
-function module_c_removed_post_updates() {
+function module_c_removed_post_updates(): array {
   return [
     'module_c_post_update_b' => '8.9.0',
     'module_c_post_update_c' => '8.9.0',
@@ -143,7 +146,7 @@ function theme_d_post_update_c() {
 /**
  * Implements hook_removed_post_updates().
  */
-function theme_d_removed_post_updates() {
+function theme_d_removed_post_updates(): array {
   return [
     'theme_d_post_update_a' => '8.9.0',
   ];
@@ -192,7 +195,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -275,7 +278,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -318,7 +321,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -370,7 +373,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -440,7 +443,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -483,7 +486,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -523,7 +526,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -598,7 +601,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);
@@ -635,6 +638,7 @@ EOS;
     $info_d = <<<'EOS'
 type: theme
 name: Theme D
+core_version_requirement: '*'
 EOS;
 
     $module_a = <<<'EOS'
@@ -685,7 +689,7 @@ EOS;
     $theme_handler = $this->prophesize(ThemeHandlerInterface::class);
     $theme_handler->listInfo()->willReturn([
       'theme_d' => [
-        'type' => 'theme_d',
+        'type' => 'theme',
         'pathname' => 'core/themes/theme_d/theme_d.info.yml',
       ],
     ]);

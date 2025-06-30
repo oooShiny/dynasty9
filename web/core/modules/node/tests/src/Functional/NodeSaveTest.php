@@ -21,9 +21,7 @@ class NodeSaveTest extends NodeTestBase {
   protected $webUser;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['node_test'];
 
@@ -38,7 +36,8 @@ class NodeSaveTest extends NodeTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    // Create a user that is allowed to post; we'll use this to test the submission.
+    // Create a user that is allowed to post; we'll use this to test the
+    // submission.
     $web_user = $this->drupalCreateUser(['create article content']);
     $this->drupalLogin($web_user);
     $this->webUser = $web_user;

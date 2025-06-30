@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: favorite_podcast_block
 label: 'Favorite Podcast Block'
-revision: 0
+revision: false
 description: ''

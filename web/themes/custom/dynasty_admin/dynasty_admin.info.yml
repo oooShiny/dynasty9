@@ -2,7 +2,7 @@ name: Dynasty Admin Theme
 description: 'Overrides to the Gin admin theme'
 base theme: gin
 type: theme
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^8 || ^9 || ^10 || ^11
 libraries:
   - dynasty_tw/global
   - dynasty_tw/overrides

@@ -75,8 +75,7 @@ class SignalCache implements SignalInterface {
    * @param string $signal
    *   The name of the signal.
    *
-   * @return boolean
-   *   TRUE if the signal was set.
+   * @return void
    */
   public function set($job_id, $signal) {
     $this->cacheBackend->set("signal-$job_id-$signal", TRUE);

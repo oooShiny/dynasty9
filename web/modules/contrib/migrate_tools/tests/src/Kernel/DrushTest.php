@@ -66,6 +66,7 @@ namespace Drupal\Tests\migrate_tools\Kernel {
       $this->installEntitySchema('taxonomy_term');
       $this->installEntitySchema('user');
       $this->installSchema('user', ['users_data']);
+      $this->installSchema('migrate_tools', ['migrate_tools_sync_source_ids']);
       $this->migrationPluginManager = $this->container->get('plugin.manager.migration');
       // Handle Drush 10 vs Drush 11 differences.
       $logger_class = class_exists(DrushLoggerManager::class) ? DrushLoggerManager::class : LoggerInterface::class;

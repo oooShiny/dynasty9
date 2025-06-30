@@ -24,6 +24,7 @@ use Symfony\Component\Routing\Route;
  *
  * @coversDefaultClass \Drupal\user\Form\EntityPermissionsForm
  * @group user
+ * @group legacy
  */
 class EntityPermissionsFormTest extends UnitTestCase {
 
@@ -60,12 +61,10 @@ class EntityPermissionsFormTest extends UnitTestCase {
     $module_handler = $this->prophesize(ModuleHandlerInterface::class)->reveal();
     $module_extension_list = $this->prophesize(ModuleExtensionList::class)->reveal();
     $prophecy = $this->prophesize(ConfigManagerInterface::class);
-    $prophecy->getConfigEntitiesToChangeOnDependencyRemoval('config', ['node.type.article'])
+    $prophecy->findConfigEntityDependencies('config', ['node.type.article'])
       ->willReturn([
-        'delete' => [
-          new ConfigEntityDependency('core.entity_view_display.node.article.full'),
-          new ConfigEntityDependency('field.field.node.article.body'),
-        ],
+        new ConfigEntityDependency('core.entity_view_display.node.article.full'),
+        new ConfigEntityDependency('field.field.node.article.body'),
       ]);
     $config_manager = $prophecy->reveal();
     $prophecy = $this->prophesize(EntityTypeInterface::class);
@@ -95,12 +94,14 @@ class EntityPermissionsFormTest extends UnitTestCase {
 
     $access_actual = $bundle_form->access($route, $route_match, $bundle);
     $this->assertEquals($found ? AccessResult::allowed() : AccessResult::neutral(), $access_actual);
+    $this->expectDeprecation('Drupal\user\Form\EntityPermissionsForm::access() is deprecated in drupal:11.1.0 and is removed from drupal:12.0.0. Use a permissions check on the route definition instead. See https://www.drupal.org/node/3384745');
   }
 
   /**
    * Provides data for the testPermissionsByProvider method.
    *
    * @return array
+   *   An array of test data.
    */
   public static function providerTestPermissionsByProvider() {
     return [

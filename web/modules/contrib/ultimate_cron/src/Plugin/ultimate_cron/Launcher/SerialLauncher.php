@@ -21,16 +21,6 @@ class SerialLauncher extends LauncherBase implements PluginCleanupInterface {
   public $currentThread = NULL;
 
   /**
-   * Implements hook_cron_alter().
-   */
-  public function cron_alter(&$jobs) {
-    $lock = \Drupal::service('ultimate_cron.lock');
-    if (!empty($lock->{$killable})) {
-      $jobs['ultimate_cron_plugin_launcher_serial_cleanup']->hook['tags'][] = 'killable';
-    }
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
@@ -116,21 +106,6 @@ class SerialLauncher extends LauncherBase implements PluginCleanupInterface {
       '#weight' => 2,
     );
     return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function settingsFormValidate(&$form, &$form_state, $job = NULL) {
-    $elements = & $form['configuration'][$this->type][$this->name];
-    $values = & $form_state['values']['configuration'][$this->type][$this->name];
-    if (!$job) {
-      if (intval($values['max_threads']) <= 0) {
-        form_set_error("settings[$this->type][$this->name", t('%title must be greater than 0', array(
-          '%title' => $elements['launcher']['max_threads']['#title']
-        )));
-      }
-    }
   }
 
   /**

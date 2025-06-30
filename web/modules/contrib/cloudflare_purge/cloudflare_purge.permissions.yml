@@ -1,0 +1,5 @@
+Administer Cloudflare Purge:
+  title: 'Administer Cloudflare Purge'
+  restrict access: true
+Cloudflare Purge:
+  title: 'Purge Cloudflare Cache'

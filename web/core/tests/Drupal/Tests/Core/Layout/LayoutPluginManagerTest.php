@@ -17,6 +17,7 @@ use Drupal\Core\Layout\LayoutDefinition;
 use Drupal\Core\Layout\LayoutInterface;
 use Drupal\Core\Layout\LayoutPluginManager;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 use Prophecy\Argument;
@@ -26,6 +27,7 @@ use Prophecy\Argument;
 /**
  * @coversDefaultClass \Drupal\Core\Layout\LayoutPluginManager
  * @group Layout
+ * @group legacy
  */
 class LayoutPluginManagerTest extends UnitTestCase {
 
@@ -42,6 +44,13 @@ class LayoutPluginManagerTest extends UnitTestCase {
    * @var \Drupal\Core\Extension\ThemeHandlerInterface
    */
   protected $themeHandler;
+
+  /**
+   * The theme manager.
+   *
+   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   */
+  protected $themeManager;
 
   /**
    * Cache backend instance.
@@ -67,6 +76,8 @@ class LayoutPluginManagerTest extends UnitTestCase {
 
     $container = new ContainerBuilder();
     $container->set('string_translation', $this->getStringTranslationStub());
+    $this->themeManager = $this->prophesize(ThemeManagerInterface::class);
+    $container->set('theme.manager', $this->themeManager->reveal());
     \Drupal::setContainer($container);
 
     $this->moduleHandler = $this->prophesize(ModuleHandlerInterface::class);
@@ -98,6 +109,8 @@ class LayoutPluginManagerTest extends UnitTestCase {
     $class_loader->addPsr4("Drupal\\Core\\", vfsStream::url("root/core/lib/Drupal/Core"));
     $class_loader->register(TRUE);
     $this->layoutPluginManager = new LayoutPluginManager($namespaces, $this->cacheBackend->reveal(), $this->moduleHandler->reveal(), $this->themeHandler->reveal());
+
+    $this->expectDeprecation('Using @Layout annotation for plugin with ID plugin_provided_by_annotation_layout is deprecated and is removed from drupal:13.0.0. Use a Drupal\Core\Layout\Attribute\Layout attribute instead. See https://www.drupal.org/node/3395575');
   }
 
   /**
@@ -348,9 +361,31 @@ EOS;
   }
 
   /**
+   * Test that modules and themes can alter the list of layouts.
+   *
+   * @covers ::getLayoutOptions
+   */
+  public function testGetLayoutOptions(): void {
+    $this->moduleHandler->alter(
+      ['plugin_filter_layout', 'plugin_filter_layout__layout'],
+      Argument::type('array'),
+      [],
+      'layout',
+    )->shouldBeCalled();
+    $this->themeManager->alter(
+      ['plugin_filter_layout', 'plugin_filter_layout__layout'],
+      Argument::type('array'),
+      [],
+      'layout',
+    )->shouldBeCalled();
+
+    $this->layoutPluginManager->getLayoutOptions();
+  }
+
+  /**
    * Sets up the filesystem with YAML files and annotated plugins.
    */
-  protected function setUpFilesystem() {
+  protected function setUpFilesystem(): void {
     $module_a_provided_layout = <<<'EOS'
 module_a_provided_layout:
   label: 1 column layout

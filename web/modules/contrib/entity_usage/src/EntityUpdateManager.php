@@ -4,10 +4,11 @@ namespace Drupal\entity_usage;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\Core\Entity\TranslatableInterface;
 
 /**
- * Class EntityUpdateManager.
+ * The entity update manager.
  *
  * @package Drupal\entity_usage
  */
@@ -35,7 +36,7 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
   protected $config;
 
   /**
-   * EntityUpdateManager constructor.
+   * Constructs a new \Drupal\entity_usage\EntityUpdateManager object.
    *
    * @param \Drupal\entity_usage\EntityUsageInterface $usage_service
    *   The usage tracking service.
@@ -43,18 +44,35 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
    *   The PluginManager track service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
+   * @param \Drupal\entity_usage\PreSaveUrlRecorder|null $preSaveUrlRecorder
+   *   The presave URL recorder.
+   * @param \Drupal\entity_usage\RecreateTrackingDataForFieldQueuer|null $recreateTrackingDataForFieldQueuer
+   *   The recreate tracking data for field queuer.
    */
-  public function __construct(EntityUsageInterface $usage_service, EntityUsageTrackManager $track_manager, ConfigFactoryInterface $config_factory) {
+  public function __construct(
+    EntityUsageInterface $usage_service,
+    EntityUsageTrackManager $track_manager,
+    ConfigFactoryInterface $config_factory,
+    protected ?PreSaveUrlRecorder $preSaveUrlRecorder = NULL,
+    protected ?RecreateTrackingDataForFieldQueuer $recreateTrackingDataForFieldQueuer = NULL,
+  ) {
     $this->usageService = $usage_service;
     $this->trackManager = $track_manager;
     $this->config = $config_factory->get('entity_usage.settings');
-
+    if ($this->preSaveUrlRecorder === NULL) {
+      // @phpstan-ignore-next-line
+      $this->preSaveUrlRecorder = \Drupal::service(PreSaveUrlRecorder::class);
+    }
+    if ($this->recreateTrackingDataForFieldQueuer === NULL) {
+      // @phpstan-ignore-next-line
+      $this->recreateTrackingDataForFieldQueuer = \Drupal::service(RecreateTrackingDataForFieldQueuer::class);
+    }
   }
 
   /**
    * {@inheritdoc}
    */
-  public function trackUpdateOnCreation(EntityInterface $entity) {
+  public function trackUpdateOnCreation(EntityInterface $entity): void {
     if (!$this->allowSourceEntityTracking($entity)) {
       return;
     }
@@ -84,7 +102,25 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function trackUpdateOnEdition(EntityInterface $entity) {
+  public function trackUpdateOnEdition(EntityInterface $entity): void {
+    // If the URL has changed and this entity can be a target then any tracking
+    // info based on the old the URL needs to be updated.
+    if ($this->allowTargetEntityTracking($entity) && ($previous_url = $this->preSaveUrlRecorder->getUrl($entity))) {
+      if ($previous_url !== $entity->toUrl()->toString()) {
+        foreach ($this->usageService->listSources($entity, FALSE) as $usage) {
+          if (is_subclass_of($this->trackManager->getDefinition($usage['method'])['class'], EntityUsageTrackUrlUpdateInterface::class)) {
+            $this->recreateTrackingDataForFieldQueuer->addRecord(
+              $usage['source_type'],
+              $usage['source_id'],
+              $usage['source_vid'],
+              $usage['method'],
+              $usage['field_name']
+            );
+          }
+        }
+      }
+    }
+
     if (!$this->allowSourceEntityTracking($entity)) {
       return;
     }
@@ -115,12 +151,13 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function trackUpdateOnDeletion(EntityInterface $entity, $type = 'default') {
+  public function trackUpdateOnDeletion(EntityInterface $entity, $type = 'default'): void {
     // When an entity is being deleted the logic is much simpler and we don't
     // even need to call the plugins. Just delete the records that affect this
     // entity both as target and source.
     switch ($type) {
       case 'revision':
+        assert($entity instanceof RevisionableInterface);
         $this->usageService->deleteBySourceEntity($entity->id(), $entity->getEntityTypeId(), NULL, $entity->getRevisionId());
         break;
 
@@ -135,12 +172,12 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
 
       default:
         // We only accept one of the above mentioned types.
-        throw new \InvalidArgumentException('EntityUpdateManager::trackUpdateOnDeletion called with unkown deletion type: ' . $type);
+        throw new \InvalidArgumentException('EntityUpdateManager::trackUpdateOnDeletion called with unknown deletion type: ' . $type);
     }
   }
 
   /**
-   * Check if an entity is allowed to be tracked as source.
+   * Checks if an entity is allowed to be tracked as source.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity object.
@@ -148,7 +185,7 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
    * @return bool
    *   Whether the entity can be tracked or not.
    */
-  protected function allowSourceEntityTracking(EntityInterface $entity) {
+  protected function allowSourceEntityTracking(EntityInterface $entity): bool {
     $allow_tracking = FALSE;
     $entity_type = $entity->getEntityType();
     $enabled_source_entity_types = $this->config->get('track_enabled_source_entity_types');
@@ -163,12 +200,27 @@ class EntityUpdateManager implements EntityUpdateManagerInterface {
   }
 
   /**
-   * Get the enabled tracking plugins, all plugins are enabled by default.
+   * Checks if an entity is allowed to be tracked as target.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity object.
+   *
+   * @return bool
+   *   Whether the entity can be tracked or not.
+   */
+  protected function allowTargetEntityTracking(EntityInterface $entity): bool {
+    $enabled_target_entity_types = $this->config->get('track_enabled_target_entity_types');
+    // Every entity type is tracked if not set.
+    return !is_array($enabled_target_entity_types) || in_array($entity->getEntityTypeId(), $enabled_target_entity_types, TRUE);
+  }
+
+  /**
+   * Gets the enabled tracking plugins, all plugins are enabled by default.
    *
    * @return array<string, \Drupal\entity_usage\EntityUsageTrackInterface>
    *   The enabled plugin instances keyed by plugin ID.
    */
-  protected function getEnabledPlugins() {
+  protected function getEnabledPlugins(): array {
     $all_plugin_ids = array_keys($this->trackManager->getDefinitions());
     $enabled_plugins = $this->config->get('track_enabled_plugins');
     $enabled_plugin_ids = is_array($enabled_plugins) ? $enabled_plugins : $all_plugin_ids;

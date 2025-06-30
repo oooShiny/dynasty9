@@ -32,7 +32,7 @@ class JqueryUiLibraryAssetsTest extends BrowserTestBase {
   protected $libraryDiscovery;
 
   /**
-   * jQuery UI CSS and JS assets keyed by their weight.
+   * The jQuery UI CSS and JS assets keyed by their weight.
    *
    * For example, the value of $weightGroupedAssets[-11] would be an array
    * of every jQuery UI CSS and JS file asset configured with a weight of -11.
@@ -113,13 +113,9 @@ class JqueryUiLibraryAssetsTest extends BrowserTestBase {
         'core/assets/vendor/jquery.ui/ui/data-min.js',
         'core/assets/vendor/jquery.ui/ui/disable-selection-min.js',
         'core/assets/vendor/jquery.ui/ui/focusable-min.js',
-        'core/assets/vendor/jquery.ui/ui/form-min.js',
-        'core/assets/vendor/jquery.ui/ui/ie-min.js',
         'core/assets/vendor/jquery.ui/ui/jquery-patch-min.js',
         'core/assets/vendor/jquery.ui/ui/keycode-min.js',
         'core/assets/vendor/jquery.ui/ui/plugin-min.js',
-        'core/assets/vendor/jquery.ui/ui/safe-active-element-min.js',
-        'core/assets/vendor/jquery.ui/ui/safe-blur-min.js',
         'core/assets/vendor/jquery.ui/ui/scroll-parent-min.js',
         'core/assets/vendor/jquery.ui/ui/unique-id-min.js',
         'core/assets/vendor/jquery.ui/ui/widget-min.js',

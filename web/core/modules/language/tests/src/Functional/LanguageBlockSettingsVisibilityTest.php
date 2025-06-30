@@ -13,6 +13,9 @@ use Drupal\Tests\BrowserTestBase;
  */
 class LanguageBlockSettingsVisibilityTest extends BrowserTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['block', 'language'];
 
   /**
@@ -20,6 +23,9 @@ class LanguageBlockSettingsVisibilityTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * Tests languages displayed in the language switcher.
+   */
   public function testUnnecessaryLanguageSettingsVisibility(): void {
     $admin_user = $this->drupalCreateUser([
       'administer languages',

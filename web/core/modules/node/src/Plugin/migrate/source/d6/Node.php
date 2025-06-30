@@ -4,7 +4,7 @@ namespace Drupal\node\Plugin\migrate\source\d6;
 
 use Drupal\Core\Database\Query\SelectInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Extension\ModuleHandler;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\State\StateInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
@@ -73,14 +73,14 @@ class Node extends DrupalSqlBase {
   /**
    * The module handler.
    *
-   * @var \Drupal\Core\Extension\ModuleHandler
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, StateInterface $state, EntityTypeManagerInterface $entity_type_manager, ModuleHandler $module_handler) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, StateInterface $state, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration, $state, $entity_type_manager);
     $this->moduleHandler = $module_handler;
   }
@@ -186,7 +186,7 @@ class Node extends DrupalSqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    // format = 0 can happen when the body field is hidden. Set the format to 1
+    // Format = 0 can happen when the body field is hidden. Set the format to 1
     // to avoid migration map issues (since the body field isn't used anyway).
     if ($row->getSourceProperty('format') === '0') {
       $row->setSourceProperty('format', $this->filterDefaultFormat);

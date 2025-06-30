@@ -13,7 +13,6 @@ use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
  * Tests validation of content_language_settings entities.
  *
  * @group language
- * @group #slow
  */
 class ContentLanguageSettingsValidationTest extends ConfigEntityValidationTestBase {
 
@@ -41,6 +40,7 @@ class ContentLanguageSettingsValidationTest extends ConfigEntityValidationTestBa
    */
   protected function setUp(): void {
     parent::setUp();
+    $this->installEntitySchema('node');
     $this->installConfig('node');
 
     $this->createContentType(['type' => 'alpha']);

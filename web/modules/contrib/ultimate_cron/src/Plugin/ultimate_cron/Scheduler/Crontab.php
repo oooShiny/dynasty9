@@ -113,18 +113,6 @@ class Crontab extends SchedulerBase {
   /**
    * {@inheritdoc}
    */
-  public function settingsFormSubmit(&$form, &$form_state, CronJob $job = NULL) {
-    $values = & $form_state['values']['settings'][$this->type][$this->name];
-
-    if (!empty($values['rules'])) {
-      $rules = explode(',', $values['rules']);
-      $values['rules'] = array_map('trim', $rules);
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function isScheduled(CronJob $job) {
     $log_entry = isset($job->log_entry) ? $job->log_entry : $job->loadLatestLogEntry();
     $skew = $this->getSkew($job);

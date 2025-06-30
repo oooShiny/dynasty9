@@ -25,7 +25,7 @@ class Select2Widget extends OptionsSelectWidget {
   /**
    * {@inheritdoc}
    */
-  public static function defaultSettings() {
+  public static function defaultSettings(): array {
     return [
       'width' => '100%',
     ] + parent::defaultSettings();
@@ -34,7 +34,7 @@ class Select2Widget extends OptionsSelectWidget {
   /**
    * {@inheritdoc}
    */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
+  public function settingsForm(array $form, FormStateInterface $form_state): array {
     $element = [];
     $element['width'] = [
       '#type' => 'textfield',
@@ -51,7 +51,7 @@ class Select2Widget extends OptionsSelectWidget {
   /**
    * {@inheritdoc}
    */
-  public function settingsSummary() {
+  public function settingsSummary(): array {
     $summary = [];
     $summary[] = $this->t('Field width: @width', ['@width' => $this->getSetting('width')]);
     return $summary;
@@ -60,7 +60,7 @@ class Select2Widget extends OptionsSelectWidget {
   /**
    * {@inheritdoc}
    */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
     $element['#type'] = 'select2';
     $element['#cardinality'] = $this->fieldDefinition->getFieldStorageDefinition()->getCardinality();
@@ -119,7 +119,7 @@ class Select2Widget extends OptionsSelectWidget {
    * @return array
    *   Values with the correct keys.
    */
-  protected static function prepareFieldValues(array $values, array $element) {
+  protected static function prepareFieldValues(array $values, array $element): array {
     // Transpose selections from field => delta to delta => field.
     $items = [];
     foreach ($values as $value) {

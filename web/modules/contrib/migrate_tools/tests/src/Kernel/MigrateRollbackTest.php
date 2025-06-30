@@ -29,6 +29,8 @@ final class MigrateRollbackTest extends MigrateTestBase {
     'user',
   ];
 
+  protected $collectMessages = TRUE;
+
   /**
    * {@inheritdoc}
    */

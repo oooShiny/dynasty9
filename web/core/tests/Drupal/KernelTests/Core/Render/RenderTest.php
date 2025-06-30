@@ -14,9 +14,7 @@ use Drupal\KernelTests\KernelTestBase;
 class RenderTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system', 'common_test', 'theme_test'];
 
@@ -59,7 +57,7 @@ class RenderTest extends KernelTestBase {
     ];
     $this->render($build);
     $this->removeWhiteSpace();
-    $this->assertNoRaw('<div>kangarookitten</div>');
+    $this->assertNoRaw('<div>kangaroo-kitten</div>');
   }
 
   /**

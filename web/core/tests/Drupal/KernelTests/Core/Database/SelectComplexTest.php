@@ -7,6 +7,7 @@ namespace Drupal\KernelTests\Core\Database;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Query\PagerSelectExtender;
 use Drupal\Core\Database\RowCountException;
+use Drupal\Core\Database\Statement\FetchAs;
 use Drupal\user\Entity\User;
 
 /**
@@ -17,9 +18,7 @@ use Drupal\user\Entity\User;
 class SelectComplexTest extends DatabaseTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system', 'user', 'node_access_test', 'field'];
 
@@ -42,7 +41,7 @@ class SelectComplexTest extends DatabaseTestBase {
     foreach ($result as $record) {
       $num_records++;
       $this->assertGreaterThanOrEqual($last_priority, $record->$priority_field);
-      $this->assertNotSame('Ringo', $record->$name_field, 'Taskless person not selected.');
+      $this->assertNotSame('Ringo', $record->$name_field, 'Person without a task not selected.');
       $last_priority = $record->$priority_field;
     }
 
@@ -187,7 +186,7 @@ class SelectComplexTest extends DatabaseTestBase {
     $query->addField('test_task', 'task');
     $query->orderBy('task');
     $query->distinct();
-    $query_result = $query->execute()->fetchAll(\PDO::FETCH_COLUMN);
+    $query_result = $query->execute()->fetchAll(FetchAs::Column);
 
     $expected_result = ['code', 'eat', 'found new band', 'perform at superbowl', 'sing', 'sleep'];
     $this->assertEquals($query_result, $expected_result, 'Returned the correct result.');
@@ -393,7 +392,7 @@ class SelectComplexTest extends DatabaseTestBase {
       $result->rowCount();
       $exception = FALSE;
     }
-    catch (RowCountException $e) {
+    catch (RowCountException) {
       $exception = TRUE;
     }
     $this->assertTrue($exception, 'Exception was thrown');
@@ -420,7 +419,7 @@ class SelectComplexTest extends DatabaseTestBase {
       $num_records++;
       // Verify that the results are returned in the correct order.
       $this->assertGreaterThanOrEqual($last_priority, $record->$priority_field);
-      $this->assertNotSame('Ringo', $record->$name_field, 'Taskless person not selected.');
+      $this->assertNotSame('Ringo', $record->$name_field, 'Person without a task not selected.');
       $last_priority = $record->$priority_field;
     }
 

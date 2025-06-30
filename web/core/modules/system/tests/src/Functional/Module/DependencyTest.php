@@ -11,7 +11,6 @@ use Drupal\Component\Utility\Unicode;
  * Enable module without dependency enabled.
  *
  * @group Module
- * @group #slow
  */
 class DependencyTest extends ModuleTestBase {
 
@@ -19,6 +18,16 @@ class DependencyTest extends ModuleTestBase {
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
+    if ($this->name() === 'testCoreCompatibility') {
+      $this->markTestSkipped('Skipped due to major version-specific logic. See https://www.drupal.org/project/drupal/issues/3359322');
+    }
+    parent::setUp();
+  }
 
   /**
    * Checks functionality of project namespaces for dependencies.
@@ -174,7 +183,6 @@ class DependencyTest extends ModuleTestBase {
    * Tests enabling modules with different core version specifications.
    */
   public function testCoreCompatibility(): void {
-    $this->markTestSkipped('Skipped due to major version-specific logic. See https://www.drupal.org/project/drupal/issues/3359322');
     $assert_session = $this->assertSession();
 
     // Test incompatible 'core_version_requirement'.

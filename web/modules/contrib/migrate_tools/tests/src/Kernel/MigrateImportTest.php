@@ -30,6 +30,8 @@ final class MigrateImportTest extends MigrateTestBase {
     'system',
   ];
 
+  protected $collectMessages = TRUE;
+
   /**
    * {@inheritdoc}
    */

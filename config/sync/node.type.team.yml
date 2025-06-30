@@ -11,7 +11,7 @@ third_party_settings:
 name: Team
 type: team
 description: 'An NFL team'
-help: ''
+help: null
 new_revision: false
 preview_mode: 0
 display_submitted: false

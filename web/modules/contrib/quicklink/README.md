@@ -19,10 +19,10 @@ This module is tested on Drupal 8.9 and above.
 be hosted on Drupal.org.
 
 By default this module will load the Quicklink JavaScript library from a CDN at
-`https://unpkg.com/quicklink@2.2.0/dist/quicklink.umd.js`.
+`https://unpkg.com/quicklink@2.3.0/dist/quicklink.umd.js`.
 
-If you place a copy of this file into your local filesystem at
-`/libraries/quicklink/dist/quicklink.umd.js`, this module will serve the local
+It is recommended to place a copy of this file into your local filesystem at
+`/libraries/quicklink/dist/quicklink.umd.js`, so the module will serve the local
 copy instead of the CDN copy.
 
 

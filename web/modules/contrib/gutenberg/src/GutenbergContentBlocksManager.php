@@ -97,7 +97,7 @@ class GutenbergContentBlocksManager {
    *
    * @return \Drupal\Core\Entity\EntityInterface | Boolean
    */
-  public function cloneBlock($block_id, $entity_id = NULL, $entity_type = 'node') {
+  public function cloneBlock($block_id, $entity_id = NULL, $entity_type = 'node', $entity_bundle = NULL) {
     $content_block = $this->entityTypeManager->getStorage('block_content')->load($block_id);
     if ($content_block && $this->canBeCloned($content_block)) {
       $cloned_content_block = $content_block->createDuplicate();
@@ -105,6 +105,7 @@ class GutenbergContentBlocksManager {
       $this->setBlockUsage($cloned_content_block->id(), [
         'entity_id' => $entity_id,
         'entity_type' => $entity_type,
+        'entity_bundle' => $entity_bundle,
         'active' => 0, // Active 0 because the entity hasn't been saved yet.
       ]);
       return $cloned_content_block;

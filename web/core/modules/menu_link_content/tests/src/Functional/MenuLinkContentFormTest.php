@@ -15,9 +15,7 @@ use Drupal\Tests\BrowserTestBase;
 class MenuLinkContentFormTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'menu_link_content',
@@ -93,7 +91,7 @@ class MenuLinkContentFormTest extends BrowserTestBase {
     $option = $this->assertSession()->optionExists('edit-menu-parent', 'admin:');
     $this->assertTrue($option->isSelected());
     // Test that the field description is present.
-    $this->assertSession()->pageTextContains('The location this menu link points to.');
+    $this->assertSession()->pageTextContains('Start typing the title of a piece of content to select it. ');
 
     $this->submitForm([
       'title[0][value]' => 'Front page',

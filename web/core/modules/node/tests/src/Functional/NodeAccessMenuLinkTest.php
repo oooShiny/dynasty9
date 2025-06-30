@@ -14,9 +14,7 @@ use Drupal\user\RoleInterface;
 class NodeAccessMenuLinkTest extends NodeTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['menu_ui', 'block'];
 
@@ -55,7 +53,7 @@ class NodeAccessMenuLinkTest extends NodeTestBase {
    */
   public function testNodeAccessMenuLink(): void {
 
-    $menu_link_title = $this->randomString();
+    $menu_link_title = 'Test menu link title';
 
     $this->drupalLogin($this->contentAdminUser);
     $edit = [

@@ -3,9 +3,9 @@
 namespace Drupal\Tests\entity_usage\FunctionalJavascript;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Tests\entity_usage\Traits\EntityUsageLastEntityQueryTrait;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Tests\entity_usage\Traits\EntityUsageLastEntityQueryTrait;
 
 /**
  * Tests the integration with the Dynamic Entity Reference module.
@@ -28,7 +28,7 @@ class DynamicEntityReferenceTest extends EntityUsageJavascriptTestBase {
   /**
    * Tests the tracking of entities through dynamic entity reference fields.
    */
-  public function testDynamicEntityReferenceTracking() {
+  public function testDynamicEntityReferenceTracking(): void {
     $session = $this->getSession();
     $page = $session->getPage();
     $assert_session = $this->assertSession();
@@ -104,7 +104,7 @@ class DynamicEntityReferenceTest extends EntityUsageJavascriptTestBase {
     $page->pressButton('Save');
     $session->wait(500);
     $this->saveHtmlOutput();
-    $assert_session->pageTextContains('eu_test_ct Node 1 has been created.');
+    $assert_session->pageTextContains('Entity Usage test content Node 1 has been created.');
     /** @var \Drupal\node\NodeInterface $node1 */
     $node1 = $this->getLastEntityOfType('node', TRUE);
 
@@ -124,7 +124,7 @@ class DynamicEntityReferenceTest extends EntityUsageJavascriptTestBase {
     $page->pressButton('Save');
     $session->wait(500);
     $this->saveHtmlOutput();
-    $assert_session->pageTextContains('eu_test_ct Node 2 has been created.');
+    $assert_session->pageTextContains('Entity Usage test content Node 2 has been created.');
     $node2 = $this->getLastEntityOfType('node', TRUE);
     // Check that the usage of Node 1 points to Node 2.
     $usage = $usage_service->listSources($node1);
@@ -152,7 +152,7 @@ class DynamicEntityReferenceTest extends EntityUsageJavascriptTestBase {
     $page->pressButton('Save');
     $session->wait(500);
     $this->saveHtmlOutput();
-    $assert_session->pageTextContains('eu_test_ct Node 2 has been updated.');
+    $assert_session->pageTextContains('Entity Usage test content Node 2 has been updated.');
     // The node usage was released, the user was not.
     $usage = $usage_service->listSources($node1);
     $this->assertEquals([], $usage);

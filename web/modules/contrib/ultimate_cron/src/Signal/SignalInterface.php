@@ -24,8 +24,7 @@ interface SignalInterface {
    * @param string $signal
    *   The name of the signal.
    *
-   * @return boolean
-   *   TRUE if the signal was set.
+   * @return void
    */
   public function set($job_id, $signal);
 

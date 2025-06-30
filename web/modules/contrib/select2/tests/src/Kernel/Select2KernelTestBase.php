@@ -17,7 +17,7 @@ abstract class Select2KernelTestBase extends FieldKernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['select2'];
+  protected static $modules = ['select2'];
 
   /**
    * {@inheritdoc}

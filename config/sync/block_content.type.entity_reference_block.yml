@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: entity_reference_block
 label: 'Entity Reference Block'
-revision: 0
+revision: false
 description: ''

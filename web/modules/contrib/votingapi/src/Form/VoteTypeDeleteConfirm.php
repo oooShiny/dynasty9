@@ -2,8 +2,8 @@
 
 namespace Drupal\votingapi\Form;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityDeleteForm;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -43,6 +43,7 @@ class VoteTypeDeleteConfirm extends EntityDeleteForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $num_nodes = $this->entityTypeManager->getStorage('vote')->getQuery()
+      ->accessCheck(TRUE)
       ->condition('type', $this->entity->id())
       ->count()
       ->execute();

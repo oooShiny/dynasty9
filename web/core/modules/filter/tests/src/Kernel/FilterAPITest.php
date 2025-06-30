@@ -21,6 +21,9 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 class FilterAPITest extends EntityKernelTestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['system', 'filter', 'filter_test', 'user'];
 
   /**
@@ -76,10 +79,17 @@ class FilterAPITest extends EntityKernelTestBase {
     $actual_filtered_text_without_html_generators = check_markup($text, 'filtered_html', '', [FilterInterface::TYPE_MARKUP_LANGUAGE]);
     $this->assertSame($expected_filter_text_without_html_generators, (string) $actual_filtered_text_without_html_generators, 'Expected filter result when skipping FilterInterface::TYPE_MARKUP_LANGUAGE filters.');
     // Related to @see FilterSecurityTest.php/testSkipSecurityFilters(), but
-    // this check focuses on the ability to filter multiple filter types at once.
-    // Drupal core only ships with these two types of filters, so this is the
-    // most extensive test possible.
-    $actual_filtered_text_without_html_generators = check_markup($text, 'filtered_html', '', [FilterInterface::TYPE_HTML_RESTRICTOR, FilterInterface::TYPE_MARKUP_LANGUAGE]);
+    // this check focuses on the ability to filter multiple filter types at
+    // once. Drupal core only ships with these two types of filters, so this is
+    // the most extensive test possible.
+    $actual_filtered_text_without_html_generators = check_markup(
+      $text,
+      'filtered_html',
+      '',
+      [
+        FilterInterface::TYPE_HTML_RESTRICTOR,
+        FilterInterface::TYPE_MARKUP_LANGUAGE,
+      ]);
     $this->assertSame($expected_filter_text_without_html_generators, (string) $actual_filtered_text_without_html_generators, 'Expected filter result when skipping FilterInterface::TYPE_MARKUP_LANGUAGE filters, even when trying to disable filters of the FilterInterface::TYPE_HTML_RESTRICTOR type.');
   }
 
@@ -156,7 +166,8 @@ class FilterAPITest extends EntityKernelTestBase {
     );
 
     // Test on very_restricted_html, where there's two different filters of the
-    // FilterInterface::TYPE_HTML_RESTRICTOR type, each restricting in different ways.
+    // FilterInterface::TYPE_HTML_RESTRICTOR type, each restricting in different
+    // ways.
     $very_restricted_html_format = FilterFormat::create([
       'format' => 'very_restricted_html',
       'name' => 'Very Restricted HTML',
@@ -318,7 +329,7 @@ class FilterAPITest extends EntityKernelTestBase {
       'user.permissions',
     ];
     $this->assertEqualsCanonicalizing($expected_cache_contexts, $build['#cache']['contexts'], 'Expected cache contexts present.');
-    $expected_markup = '<p>Hello, world!</p><p>This is a dynamic llama.</p>';
+    $expected_markup = '<p>Hello, world!</p><p>This is a dynamic llama.</p><p>This is a static llama.</p>';
     $this->assertSame($expected_markup, (string) $build['#markup'], 'Expected #lazy_builder callback has been applied.');
   }
 

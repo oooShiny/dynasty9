@@ -52,12 +52,20 @@ interface CronJobInterface extends ConfigEntityInterface {
   public function getTitle();
 
   /**
+   * Gets the cron job callback.
+   *
+   * @return callable
+   *  Callback.
+   */
+  public function getCallback();
+
+  /**
    * Gets the cron job callback string.
    *
    * @return string
    *  Callback string.
    */
-  public function getCallback();
+  public function getCallbackString();
 
   /**
    * Gets the cron job module name used for the callback string.

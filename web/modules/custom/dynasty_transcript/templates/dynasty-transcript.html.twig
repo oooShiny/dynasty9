@@ -14,7 +14,7 @@
  * @see template_preprocess_dynasty_transcript()
  */
 #}
-{{ attach_library('dynasty/podcast') }}
+{{ attach_library('dynasty_tw/podcast') }}
 
 <article{{ attributes.addClass('px-20 md:flex py-4') }}>
   {% if content %}
@@ -22,16 +22,16 @@
     <div class="flex gap-2 justify-center md:w-1/5">
       <audio id="pod-{{ mp3 }}" src="{{ mp3_time }}"></audio>
       <div id="back-pod-{{ mp3 }}" class="text-white my-2 p-1 rounded-full bg-white shadow-lg">
-        <img src="/themes/custom/dynasty/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
+        <img src="/themes/custom/dynasty_tw/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
       </div>
       <div class="bg-red-pats p-4 rounded-full shadow-lg text-white w-12">
-        <img src="/themes/custom/dynasty/icons/pod-play.svg"
+        <img src="/themes/custom/dynasty_tw/icons/pod-play.svg"
              onclick="playPause('pod-{{ mp3 }}')"
              id="playpod-{{ mp3 }}"
              class="w-auto h-auto" style="cursor: pointer" />
       </div>
       <div id="fwd-pod-{{ mp3 }}" class="text-white my-2 p-1 rounded-full bg-white shadow-lg">
-        <img src="/themes/custom/dynasty/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
+        <img src="/themes/custom/dynasty_tw/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
       </div>
     </div>
     <div class="md:w-4/5">

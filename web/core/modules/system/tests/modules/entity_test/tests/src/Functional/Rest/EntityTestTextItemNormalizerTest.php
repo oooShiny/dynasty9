@@ -58,7 +58,7 @@ class EntityTestTextItemNormalizerTest extends EntityTestResourceTestBase {
       [
         'value' => 'Cádiz is the oldest continuously inhabited city in Spain and a nice place to spend a Sunday with friends.',
         'format' => 'my_text_format',
-        'processed' => '<p>Cádiz is the oldest continuously inhabited city in Spain and a nice place to spend a Sunday with friends.</p>' . "\n" . '<p>This is a dynamic llama.</p>',
+        'processed' => '<p>Cádiz is the oldest continuously inhabited city in Spain and a nice place to spend a Sunday with friends.</p>' . "\n" . '<p>This is a dynamic llama.</p><p>This is a static llama.</p>',
       ],
     ];
     return $expected;
@@ -185,6 +185,9 @@ class EntityTestTextItemNormalizerTest extends EntityTestResourceTestBase {
     $this->assertEqualsCanonicalizing($expected_cache_tags, explode(' ', $response->getHeader('X-Drupal-Cache-Tags')[0]));
   }
 
+  /**
+   * Provides test cases for text format retrieval with expected cache tags.
+   */
   public static function providerTestGetWithFormat() {
     return [
       'format specified (different from fallback format)' => [

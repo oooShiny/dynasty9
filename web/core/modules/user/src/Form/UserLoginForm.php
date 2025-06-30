@@ -4,6 +4,7 @@ namespace Drupal\user\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\WorkspaceSafeFormInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Render\BareHtmlPageRendererInterface;
 use Drupal\Core\Url;
@@ -19,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @internal
  */
-class UserLoginForm extends FormBase {
+class UserLoginForm extends FormBase implements WorkspaceSafeFormInterface {
 
   /**
    * The user flood control service.
@@ -168,20 +169,6 @@ class UserLoginForm extends FormBase {
   }
 
   /**
-   * Sets an error if supplied username has been blocked.
-   *
-   * @deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. There is no replacement.
-   * @see https://www.drupal.org/node/3410706
-   */
-  public function validateName(array &$form, FormStateInterface $form_state) {
-    @trigger_error(__METHOD__ . ' is deprecated in drupal:10.3.0 and is removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3410706', E_USER_DEPRECATED);
-    if (!$form_state->isValueEmpty('name') && user_is_blocked($form_state->getValue('name'))) {
-      // Blocked in user administration.
-      $form_state->setErrorByName('name', $this->t('The username %name has not been activated or is blocked.', ['%name' => $form_state->getValue('name')]));
-    }
-  }
-
-  /**
    * Checks supplied username/password against local users table.
    *
    * If successful, $form_state->get('uid') is set to the matching user ID.
@@ -195,7 +182,8 @@ class UserLoginForm extends FormBase {
       // reached. Default is 50 failed attempts allowed in one hour. This is
       // independent of the per-user limit to catch attempts from one IP to log
       // in to many different user accounts.  We have a reasonably high limit
-      // since there may be only one apparent IP for all users at an institution.
+      // since there may be only one apparent IP for all users at an
+      // institution.
       if (!$this->userFloodControl->isAllowed('user.failed_login_ip', $flood_config->get('ip_limit'), $flood_config->get('ip_window'))) {
         $form_state->set('flood_control_triggered', 'ip');
         return;
@@ -246,6 +234,13 @@ class UserLoginForm extends FormBase {
         if ($this->userAuth instanceof UserAuthenticationInterface) {
           $form_state->set('uid', $this->userAuth->authenticateAccount($account, $password) ? $account->id() : FALSE);
         }
+        // The userAuth object is decorated by an object that that has not
+        // been upgraded to the new UserAuthenticationInterface. Fallback
+        // to the authenticate() method.
+        else {
+          $uid = $this->userAuth->authenticate($form_state->getValue('name'), $password);
+          $form_state->set('uid', $uid);
+        }
       }
       elseif (!$this->userAuth instanceof UserAuthenticationInterface) {
         $uid = $this->userAuth->authenticate($form_state->getValue('name'), $password);
@@ -277,7 +272,7 @@ class UserLoginForm extends FormBase {
           // We did not find a uid, so the limit is IP-based.
           $message = $this->t('Too many failed login attempts from your IP address. This IP address is temporarily blocked. Try again later or <a href=":url">request a new password</a>.', [':url' => Url::fromRoute('user.pass')->toString()]);
         }
-        $response = $this->bareHtmlPageRenderer->renderBarePage(['#markup' => $message], $this->t('Login failed'), 'maintenance_page');
+        $response = $this->bareHtmlPageRenderer->renderBarePage(['#markup' => $message], $this->t('Login failed'), 'maintenance_page__flood');
         $response->setStatusCode(403);
         $form_state->setResponse($response);
       }

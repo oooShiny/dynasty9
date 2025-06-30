@@ -7,11 +7,11 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\KeyValueStore\KeyValueStoreInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\Url;
 use Drupal\facets\FacetInterface;
 use Drupal\facets\Widget\WidgetPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Drupal\Core\Url;
 
 /**
  * The select2 widget.
@@ -25,26 +25,10 @@ use Drupal\Core\Url;
 class Select2Widget extends WidgetPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The current request.
-   *
-   * @var \Symfony\Component\HttpFoundation\Request
-   */
-  protected $request;
-
-  /**
-   * The key-value store for entity_autocomplete.
-   *
-   * @var \Drupal\Core\KeyValueStore\KeyValueStoreInterface
-   */
-  protected $keyValueStore;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, Request $request, KeyValueStoreInterface $key_value_store) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, protected readonly Request $request, protected readonly KeyValueStoreInterface $keyValueStore) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->request = $request;
-    $this->keyValueStore = $key_value_store;
   }
 
   /**
@@ -75,6 +59,7 @@ class Select2Widget extends WidgetPluginBase implements ContainerFactoryPluginIn
    * {@inheritdoc}
    */
   public function build(FacetInterface $facet): array {
+    $build = parent::build($facet);
     $this->facet = $facet;
 
     $items = [];
@@ -127,7 +112,10 @@ class Select2Widget extends WidgetPluginBase implements ContainerFactoryPluginIn
       ];
     }
 
-    return $element;
+    $build['#items'] = [
+      $element,
+    ];
+    return $build;
   }
 
   /**

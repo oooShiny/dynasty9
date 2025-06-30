@@ -17,9 +17,7 @@ use Drupal\Tests\BrowserTestBase;
 class EntityDisplayModeTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var string[]
+   * {@inheritdoc}
    */
   protected static $modules = ['block', 'entity_test', 'field_ui', 'node'];
 
@@ -135,6 +133,7 @@ class EntityDisplayModeTest extends BrowserTestBase {
     $edit = [
       'id' => $this->randomMachineName(),
       'label' => $this->randomString(),
+      'description' => $this->randomString(),
     ];
     $this->submitForm($edit, 'Save');
     $this->assertSession()->pageTextContains("Saved the {$edit['label']} form mode.");

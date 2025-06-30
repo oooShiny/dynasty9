@@ -108,6 +108,7 @@ class ResultTest extends UnitTestCase {
    * Data provider for testResultArea.
    *
    * @return array
+   *   An array of test cases.
    */
   public static function providerTestResultArea() {
     return [
@@ -140,23 +141,19 @@ class ResultTest extends UnitTestCase {
    *
    * @param int $items_per_page
    *   The value to return from getItemsPerPage().
-   * @param int $current_page
-   *   The value to return from getCurrentPage()
-   * @param int $total_rows
-   *   The value to set the view total_rows property
    */
-  protected function setupViewPager($items_per_page = 0, $current_page = 0, $total_rows = 1000) {
+  protected function setupViewPager($items_per_page = 0): void {
     $pager = $this->prophesize(PagerPluginBase::class);
     $pager->getItemsPerPage()
       ->willReturn($items_per_page)
       ->shouldBeCalledTimes(1);
     $pager->getCurrentPage()
-      ->willReturn($current_page)
+      ->willReturn(0)
       ->shouldBeCalledTimes(1);
 
     $this->view->pager = $pager->reveal();
     $this->view->style_plugin = new \stdClass();
-    $this->view->total_rows = $total_rows;
+    $this->view->total_rows = 100;
     $this->view->result = [1, 2, 3, 4, 5];
   }
 

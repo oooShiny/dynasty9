@@ -10,6 +10,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseModalDialogCommand;
 use Drupal\Core\Ajax\SettingsCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\gutenberg\GutenbergContentBlocksManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\block_content\Entity\BlockContent;
@@ -51,6 +52,13 @@ class ContentBlockSettingsForm extends FormBase implements BaseFormIdInterface {
   protected $currentUser;
 
   /**
+   * The content block manager.
+   *
+   * @var \Drupal\gutenberg\GutenbergContentBlocksManager
+   */
+  protected $contentBlocksManager;
+
+  /**
    * Constructs a new block form.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -59,11 +67,14 @@ class ContentBlockSettingsForm extends FormBase implements BaseFormIdInterface {
    *   The block manager.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   Blocks renderer helper service.
+   * @param \Drupal\gutenberg\GutenbergContentBlocksManager $content_blocks_manager
+   *   Gutenberg Content Blocks Manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityDisplayRepositoryInterface $entity_display_repository, AccountInterface $current_user) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityDisplayRepositoryInterface $entity_display_repository, AccountInterface $current_user, GutenbergContentBlocksManager $content_blocks_manager) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityDisplayRepository = $entity_display_repository;
     $this->currentUser = $current_user;
+    $this->contentBlocksManager = $content_blocks_manager;
   }
 
   /**
@@ -88,6 +99,7 @@ class ContentBlockSettingsForm extends FormBase implements BaseFormIdInterface {
       $container->get('entity_type.manager'),
       $container->get('entity_display.repository'),
       $container->get('current_user'),
+      $container->get('gutenberg.content_blocks_manager')
     );
   }
 
@@ -137,13 +149,20 @@ class ContentBlockSettingsForm extends FormBase implements BaseFormIdInterface {
    * @return array
    *   The form array.
    */
-  public function buildForm(array $form, FormStateInterface $form_state, $type = NULL, $block_id = NULL, $config = []) {
-    $form_state->set('block_theme', $this->config('system.theme')->get('default'));
+  public function buildForm(array $form, FormStateInterface $form_state, $type = NULL, $block_id = NULL, $entity_type = 'node', $entity_id = NULL, $entity_bundle = NULL, $config = []) {
+    $form_state->set('block_theme', $this->config('system.theme')
+      ->get('default'));
     $user_input = $form_state->getUserInput();
 
     if (!empty($user_input['settings'])) {
       $configuration = array_merge($user_input['settings'], $this->arrayFlatten($user_input['settings']));
     }
+
+    $form['#gutenberg_entity'] = [
+      'entity_type' => $entity_type,
+      'entity_id' => is_numeric($entity_id) ? $entity_id : NULL,
+      'entity_bundle' => $entity_bundle,
+    ];
 
     $form['#prefix'] = '<div id="content-block-form-wrapper">';
     $form['#suffix'] = '</div>';
@@ -278,6 +297,14 @@ class ContentBlockSettingsForm extends FormBase implements BaseFormIdInterface {
 
     $block->setNonReusable();
     $block->save();
+
+    $this->contentBlocksManager->setBlockUsage($block->id(), [
+      'entity_id' => $form['#gutenberg_entity']['entity_id'],
+      'entity_type' => $form['#gutenberg_entity']['entity_type'],
+      'entity_bundle' => $form['#gutenberg_entity']['entity_bundle'],
+      'active' => 0, // Active 0 because the gutenberg entity hasn't been saved yet.
+    ]);
+
     $block_form['#block'] = $block;
     $form['#block'] = $block;
     $form_state->setRebuild(TRUE);

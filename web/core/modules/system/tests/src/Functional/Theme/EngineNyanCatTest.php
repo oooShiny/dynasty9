@@ -6,6 +6,8 @@ namespace Drupal\Tests\system\Functional\Theme;
 
 use Drupal\Tests\BrowserTestBase;
 
+// cspell:ignore nyan
+
 /**
  * Tests the multi theme engine support.
  *
@@ -14,9 +16,7 @@ use Drupal\Tests\BrowserTestBase;
 class EngineNyanCatTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['theme_test'];
 

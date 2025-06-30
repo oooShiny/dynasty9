@@ -5,6 +5,54 @@
  * Install hooks for the Quicklink module.
  */
 
+/**
+ * Implements hook_requirements().
+ */
+function quicklink_requirements($phase) {
+  $requirements = [];
+  $quicklink_cdn_path = 'https://unpkg.com/quicklink@2.3.0/dist/quicklink.umd.js';
+  $quicklink_local_path = '/libraries/quicklink/dist/quicklink.umd.js';
+
+  if (!file_exists(DRUPAL_ROOT . '/libraries/quicklink/dist/quicklink.umd.js')) {
+    if ($phase == 'runtime') {
+      $requirements['quicklink_cdn_hosted'] = [
+        'title' => t('Quicklink library served from CDN'),
+        'value' => t('The Quicklink library should be hosted by Drupal.'),
+        'description' => t('For performance reasons, the QuickLink library should be served by Drupal. To do this, copy the JavaScript file from the CDN at <a href=":quicklink_cdn_path">:quicklink_cdn_path</a> to <code>:quicklink_local_path</code>.',
+          [
+            ':quicklink_cdn_path' => $quicklink_cdn_path,
+            ':quicklink_local_path' => $quicklink_local_path,
+          ]),
+        'severity' => REQUIREMENT_WARNING,
+      ];
+    }
+  }
+  else {
+    // Multiple hashes since people might download the file in multiple ways
+    // (downloading directly, copy/paste, etc).
+    $accepted_quicklink_file_hashes = [
+      '9bf2c039e22db3d0962eb567cbe5954d', // Version 2.3 as downloaded.
+      '5d7258ea48425cb96a35d1c3aecb79f5', // Version 2.3 as downloaded, but with trailing line break.
+    ];
+    $actual_quicklink_file_hash = md5_file(DRUPAL_ROOT . '/libraries/quicklink/dist/quicklink.umd.js');
+
+    if (!in_array($actual_quicklink_file_hash, $accepted_quicklink_file_hashes)) {
+      $requirements['quicklink_wrong_version'] = [
+        'title' => t('Quicklink library needs to be updated'),
+        'value' => t('The Quicklink library does not appear to be the correct version.'),
+        'description' => t('The Quicklink library needs to be upgraded to the latest version. To do this, copy the JavaScript file from the CDN at <a href=":quicklink_cdn_path">:quicklink_cdn_path</a> to <code>:quicklink_local_path</code>',
+          [
+            ':quicklink_cdn_path' => $quicklink_cdn_path,
+            ':quicklink_local_path' => $quicklink_local_path,
+          ]),
+        'severity' => REQUIREMENT_WARNING,
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
  /**
   * Implements hook_uninstall().
   */

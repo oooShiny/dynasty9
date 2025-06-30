@@ -21,7 +21,6 @@ use Drupal\Tests\user\Traits\UserCreationTrait;
  * @coversDefaultClass \Drupal\layout_builder\Plugin\SectionStorage\OverridesSectionStorage
  *
  * @group layout_builder
- * @group #slow
  */
 class OverridesSectionStorageTest extends KernelTestBase {
 
@@ -166,7 +165,13 @@ class OverridesSectionStorageTest extends KernelTestBase {
       TRUE, TRUE, [], ['configure editable entity_test entity_test layout overrides', 'administer entity_test content'],
     ];
     $data['enabled, data, bundle edit overrides, edit access'] = [
-      TRUE, TRUE, $section_data, ['configure editable entity_test entity_test layout overrides', 'administer entity_test content'],
+      TRUE,
+      TRUE,
+      $section_data,
+      [
+        'configure editable entity_test entity_test layout overrides',
+        'administer entity_test content',
+      ],
     ];
     return $data;
   }

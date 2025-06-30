@@ -12,14 +12,11 @@ use Drupal\views\Views;
  * @see Drupal\dblog\Tests\DbLogTest
  *
  * @group dblog
- * @group #slow
  */
 class DbLogViewsTest extends DbLogTest {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'dblog',
@@ -44,7 +41,7 @@ class DbLogViewsTest extends DbLogTest {
   /**
    * {@inheritdoc}
    */
-  protected function filterLogsEntries($type = NULL, $severity = NULL) {
+  protected function filterLogsEntries($type = NULL, $severity = NULL): void {
     $query = [];
     if (isset($type)) {
       $query['type[]'] = $type;

@@ -32,7 +32,7 @@ class RateWidgetListBuilder extends ConfigEntityListBuilder {
       'data' => $this->t('Entities'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
     ];
-    $comment_module_enabled = \Drupal::service('module_handler')->moduleExists('comment');
+    $comment_module_enabled = $this->moduleHandler()->moduleExists('comment');
     $comment_header = ($comment_module_enabled) ? $this->t('Comment') : $this->t('Comment (disabled)');
     $header['comment_types'] = [
       'data' => $comment_header,

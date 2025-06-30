@@ -10,10 +10,8 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -25,23 +23,31 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'c7baa00073ee9c61edf148c51917cfb4' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
         'f844ccf1d25df8663951193c3fc307c8' => __DIR__ . '/..' . '/twig/twig/src/Resources/string_loader.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
         '2f69d3914119f042cca9e44442d5ce95' => __DIR__ . '/../..' . '/web/core/includes/bootstrap.inc',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+        'ace6d88241f812b4accb2d847454aef6' => __DIR__ . '/..' . '/halaxa/json-machine/src/functions.php',
         '79f66bc0a1900f77abe4a9a299057a0a' => __DIR__ . '/..' . '/starkbank/ecdsa/src/ellipticcurve.php',
+        '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        't' => 
-        array (
-            'tubalmartin\\CssMin\\' => 19,
-        ),
         'p' => 
         array (
             'phpowermove\\docblock\\' => 21,
             'phootwork\\lang\\' => 15,
             'phootwork\\collection\\' => 21,
+        ),
+        'm' => 
+        array (
+            'mglaman\\PHPStanDrupal\\' => 22,
+        ),
+        'd' => 
+        array (
+            'dekor\\' => 6,
         ),
         'c' => 
         array (
@@ -57,10 +63,9 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php84\\' => 23,
             'Symfony\\Polyfill\\Php83\\' => 23,
             'Symfony\\Polyfill\\Php81\\' => 23,
-            'Symfony\\Polyfill\\Php80\\' => 23,
-            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
@@ -91,11 +96,11 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
             'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'Solarium\\' => 9,
             'SendGrid\\' => 9,
-            'SelfUpdate\\' => 11,
         ),
         'R' => 
         array (
             'Robo\\' => 5,
+            'Revolt\\' => 7,
         ),
         'P' => 
         array (
@@ -106,9 +111,11 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'PhpTuf\\ComposerStager\\' => 22,
             'PhpParser\\' => 10,
             'Peast\\' => 6,
             'Patreon\\' => 8,
+            'PHPStan\\' => 8,
         ),
         'M' => 
         array (
@@ -118,6 +125,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             'League\\Csv\\' => 11,
             'League\\Container\\' => 17,
+            'Laravel\\Prompts\\' => 16,
             'Laminas\\Stdlib\\' => 15,
         ),
         'J' => 
@@ -143,6 +151,8 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'D' => 
         array (
             'Drush\\' => 6,
+            'Drupal\\rat\\' => 11,
+            'Drupal\\cloudflare_purge\\' => 24,
             'Drupal\\Core\\' => 12,
             'Drupal\\Composer\\Plugin\\Scaffold\\' => 32,
             'Drupal\\Composer\\Plugin\\ProjectMessage\\' => 38,
@@ -165,6 +175,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
             'Consolidation\\AnnotatedCommand\\' => 31,
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
+            'ComposerDrupalLenient\\' => 22,
         ),
         'A' => 
         array (
@@ -173,10 +184,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
     );
 
     public static $prefixDirsPsr4 = array (
-        'tubalmartin\\CssMin\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tubalmartin/cssmin/src',
-        ),
         'phpowermove\\docblock\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpowermove/docblock/src',
@@ -188,6 +195,14 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'phootwork\\collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phootwork/collection',
+        ),
+        'mglaman\\PHPStanDrupal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+        ),
+        'dekor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dekor/php-array-table/src',
         ),
         'cweagans\\Composer\\' => 
         array (
@@ -201,6 +216,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
+        'Symfony\\Polyfill\\Php84\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php84',
+        ),
         'Symfony\\Polyfill\\Php83\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
@@ -208,14 +227,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'Symfony\\Polyfill\\Php81\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
-        ),
-        'Symfony\\Polyfill\\Php80\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
-        ),
-        'Symfony\\Polyfill\\Php72\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -337,13 +348,13 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/fastglass/sendgrid/src',
         ),
-        'SelfUpdate\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/consolidation/self-update/src',
-        ),
         'Robo\\' => 
         array (
             0 => __DIR__ . '/..' . '/consolidation/robo/src',
+        ),
+        'Revolt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/revolt/event-loop/src',
         ),
         'Psy\\' => 
         array (
@@ -374,6 +385,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
+        'PhpTuf\\ComposerStager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-tuf/composer-stager/src',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -385,6 +400,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'Patreon\\' => 
         array (
             0 => __DIR__ . '/..' . '/patreon/patreon/src',
+        ),
+        'PHPStan\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
         ),
         'Masterminds\\' => 
         array (
@@ -398,6 +417,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/league/container/src',
         ),
+        'Laravel\\Prompts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/prompts/src',
+        ),
         'Laminas\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
@@ -409,7 +432,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'Html2Text\\' => 
         array (
             0 => __DIR__ . '/..' . '/html2text/html2text/src',
-            1 => __DIR__ . '/..' . '/html2text/html2text/test',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -439,6 +461,14 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/drush/drush/src',
         ),
+        'Drupal\\rat\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/drupal/rat/src',
+        ),
+        'Drupal\\cloudflare_purge\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/modules/contrib/cloudflare_purge/src',
+        ),
         'Drupal\\Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/web/core/lib/Drupal/Core',
@@ -465,7 +495,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         ),
         'Doctrine\\Deprecations\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
+            0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
         ),
         'Doctrine\\Common\\Lexer\\' => 
         array (
@@ -515,6 +545,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
+        'ComposerDrupalLenient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mglaman/composer-drupal-lenient/src',
+        ),
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
@@ -539,7 +573,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
     );
 
     public static $classMap = array (
-        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'CURLStringFile' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/CURLStringFile.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -551,6 +584,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'DateMalformedStringException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateMalformedStringException.php',
         'DateObjectError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateObjectError.php',
         'DateRangeError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateRangeError.php',
+        'Deprecated' => __DIR__ . '/..' . '/symfony/polyfill-php84/Resources/stubs/Deprecated.php',
         'Drupal' => __DIR__ . '/../..' . '/web/core/lib/Drupal.php',
         'Drupal\\Component\\Datetime\\Time' => __DIR__ . '/../..' . '/web/core/lib/Drupal/Component/Datetime/Time.php',
         'Drupal\\Component\\DependencyInjection\\Container' => __DIR__ . '/../..' . '/web/core/lib/Drupal/Component/DependencyInjection/Container.php',
@@ -580,7 +614,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'PEAR_Error' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
         'PEAR_ErrorStack' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
-        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
         'SebastianBergmann\\Diff\\Chunk' => __DIR__ . '/..' . '/sebastian/diff/src/Chunk.php',
@@ -599,10 +632,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'SebastianBergmann\\Diff\\Output\\UnifiedDiffOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/UnifiedDiffOutputBuilder.php',
         'SebastianBergmann\\Diff\\Parser' => __DIR__ . '/..' . '/sebastian/diff/src/Parser.php',
         'SebastianBergmann\\Diff\\TimeEfficientLongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php',
-        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'System' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/System.php',
-        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

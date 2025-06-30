@@ -17,14 +17,11 @@ use GuzzleHttp\RequestOptions;
  * Tests the structure of a REST resource.
  *
  * @group rest
- * @group #slow
  */
 class ResourceTest extends BrowserTestBase {
 
   /**
-   * Modules to install.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['rest', 'entity_test', 'rest_test'];
 
@@ -158,8 +155,8 @@ class ResourceTest extends BrowserTestBase {
     /** @var \Drupal\rest\Plugin\Type\ResourcePluginManager $manager */
     $manager = \Drupal::service('plugin.manager.rest');
 
-    foreach ($manager->getDefinitions() as $resource => $definition) {
-      foreach ($definition['uri_paths'] as $key => $uri_path) {
+    foreach ($manager->getDefinitions() as $definition) {
+      foreach ($definition['uri_paths'] as $uri_path) {
         $this->assertStringNotContainsString('//', $uri_path, 'The resource URI path does not have duplicate slashes.');
       }
     }

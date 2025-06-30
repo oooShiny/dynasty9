@@ -101,7 +101,7 @@ class SchedulerSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     );
 
-    parent::buildForm($form, $form_state);
+    return parent::buildForm($form, $form_state);
   }
 
   /**

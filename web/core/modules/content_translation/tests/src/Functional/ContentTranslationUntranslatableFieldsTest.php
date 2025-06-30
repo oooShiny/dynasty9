@@ -26,14 +26,6 @@ class ContentTranslationUntranslatableFieldsTest extends ContentTranslationPendi
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Remove and fix test to not rely on super user.
-   * @see https://www.drupal.org/project/drupal/issues/3437620
-   */
-  protected bool $usesSuperUserAccessPolicy = TRUE;
-
-  /**
-   * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
@@ -58,7 +50,7 @@ class ContentTranslationUntranslatableFieldsTest extends ContentTranslationPendi
   /**
    * {@inheritdoc}
    */
-  protected function setupTestFields() {
+  protected function setupTestFields(): void {
     parent::setupTestFields();
 
     $field_storage = FieldStorageConfig::create([

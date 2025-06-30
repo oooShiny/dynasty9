@@ -16,9 +16,7 @@ use Drupal\views\Views;
 class FilterBooleanOperatorTest extends ViewsKernelTestBase {
 
   /**
-   * The modules to enable for this test.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['system'];
 
@@ -37,6 +35,30 @@ class FilterBooleanOperatorTest extends ViewsKernelTestBase {
   protected $columnMap = [
     'views_test_data_id' => 'id',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function dataSet() {
+    $dataset = parent::dataSet();
+    $dataset[] = [
+      'name' => 'Null',
+      'age' => 0,
+      'job' => 'Null',
+      'created' => 0,
+      'status' => NULL,
+    ];
+    return $dataset;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function schemaDefinition() {
+    $schema = parent::schemaDefinition();
+    $schema['views_test_data']['fields']['status']['not null'] = FALSE;
+    return $schema;
+  }
 
   /**
    * Tests the BooleanOperator filter.
@@ -113,6 +135,59 @@ class FilterBooleanOperatorTest extends ViewsKernelTestBase {
   }
 
   /**
+   * Tests the BooleanOperator empty/not empty filters.
+   */
+  public function testEmptyFilterBooleanOperator(): void {
+    $view = Views::getView('test_view');
+    $view->setDisplay();
+
+    // Add an "empty" boolean filter on status.
+    $view->displayHandlers->get('default')->overrideOption('filters', [
+      'status' => [
+        'id' => 'status',
+        'field' => 'status',
+        'table' => 'views_test_data',
+        'operator' => 'empty',
+      ],
+    ]);
+    $this->executeView($view);
+
+    $expected_result = [
+      ['id' => 6],
+    ];
+
+    $this->assertCount(1, $view->result);
+    $this->assertIdenticalResultset($view, $expected_result, $this->columnMap);
+
+    $view->destroy();
+    $view->setDisplay();
+
+    // Add a "not empty" boolean filter on status.
+    $view->displayHandlers->get('default')->overrideOption('filters', [
+      'status' => [
+        'id' => 'status',
+        'field' => 'status',
+        'table' => 'views_test_data',
+        'operator' => 'not empty',
+      ],
+    ]);
+    $this->executeView($view);
+
+    $expected_result = [
+      ['id' => 1],
+      ['id' => 2],
+      ['id' => 3],
+      ['id' => 4],
+      ['id' => 5],
+    ];
+
+    $this->assertCount(5, $view->result);
+    $this->assertIdenticalResultset($view, $expected_result, $this->columnMap);
+
+    $view->destroy();
+  }
+
+  /**
    * Tests the boolean filter with grouped exposed form enabled.
    */
   public function testFilterGroupedExposed(): void {
@@ -172,8 +247,9 @@ class FilterBooleanOperatorTest extends ViewsKernelTestBase {
    * Provides grouped exposed filter configuration.
    *
    * @return array
+   *   An array of grouped exposed filter configuration.
    */
-  protected function getGroupedExposedFilters() {
+  protected function getGroupedExposedFilters(): array {
     $filters = [
       'status' => [
         'id' => 'status',

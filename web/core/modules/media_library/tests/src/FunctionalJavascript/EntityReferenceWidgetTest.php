@@ -181,7 +181,12 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
     foreach ($links as $link) {
       $link_titles[] = $link->getText();
     }
-    $expected_link_titles = ['Show Type Three media (selected)', 'Show Type One media', 'Show Type Two media', 'Show Type Four media'];
+    $expected_link_titles = [
+      'Show Type Three media (selected)',
+      'Show Type One media',
+      'Show Type Two media',
+      'Show Type Four media',
+    ];
     $this->assertSame($link_titles, $expected_link_titles);
     $this->drupalGet('admin/structure/types/manage/basic_page/form-display');
 
@@ -203,7 +208,9 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
     $link_titles = array_map(function ($link) {
       return $link->getText();
     }, $links);
-    $this->assertSame($link_titles, ['Show Type One media (selected)', 'Show Type Three media', 'Show Type Four media', 'Show Type Two media']);
+    $this->assertSame(
+      $link_titles,
+      ['Show Type One media (selected)', 'Show Type Three media', 'Show Type Four media', 'Show Type Two media']);
     $assert_session->elementExists('css', '.ui-dialog-titlebar-close')->click();
 
     // Assert the announcements for media type navigation in the media library.
@@ -236,7 +243,6 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
     $session->getPage()->fillField('Name', 'Dog');
     $session->getPage()->pressButton('Apply filters');
     $this->waitForText('Dog');
-    $this->markTestSkipped("Skipped temporarily for random fails.");
     $this->waitForNoText('Bear');
     $session->getPage()->fillField('Name', '');
     $session->getPage()->pressButton('Apply filters');
@@ -283,8 +289,8 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
 
     // Assert the same has been added twice and remove the items again.
     $this->waitForElementsCount('css', '.field--name-field-twin-media [data-media-library-item-delta]', 2);
-    $assert_session->hiddenFieldValueEquals('field_twin_media[selection][0][target_id]', 4);
-    $assert_session->hiddenFieldValueEquals('field_twin_media[selection][1][target_id]', 4);
+    $assert_session->hiddenFieldValueEquals('field_twin_media[selection][0][target_id]', '4');
+    $assert_session->hiddenFieldValueEquals('field_twin_media[selection][1][target_id]', '4');
     $wrapper->pressButton('Remove');
     $this->waitForText('Dog has been removed.');
     $wrapper->pressButton('Remove');
@@ -567,7 +573,8 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
    * Checks for inclusion of text in #drupal-live-announce.
    *
    * @param string $expected_message
-   *   The text that is expected to be present in the #drupal-live-announce element.
+   *   The text that is expected to be present in the #drupal-live-announce
+   *   element.
    *
    * @internal
    */
@@ -579,7 +586,7 @@ class EntityReferenceWidgetTest extends MediaLibraryTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function sortableUpdate($item, $from, $to = NULL) {
+  protected function sortableUpdate($item, $from, $to = NULL): void {
     // See core/modules/media_library/js/media_library.widget.js.
     $script = <<<JS
 (function ($) {

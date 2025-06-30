@@ -1,0 +1,5 @@
+{
+    "name": "drupal/tailwindcss",
+    "description": "This is a starter kit/demo theme for using Tailwind CSS within Drupal.",
+    "type": "drupal-theme"
+}

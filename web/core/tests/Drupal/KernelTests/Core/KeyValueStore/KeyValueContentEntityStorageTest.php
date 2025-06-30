@@ -17,9 +17,7 @@ use Drupal\entity_test\Entity\EntityTestLabel;
 class KeyValueContentEntityStorageTest extends KernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['user', 'entity_test', 'keyvalue_test'];
 
@@ -63,7 +61,7 @@ class KeyValueContentEntityStorageTest extends KernelTestBase {
       $empty->toUrl();
       $this->fail('EntityMalformedException was thrown.');
     }
-    catch (EntityMalformedException $e) {
+    catch (EntityMalformedException) {
       // Expected exception; just continue testing.
     }
 
@@ -72,7 +70,7 @@ class KeyValueContentEntityStorageTest extends KernelTestBase {
       $empty->save();
       $this->fail('EntityMalformedException was thrown.');
     }
-    catch (EntityMalformedException $e) {
+    catch (EntityMalformedException) {
       // Expected exception; just continue testing.
     }
 
@@ -85,7 +83,7 @@ class KeyValueContentEntityStorageTest extends KernelTestBase {
       $empty_id->save();
       $this->fail('EntityMalformedException was thrown.');
     }
-    catch (EntityMalformedException $e) {
+    catch (EntityMalformedException) {
       // Expected exception; just continue testing.
     }
 
@@ -111,7 +109,7 @@ class KeyValueContentEntityStorageTest extends KernelTestBase {
     try {
       $status = $entity_test->save();
     }
-    catch (EntityMalformedException $e) {
+    catch (EntityMalformedException) {
       $this->fail('EntityMalformedException was not thrown.');
     }
 
@@ -143,7 +141,7 @@ class KeyValueContentEntityStorageTest extends KernelTestBase {
       $same_id->save();
       $this->fail('Not possible to overwrite an entity.');
     }
-    catch (EntityStorageException $e) {
+    catch (EntityStorageException) {
       // Expected exception; just continue testing.
     }
 

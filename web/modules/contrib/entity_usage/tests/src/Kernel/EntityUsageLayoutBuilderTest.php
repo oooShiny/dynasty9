@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\entity_usage\Kernel;
 
+use Drupal\KernelTests\KernelTestBase;
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\block_content\Entity\BlockContentType;
 use Drupal\entity_test\Entity\EntityTest;
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
 use Drupal\layout_builder\Plugin\SectionStorage\OverridesSectionStorage;
 use Drupal\layout_builder\Section;
@@ -61,7 +61,7 @@ class EntityUsageLayoutBuilderTest extends KernelTestBase {
   /**
    * Tests blocks referenced by inline blocks in layouts are recorded.
    */
-  public function testLayoutBuilderInlineBlockUsage() {
+  public function testLayoutBuilderInlineBlockUsage(): void {
     $type = BlockContentType::create([
       'id' => 'foo',
       'label' => 'Foo',

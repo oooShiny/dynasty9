@@ -17,14 +17,11 @@ use Drupal\field\Entity\FieldStorageConfig;
  * Tests the new entity API for the number field type.
  *
  * @group field
- * @group #slow
  */
 class NumberItemTest extends FieldKernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [];
 
@@ -131,8 +128,6 @@ class NumberItemTest extends FieldKernelTestBase {
   /**
    * Tests constraints on numeric item fields.
    *
-   * @dataProvider dataNumberFieldSettingsProvider
-   *
    * @param string $type
    *   The field type.
    * @param int|float $min
@@ -147,6 +142,8 @@ class NumberItemTest extends FieldKernelTestBase {
    *   The expected constraint violation message.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @dataProvider dataNumberFieldSettingsProvider
    */
   public function testConstraints($type, $min, $max, $value, $expect_constraints, $expected_constraint_message = ''): void {
     $field = FieldConfig::loadByName('entity_test', 'entity_test', 'field_' . $type);

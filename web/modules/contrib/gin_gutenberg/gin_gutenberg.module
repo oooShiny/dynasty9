@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains the logic for handling Gin Gutenberg related features.
+ */
+
 use Drupal\node\Entity\NodeType;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Cache\Cache;
@@ -24,14 +29,26 @@ function gin_gutenberg_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_preprocess_HOOK() for html.
  */
 function gin_gutenberg_preprocess_html(&$variables) {
-  $route_entity = \Drupal::routeMatch()->getParameter('node');
-  if (!$route_entity) {
-    $route_entity = \Drupal::routeMatch()->getParameter('node_type');
-  }
+  $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
+  $route_entity = NULL;
 
-  // Check to see if Gutenberg is enabled and on a node edit form
-  if (_gin_gutenberg_is_content_form() && _is_gutenberg_enabled($route_entity)) {
-    $variables['attributes']['class'][] = 'gutenberg--enabled';
+  // Handle both node edit and node add scenarios.
+  if (in_array($route_name, ['entity.node.edit_form', 'node.add'])) {
+    if ($route_name === 'entity.node.edit_form') {
+      $route_entity = $route_match->getParameter('node');
+    }
+    elseif ($route_name === 'node.add') {
+      $node_type = $route_match->getParameter('node_type');
+      if ($node_type instanceof NodeType) {
+        $route_entity = Node::create(['type' => $node_type->id()]);
+      }
+    }
+
+    // Check to see if Gutenberg is enabled and on a node form.
+    if ($route_entity && _gin_gutenberg_is_content_form() && _gin_gutenberg_is_gutenberg_enabled($route_entity)) {
+      $variables['attributes']['class'][] = 'gutenberg--enabled';
+    }
   }
 }
 
@@ -46,7 +63,7 @@ function gin_gutenberg_page_attachments_alter(array &$attachments) {
   }
 
   // Check to see if Gutenberg is enabled on the node entity.
-  if (($node instanceof NodeInterface) && !_is_gutenberg_enabled($node)) {
+  if (($node instanceof NodeInterface) && !_gin_gutenberg_is_gutenberg_enabled($node)) {
     return;
   }
 
@@ -66,7 +83,7 @@ function gin_gutenberg_form_node_form_alter(&$form, FormStateInterface $form_sta
   $node = $form_state->getFormObject()->getEntity();
 
   // Leave early if Gutenberg is not enabled for this entity.
-  if ($node instanceof NodeInterface && !_is_gutenberg_enabled($node)) {
+  if ($node instanceof NodeInterface && !_gin_gutenberg_is_gutenberg_enabled($node)) {
     return;
   }
 
@@ -74,7 +91,7 @@ function gin_gutenberg_form_node_form_alter(&$form, FormStateInterface $form_sta
   $form['#attached']['library'][] = 'gin_gutenberg/gin_gutenberg';
 
   // @todo There's a better way to change status element group?
-  //       It seems Gin alter always overrides the group change.
+  //   It seems Gin alter always overrides the group change.
   if (isset($form['status'])) {
     unset($form['status']['#group']);
     $form['meta']['status'] = $form['status'];
@@ -85,9 +102,6 @@ function gin_gutenberg_form_node_form_alter(&$form, FormStateInterface $form_sta
 
 /**
  * Implements hook_preprocess_HOOK() for page--node--edit--gutenberg.html.twig.
- *
- * @param array $variables
- *   The variables array passed by reference.
  */
 function gin_gutenberg_preprocess_page__node__edit__gutenberg(&$variables) {
   $node_type = _gin_gutenberg_get_node_type();
@@ -96,9 +110,6 @@ function gin_gutenberg_preprocess_page__node__edit__gutenberg(&$variables) {
 
 /**
  * Implements hook_preprocess_HOOK() for page--node--add--gutenberg.html.twig.
- *
- * @param array $variables
- *   The variables array passed by reference.
  */
 function gin_gutenberg_preprocess_page__node__add__gutenberg(&$variables) {
   $node_type = _gin_gutenberg_get_node_type();
@@ -134,22 +145,23 @@ function gin_gutenberg_theme_suggestions_page_alter(array &$suggestions, array $
   if ($route_name === 'entity.node.edit_form' || $route_name === 'entity.node.content_translation_add') {
     $node = \Drupal::routeMatch()->getParameter('node');
 
-    if ($node instanceof \Drupal\node\NodeInterface) {
-      if (_is_gutenberg_enabled($node)) {
+    if ($node instanceof NodeInterface) {
+      if (_gin_gutenberg_is_gutenberg_enabled($node)) {
         $suggestions[] = 'page__node__edit__gutenberg';
       }
     }
   }
   elseif ($route_name === 'entity.node.add_form') {
     $node_type = \Drupal::routeMatch()->getParameter('node_type');
-    
+
     if ($node_type instanceof NodeType) {
-      if (_is_gutenberg_enabled($node_type)) {
+      if (_gin_gutenberg_is_gutenberg_enabled($node_type)) {
         $suggestions[] = 'page__node__add__gutenberg';
       }
     }
   }
 }
+
 /**
  * Helper function to get the node type from the current route.
  *
@@ -160,7 +172,7 @@ function _gin_gutenberg_get_node_type() {
   $route_match = \Drupal::routeMatch();
   $node = $route_match->getParameter('node');
 
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     return $node->bundle();
   }
 
@@ -196,14 +208,16 @@ function _gin_gutenberg_gin_is_active() {
   if ($admin_theme_name && isset($theme_handler[$admin_theme_name]->base_themes)) {
     $admin_base_themes = $theme_handler[$admin_theme_name]->base_themes;
     $admin_base_themes[$admin_theme_name] = $admin_theme_name;
-  } else {
+  }
+  else {
     $admin_base_themes = $frontend_base_themes;
   }
 
   if ($logged_in) {
     $gin_activated = array_key_exists('gin', $admin_base_themes);
     $claro_activated = array_key_exists('claro', $admin_base_themes) && !array_key_exists('gin', $admin_base_themes);
-  } else {
+  }
+  else {
     $gin_activated = array_key_exists('gin', $frontend_base_themes);
     $claro_activated = array_key_exists('claro', $frontend_base_themes) && !array_key_exists('gin', $frontend_base_themes);
   }
@@ -229,7 +243,7 @@ function _gin_gutenberg_get_admin_theme_setting($setting) {
 /**
  * Checks whether Gutenberg is enabled for an entity.
  */
-function _is_gutenberg_enabled(EntityInterface $entity = NULL) {
+function _gin_gutenberg_is_gutenberg_enabled(?EntityInterface $entity = NULL) {
   if (!$entity) {
     return FALSE;
   }
@@ -243,7 +257,6 @@ function _is_gutenberg_enabled(EntityInterface $entity = NULL) {
 
   return (bool) $config->get($node_type . '_enable_full');
 }
-
 
 /**
  * Check if were on a content edit form.

@@ -4,6 +4,7 @@ namespace Drupal\entity_usage\Form;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
@@ -49,8 +50,15 @@ class EntityUsageSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, RouteBuilderInterface $router_builder, CacheBackendInterface $cache_render, EntityUsageTrackManager $usage_track_manager) {
-    parent::__construct($config_factory);
+  public function __construct(
+    ConfigFactoryInterface $config_factory,
+    TypedConfigManagerInterface $typed_config_manager,
+    EntityTypeManagerInterface $entity_type_manager,
+    RouteBuilderInterface $router_builder,
+    CacheBackendInterface $cache_render,
+    EntityUsageTrackManager $usage_track_manager,
+  ) {
+    parent::__construct($config_factory, $typed_config_manager);
     $this->entityTypeManager = $entity_type_manager;
     $this->routerBuilder = $router_builder;
     $this->cacheRender = $cache_render;
@@ -60,9 +68,10 @@ class EntityUsageSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('entity_type.manager'),
       $container->get('router.builder'),
       $container->get('cache.render'),
@@ -80,7 +89,7 @@ class EntityUsageSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames(): array {
     return ['entity_usage.settings'];
   }
 
@@ -89,13 +98,14 @@ class EntityUsageSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('entity_usage.settings');
+
     $all_entity_types = $this->entityTypeManager->getDefinitions();
     $content_entity_types = [];
 
     // Filter the entity types.
-    /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_type_options */
     $entity_type_options = [];
     $tabs_options = [];
+    $source_options = [];
     foreach ($all_entity_types as $entity_type) {
       if (($entity_type instanceof ContentEntityTypeInterface)) {
         $content_entity_types[$entity_type->id()] = $entity_type->getLabel();
@@ -104,8 +114,15 @@ class EntityUsageSettingsForm extends ConfigFormBase {
       if ($entity_type->hasLinkTemplate('canonical') || $entity_type->hasLinkTemplate('edit-form')) {
         $tabs_options[$entity_type->id()] = $entity_type->getLabel();
       }
+
+      if ($this->usageTrackManager->isEntityTypeSource($entity_type)) {
+        $source_options[$entity_type->id()] = $entity_type->getLabel();
+      }
     }
+
+    natcasesort($tabs_options);
     natcasesort($entity_type_options);
+    natcasesort($source_options);
 
     // Files and users shouldn't be tracked by default.
     unset($content_entity_types['file']);
@@ -137,7 +154,7 @@ class EntityUsageSettingsForm extends ConfigFormBase {
     $form['track_enabled_source_entity_types']['entity_types'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Source entity types'),
-      '#options' => $entity_type_options,
+      '#options' => $source_options,
       // If no custom settings exist, content entities are tracked by default.
       '#default_value' => $config->get('track_enabled_source_entity_types') ?: array_keys($content_entity_types),
       '#required' => TRUE,
@@ -168,11 +185,13 @@ class EntityUsageSettingsForm extends ConfigFormBase {
       '#description' => $this->t('The following plugins were found in the system and can provide usage tracking. Check all plugins that should be active.'),
       '#tree' => TRUE,
     ];
+
     $plugins = $this->usageTrackManager->getDefinitions();
     $plugin_options = [];
     foreach ($plugins as $plugin) {
       $plugin_options[$plugin['id']] = $plugin['label'];
     }
+    natcasesort($plugin_options);
     $form['track_enabled_plugins']['plugins'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Tracking plugins'),
@@ -224,12 +243,12 @@ class EntityUsageSettingsForm extends ConfigFormBase {
       $form['edit_warning_message_entity_types']['entity_types'][$entity_type_id]['#states'] = [
         'enabled' => [
           ':input[name="track_enabled_target_entity_types[entity_types][' . $entity_type_id . ']"]' => ['checked' => TRUE],
-        ]
+        ],
       ];
       $form['delete_warning_message_entity_types']['entity_types'][$entity_type_id]['#states'] = [
         'enabled' => [
           ':input[name="track_enabled_target_entity_types[entity_types][' . $entity_type_id . ']"]' => ['checked' => TRUE],
-        ]
+        ],
       ];
     }
 

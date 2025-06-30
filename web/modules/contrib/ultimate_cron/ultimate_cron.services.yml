@@ -39,7 +39,7 @@ services:
       - { name: logger }
   ultimate_cron.queue_worker:
     class: Drupal\ultimate_cron\QueueWorker
-    arguments: ["@plugin.manager.queue_worker", "@queue", "@config.factory"]
+    arguments: ["@plugin.manager.queue_worker", "@queue", "@config.factory", "@logger.factory"]
   ultimate_cron.database_factory:
     class: Drupal\Core\Database\Connection
     factory: Drupal\ultimate_cron\UltimateCronDatabaseFactory::getConnection

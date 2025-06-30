@@ -10,7 +10,7 @@ use Drupal\Core\Entity\FieldableEntityInterface;
 /**
  * Implements hook_views_data().
  */
-function entity_usage_views_data() {
+function entity_usage_views_data(): array {
 
   $data['entity_usage']['table']['group'] = t('Entity Usage');
 
@@ -37,7 +37,7 @@ function entity_usage_views_data() {
 /**
  * Implements hook_views_data_alter().
  */
-function entity_usage_views_data_alter(array &$data) {
+function entity_usage_views_data_alter(array &$data): void {
 
   $entity_types = \Drupal::entityTypeManager()->getDefinitions();
 

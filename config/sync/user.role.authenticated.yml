@@ -9,6 +9,7 @@ dependencies:
     - contact
     - dynasty_transcript
     - field_permissions
+    - file
     - filter
     - media
     - shortcut
@@ -24,6 +25,7 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'delete own files'
   - 'post comments'
   - 'skip comment approval'
   - 'use text format basic_html'

@@ -20,7 +20,8 @@ ultimate_cron.launcher_settings:
     _form: '\Drupal\ultimate_cron\Form\LauncherSettingsForm'
     _title: 'Launcher settings'
   requirements:
-    _permission: 'administer ultimate cron'
+    # Form disabled as functionality is currently not implemented.
+    _access: 'FALSE'
 
 ultimate_cron.logger_settings:
   path: '/admin/config/system/cron/settings/logger'
@@ -28,7 +29,8 @@ ultimate_cron.logger_settings:
     _form: '\Drupal\ultimate_cron\Form\LoggerSettingsForm'
     _title: 'Logger settings'
   requirements:
-    _permission: 'administer ultimate cron'
+    # Form disabled as functionality is currently not implemented.
+    _access: 'FALSE'
 
 ultimate_cron.scheduler_settings:
   path: '/admin/config/system/cron/settings/scheduler'
@@ -36,7 +38,8 @@ ultimate_cron.scheduler_settings:
     _form: '\Drupal\ultimate_cron\Form\SchedulerSettingsForm'
     _title: 'Scheduler settings'
   requirements:
-    _permission: 'administer ultimate cron'
+    # Form disabled as functionality is currently not implemented.
+    _access: 'FALSE'
 
 entity.ultimate_cron_job.collection:
   path: '/admin/config/system/cron/jobs'
@@ -70,6 +73,7 @@ entity.ultimate_cron_job.run:
     _title: Run Cron job
   requirements:
     _permission: 'run cron jobs'
+    _csrf_token: 'TRUE'
 
 entity.ultimate_cron_job.delete_form:
   path: '/admin/config/system/cron/jobs/manage/{ultimate_cron_job}/delete'

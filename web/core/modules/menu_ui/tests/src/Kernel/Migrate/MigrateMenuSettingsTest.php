@@ -13,6 +13,9 @@ use Drupal\Tests\migrate_drupal\Kernel\d7\MigrateDrupal7TestBase;
  */
 class MigrateMenuSettingsTest extends MigrateDrupal7TestBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = ['menu_ui'];
 
   /**
@@ -24,6 +27,9 @@ class MigrateMenuSettingsTest extends MigrateDrupal7TestBase {
     $this->executeMigration('menu_settings');
   }
 
+  /**
+   * Tests migration of menu_ui settings.
+   */
   public function testMigration(): void {
     $this->assertTrue(\Drupal::config('menu_ui.settings')->get('override_parent_selector'));
   }

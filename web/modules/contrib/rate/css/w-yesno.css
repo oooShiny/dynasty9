@@ -2,7 +2,7 @@
 
 .yesno-rating-wrapper {
   display: inline;
-  padding: 0px;
+  padding: 0;
 }
 
 div.yesno > form > table > tbody > tr.rating-table-tr {
@@ -10,33 +10,32 @@ div.yesno > form > table > tbody > tr.rating-table-tr {
 }
 
 div.yesno > form > table > tbody > tr > td.rating-table-td {
+  padding: 0;
   border: none;
-  padding: 0px;
 }
-
 
 div.yesno-rating-wrapper > div.form-type-radio {
   display: inline;
-  padding: 0px;
+  padding: 0;
 }
 
-/* Deafault button styles, override in widget settings */
+/* Default button styles, override in widget settings */
 div.yesno-rating-wrapper > div > label.rating-label {
   display: inline-block;
-  vertical-align: baseline;
-  text-align: center;
-  padding-left: 10px;
   padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+  vertical-align: baseline;
 }
 
 div.yesno-rating-wrapper > div > label.yesno-rating-label {
-  background: #eee;
+  display: inline-block;
+  width: 40px;
   padding: 0 2px;
+  text-align: center;
   color: #666;
   border: 1px solid #ccc;
-  width: 40px;
-  text-align: center;
-  display: inline-block;
+  background: #eee;
 }
 
 div.yesno-rating-wrapper > div > label.yesno-rating-label:hover,
@@ -46,14 +45,14 @@ div.yesno-rating-wrapper > div > label.yesno-rating-label:focus {
 }
 
 div.yesno-rating-wrapper > div > label.yesno-rating-label:hover {
-  background: #ddd;
   text-decoration: none;
+  background: #ddd;
 }
 
 div.yesno-rating-wrapper > div > div.rating-option-result {
   display: inline;
-  text-align: center;
   padding: 5px;
+  text-align: center;
   vertical-align: baseline;
 }
 

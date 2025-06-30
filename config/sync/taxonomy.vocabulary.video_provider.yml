@@ -1,9 +1,0 @@
-uuid: b149f2c5-5b9e-4200-8542-a4011c532847
-langcode: en
-status: true
-dependencies: {  }
-name: 'Video Provider'
-vid: video_provider
-description: null
-weight: 0
-new_revision: false

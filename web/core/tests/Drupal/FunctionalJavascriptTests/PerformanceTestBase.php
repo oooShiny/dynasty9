@@ -27,6 +27,7 @@ class PerformanceTestBase extends WebDriverTestBase {
   protected function setUp(): void {
     parent::setUp();
     $this->doSetUpTasks();
+    \Drupal::service('module_installer')->uninstall(['automated_cron']);
   }
 
   /**
@@ -52,7 +53,7 @@ class PerformanceTestBase extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getMinkDriverArgs() {
+  protected function getMinkDriverArgs(): string {
     return $this->doGetMinkDriverArgs();
   }
 

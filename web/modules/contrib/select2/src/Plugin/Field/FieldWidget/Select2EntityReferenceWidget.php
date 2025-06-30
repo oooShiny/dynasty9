@@ -8,6 +8,7 @@ use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\select2\Select2Trait;
 use Drupal\user\EntityOwnerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -33,7 +34,14 @@ class Select2EntityReferenceWidget extends Select2Widget {
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected AccountInterface $currentUser;
 
   /**
    * {@inheritdoc}
@@ -41,6 +49,7 @@ class Select2EntityReferenceWidget extends Select2Widget {
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): self {
     $widget = parent::create($container, $configuration, $plugin_id, $plugin_definition);
     $widget->setEntityTypeManager($container->get('entity_type.manager'));
+    $widget->setCurrentUser($container->get('current_user'));
     return $widget;
   }
 
@@ -52,6 +61,16 @@ class Select2EntityReferenceWidget extends Select2Widget {
    */
   protected function setEntityTypeManager(EntityTypeManagerInterface $entityTypeManager): void {
     $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * Set the current user.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $currentUser
+   *   The current user.
+   */
+  protected function setCurrentUser(AccountInterface $currentUser): void {
+    $this->currentUser = $currentUser;
   }
 
   /**
@@ -107,7 +126,7 @@ class Select2EntityReferenceWidget extends Select2Widget {
   /**
    * {@inheritdoc}
    */
-  protected function getOptions(FieldableEntityInterface $entity) {
+  protected function getOptions(FieldableEntityInterface $entity): array {
     if (!isset($this->options) && $this->getSetting('autocomplete')) {
       // Get all currently selected options.
       $selected_options = [];
@@ -163,7 +182,7 @@ class Select2EntityReferenceWidget extends Select2Widget {
       $entity = $items->getEntity();
       $element['#autocreate'] = [
         'bundle' => $bundle,
-        'uid' => ($entity instanceof EntityOwnerInterface) ? $entity->getOwnerId() : \Drupal::currentUser()->id(),
+        'uid' => ($entity instanceof EntityOwnerInterface) ? $entity->getOwnerId() : $this->currentUser->id(),
       ];
     }
     // Do not display a 'multiple' select box if there is only one option. But
@@ -294,7 +313,7 @@ class Select2EntityReferenceWidget extends Select2Widget {
    * @return mixed
    *   The setting value.
    */
-  protected function getSelectionHandlerSetting(string $setting_name) {
+  protected function getSelectionHandlerSetting(string $setting_name): mixed {
     $settings = $this->getFieldSetting('handler_settings');
     return $settings[$setting_name] ?? NULL;
   }

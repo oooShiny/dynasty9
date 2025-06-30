@@ -7,6 +7,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Utility\Error;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -76,7 +77,7 @@ class RateSettingsForm extends ConfigFormBase implements ContainerInjectionInter
     $form['settings'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Rate settings'),
-      '#collapsbile' => FALSE,
+      '#collapsible' => FALSE,
       '#collapsed' => FALSE,
     ];
 
@@ -98,7 +99,7 @@ class RateSettingsForm extends ConfigFormBase implements ContainerInjectionInter
       '#type' => 'fieldset',
       '#title' => $this->t('Bot detection'),
       '#description' => $this->t('Bots can be automatically banned from voting if they rate more than a given amount of votes within one minute or hour. This threshold is configurable below. Votes from the same IP-address will be ignored forever after reaching this limit.'),
-      '#collapsbile' => FALSE,
+      '#collapsible' => FALSE,
       '#collapsed' => FALSE,
     ];
 
@@ -156,7 +157,7 @@ class RateSettingsForm extends ConfigFormBase implements ContainerInjectionInter
         }
         elseif ($status_code == 200) {
           if (in_array(substr($data, 0, 1), ['Y', 'N'], TRUE)) {
-            $messenger->addStatus($this->t('Rate has succesfully contacted the BotScout server.'));
+            $messenger->addStatus($this->t('Rate has successfully contacted the BotScout server.'));
           }
           else {
             $form_state->setErrorByName('botscout_key', $this->t('Invalid API-key.'));
@@ -168,7 +169,7 @@ class RateSettingsForm extends ConfigFormBase implements ContainerInjectionInter
       }
       catch (RequestException $e) {
         $messenger->addWarning($this->t('An error occurred contacting BotScout.'));
-        watchdog_exception('rate', $e);
+        Error::logException($this->logger('rate'), $e);
       }
     }
   }

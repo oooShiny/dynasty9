@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Drupal\Tests\file\Kernel;
 
 use Drupal\file\Entity\File;
+use Drupal\file_test\FileTestHelper;
+use Drupal\Tests\user\Traits\UserCreationTrait;
 
 /**
  * File saving tests.
@@ -13,18 +15,16 @@ use Drupal\file\Entity\File;
  */
 class SaveTest extends FileManagedUnitTestBase {
 
-  /**
-   * {@inheritdoc}
-   *
-   * @todo Remove and fix test to not rely on super user.
-   * @see https://www.drupal.org/project/drupal/issues/3437620
-   */
-  protected bool $usesSuperUserAccessPolicy = TRUE;
+  use UserCreationTrait;
 
+  /**
+   * Tests the saving process of file entities.
+   */
   public function testFileSave(): void {
+    $account = $this->createUser();
     // Create a new file entity.
     $file = File::create([
-      'uid' => 1,
+      'uid' => $account->id(),
       'filename' => 'druplicon.txt',
       'uri' => 'public://druplicon.txt',
       'filemime' => 'text/plain',
@@ -49,7 +49,7 @@ class SaveTest extends FileManagedUnitTestBase {
     $this->assertEquals('en', $loaded_file->langcode->value, 'Langcode was defaulted correctly.');
 
     // Resave the file, updating the existing record.
-    file_test_reset();
+    FileTestHelper::reset();
     $file->status->value = 7;
     $file->save();
 
@@ -64,10 +64,11 @@ class SaveTest extends FileManagedUnitTestBase {
     $this->assertEquals($file->isPermanent(), $loaded_file->isPermanent(), 'Status was saved correctly.');
     $this->assertEquals('en', $loaded_file->langcode->value, 'Langcode was saved correctly.');
 
-    // Try to insert a second file with the same name apart from case insensitivity
-    // to ensure the 'uri' index allows for filenames with different cases.
+    // Try to insert a second file with the same name apart from case
+    // insensitivity to ensure the 'uri' index allows for filenames with
+    // different cases.
     $uppercase_values = [
-      'uid' => 1,
+      'uid' => $account->id(),
       'filename' => 'DRUPLICON.txt',
       'uri' => 'public://DRUPLICON.txt',
       'filemime' => 'text/plain',
@@ -96,7 +97,7 @@ class SaveTest extends FileManagedUnitTestBase {
 
     // Save a file with zero bytes.
     $file = File::create([
-      'uid' => 1,
+      'uid' => $account->id(),
       'filename' => 'no-druplicon.txt',
       'uri' => 'public://no-druplicon.txt',
       'filemime' => 'text/plain',

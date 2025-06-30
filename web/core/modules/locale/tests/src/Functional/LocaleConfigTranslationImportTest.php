@@ -15,9 +15,7 @@ use Drupal\Tests\BrowserTestBase;
 class LocaleConfigTranslationImportTest extends BrowserTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['language', 'locale_test_translate'];
 
@@ -25,13 +23,6 @@ class LocaleConfigTranslationImportTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-  }
 
   /**
    * Tests update changes configuration translations if enabled after language.

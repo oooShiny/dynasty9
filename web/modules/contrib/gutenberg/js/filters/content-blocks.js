@@ -9,6 +9,9 @@
   const { useState, useEffect } = element;
   const { addFilter } = hooks;
   const { createHigherOrderComponent } = compose;
+  function getCsrfToken() {
+    return drupalSettings2.gutenberg.csrfToken;
+  }
   async function cloneIfUsed(contentBlockId, isDuplicate) {
     const options = {
       isDuplicate,
@@ -17,10 +20,12 @@
       entityType: "node",
       entityBundle: drupalSettings2.gutenberg.nodeType
     };
+    const csrfToken = getCsrfToken();
     const response = await fetch(Drupal2.url(`editor/content_block/clone_if_used`), {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken
       },
       body: JSON.stringify(options)
     });

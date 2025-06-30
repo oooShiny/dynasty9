@@ -16,14 +16,6 @@ class ContentTranslationRevisionTranslationDeletionTest extends ContentTranslati
 
   /**
    * {@inheritdoc}
-   *
-   * @todo Remove and fix test to not rely on super user.
-   * @see https://www.drupal.org/project/drupal/issues/3437620
-   */
-  protected bool $usesSuperUserAccessPolicy = TRUE;
-
-  /**
-   * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
@@ -58,7 +50,7 @@ class ContentTranslationRevisionTranslationDeletionTest extends ContentTranslati
    * @param int $index
    *   The test run index.
    */
-  public function doTestOverview($index) {
+  public function doTestOverview($index): void {
     $this->drupalLogin($this->currentAccount);
 
     // Create a test node.

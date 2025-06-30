@@ -532,7 +532,9 @@ class LayoutProcessor implements GutenbergBlockProcessorInterface
       if (!$inner_block_wrapper_classes) {
         break;
       }
-
+      if(null !==($tagProcessor->get_attribute('class'))){
+        break;
+      }
       if (false !== strpos($tagProcessor->get_attribute('class'), $inner_block_wrapper_classes)) {
         break;
       }

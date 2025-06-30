@@ -89,7 +89,7 @@ class Lock implements LockInterface {
       $this->locks[$lock_id] = TRUE;
 
       return $lock_id;
-    } catch (PDOException $e) {
+    } catch (\PDOException $e) {
       return FALSE;
     } catch (IntegrityConstraintViolationException $e) {
       return FALSE;

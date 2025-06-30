@@ -3,21 +3,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_brady_attempts
-    - field.storage.node.field_brady_played
-    - field.storage.node.field_brady_completions
-    - field.storage.node.field_date
     - field.storage.node.field_after_bye
+    - field.storage.node.field_brady_attempts
+    - field.storage.node.field_brady_completions
+    - field.storage.node.field_brady_ints
+    - field.storage.node.field_brady_played
+    - field.storage.node.field_brady_tds
+    - field.storage.node.field_brady_yards
+    - field.storage.node.field_conference
+    - field.storage.node.field_date
+    - field.storage.node.field_division
     - field.storage.node.field_game_video
     - field.storage.node.field_home_away
-    - field.storage.node.field_brady_ints
     - field.storage.node.field_jersey_number
-    - field.storage.node.field_starting_qb
     - field.storage.node.field_month
     - field.storage.node.field_opponent
     - field.storage.node.field_opponent_score
-    - field.storage.node.field_conference
-    - field.storage.node.field_division
     - field.storage.node.field_opposing_coach
     - field.storage.node.field_ot
     - field.storage.node.field_passer_rating
@@ -27,20 +28,18 @@ dependencies:
     - field.storage.node.field_result
     - field.storage.node.field_score_differential
     - field.storage.node.field_season
+    - field.storage.node.field_starting_qb
     - field.storage.node.field_surf
-    - field.storage.node.field_brady_tds
     - field.storage.node.field_temperature
     - field.storage.node.field_uniform
     - field.storage.node.field_week
     - field.storage.node.field_weekday
-    - field.storage.node.field_brady_yards
     - search_api.server.solr_server
   module:
-    - search_api_solr
     - node
-    - taxonomy
     - paragraphs_library
-    - search_api
+    - search_api_solr
+    - taxonomy
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -82,6 +81,9 @@ third_party_settings:
     multilingual:
       limit_to_content_language: false
       include_language_independent: true
+      specific_languages: {  }
+      use_language_undefined_as_fallback_language: false
+      use_universal_collation: false
 id: game_index
 name: 'Game Index'
 description: ''

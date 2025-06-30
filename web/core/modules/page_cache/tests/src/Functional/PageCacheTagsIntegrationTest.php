@@ -34,8 +34,7 @@ class PageCacheTagsIntegrationTest extends BrowserTestBase {
   protected $defaultTheme = 'olivero';
 
   /**
-   * Modules to enable.
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = [
     'big_pipe',
@@ -156,7 +155,6 @@ class PageCacheTagsIntegrationTest extends BrowserTestBase {
       'config:block.block.olivero_messages',
       'config:block.block.olivero_primary_local_tasks',
       'config:block.block.olivero_secondary_local_tasks',
-      'config:block.block.olivero_syndicate',
       'config:block.block.olivero_primary_admin_actions',
       'config:block.block.olivero_page_title',
       'node_view',
@@ -196,7 +194,6 @@ class PageCacheTagsIntegrationTest extends BrowserTestBase {
       'config:block.block.olivero_messages',
       'config:block.block.olivero_primary_local_tasks',
       'config:block.block.olivero_secondary_local_tasks',
-      'config:block.block.olivero_syndicate',
       'config:block.block.olivero_primary_admin_actions',
       'config:block.block.olivero_page_title',
       'node_view',

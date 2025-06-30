@@ -8,6 +8,7 @@ use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\views\Plugin\views\display\DisplayRouterInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\Plugin\ViewsPluginManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,18 +41,18 @@ class ViewExecutable {
   /**
    * Whether or not the view has been built.
    *
-   * @todo Group with other static properties.
-   *
    * @var bool
+   *
+   * @todo Group with other static properties.
    */
   public $built = FALSE;
 
   /**
    * Whether the view has been executed/query has been run.
    *
-   * @todo Group with other static properties.
-   *
    * @var bool
+   *
+   * @todo Group with other static properties.
    */
   public $executed = FALSE;
 
@@ -67,7 +68,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $build_info = [];
 
   /**
@@ -80,13 +81,13 @@ class ViewExecutable {
   /**
    * The plugin name.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public ?string $plugin_name;
 
   /**
    * The build execution time.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public string|float $build_time;
 
   /**
@@ -105,7 +106,7 @@ class ViewExecutable {
    *
    * @var int
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   protected $current_page = NULL;
 
   /**
@@ -113,7 +114,7 @@ class ViewExecutable {
    *
    * @var int
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   protected $items_per_page = NULL;
 
   /**
@@ -121,7 +122,7 @@ class ViewExecutable {
    *
    * @var int
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   protected $offset = NULL;
 
   /**
@@ -129,7 +130,7 @@ class ViewExecutable {
    *
    * @var int
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $total_rows = NULL;
 
   /**
@@ -137,7 +138,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $attachment_before = [];
 
   /**
@@ -145,7 +146,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $attachment_after = [];
 
   /**
@@ -153,7 +154,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $feedIcons = [];
 
   // Exposed widget input
@@ -163,7 +164,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $exposed_data = [];
 
   /**
@@ -171,7 +172,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   protected $exposed_input = [];
 
   /**
@@ -179,7 +180,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $exposed_raw_input = [];
 
   /**
@@ -187,7 +188,7 @@ class ViewExecutable {
    *
    * @var \Drupal\views\ViewExecutable[]
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $old_view = [];
 
   /**
@@ -195,7 +196,7 @@ class ViewExecutable {
    *
    * @var \Drupal\views\ViewExecutable[]
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $parent_views = [];
 
   /**
@@ -203,7 +204,7 @@ class ViewExecutable {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $is_attachment = NULL;
 
   /**
@@ -211,7 +212,7 @@ class ViewExecutable {
    *
    * @var string
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $current_display;
 
   /**
@@ -219,14 +220,14 @@ class ViewExecutable {
    *
    * @var \Drupal\views\Plugin\views\query\QueryPluginBase
    */
-  public $query = NULL;
+  public ?QueryPluginBase $query = NULL;
 
   /**
    * The used pager plugin used by the current executed view.
    *
    * @var \Drupal\views\Plugin\views\pager\PagerPluginBase
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $pager = NULL;
 
   /**
@@ -234,7 +235,7 @@ class ViewExecutable {
    *
    * @var \Drupal\views\Plugin\views\display\DisplayPluginBase
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $display_handler;
 
   /**
@@ -252,7 +253,7 @@ class ViewExecutable {
    *
    * @var \Drupal\views\Plugin\views\style\StylePluginBase
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $style_plugin;
 
   /**
@@ -267,7 +268,7 @@ class ViewExecutable {
    *
    * @var int
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $row_index;
 
   /**
@@ -275,7 +276,7 @@ class ViewExecutable {
    *
    * @var \Drupal\Core\Url
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $override_url;
 
 
@@ -284,7 +285,7 @@ class ViewExecutable {
    *
    * @var string
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $override_path = NULL;
 
   /**
@@ -292,7 +293,7 @@ class ViewExecutable {
    *
    * @var bool
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $base_database = NULL;
 
   // Handlers which are active on this view.
@@ -347,7 +348,7 @@ class ViewExecutable {
   public $footer;
 
   /**
-   * Stores the area handlers for the empty text which are initialized on this view.
+   * The area handlers for the empty text which are initialized on this view.
    *
    * An array containing Drupal\views\Plugin\views\area\AreaPluginBase objects.
    *
@@ -372,9 +373,9 @@ class ViewExecutable {
   /**
    * Does this view already have loaded its handlers.
    *
-   * @todo Group with other static properties.
-   *
    * @var bool
+   *
+   * @todo Group with other static properties.
    */
   public $inited;
 
@@ -386,7 +387,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $exposed_widgets;
 
   /**
@@ -399,9 +400,9 @@ class ViewExecutable {
   /**
    * Force the query to calculate the total number of results.
    *
-   * @todo Move to the query.
-   *
    * @var bool
+   *
+   * @todo Move to the query.
    */
   // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $get_total_rows;
@@ -409,9 +410,9 @@ class ViewExecutable {
   /**
    * Indicates if the sorts have been built.
    *
-   * @todo Group with other static properties.
-   *
    * @var bool
+   *
+   * @todo Group with other static properties.
    */
   // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $build_sort;
@@ -421,7 +422,7 @@ class ViewExecutable {
    *
    * @var array
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $many_to_one_tables;
 
   /**
@@ -429,7 +430,7 @@ class ViewExecutable {
    *
    * @var string
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName, Drupal.Commenting.VariableComment.Missing
   public $dom_id;
 
   /**
@@ -744,7 +745,7 @@ class ViewExecutable {
       $this->initDisplay();
 
       $this->exposed_input = $this->request->query->all();
-      // unset items that are definitely not our input:
+      // Unset items that are definitely not our input:
       foreach (['page', 'q'] as $key) {
         if (isset($this->exposed_input[$key])) {
           unset($this->exposed_input[$key]);
@@ -1122,7 +1123,7 @@ class ViewExecutable {
       return TRUE;
     }
 
-    // build arguments.
+    // Build arguments.
     $position = -1;
     $substitutions = [];
     $status = TRUE;
@@ -1147,11 +1148,11 @@ class ViewExecutable {
       if (isset($arg) || $argument->hasDefaultArgument()) {
         if (!isset($arg)) {
           $arg = $argument->getDefaultArgument();
-          // make sure default args get put back.
+          // Make sure default args get put back.
           if (isset($arg)) {
             $this->args[$position] = $arg;
           }
-          // remember that this argument was computed, not passed on the URL.
+          // Remember that this argument was computed, not passed on the URL.
           $argument->is_default = TRUE;
         }
 
@@ -1182,7 +1183,7 @@ class ViewExecutable {
         }
       }
       else {
-        // determine default condition and handle.
+        // Determine default condition and handle.
         $status = $argument->defaultAction();
         break;
       }
@@ -1191,7 +1192,7 @@ class ViewExecutable {
       unset($argument);
     }
 
-    // set the title in the build info.
+    // Set the title in the build info.
     if (!empty($title)) {
       $this->build_info['title'] = $title;
     }
@@ -1226,7 +1227,7 @@ class ViewExecutable {
     if (!empty($this->query)) {
       $class = get_class($this->query);
       if ($class && $class != 'stdClass') {
-        // return if query is already initialized.
+        // Return if query is already initialized.
         return TRUE;
       }
     }
@@ -1297,7 +1298,8 @@ class ViewExecutable {
       $this->exposed_widgets = $exposed_form->renderExposedForm();
       if (!empty($this->build_info['abort'])) {
         $this->built = TRUE;
-        // Don't execute the query, $form_state, but rendering will still be executed to display the empty text.
+        // Don't execute the query, $form_state, but rendering will still be
+        // executed to display the empty text.
         $this->executed = TRUE;
         return empty($this->build_info['fail']);
       }
@@ -1347,7 +1349,7 @@ class ViewExecutable {
       if ($this->style_plugin->buildSort()) {
         $this->_build('sort');
       }
-      // allow the plugin to build second sorts as well.
+      // Allow the plugin to build second sorts as well.
       $this->style_plugin->buildSortPost();
     }
 
@@ -1456,7 +1458,8 @@ class ViewExecutable {
       return TRUE;
     }
 
-    // Don't allow to use deactivated displays, but display them on the live preview.
+    // Don't allow to use deactivated displays, but display them on the live
+    // preview.
     if (!$this->display_handler->isEnabled() && empty($this->live_preview)) {
       $this->build_info['fail'] = TRUE;
       return FALSE;
@@ -1755,7 +1758,7 @@ class ViewExecutable {
    * Unsets the current view, mostly.
    */
   public function postExecute() {
-    // unset current view so we can be properly destructed later on.
+    // Unset current view so we can be properly destructed later on.
     // Return the previous value in case we're an attachment.
 
     if ($this->old_view) {
@@ -1964,7 +1967,7 @@ class ViewExecutable {
     try {
       $this->routeProvider->getRouteByName($display_handler->getRouteName());
     }
-    catch (RouteNotFoundException $e) {
+    catch (RouteNotFoundException) {
       return FALSE;
     }
 
@@ -2535,7 +2538,7 @@ class ViewExecutable {
    * @return array
    *   The names of all variables that should be serialized.
    */
-  public function __sleep() {
+  public function __sleep(): array {
     // Limit to only the required data which is needed to properly restore the
     // state during unserialization.
     $this->serializationData = [
@@ -2555,7 +2558,7 @@ class ViewExecutable {
   /**
    * Magic method implementation to unserialize the view executable.
    */
-  public function __wakeup() {
+  public function __wakeup(): void {
     // There are cases, like in testing where we don't have a container
     // available.
     if (\Drupal::hasContainer() && !empty($this->serializationData)) {

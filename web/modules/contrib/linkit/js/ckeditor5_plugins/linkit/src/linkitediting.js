@@ -56,11 +56,6 @@ export default class LinkitEditing extends Plugin {
     let linkCommandExecuting = false;
 
     linkCommand.on('execute', (evt, args) => {
-      // Custom handling is only required if an extra attribute was passed into
-      // editor.execute( 'link', ... ).
-      if (args.length < 3) {
-        return;
-      }
       if (linkCommandExecuting) {
         linkCommandExecuting = false;
         return;
@@ -74,7 +69,9 @@ export default class LinkitEditing extends Plugin {
       // Prevent infinite recursion by keeping records of when link command is
       // being executed by this function.
       linkCommandExecuting = true;
-      const extraAttributeValues = args[args.length - 1];
+      // Any decorators should be an object provided as the second element to
+      // the execute params.
+      const extraAttributeValues = args[1];
       const model = this.editor.model;
       const selection = model.document.selection;
 

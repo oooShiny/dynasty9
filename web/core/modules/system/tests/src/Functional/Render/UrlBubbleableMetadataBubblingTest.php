@@ -18,9 +18,7 @@ class UrlBubbleableMetadataBubblingTest extends BrowserTestBase {
   use AssertPageCacheContextsAndTagsTrait;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['cache_test'];
 
@@ -28,13 +26,6 @@ class UrlBubbleableMetadataBubblingTest extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setUp(): void {
-    parent::setUp();
-  }
 
   /**
    * Tests that URL bubbleable metadata is correctly bubbled.

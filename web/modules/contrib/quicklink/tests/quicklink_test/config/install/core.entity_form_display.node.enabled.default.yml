@@ -17,7 +17,7 @@ content:
     settings:
       rows: 9
       summary_rows: 3
-      placeholder: ''
+      placeholder: 'placeholder'
       show_summary: false
     third_party_settings: {  }
     region: content
@@ -54,7 +54,7 @@ content:
     region: content
     settings:
       size: 60
-      placeholder: ''
+      placeholder: 'placeholder'
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
@@ -62,7 +62,7 @@ content:
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: ''
+      placeholder: 'placeholder'
       match_limit: 10
     region: content
     third_party_settings: {  }
