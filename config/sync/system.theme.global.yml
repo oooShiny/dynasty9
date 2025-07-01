@@ -2,15 +2,15 @@ _core:
   default_config_hash: 9rAU4Pku7eMBQxauQqAgjzlcicFZ2As6zEa6zvTlCB8
 favicon:
   mimetype: image/png
-  path: themes/custom/dynasty_tw/icons/lombardi-icon-16px.png
+  path: themes/custom/dynasty/icons/lombardi-icon-16px.png
   url: ''
-  use_default: false
+  use_default: true
 features:
   comment_user_picture: true
   comment_user_verification: true
-  favicon: true
+  favicon: false
   node_user_picture: true
 logo:
-  path: ''
+  path: themes/custom/dynasty_tw/icons/lombardi-icon-96px.png
   url: null
-  use_default: true
+  use_default: false

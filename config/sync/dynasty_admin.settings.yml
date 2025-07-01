@@ -18,7 +18,8 @@ classic_toolbar: horizontal
 icon_default: 1
 icon_upload: ''
 logo:
-  use_default: 1
+  use_default: 0
+  path: themes/custom/dynasty_tw/icons/lombardi-icon-96px.png
 sticky_action_buttons: 0
 secondary_toolbar_frontend: 0
 layout_density: ''
