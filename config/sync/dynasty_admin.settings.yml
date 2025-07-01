@@ -5,7 +5,7 @@ features:
   favicon: 1
 favicon:
   use_default: 0
-  path: themes/custom/dynasty/icons/lombardi-icon-16px.png
+  path: themes/custom/dynasty_tw/icons/lombardi-icon-16px.png
   mimetype: image/png
 enable_darkmode: '0'
 preset_accent_color: blue
