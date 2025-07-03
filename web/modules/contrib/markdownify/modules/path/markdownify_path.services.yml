@@ -1,0 +1,8 @@
+services:
+  # Path processor for handling Markdown-specific inbound paths for path aliases.
+  markdownify.alias_path_processor:
+    class: 'Drupal\markdownify_path\PathProcessor\MarkdownifyAliasPathProcessor'
+    tags:
+      - { name: path_processor_inbound, priority: 101 }
+    arguments:
+      - '@path_alias.manager'

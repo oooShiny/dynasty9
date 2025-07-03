@@ -1,0 +1,7 @@
+allowed_extensions:
+  - 'txt'
+  - 'yml'
+  - 'yaml'
+  - 'wsdl'
+  - 'json'
+max_file_embed_size: '1 MB'

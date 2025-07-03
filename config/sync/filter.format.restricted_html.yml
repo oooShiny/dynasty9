@@ -1,13 +1,12 @@
 uuid: 6d835519-97b4-4f4d-8bfe-e172ca84dded
 langcode: en
 status: true
-dependencies:
-  module: {  }
+dependencies: {  }
 _core:
   default_config_hash: oz6NyPDAB4HB6N9hgH2LwNVtCd-sXbMG1fbn5KsRIDI
 name: 'Restricted HTML'
 format: restricted_html
-weight: 1
+weight: -9
 filters:
   filter_autop:
     id: filter_autop

@@ -1,0 +1,5 @@
+markdownify_file_attachment.settings:
+  title: 'Markdownify File Attachment Settings'
+  route_name: markdownify_file_attachment.settings
+  description: 'Configure file embedding settings'
+  parent: system.admin_config_services

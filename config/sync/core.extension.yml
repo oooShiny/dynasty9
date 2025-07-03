@@ -11,6 +11,7 @@ module:
   block_field: 0
   breakpoint: 0
   ckeditor5: 0
+  cloudflare_purge: 0
   color_field: 0
   comment: 0
   config: 0
@@ -52,6 +53,9 @@ module:
   link: 0
   linkit: 0
   mailsystem: 0
+  markdownify: 0
+  markdownify_path: 0
+  markdownify_views: 0
   media: 0
   media_library: 0
   menu_link_content: 0

@@ -1,23 +1,32 @@
 _core:
   default_config_hash: 7R74wb0NllX6DTTAV9sfg790XV_QXshmF0wAobLEFNQ
 favicon:
-  use_default: true
+  mimetype: image/png
+  path: themes/custom/dynasty_tw/icons/lombardi-icon-32px.png
+  use_default: false
 features:
   comment_user_picture: true
   comment_user_verification: true
   favicon: true
   node_user_picture: true
+logo:
+  path: themes/custom/dynasty_tw/icons/lombardi-icon-96px.png
+  use_default: false
 third_party_settings:
   shortcut:
     module_link: true
-preset_accent_color: custom
-preset_focus_color: custom
-enable_darkmode: false
+preset_accent_color: blue
+preset_focus_color: gin
+enable_darkmode: '0'
 classic_toolbar: horizontal
+secondary_toolbar_frontend: false
+high_contrast_mode: false
+accent_color: ''
+focus_color: ''
+layout_density: ''
+show_description_toggle: false
+show_user_theme_settings: false
+sticky_action_buttons: false
 icon_default: false
 icon_path: 'public://dynasty-web.png'
-high_contrast_mode: false
-accent_color: '#002244'
-focus_color: '#c60c30'
 icon_upload: ''
-show_user_theme_settings: true

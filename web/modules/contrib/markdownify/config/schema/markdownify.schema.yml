@@ -1,0 +1,60 @@
+markdownify.settings:
+  type: config_object
+  label: 'Markdownify settings'
+  mapping:
+    supported_entity_types:
+      type: sequence
+      label: 'Supported entity types'
+      sequence:
+        type: string
+        label: 'Entity type'
+    default_converter:
+      type: string
+      label: 'Default converter'
+    converters:
+      type: sequence
+      sequence:
+        type: markdownify.plugin.html_to_markdown.[%key]
+
+markdownify.plugin.html_to_markdown.league:
+  type: mapping
+  mapping:
+    header_style:
+      type: string
+      label: 'Header Style'
+    suppress_errors:
+      type: boolean
+      label: 'Suppress errors'
+    strip_tags:
+      type: boolean
+      label: 'Strip tags'
+    strip_placeholder_links:
+      type: boolean
+      label: 'Strip placeholder links'
+    bold_style:
+      type: string
+      label: 'Bold style'
+    italic_style:
+      type: string
+      label: 'Italic style'
+    remove_nodes:
+      type: string
+      label: 'Remove nodes'
+    hard_break:
+      type: boolean
+      label: 'Hard break'
+    list_item_style:
+      type: string
+      label: 'List item style'
+    preserve_comments:
+      type: boolean
+      label: 'Preserve comments'
+    use_autolinks:
+      type: boolean
+      label: 'User autolinks'
+    table_pipe_escape:
+      type: string
+      label: 'Table pipe escape'
+    table_caption_side:
+      type: string
+      label: 'Table caption side'

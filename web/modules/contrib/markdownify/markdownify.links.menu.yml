@@ -1,0 +1,5 @@
+markdownify.settings:
+  title: 'Markdownify Settings'
+  route_name: markdownify.settings
+  description: 'Configure html to markdown settings'
+  parent: system.admin_config_services

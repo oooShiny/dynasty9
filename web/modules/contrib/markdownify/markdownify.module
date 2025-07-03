@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Contains the Markdownify module hooks and helpers.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * Load all meta tags for this page.
+ */
+function markdownify_page_attachments(array &$attachments): void {
+  $entity = markdownify_get_supported_entity();
+  if (!$entity) {
+    return;
+  }
+  // Generate the absolute, aliased canonical URL for the entity.
+  $canonical_url = $entity->toUrl('canonical')
+    ->setOption('alias', TRUE)
+    ->setAbsolute(TRUE)
+    ->toString();
+  // Append ".md" to the canonical path for the Markdown version.
+  $markdown_url = $canonical_url . '.md';
+  // Attach the <link> element to the HTML head as an alternate Markdown
+  // representation.
+  $attachments['#attached']['html_head_link'][] = [
+    [
+      'rel' => 'alternate',
+      'type' => 'text/markdown',
+      'title' => $entity->label(),
+      'href' => $markdown_url,
+    ],
+    TRUE,
+  ];
+}
+
+/**
+ * Returns the current route's entity if it is supported by Markdownify.
+ *
+ * This function detects whether the current page is displaying a supported
+ * entity (e.g., a node or user profile) using the 'canonical' or
+ * 'latest-version' routes.  If it is supported, the corresponding entity
+ * object is returned.
+ *
+ * @return \Drupal\Core\Entity\EntityInterface|null
+ *   The current entity object if supported, or NULL otherwise.
+ */
+function markdownify_get_supported_entity(): ?EntityInterface {
+  $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
+  // In some edge cases (e.g., not an entity route), this may be empty.
+  if (is_null($route_name)) {
+    return NULL;
+  }
+  // Match routes like 'entity.node.canonical' or 'entity.user.latest-version'.
+  $matches = [];
+  preg_match('/entity\.(.*)\.(latest[_-]version|canonical)/', $route_name, $matches);
+  $entity_type_id = $matches[1] ?? NULL;
+  if (empty($entity_type_id)) {
+    return NULL;
+  }
+  // Use the validator service to confirm this entity type supports Markdownify.
+  /** @var \Drupal\markdownify\MarkdownifySupportedEntityTypesValidatorInterface $validator */
+  $validator = \Drupal::service('markdownify.supported_entity_types.validator');
+  if (!$validator->isSupported($entity_type_id)) {
+    return NULL;
+  }
+  // Retrieve the actual entity object from route parameters.
+  $entity = $route_match->getParameter($entity_type_id);
+  if (!$entity instanceof EntityInterface) {
+    return NULL;
+  }
+  // Return the supported entity.
+  return $entity;
+}

@@ -1,0 +1,7 @@
+services:
+  # This service listens for route events and dynamically modifies the route
+  # collection to add Markdown-specific routes for eligible Views pages.
+  markdownify_views.route_subscriber:
+    class: 'Drupal\markdownify_views\Routing\MarkdownifyViewsRoutes'
+    tags:
+      - { name: event_subscriber }

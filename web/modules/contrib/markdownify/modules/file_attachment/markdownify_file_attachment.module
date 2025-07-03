@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Main module file for Markdownify File Attachment.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Component\Utility\Bytes;
+use Drupal\Component\Utility\Environment;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+
+/**
+ * Implements hook_markdownify_entity_build_alter().
+ *
+ * Ensures entity reference fields pointing to files are rendered using the
+ * "md_file_attachment_file_embed" formatter when the format is Markdown.
+ */
+function markdownify_file_attachment_markdownify_entity_build_alter(array &$build, array $context, ?BubbleableMetadata $metadata): void {
+  $entity = $context['entity'] ?? NULL;
+  if (!$entity instanceof FieldableEntityInterface) {
+    return;
+  }
+  foreach ($entity->getFieldDefinitions() as $field) {
+    $field_name = $field->getName();
+    if ($field->getType() === 'file') {
+      $config = \Drupal::config('markdownify_file_attachment.settings');
+      $display_options = [
+        'type' => 'md_file_attachment_file_embed',
+        'settings' => [
+          'allowed_extensions' => $config->get('allowed_extensions'),
+          'max_size' => min(Bytes::toNumber($config->get('max_file_embed_size') ?? 0), Environment::getUploadMaxSize()),
+        ],
+      ];
+      $field_name = $field->getName();
+      $field_build = $entity->get($field_name)->view($display_options);
+      $build[$field_name] = $field_build;
+      if ($metadata) {
+        $cacheability = BubbleableMetadata::createFromRenderArray($field_build);
+        $metadata->merge($cacheability);
+      }
+    }
+  }
+}

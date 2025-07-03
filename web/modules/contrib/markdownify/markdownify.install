@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for the Markdownify module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function markdownify_requirements($phase): array {
+  if ($phase === 'runtime') {
+    if (!class_exists('League\HTMLToMarkdown\HtmlConverter')) {
+      return [
+        'markdownify_library' => [
+          'title' => t('League HTML-to-Markdown Library'),
+          'description' => t('The required library "league/html-to-markdown" is not installed. Install it via Composer.'),
+          'severity' => REQUIREMENT_ERROR,
+        ],
+      ];
+    }
+  }
+  return [];
+}
+
+/**
+ * Populate default values for new config properties.
+ */
+function markdownify_update_10001() {
+  $config = \Drupal::configFactory()->getEditable('markdownify.settings');
+  // Set league as default converter.
+  $config->set('default_converter', 'league');
+  // Provide league converter default settings.
+  $converters = [];
+  $converters['league'] = [
+    'header_style' => 'atx',
+    'suppress_errors' => TRUE,
+    'strip_tags' => TRUE,
+    'strip_placeholder_links' => FALSE,
+    'bold_style' => '**',
+    'italic_style' => '*',
+    'remove_nodes' => '',
+    'hard_break' => FALSE,
+    'list_item_style' => '-',
+    'preserve_comments' => FALSE,
+    'use_autolinks' => TRUE,
+    'table_pipe_escape' => '\|',
+    'table_caption_side' => 'top',
+  ];
+  $config->set('converters', $converters);
+  $config->save(TRUE);
+}

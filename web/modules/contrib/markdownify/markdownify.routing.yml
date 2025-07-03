@@ -1,0 +1,19 @@
+# Dynamic route definitions for Markdownify.
+#
+# This file configures the routing callback for the Markdownify module, which
+# dynamically generates routes for entities that support Markdown conversion.
+#
+# The routes are created based on entity types validated by the
+# MarkdownifySupportedEntityTypesValidator service.
+#
+# @see \Drupal\markdownify\Service\MarkdownifySupportedEntityTypesValidator::getSupportedEntityTypes()
+route_callbacks:
+  - '\Drupal\markdownify\Routing\MarkdownifyEntityRoutes::routes'
+
+markdownify.settings:
+  path: '/admin/config/services/markdownify'
+  defaults:
+    _title: 'Markdownify Settings'
+    _form: Drupal\markdownify\Form\MarkdownifySettings
+  requirements:
+    _permission: 'administer markdownify'

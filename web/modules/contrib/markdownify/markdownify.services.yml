@@ -1,0 +1,55 @@
+services:
+  # Logger service for the Markdownify module.
+  logger.channel.markdownify:
+    parent: 'logger.channel_base'
+    arguments: [ 'markdownify' ]
+
+  # Validator service for checking supported entity types in Markdownify.
+  markdownify.supported_entity_types.validator:
+    class: 'Drupal\markdownify\Service\MarkdownifySupportedEntityTypesValidator'
+    arguments:
+      - '@config.factory'
+      - '@module_handler'
+
+  # Service for rendering entities as HTML in Markdownify.
+  markdownify.entity_renderer:
+    class: 'Drupal\markdownify\Service\MarkdownifyEntityRenderer'
+    arguments:
+      - '@entity_type.manager'
+      - '@renderer'
+      - '@module_handler'
+      - '@logger.channel.markdownify'
+
+  # Service for converting HTML to Markdown in Markdownify.
+  markdownify.html_converter:
+    class: 'Drupal\markdownify\Service\MarkdownifyHtmlConverter'
+    arguments:
+      - '@plugin.manager.html_to_markdown_converter'
+      - '@config.factory'
+      - '@module_handler'
+      - '@logger.channel.markdownify'
+
+  # Service for converting entities to Markdown format.
+  markdownify.entity_converter:
+    class: 'Drupal\markdownify\Service\MarkdownifyEntityConverter'
+    arguments:
+      - '@markdownify.entity_renderer'
+      - '@markdownify.html_converter'
+
+  # Route filter for setting the request format to Markdown.
+  markdownify.route_filter.format_setter:
+    class: 'Drupal\markdownify\Routing\MarkdownRequestFormatRouteFilter'
+    tags:
+      # Set to a high priority so it runs before content_type_header_matcher
+      # and other filters that might throw exceptions.
+      - { name: route_filter, priority: 100 }
+
+  # Path processor for handling Markdown-specific inbound paths.
+  markdownify.path_processor:
+    class: 'Drupal\markdownify\PathProcessor\MarkdownifyPathProcessor'
+    tags:
+      - { name: path_processor_inbound, priority: 100 }
+
+  plugin.manager.html_to_markdown_converter:
+    class: Drupal\markdownify\HtmlToMarkdownConverterManager
+    parent: default_plugin_manager

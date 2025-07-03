@@ -123,6 +123,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         ),
         'L' => 
         array (
+            'League\\HTMLToMarkdown\\' => 22,
             'League\\Csv\\' => 11,
             'League\\Container\\' => 17,
             'Laravel\\Prompts\\' => 16,
@@ -152,6 +153,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             'Drush\\' => 6,
             'Drupal\\rat\\' => 11,
+            'Drupal\\markdownify\\' => 19,
             'Drupal\\cloudflare_purge\\' => 24,
             'Drupal\\Core\\' => 12,
             'Drupal\\Composer\\Plugin\\Scaffold\\' => 32,
@@ -409,6 +411,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
+        'League\\HTMLToMarkdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/html-to-markdown/src',
+        ),
         'League\\Csv\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/csv/src',
@@ -464,6 +470,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'Drupal\\rat\\' => 
         array (
             0 => __DIR__ . '/..' . '/drupal/rat/src',
+        ),
+        'Drupal\\markdownify\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/web/modules/contrib/markdownify/src',
         ),
         'Drupal\\cloudflare_purge\\' => 
         array (

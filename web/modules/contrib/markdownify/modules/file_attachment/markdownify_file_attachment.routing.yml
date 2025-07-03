@@ -1,0 +1,7 @@
+markdownify_file_attachment.settings:
+  path: '/admin/config/services/markdownify/file-attachment'
+  defaults:
+    _form: '\Drupal\markdownify_file_attachment\Form\MarkdownifyFileAttachmentSettingsForm'
+    _title: 'Markdownify File Attachment Settings'
+  requirements:
+    _permission: 'administer site configuration'

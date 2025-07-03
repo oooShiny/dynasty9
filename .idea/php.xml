@@ -191,6 +191,7 @@
       <path value="$PROJECT_DIR$/vendor/mglaman/composer-drupal-lenient" />
       <path value="$PROJECT_DIR$/vendor/webflo/drupal-finder" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php84" />
+      <path value="$PROJECT_DIR$/vendor/league/html-to-markdown" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

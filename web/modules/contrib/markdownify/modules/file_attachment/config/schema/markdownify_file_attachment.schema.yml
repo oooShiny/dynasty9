@@ -1,0 +1,12 @@
+markdownify_file_attachment.settings:
+  type: config_object
+  label: 'Markdownify File Attachment Settings'
+  mapping:
+    allowed_extensions:
+      type: sequence
+      label: 'Allowed extensions'
+      sequence:
+        type: string
+    max_file_embed_size:
+      type: bytes
+      label: 'Maximum file embed size (in bytes)'
