@@ -1,0 +1,11 @@
+uuid: af858c42-85b0-4b8a-a82a-0ebfefe1492b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.media_only
+label: 'Media Only'
+description: null
+targetEntityType: node
+cache: true

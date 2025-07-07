@@ -14,7 +14,7 @@ seckit_xss:
     img-src: ''
     media-src: ''
     frame-src: ''
-    frame-ancestors: br0wn.net
+    frame-ancestors: 'dynasty9.ddev.site patsdynasty.com'
     child-src: ''
     font-src: ''
     connect-src: ''

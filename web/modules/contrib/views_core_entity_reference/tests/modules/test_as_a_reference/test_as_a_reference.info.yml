@@ -1,0 +1,14 @@
+name: 'Test as a Reference'
+type: module
+description: 'Provides test config to do an update test to.'
+package: Testing
+dependencies:
+  - drupal:views
+  - drupal:field
+  - drupal:node
+  - drupal:user
+
+# Information added by Drupal.org packaging script on 2025-01-15
+version: '1.0.0-alpha3'
+project: 'views_core_entity_reference'
+datestamp: 1736951310

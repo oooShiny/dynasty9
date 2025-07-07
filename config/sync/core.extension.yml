@@ -26,6 +26,7 @@ module:
   dynasty_timeline: 0
   dynasty_transcript: 0
   editor: 0
+  entity_browser: 0
   entity_reference_revisions: 0
   entity_usage: 0
   facets: 0
@@ -114,6 +115,7 @@ module:
   update: 0
   upgrade_status: 0
   user: 0
+  views_core_entity_reference: 0
   views_entity_form_field: 0
   views_jump_menu: 0
   views_ui: 0

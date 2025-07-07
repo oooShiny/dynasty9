@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Provides the Views Core Entity Reference module install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function views_core_entity_reference_install($is_syncing) {
+  _views_core_entity_reference_update_as_a_reference();
+}
+
+/**
+ * Update any 'as a Reference' configurations to remove the '_reference'.
+ */
+function _views_core_entity_reference_update_as_a_reference(): void {
+  $config_factory = \Drupal::configFactory();
+  $views_config_names = $config_factory->listAll('views.view');
+  if (empty($views_config_names)) {
+    return;
+  }
+
+  // Search all views config for filters.
+  foreach ($views_config_names as $views_config_name) {
+    $view_config = $config_factory->getEditable($views_config_name);
+    if ($filters = $view_config->get('display.default.display_options.filters')) {
+
+      $has_change = FALSE;
+      foreach ($filters as $key => $filter) {
+
+        // Check that the filter is one of the targets from the old patch.
+        if (
+          $filter['plugin_id'] !== 'entity_reference'
+          || !str_ends_with($key, '_reference')
+          || !isset($filter['id'])
+          || !str_ends_with($filter['id'], '_target_id_reference')
+        ) {
+          continue;
+        }
+        $has_change = TRUE;
+
+        // Remove reference safely from the ID, considering the same text may
+        // exist within the ID too.
+        $end_removal = '_reference';
+        $filter['id'] = substr($filter['id'], 0, -strlen($end_removal));
+
+        // Fix the field.
+        if (!empty($filter['field']) && str_ends_with($filter['field'], '_target_id_reference')) {
+          $filter['field'] = substr($filter['field'], 0, -strlen($end_removal));
+        }
+
+        // Fix exposed filters if set.
+        if (!empty($filter['expose']) && is_array($filter['expose'])) {
+
+          // Fix the operator ID next.
+          $end_removal = '_reference_op';
+          if (!empty($filter['expose']['operator_id']) && str_ends_with($filter['expose']['operator_id'], $end_removal)) {
+            $filter['expose']['operator_id'] = substr($filter['expose']['operator_id'], 0, -strlen($end_removal));
+            $filter['expose']['operator_id'] .= '_op';
+          }
+
+          // Finally, fix the operator.
+          if (!empty($filter['expose']['operator']) && str_ends_with($filter['expose']['operator'], $end_removal)) {
+            $filter['expose']['operator'] = substr($filter['expose']['operator'], 0, -strlen($end_removal));
+            $filter['expose']['operator'] .= '_op';
+          }
+        }
+
+        // Replace the key.
+        unset($filters[$key]);
+        $end_removal = '_reference';
+        $key = substr($key, 0, -strlen($end_removal));
+        $filters[$key] = $filter;
+      }
+
+      // Resave the views configuration updated filters.
+      if ($has_change) {
+        $view_config->set('display.default.display_options.filters', $filters);
+        $view_config->save();
+      }
+    }
+  }
+}

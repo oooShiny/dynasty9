@@ -1,0 +1,12 @@
+name: 'Views Core Entity Reference'
+type: module
+description: 'Opts-in to using the Entity Reference filter provided by Drupal Core.'
+core_version_requirement: ^10.2 || ^11
+package: Views
+dependencies:
+  - drupal:views
+
+# Information added by Drupal.org packaging script on 2025-01-15
+version: '1.0.0-alpha3'
+project: 'views_core_entity_reference'
+datestamp: 1736951310

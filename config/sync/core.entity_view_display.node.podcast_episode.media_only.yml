@@ -1,0 +1,172 @@
+uuid: 7c0789b9-6dcd-466d-a7c0-7b1f92089ce7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.media_only
+    - field.field.node.podcast_episode.body
+    - field.field.node.podcast_episode.field_duration
+    - field.field.node.podcast_episode.field_episode
+    - field.field.node.podcast_episode.field_episode_cover_image
+    - field.field.node.podcast_episode.field_episode_transcript
+    - field.field.node.podcast_episode.field_game
+    - field.field.node.podcast_episode.field_hosts
+    - field.field.node.podcast_episode.field_iframe
+    - field.field.node.podcast_episode.field_meta_tags
+    - field.field.node.podcast_episode.field_monthly_downloads
+    - field.field.node.podcast_episode.field_mp3
+    - field.field.node.podcast_episode.field_podcast_guest
+    - field.field.node.podcast_episode.field_season
+    - field.field.node.podcast_episode.field_subtitle
+    - field.field.node.podcast_episode.field_total_downloads
+    - field.field.node.podcast_episode.field_transcription
+    - node.type.podcast_episode
+  module:
+    - entity_reference_revisions
+    - metatag
+    - text
+    - user
+id: node.podcast_episode.media_only
+targetEntityType: node
+bundle: podcast_episode
+mode: media_only
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_duration:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_episode:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_episode_cover_image:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_episode_transcript:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_game:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_hosts:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 117
+    region: content
+  field_iframe:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_monthly_downloads:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_mp3:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_podcast_guest:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_season:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_total_downloads:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_transcription:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
