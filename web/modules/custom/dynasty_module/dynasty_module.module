@@ -287,7 +287,7 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
         $video_id = $entity->field_muse_video_id->value;
         $url = 'https://muse.ai/api/files/videos/' . $video_id;
         $client = \Drupal::httpClient();
-        $description = '';
+
         try{
           $response = $client->request('GET', $url, [
             'headers' => ['Key' => 'vvjguqSQzGQu9cJXtRg1QfI85f7b9e4f']
@@ -309,6 +309,7 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
       }
 
       // Format play description automatically based on other fields.
+      $description = '';
       $play_desc = [];
       if (!$entity->field_yards_gained->isEmpty()) {
         $play_desc['yards'] = $entity->get('field_yards_gained')->value . ' yard';
@@ -319,34 +320,40 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
 
       if (!$entity->field_play_type->isEmpty()) {
         $play_desc['type'] = Term::load($entity->field_play_type->target_id)->get('name')->value;
-        foreach ($entity->field_players_involved->referencedEntities() as $player) {
-          $play_desc['players'][] = $player->label();
-        }
+        if ($play_desc['type'] !== 'Non-Game Highlight') {
 
-        $description = $play_desc['yards'] . ' ' . $play_desc['type'];
-        if ($play_desc['type'] == 'Pass') {
-          $description .= ' from ';
-          $count = count($play_desc['players']);
-          foreach ($play_desc['players'] as $player) {
-            if (--$count <= 0) {
-              $description .= $player;
+          foreach ($entity->field_players_involved->referencedEntities() as $player) {
+            $play_desc['players'][] = $player->label();
+          }
+
+          $description = $play_desc['yards'] . ' ' . $play_desc['type'];
+          if ($play_desc['type'] == 'Pass') {
+            $description .= ' from ';
+            $count = count($play_desc['players']);
+            foreach ($play_desc['players'] as $player) {
+              if (--$count <= 0) {
+                $description .= $player;
+              }
+              else {
+                $description .= $player. ' to ';
+              }
             }
-            else {
-              $description .= $player. ' to ';
+          }
+          else {
+            $description .= ' by ';
+            $count = count($play_desc['players']);
+            foreach ($play_desc['players'] as $player) {
+              if (--$count <= 0) {
+                $description .= $player;
+              }
+              else {
+                $description .= $player. ' and ';
+              }
             }
           }
         }
         else {
-          $description .= ' by ';
-          $count = count($play_desc['players']);
-          foreach ($play_desc['players'] as $player) {
-            if (--$count <= 0) {
-              $description .= $player;
-            }
-            else {
-              $description .= $player. ' and ';
-            }
-          }
+          $description = $entity->label();
         }
       }
       $entity->field_play_description->value = $description;
