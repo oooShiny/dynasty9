@@ -8,7 +8,6 @@ dependencies:
     - node.type.highlight
     - taxonomy.vocabulary.play_type
   module:
-    - datetime
     - entity_browser
     - node
     - taxonomy
@@ -312,14 +311,16 @@ display:
         options: {  }
       empty: {  }
       sorts:
-        field_date_value:
-          id: field_date_value
-          table: node__field_date
-          field: field_date_value
-          relationship: field_game
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: datetime
+          entity_type: node
+          entity_field: created
+          plugin_id: date
           order: ASC
           expose:
             label: ''
@@ -617,7 +618,7 @@ display:
           group_type: group
           admin_label: 'field_game: Content'
           plugin_id: standard
-          required: true
+          required: false
       header: {  }
       footer: {  }
       display_extenders: {  }
