@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.media.field_image_size
     - field.field.paragraph.media.field_media
     - paragraphs.paragraphs_type.media
 id: paragraph.media.default
@@ -10,6 +11,14 @@ targetEntityType: paragraph
 bundle: media
 mode: default
 content:
+  field_image_size:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
   field_media:
     type: entity_reference_entity_view
     label: hidden

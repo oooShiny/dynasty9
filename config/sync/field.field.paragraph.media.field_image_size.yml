@@ -1,0 +1,23 @@
+uuid: 42ff4486-e22d-4805-b456-2c1a0d4364f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_size
+    - paragraphs.paragraphs_type.media
+id: paragraph.media.field_image_size
+field_name: field_image_size
+entity_type: paragraph
+bundle: media
+label: 'Image Size'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:image_style'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

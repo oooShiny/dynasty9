@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\views\ViewExecutable;
 
@@ -52,7 +53,6 @@ function dynasty_tw_preprocess_field(&$variables) {
  * Implements hook_preprocess_image().
  */
 function dynasty_tw_preprocess_image(&$variables) {
-  $test = 1;
   switch ($variables['style_name']) {
     case 'wide':
       $variables['attributes']['class'][] = 'w-full';
@@ -226,9 +226,9 @@ function dynasty_tw_preprocess_node(&$variables) {
  * Implements hook_preprocess_paragraph().
  */
 function dynasty_tw_preprocess_paragraph(&$variables) {
-  $paragraph = $variables['paragraph'];
+  $p = $variables['paragraph'];
   // Add styles to specific fields.
-  switch ($paragraph->bundle()) {
+  switch ($p->bundle()) {
     case 'section':
       // bg-gray-200|None
       // bg-gray-400 text-white|Gray
@@ -236,16 +236,16 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
       // bg-red-pats text-white|Red
       // section-header
       // header-block
-      $variables['bg_color'] = $paragraph->field_background_color->value;
-      $variables['full_width'] = $paragraph->field_full_width_section->value ?? null;
+      $variables['bg_color'] = $p->field_background_color->value;
+      $variables['full_width'] = $p->field_full_width_section->value ?? null;
 
-      if (!$paragraph->field_2_column_widths->isEmpty()) {
+      if (!$p->field_2_column_widths->isEmpty()) {
         $widths = [
           '25' => 'w-1/4',
           '50' => 'w-1/2',
           '75' => 'w-3/4',
         ];
-        $cols = explode('_', $paragraph->field_2_column_widths->value);
+        $cols = explode('_', $p->field_2_column_widths->value);
         $variables['widths'] = [
           'first_col' => $widths[$cols[0]],
           'second_col' => $widths[$cols[1]],
@@ -256,6 +256,16 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
     case 'text':
       $variables['attributes']['class'][] = 'py-5';
       break;
+    case 'media':
+      $parent = $p->getParentEntity()->bundle();
+      if ($parent == 'card') {
+        $variables['image_css'] = '';
+      }
+      else {
+        $variables['image_css'] = 'rounded-2xl mx-auto';
+      }
+      $variables['card_img_style'] = $p->get('field_image_size')->target_id;
+      $variables['card_media'] = Media::load($p->get('field_media')->target_id);
   }
 }
 
