@@ -21,19 +21,19 @@
         {{ content.top }}
       </div>
     {% endif %}
+    <div class="flex flex-col md:flex-row gap-4 w-full md:justify-evenly">
+      {% if content.first %}
+        <div {{ region_attributes.first.addClass(content.width.first, 'justify-items-center') }}>
+          {{ content.first }}
+        </div>
+      {% endif %}
 
-    {% if content.first %}
-      <div {{ region_attributes.first.addClass('pr-2', content.width.first) }}>
-        {{ content.first }}
-      </div>
-    {% endif %}
-
-    {% if content.second %}
-      <div {{ region_attributes.second.addClass('pl-2', content.width.second) }}>
-        {{ content.second }}
-      </div>
-    {% endif %}
-
+      {% if content.second %}
+        <div {{ region_attributes.second.addClass(content.width.second, 'justify-items-center') }}>
+          {{ content.second }}
+        </div>
+      {% endif %}
+    </div>
     {% if content.bottom %}
       <div {{ region_attributes.bottom.addClass('layout__region', 'layout__region--bottom') }}>
         {{ content.bottom }}
