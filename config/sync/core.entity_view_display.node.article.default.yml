@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.field_content_rows
     - field.field.node.article.field_image
     - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_parent_article
     - field.field.node.article.field_show_in_blog_listing
     - field.field.node.article.field_tags
     - image.style.large
@@ -57,6 +58,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_parent_article:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
     region: content
   field_tags:
     type: entity_reference_label

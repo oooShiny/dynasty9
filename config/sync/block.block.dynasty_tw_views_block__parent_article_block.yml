@@ -1,22 +1,22 @@
-uuid: 9911709f-6c95-414b-a5ff-91db335d7350
+uuid: bf69262c-0f95-448a-b617-77143367f55d
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.player_jersey_number
+    - views.view.parent_article
   module:
     - node
     - views
   theme:
     - dynasty_tw
-id: dynasty_tw_player_jersey_number_block
+id: dynasty_tw_views_block__parent_article_block
 theme: dynasty_tw
 region: highlighted
-weight: -12
+weight: 0
 provider: null
-plugin: 'views_block:player_jersey_number-block_1'
+plugin: 'views_block:parent_article-block_1'
 settings:
-  id: 'views_block:player_jersey_number-block_1'
+  id: 'views_block:parent_article-block_1'
   label: ''
   label_display: '0'
   provider: views
@@ -30,4 +30,4 @@ visibility:
     context_mapping:
       node: '@node.node_route_context:node'
     bundles:
-      player: player
+      article: article
