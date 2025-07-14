@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Url;
 use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\views\ViewExecutable;
@@ -255,6 +256,13 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
       break;
     case 'text':
       $variables['attributes']['class'][] = 'py-5';
+      break;
+    case 'article_card':
+      $link = $p->field_card_title->uri;
+      $url = Url::fromUri($link);
+      $variables['card_style'] = $p->field_card_style->value;
+      $variables['card_link'] = $url->toString();
+      $variables['card_title'] = $p->field_card_title->title;
       break;
     case 'media':
       $parent = $p->getParentEntity()->bundle();

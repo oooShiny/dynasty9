@@ -1,0 +1,24 @@
+uuid: 94e2ddac-34ff-4c68-a277-261314c71d24
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_blurb
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.article_card
+  module:
+    - text
+id: paragraph.article_card.field_card_blurb
+field_name: field_card_blurb
+entity_type: paragraph
+bundle: article_card
+label: 'Card Blurb'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

@@ -1,21 +1,44 @@
 <?php
 
+use Drupal\Core\Url;
+
 /**
  * Implements hook_preprocess_paragraph().
  */
 function dynasty_admin_preprocess_paragraph(&$variables) {
-  $paragraph = $variables['paragraph'];
+  $p = $variables['paragraph'];
   // Add styles to specific fields.
-  switch ($paragraph->bundle()) {
+  switch ($p->bundle()) {
     case 'section':
       // bg-gray-200|None
       // bg-gray-400 text-white|Gray
       // bg-blue-pats text-white|Blue
       // bg-red-pats text-white|Red
-      $variables['bg_color'] = $paragraph->field_background_color->value;
+      $variables['bg_color'] = $p->field_background_color->value;
       break;
     case 'text':
       $variables['attributes']['class'][] = 'py-6';
       break;
+    case 'article_card':
+      $link = $p->field_card_title->uri;
+      $url = Url::fromUri($link);
+      $variables['card_style'] = $p->field_card_style->value;
+      $variables['card_link'] = $url->toString();
+      $variables['card_title'] = $p->field_card_title->title;
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_radios().
+ */
+function dynasty_admin_preprocess_form_element_label(&$variables) {
+  if (str_contains($variables['element']['#id'], 'field-card-style')) {
+    $no_end = explode('--', $variables['element']['#id']);
+    $parts = explode('-', $no_end[0]);
+    $last = array_pop($parts);
+    $css = $last == 'patriots' ? $last : 'patriots-' . $last;
+
+    $variables['attributes']['class'][] = $css;
   }
 }

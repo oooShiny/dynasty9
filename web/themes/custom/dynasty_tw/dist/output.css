@@ -8224,6 +8224,25 @@ html:has(.drawer-open.drawer-open) {
   background-color: #002244 !important;
 }
 
+.article-card {
+  text-decoration: none !important;
+}
+
+.article p,
+  .article ol,
+  .article ul {
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .article p,
+  .article ol,
+  .article ul {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
 .section-header {
   text-align: center;
   font-size: 1.875rem;
@@ -8705,10 +8724,6 @@ html:has(.drawer-open.drawer-open) {
 
 .flex-1 {
   flex: 1 1 0%;
-}
-
-.flex-none {
-  flex: none;
 }
 
 .flex-shrink {
@@ -10917,6 +10932,11 @@ html:has(.drawer-open.drawer-open) {
 }
 
 @media (min-width: 1024px) {
+  .lg\:mx-20 {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
   .lg\:flex {
     display: flex;
   }

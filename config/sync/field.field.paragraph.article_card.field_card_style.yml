@@ -1,0 +1,23 @@
+uuid: 200e3f74-cfc2-4d4c-a8e2-4fd8a97f3d8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_style
+    - paragraphs.paragraphs_type.article_card
+  module:
+    - options
+id: paragraph.article_card.field_card_style
+field_name: field_card_style
+entity_type: paragraph
+bundle: article_card
+label: 'Card Style'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: patriots
+default_value_callback: ''
+settings: {  }
+field_type: list_string

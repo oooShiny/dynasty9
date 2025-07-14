@@ -17,14 +17,6 @@
   font-weight: bold;
 }
 
-.article p,
-.article ol,
-.article ul {
-  padding: 1em 0;
-  padding-left: 6rem!important;
-  padding-right: 6rem!important;
-}
-
 .small-margin ol {
   padding: 0;
   padding-left: 1rem !important;

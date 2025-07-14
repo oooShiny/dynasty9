@@ -1,0 +1,20 @@
+uuid: 3f7bd232-d8a4-409e-9f79-d090d62bab0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.article_card.field_card_blurb
+    - field.field.paragraph.article_card.field_card_style
+    - field.field.paragraph.article_card.field_card_title
+    - paragraphs.paragraphs_type.article_card
+id: paragraph.article_card.preview
+targetEntityType: paragraph
+bundle: article_card
+mode: preview
+content: {  }
+hidden:
+  field_card_blurb: true
+  field_card_style: true
+  field_card_title: true
+  search_api_excerpt: true

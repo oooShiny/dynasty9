@@ -1,0 +1,39 @@
+uuid: 71f5dc77-b8b2-49ea-93b7-904819ac8bef
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_card_style
+field_name: field_card_style
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: blog
+      label: blog
+    -
+      value: patriots
+      label: patriots
+    -
+      value: patriots-blue
+      label: patriots-blue
+    -
+      value: patriots-otd
+      label: patriots-otd
+    -
+      value: patriots-red
+      label: patriots-red
+    -
+      value: patriots-white
+      label: patriots-white
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

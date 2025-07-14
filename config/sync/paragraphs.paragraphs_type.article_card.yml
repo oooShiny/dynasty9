@@ -1,0 +1,10 @@
+uuid: eb521285-4821-4368-91de-71b56fc6bff6
+langcode: en
+status: true
+dependencies: {  }
+id: article_card
+label: 'Article Card'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

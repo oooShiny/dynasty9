@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_content_rows
     - node.type.article
+    - paragraphs.paragraphs_type.article_card
     - paragraphs.paragraphs_type.block
     - paragraphs.paragraphs_type.highlight_video
     - paragraphs.paragraphs_type.media
@@ -31,51 +32,55 @@ settings:
       block: block
       media: media
       highlight_video: highlight_video
+      article_card: article_card
     negate: 0
     target_bundles_drag_drop:
       alternate_team_name:
-        weight: -24
+        weight: -26
         enabled: false
-      belichick_hoodie:
-        weight: -23
-        enabled: false
-      block:
+      article_card:
         weight: -28
         enabled: true
+      belichick_hoodie:
+        weight: -24
+        enabled: false
+      block:
+        weight: -31
+        enabled: true
       from_library:
-        weight: -22
+        weight: -23
         enabled: false
       highlight:
-        weight: -31
-        enabled: false
-      highlight_video:
-        weight: -26
-        enabled: true
-      media:
-        weight: -27
-        enabled: true
-      podcast_download:
-        weight: -21
-        enabled: false
-      podcast_transcript_text_block:
-        weight: -20
-        enabled: false
-      quarterback:
-        weight: -19
-        enabled: false
-      section:
-        weight: -30
-        enabled: true
-      team_record:
         weight: -25
         enabled: false
-      text:
+      highlight_video:
         weight: -29
         enabled: true
+      media:
+        weight: -30
+        enabled: true
+      podcast_download:
+        weight: -22
+        enabled: false
+      podcast_transcript_text_block:
+        weight: -21
+        enabled: false
+      quarterback:
+        weight: -20
+        enabled: false
+      section:
+        weight: -33
+        enabled: true
+      team_record:
+        weight: -27
+        enabled: false
+      text:
+        weight: -32
+        enabled: true
       transcript_line:
-        weight: -18
+        weight: -19
         enabled: false
       uniform:
-        weight: -17
+        weight: -18
         enabled: false
 field_type: entity_reference_revisions

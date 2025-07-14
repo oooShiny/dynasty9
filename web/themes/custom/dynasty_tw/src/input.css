@@ -7,6 +7,14 @@
   .bg-blue-pats {
     background-color: #002244 !important;
   }
+  .article-card {
+    text-decoration: none !important;
+  }
+  .article p,
+  .article ol,
+  .article ul {
+    @apply lg:px-20 pt-1;
+  }
   .section-header {
     @apply text-3xl uppercase font-thin text-center;
   }
