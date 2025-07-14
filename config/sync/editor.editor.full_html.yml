@@ -13,6 +13,8 @@ settings:
     items:
       - heading
       - style
+      - specialCharacters
+      - blockQuote
       - showBlocks
       - '|'
       - bold
@@ -58,6 +60,9 @@ settings:
         -
           label: 'Centered Text'
           element: '<p class="text-center">'
+        -
+          label: 'Block Quote'
+          element: '<blockquote class="quote">'
         -
           label: 'Section Header'
           element: '<h2 class="section-header divider">'
