@@ -35,7 +35,7 @@ filters:
     status: false
     weight: -10
     settings:
-      allowed_html: '<p class="py-5 font-light text-xl text-center card-side bg-base-100 shadow-xl"> <h2 class="section-header header-block"> <a class="btn-primary">'
+      allowed_html: '<p class="py-5 font-light text-xl text-center card-side bg-base-100 shadow-xl"> <h2 class="section-header divider header-block"> <a class="btn-primary">'
       filter_html_help: false
       filter_html_nofollow: false
   filter_htmlcorrector:

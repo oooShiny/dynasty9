@@ -60,7 +60,7 @@ settings:
           element: '<p class="text-center">'
         -
           label: 'Section Header'
-          element: '<h2 class="section-header">'
+          element: '<h2 class="section-header divider">'
         -
           label: 'Header Block (blue)'
           element: '<h2 class="header-block">'
