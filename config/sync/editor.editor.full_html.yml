@@ -62,7 +62,7 @@ settings:
           element: '<p class="text-center">'
         -
           label: 'Block Quote'
-          element: '<blockquote class="quote">'
+          element: '<blockquote class="text-xl italic font-semibold text-gray-900">'
         -
           label: 'Section Header'
           element: '<h2 class="section-header divider">'

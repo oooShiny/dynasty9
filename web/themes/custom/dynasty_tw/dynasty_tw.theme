@@ -257,6 +257,12 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
     case 'text':
       $variables['attributes']['class'][] = 'py-5';
       break;
+    case 'blockquote':
+      if (!$p->field_quote_link->isEmpty()) {
+        $url = Url::fromUri($p->field_quote_link->uri);
+        $variables['quote_link'] = $url->toString();
+      }
+      break;
     case 'article_card':
       $variables['card_style'] = $p->field_card_style->value;
       // If we have a linked article, use that for the card's content.

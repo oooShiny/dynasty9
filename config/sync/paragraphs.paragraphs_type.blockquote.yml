@@ -1,0 +1,10 @@
+uuid: 8487d9cd-c780-4510-ae2a-420c26d6b277
+langcode: en
+status: true
+dependencies: {  }
+id: blockquote
+label: Blockquote
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

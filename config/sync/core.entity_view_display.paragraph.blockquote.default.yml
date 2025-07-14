@@ -1,0 +1,46 @@
+uuid: e759d984-53c2-4502-a1db-dfd7ba23fbc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.blockquote.field_attribution
+    - field.field.paragraph.blockquote.field_quote_link
+    - field.field.paragraph.blockquote.field_quote_text
+    - paragraphs.paragraphs_type.blockquote
+  module:
+    - link
+    - text
+id: paragraph.blockquote.default
+targetEntityType: paragraph
+bundle: blockquote
+mode: default
+content:
+  field_attribution:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_quote_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_quote_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true
