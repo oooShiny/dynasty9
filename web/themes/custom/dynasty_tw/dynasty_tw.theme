@@ -258,11 +258,25 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'py-5';
       break;
     case 'article_card':
-      $link = $p->field_card_title->uri;
-      $url = Url::fromUri($link);
       $variables['card_style'] = $p->field_card_style->value;
+      // If we have a linked article, use that for the card's content.
+      if ($p->field_card_title->isEmpty() &&
+        $p->field_card_title->isEmpty() &&
+        !$p->field_article_node->isEmpty()) {
+        $article = $p->field_article_node->entity;
+        $url = $article->toUrl();
+        $card_title = $article->label();
+
+      }
+      else {
+        $url = Url::fromUri($p->field_card_title->uri);
+        $card_title = $p->field_card_title->title;
+      }
+      // Set Title and Link variables.
+      $variables['card_title'] = $card_title;
+      $variables['article_summary'] = $article->body->summary ?? NULL;
       $variables['card_link'] = $url->toString();
-      $variables['card_title'] = $p->field_card_title->title;
+
       break;
     case 'media':
       $parent = $p->getParentEntity()->bundle();

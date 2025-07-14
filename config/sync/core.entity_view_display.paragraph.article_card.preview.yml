@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.article_card.field_article_node
     - field.field.paragraph.article_card.field_card_blurb
     - field.field.paragraph.article_card.field_card_style
     - field.field.paragraph.article_card.field_card_title
@@ -14,6 +15,7 @@ bundle: article_card
 mode: preview
 content: {  }
 hidden:
+  field_article_node: true
   field_card_blurb: true
   field_card_style: true
   field_card_title: true

@@ -57,12 +57,12 @@
 {% endif %}
 
 {% block paragraph %}
-  <a class="article-card" href="{{ card_link }}">
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       <h2 class="{{ title_classes }}">{{ card_title }}</h2>
-      {{ content.field_card_blurb }}
+      {{ card_text|render }}
     {% endblock %}
+  <span class="article-card text-xs font-mono text-gray-400">{{ card_link }}</span>
   </div>
-  </a>
+
 {% endblock paragraph %}

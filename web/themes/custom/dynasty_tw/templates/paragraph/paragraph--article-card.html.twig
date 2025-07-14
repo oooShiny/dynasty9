@@ -61,7 +61,11 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       <h2 class="{{ title_classes }}">{{ card_title }}</h2>
-      {{ content.field_card_blurb }}
+      {% if article_summary is null %}
+        {{ content.field_card_blurb }}
+      {% else %}
+        <p>{{ article_summary }}</p>
+      {% endif %}
     {% endblock %}
   </div>
   </a>

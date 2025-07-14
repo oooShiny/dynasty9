@@ -3,21 +3,84 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.article_card.field_article_node
     - field.field.paragraph.article_card.field_card_blurb
     - field.field.paragraph.article_card.field_card_style
     - field.field.paragraph.article_card.field_card_title
     - paragraphs.paragraphs_type.article_card
   module:
+    - field_group
     - link
     - text
+third_party_settings:
+  field_group:
+    group_choose_article:
+      children:
+        - group_render_teaser
+        - group_custom_card
+      label: 'Build Card'
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_render_teaser:
+      children:
+        - field_article_node
+      label: 'Render Teaser'
+      region: content
+      parent_name: group_choose_article
+      weight: 1
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: open
+        description: "Use this section to build a card automatically by selecting the article. The card will show the Article's Title as the card title and the Article Summary as the blurb. Note: setting any custom fields in the Custom Card tab will overwrite this setting."
+        required_fields: true
+    group_custom_card:
+      children:
+        - field_card_title
+        - field_card_blurb
+      label: 'Custom Card'
+      region: content
+      parent_name: group_choose_article
+      weight: 2
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: 'Use this section to build a card from a custom link using your own text for the title and blurb.'
+        required_fields: true
 id: paragraph.article_card.default
 targetEntityType: paragraph
 bundle: article_card
 mode: default
 content:
+  field_article_node:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_card_blurb:
     type: text_textarea
-    weight: 1
+    weight: 2
     region: content
     settings:
       rows: 5
@@ -31,7 +94,7 @@ content:
     third_party_settings: {  }
   field_card_title:
     type: link_default
-    weight: 0
+    weight: 1
     region: content
     settings:
       placeholder_url: ''

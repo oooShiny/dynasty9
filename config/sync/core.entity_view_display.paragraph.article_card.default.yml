@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.article_card.field_article_node
     - field.field.paragraph.article_card.field_card_blurb
     - field.field.paragraph.article_card.field_card_style
     - field.field.paragraph.article_card.field_card_title
@@ -16,6 +17,14 @@ targetEntityType: paragraph
 bundle: article_card
 mode: default
 content:
+  field_article_node:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_card_blurb:
     type: text_default
     label: hidden
