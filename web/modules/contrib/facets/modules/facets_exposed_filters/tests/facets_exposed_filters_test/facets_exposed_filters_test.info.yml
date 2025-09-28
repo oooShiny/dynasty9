@@ -1,0 +1,10 @@
+name: 'Facets Exposed Filters test'
+type: module
+description: 'Provides config for Facets exposed filters test.'
+package: 'Testing'
+hidden: true
+dependencies:
+  - search_api:search_api
+  - search_api:search_api_test_db
+  - drupal:views
+core_version_requirement: ^10.1 || ^11

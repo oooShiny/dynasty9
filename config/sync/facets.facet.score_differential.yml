@@ -40,7 +40,7 @@ widget:
 empty_behavior:
   behavior: none
 only_visible_when_facet_source_is_visible: true
-show_only_one_result: false
+show_only_one_result: true
 show_title: false
 processor_configs:
   display_value_widget_order:
@@ -49,16 +49,26 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
-  range_slider:
-    processor_id: range_slider
+  hierarchy_processor:
+    processor_id: hierarchy_processor
     weights:
-      pre_query: 60
-      post_query: 60
-      build: 20
+      build: 100
     settings: {  }
+  list_item:
+    processor_id: list_item
+    weights:
+      build: 5
+    settings: {  }
+  exposed_range_slider:
+    processor_id: exposed_range_slider
+    weights:
+      post_query: 60
+    settings:
+      step: 1
   url_processor_handler:
     processor_id: url_processor_handler
     weights:
       pre_query: 50
       build: 15
     settings: {  }
+query_type: range

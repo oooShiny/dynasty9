@@ -1,6 +1,6 @@
 uuid: 23a69f86-d4a3-42cc-b965-a7e6c248fc58
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - facets_block
@@ -10,7 +10,7 @@ dependencies:
 id: dynasty_tw_facetsblock_6
 theme: dynasty_tw
 region: sidebar_first
-weight: -15
+weight: -12
 provider: null
 plugin: facets_block
 settings:
@@ -24,7 +24,7 @@ settings:
   facets_to_include:
     - 'facet_block:game_opponent'
     - 'facet_block:game_opposing_coach'
-  add_js_classes: false
+  add_js_classes: true
 visibility:
   request_path:
     id: request_path

@@ -15,11 +15,13 @@
  * @see template_preprocess_details()
  */
 #}
-<details{{ attributes }}>
+
+<details{{ attributes.addClass('py-2') }}>
   {%
     set summary_classes = [
       required ? 'js-form-required',
       required ? 'form-required',
+      'text-xl text-white pb-1'
     ]
   %}
   {%- if title -%}
@@ -31,8 +33,9 @@
       {{ errors }}
     </div>
   {% endif %}
-
+<div class="p-3">
   {{ description }}
   {{ children }}
   {{ value }}
+</div>
 </details>

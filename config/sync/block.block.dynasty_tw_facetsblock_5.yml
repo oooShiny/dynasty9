@@ -1,6 +1,6 @@
 uuid: 7afb8561-5a98-4295-97ff-7805e26f33a8
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - facets_block
@@ -10,7 +10,7 @@ dependencies:
 id: dynasty_tw_facetsblock_5
 theme: dynasty_tw
 region: sidebar_first
-weight: -12
+weight: -9
 provider: null
 plugin: facets_block
 settings:

@@ -6,6 +6,7 @@ base theme: stable9
 libraries:
   - dynasty_tw/global
   - dynasty_tw/overrides
+  - dynasty_tw/select2
 regions:
   header: 'Header'
   primary_menu: 'Primary menu'

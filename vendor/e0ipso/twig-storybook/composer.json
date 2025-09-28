@@ -1,0 +1,51 @@
+{
+    "name": "e0ipso/twig-storybook",
+    "description": "Extends Twig with new \"stories\" and \"story\" tags for easily writing Storybook stories using Twig templates.",
+    "license": "GPL-2.0-or-later",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mateu Aguiló Bosch",
+            "email": "mateu@mateuaguilo.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-dom": "*",
+        "ext-mbstring": "*",
+        "psr/log": "^1.0 || ^2.0 || ^3.0",
+        "symfony/dom-crawler": "^4.4.45 || ^6 || ^7",
+        "symfony/http-foundation": "^4.4.45 || ^6 || ^7",
+        "symfony/http-kernel": "^4.4.45 || ^6 || ^7",
+        "twig/twig": "^2.15.4 || ^3"
+    },
+    "require-dev": {
+        "enlightn/security-checker": "^2",
+        "ergebnis/composer-normalize": "^2",
+        "nikic/php-parser": "^4",
+        "php-parallel-lint/php-parallel-lint": "^1",
+        "phpro/grumphp-shim": "^2",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^9.5",
+        "povils/phpmnd": "^3",
+        "squizlabs/php_codesniffer": "^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TwigStorybook\\": "src",
+            "TwigStorybook\\Tests\\": "tests/src"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "php-http/discovery": true,
+            "phpro/grumphp-shim": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "test": "php vendor/bin/grumphp.phar run"
+    }
+}

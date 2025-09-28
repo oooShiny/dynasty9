@@ -1,0 +1,54 @@
+grumphp:
+  additional_info: "\nVisit https://github.com/e0ipso/twig-storybook#readme for documentation!\n"
+  hooks_preset: local
+  stop_on_failure: false
+  ignore_unstaged_changes: false
+  hide_circumvention_tip: false
+  process_timeout: 60
+  tasks:
+    git_commit_message:
+      enforce_capitalized_subject: false
+      type_scope_conventions:
+        - types: ['build', 'ci', 'chore', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test']
+        - scopes: ['twig', 'service', 'misc']
+      max_subject_width: 50
+      enforce_no_subject_punctuations: true
+      enforce_no_subject_trailing_period: true
+    git_branch_name:
+      whitelist:
+        - '/(build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test)\/[a-z0-9-]+/'
+        - main
+        - '/\d+\.x/'
+    phpunit: ~
+    phpcs:
+      standard:
+        - psr2
+      tab_width: 2
+      ignore_patterns: ['.github', '.gitlab', 'bower_components', 'node_modules', 'vendor', '/tests/.*']
+    phpmnd:
+      hint: true
+    securitychecker_enlightn:
+      lockfile: ./composer.lock
+      run_always: false
+    phplint:
+      exclude: []
+      jobs: ~
+      short_open_tag: false
+      ignore_patterns: []
+    yamllint: ~
+    composer: ~
+    composer_normalize: ~
+    jsonlint: ~
+    phpstan:
+      configuration: phpstan.neon
+      level: ~
+      memory_limit: "-1"
+      triggered_by: ['php']
+    phpparser:
+      visitors:
+        no_exit_statements: ~
+        never_use_else: ~
+        forbidden_function_calls:
+          blacklist: [var_dump, kint]
+      metadata:
+        priority: 100000

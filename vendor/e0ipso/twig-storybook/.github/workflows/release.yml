@@ -1,0 +1,19 @@
+name: Release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create npm deps
+        run: npm init --yes && npm install --save-dev @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/github @semantic-release/git conventional-changelog-conventionalcommits
+
+      - name: Tag a new release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

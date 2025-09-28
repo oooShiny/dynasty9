@@ -1,0 +1,4 @@
+render storybook stories:
+  title: "Render Storybook stories"
+  description: "Allows a user to access the Twig Storybook endpoint to render a template with stories."
+  restrict access: true

@@ -1,0 +1,73 @@
+parameters:
+  storybook.development: false
+services:
+  logger.channel.storybook:
+    parent: logger.channel_base
+    arguments: ['storybook']
+
+  TwigStorybook\Service\StoryCollector: {}
+  TwigStorybook\Service\StoryRenderer:
+    arguments:
+      - '@TwigStorybook\Service\StoryCollector'
+      - '@logger.channel.storybook'
+      - '%app.root%'
+    calls:
+      - ['setTwigEnvironment', ['@twig']]
+
+  TwigStorybook\Twig\TwigExtension:
+    arguments:
+      - '@TwigStorybook\Service\StoryCollector'
+      - '%app.root%'
+    tags:
+      - { name: twig.extension }
+
+  Drupal\storybook\EventSubscriber\AlterBodySubscriber:
+    tags:
+      - { name: event_subscriber }
+
+  # Set the theme based on the query string parameter.
+  theme.negotiator.storybook:
+    class: Drupal\storybook\Theme\StorybookThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 1000 }
+    arguments:
+      - '@request_stack'
+      - '@theme_handler'
+
+  # Enforces all URL links to be absolute so the iframe works.
+  Drupal\storybook\PathProcessor\AbsolutePathProcessor:
+    tags:
+      - { name: path_processor_outbound, priority: 0 }
+
+  # Enforces all assets to have absolute URLs so the iframe works.
+  Drupal\storybook\FileUrlGenerator:
+    decorates: file_url_generator
+    public: false
+    arguments: ['@Drupal\storybook\FileUrlGenerator.inner', '@request_stack']
+
+  # Disables page cache for the endpoint.
+  Drupal\storybook\PageCache\DisallowPageCache:
+    public: false
+    tags:
+      - { name: page_cache_request_policy }
+    arguments:
+      - '%storybook.development%'
+
+  # Decorate the data cache backend to avoid caching on the render route.
+  Drupal\storybook\Cache\SkippableBackend:
+    decorates: cache.data
+    parent: cache.data
+    arguments:
+      - '@Drupal\storybook\Cache\SkippableBackend.inner'
+      - '@request_stack'
+      - '%storybook.development%'
+
+  # Decorate the asset resolver, so we can turn off caching and optimization for
+  # the render controller.
+  Drupal\storybook\Asset\UnoptimizedAssetResolver:
+    decorates: 'asset.resolver'
+    public: false
+    arguments:
+      - '@Drupal\storybook\Asset\UnoptimizedAssetResolver.inner'
+      - '@request_stack'
+      - '%storybook.development%'

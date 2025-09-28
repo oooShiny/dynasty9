@@ -342,9 +342,11 @@ function dynasty_tw_preprocess_views_view_table(&$variables) {
       // Add game results/scores to totals.
       $qb = '';
       foreach ($view->field as $fid => $field) {
+        $values = $field->getItems($row);
+        $value = $values[0]['value'] ?? $values[0]['rendered']['#markup'] ?? '';
         switch ($fid) {
           case 'result':
-            $winloss = $field->getValue($row);
+            $winloss = $value;
             if ($winloss == 'Loss') {
               $losses++;
             }
@@ -354,15 +356,15 @@ function dynasty_tw_preprocess_views_view_table(&$variables) {
             $games++;
             break;
           case 'opponent_score':
-            $score['opp'] += $field->getValue($row);
+            $score['opp'] += $value;
             break;
           case 'patriots_score':
-            $score['pats'] += $field->getValue($row);
+            $score['pats'] += $value;
             break;
           case 'starting_qb':
-            $qb = $field->getValue($row);
-            if (!array_key_exists($field->getValue($row), $qb_stats)) {
-              $qb_stats[$field->getValue($row)] = [
+            $qb = $value;
+            if (!array_key_exists($qb, $qb_stats)) {
+              $qb_stats[$qb] = [
                 'attempts' => 0,
                 'completions' => 0,
                 'tds' => 0,
@@ -371,16 +373,16 @@ function dynasty_tw_preprocess_views_view_table(&$variables) {
             }
             break;
           case 'brady_attempts':
-            $qb_stats[$qb]['attempts'] += $field->getValue($row);
+            $qb_stats[$qb]['attempts'] += $value;
             break;
           case 'brady_completions':
-            $qb_stats[$qb]['completions'] += $field->getValue($row);
+            $qb_stats[$qb]['completions'] += $value;
             break;
           case 'brady_tds':
-            $qb_stats[$qb]['tds'] += $field->getValue($row);
+            $qb_stats[$qb]['tds'] += $value;
             break;
           case 'brady_ints':
-            $qb_stats[$qb]['ints'] += $field->getValue($row);
+            $qb_stats[$qb]['ints'] += $value;
             break;
         }
       }

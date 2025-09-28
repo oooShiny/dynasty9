@@ -1,0 +1,75 @@
+
+{#
+/**
+ * @file
+ * Default theme implementation to display views exposed filters summary.
+ *
+ * Available variables:
+ *  - show_label: Show the filter label.
+ *  - show_remove_link: Show a remove link.
+ *  - show_reset_link: Show a reset link.
+ *  - reset_link:
+ *      - title: The reset link title.
+ *  - filters_summary:
+ *      - prefix: The exposed filter summary prefix.
+ *      - separator: The exposed filter summary separator.
+ *  - summary: An array of selected filters. Available keys:
+ *      - label: The label of the filter.
+ *      - value: The value of the filter.
+ */
+#}
+
+
+{% set classes = [
+  'views-filters-summary',
+  options.use_ajax ? 'views-filters-summary--use-ajax',
+  'flex flex-wrap mt-4 gap-1'
+] %}
+
+{% apply spaceless %}
+  <div{{ attributes.addClass(classes) }} data-exposed-form-id={{ exposed_form_id }}>
+    {% if summary and options.filters_summary.prefix %}
+      <span class="prefix">
+        {{ options.filters_summary.prefix }}
+      </span>
+    {% endif %}
+
+    <span class="items flex flex-wrap gap-1">
+      {%- for item in summary -%}
+        <div class="item font-light patriots-blue rounded-lg flex flex-col">
+          {% if options.show_label %}
+            <span class="bg-blue-pats mb-2 text-white">{{ item.label }}</span>
+          {% endif %}
+
+          {% if options.has_group_values %}
+            <span class="flex flex-wrap divide-x divide-blue-900">
+              {%- for value in item.groups -%}
+                <span class="px-2">
+                  <strong class="">{{ value.value }}</strong>
+                  {% if value.link and options.show_remove_link %}
+                    {{ value.link }}
+                  {% endif %}
+                </span>
+              {% endfor %}
+             </span>
+          {% else %}
+            <span class="value-container">
+              <strong class="">{{ item.value }}</strong>
+              {% if item.link and options.show_remove_link %}
+                  {{ item.link }}
+              {% endif %}
+            </span>
+          {% endif %}
+
+          {% if loop.last == false %}
+            {{- options.filters_summary.separator -}}
+          {% endif %}
+        </div>
+      {%- endfor -%}
+    </span>
+
+    {% if summary and options.show_reset_link and options.reset_link.title %}
+      <a class="flex flex-col inline-block justify-center p-2 patriots-red reset rounded-lg" href='/'>{{ options.reset_link.title }}</a>
+    {% endif %}
+  </div>
+{% endapply %}

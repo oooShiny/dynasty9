@@ -1,0 +1,9 @@
+storybook.render_story:
+  path: /storybook/stories/render/{hash}
+  defaults:
+    _controller: '\Drupal\storybook\Controller\ServerController::renderStory'
+    _title: "Render a Storybook story"
+  requirements:
+    _custom_access: '\Drupal\storybook\Controller\ServerController::access'
+  options:
+    _no_big_pipe: TRUE

@@ -10,7 +10,7 @@ dependencies:
 id: dynasty_tw_facetsblock
 theme: dynasty_tw
 region: sidebar_first
-weight: -11
+weight: -15
 provider: null
 plugin: facets_block
 settings:

@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Module implementation file.
+ */
+
+use Drupal\Core\Routing\RouteObjectInterface;
+
+/**
+ * Implements hook_file_url_alter().
+ */
+function storybook_file_url_alter(&$uri) {
+  $request = \Drupal::request();
+  $route_name = $request->attributes->get(RouteObjectInterface::ROUTE_NAME);
+
+  // Only modify the URI if our controller is returning a response, and we are
+  // not returning an absolute URL or URL to a file in the public files
+  // directory, notably aggregated CSS and JS.
+  if ($route_name === 'storybook.render' && !preg_match('%^(https?://|public://)%', $uri)) {
+    $uri = implode('/', [$request->getSchemeAndHttpHost(), ltrim($uri, '/')]);
+  }
+}

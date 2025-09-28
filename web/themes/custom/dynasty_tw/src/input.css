@@ -3,22 +3,115 @@
 @tailwind utilities;
 
 
-@layer components {
-  .bg-blue-pats {
-    background-color: #002244 !important;
-  }
-  .article-card {
-    text-decoration: none !important;
-  }
-  .article p,
-  .article ol,
-  .article ul {
-    @apply lg:px-20 pt-1;
-  }
-  .section-header {
-    @apply text-3xl uppercase font-thin text-center;
-  }
-  .header-block {
-    @apply bg-blue-pats font-light py-3 my-3 text-2xl text-center text-white;
-  }
+.bg-blue-pats {
+  background-color: #024 !important;
 }
+/* Dynasty-themed NoUI Slider Styles */
+.bef-slider.noUi-target {
+  @apply bg-gray-200 border-0 rounded-lg shadow-sm;
+  height: 8px !important;
+  border: none !important;
+}
+
+/* Active range/connect */
+.bef-slider .noUi-connect {
+  @apply rounded-lg;
+  background-color: #0866f1 !important; /* Lighter blue */
+}
+
+/* Slider handles - larger to accommodate text */
+.bef-slider .noUi-handle {
+  @apply !w-8 !h-8 rounded-full border-2 border-white shadow-lg cursor-pointer;
+  background-color: #c60c30 !important; /* Dynasty red */
+  border-radius: 50% !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  outline: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.bef-slider .noUi-handle:hover,
+.bef-slider .noUi-handle:focus {
+  @apply shadow-xl;
+  background-color: #e60c30 !important; /* Lighter red on hover */
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+
+/* Remove default handle styling */
+.bef-slider .noUi-handle:before,
+.bef-slider .noUi-handle:after {
+  display: none !important;
+}
+
+/* Touch area for better mobile interaction */
+.bef-slider .noUi-touch-area {
+  @apply w-full h-full rounded-full;
+}
+
+/* Base styling */
+.bef-slider .noUi-base {
+  @apply w-full h-full rounded-lg;
+}
+
+/* Container for better spacing */
+.exposed-range-slider {
+  @apply py-4;
+}
+
+/* Hide the visible min/max textfields - only show the slider */
+.bef-slider-min,
+.bef-slider-max {
+  @apply sr-only;
+}
+
+/* Hide the labels for min/max fields */
+label[for*="min"],
+label[for*="max"] {
+  @apply sr-only;
+}
+
+/* Labels styling */
+.slider-min-max-labels {
+  @apply flex justify-between mt-2 text-xs font-medium;
+}
+
+.slider-min-max-labels .min-label,
+.slider-min-max-labels .max-label {
+  @apply text-white;
+}
+
+/* Tooltip styles - inside the handle */
+.bef-slider .noUi-tooltip {
+  @apply !text-white font-bold text-xs leading-none;
+  background: none !important;
+  border: none !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  white-space: nowrap !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+  bottom: unset !important;
+}
+
+
+.article-card {
+  text-decoration: none !important;
+}
+.article p,
+.article ol,
+.article ul {
+  @apply lg:px-20 pt-1;
+}
+.section-header {
+  @apply text-3xl uppercase font-thin text-center;
+}
+.header-block {
+  @apply bg-blue-pats font-light py-3 my-3 text-2xl text-center text-white;
+}
+
+

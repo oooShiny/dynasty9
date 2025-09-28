@@ -1,0 +1,11 @@
+name: video
+
+props:
+  type: object
+  properties:
+    muse_id:
+      type: string
+      title: 'Muse ID'
+    vid:
+      type: string
+      title: 'Video ID'

@@ -1,0 +1,19 @@
+{
+    "name": "drupal/storybook",
+    "description": "Storybook integration for Drupal",
+    "type": "drupal-module",
+    "require": {
+        "ext-dom": "*",
+        "symfony/dom-crawler": "^4 || ^6 || ^7",
+        "symfony/css-selector": "^4 || ^6 || ^7",
+        "e0ipso/twig-storybook": "^1.5"
+    },
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Mateu Aguiló Bosch (e0ipso)",
+            "homepage": "https://www.drupal.org/u/e0ipso",
+            "role": "Maintainer"
+        }
+    ]
+}

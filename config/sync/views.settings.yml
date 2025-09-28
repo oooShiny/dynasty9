@@ -3,6 +3,7 @@ _core:
 display_extenders:
   0: metatag_display_extender
   simple_sitemap_display_extender: simple_sitemap_display_extender
+  1: ajax_history
 sql_signature: false
 ui:
   show:

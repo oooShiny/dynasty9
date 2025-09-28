@@ -21,7 +21,6 @@
     'px-1'
   ]
 %}
-{{ dump(attributes) }}
 {% if title is not empty or required -%}
   <label{{ attributes.addClass(classes) }}>{{ title }}</label>
 {%- endif %}

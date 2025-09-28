@@ -1,0 +1,9 @@
+name: No Markup
+description: Remove the markup of fields
+core_version_requirement: ^9 || ^10 || ^11
+type: module
+
+# Information added by Drupal.org packaging script on 2024-10-26
+version: '1.0.6'
+project: 'nomarkup'
+datestamp: 1729923654

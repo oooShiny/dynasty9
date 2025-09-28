@@ -1,0 +1,188 @@
+<?php
+
+/**
+ * @file
+ * Module implementation file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FormatterInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\nomarkup\NoMarkupInterface;
+
+/**
+ * Implements hook_help().
+ */
+function nomarkup_help($route_name) {
+  switch ($route_name) {
+    // Main module help for the nomarkup module.
+    case 'help.page.nomarkup':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module aims to help integration with component libraries.
+       Map the Twig templates in your component library to the field data, without the field markup.') . '</p>';
+
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function nomarkup_theme() {
+  return [
+    'entity__nomarkup' => [
+      'render element' => 'elements',
+    ],
+    'field__nomarkup' => [
+      'base hook' => 'field',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_field_formatter_third_party_settings_form().
+ */
+function nomarkup_field_formatter_third_party_settings_form(FormatterInterface $plugin, FieldDefinitionInterface $field_definition, $view_mode, $form, FormStateInterface $form_state) {
+  $settings['nomarkup'] = [];
+
+  $settings['nomarkup']['enabled'] = [
+    '#title' => t('Remove field markup'),
+    '#description' => t('If enabled, the field value will be rendeded without any other HTML markup.'),
+    '#type' => 'checkbox',
+    '#default_value' => $plugin->getThirdPartySetting('nomarkup', 'enabled'),
+  ];
+  $separator = $plugin->getThirdPartySetting('nomarkup', 'separator', NoMarkupInterface::DEFAULT_SEPARATOR);
+  if ($field_definition->getFieldStorageDefinition()->getCardinality() !== 1) {
+    $settings['nomarkup']['separator'] = [
+      '#title' => t('Multi-value separator'),
+      '#description' => t('This string is used to separate multiple values of the field. Choose something that is unlikely to appear in the field value.'),
+      '#type' => 'textfield',
+      '#default_value' => $separator,
+    ];
+  }
+  else {
+    $settings['nomarkup']['separator'] = [
+      '#type' => 'hidden',
+      '#value' => $separator,
+    ];
+  }
+  if (
+    $plugin->getPluginId() === 'entity_reference_entity_view' &&
+    $field_definition->getType() === 'entity_reference'
+  ) {
+    // If we are embedding the referenced entity, offer removing the entity
+    // markup.
+    $settings['nomarkup']['referenced_entity'] = [
+      '#title' => t('Remove markup on the referenced entity'),
+      '#description' => t('If enabled, the entity will render without any other HTML markup. Note that you may need to configure the fields inside that entity to remove additional markup.'),
+      '#type' => 'checkbox',
+      '#default_value' => $plugin->getThirdPartySetting('nomarkup', 'referenced_entity'),
+    ];
+  }
+  else {
+    $settings['nomarkup']['referenced_entity'] = [
+      '#type' => 'hidden',
+      '#value' => FALSE,
+    ];
+  }
+  return $settings['nomarkup'];
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary_alter().
+ */
+function nomarkup_field_formatter_settings_summary_alter(array &$summary, array $context) {
+  if ($context['formatter']->getThirdPartySetting('nomarkup', 'enabled')) {
+    $cardinality = $context['field_definition']->getFieldStorageDefinition()
+      ->getCardinality();
+    $message = $cardinality === 1 ?
+      t('The field will render without markup.') :
+      t('The field will render without markup using "@separator" to separate multiple values.', [
+        '@separator' => $context['formatter']->getThirdPartySetting('nomarkup', 'separator', NoMarkupInterface::DEFAULT_SEPARATOR),
+      ]);
+    $summary[] = $message;
+  }
+  if ($context['formatter']->getThirdPartySetting('nomarkup', 'referenced_entity')) {
+    $summary[] = t('The referenced entity will render without markup.');
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function nomarkup_preprocess_field(&$vars) {
+  $nomarkup_config = $vars['element']['#third_party_settings']['nomarkup'] ?? [];
+  $vars['separator'] = $nomarkup_config['separator'] ?? NoMarkupInterface::DEFAULT_SEPARATOR;
+  if (!($nomarkup_config['enabled'] ?? FALSE)) {
+    return;
+  }
+  $field_type = $vars['element']['#field_type'] ?? NULL;
+  if (
+    $field_type !== 'entity_reference'
+    || !($nomarkup_config['referenced_entity'] ?? FALSE)
+  ) {
+    return;
+  }
+  $children = Element::children($vars['element']);
+  foreach ($children as $child) {
+    $vars['items'][$child]['content']['#nomarkup'] = ['referenced_entity' => TRUE];
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function nomarkup_preprocess(&$variables, $hook) {
+  // Ensure we are altering the suggestions for rendering an entity.
+  $entity_type_id = $variables['elements']['#entity_type'] ?? NULL;
+  if (!$entity_type_id) {
+    return;
+  }
+  $entity = $variables['elements']['#' . $entity_type_id] ?? NULL;
+  if (!$entity instanceof EntityInterface) {
+    return;
+  }
+  // Now detect if we are rendering this entity as part of an entity reference
+  // that does not want any markup.
+  $enabled = $variables['elements']['#nomarkup']['referenced_entity'] ?? FALSE;
+  $upstream_preprocess = 'template_preprocess_' . $hook;
+  if ($enabled && function_exists($upstream_preprocess)) {
+    // Execute the original hook.
+    $upstream_preprocess($variables, $hook);
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function nomarkup_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  $enabled = $variables['element']['#third_party_settings']['nomarkup']['enabled'] ?? FALSE;
+  // If the setting is enabled, suggest our own template.
+  if ($enabled) {
+    $suggestions = ['field__nomarkup'];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function nomarkup_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  // Ensure we are altering the suggestions for rendering an entity.
+  $entity_type_id = $variables['elements']['#entity_type'] ?? NULL;
+  if (!$entity_type_id) {
+    return;
+  }
+  $entity = $variables['elements']['#' . $entity_type_id] ?? NULL;
+  if (!$entity instanceof EntityInterface) {
+    return;
+  }
+  // Now detect if we are rendering this entity as part of an entity reference
+  // that does not want any markup.
+  $enabled = $variables['elements']['#nomarkup']['referenced_entity'] ?? FALSE;
+  if ($enabled) {
+    $suggestions = ['entity__nomarkup'];
+  }
+}

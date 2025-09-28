@@ -1,0 +1,13 @@
+<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+  <div id="{{ vid }}" class="flex justify-center bg-black"></div>
+  <script>
+    MusePlayer({
+      container: document.getElementById('{{ vid }}'),
+      video: '{{ muse_id }}',
+      title: false,
+      search: false,
+      links: true,
+      logo: false,
+      sizing: '100%',
+    });
+  </script>

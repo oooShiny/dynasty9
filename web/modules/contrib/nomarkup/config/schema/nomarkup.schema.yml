@@ -1,0 +1,13 @@
+field.formatter.third_party.nomarkup:
+  type: mapping
+  label: 'No markup configuration'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enabled'
+    separator:
+      type: string
+      label: 'Multi-value separator'
+    referenced_entity:
+      type: string
+      label: 'Remove markup on the referenced entity when using rendered entity formatter on an entity reference'

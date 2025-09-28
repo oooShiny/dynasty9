@@ -38,11 +38,53 @@ class SearchApiRange extends QueryTypePluginBase {
 
       // Add the filter to the query if there are active values.
       $active_items = $this->facet->getActiveItems();
+      
+      \Drupal::logger('facets_range_debug')->info('SearchApiRange: Active items for field @field: @items', [
+        '@field' => $field_identifier,
+        '@items' => print_r($active_items, TRUE)
+      ]);
 
       if (count($active_items)) {
         $filter = $query->createConditionGroup($operator, ['facet:' . $field_identifier]);
         foreach ($active_items as $value) {
-          $filter->addCondition($field_identifier, $value, $exclude ? 'NOT BETWEEN' : 'BETWEEN');
+          // Handle array values from exposed filters (e.g., [min, max])
+          if (is_array($value) && count($value) === 2) {
+            \Drupal::logger('facets_range_debug')->info('SearchApiRange: Processing array range @min to @max for field @field', [
+              '@min' => $value[0],
+              '@max' => $value[1],
+              '@field' => $field_identifier
+            ]);
+            $filter->addCondition($field_identifier, $value, $exclude ? 'NOT BETWEEN' : 'BETWEEN');
+          } else {
+            // For single values or string ranges, parse as range if it contains comma or range separator
+            \Drupal::logger('facets_range_debug')->info('SearchApiRange: Processing single value @value for field @field', [
+              '@value' => $value,
+              '@field' => $field_identifier
+            ]);
+            
+            if (is_string($value) && (strpos($value, ',') !== FALSE || strpos($value, ' TO ') !== FALSE)) {
+              // Parse range string like "min,max" or "min TO max"
+              $range_parts = strpos($value, ' TO ') !== FALSE ? 
+                explode(' TO ', $value) : 
+                explode(',', $value);
+              
+              if (count($range_parts) === 2) {
+                $min = trim($range_parts[0]);
+                $max = trim($range_parts[1]);
+                \Drupal::logger('facets_range_debug')->info('SearchApiRange: Parsed string range @min to @max', [
+                  '@min' => $min,
+                  '@max' => $max
+                ]);
+                $filter->addCondition($field_identifier, [$min, $max], $exclude ? 'NOT BETWEEN' : 'BETWEEN');
+              } else {
+                // Single value, use equals
+                $filter->addCondition($field_identifier, $value, $exclude ? '!=' : '=');
+              }
+            } else {
+              // Single value, use equals
+              $filter->addCondition($field_identifier, $value, $exclude ? '!=' : '=');
+            }
+          }
         }
         $query->addConditionGroup($filter);
       }

@@ -1,0 +1,9 @@
+{% if items|length == 1 %}
+  {{- items[0].content -}}
+{% else %}
+  {% for item in items[:-1] %}
+      {{- item.content -}}
+      {{- separator -}}
+  {% endfor %}
+  {{- items[items|length - 1].content -}}
+{% endif %}

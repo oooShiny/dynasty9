@@ -1,6 +1,6 @@
 uuid: cc07142d-ffe0-4465-84ff-b304b8b2c54d
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - facets_block
@@ -10,7 +10,7 @@ dependencies:
 id: dynasty_tw_facetsblock_7
 theme: dynasty_tw
 region: sidebar_first
-weight: -13
+weight: -10
 provider: null
 plugin: facets_block
 settings:
@@ -25,7 +25,7 @@ settings:
     - 'facet_block:game_opp_score'
     - 'facet_block:game_pats_score'
     - 'facet_block:score_differential'
-  add_js_classes: false
+  add_js_classes: true
 visibility:
   request_path:
     id: request_path

@@ -1,0 +1,9 @@
+name: 'UI Icons Tests'
+type: module
+description: 'Provides test for icons and settings.'
+package: 'Testing'
+
+# Information added by Drupal.org packaging script on 2025-06-20
+version: '1.1.0-beta6'
+project: 'ui_icons'
+datestamp: 1750427886

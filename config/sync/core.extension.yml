@@ -5,6 +5,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   automated_cron: 0
+  better_exposed_filters: 0
   big_pipe: 0
   block: 0
   block_content: 0
@@ -15,6 +16,7 @@ module:
   color_field: 0
   comment: 0
   config: 0
+  configurable_views_filter_block: 0
   contact: 0
   contextual: 0
   ctools: 0
@@ -31,7 +33,9 @@ module:
   entity_usage: 0
   facets: 0
   facets_block: 0
+  facets_exposed_filters: 0
   facets_range_widget: 0
+  facets_searchbox_widget: 0
   field: 0
   field_group: 0
   field_permissions: 0
@@ -47,6 +51,7 @@ module:
   inline_form_errors: 0
   jquery_ui: 0
   jquery_ui_slider: 0
+  jquery_ui_touch_punch: 0
   key: 0
   language: 0
   layout_discovery: 0
@@ -115,8 +120,10 @@ module:
   update: 0
   upgrade_status: 0
   user: 0
+  views_ajax_history: 0
   views_core_entity_reference: 0
   views_entity_form_field: 0
+  views_filters_summary: 0
   views_jump_menu: 0
   views_ui: 0
   votingapi: 0

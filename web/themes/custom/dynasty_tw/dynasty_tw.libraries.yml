@@ -41,3 +41,14 @@ muse_modal:
 podcast:
   js:
     js/playpodcast.js: {}
+select2.theme:
+  css:
+    component:
+      css/select2-pats.css: {}
+facets_range_slider_tooltips:
+  js:
+    js/facets-range-slider-tooltips.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once

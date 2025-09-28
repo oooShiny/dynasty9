@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * Implements hook_facets_search_api_query_type_mapping_alter().
+ */
+function facets_range_widget_facets_search_api_query_type_mapping_alter($backend_plugin_id, array &$query_types) {
+  if (isset($query_types['range'])) {
+    // Add our range query type.
+    $query_types['exposed_range'] = 'exposed_search_api_range';
+  }
+}
+
+/**
+ * Implements hook_views_pre_execute().
+ *
+ * Transform range slider values before the view executes.
+ */
+function facets_range_widget_views_pre_execute($view) {
+  if ($view->id() !== 'game_search') {
+    return;
+  }
+
+  $exposed_input = $view->getExposedInput();
+
+  \Drupal::logger('facets_range_debug')->info('Raw exposed input: @input', [
+    '@input' => json_encode($exposed_input)
+  ]);
+
+  // Check if we have score_differential with min/max structure
+  if (isset($exposed_input['score_differential']) &&
+      is_array($exposed_input['score_differential']) &&
+      isset($exposed_input['score_differential']['min']) &&
+      isset($exposed_input['score_differential']['max'])) {
+
+    $min = (float) $exposed_input['score_differential']['min'];
+    $max = (float) $exposed_input['score_differential']['max'];
+
+    \Drupal::logger('facets_range_debug')->info('Pre-execute: transforming range @min to @max', [
+      '@min' => $min,
+      '@max' => $max
+    ]);
+
+    // Transform into the format expected by facets range query type
+    // Use string format that both facets and views_filters_summary can handle
+    $exposed_input['score_differential'] = [$min, $max];
+    $view->filter["facets_score_differential"]->operator = 'BETWEEN';
+    $view->setExposedInput($exposed_input);
+
+    \Drupal::logger('facets_range_debug')->info('After transformation: @input', [
+      '@input' => json_encode($view->getExposedInput())
+    ]);
+  }
+}
+
+/**
+ * Implements hook_facets_exposed_filters_views_post_execute().
+ */
+function facets_range_widget_facets_exposed_filters_views_post_execute($view) {
+  if ($view->id() !== 'game_search') {
+    return;
+  }
+
+  \Drupal::logger('facets_range_debug')->info('Post-execute hook called');
+
+  // Check if the facets filter has active values
+  foreach ($view->filter as $filter_id => $filter) {
+    if ($filter instanceof \Drupal\facets_exposed_filters\Plugin\views\filter\FacetsFilter) {
+      $active_items = $filter->facet?->getActiveItems() ?? [];
+      \Drupal::logger('facets_range_debug')->info('Filter @id active items: @items', [
+        '@id' => $filter_id,
+        '@items' => json_encode($active_items)
+      ]);
+    }
+  }
+}

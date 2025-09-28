@@ -29,7 +29,7 @@ enable_parent_when_child_gets_disabled: true
 widget:
   type: range_slider
   config:
-    show_numbers: false
+    show_numbers: true
     prefix: ''
     suffix: ''
     min_type: search_result
@@ -49,12 +49,22 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
+  hierarchy_processor:
+    processor_id: hierarchy_processor
+    weights:
+      build: 100
+    settings: {  }
   range_slider:
     processor_id: range_slider
     weights:
       pre_query: 60
       post_query: 60
       build: 20
+    settings: {  }
+  slider:
+    processor_id: slider
+    weights:
+      post_query: 60
     settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler

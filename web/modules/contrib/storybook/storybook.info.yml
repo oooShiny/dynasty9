@@ -1,0 +1,9 @@
+name: 'Storybook'
+description: Storybook integration for Drupal
+type: module
+core_version_requirement: ^9 || ^10 || ^11
+
+# Information added by Drupal.org packaging script on 2024-11-13
+version: '1.0.2'
+project: 'storybook'
+datestamp: 1731516579

@@ -8220,51 +8220,6 @@ html:has(.drawer-open.drawer-open) {
   --tooltip-text-color: var(--fallback-erc,oklch(var(--erc)/1));
 }
 
-.bg-blue-pats {
-  background-color: #002244 !important;
-}
-
-.article-card {
-  text-decoration: none !important;
-}
-
-.article p,
-  .article ol,
-  .article ul {
-  padding-top: 0.25rem;
-}
-
-@media (min-width: 1024px) {
-  .article p,
-  .article ol,
-  .article ul {
-    padding-left: 5rem;
-    padding-right: 5rem;
-  }
-}
-
-.section-header {
-  text-align: center;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  font-weight: 100;
-  text-transform: uppercase;
-}
-
-.header-block {
-  background-color: #002244;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  text-align: center;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 300;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -8421,6 +8376,11 @@ html:has(.drawer-open.drawer-open) {
   margin-right: 2.5rem;
 }
 
+.mx-14 {
+  margin-left: 3.5rem;
+  margin-right: 3.5rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -8470,6 +8430,10 @@ html:has(.drawer-open.drawer-open) {
   margin-bottom: 0.5rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -8496,6 +8460,10 @@ html:has(.drawer-open.drawer-open) {
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .box-border {
@@ -8627,6 +8595,10 @@ html:has(.drawer-open.drawer-open) {
 
 .h-6 {
   height: 1.5rem;
+}
+
+.h-8 {
+  height: 2rem;
 }
 
 .h-auto {
@@ -9338,6 +9310,11 @@ html:has(.drawer-open.drawer-open) {
   border-color: rgb(156 163 175 / var(--tw-divide-opacity));
 }
 
+.divide-gray-500 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-divide-opacity));
+}
+
 .place-self-auto {
   place-self: auto;
 }
@@ -9993,6 +9970,11 @@ html:has(.drawer-open.drawer-open) {
   padding-right: 3.5rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .px-20 {
   padding-left: 5rem;
   padding-right: 5rem;
@@ -10170,14 +10152,14 @@ html:has(.drawer-open.drawer-open) {
   line-height: 1.75rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-xs {
@@ -10199,6 +10181,10 @@ html:has(.drawer-open.drawer-open) {
 
 .font-medium {
   font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .font-thin {
@@ -10694,6 +10680,206 @@ html:has(.drawer-open.drawer-open) {
   forced-color-adjust: none;
 }
 
+.bg-blue-pats {
+  background-color: #024 !important;
+}
+
+/* Dynasty-themed NoUI Slider Styles */
+
+.bef-slider.noUi-target {
+  border-radius: 0.5rem;
+  border-width: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  height: 8px !important;
+  border: none !important;
+}
+
+/* Active range/connect */
+
+.bef-slider .noUi-connect {
+  border-radius: 0.5rem;
+  background-color: #0866f1 !important;
+  /* Lighter blue */
+}
+
+/* Slider handles - larger to accommodate text */
+
+.bef-slider .noUi-handle {
+  height: 2rem !important;
+  width: 2rem !important;
+  cursor: pointer;
+  border-radius: 9999px;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  background-color: #c60c30 !important;
+  /* Dynasty red */
+  border-radius: 50% !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  outline: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.bef-slider .noUi-handle:hover,
+.bef-slider .noUi-handle:focus {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  background-color: #e60c30 !important;
+  /* Lighter red on hover */
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+
+/* Remove default handle styling */
+
+.bef-slider .noUi-handle:before,
+.bef-slider .noUi-handle:after {
+  display: none !important;
+}
+
+/* Touch area for better mobile interaction */
+
+.bef-slider .noUi-touch-area {
+  height: 100%;
+  width: 100%;
+  border-radius: 9999px;
+}
+
+/* Base styling */
+
+.bef-slider .noUi-base {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+/* Container for better spacing */
+
+.exposed-range-slider {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Hide the visible min/max textfields - only show the slider */
+
+.bef-slider-min,
+.bef-slider-max {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Hide the labels for min/max fields */
+
+label[for*="min"],
+label[for*="max"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Labels styling */
+
+.slider-min-max-labels {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+.slider-min-max-labels .min-label,
+.slider-min-max-labels .max-label {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+/* Tooltip styles - inside the handle */
+
+.bef-slider .noUi-tooltip {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+  background: none !important;
+  border: none !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  white-space: nowrap !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+  bottom: unset !important;
+}
+
+.article-card {
+  text-decoration: none !important;
+}
+
+.article p,
+.article ol,
+.article ul {
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .article p,
+.article ol,
+.article ul {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.section-header {
+  text-align: center;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.header-block {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 300;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  background-color: #024;
+}
+
 @media (hover:hover) {
   .table .\*\:hover > *tr:hover,
   .table .\*\:hover > *tr:nth-child(even):hover {
@@ -10987,3 +11173,5 @@ html:has(.drawer-open.drawer-open) {
     }
   }
 }
+
+
