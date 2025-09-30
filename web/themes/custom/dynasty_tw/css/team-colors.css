@@ -15,7 +15,10 @@
 }
 
 .text-red-pats {
-  color: #c60c30 !important;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #c60c30;
+  font-weight: 700;
+  color: white !important;
 }
 
 .bg-red-pats {
