@@ -292,7 +292,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: ''
+          content: '<h2 class="jersey-blue">All Highlights</h2>'
           tokenize: false
         result:
           id: result

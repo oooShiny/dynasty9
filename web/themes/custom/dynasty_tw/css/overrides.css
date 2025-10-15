@@ -2,6 +2,22 @@ a:hover {
   text-decoration: underline;
 }
 
+h2.jersey-blue {
+  background-image: url('/themes/custom/dynasty_tw/images/jersey-blue.webp');
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+/**
+ * Card Overrides
+ */
+div.card > * {
+  padding: 1rem !important;
+}
 /**
  * Game Summary Styles
  */

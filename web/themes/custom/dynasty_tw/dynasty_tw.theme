@@ -284,6 +284,9 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
       $variables['card_link'] = $url->toString();
 
       break;
+    case 'card':
+      $variables['card_bg'] = $p->field_background_color->value;
+      break;
     case 'media':
       $parent = $p->getParentEntity()->bundle();
       if ($parent == 'card') {

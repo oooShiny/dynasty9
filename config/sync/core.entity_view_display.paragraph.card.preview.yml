@@ -1,0 +1,52 @@
+uuid: 8f9b2d1f-cd60-4160-a354-f98af42f351e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.card.field_background_color
+    - field.field.paragraph.card.field_basic_card_title
+    - field.field.paragraph.card.field_card_image
+    - field.field.paragraph.card.field_card_text
+    - paragraphs.paragraphs_type.card
+  module:
+    - options
+    - text
+id: paragraph.card.preview
+targetEntityType: paragraph
+bundle: card
+mode: preview
+content:
+  field_background_color:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_basic_card_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_card_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_card_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

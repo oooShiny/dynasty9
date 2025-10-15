@@ -1,0 +1,50 @@
+uuid: 9be1f0cb-f132-4154-9be2-420a1f500771
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card.field_background_color
+    - field.field.paragraph.card.field_basic_card_title
+    - field.field.paragraph.card.field_card_image
+    - field.field.paragraph.card.field_card_text
+    - paragraphs.paragraphs_type.card
+  module:
+    - media_library
+    - text
+id: paragraph.card.default
+targetEntityType: paragraph
+bundle: card
+mode: default
+content:
+  field_background_color:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_basic_card_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_card_image:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_card_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

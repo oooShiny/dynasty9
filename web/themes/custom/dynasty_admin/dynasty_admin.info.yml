@@ -6,4 +6,7 @@ core_version_requirement: ^8 || ^9 || ^10 || ^11
 libraries:
   - dynasty_tw/global
   - dynasty_tw/overrides
+  - dynasty_tw/select2
+  - dynasty_tw/article
+  - dynasty_tw/basic_page
   - dynasty_admin/gin_overrides
