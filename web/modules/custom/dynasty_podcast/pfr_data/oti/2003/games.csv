@@ -1,0 +1,22 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 7,8:51PM ET,boxscore,W,,1-0,,Oakland Raiders,25.0,20.0,20.0,334.0,258.0,76.0,2.0,13.0,280.0,246.0,34.0,1.0,3.99,5.31,-4.15
+2,Sun,September 14,1:00PM ET,boxscore,L,,1-1,@,Indianapolis Colts,7.0,33.0,14.0,236.0,183.0,53.0,2.0,20.0,291.0,164.0,127.0,,-18.6,-4.55,-3.21
+3,Sun,September 21,1:03PM ET,boxscore,W,,2-1,,New Orleans Saints,27.0,12.0,28.0,385.0,280.0,105.0,1.0,11.0,188.0,165.0,23.0,2.0,17.19,4.97,-2.83
+4,Sun,September 28,1:01PM ET,boxscore,W,,3-1,@,Pittsburgh Steelers,30.0,13.0,9.0,198.0,158.0,40.0,,25.0,376.0,307.0,69.0,2.0,-1.5,12.57,4.96
+5,Sun,October 5,1:02PM ET,boxscore,L,,3-2,@,New England Patriots,30.0,38.0,23.0,411.0,341.0,70.0,1.0,21.0,354.0,193.0,161.0,,3.08,-12.53,-2.58
+6,Sun,October 12,1:03PM ET,boxscore,W,,4-2,,Houston Texans,38.0,17.0,22.0,535.0,421.0,114.0,1.0,24.0,458.0,367.0,91.0,3.0,21.55,0.79,-3.83
+7,Sun,October 19,1:02PM ET,boxscore,W,,5-2,@,Carolina Panthers,37.0,17.0,15.0,348.0,214.0,134.0,,19.0,383.0,339.0,44.0,4.0,-0.32,14.51,2.67
+8,Sun,October 26,1:01PM ET,boxscore,W,,6-2,@,Jacksonville Jaguars,30.0,17.0,23.0,320.0,187.0,133.0,1.0,15.0,293.0,239.0,54.0,3.0,8.08,7.81,-2.89
+9,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+10,Sun,November 9,1:02PM ET,boxscore,W,,7-2,,Miami Dolphins,31.0,7.0,17.0,324.0,223.0,101.0,,12.0,224.0,165.0,59.0,5.0,-0.14,27.99,-1.94
+11,Sun,November 16,1:02PM ET,boxscore,W,,8-2,,Jacksonville Jaguars,10.0,3.0,13.0,246.0,150.0,96.0,3.0,16.0,271.0,145.0,126.0,2.0,-14.37,18.02,1.99
+12,Sun,November 23,4:15PM ET,boxscore,W,,9-2,@,Atlanta Falcons,38.0,31.0,20.0,347.0,203.0,144.0,1.0,16.0,282.0,257.0,25.0,2.0,7.76,-0.2,1.97
+13,Mon,December 1,9:09PM ET,boxscore,L,,9-3,@,New York Jets,17.0,24.0,19.0,347.0,263.0,84.0,2.0,19.0,320.0,223.0,97.0,2.0,1.84,-5.92,-2.47
+14,Sun,December 7,1:03PM ET,boxscore,L,,9-4,,Indianapolis Colts,27.0,29.0,23.0,327.0,234.0,93.0,4.0,21.0,340.0,224.0,116.0,,12.01,-7.23,-10.08
+15,Sun,December 14,1:03PM ET,boxscore,W,,10-4,,Buffalo Bills,28.0,26.0,23.0,349.0,263.0,86.0,1.0,13.0,241.0,152.0,89.0,1.0,-1.34,7.75,-1.17
+16,Sun,December 21,1:03PM ET,boxscore,W,,11-4,@,Houston Texans,27.0,24.0,21.0,450.0,268.0,182.0,1.0,14.0,326.0,235.0,91.0,3.0,-3.96,10.16,-2.21
+17,Sun,December 28,1:03PM ET,boxscore,W,,12-4,,Tampa Bay Buccaneers,33.0,13.0,20.0,344.0,232.0,112.0,1.0,16.0,274.0,185.0,89.0,4.0,5.04,12.98,2.11
+,,Playoffs,,,,,,,,,,,,,,,,,,,,,,
+Wild Card,Sat,January 3,4:37PM ET,boxscore,W,,13-4,@,Baltimore Ravens,20.0,17.0,16.0,324.0,159.0,165.0,3.0,12.0,255.0,201.0,54.0,2.0,-10.52,13.39,-0.24
+Division,Sat,January 10,8:15PM ET,boxscore,L,,13-5,@,New England Patriots,14.0,17.0,16.0,284.0,200.0,84.0,1.0,18.0,297.0,201.0,96.0,1.0,-0.79,-4.23,1.14

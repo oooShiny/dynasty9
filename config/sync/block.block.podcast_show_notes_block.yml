@@ -1,0 +1,33 @@
+uuid: 1a36038e-0622-498d-b99a-5cdad649e054
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.podcast_show_notes
+  module:
+    - node
+    - views
+  theme:
+    - dynasty_tw
+id: podcast_show_notes_block
+theme: dynasty_tw
+region: highlighted
+weight: 0
+provider: null
+plugin: 'views_block:podcast_show_notes-block_1'
+settings:
+  id: 'views_block:podcast_show_notes-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: null
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      game: game

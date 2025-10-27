@@ -1,0 +1,85 @@
+uuid: 4d5eaa26-dae1-4fe5-9ea8-4902b22711bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_draft_picks
+    - node.type.team
+    - paragraphs.paragraphs_type.draft_pick
+  module:
+    - entity_reference_revisions
+id: node.team.field_draft_picks
+field_name: field_draft_picks
+entity_type: node
+bundle: team
+label: 'Draft Picks'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      draft_pick: draft_pick
+    negate: 0
+    target_bundles_drag_drop:
+      alternate_team_name:
+        weight: 20
+        enabled: false
+      article_card:
+        weight: 21
+        enabled: false
+      belichick_hoodie:
+        weight: 22
+        enabled: false
+      block:
+        weight: 23
+        enabled: false
+      blockquote:
+        weight: 24
+        enabled: false
+      card:
+        weight: 25
+        enabled: false
+      draft_pick:
+        weight: 26
+        enabled: true
+      from_library:
+        weight: 27
+        enabled: false
+      highlight:
+        weight: 28
+        enabled: false
+      highlight_video:
+        weight: 29
+        enabled: false
+      media:
+        weight: 30
+        enabled: false
+      podcast_download:
+        weight: 31
+        enabled: false
+      podcast_transcript_text_block:
+        weight: 32
+        enabled: false
+      quarterback:
+        weight: 33
+        enabled: false
+      section:
+        weight: 34
+        enabled: false
+      team_record:
+        weight: 35
+        enabled: false
+      text:
+        weight: 36
+        enabled: false
+      transcript_line:
+        weight: 37
+        enabled: false
+      uniform:
+        weight: 38
+        enabled: false
+field_type: entity_reference_revisions

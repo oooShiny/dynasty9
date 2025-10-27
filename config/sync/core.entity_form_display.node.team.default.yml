@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.team.field_alternate_team_name
     - field.field.node.team.field_conference
     - field.field.node.team.field_division
+    - field.field.node.team.field_draft_picks
     - field.field.node.team.field_meta_tags
     - field.field.node.team.field_pfr_id
     - field.field.node.team.field_team_standings
@@ -42,6 +43,26 @@ content:
     weight: 4
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_draft_picks:
+    type: paragraphs
+    weight: 131
+    region: content
+    settings:
+      title: 'Draft Pick'
+      title_plural: 'Draft Picks'
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: draft_pick
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
@@ -81,6 +102,16 @@ content:
   path:
     type: path
     weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
     region: content
     settings: {  }
     third_party_settings: {  }

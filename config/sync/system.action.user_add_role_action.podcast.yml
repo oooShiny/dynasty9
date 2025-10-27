@@ -1,0 +1,14 @@
+uuid: 282f2ebb-544a-4bc9-a5c3-16517f483ad9
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.podcast
+  module:
+    - user
+id: user_add_role_action.podcast
+label: 'Add the Podcast role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: podcast

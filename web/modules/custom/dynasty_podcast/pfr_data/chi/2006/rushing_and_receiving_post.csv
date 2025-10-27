@@ -1,0 +1,14 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Scrimmage,Scrimmage,Scrimmage,Scrimmage,Unnamed: 31_level_0,Unnamed: 32_level_0
+Rk,Player,Age,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,Touch,Y/Tch,YScm,RRTD,Fmb,Awards
+1.0,Thomas Jones,28.0,RB,3,3,55,301,4,14,49.1,52.0,5.5,100.3,18.3,11,6,24,4.0,0,1,9.1,14.0,2.0,8.0,54.5,2.2,61,5.3,325,4,1,
+2.0,Bernard Berrian,26.0,WR,3,3,0,0,0,0,,,,0.0,0.0,26,14,228,16.3,2,9,46.2,68.0,4.7,76.0,53.8,8.8,14,16.3,228,2,0,
+3.0,Cedric Benson,24.0,RB,3,0,38,104,1,8,44.7,12.0,2.7,34.7,12.7,4,3,24,8.0,0,1,75.0,11.0,1.0,8.0,75.0,6.0,41,3.1,128,1,1,
+4.0,Rashied Davis,27.0,WR,3,0,2,25,0,1,100.0,16.0,12.5,8.3,0.7,9,5,86,17.2,0,3,33.3,37.0,1.7,28.7,55.6,9.6,7,15.9,111,0,0,
+5.0,Desmond Clark,29.0,TE,3,3,0,0,0,0,,,,0.0,0.0,13,8,107,13.4,0,5,61.5,30.0,2.7,35.7,61.5,8.2,8,13.4,107,0,0,
+6.0,Muhsin Muhammad,33.0,WR,3,3,0,0,0,0,,,,0.0,0.0,15,7,93,13.3,1,5,40.0,22.0,2.3,31.0,46.7,6.2,7,13.3,93,1,0,
+7.0,Jason McKie,26.0,FB,3,3,0,0,0,0,,,,0.0,0.0,10,6,16,2.7,0,0,0.0,4.0,2.0,5.3,60.0,1.6,6,2.7,16,0,0,
+8.0,Mark Bradley,24.0,WR,1,0,0,0,0,0,,,,0.0,0.0,2,1,5,5.0,0,0,0.0,5.0,1.0,5.0,50.0,2.5,1,5.0,5,0,0,
+9.0,Gabe Reid,29.0,TE,1,0,0,0,0,0,,,,0.0,0.0,1,1,5,5.0,0,0,0.0,5.0,1.0,5.0,100.0,5.0,1,5.0,5,0,0,
+10.0,John Gilmore,27.0,TE,1,0,0,0,0,0,,,,0.0,0.0,1,1,3,3.0,0,0,0.0,3.0,1.0,3.0,100.0,3.0,1,3.0,3,0,0,
+11.0,Rex Grossman,26.0,QB,2,2,4,-3,0,0,0.0,-1.0,-0.8,-1.5,2.0,0,0,0,,0,0,,,0.0,0.0,,,4,-0.8,-3,0,2,
+,Team Totals,,,3,3,99,427,5,23,46.5,52.0,4.3,142.3,33.0,92,52,591,11.4,3,24,35.9,68.0,17.3,197.0,56.5,6.4,151,6.7,1018,8,4,

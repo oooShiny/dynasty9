@@ -1,0 +1,22 @@
+uuid: a363044a-bea8-4a9c-af84-fd2fb0a76b05
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - filter
+    - rate
+    - system
+    - votingapi
+id: podcast
+label: Podcast
+weight: 8
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'cast rate vote on node of highlight'
+  - 'use text format full_html'
+  - 'view any vote'
+  - 'view own vote'
+  - 'view the administration theme'

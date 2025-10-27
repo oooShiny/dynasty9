@@ -1,0 +1,24 @@
+uuid: 470be688-ad9a-40c8-8735-3b3c94cf5b04
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opp_hc_notes
+    - filter.format.full_html
+    - node.type.game
+  module:
+    - text
+id: node.game.field_opp_hc_notes
+field_name: field_opp_hc_notes
+entity_type: node
+bundle: game
+label: 'Opposing HC Notes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

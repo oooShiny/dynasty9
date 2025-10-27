@@ -1,0 +1,29 @@
+uuid: f727fff0-ba22-4dd7-aa67-c1ae45f9f5b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_drafting_team
+    - node.type.team
+    - paragraphs.paragraphs_type.draft_pick
+id: paragraph.draft_pick.field_drafting_team
+field_name: field_drafting_team
+entity_type: paragraph
+bundle: draft_pick
+label: 'Drafting Team'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      team: team
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

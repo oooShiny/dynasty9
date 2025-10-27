@@ -1,0 +1,22 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 13,1:00PM ET,boxscore,W,,1-0,,Cleveland Browns,38.0,6.0,23.0,381.0,270.0,111.0,1.0,20.0,306.0,168.0,138.0,3.0,16.62,8.32,8.64
+2,Sun,September 20,4:25PM ET,boxscore,W,,2-0,@,Houston Texans,33.0,16.0,23.0,407.0,177.0,230.0,,18.0,304.0,253.0,51.0,2.0,15.93,5.68,-3.2
+3,Mon,September 28,8:15PM ET,boxscore,L,,2-1,,Kansas City Chiefs,20.0,34.0,16.0,228.0,70.0,158.0,1.0,29.0,517.0,385.0,132.0,1.0,-4.74,-26.62,17.39
+4,Sun,October 4,1:00PM ET,boxscore,W,,3-1,@,Washington Football Team,31.0,17.0,18.0,350.0,206.0,144.0,2.0,24.0,343.0,274.0,69.0,1.0,8.74,-2.58,9.39
+5,Sun,October 11,1:00PM ET,boxscore,W,,4-1,,Cincinnati Bengals,27.0,3.0,17.0,332.0,171.0,161.0,1.0,12.0,205.0,135.0,70.0,3.0,2.28,28.69,-3.99
+6,Sun,October 18,1:00PM ET,boxscore,W,,5-1,@,Philadelphia Eagles,30.0,28.0,17.0,355.0,173.0,182.0,,19.0,364.0,170.0,194.0,1.0,-0.7,-1.83,9.68
+7,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+8,Sun,November 1,1:00PM ET,boxscore,L,,5-2,,Pittsburgh Steelers,24.0,28.0,25.0,457.0,192.0,265.0,4.0,19.0,221.0,173.0,48.0,1.0,3.94,-4.67,0.54
+9,Sun,November 8,1:00PM ET,boxscore,W,,6-2,@,Indianapolis Colts,24.0,10.0,19.0,266.0,156.0,110.0,1.0,20.0,339.0,227.0,112.0,2.0,-0.58,13.1,-1.45
+10,Sun,November 15,8:20PM ET,boxscore,L,,6-3,@,New England Patriots,17.0,23.0,19.0,357.0,242.0,115.0,1.0,25.0,308.0,135.0,173.0,,3.45,-13.95,1.86
+11,Sun,November 22,1:00PM ET,boxscore,L,OT,6-4,,Tennessee Titans,24.0,30.0,21.0,306.0,177.0,129.0,1.0,26.0,423.0,250.0,173.0,1.0,7.48,-13.91,-0.86
+12,Wed,December 2,3:40PM ET,boxscore,L,,6-5,@,Pittsburgh Steelers,14.0,19.0,10.0,219.0,90.0,129.0,2.0,22.0,334.0,266.0,68.0,2.0,-12.11,-2.03,10.71
+13,Tue,December 8,8:05PM ET,boxscore,W,,7-5,,Dallas Cowboys,34.0,17.0,19.0,401.0,107.0,294.0,1.0,29.0,388.0,277.0,111.0,1.0,19.5,-10.45,3.43
+14,Mon,December 14,8:15PM ET,boxscore,W,,8-5,@,Cleveland Browns,47.0,42.0,25.0,385.0,154.0,231.0,,33.0,493.0,355.0,138.0,1.0,24.92,-23.63,5.17
+15,Sun,December 20,1:00PM ET,boxscore,W,,9-5,,Jacksonville Jaguars,40.0,14.0,26.0,409.0,250.0,159.0,1.0,17.0,267.0,205.0,62.0,1.0,24.92,1.7,-0.13
+16,Sun,December 27,1:00PM ET,boxscore,W,,10-5,,New York Giants,27.0,13.0,25.0,432.0,183.0,249.0,1.0,24.0,269.0,215.0,54.0,,17.45,3.69,-5.16
+17,Sun,January 3,1:00PM ET,boxscore,W,,11-5,@,Cincinnati Bengals,38.0,3.0,24.0,525.0,121.0,404.0,1.0,10.0,195.0,48.0,147.0,2.0,24.61,14.61,-7.13
+,,Playoffs,,,,,,,,,,,,,,,,,,,,,,
+Wild Card,Sun,January 10,1:05PM ET,boxscore,W,,12-5,@,Tennessee Titans,20.0,13.0,22.0,401.0,165.0,236.0,1.0,12.0,209.0,158.0,51.0,1.0,10.95,2.51,-2.13
+Division,Sat,January 16,8:15PM ET,boxscore,L,,12-6,@,Buffalo Bills,3.0,17.0,19.0,340.0,190.0,150.0,1.0,17.0,220.0,188.0,32.0,,-14.36,3.68,-1.22

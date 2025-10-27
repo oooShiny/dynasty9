@@ -1,0 +1,11 @@
+uuid: c7b8875b-8ee7-4dad-ad73-41354d205e58
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.podcast_show_notes
+label: 'Podcast Show Notes'
+description: null
+targetEntityType: node
+cache: true

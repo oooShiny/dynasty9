@@ -1,0 +1,13 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Scrimmage,Scrimmage,Scrimmage,Scrimmage,Unnamed: 31_level_0,Unnamed: 32_level_0
+Rk,Player,Age,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,Touch,Y/Tch,YScm,RRTD,Fmb,Awards
+1.0,Isaac Redman,27.0,RB,1,1,17,121,0,7,58.8,32.0,7.1,121.0,17.0,2,2,21,10.5,0,0,50.0,12.0,2.0,21.0,100.0,10.5,19,7.5,142,0,0,
+2.0,Antonio Brown,23.0,WR,1,0,1,18,0,1,100.0,18.0,18.0,18.0,1.0,7,5,70,14.0,0,4,71.4,25.0,5.0,70.0,71.4,10.0,6,14.7,88,0,0,
+3.0,Emmanuel Sanders,24.0,WR,1,0,0,0,0,0,,,,0.0,0.0,8,6,81,13.5,0,3,75.0,18.0,6.0,81.0,75.0,10.1,6,13.5,81,0,0,
+4.0,Heath Miller,29.0,TE,1,1,0,0,0,0,,,,0.0,0.0,7,5,60,12.0,0,2,57.1,33.0,5.0,60.0,71.4,8.6,5,12.0,60,0,0,
+5.0,Jerricho Cotchery,29.0,WR,1,0,0,0,0,0,,,,0.0,0.0,2,1,31,31.0,1,1,50.0,31.0,1.0,31.0,50.0,15.5,1,31.0,31,1,0,
+6.0,Mike Wallace,25.0,WR,1,1,1,1,1,1,100.0,1.0,1.0,1.0,1.0,10,3,26,8.7,0,1,10.0,17.0,3.0,26.0,30.0,2.6,4,6.8,27,1,0,
+7.0,Ben Roethlisberger,29.0,QB,1,1,3,15,0,0,66.7,9.0,5.0,15.0,3.0,0,0,0,,0,0,,,0.0,0.0,,,3,5.0,15,0,1,
+8.0,John Clay,23.0,RB,1,0,1,1,0,0,0.0,1.0,1.0,1.0,1.0,0,0,0,,0,0,,,0.0,0.0,,,1,1.0,1,0,0,
+9.0,David Johnson,24.0,TE,1,1,0,0,0,0,,,,0.0,0.0,2,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,0,0,0,
+10.0,Hines Ward,35.0,WR,1,0,0,0,0,0,,,,0.0,0.0,2,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,0,,0,0,0,
+,Team Totals,,,1,1,23,156,1,9,60.9,32.0,6.8,156.0,23.0,40,22,289,13.1,1,11,45.0,33.0,22.0,289.0,55.0,7.2,45,9.9,445,2,1,

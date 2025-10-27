@@ -1,0 +1,19 @@
+uuid: e9891045-6f0a-4175-b292-c9de91a23405
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_opp_draft_picks
+field_name: field_opp_draft_picks
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

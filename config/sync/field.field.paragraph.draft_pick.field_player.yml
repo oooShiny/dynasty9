@@ -1,0 +1,29 @@
+uuid: b80387f4-1ad5-47a6-b4dc-d14ab4d55c10
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_player
+    - node.type.player
+    - paragraphs.paragraphs_type.draft_pick
+id: paragraph.draft_pick.field_player
+field_name: field_player
+entity_type: paragraph
+bundle: draft_pick
+label: Player
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      player: player
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

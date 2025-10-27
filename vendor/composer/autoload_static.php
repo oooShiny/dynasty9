@@ -32,6 +32,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        '941748b3c8cae4466c827dfb5ca9602a' => __DIR__ . '/..' . '/rmccue/requests/library/Deprecated.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -56,6 +57,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'Z' => 
         array (
             'ZipStream\\' => 10,
+        ),
+        'W' => 
+        array (
+            'WpOrg\\Requests\\' => 15,
         ),
         'T' => 
         array (
@@ -220,6 +225,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'WpOrg\\Requests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rmccue/requests/src',
         ),
         'Twig\\' => 
         array (
@@ -659,6 +668,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'PEAR_Error' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
         'PEAR_ErrorStack' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
         'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
+        'Requests' => __DIR__ . '/..' . '/rmccue/requests/library/Requests.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
         'SebastianBergmann\\Diff\\Chunk' => __DIR__ . '/..' . '/sebastian/diff/src/Chunk.php',
@@ -679,6 +689,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'SebastianBergmann\\Diff\\TimeEfficientLongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php',
         'Stringable' => __DIR__ . '/..' . '/marc-mabe/php-enum/stubs/Stringable.php',
         'System' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/System.php',
+        'WikiFile' => __DIR__ . '/..' . '/hamstar/wikimate/Wikimate.php',
+        'WikiPage' => __DIR__ . '/..' . '/hamstar/wikimate/Wikimate.php',
+        'Wikimate' => __DIR__ . '/..' . '/hamstar/wikimate/Wikimate.php',
+        'WikimateException' => __DIR__ . '/..' . '/hamstar/wikimate/Wikimate.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

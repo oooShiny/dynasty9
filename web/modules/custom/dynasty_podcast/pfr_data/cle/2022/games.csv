@@ -1,0 +1,20 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 11,1:00PM ET,boxscore,W,,1-0,@,Carolina Panthers,26.0,24.0,23.0,355.0,138.0,217.0,,15.0,261.0,207.0,54.0,1.0,6.82,-5.38,1.66
+2,Sun,September 18,1:00PM ET,boxscore,L,,1-1,,New York Jets,30.0,31.0,29.0,405.0,221.0,184.0,1.0,20.0,402.0,309.0,93.0,1.0,17.92,-15.19,-5.38
+3,Thu,September 22,8:15PM ET,boxscore,W,,2-1,,Pittsburgh Steelers,29.0,17.0,22.0,376.0,205.0,171.0,,20.0,308.0,204.0,104.0,1.0,10.79,1.19,0.62
+4,Sun,October 2,1:00PM ET,boxscore,L,,2-2,@,Atlanta Falcons,20.0,23.0,22.0,403.0,226.0,177.0,2.0,19.0,333.0,131.0,202.0,1.0,5.25,-5.92,-1.44
+5,Sun,October 9,1:00PM ET,boxscore,L,,2-3,,Los Angeles Chargers,28.0,30.0,27.0,443.0,230.0,213.0,1.0,26.0,465.0,227.0,238.0,,16.53,-16.01,-4.92
+6,Sun,October 16,1:00PM ET,boxscore,L,,2-4,,New England Patriots,15.0,38.0,16.0,328.0,258.0,70.0,4.0,20.0,399.0,301.0,98.0,1.0,-12.35,-11.3,0.09
+7,Sun,October 23,1:00PM ET,boxscore,L,,2-5,@,Baltimore Ravens,20.0,23.0,18.0,336.0,223.0,113.0,2.0,17.0,254.0,94.0,160.0,1.0,6.61,-1.58,-7.18
+8,Mon,October 31,8:15PM ET,boxscore,W,,3-5,,Cincinnati Bengals,32.0,13.0,24.0,440.0,268.0,172.0,2.0,15.0,229.0,193.0,36.0,2.0,15.92,3.49,2.71
+9,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+10,Sun,November 13,1:00PM ET,boxscore,L,,3-6,@,Miami Dolphins,17.0,39.0,20.0,297.0,185.0,112.0,1.0,29.0,491.0,296.0,195.0,,-1.04,-28.5,4.93
+11,Sun,November 20,1:00PM ET,boxscore,L,,3-7,@,Buffalo Bills,23.0,31.0,27.0,396.0,316.0,80.0,1.0,22.0,357.0,186.0,171.0,,10.86,-6.0,-13.72
+12,Sun,November 27,1:00PM ET,boxscore,W,OT,4-7,,Tampa Bay Buccaneers,23.0,17.0,22.0,367.0,178.0,189.0,1.0,16.0,325.0,229.0,96.0,,2.41,1.81,1.78
+13,Sun,December 4,1:00PM ET,boxscore,W,,5-7,@,Houston Texans,27.0,14.0,14.0,304.0,130.0,174.0,2.0,16.0,283.0,201.0,82.0,4.0,-13.96,23.84,5.52
+14,Sun,December 11,1:00PM ET,boxscore,L,,5-8,@,Cincinnati Bengals,10.0,23.0,18.0,344.0,273.0,71.0,1.0,23.0,363.0,227.0,136.0,1.0,-8.32,-7.01,3.29
+15,Sat,December 17,4:30PM ET,boxscore,W,,6-8,,Baltimore Ravens,13.0,3.0,19.0,283.0,140.0,143.0,,17.0,324.0,126.0,198.0,2.0,2.64,7.94,0.26
+16,Sat,December 24,1:00PM ET,boxscore,L,,6-9,,New Orleans Saints,10.0,17.0,15.0,249.0,125.0,124.0,1.0,14.0,244.0,92.0,152.0,1.0,-12.78,4.01,2.04
+17,Sun,January 1,1:00PM ET,boxscore,W,,7-9,@,Washington Commanders,24.0,10.0,16.0,301.0,155.0,146.0,,17.0,260.0,124.0,136.0,3.0,7.26,7.5,-0.54
+18,Sun,January 8,1:00PM ET,boxscore,L,,7-10,@,Pittsburgh Steelers,14.0,28.0,18.0,307.0,173.0,134.0,2.0,23.0,333.0,189.0,144.0,1.0,3.47,-10.81,-2.18

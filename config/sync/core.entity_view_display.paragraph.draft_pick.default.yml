@@ -1,0 +1,59 @@
+uuid: 6230578c-2a97-41a3-bbc6-4c99d538e648
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.draft_pick.field_drafting_team
+    - field.field.paragraph.draft_pick.field_player
+    - field.field.paragraph.draft_pick.field_player_name
+    - field.field.paragraph.draft_pick.field_player_position
+    - field.field.paragraph.draft_pick.field_season_int
+    - paragraphs.paragraphs_type.draft_pick
+id: paragraph.draft_pick.default
+targetEntityType: paragraph
+bundle: draft_pick
+mode: default
+content:
+  field_drafting_team:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_player:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_player_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_player_position:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_season_int:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  search_api_excerpt: true

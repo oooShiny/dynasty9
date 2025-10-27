@@ -1,0 +1,22 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 8,1:06PM ET,boxscore,W,,1-0,,Philadelphia Eagles,27.0,24.0,22.0,328.0,267.0,61.0,4.0,17.0,261.0,181.0,80.0,3.0,3.0,8.59,-8.8
+2,Sun,September 15,1:02PM ET,boxscore,L,,1-1,@,Dallas Cowboys,13.0,21.0,19.0,333.0,235.0,98.0,1.0,14.0,297.0,230.0,67.0,,-10.71,-2.85,3.81
+3,Sun,September 22,1:03PM ET,boxscore,L,OT,1-2,,Cleveland Browns,28.0,31.0,13.0,187.0,101.0,86.0,,26.0,403.0,311.0,92.0,4.0,-1.78,-4.38,2.31
+4,Sun,September 29,4:15PM ET,boxscore,L,,1-3,@,Oakland Raiders,25.0,52.0,23.0,430.0,387.0,43.0,4.0,24.0,464.0,374.0,90.0,1.0,-23.7,-2.23,-0.79
+5,Sun,October 6,1:03PM ET,boxscore,L,,1-4,,Washington Redskins,14.0,31.0,17.0,289.0,230.0,59.0,4.0,25.0,442.0,286.0,156.0,,-5.84,-19.74,5.61
+6,Sun,October 13,4:03PM ET,boxscore,W,,2-4,,Jacksonville Jaguars,23.0,14.0,25.0,370.0,218.0,152.0,1.0,13.0,198.0,68.0,130.0,2.0,10.02,0.75,-1.86
+7,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+8,Sun,October 27,1:02PM ET,boxscore,W,,3-4,@,Cincinnati Bengals,30.0,24.0,20.0,342.0,208.0,134.0,1.0,22.0,384.0,193.0,191.0,1.0,10.48,-13.32,6.12
+9,Sun,November 3,1:00PM ET,boxscore,W,,4-4,@,Indianapolis Colts,23.0,15.0,13.0,198.0,77.0,121.0,,25.0,378.0,298.0,80.0,3.0,-3.38,13.71,6.23
+10,Sun,November 10,1:03PM ET,boxscore,W,,5-4,,Houston Texans,17.0,10.0,15.0,251.0,109.0,142.0,2.0,13.0,233.0,165.0,68.0,3.0,-8.61,22.15,-5.54
+11,Sun,November 17,1:03PM ET,boxscore,W,,6-4,,Pittsburgh Steelers,31.0,23.0,22.0,378.0,257.0,121.0,1.0,20.0,357.0,312.0,45.0,3.0,4.17,-2.13,8.61
+12,Sun,November 24,1:02PM ET,boxscore,L,,6-5,@,Baltimore Ravens,12.0,13.0,19.0,402.0,281.0,121.0,4.0,12.0,199.0,87.0,112.0,2.0,-13.33,18.43,-7.92
+13,Sun,December 1,1:03PM ET,boxscore,W,OT,7-5,@,New York Giants,32.0,29.0,31.0,476.0,334.0,142.0,1.0,24.0,345.0,283.0,62.0,,20.69,-12.84,-3.93
+14,Sun,December 8,1:03PM ET,boxscore,W,,8-5,,Indianapolis Colts,27.0,17.0,18.0,348.0,229.0,119.0,1.0,22.0,389.0,297.0,92.0,3.0,12.73,-10.8,8.59
+15,Mon,December 16,9:08PM ET,boxscore,W,,9-5,,New England Patriots,24.0,7.0,20.0,365.0,127.0,238.0,1.0,11.0,176.0,120.0,56.0,2.0,8.91,13.07,-6.46
+16,Sun,December 22,1:03PM ET,boxscore,W,,10-5,@,Jacksonville Jaguars,28.0,10.0,20.0,298.0,123.0,175.0,,13.0,214.0,139.0,75.0,1.0,5.42,16.41,-5.43
+17,Sun,December 29,1:03PM ET,boxscore,W,,11-5,@,Houston Texans,13.0,3.0,15.0,277.0,137.0,140.0,,16.0,224.0,196.0,28.0,1.0,-6.7,11.48,4.63
+,,Playoffs,,,,,,,,,,,,,,,,,,,,,,
+Division,Sat,January 11,4:36PM ET,boxscore,W,OT,12-5,,Pittsburgh Steelers,34.0,31.0,29.0,430.0,331.0,99.0,4.0,21.0,324.0,257.0,67.0,1.0,8.8,-2.88,-1.92
+Conf. Champ.,Sun,January 19,6:47PM ET,boxscore,L,,12-6,@,Oakland Raiders,24.0,41.0,28.0,312.0,174.0,138.0,2.0,25.0,375.0,286.0,89.0,1.0,5.39,-15.54,-6.0

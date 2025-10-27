@@ -1,0 +1,24 @@
+uuid: b2fbb92a-216b-45eb-908d-39d8122eb43d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_defensive_leaders
+    - filter.format.full_html
+    - node.type.game
+  module:
+    - text
+id: node.game.field_defensive_leaders
+field_name: field_defensive_leaders
+entity_type: node
+bundle: game
+label: 'Defensive Leaders'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

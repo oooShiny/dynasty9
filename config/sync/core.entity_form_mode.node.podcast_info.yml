@@ -1,0 +1,11 @@
+uuid: 3ff49a86-c4c1-4315-b220-20c246ad3cdd
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.podcast_info
+label: 'Podcast Info'
+description: 'Form mode for editing podcast-related information on Game nodes.'
+targetEntityType: node
+cache: true

@@ -1,0 +1,23 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 10,1:00PM ET,boxscore,L,,0-1,@,Baltimore Ravens,9.0,25.0,18.0,268.0,196.0,72.0,1.0,18.0,265.0,155.0,110.0,2.0,-15.24,0.55,0.49
+2,Sun,September 17,1:00PM ET,boxscore,L,,0-2,,Indianapolis Colts,20.0,31.0,24.0,389.0,337.0,52.0,1.0,19.0,353.0,227.0,126.0,,7.88,-14.21,-4.04
+3,Sun,September 24,1:00PM ET,boxscore,W,,1-2,@,Jacksonville Jaguars,37.0,17.0,15.0,366.0,280.0,86.0,,22.0,404.0,288.0,116.0,2.0,13.65,-3.88,10.46
+4,Sun,October 1,1:00PM ET,boxscore,W,,2-2,,Pittsburgh Steelers,30.0,6.0,24.0,451.0,312.0,139.0,,12.0,225.0,111.0,114.0,1.0,15.66,8.54,-2.59
+5,Sun,October 8,1:00PM ET,boxscore,L,,2-3,@,Atlanta Falcons,19.0,21.0,17.0,313.0,249.0,64.0,,26.0,447.0,351.0,96.0,2.0,2.73,-6.01,1.01
+6,Sun,October 15,1:00PM ET,boxscore,W,,3-3,,New Orleans Saints,20.0,13.0,19.0,297.0,177.0,120.0,1.0,24.0,430.0,341.0,89.0,2.0,8.1,-5.96,3.91
+7,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+8,Sun,October 29,1:00PM ET,boxscore,L,,3-4,@,Carolina Panthers,13.0,15.0,16.0,229.0,119.0,110.0,1.0,20.0,224.0,180.0,44.0,,-3.6,-0.91,2.13
+9,Sun,November 5,1:00PM ET,boxscore,W,,4-4,,Tampa Bay Buccaneers,39.0,37.0,26.0,496.0,443.0,53.0,1.0,21.0,332.0,251.0,81.0,1.0,16.65,-13.23,-5.81
+10,Sun,November 12,1:00PM ET,boxscore,W,,5-4,@,Cincinnati Bengals,30.0,27.0,28.0,544.0,356.0,188.0,3.0,20.0,380.0,314.0,66.0,2.0,13.25,-4.94,-4.46
+11,Sun,November 19,1:00PM ET,boxscore,W,,6-4,,Arizona Cardinals,21.0,16.0,22.0,419.0,308.0,111.0,3.0,20.0,319.0,196.0,123.0,2.0,4.22,1.11,-0.49
+12,Sun,November 26,1:00PM ET,boxscore,L,,6-5,,Jacksonville Jaguars,21.0,24.0,19.0,352.0,261.0,91.0,,22.0,445.0,364.0,81.0,1.0,8.2,-13.92,-3.64
+13,Sun,December 3,1:00PM ET,boxscore,W,,7-5,,Denver Broncos,22.0,17.0,14.0,353.0,264.0,89.0,,16.0,282.0,164.0,118.0,3.0,-1.15,4.63,0.91
+14,Sun,December 10,1:00PM ET,boxscore,L,,7-6,@,New York Jets,6.0,30.0,10.0,135.0,54.0,81.0,,20.0,347.0,268.0,79.0,1.0,-22.37,-2.85,3.08
+15,Sun,December 17,1:00PM ET,boxscore,W,OT,8-6,@,Tennessee Titans,19.0,16.0,21.0,340.0,192.0,148.0,1.0,14.0,204.0,138.0,66.0,1.0,-9.0,8.62,3.38
+16,Sun,December 24,1:00PM ET,boxscore,L,,8-7,,Cleveland Browns,22.0,36.0,20.0,250.0,178.0,72.0,2.0,26.0,418.0,364.0,54.0,2.0,-9.69,-12.38,8.56
+17,Sun,December 31,1:00PM ET,boxscore,W,,9-7,,Tennessee Titans,26.0,3.0,20.0,312.0,201.0,111.0,,11.0,187.0,134.0,53.0,1.0,3.77,18.77,-1.45
+18,Sat,January 6,8:15PM ET,boxscore,W,,10-7,@,Indianapolis Colts,23.0,19.0,16.0,306.0,246.0,60.0,,21.0,360.0,133.0,227.0,1.0,5.93,-3.98,-1.85
+,,Playoffs,,,,,,,,,,,,,,,,,,,,,,
+Wild Card,Sat,January 13,4:30PM ET,boxscore,W,,11-7,,Cleveland Browns,45.0,14.0,14.0,356.0,280.0,76.0,,18.0,324.0,268.0,56.0,2.0,15.45,19.5,-3.91
+Division,Sat,January 20,4:30PM ET,boxscore,L,,11-8,@,Baltimore Ravens,10.0,34.0,10.0,213.0,175.0,38.0,,22.0,352.0,123.0,229.0,,-10.33,-15.37,2.77

@@ -1,0 +1,23 @@
+uuid: 51d44e60-2cc8-4d19-923f-1e315f8ce2be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_season_int
+    - paragraphs.paragraphs_type.draft_pick
+id: paragraph.draft_pick.field_season_int
+field_name: field_season_int
+entity_type: paragraph
+bundle: draft_pick
+label: Season
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

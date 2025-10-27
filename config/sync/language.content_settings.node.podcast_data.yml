@@ -1,0 +1,11 @@
+uuid: 57091004-d1aa-4390-a380-0382a922880d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.podcast_data
+id: node.podcast_data
+target_entity_type_id: node
+target_bundle: podcast_data
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,23 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 8,4:26PM ET,boxscore,W,,1-0,,Green Bay Packers,34.0,28.0,23.0,494.0,404.0,90.0,,23.0,385.0,322.0,63.0,2.0,18.21,-8.49,-3.29
+2,Sun,September 15,8:31PM ET,boxscore,L,,1-1,@,Seattle Seahawks,3.0,29.0,12.0,207.0,107.0,100.0,5.0,19.0,290.0,118.0,172.0,1.0,-25.9,2.01,-3.35
+3,Sun,September 22,4:25PM ET,boxscore,L,,1-2,,Indianapolis Colts,7.0,27.0,14.0,254.0,139.0,115.0,2.0,23.0,336.0,152.0,184.0,,-7.16,-12.26,-0.58
+4,Thu,September 26,8:25PM ET,boxscore,W,,2-2,@,St. Louis Rams,35.0,11.0,19.0,370.0,151.0,219.0,2.0,14.0,188.0,170.0,18.0,2.0,3.33,24.26,-4.15
+5,Sun,October 6,8:31PM ET,boxscore,W,,3-2,,Houston Texans,34.0,3.0,17.0,284.0,107.0,177.0,,17.0,313.0,182.0,131.0,4.0,4.7,19.21,4.81
+6,Sun,October 13,4:25PM ET,boxscore,W,,4-2,,Arizona Cardinals,32.0,20.0,20.0,387.0,238.0,149.0,2.0,16.0,403.0,294.0,109.0,4.0,-1.25,9.22,1.87
+7,Sun,October 20,4:06PM ET,boxscore,W,,5-2,@,Tennessee Titans,31.0,17.0,19.0,349.0,196.0,153.0,,15.0,368.0,298.0,70.0,2.0,10.28,-3.66,9.9
+8,Sun,October 27,1:07PM ET,boxscore,W,,6-2,@,Jacksonville Jaguars,42.0,10.0,25.0,398.0,177.0,221.0,1.0,20.0,318.0,228.0,90.0,1.0,20.89,8.1,-1.73
+9,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+10,Sun,November 10,4:05PM ET,boxscore,L,,6-3,,Carolina Panthers,9.0,10.0,10.0,151.0,46.0,105.0,2.0,15.0,250.0,141.0,109.0,2.0,-22.93,9.9,8.81
+11,Sun,November 17,4:25PM ET,boxscore,L,,6-4,@,New Orleans Saints,20.0,23.0,12.0,196.0,115.0,81.0,1.0,23.0,387.0,295.0,92.0,3.0,-5.76,-5.14,8.17
+12,Mon,November 25,8:40PM ET,boxscore,W,,7-4,@,Washington Redskins,27.0,6.0,15.0,304.0,228.0,76.0,1.0,10.0,190.0,76.0,114.0,1.0,-0.61,21.95,1.46
+13,Sun,December 1,4:05PM ET,boxscore,W,,8-4,,St. Louis Rams,23.0,13.0,20.0,338.0,255.0,83.0,1.0,19.0,312.0,198.0,114.0,1.0,4.47,7.54,-2.6
+14,Sun,December 8,4:26PM ET,boxscore,W,,9-4,,Seattle Seahawks,19.0,17.0,19.0,318.0,155.0,163.0,1.0,13.0,264.0,178.0,86.0,1.0,-0.82,-2.16,6.78
+15,Sun,December 15,1:02PM ET,boxscore,W,,10-4,@,Tampa Bay Buccaneers,33.0,14.0,22.0,376.0,189.0,187.0,,13.0,183.0,144.0,39.0,2.0,6.43,8.69,5.75
+16,Mon,December 23,8:40PM ET,boxscore,W,,11-4,,Atlanta Falcons,34.0,24.0,20.0,379.0,180.0,199.0,,25.0,402.0,341.0,61.0,2.0,18.81,0.67,-8.48
+17,Sun,December 29,4:25PM ET,boxscore,W,,12-4,@,Arizona Cardinals,23.0,20.0,19.0,375.0,292.0,83.0,,19.0,482.0,399.0,83.0,2.0,3.12,-5.55,5.89
+,,Playoffs,,,,,,,,,,,,,,,,,,,,,,
+Wild Card,Sun,January 5,4:40PM ET,boxscore,W,,13-4,@,Green Bay Packers,23.0,20.0,22.0,381.0,214.0,167.0,1.0,18.0,281.0,157.0,124.0,,11.98,-5.14,-3.84
+Division,Sun,January 12,1:05PM ET,boxscore,W,,14-4,@,Carolina Panthers,23.0,10.0,21.0,315.0,189.0,126.0,,18.0,325.0,232.0,93.0,2.0,11.99,-2.72,1.23
+Conf. Champ.,Sun,January 19,6:42PM ET,boxscore,L,,14-5,@,Seattle Seahawks,17.0,23.0,16.0,308.0,147.0,161.0,3.0,14.0,308.0,193.0,115.0,1.0,-2.26,6.2,-7.65

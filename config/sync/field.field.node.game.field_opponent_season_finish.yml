@@ -1,0 +1,27 @@
+uuid: 80fdc710-5b55-4cb4-a4dd-9114109d28eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opponent_season_finish
+    - filter.format.full_html
+    - node.type.game
+  module:
+    - text
+id: node.game.field_opponent_season_finish
+field_name: field_opponent_season_finish
+entity_type: node
+bundle: game
+label: 'Opponent Season Finish'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<p><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-style:normal;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Finish season 10-6</span></p><ul><li><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-style:normal;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">2nd in AFC East</span></li><li><span style="background-color:transparent;color:#000000;font-family:Arial,sans-serif;font-size:11pt;font-style:normal;font-variant:normal;font-weight:400;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Lost Wild Card Playoffs (at Patriots) 16–37</span></li></ul>'
+    format: full_html
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

@@ -1,0 +1,14 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Rushing,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Receiving,Scrimmage,Scrimmage,Scrimmage,Scrimmage,Unnamed: 31_level_0,Unnamed: 32_level_0
+Rk,Player,Age,Pos,G,GS,Att,Yds,TD,1D,Succ%,Lng,Y/A,Y/G,A/G,Tgt,Rec,Yds,Y/R,TD,1D,Succ%,Lng,R/G,Y/G,Ctch%,Y/Tgt,Touch,Y/Tch,YScm,RRTD,Fmb,Awards
+1.0,Allen Robinson,25.0,WR,1,1,0,0,0,0,,,,0.0,0.0,13,10,143,14.3,1,5,69.2,45.0,10.0,143.0,76.9,11.0,10,14.3,143,1,0,
+2.0,Taylor Gabriel,27.0,WR,1,1,2,20,0,1,50.0,21.0,10.0,20.0,2.0,9,4,37,9.3,0,3,33.3,19.0,4.0,37.0,44.4,4.1,6,9.5,57,0,0,
+3.0,Jordan Howard,24.0,RB,1,1,10,35,0,2,50.0,12.0,3.5,35.0,10.0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,10,3.5,35,0,0,
+4.0,Josh Bellamy,29.0,WR,1,0,0,0,0,0,,,,0.0,0.0,1,1,34,34.0,0,1,100.0,34.0,1.0,34.0,100.0,34.0,1,34.0,34,0,0,
+5.0,Anthony Miller,24.0,WR,1,0,0,0,0,0,,,,0.0,0.0,5,3,34,11.3,0,2,40.0,23.0,3.0,34.0,60.0,6.8,3,11.3,34,0,0,
+6.0,Tarik Cohen,23.0,RB,1,0,1,0,0,0,0.0,,0.0,0.0,1.0,5,3,27,9.0,0,1,20.0,19.0,3.0,27.0,60.0,5.4,4,6.8,27,0,0,
+7.0,Ben Braunecker,24.0,TE,1,1,0,0,0,0,,,,0.0,0.0,2,2,15,7.5,0,0,100.0,9.0,2.0,15.0,100.0,7.5,2,7.5,15,0,0,
+8.0,Adam Shaheen,24.0,TE,1,1,0,0,0,0,,,,0.0,0.0,4,3,13,4.3,0,0,0.0,7.0,3.0,13.0,75.0,3.3,3,4.3,13,0,0,
+9.0,Mitchell Trubisky,24.0,QB,1,1,3,9,0,0,0.0,6.0,3.0,9.0,3.0,0,0,0,,0,0,,,0.0,0.0,,,3,3.0,9,0,0,
+10.0,Benny Cunningham,28.0,RB,1,0,1,2,0,0,0.0,2.0,2.0,2.0,1.0,0,0,0,,0,0,,,0.0,0.0,,,1,2.0,2,0,0,
+11.0,Taquan Mizzell,25.0,RB,1,0,1,-1,0,0,0.0,-1.0,-1.0,-1.0,1.0,1,0,0,,0,0,0.0,,0.0,0.0,0.0,0.0,1,-1.0,-1,0,0,
+,Team Totals,,,1,1,18,65,0,3,33.3,21.0,3.6,65.0,18.0,41,26,303,11.7,1,12,43.9,45.0,26.0,303.0,63.4,7.4,44,8.4,368,1,0,

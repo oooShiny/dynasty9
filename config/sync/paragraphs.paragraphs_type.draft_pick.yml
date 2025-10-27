@@ -1,0 +1,10 @@
+uuid: a43d6fb1-ad12-4f46-bf26-7ba870eb9b3f
+langcode: en
+status: true
+dependencies: {  }
+id: draft_pick
+label: 'Draft Pick'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

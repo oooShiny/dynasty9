@@ -1,0 +1,20 @@
+Unnamed: 0_level_0,Unnamed: 1_level_0,Unnamed: 2_level_0,Unnamed: 3_level_0,Unnamed: 4_level_0,Unnamed: 5_level_0,Unnamed: 6_level_0,Unnamed: 7_level_0,Unnamed: 8_level_0,Unnamed: 9_level_0,Score,Score,Offense,Offense,Offense,Offense,Offense,Defense,Defense,Defense,Defense,Defense,Expected Points,Expected Points,Expected Points
+Week,Day,Date,Unnamed: 3_level_1,Unnamed: 4_level_1,Unnamed: 5_level_1,OT,Rec,Unnamed: 8_level_1,Opp,Tm,Opp,1stD,TotYd,PassY,RushY,TO,1stD,TotYd,PassY,RushY,TO,Offense,Defense,Sp. Tms
+1,Sun,September 12,4:25PM ET,boxscore,W,,1-0,@,New York Giants,27.0,13.0,24.0,420.0,255.0,165.0,1.0,19.0,314.0,254.0,60.0,1.0,20.31,-3.89,-3.35
+2,Sun,September 19,1:00PM ET,boxscore,W,,2-0,@,Jacksonville Jaguars,23.0,13.0,22.0,398.0,302.0,96.0,,12.0,189.0,114.0,75.0,2.0,13.99,2.8,2.29
+3,Sun,September 26,4:05PM ET,boxscore,W,,3-0,,New York Jets,26.0,0.0,23.0,343.0,223.0,120.0,1.0,11.0,162.0,119.0,43.0,2.0,4.68,27.58,-1.98
+4,Sun,October 3,4:25PM ET,boxscore,L,,3-1,,Baltimore Ravens,7.0,23.0,15.0,254.0,148.0,106.0,1.0,20.0,406.0,304.0,102.0,,-10.92,-3.9,-1.59
+5,Sun,October 10,1:00PM ET,boxscore,L,,3-2,@,Pittsburgh Steelers,19.0,27.0,17.0,374.0,268.0,106.0,1.0,19.0,391.0,244.0,147.0,1.0,5.37,-11.44,-1.98
+6,Sun,October 17,4:25PM ET,boxscore,L,,3-3,,Las Vegas Raiders,24.0,34.0,25.0,421.0,309.0,112.0,4.0,16.0,426.0,340.0,86.0,,2.97,-16.95,1.18
+7,Thu,October 21,8:20PM ET,boxscore,L,,3-4,@,Cleveland Browns,14.0,17.0,15.0,223.0,182.0,41.0,1.0,23.0,376.0,194.0,182.0,,4.39,-13.24,1.9
+8,Sun,October 31,4:25PM ET,boxscore,W,,4-4,,Washington Football Team,17.0,10.0,17.0,273.0,190.0,83.0,1.0,21.0,342.0,230.0,112.0,2.0,5.1,-1.75,2.71
+9,Sun,November 7,1:00PM ET,boxscore,W,,5-4,@,Dallas Cowboys,30.0,16.0,23.0,407.0,217.0,190.0,,14.0,290.0,212.0,78.0,2.0,12.79,5.92,-1.79
+10,Sun,November 14,4:25PM ET,boxscore,L,,5-5,,Philadelphia Eagles,13.0,30.0,17.0,308.0,212.0,96.0,1.0,22.0,386.0,170.0,216.0,1.0,-6.62,-8.45,0.91
+11,,,,,,,,,Bye Week,,,,,,,,,,,,,,,
+12,Sun,November 28,4:05PM ET,boxscore,W,,6-5,,Los Angeles Chargers,28.0,13.0,23.0,302.0,155.0,147.0,1.0,20.0,357.0,285.0,72.0,2.0,12.16,6.58,1.43
+13,Sun,December 5,8:20PM ET,boxscore,L,,6-6,@,Kansas City Chiefs,9.0,22.0,22.0,404.0,250.0,154.0,3.0,15.0,267.0,178.0,89.0,1.0,-8.21,4.04,-5.89
+14,Sun,December 12,4:05PM ET,boxscore,W,,7-6,,Detroit Lions,38.0,10.0,25.0,358.0,174.0,184.0,,17.0,316.0,198.0,118.0,2.0,22.94,4.61,-1.05
+15,Sun,December 19,4:05PM ET,boxscore,L,,7-7,,Cincinnati Bengals,10.0,15.0,19.0,292.0,159.0,133.0,1.0,12.0,249.0,136.0,113.0,,-7.29,4.53,-5.22
+16,Sun,December 26,4:25PM ET,boxscore,L,,7-8,@,Las Vegas Raiders,13.0,17.0,8.0,158.0,140.0,18.0,,22.0,342.0,182.0,160.0,3.0,-7.14,0.46,2.09
+17,Sun,January 2,4:05PM ET,boxscore,L,,7-9,@,Los Angeles Chargers,13.0,34.0,18.0,319.0,236.0,83.0,1.0,21.0,341.0,237.0,104.0,,-7.8,-15.09,-1.0
+18,Sat,January 8,4:30PM ET,boxscore,L,,7-10,,Kansas City Chiefs,24.0,28.0,18.0,364.0,173.0,191.0,1.0,28.0,390.0,255.0,135.0,,4.6,-17.95,5.59

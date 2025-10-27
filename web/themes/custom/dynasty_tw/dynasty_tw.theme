@@ -16,6 +16,26 @@ function dynasty_tw_suggestions_page_alter(array &$suggestions, array $variables
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK().
+ *
+ * Add views field template suggestions.
+ *
+ * @inheritdoc
+ */
+function dynasty_tw_theme_suggestions_views_view_field(array $variables) {
+  return [
+    'views_view_field__' . $variables['field']->field
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function dynasty_tw_theme_suggestions_views_view_field_alter(array &$suggestions, array &$variables) {
+  $suggestions[] = 'views_view_field__' . $variables['field']->field;
+}
+
+/**
  * Implements hook_preprocess_field().
  */
 function dynasty_tw_preprocess_field(&$variables) {
@@ -144,7 +164,7 @@ function dynasty_tw_preprocess_node(&$variables) {
       }
 
 
-      // Create pro-football-reference and NFL Gamepass links.
+      // Create pro-football-reference and Wikipedia links.
       $game_date = new DateTime($node->get('field_date')->value);
       $gp_date = $game_date->format('mdY');
       $gp_opp = explode(' ', $opp->getTitle());
@@ -162,7 +182,6 @@ function dynasty_tw_preprocess_node(&$variables) {
         $variables['schema_state'] = $game_location['state'];
       }
       $variables['season'] = intval($game_season);
-      $variables['gamepass_link'] = 'https://gamepass.nfl.com/game/'.$gp_away.'-at-'.$gp_home.'-on-' . $gp_date;
 
       // Schema.org formatting.
       $variables['schema_date'] = $game_date->format('c');
@@ -313,6 +332,16 @@ function dynasty_tw_views_pre_render(ViewExecutable $view) {
   }
 }
 
+/**
+ * Implements template_preprocess_views_view_field().
+ */
+function dynasty_tw_preprocess_views_view_field(&$variables) {
+  $view = $variables['view'];
+  if ($view->id() == 'podcast_show_notes' && $view->current_display == 'block_1') {
+    $variables['attributes']['class'][] = 'bg-blue-pats p-2 w-fit';
+    $variables['content_attributes']['class'][] = 'text-3xl uppercase font-thin text-white';
+  }
+}
 /**
  * Implements hook_preprocess_views_view_table().
  */

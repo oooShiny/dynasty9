@@ -1,0 +1,14 @@
+uuid: 8418fa0d-2604-448e-b3f7-7527abc3e10d
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.podcast
+  module:
+    - user
+id: user_remove_role_action.podcast
+label: 'Remove the Podcast role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: podcast

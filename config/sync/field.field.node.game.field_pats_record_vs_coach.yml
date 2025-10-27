@@ -1,0 +1,28 @@
+uuid: 02d2d2a2-e446-4d5e-a11a-8c19f9bd24b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pats_record_vs_coach
+    - node.type.game
+  module:
+    - link
+id: node.game.field_pats_record_vs_coach
+field_name: field_pats_record_vs_coach
+entity_type: node
+bundle: game
+label: 'Pats Record vs Coach'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    attributes: {  }
+    uri: 'internal:/search/games'
+    title: 'Patriots are 0-0 against Coach led teams'
+    options: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 1
+field_type: link

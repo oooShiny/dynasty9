@@ -1,0 +1,17 @@
+uuid: 4b64962c-2f96-4286-bfac-3b3202f531c5
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Podcast Data'
+type: podcast_data
+description: null
+help: null
+new_revision: false
+preview_mode: 0
+display_submitted: false

@@ -47,6 +47,7 @@ return array(
     'PEAR_Error' => $vendorDir . '/pear/pear-core-minimal/src/PEAR.php',
     'PEAR_ErrorStack' => $vendorDir . '/pear/pear-core-minimal/src/PEAR/ErrorStack.php',
     'PEAR_Exception' => $vendorDir . '/pear/pear_exception/PEAR/Exception.php',
+    'Requests' => $vendorDir . '/rmccue/requests/library/Requests.php',
     'ReturnTypeWillChange' => $vendorDir . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
     'SQLite3Exception' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
     'SebastianBergmann\\Diff\\Chunk' => $vendorDir . '/sebastian/diff/src/Chunk.php',
@@ -67,4 +68,8 @@ return array(
     'SebastianBergmann\\Diff\\TimeEfficientLongestCommonSubsequenceCalculator' => $vendorDir . '/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php',
     'Stringable' => $vendorDir . '/marc-mabe/php-enum/stubs/Stringable.php',
     'System' => $vendorDir . '/pear/pear-core-minimal/src/System.php',
+    'WikiFile' => $vendorDir . '/hamstar/wikimate/Wikimate.php',
+    'WikiPage' => $vendorDir . '/hamstar/wikimate/Wikimate.php',
+    'Wikimate' => $vendorDir . '/hamstar/wikimate/Wikimate.php',
+    'WikimateException' => $vendorDir . '/hamstar/wikimate/Wikimate.php',
 );

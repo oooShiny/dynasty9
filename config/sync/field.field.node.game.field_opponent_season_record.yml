@@ -1,0 +1,19 @@
+uuid: 7fbae2f0-4fe7-417f-b253-5759a60d0846
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opponent_season_record
+    - node.type.game
+id: node.game.field_opponent_season_record
+field_name: field_opponent_season_record
+entity_type: node
+bundle: game
+label: 'Opponent Season Record'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

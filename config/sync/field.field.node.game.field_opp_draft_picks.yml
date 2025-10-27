@@ -1,0 +1,24 @@
+uuid: 2c35af28-19ec-4f78-8efc-ad30918a253a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_opp_draft_picks
+    - filter.format.full_html
+    - node.type.game
+  module:
+    - text
+id: node.game.field_opp_draft_picks
+field_name: field_opp_draft_picks
+entity_type: node
+bundle: game
+label: 'Opponent Draft Picks'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

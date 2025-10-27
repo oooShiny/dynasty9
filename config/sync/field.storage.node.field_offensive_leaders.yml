@@ -1,0 +1,19 @@
+uuid: 9fba9c75-1617-4cee-8e34-7dd41955409d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_offensive_leaders
+field_name: field_offensive_leaders
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

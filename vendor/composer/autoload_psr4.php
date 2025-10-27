@@ -13,6 +13,7 @@ return array(
     'dekor\\' => array($vendorDir . '/dekor/php-array-table/src'),
     'cweagans\\Composer\\' => array($vendorDir . '/cweagans/composer-patches/src'),
     'ZipStream\\' => array($vendorDir . '/maennchen/zipstream-php/src'),
+    'WpOrg\\Requests\\' => array($vendorDir . '/rmccue/requests/src'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'TwigStorybook\\Tests\\' => array($vendorDir . '/e0ipso/twig-storybook/tests/src'),
     'TwigStorybook\\' => array($vendorDir . '/e0ipso/twig-storybook/src'),

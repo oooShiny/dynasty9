@@ -1,0 +1,383 @@
+uuid: 20224037-62c2-4ace-8c8c-53894a9e47dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.podcast_info
+    - field.field.node.game.field_after_bye
+    - field.field.node.game.field_belichick_hoodie
+    - field.field.node.game.field_brady_attempts
+    - field.field.node.game.field_brady_completions
+    - field.field.node.game.field_brady_ints
+    - field.field.node.game.field_brady_played
+    - field.field.node.game.field_brady_tds
+    - field.field.node.game.field_brady_yards
+    - field.field.node.game.field_date
+    - field.field.node.game.field_defensive_leaders
+    - field.field.node.game.field_game_links
+    - field.field.node.game.field_game_summary
+    - field.field.node.game.field_game_video
+    - field.field.node.game.field_highlight_video_url
+    - field.field.node.game.field_home_away
+    - field.field.node.game.field_meta_tags
+    - field.field.node.game.field_month
+    - field.field.node.game.field_offensive_leaders
+    - field.field.node.game.field_opp_dc
+    - field.field.node.game.field_opp_draft_picks
+    - field.field.node.game.field_opp_hc_notes
+    - field.field.node.game.field_opp_oc
+    - field.field.node.game.field_opp_ot
+    - field.field.node.game.field_opp_pro_bowlers
+    - field.field.node.game.field_opp_q1
+    - field.field.node.game.field_opp_q2
+    - field.field.node.game.field_opp_q3
+    - field.field.node.game.field_opp_q4
+    - field.field.node.game.field_opponent
+    - field.field.node.game.field_opponent_pfr
+    - field.field.node.game.field_opponent_score
+    - field.field.node.game.field_opponent_season_finish
+    - field.field.node.game.field_opponent_season_record
+    - field.field.node.game.field_opponent_team_ranks
+    - field.field.node.game.field_opponent_wikipedia
+    - field.field.node.game.field_opposing_coach
+    - field.field.node.game.field_ot
+    - field.field.node.game.field_other_qbs
+    - field.field.node.game.field_over_under
+    - field.field.node.game.field_passer_rating
+    - field.field.node.game.field_patriots_dc
+    - field.field.node.game.field_patriots_head_coach
+    - field.field.node.game.field_patriots_oc
+    - field.field.node.game.field_patriots_score
+    - field.field.node.game.field_pats_ot
+    - field.field.node.game.field_pats_q1
+    - field.field.node.game.field_pats_q2
+    - field.field.node.game.field_pats_q3
+    - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_pats_record_vs_coach
+    - field.field.node.game.field_pfr_link
+    - field.field.node.game.field_playoff_game
+    - field.field.node.game.field_result
+    - field.field.node.game.field_score_differential
+    - field.field.node.game.field_season
+    - field.field.node.game.field_starting_qb
+    - field.field.node.game.field_surf
+    - field.field.node.game.field_temperature
+    - field.field.node.game.field_uniform
+    - field.field.node.game.field_vegas_line
+    - field.field.node.game.field_week
+    - field.field.node.game.field_weekday
+    - field.field.node.game.field_youtube_highlights
+    - node.type.game
+  module:
+    - datetime
+    - field_group
+    - link
+    - path
+    - select2
+    - text
+third_party_settings:
+  field_group:
+    group_opponent_info:
+      children:
+        - field_opponent
+        - field_opponent_pfr
+        - field_opponent_wikipedia
+        - field_opponent_season_record
+        - field_opponent_season_finish
+        - field_opp_pro_bowlers
+        - field_opp_draft_picks
+        - group_coaching_staff
+      label: 'Opponent Info'
+      region: content
+      parent_name: ''
+      weight: 5
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: true
+        description: ''
+        required_fields: true
+    group_coaching_staff:
+      children:
+        - field_pats_record_vs_coach
+        - field_opposing_coach
+        - field_opp_dc
+        - field_opp_oc
+      label: 'Coaching Staff'
+      region: content
+      parent_name: group_opponent_info
+      weight: 9
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+id: node.game.podcast_info
+targetEntityType: node
+bundle: game
+mode: podcast_info
+content:
+  field_date:
+    type: datetime_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_defensive_leaders:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_game_links:
+    type: link_default
+    weight: 11
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_game_summary:
+    type: text_textarea
+    weight: 7
+    region: content
+    settings:
+      rows: 10
+      placeholder: 'Enter podcast show notes and game summary...'
+    third_party_settings: {  }
+  field_game_video:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_highlight_video_url:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: 'https://www.youtube.com/watch?v=...'
+    third_party_settings: {  }
+  field_offensive_leaders:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opp_dc:
+    type: select2_entity_reference
+    weight: 5
+    region: content
+    settings:
+      width: 100%
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+    third_party_settings: {  }
+  field_opp_draft_picks:
+    type: text_textarea
+    weight: 8
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opp_hc_notes:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opp_oc:
+    type: select2_entity_reference
+    weight: 6
+    region: content
+    settings:
+      width: 100%
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+    third_party_settings: {  }
+  field_opp_pro_bowlers:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_pfr:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_opponent_season_finish:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_season_record:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_team_ranks:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_wikipedia:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_opposing_coach:
+    type: select2_entity_reference
+    weight: 3
+    region: content
+    settings:
+      width: 100%
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+    third_party_settings: {  }
+  field_pats_record_vs_coach:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_pfr_link:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_season:
+    type: number
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_youtube_highlights:
+    type: link_default
+    weight: 12
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_after_bye: true
+  field_belichick_hoodie: true
+  field_brady_attempts: true
+  field_brady_completions: true
+  field_brady_ints: true
+  field_brady_played: true
+  field_brady_tds: true
+  field_brady_yards: true
+  field_home_away: true
+  field_meta_tags: true
+  field_month: true
+  field_opp_ot: true
+  field_opp_q1: true
+  field_opp_q2: true
+  field_opp_q3: true
+  field_opp_q4: true
+  field_opponent_score: true
+  field_ot: true
+  field_other_qbs: true
+  field_over_under: true
+  field_passer_rating: true
+  field_patriots_dc: true
+  field_patriots_head_coach: true
+  field_patriots_oc: true
+  field_patriots_score: true
+  field_pats_ot: true
+  field_pats_q1: true
+  field_pats_q2: true
+  field_pats_q3: true
+  field_pats_q4: true
+  field_playoff_game: true
+  field_result: true
+  field_score_differential: true
+  field_starting_qb: true
+  field_surf: true
+  field_temperature: true
+  field_uniform: true
+  field_vegas_line: true
+  field_week: true
+  field_weekday: true
+  langcode: true
+  promote: true
+  simple_sitemap: true
+  status: true
+  sticky: true
+  uid: true
+  url_redirects: true

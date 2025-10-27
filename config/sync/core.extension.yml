@@ -25,6 +25,7 @@ module:
   dynamic_page_cache: 0
   dynasty_images: 0
   dynasty_module: 0
+  dynasty_podcast: 0
   dynasty_timeline: 0
   dynasty_transcript: 0
   editor: 0

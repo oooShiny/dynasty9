@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.game.field_brady_tds
     - field.field.node.game.field_brady_yards
     - field.field.node.game.field_date
+    - field.field.node.game.field_defensive_leaders
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
@@ -19,15 +20,24 @@ dependencies:
     - field.field.node.game.field_home_away
     - field.field.node.game.field_meta_tags
     - field.field.node.game.field_month
+    - field.field.node.game.field_offensive_leaders
     - field.field.node.game.field_opp_dc
+    - field.field.node.game.field_opp_draft_picks
+    - field.field.node.game.field_opp_hc_notes
     - field.field.node.game.field_opp_oc
     - field.field.node.game.field_opp_ot
+    - field.field.node.game.field_opp_pro_bowlers
     - field.field.node.game.field_opp_q1
     - field.field.node.game.field_opp_q2
     - field.field.node.game.field_opp_q3
     - field.field.node.game.field_opp_q4
     - field.field.node.game.field_opponent
+    - field.field.node.game.field_opponent_pfr
     - field.field.node.game.field_opponent_score
+    - field.field.node.game.field_opponent_season_finish
+    - field.field.node.game.field_opponent_season_record
+    - field.field.node.game.field_opponent_team_ranks
+    - field.field.node.game.field_opponent_wikipedia
     - field.field.node.game.field_opposing_coach
     - field.field.node.game.field_ot
     - field.field.node.game.field_other_qbs
@@ -42,6 +52,7 @@ dependencies:
     - field.field.node.game.field_pats_q2
     - field.field.node.game.field_pats_q3
     - field.field.node.game.field_pats_q4
+    - field.field.node.game.field_pats_record_vs_coach
     - field.field.node.game.field_pfr_link
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
@@ -254,6 +265,7 @@ content:
       collapsible: false
       collapsed: false
       revision: false
+      removed_reference: optional
     third_party_settings: {  }
   field_brady_attempts:
     type: number
@@ -302,6 +314,14 @@ content:
     weight: 7
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_defensive_leaders:
+    type: text_textarea
+    weight: 140
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_game_links:
     type: link_default
@@ -357,31 +377,63 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_offensive_leaders:
+    type: text_textarea
+    weight: 139
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_opp_dc:
-    type: entity_reference_autocomplete_tags
+    type: select2_entity_reference
     weight: 12
     region: content
     settings:
+      width: 100%
+      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
+    third_party_settings: {  }
+  field_opp_draft_picks:
+    type: text_textarea
+    weight: 138
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opp_hc_notes:
+    type: text_textarea
+    weight: 136
+    region: content
+    settings:
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   field_opp_oc:
-    type: entity_reference_autocomplete_tags
+    type: select2_entity_reference
     weight: 11
     region: content
     settings:
+      width: 100%
+      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_opp_ot:
     type: number
     weight: 22
     region: content
     settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_opp_pro_bowlers:
+    type: string_textfield
+    weight: 137
+    region: content
+    settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_opp_q1:
@@ -422,6 +474,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_opponent_pfr:
+    type: link_default
+    weight: 132
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_opponent_score:
     type: number
     weight: 23
@@ -429,15 +489,47 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_opponent_season_finish:
+    type: text_textarea
+    weight: 134
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_season_record:
+    type: string_textfield
+    weight: 133
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_team_ranks:
+    type: text_textarea
+    weight: 141
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_opponent_wikipedia:
+    type: link_default
+    weight: 131
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_opposing_coach:
-    type: entity_reference_autocomplete_tags
+    type: select2_entity_reference
     weight: 10
     region: content
     settings:
+      width: 100%
+      autocomplete: false
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_ot:
     type: boolean_checkbox
@@ -551,6 +643,14 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_pats_record_vs_coach:
+    type: link_default
+    weight: 135
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_pfr_link:
     type: string_textfield
     weight: 11
@@ -663,6 +763,11 @@ content:
     third_party_settings: {  }
   simple_sitemap:
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
     region: content
     settings: {  }
     third_party_settings: {  }

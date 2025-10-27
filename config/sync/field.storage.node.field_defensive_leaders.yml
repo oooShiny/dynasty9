@@ -1,0 +1,19 @@
+uuid: d21510ff-c5fa-4afe-8526-b4f8d13de44a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_defensive_leaders
+field_name: field_defensive_leaders
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -190,6 +190,7 @@
         "drupal/views_jump_menu": "^1.0",
         "drupal/votingapi": "^4",
         "drush/drush": "^13",
+        "hamstar/wikimate": "^1.1",
         "mglaman/composer-drupal-lenient": "^1.0",
         "symfony/finder": "^6 || ^7"
     },

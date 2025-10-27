@@ -1,0 +1,13 @@
+entity.node.podcast_show_notes:
+  path: '/node/{node}/edit-podcast'
+  defaults:
+    _entity_form: 'node.podcast_info'
+    _title: 'Edit Podcast Show Notes'
+  requirements:
+    _entity_access: 'node.update'
+    node: \d+
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node

@@ -1,0 +1,843 @@
+<?php
+
+/**
+ * @file
+ * Contains dynasty_podcast.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\views\Views;
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function dynasty_podcast_entity_type_alter(array &$entity_types) {
+  // Add a form handler for the podcast_info operation on nodes.
+  if (isset($entity_types['node'])) {
+    $entity_types['node']->setFormClass('podcast_info', 'Drupal\node\NodeForm');
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function dynasty_podcast_entity_presave(EntityInterface $entity) {
+  if ($entity->bundle() == 'game') {
+    if (!$entity->field_opponent->isEmpty()) {
+    // PFR Link field.
+      $opp = Node::load($entity->get('field_opponent')->target_id);
+      $team_name = explode(' ', $opp->label());
+      $team_short =  end($team_name);
+      $pfr_id = $opp->get('field_pfr_id')->value;
+      $season = $entity->get('field_season')->value;
+      $entity->set('field_opponent_pfr', [
+        'uri' => "https://www.pro-football-reference.com/teams/{$pfr_id}/{$season}.htm",
+        'title' => "{$team_short} {$season} PFR",
+        'options' => [
+          'attributes' => [
+            'target' => '_blank',
+            'class' => [
+              'text-green-900 font-bold underline'
+            ]
+          ]
+        ]
+      ]);
+
+      // Wikipedia Link field.
+      $team = str_replace(' ', '_', $opp->label());
+      $entity->set('field_opponent_wikipedia', [
+        'uri' => "https://en.wikipedia.org/wiki/{$season}_{$team}_season",
+        'title' => "{$team_short} {$season} Wikipedia",
+        'options' => [
+          'attributes' => [
+            'target' => '_blank',
+            'class' => [
+              'font-bold underline'
+            ]
+          ]
+        ]
+      ]);
+
+      // Get info from Wikipedia.
+      $wiki_title = "{$season}_{$team}_season";
+      $wiki_data = _get_from_wikipedia($wiki_title);
+
+      if ($wiki_data['infobox']) {
+        $infobox = $wiki_data['infobox'];
+        // Sometimes this is different!?
+        $infobox['pro_bowlers'] = $infobox['pro bowlers'] ?? $infobox['pro_bowlers'];
+
+        // Add Pro Bowlers.
+        if ($entity->field_opp_pro_bowlers->isEmpty()) {
+          if (str_contains($infobox['pro_bowlers'], '<br>')) {
+            $list = explode('<br>', $infobox['pro_bowlers']);
+            foreach ($list as $pro_bowler) {
+              $entity->field_opp_pro_bowlers[] = ['value' => $pro_bowler];
+            }
+          }
+          else {
+            $entity->field_opp_pro_bowlers[] = ['value' => $infobox['pro_bowlers']];
+          }
+        }
+
+        // Opponent Season Record & Season Finish.
+        $entity->field_opponent_season_record->value = $infobox['record'];
+        $season_finish = '<ul><li>' . $infobox['division_place'] . '</li>';
+        if ($infobox['playoffs']) {
+          $season_finish .= '<li>' . $infobox['playoffs'] . '</li>';
+        }
+        $season_finish .= '</ul>';
+        $entity->field_opponent_season_finish->value = $season_finish;
+        $entity->field_opponent_season_finish->format = 'full_html';
+      }
+
+      if ($wiki_data['draft']) {
+        $draft_table = '<table class="table table-sm">';
+        $draft_table .= '<thead><tr>';
+        $draft_table .= '<th>Round</th><th>Pick</th><th>Player</th><th>Position</th><th>College</th><th>Notes</th>';
+        $draft_table .= '</tr></thead>';
+        $draft_table .= '<tbody>';
+        foreach ($wiki_data['draft'] as $draft_pick) {
+          $row_css = ($draft_pick['maderoster'] == 'yes') ? ' class="bg-blue-100"' : '';
+          $cell_css = ($draft_pick['probowl'] == 'yes') ? ' class="bg-yellow-200"' : '';
+          $draft_table .= '<tr'.$row_css.'>';
+          $draft_table .= '<td>' . $draft_pick['round'] . '</td>';
+          $draft_table .= '<td>' . $draft_pick['pick'] . '</td>';
+          $draft_table .= '<td'.$cell_css.'>' . $draft_pick['player'] . '</td>';
+          $draft_table .= '<td>' . $draft_pick['position'] . '</td>';
+          $draft_table .= '<td>' . $draft_pick['college'] . '</td>';
+          $draft_table .= '<td>' . $draft_pick['notes'] . '</td>';
+          $draft_table .= '</tr>';
+        }
+        $draft_table .= '</tbody>';
+        $draft_table .= '</table>';
+        $entity->field_opp_draft_picks->value = $draft_table;
+        $entity->field_opp_draft_picks->format = 'full_html';
+      }
+    }
+
+    // Record vs HC field.
+    if (!$entity->field_opposing_coach->isEmpty()) {
+      $opp = Term::load($entity->get('field_opposing_coach')->target_id);
+      $coach = $opp->label();
+      // Get W/L record from the game search view.
+      $view = Views::getView('game_search');
+      $view->setExposedInput([
+        'game_opposing_coach' => $coach,
+      ]);
+      $view->execute();
+      $results = $view->result;
+      $wins = 0;
+      $losses = 0;
+      foreach ($results as $row) {
+        // Access the entity and get the field value.
+        // For entity-based views, use _entity to get the loaded entity.
+        if (isset($row->_entity)) {
+          $result = $row->_entity->get('field_result')->value;
+          if ($result === 'Win') {
+            $wins++;
+          }
+          elseif ($result === 'Loss') {
+            $losses++;
+          }
+        }
+      }
+      $record = "{$wins}-{$losses}";
+      $entity->set('field_pats_record_vs_coach', [
+        'uri' => "/search/games?game_opposing_coach[]=" . rawurlencode($coach),
+        'title' => "The Patriots are {$record} against {$coach} led teams.",
+        'options' => [
+          'attributes' => [
+            'target' => '_blank',
+            'class' => [
+              'font-bold underline'
+            ]
+          ]
+        ]
+      ]);
+    }
+
+    // Calculate Offensive and Defensive Leaders.
+    if (!$entity->field_opponent->isEmpty()) {
+      $opp = Node::load($entity->get('field_opponent')->target_id);
+      $pfr_id = $opp->get('field_pfr_id')->value;
+      $season = $entity->get('field_season')->value;
+
+      $leaders = _calculate_team_leaders($season, $pfr_id);
+
+      if (!empty($leaders['offense'])) {
+        $entity->set('field_offensive_leaders', [
+          'value' => $leaders['offense'],
+          'format' => 'full_html',
+        ]);
+      }
+
+      if (!empty($leaders['defense'])) {
+        $entity->set('field_defensive_leaders', [
+          'value' => $leaders['defense'],
+          'format' => 'full_html',
+        ]);
+      }
+
+      if (!empty($leaders['team_ranks'])) {
+        $team_ranks_html = _format_team_ranks($leaders['team_ranks']);
+        if (!empty($team_ranks_html)) {
+          $entity->set('field_opponent_team_ranks', [
+            'value' => $team_ranks_html,
+            'format' => 'full_html',
+          ]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Calculate offensive and defensive team leaders from PFR CSV data.
+ */
+function _calculate_team_leaders($season, $pfr_id) {
+  $module_path = \Drupal::service('module_handler')->getModule('dynasty_podcast')->getPath();
+  $pfr_id = strtolower($pfr_id);
+  $data_dir = $module_path . "/pfr_data/{$pfr_id}/{$season}";
+
+  if (!is_dir($data_dir)) {
+    return ['offense' => '', 'defense' => ''];
+  }
+
+  // Parse offensive stats.
+  $passing_file = $data_dir . '/passing.csv';
+  $rush_rec_file = $data_dir . '/rushing_and_receiving.csv';
+  $defense_file = $data_dir . '/defense.csv';
+  $team_stats_file = $data_dir . '/team_stats.csv';
+
+  $qbs = _parse_passing_csv($passing_file);
+  $skill_players = _parse_rushing_receiving_csv($rush_rec_file);
+  $defenders = _parse_defense_csv($defense_file);
+  $team_ranks = _parse_team_stats_csv($team_stats_file);
+
+  // Format offense output.
+  $offense_html = _format_offense_leaders_pfr($qbs, $skill_players);
+
+  // Format defense output.
+  $defense_html = _format_defense_leaders_pfr($defenders);
+
+  return [
+    'offense' => $offense_html,
+    'defense' => $defense_html,
+    'team_ranks' => $team_ranks,
+  ];
+}
+
+/**
+ * Helper function to combine multi-level CSV headers.
+ */
+function _combine_csv_headers($row1, $row2) {
+  $combined = [];
+
+  for ($i = 0; $i < count($row2); $i++) {
+    $category = $row1[$i] ?? '';
+    $stat = $row2[$i] ?? '';
+
+    // If category starts with "Unnamed:", just use the stat name.
+    if (strpos($category, 'Unnamed:') === 0 || empty($category)) {
+      $combined[] = $stat;
+    }
+    else {
+      // Combine category and stat with underscore.
+      $combined[] = $category . '_' . $stat;
+    }
+  }
+
+  return $combined;
+}
+
+/**
+ * Parse passing.csv file.
+ */
+function _parse_passing_csv($file_path) {
+  $qbs = [];
+
+  if (!file_exists($file_path)) {
+    return $qbs;
+  }
+
+  if (($handle = fopen($file_path, "r")) !== FALSE) {
+    $headers = fgetcsv($handle);
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $row = array_combine($headers, $data);
+
+      // Skip team totals row.
+      if (empty($row['Player']) || $row['Player'] == 'Team Totals') {
+        continue;
+      }
+
+      $yds = (float)($row['Yds'] ?? 0);
+      $tds = (float)($row['TD'] ?? 0);
+
+      // Only include QBs with meaningful stats.
+      if ($yds >= 100 || $tds >= 1) {
+        $qbs[] = [
+          'player' => $row['Player'],
+          'yds' => $yds,
+          'tds' => $tds,
+          'ints' => (float)($row['Int'] ?? 0),
+        ];
+      }
+    }
+    fclose($handle);
+  }
+
+  // Sort by yards descending.
+  usort($qbs, function($a, $b) {
+    return $b['yds'] <=> $a['yds'];
+  });
+
+  return $qbs;
+}
+
+/**
+ * Parse rushing_and_receiving.csv file.
+ */
+function _parse_rushing_receiving_csv($file_path) {
+  $players = [];
+
+  if (!file_exists($file_path)) {
+    return $players;
+  }
+
+  if (($handle = fopen($file_path, "r")) !== FALSE) {
+    // Read and combine the multi-level headers.
+    $header_row1 = fgetcsv($handle);
+    $header_row2 = fgetcsv($handle);
+    $headers = _combine_csv_headers($header_row1, $header_row2);
+
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $row = array_combine($headers, $data);
+
+      // Skip team totals row.
+      if (empty($row['Player']) || $row['Player'] == 'Team Totals') {
+        continue;
+      }
+
+      $rush_yds = (float)($row['Rushing_Yds'] ?? 0);
+      $rush_tds = (float)($row['Rushing_TD'] ?? 0);
+      $rec_yds = (float)($row['Receiving_Yds'] ?? 0);
+      $rec_tds = (float)($row['Receiving_TD'] ?? 0);
+
+      $players[] = [
+        'player' => $row['Player'],
+        'pos' => $row['Pos'] ?? '',
+        'rush_yds' => $rush_yds,
+        'rush_tds' => $rush_tds,
+        'rec_yds' => $rec_yds,
+        'rec_tds' => $rec_tds,
+      ];
+    }
+    fclose($handle);
+  }
+
+  return $players;
+}
+
+/**
+ * Parse defense.csv file.
+ */
+function _parse_defense_csv($file_path) {
+  $defenders = [];
+
+  if (!file_exists($file_path)) {
+    return $defenders;
+  }
+
+  if (($handle = fopen($file_path, "r")) !== FALSE) {
+    // Read and combine the multi-level headers.
+    $header_row1 = fgetcsv($handle);
+    $header_row2 = fgetcsv($handle);
+    $headers = _combine_csv_headers($header_row1, $header_row2);
+
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $row = array_combine($headers, $data);
+
+      // Skip team totals row.
+      if (empty($row['Player']) || $row['Player'] == 'Team Totals') {
+        continue;
+      }
+
+      $sacks = (float)($row['Sk'] ?? 0);
+      $tackles = (float)($row['Tackles_Comb'] ?? 0);
+      $ints = (float)($row['Def Interceptions_Int'] ?? 0);
+      $pds = (float)($row['Def Interceptions_PD'] ?? 0);
+      $ffs = (float)($row['Fumbles_FF'] ?? 0);
+      $tfl = (float)($row['Tackles_TFL'] ?? 0);
+
+      // Only include players with meaningful defensive stats.
+      if ($tackles > 0 || $sacks > 0 || $ints > 0 || $pds > 0) {
+        $defenders[] = [
+          'player' => $row['Player'],
+          'pos' => $row['Pos'] ?? '',
+          'sacks' => $sacks,
+          'tackles' => $tackles,
+          'solo' => (float)($row['Tackles_Solo'] ?? 0),
+          'ints' => $ints,
+          'pds' => $pds,
+          'ffs' => $ffs,
+          'tfl' => $tfl,
+        ];
+      }
+    }
+    fclose($handle);
+  }
+
+  return $defenders;
+}
+
+/**
+ * Parse team_stats.csv file for league rankings.
+ */
+function _parse_team_stats_csv($file_path) {
+  $ranks = [
+    'offense' => [],
+    'defense' => [],
+  ];
+
+  if (!file_exists($file_path)) {
+    return $ranks;
+  }
+
+  if (($handle = fopen($file_path, "r")) !== FALSE) {
+    // Read and combine the multi-level headers.
+    $header_row1 = fgetcsv($handle);
+    $header_row2 = fgetcsv($handle);
+    $headers = _combine_csv_headers($header_row1, $header_row2);
+
+    $data_rows = [];
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $row = array_combine($headers, $data);
+      $data_rows[$row['Player']] = $row;
+    }
+    fclose($handle);
+
+    // Extract offensive and defensive rankings.
+    if (isset($data_rows['Lg Rank Offense'])) {
+      $ranks['offense'] = [
+        'points' => $data_rows['Lg Rank Offense']['PF'] ?? '',
+        'yards' => $data_rows['Lg Rank Offense']['Yds'] ?? '',
+      ];
+    }
+
+    if (isset($data_rows['Lg Rank Defense'])) {
+      $ranks['defense'] = [
+        'points' => $data_rows['Lg Rank Defense']['PF'] ?? '',
+        'yards' => $data_rows['Lg Rank Defense']['Yds'] ?? '',
+      ];
+    }
+  }
+
+  return $ranks;
+}
+
+/**
+ * Format team ranks for display.
+ */
+function _format_team_ranks($ranks) {
+  $html = '';
+
+  if (empty($ranks['offense']) && empty($ranks['defense'])) {
+    return $html;
+  }
+
+  $html .= '<div class="grid grid-cols-2 gap-4">';
+
+  // Offense ranks.
+  if (!empty($ranks['offense']['points']) || !empty($ranks['offense']['yards'])) {
+    $html .= '<div>';
+    $html .= '<strong>Offense:</strong><br>';
+    if (!empty($ranks['offense']['points'])) {
+      $html .= '<span>Points: #' . $ranks['offense']['points'] . '</span><br>';
+    }
+    if (!empty($ranks['offense']['yards'])) {
+      $html .= '<span>Yards: #' . $ranks['offense']['yards'] . '</span>';
+    }
+    $html .= '</div>';
+  }
+
+  // Defense ranks.
+  if (!empty($ranks['defense']['points']) || !empty($ranks['defense']['yards'])) {
+    $html .= '<div>';
+    $html .= '<strong>Defense:</strong><br>';
+    if (!empty($ranks['defense']['points'])) {
+      $html .= '<span>Points: #' . $ranks['defense']['points'] . '</span><br>';
+    }
+    if (!empty($ranks['defense']['yards'])) {
+      $html .= '<span>Yards: #' . $ranks['defense']['yards'] . '</span>';
+    }
+    $html .= '</div>';
+  }
+
+  $html .= '</div>';
+
+  return $html;
+}
+
+/**
+ * Format offensive leaders from PFR data.
+ */
+function _format_offense_leaders_pfr($qbs, $skill_players) {
+  $html = '';
+
+  // Display all QBs.
+  foreach ($qbs as $qb) {
+    $html .= '<div class="mb-2">';
+    $html .= '<strong>QB ' . $qb['player'] . '</strong><br>';
+    $html .= '<em>' . number_format($qb['yds']) . ' ~ ' . number_format($qb['tds']) . ' TDs ~ ' . number_format($qb['ints']) . ' INTs</em>';
+    $html .= '</div>';
+  }
+
+  // Find top RB.
+  usort($skill_players, function($a, $b) {
+    return $b['rush_yds'] <=> $a['rush_yds'];
+  });
+
+  $top_rb = null;
+  foreach ($skill_players as $player) {
+    if ($player['rush_yds'] > 0) {
+      $top_rb = $player;
+      break;
+    }
+  }
+
+  if ($top_rb) {
+    $html .= '<div class="mb-2">';
+    $html .= '<strong>RB ' . $top_rb['player'] . '</strong><br>';
+    $html .= '<em>' . number_format($top_rb['rush_yds']) . ' ~ ' . number_format($top_rb['rush_tds']) . ' TD</em>';
+    $html .= '</div>';
+  }
+
+  // Find top WRs.
+  usort($skill_players, function($a, $b) {
+    return $b['rec_yds'] <=> $a['rec_yds'];
+  });
+
+  $wr_count = 0;
+  foreach ($skill_players as $player) {
+    if ($player['rec_yds'] > 0 && $wr_count < 2) {
+      $html .= '<div class="mb-2">';
+      $html .= '<strong>WR ' . $player['player'] . '</strong><br>';
+      $html .= '<em>' . number_format($player['rec_yds']) . ' ~ ' . number_format($player['rec_tds']) . ' TDs</em>';
+      $html .= '</div>';
+      $wr_count++;
+    }
+  }
+
+  return $html;
+}
+
+/**
+ * Format defensive leaders from PFR data.
+ */
+function _format_defense_leaders_pfr($defenders) {
+  $html = '';
+
+  // Sort by a combination of factors to get diverse defensive leaders.
+  usort($defenders, function($a, $b) {
+    // Weight tackles and sacks heavily.
+    $score_a = $a['tackles'] + ($a['sacks'] * 5) + ($a['ints'] * 3);
+    $score_b = $b['tackles'] + ($b['sacks'] * 5) + ($b['ints'] * 3);
+    return $score_b <=> $score_a;
+  });
+
+  // Take top 4 defensive players.
+  $top_defenders = array_slice($defenders, 0, 4);
+
+  foreach ($top_defenders as $player) {
+    $stats_display = [];
+    $position = $player['pos'] ?: 'LB';
+
+    $html .= '<div class="mb-2">';
+    $html .= '<strong>' . $position . ' ' . $player['player'] . '</strong><br>';
+
+    // Build stats string.
+    if ($player['ints'] > 0) {
+      $stats_display[] = number_format($player['ints']) . ' INT';
+    }
+    if ($player['pds'] > 0) {
+      $stats_display[] = number_format($player['pds']) . ' PD';
+    }
+    if ($player['ffs'] > 0) {
+      $stats_display[] = number_format($player['ffs']) . ' FF';
+    }
+    if ($player['sacks'] > 0) {
+      $stats_display[] = number_format($player['sacks'], 1) . ' SK';
+    }
+    if ($player['tackles'] > 0) {
+      $stats_display[] = number_format($player['tackles']) . ' TKL';
+    }
+    if ($player['solo'] > 0) {
+      $stats_display[] = number_format($player['solo']) . ' solo';
+    }
+    if ($player['tfl'] > 0) {
+      $stats_display[] = number_format($player['tfl']) . ' TFL';
+    }
+
+    $html .= '<em>' . implode(', ', $stats_display) . '</em>';
+    $html .= '</div>';
+  }
+
+  return $html;
+}
+
+/**
+ * Find top player(s) by a specific stat.
+ */
+function _find_top_player($player_stats, $stat_key, $count = 1) {
+  $player_stats_array = array_map(function($player, $stats) {
+    $stats['player'] = $player;
+    return $stats;
+  }, array_keys($player_stats), $player_stats);
+
+  usort($player_stats_array, function($a, $b) use ($stat_key) {
+    return $b[$stat_key] <=> $a[$stat_key];
+  });
+
+  return array_slice($player_stats_array, 0, $count);
+}
+
+/**
+ * Find all QBs with meaningful passing stats.
+ */
+function _find_all_qbs($player_stats) {
+  $qbs = [];
+
+  foreach ($player_stats as $player => $stats) {
+      $stats['player'] = $player;
+      $qbs[] = $stats;
+  }
+
+  // Sort by passing yards
+  usort($qbs, function($a, $b) {
+    return $b['pass_yds'] <=> $a['pass_yds'];
+  });
+
+  return $qbs;
+}
+
+/**
+ * Find top tacklers with additional defensive stats.
+ */
+function _find_top_tacklers($player_stats, $count = 2) {
+  $player_stats_array = array_map(function($player, $stats) {
+    $stats['player'] = $player;
+    return $stats;
+  }, array_keys($player_stats), $player_stats);
+
+  usort($player_stats_array, function($a, $b) {
+    return $b['tackles_combined'] <=> $a['tackles_combined'];
+  });
+
+  return array_slice($player_stats_array, 0, $count);
+}
+
+/**
+ * Format offensive leaders as HTML.
+ */
+function _format_offense_leaders($top_qbs, $top_rb, $top_wrs) {
+  $html = '';
+
+  // QBs - display all with meaningful stats.
+  foreach ($top_qbs as $qb) {
+    if (!empty($qb['pass_yds'])) {
+      $html .= '<div class="mb-2">';
+      $html .= '<strong>QB ' . $qb['player'] . '</strong><br>';
+      $html .= '<em>' . number_format($qb['pass_yds']) . ' ~ ' . number_format($qb['pass_tds']) . ' TDs ~ ' . number_format($qb['pass_int']) . ' INTs</em>';
+      $html .= '</div>';
+    }
+  }
+
+  // RB.
+  if (!empty($top_rb[0]['rush_yds'])) {
+    $rb = $top_rb[0];
+    $html .= '<div class="mb-2">';
+    $html .= '<strong>RB ' . $rb['player'] . '</strong><br>';
+    $html .= '<em>' . number_format($rb['rush_yds']) . ' ~ ' . number_format($rb['rush_tds']) . ' TD</em>';
+    $html .= '</div>';
+  }
+
+  // WRs.
+  foreach ($top_wrs as $wr) {
+    if (!empty($wr['rec_yds'])) {
+      $html .= '<div class="mb-2">';
+      $html .= '<strong>WR ' . $wr['player'] . '</strong><br>';
+      $html .= '<em>' . number_format($wr['rec_yds']) . ' ~ ' . number_format($wr['rec_tds']) . ' TDs</em>';
+      $html .= '</div>';
+    }
+  }
+
+  return $html;
+}
+
+/**
+ * Format defensive leaders as HTML.
+ */
+function _format_defense_leaders($top_tacklers, $top_pass_rushers, $all_stats) {
+  $html = '';
+
+  // Combine defensive leaders with diverse stats.
+  $defensive_leaders = array_merge($top_tacklers, $top_pass_rushers);
+
+  // Remove duplicates.
+  $unique_leaders = [];
+  foreach ($defensive_leaders as $leader) {
+    $unique_leaders[$leader['player']] = $leader;
+  }
+
+  // Limit to top 4.
+  $unique_leaders = array_slice($unique_leaders, 0, 4);
+
+  foreach ($unique_leaders as $player) {
+    $stats_display = [];
+
+    // Determine position based on stats.
+    $position = 'LB';
+    if ($player['sacks'] > 5) {
+      $position = 'DE';
+    }
+    if ($player['def_int'] > 2) {
+      $position = 'FS';
+    }
+
+    $html .= '<div class="mb-2">';
+    $html .= '<strong>' . $position . ' ' . $player['player'] . '</strong><br>';
+
+    // Build stats string.
+    if ($player['def_int'] > 0) {
+      $stats_display[] = number_format($player['def_int']) . ' INT';
+    }
+    if ($player['pass_defended'] > 0) {
+      $stats_display[] = number_format($player['pass_defended']) . ' PD';
+    }
+    if ($player['fumbles_forced'] > 0) {
+      $stats_display[] = number_format($player['fumbles_forced']) . ' FF';
+    }
+    if ($player['sacks'] > 0) {
+      $stats_display[] = number_format($player['sacks'], 1) . ' SK';
+    }
+    if ($player['tackles_solo'] > 0) {
+      $stats_display[] = number_format($player['tackles_solo']) . ' solo';
+    }
+    if ($player['tackles_combined'] > 0 && $position != 'DE') {
+      $stats_display[] = number_format($player['tackles_combined']) . ' TKL';
+    }
+    if ($player['tackles_loss'] > 0 && $position == 'DE') {
+      $stats_display[] = number_format($player['tackles_loss']) . ' TFL';
+    }
+    if ($player['qb_hits'] > 5) {
+      $stats_display[] = number_format($player['qb_hits']) . ' QB Hits';
+    }
+
+    $html .= '<em>' . implode(', ', $stats_display) . '</em>';
+    $html .= '</div>';
+  }
+
+  return $html;
+}
+
+function _get_from_wikipedia($page_title) {
+  $wiki = new Wikimate('https://en.wikipedia.org/w/api.php');
+  $page = $wiki->getPage($page_title);
+  $data = [];
+  if ($page->exists()) {
+    // Get the draft section.
+    $sections = $page->getSectionOffsets();
+    foreach ($sections->byName as $title => $section) {
+      if (str_contains($title, 'draft')) {
+        $data['draft'] = _format_wiki_text($page->getSection($title), 'draft');
+      }
+    }
+    // Get the Infobox section.
+    $full_page = $page->getText();
+    $page_parts = explode('}}', $full_page);
+    foreach ($page_parts as $part) {
+      $part = ltrim($part, "\n{{");
+      if (str_contains($part, 'Infobox')) {
+        $data['infobox'] = _format_wiki_text($part,  'infobox');
+      }
+    }
+  }
+  return $data;
+}
+
+function _format_wiki_text($text, $section) {
+  $formatted = [];
+  switch ($section) {
+    case 'draft':
+      $text_parts = explode('{{', $text);
+      foreach ($text_parts as $part) {
+        if (str_contains($part, 'draft entry')) {
+          $draft_pick = [];
+          $draft_entry = explode('|', $part);
+          foreach ($draft_entry as $entry) {
+            if (str_contains($entry, '=')) {
+              $entry_parts = explode('=', $entry);
+              $title = _clean_string($entry_parts[0]);
+              $data = _clean_string($entry_parts[1]);
+              $draft_pick[$title] = $data;
+            }
+          }
+          $formatted[] = $draft_pick;
+        }
+      }
+      break;
+    case 'infobox':
+      $text_parts = explode("\n|", $text);
+      foreach ($text_parts as $part) {
+        if (str_contains($part, '=')) {
+          $part_parts = explode('=', $part);
+          $title = _clean_string($part_parts[0]);
+          $data = _clean_string($part_parts[1]);
+          $formatted[$title] = $data;
+        }
+      }
+  }
+  return $formatted;
+}
+
+function _clean_string($string) {
+  // Trim any leading/trailing spaces.
+  $string = trim($string);
+  // Get data from [[wiki links]] wrapped text.
+  while ((str_contains($string, '[[') && str_contains($string, ']]')) === true) {
+    $string = _get_string_between('[[', ']]', $string);
+  }
+  // Trim any remaining extra characters.
+  $string = trim($string, "[]{}\n");
+  $string = _remove_chars($string, ['{', '}', "\n", "\r", "\t"]);
+  return $string;
+}
+
+function _remove_chars($text, $chars) {
+  foreach ($chars as $char) {
+    $text = str_replace($char, "", $text);
+  }
+  return $text;
+}
+
+function _get_string_between($from, $to, $haystack) {
+  $fromPosition = strpos($haystack, $from) + strlen($from);
+  $toPosition = strpos($haystack, $to, $fromPosition);
+  $betweenLength = $toPosition - $fromPosition;
+  // Keep the original text that was found in case there is other text that
+  // needs to be preserved.
+  $original_text = substr($haystack, $fromPosition-2, $betweenLength+4);
+  $extracted_text = substr($haystack, $fromPosition, $betweenLength);
+  // Replace the [[wrapped]] text with the unwrapped version.
+  $cleaned_text = str_replace($original_text, $extracted_text, $haystack);
+  // Some wiki links have a target and title text separated by |
+  // Get just the title text.
+  if (str_contains($extracted_text, '|')) {
+    $wiki_link_parts = explode('|', $extracted_text);
+    $cleaned_text = str_replace($extracted_text, $wiki_link_parts[1], $cleaned_text);
+  }
+  return $cleaned_text;
+}
