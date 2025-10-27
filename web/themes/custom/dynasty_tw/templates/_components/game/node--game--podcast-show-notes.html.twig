@@ -94,6 +94,10 @@
           <div class="text-5xl text-center">{{ content.field_opponent_score }}</div>
         </div>
       </div>
+      <div class="flex items-center justify-evenly py-2">
+        {{ prev_game_block }}
+        {{ next_game_block }}
+      </div>
       {# Box Score #}
       <details class="collapse collapse-arrow">
         <summary class="collapse-title text-3xl w-fit mx-auto">Boxscore</summary>
@@ -193,7 +197,10 @@
       <div class="p-4 patriots w-fit text-lg mx-auto">
         <a href="https://wikipedia.org/wiki/{{ season }}_New_England_Patriots_season" target="_blank">Patriots {{ season }} Wikipedia</a>
       </div>
+
     </div>
+
+
   </div>
 
 
@@ -321,7 +328,7 @@
   <div class="bg-gray-400 py-5">
     <h2 class="text-center mb-6 text-3xl uppercase font-light">Highlights</h2>
     <div class="flex flex-wrap justify-center">
-      {{ drupal_view('game_highlights', 'block_1') }}
+      {{ drupal_view('game_highlights', 'block_1', node.id()) }}
     </div>
   </div>
 
