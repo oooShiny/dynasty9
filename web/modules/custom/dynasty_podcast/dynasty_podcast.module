@@ -72,12 +72,18 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
 
         // Add Pro Bowlers.
         if ($entity->field_opp_pro_bowlers->isEmpty()) {
-          if (str_contains($infobox['pro_bowlers'], '<br>')) {
-            $list = explode('<br>', $infobox['pro_bowlers']);
+          if (str_contains($infobox['pro_bowlers'], '<br')) {
+            if (str_contains($infobox['pro_bowlers'], '<br>')) {
+              $list = explode('<br>', $infobox['pro_bowlers']);
+            }
+            elseif (str_contains($infobox['pro_bowlers'], '<br />')) {
+              $list = explode('<br />', $infobox['pro_bowlers']);
+            }
             foreach ($list as $pro_bowler) {
               $entity->field_opp_pro_bowlers[] = ['value' => $pro_bowler];
             }
           }
+
           else {
             $entity->field_opp_pro_bowlers[] = ['value' => $infobox['pro_bowlers']];
           }
