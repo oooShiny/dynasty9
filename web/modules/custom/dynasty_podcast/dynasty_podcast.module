@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
+use Pandoc\Pandoc;
 
 /**
  * Implements hook_entity_type_alter().
@@ -93,7 +94,7 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
         $entity->field_opponent_season_finish->format = 'full_html';
       }
 
-      if ($wiki_data['draft']) {
+      if ($entity->field_opp_draft_picks->isEmpty() && $wiki_data['draft']) {
         $draft_table = '<table class="table table-sm">';
         $draft_table .= '<thead><tr>';
         $draft_table .= '<th>Round</th><th>Pick</th><th>Player</th><th>Position</th><th>College</th><th>Notes</th>';
@@ -751,7 +752,7 @@ function _get_from_wikipedia($page_title) {
     // Get the draft section.
     $sections = $page->getSectionOffsets();
     foreach ($sections->byName as $title => $section) {
-      if (str_contains($title, 'draft')) {
+      if (str_contains(strtolower($title), 'draft')) {
         $data['draft'] = _format_wiki_text($page->getSection($title), 'draft');
       }
     }
@@ -772,20 +773,77 @@ function _format_wiki_text($text, $section) {
   $formatted = [];
   switch ($section) {
     case 'draft':
-      $text_parts = explode('{{', $text);
-      foreach ($text_parts as $part) {
-        if (str_contains($part, 'draft entry')) {
-          $draft_pick = [];
-          $draft_entry = explode('|', $part);
-          foreach ($draft_entry as $entry) {
-            if (str_contains($entry, '=')) {
-              $entry_parts = explode('=', $entry);
-              $title = _clean_string($entry_parts[0]);
-              $data = _clean_string($entry_parts[1]);
-              $draft_pick[$title] = $data;
+      if (empty($formatted)) {
+
+        if (str_contains($text, 'draft entry')) {
+          $round = 0;
+          $text_parts = explode('{{', $text);
+          foreach ($text_parts as $part) {
+            if (str_contains($part, 'draft entry')) {
+              $draft_pick = [];
+              $draft_entry = explode(' | ', $part);
+              foreach ($draft_entry as $entry) {
+                if (str_contains($entry, '=')) {
+                  $entry_parts = explode('=', $entry);
+                  $title = _clean_string($entry_parts[0]);
+                  $data = _clean_string($entry_parts[1]);
+                  $draft_pick[$title] = $data;
+                }
+              }
+              $formatted[] = $draft_pick;
             }
           }
-          $formatted[] = $draft_pick;
+        }
+        elseif (str_contains($text, '|-')) {
+          $text_parts = explode('|-', $text);
+          foreach ($text_parts as $part) {
+            // Try to get only the table rows.
+            if (!str_contains($part, '{{')) {
+              $draft_entry = explode('||', $part);
+              $headers = ['round', 'pick', 'player', 'position', 'college', 'notes'];
+              $draft_pick = [];
+              $split_child = FALSE;
+
+              // Does this have all the fields?
+              $fields = count($draft_entry);
+              if ($fields < 4) {
+                array_unshift($draft_entry, $round);
+              }
+              foreach ($draft_entry as $c => $entry) {
+
+                // Check the pick/player entry to see if we need to break it up
+                if (str_contains($entry, "\n|")) {
+                  $entry_parts = explode("\n|", $entry);
+                  foreach ($entry_parts as $part) {
+                    $part = _clean_string($part);
+                    if (!empty($part)) {
+                      if ($split_child) {
+                        $c++;
+                      }
+                      $draft_pick[$headers[$c]] = $part;
+                      $c++;
+                    }
+                  }
+                  $split_child = TRUE;
+                }
+                else {
+                  if ($split_child) {
+                    $c++;
+//                    $split_child = FALSE;
+                  }
+                  // Someone is trying to do something fancy by grouping the picks by round.
+                  if (str_contains($entry, '!rowspan')) {
+                    $entry_pieces = explode('|', $entry);
+                    $entry = trim(end($entry_pieces));
+                    $round = $entry;
+                  }
+                  $entry = _clean_string($entry);
+                  $draft_pick[$headers[$c]] = $entry;
+                }
+              }
+              $formatted[] = $draft_pick;
+            }
+          }
         }
       }
       break;
@@ -811,7 +869,7 @@ function _clean_string($string) {
     $string = _get_string_between('[[', ']]', $string);
   }
   // Trim any remaining extra characters.
-  $string = trim($string, "[]{}\n");
+  $string = trim($string, "[]{}!\n");
   $string = _remove_chars($string, ['{', '}', "\n", "\r", "\t"]);
   return $string;
 }

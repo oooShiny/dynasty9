@@ -1,13 +1,10 @@
-<div class="flex justify-center">
-<ul class="mx-4">
-
-  <li>
-    {% if previous is not empty %}
-      <a class="p-4 w-1/6 bg-blue-pats text-white text-center" href="{{ previous }}">&lsaquo; Last Game</a>
+ {% if previous is not empty %}
+      <div class="flex justify-center">
+        <a class="p-4 border border-white text-white text-center bg-blue-pats" href="{{ previous }}">&lsaquo; Last Game</a>
+      </div>
     {% endif %}
     {% if next is not empty %}
-      <a class="p-4 w-1/6 bg-blue-pats text-white text-center" href="{{ next }}">Next Game &rsaquo;</a>
+      <div class="flex justify-center">
+        <a class="p-4 border border-white text-white text-center bg-blue-pats" href="{{ next }}">Next Game &rsaquo;</a>
+      </div>
     {% endif %}
-  </li>
-</ul>
-</div>

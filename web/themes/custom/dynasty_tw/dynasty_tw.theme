@@ -215,15 +215,9 @@ function dynasty_tw_preprocess_node(&$variables) {
 
         // Render prev_game block.
         $prev_config = [];
-        $prev_plugin = $block_manager->createInstance('prev_game', $prev_config);
+        $prev_plugin = $block_manager->createInstance('prev_next_show_notes', $prev_config);
         $prev_plugin->setContext('node', $context);
-        $variables['prev_game_block'] = $prev_plugin->build();
-
-        // Render next_game block.
-        $next_config = [];
-        $next_plugin = $block_manager->createInstance('next_game', $next_config);
-        $next_plugin->setContext('node', $context);
-        $variables['next_game_block'] = $next_plugin->build();
+        $variables['prev_next_block'] = $prev_plugin->build();
       }
       break;
     case 'podcast_episode':

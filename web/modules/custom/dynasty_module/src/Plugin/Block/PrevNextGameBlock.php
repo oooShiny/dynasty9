@@ -6,11 +6,11 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\node\Entity\Node;
 
 /**
- * Provides a Block that displays games from this date in history.
+ * Provides a Block that displays buttons to go to the prev/next show notes.
  *
  * @Block(
- *   id = "prev_next_game",
- *   admin_label = @Translation("Previous/Next Game Block"),
+ *   id = "prev_next_show_notes",
+ *   admin_label = @Translation("Previous/Next Show Notes Block"),
  *   category = @Translation("Dynasty"),
  *   context_definitions = {
  *     "node" = @ContextDefinition("entity:node", label = @Translation("Node"))
@@ -40,7 +40,7 @@ class PrevNextGameBlock extends BlockBase {
     $nid = $this->get_adjacent_game($games, $date);
     if ($nid) {
       $next_nid = $games[$nid];
-      $next = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $next_nid);
+      $next = '/show-notes/' . $next_nid;
     }
     else {
       $next = NULL;
@@ -49,8 +49,8 @@ class PrevNextGameBlock extends BlockBase {
     krsort($games);
     $nid = $this->get_adjacent_game($games, $date);
     if ($nid) {
-    $previous_nid = $games[$nid];
-      $previous = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $previous_nid);
+      $previous_nid = $games[$nid];
+      $previous = '/show-notes/' . $previous_nid;
     }
     else {
       $previous = NULL;
