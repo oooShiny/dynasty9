@@ -753,7 +753,10 @@ function _get_from_wikipedia($page_title) {
     $sections = $page->getSectionOffsets();
     foreach ($sections->byName as $title => $section) {
       if (str_contains(strtolower($title), 'draft')) {
-        $data['draft'] = _format_wiki_text($page->getSection($title), 'draft');
+        $draft_data = _format_wiki_text($page->getSection($title), 'draft');
+        if (!empty($draft_data)) {
+          $data['draft'] =  $draft_data;
+        }
       }
     }
     // Get the Infobox section.
@@ -774,7 +777,6 @@ function _format_wiki_text($text, $section) {
   switch ($section) {
     case 'draft':
       if (empty($formatted)) {
-
         if (str_contains($text, 'draft entry')) {
           $round = 0;
           $text_parts = explode('{{', $text);
