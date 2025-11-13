@@ -79,44 +79,122 @@ third_party_settings:
   field_group:
     group_opponent_info:
       children:
+        - field_opponent_team_ranks
         - field_opponent
         - field_opponent_pfr
         - field_opponent_wikipedia
         - field_opponent_season_record
         - field_opponent_season_finish
-        - field_opp_pro_bowlers
-        - field_opp_draft_picks
-        - group_coaching_staff
       label: 'Opponent Info'
       region: content
-      parent_name: ''
-      weight: 5
-      format_type: details
+      parent_name: group_tabs
+      weight: 2
+      format_type: tab
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
         label_as_html: false
-        open: true
+        formatter: closed
         description: ''
         required_fields: true
+        open: true
     group_coaching_staff:
       children:
+        - field_opp_hc_notes
         - field_pats_record_vs_coach
         - field_opposing_coach
         - field_opp_dc
         - field_opp_oc
       label: 'Coaching Staff'
       region: content
-      parent_name: group_opponent_info
-      weight: 9
-      format_type: details
+      parent_name: group_tabs
+      weight: 4
+      format_type: tab
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
         label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
         open: false
+    group_tabs:
+      children:
+        - group_game_info
+        - group_opponent_info
+        - group_player_info
+        - group_coaching_staff
+        - group_game_media
+      label: Tabs
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_game_info:
+      children:
+        - field_date
+        - field_season
+        - field_game_summary
+        - field_game_links
+        - title
+        - field_pfr_link
+      label: 'Game Info'
+      region: content
+      parent_name: group_tabs
+      weight: 1
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_player_info:
+      children:
+        - field_opp_pro_bowlers
+        - field_offensive_leaders
+        - field_defensive_leaders
+        - field_opp_draft_picks
+      label: 'Player Info'
+      region: content
+      parent_name: group_tabs
+      weight: 3
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_game_media:
+      children:
+        - field_highlight_video_url
+        - field_youtube_highlights
+        - field_game_video
+      label: 'Game Media'
+      region: content
+      parent_name: group_tabs
+      weight: 5
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
         description: ''
         required_fields: true
 id: node.game.podcast_info
@@ -132,7 +210,7 @@ content:
     third_party_settings: {  }
   field_defensive_leaders:
     type: text_textarea
-    weight: 3
+    weight: 13
     region: content
     settings:
       rows: 5
@@ -140,7 +218,7 @@ content:
     third_party_settings: {  }
   field_game_links:
     type: link_default
-    weight: 11
+    weight: 17
     region: content
     settings:
       placeholder_url: ''
@@ -148,7 +226,7 @@ content:
     third_party_settings: {  }
   field_game_summary:
     type: text_textarea
-    weight: 7
+    weight: 16
     region: content
     settings:
       rows: 10
@@ -156,7 +234,7 @@ content:
     third_party_settings: {  }
   field_game_video:
     type: string_textfield
-    weight: 15
+    weight: 4
     region: content
     settings:
       size: 60
@@ -164,7 +242,7 @@ content:
     third_party_settings: {  }
   field_highlight_video_url:
     type: string_textfield
-    weight: 10
+    weight: 2
     region: content
     settings:
       size: 60
@@ -172,7 +250,7 @@ content:
     third_party_settings: {  }
   field_offensive_leaders:
     type: text_textarea
-    weight: 4
+    weight: 12
     region: content
     settings:
       rows: 5
@@ -180,7 +258,7 @@ content:
     third_party_settings: {  }
   field_opp_dc:
     type: select2_entity_reference
-    weight: 5
+    weight: 14
     region: content
     settings:
       width: 100%
@@ -190,7 +268,7 @@ content:
     third_party_settings: {  }
   field_opp_draft_picks:
     type: text_textarea
-    weight: 8
+    weight: 14
     region: content
     settings:
       rows: 5
@@ -198,7 +276,7 @@ content:
     third_party_settings: {  }
   field_opp_hc_notes:
     type: text_textarea
-    weight: 2
+    weight: 11
     region: content
     settings:
       rows: 5
@@ -206,7 +284,7 @@ content:
     third_party_settings: {  }
   field_opp_oc:
     type: select2_entity_reference
-    weight: 6
+    weight: 15
     region: content
     settings:
       width: 100%
@@ -216,7 +294,7 @@ content:
     third_party_settings: {  }
   field_opp_pro_bowlers:
     type: string_textfield
-    weight: 7
+    weight: 11
     region: content
     settings:
       size: 60
@@ -224,7 +302,7 @@ content:
     third_party_settings: {  }
   field_opponent:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -234,7 +312,7 @@ content:
     third_party_settings: {  }
   field_opponent_pfr:
     type: link_default
-    weight: 2
+    weight: 6
     region: content
     settings:
       placeholder_url: ''
@@ -242,7 +320,7 @@ content:
     third_party_settings: {  }
   field_opponent_season_finish:
     type: text_textarea
-    weight: 6
+    weight: 10
     region: content
     settings:
       rows: 5
@@ -250,7 +328,7 @@ content:
     third_party_settings: {  }
   field_opponent_season_record:
     type: string_textfield
-    weight: 4
+    weight: 8
     region: content
     settings:
       size: 60
@@ -258,7 +336,7 @@ content:
     third_party_settings: {  }
   field_opponent_team_ranks:
     type: text_textarea
-    weight: 1
+    weight: 4
     region: content
     settings:
       rows: 5
@@ -266,7 +344,7 @@ content:
     third_party_settings: {  }
   field_opponent_wikipedia:
     type: link_default
-    weight: 3
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -274,7 +352,7 @@ content:
     third_party_settings: {  }
   field_opposing_coach:
     type: select2_entity_reference
-    weight: 3
+    weight: 13
     region: content
     settings:
       width: 100%
@@ -284,7 +362,7 @@ content:
     third_party_settings: {  }
   field_pats_record_vs_coach:
     type: link_default
-    weight: 2
+    weight: 12
     region: content
     settings:
       placeholder_url: ''
@@ -292,7 +370,7 @@ content:
     third_party_settings: {  }
   field_pfr_link:
     type: string_textfield
-    weight: 6
+    weight: 19
     region: content
     settings:
       size: 60
@@ -300,14 +378,14 @@ content:
     third_party_settings: {  }
   field_season:
     type: number
-    weight: 13
+    weight: 15
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_youtube_highlights:
     type: link_default
-    weight: 12
+    weight: 3
     region: content
     settings:
       placeholder_url: ''
@@ -315,18 +393,18 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   simple_sitemap_index_now:
-    weight: 9
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 0
+    weight: 18
     region: content
     settings:
       size: 60
