@@ -28,8 +28,17 @@
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Uuid/" isTestSource="false" packagePrefix="Drupal\Component\Uuid\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Component/Version/" isTestSource="false" packagePrefix="Drupal\Component\Version\" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/lib/Drupal/Core" isTestSource="false" packagePrefix="Drupal\Core\" />
-      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/web/core/tests/Drupal/Tests/Composer/Plugin/Scaffold/fixtures/composer-plugin-implements-scaffold-events/src" isTestSource="false" packagePrefix="Drupal\Tests\fixture\Composer\Plugin\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/path_repos/cweagans--composer-patches/src" isTestSource="false" packagePrefix="cweagans\Fake\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/../Drupal/BuildTests" isTestSource="false" packagePrefix="Drupal\BuildTests\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/../Drupal/FunctionalJavascriptTests" isTestSource="false" packagePrefix="Drupal\FunctionalJavascriptTests\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/../Drupal/FunctionalTests" isTestSource="false" packagePrefix="Drupal\FunctionalTests\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/../Drupal/KernelTests" isTestSource="false" packagePrefix="Drupal\KernelTests\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/../Drupal/Tests" isTestSource="false" packagePrefix="Drupal\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/Rules" isTestSource="false" packagePrefix="Drupal\PHPStan\Rules\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/web/modules/contrib/cloudflare_purge/src" isTestSource="false" packagePrefix="Drupal\cloudflare_purge\" />
+      <sourceFolder url="file://$MODULE_DIR$/web/modules/contrib/markdownify/src" isTestSource="false" packagePrefix="Drupal\markdownify\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
@@ -122,6 +131,18 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/agaric/php-facebook" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/html-to-markdown" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php84" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/e0ipso/twig-storybook" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/hamstar/wikimate" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/justinrainbow/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/marc-mabe/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/rmccue/requests" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sabberworm/php-css-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core" />
+      <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core-dev" />
+      <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core-recommended" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
