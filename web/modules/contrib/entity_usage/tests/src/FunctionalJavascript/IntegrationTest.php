@@ -471,7 +471,7 @@ class IntegrationTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals([], $usage);
 
     // Create Node 3 referencing Node 1 with an absolute URL in the link field.
-    // Whitelist the local hostname so we can test absolute URLs.
+    // Configure the local hostname so we can test absolute URLs.
     $current_request = \Drupal::request();
     $config = \Drupal::configFactory()->getEditable('entity_usage.settings');
     $config->set('site_domains', [$current_request->getHttpHost() . $current_request->getBasePath()]);

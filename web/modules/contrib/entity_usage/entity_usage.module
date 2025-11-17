@@ -41,6 +41,7 @@ function entity_usage_entity_presave(EntityInterface $entity): void {
     $enabled_target_entity_types = $config->get('track_enabled_target_entity_types');
     // Every entity type is tracked if not set.
     if (!is_array($enabled_target_entity_types) || in_array($entity->getEntityTypeId(), $enabled_target_entity_types, TRUE)) {
+      // @phpstan-ignore classConstant.internalClass, method.internalClass
       \Drupal::service(PreSaveUrlRecorder::class)->recordEntity($entity);
     }
   }
@@ -63,6 +64,7 @@ function entity_usage_entity_update(EntityInterface $entity): void {
   // The previous URL is no longer needed so remove it to save memory in case
   // this is a part of a long-running process updating a large number of
   // entities.
+  // @phpstan-ignore classConstant.internalClass, method.internalClass
   \Drupal::service(PreSaveUrlRecorder::class)->removeEntity($entity);
 }
 
@@ -153,7 +155,7 @@ function entity_usage_form_alter(array &$form, FormStateInterface $form_state, s
     return;
   }
 
-  $local_task_entity_types = $config->get('local_task_enabled_entity_types') ?: [];
+  $local_task_entity_types = $config->get('local_task_enabled_entity_types');
   $usage_url = in_array($entity_type_id, $local_task_entity_types, TRUE) ?
     Url::fromRoute("entity.$entity_type_id.entity_usage", [
       $entity_type_id => $entity->id(),

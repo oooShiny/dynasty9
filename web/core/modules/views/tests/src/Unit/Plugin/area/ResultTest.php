@@ -21,13 +21,6 @@ use Prophecy\Argument;
  */
 class ResultTest extends UnitTestCase {
 
-  const SEPARATOR_COMMA = ',';
-  const SEPARATOR_PERIOD = '.';
-  const SEPARATOR_SPACE = ' ';
-  const SEPARATOR_THIN_SPACE = "\t";
-  const SEPARATOR_APOSTROPHE = "'";
-  const SEPARATOR_NONE = '';
-
   /**
    * The view executable object.
    *
@@ -83,24 +76,16 @@ class ResultTest extends UnitTestCase {
    *
    * @param string $content
    *   The content to use when rendering the handler.
-   * @param string $thousand_separator
-   *   The thousand separator to use
    * @param string $expected
    *   The expected content string.
    * @param int $items_per_page
    *   The items per page of the configuration.
-   * @param int $current_page
-   *   The current page of the view
-   * @param int $total_rows
-   *   The total rows found in the view
    *
    * @dataProvider providerTestResultArea
    */
-  public function testResultArea($content, $thousand_separator, $expected, $items_per_page = 0, $current_page = 0, $total_rows = 1000): void {
-    $this->setupViewPager($items_per_page, $current_page, $total_rows);
+  public function testResultArea($content, $expected, $items_per_page = 0): void {
     $this->setupViewPager($items_per_page);
     $this->resultHandler->options['content'] = $content;
-    $this->resultHandler->options['thousand_separator'] = $thousand_separator;
     $this->assertEquals(['#markup' => $expected], $this->resultHandler->render());
   }
 
@@ -112,27 +97,23 @@ class ResultTest extends UnitTestCase {
    */
   public static function providerTestResultArea() {
     return [
-      ['@label', self::SEPARATOR_NONE, 'ResultTest'],
-      ['@start', self::SEPARATOR_COMMA, '1'],
-      ['@start', self::SEPARATOR_COMMA, '1', 1],
-      ['@start', self::SEPARATOR_NONE, '1000', 1, 999, 1000],
-      ['@start', self::SEPARATOR_COMMA, '1,000', 1, 999, 1000],
-      ['@end', self::SEPARATOR_COMMA, '1,000'],
-      ['@end', self::SEPARATOR_PERIOD, '1', 1],
-      ['@end', self::SEPARATOR_PERIOD, '1.000', 1, 999, 1000],
-      ['@total', self::SEPARATOR_PERIOD, '1.000'],
-      ['@total', self::SEPARATOR_SPACE, '1 000', 1],
-      ['@per_page', self::SEPARATOR_SPACE, '0'],
-      ['@per_page', self::SEPARATOR_SPACE, '1', 1],
-      ['@current_page', self::SEPARATOR_SPACE, '1'],
-      ['@current_page', self::SEPARATOR_SPACE, '1', 1],
-      ['@current_record_count', self::SEPARATOR_THIN_SPACE, '1000'],
-      ['@current_record_count', self::SEPARATOR_APOSTROPHE, '1', 1],
-      ['@page_count', self::SEPARATOR_SPACE, '1'],
-      // @page_count doesn't honor the thousand separator.
-      ['@page_count', self::SEPARATOR_PERIOD, '1000', 1],
-      ['@start | @end | @total', self::SEPARATOR_APOSTROPHE, "1 | 1'000 | 1'000"],
-      ['@start | @end | @total', self::SEPARATOR_SPACE, '1 | 100 | 1 000', 100],
+      ['@label', 'ResultTest'],
+      ['@start', '1'],
+      ['@start', '1', 1],
+      ['@end', '100'],
+      ['@end', '1', 1],
+      ['@total', '100'],
+      ['@total', '100', 1],
+      ['@per_page', '0'],
+      ['@per_page', '1', 1],
+      ['@current_page', '1'],
+      ['@current_page', '1', 1],
+      ['@current_record_count', '100'],
+      ['@current_record_count', '1', 1],
+      ['@page_count', '1'],
+      ['@page_count', '100', 1],
+      ['@start | @end | @total', '1 | 100 | 100'],
+      ['@start | @end | @total', '1 | 1 | 100', 1],
     ];
   }
 

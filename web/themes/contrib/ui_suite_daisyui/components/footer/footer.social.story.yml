@@ -1,0 +1,40 @@
+name: Social
+slots:
+  social:
+    - type: html_tag
+      tag: a
+      icon:
+        type: icon
+        pack_id: hero_solid_24
+        icon_id: bolt
+        settings:
+          size: 32
+          stroke_width: 2
+      attributes:
+        href: "#"
+    - type: html_tag
+      tag: a
+      icon:
+        type: icon
+        pack_id: hero_solid_24
+        icon_id: star
+        settings:
+          size: 32
+          stroke_width: 2
+      attributes:
+        href: "#"
+    - type: html_tag
+      tag: a
+      icon:
+        type: icon
+        pack_id: hero_solid_24
+        icon_id: moon
+        settings:
+          size: 32
+          stroke_width: 2
+      attributes:
+        href: "#"
+props:
+  social_title: social
+  attributes:
+    class: ["bg-base-300", "text-base-content", "p-4"]

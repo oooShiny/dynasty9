@@ -16,7 +16,7 @@ test_dependencies:
   - entity_browser_block:entity_browser_block
   - inline_entity_form:inline_entity_form
 
-# Information added by Drupal.org packaging script on 2025-04-04
-version: '8.x-2.0-beta24'
+# Information added by Drupal.org packaging script on 2025-11-05
+version: '8.x-2.0-beta25'
 project: 'entity_usage'
-datestamp: 1743745776
+datestamp: 1762358231

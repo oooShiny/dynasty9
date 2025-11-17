@@ -16,6 +16,9 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\entity_usage\EntityUsageInterface;
+use Drupal\layout_builder\InlineBlockUsageInterface;
+use Drupal\paragraphs\ParagraphInterface;
+use Drupal\trash\TrashManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -93,6 +96,20 @@ class ListUsageController extends ControllerBase {
   protected $pagerManager;
 
   /**
+   * The inline block usage service.
+   *
+   * @var \Drupal\layout_builder\InlineBlockUsageInterface|null
+   */
+  protected $inlineBlockUsage;
+
+  /**
+   * The trash manager.
+   *
+   * @var \Drupal\trash\TrashManagerInterface|null
+   */
+  protected ?TrashManagerInterface $trashManager;
+
+  /**
    * ListUsageController constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -105,14 +122,28 @@ class ListUsageController extends ControllerBase {
    *   The config factory service.
    * @param \Drupal\Core\Pager\PagerManagerInterface $pager_manager
    *   The pager manager.
+   * @param \Drupal\layout_builder\InlineBlockUsageInterface|null $inline_block_usage
+   *   The inline block usage.
+   * @param \Drupal\trash\TrashManagerInterface|null $trash_manager
+   *   The trash manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, EntityUsageInterface $entity_usage, ConfigFactoryInterface $config_factory, PagerManagerInterface $pager_manager) {
+  public function __construct(
+    EntityTypeManagerInterface $entity_type_manager,
+    EntityFieldManagerInterface $entity_field_manager,
+    EntityUsageInterface $entity_usage,
+    ConfigFactoryInterface $config_factory,
+    PagerManagerInterface $pager_manager,
+    ?InlineBlockUsageInterface $inline_block_usage,
+    ?TrashManagerInterface $trash_manager,
+  ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->entityFieldManager = $entity_field_manager;
     $this->entityUsage = $entity_usage;
     $this->entityUsageConfig = $config_factory->get('entity_usage.settings');
     $this->itemsPerPage = $this->entityUsageConfig->get('usage_controller_items_per_page') ?: self::ITEMS_PER_PAGE_DEFAULT;
     $this->pagerManager = $pager_manager;
+    $this->inlineBlockUsage = $inline_block_usage;
+    $this->trashManager = $trash_manager;
   }
 
   /**
@@ -124,7 +155,9 @@ class ListUsageController extends ControllerBase {
       $container->get('entity_field.manager'),
       $container->get('entity_usage.usage'),
       $container->get('config.factory'),
-      $container->get('pager.manager')
+      $container->get('pager.manager'),
+      $container->get('inline_block.usage', ContainerInterface::NULL_ON_INVALID_REFERENCE),
+      $container->get('trash.manager', ContainerInterface::NULL_ON_INVALID_REFERENCE)
     );
   }
 
@@ -217,6 +250,13 @@ class ListUsageController extends ControllerBase {
       // results every time records are added/removed to the same target entity.
     }
     $rows = [];
+
+    // Tell the Trash module not to hide entities that are trashed.
+    if (!is_null($this->trashManager)) {
+      $prev_trash_context = $this->trashManager->getTrashContext();
+      $this->trashManager->setTrashContext('ignore');
+    }
+
     $entity = $this->entityTypeManager->getStorage($entity_type)->load($entity_id);
     if (!$entity) {
       return $rows;
@@ -242,6 +282,16 @@ class ListUsageController extends ControllerBase {
           // If for some reason this record is broken, just skip it.
           continue;
         }
+
+        // Skip soft-deleted inline blocks. Layout Builder's cron hook will
+        // delete them, but until then we don't want them showing as a source.
+        if ($source_entity instanceof BlockContentInterface && !$source_entity->isReusable() && $this->inlineBlockUsage) {
+          $blockUsageData = $this->inlineBlockUsage->getUsage($source_entity->id());
+          if (!$blockUsageData || is_null($blockUsageData->layout_entity_id)) {
+            continue;
+          }
+        }
+
         $field_definitions = $this->entityFieldManager->getFieldDefinitions($source_type, $source_entity->bundle());
         $default_langcode = $source_entity->language()->getId();
         $used_in = [];
@@ -310,6 +360,11 @@ class ListUsageController extends ControllerBase {
           ['data' => $used_in],
         ];
       }
+    }
+
+    // Restore previous trash context if we changed it.
+    if (isset($prev_trash_context)) {
+      $this->trashManager->setTrashContext($prev_trash_context);
     }
 
     $this->allRows = $rows;
@@ -417,8 +472,15 @@ class ListUsageController extends ControllerBase {
     // Treat paragraph entities in a special manner. Paragraph entities
     // should get their host (parent) entity's status.
     if ($source_entity->getEntityTypeId() == 'paragraph') {
-      /** @var \Drupal\paragraphs\ParagraphInterface $source_entity */
+      assert($source_entity instanceof ParagraphInterface);
       $parent = $source_entity->getParentEntity();
+      if (!empty($parent)) {
+        return $this->getSourceEntityStatus($parent);
+      }
+    }
+    // Do the same for inline content blocks.
+    elseif ($source_entity instanceof BlockContentInterface && !$source_entity->isReusable()) {
+      $parent = $this->getContentBlockParentEntity($source_entity);
       if (!empty($parent)) {
         return $this->getSourceEntityStatus($parent);
       }
@@ -454,9 +516,26 @@ class ListUsageController extends ControllerBase {
    *   shown on the UI (for example when dealing with an orphan paragraph).
    */
   protected function getSourceEntityLink(EntityInterface $source_entity, $text = NULL): mixed {
-    // Note that $paragraph_entity->label() will return a string of type:
-    // "{parent label} > {parent field}", which is actually OK for us.
+    // Treat block_content entities in a special manner. Block content
+    // relationships are stored as serialized data on the host entity. This
+    // makes it difficult to query parent data. Instead we look up relationship
+    // data which may exist in entity_usage tables. This requires site builders
+    // to set up entity usage on host-entity-type -> block_content manually.
+    // @todo this could be made more generic to support other entity types with
+    // difficult to handle parent -> child relationships.
+    if ($source_entity instanceof BlockContentInterface && !$source_entity->isReusable()) {
+      $parent = $this->getContentBlockParentEntity($source_entity);
+      if ($parent) {
+        return $this->getSourceEntityLink($parent);
+      }
+    }
+
+    $entity_in_trash = !is_null($this->trashManager) && trash_entity_is_deleted($source_entity);
+
     $entity_label = $source_entity->access('view label') ? $source_entity->label() : $this->t('- Restricted access -');
+    if ($entity_in_trash) {
+      $entity_label .= ' ' . $this->t('(in trash)');
+    }
 
     $rel = NULL;
     if ($source_entity->hasLinkTemplate('revision')) {
@@ -475,7 +554,12 @@ class ListUsageController extends ControllerBase {
     if ($rel) {
       // Prevent 404s by exposing the text unlinked if the user has no access
       // to view the entity.
-      return $source_entity->access('view') ? $source_entity->toLink($link_text, $rel) : $link_text;
+      $options = [];
+      if ($entity_in_trash) {
+        // Trashed entities need a query string parameter to allow viewing.
+        $options['query'] = ['in_trash' => TRUE];
+      }
+      return $source_entity->access('view') ? $source_entity->toLink($link_text, $rel, $options) : $link_text;
     }
 
     // Treat paragraph entities in a special manner. Normal paragraph entities
@@ -488,26 +572,27 @@ class ListUsageController extends ControllerBase {
         return $this->getSourceEntityLink($parent, $link_text);
       }
     }
-    // Treat block_content entities in a special manner. Block content
-    // relationships are stored as serialized data on the host entity. This
-    // makes it difficult to query parent data. Instead we look up relationship
-    // data which may exist in entity_usage tables. This requires site builders
-    // to set up entity usage on host-entity-type -> block_content manually.
-    // @todo this could be made more generic to support other entity types with
-    // difficult to handle parent -> child relationships.
-    elseif ($source_entity->getEntityTypeId() === 'block_content') {
-      $sources = $this->entityUsage->listSources($source_entity, FALSE);
-      $source = reset($sources);
-      if ($source !== FALSE) {
-        $parent = $this->entityTypeManager()->getStorage($source['source_type'])->load($source['source_id']);
-        if ($parent) {
-          return $this->getSourceEntityLink($parent);
-        }
-      }
-    }
 
     // As a fallback just return a non-linked label.
     return $link_text;
+  }
+
+  /**
+   * Figure out the "parent" entity of a content block.
+   *
+   * @param \Drupal\block_content\BlockContentInterface $block_content
+   *   The block entity we are interested in.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface|null
+   *   The entity that has a tracked relationship pointing to this block.
+   */
+  private function getContentBlockParentEntity(BlockContentInterface $block_content): ?EntityInterface {
+    $sources = $this->entityUsage->listSources($block_content, FALSE);
+    $source = reset($sources);
+    if (!empty($source['source_type']) && !empty($source['source_id'])) {
+      return $this->entityTypeManager()->getStorage($source['source_type'])->load($source['source_id']);
+    }
+    return NULL;
   }
 
   /**

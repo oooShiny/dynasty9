@@ -14,9 +14,6 @@ use Drupal\views\Views;
  */
 class FieldCounterTest extends ViewsKernelTestBase {
 
-  const SEPARATOR_COMMA = ',';
-  const SEPARATOR_NONE = '';
-
   /**
    * {@inheritdoc}
    */
@@ -102,13 +99,12 @@ class FieldCounterTest extends ViewsKernelTestBase {
         'table' => 'views',
         'field' => 'counter',
         'relationship' => 'none',
-        'thousand_separator' => self::SEPARATOR_NONE,
       ],
       'name' => [
         'id' => 'name',
         'table' => 'views_test_data',
         'field' => 'name',
-        'relationship' => self::SEPARATOR_NONE,
+        'relationship' => 'none',
       ],
     ]);
     $view->displayHandlers->get('default')->setOption('pager', [
@@ -149,7 +145,6 @@ class FieldCounterTest extends ViewsKernelTestBase {
         'field' => 'counter',
         'relationship' => 'none',
         'counter_start' => $counter_start,
-        'thousand_separator' => self::SEPARATOR_NONE,
       ],
       'name' => [
         'id' => 'name',
@@ -179,31 +174,6 @@ class FieldCounterTest extends ViewsKernelTestBase {
 
     $counter = $view->style_plugin->getField(0, 'counter');
     $this->assertEquals($counter_start + 2, $counter);
-    $view->destroy();
-
-    // Test using thousand separator option
-    $view->setDisplay();
-    $view->displayHandlers->get('default')->overrideOption('fields', [
-      'counter' => [
-        'id' => 'counter',
-        'table' => 'views',
-        'field' => 'counter',
-        'relationship' => 'none',
-        'counter_start' => 1000000,
-        'thousand_separator' => self::SEPARATOR_COMMA,
-      ],
-      'name' => [
-        'id' => 'name',
-        'table' => 'views_test_data',
-        'field' => 'name',
-        'relationship' => 'none',
-      ],
-    ]);
-
-    $view->preview();
-
-    $counter = $view->style_plugin->getField(0, 'counter');
-    $this->assertEquals('1,000,000', $counter);
   }
 
 }

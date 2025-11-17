@@ -1,0 +1,9 @@
+name: Aside
+slots:
+  aside:
+    - type: html_tag
+      tag: p
+      value: "Copyright © 2025 - All right reserved by ACME Industries Ltd"
+props:
+  attributes:
+    class: ["bg-base-300", "text-base-content", "p-4"]

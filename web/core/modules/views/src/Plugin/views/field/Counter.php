@@ -29,7 +29,6 @@ class Counter extends FieldPluginBase {
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['counter_start'] = ['default' => 1];
-    $options['thousand_separator'] = ['default' => ','];
     return $options;
   }
 
@@ -43,11 +42,6 @@ class Counter extends FieldPluginBase {
       '#default_value' => $this->options['counter_start'],
       '#description' => $this->t('Specify the number the counter should start at.'),
       '#size' => 2,
-    ];
-    $form['thousand_separator'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Thousand marker'),
-      '#default_value' => $this->options['thousand_separator'],
     ];
 
     parent::buildOptionsForm($form, $form_state);
@@ -75,7 +69,7 @@ class Counter extends FieldPluginBase {
     // Add the counter for the current site.
     $count += $this->view->row_index + 1;
 
-    return number_format($count, 0, '', $this->options['thousand_separator']);
+    return $count;
   }
 
 }

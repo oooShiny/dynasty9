@@ -1,0 +1,51 @@
+name: Aside & Social
+slots:
+  aside:
+    - icon:
+        type: icon
+        pack_id: hero_outline_24
+        icon_id: hashtag
+        settings:
+          size: 48
+          stroke_width: 2
+    - type: html_tag
+      tag: p
+      value: "ACME Industries Ltd.</br>Providing reliable tech since 1992"
+  social:
+    - type: html_tag
+      tag: a
+      icon:
+        type: icon
+        pack_id: hero_solid_24
+        icon_id: bolt
+        settings:
+          size: 32
+          stroke_width: 2
+      attributes:
+        href: "#"
+    - type: html_tag
+      tag: a
+      icon:
+        type: icon
+        pack_id: hero_solid_24
+        icon_id: star
+        settings:
+          size: 32
+          stroke_width: 2
+      attributes:
+        href: "#"
+    - type: html_tag
+      tag: a
+      icon:
+        type: icon
+        pack_id: hero_solid_24
+        icon_id: moon
+        settings:
+          size: 32
+          stroke_width: 2
+      attributes:
+        href: "#"
+props:
+  social_title: social
+  attributes:
+    class: ["bg-neutral", "text-neutral-content", "p-10"]

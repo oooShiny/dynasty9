@@ -56,3 +56,14 @@ function entity_usage_post_update_remove_unsupported_source_entity_types(array &
       ->save();
   }
 }
+
+/**
+ * Set "local_task_enabled_entity_types" config value to an empty array if null.
+ */
+function entity_usage_post_update_fix_local_task_enabled_entity_types(): void {
+  $config = \Drupal::configFactory()->getEditable('entity_usage.settings');
+  $entity_types = $config->get('local_task_enabled_entity_types');
+  if ($entity_types === NULL) {
+    $config->set('local_task_enabled_entity_types', [])->save();
+  }
+}

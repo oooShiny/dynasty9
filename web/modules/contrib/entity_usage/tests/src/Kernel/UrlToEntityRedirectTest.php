@@ -32,6 +32,7 @@ class UrlToEntityRedirectTest extends EntityKernelTestBase {
     $this->installSchema('entity_usage', ['entity_usage']);
     $this->installEntitySchema('path_alias');
     $this->installEntitySchema('redirect');
+    $this->installConfig(['entity_usage']);
   }
 
   /**

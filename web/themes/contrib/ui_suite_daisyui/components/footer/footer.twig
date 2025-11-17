@@ -1,0 +1,78 @@
+{% set attributes = attributes.addClass('footer') %}
+
+{% if variant %}
+{% set attributes = (variant != 'default') ? attributes.addClass('footer-' ~ variant) : attributes %}
+{% endif %}
+
+{% if links_break and variant != 'center' %}
+  {% set attributes = attributes.addClass('grid-rows-' ~ links_break) %}
+{% endif %}
+
+{% set heading_level = heading_level|default(6) %}
+
+<footer {{ attributes }}>
+
+{% if variant == 'center' %}
+  {% if links %}
+    {{ _self.links_first_level(links, heading_level) }}
+  {% endif %}
+  {% if aside %}
+    <aside>
+      {{ aside }}
+    </aside>
+  {% endif %}
+  {% if social %}
+    {{ _self.social(social, social_title, heading_level) }}
+  {% endif %}
+{% else %}
+  {% if aside %}
+    <aside>
+      {{ aside }}
+    </aside>
+  {% endif %}
+  {% if links %}
+    {{ _self.links(links, heading_level) }}
+  {% endif %}
+  {% if social %}
+    {{ _self.social(social, social_title, heading_level) }}
+  {% endif %}
+{% endif %}
+</footer>
+
+{% macro links(links, heading_level) %}
+{% for category in links %}
+  <nav>
+      <h{{ heading_level }} class="footer-title">{{ category.title }}</h{{ heading_level }}>
+      {% for link in category.below %}
+        {{ include('ui_suite_daisyui:link', {
+        url: link.url,
+        label: link.title,
+        underline_hover: true,
+        }, with_context: false) }}
+      {% endfor %}
+  </nav>
+{% endfor %}
+{% endmacro %}
+
+{% macro links_first_level(links, heading_level) %}
+<nav class="grid grid-flow-col gap-4">
+{% for link in links %}
+  {{ include('ui_suite_daisyui:link', {
+  url: link.url,
+  label: link.title,
+  underline_hover: true,
+  }, with_context: false) }}
+{% endfor %}
+</nav>
+{% endmacro %}
+
+{% macro social(social, social_title, heading_level) %}
+<nav>
+  {% if social_title %}
+    <h{{ heading_level }} class="footer-title">{{ social_title }}</h{{ heading_level }}>
+  {% endif %}
+  <div class="grid grid-flow-col gap-4">
+    {{ social }}
+  </div>
+</nav>
+{% endmacro %}

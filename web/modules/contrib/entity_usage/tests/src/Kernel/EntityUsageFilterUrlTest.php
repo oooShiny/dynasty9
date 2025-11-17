@@ -33,6 +33,7 @@ class EntityUsageFilterUrlTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
+    $this->installConfig(['entity_usage']);
 
     FieldStorageConfig::create([
       'type' => 'text_long',

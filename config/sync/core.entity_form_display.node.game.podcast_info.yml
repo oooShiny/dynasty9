@@ -72,19 +72,18 @@ dependencies:
     - datetime
     - field_group
     - link
-    - path
     - select2
     - text
 third_party_settings:
   field_group:
     group_opponent_info:
       children:
-        - field_opponent_team_ranks
-        - field_opponent
-        - field_opponent_pfr
-        - field_opponent_wikipedia
         - field_opponent_season_record
         - field_opponent_season_finish
+        - field_opponent_team_ranks
+        - field_opponent_pfr
+        - field_opponent_wikipedia
+        - field_opponent
       label: 'Opponent Info'
       region: content
       parent_name: group_tabs
@@ -141,10 +140,10 @@ third_party_settings:
         width_breakpoint: 640
     group_game_info:
       children:
-        - field_date
-        - field_season
         - field_game_summary
         - field_game_links
+        - field_date
+        - field_season
         - title
         - field_pfr_link
       label: 'Game Info'
@@ -204,7 +203,7 @@ mode: podcast_info
 content:
   field_date:
     type: datetime_default
-    weight: 14
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -302,7 +301,7 @@ content:
     third_party_settings: {  }
   field_opponent:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 10
     region: content
     settings:
       match_operator: CONTAINS
@@ -312,7 +311,7 @@ content:
     third_party_settings: {  }
   field_opponent_pfr:
     type: link_default
-    weight: 6
+    weight: 8
     region: content
     settings:
       placeholder_url: ''
@@ -320,7 +319,7 @@ content:
     third_party_settings: {  }
   field_opponent_season_finish:
     type: text_textarea
-    weight: 10
+    weight: 6
     region: content
     settings:
       rows: 5
@@ -328,7 +327,7 @@ content:
     third_party_settings: {  }
   field_opponent_season_record:
     type: string_textfield
-    weight: 8
+    weight: 5
     region: content
     settings:
       size: 60
@@ -336,7 +335,7 @@ content:
     third_party_settings: {  }
   field_opponent_team_ranks:
     type: text_textarea
-    weight: 4
+    weight: 7
     region: content
     settings:
       rows: 5
@@ -344,7 +343,7 @@ content:
     third_party_settings: {  }
   field_opponent_wikipedia:
     type: link_default
-    weight: 7
+    weight: 9
     region: content
     settings:
       placeholder_url: ''
@@ -370,7 +369,7 @@ content:
     third_party_settings: {  }
   field_pfr_link:
     type: string_textfield
-    weight: 19
+    weight: 21
     region: content
     settings:
       size: 60
@@ -378,7 +377,7 @@ content:
     third_party_settings: {  }
   field_season:
     type: number
-    weight: 15
+    weight: 19
     region: content
     settings:
       placeholder: ''
@@ -391,20 +390,9 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  path:
-    type: path
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  simple_sitemap_index_now:
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 18
+    weight: 20
     region: content
     settings:
       size: 60
@@ -453,8 +441,10 @@ hidden:
   field_week: true
   field_weekday: true
   langcode: true
+  path: true
   promote: true
   simple_sitemap: true
+  simple_sitemap_index_now: true
   status: true
   sticky: true
   uid: true

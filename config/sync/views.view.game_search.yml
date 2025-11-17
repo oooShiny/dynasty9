@@ -1667,6 +1667,7 @@ display:
             show_numbers: true
             processor_configs:
               display_value_widget_order:
+                processor_id: display_value_widget_order
                 weights:
                   sort: 40
                 settings:
@@ -1717,6 +1718,7 @@ display:
             show_numbers: true
             processor_configs:
               display_value_widget_order:
+                processor_id: display_value_widget_order
                 weights:
                   sort: 40
                 settings:
@@ -1767,6 +1769,7 @@ display:
             show_numbers: true
             processor_configs:
               boolean_item:
+                processor_id: boolean_item
                 weights:
                   build: 35
                 settings:
@@ -1863,6 +1866,7 @@ display:
             show_numbers: true
             processor_configs:
               boolean_item:
+                processor_id: boolean_item
                 weights:
                   build: 35
                 settings:
@@ -1914,6 +1918,7 @@ display:
             show_numbers: true
             processor_configs:
               boolean_item:
+                processor_id: boolean_item
                 weights:
                   build: 35
                 settings:
@@ -1965,6 +1970,7 @@ display:
             show_numbers: true
             processor_configs:
               display_value_widget_order:
+                processor_id: display_value_widget_order
                 weights:
                   sort: 40
                 settings:
@@ -2015,6 +2021,7 @@ display:
             show_numbers: true
             processor_configs:
               display_value_widget_order:
+                processor_id: display_value_widget_order
                 weights:
                   sort: 40
                 settings:
@@ -2065,11 +2072,13 @@ display:
             show_numbers: false
             processor_configs:
               exposed_range_slider:
+                processor_id: exposed_range_slider
                 weights:
                   post_query: 60
                 settings:
                   step: 1
               display_value_widget_order:
+                processor_id: display_value_widget_order
                 weights:
                   sort: 40
                 settings:

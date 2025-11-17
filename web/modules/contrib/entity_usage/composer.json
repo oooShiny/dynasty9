@@ -15,13 +15,14 @@
     "drupal/entity_embed": "^1.7",
     "drupal/entity_reference_revisions": "~1.0",
     "drupal/paragraphs": "~1.0",
-    "drupal/webform": "^6.0.0-alpha4",
+    "drupal/webform": "^6.0.0",
     "drupal/block_field": "~1.0",
-    "drupal/dynamic_entity_reference": "~1.0 || ^2.0 || ^4.0",
+    "drupal/dynamic_entity_reference": "^3.0",
     "drupal/entity_browser": "~2.0",
     "drupal/entity_browser_block": "~1.0 || ^2.0",
     "drupal/inline_entity_form": "^1.0@RC || ^3.0@RC",
-    "drupal/redirect": "^1.11"
+    "drupal/redirect": "^1.11",
+    "drupal/trash": "~3.0"
   },
   "extra": {
     "drush": {

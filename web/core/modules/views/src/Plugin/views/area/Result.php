@@ -24,7 +24,6 @@ class Result extends AreaPluginBase {
     $options['content'] = [
       'default' => $this->t('Displaying @start - @end of @total'),
     ];
-    $options['thousand_separator'] = ['default' => ','];
 
     return $options;
   }
@@ -54,11 +53,6 @@ class Result extends AreaPluginBase {
       '#rows' => 3,
       '#default_value' => $this->options['content'],
       '#description' => $this->t('You may use HTML code in this field. The following tokens are supported:') . $list,
-    ];
-    $form['thousand_separator'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Thousand marker'),
-      '#default_value' => $this->options['thousand_separator'],
     ];
   }
 
@@ -109,9 +103,9 @@ class Result extends AreaPluginBase {
     $current_record_count = ($end - $start) + $start_offset;
     // Get the search information.
     $replacements = [];
-    $replacements['@start'] = number_format($start, 0, '', $this->options['thousand_separator']);
-    $replacements['@end'] = number_format($end, 0, '', $this->options['thousand_separator']);
-    $replacements['@total'] = number_format($total, 0, '', $this->options['thousand_separator']);
+    $replacements['@start'] = $start;
+    $replacements['@end'] = $end;
+    $replacements['@total'] = $total;
     $replacements['@label'] = $label;
     $replacements['@per_page'] = $per_page;
     $replacements['@current_page'] = $current_page;

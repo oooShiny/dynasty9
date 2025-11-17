@@ -1,0 +1,45 @@
+name: Footer
+description: "Footer can contain logo, copyright notice, and links to other pages."
+group: Layout
+links:
+  - "https://daisyui.com/components/footer/"
+variants:
+  default:
+    title: Default
+  center:
+    title: Center
+slots:
+  social:
+    title: Social
+  aside:
+    title: Aside
+props:
+  type: object
+  properties:
+    links:
+      title: "Links"
+      description: "Footer links. Each first level in a <nav/>."
+      $ref: "ui-patterns://links"
+    links_break:
+      title: "Links break"
+      description: "Integer only. From 1 to 3."
+      type: integer
+    social_title:
+      title: "Social title"
+      description: "Title of social slot."
+      type: string
+    heading_level:
+      title: "Heading level"
+      type: integer
+      enum:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      "meta:enum":
+        2: h2
+        3: h3
+        4: h4
+        5: h5
+        6: "h6 (Default)"

@@ -29,6 +29,7 @@ class UrlToEntityTest extends EntityKernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
+    $this->installConfig(['entity_usage']);
 
     $this->installEntitySchema('path_alias');
   }

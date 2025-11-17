@@ -58,7 +58,7 @@ class EntityUsageTrackExceptionTest extends KernelTestBase {
 
     $this->installEntitySchema('entity_test');
     $this->installSchema('entity_usage', ['entity_usage']);
-    $this->installConfig(['filter']);
+    $this->installConfig(['entity_usage', 'filter']);
 
     $this->config('entity_usage.settings')
       ->set('track_enabled_source_entity_types', ['entity_test'])

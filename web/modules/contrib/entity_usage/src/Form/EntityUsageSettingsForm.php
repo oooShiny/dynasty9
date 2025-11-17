@@ -140,7 +140,7 @@ class EntityUsageSettingsForm extends ConfigFormBase {
       '#type' => 'checkboxes',
       '#title' => $this->t('Local task entity types'),
       '#options' => $tabs_options,
-      '#default_value' => $config->get('local_task_enabled_entity_types') ?: [],
+      '#default_value' => $config->get('local_task_enabled_entity_types'),
     ];
 
     // Entity types (source).

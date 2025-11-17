@@ -50,9 +50,6 @@ views.area.result:
     content:
       type: text
       label: 'The shown text of the result summary area'
-    thousand_separator:
-      type: text
-      label: 'Thousand marker'
 
 views.area.title:
   type: views_area

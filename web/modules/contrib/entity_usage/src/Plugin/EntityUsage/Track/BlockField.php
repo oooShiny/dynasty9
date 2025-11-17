@@ -34,7 +34,7 @@ class BlockField extends EntityUsageTrackBase {
 
     // If there is a view inside this block, track the view entity instead.
     if ($block_instance->getBaseId() === 'views_block' && $this->isEntityTypeTracked('view')) {
-      [$view_name, $display_id] = explode('-', $block_instance->getDerivativeId(), 2);
+      [$view_name] = explode('-', $block_instance->getDerivativeId(), 2);
       // @todo worth trying to track the display id as well?
       // At this point the view is supposed to exist. Only track it if so.
       $exists = (bool) $this->entityTypeManager->getStorage('view')

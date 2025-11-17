@@ -79,7 +79,7 @@ class EmbeddedContentTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals($expected, $usage);
 
     // Create node 3 referencing N2 and N1 on the same field.
-    $embedded_text .= '<p>Foo bar</p>' . '<drupal-entity data-embed-button="node" data-entity-embed-display="entity_reference:entity_reference_label" data-entity-embed-display-settings="{&quot;link&quot;:1}" data-entity-type="node" data-entity-uuid="' . $node2->uuid() . '"></drupal-entity>';
+    $embedded_text .= '<p>Foo bar</p><drupal-entity data-embed-button="node" data-entity-embed-display="entity_reference:entity_reference_label" data-entity-embed-display-settings="{&quot;link&quot;:1}" data-entity-type="node" data-entity-uuid="' . $node2->uuid() . '"></drupal-entity>';
     $node3 = Node::create([
       'type' => 'eu_test_ct',
       'title' => 'Node 3',
@@ -186,7 +186,7 @@ class EmbeddedContentTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals($expected, $usage);
 
     // Create node 3 referencing N2 and N1 on the same field.
-    $embedded_text .= '<p>Foo bar</p>' . '<p>foo2 <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="' . $node2->uuid() . '">linked text 2</a> bar 2</p>';
+    $embedded_text .= '<p>Foo bar</p><p>foo2 <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="' . $node2->uuid() . '">linked text 2</a> bar 2</p>';
     $node3 = Node::create([
       'type' => 'eu_test_ct',
       'title' => 'Node 3',
@@ -309,7 +309,7 @@ class EmbeddedContentTest extends EntityUsageJavascriptTestBase {
     $this->assertEquals($expected, $usage);
 
     // Create node 3 referencing N2 and N1 on the same field.
-    $embedded_text .= '<p>Foo bar</p>' . '<p>foo2 <a href="/node/' . $node2->id() . '">linked text 2</a> bar 2</p>';
+    $embedded_text .= '<p>Foo bar</p><p>foo2 <a href="/node/' . $node2->id() . '">linked text 2</a> bar 2</p>';
     $node3 = Node::create([
       'type' => 'eu_test_ct',
       'title' => 'Node 3',
@@ -358,7 +358,7 @@ class EmbeddedContentTest extends EntityUsageJavascriptTestBase {
 
     // Create node 5 referencing node 4 using an absolute URL.
     $embedded_text = '<p>foo <a href="' . $node4->toUrl()->setAbsolute(TRUE)->toString() . '">linked text</a> bar</p>';
-    // Whitelist the local hostname so we can test absolute URLs.
+    // Configure the local hostname so we can test absolute URLs.
     $current_request = \Drupal::request();
     $config = \Drupal::configFactory()->getEditable('entity_usage.settings');
     $config->set('site_domains', [$current_request->getHttpHost() . $current_request->getBasePath()]);
@@ -407,7 +407,7 @@ class EmbeddedContentTest extends EntityUsageJavascriptTestBase {
     ])->save();
 
     // Create node 6 referencing N5 twice, once on each field.
-    $embedded_text = '<p>Foo bar</p>' . '<p>foo2 <a href="/node/' . $node5->id() . '">linked text 5</a> bar</p>';
+    $embedded_text = '<p>Foo bar</p><p>foo2 <a href="/node/' . $node5->id() . '">linked text 5</a> bar</p>';
     $node6 = Node::create([
       'type' => 'eu_test_ct',
       'title' => 'Node 6',
@@ -430,7 +430,7 @@ class EmbeddedContentTest extends EntityUsageJavascriptTestBase {
     foreach ($usages['node'][$node5->id()] as $usage) {
       $this->assertEquals(1, $usage['count']);
       $this->assertEquals('html_link', $usage['method']);
-      $this->assertTrue(in_array($usage['field_name'], ['field_eu_test_rich_text', 'field_eu_test_normal_text']));
+      $this->assertContains($usage['field_name'], ['field_eu_test_rich_text', 'field_eu_test_normal_text']);
     }
 
     // Create node 7 referencing node 6 using an aliased URL.

@@ -277,7 +277,7 @@ class ParagraphsTest extends EntityUsageJavascriptTestBase {
 
     // The usage is still there.
     $usage = $usage_service->listSources($media1);
-    $this->assertTrue(!empty($usage['paragraph']));
+    $this->assertNotEmpty($usage['paragraph']);
 
     // Assert how orphaned paragraphs on older revision are shown.
     $this->drupalGet("/admin/content/entity-usage/media/{$media1->id()}");

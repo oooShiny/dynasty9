@@ -76,6 +76,7 @@ class EntityUsageTest extends EntityKernelTestBase {
 
     $this->installEntitySchema('entity_test_mulrevpub');
     $this->installSchema('entity_usage', ['entity_usage']);
+    $this->installConfig('entity_usage');
     $this->tableName = 'entity_usage';
 
     // Create two test entities.
@@ -179,7 +180,6 @@ class EntityUsageTest extends EntityKernelTestBase {
     /** @var \Drupal\Core\Entity\EntityInterface $target_entity */
     $target_entity = $this->testEntities[0];
 
-    $storage = $this->entityTypeManager->getStorage('entity_test_mulrevpub');
     /** @var \Drupal\entity_usage\EntityUsage $entity_usage */
     $entity_usage = $this->container->get('entity_usage.usage');
     $field_name = 'body';

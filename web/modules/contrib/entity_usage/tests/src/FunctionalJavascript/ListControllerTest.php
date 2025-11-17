@@ -141,7 +141,7 @@ class ListControllerTest extends EntityUsageJavascriptTestBase {
       ->execute();
     // Check the usage is there.
     $usage = \Drupal::service('entity_usage.usage')->listSources($node1);
-    $this->assertTrue(!empty($usage['user']));
+    $this->assertNotEmpty($usage['user']);
     // Check the usage list skips it when showing results.
     $this->drupalGet("/admin/content/entity-usage/node/{$node1->id()}");
     $assert_session->pageTextContains('Entity usage information for Node 1');
