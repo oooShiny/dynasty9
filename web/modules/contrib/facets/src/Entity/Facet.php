@@ -11,7 +11,6 @@ use Drupal\facets\Exception\Exception;
 use Drupal\facets\Exception\InvalidProcessorException;
 use Drupal\facets\Exception\InvalidQueryTypeException;
 use Drupal\facets\FacetInterface;
-use Drupal\facets\Hierarchy\HierarchyInterface;
 
 /**
  * Defines the facet configuration entity.
@@ -133,13 +132,6 @@ class Facet extends ConfigEntityBase implements FacetInterface {
    * @var array
    */
   protected $hierarchy;
-
-  /**
-   * The hierarchy plugin instance.
-   *
-   * @var \Drupal\facets\Hierarchy\HierarchyInterface
-   */
-  protected HierarchyInterface $hierarchyInstance;
 
   /**
    * The operator to hand over to the query, currently AND | OR.
@@ -332,12 +324,7 @@ class Facet extends ConfigEntityBase implements FacetInterface {
    */
   protected $min_count = 1;
 
-  /**
-   * Tracks whether the cache dependencies have been calculated.
-   *
-   * @var bool
-   */
-  protected $cacheDependenciesCalculated = FALSE;
+  protected $cache_dependencies_calculated = FALSE;
 
   /**
    * The missing parameter.
@@ -432,7 +419,7 @@ class Facet extends ConfigEntityBase implements FacetInterface {
     $this->hierarchy = ['type' => $id, 'config' => $configuration];
 
     // Unset the hierarchy instance, if exists.
-    unset($this->hierarchyInstance);
+    unset($this->hierarchy_instance);
   }
 
   /**
@@ -446,12 +433,12 @@ class Facet extends ConfigEntityBase implements FacetInterface {
    * {@inheritdoc}
    */
   public function getHierarchyInstance() {
-    if (!isset($this->hierarchyInstance)) {
+    if (!isset($this->hierarchy_instance)) {
       $definition = $this->getHierarchy();
-      $this->hierarchyInstance = $this->getHierarchyManager()
+      $this->hierarchy_instance = $this->getHierarchyManager()
         ->createInstance($definition['type'], (array) $definition['config']);
     }
-    return $this->hierarchyInstance;
+    return $this->hierarchy_instance;
   }
 
   /**
@@ -504,16 +491,14 @@ class Facet extends ConfigEntityBase implements FacetInterface {
   public function getQueryType() {
     $facet_source = $this->getFacetSource();
     if (is_null($facet_source)) {
-      \Drupal::logger('facets')->warning('Facet @id had no source; falling back to search_api_string.', ['@id' => $this->id()]);
-      return 'search_api_string';
+      throw new Exception("No facet source defined for facet.");
     }
 
     $query_types = $facet_source->getQueryTypesForFacet($this);
 
-    // Allow Facets without widgets (e.g. for facets exposed filters, where
-    // views handles the widget part).
+    // Allow Facets without widgets (e.g. for facets exposed filters, where views handles the widget part).
     $widgetQueryType = NULL;
-    if ($this->widget != "<nowidget>") {
+    if($this->widget != "<nowidget>") {
       // Get the widget configured for this facet.
       /** @var \Drupal\facets\Widget\WidgetPluginInterface $widget */
       $widget = $this->getWidgetInstance();
@@ -732,7 +717,6 @@ class Facet extends ConfigEntityBase implements FacetInterface {
   public function getName() {
     return $this->name;
   }
-
   /**
    * {@inheritdoc}
    */
@@ -1035,7 +1019,7 @@ class Facet extends ConfigEntityBase implements FacetInterface {
     // Sort the processors, so we won't have unnecessary changes.
     ksort($this->processor_configs);
 
-    $this->cacheDependenciesCalculated = FALSE;
+    $this->cache_dependencies_calculated = FALSE;
   }
 
   /**
@@ -1045,7 +1029,7 @@ class Facet extends ConfigEntityBase implements FacetInterface {
     unset($this->processor_configs[$processor_id]);
     unset($this->processors[$processor_id]);
 
-    $this->cacheDependenciesCalculated = FALSE;
+    $this->cache_dependencies_calculated = FALSE;
   }
 
   /**
@@ -1235,11 +1219,8 @@ class Facet extends ConfigEntityBase implements FacetInterface {
     return $this->cacheMaxAge;
   }
 
-  /**
-   * Calculates the cache dependencies for this facet entity.
-   */
   protected function calculateCacheDependencies(): void {
-    if (!$this->cacheDependenciesCalculated) {
+    if (!$this->cache_dependencies_calculated) {
       if ($facet_source = $this->getFacetSource()) {
         $this->addCacheableDependency($facet_source);
       }
@@ -1248,7 +1229,7 @@ class Facet extends ConfigEntityBase implements FacetInterface {
         $this->addCacheableDependency($processor);
       }
 
-      $this->cacheDependenciesCalculated = TRUE;
+      $this->cache_dependencies_calculated = TRUE;
     }
   }
 

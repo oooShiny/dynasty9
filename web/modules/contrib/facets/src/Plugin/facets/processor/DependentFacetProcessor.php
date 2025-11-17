@@ -222,9 +222,6 @@ class DependentFacetProcessor extends ProcessorPluginBase implements BuildProces
     return $return;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function supportsFacet(FacetInterface $facet) {
     // Only support facets as entities, not e.g. facets_exposed_filters.
     return $facet->getFacetType() == 'facet_entity';

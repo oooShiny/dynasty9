@@ -14,31 +14,35 @@ abstract class QueryTypeRangeBase extends QueryTypePluginBase {
    */
   public function execute() {
     $query = $this->query;
-    $options = &$query->getOptions();
 
-    $operator = $this->facet->getQueryOperator();
-    $field_identifier = $this->facet->getFieldIdentifier();
-    $exclude = $this->facet->getExclude();
-    $options['search_api_facets'][$field_identifier] = $this->getFacetOptions();
+    // Alter the query here.
+    if (!empty($query)) {
+      $options = &$query->getOptions();
 
-    // Add the filter to the query if there are active values.
-    $active_items = $this->facet->getActiveItems();
-    $filter = $query->createConditionGroup($operator, ['facet:' . $field_identifier]);
-    if (count($active_items)) {
-      foreach ($active_items as $value) {
-        $range = $this->calculateRange($value) + [
-          'include_lower' => TRUE,
-          'include_upper' => TRUE,
-        ];
+      $operator = $this->facet->getQueryOperator();
+      $field_identifier = $this->facet->getFieldIdentifier();
+      $exclude = $this->facet->getExclude();
+      $options['search_api_facets'][$field_identifier] = $this->getFacetOptions();
 
-        $conjunction = $exclude ? 'OR' : 'AND';
-        $item_filter = $query->createConditionGroup($conjunction, ['facet:' . $field_identifier]);
-        $item_filter->addCondition($this->facet->getFieldIdentifier(), $range['start'], $exclude ? '<' : ($range['include_lower'] ? '>=' : '>'));
-        $item_filter->addCondition($this->facet->getFieldIdentifier(), $range['stop'], $exclude ? '>' : ($range['include_upper'] ? '<=' : '<'));
+      // Add the filter to the query if there are active values.
+      $active_items = $this->facet->getActiveItems();
+      $filter = $query->createConditionGroup($operator, ['facet:' . $field_identifier]);
+      if (count($active_items)) {
+        foreach ($active_items as $value) {
+          $range = $this->calculateRange($value) + [
+            'include_lower' => TRUE,
+            'include_upper' => TRUE,
+          ];
 
-        $filter->addConditionGroup($item_filter);
+          $conjunction = $exclude ? 'OR' : 'AND';
+          $item_filter = $query->createConditionGroup($conjunction, ['facet:' . $field_identifier]);
+          $item_filter->addCondition($this->facet->getFieldIdentifier(), $range['start'], $exclude ? '<' : ($range['include_lower'] ? '>=' : '>'));
+          $item_filter->addCondition($this->facet->getFieldIdentifier(), $range['stop'], $exclude ? '>' : ($range['include_upper'] ? '<=' : '<'));
+
+          $filter->addConditionGroup($item_filter);
+        }
+        $query->addConditionGroup($filter);
       }
-      $query->addConditionGroup($filter);
     }
   }
 
@@ -87,7 +91,7 @@ abstract class QueryTypeRangeBase extends QueryTypePluginBase {
           else {
             $facet_results[$result_filter['raw']] = new Result($this->facet, $result_filter['raw'], $result_filter['display'], $count);
           }
-          if (($key = array_search($result_filter['raw'], $unprocessed_active_items)) !== FALSE) {
+          if (($key = array_search($result_filter['raw'], $unprocessed_active_items)) !== false) {
             unset($unprocessed_active_items[$key]);
           }
         }
@@ -95,8 +99,7 @@ abstract class QueryTypeRangeBase extends QueryTypePluginBase {
     }
 
     if (!$this->getHierarchy()) {
-      // Add unprocessed active values to the result. These are selected items
-      // that do not match the results anymore.
+      // Add unprocessed active values to the result. These are selected items that do not match the results anymore.
       foreach ($unprocessed_active_items as $val) {
         $result = new Result($this->facet, $val, $this->getDisplayValue($val), 0);
         $result->setActiveState(TRUE);
@@ -108,15 +111,6 @@ abstract class QueryTypeRangeBase extends QueryTypePluginBase {
     return $this->facet;
   }
 
-  /**
-   * Returns the display value for the given raw value.
-   *
-   * @param mixed $raw_value
-   *   The raw value.
-   *
-   * @return mixed
-   *   The display value.
-   */
   public function getDisplayValue($raw_value) {
     return $raw_value;
   }

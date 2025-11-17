@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @group facets
  */
-class RestIntegrationTestDisabledForNow extends FacetsTestBase {
+class RestIntegrationTest extends FacetsTestBase {
 
   /**
    * {@inheritdoc}

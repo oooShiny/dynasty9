@@ -134,6 +134,7 @@ class LinksWidget extends WidgetPluginBase {
    *   Reference to build array.
    */
   protected function appendWidgetLibrary(array &$build) {
+    $build['#attached']['library'][] = 'facets/drupal.facets.checkbox-widget';
     $build['#attributes']['class'][] = 'js-facets-links';
   }
 

@@ -45,6 +45,8 @@ final class PostBuildFacet extends Event {
    *
    * @param \Drupal\facets\FacetInterface $facet
    *   The facet.
+   *
+   * @return void
    */
   public function setFacet(FacetInterface $facet): void {
     $this->facet = $facet;

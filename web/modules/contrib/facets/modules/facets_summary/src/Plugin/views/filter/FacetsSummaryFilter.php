@@ -25,7 +25,6 @@ class FacetsSummaryFilter extends FilterPluginBase {
   /**
    * {@inheritdoc}
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $no_operator = TRUE;
 
   /**

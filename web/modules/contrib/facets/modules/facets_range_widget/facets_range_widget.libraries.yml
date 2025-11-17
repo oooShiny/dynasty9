@@ -14,6 +14,7 @@ jquery.ui.slider.pips:
     - jquery_ui_slider/slider
 
 slider:
+  version: VERSION
   js:
     js/slider.js: { attributes: { defer: true } }
   css:

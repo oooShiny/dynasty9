@@ -1,4 +1,5 @@
 edit_filter:
+  version: VERSION
   js:
     js/edit-filter.js: {}
   dependencies:

@@ -139,7 +139,7 @@ class FacetSettingsForm extends EntityForm {
         'trigger_as' => ['name' => 'facet_source_configure'],
         'callback' => '::buildAjaxFacetSourceConfigForm',
         'wrapper' => 'facets-facet-sources-config-form',
-        'method' => 'replaceWith',
+        'method' => 'replace',
         'effect' => 'fade',
       ],
     ];

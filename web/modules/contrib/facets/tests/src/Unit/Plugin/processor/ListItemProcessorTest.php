@@ -42,11 +42,6 @@ class ListItemProcessorTest extends UnitTestCase {
    */
   protected $results;
 
-  /**
-   * The processor plugin manager.
-   *
-   * @var \Drupal\facets_summary\Processor\ProcessorPluginManager
-   */
   protected $processorPluginManager;
 
   /**
@@ -320,7 +315,7 @@ if (!function_exists('options_allowed_values')) {
   /**
    * Overwrite the global function with a version that returns the test values.
    */
-  function options_allowed_values($definition, $entity = NULL) {
+  function options_allowed_values() {
     return [
       1 => 'llama',
       2 => 'badger',

@@ -10,24 +10,15 @@ views.filter.facets_filter:
     facet:
       type: mapping
       mapping:
-        expand_hierarchy:
-          type: boolean
-          label: 'Expand hierarchy'
-        hierarchy:
-          type: string
-          label: 'Hierarchy type'
         query_operator:
           type: string
           label: 'Query operator'
-        hard_limit:
-          type: integer
-          label: 'Hard limit'
         min_count:
           type: integer
-          label: 'Minimum count'
+          label: 'Query operator'
         show_numbers:
           type: boolean
-          label: 'Show the amount of results'
+          label: 'Query operator'
         processor_configs:
           type: sequence
           label: 'Processor settings'

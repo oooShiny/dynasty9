@@ -39,8 +39,6 @@ class FacetBlock extends BlockBase implements ContainerFactoryPluginInterface {
   protected $facetStorage;
 
   /**
-   * The facet being displayed.
-   *
    * @var \Drupal\facets\FacetInterface
    */
   protected $facet;

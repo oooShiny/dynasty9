@@ -11,6 +11,7 @@ use Drupal\facets\FacetInterface;
 use Drupal\facets\Hierarchy\HierarchyPluginBase;
 use Drupal\facets\Processor\ProcessorInterface;
 use Drupal\facets\Processor\SortProcessorInterface;
+use Drupal\facets\Result\Result;
 use Drupal\views\Plugin\views\filter\FilterPluginBase;
 
 /**
@@ -25,15 +26,11 @@ class FacetsFilter extends FilterPluginBase {
   /**
    * {@inheritdoc}
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $no_operator = FALSE;
 
   /**
-   * Stores the facet results after the query is executed.
-   *
-   * @var \Drupal\facets\Result\ResultInterface[]
+   * Will be filled with the facet results after the query is executed.
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $facet_results = [];
 
   /**
@@ -50,7 +47,6 @@ class FacetsFilter extends FilterPluginBase {
     $options['facet']['contains']['show_numbers'] = ['default' => FALSE];
     $options['facet']['contains']['min_count'] = ['default' => 1];
     $options['facet']['contains']['query_operator'] = ['default' => 'or'];
-    $options['facet']['contains']['hard_limit'] = ['default' => 0];
     return $options;
   }
 
@@ -122,7 +118,7 @@ class FacetsFilter extends FilterPluginBase {
       return $form;
     }
 
-    // Retrieve the processed facet if already handled in the current request.
+    // Retrieve the processed facet if we already done this in the current request.
     $processed_facet = facets_exposed_filters_get_processed_facet($this->view->id(), $this->view->current_display, $this->options["id"]);
 
     // Empty facet results, return empty form.
@@ -153,8 +149,8 @@ class FacetsFilter extends FilterPluginBase {
       );
       $query_type_plugin->build();
 
-      // Skip facet processing and form rendering if there are no results.
-      if (!$facet->getResults()) {
+      // When no results are available, we do not need to process the facet or render the form item.
+      if(!$facet->getResults()) {
         return;
       }
 
@@ -170,7 +166,7 @@ class FacetsFilter extends FilterPluginBase {
         $facet->setResults($processor->build($facet, $facet->getResults()));
       }
 
-      // Allow processors to sort the results.
+      // Trigger sort stage and sort the actual results with the sort processors.
       $active_sort_processors = [];
       foreach ($facet->getProcessorsByStage(ProcessorInterface::STAGE_SORT) as $processor) {
         $active_sort_processors[] = $processor;
@@ -180,8 +176,7 @@ class FacetsFilter extends FilterPluginBase {
       }
       $facet->setActiveItems(array_values($active_facet_values));
 
-      // Store the processed facet so we can access it later (e.g. in an exposed
-      // form rendered as a block).
+      // Store the processed facet so we can access it later (e.g. in an exposed form rendered as a block).
       facets_exposed_filters_get_processed_facet($this->view->id(), $this->view->current_display, $this->options["id"], $facet);
     }
 
@@ -234,9 +229,7 @@ class FacetsFilter extends FilterPluginBase {
    * {@inheritdoc}
    */
   public function acceptExposedInput($input) {
-    // Modules like views_dependent_filters alter the exposed option to ignore the filter when hidden.
-    // We need to check for this.
-    return $this->isExposed();
+    return TRUE;
   }
 
   /**
@@ -254,6 +247,20 @@ class FacetsFilter extends FilterPluginBase {
     $active_values = $this->getActiveFacetValues();
     $facet->setActiveItems($active_values);
     $qtpm = \Drupal::service('plugin.manager.facets.query_type');
+
+    // Debug logging
+    \Drupal::logger('facets_range_debug')->info('FacetsFilter query() - Field: @field, Query Type: @query_type, Active Values: @values', [
+      '@field' => $facet->getFieldIdentifier(),
+      '@query_type' => $facet->getQueryType(),
+      '@values' => json_encode($active_values)
+    ]);
+    
+    // Additional debug for score_differential
+    if ($facet->getFieldIdentifier() === 'score_differential') {
+      \Drupal::logger('facets_range_debug')->info('SCORE_DIFF - Active values detail: @values', [
+        '@values' => var_export($active_values, true)
+      ]);
+    }
 
     /** @var \Drupal\facets\QueryType\QueryTypeInterface $query_type_plugin */
     $query_type_plugin = $qtpm->createInstance(
@@ -394,13 +401,6 @@ class FacetsFilter extends FilterPluginBase {
       '#default_value' => $facet->getQueryOperator(),
     ];
 
-    $form['facet']['hard_limit'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Hard limit'),
-      '#default_value' => $facet->getHardLimit(),
-      '#description' => $this->t('Display no more than this number of facet items.<br>*Note: Some search backends will use 0 as "no limit", and some still apply a default limit when hard limit is set to 0. If this affects you, set this to an appropriately-high value or a value that indicates "no limit" to your search backend'),
-    ];
-
     $hierarchy = $facet->getHierarchy();
     $options = array_map(function (HierarchyPluginBase $plugin) {
       return $plugin->getPluginDefinition()['label'];
@@ -531,6 +531,15 @@ class FacetsFilter extends FilterPluginBase {
    * Helper function to retrieve the representing facet.
    */
   private function getFacet() {
+    // Check if exposed_range_slider processor is configured
+    $has_exposed_range_slider = isset($this->options["facet"]["processor_configs"]["exposed_range_slider"]);
+    
+    // Debug log the processor check
+    \Drupal::logger('facets_range_debug')->info('Creating facet for field @field - has exposed_range_slider: @has_slider', [
+      '@field' => $this->configuration["search_api_field_identifier"],
+      '@has_slider' => $has_exposed_range_slider ? 'YES' : 'NO'
+    ]);
+    
     $facet = Facet::create([
       'id' => $this->options["field"],
       'field_identifier' => $this->configuration["search_api_field_identifier"],
@@ -539,10 +548,15 @@ class FacetsFilter extends FilterPluginBase {
       'use_hierarchy' => isset($this->options["facet"]["processor_configs"]["hierarchy_processor"]),
       'expand_hierarchy' => $this->options["facet"]["expand_hierarchy"] ?? FALSE,
       'min_count' => $this->options["facet"]["min_count"] ?? 1,
-      'widget' => '<nowidget>',
       'facet_type' => 'facets_exposed_filter',
     ]);
-    $facet->setHardLimit($this->options["facet"]["hard_limit"] ?? 0);
+    
+    // Set widget in the proper array format - check if this is a range slider
+    if ($has_exposed_range_slider) {
+      $facet->widget = ['type' => 'range_slider', 'config' => []];
+    } else {
+      $facet->widget = ['type' => 'links', 'config' => []];
+    }
     if ($facet->getUseHierarchy()) {
       $facet->setHierarchy($this->options["facet"]["hierarchy"], []);
     }
@@ -565,11 +579,6 @@ class FacetsFilter extends FilterPluginBase {
    * to retrieve the active filters from the request ourself.
    */
   private function getActiveFacetValues() {
-    // Reset button in ajax request. We probably want a better way to detect if
-    // this was clicked.
-    if (isset($_GET["reset"])) {
-      return [];
-    }
     $exposed = $this->view->getExposedInput();
     if (!isset($exposed[$this->options["expose"]["identifier"]])) {
       return [];
@@ -577,6 +586,14 @@ class FacetsFilter extends FilterPluginBase {
     $enabled = $exposed[$this->options["expose"]["identifier"]];
     if ($enabled == 'All') {
       return [];
+    }
+    
+    // Handle range slider values (array with 'min' and 'max' keys)
+    if (is_array($enabled) && isset($enabled['min']) && isset($enabled['max'])) {
+      \Drupal::logger('facets_range_debug')->info('Processing range values: @values', [
+        '@values' => json_encode($enabled)
+      ]);
+      return [[$enabled['min'], $enabled['max']]];
     }
     elseif (!is_array($enabled)) {
       $enabled = [$enabled];
@@ -595,7 +612,6 @@ class FacetsFilter extends FilterPluginBase {
     foreach ($options["facet"]["processors"] as $processor_id => $processor_data) {
       if ($processor_data["status"] == 1) {
         $processor_configs[$processor_id] = [
-          'processor_id' => $processor_id,
           'settings' => $processor_data["settings"] ?? [],
         ];
       }
@@ -603,7 +619,6 @@ class FacetsFilter extends FilterPluginBase {
     foreach ($options["facet_sort_processors"] as $processor_id => $processor_data) {
       if ($processor_data["status"] == 1) {
         $processor_configs[$processor_id] = [
-          'processor_id' => $processor_id,
           'settings' => $processor_data["settings"] ?? [],
         ];
       }

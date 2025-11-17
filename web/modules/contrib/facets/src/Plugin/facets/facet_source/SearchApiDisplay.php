@@ -88,7 +88,7 @@ class SearchApiDisplay extends FacetSourcePluginBase implements SearchApiFacetSo
    *
    * @var bool
    */
-  protected $displayEditInProgress = FALSE;
+  protected $display_edit_in_progress = FALSE;
 
   /**
    * Constructs a SearchApiBaseFacetSource object.
@@ -462,13 +462,14 @@ class SearchApiDisplay extends FacetSourcePluginBase implements SearchApiFacetSo
   /**
    * {@inheritdoc}
    */
-  public function getCount() {
+  public function getCount(): string {
     $search_id = $this->getDisplay()->getPluginId();
-    if (!empty($search_id) && $this->searchApiQueryHelper->getResults($search_id) !== NULL) {
-      return $this->searchApiQueryHelper->getResults($search_id)
-        ->getResultCount();
+    if ($search_id && !empty($search_id)) {
+      if ($this->searchApiQueryHelper->getResults($search_id) !== NULL) {
+        return $this->searchApiQueryHelper->getResults($search_id)
+          ->getResultCount();
+      }
     }
-    return NULL;
   }
 
   /**
@@ -574,20 +575,19 @@ class SearchApiDisplay extends FacetSourcePluginBase implements SearchApiFacetSo
    * Is the display currently edited and saved?
    *
    * @return bool
-   *   Whether the display being edited.
    */
   public function isDisplayEditInProgress(): bool {
-    return $this->displayEditInProgress;
+    return $this->display_edit_in_progress;
   }
 
   /**
    * Set the state, that the display is currently edited and saved.
    *
-   * @param bool $value
-   *   Sets whether the display being edited.
+   * @param bool $display_edit_in_progress
+   *   True if the display being edited.
    */
-  public function setDisplayEditInProgress(bool $value): void {
-    $this->displayEditInProgress = $value;
+  public function setDisplayEditInProgress(bool $display_edit_in_progress): void {
+    $this->display_edit_in_progress = $display_edit_in_progress;
   }
 
 }

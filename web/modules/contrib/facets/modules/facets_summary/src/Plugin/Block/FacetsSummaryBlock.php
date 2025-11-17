@@ -152,7 +152,7 @@ class FacetsSummaryBlock extends BlockBase implements FacetsSummaryBlockInterfac
   }
 
   /**
-   * Calculates the cache dependencies for this block instance.
+   * @throws \Drupal\facets\Exception\InvalidProcessorException
    */
   protected function calculateCacheDependencies(): void {
     if (!$this->cacheableMetadata) {

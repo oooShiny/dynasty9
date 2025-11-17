@@ -62,9 +62,6 @@ class HideInactiveSiblingsProcessor extends ProcessorPluginBase implements Build
     return $results;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function supportsFacet(FacetInterface $facet) {
     return $facet->getFacetType() == 'facet_entity';
   }

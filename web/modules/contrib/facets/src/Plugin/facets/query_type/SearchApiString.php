@@ -28,35 +28,39 @@ class SearchApiString extends QueryTypePluginBase {
    */
   public function execute() {
     $query = $this->query;
-    $operator = $this->facet->getQueryOperator();
-    $field_identifier = $this->facet->getFieldIdentifier();
-    $exclude = $this->facet->getExclude();
 
-    if ($query->getProcessingLevel() === QueryInterface::PROCESSING_FULL) {
-      // Set the options for the actual query.
-      $options = &$query->getOptions();
-      $options['search_api_facets'][$field_identifier] = $this->getFacetOptions();
-    }
+    // Only alter the query when there's an actual query object to alter.
+    if (!empty($query)) {
+      $operator = $this->facet->getQueryOperator();
+      $field_identifier = $this->facet->getFieldIdentifier();
+      $exclude = $this->facet->getExclude();
 
-    // Add the filter to the query if there are active values.
-    $active_items = $this->facet->getActiveItems();
+      if ($query->getProcessingLevel() === QueryInterface::PROCESSING_FULL) {
+        // Set the options for the actual query.
+        $options = &$query->getOptions();
+        $options['search_api_facets'][$field_identifier] = $this->getFacetOptions();
+      }
 
-    if (count($active_items)) {
-      $filter = $query->createConditionGroup($operator, ['facet:' . $field_identifier]);
-      foreach ($active_items as $value) {
-        if (str_starts_with($value, '!(')) {
-          /** @var \Drupal\facets\UrlProcessor\UrlProcessorInterface $urlProcessor */
-          $urlProcessor = $this->facet->getProcessors()['url_processor_handler']->getProcessor();
-          foreach (explode($urlProcessor->getDelimiter(), substr($value, 2, -1)) as $missing_value) {
-            // Note that $exclude needs to be inverted for "missing".
-            $filter->addCondition($this->facet->getFieldIdentifier(), $missing_value, !$exclude ? '<>' : '=');
+      // Add the filter to the query if there are active values.
+      $active_items = $this->facet->getActiveItems();
+
+      if (count($active_items)) {
+        $filter = $query->createConditionGroup($operator, ['facet:' . $field_identifier]);
+        foreach ($active_items as $value) {
+          if (str_starts_with($value, '!(')) {
+            /** @var \Drupal\facets\UrlProcessor\UrlProcessorInterface $urlProcessor */
+            $urlProcessor = $this->facet->getProcessors()['url_processor_handler']->getProcessor();
+            foreach (explode($urlProcessor->getDelimiter(), substr($value, 2, -1)) as $missing_value) {
+              // Note that $exclude needs to be inverted for "missing".
+              $filter->addCondition($this->facet->getFieldIdentifier(), $missing_value, !$exclude ? '<>' : '=');
+            }
+          }
+          else {
+            $filter->addCondition($this->facet->getFieldIdentifier(), $value, $exclude ? '<>' : '=');
           }
         }
-        else {
-          $filter->addCondition($this->facet->getFieldIdentifier(), $value, $exclude ? '<>' : '=');
-        }
+        $query->addConditionGroup($filter);
       }
-      $query->addConditionGroup($filter);
     }
   }
 
@@ -78,7 +82,7 @@ class SearchApiString extends QueryTypePluginBase {
           if ($result_filter[strlen($result_filter) - 1] === '"') {
             $result_filter = substr($result_filter, 0, -1);
           }
-          if (($key = array_search($result_filter, $unprocessed_active_items)) !== FALSE) {
+          if (($key = array_search($result_filter, $unprocessed_active_items)) !== false) {
             unset($unprocessed_active_items[$key]);
           }
           $count = $result['count'];
@@ -88,8 +92,7 @@ class SearchApiString extends QueryTypePluginBase {
         }
       }
 
-      // Add unprocessed active values to the result. These are selected items
-      // that do not match the results anymore.
+      // Add unprocessed active values to the result. These are selected items that do not match the results anymore.
       foreach ($unprocessed_active_items as $val) {
         $result = new Result($this->facet, $val, $val, 0);
         $result->setActiveState(TRUE);
