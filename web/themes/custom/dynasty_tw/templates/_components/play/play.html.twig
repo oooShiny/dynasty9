@@ -62,10 +62,50 @@
   {% endif %}
 
   {# Highlight Reference #}
-  {% if content.play_highlight %}
-    <div class="play-highlight mt-2 pt-2 border-t border-gray-200">
-      <span class="text-sm text-gray-500 mr-2">Highlight:</span>
-      {{ content.play_highlight }}
-    </div>
+  {% if play.play_highlight.entity %}
+    {% set highlight = play.play_highlight.entity %}
+    {% set video_id = highlight.field_muse_video_id.value %}
+    {% if video_id %}
+      {% set modal_id = 'video_modal_' ~ play.id.value %}
+      <div class="play-highlight mt-2 pt-2 border-t border-gray-200">
+        <button
+          onclick="document.getElementById('{{ modal_id }}').showModal()"
+          class="btn btn-sm btn-primary gap-2"
+          aria-label="Play highlight video for {{ highlight.label }}">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+          </svg>
+          Watch Highlight
+        </button>
+
+        {# DaisyUI Modal #}
+        <dialog id="{{ modal_id }}" class="modal">
+          <div class="modal-box w-11/12 max-w-5xl p-0">
+            <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-10">✕</button>
+            </form>
+            <h3 class="font-bold text-lg p-4 pb-2">{{ highlight.label }}</h3>
+            <div class="aspect-video w-full">
+              <iframe
+                src="https://muse.ai/embed/{{ video_id }}?auto=0"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="w-full h-full"
+                title="{{ highlight.label }}"></iframe>
+            </div>
+          </div>
+          <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+      </div>
+    {% else %}
+      {# Fallback if no video ID #}
+      <div class="play-highlight mt-2 pt-2 border-t border-gray-200">
+        <span class="text-sm text-gray-500 mr-2">Highlight:</span>
+        {{ content.play_highlight }}
+      </div>
+    {% endif %}
   {% endif %}
 </div>
