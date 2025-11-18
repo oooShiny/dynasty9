@@ -36,7 +36,7 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\Core\Entity\EntityAccessControlHandler",
  *     "route_provider" = {
- *       "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider",
+ *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
  *     },
  *   },
  *   base_table = "play",
@@ -50,10 +50,10 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/admin/content/play/{play}",
+ *     "canonical" = "/play/{play}",
  *     "add-form" = "/admin/content/play/add",
- *     "edit-form" = "/admin/content/play/{play}/edit",
- *     "delete-form" = "/admin/content/play/{play}/delete",
+ *     "edit-form" = "/admin/play/{play}/edit",
+ *     "delete-form" = "/admin/play/{play}/delete",
  *     "collection" = "/admin/content/play",
  *   },
  *   field_ui_base_route = "play.settings"
