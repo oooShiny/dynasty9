@@ -1,0 +1,8 @@
+# Play routing definition
+play.settings:
+  path: '/admin/structure/play/settings'
+  defaults:
+    _form: '\Drupal\dynasty_plays\Form\PlaySettingsForm'
+    _title: 'Play settings'
+  requirements:
+    _permission: 'administer play entities'

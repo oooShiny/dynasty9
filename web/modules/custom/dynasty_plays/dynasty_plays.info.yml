@@ -1,0 +1,8 @@
+name: Dynasty Plays
+type: module
+description: 'Manages Play entities for the Dynasty site.'
+core_version_requirement: ^11
+package: Dynasty
+dependencies:
+  - drupal:node
+  - drupal:text

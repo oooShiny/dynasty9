@@ -1,0 +1,125 @@
+uuid: dc6656dd-6c5a-463a-9973-e4357e8f0908
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.play.simple_form
+    - entity_browser.browser.highlight_browser
+  module:
+    - dynasty_plays
+    - entity_browser
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_play_metadata:
+      children:
+        - scoring_team
+        - quarter
+        - minutes
+        - seconds
+        - distance
+      label: 'Play Metadata'
+      region: content
+      parent_name: ''
+      weight: 3
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: ''
+        required_fields: true
+id: play.play.simple_form
+targetEntityType: play
+bundle: play
+mode: simple_form
+content:
+  distance:
+    type: number
+    weight: 6
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  minutes:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  play_description:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  play_game:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  play_highlight:
+    type: entity_browser_entity_reference
+    weight: 0
+    region: content
+    settings:
+      entity_browser: highlight_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: false
+      field_widget_remove: false
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: media_only
+      selection_mode: selection_append
+    third_party_settings: {  }
+  quarter:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scoring_play:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  scoring_team:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  seconds:
+    type: number
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  turnover:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  name: true
+  user_id: true

@@ -1,0 +1,6 @@
+# Play action links
+play.add:
+  route_name: entity.play.add_form
+  title: 'Add Play'
+  appears_on:
+    - entity.play.collection

@@ -58,6 +58,7 @@ dependencies:
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
+    - field.field.node.game.field_scoring_plays
     - field.field.node.game.field_season
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
@@ -247,6 +248,7 @@ hidden:
   field_playoff_game: true
   field_result: true
   field_score_differential: true
+  field_scoring_plays: true
   field_season: true
   field_starting_qb: true
   field_surf: true

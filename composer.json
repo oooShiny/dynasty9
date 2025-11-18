@@ -184,6 +184,7 @@
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/upgrade_status": "^4.3",
         "drupal/views_ajax_history": "^1.8",
+        "drupal/views_bulk_operations": "^4.4",
         "drupal/views_core_entity_reference": "^1.0@alpha",
         "drupal/views_entity_form_field": "^1.0@beta",
         "drupal/views_filters_summary": "^3.2@RC",

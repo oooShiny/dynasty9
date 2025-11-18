@@ -198,6 +198,79 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
         }
       }
     }
+
+    // Create Play entities from CSV data if they don't exist (only for existing nodes).
+    // Skip this logic if we're in a nested save operation to prevent infinite loops.
+    static $processing = FALSE;
+
+    if (!$processing && !$entity->isNew() && $entity->hasField('field_scoring_plays')) {
+      if (($entity->get('field_scoring_plays')->isEmpty())) {
+        // Pass FALSE to prevent recursive save since we're already in presave hook.
+        _create_and_attach_plays($entity, FALSE);
+      }
+      // The field might have an empty entity in it. If so, remove it and add actual plays.
+      elseif (count($entity->get('field_scoring_plays')->referencedEntities()) <= 1) {
+        $first_play = $entity->get('field_scoring_plays')->referencedEntities()[0];
+        // Check if the play entity is valid and not being deleted.
+        if ($first_play && !$first_play->isNew() && $first_play->get('name')->isEmpty()) {
+          $processing = TRUE;
+          $first_play->delete();
+          // Pass FALSE to prevent recursive save since we're already in presave hook.
+          _create_and_attach_plays($entity, FALSE);
+          $processing = FALSE;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function dynasty_podcast_entity_insert(EntityInterface $entity) {
+  // Create Play entities for new Game nodes.
+  if ($entity->bundle() == 'game' && $entity->hasField('field_scoring_plays')) {
+    _create_and_attach_plays($entity);
+  }
+}
+
+/**
+ * Helper function to create and attach Play entities to a Game node.
+ *
+ * @param object $game_node
+ *   The game node entity.
+ * @param bool $save_node
+ *   Whether to save the node after attaching plays. Default TRUE.
+ *   Set to FALSE when called from presave hook to avoid recursive saves.
+ */
+function _create_and_attach_plays($game_node, $save_node = TRUE) {
+  $pfr_link = $game_node->get('field_pfr_link')->value;
+
+  if (empty($pfr_link)) {
+    return;
+  }
+
+  // Find and parse the CSV file.
+  $csv_files = _find_scoring_plays_csv($pfr_link);
+
+  if (empty($csv_files)) {
+    return;
+  }
+
+  // Parse CSV and create Play entities.
+  $play_ids = [];
+  foreach ($csv_files as $csv_file) {
+    $created_plays = _create_plays_from_csv($csv_file, $game_node);
+    $play_ids = array_merge($play_ids, $created_plays);
+  }
+
+  // Add the created Play entities to the field_scoring_plays field.
+  if (!empty($play_ids)) {
+    $game_node->set('field_scoring_plays', $play_ids);
+    // Only save if requested (not when called from presave hook).
+    if ($save_node) {
+      $game_node->save();
+    }
   }
 }
 
@@ -906,4 +979,162 @@ function _get_string_between($from, $to, $haystack) {
     $cleaned_text = str_replace($extracted_text, $wiki_link_parts[1], $cleaned_text);
   }
   return $cleaned_text;
+}
+
+/**
+ * Find CSV file(s) matching the game's PFR link.
+ */
+function _find_scoring_plays_csv($pfr_link) {
+  $csv_dir = 'public://nfl-data/scoring-plays';
+  $real_path = \Drupal::service('file_system')->realpath($csv_dir);
+
+  if (!is_dir($real_path)) {
+    return [];
+  }
+
+  // Find CSV files that contain this PFR link in the filename.
+  $pfr = explode('/', $pfr_link);
+  $pfr_id = rtrim(end($pfr), '.htm');
+  $pattern = "*_scoring_{$pfr_id}.csv";
+  $files = glob($real_path . '/' . $pattern);
+
+  return $files;
+}
+
+/**
+ * Create Play entities from a CSV file.
+ */
+function _create_plays_from_csv($csv_file, $game_node) {
+  $play_ids = [];
+
+  if (!file_exists($csv_file) || !is_readable($csv_file)) {
+    return $play_ids;
+  }
+
+  $handle = fopen($csv_file, 'r');
+  if ($handle === FALSE) {
+    return $play_ids;
+  }
+
+  // Read header row.
+  $headers = fgetcsv($handle);
+
+  if ($headers === FALSE) {
+    fclose($handle);
+    return $play_ids;
+  }
+
+  // Get the game's highlight nodes to potentially reference.
+  $highlights = _get_game_highlights($game_node);
+
+  // Parse each row and create Play entities.
+  while (($data = fgetcsv($handle)) !== FALSE) {
+    $row = array_combine($headers, $data);
+
+    if (empty($row['description']) || empty($row['quarter'])) {
+      continue;
+    }
+
+    // Convert time (in seconds) to minutes and seconds.
+    $time_seconds = (int) $row['time'];
+    $minutes = floor($time_seconds / 60);
+    $seconds = $time_seconds % 60;
+
+    // Parse quarter (remove decimal).
+    $quarter = (int) floatval($row['quarter']);
+
+    // Try to parse distance from description.
+    $distance = _parse_distance_from_description($row['description']);
+
+    // Create the Play entity.
+    // Ensure we have a valid name - use description or fallback to a default.
+    $play_name = !empty($row['description']) ? substr($row['description'], 0, 50) : 'Scoring Play';
+    if (empty(trim($play_name))) {
+      $play_name = 'Scoring Play Q' . $quarter;
+    }
+
+    $play = \Drupal::entityTypeManager()->getStorage('play')->create([
+      'name' => $play_name,
+      'play_description' => [
+        'value' => $row['description'] ?? '',
+        'format' => 'plain_text',
+      ],
+      'play_game' => $game_node->id(),
+      'scoring_team' => $row['scoring_team'] ?? '',
+      'quarter' => $quarter,
+      'minutes' => $minutes,
+      'seconds' => $seconds,
+      'distance' => $distance,
+      'scoring_play' => TRUE, // All plays from CSV are scoring plays.
+      'turnover' => FALSE, // Default to false, can be updated manually if needed.
+      'status' => 1,
+    ]);
+
+    // Try to match a highlight if available.
+    $highlight_id = _match_highlight_for_play($row['description'], $highlights);
+    if ($highlight_id) {
+      $play->set('play_highlight', $highlight_id);
+    }
+
+    $play->save();
+    $play_ids[] = $play->id();
+  }
+
+  fclose($handle);
+
+  return $play_ids;
+}
+
+/**
+ * Get highlights associated with a game.
+ */
+function _get_game_highlights($game_node) {
+  $highlights = [];
+
+  // Check if the game has a highlights field.
+  if ($game_node->hasField('field_highlights') && !$game_node->get('field_highlights')->isEmpty()) {
+    foreach ($game_node->get('field_highlights') as $highlight_ref) {
+      if ($highlight = $highlight_ref->entity) {
+        $highlights[$highlight->id()] = $highlight->label();
+      }
+    }
+  }
+
+  return $highlights;
+}
+
+/**
+ * Try to parse distance (yards) from play description.
+ */
+function _parse_distance_from_description($description) {
+  // Look for patterns like "1 yard", "19 yard", "51 yard", etc.
+  if (preg_match('/(\d+)\s+yard/', $description, $matches)) {
+    return (int) $matches[1];
+  }
+
+  return NULL;
+}
+
+/**
+ * Try to match a highlight for a play based on description similarity.
+ */
+function _match_highlight_for_play($description, $highlights) {
+  // Simple matching based on player names or key terms.
+  // This is a basic implementation - can be enhanced later.
+  foreach ($highlights as $id => $title) {
+    // Check if key terms from description appear in highlight title.
+    $description_lower = strtolower($description);
+    $title_lower = strtolower($title);
+
+    // Extract player name from description (usually first two words).
+    $words = explode(' ', $description);
+    if (count($words) >= 2) {
+      $player_name = $words[0] . ' ' . $words[1];
+      if (stripos($title_lower, strtolower($player_name)) !== FALSE) {
+        return $id;
+      }
+    }
+  }
+
+  return NULL;
 }

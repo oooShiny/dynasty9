@@ -1,0 +1,78 @@
+uuid: ead8a176-94cc-40c0-bc63-31b882ae9b78
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.play.table_row
+  module:
+    - dynasty_plays
+    - options
+    - text
+id: play.play.table_row
+targetEntityType: play
+bundle: play
+mode: table_row
+content:
+  distance:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  minutes:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  play_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  play_highlight:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  quarter:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  scoring_team:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  seconds:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  langcode: true
+  name: true
+  play_game: true
+  search_api_excerpt: true
+  user_id: true

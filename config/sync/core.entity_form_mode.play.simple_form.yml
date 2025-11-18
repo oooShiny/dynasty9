@@ -1,0 +1,11 @@
+uuid: d320c099-6a4b-4147-a781-ebeb92e6fc62
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_plays
+id: play.simple_form
+label: 'Simple Form'
+description: null
+targetEntityType: play
+cache: true

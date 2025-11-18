@@ -25,6 +25,7 @@ module:
   dynamic_page_cache: 0
   dynasty_images: 0
   dynasty_module: 0
+  dynasty_plays: 0
   dynasty_podcast: 0
   dynasty_timeline: 0
   dynasty_transcript: 0
@@ -122,6 +123,7 @@ module:
   upgrade_status: 0
   user: 0
   views_ajax_history: 0
+  views_bulk_operations: 0
   views_core_entity_reference: 0
   views_entity_form_field: 0
   views_filters_summary: 0

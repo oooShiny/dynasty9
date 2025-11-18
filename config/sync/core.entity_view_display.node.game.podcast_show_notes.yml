@@ -58,6 +58,7 @@ dependencies:
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
+    - field.field.node.game.field_scoring_plays
     - field.field.node.game.field_season
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
@@ -553,6 +554,15 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 31
+    region: content
+  field_scoring_plays:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 64
     region: content
   field_season:
     type: number_integer

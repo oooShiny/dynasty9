@@ -1,0 +1,13 @@
+# Play menu items definition
+entity.play.collection:
+  title: 'Plays'
+  route_name: entity.play.collection
+  description: 'List of Play entities'
+  parent: system.admin_content
+  weight: 99
+
+play.admin.structure.settings:
+  title: Play settings
+  description: 'Configure Play entity'
+  route_name: play.settings
+  parent: system.admin_structure

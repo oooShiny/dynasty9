@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains dynasty_plays.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function dynasty_plays_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the dynasty_plays module.
+    case 'help.page.dynasty_plays':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Manages Play entities for the Dynasty site.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dynasty_plays_theme() {
+  return [
+    'play' => [
+      'render element' => 'elements',
+    ],
+  ];
+}

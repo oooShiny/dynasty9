@@ -1,0 +1,296 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the dynasty_plays module.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Add new fields to the Play entity.
+ */
+function dynasty_plays_update_9002() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_id = 'play';
+  $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+
+  // Define all the fields that need to be added.
+  $fields_to_add = [];
+
+  // Play Description field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('play_description', $entity_type_id)) {
+    $fields_to_add['play_description'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Play Description'))
+      ->setDescription(t('A description of the play.'))
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'text_default',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'text_textarea',
+        'weight' => 0,
+        'settings' => [
+          'rows' => 5,
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Play Highlight field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('play_highlight', $entity_type_id)) {
+    $fields_to_add['play_highlight'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Play Highlight'))
+      ->setDescription(t('Reference to a Highlight node.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'highlight' => 'highlight',
+        ],
+      ])
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 1,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 1,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Play Game field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('play_game', $entity_type_id)) {
+    $fields_to_add['play_game'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Play Game'))
+      ->setDescription(t('Reference to a Game node.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'game' => 'game',
+        ],
+      ])
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 2,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 2,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Scoring Team field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('scoring_team', $entity_type_id)) {
+    $fields_to_add['scoring_team'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Scoring Team'))
+      ->setDescription(t('The team that scored on this play.'))
+      ->setSettings([
+        'max_length' => 50,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => 3,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 3,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Quarter field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('quarter', $entity_type_id)) {
+    $fields_to_add['quarter'] = BaseFieldDefinition::create('list_integer')
+      ->setLabel(t('Quarter'))
+      ->setDescription(t('The quarter in which the play occurred.'))
+      ->setSettings([
+        'allowed_values' => [
+          1 => '1st Quarter',
+          2 => '2nd Quarter',
+          3 => '3rd Quarter',
+          4 => '4th Quarter',
+          5 => 'Overtime',
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'list_default',
+        'weight' => 4,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'options_select',
+        'weight' => 4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Minutes field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('minutes', $entity_type_id)) {
+    $fields_to_add['minutes'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Minutes'))
+      ->setDescription(t('Minutes remaining in the quarter (0-15).'))
+      ->setSettings([
+        'min' => 0,
+        'max' => 15,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => 5,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 5,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Seconds field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('seconds', $entity_type_id)) {
+    $fields_to_add['seconds'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Seconds'))
+      ->setDescription(t('Seconds remaining in the quarter (0-59).'))
+      ->setSettings([
+        'min' => 0,
+        'max' => 59,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => 6,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 6,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Distance field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('distance', $entity_type_id)) {
+    $fields_to_add['distance'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Distance'))
+      ->setDescription(t('Distance in yards (0-99).'))
+      ->setSettings([
+        'min' => 0,
+        'max' => 99,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => 7,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 7,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Scoring Play field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('scoring_play', $entity_type_id)) {
+    $fields_to_add['scoring_play'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Scoring Play'))
+      ->setDescription(t('Check if this play resulted in a score.'))
+      ->setDefaultValue(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'boolean',
+        'weight' => 8,
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => 8,
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Turnover field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('turnover', $entity_type_id)) {
+    $fields_to_add['turnover'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Turnover'))
+      ->setDescription(t('Check if this play resulted in a turnover.'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'boolean',
+        'weight' => 9,
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => 9,
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Install all new field definitions.
+  foreach ($fields_to_add as $field_name => $field_definition) {
+    $entity_definition_update_manager->installFieldStorageDefinition(
+      $field_name,
+      $entity_type_id,
+      'dynasty_plays',
+      $field_definition
+    );
+  }
+
+  $message = t('Added @count new fields to the Play entity.', [
+    '@count' => count($fields_to_add),
+  ]);
+
+  return $message;
+}

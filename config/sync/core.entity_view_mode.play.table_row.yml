@@ -1,0 +1,11 @@
+uuid: 31864d80-ebd6-4cd8-8468-d1566b34fa16
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_plays
+id: play.table_row
+label: 'Table Row'
+description: null
+targetEntityType: play
+cache: true

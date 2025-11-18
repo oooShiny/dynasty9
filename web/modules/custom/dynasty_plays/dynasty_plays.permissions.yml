@@ -1,0 +1,20 @@
+administer play entities:
+  title: 'Administer play entities'
+  description: 'Allow to access the administration form to configure Play entities.'
+  restrict access: true
+
+add play entities:
+  title: 'Add play entities'
+  description: 'Allow to add Play entities.'
+
+delete play entities:
+  title: 'Delete play entities'
+  description: 'Allow to delete Play entities.'
+
+edit play entities:
+  title: 'Edit play entities'
+  description: 'Allow to edit Play entities.'
+
+view play entities:
+  title: 'View play entities'
+  description: 'Allow to view Play entities.'

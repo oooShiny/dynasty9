@@ -1,0 +1,16 @@
+# Play task links
+entity.play.canonical:
+  route_name: entity.play.canonical
+  base_route: entity.play.canonical
+  title: 'View'
+
+entity.play.edit_form:
+  route_name: entity.play.edit_form
+  base_route: entity.play.canonical
+  title: 'Edit'
+
+entity.play.delete_form:
+  route_name: entity.play.delete_form
+  base_route: entity.play.canonical
+  title: Delete
+  weight: 10

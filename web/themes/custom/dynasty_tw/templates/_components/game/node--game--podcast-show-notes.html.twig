@@ -75,8 +75,8 @@
   <li class="p-2 mr-6 uppercase"><a href="/node/{{ node.id() }}/edit-podcast?destination=/show-notes/{{ node.id() }}">Edit</a></li>
 </ul>
 <article class="container mx-auto text-center">
-  <div class="grid grid-flow-col">
   {# Teams and Score Boxes #}
+  <div class="grid grid-flow-col">
     <div>
       <h1 class="text-4xl py-2">{{ label }}</h1>
       <div class="text-center text-xl">{{ content.field_date }}</div>
@@ -196,19 +196,25 @@
       <div class="p-4 patriots w-fit text-lg mx-auto">
         <a href="https://wikipedia.org/wiki/{{ season }}_New_England_Patriots_season" target="_blank">Patriots {{ season }} Wikipedia</a>
       </div>
-
     </div>
-
-
   </div>
 
 
 
+{# Game Information #}
+  <h2 class="divider text-3xl py-4">Game Information</h2>
+  <div class="flex justify-center">
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Scoring Drives</h3>
+      <div class="p-4 text-left">
+        {{ drupal_view('scoring_plays', 'block_1', node.id()) }}
+      </div>
+    </div>
+  </div>
 
 
-
-  <h2 class="divider text-3xl py-4">{{ opp_short }} Information</h2>
 {# Opponent Season Info #}
+  <h2 class="divider text-3xl py-4">{{ opp_short }} Information</h2>
   <div class="flex justify-center">
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
       <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Season Info</h3>
@@ -228,8 +234,7 @@
         <p>{{ content.field_opponent_season_finish }}</p>
       </div>
     </div>
-{# Opponent Team Ranks #}
-
+  {# Opponent Team Ranks #}
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
       <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Team Ranks</h3>
       <div class="p-4 text-left">
@@ -237,7 +242,7 @@
       </div>
     </div>
 
-    {# Coaches #}
+  {# Coaches #}
     <div class="flex justify-center">
       <div class="m-4 border border-blue-pats w-fit rounded-lg">
         <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">{{ opp_short }} Coaches</h3>
@@ -262,22 +267,25 @@
 
 
   {#  Draft Picks #}
-  <div class="m-4 border border-blue-pats w-fit rounded-lg">
-    <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">{{ season }} Draft Picks</h3>
-    <div class="p-4 text-left">
-      {{ content.field_opp_draft_picks }}
-      <div class="flex gap-4 justify-center">
-        <div class="flex gap-1 items-center">
-          <span class="bg-blue-100 border border-black h-4 w-4 inline-block">&nbsp;</span>
-          <span class="text-sm">Made Roster</span>
-        </div>
-        <div class="flex gap-1 items-center">
-          <span class="bg-yellow-200 border border-black h-4 w-4 inline-block">&nbsp;</span>
-          <span class="text-sm">Made Pro Bowl</span>
+  <div class="flex justify-center">
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">{{ season }} Draft Picks</h3>
+      <div class="p-4 text-left">
+        {{ content.field_opp_draft_picks }}
+        <div class="flex gap-4 justify-center">
+          <div class="flex gap-1 items-center">
+            <span class="bg-blue-100 border border-black h-4 w-4 inline-block">&nbsp;</span>
+            <span class="text-sm">Made Roster</span>
+          </div>
+          <div class="flex gap-1 items-center">
+            <span class="bg-yellow-200 border border-black h-4 w-4 inline-block">&nbsp;</span>
+            <span class="text-sm">Made Pro Bowl</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 {# Team Leaders #}
   <h2 class="divider text-3xl py-4">Team Leaders</h2>
   <div class="flex justify-center">
@@ -290,8 +298,8 @@
         </ul>
       </div>
     </div>
-    {# Offense #}
 
+    {# Offense #}
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
       <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Offense</h3>
       <div class="p-4 text-left">
@@ -300,7 +308,6 @@
     </div>
 
     {# Defense #}
-
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
       <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Defense</h3>
       <div class="p-4 text-left">

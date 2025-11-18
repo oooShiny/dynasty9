@@ -58,6 +58,7 @@ dependencies:
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
+    - field.field.node.game.field_scoring_plays
     - field.field.node.game.field_season
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
@@ -142,6 +143,7 @@ third_party_settings:
       children:
         - field_game_summary
         - field_game_links
+        - field_scoring_plays
         - field_date
         - field_season
         - title
@@ -203,7 +205,7 @@ mode: podcast_info
 content:
   field_date:
     type: datetime_default
-    weight: 18
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -369,15 +371,25 @@ content:
     third_party_settings: {  }
   field_pfr_link:
     type: string_textfield
-    weight: 21
+    weight: 22
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_scoring_plays:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_season:
     type: number
-    weight: 19
+    weight: 20
     region: content
     settings:
       placeholder: ''
@@ -392,7 +404,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 20
+    weight: 21
     region: content
     settings:
       size: 60

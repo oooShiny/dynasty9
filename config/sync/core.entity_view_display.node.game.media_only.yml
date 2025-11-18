@@ -58,6 +58,7 @@ dependencies:
     - field.field.node.game.field_playoff_game
     - field.field.node.game.field_result
     - field.field.node.game.field_score_differential
+    - field.field.node.game.field_scoring_plays
     - field.field.node.game.field_season
     - field.field.node.game.field_starting_qb
     - field.field.node.game.field_surf
@@ -558,5 +559,6 @@ hidden:
   field_opponent_team_ranks: true
   field_opponent_wikipedia: true
   field_pats_record_vs_coach: true
+  field_scoring_plays: true
   langcode: true
   search_api_excerpt: true

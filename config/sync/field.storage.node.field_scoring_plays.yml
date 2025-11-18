@@ -1,0 +1,20 @@
+uuid: ea4a7cc2-91f7-4ccc-b55c-7670ccc3d70a
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_plays
+    - node
+id: node.field_scoring_plays
+field_name: field_scoring_plays
+entity_type: node
+type: entity_reference
+settings:
+  target_type: play
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
