@@ -2,8 +2,12 @@ uuid: 0685281b-1cca-4fed-b104-1b82aa4ab9e5
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.play.table_row
+    - field.storage.node.field_muse_video_id
   module:
     - dynasty_plays
+    - node
     - options
     - text
 id: scoring_plays
@@ -152,6 +156,133 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_muse_video_id:
+          id: field_muse_video_id
+          table: node__field_muse_video_id
+          field: field_muse_video_id
+          relationship: play_highlight
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Muse Video ID'
+          exclude: true
+          alter:
+            alter_text: true
+            text: '{{ field_muse_video_id__value }}'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        play_description__value_1:
+          id: play_description__value_1
+          table: play
+          field: play_description__value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: play
+          entity_field: play_description
+          plugin_id: field
+          label: 'Play Description'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         play_highlight:
           id: play_highlight
           table: play
@@ -166,7 +297,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/node/{{ play_highlight__target_id }}"><img class="bg-red-100 h-4 inline" src="/themes/custom/dynasty_tw/icons/play-video.svg" /></a>'
+            text: "{% set video_id = field_muse_video_id %}\r\n{% set modal_id = 'video_modal_' ~ video_id %}\r\n\r\n<button onclick=\"document.getElementById('{{ modal_id }}').showModal()\"><img class=\"bg-red-100 h-4 inline\" src=\"/themes/custom/dynasty_tw/icons/play-video.svg\" /></button>\r\n\r\n        {# DaisyUI Modal #}\r\n        \r\n        <dialog id=\"{{ modal_id }}\" class=\"modal\">\r\n          <div class=\"modal-box w-11/12 max-w-5xl p-0\">\r\n            <form method=\"dialog\">\r\n              <button class=\"btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-10\">✕</button>\r\n            </form>\r\n            <h3 class=\"font-bold text-lg p-4 pb-2\">{{ play_description__value_1 }}</h3>\r\n            <div class=\"aspect-video w-full\">\r\n              <iframe\r\n                src=\"https://muse.ai/embed/{{ video_id }}?auto=0\"\r\n                frameborder=\"0\"\r\n                allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\"\r\n                allowfullscreen\r\n                class=\"w-full h-full\"\r\n                title=\"{{ play_description__value_1 }}\"></iframe>\r\n            </div>\r\n          </div>\r\n          <form method=\"dialog\" class=\"modal-backdrop\">\r\n            <button>close</button>\r\n          </form>\r\n        </dialog>"
             make_link: false
             path: ''
             absolute: false
@@ -206,7 +337,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -233,7 +364,7 @@ display:
             alter_text: true
             text: '{{ play_description__value__value }}'
             make_link: true
-            path: '/play/{{ id }}/edit'
+            path: '/admin/play/{{ id }}/edit'
             absolute: false
             external: false
             replace_spaces: false
@@ -623,79 +754,16 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       style:
-        type: table
+        type: default
         options:
           grouping: {  }
           row_class: ''
           default_row_class: true
-          columns:
-            quarter: quarter
-            id: id
-            play_description__value: play_description__value
-            play_highlight: play_description__value
-            scoring_team: scoring_team
-            minutes: minutes
-            seconds: minutes
-          default: '-1'
-          info:
-            quarter:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            id:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            play_description__value:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: '&nbsp;'
-              empty_column: false
-              responsive: ''
-            play_highlight:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            scoring_team:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            minutes:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ':'
-              empty_column: false
-              responsive: ''
-            seconds:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          override: true
-          sticky: false
-          summary: ''
-          empty_table: false
-          caption: ''
-          description: ''
-          class: 'table table-zebra-zebra'
       row:
-        type: fields
+        type: 'entity:play'
+        options:
+          relationship: none
+          view_mode: table_row
       query:
         type: views_query
         options:
@@ -704,7 +772,18 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        play_highlight:
+          id: play_highlight
+          table: play
+          field: play_highlight
+          relationship: none
+          group_type: group
+          admin_label: Content
+          entity_type: play
+          entity_field: play_highlight
+          plugin_id: standard
+          required: false
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -714,7 +793,8 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.field_muse_video_id'
   block_1:
     id: block_1
     display_title: Block
@@ -733,4 +813,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.field_muse_video_id'

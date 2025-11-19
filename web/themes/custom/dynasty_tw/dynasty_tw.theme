@@ -505,7 +505,6 @@ function _get_team_location($team) {
  * Implements hook_theme_suggestions_HOOK_alter() for Play entities.
  */
 function dynasty_tw_theme_suggestions_play_alter(array &$suggestions, array $variables) {
-  $play = $variables['elements']['#play'];
   $view_mode = $variables['elements']['#view_mode'];
 
   // Add suggestion based on view mode.

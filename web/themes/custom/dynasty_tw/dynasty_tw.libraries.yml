@@ -52,3 +52,6 @@ facets_range_slider_tooltips:
     - core/jquery
     - core/drupal
     - core/once
+preline:
+  js:
+    node_modules/preline/dist/preline.js: { minified: true }

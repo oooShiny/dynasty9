@@ -1,14 +1,93 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import "../node_modules/preline/variants.css";
 
+/* Preline UI */
+@source "../node_modules/preline/dist/*.js";
+@source '../../../../modules/custom/**/*.{js,twig,theme}';
 
-.bg-blue-pats {
-  background-color: #024 !important;
+@plugin "@tailwindcss/forms";
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
+
+@theme {
+  --color-blue-pats: #024;
+  --color-dolphins-primary: white;
+  --color-dolphins-secondary: #008D97;
+  --color-bills-primary: white;
+  --color-bills-secondary: #00338D;
+  --color-jets-primary: white;
+  --color-jets-secondary: #0C371D;
+  --color-chiefs-primary: white;
+  --color-chiefs-secondary: #B20032;
+  --color-raiders-primary: #C4C8CB;
+  --color-raiders-secondary: black;
+  --color-broncos-primary: #002244;
+  --color-broncos-secondary: #FB4F14;
+  --color-charger-primary: #0C2340;
+  --color-charger-secondary: #FFB81C;
+  --color-steelers-primary: #FFB612;
+  --color-steelers-secondary: black;
+  --color-ravens-primary: #D0B240;
+  --color-ravens-secondary: #280353;
+  --color-bengals-primary: white;
+  --color-bengals-secondary: #FB4F14;
+  --color-browns-primary: #512F2D;
+  --color-browns-secondary: #FE3C00;
+  --color-texans-primary: white;
+  --color-texans-secondary: #02253A;
+  --color-titans-primary: white;
+  --color-titans-secondary: #648FCC;
+  --color-colts-primary: white;
+  --color-colts-secondary: #003B7B;
+  --color-jaguars-primary: #D7A22A;
+  --color-jaguars-secondary: #006778;
+  --color-cowboys-primary: white;
+  --color-cowboys-secondary: #0D254C;
+  --color-giants-primary: white;
+  --color-giants-secondary: #192F6B;
+  --color-redskins-primary: #FFB612;
+  --color-redskins-secondary: #773141;
+  --color-commanders-primary: #FFB612;
+  --color-commanders-secondary: #773141;
+  --color-eagles-primary: #C0C0C0;
+  --color-eagles-secondary: #003B48;
+  --color-seahawks-primary: #A5ACAF;
+  --color-seahawks-secondary: #002244;
+  --color-cardinals-primary: white;
+  --color-cardinals-secondary: #9B2743;
+  --color-rams-primary: #C9AF74;
+  --color-rams-secondary: #13264B;
+  --color-forty9ers-primary: #E6BE8A;
+  --color-forty9ers-secondary: #AF1E2C;
+  --color-packers-primary: #FFB612;
+  --color-packers-secondary: #203731;
+  --color-lions-primary: #C5C7CF;
+  --color-lions-secondary: #006DB0;
+  --color-vikings-primary: #F0BF00;
+  --color-vikings-secondary: #582C81;
+  --color-bears-primary: #DD4814;
+  --color-bears-secondary: #03202F;
+  --color-falcons-primary: white;
+  --color-falcons-secondary: #A6192D;
+  --color-buccaneers-primary: white;
+  --color-buccaneers-secondary: #D60A0B;
+  --color-saints-primary: #D2B887;
+  --color-saints-secondary: black;
+  --color-panthers-primary: white;
+  --color-panthers-secondary: #0088CE;
+}
+
 /* Dynasty-themed NoUI Slider Styles */
 .bef-slider.noUi-target {
-  @apply bg-gray-200 border-0 rounded-lg shadow-sm;
+  @apply bg-gray-200 border-0 rounded-lg shadow-xs;
   height: 8px !important;
   border: none !important;
 }
@@ -21,7 +100,7 @@
 
 /* Slider handles - larger to accommodate text */
 .bef-slider .noUi-handle {
-  @apply !w-8 !h-8 rounded-full border-2 border-white shadow-lg cursor-pointer;
+  @apply w-8! h-8! rounded-full border-2 border-white shadow-lg cursor-pointer;
   background-color: #c60c30 !important; /* Dynasty red */
   border-radius: 50% !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
@@ -84,7 +163,7 @@ label[for*="max"] {
 
 /* Tooltip styles - inside the handle */
 .bef-slider .noUi-tooltip {
-  @apply !text-white font-bold text-xs leading-none;
+  @apply text-white! font-bold text-xs leading-none;
   background: none !important;
   border: none !important;
   position: absolute !important;

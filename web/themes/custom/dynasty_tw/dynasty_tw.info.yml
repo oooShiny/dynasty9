@@ -7,6 +7,7 @@ libraries:
   - dynasty_tw/global
   - dynasty_tw/overrides
   - dynasty_tw/select2
+  - dynasty_tw/preline
 regions:
   header: 'Header'
   primary_menu: 'Primary menu'
