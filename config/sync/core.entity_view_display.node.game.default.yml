@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.game.field_brady_yards
     - field.field.node.game.field_date
     - field.field.node.game.field_defensive_leaders
+    - field.field.node.game.field_drive_charts
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
@@ -170,6 +171,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 63
+    region: content
+  field_drive_charts:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 66
     region: content
   field_game_links:
     type: link

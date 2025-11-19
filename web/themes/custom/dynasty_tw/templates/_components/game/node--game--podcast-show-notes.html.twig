@@ -74,7 +74,7 @@
   <li class="p-2 mr-6 uppercase"><a href="/node/{{ node.id() }}">Game Page</a></li>
   <li class="p-2 mr-6 uppercase"><a href="/node/{{ node.id() }}/edit-podcast?destination=/show-notes/{{ node.id() }}">Edit</a></li>
 </ul>
-<article class="container mx-auto text-center">
+<article class="mx-2 text-center">
   {# Teams and Score Boxes #}
   <div class="grid grid-flow-col">
     <div>
@@ -204,10 +204,21 @@
 {# Game Information #}
   <h2 class="divider text-3xl py-4">Game Information</h2>
   <div class="flex justify-center">
+    {# Scoring Drives #}
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
       <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Scoring Drives</h3>
       <div class="p-4 text-left">
         {{ drupal_view('scoring_plays', 'block_1', node.id()) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center">
+    {# Drive Charts #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Drive Charts</h3>
+      <div class="flex gap-4 p-4">
+        {{ content.field_drive_charts }}
       </div>
     </div>
   </div>

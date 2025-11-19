@@ -103,6 +103,62 @@ class DynastyHelpers {
     return $weeks;
   }
 
+  public static function get_week_number($week_name, $season) {
+    if ($season >= '2021') {
+      $weeks = [
+        'Week 1' => 1,
+        'Week 2' => 2,
+        'Week 3' => 3,
+        'Week 4' => 4,
+        'Week 5' => 5,
+        'Week 6' => 6,
+        'Week 7' => 7,
+        'Week 8' => 8,
+        'Week 9' => 9,
+        'Week 10' => 10,
+        'Week 11' => 11,
+        'Week 12' => 12,
+        'Week 13' => 13,
+        'Week 14' => 14,
+        'Week 15' => 15,
+        'Week 16' => 16,
+        'Week 17' => 17,
+        'Week 18' => 18,
+        'AFC Wildcard' => 19,
+        'AFC Divisional Round' => 20,
+        'AFC Conference Championship' => 21,
+        'Super Bowl' => 22,
+      ];
+    }
+    else {
+      $weeks = [
+        'Week 1' => 1,
+        'Week 2' => 2,
+        'Week 3' => 3,
+        'Week 4' => 4,
+        'Week 5' => 5,
+        'Week 6' => 6,
+        'Week 7' => 7,
+        'Week 8' => 8,
+        'Week 9' => 9,
+        'Week 10' => 10,
+        'Week 11' => 11,
+        'Week 12' => 12,
+        'Week 13' => 13,
+        'Week 14' => 14,
+        'Week 15' => 15,
+        'Week 16' => 16,
+        'Week 17' => 17,
+        'AFC Wildcard' => 18,
+        'AFC Divisional Round' => 19,
+        'AFC Conference Championship' => 20,
+        'Super Bowl' => 21,
+      ];
+    }
+
+    return $weeks[$week_name];
+  }
+
   public static function get_term_names($taxonomy) {
     $term_names = [];
     $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($taxonomy);

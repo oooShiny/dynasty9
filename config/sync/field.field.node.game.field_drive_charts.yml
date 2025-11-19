@@ -1,0 +1,24 @@
+uuid: 80b95ada-91c5-4c3d-b3e7-8169bf12fa12
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_drive_charts
+    - filter.format.full_html
+    - node.type.game
+  module:
+    - text
+id: node.game.field_drive_charts
+field_name: field_drive_charts
+entity_type: node
+bundle: game
+label: 'Drive Charts'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

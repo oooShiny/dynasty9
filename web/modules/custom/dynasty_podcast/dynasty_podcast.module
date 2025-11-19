@@ -6,10 +6,10 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\dynasty_module\DynastyHelpers;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
-use Pandoc\Pandoc;
 
 /**
  * Implements hook_entity_type_alter().
@@ -219,6 +219,13 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
           _create_and_attach_plays($entity, FALSE);
           $processing = FALSE;
         }
+      }
+    }
+
+    // Generate Drive Charts from CSV data if the field is empty.
+    if (!$entity->isNew() && $entity->hasField('field_drive_charts')) {
+      if ($entity->get('field_drive_charts')->isEmpty()) {
+        _populate_drive_charts($entity);
       }
     }
   }
@@ -1137,4 +1144,189 @@ function _match_highlight_for_play($description, $highlights) {
   }
 
   return NULL;
+}
+
+/**
+ * Populate drive charts field from CSV files.
+ *
+ * @param \Drupal\node\Entity\Node $game_node
+ *   The game node entity.
+ */
+function _populate_drive_charts($game_node) {
+  $pfr_link = $game_node->get('field_pfr_link')->value;
+
+  if (empty($pfr_link)) {
+    return;
+  }
+
+  // Extract PFR game ID from URL (e.g., "200009030nwe" from "...boxscores/200009030nwe.htm").
+  if (preg_match('/boxscores\/(\w+)\.htm/', $pfr_link, $matches)) {
+    $pfr_game_id = $matches[1];
+  }
+  else {
+    return;
+  }
+
+  // Get season and week from the game node.
+  $season = $game_node->get('field_season')->value;
+  $week_name = $game_node->get('field_week')->entity->label();
+  $week = DynastyHelpers::get_week_number($week_name, $season);
+
+
+  if (empty($season) || empty($week)) {
+    return;
+  }
+
+  // Build paths to drive chart CSV files.
+  $file_system = \Drupal::service('file_system');
+  $base_path = $file_system->realpath('public://nfl-data/game-data');
+  $drive_dir = $base_path . '/' . $season . '/' . $week;
+
+  $home_drives_file = $drive_dir . '/' . $pfr_game_id . '-home_drives.csv';
+  $vis_drives_file = $drive_dir . '/' . $pfr_game_id . '-vis_drives.csv';
+
+  // Parse both drive chart CSV files.
+  $home_drives = _parse_drive_chart_csv($home_drives_file);
+  $vis_drives = _parse_drive_chart_csv($vis_drives_file);
+
+  // Generate HTML tables.
+  $drive_charts = [];
+
+  $home_away = $game_node->get('field_home_away')->value;
+  $opp = $game_node->get('field_opponent')->entity->label();
+  $opp = explode(' ', $opp);
+  $opp_name = end($opp);
+  if ($home_away == 'Home') {
+    $ha = [
+      'Home' => 'Patriots',
+      'Away' => $opp_name,
+    ];
+  }
+  else {
+    $ha = [
+      'Home' => $opp_name,
+      'Away' => 'Patriots',
+    ];
+  }
+  if (!empty($home_drives)) {
+    $drive_charts[] = [
+      'value' => _format_drive_chart_table($home_drives, $ha['Home']),
+      'format' => 'full_html',
+    ];
+  }
+
+  if (!empty($vis_drives)) {
+    $drive_charts[] = [
+      'value' => _format_drive_chart_table($vis_drives, $ha['Away']),
+      'format' => 'full_html',
+    ];
+  }
+
+  // Set the field value.
+  if (!empty($drive_charts)) {
+    $game_node->set('field_drive_charts', $drive_charts);
+  }
+}
+
+/**
+ * Parse a drive chart CSV file.
+ *
+ * @param string $file_path
+ *   The path to the CSV file.
+ *
+ * @return array
+ *   Array of drive data.
+ */
+function _parse_drive_chart_csv($file_path) {
+  $drives = [];
+
+  if (!file_exists($file_path)) {
+    return $drives;
+  }
+
+  if (($handle = fopen($file_path, "r")) !== FALSE) {
+    $headers = fgetcsv($handle);
+
+    // Clean up headers.
+    $headers = array_map('trim', $headers);
+
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $row = array_combine($headers, $data);
+      $drives[] = $row;
+    }
+    fclose($handle);
+  }
+
+  return $drives;
+}
+
+/**
+ * Format drive chart data as an HTML table.
+ *
+ * @param array $drives
+ *   Array of drive data.
+ * @param string $team_label
+ *   Label for the team (e.g., "Home" or "Visitor").
+ *
+ * @return string
+ *   HTML table markup.
+ */
+function _format_drive_chart_table($drives, $team_label = '') {
+  if (empty($drives)) {
+    return '';
+  }
+
+  // Start table with Tailwind classes.
+  $html = '<div class="border border-blue-pats rounded-lg">';
+  if (!empty($team_label)) {
+    $html .= '<h4 class="p-2 bg-'.strtolower($team_label).'-primary text-'.strtolower($team_label).'-secondary text-xl font-bold mb-2">' . htmlspecialchars($team_label) . ' Drives</h4>';
+  }
+  $html .= '<table class="text-sm p-2 block">';
+
+  // Table header.
+  $html .= '<thead><tr class="bg-'.strtolower($team_label).'-secondary text-'.strtolower($team_label).'-primary">';
+  $headers = array_keys($drives[0]);
+  foreach ($headers as $header) {
+    $html .= '<th class="p-2 text-center">' . htmlspecialchars($header) . '</th>';
+  }
+  $html .= '</tr></thead>';
+
+  // Table body.
+  $html .= '<tbody class="divide-gray-500 divide-y">';
+  foreach ($drives as $drive) {
+    $html .= '<tr class="odd:bg-white">';
+    foreach ($drive as $key => $value) {
+      // Apply special styling for Result column.
+      $cell_class = 'py-2 text-center';
+      if ($key === 'Result') {
+        if (stripos($value, 'touchdown') !== FALSE) {
+          $cell_class .= ' bg-green-100 font-bold text-green-800';
+        }
+        elseif (stripos($value, 'field goal') !== FALSE) {
+          $cell_class .= ' bg-blue-100 font-semibold text-blue-800';
+        }
+        elseif (stripos($value, 'punt') !== FALSE) {
+          $cell_class .= ' text-gray-600';
+        }
+        elseif (stripos($value, 'turnover') !== FALSE || stripos($value, 'interception') !== FALSE || stripos($value, 'fumble') !== FALSE) {
+          $cell_class .= ' bg-red-100 font-bold text-red-800';
+        }
+      }
+      $html .= '<td class="' . $cell_class . '">' . htmlspecialchars($value) . '</td>';
+    }
+    $html .= '</tr>';
+  }
+  $html .= '</tbody>';
+
+  $html .= '</table>';
+  $html .= '</div>';
+
+  return $html;
+}
+
+function _get_pfr_id_from_link($pfr_link) {
+  if (preg_match('/boxscores\/(\w+)\.htm/', $pfr_link, $matches)) {
+    $pfr_game_id = $matches[1];
+  }
+  return $pfr_game_id ?? NULL;
 }

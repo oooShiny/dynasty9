@@ -9,15 +9,28 @@
       "Courier New", monospace;
     --color-red-100: oklch(93.6% 0.032 17.717);
     --color-red-200: oklch(88.5% 0.062 18.334);
+    --color-red-300: oklch(80.8% 0.114 19.571);
+    --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-600: oklch(57.7% 0.245 27.325);
+    --color-red-700: oklch(50.5% 0.213 27.518);
     --color-red-800: oklch(44.4% 0.177 26.899);
+    --color-red-900: oklch(39.6% 0.141 25.723);
+    --color-yellow-100: oklch(97.3% 0.071 103.193);
     --color-yellow-200: oklch(94.5% 0.129 101.54);
+    --color-yellow-300: oklch(90.5% 0.182 98.111);
+    --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
+    --color-yellow-700: oklch(55.4% 0.135 66.442);
+    --color-yellow-900: oklch(42.1% 0.095 57.708);
     --color-green-100: oklch(96.2% 0.044 156.743);
+    --color-green-300: oklch(87.1% 0.15 154.449);
+    --color-green-400: oklch(79.2% 0.209 151.711);
     --color-green-600: oklch(62.7% 0.194 149.214);
     --color-green-700: oklch(52.7% 0.154 150.069);
     --color-green-900: oklch(39.3% 0.095 152.535);
     --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-300: oklch(80.9% 0.105 251.813);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-blue-700: oklch(48.8% 0.243 264.376);
@@ -84,70 +97,73 @@
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-blue-pats: #024;
-    --color-dolphins-primary: white;
-    --color-dolphins-secondary: #008D97;
-    --color-bills-primary: white;
-    --color-bills-secondary: #00338D;
-    --color-jets-primary: white;
-    --color-jets-secondary: #0C371D;
-    --color-chiefs-primary: white;
-    --color-chiefs-secondary: #B20032;
-    --color-raiders-primary: #C4C8CB;
-    --color-raiders-secondary: black;
-    --color-broncos-primary: #002244;
-    --color-broncos-secondary: #FB4F14;
-    --color-charger-primary: #0C2340;
-    --color-charger-secondary: #FFB81C;
-    --color-steelers-primary: #FFB612;
-    --color-steelers-secondary: black;
-    --color-ravens-primary: #D0B240;
-    --color-ravens-secondary: #280353;
-    --color-bengals-primary: white;
-    --color-bengals-secondary: #FB4F14;
-    --color-browns-primary: #512F2D;
-    --color-browns-secondary: #FE3C00;
-    --color-texans-primary: white;
-    --color-texans-secondary: #02253A;
-    --color-titans-primary: white;
-    --color-titans-secondary: #648FCC;
-    --color-colts-primary: white;
-    --color-colts-secondary: #003B7B;
-    --color-jaguars-primary: #D7A22A;
-    --color-jaguars-secondary: #006778;
-    --color-cowboys-primary: white;
-    --color-cowboys-secondary: #0D254C;
-    --color-giants-primary: white;
-    --color-giants-secondary: #192F6B;
-    --color-redskins-primary: #FFB612;
-    --color-redskins-secondary: #773141;
-    --color-commanders-primary: #FFB612;
-    --color-commanders-secondary: #773141;
-    --color-eagles-primary: #C0C0C0;
-    --color-eagles-secondary: #003B48;
-    --color-seahawks-primary: #A5ACAF;
-    --color-seahawks-secondary: #002244;
-    --color-cardinals-primary: white;
-    --color-cardinals-secondary: #9B2743;
-    --color-rams-primary: #C9AF74;
-    --color-rams-secondary: #13264B;
-    --color-forty9ers-primary: #E6BE8A;
-    --color-forty9ers-secondary: #AF1E2C;
-    --color-packers-primary: #FFB612;
-    --color-packers-secondary: #203731;
-    --color-lions-primary: #C5C7CF;
-    --color-lions-secondary: #006DB0;
-    --color-vikings-primary: #F0BF00;
-    --color-vikings-secondary: #582C81;
-    --color-bears-primary: #DD4814;
-    --color-bears-secondary: #03202F;
-    --color-falcons-primary: white;
-    --color-falcons-secondary: #A6192D;
-    --color-buccaneers-primary: white;
-    --color-buccaneers-secondary: #D60A0B;
-    --color-saints-primary: #D2B887;
-    --color-saints-secondary: black;
-    --color-panthers-primary: white;
-    --color-panthers-secondary: #0088CE;
+    --color-red-pats: #c60c30;
+    --color-patriots-primary: #024;
+    --color-patriots-secondary: white;
+    --color-dolphins-primary: #008D97;
+    --color-dolphins-secondary: white;
+    --color-bills-primary: #00338D;
+    --color-bills-secondary: white;
+    --color-jets-primary: #0C371D;
+    --color-jets-secondary: white;
+    --color-chiefs-primary: #B20032;
+    --color-chiefs-secondary: white;
+    --color-raiders-primary: black;
+    --color-raiders-secondary: #C4C8CB;
+    --color-broncos-primary: #FB4F14;
+    --color-broncos-secondary: #002244;
+    --color-charger-primary: #FFB81C;
+    --color-charger-secondary: #0C2340;
+    --color-steelers-primary: black;
+    --color-steelers-secondary: #FFB612;
+    --color-ravens-primary: #280353;
+    --color-ravens-secondary: #D0B240;
+    --color-bengals-primary: #FB4F14;
+    --color-bengals-secondary: white;
+    --color-browns-primary: #FE3C00;
+    --color-browns-secondary: #512F2D;
+    --color-texans-primary: #02253A;
+    --color-texans-secondary: white;
+    --color-titans-primary: #648FCC;
+    --color-titans-secondary: white;
+    --color-colts-primary: #003B7B;
+    --color-colts-secondary: white;
+    --color-jaguars-primary: #006778;
+    --color-jaguars-secondary: #D7A22A;
+    --color-cowboys-primary: #0D254C;
+    --color-cowboys-secondary: white;
+    --color-giants-primary: #192F6B;
+    --color-giants-secondary: white;
+    --color-redskins-primary: #773141;
+    --color-redskins-secondary: #FFB612;
+    --color-commanders-primary: #773141;
+    --color-commanders-secondary: #FFB612;
+    --color-eagles-primary: #003B48;
+    --color-eagles-secondary: #C0C0C0;
+    --color-seahawks-primary: #002244;
+    --color-seahawks-secondary: #A5ACAF;
+    --color-cardinals-primary: #9B2743;
+    --color-cardinals-secondary: white;
+    --color-rams-primary: #13264B;
+    --color-rams-secondary: #C9AF74;
+    --color-forty9ers-primary: #AF1E2C;
+    --color-forty9ers-secondary: #E6BE8A;
+    --color-packers-primary: #203731;
+    --color-packers-secondary: #FFB612;
+    --color-lions-primary: #006DB0;
+    --color-lions-secondary: #C5C7CF;
+    --color-vikings-primary: #582C81;
+    --color-vikings-secondary: #F0BF00;
+    --color-bears-primary: #03202F;
+    --color-bears-secondary: #DD4814;
+    --color-falcons-primary: #A6192D;
+    --color-falcons-secondary: white;
+    --color-buccaneers-primary: #D60A0B;
+    --color-buccaneers-secondary: white;
+    --color-saints-primary: black;
+    --color-saints-secondary: #D2B887;
+    --color-panthers-primary: #0088CE;
+    --color-panthers-secondary: white;
   }
 }
 @layer base {
@@ -367,9 +383,6 @@
     }
     .top-full {
       top: 100%;
-    }
-    .right-2 {
-      right: calc(var(--spacing) * 2);
     }
     .bottom-full {
       bottom: 100%;
@@ -653,9 +666,6 @@
     }
     .w-10 {
       width: calc(var(--spacing) * 10);
-    }
-    .w-11\/12 {
-      width: calc(11/12 * 100%);
     }
     .w-12 {
       width: calc(var(--spacing) * 12);
@@ -956,6 +966,9 @@
     .border-red-600 {
       border-color: var(--color-red-600);
     }
+    .border-red-pats {
+      border-color: var(--color-red-pats);
+    }
     .border-transparent {
       border-color: transparent;
     }
@@ -968,6 +981,24 @@
     .\!bg-white {
       background-color: var(--color-white) !important;
     }
+    .bg-bears-primary {
+      background-color: var(--color-bears-primary);
+    }
+    .bg-bears-secondary {
+      background-color: var(--color-bears-secondary);
+    }
+    .bg-bengals-primary {
+      background-color: var(--color-bengals-primary);
+    }
+    .bg-bengals-secondary {
+      background-color: var(--color-bengals-secondary);
+    }
+    .bg-bills-primary {
+      background-color: var(--color-bills-primary);
+    }
+    .bg-bills-secondary {
+      background-color: var(--color-bills-secondary);
+    }
     .bg-black {
       background-color: var(--color-black);
     }
@@ -979,6 +1010,90 @@
     }
     .bg-blue-pats {
       background-color: var(--color-blue-pats);
+    }
+    .bg-broncos-primary {
+      background-color: var(--color-broncos-primary);
+    }
+    .bg-broncos-secondary {
+      background-color: var(--color-broncos-secondary);
+    }
+    .bg-browns-primary {
+      background-color: var(--color-browns-primary);
+    }
+    .bg-browns-secondary {
+      background-color: var(--color-browns-secondary);
+    }
+    .bg-buccaneers-primary {
+      background-color: var(--color-buccaneers-primary);
+    }
+    .bg-buccaneers-secondary {
+      background-color: var(--color-buccaneers-secondary);
+    }
+    .bg-cardinals-primary {
+      background-color: var(--color-cardinals-primary);
+    }
+    .bg-cardinals-secondary {
+      background-color: var(--color-cardinals-secondary);
+    }
+    .bg-charger-primary {
+      background-color: var(--color-charger-primary);
+    }
+    .bg-charger-secondary {
+      background-color: var(--color-charger-secondary);
+    }
+    .bg-chiefs-primary {
+      background-color: var(--color-chiefs-primary);
+    }
+    .bg-chiefs-secondary {
+      background-color: var(--color-chiefs-secondary);
+    }
+    .bg-colts-primary {
+      background-color: var(--color-colts-primary);
+    }
+    .bg-colts-secondary {
+      background-color: var(--color-colts-secondary);
+    }
+    .bg-commanders-primary {
+      background-color: var(--color-commanders-primary);
+    }
+    .bg-commanders-secondary {
+      background-color: var(--color-commanders-secondary);
+    }
+    .bg-cowboys-primary {
+      background-color: var(--color-cowboys-primary);
+    }
+    .bg-cowboys-secondary {
+      background-color: var(--color-cowboys-secondary);
+    }
+    .bg-dolphins-primary {
+      background-color: var(--color-dolphins-primary);
+    }
+    .bg-dolphins-secondary {
+      background-color: var(--color-dolphins-secondary);
+    }
+    .bg-eagles-primary {
+      background-color: var(--color-eagles-primary);
+    }
+    .bg-eagles-secondary {
+      background-color: var(--color-eagles-secondary);
+    }
+    .bg-falcons-primary {
+      background-color: var(--color-falcons-primary);
+    }
+    .bg-falcons-secondary {
+      background-color: var(--color-falcons-secondary);
+    }
+    .bg-forty9ers-primary {
+      background-color: var(--color-forty9ers-primary);
+    }
+    .bg-forty9ers-secondary {
+      background-color: var(--color-forty9ers-secondary);
+    }
+    .bg-giants-primary {
+      background-color: var(--color-giants-primary);
+    }
+    .bg-giants-secondary {
+      background-color: var(--color-giants-secondary);
     }
     .bg-gray-100 {
       background-color: var(--color-gray-100);
@@ -1007,11 +1122,110 @@
     .bg-green-900 {
       background-color: var(--color-green-900);
     }
+    .bg-jaguars-primary {
+      background-color: var(--color-jaguars-primary);
+    }
+    .bg-jaguars-secondary {
+      background-color: var(--color-jaguars-secondary);
+    }
+    .bg-jets-primary {
+      background-color: var(--color-jets-primary);
+    }
+    .bg-jets-secondary {
+      background-color: var(--color-jets-secondary);
+    }
+    .bg-lions-primary {
+      background-color: var(--color-lions-primary);
+    }
+    .bg-lions-secondary {
+      background-color: var(--color-lions-secondary);
+    }
+    .bg-packers-primary {
+      background-color: var(--color-packers-primary);
+    }
+    .bg-packers-secondary {
+      background-color: var(--color-packers-secondary);
+    }
+    .bg-panthers-primary {
+      background-color: var(--color-panthers-primary);
+    }
+    .bg-panthers-secondary {
+      background-color: var(--color-panthers-secondary);
+    }
+    .bg-patriots-primary {
+      background-color: var(--color-patriots-primary);
+    }
+    .bg-patriots-secondary {
+      background-color: var(--color-patriots-secondary);
+    }
+    .bg-raiders-primary {
+      background-color: var(--color-raiders-primary);
+    }
+    .bg-raiders-secondary {
+      background-color: var(--color-raiders-secondary);
+    }
+    .bg-rams-primary {
+      background-color: var(--color-rams-primary);
+    }
+    .bg-rams-secondary {
+      background-color: var(--color-rams-secondary);
+    }
+    .bg-ravens-primary {
+      background-color: var(--color-ravens-primary);
+    }
+    .bg-ravens-secondary {
+      background-color: var(--color-ravens-secondary);
+    }
     .bg-red-100 {
       background-color: var(--color-red-100);
     }
     .bg-red-600 {
       background-color: var(--color-red-600);
+    }
+    .bg-red-pats {
+      background-color: var(--color-red-pats);
+    }
+    .bg-redskins-primary {
+      background-color: var(--color-redskins-primary);
+    }
+    .bg-redskins-secondary {
+      background-color: var(--color-redskins-secondary);
+    }
+    .bg-saints-primary {
+      background-color: var(--color-saints-primary);
+    }
+    .bg-saints-secondary {
+      background-color: var(--color-saints-secondary);
+    }
+    .bg-seahawks-primary {
+      background-color: var(--color-seahawks-primary);
+    }
+    .bg-seahawks-secondary {
+      background-color: var(--color-seahawks-secondary);
+    }
+    .bg-steelers-primary {
+      background-color: var(--color-steelers-primary);
+    }
+    .bg-steelers-secondary {
+      background-color: var(--color-steelers-secondary);
+    }
+    .bg-texans-primary {
+      background-color: var(--color-texans-primary);
+    }
+    .bg-texans-secondary {
+      background-color: var(--color-texans-secondary);
+    }
+    .bg-titans-primary {
+      background-color: var(--color-titans-primary);
+    }
+    .bg-titans-secondary {
+      background-color: var(--color-titans-secondary);
+    }
+    .bg-vikings-primary {
+      background-color: var(--color-vikings-primary);
+    }
+    .bg-vikings-secondary {
+      background-color: var(--color-vikings-secondary);
     }
     .bg-white {
       background-color: var(--color-white);
@@ -1033,9 +1247,6 @@
     }
     .stroke-current {
       stroke: currentcolor;
-    }
-    .p-0 {
-      padding: calc(var(--spacing) * 0);
     }
     .p-1 {
       padding: calc(var(--spacing) * 1);
@@ -1138,9 +1349,6 @@
     }
     .pb-1 {
       padding-bottom: calc(var(--spacing) * 1);
-    }
-    .pb-2 {
-      padding-bottom: calc(var(--spacing) * 2);
     }
     .pb-3 {
       padding-bottom: calc(var(--spacing) * 3);
@@ -1411,6 +1619,12 @@
     .text-panthers-secondary {
       color: var(--color-panthers-secondary);
     }
+    .text-patriots-primary {
+      color: var(--color-patriots-primary);
+    }
+    .text-patriots-secondary {
+      color: var(--color-patriots-secondary);
+    }
     .text-raiders-primary {
       color: var(--color-raiders-primary);
     }
@@ -1431,6 +1645,9 @@
     }
     .text-red-600 {
       color: var(--color-red-600);
+    }
+    .text-red-pats {
+      color: var(--color-red-pats);
     }
     .text-redskins-primary {
       color: var(--color-redskins-primary);
@@ -2294,6 +2511,116 @@ label[for*="min"], label[for*="max"] {
   --tw-font-weight: var(--font-weight-light);
   font-weight: var(--font-weight-light);
   color: var(--color-white);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--spacing) * 3);
+  &::before {
+    content: var(--tw-content);
+    margin-inline-end: calc(var(--spacing) * 6);
+  }
+  &::before {
+    content: var(--tw-content);
+    flex: 1;
+  }
+  &::before {
+    content: var(--tw-content);
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  &::before {
+    content: var(--tw-content);
+    border-color: var(--color-blue-pats);
+  }
+  &::after {
+    content: var(--tw-content);
+    margin-inline-start: calc(var(--spacing) * 6);
+  }
+  &::after {
+    content: var(--tw-content);
+    flex: 1;
+  }
+  &::after {
+    content: var(--tw-content);
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  &::after {
+    content: var(--tw-content);
+    border-color: var(--color-blue-pats);
+  }
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-white);
+  }
+  @media (prefers-color-scheme: dark) {
+    &::before {
+      content: var(--tw-content);
+      border-color: var(--color-red-pats);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    &::after {
+      content: var(--tw-content);
+      border-color: var(--color-red-pats);
+    }
+  }
+}
+.alert-success {
+  border-color: var(--color-green-400);
+  background-color: var(--color-green-100);
+  color: var(--color-green-700);
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--color-green-300);
+  }
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--color-green-900);
+  }
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-green-300);
+  }
+}
+.alert-error {
+  border-color: var(--color-red-400);
+  background-color: var(--color-red-100);
+  color: var(--color-red-700);
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--color-red-300);
+  }
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--color-red-900);
+  }
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-red-300);
+  }
+}
+.alert-warning {
+  border-color: var(--color-yellow-400);
+  background-color: var(--color-yellow-100);
+  color: var(--color-yellow-700);
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--color-yellow-300);
+  }
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--color-yellow-900);
+  }
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-yellow-300);
+  }
+}
+.alert-info {
+  border-color: var(--color-blue-400);
+  background-color: var(--color-blue-100);
+  color: var(--color-blue-700);
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--color-blue-300);
+  }
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--color-blue-900);
+  }
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-blue-300);
+  }
 }
 @layer base {
   [type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select {

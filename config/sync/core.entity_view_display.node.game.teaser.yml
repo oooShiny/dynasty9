@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.game.field_brady_yards
     - field.field.node.game.field_date
     - field.field.node.game.field_defensive_leaders
+    - field.field.node.game.field_drive_charts
     - field.field.node.game.field_game_links
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
@@ -217,6 +218,7 @@ hidden:
   field_brady_tds: true
   field_brady_yards: true
   field_defensive_leaders: true
+  field_drive_charts: true
   field_game_links: true
   field_game_summary: true
   field_game_video: true
