@@ -74,6 +74,14 @@
   <li class="p-2 mr-6 uppercase"><a href="/node/{{ node.id() }}">Game Page</a></li>
   <li class="p-2 mr-6 uppercase"><a href="/node/{{ node.id() }}/edit-podcast?destination=/show-notes/{{ node.id() }}">Edit</a></li>
 </ul>
+<div class="bg-blue-pats text-white p-6 w-full z-10 sticky top-12 shadow-gray-500 shadow-lg drop-shadow-2xl">
+  <ul class="flex font-light gap-4 justify-center uppercase">
+    <li><a href="#game_info">Game Info</a></li>
+    <li><a href="#opp_info">Opponent Info</a></li>
+    <li><a href="#team_lead">Team Leaders</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+  </ul>
+</div>
 <article class="mx-2 text-center">
   {# Teams and Score Boxes #}
   <div class="grid grid-flow-col">
@@ -202,7 +210,7 @@
 
 
 {# Game Information #}
-  <h2 class="divider text-3xl py-4">Game Information</h2>
+  <h2 id="game_info" class="divider text-3xl py-4">Game Information</h2>
   <div class="flex justify-center">
     {# Scoring Drives #}
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
@@ -225,7 +233,7 @@
 
 
 {# Opponent Season Info #}
-  <h2 class="divider text-3xl py-4">{{ opp_short }} Information</h2>
+  <h2 id="opp_info" class="divider text-3xl py-4">{{ opp_short }} Information</h2>
   <div class="flex justify-center">
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
       <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Season Info</h3>
@@ -298,7 +306,7 @@
   </div>
 
 {# Team Leaders #}
-  <h2 class="divider text-3xl py-4">Team Leaders</h2>
+  <h2 id="team_lead" class="divider text-3xl py-4">Team Leaders</h2>
   <div class="flex justify-center">
     {# Pro Bowlers #}
     <div class="m-4 border border-blue-pats w-fit rounded-lg">
