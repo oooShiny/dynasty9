@@ -2,8 +2,8 @@
 <ul class="mx-4">
 {% for season, link in seasons %}
   <li class="py-2 md:py-0">
-    <a class="md:block hidden" href="{{ link }}">{{ season }} Season</a>
-    <a class="block md:hidden" href="{{ link }}">{{ season }}</a>
+    <a class="md:!block hidden" href="{{ link }}">{{ season }} Season</a>
+    <a class="block md:!hidden" href="{{ link }}">{{ season }}</a>
   </li>
   {% if loop.index is divisible by(5) %}
     </ul><ul class="mx-4">
