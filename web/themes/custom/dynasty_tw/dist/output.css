@@ -708,17 +708,11 @@
     .max-w-75 {
       max-width: calc(var(--spacing) * 75);
     }
-    .max-w-fit {
-      max-width: fit-content;
-    }
     .max-w-full {
       max-width: 100%;
     }
     .max-w-md {
       max-width: var(--container-md);
-    }
-    .max-w-min {
-      max-width: min-content;
     }
     .max-w-sm {
       max-width: var(--container-sm);
@@ -860,11 +854,6 @@
     .divide-blue-900 {
       :where(& > :not(:last-child)) {
         border-color: var(--color-blue-900);
-      }
-    }
-    .divide-blue-pats {
-      :where(& > :not(:last-child)) {
-        border-color: var(--color-blue-pats);
       }
     }
     .divide-gray-300 {
@@ -1271,12 +1260,6 @@
     }
     .stroke-current {
       stroke: currentcolor;
-    }
-    .object-contain {
-      object-fit: contain;
-    }
-    .p-0 {
-      padding: calc(var(--spacing) * 0);
     }
     .p-1 {
       padding: calc(var(--spacing) * 1);
@@ -2011,6 +1994,11 @@
         display: none !important;
       }
     }
+    .md\:\!table-cell {
+      @media (width >= 48rem) {
+        display: table-cell !important;
+      }
+    }
     .md\:block {
       @media (width >= 48rem) {
         display: block;
@@ -2029,6 +2017,11 @@
     .md\:table-cell {
       @media (width >= 48rem) {
         display: table-cell;
+      }
+    }
+    .md\:\!w-1\/4 {
+      @media (width >= 48rem) {
+        width: calc(1/4 * 100%) !important;
       }
     }
     .md\:w-1\/2 {
@@ -2677,6 +2670,33 @@ label[for*="min"], label[for*="max"] {
   @media (prefers-color-scheme: dark) {
     color: var(--color-blue-300);
   }
+}
+.table {
+  :where(& > :not(:last-child)) {
+    --tw-divide-y-reverse: 0;
+    border-bottom-style: var(--tw-border-style);
+    border-top-style: var(--tw-border-style);
+    border-top-width: calc(1px * var(--tw-divide-y-reverse));
+    border-bottom-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  }
+  :where(& > :not(:last-child)) {
+    border-color: var(--color-gray-400);
+  }
+}
+.table thead {
+  text-align: start;
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  --tw-font-weight: var(--font-weight-extrabold);
+  font-weight: var(--font-weight-extrabold);
+  text-transform: uppercase;
+}
+.table tbody {
+  background-color: var(--color-gray-100);
+}
+.table tbody td, .table thead th {
+  padding-inline: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 3);
 }
 @layer base {
   [type='text'],input:where(:not([type])),[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select {

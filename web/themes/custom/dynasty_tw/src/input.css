@@ -217,3 +217,23 @@ label[for*="max"] {
 .alert-info {
   @apply bg-blue-100 border-blue-400 text-blue-700 dark:bg-blue-900 dark:border-blue-300 dark:text-blue-300;
 }
+
+/* Table overrides */
+.table {
+  @apply divide-gray-400 divide-y;
+}
+
+.table thead {
+  @apply font-extrabold text-start text-xs uppercase;
+}
+
+.table tbody {
+  @apply bg-gray-100;
+}
+
+.table tbody td,
+.table thead th {
+  @apply px-6 py-3;
+}
+
+
