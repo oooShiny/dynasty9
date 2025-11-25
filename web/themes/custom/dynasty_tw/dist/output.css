@@ -1965,6 +1965,11 @@
         display: block !important;
       }
     }
+    .md\:\!flex {
+      @media (width >= 48rem) {
+        display: flex !important;
+      }
+    }
     .md\:\!hidden {
       @media (width >= 48rem) {
         display: none !important;
@@ -2028,6 +2033,11 @@
     .md\:flex-row {
       @media (width >= 48rem) {
         flex-direction: row;
+      }
+    }
+    .md\:\!flex-wrap {
+      @media (width >= 48rem) {
+        flex-wrap: wrap !important;
       }
     }
     .md\:justify-evenly {
