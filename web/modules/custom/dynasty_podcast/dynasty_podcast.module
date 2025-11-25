@@ -204,7 +204,10 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
     static $processing = FALSE;
 
     if (!$processing && !$entity->isNew() && $entity->hasField('field_scoring_plays')) {
+      \Drupal::logger('dynasty_podcast')->info('Checking scoring plays for game @id', ['@id' => $entity->id()]);
+
       if (($entity->get('field_scoring_plays')->isEmpty())) {
+        \Drupal::logger('dynasty_podcast')->info('Field scoring plays is empty, creating plays for game @id', ['@id' => $entity->id()]);
         // Pass FALSE to prevent recursive save since we're already in presave hook.
         _create_and_attach_plays($entity, FALSE);
       }
@@ -213,6 +216,7 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
         $first_play = $entity->get('field_scoring_plays')->referencedEntities()[0];
         // Check if the play entity is valid and not being deleted.
         if ($first_play && !$first_play->isNew() && $first_play->get('name')->isEmpty()) {
+          \Drupal::logger('dynasty_podcast')->info('Found empty play entity, deleting and recreating for game @id', ['@id' => $entity->id()]);
           $processing = TRUE;
           $first_play->delete();
           // Pass FALSE to prevent recursive save since we're already in presave hook.
@@ -224,8 +228,14 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
 
     // Generate Drive Charts from CSV data if the field is empty.
     if (!$entity->isNew() && $entity->hasField('field_drive_charts')) {
+      \Drupal::logger('dynasty_podcast')->info('Checking drive charts for game @id', ['@id' => $entity->id()]);
+
       if ($entity->get('field_drive_charts')->isEmpty()) {
+        \Drupal::logger('dynasty_podcast')->info('Field drive charts is empty, populating for game @id', ['@id' => $entity->id()]);
         _populate_drive_charts($entity);
+      }
+      else {
+        \Drupal::logger('dynasty_podcast')->info('Drive charts already populated for game @id', ['@id' => $entity->id()]);
       }
     }
   }
@@ -251,9 +261,16 @@ function dynasty_podcast_entity_insert(EntityInterface $entity) {
  *   Set to FALSE when called from presave hook to avoid recursive saves.
  */
 function _create_and_attach_plays($game_node, $save_node = TRUE) {
-  $pfr_link = $game_node->get('field_pfr_link')->value;
+  try {
+    $pfr_link = $game_node->get('field_pfr_link')->value;
+
+    \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Starting for game @id with PFR link: @link', [
+      '@id' => $game_node->id(),
+      '@link' => $pfr_link ?? 'NULL',
+    ]);
 
   if (empty($pfr_link)) {
+    \Drupal::logger('dynasty_podcast')->warning('_create_and_attach_plays: No PFR link found for game @id', ['@id' => $game_node->id()]);
     return;
   }
 
@@ -261,23 +278,48 @@ function _create_and_attach_plays($game_node, $save_node = TRUE) {
   $csv_files = _find_scoring_plays_csv($pfr_link);
 
   if (empty($csv_files)) {
+    \Drupal::logger('dynasty_podcast')->warning('_create_and_attach_plays: No CSV files found for PFR link @link', ['@link' => $pfr_link]);
     return;
   }
+
+  \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Found @count CSV file(s): @files', [
+    '@count' => count($csv_files),
+    '@files' => implode(', ', $csv_files),
+  ]);
 
   // Parse CSV and create Play entities.
   $play_ids = [];
   foreach ($csv_files as $csv_file) {
     $created_plays = _create_plays_from_csv($csv_file, $game_node);
+    \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Created @count play(s) from @file', [
+      '@count' => count($created_plays),
+      '@file' => $csv_file,
+    ]);
     $play_ids = array_merge($play_ids, $created_plays);
   }
 
   // Add the created Play entities to the field_scoring_plays field.
   if (!empty($play_ids)) {
+    \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Attaching @count total plays to game @id', [
+      '@count' => count($play_ids),
+      '@id' => $game_node->id(),
+    ]);
     $game_node->set('field_scoring_plays', $play_ids);
     // Only save if requested (not when called from presave hook).
     if ($save_node) {
       $game_node->save();
+      \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Game @id saved successfully', ['@id' => $game_node->id()]);
     }
+  }
+  else {
+    \Drupal::logger('dynasty_podcast')->warning('_create_and_attach_plays: No plays created for game @id', ['@id' => $game_node->id()]);
+  }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('dynasty_podcast')->error('_create_and_attach_plays: Exception for game @id - @message', [
+      '@id' => $game_node->id(),
+      '@message' => $e->getMessage(),
+    ]);
   }
 }
 
@@ -995,7 +1037,13 @@ function _find_scoring_plays_csv($pfr_link) {
   $csv_dir = 'public://nfl-data/scoring-plays';
   $real_path = \Drupal::service('file_system')->realpath($csv_dir);
 
+  \Drupal::logger('dynasty_podcast')->info('_find_scoring_plays_csv: Looking in directory: @dir (resolved: @real)', [
+    '@dir' => $csv_dir,
+    '@real' => $real_path ?? 'NULL',
+  ]);
+
   if (!is_dir($real_path)) {
+    \Drupal::logger('dynasty_podcast')->warning('_find_scoring_plays_csv: Directory does not exist: @dir', ['@dir' => $real_path ?? $csv_dir]);
     return [];
   }
 
@@ -1003,7 +1051,23 @@ function _find_scoring_plays_csv($pfr_link) {
   $pfr = explode('/', $pfr_link);
   $pfr_id = rtrim(end($pfr), '.htm');
   $pattern = "*_scoring_{$pfr_id}.csv";
+
+  \Drupal::logger('dynasty_podcast')->info('_find_scoring_plays_csv: Searching for pattern: @pattern', ['@pattern' => $pattern]);
+
   $files = glob($real_path . '/' . $pattern);
+
+  if ($files) {
+    \Drupal::logger('dynasty_podcast')->info('_find_scoring_plays_csv: Found @count file(s): @files', [
+      '@count' => count($files),
+      '@files' => implode(', ', $files),
+    ]);
+  }
+  else {
+    \Drupal::logger('dynasty_podcast')->warning('_find_scoring_plays_csv: No files found for pattern: @pattern in @dir', [
+      '@pattern' => $pattern,
+      '@dir' => $real_path,
+    ]);
+  }
 
   return $files;
 }
@@ -1153,27 +1217,43 @@ function _match_highlight_for_play($description, $highlights) {
  *   The game node entity.
  */
 function _populate_drive_charts($game_node) {
-  $pfr_link = $game_node->get('field_pfr_link')->value;
+  try {
+    $pfr_link = $game_node->get('field_pfr_link')->value;
+
+    \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Starting for game @id with PFR link: @link', [
+      '@id' => $game_node->id(),
+      '@link' => $pfr_link ?? 'NULL',
+    ]);
 
   if (empty($pfr_link)) {
+    \Drupal::logger('dynasty_podcast')->warning('_populate_drive_charts: No PFR link found for game @id', ['@id' => $game_node->id()]);
     return;
   }
 
   // Extract PFR game ID from URL (e.g., "200009030nwe" from "...boxscores/200009030nwe.htm").
   if (preg_match('/boxscores\/(\w+)\.htm/', $pfr_link, $matches)) {
     $pfr_game_id = $matches[1];
+    \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Extracted PFR game ID: @id', ['@id' => $pfr_game_id]);
   }
   else {
+    \Drupal::logger('dynasty_podcast')->error('_populate_drive_charts: Could not extract PFR game ID from link: @link', ['@link' => $pfr_link]);
     return;
   }
 
   // Get season and week from the game node.
   $season = $game_node->get('field_season')->value;
-  $week_name = $game_node->get('field_week')->entity->label();
-  $week = DynastyHelpers::get_week_number($week_name, $season);
+  $week_entity = $game_node->get('field_week')->entity;
+  $week_name = $week_entity ? $week_entity->label() : NULL;
+  $week = $week_name ? DynastyHelpers::get_week_number($week_name, $season) : NULL;
 
+  \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Season: @season, Week name: @week_name, Week number: @week', [
+    '@season' => $season ?? 'NULL',
+    '@week_name' => $week_name ?? 'NULL',
+    '@week' => $week ?? 'NULL',
+  ]);
 
   if (empty($season) || empty($week)) {
+    \Drupal::logger('dynasty_podcast')->warning('_populate_drive_charts: Missing season or week for game @id', ['@id' => $game_node->id()]);
     return;
   }
 
@@ -1185,15 +1265,36 @@ function _populate_drive_charts($game_node) {
   $home_drives_file = $drive_dir . '/' . $pfr_game_id . '-home_drives.csv';
   $vis_drives_file = $drive_dir . '/' . $pfr_game_id . '-vis_drives.csv';
 
+  \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Looking for CSV files:@newline  Home: @home@newline  Visitor: @vis', [
+    '@newline' => "\n",
+    '@home' => $home_drives_file,
+    '@vis' => $vis_drives_file,
+  ]);
+
+  // Check if files exist before parsing.
+  $home_exists = file_exists($home_drives_file);
+  $vis_exists = file_exists($vis_drives_file);
+
+  \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: File existence check - Home: @home, Visitor: @vis', [
+    '@home' => $home_exists ? 'EXISTS' : 'NOT FOUND',
+    '@vis' => $vis_exists ? 'EXISTS' : 'NOT FOUND',
+  ]);
+
   // Parse both drive chart CSV files.
   $home_drives = _parse_drive_chart_csv($home_drives_file);
   $vis_drives = _parse_drive_chart_csv($vis_drives_file);
+
+  \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Parsed drives - Home: @home_count, Visitor: @vis_count', [
+    '@home_count' => count($home_drives),
+    '@vis_count' => count($vis_drives),
+  ]);
 
   // Generate HTML tables.
   $drive_charts = [];
 
   $home_away = $game_node->get('field_home_away')->value;
-  $opp = $game_node->get('field_opponent')->entity->label();
+  $opp_entity = $game_node->get('field_opponent')->entity;
+  $opp = $opp_entity ? $opp_entity->label() : 'Unknown';
   $opp = explode(' ', $opp);
   $opp_name = end($opp);
   if ($home_away == 'Home') {
@@ -1208,11 +1309,18 @@ function _populate_drive_charts($game_node) {
       'Away' => 'Patriots',
     ];
   }
+
+  \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Team labels - Home: @home, Away: @away', [
+    '@home' => $ha['Home'],
+    '@away' => $ha['Away'],
+  ]);
+
   if (!empty($home_drives)) {
     $drive_charts[] = [
       'value' => _format_drive_chart_table($home_drives, $ha['Home']),
       'format' => 'full_html',
     ];
+    \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Added home drives table');
   }
 
   if (!empty($vis_drives)) {
@@ -1220,11 +1328,26 @@ function _populate_drive_charts($game_node) {
       'value' => _format_drive_chart_table($vis_drives, $ha['Away']),
       'format' => 'full_html',
     ];
+    \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Added visitor drives table');
   }
 
   // Set the field value.
   if (!empty($drive_charts)) {
     $game_node->set('field_drive_charts', $drive_charts);
+    \Drupal::logger('dynasty_podcast')->info('_populate_drive_charts: Successfully set @count drive chart(s) for game @id', [
+      '@count' => count($drive_charts),
+      '@id' => $game_node->id(),
+    ]);
+  }
+  else {
+    \Drupal::logger('dynasty_podcast')->warning('_populate_drive_charts: No drive charts generated for game @id', ['@id' => $game_node->id()]);
+  }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('dynasty_podcast')->error('_populate_drive_charts: Exception for game @id - @message', [
+      '@id' => $game_node->id(),
+      '@message' => $e->getMessage(),
+    ]);
   }
 }
 
