@@ -1084,13 +1084,23 @@ function _create_plays_from_csv($csv_file, $game_node) {
 
   $handle = fopen($csv_file, 'r');
   if ($handle === FALSE) {
+    \Drupal::logger('dynasty_podcast')->error('_create_and_attach_plays: Failed to open CSV file: @file', [
+      '@file' => $csv_file,
+    ]);
     return $play_ids;
   }
 
   // Read header row.
   $headers = fgetcsv($handle);
 
+  \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Read headers from CSV: @headers', [
+    '@headers' => $headers ? implode(', ', $headers) : 'NULL',
+  ]);
+
   if ($headers === FALSE) {
+    \Drupal::logger('dynasty_podcast')->error('_create_and_attach_plays: Failed to read headers from CSV: @file', [
+      '@file' => $csv_file,
+    ]);
     fclose($handle);
     return $play_ids;
   }
@@ -1099,8 +1109,10 @@ function _create_plays_from_csv($csv_file, $game_node) {
   $highlights = _get_game_highlights($game_node);
 
   // Parse each row and create Play entities.
+  $row_count = 0;
   while (($data = fgetcsv($handle)) !== FALSE) {
     $row = array_combine($headers, $data);
+    $row_count++;
 
     if (empty($row['description']) || empty($row['quarter'])) {
       continue;
@@ -1152,6 +1164,11 @@ function _create_plays_from_csv($csv_file, $game_node) {
   }
 
   fclose($handle);
+
+  \Drupal::logger('dynasty_podcast')->info('_create_and_attach_plays: Processed @total row(s), created @count play(s)', [
+    '@total' => $row_count,
+    '@count' => count($play_ids),
+  ]);
 
   return $play_ids;
 }
@@ -1363,21 +1380,46 @@ function _populate_drive_charts($game_node) {
 function _parse_drive_chart_csv($file_path) {
   $drives = [];
 
+  \Drupal::logger('dynasty_podcast')->info('_parse_drive_chart_csv: Attempting to parse file: @file', [
+    '@file' => $file_path,
+  ]);
+
   if (!file_exists($file_path)) {
+    \Drupal::logger('dynasty_podcast')->warning('_parse_drive_chart_csv: File does not exist: @file', [
+      '@file' => $file_path,
+    ]);
     return $drives;
   }
+
+  \Drupal::logger('dynasty_podcast')->info('_parse_drive_chart_csv: File exists, opening for reading');
 
   if (($handle = fopen($file_path, "r")) !== FALSE) {
     $headers = fgetcsv($handle);
 
+    \Drupal::logger('dynasty_podcast')->info('_parse_drive_chart_csv: Read headers: @headers', [
+      '@headers' => $headers ? implode(', ', $headers) : 'NULL',
+    ]);
+
     // Clean up headers.
     $headers = array_map('trim', $headers);
 
+    $row_count = 0;
     while (($data = fgetcsv($handle)) !== FALSE) {
       $row = array_combine($headers, $data);
       $drives[] = $row;
+      $row_count++;
     }
     fclose($handle);
+
+    \Drupal::logger('dynasty_podcast')->info('_parse_drive_chart_csv: Parsed @count row(s) from @file', [
+      '@count' => $row_count,
+      '@file' => $file_path,
+    ]);
+  }
+  else {
+    \Drupal::logger('dynasty_podcast')->error('_parse_drive_chart_csv: Failed to open file: @file', [
+      '@file' => $file_path,
+    ]);
   }
 
   return $drives;
