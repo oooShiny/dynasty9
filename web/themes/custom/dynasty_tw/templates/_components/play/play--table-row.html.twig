@@ -13,8 +13,10 @@
 #}
 {% set team = content.scoring_team.0['#context'].value %}
 {% set css = '' %}
+{% set play_link = false %}
 {% if team == 'Patriots' %}
   {% set css = 'text-blue-pats font-bold' %}
+  {% set play_link = true %}
 {% else %}
   {% set css = 'text-' ~ team|lower ~ '-primary' %}
 {% endif %}
@@ -75,7 +77,15 @@
         </div>
       {% endif %}
     {% endif %}
-    <span class="italic">{{ content.play_description.0['#text'] }}</span>
+    <span class="italic">
+      {% if play_link and is_admin %}
+        <a href="/play/{{ play.id.value }}">
+      {% endif %}
+        {{ content.play_description.0['#text'] }}
+      {% if play_link and is_admin %}
+        </a>
+      {% endif %}
+    </span>
   </div>
   <div class="basis-1/6">{{ team }}</div>
   <div class="basis-1/6">{{ content.minutes.0['#markup'] }}:{{ "%02d"|format(content.seconds.0['#markup']) }}</div>
