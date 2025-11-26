@@ -7,6 +7,9 @@
 
 @plugin "@tailwindcss/forms";
 
+/* Prevent dark theme unless specified. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   *,
   ::after,
