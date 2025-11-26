@@ -173,3 +173,13 @@ a.facets-soft-limit-link.open:after {
     position: relative;
   }
 }
+
+/* Facet link color overrides */
+.facet-item__value {
+  color: white !important;
+  text-decoration-color: #c60c30 !important;
+}
+
+.facet-item__value:hover {
+  color: #c60c30 !important;
+}
