@@ -1,0 +1,135 @@
+# Upsun configuration, generated using AI at: 2025-12-12T19:54:35-05:00
+# AI can make mistakes. Please modify this file to suit your needs.
+applications:
+  drupal:
+    type: php:8.3
+
+    build:
+      flavor: none
+
+    hooks:
+      build: |
+        set -ex
+        composer install --no-progress --no-interaction --optimize-autoloader --no-dev
+
+        # Add Composer tools (such as drush) to the PATH.
+        echo >> .environment '# Add Composer tools (such as drush) to the PATH.'
+        echo >> .environment 'export PATH="$PATH:$PLATFORM_APP_DIR/vendor/bin"'
+
+        # Set the URI for Drush commands.
+        echo >> .environment 'export PRIMARY_URL=$(echo "$PLATFORM_ROUTES" | base64 --decode | jq -r "to_entries[] | select(.value.primary) | .key")'
+        echo >> .environment 'export DRUSH_OPTIONS_URI=${PRIMARY_URL%/}'
+
+        # Create settings files if missing.
+        if [ ! -f web/sites/default/settings.php ]; then
+          cp web/sites/default/default.settings.php web/sites/default/settings.php
+        fi
+        if ! grep -q -F settings.upsun.php web/sites/default/settings.php; then
+          echo >> web/sites/default/settings.php "// Upsun configuration"
+          echo >> web/sites/default/settings.php "if (getenv('PLATFORM_APPLICATION') && file_exists(__DIR__ . '/settings.upsun.php')) {"
+          echo >> web/sites/default/settings.php "  require_once __DIR__ . '/settings.upsun.php';"
+          echo >> web/sites/default/settings.php "}"
+        fi
+
+        if [ ! -f web/sites/default/settings.upsun.php ]; then
+          curl -sfSL https://raw.githubusercontent.com/upsun/config-assets/refs/heads/main/drupal/11/settings.upsun.php > web/sites/default/settings.upsun.php
+        fi
+
+      deploy: |
+        set -ex
+        cd web
+        if [ -n "$(drush status --field=bootstrap)" ]; then
+          drush -y cache-rebuild
+          drush -y updatedb
+          if [ -n "$(ls config/sync/*.yml 2>/dev/null)" ]; then
+            drush -y config-import
+          else
+            echo "No config to import. Skipping."
+          fi
+        else
+          echo "Drupal not installed. Skipping standard Drupal deploy steps"
+        fi
+
+    web:
+      locations:
+        /:
+          root: web
+          expires: 5m
+          passthru: /index.php
+          allow: false
+          rules:
+            '\.(avif|webp|jpe?g|png|gif|svgz?|css|js|map|ico|bmp|eot|woff2?|otf|ttf)$':
+              allow: true
+            '^/robots\.txt$':
+              allow: true
+            '^/sitemap\.xml$':
+              allow: true
+            '^/sites/sites\.php$':
+              scripts: false
+            '^/sites/[^/]+/settings.*?\.php$':
+              scripts: false
+        /sites/default/files:
+          allow: true
+          expires: 5m
+          passthru: /index.php
+          root: web/sites/default/files
+          scripts: false
+          rules:
+            '^/sites/default/files/(css|js)':
+              expires: 2w
+
+    mounts:
+      web/sites/default/files:
+        source: storage
+      tmp:
+        source: storage
+      private:
+        source: storage
+      .drush:
+        source: storage
+      drush-backups:
+        source: storage
+
+    relationships:
+      db: {}
+      cache: {}
+
+    crons:
+      drupal:
+        spec: '*/19 * * * *'
+        commands:
+          start: 'cd web ; drush core-cron'
+
+    runtime:
+      extensions:
+        - redis
+        - sodium
+        - apcu
+        - blackfire
+        - gd
+
+services:
+  db:
+    type: mariadb:11.8
+  cache:
+    type: redis-persistent:8.0
+
+routes:
+  https://{default}/:
+    type: upstream
+    upstream: drupal:http
+    cache:
+      enabled: true
+      cookies: ['/^SS?ESS/', '/^Drupal.visitor/']
+  https://www.{default}/:
+    type: redirect
+    to: https://{default}/
+
+# Configuration uses PHP 8.3 as Drupal 11 requires PHP >= 8.3.
+# MariaDB 11.8 is used as the database service, matching project context.
+# Redis persistent cache service is configured for Drupal caching.
+# Web root is set to 'web' directory as per project structure.
+# Build hook installs composer dependencies without dev packages and sets up environment and settings files.
+# Deploy hook runs Drupal cache rebuild, database updates, and config import if applicable.
+# Mounts provide persistent storage for files, tmp, private files, drush data, and backups.
+# Routes define default upstream to Drupal app with caching and a redirect from www to non-www.
