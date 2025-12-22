@@ -17,7 +17,7 @@
  */
 #}
 {% if attributes -%}
-  <div{{ attributes }}>
+  <div{{ attributes.addClass('overflow-y-scroll h-96 pt-4') }}>
 {% endif %}
   {% if title %}
     <h3>{{ title }}</h3>
@@ -26,8 +26,9 @@
   <{{ list.type }}{{ list.attributes }}>
 
     {% for row in rows %}
-      <li{{ row.attributes }}>
-        {{- row.content -}}
+      <li{{ row.attributes.addClass('bg-blue-pats text-white flex m-1') }}>
+        <div class="w-28 text-center my-auto p-6 text-6xl text-white">{{ loop.index }}</div>
+        <div class="my-auto p-4">{{- row.content -}}</div>
       </li>
     {% endfor %}
 

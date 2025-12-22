@@ -6,14 +6,14 @@
         if (href.indexOf('muse') >= 0) {
           $(v).on('click', function (e) {
             e.preventDefault();
-            modalSrc = "<video controls muted autoplay preload='metadata' class='responsive-video'>" +
-              "<source src='" + href + "' type='video/mp4; codecs=' avc1.42e01e, mp4a.40.2''>" +
-              "</video>";
+            var link_parts = href.split('/');
+            var muse_id = link_parts[link_parts.length - 1];
+            modalSrc = '<iframe src="https://muse.ai/embed/'+ muse_id +'" frameborder="0" allowfullscreen></iframe>';
             // Create modal.
             var imageModal = Drupal.dialog(modalSrc, {
               resizable: false,
               closeOnEscape: true,
-              position: { my: "left top", at: "left top+64", of: window },
+              position: { my: "center center", at: "center center", of: window },
               height: 'auto',
               width: 'auto',
               beforeClose: false,

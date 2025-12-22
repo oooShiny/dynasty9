@@ -28,7 +28,7 @@
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
-<div class="flex flex-wrap justify-center">
+<div class="flex flex-wrap justify-center gap-2">
   {% for row in items %}
       {% for column in row.content %}
           {{- column.content -}}

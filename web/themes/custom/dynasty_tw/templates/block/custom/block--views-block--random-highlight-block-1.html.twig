@@ -25,10 +25,10 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes }}>
+<div{{ attributes.addClass('w-fit mx-auto') }}>
   {{ title_prefix }}
   {% if label %}
-    <h2{{ title_attributes.addClass('py-2 bg-blue-pats font-light text-2xl text-center text-white uppercase') }}>{{ label }}</h2>
+    <h2{{ title_attributes.addClass('p-2 bg-blue-pats font-light text-2xl text-center text-white uppercase') }}>{{ label }}</h2>
   {% endif %}
   {{ title_suffix }}
   {% block content %}

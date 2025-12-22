@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Template for the Dynasty Advent Calendar.
+ *
+ * Available variables:
+ * - doors: Array of door numbers in random order.
+ * - current_day: The current day of the month.
+ * - is_december: Boolean indicating if it's December.
+ */
+#}
+
+<div class="advent-calendar-wrapper py-8">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-blue-pats dark:text-white mb-2">Patriots Dynasty Advent Calendar</h1>
+      {% if not is_december %}
+        <p class="text-lg text-gray-600 dark:text-gray-300">Come back in December to open the doors!</p>
+      {% else %}
+        <p class="text-lg text-gray-600 dark:text-gray-300">Open a new door each day of December!</p>
+      {% endif %}
+    </div>
+
+    <div class="advent-calendar-grid grid grid-cols-4 md:grid-cols-6 gap-4 max-w-4xl mx-auto">
+      {% for day in doors %}
+        {% set is_unlocked = is_december and current_day >= day %}
+        {% set is_future = not is_december or current_day < day %}
+
+        <div class="advent-door-wrapper" data-day="{{ day }}">
+          <div class="advent-door bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-all duration-300 cursor-pointer aspect-square rounded-xl border-2 border-gray-200 dark:border-neutral-700
+            {{ is_unlocked ? 'unlocked' : 'locked' }}
+            {{ is_future ? 'future' : '' }}"
+            data-unlocked="{{ is_unlocked ? 'true' : 'false' }}">
+
+            <div class="p-0 flex items-center justify-center relative overflow-hidden h-full">
+              {# Door number #}
+              <div class="door-number text-4xl md:text-5xl font-bold text-blue-pats dark:text-blue-300">
+                {{ day }}
+              </div>
+
+              {# Lock icon for locked doors #}
+              {% if not is_unlocked %}
+                <div class="lock-icon absolute top-2 right-2 text-gray-400 dark:text-neutral-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              {% endif %}
+
+              {# Opened indicator #}
+              <div class="opened-indicator hidden absolute inset-0 bg-green-100 dark:bg-green-900/20">
+                <div class="flex items-center justify-center h-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600 dark:text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{# Preline Modal for displaying door content #}
+<div id="advent-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="advent-modal-label">
+  <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-3xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+    <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xl rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700">
+      <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+        <h3 id="advent-modal-label" class="font-bold text-gray-800 dark:text-white">
+          Advent Calendar
+        </h3>
+        <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#advent-modal">
+          <span class="sr-only">Close</span>
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="advent-modal-content" class="p-4 overflow-y-auto">
+        {# Content loaded via AJAX #}
+      </div>
+      <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-blue-pats bg-white text-blue-pats shadow-sm hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#advent-modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

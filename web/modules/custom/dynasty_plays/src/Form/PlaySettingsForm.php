@@ -46,7 +46,33 @@ class PlaySettingsForm extends FormBase {
    *   Form definition array.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['play_settings']['#markup'] = 'Settings form for Play entities. Manage field settings here.';
+    $form['help'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('Configure settings for Play entities. Use the tabs above to manage fields, form display, and view display.'),
+    ];
+
+    $form['links'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Quick Links'),
+    ];
+
+    $form['links']['list'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('<ul>
+        <li><a href="@fields">Manage fields</a> - Add, edit, or remove fields for Play entities</li>
+        <li><a href="@form">Manage form display</a> - Configure how fields appear on the add/edit forms</li>
+        <li><a href="@display">Manage display</a> - Configure how fields appear when viewing plays</li>
+        <li><a href="@collection">View all plays</a> - Browse all play entities</li>
+        <li><a href="@add">Add a play</a> - Create a new play entity</li>
+      </ul>', [
+        '@fields' => '/admin/structure/play/settings/fields',
+        '@form' => '/admin/structure/play/settings/form-display',
+        '@display' => '/admin/structure/play/settings/display',
+        '@collection' => '/admin/content/play',
+        '@add' => '/admin/content/play/add',
+      ]),
+    ];
+
     return $form;
   }
 

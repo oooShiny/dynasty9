@@ -1,0 +1,9 @@
+name: Dynasty Advent Calendar
+type: module
+description: 'Provides advent calendar functionality for the Dynasty site'
+core_version_requirement: ^11
+package: Dynasty
+dependencies:
+  - drupal:node
+  - drupal:media
+  - drupal:text

@@ -1,0 +1,54 @@
+/**
+ * Video Switcher Styles
+ * 
+ * Default styles for video switcher active states.
+ * These can be overridden in your own CSS.
+ */
+
+/* Basic active state for any element with data-video-category */
+[data-video-category].active {
+  background-color: #c60c30; /* Patriots red */
+  color: white;
+  font-weight: bold;
+}
+
+/* Link-specific styling */
+a[data-video-category] {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+a[data-video-category]:hover {
+  opacity: 0.8;
+}
+
+a[data-video-category].active:hover {
+  opacity: 1;
+}
+
+/* Button-specific styling */
+button[data-video-category] {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button[data-video-category].active {
+  background-color: #c60c30;
+  border-color: #c60c30;
+  color: white;
+}
+
+/* List item styling */
+li[data-video-category] {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+li[data-video-category]:hover {
+  background-color: rgba(0, 34, 68, 0.1);
+}
+
+li[data-video-category].active {
+  background-color: #c60c30;
+  color: white;
+}

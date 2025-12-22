@@ -1,0 +1,17 @@
+dynasty_advent.calendar:
+  path: '/advent-calendar'
+  defaults:
+    _controller: '\Drupal\dynasty_advent\Controller\AdventCalendarController::calendar'
+    _title: 'Advent Calendar'
+  requirements:
+    _permission: 'access content'
+
+dynasty_advent.door_content:
+  path: '/advent-calendar/door/{day}'
+  defaults:
+    _controller: '\Drupal\dynasty_advent\Controller\AdventCalendarController::getDoorContent'
+  requirements:
+    _permission: 'access content'
+    day: '\d+'
+  options:
+    no_cache: TRUE

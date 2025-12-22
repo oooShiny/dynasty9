@@ -14,7 +14,7 @@ bundle: block
 mode: preview
 content:
   field_block:
-    type: block_field
+    type: block_field_label
     label: hidden
     settings: {  }
     third_party_settings: {  }

@@ -69,6 +69,17 @@ function dynasty_tw_preprocess_field(&$variables) {
       $variables['mp3_url'] = $variables['element'][0]['#context']['value'];
       $variables['view_mode'] = $variables['element']['#view_mode'];
       break;
+    case 'field_muse_video_id':
+      if ($variables['element']['#view_mode'] == 'card') {
+        $variables['card'] = 'vertical';
+      }
+      elseif ($variables['element']['#view_mode'] == 'horizontal_card') {
+        $variables['card'] = 'horizontal';
+      }
+      else {
+        $variables['card'] = 'none';
+      }
+      break;
   }
 }
 
@@ -114,6 +125,14 @@ function dynasty_tw_preprocess_layout(&$variables) {
       foreach ($cols as $key => $col_width) {
         $variables['content']['width'][$col_list[$key]] = $widths[$col_width];
       }
+    }
+    if (!$this_layout->getEntity()->field_vertical_align->isEmpty()) {
+      $valign = [
+        'top' => 'justify-start',
+        'mid' => 'justify-center',
+        'bottom' => 'justify-end',
+      ];
+      $variables['content']['valign'] = $valign[$this_layout->getEntity()->field_vertical_align->value];
     }
   }
 }
@@ -251,8 +270,6 @@ function dynasty_tw_preprocess_node(&$variables) {
       $names = explode(' ', $node->label());
       $variables['lastname'] = end($names);
       break;
-    case 'page':
-      $variables['#attached']['library'][] =  'dynasty_tw/gfycat';
   }
 }
 
@@ -270,7 +287,16 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
       // bg-red-pats text-white|Red
       // section-header
       // header-block
-      $variables['bg_color'] = $p->field_background_color->value;
+      $css = explode(' ', $p->field_background_color->value);
+      $variables['bg_color'] = $css[0];
+      if (isset($css[1]) && $css[1] == 'text-white') {
+        $text_css = 'text-white border-white';
+      }
+      else {
+        $text_css = 'text-blue-pats border-blue-pats';
+      }
+      $variables['text_color'] = $text_css ?? '';
+
       $variables['full_width'] = $p->field_full_width_section->value ?? null;
 
       if (!$p->field_2_column_widths->isEmpty()) {
@@ -344,8 +370,14 @@ function dynasty_tw_views_pre_render(ViewExecutable $view) {
   if (in_array($view->storage->id(), $podcast_views)) {
     $view->element['#attached']['library'][] = 'dynasty_tw/podcast';
   }
-}
 
+  $video_player_views = [
+    'top_plays'
+  ];
+  if (in_array($view->storage->id(), $video_player_views)) {
+    $view->element['#attached']['library'][] = 'dynasty_tw/video_switcher';
+  }
+}
 /**
  * Implements template_preprocess_views_view_field().
  */

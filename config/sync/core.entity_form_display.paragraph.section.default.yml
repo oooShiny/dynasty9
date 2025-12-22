@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.section.field_2_column_widths
     - field.field.paragraph.section.field_background_color
     - field.field.paragraph.section.field_full_width_section
+    - field.field.paragraph.section.field_vertical_align
     - paragraphs.paragraphs_type.section
 id: paragraph.section.default
 targetEntityType: paragraph
@@ -30,6 +31,12 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_vertical_align:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
     third_party_settings: {  }
   layout_paragraphs_fields:
     weight: -200

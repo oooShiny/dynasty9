@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muse.ai Video Switcher Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .video-container {
+      margin-bottom: 30px;
+    }
+    
+    .video-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .video-link {
+      padding: 10px 20px;
+      background: #002244;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .video-link:hover {
+      background: #003366;
+    }
+    
+    .video-link.active {
+      background: #c60c30;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Muse.ai Video Switcher Example</h1>
+
+  <!-- Example 1: Longest Plays -->
+  <div class="video-container">
+    <h2>Longest Plays</h2>
+    <div id="longest-plays" class="aspect-video h-full" style="width: 100%; height: 500px;"></div>
+    
+    <div class="video-list">
+      <a class="video-link active" data-video-id="smZ3M7x" data-video-category="longest-plays">
+        Video 1
+      </a>
+      <a class="video-link" data-video-id="UaeHcHT" data-video-category="longest-plays">
+        Video 2
+      </a>
+      <a class="video-link" data-video-id="abc123X" data-video-category="longest-plays">
+        Video 3
+      </a>
+    </div>
+  </div>
+
+  <!-- Example 2: Best Touchdowns (second player) -->
+  <div class="video-container">
+    <h2>Best Touchdowns</h2>
+    <div id="best-touchdowns" class="aspect-video h-full" style="width: 100%; height: 500px;"></div>
+    
+    <div class="video-list">
+      <a class="video-link active" data-video-id="xyz789A" data-video-category="best-touchdowns">
+        TD Video 1
+      </a>
+      <a class="video-link" data-video-id="def456B" data-video-category="best-touchdowns">
+        TD Video 2
+      </a>
+    </div>
+  </div>
+
+  <!-- Load Muse.ai player script -->
+  <script src="https://muse.ai/static/js/embed-player.min.js"></script>
+  
+  <!-- Initialize players and register them -->
+  <script>
+    // Create the first player
+    const longestPlays = MusePlayer({
+      container: '#longest-plays',
+      video: 'smZ3M7x',
+      sizing: 'fit',
+      search: false,
+      links: false,
+      logo: false,
+      title: false
+    });
+
+    // Create the second player
+    const bestTouchdowns = MusePlayer({
+      container: '#best-touchdowns',
+      video: 'xyz789A',
+      sizing: 'fit',
+      search: false,
+      links: false,
+      logo: false,
+      title: false
+    });
+
+    // Initialize the global registry if it doesn't exist
+    window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
+      players: {},
+      registerPlayer: function(category, player) {
+        this.players[category] = player;
+        console.log('Registered Muse.ai player:', category);
+      },
+      switchVideo: function(category, videoId) {
+        const player = this.players[category];
+        if (player && typeof player.changeVideo === 'function') {
+          player.changeVideo(videoId);
+        } else {
+          console.error('Player does not support changeVideo or not found:', category);
+        }
+      }
+    };
+
+    // Register both players with the switcher
+    MuseVideoSwitcher.registerPlayer('longest-plays', longestPlays);
+    MuseVideoSwitcher.registerPlayer('best-touchdowns', bestTouchdowns);
+
+    // Add click handlers to video links (vanilla JS version)
+    document.querySelectorAll('[data-video-id][data-video-category]').forEach(function(element) {
+      element.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const videoId = this.getAttribute('data-video-id');
+        const category = this.getAttribute('data-video-category');
+
+        if (!videoId || !category) {
+          console.warn('Missing video-id or category');
+          return;
+        }
+
+        // Switch the video
+        window.MuseVideoSwitcher.switchVideo(category, videoId);
+
+        // Update active states for this category
+        document.querySelectorAll('[data-video-category="' + category + '"]').forEach(function(el) {
+          el.classList.remove('active');
+        });
+
+        // Add active class to clicked element
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

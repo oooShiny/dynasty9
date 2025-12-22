@@ -1,0 +1,101 @@
+<!--
+  READY-TO-PASTE EXAMPLE FOR DRUPAL CONTENT
+  
+  This is a complete, working example that you can paste directly into
+  Drupal content (using the "Source" mode in the WYSIWYG editor).
+  
+  Make sure the video_switcher library is attached to the page via:
+  - Template: {{ attach_library('dynasty_tw/video_switcher') }}
+  - Or preprocess function in dynasty_tw.theme
+-->
+
+<div class="my-8">
+  <h2 class="text-2xl font-bold mb-4">Longest Plays</h2>
+  
+  <!-- Video Player Container -->
+  <div id="longest-plays" class="aspect-video w-full mb-4 bg-black"></div>
+  
+  <!-- Video Selection Links -->
+  <div class="flex flex-wrap gap-2">
+    <a href="#" 
+       data-video-id="smZ3M7x" 
+       data-video-category="longest-plays"
+       class="btn btn-sm btn-primary active">
+      85-yard TD Pass
+    </a>
+    
+    <a href="#" 
+       data-video-id="UaeHcHT" 
+       data-video-category="longest-plays"
+       class="btn btn-sm btn-primary">
+      71-yard Bomb
+    </a>
+    
+    <a href="#" 
+       data-video-id="abc123X" 
+       data-video-category="longest-plays"
+       class="btn btn-sm btn-primary">
+      76-yard TD
+    </a>
+  </div>
+</div>
+
+<!-- Initialize Player -->
+<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+<script>
+(function() {
+  // Initialize MuseVideoSwitcher inline (prevents "not defined" errors)
+  window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
+    players: {},
+    registerPlayer: function(category, player) {
+      this.players[category] = player;
+      console.log('Registered Muse.ai player:', category);
+    },
+    switchVideo: function(category, videoId) {
+      const player = this.players[category];
+      if (player && typeof player.setVideo === 'function') {
+        player.setVideo(videoId);
+        console.log('Switched to video:', videoId);
+      } else {
+        console.warn('Player not found or does not support setVideo:', category);
+      }
+    }
+  };
+
+  // Initialize the player when ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPlayer);
+  } else {
+    initPlayer();
+  }
+
+  function initPlayer() {
+    const longestPlays = MusePlayer({
+      container: '#longest-plays',
+      video: 'smZ3M7x',
+      sizing: 'fit',
+      search: false,
+      links: false,
+      logo: false,
+      title: false
+    });
+
+    // Register the player
+    MuseVideoSwitcher.registerPlayer('longest-plays', longestPlays);
+    
+    console.log('Player initialized and registered');
+  }
+})();
+</script>
+
+<!-- 
+  Optional: Add custom active state styling
+  (Only needed if you want different styles than the default)
+-->
+<style>
+  [data-video-category].active {
+    background-color: #c60c30 !important;
+    border-color: #c60c30 !important;
+    color: white !important;
+  }
+</style>

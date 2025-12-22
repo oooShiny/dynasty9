@@ -1,0 +1,21 @@
+uuid: fab3daae-120c-45ed-97f1-e45514380e63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vertical_align
+    - paragraphs.paragraphs_type.section
+  module:
+    - options
+id: paragraph.section.field_vertical_align
+field_name: field_vertical_align
+entity_type: paragraph
+bundle: section
+label: 'Vertical Align'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

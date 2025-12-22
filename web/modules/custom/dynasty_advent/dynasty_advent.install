@@ -1,0 +1,257 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Dynasty Advent module.
+ */
+
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_install().
+ */
+function dynasty_advent_install() {
+  // Create the advent_calendar_item content type.
+  $content_type = NodeType::create([
+    'type' => 'advent_calendar_item',
+    'name' => 'Advent Calendar Item',
+    'description' => 'Content for a single day of the advent calendar',
+    'display_submitted' => FALSE,
+  ]);
+  $content_type->save();
+
+  // Create field storage for the day number.
+  $field_storage = FieldStorageConfig::create([
+    'field_name' => 'field_advent_day',
+    'entity_type' => 'node',
+    'type' => 'integer',
+    'settings' => [
+      'min' => 1,
+      'max' => 24,
+    ],
+    'cardinality' => 1,
+  ]);
+  $field_storage->save();
+
+  // Create field instance for day number.
+  $field = FieldConfig::create([
+    'field_storage' => $field_storage,
+    'bundle' => 'advent_calendar_item',
+    'label' => 'Day Number',
+    'description' => 'The day of December (1-24) this item is for',
+    'required' => TRUE,
+    'settings' => [
+      'min' => 1,
+      'max' => 24,
+    ],
+  ]);
+  $field->save();
+
+  // Create field storage for header text.
+  $field_storage = FieldStorageConfig::create([
+    'field_name' => 'field_advent_header',
+    'entity_type' => 'node',
+    'type' => 'string',
+    'settings' => [
+      'max_length' => 255,
+    ],
+    'cardinality' => 1,
+  ]);
+  $field_storage->save();
+
+  // Create field instance for header.
+  $field = FieldConfig::create([
+    'field_storage' => $field_storage,
+    'bundle' => 'advent_calendar_item',
+    'label' => 'Header',
+    'description' => 'Header text to display in the modal',
+    'required' => FALSE,
+  ]);
+  $field->save();
+
+  // Create field storage for body text.
+  $field_storage = FieldStorageConfig::create([
+    'field_name' => 'field_advent_body',
+    'entity_type' => 'node',
+    'type' => 'text_long',
+    'cardinality' => 1,
+  ]);
+  $field_storage->save();
+
+  // Create field instance for body.
+  $field = FieldConfig::create([
+    'field_storage' => $field_storage,
+    'bundle' => 'advent_calendar_item',
+    'label' => 'Body Text',
+    'description' => 'Body text to display below the media in the modal',
+    'required' => FALSE,
+  ]);
+  $field->save();
+
+  // Create field storage for media.
+  $field_storage = FieldStorageConfig::create([
+    'field_name' => 'field_advent_media',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+    'settings' => [
+      'target_type' => 'media',
+    ],
+    'cardinality' => 1,
+  ]);
+  $field_storage->save();
+
+  // Create field instance for media.
+  $field = FieldConfig::create([
+    'field_storage' => $field_storage,
+    'bundle' => 'advent_calendar_item',
+    'label' => 'Media',
+    'description' => 'Image or video to display in the modal',
+    'required' => FALSE,
+    'settings' => [
+      'handler' => 'default:media',
+      'handler_settings' => [
+        'target_bundles' => [
+          'image' => 'image',
+          'video' => 'video',
+        ],
+      ],
+    ],
+  ]);
+  $field->save();
+
+  // Set form display.
+  $form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.advent_calendar_item.default');
+
+  if (!$form_display) {
+    $form_display = \Drupal::entityTypeManager()
+      ->getStorage('entity_form_display')
+      ->create([
+        'targetEntityType' => 'node',
+        'bundle' => 'advent_calendar_item',
+        'mode' => 'default',
+        'status' => TRUE,
+      ]);
+  }
+
+  $form_display->setComponent('field_advent_day', [
+    'type' => 'number',
+    'weight' => 1,
+  ]);
+
+  $form_display->setComponent('field_advent_media', [
+    'type' => 'media_library_widget',
+    'weight' => 2,
+  ]);
+
+  $form_display->setComponent('field_advent_header', [
+    'type' => 'string_textfield',
+    'weight' => 3,
+  ]);
+
+  $form_display->setComponent('field_advent_body', [
+    'type' => 'text_textarea',
+    'weight' => 4,
+  ]);
+
+  $form_display->save();
+
+  // Set view display for advent_modal view mode.
+  // First, check if advent_modal view mode exists, if not create it.
+  $view_mode_storage = \Drupal::entityTypeManager()->getStorage('entity_view_mode');
+  $view_mode = $view_mode_storage->load('node.advent_modal');
+
+  if (!$view_mode) {
+    $view_mode = $view_mode_storage->create([
+      'id' => 'node.advent_modal',
+      'targetEntityType' => 'node',
+      'label' => 'Advent Modal',
+      'status' => TRUE,
+    ]);
+    $view_mode->save();
+  }
+
+  $view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.advent_calendar_item.advent_modal');
+
+  if (!$view_display) {
+    $view_display = \Drupal::entityTypeManager()
+      ->getStorage('entity_view_display')
+      ->create([
+        'targetEntityType' => 'node',
+        'bundle' => 'advent_calendar_item',
+        'mode' => 'advent_modal',
+        'status' => TRUE,
+      ]);
+  }
+
+  $view_display->setComponent('field_advent_media', [
+    'type' => 'entity_reference_entity_view',
+    'weight' => 1,
+    'settings' => [
+      'view_mode' => 'default',
+    ],
+  ]);
+
+  $view_display->setComponent('field_advent_header', [
+    'type' => 'string',
+    'weight' => 2,
+    'label' => 'hidden',
+    'settings' => [
+      'link_to_entity' => FALSE,
+    ],
+  ]);
+
+  $view_display->setComponent('field_advent_body', [
+    'type' => 'text_default',
+    'weight' => 3,
+    'label' => 'hidden',
+  ]);
+
+  $view_display->removeComponent('field_advent_day');
+  $view_display->removeComponent('title');
+  $view_display->removeComponent('uid');
+  $view_display->removeComponent('created');
+
+  $view_display->save();
+
+  \Drupal::messenger()->addStatus(t('Dynasty Advent Calendar module has been installed. Visit /advent-calendar to see the calendar.'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function dynasty_advent_uninstall() {
+  // Clean up the content type and fields.
+  $content_type = NodeType::load('advent_calendar_item');
+  if ($content_type) {
+    $content_type->delete();
+  }
+
+  // Delete field storages.
+  $field_storages = [
+    'field_advent_day',
+    'field_advent_header',
+    'field_advent_body',
+    'field_advent_media',
+  ];
+
+  foreach ($field_storages as $field_name) {
+    $field_storage = FieldStorageConfig::loadByName('node', $field_name);
+    if ($field_storage) {
+      $field_storage->delete();
+    }
+  }
+
+  // Delete view mode.
+  $view_mode = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_mode')
+    ->load('node.advent_modal');
+  if ($view_mode) {
+    $view_mode->delete();
+  }
+}

@@ -55,3 +55,36 @@ facets_range_slider_tooltips:
 preline:
   js:
     node_modules/preline/dist/preline.js: { minified: true }
+
+magnific:
+  css:
+    theme:
+      third_party/magnific/magnific-popup.css: {}
+  js:
+    js/magnific.js: {}
+    third_party/magnific/jquery.magnific-popup.min.js: { minified: true }
+  dependencies:
+    - core/jquery
+
+highcharts:
+  remote: https://code.highcharts.com/highcharts.js
+  version: 1.0
+  header: true
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    https://code.highcharts.com/highcharts.js : { type: external, minified: true }
+    https://code.highcharts.com/modules/exporting.js : { type: external, minified: true }
+    https://code.highcharts.com/modules/export-data.js : { type: external, minified: true }
+
+video_switcher:
+  css:
+    theme:
+      css/video-switcher.css: {}
+  js:
+    js/video_switcher.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

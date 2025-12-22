@@ -14,3 +14,9 @@ entity.play.delete_form:
   base_route: entity.play.canonical
   title: Delete
   weight: 10
+
+# Play settings task links
+play.settings:
+  route_name: play.settings
+  base_route: play.settings
+  title: 'Settings'

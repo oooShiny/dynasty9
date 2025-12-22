@@ -1,7 +1,7 @@
 {% for item in items %}
-
   {{ include('dynasty_tw:video', {
     muse_id: item.content['#context']['value'],
     vid: 'vid-' ~ item.content['#context']['value'],
+    card_type: card
   }, with_context = false) }}
 {% endfor %}

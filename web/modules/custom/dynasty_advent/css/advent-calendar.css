@@ -1,0 +1,90 @@
+/**
+ * @file
+ * Advent Calendar styles.
+ */
+
+.advent-door {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.advent-door.unlocked:hover {
+  transform: scale(1.05);
+  border-color: #002244; /* Primary Patriots blue */
+  box-shadow: 0 8px 16px rgba(0, 34, 68, 0.2);
+}
+
+.advent-door.locked {
+  opacity: 0.6;
+}
+
+.advent-door.locked:hover {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.advent-door.opened .door-number {
+  opacity: 0.5;
+}
+
+.advent-door.future {
+  opacity: 0.5;
+}
+
+.door-number {
+  z-index: 10;
+  pointer-events: none;
+}
+
+.advent-calendar-grid {
+  perspective: 1000px;
+}
+
+/* Animation for door opening */
+@keyframes doorOpen {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+.advent-door.opening {
+  animation: doorOpen 0.6s ease-in-out;
+}
+
+/* Modal content styling */
+#advent-modal-content img,
+#advent-modal-content video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#advent-modal-content h2,
+#advent-modal-content h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+#advent-modal-content p {
+  margin-bottom: 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .advent-calendar-grid {
+    gap: 0.75rem;
+  }
+
+  .door-number {
+    font-size: 2rem;
+  }
+
+  #advent-modal .sm\:max-w-3xl {
+    max-width: 95%;
+  }
+}

@@ -3,6 +3,7 @@
 namespace Drupal\dynasty_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 
 /**
@@ -29,10 +30,45 @@ class OnThisDayBlock extends BlockBase {
 
     return [
       '#theme' => 'on_this_day_block',
+      '#attributes' => ['class' => 'mx-auto w-fit'],
       '#games' => $games,
       '#birthdays' => [],
       '#events' => $events,
+      '#limit' => $this->configuration['on_this_day_block_games'],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'on_this_day_block_games' => 0,
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form = parent::blockForm($form, $form_state);
+
+    $form['on_this_day_block_games'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Number of Games'),
+      '#description' => $this->t('Limit the number of games (0 is no limit).'),
+      '#default_value' => $this->configuration['on_this_day_block_games'],
+    ];
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $values = $form_state->getValues();
+    $this->configuration['on_this_day_block_games'] = $values['on_this_day_block_games'];
   }
 
   /**
@@ -105,6 +141,7 @@ class OnThisDayBlock extends BlockBase {
             'week' => $game->field_week->entity->label(),
             'css' => $css,
             'highlight' => $muse_id,
+            'result' => $game->field_result->value,
           ];
         }
         else {
@@ -116,6 +153,7 @@ class OnThisDayBlock extends BlockBase {
             'season' => $game->field_season->value,
             'week' => $game->field_week->entity->label(),
             'css' => $css,
+            'result' => $game->field_result->value,
           ];
         }
       }

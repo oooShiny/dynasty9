@@ -27,33 +27,35 @@
 #}
 <h2 class="text-center mb-6 text-3xl uppercase font-light"><a href="/calendar">On This Day:</a> {{ 'now'|date('F jS') }}</h2>
 {% if games is not empty %}
-  <h3 class="mb-6 text-xl uppercase font-light">Games on this day</h3>
-<div class="justify-evenly lg:gap-2 md:flex my-4">
-    {% for game in games.with_video %}
-      <div class="md:w-1/4">
-        <div class="font-bold text-center">
-          <a href="{{ game.alias }}">
-          {{ game.season }}
-          {{ game.week }}
-          </a>
-        </div>
-
-        <div class="flex pb-1">
-          <div class="{{ game.css }} w-1/2 text-center">
-            <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
-            <div class="text-3xl">{{ game.opp_score }}</div>
+  {% if limit == 1 %}
+    <div class="md:flex shadow-2xl">
+    {% set all_games = games.with_video|merge(games.no_video) %}
+    {% for game in all_games %}
+      {% if loop.index == 1 %}
+        <div>
+          <div class="border-2 border-b-0 font-bold text-center {{ game.result|lower }}">
+            <a href="{{ game.alias }}">
+              {{ game.season }}
+              {{ game.week }}
+            </a>
           </div>
-          <div class="patriots-otd w-1/2 text-center">
-            <div>Patriots</div>
-            <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
-          </div>
-        </div>
 
-        {% if game.highlight is not empty %}
+          <div class="flex">
+            <div class="{{ game.css }} w-1/2 text-center">
+              <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
+              <div class="text-3xl">{{ game.opp_score }}</div>
+            </div>
+            <div class="patriots-otd w-1/2 text-center">
+              <div>Patriots</div>
+              <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
+            </div>
+          </div>
+
+          {% if game.highlight is not empty %}
 
             {% set vid = 'vid-' ~ game.highlight %}
-
-            <div id="{{ vid }}" ></div>
+            <script src="https://muse.ai/static/js/embed-player.min.js"></script>
+            <div id="{{ vid }}" class="mx-auto w-fit border-2 border-t-0"></div>
             <script>
               MusePlayer({
                 container: document.getElementById('{{ vid }}'),
@@ -65,43 +67,102 @@
                 sizing: '100%',
               });
             </script>
+          {% endif %}
+        </div>
+      {% else %}
+        {% if loop.index == 2 %}
+          <div class="border-b-2 border-r-2 border-t-2 divide-y flex flex-col">
         {% endif %}
-      </div>
-      {#  Start another row after 4 highlights. #}
-      {% if loop.index % 4 == 0 %}
-        </div>
-        <div class="justify-evenly lg:gap-2 md:flex my-4">
+            <div class="{{ game.result|lower }} flex grow justify-between px-2 text-sm gap-4 h-fit my-auto">
+              <span class="my-auto"><a href="{{ game.alias }}">
+                  {{ game.season }}
+                  {{ game.week }}
+                </a></span>
+              <span class="my-auto"><a href="/team/{{ game.css }}">{{ game.opponent }}</a></span>
+              <span class="my-auto">{{ game.opp_score }} - {{ game.pats_score }}</span>
+              <span class="my-auto">Patriots</span>
+            </div>
       {% endif %}
     {% endfor %}
-    </div>
+        </div>
+      </div>
+  {% else %}
+    <h3 class="mb-6 text-xl uppercase font-light">Games on this day</h3>
     <div class="justify-evenly lg:gap-2 md:flex my-4">
-    {% for game in games.no_video %}
-      <div class="md:w-1/4">
-        <div class="font-bold text-center">
-          <a href="{{ game.alias }}">
-            {{ game.season }}
-            {{ game.week }}
-          </a>
-        </div>
+        {% for game in games.with_video %}
+          <div class="md:w-1/4">
+            <div class="font-bold text-center">
+              <a href="{{ game.alias }}">
+              {{ game.season }}
+              {{ game.week }}
+              </a>
+            </div>
 
-        <div class="flex pb-1">
-          <div class="{{ game.css }} w-1/2 text-center">
-            <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
-            <div class="text-3xl">{{ game.opp_score }}</div>
+            <div class="flex">
+              <div class="{{ game.css }} w-1/2 text-center">
+                <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
+                <div class="text-3xl">{{ game.opp_score }}</div>
+              </div>
+              <div class="patriots-otd w-1/2 text-center">
+                <div>Patriots</div>
+                <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
+              </div>
+            </div>
+
+            {% if game.highlight is not empty %}
+
+                {% set vid = 'vid-' ~ game.highlight %}
+
+                <div id="{{ vid }}" ></div>
+                <script>
+                  MusePlayer({
+                    container: document.getElementById('{{ vid }}'),
+                    video: '{{ game.highlight }}',
+                    title: false,
+                    search: false,
+                    links: true,
+                    logo: false,
+                    sizing: '100%',
+                  });
+                </script>
+            {% endif %}
           </div>
-          <div class="patriots-otd w-1/2 text-center">
-            <div>Patriots</div>
-            <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
-          </div>
-        </div>
-      </div>
-      {#  Start another row after 4 highlights. #}
-      {% if loop.index % 4 == 0 %}
+          {#  Start another row after 4 highlights. #}
+          {% if loop.index % 4 == 0 %}
+            </div>
+            <div class="justify-evenly lg:gap-2 md:flex my-4">
+          {% endif %}
+        {% endfor %}
         </div>
         <div class="justify-evenly lg:gap-2 md:flex my-4">
-      {% endif %}
-    {% endfor %}
-</div>
+        {% for game in games.no_video %}
+          <div class="md:w-1/4">
+            <div class="font-bold text-center">
+              <a href="{{ game.alias }}">
+                {{ game.season }}
+                {{ game.week }}
+              </a>
+            </div>
+
+            <div class="flex pb-1">
+              <div class="{{ game.css }} w-1/2 text-center">
+                <div><a href="/team/{{ game.css }}">{{ game.opponent }}</a></div>
+                <div class="text-3xl">{{ game.opp_score }}</div>
+              </div>
+              <div class="patriots-otd w-1/2 text-center">
+                <div>Patriots</div>
+                <div class="text-3xl text-red-pats">{{ game.pats_score }}</div>
+              </div>
+            </div>
+          </div>
+          {#  Start another row after 4 highlights. #}
+          {% if loop.index % 4 == 0 %}
+            </div>
+            <div class="justify-evenly lg:gap-2 md:flex my-4">
+          {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
 {% endif %}
 {% if events is not empty %}
   <h3 class="mb-6 text-xl uppercase font-light">Events on this day</h3>

@@ -23,13 +23,13 @@
     {% endif %}
     <div class="flex flex-col md:flex-row gap-4 w-full md:justify-evenly">
       {% if content.first %}
-        <div {{ region_attributes.first.addClass(content.width.first, 'justify-items-center') }}>
+        <div {{ region_attributes.first.addClass(content.width.first, 'justify-items-center flex flex-col', content.valign) }}>
           {{ content.first }}
         </div>
       {% endif %}
 
       {% if content.second %}
-        <div {{ region_attributes.second.addClass(content.width.second, 'justify-items-center') }}>
+        <div {{ region_attributes.second.addClass(content.width.second, 'justify-items-center flex flex-col', content.valign) }}>
           {{ content.second }}
         </div>
       {% endif %}

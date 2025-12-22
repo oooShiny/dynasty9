@@ -2,8 +2,6 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Utility\Error;
-use Drupal\file\Entity\File;
-use Drupal\gin\GinSettings;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
@@ -166,7 +164,13 @@ function dynasty_module_theme($existing, $type, $theme, $path) {
     'on_this_day_block' => [
       'variables' => [
         'games' => '',
-        'games_highlights' => ''
+        'games_highlights' => '',
+        'limit' => 0
+      ]
+    ],
+    'link_buttons_block' => [
+      'variables' => [
+        'buttons' => '',
       ]
     ],
     'pats_calendar' => [

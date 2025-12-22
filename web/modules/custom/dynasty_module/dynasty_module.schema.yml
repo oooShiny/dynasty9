@@ -1,0 +1,7 @@
+block.settings.on_this_day:
+  type: block_settings
+  label: 'On This Day block settings'
+  mapping:
+    on_this_day_block_games:
+      type: int
+      label: 'Number of games to show (0 shows all available)'

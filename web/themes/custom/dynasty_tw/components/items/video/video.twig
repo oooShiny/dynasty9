@@ -1,5 +1,17 @@
 <script src="https://muse.ai/static/js/embed-player.min.js"></script>
-  <div id="{{ vid }}" class="flex justify-center bg-black"></div>
+{% if card_type == 'horizontal' %}
+  {% set css = 'aspect-square flex justify-center w-48 h-48' %}
+{% elseif card_type == 'vertical' %}
+  {% set css = 'flex justify-center w-full h-40' %}
+{% else %}
+  {% set css = 'absolute inset-0 aspect-video' %}
+{% endif %}
+
+{% if card_type == 'none' %}
+<div class="relative" style="padding-top: 56.25%">
+{% endif %}
+
+  <div id="{{ vid }}" class="bg-black  {{ css }}"></div>
   <script>
     MusePlayer({
       container: document.getElementById('{{ vid }}'),
@@ -8,5 +20,14 @@
       search: false,
       links: true,
       logo: false,
+    {% if card_type == 'horizontal' %}
+      sizing: 'fit',
+    {% else %}
+      sizing: 'fill',
+    {% endif %}
     });
   </script>
+
+{% if card_type == 'none' %}
+</div>
+{% endif %}

@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Dynasty Advent Calendar module file.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function dynasty_advent_theme($existing, $type, $theme, $path) {
+  return [
+    'dynasty_advent_calendar' => [
+      'variables' => [
+        'doors' => [],
+        'current_day' => 0,
+        'is_december' => FALSE,
+      ],
+      'template' => 'dynasty-advent-calendar',
+    ],
+  ];
+}

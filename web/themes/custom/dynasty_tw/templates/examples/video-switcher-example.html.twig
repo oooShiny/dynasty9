@@ -1,0 +1,150 @@
+{#
+/**
+ * @file
+ * Example Twig template showing how to use the Muse.ai Video Switcher
+ * 
+ * This example shows:
+ * - Loading the video_switcher library
+ * - Creating a player
+ * - Registering the player
+ * - Creating clickable links that switch videos
+ */
+#}
+
+{{ attach_library('dynasty_tw/video_switcher') }}
+
+<div class="container mx-auto px-4 py-8">
+  
+  {# Example 1: Video player with list of plays #}
+  <div class="mb-12">
+    <h2 class="text-3xl font-bold mb-4">Longest Plays of the Dynasty</h2>
+    
+    {# Video container #}
+    <div id="longest-plays" class="aspect-video w-full mb-6 bg-black"></div>
+    
+    {# Video list with Tailwind/DaisyUI styling #}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a 
+        href="#" 
+        data-video-id="smZ3M7x" 
+        data-video-category="longest-plays"
+        class="btn btn-outline btn-primary active:btn-secondary [&.active]:btn-secondary [&.active]:font-bold"
+      >
+        <span class="text-left">
+          <div class="font-bold">85-yard TD Pass</div>
+          <div class="text-sm opacity-70">vs. Dolphins, 2011</div>
+        </span>
+      </a>
+      
+      <a 
+        href="#" 
+        data-video-id="UaeHcHT" 
+        data-video-category="longest-plays"
+        class="btn btn-outline btn-primary active:btn-secondary [&.active]:btn-secondary [&.active]:font-bold"
+      >
+        <span class="text-left">
+          <div class="font-bold">71-yard Bomb</div>
+          <div class="text-sm opacity-70">vs. Ravens, 2014</div>
+        </span>
+      </a>
+      
+      <a 
+        href="#" 
+        data-video-id="abc123X" 
+        data-video-category="longest-plays"
+        class="btn btn-outline btn-primary active:btn-secondary [&.active]:btn-secondary [&.active]:font-bold"
+      >
+        <span class="text-left">
+          <div class="font-bold">76-yard TD</div>
+          <div class="text-sm opacity-70">vs. Steelers, 2015</div>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  {# Example 2: Card layout with thumbnails #}
+  <div class="mb-12">
+    <h2 class="text-3xl font-bold mb-4">Best Touchdowns</h2>
+    
+    <div id="best-touchdowns" class="aspect-video w-full mb-6 bg-black"></div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {% set touchdown_videos = [
+        { id: 'xyz789A', title: 'Gronk Spike', game: 'Super Bowl XLIX' },
+        { id: 'def456B', title: 'Edelman Catch', game: 'Super Bowl LI' },
+        { id: 'ghi789C', title: 'White OT TD', game: 'Super Bowl LI' },
+        { id: 'jkl012D', title: 'Amendola TD', game: 'AFC Championship' }
+      ] %}
+      
+      {% for video in touchdown_videos %}
+        <div 
+          data-video-id="{{ video.id }}" 
+          data-video-category="best-touchdowns"
+          class="card card-compact bg-base-100 shadow-xl cursor-pointer hover:shadow-2xl transition-shadow [&.active]:ring-4 [&.active]:ring-secondary"
+        >
+          <figure class="bg-base-300 aspect-video">
+            {# Placeholder for video thumbnail #}
+            <div class="w-full h-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-base-content opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </figure>
+          <div class="card-body">
+            <h3 class="card-title text-sm">{{ video.title }}</h3>
+            <p class="text-xs opacity-70">{{ video.game }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{# Initialize the Muse.ai players #}
+<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+<script>
+  (function() {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPlayers);
+    } else {
+      initPlayers();
+    }
+
+    function initPlayers() {
+      // Initialize the "longest plays" player
+      const longestPlays = MusePlayer({
+        container: '#longest-plays',
+        video: 'smZ3M7x',
+        sizing: 'fit',
+        search: false,
+        links: false,
+        logo: false,
+        title: false
+      });
+
+      // Initialize the "best touchdowns" player
+      const bestTouchdowns = MusePlayer({
+        container: '#best-touchdowns',
+        video: 'xyz789A',
+        sizing: 'fit',
+        search: false,
+        links: false,
+        logo: false,
+        title: false
+      });
+
+      // Register both players with the video switcher
+      if (window.MuseVideoSwitcher) {
+        MuseVideoSwitcher.registerPlayer('longest-plays', longestPlays);
+        MuseVideoSwitcher.registerPlayer('best-touchdowns', bestTouchdowns);
+        
+        // Set initial active states
+        document.querySelector('[data-video-id="smZ3M7x"][data-video-category="longest-plays"]')?.classList.add('active');
+        document.querySelector('[data-video-id="xyz789A"][data-video-category="best-touchdowns"]')?.classList.add('active');
+      }
+    }
+  })();
+</script>

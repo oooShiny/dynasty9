@@ -53,6 +53,16 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
+  scoring_play:
+    type: boolean
+    label: inline
+    settings:
+      format: yes-no
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
   scoring_team:
     type: string
     label: hidden
@@ -69,6 +79,16 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 5
+    region: content
+  turnover:
+    type: boolean
+    label: inline
+    settings:
+      format: yes-no
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 9
     region: content
 hidden:
   langcode: true

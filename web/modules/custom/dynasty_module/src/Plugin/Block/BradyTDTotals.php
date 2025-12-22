@@ -34,8 +34,8 @@ class BradyTdTotals extends BlockBase {
       ->accessCheck(TRUE)
       ->sort('field_season' , 'DESC')
       ->execute();
-    $node_stirage = \Drupal::entityTypeManager()->getStorage('node');
-    $gif_nodes = $node_stirage->loadMultiple($nids);
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $gif_nodes = $node_storage->loadMultiple($nids);
     // TDs sorted by player.
     foreach ($gif_nodes as $gif) {
       $players_involved = $gif->get('field_players_involved')->getValue();
@@ -47,7 +47,7 @@ class BradyTdTotals extends BlockBase {
         $week = $weeks[$gif->get('field_week')->target_id];
         $player_tds[$name][] = [
           'title' => $gif->label(),
-          'link' => 'https://gfycat.com/' . $gif->get('field_gfycat_id')->value,
+          'link' => $gif->get('field_muse_video_id')->value,
           'season' => $gif->get('field_season')->value,
           'week' => $week,
           'opp' => $teams[$gif->get('field_opponent')->target_id],
@@ -55,14 +55,14 @@ class BradyTdTotals extends BlockBase {
 
         $position_tds[$position][] = [
           'title' => $gif->label(),
-          'link' => 'https://gfycat.com/' . $gif->get('field_gfycat_id')->value,
+          'link' => $gif->get('field_muse_video_id')->value,
           'season' => $gif->get('field_season')->value,
           'week' => $week,
           'opp' => $teams[$gif->get('field_opponent')->target_id],
         ];
         $all_tds[$gif->get('field_season')->value][$week][] = [
           'title' => $gif->label(),
-          'link' => 'https://gfycat.com/' . $gif->get('field_gfycat_id')->value,
+          'link' => $gif->get('field_muse_video_id')->value,
           'opp' => $teams[$gif->get('field_opponent')->target_id],
           'week' => $week,
         ];
@@ -99,7 +99,7 @@ class BradyTdTotals extends BlockBase {
         }
         $quarter_tds[$quarter][] = [
           'title' => $gif->label(),
-          'link' => 'https://gfycat.com/' . $gif->get('field_gfycat_id')->value,
+          'link' => $gif->get('field_muse_video_id')->value,
           'season' => $gif->get('field_season')->value,
           'opp' => $teams[$gif->get('field_opponent')->target_id],
         ];
@@ -127,7 +127,7 @@ class BradyTdTotals extends BlockBase {
         $yards = $gif->get('field_yards_gained')->value;
         $yards_tds[$yards][] = [
           'title' => $gif->label(),
-          'link' => 'https://gfycat.com/' . $gif->get('field_gfycat_id')->value,
+          'link' => $gif->get('field_muse_video_id')->value,
           'season' => $gif->get('field_season')->value,
           'opp' => $teams[$gif->get('field_opponent')->target_id],
         ];

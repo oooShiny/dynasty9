@@ -70,8 +70,8 @@ settings:
           label: 'Header Block (blue)'
           element: '<h2 class="header-block">'
         -
-          label: 'Button Link (blue)'
-          element: '<a class="btn-primary">'
+          label: Button
+          element: '<a class="btn-pats">'
         -
           label: Card
           element: '<p class="card-side bg-base-100 shadow-xl">'

@@ -9,3 +9,6 @@ props:
     vid:
       type: string
       title: 'Video ID'
+    card_type:
+      type: string
+      title: 'Card Type'
