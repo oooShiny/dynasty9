@@ -37,8 +37,12 @@ settings:
       'views_block:podcast_search-block_1': 'views_block:podcast_search-block_1'
       'views_block:podcast_transcript_search-block_1': 'views_block:podcast_transcript_search-block_1'
       'views_block:random_highlight-block_1': 'views_block:random_highlight-block_1'
-      'views_block:top_plays-block_1': 'views_block:top_plays-block_1'
       'views_block:top_plays-block_2': 'views_block:top_plays-block_2'
+      'views_block:top_plays-block_3': 'views_block:top_plays-block_3'
+      'views_block:top_plays-block_4': 'views_block:top_plays-block_4'
+      'views_block:top_plays-block_1': 'views_block:top_plays-block_1'
+      'views_block:top_plays-block_6': 'views_block:top_plays-block_6'
+      'views_block:top_plays-block_5': 'views_block:top_plays-block_5'
       'system_menu_block:brady-page-menu': 'system_menu_block:brady-page-menu'
       patreon_become_block: patreon_become_block
       patreon_user_block: patreon_user_block
