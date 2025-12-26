@@ -411,11 +411,11 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Clear
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
@@ -462,6 +462,124 @@ display:
           plugin_id: bundle
           value:
             highlight: highlight
+        field_down_value:
+          id: field_down_value
+          table: node__field_down
+          field: field_down_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_down_value_op
+            label: Down
+            description: ''
+            use_operator: false
+            operator: field_down_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_down_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        field_playoff_game_value:
+          id: field_playoff_game_value
+          table: node__field_playoff_game
+          field: field_playoff_game_value
+          relationship: field_game
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Playoff Game'
+            description: ''
+            use_operator: false
+            operator: field_playoff_game_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_playoff_game_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_quarter_value:
+          id: field_quarter_value
+          table: node__field_quarter
+          field: field_quarter_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_quarter_value_op
+            label: Quarter
+            description: ''
+            use_operator: false
+            operator: field_quarter_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_quarter_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
       style:
         type: html_list
         options:
@@ -496,6 +614,7 @@ display:
           admin_label: 'field_game: Content'
           plugin_id: standard
           required: true
+      use_ajax: true
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -504,6 +623,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -518,17 +638,21 @@ display:
     position: 1
     display_options:
       display_description: ''
+      exposed_block: true
       display_extenders:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
         simple_sitemap_display_extender: {  }
-        ajax_history: {  }
+        ajax_history:
+          enable_history: true
+          exclude_args: ''
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - 'user.node_grants:view'
         - user.permissions
       tags:

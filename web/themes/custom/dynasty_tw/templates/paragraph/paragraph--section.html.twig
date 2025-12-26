@@ -51,9 +51,9 @@
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes) }} {% if content.field_anchor_id|render %}id="{{ content.field_anchor_id[0]['#context']['value'] }}"{% endif %}>
     {% block content %}
-      {{ content|without('field_background_color', 'field_full_width_section') }}
+      {{ content|without('field_background_color', 'field_full_width_section', 'field_anchor_id') }}
     {% endblock %}
   </div>
 {% endblock paragraph %}

@@ -1,0 +1,19 @@
+uuid: 0acf3853-6459-4a57-9518-71399356be1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_anchor_id
+    - paragraphs.paragraphs_type.section
+id: paragraph.section.field_anchor_id
+field_name: field_anchor_id
+entity_type: paragraph
+bundle: section
+label: 'Anchor ID'
+description: 'Use this field to add an ID to the section as a way to add an anchor tag to it.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.section.field_2_column_widths
+    - field.field.paragraph.section.field_anchor_id
     - field.field.paragraph.section.field_background_color
     - field.field.paragraph.section.field_full_width_section
     - field.field.paragraph.section.field_vertical_align
@@ -15,6 +16,14 @@ targetEntityType: paragraph
 bundle: section
 mode: default
 content:
+  field_anchor_id:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_background_color:
     type: list_key
     label: hidden
