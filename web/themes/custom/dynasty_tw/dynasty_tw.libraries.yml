@@ -80,6 +80,7 @@ highcharts:
     https://code.highcharts.com/modules/export-data.js : { type: external, minified: true }
 
 video_switcher:
+  header: true
   css:
     theme:
       css/video-switcher.css: {}

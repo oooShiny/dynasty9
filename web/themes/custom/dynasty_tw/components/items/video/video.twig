@@ -1,32 +1,21 @@
-<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+{# Using iframe method to avoid CORS issues with muse.ai API #}
 {% if card_type == 'horizontal' %}
-  {% set css = 'aspect-square flex justify-center w-48 h-48' %}
+  {% set css = 'aspect-square w-48 h-48' %}
 {% elseif card_type == 'vertical' %}
-  {% set css = 'flex justify-center w-full h-40' %}
+  {% set css = 'w-full h-40' %}
 {% else %}
-  {% set css = 'absolute inset-0 aspect-video' %}
+  {% set css = 'absolute inset-0 w-full h-full aspect-video' %}
 {% endif %}
 
 {% if card_type == 'none' %}
 <div class="relative" style="padding-top: 56.25%">
 {% endif %}
 
-  <div id="{{ vid }}" class="bg-black  {{ css }}"></div>
-  <script>
-    MusePlayer({
-      container: document.getElementById('{{ vid }}'),
-      video: '{{ muse_id }}',
-      title: false,
-      search: false,
-      links: true,
-      logo: false,
-    {% if card_type == 'horizontal' %}
-      sizing: 'fit',
-    {% else %}
-      sizing: 'fill',
-    {% endif %}
-    });
-  </script>
+  <iframe src="https://muse.ai/embed/{{ muse_id }}?links=0&search=0&title=0&controls=[-settings,-chromecast,-airplay]&&logo=https://patsdynasty.com/themes/custom/dynasty_tw/images/dynasty-white.png"
+          class="bg-black {{ css }} border-0"
+          allowfullscreen
+          allow="autoplay; fullscreen"
+          loading="lazy"></iframe>
 
 {% if card_type == 'none' %}
 </div>

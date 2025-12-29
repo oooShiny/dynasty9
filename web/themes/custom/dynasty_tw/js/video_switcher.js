@@ -1,14 +1,14 @@
 /**
  * @file
- * Video Switcher for Muse.ai players.
+ * Video Switcher for Muse.ai iframes.
  *
- * This script allows switching videos in Muse.ai players by clicking on elements
+ * This script allows switching videos in Muse.ai iframe embeds by clicking on elements
  * with data-video-id and data-video-category attributes.
  *
  * Usage:
- * 1. Create a player and register it:
- *    const longestPlays = MusePlayer({ ... });
- *    MuseVideoSwitcher.registerPlayer('longest-plays', longestPlays);
+ * 1. Create an iframe with an ID and register it:
+ *    <iframe id="longest-plays-player" src="https://muse.ai/embed/VIDEO_ID?..."></iframe>
+ *    MuseVideoSwitcher.registerIframe('longest-plays', 'longest-plays-player');
  *
  * 2. Add clickable elements with data attributes:
  *    <a data-video-id="UaeHcHT" data-video-category="longest-plays">Video Title</a>
@@ -16,17 +16,38 @@
 
 // Create global registry immediately (outside IIFE)
 window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
-  players: {},
+  iframes: {},
+  baseParams: {},
 
   /**
-   * Register a player instance with a category name.
+   * Register an iframe element with a category name.
    *
    * @param {string} category - The category name (matches data-video-category)
-   * @param {object} player - The MusePlayer instance
+   * @param {string} iframeId - The iframe element ID
+   * @param {string} params - Optional query parameters (e.g., "?links=0&search=0")
    */
-  registerPlayer: function(category, player) {
-    this.players[category] = player;
-    console.log('Registered Muse.ai player:', category);
+  registerIframe: function(category, iframeId, params) {
+    const iframe = document.getElementById(iframeId);
+    if (iframe) {
+      this.iframes[category] = iframe;
+      this.baseParams[category] = params || '?links=0&search=0&title=0&controls=[-settings,-chromecast,-airplay]&logo=https://patsdynasty.com/themes/custom/dynasty_tw/images/dynasty-white.png';
+      console.log('Registered Muse.ai iframe:', category);
+    } else {
+      console.error('Iframe not found:', iframeId);
+    }
+  },
+
+  /**
+   * Legacy support: Register a player instance (redirects to registerIframe)
+   * @deprecated Use registerIframe instead
+   */
+  registerPlayer: function(category, elementOrId) {
+    console.warn('registerPlayer is deprecated. Use registerIframe instead.');
+    if (typeof elementOrId === 'string') {
+      this.registerIframe(category, elementOrId);
+    } else if (elementOrId && elementOrId.id) {
+      this.registerIframe(category, elementOrId.id);
+    }
   },
 
   /**
@@ -36,18 +57,16 @@ window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
    * @param {string} videoId - The Muse.ai video ID
    */
   switchVideo: function(category, videoId) {
-    const player = this.players[category];
-    if (player) {
-      // Muse.ai player supports the setVideo method
-      if (typeof player.setVideo === 'function') {
-        player.setVideo(videoId);
-        player.play();
-        console.log('Switched to video:', videoId, 'for category:', category);
-      } else {
-        console.error('Player does not support setVideo method', player);
-      }
+    const iframe = this.iframes[category];
+    if (iframe) {
+      const params = this.baseParams[category] || '';
+      // Add autoplay parameter, handling both ? and & cases
+      const separator = params.includes('?') ? '&' : '?';
+      const autoplayParam = separator + 'autoplay=1';
+      iframe.src = 'https://muse.ai/embed/' + videoId + params + autoplayParam;
+      console.log('Switched to video:', videoId, 'for category:', category);
     } else {
-      console.warn('No player registered for category:', category);
+      console.warn('No iframe registered for category:', category);
     }
   }
 };
