@@ -406,6 +406,18 @@ function dynasty_module_page_attachments(array &$attachments) {
 }
 
 /**
+ * Implements hook_logger_log_alter().
+ *
+ * Suppress debug logging from facets_range module.
+ */
+function dynasty_module_logger_log_alter(array &$log) {
+  // Suppress facets_range_debug messages to reduce log clutter
+  if (isset($log['channel']) && $log['channel'] === 'facets_range_debug') {
+    $log = [];
+  }
+}
+
+/**
  * Implements hook_cron().
  *
  * Runs Dynasty migrations on a controlled schedule.
