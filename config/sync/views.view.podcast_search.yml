@@ -199,7 +199,12 @@ display:
         type: none
         options: {  }
       cache:
-        type: search_api_none
+        type: search_api_time
+        options:
+          results_lifespan: 3600
+          results_lifespan_custom: 0
+          output_lifespan: 3600
+          output_lifespan_custom: 0
         options: {  }
       empty: {  }
       sorts:
@@ -335,7 +340,12 @@ display:
     position: 1
     display_options:
       cache:
-        type: search_api_none
+        type: search_api_time
+        options:
+          results_lifespan: 3600
+          results_lifespan_custom: 0
+          output_lifespan: 3600
+          output_lifespan_custom: 0
       defaults:
         cache: false
       exposed_block: true

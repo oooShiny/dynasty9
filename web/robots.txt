@@ -58,6 +58,15 @@ Disallow: /user/login
 Disallow: /user/logout
 Disallow: /media/oembed
 Disallow: /*/media/oembed
+# Block bots from crawling faceted search combinations
+Disallow: /*?season
+Disallow: /*?opponent
+Disallow: /*?result
+Disallow: /*?home_away
+Disallow: /*&season
+Disallow: /*&opponent
+Disallow: /*&result
+Disallow: /*&home_away
 # Paths (no clean URLs)
 Disallow: /index.php/admin/
 Disallow: /index.php/comment/reply/
