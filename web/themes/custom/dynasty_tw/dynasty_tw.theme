@@ -314,6 +314,13 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
 
       }
       break;
+    case 'block':
+      $block_id = $variables['elements']['field_block'][0]['#id'];
+      $plugin_id = $variables['elements']['field_block'][0]['#base_plugin_id'];
+      if ($plugin_id == 'views_block' && str_contains($block_id, 'top_plays')) {
+        $variables['attributes']['class'][] = 'overflow-y-scroll h-96 mt-5';
+      }
+      break;
     case 'text':
       $variables['attributes']['class'][] = 'py-5';
       break;

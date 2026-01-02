@@ -17,16 +17,16 @@
  */
 #}
 {% if attributes -%}
-  <div{{ attributes.addClass('overflow-y-scroll h-96 pt-4') }}>
+  <div{{ attributes }}>
 {% endif %}
   {% if title %}
     <h3>{{ title }}</h3>
   {% endif %}
 
-  <{{ list.type }}{{ list.attributes }}>
+  <{{ list.type }}{{ list.attributes.addClass('flex flex-col gap-1') }}>
 
     {% for row in rows %}
-      <li{{ row.attributes.addClass('bg-blue-pats text-white flex m-1') }}>
+      <li{{ row.attributes.addClass('bg-blue-pats text-white flex mx-1') }}>
         <div class="w-28 text-center my-auto p-6 text-6xl text-white">{{ loop.index }}</div>
         <div class="my-auto p-4">{{- row.content -}}</div>
       </li>

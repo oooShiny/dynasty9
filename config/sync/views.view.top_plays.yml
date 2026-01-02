@@ -115,7 +115,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a data-video-id="{{ field_muse_video_id }}" data-video-category="longest-plays">{{ title }}</a>'
+            text: '<a data-video-id="{{ field_muse_video_id }}" data-video-category="longest-plays" data-title="{{ title }}" data-game="{{ field_game }}" data-opponent="{{ field_opponent }}" data-home-away="{{ field_home_away }}">{{ title }}</a>'
             make_link: false
             path: ''
             absolute: false

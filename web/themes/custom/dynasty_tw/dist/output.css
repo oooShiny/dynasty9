@@ -448,6 +448,9 @@
     .m-auto {
       margin: auto;
     }
+    .mx-1 {
+      margin-inline: calc(var(--spacing) * 1);
+    }
     .mx-1\.5 {
       margin-inline: calc(var(--spacing) * 1.5);
     }
@@ -507,6 +510,9 @@
     }
     .mt-4 {
       margin-top: calc(var(--spacing) * 4);
+    }
+    .mt-5 {
+      margin-top: calc(var(--spacing) * 5);
     }
     .mt-10 {
       margin-top: calc(var(--spacing) * 10);
@@ -640,9 +646,6 @@
     }
     .h-48 {
       height: calc(var(--spacing) * 48);
-    }
-    .h-56 {
-      height: calc(var(--spacing) * 56);
     }
     .h-96 {
       height: calc(var(--spacing) * 96);
@@ -991,6 +994,10 @@
       border-style: var(--tw-border-style);
       border-width: 1px;
     }
+    .border-0 {
+      border-style: var(--tw-border-style);
+      border-width: 0px;
+    }
     .border-2 {
       border-style: var(--tw-border-style);
       border-width: 2px;
@@ -1035,6 +1042,14 @@
       border-bottom-style: var(--tw-border-style);
       border-bottom-width: 2px;
     }
+    .border-l {
+      border-left-style: var(--tw-border-style);
+      border-left-width: 1px;
+    }
+    .border-l-2 {
+      border-left-style: var(--tw-border-style);
+      border-left-width: 2px;
+    }
     .border-solid {
       --tw-border-style: solid;
       border-style: solid;
@@ -1074,6 +1089,9 @@
     }
     .border-t-transparent {
       border-top-color: transparent;
+    }
+    .border-l-white {
+      border-left-color: var(--color-white);
     }
     .\!bg-white {
       background-color: var(--color-white) !important;
