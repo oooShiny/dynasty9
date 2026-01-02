@@ -5,6 +5,8 @@ use Drupal\Core\Utility\Error;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
+use Drupal\migrate\MigrateExecutable;
+use Drupal\migrate\MigrateMessage;
 use GuzzleHttp\Exception\RequestException;
 
 /**
@@ -401,4 +403,56 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
  */
 function dynasty_module_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'dynasty_module/dynasty_admin';
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Runs Dynasty migrations on a controlled schedule.
+ */
+function dynasty_module_cron() {
+  // Only run podcast migration once per day
+  $last_run = \Drupal::state()->get('dynasty_module.last_podcast_migration', 0);
+  $interval = 86400; // 24 hours
+
+  if ((time() - $last_run) > $interval) {
+    try {
+      $migration_id = 'dynasty_podcast_import';
+      $migration_plugin_manager = \Drupal::service('plugin.manager.migration');
+      $migration = $migration_plugin_manager->createInstance($migration_id);
+
+      if ($migration) {
+        // Set execution options with safety limits
+        $migration->getIdMap()->prepareUpdate();
+
+        $executable = new \Drupal\migrate\MigrateExecutable(
+          $migration,
+          new \Drupal\migrate\MigrateMessage(),
+          [
+            'limit' => 50,        // Process max 50 items per run
+            'update' => TRUE,     // Update existing items
+            'force' => FALSE,     // Don't force re-import
+          ]
+        );
+
+        // Run the migration
+        $result = $executable->import();
+
+        // Log the result
+        \Drupal::logger('dynasty_module')->info(
+          'Podcast migration completed with result: @result',
+          ['@result' => $result]
+        );
+
+        // Update last run timestamp
+        \Drupal::state()->set('dynasty_module.last_podcast_migration', time());
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('dynasty_module')->error(
+        'Podcast migration failed: @error',
+        ['@error' => $e->getMessage()]
+      );
+    }
+  }
 }
