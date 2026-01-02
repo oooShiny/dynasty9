@@ -145,7 +145,6 @@ display:
           results_lifespan_custom: 0
           output_lifespan: 3600
           output_lifespan_custom: 0
-        options: {  }
       empty: {  }
       sorts:
         season_1:
