@@ -33,28 +33,28 @@
 
 
 <div class="flex items-center justify-evenly">
-  <div class="patriots p-2 w-1/3 md:w-1/4">
-    <div class="text-2xl text-center hidden md:block">Patriots Record</div>
-    <div class="text-2xl text-center block md:hidden">Record</div>
-    <div class="text-xl md:text-3xl text-center">{{ winloss }}</div>
+  <div class="patriots p-2 w-1/3 md:!w-1/4">
+    <div class="text-2xl text-center hidden md:!block">Patriots Record</div>
+    <div class="text-2xl text-center block md:!hidden">Record</div>
+    <div class="text-xl md:!text-3xl text-center">{{ winloss }}</div>
   </div>
-  <div class="patriots p-2 w-1/3 md:w-1/4">
-    <div class="text-2xl text-center hidden md:block">Win Percentage</div>
-    <div class="text-2xl text-center block md:hidden">Win %</div>
-    <div class="text-xl md:text-3xl text-center">{{ winpct|round(3) }}</div>
+  <div class="patriots p-2 w-1/3 md:!w-1/4">
+    <div class="text-2xl text-center hidden md:!block">Win Percentage</div>
+    <div class="text-2xl text-center block md:!hidden">Win %</div>
+    <div class="text-xl md:!text-3xl text-center">{{ winpct|round(3) }}</div>
   </div>
-  <div class="patriots p-2 w-1/3 md:w-1/4">
-    <div class="text-2xl text-center hidden md:block">Average Score</div>
-    <div class="text-2xl text-center block md:hidden">Score</div>
-    <div class="text-xl md:text-3xl text-center">{{ avgscore }}</div>
+  <div class="patriots p-2 w-1/3 md:!w-1/4">
+    <div class="text-2xl text-center hidden md:!block">Average Score</div>
+    <div class="text-2xl text-center block md:!hidden">Score</div>
+    <div class="text-xl md:!text-3xl text-center">{{ avgscore }}</div>
   </div>
 </div>
 
     {% if qb_stats|length > 1 %}
     <details class="px-14 py-5">
-      <summary class="collapse-title text-xl patriots-white font-medium">QB Stats</summary>
-      <div>
-        <table class="table table-sm bg-white">
+      <summary class="p-2 text-xl patriots-white font-medium">QB Stats</summary>
+      <div class="bg-gray-100">
+        <table class="table table-sm bg-white w-full">
           <thead class="bg-blue-pats text-white">
             <tr>
               <th>QB</th>
@@ -82,22 +82,24 @@
     {% elseif qb_stats|length == 1 %}
       {% for qb, stats in qb_stats %}
       <details class="px-14 py-5">
-        <summary class="collapse-title text-xl bg-red-pats text-white font-medium">{{ qb}} Stats</summary>
-        <div>
+        <summary class="p-2 text-xl bg-red-pats text-white font-medium">{{ qb}} Stats</summary>
+        <div class="bbg-white p-2 shadow-gray-500 shadow-md">
+          <h3 class="bg-blue-pats p-2 text-center text-lg text-white uppercase w-full">Totals</h3>
           <div class="flex items-center justify-evenly gap-2">
           {% for stat, number in stats %}
-            <div class="patriots p-2 w-1/4 md:w-1/2">
-              <div class="text-2xl text-center hidden md:block">{{ stat|capitalize }}</div>
-              <div class="text-xl md:text-3xl text-center">{{ number|number_format }}</div>
+            <div class="patriots p-2 w-1/4 md:!w-1/2">
+              <div class="text-2xl text-center hidden md:!block">{{ stat|slice(0,3)|upper }}</div>
+              <div class="text-xl md:!text-3xl text-center">{{ number|number_format }}</div>
             </div>
             {% endfor %}
           </div>
-          <div class="flex items-center justify-evenly gap-2 pt-2">
+          <h3 class="bg-blue-pats p-2 mt-4 text-center text-lg text-white uppercase w-full">Averages</h3>
+          <div class="flex items-center justify-evenly gap-2">
             {% for stat, number in stats %}
               {% set avg = number/games %}
-              <div class="patriots p-2 w-1/4 md:w-1/2">
-                <div class="text-2xl text-center hidden md:block">Avg {{ stat|capitalize }}</div>
-                <div class="text-xl md:text-3xl text-center">{{ avg|number_format }}</div>
+              <div class="patriots p-2 w-1/4 md:!w-1/2">
+                <div class="text-2xl text-center hidden md:!block">{{ stat|slice(0,3)|upper }}</div>
+                <div class="text-xl md:!text-3xl text-center">{{ avg|number_format }}</div>
               </div>
             {% endfor %}
           </div>
