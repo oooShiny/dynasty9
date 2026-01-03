@@ -71,23 +71,23 @@
     {{ page.breadcrumb }}
     {{ page.secondary_menu }}
 
-    <div class="mx-auto block md:flex">
+    <div class="mx-auto block md:!flex">
       <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
       {% set content_width = '' %}
       {% if page.sidebar_first %}
-        {% set content_width = 'md:w-4/5' %}
-        <aside class="w-screen md:w-1/5 px-4" role="complementary">
+        {% set content_width = 'md:!w-4/5' %}
+        <aside class="w-screen md:!w-1/5 px-4" role="complementary">
           {{ page.sidebar_first }}
         </aside>
       {% endif %}
 
-      <div class="md:flex w-screen {{ content_width }}">
-        <div class="md:flex-1">
+      <div class="md:!flex w-screen {{ content_width }}">
+        <div class="md:!flex-1">
           {{ page.content }}
         </div>
 
         {% if page.sidebar_second %}
-          <aside class="md:w-1/5" role="complementary">
+          <aside class="md:!w-1/5" role="complementary">
             {{ page.sidebar_second }}
           </aside>
         {% endif %}
@@ -101,14 +101,14 @@
         {{ page.footer_menu }}
       </div>
       {{ page.footer }}
-      <div class="border-gray-400 border-t md:flex justify-between pt-2 text-gray-400">
-        <div class="md:pt-0 flex justify-center pt-4">
+      <div class="border-gray-400 border-t md:!flex justify-between pt-2 text-gray-400">
+        <div class="md:!pt-0 flex justify-center pt-4">
           <a href="https://drupal.org" target="_blank"><img src="/themes/custom/dynasty_tw/icons/drupal.svg" alt="drupal" class="h-6 svg-white"></a>
         </div>
-        <div class="pt-4 md:pt-0">
+        <div class="pt-4 md:!pt-0">
           <span>&copy; Patriots Dynasty 2017-{{ 'now'|date('Y') }}</span>
         </div>
-        <div class="flex pt-4 md:pt-0 justify-evenly">
+        <div class="flex pt-4 md:!pt-0 justify-evenly">
           <a href="https://twitter.com/PatsDynastyInfo" target="_blank"><img src="/themes/custom/dynasty_tw/icons/twitter.svg" alt="twitter" class="h-6 pr-2 svg-white"></a>
           <a href="https://www.facebook.com/patriotsdynasty2001" target="_blank"><img src="/themes/custom/dynasty_tw/icons/facebook.svg" alt="facebook" class="h-6 pr-2 svg-white"></a>
           <a href="https://www.instagram.com/patriotsdynasty2001/" target="_blank"><img src="/themes/custom/dynasty_tw/icons/instagram.svg" alt="instagram" class="h-6 pr-2 svg-white"></a>

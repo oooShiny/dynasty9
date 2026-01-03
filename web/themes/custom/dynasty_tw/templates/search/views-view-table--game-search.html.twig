@@ -51,7 +51,7 @@
 </div>
 
     {% if qb_stats|length > 1 %}
-    <details class="px-14 py-5 collapse collapse-arrow">
+    <details class="px-14 py-5">
       <summary class="collapse-title text-xl patriots-white font-medium">QB Stats</summary>
       <div>
         <table class="table table-sm bg-white">
@@ -81,7 +81,7 @@
     </details>
     {% elseif qb_stats|length == 1 %}
       {% for qb, stats in qb_stats %}
-      <details class="px-14 py-5 collapse collapse-arrow">
+      <details class="px-14 py-5">
         <summary class="collapse-title text-xl bg-red-pats text-white font-medium">{{ qb}} Stats</summary>
         <div>
           <div class="flex items-center justify-evenly gap-2">
@@ -110,9 +110,15 @@
   'cols-' ~ header|length,
   responsive ? 'responsive-enabled',
   sticky ? 'sticky-enabled',
-  'table table-md'
+  'table table-md',
+  'min-w-full'
 ]
 %}
+<div class="flex flex-col">
+  <div class="-m-1.5 overflow-x-auto">
+    <div class="p-1.5 min-w-full inline-block align-middle">
+      <div class="overflow-hidden">
+
 <table{{ attributes.addClass(classes) }}>
   {% if caption_needed %}
     <caption>
@@ -191,3 +197,7 @@
   {% endfor %}
   </tbody>
 </table>
+      </div>
+    </div>
+  </div>
+</div>

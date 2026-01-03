@@ -579,4 +579,8 @@ function dynasty_tw_preprocess_views_view(&$variables) {
   if ($view->id() == 'top_plays') {
     $variables['#attached']['library'][] = 'dynasty_tw/video_switcher';
   }
+
+  if ($view->id() == 'game_search') {
+    $variables['attributes']['class'][] = 'md:!w-4/5';
+  }
 }

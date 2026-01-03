@@ -436,8 +436,8 @@
         max-width: 96rem;
       }
     }
-    .m-1 {
-      margin: calc(var(--spacing) * 1);
+    .-m-1\.5 {
+      margin: calc(var(--spacing) * -1.5);
     }
     .m-3 {
       margin: calc(var(--spacing) * 3);
@@ -776,6 +776,9 @@
     .min-w-24 {
       min-width: calc(var(--spacing) * 24);
     }
+    .min-w-full {
+      min-width: 100%;
+    }
     .flex-1 {
       flex: 1;
     }
@@ -1042,14 +1045,6 @@
       border-bottom-style: var(--tw-border-style);
       border-bottom-width: 2px;
     }
-    .border-l {
-      border-left-style: var(--tw-border-style);
-      border-left-width: 1px;
-    }
-    .border-l-2 {
-      border-left-style: var(--tw-border-style);
-      border-left-width: 2px;
-    }
     .border-solid {
       --tw-border-style: solid;
       border-style: solid;
@@ -1089,9 +1084,6 @@
     }
     .border-t-transparent {
       border-top-color: transparent;
-    }
-    .border-l-white {
-      border-left-color: var(--color-white);
     }
     .\!bg-white {
       background-color: var(--color-white) !important;
@@ -1383,6 +1375,9 @@
     .p-1 {
       padding: calc(var(--spacing) * 1);
     }
+    .p-1\.5 {
+      padding: calc(var(--spacing) * 1.5);
+    }
     .p-2 {
       padding: calc(var(--spacing) * 2);
     }
@@ -1514,6 +1509,9 @@
     }
     .align-bottom {
       vertical-align: bottom;
+    }
+    .align-middle {
+      vertical-align: middle;
     }
     .font-mono {
       font-family: var(--font-mono);
@@ -2206,6 +2204,16 @@
         width: calc(1/4 * 100%) !important;
       }
     }
+    .md\:\!w-1\/5 {
+      @media (width >= 48rem) {
+        width: calc(1/5 * 100%) !important;
+      }
+    }
+    .md\:\!w-4\/5 {
+      @media (width >= 48rem) {
+        width: calc(4/5 * 100%) !important;
+      }
+    }
     .md\:w-1\/2 {
       @media (width >= 48rem) {
         width: calc(1/2 * 100%);
@@ -2234,6 +2242,11 @@
     .md\:w-4\/5 {
       @media (width >= 48rem) {
         width: calc(4/5 * 100%);
+      }
+    }
+    .md\:\!flex-1 {
+      @media (width >= 48rem) {
+        flex: 1 !important;
       }
     }
     .md\:flex-1 {
@@ -2274,6 +2287,11 @@
     .md\:py-0 {
       @media (width >= 48rem) {
         padding-block: calc(var(--spacing) * 0);
+      }
+    }
+    .md\:\!pt-0 {
+      @media (width >= 48rem) {
+        padding-top: calc(var(--spacing) * 0) !important;
       }
     }
     .md\:pt-0 {
