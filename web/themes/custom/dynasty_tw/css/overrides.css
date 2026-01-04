@@ -183,3 +183,8 @@ a.facets-soft-limit-link.open:after {
 .facet-item__value:hover {
   color: #c60c30 !important;
 }
+
+.bef-links {
+  color: #002244 !important;
+}
+
