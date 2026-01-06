@@ -560,19 +560,16 @@ display:
           plugin_id: bundle
           value:
             game: game
-        field_starting_qb_target_id:
-          id: field_starting_qb_target_id
-          table: node__field_starting_qb
-          field: field_starting_qb_target_id
+        field_brady_played_value:
+          id: field_brady_played_value
+          table: node__field_brady_played
+          field: field_brady_played_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: numeric
+          plugin_id: boolean
           operator: '='
-          value:
-            min: ''
-            max: ''
-            value: '272'
+          value: '1'
           group: 1
           exposed: false
           expose:
@@ -589,9 +586,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -629,14 +623,14 @@ display:
               empty_column: false
               responsive: ''
             nid:
-              sortable: true
+              sortable: false
               default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
             field_brady_tds:
-              sortable: true
+              sortable: false
               default_sort_order: desc
               align: ''
               separator: ''
@@ -648,7 +642,7 @@ display:
               empty_column: false
               responsive: ''
             field_brady_yards:
-              sortable: true
+              sortable: false
               default_sort_order: desc
               align: ''
               separator: ''
@@ -660,7 +654,7 @@ display:
               empty_column: false
               responsive: ''
             field_brady_ints:
-              sortable: true
+              sortable: false
               default_sort_order: desc
               align: ''
               separator: ''
@@ -677,7 +671,7 @@ display:
           empty_table: false
           caption: ''
           description: ''
-          class: ''
+          class: sortable
       row:
         type: fields
         options:
@@ -708,7 +702,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<ul class=\"flex\">\r\n<li><a class=\"bg-blue-pats btn font-medium text-white\" href=\"/tb-vs-teams\">Brady vs Teams</a></li>\r\n<li><a class=\"bg-blue-pats btn font-medium text-white\" href=\"/tb-vs-hc\">Brady vs HCs</a></li>\r\n<li><a class=\"bg-blue-pats btn font-medium text-white\" href=\"/tb-vs-dc\">Brady vs DCs</a></li>\r\n</ul>"
+          content: "<ul class=\"flex justify-evenly\">\r\n<li><a class=\"bg-blue-pats btn font-medium p-2 rounded text-white\" href=\"/tb-vs-teams\">Brady vs Teams</a></li>\r\n<li><a class=\"bg-blue-pats btn font-medium p-2 rounded text-white\" href=\"/tb-vs-hc\">Brady vs HCs</a></li>\r\n<li><a class=\"bg-blue-pats btn font-medium p-2 rounded text-white\" href=\"/tb-vs-dc\">Brady vs DCs</a></li>\r\n</ul>"
           tokenize: false
       footer: {  }
       display_extenders: {  }
@@ -717,7 +711,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -739,7 +732,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1248,13 +1240,13 @@ display:
           metatags: {  }
           tokenize: false
         simple_sitemap_display_extender: {  }
+        ajax_history: {  }
       path: tb-vs-hc
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1771,7 +1763,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:

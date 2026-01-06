@@ -12,7 +12,6 @@ dependencies:
     - field.field.node.player.field_seasons_on_team
     - node.type.player
   module:
-    - datetime
     - metatag
     - text
     - user
@@ -21,23 +20,6 @@ targetEntityType: node
 bundle: player
 mode: default
 content:
-  field_birthday:
-    type: datetime_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: basic_date
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_college:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_meta_tags:
     type: metatag_empty_formatter
     label: hidden
@@ -50,16 +32,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_seasons_on_team:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 5
+    weight: 2
     region: content
   links:
     settings: {  }
@@ -67,7 +40,10 @@ content:
     weight: 0
     region: content
 hidden:
+  field_birthday: true
+  field_college: true
   field_jersey_number: true
   field_player_position: true
+  field_seasons_on_team: true
   langcode: true
   search_api_excerpt: true
