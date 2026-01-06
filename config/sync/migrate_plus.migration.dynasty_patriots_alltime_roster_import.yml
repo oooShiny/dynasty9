@@ -1,0 +1,127 @@
+uuid: 8d09dd46-e45d-4604-b550-7959e8e8a6ba
+langcode: en
+status: true
+dependencies: {  }
+id: dynasty_patriots_alltime_roster_import
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: null
+label: 'Import Patriots All-Time Roster from CSV'
+source:
+  plugin: csv
+  path: 'public://csv/patriots_all_time_roster.csv'
+  header_row_count: 1
+  delimiter: ','
+  ids:
+    - Name
+    - Position
+  constants:
+    uid: 1
+process:
+  title:
+    plugin: swap_player_name
+    source: Name
+  field_player_position:
+    -
+      plugin: static_map
+      source: Position
+      map:
+        QB: 46
+        QB-DB: 46
+        P-QB: 46
+        WR/QB: 46
+        RB: 47
+        FB: 47
+        RB-P: 47
+        RB/KR: 47
+        LB-RB: 47
+        WR/RB: 47
+        WR: 49
+        WR-K-DB: 49
+        WR-P: 49
+        WR/PR/KR: 49
+        OE: 49
+        TE: 48
+        T/TE: 48
+        TE-DE: 48
+        TE-LB: 48
+        DB-TE: 48
+        OL: 50
+        C: 50
+        G: 50
+        T: 50
+        OT: 50
+        OG: 50
+        OC: 50
+        C-G: 50
+        C/G: 50
+        G/T: 50
+        OT-G: 50
+        OT-G-C: 50
+        G-DE: 50
+        OT-DE: 50
+        DL: 51
+        DE: 51
+        DT: 51
+        NT: 51
+        DT/NT: 51
+        NT/DT: 51
+        DT-LB-G: 51
+        LB: 52
+        OLB: 52
+        LB-C: 52
+        LB-DE: 52
+        LB-P: 52
+        LB/DE: 52
+        DE-LB: 52
+        DE/LB: 52
+        DB/LB: 52
+        CB: 53
+        DB: 53
+        FS: 53
+        SS: 53
+        S: 53
+        CB-KR: 53
+        DB-P: 53
+        K: 65
+        K-P: 65
+        P: 186
+        LS: 50
+      bypass: true
+    -
+      plugin: skip_on_empty
+      method: process
+  field_jersey_number:
+    plugin: extract_first_number
+    source: Number
+  field_college:
+    plugin: entity_generate
+    source: College
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: college
+    value_key: name
+  field_seasons_on_team:
+    plugin: extract_first_year
+    source: Years
+  field_player_bio/value:
+    plugin: player_bio
+    source:
+      - College
+      - Years
+      - GP
+      - GS
+      - Number
+  field_player_bio/format:
+    plugin: default_value
+    default_value: basic_html
+  uid: constants/uid
+  status:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: 'entity:node'
+  default_bundle: player
+migration_dependencies: null

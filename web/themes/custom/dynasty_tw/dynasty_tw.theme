@@ -115,9 +115,9 @@ function dynasty_tw_preprocess_layout(&$variables) {
 //  Add width classes to each layout section if set.
   if ($variables['layout']->id() == 'layout_twocol') {
     $widths = [
-      '25' => 'md:w-1/4',
-      '50' => 'md:w-1/2',
-      '75' => 'md:w-3/4',
+      '25' => 'md:!w-1/4',
+      '50' => 'md:!w-1/2',
+      '75' => 'md:!w-3/4',
     ];
     $this_layout = $variables['settings']['layout_paragraphs_section'];
     if (!$this_layout->getEntity()->field_2_column_widths->isEmpty()) {

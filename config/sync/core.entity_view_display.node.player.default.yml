@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.player.field_birthday
+    - field.field.node.player.field_college
     - field.field.node.player.field_jersey_number
     - field.field.node.player.field_meta_tags
     - field.field.node.player.field_player_bio
     - field.field.node.player.field_player_position
+    - field.field.node.player.field_seasons_on_team
     - node.type.player
   module:
     - datetime
@@ -28,6 +30,14 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_college:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_meta_tags:
     type: metatag_empty_formatter
     label: hidden
@@ -41,6 +51,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 3
+    region: content
+  field_seasons_on_team:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 5
     region: content
   links:
     settings: {  }

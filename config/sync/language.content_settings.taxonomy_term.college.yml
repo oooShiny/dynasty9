@@ -1,0 +1,11 @@
+uuid: 51b95f91-b1a2-4bc0-acf3-b2782474449d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.college
+id: taxonomy_term.college
+target_entity_type_id: taxonomy_term
+target_bundle: college
+default_langcode: site_default
+language_alterable: false

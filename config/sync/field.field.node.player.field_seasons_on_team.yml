@@ -1,0 +1,23 @@
+uuid: a65b437e-5ddb-4566-bc49-d74ad2af6eab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_seasons_on_team
+    - node.type.player
+id: node.player.field_seasons_on_team
+field_name: field_seasons_on_team
+entity_type: node
+bundle: player
+label: 'Seasons on Team'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1950
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

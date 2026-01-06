@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.player.field_birthday
+    - field.field.node.player.field_college
     - field.field.node.player.field_jersey_number
     - field.field.node.player.field_meta_tags
     - field.field.node.player.field_player_bio
     - field.field.node.player.field_player_position
+    - field.field.node.player.field_seasons_on_team
     - node.type.player
   module:
     - datetime
@@ -30,6 +32,16 @@ content:
     weight: 26
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_college:
+    type: entity_reference_autocomplete
+    weight: 131
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_jersey_number:
     type: number
@@ -63,6 +75,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_seasons_on_team:
+    type: number
+    weight: 132
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 3
@@ -85,6 +104,11 @@ content:
     third_party_settings: {  }
   simple_sitemap:
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
     region: content
     settings: {  }
     third_party_settings: {  }
