@@ -78,7 +78,9 @@ highcharts:
     https://code.highcharts.com/highcharts.js : { type: external, minified: true }
     https://code.highcharts.com/modules/exporting.js : { type: external, minified: true }
     https://code.highcharts.com/modules/export-data.js : { type: external, minified: true }
-
+tablesort:
+  js:
+    third_party/sorttable.js: {}
 video_switcher:
   header: true
   css:

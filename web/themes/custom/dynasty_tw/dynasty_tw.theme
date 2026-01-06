@@ -385,6 +385,13 @@ function dynasty_tw_views_pre_render(ViewExecutable $view) {
   if (in_array($view->storage->id(), $video_player_views)) {
     $view->element['#attached']['library'][] = 'dynasty_tw/video_switcher';
   }
+
+  $table_views = [
+    'brady_s_interceptions',
+  ];
+  if (in_array($view->storage->id(), $table_views)) {
+    $view->element['#attached']['library'][] = 'dynasty_tw/tablesort';
+  }
 }
 /**
  * Implements template_preprocess_views_view_field().

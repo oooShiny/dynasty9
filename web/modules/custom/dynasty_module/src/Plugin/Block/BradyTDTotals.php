@@ -22,13 +22,14 @@ class BradyTdTotals extends BlockBase {
   public function build() {
     $player_tds = [];
     $all_tds = [];
+    $position_tds = [];
     $players = DynastyHelpers::get_players();
     $teams = DynastyHelpers::get_teams();
     $weeks = DynastyHelpers::get_weeks();
     // Get all Gif paragraphs tagged with Brady + Pass + TD.
     $nids = \Drupal::entityQuery('node')
       ->condition('type', 'highlight')
-      ->condition('field_players_involved', '272')
+      ->condition('field_players_involved', '9776')
       ->condition('field_td_scored', TRUE)
       ->condition('field_play_type', '54')
       ->accessCheck(TRUE)
@@ -40,7 +41,7 @@ class BradyTdTotals extends BlockBase {
     foreach ($gif_nodes as $gif) {
       $players_involved = $gif->get('field_players_involved')->getValue();
       // Only count plays where Brady was the one who threw the TD.
-      if ($players_involved[count($players_involved) - 2]['target_id'] == '272') {
+      if ($players_involved[count($players_involved) - 2]['target_id'] == '9776') {
         $receiver = array_pop($players_involved);
         $name = $players[$receiver['target_id']]['name'];
         $position = $players[$receiver['target_id']]['position'];
