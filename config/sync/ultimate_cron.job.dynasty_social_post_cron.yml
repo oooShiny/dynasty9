@@ -1,0 +1,17 @@
+uuid: 11b2b9cf-6585-43cb-ae62-472a7fd0c9d0
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_social_post
+title: 'Default cron handler'
+id: dynasty_social_post_cron
+weight: 0
+module: dynasty_social_post
+callback: 'dynasty_social_post#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database
