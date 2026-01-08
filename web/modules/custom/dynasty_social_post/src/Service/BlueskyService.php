@@ -286,6 +286,40 @@ class BlueskyService {
   }
 
   /**
+   * Creates facets for hashtags in the post text.
+   *
+   * @param string $text
+   *   The post text.
+   *
+   * @return array
+   *   Array of facets for hashtags.
+   */
+  protected function createHashtagFacets($text) {
+    $facets = [];
+    $hashtags = ['#Patriots', '#Dynasty'];
+
+    foreach ($hashtags as $hashtag) {
+      $position = mb_strpos($text, $hashtag);
+      if ($position !== FALSE) {
+        $facets[] = [
+          'index' => [
+            'byteStart' => strlen(mb_substr($text, 0, $position)),
+            'byteEnd' => strlen(mb_substr($text, 0, $position + mb_strlen($hashtag))),
+          ],
+          'features' => [
+            [
+              '$type' => 'app.bsky.richtext.facet#tag',
+              'tag' => ltrim($hashtag, '#'),
+            ],
+          ],
+        ];
+      }
+    }
+
+    return $facets;
+  }
+
+  /**
    * Creates a post on Bluesky with a video.
    *
    * @param string $text
@@ -304,6 +338,9 @@ class BlueskyService {
    */
   protected function createPost($text, $video_blob, $access_token, $did, $video_dimensions = ['width' => 1920, 'height' => 1080]) {
     try {
+      // Create facets for hashtags.
+      $facets = $this->createHashtagFacets($text);
+
       $post_data = [
         '$type' => 'app.bsky.feed.post',
         'text' => $text,
@@ -317,6 +354,11 @@ class BlueskyService {
           ],
         ],
       ];
+
+      // Add facets if we found any hashtags.
+      if (!empty($facets)) {
+        $post_data['facets'] = $facets;
+      }
 
       $response = $this->httpClient->post('https://bsky.social/xrpc/com.atproto.repo.createRecord', [
         'headers' => [

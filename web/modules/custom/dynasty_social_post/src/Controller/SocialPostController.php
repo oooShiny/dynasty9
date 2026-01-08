@@ -64,4 +64,61 @@ class SocialPostController extends ControllerBase {
     return new RedirectResponse('/admin/config/dynasty/social-post');
   }
 
+  /**
+   * Displays a list of posted highlights.
+   *
+   * @return array
+   *   Render array for the page.
+   */
+  public function postedList() {
+    $posted_highlights = \Drupal::state()->get('dynasty_social_post.posted_highlights', []);
+
+    if (empty($posted_highlights)) {
+      return [
+        '#markup' => $this->t('No highlights have been posted yet.'),
+      ];
+    }
+
+    // Load the highlight nodes.
+    $node_storage = $this->entityTypeManager()->getStorage('node');
+    $highlights = $node_storage->loadMultiple($posted_highlights);
+
+    $rows = [];
+    foreach ($highlights as $highlight) {
+      $season = $highlight->get('field_season')->value ?? 'N/A';
+      $week_entity = $highlight->get('field_week')->entity;
+      $week = $week_entity ? $week_entity->getName() : 'N/A';
+      $opponent_entity = $highlight->get('field_opponent')->entity;
+      $opponent = $opponent_entity ? $opponent_entity->getTitle() : 'N/A';
+
+      $rows[] = [
+        $highlight->id(),
+        [
+          'data' => [
+            '#type' => 'link',
+            '#title' => $highlight->getTitle(),
+            '#url' => $highlight->toUrl(),
+          ],
+        ],
+        $season,
+        $week,
+        $opponent,
+      ];
+    }
+
+    return [
+      '#theme' => 'table',
+      '#header' => [
+        $this->t('ID'),
+        $this->t('Title'),
+        $this->t('Season'),
+        $this->t('Week'),
+        $this->t('Opponent'),
+      ],
+      '#rows' => $rows,
+      '#empty' => $this->t('No highlights have been posted yet.'),
+      '#caption' => $this->t('Total posted: @count', ['@count' => count($posted_highlights)]),
+    ];
+  }
+
 }

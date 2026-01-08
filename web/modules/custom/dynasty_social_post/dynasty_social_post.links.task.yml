@@ -8,3 +8,9 @@ dynasty_social_post.post_now:
   title: 'Post Now'
   base_route: dynasty_social_post.settings
   weight: 10
+
+dynasty_social_post.posted_list:
+  route_name: dynasty_social_post.posted_list
+  title: 'Posted Highlights'
+  base_route: dynasty_social_post.settings
+  weight: 20
