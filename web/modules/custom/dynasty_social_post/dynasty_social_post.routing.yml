@@ -1,0 +1,15 @@
+dynasty_social_post.settings:
+  path: '/admin/config/dynasty/social-post'
+  defaults:
+    _form: '\Drupal\dynasty_social_post\Form\SocialPostSettingsForm'
+    _title: 'Bluesky Social Post Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_social_post.post_now:
+  path: '/admin/config/dynasty/social-post/post-now'
+  defaults:
+    _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::postNow'
+    _title: 'Post to Bluesky Now'
+  requirements:
+    _permission: 'administer site configuration'

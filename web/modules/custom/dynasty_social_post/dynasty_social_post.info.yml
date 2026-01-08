@@ -1,0 +1,10 @@
+name: Dynasty Social Post
+description: Automatically posts highlight videos to Bluesky social media platform.
+package: Dynasty
+
+type: module
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+
+dependencies:
+  - drupal:node
+  - drupal:file

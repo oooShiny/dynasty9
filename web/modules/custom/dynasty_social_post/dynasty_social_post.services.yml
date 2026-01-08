@@ -1,0 +1,4 @@
+services:
+  dynasty_social_post.bluesky:
+    class: Drupal\dynasty_social_post\Service\BlueskyService
+    arguments: ['@http_client', '@config.factory', '@entity_type.manager', '@file_system', '@logger.factory', '@state']

@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Dynasty Social Post module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function dynasty_social_post_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.dynasty_social_post':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Dynasty Social Post module automatically posts random highlight videos from your site to Bluesky on a scheduled basis.') . '</p>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<p>' . t('Configure Bluesky credentials and posting settings at <a href=":url">Administration > Configuration > Dynasty > Bluesky Social Post Settings</a>.', [':url' => '/admin/config/dynasty/social-post']) . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function dynasty_social_post_cron() {
+  $config = \Drupal::config('dynasty_social_post.settings');
+
+  // Check if auto-posting is enabled.
+  if (!$config->get('enable_auto_post')) {
+    return;
+  }
+
+  // Check if enough time has passed since last post.
+  $interval = $config->get('post_interval') ?: 86400; // Default 24 hours.
+  $last_post = \Drupal::state()->get('dynasty_social_post.last_post_time', 0);
+  $current_time = \Drupal::time()->getRequestTime();
+
+  if (($current_time - $last_post) < $interval) {
+    return;
+  }
+
+  // Post a highlight.
+  $bluesky_service = \Drupal::service('dynasty_social_post.bluesky');
+  try {
+    $result = $bluesky_service->postRandomHighlight();
+    if ($result) {
+      \Drupal::state()->set('dynasty_social_post.last_post_time', $current_time);
+      \Drupal::logger('dynasty_social_post')->info('Successfully posted highlight to Bluesky via cron.');
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('dynasty_social_post')->error('Error posting to Bluesky via cron: @message', ['@message' => $e->getMessage()]);
+  }
+}
