@@ -2,6 +2,8 @@ uuid: c8189452-4494-4e93-90f2-6d9b1bfaaf2a
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - dynasty_tw
 _core:
@@ -17,4 +19,8 @@ settings:
   label: 'Page title'
   label_display: '0'
   provider: core
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /podcast/highlight-viewer

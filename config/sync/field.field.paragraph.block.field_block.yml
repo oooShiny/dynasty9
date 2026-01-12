@@ -21,6 +21,7 @@ settings:
   selection: blocks
   selection_settings:
     plugin_ids:
+      'configurable_views_filter_block_block:highlight_player-page_1': 'configurable_views_filter_block_block:highlight_player-page_1'
       'configurable_views_filter_block_block:top_plays-block_1': 'configurable_views_filter_block_block:top_plays-block_1'
       'block_content:3df58732-07a1-430b-9631-493cb6e57a52': 'block_content:3df58732-07a1-430b-9631-493cb6e57a52'
       brady_td_viz: brady_td_viz
@@ -35,9 +36,11 @@ settings:
       top_10_podcast_block: top_10_podcast_block
       total_podcast_downloads_block: total_podcast_downloads_block
       facets_block: facets_block
+      'views_block:highlight_player-block_1': 'views_block:highlight_player-block_1'
       'views_block:podcast_search-block_1': 'views_block:podcast_search-block_1'
       'views_block:podcast_transcript_search-block_1': 'views_block:podcast_transcript_search-block_1'
       'views_block:random_highlight-block_1': 'views_block:random_highlight-block_1'
+      'views_block:top_plays-block_7': 'views_block:top_plays-block_7'
       'views_block:top_plays-block_2': 'views_block:top_plays-block_2'
       'views_block:top_plays-block_3': 'views_block:top_plays-block_3'
       'views_block:top_plays-block_4': 'views_block:top_plays-block_4'

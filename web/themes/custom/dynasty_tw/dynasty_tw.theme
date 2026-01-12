@@ -38,6 +38,18 @@ function dynasty_tw_theme_suggestions_views_view_field_alter(array &$suggestions
 }
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter() for Play entities.
+ */
+function dynasty_tw_theme_suggestions_play_alter(array &$suggestions, array $variables) {
+  $view_mode = $variables['elements']['#view_mode'];
+
+  // Add suggestion based on view mode.
+  $suggestions[] = 'play__' . $view_mode;
+
+  return $suggestions;
+}
+
+/**
  * Implements hook_preprocess_field().
  */
 function dynasty_tw_preprocess_field(&$variables) {
@@ -368,6 +380,22 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for Play entities.
+ */
+function dynasty_tw_preprocess_play(&$variables) {
+  $play = $variables['elements']['#play'];
+  $variables['play'] = $play;
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+
+  // Helper to clean up field values for display.
+  $variables['content'] = $variables['elements'];
+
+  // Add custom attributes.
+  $variables['attributes']['class'][] = 'play';
+  $variables['attributes']['class'][] = 'play--' . $variables['view_mode'];
+}
+
+/**
  * Implements hook_views_pre_render().
  */
 function dynasty_tw_views_pre_render(ViewExecutable $view) {
@@ -393,6 +421,18 @@ function dynasty_tw_views_pre_render(ViewExecutable $view) {
     $view->element['#attached']['library'][] = 'dynasty_tw/tablesort';
   }
 }
+
+/**
+ * Implements hook_preprocess_views_view()..
+ */
+function dynasty_tw_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+
+  if ($view->id() == 'game_search') {
+    $variables['attributes']['class'][] = 'md:!w-4/5';
+  }
+}
+
 /**
  * Implements template_preprocess_views_view_field().
  */
@@ -494,9 +534,6 @@ function dynasty_tw_preprocess_views_view_table(&$variables) {
 
 }
 
-
-
-
 function _check_name_alts($team_node, $season) {
   // See if the team node has any alternate names.
   if (!$team_node->field_alternate_team_name->isEmpty()) {
@@ -546,48 +583,4 @@ function _get_team_location($team) {
     'redskins' => ['city' => 'Landover' , 'state' => 'MD']
   ];
   return $locations[$team];
-}
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter() for Play entities.
- */
-function dynasty_tw_theme_suggestions_play_alter(array &$suggestions, array $variables) {
-  $view_mode = $variables['elements']['#view_mode'];
-
-  // Add suggestion based on view mode.
-  $suggestions[] = 'play__' . $view_mode;
-
-  return $suggestions;
-}
-
-/**
- * Implements hook_preprocess_HOOK() for Play entities.
- */
-function dynasty_tw_preprocess_play(&$variables) {
-  $play = $variables['elements']['#play'];
-  $variables['play'] = $play;
-  $variables['view_mode'] = $variables['elements']['#view_mode'];
-
-  // Helper to clean up field values for display.
-  $variables['content'] = $variables['elements'];
-
-  // Add custom attributes.
-  $variables['attributes']['class'][] = 'play';
-  $variables['attributes']['class'][] = 'play--' . $variables['view_mode'];
-}
-
-/**
- * Implements hook_preprocess_views_view() for top_plays view.
- */
-function dynasty_tw_preprocess_views_view(&$variables) {
-  $view = $variables['view'];
-
-  // Attach video_switcher library to views that need it
-  if ($view->id() == 'top_plays') {
-    $variables['#attached']['library'][] = 'dynasty_tw/video_switcher';
-  }
-
-  if ($view->id() == 'game_search') {
-    $variables['attributes']['class'][] = 'md:!w-4/5';
-  }
 }
