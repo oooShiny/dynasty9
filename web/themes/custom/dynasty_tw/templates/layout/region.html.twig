@@ -13,7 +13,20 @@
  */
 #}
 {% if content %}
-  <div{{ attributes }}>
-    {{ content }}
+  {% if (content_type == 'page' and region == 'content') or region == 'sidebar_first' %}
+    <div{{ attributes }}>
+      {{ content }}
+    </div>
+  {% else %}
+  <div class="flex w-full justify-between">
+    <div{{ attributes.addClass('w-full') }}>
+      {{ content }}
+    </div>
+    <div class="flex h-auto">
+      <div class="bg-white w-1/3">&nbsp;</div>
+      <div class="bg-red-pats w-1/3">&nbsp;</div>
+      <div class="bg-white w-1/3">&nbsp;</div>
+    </div>
   </div>
+  {% endif %}
 {% endif %}

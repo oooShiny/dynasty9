@@ -323,7 +323,10 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
           'first_col' => $widths[$cols[0]],
           'second_col' => $widths[$cols[1]],
         ];
-
+      }
+      $variables['section_border'] = '';
+      if (!$p->field_section_border->isEmpty() && $p->field_section_border->value == 1) {
+        $variables['section_border'] = 'loop';
       }
       break;
     case 'block':
@@ -395,6 +398,19 @@ function dynasty_tw_preprocess_play(&$variables) {
   $variables['attributes']['class'][] = 'play--' . $variables['view_mode'];
 }
 
+/**
+ * Implements hook_preprocess_region().
+ */
+function dynasty_tw_preprocess_region(&$variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    // Get the node type (bundle machine name).
+    $node_type = $node->bundle(); // Or $node->getType()
+
+    // Add the node type as a variable to the region template.
+    $variables['content_type'] = $node_type;
+  }
+
+}
 /**
  * Implements hook_views_pre_render().
  */

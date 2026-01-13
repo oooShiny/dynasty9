@@ -8,8 +8,8 @@ _core:
   default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
 id: dynasty_tw_local_tasks
 theme: dynasty_tw
-region: content
-weight: -15
+region: secondary_menu
+weight: -17
 provider: null
 plugin: local_tasks_block
 settings:

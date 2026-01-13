@@ -1,0 +1,23 @@
+uuid: fc8c6097-84f0-4c35-9b23-30cdbb2d23c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_border
+    - paragraphs.paragraphs_type.section
+id: paragraph.section.field_section_border
+field_name: field_section_border
+entity_type: paragraph
+bundle: section
+label: 'Section Border'
+description: 'Turning this on will make the border on the right side of the screen loop around this section. Leaving it off will keep the border just going down the right side'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Loop Border'
+  off_label: 'Off'
+field_type: boolean

@@ -13,14 +13,7 @@
  */
 #}
 {% if content %}
-<div class="flex w-full justify-between">
-  <div{{ attributes.addClass('flex flex-wrap gap-1 items-center mb-5 pt-10') }}>
-    {{ content }}
-  </div>
-  <div class="flex h-auto">
-    <div class="bg-white w-1/3">&nbsp;</div>
-    <div class="bg-red-pats w-1/3">&nbsp;</div>
-    <div class="bg-white w-1/3">&nbsp;</div>
-  </div>
-</div>
+    <div{{ attributes }}>
+      {{ content }}
+    </div>
 {% endif %}
