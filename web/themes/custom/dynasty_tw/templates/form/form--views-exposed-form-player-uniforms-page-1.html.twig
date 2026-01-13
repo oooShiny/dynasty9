@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes.addClass('flex mx-auto p-4 patriots-white views-exposed-form w-fit mt-5') }}>
+  {{ children }}
+</form>

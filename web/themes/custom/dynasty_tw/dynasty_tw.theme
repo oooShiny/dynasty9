@@ -436,6 +436,13 @@ function dynasty_tw_views_pre_render(ViewExecutable $view) {
   if (in_array($view->storage->id(), $table_views)) {
     $view->element['#attached']['library'][] = 'dynasty_tw/tablesort';
   }
+
+  $player_uniform_views = [
+    'player_uniforms',
+  ];
+  if (in_array($view->storage->id(), $player_uniform_views)) {
+    $view->element['#attached']['library'][] = 'dynasty_tw/player_uniforms';
+  }
 }
 
 /**

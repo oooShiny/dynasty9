@@ -1,0 +1,79 @@
+{#
+/**
+ * @file
+ * Theme override to display all the fields in a row for Player Uniforms view.
+ *
+ * Available variables:
+ * - view: The view object.
+ * - fields: A list of fields, each one containing:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists.
+ *   - class: HTML classes to apply to the field.
+ *   - handler: The field handler object.
+ * - row: The raw result from the query, with all data it fetched.
+ */
+#}
+
+{# Extract field values #}
+{% set full_name = fields.title.content|striptags|trim %}
+{# Get last name only #}
+{% set name_parts = full_name|split(' ') %}
+{% set player_name = name_parts|last %}
+{% set jersey_number = fields.field_jersey_number.content|striptags|trim %}
+
+{# Process seasons to find min and max #}
+{% set seasons = [] %}
+{% if row._entity.field_seasons_on_team %}
+  {% for season_item in row._entity.field_seasons_on_team %}
+    {% set seasons = seasons|merge([season_item.value]) %}
+  {% endfor %}
+{% endif %}
+
+{# Calculate start and end seasons #}
+{% set start_season = seasons|length > 0 ? min(seasons) : '' %}
+{% set end_season = seasons|length > 0 ? max(seasons) : '' %}
+
+{# Determine uniform era based on start season #}
+{% set uniform_era = 'patriots-modern' %}
+{% if start_season %}
+  {% if start_season < 1993 %}
+    {% set uniform_era = 'patriots-80s' %}
+  {% elseif start_season >= 1993 and start_season <= 1999 %}
+    {% set uniform_era = 'patriots-90s' %}
+  {% elseif start_season >= 2000 and start_season <= 2019 %}
+    {% set uniform_era = 'patriots-dynasty' %}
+  {% else %}
+    {% set uniform_era = 'patriots-modern' %}
+  {% endif %}
+{% endif %}
+
+{# Build season range text #}
+{% set season_text = '' %}
+{% if start_season and end_season %}
+  {% if start_season == end_season %}
+    {% set season_text = start_season %}
+  {% else %}
+    {% set season_text = start_season ~ '-' ~ end_season %}
+  {% endif %}
+{% endif %}
+
+{# Get player URL using path function #}
+{% set player_url = path('entity.node.canonical', {'node': row._entity.id}) %}
+
+<div class="player-uniform-wrapper w-48" data-era="{{ uniform_era }}">
+  <a href="{{ player_url }}" class="player-uniform-link">
+    <div class="player-uniform-card">
+      <div class="uniform-image-container">
+        <img src="/themes/custom/dynasty_tw/icons/uniforms/{{ uniform_era }}.png"
+             alt="{{ player_name }} uniform"
+             class="uniform-image" />
+
+        <div class="uniform-overlays">
+          <div class="player-name">{{ player_name|raw }}</div>
+          <div class="player-number">{{ jersey_number }}</div>
+          <div class="player-seasons">{{ season_text }}</div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

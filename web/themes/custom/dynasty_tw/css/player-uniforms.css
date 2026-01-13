@@ -1,0 +1,238 @@
+/**
+ * Player Uniforms View Styling
+ * Displays player cards with uniform images and text overlays
+ */
+@font-face {
+  font-family: "pats80s";
+  src: url("../fonts/patriots_80s.TTF");
+}
+
+@font-face {
+  font-family: "pats90s";
+  src: url("../fonts/patriots_90s.TTF");
+}
+@font-face {
+  font-family: "patsmodern";
+  src: url("../fonts/Patriots2025.ttf");
+}
+/* Grid layout for uniform cards */
+.view-player-uniforms .view-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .view-player-uniforms .view-content {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .view-player-uniforms .view-content {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Individual uniform card */
+.player-uniform-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-uniform-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  max-width: 300px;
+}
+
+.player-uniform-card {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.player-uniform-link:hover .player-uniform-card {
+  transform: scale(1.05);
+}
+
+.player-uniform-link:focus {
+  outline: 2px solid #c60c30;
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+/* Uniform image container */
+.uniform-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.uniform-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Overlay container */
+.uniform-overlays {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Player name styling - positioned above number */
+.player-name {
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  width: 80%;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 2;
+}
+
+/* Player number styling - positioned below name */
+.player-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  z-index: 2;
+}
+
+/* Player seasons styling (ribbon at bottom) */
+.player-seasons {
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #003f84;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  min-width: 100px;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Responsive adjustments */
+/*@media (max-width: 640px) {*/
+/*  .player-name {*/
+/*    font-size: 1.125rem;*/
+/*    top: 20%;*/
+/*  }*/
+
+/*  .player-number {*/
+/*    font-size: 3.5rem;*/
+/*    top: 32%;*/
+/*  }*/
+
+/*  .player-seasons {*/
+/*    font-size: 0.875rem;*/
+/*    padding: 0.375rem 1rem;*/
+/*    bottom: 8%;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 480px) {*/
+/*  .player-name {*/
+/*    font-size: 1rem;*/
+/*    top: 18%;*/
+/*  }*/
+
+/*  .player-number {*/
+/*    font-size: 2.5rem;*/
+/*    top: 30%;*/
+/*  }*/
+
+/*  .player-seasons {*/
+/*    font-size: 0.75rem;*/
+/*    padding: 0.25rem 0.75rem;*/
+/*  }*/
+/*}*/
+
+/* Era-specific styling variations (optional) */
+.player-uniform-wrapper[data-era="patriots-80s"] .player-number {
+  /* Vintage look for 80s era */
+  -webkit-text-stroke: 1px #003f84;
+  left: 52%;
+  font-family: "pats80s", serif;
+}
+
+.player-uniform-wrapper[data-era="patriots-90s"] .player-number {
+  /* 90s era ribbon styling */
+  -webkit-text-stroke: 1px #c0001d;
+  text-shadow: 4px 5px 0 #c0001d;
+  font-family: "pats90s", sans-serif;
+}
+
+.player-uniform-wrapper[data-era="patriots-dynasty"] .player-number,
+.player-uniform-wrapper[data-era="patriots-modern"] .player-number {
+  /* Dynasty era emphasis */
+  top: 48%;
+  font-size: 3.75rem;
+  -webkit-text-stroke: 1px #c0001d;
+  font-family: "patsmodern", sans-serif;
+}
+
+/* Empty state styling */
+.view-player-uniforms .view-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-size: 1.25rem;
+  color: #002244;
+}
+
+/* Pager styling */
+.view-player-uniforms .pager {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.view-player-uniforms .pager__item {
+  list-style: none;
+}
+
+.view-player-uniforms .pager__link {
+  padding: 0.5rem 1rem;
+  background-color: #002244;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.view-player-uniforms .pager__link:hover {
+  background-color: #c60c30;
+}
+
+.view-player-uniforms .pager__item--active .pager__link {
+  background-color: #c60c30;
+  font-weight: bold;
+}

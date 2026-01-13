@@ -91,3 +91,7 @@ video_switcher:
   dependencies:
     - core/drupal
     - core/once
+player_uniforms:
+  css:
+    theme:
+      css/player-uniforms.css: {}
