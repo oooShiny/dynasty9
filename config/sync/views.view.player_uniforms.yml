@@ -7,8 +7,12 @@ dependencies:
     - field.storage.node.field_seasons_on_team
     - node.type.player
     - system.menu.main
+    - taxonomy.vocabulary.position
+  content:
+    - 'taxonomy_term:position:f4fa5bdf-995b-481d-af9c-1282f789d0e0'
   module:
     - node
+    - taxonomy
     - user
 id: player_uniforms
 label: 'Player Uniforms'
@@ -328,6 +332,93 @@ display:
               authenticated: authenticated
             min_placeholder: ''
             max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_player_position_target_id:
+          id: field_player_position_target_id
+          table: node__field_player_position
+          field: field_player_position_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: not
+          value:
+            - 175
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: position
+          type: textfield
+          hierarchy: false
+          limit: true
+          error_message: true
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+          operator: not
+          value: (
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
             placeholder: ''
           is_grouped: false
           group_info:
