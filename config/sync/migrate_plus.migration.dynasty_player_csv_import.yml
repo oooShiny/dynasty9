@@ -19,8 +19,10 @@ source:
   constants:
     uid: 1
 process:
-  # Map player name
-  title: Name
+  # Map player name (swap from "Last First" to "First Last")
+  title:
+    plugin: swap_player_name
+    source: Name
 
   # Map jersey number
   field_jersey_number: Number
