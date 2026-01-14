@@ -1,0 +1,6 @@
+services:
+  dynasty_module.player_cleanup_commands:
+    class: Drupal\dynasty_module\Commands\PlayerCleanupCommands
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: drush.command }

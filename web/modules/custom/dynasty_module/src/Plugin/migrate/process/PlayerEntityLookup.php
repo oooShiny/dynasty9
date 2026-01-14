@@ -75,28 +75,18 @@ class PlayerEntityLookup extends ProcessPluginBase implements ContainerFactoryPl
       }
     }
 
-    // Get the jersey number from source
-    $source_number = $row->getSourceProperty($this->configuration['source_number'] ?? 'Number');
-
-    // Extract first number from the Number field (handles cases like "69,85")
-    $jersey_number = NULL;
-    if (!empty($source_number)) {
-      if (preg_match('/(\d+)/', $source_number, $matches)) {
-        $jersey_number = (int) $matches[1];
-      }
-    }
-
-    if (empty($player_name) || empty($jersey_number)) {
-      // Can't do lookup without both values
+    if (empty($player_name)) {
+      // Can't do lookup without player name
       return NULL;
     }
 
-    // Query for existing player node
+    // Query for existing player node by name only
+    // This will find existing players regardless of whether they have
+    // a jersey number or position suffix already
     $storage = $this->entityTypeManager->getStorage('node');
     $query = $storage->getQuery()
       ->condition('type', 'player')
       ->condition('title', $player_name)
-      ->condition('field_jersey_number', $jersey_number)
       ->accessCheck(FALSE)
       ->range(0, 1);
 
