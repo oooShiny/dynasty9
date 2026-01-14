@@ -20,6 +20,12 @@ source:
   constants:
     uid: 1
 process:
+  # Look up existing player by name and jersey number
+  nid:
+    plugin: player_entity_lookup
+    source_title: Name
+    source_number: Number
+
   title:
     plugin: swap_player_name
     source: Name
@@ -124,4 +130,11 @@ process:
 destination:
   plugin: 'entity:node'
   default_bundle: player
+  overwrite_properties:
+    - title
+    - field_player_position
+    - field_jersey_number
+    - field_college
+    - field_seasons_on_team
+    - field_player_bio
 migration_dependencies: null
