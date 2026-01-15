@@ -27,7 +27,7 @@ process:
     source_number: Number
 
   title:
-    plugin: swap_player_name
+    plugin: simple_swap_player_name
     source: Name
   field_player_position:
     -

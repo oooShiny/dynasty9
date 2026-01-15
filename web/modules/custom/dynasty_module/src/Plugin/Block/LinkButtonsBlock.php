@@ -26,6 +26,7 @@ class LinkButtonsBlock extends BlockBase {
       'games' => [
         ['link' => '/search/games', 'text' => 'Search Games'],
         ['link' => 'https://patriots.games', 'text' => 'Watch Games'],
+        ['link' => '/calendar', 'text' => 'Game Calendar'],
       ],
       'plays' => [
         ['link' => '/top-plays', 'text' => 'Top Plays'],
