@@ -139,6 +139,8 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
             'League\\Container\\' => 17,
             'Laravel\\Prompts\\' => 16,
             'Laminas\\Stdlib\\' => 15,
+            'Laminas\\Feed\\' => 13,
+            'Laminas\\Escaper\\' => 16,
         ),
         'J' =>
         array (
@@ -470,6 +472,14 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'Laminas\\Stdlib\\' =>
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
+        ),
+        'Laminas\\Feed\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-feed/src',
+        ),
+        'Laminas\\Escaper\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
         'JsonSchema\\' =>
         array (

@@ -1,0 +1,116 @@
+uuid: 3463fe35-7a41-4513-8ccc-c61acd291f99
+langcode: en
+status: true
+dependencies:
+  module:
+    - simplenews
+    - user
+id: dynasty_subscribers
+label: 'Dynasty Subscribers'
+module: views
+description: 'Manage newsletter subscribers'
+tag: ''
+base_table: simplenews_subscriber
+base_field: id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Newsletter Subscribers'
+      fields:
+        mail:
+          id: mail
+          table: simplenews_subscriber
+          field: mail
+          relationship: none
+          plugin_id: standard
+          label: 'Email Address'
+        created:
+          id: created
+          table: simplenews_subscriber
+          field: created
+          relationship: none
+          plugin_id: date
+          label: 'Subscribed On'
+          settings:
+            date_format: short
+        status:
+          id: status
+          table: simplenews_subscriber_field_data
+          field: status
+          relationship: none
+          plugin_id: boolean
+          label: Status
+          settings:
+            format: custom
+            format_custom_false: Unsubscribed
+            format_custom_true: Active
+        operations:
+          id: operations
+          table: simplenews_subscriber
+          field: operations
+          relationship: none
+          plugin_id: entity_operations
+          label: Operations
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 50
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+      access:
+        type: perm
+        options:
+          perm: 'administer simplenews subscriptions'
+      cache:
+        type: tag
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          content: 'No subscribers found.'
+      sorts:
+        created:
+          id: created
+          table: simplenews_subscriber
+          field: created
+          relationship: none
+          plugin_id: date
+          order: DESC
+      filters:
+        mail:
+          id: mail
+          table: simplenews_subscriber
+          field: mail
+          relationship: none
+          plugin_id: string
+          exposed: true
+          expose:
+            operator_id: mail_op
+            label: 'Email Address'
+            operator: mail_op
+            identifier: mail
+  page_1:
+    id: page_1
+    display_title: 'Subscribers Page'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: admin/dynasty/subscribers
+      menu:
+        type: normal
+        title: 'View Subscribers'
+        description: 'View and manage newsletter subscribers'
+        weight: 0
+        menu_name: admin

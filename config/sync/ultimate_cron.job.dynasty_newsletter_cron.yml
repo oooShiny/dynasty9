@@ -1,0 +1,17 @@
+uuid: 21ffbbdd-0cb6-4c0e-898a-fd727aaadfbf
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_newsletter
+title: 'Default cron handler'
+id: dynasty_newsletter_cron
+weight: 0
+module: dynasty_newsletter
+callback: 'dynasty_newsletter#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

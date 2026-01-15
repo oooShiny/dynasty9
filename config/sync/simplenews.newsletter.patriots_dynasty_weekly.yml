@@ -1,0 +1,21 @@
+uuid: 9a1b2c3d-4e5f-6789-0abc-def123456789
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: generated_patriots_dynasty_weekly
+name: 'Patriots Dynasty Weekly'
+id: patriots_dynasty_weekly
+description: 'Weekly newsletter covering Patriots news, games, podcasts, and historical content from the dynasty era and current team.'
+format: html
+priority: 0
+receipt: false
+from_name: 'Patriots Dynasty'
+subject: 'Patriots Dynasty Weekly - [node:title]'
+from_address: info@patsdynasty.com
+hyperlinks: true
+allowed_handlers: {  }
+new_account: none
+access: default
+reason: ''
+weight: 1

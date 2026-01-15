@@ -13,6 +13,7 @@ dependencies:
     - filter
     - media
     - shortcut
+    - simplenews
     - system
 _core:
   default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
@@ -28,6 +29,7 @@ permissions:
   - 'delete own files'
   - 'post comments'
   - 'skip comment approval'
+  - 'subscribe to newsletters'
   - 'use text format basic_html'
   - 'view dynasty_transcript'
   - 'view field_game_video'

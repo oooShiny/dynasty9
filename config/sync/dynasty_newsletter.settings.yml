@@ -1,0 +1,13 @@
+_core:
+  default_config_hash: FcBoGj5iTmea6nLIzgYTlp0Qaiu7Y1FtdkWkRJrWlcA
+frequency: weekly
+send_day: thursday
+send_time: '10:00'
+editor_emails:
+  - arbrown83@gmail.com
+news_items_limit: 5
+recent_games_limit: 3
+recent_podcasts_limit: 3
+historical_games_limit: 5
+birthdays_limit: 10
+events_limit: 5

@@ -1,0 +1,17 @@
+uuid: 39b6a357-a7f4-408f-9c55-8ff35df42e7b
+langcode: en
+status: true
+dependencies:
+  module:
+    - aggregator
+title: 'Refresh feeds'
+id: aggregator_cron
+weight: 0
+module: aggregator
+callback: 'aggregator#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

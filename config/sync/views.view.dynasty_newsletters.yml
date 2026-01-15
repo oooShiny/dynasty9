@@ -1,0 +1,203 @@
+uuid: 92cf98d7-441f-485c-b61b-37ec3abf3142
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.simplenews_issue
+  module:
+    - node
+    - user
+id: dynasty_newsletters
+label: 'Dynasty Newsletters'
+module: views
+description: 'Manage newsletter issues'
+tag: ''
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: Newsletters
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          plugin_id: field
+          label: Title
+          settings:
+            link_to_entity: true
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          plugin_id: date
+          label: Created
+          settings:
+            date_format: short
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          plugin_id: boolean
+          label: Status
+          settings:
+            format: custom
+            format_custom_false: Draft
+            format_custom_true: Sent
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          plugin_id: date
+          label: 'Last Updated'
+          settings:
+            date_format: short
+        operations:
+          id: operations
+          table: node
+          field: operations
+          relationship: none
+          plugin_id: entity_operations
+          label: Operations
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 25
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+      access:
+        type: perm
+        options:
+          perm: 'administer simplenews'
+      cache:
+        type: tag
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          content: 'No newsletters found.'
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          plugin_id: date
+          order: DESC
+      filters:
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          plugin_id: bundle
+          value:
+            simplenews_issue: simplenews_issue
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          plugin_id: string
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Title
+            operator: title_op
+            identifier: title
+  page_all:
+    id: page_all
+    display_title: 'All Newsletters'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: admin/dynasty/newsletters
+      menu:
+        type: normal
+        title: 'All Newsletters'
+        description: 'View all newsletters (drafts and sent)'
+        weight: 0
+        menu_name: admin
+  page_drafts:
+    id: page_drafts
+    display_title: 'Draft Newsletters'
+    display_plugin: page
+    position: 2
+    display_options:
+      filters:
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          plugin_id: bundle
+          value:
+            simplenews_issue: simplenews_issue
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          plugin_id: boolean
+          value: '0'
+      defaults:
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      path: admin/dynasty/newsletters/drafts
+      menu:
+        type: tab
+        title: Drafts
+        description: 'View draft newsletters awaiting review'
+        weight: 1
+        menu_name: admin
+  page_sent:
+    id: page_sent
+    display_title: 'Sent Newsletters'
+    display_plugin: page
+    position: 3
+    display_options:
+      filters:
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          plugin_id: bundle
+          value:
+            simplenews_issue: simplenews_issue
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          plugin_id: boolean
+          value: '1'
+      defaults:
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      path: admin/dynasty/newsletters/sent
+      menu:
+        type: tab
+        title: Sent
+        description: 'View sent newsletters'
+        weight: 2
+        menu_name: admin

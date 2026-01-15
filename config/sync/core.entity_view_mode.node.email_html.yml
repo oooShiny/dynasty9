@@ -1,0 +1,16 @@
+uuid: 6ed0a95d-6e31-4418-9b81-cb0b10358d2a
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - simplenews
+_core:
+  default_config_hash: iQNOEsNlbBFbVMOoSwtfUd8YC0XpRLzTjXv48HYfxwE
+id: node.email_html
+label: 'Email: HTML'
+description: null
+targetEntityType: node
+cache: true

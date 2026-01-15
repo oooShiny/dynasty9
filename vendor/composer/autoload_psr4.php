@@ -74,6 +74,8 @@ return array(
     'League\\Container\\' => array($vendorDir . '/league/container/src'),
     'Laravel\\Prompts\\' => array($vendorDir . '/laravel/prompts/src'),
     'Laminas\\Stdlib\\' => array($vendorDir . '/laminas/laminas-stdlib/src'),
+    'Laminas\\Feed\\' => array($vendorDir . '/laminas/laminas-feed/src'),
+    'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'JsonMachine\\' => array($vendorDir . '/halaxa/json-machine/src'),
     'Html2Text\\' => array($vendorDir . '/html2text/html2text/src'),
