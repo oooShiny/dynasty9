@@ -1,0 +1,14 @@
+include:
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - '/includes/include.drupalci.main.yml'
+      - '/includes/include.drupalci.variables.yml'
+      - '/includes/include.drupalci.workflows.yml'
+
+variables:
+  _PHPUNIT_CONCURRENT: 1
+  _CSPELL_IGNORE_PATHS: 'tests/fixtures/*, tests/src/Kernel/Migrate/*'
+  _CSPELL_WORDS: 'feededit, aggregatorentry, XMLURL, SSRF, hijklmn, xfiles, atomentry, guids'
+  OPT_IN_TEST_NEXT_MINOR: 1
+  OPT_IN_TEST_NEXT_MAJOR: 1

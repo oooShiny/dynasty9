@@ -1,0 +1,8 @@
+services:
+  dynasty_newsletter.content_builder:
+    class: Drupal\dynasty_newsletter\Service\NewsletterContentBuilder
+    arguments: ['@entity_type.manager', '@database', '@date.formatter', '@renderer', '@path_alias.manager']
+
+  dynasty_newsletter.historical_data:
+    class: Drupal\dynasty_newsletter\Service\NewsletterHistoricalData
+    arguments: ['@entity_type.manager', '@database']

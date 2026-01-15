@@ -1916,6 +1916,12 @@
       outline-style: var(--tw-outline-style);
       outline-width: 1px;
     }
+    .outline-offset-4 {
+      outline-offset: 4px;
+    }
+    .outline-white {
+      outline-color: var(--color-white);
+    }
     .blur {
       --tw-blur: blur(8px);
       filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -1958,6 +1964,9 @@
     .ease-out {
       --tw-ease: var(--ease-out);
       transition-timing-function: var(--ease-out);
+    }
+    .\[simplenews-subscriber\:unsubscribe-url\] {
+      simplenews-subscriber: unsubscribe-url;
     }
     .before\:absolute {
       &::before {

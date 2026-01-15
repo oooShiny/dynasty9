@@ -1,0 +1,359 @@
+{#
+/**
+ * @file
+ * Template for Patriots Dynasty Weekly newsletter.
+ *
+ * Available variables:
+ * - newsletter_title: Newsletter title
+ * - newsletter_date: Newsletter date
+ * - news_items: Recent Patriots news from RSS
+ * - recent_games: Recent game results
+ * - recent_podcasts: Latest podcast episodes
+ * - on_this_date: Historical games on this date
+ * - birthdays: Player birthdays this week
+ * - historical_events: Historical events this week
+ */
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ newsletter_title }}</title>
+  <style>
+    /* Reset styles */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+
+    /* Base styles */
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100% !important;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    /* Container */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+
+    /* Header */
+    .header {
+      background-color: #002244;
+      color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .header p {
+      margin: 0;
+      font-size: 14px;
+      color: #cccccc;
+    }
+
+    /* Section */
+    .section {
+      padding: 25px 20px;
+      border-bottom: 1px solid #dddddd;
+    }
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    /* Section title */
+    .section-title {
+      color: #002244;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #c60c30;
+    }
+
+    /* News item */
+    .news-item {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eeeeee;
+    }
+    .news-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .news-item-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+    }
+    .news-item-title a {
+      color: #c60c30;
+      text-decoration: none;
+    }
+    .news-item-title a:hover {
+      text-decoration: underline;
+    }
+    .news-item-description {
+      font-size: 14px;
+      color: #444444;
+      line-height: 1.5;
+      margin: 0 0 5px 0;
+    }
+    .news-item-meta {
+      font-size: 12px;
+      color: #888888;
+    }
+
+    /* Game result */
+    .game-result {
+      background-color: #f8f8f8;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 4px solid #002244;
+    }
+    .game-result:last-child {
+      margin-bottom: 0;
+    }
+    .game-result-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #002244;
+      margin: 0 0 5px 0;
+    }
+    .game-result-score {
+      font-size: 18px;
+      font-weight: bold;
+      color: #c60c30;
+      margin: 0 0 5px 0;
+    }
+    .game-result-link a {
+      color: #002244;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .game-result-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Historical item */
+    .historical-item {
+      margin-bottom: 12px;
+      padding-left: 15px;
+      border-left: 3px solid #c60c30;
+    }
+    .historical-year {
+      font-weight: bold;
+      color: #002244;
+      font-size: 16px;
+    }
+    .historical-description {
+      font-size: 14px;
+      color: #444444;
+      margin: 3px 0;
+    }
+    .historical-link a {
+      color: #c60c30;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    /* Birthday item */
+    .birthday-item {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .birthday-name {
+      font-weight: bold;
+      color: #002244;
+    }
+    .birthday-date {
+      color: #c60c30;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #002244;
+      color: #ffffff;
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 12px;
+    }
+    .footer p {
+      margin: 0 0 10px 0;
+    }
+    .footer a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .footer a:hover {
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media only screen and (max-width: 600px) {
+      .container {
+        width: 100% !important;
+      }
+      .header h1 {
+        font-size: 24px !important;
+      }
+      .section {
+        padding: 20px 15px !important;
+      }
+      .section-title {
+        font-size: 18px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td align="center" style="padding: 20px 0;">
+        <div class="container">
+
+          <!-- Header -->
+          <div class="header">
+            <h1>Patriots Dynasty Weekly</h1>
+            <p>{{ newsletter_date }}</p>
+          </div>
+
+          <!-- Recent News Section -->
+          {% if news_items %}
+          <div class="section">
+            <h2 class="section-title">This Week in Patriots News</h2>
+            {% for item in news_items %}
+            <div class="news-item">
+              <div class="news-item-title">
+                <a href="{{ item.link }}">{{ item.title }}</a>
+              </div>
+              <div class="news-item-description">
+                {{ item.description|length > 200 ? item.description|slice(0, 200) ~ '...' : item.description }}
+              </div>
+              <div class="news-item-meta">{{ item.source }} - {{ item.date }}</div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- Recent Games Section -->
+          {% if recent_games %}
+          <div class="section">
+            <h2 class="section-title">Recent Game Results</h2>
+            {% for game in recent_games %}
+            <div class="game-result">
+              <div class="game-result-title">{{ game.week }} - {{ game.season }} Season</div>
+              <div class="game-result-score">
+                Patriots {{ game.patriots_score }}, {{ game.opponent_name }} {{ game.opponent_score }}
+                {% if game.result == 'W' %}
+                  ✓
+                {% elseif game.result == 'L' %}
+                  ✗
+                {% endif %}
+              </div>
+              <div class="game-result-link">
+                <a href="{{ game.url }}">View Game Recap →</a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- Recent Podcasts Section -->
+          {% if recent_podcasts %}
+          <div class="section">
+            <h2 class="section-title">Latest Podcast Episodes</h2>
+            {% for podcast in recent_podcasts %}
+            <div class="news-item">
+              <div class="news-item-title">
+                <a href="{{ podcast.url }}">{{ podcast.title }}</a>
+              </div>
+              {% if podcast.subtitle %}
+              <div class="news-item-description">{{ podcast.subtitle }}</div>
+              {% endif %}
+              <div class="news-item-meta">
+                Season {{ podcast.season }}, Episode {{ podcast.episode }}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- On This Date Section -->
+          {% if on_this_date %}
+          <div class="section">
+            <h2 class="section-title">On This Date in Patriots History</h2>
+            {% for historical in on_this_date %}
+            <div class="historical-item">
+              <div class="historical-year">{{ historical.year }}</div>
+              <div class="historical-description">{{ historical.description }}</div>
+              {% if historical.url %}
+              <div class="historical-link">
+                <a href="{{ historical.url }}">View Game Details →</a>
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- Player Birthdays Section -->
+          {% if birthdays %}
+          <div class="section">
+            <h2 class="section-title">Patriots Birthdays This Week</h2>
+            {% for birthday in birthdays %}
+            <div class="birthday-item">
+              <span class="birthday-name">{{ birthday.player_name }}</span>
+              {% if birthday.position %} - {{ birthday.position }}{% endif %}
+              <br>
+              <span class="birthday-date">{{ birthday.date }}</span>
+              {% if birthday.birth_year %} (Born {{ birthday.birth_year }}){% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- Historical Events Section -->
+          {% if historical_events %}
+          <div class="section">
+            <h2 class="section-title">Patriots History This Week</h2>
+            {% for event in historical_events %}
+            <div class="historical-item">
+              <div class="historical-year">{{ event.year }} - {{ event.date }}</div>
+              <div class="historical-description">
+                <strong>{{ event.title }}</strong><br>
+                {{ event.description }}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <!-- Footer -->
+          <div class="footer">
+            <p>&copy; {{ "now"|date("Y") }} Patriots Dynasty</p>
+            <p>
+              <a href="[simplenews-subscriber:unsubscribe-url]">Unsubscribe</a> |
+              <a href="https://dynasty9.ddev.site">Visit Website</a>
+            </p>
+            <p style="margin-top: 15px; font-size: 11px; color: #999999;">
+              You're receiving this email because you subscribed to Patriots Dynasty Weekly.<br>
+              This newsletter covers the New England Patriots dynasty era and current team news.
+            </p>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

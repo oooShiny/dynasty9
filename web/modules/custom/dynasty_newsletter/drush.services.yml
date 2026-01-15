@@ -1,0 +1,6 @@
+services:
+  dynasty_newsletter.commands:
+    class: \Drupal\dynasty_newsletter\Commands\NewsletterCommands
+    arguments: ['@dynasty_newsletter.content_builder']
+    tags:
+      - { name: drush.command }

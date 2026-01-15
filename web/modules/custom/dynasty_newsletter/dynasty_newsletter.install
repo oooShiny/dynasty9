@@ -1,0 +1,150 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the dynasty_newsletter module.
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_install().
+ */
+function dynasty_newsletter_install() {
+  // Create RSS aggregator feeds
+  dynasty_newsletter_create_rss_feeds();
+
+  // Backfill publication dates for existing podcast episodes
+  dynasty_newsletter_backfill_podcast_dates();
+}
+
+/**
+ * Create default RSS aggregator feeds for Patriots news.
+ */
+function dynasty_newsletter_create_rss_feeds() {
+  $feeds = [
+    [
+      'title' => 'ESPN Patriots News',
+      'url' => 'https://www.espn.com/espn/rss/nfl/team/_/name/ne/new-england-patriots',
+      'refresh' => 10800, // 3 hours
+      'description' => 'Latest Patriots news from ESPN',
+    ],
+    [
+      'title' => 'NFL.com Patriots Feed',
+      'url' => 'https://www.nfl.com/feeds/rss/team/new-england-patriots',
+      'refresh' => 10800,
+      'description' => 'Official Patriots news from NFL.com',
+    ],
+    [
+      'title' => 'Patriots.com News',
+      'url' => 'https://www.patriots.com/feeds/news',
+      'refresh' => 10800,
+      'description' => 'Official New England Patriots team news',
+    ],
+  ];
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  foreach ($feeds as $feed_data) {
+    try {
+      // Check if feed already exists
+      $existing_feeds = $entity_type_manager
+        ->getStorage('aggregator_feed')
+        ->loadByProperties(['url' => $feed_data['url']]);
+
+      if (empty($existing_feeds)) {
+        $feed = $entity_type_manager
+          ->getStorage('aggregator_feed')
+          ->create([
+            'title' => $feed_data['title'],
+            'url' => $feed_data['url'],
+            'refresh' => $feed_data['refresh'],
+            'description' => $feed_data['description'],
+          ]);
+        $feed->save();
+
+        \Drupal::logger('dynasty_newsletter')->info('Created RSS feed: @title', [
+          '@title' => $feed_data['title'],
+        ]);
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('dynasty_newsletter')->error('Failed to create RSS feed @title: @message', [
+        '@title' => $feed_data['title'],
+        '@message' => $e->getMessage(),
+      ]);
+    }
+  }
+}
+
+/**
+ * Backfill publication dates for podcast episodes.
+ */
+function dynasty_newsletter_backfill_podcast_dates() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  // Get all podcast episode nodes
+  $podcast_nids = $entity_type_manager
+    ->getStorage('node')
+    ->getQuery()
+    ->condition('type', 'podcast_episode')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (empty($podcast_nids)) {
+    return;
+  }
+
+  $podcasts = $entity_type_manager
+    ->getStorage('node')
+    ->loadMultiple($podcast_nids);
+
+  $updated = 0;
+  foreach ($podcasts as $podcast) {
+    // Skip if publication date is already set
+    if (!$podcast->get('field_publication_date')->isEmpty()) {
+      continue;
+    }
+
+    $publication_date = NULL;
+
+    // Priority 1: Use referenced game's date
+    if (!$podcast->get('field_game')->isEmpty()) {
+      $game = $podcast->get('field_game')->entity;
+      if ($game && !$game->get('field_date')->isEmpty()) {
+        $publication_date = $game->get('field_date')->value;
+      }
+    }
+
+    // Priority 2: Use node created timestamp
+    if (!$publication_date) {
+      $created_timestamp = $podcast->getCreatedTime();
+      $publication_date = date('Y-m-d', $created_timestamp);
+    }
+
+    // Set the publication date
+    if ($publication_date) {
+      $podcast->set('field_publication_date', $publication_date);
+      $podcast->save();
+      $updated++;
+    }
+  }
+
+  \Drupal::logger('dynasty_newsletter')->info('Backfilled publication dates for @count podcast episodes.', ['@count' => $updated]);
+}
+
+/**
+ * Update hook to backfill publication dates.
+ */
+function dynasty_newsletter_update_9001() {
+  dynasty_newsletter_backfill_podcast_dates();
+  return t('Backfilled publication dates for podcast episodes.');
+}
+
+/**
+ * Update hook to create RSS feeds.
+ */
+function dynasty_newsletter_update_9002() {
+  dynasty_newsletter_create_rss_feeds();
+  return t('Created RSS aggregator feeds for Patriots news.');
+}

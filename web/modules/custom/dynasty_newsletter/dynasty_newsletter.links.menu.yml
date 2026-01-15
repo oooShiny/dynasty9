@@ -1,0 +1,34 @@
+dynasty_newsletter.admin_dynasty:
+  title: 'Dynasty'
+  description: 'Dynasty module administration and newsletter management'
+  route_name: dynasty_newsletter.dashboard
+  parent: system.admin_config
+  weight: -10
+
+dynasty_newsletter.dashboard:
+  title: 'Dashboard'
+  description: 'Dynasty Newsletter dashboard with quick access to all features'
+  route_name: dynasty_newsletter.dashboard
+  parent: dynasty_newsletter.admin_dynasty
+  weight: -10
+
+dynasty_newsletter.settings:
+  title: 'Newsletter Settings'
+  description: 'Configure newsletter frequency, timing, and content limits'
+  route_name: dynasty_newsletter.settings
+  parent: dynasty_newsletter.admin_dynasty
+  weight: 0
+
+dynasty_newsletter.rss_settings:
+  title: 'RSS Feed Settings'
+  description: 'Configure RSS feed sources for newsletter content'
+  route_name: dynasty_newsletter.rss_settings
+  parent: dynasty_newsletter.admin_dynasty
+  weight: 1
+
+dynasty_newsletter.generate:
+  title: 'Generate Newsletter'
+  description: 'Manually generate a new newsletter draft'
+  route_name: dynasty_newsletter.generate
+  parent: dynasty_newsletter.admin_dynasty
+  weight: 2

@@ -404,6 +404,9 @@ function dynasty_tw_preprocess_play(&$variables) {
 function dynasty_tw_preprocess_region(&$variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     // Get the node type (bundle machine name).
+    if (!is_object($node)) {
+      $node = Node::load($node);
+    }
     $node_type = $node->bundle(); // Or $node->getType()
 
     // Add the node type as a variable to the region template.

@@ -1,0 +1,11 @@
+name: Dynasty Newsletter
+description: Automated newsletter generation for Patriots Dynasty Weekly
+package: Dynasty
+type: module
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+dependencies:
+  - drupal:node
+  - simplenews:simplenews
+  - aggregator:aggregator
+  - scheduler:scheduler
+  - dynasty_module:dynasty_module

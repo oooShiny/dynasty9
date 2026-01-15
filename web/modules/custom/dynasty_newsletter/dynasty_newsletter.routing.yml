@@ -1,0 +1,40 @@
+dynasty_newsletter.dashboard:
+  path: '/admin/config/dynasty'
+  defaults:
+    _controller: '\Drupal\dynasty_newsletter\Controller\DashboardController::dashboard'
+    _title: 'Dynasty Dashboard'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_newsletter.settings:
+  path: '/admin/config/dynasty/newsletter'
+  defaults:
+    _form: '\Drupal\dynasty_newsletter\Form\NewsletterSettingsForm'
+    _title: 'Newsletter Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_newsletter.rss_settings:
+  path: '/admin/config/dynasty/newsletter/rss'
+  defaults:
+    _form: '\Drupal\dynasty_newsletter\Form\NewsletterRSSSettingsForm'
+    _title: 'Newsletter RSS Feed Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_newsletter.generate:
+  path: '/admin/dynasty/newsletter/generate'
+  defaults:
+    _form: '\Drupal\dynasty_newsletter\Form\NewsletterGenerateForm'
+    _title: 'Generate Newsletter'
+  requirements:
+    _permission: 'administer simplenews'
+
+dynasty_newsletter.preview:
+  path: '/admin/dynasty/newsletter/preview/{node}'
+  defaults:
+    _controller: '\Drupal\dynasty_newsletter\Controller\NewsletterPreviewController::preview'
+    _title: 'Preview Newsletter'
+  requirements:
+    _permission: 'administer simplenews'
+    node: \d+

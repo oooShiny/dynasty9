@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * @file
+ * Dynasty Newsletter module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_help().
+ */
+function dynasty_newsletter_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.dynasty_newsletter':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Automated newsletter generation for Patriots Dynasty Weekly.') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('Generate Newsletter') . '</dt>';
+      $output .= '<dd>' . t('Use the drush command "drush dynasty-newsletter:generate" to manually generate a newsletter draft.') . '</dd>';
+      $output .= '<dt>' . t('Configure Settings') . '</dt>';
+      $output .= '<dd>' . t('Visit <a href=":config">Newsletter Settings</a> to configure frequency, timing, and content options.', [':config' => '/admin/config/dynasty/newsletter']) . '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dynasty_newsletter_theme($existing, $type, $theme, $path) {
+  return [
+    'newsletter_issue' => [
+      'variables' => [
+        'newsletter_title' => '',
+        'newsletter_date' => '',
+        'news_items' => [],
+        'recent_games' => [],
+        'recent_podcasts' => [],
+        'on_this_date' => [],
+        'birthdays' => [],
+        'historical_events' => [],
+      ],
+      'template' => 'newsletter-issue',
+    ],
+    'newsletter_dashboard' => [
+      'variables' => [
+        'sections' => []
+      ]
+    ]
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function dynasty_newsletter_cron() {
+  $config = \Drupal::config('dynasty_newsletter.settings');
+  $frequency = $config->get('frequency') ?? 'weekly';
+  $last_generated = \Drupal::state()->get('dynasty_newsletter.last_generated', 0);
+
+  // Skip if frequency is manual-only
+  if ($frequency === 'manual') {
+    return;
+  }
+
+  // Calculate interval based on frequency
+  $intervals = [
+    'weekly' => 604800,      // 7 days
+    'bi-weekly' => 1209600,  // 14 days
+    'monthly' => 2592000,    // 30 days
+  ];
+
+  $interval = $intervals[$frequency] ?? 604800;
+
+  // Check if enough time has passed since last generation
+  if ((time() - $last_generated) < $interval) {
+    return;
+  }
+
+  // Generate draft newsletter
+  try {
+    $content_builder = \Drupal::service('dynasty_newsletter.content_builder');
+    $html = $content_builder->buildNewsletterContent();
+
+    // Create Simplenews issue node
+    $newsletter = Node::create([
+      'type' => 'simplenews_issue',
+      'title' => 'Patriots Dynasty Weekly - ' . date('F j, Y'),
+      'body' => [
+        'value' => $html,
+        'format' => 'full_html',
+      ],
+      'simplenews_issue' => [
+        'target_id' => 'patriots_dynasty_weekly',
+      ],
+      'status' => 0, // Unpublished draft
+    ]);
+    $newsletter->save();
+
+    // Update last generated timestamp
+    \Drupal::state()->set('dynasty_newsletter.last_generated', time());
+
+    // Notify editors
+    _dynasty_newsletter_notify_editors($newsletter);
+
+    \Drupal::logger('dynasty_newsletter')->info('Newsletter draft generated: @nid', ['@nid' => $newsletter->id()]);
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('dynasty_newsletter')->error('Failed to generate newsletter: @message', ['@message' => $e->getMessage()]);
+  }
+}
+
+/**
+ * Notify editors that a newsletter draft is ready.
+ */
+function _dynasty_newsletter_notify_editors($newsletter) {
+  $config = \Drupal::config('dynasty_newsletter.settings');
+  $editor_emails = $config->get('editor_emails') ?? ['arbrown83@gmail.com'];
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+
+  foreach ($editor_emails as $email) {
+    $params = [
+      'newsletter_id' => $newsletter->id(),
+      'newsletter_title' => $newsletter->getTitle(),
+      'edit_url' => $newsletter->toUrl('edit-form', ['absolute' => TRUE])->toString(),
+    ];
+
+    $mailManager->mail('dynasty_newsletter', 'editor_notification', $email, 'en', $params, NULL, TRUE);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function dynasty_newsletter_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'editor_notification':
+      $message['subject'] = t('Newsletter Draft Ready: @title', ['@title' => $params['newsletter_title']]);
+      $message['body'][] = t('A new newsletter draft has been automatically generated and is ready for review.');
+      $message['body'][] = t('Title: @title', ['@title' => $params['newsletter_title']]);
+      $message['body'][] = t('Edit the newsletter: @url', ['@url' => $params['edit_url']]);
+      $message['body'][] = t('Review and schedule the newsletter at: @admin_url', ['@admin_url' => \Drupal::request()->getSchemeAndHttpHost() . '/admin/content/simplenews']);
+      break;
+  }
+}
