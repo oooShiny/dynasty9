@@ -1,0 +1,60 @@
+uuid: 42764bf5-b3bc-4c98-ac93-b36914237c71
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.dashboard_content
+  module:
+    - dynasty_module
+    - layout_builder
+    - views
+id: content_editor
+label: 'Content Editor'
+description: ''
+layout:
+  -
+    layout_id: layout_twocol_section
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      column_widths: 50-50
+    components:
+      b4b2404a-f705-4ddb-8858-0e1456afa5fe:
+        uuid: b4b2404a-f705-4ddb-8858-0e1456afa5fe
+        region: first
+        configuration:
+          id: latest_podcast_block
+          label: 'Latest Podcast'
+          label_display: visible
+          provider: dynasty_module
+          context_mapping: {  }
+        weight: 1
+        additional: {  }
+      31231244-b7cd-40c7-85c3-59c464cabdc7:
+        uuid: 31231244-b7cd-40c7-85c3-59c464cabdc7
+        region: second
+        configuration:
+          id: 'views_block:dashboard_content-block_edited_content'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: null
+        weight: 0
+        additional: {  }
+      8941bf1d-c013-41ab-bc75-e4e05dab3d29:
+        uuid: 8941bf1d-c013-41ab-bc75-e4e05dab3d29
+        region: first
+        configuration:
+          id: 'views_block:dashboard_content-block_own_drafts'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: null
+        weight: 0
+        additional: {  }
+    third_party_settings: {  }
+weight: 1

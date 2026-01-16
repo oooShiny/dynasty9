@@ -21,6 +21,7 @@ module:
   contact: 0
   contextual: 0
   ctools: 0
+  dashboard: 0
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
@@ -59,6 +60,7 @@ module:
   jquery_ui_touch_punch: 0
   key: 0
   language: 0
+  layout_builder: 0
   layout_discovery: 0
   layout_paragraphs: 0
   link: 0

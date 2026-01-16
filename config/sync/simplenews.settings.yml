@@ -3,9 +3,9 @@ _core:
 hash_expiration: 86400
 newsletter:
   issue_tokens: false
-  format: plain
+  format: html
   priority: 0
-  receipt: true
+  receipt: false
   from_address: info@patsdynasty.com
   from_name: 'Patriots Dynasty'
 subscriber:
@@ -15,10 +15,10 @@ subscription:
   tidy_unconfirmed: 7
   confirm_subject: 'Confirmation for [site:name]'
   confirm_body: "We have received a request to subscribe [simplenews-subscriber:mail] at [site:url]. To confirm please use the link below.\r\n\r\n[simplenews-subscriber:confirm-url]"
-  validate_subject: 'Manage your subscriptions at [site:name]'
-  validate_body: "We have received a request to manage your subscriptions for [simplenews-subscriber:mail] at [site:url]. To proceed please use the link below.\r\n\r\n[simplenews-subscriber:manage-url]"
   confirm_subscribe_page: ''
   confirm_unsubscribe_page: ''
+  validate_subject: 'Manage your subscriptions at [site:name]'
+  validate_body: "We have received a request to manage your subscriptions for [simplenews-subscriber:mail] at [site:url]. To proceed please use the link below.\r\n\r\n[simplenews-subscriber:manage-url]"
 mail:
   use_cron: true
   textalt: false

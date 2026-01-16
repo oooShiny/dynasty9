@@ -1,0 +1,17 @@
+uuid: 76631bd5-eb99-45bb-9082-39656aaad1b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - layout_builder
+title: 'Remove unused inline block entity operations'
+id: layout_builder_cron
+weight: 0
+module: layout_builder
+callback: 'layout_builder#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

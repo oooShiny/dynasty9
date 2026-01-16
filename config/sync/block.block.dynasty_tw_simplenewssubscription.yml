@@ -1,0 +1,26 @@
+uuid: 1e49ea47-f9c7-478c-9982-390ce5401c08
+langcode: en
+status: true
+dependencies:
+  module:
+    - simplenews
+  theme:
+    - dynasty_tw
+id: dynasty_tw_simplenewssubscription
+theme: dynasty_tw
+region: footer
+weight: 0
+provider: null
+plugin: simplenews_subscription_block
+settings:
+  id: simplenews_subscription_block
+  label: 'Simplenews subscription'
+  label_display: '0'
+  provider: simplenews
+  newsletters: {  }
+  default_newsletters:
+    patriots_dynasty_weekly: patriots_dynasty_weekly
+  message: 'Stay informed - subscribe to our newsletter.'
+  show_manage: false
+  unique_id: 2f96a6b8-f8ba-43cb-bdc3-d3e913ee4f55
+visibility: {  }

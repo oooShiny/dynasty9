@@ -1,7 +1,7 @@
 uuid: f7e9c3d1-2b4a-4c5e-8f1a-9d3e5b7c9a1b
 langcode: en
 status: false
-dependencies: {}
+dependencies: {  }
 id: dynasty_player_csv_import
 class: null
 field_plugin_method: null
@@ -19,15 +19,10 @@ source:
   constants:
     uid: 1
 process:
-  # Map player name (swap from "Last First" to "First Last")
   title:
     plugin: swap_player_name
     source: Name
-
-  # Map jersey number
   field_jersey_number: Number
-
-  # Map position to taxonomy term
   field_player_position:
     -
       plugin: entity_lookup
@@ -40,8 +35,6 @@ process:
     -
       plugin: skip_on_empty
       method: process
-
-  # Map college to taxonomy term (auto-create if doesn't exist)
   field_college:
     -
       plugin: entity_generate
@@ -53,23 +46,13 @@ process:
     -
       plugin: skip_on_empty
       method: process
-
-  # Parse years field into individual seasons
-  # This needs a custom process plugin to handle formats like:
-  # "2004" (single year)
-  # "1971-85" (range)
-  # "1971-85 87" (range plus additional year)
   field_seasons_on_team:
     plugin: parse_player_years
     source: Years
-
-  # Set the author
   uid: constants/uid
-
 destination:
   plugin: 'entity:node'
   default_bundle: player
-
 migration_dependencies:
   optional:
     - dynasty_taxonomy_import

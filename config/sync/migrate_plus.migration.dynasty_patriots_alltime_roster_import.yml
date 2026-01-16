@@ -20,12 +20,10 @@ source:
   constants:
     uid: 1
 process:
-  # Look up existing player by name and jersey number
   nid:
     plugin: player_entity_lookup
     source_title: Name
     source_number: Number
-
   title:
     plugin: simple_swap_player_name
     source: Name
