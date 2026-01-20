@@ -14,9 +14,14 @@ function dynasty_social_post_help($route_name, RouteMatchInterface $route_match)
   switch ($route_name) {
     case 'help.page.dynasty_social_post':
       $output = '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Dynasty Social Post module automatically posts random highlight videos from your site to Bluesky on a scheduled basis.') . '</p>';
+      $output .= '<p>' . t('The Dynasty Social Post module automatically posts random highlight videos from your site to Bluesky and YouTube on a scheduled basis.') . '</p>';
       $output .= '<h3>' . t('Configuration') . '</h3>';
-      $output .= '<p>' . t('Configure Bluesky credentials and posting settings at <a href=":url">Administration > Configuration > Dynasty > Bluesky Social Post Settings</a>.', [':url' => '/admin/config/dynasty/social-post']) . '</p>';
+      $output .= '<p>' . t('Configure credentials and posting settings at <a href=":url">Administration > Configuration > Dynasty > Social Post Settings</a>.', [':url' => '/admin/config/dynasty/social-post']) . '</p>';
+      $output .= '<h3>' . t('Supported Platforms') . '</h3>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('<strong>Bluesky:</strong> Uses app passwords for authentication. Videos are uploaded directly to Bluesky.') . '</li>';
+      $output .= '<li>' . t('<strong>YouTube:</strong> Requires OAuth 2.0 authorization. Videos are uploaded to a "Patriots Highlights" playlist.') . '</li>';
+      $output .= '</ul>';
       return $output;
   }
 }
@@ -41,16 +46,53 @@ function dynasty_social_post_cron() {
     return;
   }
 
-  // Post a highlight.
-  $bluesky_service = \Drupal::service('dynasty_social_post.bluesky');
-  try {
-    $result = $bluesky_service->postRandomHighlight();
-    if ($result) {
-      \Drupal::state()->set('dynasty_social_post.last_post_time', $current_time);
-      \Drupal::logger('dynasty_social_post')->info('Successfully posted highlight to Bluesky via cron.');
+  $bluesky_enabled = $config->get('enable_bluesky') ?? TRUE;
+  $youtube_enabled = $config->get('enable_youtube') ?? FALSE;
+
+  $bluesky_success = FALSE;
+  $youtube_success = FALSE;
+
+  // Post to Bluesky if enabled.
+  if ($bluesky_enabled) {
+    $bluesky_service = \Drupal::service('dynasty_social_post.bluesky');
+    try {
+      $bluesky_success = $bluesky_service->postRandomHighlight();
+      if ($bluesky_success) {
+        \Drupal::logger('dynasty_social_post')->info('Successfully posted highlight to Bluesky via cron.');
+      }
+      else {
+        \Drupal::logger('dynasty_social_post')->warning('Failed to post to Bluesky via cron.');
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('dynasty_social_post')->error('Error posting to Bluesky via cron: @message', ['@message' => $e->getMessage()]);
     }
   }
-  catch (\Exception $e) {
-    \Drupal::logger('dynasty_social_post')->error('Error posting to Bluesky via cron: @message', ['@message' => $e->getMessage()]);
+
+  // Post to YouTube if enabled and configured.
+  if ($youtube_enabled) {
+    $youtube_service = \Drupal::service('dynasty_social_post.youtube');
+    if ($youtube_service->isConfigured()) {
+      try {
+        $youtube_success = $youtube_service->postHighlight();
+        if ($youtube_success) {
+          \Drupal::logger('dynasty_social_post')->info('Successfully posted highlight to YouTube via cron.');
+        }
+        else {
+          \Drupal::logger('dynasty_social_post')->warning('Failed to post to YouTube via cron.');
+        }
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('dynasty_social_post')->error('Error posting to YouTube via cron: @message', ['@message' => $e->getMessage()]);
+      }
+    }
+    else {
+      \Drupal::logger('dynasty_social_post')->warning('YouTube is enabled but not authorized. Skipping YouTube post.');
+    }
+  }
+
+  // Update last post time if at least one platform succeeded.
+  if ($bluesky_success || $youtube_success) {
+    \Drupal::state()->set('dynasty_social_post.last_post_time', $current_time);
   }
 }

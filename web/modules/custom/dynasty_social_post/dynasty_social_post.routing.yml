@@ -2,7 +2,7 @@ dynasty_social_post.settings:
   path: '/admin/config/dynasty/social-post'
   defaults:
     _form: '\Drupal\dynasty_social_post\Form\SocialPostSettingsForm'
-    _title: 'Bluesky Social Post Settings'
+    _title: 'Social Post Settings'
   requirements:
     _permission: 'administer site configuration'
 
@@ -10,7 +10,7 @@ dynasty_social_post.post_now:
   path: '/admin/config/dynasty/social-post/post-now'
   defaults:
     _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::postNow'
-    _title: 'Post to Bluesky Now'
+    _title: 'Post Now'
   requirements:
     _permission: 'administer site configuration'
 
@@ -19,5 +19,21 @@ dynasty_social_post.posted_list:
   defaults:
     _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::postedList'
     _title: 'Posted Highlights'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_social_post.youtube_callback:
+  path: '/admin/config/dynasty/social-post/youtube-callback'
+  defaults:
+    _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::youtubeCallback'
+    _title: 'YouTube Authorization'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_social_post.youtube_disconnect:
+  path: '/admin/config/dynasty/social-post/youtube-disconnect'
+  defaults:
+    _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::youtubeDisconnect'
+    _title: 'Disconnect YouTube'
   requirements:
     _permission: 'administer site configuration'
