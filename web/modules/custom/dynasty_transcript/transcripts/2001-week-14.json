@@ -1,0 +1,3087 @@
+[
+  {
+    "speaker" : "Mom",
+    "text" : "This is Christine Brown, and while I have to listen to this podcast as my motherly duty, you have the choice not to. My sons, and of course Michael, sometimes say some naughty things when they're trying to be funny, but really they're just being stupid. Stupid. You still want to listen? Go right ahead. I am not your mother.",
+    "timestamp" : "00:00-00:19"
+  },
+  {
+    "timestamp" : "00:21-00:48",
+    "speaker" : "Andy",
+    "text" : "Alright, welcome back yet again. Episode 14. Of the Patriots Dynasty Podcast. We're keeping making our way through the 2001 season, getting towards the end here. This is the game where New England Patriots headed to warm and cozy Buffalo. Uh that Mike Mello knows so well from having gone to school up in that area. How far is Buffalo from Rochester"
+  },
+  {
+    "text" : "It's pretty close, yeah. I think uh if it's n if it's snowing it'll probably take you a good hour and a half to get there, but if it's not probably you probably do it in twenty to thirty, I think",
+    "timestamp" : "00:48-00:59",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "00:59-01:01",
+    "speaker" : "Andy",
+    "text" : "All right, so it's an hour and a half away then is what you're saying."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "One hour and sixteen minutes. There you go. Thank you.",
+    "timestamp" : "01:02-01:06"
+  },
+  {
+    "text" : "Thanks, Alexa.",
+    "speaker" : "Andy",
+    "timestamp" : "01:08-01:09"
+  },
+  {
+    "timestamp" : "01:12-01:13",
+    "speaker" : "Mike Melo",
+    "text" : "It is lovely up there though."
+  },
+  {
+    "text" : "Oh good, good. So if you haven't figured it out by now, we're joined by Mike and the Brown brothers. Greg and Steve. Steve just got back from Mexico, isn't that right?",
+    "timestamp" : "01:13-01:22",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Hola.",
+    "timestamp" : "01:22-01:23",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I see you've taken the Mick Brown approach to learning the language where you learn how to say hello and my guess is you know how to order beers.",
+    "speaker" : "Andy",
+    "timestamp" : "01:26-01:35"
+  },
+  {
+    "timestamp" : "01:37-01:38",
+    "text" : "Yes, exactly.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Okay. Do you know anything else in Spanish?",
+    "timestamp" : "01:39-01:41",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "We went to Chichen Itza, which is spelled kind of like Chicken Itza, and I asked my girlfriend where all the chickens were. Like repeat it.",
+    "timestamp" : "01:42-01:49"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:52-01:53",
+    "text" : "Oh that poor woman."
+  },
+  {
+    "timestamp" : "01:59-02:02",
+    "speaker" : "Steve",
+    "text" : "Should have asked as better, you're right, Greg. Damn it. Yep."
+  },
+  {
+    "timestamp" : "02:02-02:03",
+    "speaker" : "Greg",
+    "text" : "Missed opportunity."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Missed opportunity indeed. Craig, how are you doing?",
+    "timestamp" : "02:03-02:06"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "I'm doing fantastic. Yeah.",
+    "timestamp" : "02:07-02:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You just got a promotion.",
+    "timestamp" : "02:09-02:10"
+  },
+  {
+    "text" : "I did.",
+    "speaker" : "Greg",
+    "timestamp" : "02:11-02:11"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "02:12-02:18",
+    "text" : "And now your uh big job this week has been to send out something about mustaches?"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "02:19-02:24",
+    "text" : "Yes. Yeah. Coronavirus mustache face mask etiquette."
+  },
+  {
+    "timestamp" : "02:28-02:30",
+    "speaker" : "Andy",
+    "text" : "Well uh congrats on that promotion."
+  },
+  {
+    "text" : "Congratulations, man. Life just keeps getting better.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "02:31-02:35"
+  },
+  {
+    "timestamp" : "02:36-02:45",
+    "text" : "It does. And what better way to continue it by talking about um a football game where I'm just gonna come out and say it there were no touchdowns scored.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Hey! Again with the spoiler.",
+    "timestamp" : "02:45-02:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I I'm not sure what I'm spoiling for you.",
+    "timestamp" : "02:48-02:50"
+  },
+  {
+    "text" : "Not for me, but for everybody else. We gotta we gotta build it up, baby.",
+    "timestamp" : "02:50-02:54",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Nope. No, because we we've been we've been told that we don't say the score, so I'm just gonna say the score every week. At inappropriate times. At the beginning? At inappropriate times. So boy. What better time than now? The Patriots win this 12-9 in overtime. A shootout Yeah, but I mean so going into this, knowing that uh I was not particularly enthused, but uh after watching this game, I am changing my tune. I think this was actually yeah, I thought this was a pretty good game. And I thought there were some interesting takeaways from this, especially if you compare it to kind of today's Patriots and not just that but the kind of media reaction around it.",
+    "speaker" : "Andy",
+    "timestamp" : "02:54-03:45"
+  },
+  {
+    "timestamp" : "03:46-03:47",
+    "speaker" : "Greg",
+    "text" : "Well you know what they say."
+  },
+  {
+    "text" : "Buffalo Bills.",
+    "timestamp" : "03:52-03:53",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I I will counter and say this might be one of the worst games I ever watched, so we'll see how this uh we'll see how this unravels.",
+    "timestamp" : "03:54-04:00"
+  },
+  {
+    "text" : "Well I didn't watch it.",
+    "timestamp" : "04:01-04:02",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, we know Greg didn't watch it.",
+    "timestamp" : "04:06-04:07"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "04:09-04:11",
+    "text" : "Clearly I watched the NFL primetime highlights."
+  },
+  {
+    "timestamp" : "04:11-04:14",
+    "text" : "I know, because I I actually now provide that just for you.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Dude, prime time, it was the best. The best. Yes. Has anybody seen the new iteration yet?",
+    "timestamp" : "04:14-04:22"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "04:23-04:24",
+    "text" : "No."
+  },
+  {
+    "text" : "It came back, but they put it behind a paywall on ESPN Plus. Oh, then yeah, I definitely didn't see it. Yeah.",
+    "timestamp" : "04:25-04:30",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "That's stupid.",
+    "speaker" : "Andy",
+    "timestamp" : "04:30-04:31"
+  },
+  {
+    "text" : "I know.",
+    "speaker" : "Greg",
+    "timestamp" : "04:32-04:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I actually at one point um I think it was around the time when what was that uh competitor to uh Madden, the video game came out? What was that one? Oh NFL 2K, yeah. So when the the what the whatever the last one was that came out, like the really good one, 2K5, is that right? Yeah, yeah, I think so. That came out. Uh I spent altogether too much time on that, but it it made me actually go looking for NFL primetime videos. And I still think the NFL would make a killing, or ESPN for that matter, if they sold just like Access to, you know, the the Patriots NFL primetime highlights of, you know, a season",
+    "timestamp" : "04:32-05:16"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Because those were the bad The music on it was unparalleled.",
+    "timestamp" : "05:17-05:22"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "05:22-05:23",
+    "text" : "Uh electric."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah I listened to that. I found the audio files and it's in my regular playlist.",
+    "timestamp" : "05:24-05:30"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "There's at least like seven or eight songs that are just bangers.",
+    "timestamp" : "05:30-05:33"
+  },
+  {
+    "text" : "Yeah, and and for some reason I can just like I I have different highlights in my head for different songs and like like random games like oh this is when I listen to one of them it's like oh this is the Jets versus the Bengals in Meadowland Stadium. No no idea why.",
+    "timestamp" : "05:33-05:48",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "05:48-05:53",
+    "text" : "It's almost like you could tell how close the game is by what music they're using."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's the one. That's the best one. Yeah, and it's actually great music to work to as well, because it's it's upbeat, there's no there's no words or anything, you know the song. It's a bit repetitive so it doesn't like get in the way to distract you. It's fantastic. What was that? I highly recommend it.",
+    "timestamp" : "05:56-06:21"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "06:21-06:25",
+    "text" : "I mean I can just like hold my play it right now if you guys want."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "06:25-06:30",
+    "text" : "Oh boy. Um we can try it, but this might sound like ass."
+  },
+  {
+    "text" : "Andy, you should. Also, do we have the rights to play that on here?",
+    "timestamp" : "06:30-06:33",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Hmm.",
+    "timestamp" : "06:34-06:34",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, it's on YouTube.",
+    "speaker" : "Greg",
+    "timestamp" : "06:35-06:36"
+  },
+  {
+    "text" : "Okay.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "06:37-06:38"
+  },
+  {
+    "timestamp" : "06:41-06:42",
+    "text" : "The lawyer has spoken.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "If we're allowed to, you should this whole conversation just put the music in the background for it all.",
+    "timestamp" : "06:42-06:48"
+  },
+  {
+    "text" : "Alright. Yeah, I'll I'll edit it in a post, I'm sure. This is great. Alright, we'll be cutting this part. Fuck",
+    "speaker" : "Andy",
+    "timestamp" : "06:48-07:00"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "You don't cut anything out. You're a liar.",
+    "timestamp" : "07:00-07:02"
+  },
+  {
+    "timestamp" : "07:02-07:07",
+    "text" : "I cut a little bit out. Okay. Cut this sort of shit out. If you say something stupid, that stays in.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "07:08-07:09",
+    "text" : "I got nothing.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. I know. Self-censor. Um yeah, so going back to the football game, the reason that I enjoyed it was because it was so different from I think probably this past year. Well because there was kind of some similarities that kept like coming back to me about when the Patriots played the Bills I think it wasn't around week fourteen, fifteen uh this this year at home and the Bills had given them problems at the beginning of the season and the Patriots came out and kind of had their way with them beat them pretty handily And the like the offense looked the best it's looked in a while. You remember the game I'm talking about? Yeah. Oh. Was it yeah, something like that. Um and then but the the whole reaction around that game was these Patriots still kind of suck. They should have beat the Bills by more. You know, the this this is not a team that's gonna go anywhere in the playoffs. All this kind of like negativity around it. And then if you look at go back to 2001, look at almost the exact same situation, like except the Patriots didn't play as well. Like the defense played really well. Brady had an off game. I don't think it was as bad as maybe it looked on paper, but it still wasn't great. He was running for his life, got sacked a whole bunch. But if you looked at the you know the papers the next day There was all this kind of optimism like, hey, we're actually in the playoff race. This is a team that could do something. And and the commentators were talking about how Yeah, this could be the one team that that gets into the playoffs and that's the one team all the other playoff teams are looking at and saying we don't want to play them.",
+    "timestamp" : "07:09-08:59"
+  },
+  {
+    "text" : "Yeah, I mean from that perspective, I get your point. Um and I guess this was a a game to test their metal. Uh so to speak, even though the the Bills at this time were two and ten and basically for all intents and purposes rebuilding Alex Van Pelt was the quarterback. Yep. I mean um Also, by the way, that guy's nickname was Pill. I don't know if you caught that.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "08:59-09:22"
+  },
+  {
+    "text" : "I didn't. Pill?",
+    "timestamp" : "09:22-09:24",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "09:24-09:36",
+    "text" : "Yeah, for Pillsbury Doughboy. It's gotta be the worst nickname I've ever heard for a football player, but Wait, that's tough. Pillsbury Throwboy? Pillsbury Doughboy."
+  },
+  {
+    "timestamp" : "09:36-09:38",
+    "text" : "Pillsbury Doughboy. Oh right.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "09:38-09:41",
+    "text" : "But I do like the Pillsbury throwboy."
+  },
+  {
+    "text" : "Well that's Jared Lorenzen's had a million nicknames like that. Who did?",
+    "speaker" : "Greg",
+    "timestamp" : "09:41-09:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that Jared Lorenzen. Remember him? The hefty lefty.",
+    "timestamp" : "09:45-09:50"
+  },
+  {
+    "text" : "The round map of touchdown. Yes.",
+    "timestamp" : "09:50-09:53",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Alex Van Pelt's first name is Gregory. What? Not Alex? Gregory Alexander Van Pelp.",
+    "timestamp" : "09:56-10:03"
+  },
+  {
+    "timestamp" : "10:04-10:04",
+    "speaker" : "Greg",
+    "text" : "Wow."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Can we fact check that please?",
+    "timestamp" : "10:05-10:07"
+  },
+  {
+    "timestamp" : "10:11-10:18",
+    "text" : "Jared Lenz's nicknames are so funny. J-Load Quarter Golf He ate me.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh Jesus. Wow.",
+    "timestamp" : "10:19-10:20"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Pillsbury Throwboy. Of course. Battleship Lorenzen.",
+    "timestamp" : "10:21-10:25"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "10:28-10:30",
+    "text" : "Yeah, yeah, he did die recently, I think."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "10:32-10:35",
+    "text" : "Yeah. I'll have to uh look him up."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah, he was he's a big dude. Yeah, if you look up Van Pelt now, he kinda looks Like Lorenzen did. Really? Yeah. He he looks like Mike McCarthy.",
+    "timestamp" : "10:35-10:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Wait, he's the Browns offensive coordinator right now?",
+    "timestamp" : "10:48-10:52"
+  },
+  {
+    "text" : "Yeah, he's a coach now.",
+    "speaker" : "Greg",
+    "timestamp" : "10:52-10:54"
+  },
+  {
+    "timestamp" : "10:54-11:06",
+    "speaker" : "Steve",
+    "text" : "Wait a minute. Are you looking him up, Steve? Yeah, I'm on his look. I thought he died. No, he's out of the Cleveland offensive coordinator. So he's their next head coach. Mike McCarthy. Oh yeah, he looks exactly like Mike McCarthy."
+  },
+  {
+    "timestamp" : "11:07-11:22",
+    "speaker" : "Andy",
+    "text" : "So I just googled Alex Van Pelt and the picture that came up I I just thought was Mike McCarthy. Are you sure it's not? In 6-1, 2-2. Well maybe. Because he's got the Green Bay Packers gear on and everything. That's him. Wow."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "11:22-11:27",
+    "text" : "Green Bay Packers running backs coach and quarterbacks coach 2012 to 2017."
+  },
+  {
+    "timestamp" : "11:27-11:28",
+    "text" : "Well, goodness.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "11:29-11:37",
+    "text" : "Then the Bengals the Bengals QB coach to the Browns OC. Who he's got this year."
+  },
+  {
+    "timestamp" : "11:38-11:38",
+    "speaker" : "Andy",
+    "text" : "Illustrious."
+  },
+  {
+    "timestamp" : "11:39-11:44",
+    "speaker" : "Steve",
+    "text" : "Well, speaking of illustrious career sixteen touchdowns, twenty-four INT."
+  },
+  {
+    "timestamp" : "11:47-11:57",
+    "speaker" : "Andy",
+    "text" : "Uh yeah, he didn't have either of those in this game. He he didn't really do oh no, he had an interception. That's kind of all he provided in this game."
+  },
+  {
+    "text" : "I mean, that's how it spam felt for you though, right?",
+    "speaker" : "Greg",
+    "timestamp" : "11:58-12:00"
+  },
+  {
+    "timestamp" : "12:01-12:02",
+    "speaker" : "Andy",
+    "text" : "I mean I guess so."
+  },
+  {
+    "text" : "I mean that's why I think it's impressive that they the the Pats were um, you know, they continued on their role because There there'd be a part of me that'd be like, man, we're facing a two-in-ten team against Alex Van Pelt. Uh the guy is Alex Van Pelt, right? Pell. And yet They barely squeak this out. Like it I I know that it inspired confidence because it did test them, but if I was on the team, I would be questioning that, I think.",
+    "timestamp" : "12:02-12:31",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "You think so? I think so man, like But this is just how the Patriots and Bills played at that point. They they showed a stat where Before this game, three of the last four games have gone into overtime.",
+    "speaker" : "Andy",
+    "timestamp" : "12:31-12:43"
+  },
+  {
+    "timestamp" : "12:44-13:21",
+    "text" : "Yeah, but Alex man, Peltman. I mean, uh when it's been like um Flutie or Rob Johnson, we've at least like, you know, dissected the merit of uh you know, a uh m a first round pick or something like that. But this is a this is pill we're talking about. But I mean I will say one uh cool um point in this game was that Troy Brown crossed a thousand yards. And this is what week 14, so that's pretty impressive. Um he was also the leading punt returner in the AFC, so Uh props to Troy Brown for the uh in this game, but other than that, I don't know. I don't know what would inspire anything.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "I mean, this was definitely a defensive battle. I will give you that Uh I I did notice a difference in that side of things too. The hits that were being I mean we've talked about this a little bit, but Just the speed at which the defense is moved in these games on both sides of the ball, like for the Bills and the Patriots, just seems so much faster. And more aggressive than it does now. And I think part of that is probably the rule changes like we've talked about before, but just this. Yeah, but I'm gonna",
+    "speaker" : "Andy",
+    "timestamp" : "13:21-13:52"
+  },
+  {
+    "timestamp" : "13:53-14:20",
+    "speaker" : "Mike Melo",
+    "text" : "I'm gonna call out Connor in the previous episode because he was like, Yeah, there's no defenseless like receivers and this all but they they they were talking about in this game that they're um they were debating on flags for uh hits on defenseless receivers. So I I know that the uh the rules have tightened up a little bit, but apparently some of them were still in play. So they they just maybe they were allowed to get away with it a little bit more. I don't know. I mean I agree with you that it was a lot more aggressive back then."
+  },
+  {
+    "text" : "Yeah, and I I you're right. They uh they did have one that they threw the flag for but picked it back up again.",
+    "timestamp" : "14:21-14:28",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "14:29-14:33",
+    "speaker" : "Mike Melo",
+    "text" : "Um 'Cause they said that he uh he wasn't defenseless, he became a runner. Yeah, I know."
+  },
+  {
+    "timestamp" : "14:34-14:34",
+    "text" : "Oh.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "14:36-14:42",
+    "speaker" : "Mike Melo",
+    "text" : "Even though it wasn't two steps, I think he landed uh on his on both feet and then got crushed."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Exactly, exactly. So it yeah, it was uh I mean to that point though, I also felt like there's this one play where",
+    "timestamp" : "14:42-14:52"
+  },
+  {
+    "text" : "Um, the pats just like plowed into somebody like running out of bounds, and they were probably out of bounds maybe two, three feet already, and there was no one even batted an eye. So Yeah, the rules were in place. Maybe they were just enforced differently.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "14:52-15:05"
+  },
+  {
+    "text" : "I think they were, yeah. And I think some of them were probably still new, so they were kind of testing them out more than they were actually being enforced as stringently as you see now. Like like that that um defenseless receiver thing. Because I I wrote down that if That was happening now. Mama Brown is writing a letter to the commissioner.",
+    "speaker" : "Andy",
+    "timestamp" : "15:05-15:27"
+  },
+  {
+    "text" : "Who was the commissioner then?",
+    "timestamp" : "15:29-15:30",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Tech Leaboo?",
+    "timestamp" : "15:31-15:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I think so.",
+    "timestamp" : "15:32-15:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think that's what we decided earlier. How do you say that in a British accent? You tell me, Steve. That sounds pretty British already, tag Leaboo.",
+    "timestamp" : "15:33-15:44"
+  },
+  {
+    "timestamp" : "15:44-15:45",
+    "speaker" : "Greg",
+    "text" : "Good world, Steve."
+  },
+  {
+    "text" : "Yeah, come on Steve. I got I mean you had the Mexican the the Spanish.",
+    "timestamp" : "15:46-15:51",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "15:52-15:56",
+    "text" : "Taglia boo oh what was that",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That was a travesty that was. It was Spanish. Oh. Oh no, it wasn't. Yeah.",
+    "timestamp" : "15:58-16:06"
+  },
+  {
+    "timestamp" : "16:08-16:38",
+    "speaker" : "Greg",
+    "text" : "Oh boy. Well my two cents on the whole hitting defenseless receivers, I think the big difference is how people like react to it. Like you see a big hit and it was like celebrated back then. Where players immediately celebrate and the commentators are like, yeah, what a hit. Where now you're kind of like We know that that's gonna cause some brain damage, so you're far less likely to kinda But didn't didn't you know that it like would cause brain damage back then?"
+  },
+  {
+    "timestamp" : "16:38-17:06",
+    "speaker" : "Mike Melo",
+    "text" : "That's what I don't understand. We didn't know there was a direct correlation. Um Andy and I, me far less because I only played um, you know, a few uh games here or there, not even you know, because I as we have established, didn't last on the football team very long. But when I was on the team with Andy, that's what I said, me personally, when um when I was on the team with him, we knew some guys that had accumulated quite a few concussions at that point."
+  },
+  {
+    "text" : "They didn't seem to Yeah, you always knew which guys those were.",
+    "timestamp" : "17:06-17:12",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "17:12-17:33",
+    "speaker" : "Mike Melo",
+    "text" : "Right. And I didn't play like Pop Warner or anything, so it's like one year of experience for me. And I'm just looking around and like, you know, you know who's had the concussions and who hasn't. I mean, uh, some because they tell you, but uh I don't know. I I think that there were signs back then, so I don't I don't understand how people didn't know that banging your head against another person would uh not would cause damage."
+  },
+  {
+    "timestamp" : "17:36-17:45",
+    "speaker" : "Andy",
+    "text" : "We knew, but not to the extent like of how long term the damage was and how uh Yeah, we didn't know about CTE and all that."
+  },
+  {
+    "timestamp" : "17:44-17:55",
+    "speaker" : "Mike Melo",
+    "text" : "I mean, yeah, we didn't know about CTE, but I I mean, y you could probably figure that some of these people are gonna have problems with dementia, uh, memory issues, even way before, right?"
+  },
+  {
+    "text" : "I mean I remember at the time we thought it was just like those guys that got the their heads knocked off all the time were getting multiple concussions. Now it's like if you get one",
+    "timestamp" : "17:56-18:08",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Well I don't know.",
+    "timestamp" : "18:09-18:10",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, but like every one of those hits. Yeah, yeah. But every one of those hits it just makes it worse and worse.",
+    "timestamp" : "18:11-18:16"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I don't know. I I look at this and I'm like, I understand. And now because there's a uh there's a term like we're held accountable, right? Or it's like, hey, here are the repercussions. We know exactly what this is, this is causing damage. I just think that for what, s sixty, seventy years of football before that, um, no one knew that this was I mean I feel like it's it's a little bit of a cop out. I don't know. I mean I I I enjoy football now like I enjoyed it back then, but I'm not gonna sit here and say that I I a hundred percent thought it was safe. I mean that's fair.",
+    "timestamp" : "18:17-18:52"
+  },
+  {
+    "timestamp" : "18:53-18:57",
+    "speaker" : "Steve",
+    "text" : "Mike, would you say that September 11th caused CTE?"
+  },
+  {
+    "timestamp" : "18:58-19:07",
+    "text" : "Wow, man. Now you're now you're just fishing. This is what happens when you don't watch the football game. This is what happens.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Or this is what happens when you make stupid hot takes. Just live with you forever on the internet.",
+    "timestamp" : "19:08-19:13"
+  },
+  {
+    "text" : "Okay, Steve, thank you for that. I appreciate it. I okay. Really fun. Goodbye to the fun guy. Where's Connor?",
+    "timestamp" : "19:14-19:21",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Oh Jesus. Here we go. He's like talking to himself in the mirror, trying to get him psyched up for the next podcast.",
+    "timestamp" : "19:21-19:27",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "That's fair.",
+    "timestamp" : "19:27-19:29"
+  },
+  {
+    "timestamp" : "19:30-19:37",
+    "speaker" : "Greg",
+    "text" : "I only figured out when uh Will Smith told me in an African accent. Tell me the truth."
+  },
+  {
+    "text" : "I don't know that was because I have not seen the movie, but um",
+    "timestamp" : "19:38-19:41",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "19:43-19:50",
+    "speaker" : "Greg",
+    "text" : "Will Smith overdoes it a bit with the accent, but Yeah, no, I mean that that definitely did bring everything to light."
+  },
+  {
+    "timestamp" : "19:50-20:25",
+    "text" : "Um you're right. And I I think it's there is more of a public awareness. I mean I think that the NFL is definitely held accountable to it because of all this information now, which I think is a good thing. And I think the rules ultimately obviously are a good thing and Um, I think it makes, you know, the game a little bit more exciting in different ways. I mean a little bit more scoring. Um, people are around longer, so you get to see your your you know these like icons continue to play as opposed to being on the sideline. Um but I'm just saying before that movie W apparently we didn't know anything.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "20:25-20:43",
+    "text" : "Well, uh yeah, I mean I'm sure that the NFL knew more than they were letting on as well, you know. Right. Well it was obvious to everybody except for them apparently."
+  },
+  {
+    "text" : "Yeah, no, I mean I think you're definitely right on that. Maybe the the public in general never thought about it, but they definitely had to have had some type of data.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "20:44-20:52"
+  },
+  {
+    "text" : "Yeah that's too easy to like generalize, you know? Like dual data takes a long time to develop and like prove causation. Yeah. Just because you had one player like a couple concussions and got dementia doesn't mean that that's what caused them.",
+    "timestamp" : "20:52-21:08",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Right, right. Yeah, who do you think you are, Greg? Some sort of like team lead or something? Come on. Spot the QA dude.",
+    "timestamp" : "21:08-21:14",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "21:15-21:18",
+    "text" : "Science. You guys just don't understand.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "21:19-21:41",
+    "speaker" : "Andy",
+    "text" : "But I think we had a team that we would. I mean it So building off of that, watching Brady, I mean people who have watched this game will recognize probably one, if not two, highlights from this. And one is Brady rolling out, going on the run and getting his head taken off."
+  },
+  {
+    "timestamp" : "21:41-21:42",
+    "speaker" : "Greg",
+    "text" : "Ragdolled."
+  },
+  {
+    "text" : "Like liter like literally helmet popped off and went ten yards backwards downfield. Like just Yeah, Nate Clements. Yeah. And the fact and he just popped right back up, clapping and everything. And then they showed him on the sideline kind of I don't know, like joking around about it with Drew Bledsoe. And it made me think, uh if anybody knows what that feels like, it's probably Drew Blood cell.",
+    "speaker" : "Andy",
+    "timestamp" : "21:42-22:06"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "22:06-22:13",
+    "text" : "I know you're probably you uh that's probably in poor taste of brain to like be joking with that guy about something like that. I'd probably wait a minute."
+  },
+  {
+    "text" : "I don't know. I mean who's who's gonna get that joke the best other than somebody who's been there with you?",
+    "speaker" : "Andy",
+    "timestamp" : "22:13-22:18"
+  },
+  {
+    "timestamp" : "22:19-22:22",
+    "speaker" : "Mike Melo",
+    "text" : "I guess, but Bledzel's probably like you son of a bitch."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No bloodso. I bet Bloodso's diet, he probably come up and he's like, oh, how your lungs feel?",
+    "timestamp" : "22:24-22:28"
+  },
+  {
+    "text" : "Oh.",
+    "timestamp" : "22:28-22:28",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "22:29-22:33",
+    "speaker" : "Andy",
+    "text" : "That's exactly what I would have done if I was in Drew Bloodzo's situation."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yeah, no, I mean I I think that's interesting too too, and it plays into the the CTE thing of like um you know, you show bravado, right? So you didn't want to show weakness. I mean it obviously amps your white team up But nowadays, I don't know if it's necessarily celebrated. I mean, I think it would have been a little bit more uh, you know, people getting in the face of that other player. Like nobody really did anything. It was just like he got popped, he got up Um his helmet goes flying. Yeah, it's interesting. And it's also like we had talked about, I believe, last episode where He had the mentality of being like this tough guy and taking his hits and then after um his ACL injury um he got a little bit smarter about that. So I mean I I I think that whole era was around that and You know, maybe that is a a little bit of proof that players didn't quite know the extent of the injuries until now because I I don't see players necessarily reacting that way anymore.",
+    "timestamp" : "22:33-23:28"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "23:28-23:28",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I mean even players didn't was that but Belichick definitely did. If you Andy, you remember you mentioned that first Bills game this year where they kind of had trouble with it and you're kind of relating it to this one. Um Brady brought up that hit after that game this year.",
+    "timestamp" : "23:28-23:44",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He did?",
+    "timestamp" : "23:44-23:45"
+  },
+  {
+    "timestamp" : "23:46-23:48",
+    "text" : "Yeah, because remember uh Josh Allen got knocked out in that game.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "23:49-23:49",
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "23:49-24:49",
+    "text" : "Like a head hit and like all the Bills players like, oh, if that was Brady getting hit like that, we'd all be ejected. And I've looked hold up. So he he talked about it after the game. The Nate Clemens hit So I actually had a plate that up in Buffalo earlier in my career when I was scrambling up the right side and tried to hold on to the ball. I tried to slide late and it hit me and my helmet flew about ten yards away. It kind of riled up their whole sideline. Shut up. I remember the next day Coach Belchek said to me, I'll never forget this. He said, Hey Brady. If you want to have a career in this league, when you're running like that, you either throw the ball away or you slide. It I'll never forget Coach Belichick telling me that, and I've kind of taken to that. A lot of quarterbacks who do run, you're trying to get make yards, and that's great. At the same time, you're susceptible to big hits. Again, whether it's flagged or not or whether that's penalty. A lot of rules have changed over the years, but from a quarterback standpoint, I feel like it's always better to try to be available to the team. And try to take the risk reward and so forth. Again, nobody likes to see anybody hurt out there. From my own experience, I try to do the best I can to avoid any big shots like that."
+  },
+  {
+    "timestamp" : "24:49-24:50",
+    "speaker" : "Andy",
+    "text" : "Damn."
+  },
+  {
+    "text" : "The Russell Wilson approach. It's true. When Russell Wilson scrambles and then like slides right in front of a defender, it's so fucking annoying.",
+    "speaker" : "Greg",
+    "timestamp" : "24:50-25:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It really is. You're like, God fucking. Like even as a fan, you want to see it's like, oh, oh, this is your chance, this is your chance, somebody hit him, somebody hit him. But nobody ever can. Or he'll or he'll just like step out of bounds right at the end. Yeah. Oh, I hate you. It's true. But I mean, even in this game, like we're talking about, one, after that play happened, how many times did they show the replay? Seven, eight, twelve, fifteen? And like they kept like even the comments like, oh it was such a scary hit. Like I'm it's it's it's amazing nobody's hurt. Let's look at it again. Here it is again. Well to be fair though they'll still do that today.",
+    "timestamp" : "25:00-25:37"
+  },
+  {
+    "timestamp" : "25:38-25:45",
+    "text" : "Not with that enthusiasm, but they'll go, Oh geez, I c I can't believe let's just watch that again one more time. Oh god.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well let's let's listen to it. We have the sound.",
+    "timestamp" : "25:46-25:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Exactly, yeah. Let's watch it full speed. But then like that was their highlight of the game too, like when when overtime started they went back to it's like, oh this has been a game of full hits. And they showed that one and then the the one that Steve was talking about where the uh running back took the hit out of bounds. Or like anything like Yeah. Um and they just kept showing those over and over again. I will say, man.",
+    "timestamp" : "25:49-26:13"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "By the way, I I don't know if this was because of the the the game and how it was going or because the announcers are insane, but did you notice that Everything that was said in the first half, they repeated in the second half, like word for word, almost like they had a script. And I felt like, how on earth is this like televised? Because I already thought the game was boring as hell and these guys, I don't know what was going on mentally with them, but everything was regurgitated twice. So how much of a team hang on.",
+    "timestamp" : "26:15-26:44"
+  },
+  {
+    "timestamp" : "26:45-27:08",
+    "speaker" : "Andy",
+    "text" : "So I I just wanna I just wanna take a moment here just so you all can can see what's happening. So when when I when we first started this podcast and I was coming out saying how bad these commentators were, and I got so much pushback. And all I said was, all right, we'll we'll see. Just wait. Just wait until it's like week fourteen. We have fucking Steve Tasker and Don Cricky doing this. And we'll see what you guys are saying."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "27:08-27:11",
+    "text" : "And now Did you say those words? Because that would be incredible."
+  },
+  {
+    "text" : "It was something very similar. I don't think it was Don Crook and Steve Tasker. I think I was using my uh My old crutch. What's his name? Dan Deerdorf.",
+    "speaker" : "Andy",
+    "timestamp" : "27:12-27:22"
+  },
+  {
+    "text" : "Oh right. Well then I'll I'll hand it to you because it's infuriating. I mean, and look, I know it's a difficult like job. And when it's a game like this, you have to keep the excitement and make it entertaining. But I look at a guy like now and I know that the times have changed, but somebody like a Romo Which is really fun to listen to in my opinion. Um he's a little off the cuff and silly. Uh these guys ran out of material watching a live game. Yeah.",
+    "timestamp" : "27:22-27:47",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "27:48-27:52",
+    "speaker" : "Andy",
+    "text" : "I mean, as somebody who now talks about a football game that's already happened for an hour."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yeah.",
+    "timestamp" : "27:53-27:53"
+  },
+  {
+    "text" : "After being able to prepare for it for it. I understand that talking about a game is is harder than I thought it was at the time.",
+    "speaker" : "Andy",
+    "timestamp" : "27:53-28:01"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "28:02-28:14",
+    "text" : "I understand, but even if one of the announcers made some stupid remark about how a guy made a nine eleven comment and then the other guy got pissed off at him and they retaliated, that would They'll be more interesting than what the hell would be put on TV."
+  },
+  {
+    "timestamp" : "28:15-28:42",
+    "speaker" : "Andy",
+    "text" : "Yeah, they weren't they weren't great. But I did like how they started the whole broadcast. They didn't I uh I didn't I I because I write down the commentators every time because I have my grudges. Right. Um and it took me until every game. Yeah. Uh but every yeah, so every game I write down who the commentators are so I know who who to give shit to. This one it took me until the fourth quarter before they introduced themselves for one."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "28:43-28:44",
+    "text" : "How dare they?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Right? Like fucking tell me tell me who I'm supposed to be mad at, like from the beginning.",
+    "timestamp" : "28:44-28:48"
+  },
+  {
+    "timestamp" : "28:48-28:49",
+    "text" : "Oh my god.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Right. True. True.",
+    "timestamp" : "28:49-28:50"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "28:50-29:01",
+    "text" : "Except they they did introduce Steve Tasker at the beginning. By showing the highlight of him being on the field and the punt returner for the longest punt in Patriots' history was 93 yards."
+  },
+  {
+    "timestamp" : "29:01-29:02",
+    "speaker" : "Mike Melo",
+    "text" : "Yeah, that was pretty awesome."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "29:03-29:08",
+    "text" : "Like the guy punted it from his own end zone and it ended up being down on like the one yard line of the Bills."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "29:09-29:17",
+    "text" : "Dude, can I can I also say he was on that like uh the the Buffalo team that went four straight years to the Super Bowl and never won? Ye That's gotta be brutal."
+  },
+  {
+    "text" : "Yeah, and it didn't get brought up once.",
+    "speaker" : "Andy",
+    "timestamp" : "29:18-29:20"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yeah, I think they they touched on it for a second. I know, I know. How would you guys feel by the way as fans to see something like that?",
+    "timestamp" : "29:20-29:28"
+  },
+  {
+    "text" : "Oh, this is gonna be heartbreaking. Like the worst brew's loss in history is definitely the undefeated Super Bowl.",
+    "speaker" : "Greg",
+    "timestamp" : "29:28-29:35"
+  },
+  {
+    "timestamp" : "29:35-29:36",
+    "speaker" : "Mike Melo",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "29:36-29:39",
+    "speaker" : "Greg",
+    "text" : "Like I would have rather not even have that season happen."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "29:40-29:45",
+    "text" : "Oh yeah, I I couldn't watch anything sports related until probably the start of the next season."
+  },
+  {
+    "timestamp" : "29:45-29:49",
+    "speaker" : "Greg",
+    "text" : "I still haven't seen highlights. I just every time it comes on I turn it off."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "29:49-29:54",
+    "text" : "I watched highlights of that um about a month ago for the first time."
+  },
+  {
+    "timestamp" : "29:54-29:58",
+    "speaker" : "Steve",
+    "text" : "Well, we should probably just like cancel this podcast before it gets to that."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "29:58-30:09",
+    "text" : "So oh no well that that's that's when it ends is we go up to the AFC Championship game of two thousand seven and then the podcast is done All right, yeah. Somebody else can take over from there."
+  },
+  {
+    "timestamp" : "30:10-30:14",
+    "speaker" : "Steve",
+    "text" : "We maybe we can just do an episode where we just talk about anything but"
+  },
+  {
+    "text" : "Yeah, I th I think we'll have to come up with s with some way to get started.",
+    "timestamp" : "30:14-30:17",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "30:17-30:20",
+    "speaker" : "Mike Melo",
+    "text" : "Actually that might be that's a good idea. Yeah. We just won't address it."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "30:21-30:26",
+    "text" : "Just skip it. Look, and that's the end of the 2007 season. Moving on."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Right. That's what I do with all my problems. I just get through the street.",
+    "timestamp" : "30:26-30:32"
+  },
+  {
+    "timestamp" : "30:32-30:42",
+    "text" : "Well I I I read some meme where it says your problems uh now won't matter a year from now. I don't know if that's uh if that's debatable or not, but you're probably right. Just Forget about it and they'll go away.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It depends on the problem.",
+    "timestamp" : "30:43-30:44"
+  },
+  {
+    "timestamp" : "30:44-30:47",
+    "speaker" : "Greg",
+    "text" : "But yeah, I mean conjunctivitis does not work."
+  },
+  {
+    "text" : "I would imagine. Anything that you need a cream for, you should probably take",
+    "speaker" : "Mike Melo",
+    "timestamp" : "30:48-30:51"
+  },
+  {
+    "timestamp" : "30:52-30:58",
+    "speaker" : "Greg",
+    "text" : "Take that into consideration, but I'm into the doctors, I couldn't open my eyes. God damn it."
+  },
+  {
+    "text" : "Well luckily we're we're all remote, so uh um we don't have to deal with that. But hey, did it I mean that that could go away on its own too, right? I'm no doctor, but",
+    "speaker" : "Mike Melo",
+    "timestamp" : "31:03-31:13"
+  },
+  {
+    "timestamp" : "31:14-31:15",
+    "text" : "That's the one that does it.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Oh man.",
+    "timestamp" : "31:21-31:22"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Good lord.",
+    "timestamp" : "31:23-31:24"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "31:24-31:26",
+    "text" : "Um Uh go ahead."
+  },
+  {
+    "timestamp" : "31:27-31:34",
+    "speaker" : "Greg",
+    "text" : "Uh conjunctivitis, appendicitis, and meningitis all in one summer. Fucking hell."
+  },
+  {
+    "text" : "What the hell dude? Yeah. So do you I mean antibiotics are eventually gonna just destroy everything in your system. So how do you build that up? That's insane.",
+    "timestamp" : "31:35-31:44",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "31:44-31:49",
+    "text" : "I think I was drinking lake water. Oh yeah, that didn't help."
+  },
+  {
+    "text" : "Uh tell your uh appendicitis story though.",
+    "speaker" : "Andy",
+    "timestamp" : "31:49-31:53"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Well, when we're working together.",
+    "timestamp" : "31:54-31:55"
+  },
+  {
+    "timestamp" : "31:56-32:00",
+    "text" : "No, about um how mom handled it.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "32:00-32:41",
+    "text" : "Oh yeah. Well and you too. You kind of called me a pussy because I was like, we were working together doing pools. And I was like, Andy. I can't I I can't do this today. You gotta drop me off. Alright, I guess I'll do the rest of the day myself. I get home like forcing myself to puke. I'm in so much pain. And my mom's like, oh you you just have gas. She's a gate of corn. It's like corn. I don't even corn. Corn gives you gas, first of all. But then I ghouled that I'm like, mom, this is really looking like the symptoms of appendicitis, and she's like, okay Fair enough. Partially ruptured appendix. Ooh, that's fun.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah. She hasn't yeah. How long are you in the hospital for?",
+    "speaker" : "Andy",
+    "timestamp" : "32:41-32:44"
+  },
+  {
+    "text" : "Not long. Didn't you think your meningitis was cause you're hung over too?",
+    "speaker" : "Steve",
+    "timestamp" : "32:45-32:52"
+  },
+  {
+    "text" : "Yeah, the meningitis I have. That was brutal. That's no joke.",
+    "timestamp" : "32:52-32:57",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "32:58-33:05",
+    "text" : "You do have a track record of all those things. Yes. So none of these were like out of the norm for any of us."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah, and an extremely high pain tolerance.",
+    "timestamp" : "33:05-33:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Apparently.",
+    "timestamp" : "33:09-33:10"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "33:10-33:16",
+    "text" : "Because I'm a man's man. I'm 2001 Tom Brady, you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You're getting your bell rug and popping back in there. But speaking of which, so he he does that, right? And then the next drive the I don't know if it was designed or if he called it himself just to be a hard ass, but Brady ran a QB draw, like in the in the red zone.",
+    "timestamp" : "33:17-33:35"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yeah, I mean if we're gonna talk about that, what a stupid play. Can I say that? Um go ahead. No, I mean I forget it because this was was it towards the end of the half? I mean we're jumping around here a little bit, but uh actually towards the end of the game.",
+    "timestamp" : "33:36-33:47"
+  },
+  {
+    "timestamp" : "33:47-33:50",
+    "text" : "It was right before they kicked their own, yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "33:50-34:10",
+    "speaker" : "Mike Melo",
+    "text" : "Man. So yeah, they they're they're driving. You can win the game. And wasn't it like third down? Yep. So it was third down. They n th they were I think what, like Several yards away from the end zone and they run a drawing. So they yeah, they kick the field goal and they tie it to go into overtime. But what what the hell was that?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So it's third and nine from Buffalo ten yard line. And they run a Tom Brady draw. QB designed QB draw from the looks of it for three yards.",
+    "timestamp" : "34:10-34:20"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "34:21-34:23",
+    "text" : "Yeah, what what on earth is that?"
+  },
+  {
+    "timestamp" : "34:23-34:25",
+    "speaker" : "Greg",
+    "text" : "Tough playground. Yeah."
+  },
+  {
+    "text" : "Oh uh I actually stat checked Connor's claim that Vinateri didn't miss a kick the rest of the season. Uh he did. Yeah, for the record. He he went, I think, 13 or 14 from week 14 on or whatever the hell it was.",
+    "speaker" : "Andy",
+    "timestamp" : "34:31-34:46"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "34:46-34:47",
+    "text" : "It was close."
+  },
+  {
+    "text" : "Yeah, so I'm sure we'll we'll we'll come across that kick sooner or later and one of you can point it out like where's Waldo.",
+    "timestamp" : "34:47-34:53",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Um I will also say talking about kickers, um I'm gonna have to issue an apology here. Um uh I initiated ragging on Ken Walter for not averaging 40 yards um because the the previous game was brutal in some of the punts. But the announcer said, and I don't know if this is true, maybe Greg can check on this at some point, but they said that Ken Walter was averaging 37 yards net, and he was actually first in the NFL in that category.",
+    "timestamp" : "34:53-35:22",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Yeah. I I caught that too. Because there was one game where both punters were averaging like under thirty yards a punt. I don't remember which one it was a few months ago. And it was horrendous. Uh but yeah, I was surprised to hear that too. And Troy Brown was leading what did they call it? They didn't call it the AFC. They call it like the American Conference.",
+    "speaker" : "Andy",
+    "timestamp" : "35:22-35:45"
+  },
+  {
+    "timestamp" : "35:45-36:19",
+    "speaker" : "Steve",
+    "text" : "Right, right. In in punt return yards. I have a um a guy at work. He was actually in the office today. He's one of GMs. He's like a true and true Bill's mafia guy. And he's like poor bastard. Brian Mormon is my favorite Bill of all time. I have his jersey and everything. Wow. I can see that though. I gave him that uh Bill's Patriots like yearbook or whatever it was from the game from ninth or two thousand four. He was loving it. It's like, oh Brian Warren, my favorite."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "36:19-36:35",
+    "text" : "I mean he was pretty diesel though. That's a good segue. We should talk about Bill's Mafia. Alright, talk about him. It's the the single greatest uh annual sporting event in the world."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "36:35-36:39",
+    "text" : "What's that? Pat's beating the Bills in Buffalo."
+  },
+  {
+    "text" : "At Buffalo, yeah.",
+    "timestamp" : "36:40-36:41",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Okay.",
+    "speaker" : "Andy",
+    "timestamp" : "36:41-36:42"
+  },
+  {
+    "timestamp" : "36:43-36:46",
+    "speaker" : "Greg",
+    "text" : "It's the it's the best sporting event I've been to."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "36:46-36:51",
+    "text" : "Really? Oh yeah. Because you've been to some big sporting events. Mm-hmm."
+  },
+  {
+    "text" : "And as far as like atmosphere, well, we'll we'll say this for a 21 to 30 year old male. Yeah. That's the cost that you can get.",
+    "speaker" : "Greg",
+    "timestamp" : "36:51-37:04"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "37:05-37:10",
+    "text" : "Don't bring it in here or anything. I mean you care to to elaborate on that and share some experiences?"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "37:10-37:58",
+    "text" : "Sure. Yeah. I mean, so we probably first time I went was like two thousand ten time frame. And me and we got a lot of Buffalo Bills fans around here that we we take an RV driving from New Hampshire all the way over to Buffalo, hit Niagara, hit the casino, get some wins. Park at the mud lot. You can park at the mud lot right next to the stadium. Give you like a hundred bucks for the week. So like whenever you want. You just wake up in the morning, the lot fills up around you, and it's just a shitload of hammered Bills fans. And obviously you've seen the videos of them doing like cables and the And they're all just there for a good time, you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "37:59-38:02",
+    "text" : "I mean I suppose like what else is there to do in Buffalo"
+  },
+  {
+    "text" : "Nothing, but it's about the people, you know?",
+    "timestamp" : "38:02-38:04",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "38:05-38:11",
+    "speaker" : "Andy",
+    "text" : "Oh yeah. Salt of the earth kind of guys. Because me and Mike went to a game when he was at school in Rochester."
+  },
+  {
+    "timestamp" : "38:12-38:18",
+    "text" : "I'm pretty sure this program is from that game, Andy. Is it? Yeah. Huh. 2004.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "38:19-39:32",
+    "speaker" : "Andy",
+    "text" : "Yeah, that that's a good thing. Yeah, that sounds right. Yeah. That was the uh Richard Seymour game, which we'll get into at some point. But um we were wholly unprepared if I recall. Cause we drove uh I I think I drove up no I I actually flew up for that one I think on like this tin can of a plane. It was the scariest airplane ride of my life. But got to Buffalo and then we on the day of the game went to go buy beer and you can't buy beer in Buffalo on Sundays. Mm-hmm. I remember that, yeah. So then we just fucking said fuck it drove to the game. And if you haven't been to their stadium It's literally feels like it's in a neighborhood. Like you're driving through upstate New York. There's nothing, nothing, nothing. All of a sudden there's a few houses on your left and you come over this this hill and there there's a stadium on the right. Yeah. So we literally parked in some dude's backyard. Like he just like took his fence down and and like used it as a sign to be like free like Buffalo Bills parking here. So parked in there, bummed a couple of beers off like some of the guys there that felt bad for us. And then went into the game."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "It is a magical experience. And the fans there are obviously fantastic. I mean you can see uh didn't we see Bill's fans attacking Bill's fans?",
+    "timestamp" : "39:32-39:40"
+  },
+  {
+    "text" : "Oh yeah",
+    "speaker" : "Andy",
+    "timestamp" : "39:40-39:41"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I mean that was fantastic.",
+    "timestamp" : "39:41-39:42"
+  },
+  {
+    "timestamp" : "39:42-39:46",
+    "speaker" : "Andy",
+    "text" : "Yeah, I was like some some dude who brought his kid who was like trying to fight another dude."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yeah. There's a there They're fighting amongst themselves and you can just walk past if you're like coy about it, because they don't like obviously Pat's fans, but if you're walking by, you can w see some fantastic things happening in the parking lot. Yep. Um and then when we went to the game, didn't we start or somebody started a chant um where they were just chanting Norwood, nor would for like a quarter and a half, that's all the guy did. Yep.",
+    "timestamp" : "39:47-40:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I I I think he was a Bills fan.",
+    "timestamp" : "40:12-40:14"
+  },
+  {
+    "text" : "I think he was.",
+    "timestamp" : "40:14-40:15",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "40:15-40:25",
+    "text" : "I think we started, he joined in, he just did it for the rest of the game. And this was like halfway through the third quarter. And he just He's like, Yeah, okay, I'm going with this and just did it."
+  },
+  {
+    "text" : "I don't know if he's a representation of all Bills fans, but he was a great gentleman.",
+    "timestamp" : "40:25-40:29",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "40:30-41:03",
+    "speaker" : "Steve",
+    "text" : "I don't know. You guys sounded more prepared than that one game I went to. Which one? Greg, where they forgot the adapter for the grill. Oh, that's a mummer We bought like a hundred bucks worth of meat and we're like yeah we're gonna like eat all this meat and it was like snowing it's motherfucker and Forgot the adapter and we're like, oh I don't know. I remember walking around trying to find a place that would sell charcoal and like telling me to go fuck myself and then all the deck drank because we had a bunch of beer and it was cold. We had no food, so we all just drank it by like halftime. It was dunskis."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Is this in Buffalo?",
+    "timestamp" : "41:04-41:05"
+  },
+  {
+    "timestamp" : "41:06-41:06",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "41:06-41:14",
+    "text" : "And there's a great picture out there. We made a pregame bet. Whoever's team lost. Gets a beer poured on him."
+  },
+  {
+    "timestamp" : "41:15-41:15",
+    "text" : "Oh no.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Spread. This is Patriots like 2010-11, which is like ballpoint spread. I was like, okay, take the back. That is a great picture of me just pouring a beer on a sad-looking Brendan Mohorn's head. So he's got a fucking uh Stevie Johnson jersey on.",
+    "speaker" : "Greg",
+    "timestamp" : "41:16-41:38"
+  },
+  {
+    "timestamp" : "41:40-41:41",
+    "speaker" : "Mike Melo",
+    "text" : "That's brutal too, man."
+  },
+  {
+    "timestamp" : "41:41-41:57",
+    "speaker" : "Steve",
+    "text" : "It's freezing up there, so he gave me like a like a 36 pack of hand warmers. And we were seeing in the end zone. I was I was throwing them just into the stance. That's fucking Santa Claus, the hand warmest."
+  },
+  {
+    "timestamp" : "41:57-41:57",
+    "speaker" : "Andy",
+    "text" : "Oh god, see."
+  },
+  {
+    "text" : "Tom's the best.",
+    "timestamp" : "41:58-41:59",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "41:59-41:59"
+  },
+  {
+    "timestamp" : "42:00-42:01",
+    "text" : "Yeah, wicked wicked fun.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So, um speaking of of that, one of my favorite ever Tom Brady statistics. On the list of most wins by a quarterback in Buffalo. The top five are Buffalo Bills quarterbacks. Number six is Tom Brady.",
+    "timestamp" : "42:02-42:21"
+  },
+  {
+    "text" : "Ooh, can we name top five?",
+    "timestamp" : "42:22-42:24",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh yeah, let's see if you can give me top five.",
+    "timestamp" : "42:25-42:27"
+  },
+  {
+    "timestamp" : "42:27-42:28",
+    "text" : "It's Matt Jelly.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "42:29-42:36",
+    "speaker" : "Andy",
+    "text" : "Jim Kelly's number one was 66 wins. In Buffalo. So obviously all those came as a Buffalo Bill."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah.",
+    "timestamp" : "42:36-42:37"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "42:37-42:41",
+    "text" : "Doug Flooney. Doug Floody's number nine."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "42:42-42:42",
+    "text" : "Ooh."
+  },
+  {
+    "text" : "With 13 wins.",
+    "timestamp" : "42:42-42:44",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "42:44-42:45",
+    "text" : "Robbie J",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "42:47-42:48",
+    "speaker" : "Greg",
+    "text" : "Rob Johnson?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Not on this list.",
+    "timestamp" : "42:48-42:50"
+  },
+  {
+    "text" : "It's worth a shot.",
+    "timestamp" : "42:50-42:52",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "42:52-42:56",
+    "text" : "We got it. What about Fitzpatrick? He's on this."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He is number 10. He's tied. He's tied with Doug Flutie. Who was before Jim Kemp? Uh I'll give you two names that I don't know. Joe Ferguson and Jack Kemp are third and fourth.",
+    "timestamp" : "42:56-43:09"
+  },
+  {
+    "text" : "Oh yeah, yeah, yeah. Jack Kemp. For my time. Right. He was really good that guy.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "43:09-43:17"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "43:17-43:32",
+    "text" : "Uh there's Tyrod Taylor. Is number eight. Ooh. He has one more win than Doug Flutie and Ryan Fitzpatrick with 14. He's two less than Tom Brady, who has 16. And number seven is Daryl LaMonica. So there's only one more guy."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "43:32-43:34",
+    "text" : "Oh fuck, dude. Daryl La Monica."
+  },
+  {
+    "text" : "He has 15 when there's one guy on here, number two, just behind Jim Kelly. He's actually tied with Joe Ferguson for 43 wins. He uh let's do this. He is a you will know him.",
+    "timestamp" : "43:34-43:45",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He's a clue.",
+    "speaker" : "Greg",
+    "timestamp" : "43:46-43:47"
+  },
+  {
+    "text" : "Alex Van Pel. I don't know if he has any wits as a Buffalo quarterback, but uh no. He uh a current coach in the NFL. Not a clue?",
+    "timestamp" : "43:48-43:58",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Uh no, no, hold on a second. Hold on a second. He's a coach in the NFL, a head coach?",
+    "timestamp" : "43:59-44:06",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "44:06-44:08",
+    "speaker" : "Andy",
+    "text" : "Yes, I believe so."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "44:09-44:14",
+    "text" : "All right. Andy Reeb. No. I just like that visual."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Andy Reid would look good in Buffalo Bills uniform. Say again, Greg.",
+    "timestamp" : "44:16-44:22"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "44:22-44:35",
+    "text" : "Time frame. 80s, 90s. Um similar time frame as Jim Kelly. Yeah, I know. I do there's someone right there that I can't think of. You say he was a head coach?"
+  },
+  {
+    "text" : "Yeah, here's another clue. Uh he is responsible for the biggest comeback in NFL history.",
+    "speaker" : "Andy",
+    "timestamp" : "44:35-44:41"
+  },
+  {
+    "text" : "Yes, against the Oilers. Yes. Fuck, dude. I know that's exactly what I was thinking of was that game. Hmm. No idea. I can't remember.",
+    "timestamp" : "44:41-44:53",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "44:53-44:57",
+    "text" : "The current coach of the Indianapolis Colts.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh, that's right. What's his name? Frank Reich. Yep. Yeah, you're right. Yeah. Nathan Peterman? Oh, Nathan Peterman! I remember the guy. No, I don't know any of these freaking people, Andy.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "44:58-45:13"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't remember Peterman. He was like their first round draft pick who threw like five interceptions No, yeah, I feel bad for that guy, yeah.",
+    "timestamp" : "45:15-45:21"
+  },
+  {
+    "timestamp" : "45:22-45:30",
+    "text" : "So he's probably I I haven't Can we stat check this? Who has throwing more interceptions in Buffalo? Nathan Peterman or Tom Brady?",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "45:32-45:33",
+    "text" : "Peterman's got well.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "45:34-45:35",
+    "speaker" : "Andy",
+    "text" : "It's gotta be Peterman."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Is that guy still in the league?",
+    "timestamp" : "45:35-45:37"
+  },
+  {
+    "text" : "Yeah, he's uh the backup for the Raiders. No kidding. Yeah. Yeah, apparently does. Alright, uh anything else you guys had on this game?",
+    "speaker" : "Andy",
+    "timestamp" : "45:38-45:51"
+  },
+  {
+    "timestamp" : "45:52-46:23",
+    "speaker" : "Mike Melo",
+    "text" : "Um I mean, I will say that there was another, you know, stat on the difference between Tom Brady and Bletto at this point. And up to this point, records 8-3 for Brady, 0-2 for Bletto. Uh Brady was averaging 25 points a game. Bletto, although it was only a few 10 points a game. Right. Uh yards were about the same at 205 and 200. And then Brady, 16 TDs, nine interceptions. Bleto, two and two. Yes."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Although they did they did note that uh because while this game was going on, they kept showing some of the other games uh because the Jets are also uh had the same record, so it was you know Were the Pages going to keep pace with them? So the Jets were playing the Bengals and they noted that uh the Bengals had like a top ten ranked defense as well. And the Jets also had, I think, a top ten ranked defense. So those are the two games that Bledsoe lost against two top ten defenses. So I am willing to give him a little bit of slack for that.",
+    "timestamp" : "46:24-46:57"
+  },
+  {
+    "text" : "That's fair.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "46:57-46:59"
+  },
+  {
+    "text" : "Um but the one thing we haven't touched on yet, I said before that there were two highlights that people who had watched this game would probably remember. One was Brady getting his head knocked off, and the other was In overtime, the one that everybody was talking about the day after. And this is something I thought was also a little bit uh different in terms of what the reaction was, but it was Uh in overtime, the Page got the ball after the Bills punted. Um and Brady scrambles out to his right and completes a pass to David Patton. Who gets hit again so hard in the head that he gets knocked the fuck out and drops the football. But he falls his limp, unconscious body. Right.",
+    "speaker" : "Andy",
+    "timestamp" : "46:59-47:47"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Well it was called it was called a fumble.",
+    "timestamp" : "47:47-47:49"
+  },
+  {
+    "timestamp" : "47:49-48:18",
+    "speaker" : "Andy",
+    "text" : "Yeah. So so he fumbled the ball and the Bills recovered and he was called down. And so that's how it was called in the fields. Bill's ball. They thought they were getting the ball back. Uh but after probably it felt like about a half an hour of review, uh what they ruled was that David Patton's unconscious body had come down out of bounds. And because his foot was resting on the ball, that means the ball was out of bounds. So it's considered a catch. a fumble, but then technically a fumble out of bounds."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Right, because his head was uh out of bounds.",
+    "timestamp" : "48:18-48:20"
+  },
+  {
+    "text" : "Yeah, which if you look at it logically makes sense because if you You know, you if you don't get two feet and one foot is stepped out of bounds, that's considered out of bounds, so therefore the ball is not in play. If you do it the other way around. So It makes sense, but the bills were livid about this rule. Or or just about the call in general and the fact they got overturned and everything.",
+    "timestamp" : "48:20-48:44",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "48:45-48:47",
+    "text" : "I mean it does make sense what uh what do they want him to do.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Yeah, I mean it I think it was the right call eventually.",
+    "timestamp" : "48:47-48:50",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "48:52-48:53",
+    "text" : "Makes sense."
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "48:53-48:54",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah. I mean it yeah, it it's it's pretty clear and obvious when you look at it that way. Um especially because if you if you kind of turn it around like if it was a fumble, like a loose fumble. And like a Patriots player grabbed it while they're out of bounds, or or if a Bills player grabbed it while he was out of bounds, it would still stay with the Patriots because they were out of bounds and the ball stays with the team.",
+    "timestamp" : "48:54-49:13"
+  },
+  {
+    "timestamp" : "49:14-49:36",
+    "speaker" : "Mike Melo",
+    "text" : "And to add to that, I don't know if you guys have seen this rule, um, but it plays up on that. But I've seen videos where a few kick returners Well actually step out of bounds and then catch the ball and it goes before they So they uh I mean Buffalo Buffalo obviously expected to have the ball, but they should know better."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "49:37-49:58",
+    "text" : "Yeah. But then literally the very next play. So I think the Pats get the ball and like the forty of the Bills at this point because of like all after the end of the result of this play. And the very next play, the Bills obviously just like not prepared to continue playing defense because Antoine Smith runs for 38 yards down to the two yard line and that's the end of the game."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Right. They didn't even uh they didn't even try another play. I mean Brady centered it and somehow he fell forward and got hit by Mark Edwards.",
+    "timestamp" : "49:58-50:05"
+  },
+  {
+    "text" : "I don't know how that happened, but that was a cluster markable play.",
+    "speaker" : "Andy",
+    "timestamp" : "50:05-50:09"
+  },
+  {
+    "timestamp" : "50:08-50:09",
+    "speaker" : "Mike Melo",
+    "text" : "Right."
+  },
+  {
+    "timestamp" : "50:09-50:11",
+    "speaker" : "Andy",
+    "text" : "Brady took a bunch of shots in this game."
+  },
+  {
+    "timestamp" : "50:12-50:46",
+    "text" : "Um but yeah, no, and then obviously Vinatari wins it, but Yeah, it could have gone either way. There were a couple of those weird moments. There's another weird moment in the fourth quarter where I mean, um, and you know, help me out on this, but Pierless Price catches a touchdown, or so it seems. Uh so it looked pretty good. I mean they slowed it down a bunch. Uh I mean you could debate, I guess, control, but it was a fingertip catch. He drags both feet. And it's uh it's called an incomplete and they didn't challenge that, right?",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Yeah, yeah, it's like third and goal, through a touchdown pass, and it looked like it was pretty obvious, I think, in slow-mo that it was a touchdown. And the Bills just didn't challenge it.",
+    "speaker" : "Andy",
+    "timestamp" : "50:46-50:58"
+  },
+  {
+    "timestamp" : "50:59-51:10",
+    "speaker" : "Mike Melo",
+    "text" : "Yeah, and so they kick a field goal to tie it. Right. And then the announcers were losing their minds, and rightfully so, but I think they had like all their timeouts and everything. So it was a pretty weird uh sequence of events there."
+  },
+  {
+    "timestamp" : "51:10-51:45",
+    "speaker" : "Andy",
+    "text" : "Yeah, they mentioned that the Bills had been kind of bitten by failed uh challenges in the in the past of that season. And I feel like challenges and the whole replay system was new, if not this season then, relatively recently. I think people are still trying to like figure it out. But at that point, I think you just I mean fuck it, take take a delay of game. It's a chip shot field because it's on the ten. What do you have to lose though at 2 and 10?"
+  },
+  {
+    "text" : "Why not just challenge it? Who cares?",
+    "speaker" : "Mike Melo",
+    "timestamp" : "51:45-51:47"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "51:47-52:03",
+    "text" : "Well that's true too, yeah. Um but I think the co-chair was the name, Greg Williams. I gotta say, I think we talked about it the first time he came up. Not a great um head coach"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Well, he's got two D's the end of Greg, so he's a fucking asshole.",
+    "timestamp" : "52:03-52:07"
+  },
+  {
+    "text" : "Yeah. Oh, you can always you can already tell.",
+    "timestamp" : "52:07-52:09",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "52:09-52:09",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But I think Just like they showed him every single time anything happened in the game and his reaction was so over the top. It looked like how I watch the game in real time as a Patriots fan, but he's sitting on the sideline with a headset on. Like cringing and like trying to body language a field goal to go through and all this shit. And jumping up and down and the even the commentators talking about how he lives and dies on every play.",
+    "timestamp" : "52:10-52:40"
+  },
+  {
+    "text" : "Yeah, he's a player's coach, man. College basketball coaches. You ever notice that?",
+    "timestamp" : "52:40-52:45",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah, same thing. But yeah, like it doesn't work in the NFL. Like name one guy who's like that that's had a prolonged career as a head coach.",
+    "timestamp" : "52:46-52:54",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh I've been on that I've been on that tick forever. That like college athletic coaches are always like over I mean Pete Carroll is still like that.",
+    "timestamp" : "52:55-53:03",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that's true.",
+    "timestamp" : "53:05-53:06"
+  },
+  {
+    "text" : "I mean he does create that culture. I see your point though that it doesn't really work for the most part, but even Harbaugh, um, before he went back to Michigan, he was kind of a little bit like that.",
+    "timestamp" : "53:06-53:15",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah, he's a good one.",
+    "timestamp" : "53:15-53:16"
+  },
+  {
+    "text" : "But it's also like the there's a difference between like a true like player's like rah-rah coach and like uh Kind of an ass psychopath. Oh true, yeah. I'll give you that. All right. I don't want because those kids are like eighteen, nineteen and they they're not getting paid and can't tell them to fuck off.",
+    "speaker" : "Greg",
+    "timestamp" : "53:23-53:45"
+  },
+  {
+    "text" : "Yeah, that's a good point. Trivia question.",
+    "timestamp" : "53:48-53:50",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yep.",
+    "timestamp" : "53:51-53:51"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "53:51-53:59",
+    "text" : "All right. Who has more touchdowns thrown to Bill's players? Tom Brady or Nathan Peterman?"
+  },
+  {
+    "timestamp" : "53:59-54:04",
+    "speaker" : "Andy",
+    "text" : "Ooh. Tom Brady. Tom Brady. He's throwing a bunch of pick sixes in Buffalo."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh Peterman three, Brady two.",
+    "timestamp" : "54:05-54:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh so close. He's only thrown two picks in Buffalo. I feel like I can remember both of them. Yeah, I can think of both of them. I can't think of the third, so yeah, that makes sense.",
+    "timestamp" : "54:09-54:20"
+  },
+  {
+    "text" : "Man, remember when uh Connor was uh basically uh claiming that it was the worst game that Brady played and we had countered that there was another one the season? This is another duck put up by Brady. And like I said, Alex Van Pelt. Like he started the game like two and ten, uh two for ten, you know. Um, but Brady, I think they mustered up for most of the second half. I think it was four yards. Um at one point, yes. Yeah, and Brady was like chucking it all over the place, not completing it, um getting hit, obviously. Um he kind of didn't seem like He knew where he was uh a little bit. So it was a it was a it was pretty interesting to kind of see a few games in a row now where he Were defenses figuring him out? Was he just adjusting to the game plan? I mean, why do you think he struggled uh mightily before the playoffs?",
+    "timestamp" : "54:24-55:16",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "Yeah, I mean, I think this game especially You could see he was actually sailing some balls. Yeah. And I think we saw some like issues in the kicking game too. I I think weather or at least wind may have played a factor in this. Which I think you've seen.",
+    "timestamp" : "55:17-55:31",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "55:35-55:38",
+    "speaker" : "Mike Melo",
+    "text" : "Did they mention that though? I don't remember it being too windy there."
+  },
+  {
+    "timestamp" : "55:38-55:50",
+    "speaker" : "Andy",
+    "text" : "Uh they they talked about it 'cause the on the first field goal that the Bills missed Then I talked about Adam Vinateri kicking in that end zone and and whether or not it would be as easy as a chip trying that as it should be."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "No win. Oh really? Thirty-four degrees, relative humidity, 89%, no wind. Yeah.",
+    "timestamp" : "55:52-56:00"
+  },
+  {
+    "text" : "I don't remember. Thank you, Greg. That's that's important. Yeah. Stat check tomorrow.",
+    "timestamp" : "56:01-56:08",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Dude, see I haven't really talked about the wind in the game. I never heard it.",
+    "timestamp" : "56:09-56:12"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "I never heard it. What else you want, huh? You want something else, Andy?",
+    "timestamp" : "56:14-56:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh yeah.",
+    "timestamp" : "56:22-56:23"
+  },
+  {
+    "timestamp" : "56:24-56:34",
+    "speaker" : "Greg",
+    "text" : "Let's see. Um offense ranked twenty seven. Their defense, twenty nine. Really? So bad that year."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "56:34-56:54",
+    "text" : "Their defense was 29th. That's what it says. Because it came to play in this game. And I well, I think a lot of it was Matt Light getting toasted by um The the leading yeah, the l the the guy who has the most sacks on Tom Brady in NFL history."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So he was the uh guy on the cover of that program that I gave to the Bills fan.",
+    "timestamp" : "56:54-56:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Was he really?",
+    "timestamp" : "56:59-57:00"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "57:00-57:01"
+  },
+  {
+    "text" : "Yeah, because this this is his this is both of their rookie seasons. Matt Light and Aaron Schobel. Yeah. They talked about it being like a rookie on rookie matchup and Schobel absolutely just torched Matt Light.",
+    "speaker" : "Andy",
+    "timestamp" : "57:01-57:12"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "The guy called him no show showbull because he was he was convinced that he would never do anything, which is crazy because he has the most sacks against Brady And then he went on to tell me that after every Bills loss, him and his brothers would do a Bills burning where they'd go to their backfire and burn something Bills related. That sounds really fun. That sounds expensive. You must have gone through a lot of shit, dude. Right.",
+    "timestamp" : "57:13-57:38"
+  },
+  {
+    "text" : "Yeah, but they're probably buying shit off of the the bargain uh bin thing that you were getting all your jerseys from.",
+    "timestamp" : "57:38-57:44",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "57:44-57:49",
+    "text" : "Uh that's true, yeah. Bill's jersey is very unexpensive. Although there's probably not many out there, so they it might be the other way around.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Well that's that's fair.",
+    "timestamp" : "57:50-57:51",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They're a collector's It's not like you're making a whole bunch of them, are you? You're not making a shit ton of J. Remusmer jerseys.",
+    "timestamp" : "57:51-57:58"
+  },
+  {
+    "timestamp" : "57:58-58:17",
+    "speaker" : "Steve",
+    "text" : "He still got his Brian Mormon jersey in his closet. I just texted him. He never burned it? No, nothing I guess the classic. And then apparently there was like this hamster thing that sings like a song. I don't know, we looked it up on eBay. He was all excited about it. Bills related? Yeah, yeah. Or are we just talking about this guy being a weirdo?"
+  },
+  {
+    "timestamp" : "58:18-58:23",
+    "text" : "Right? I'm like, where are we going with this? I'm interested in finding out more about Bill's hamster touchdown song.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It'll come up.",
+    "timestamp" : "58:23-58:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Not on my work, computer. Thank you very much.",
+    "timestamp" : "58:25-58:27"
+  },
+  {
+    "timestamp" : "58:27-58:28",
+    "speaker" : "Greg",
+    "text" : "Hello, Buffalo."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh that song. I remember them singing that. Oh yeah, that's that's a jam. Yep, it is.",
+    "timestamp" : "58:30-58:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What's that? You wear Zubaz. No, I don't know if he wears I mean I've only seen him in work stuff, so Yeah He doesn't want him to work?",
+    "timestamp" : "58:37-58:45"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "58:45-58:47",
+    "text" : "What kind of builds fan is he?"
+  },
+  {
+    "timestamp" : "58:49-58:55",
+    "text" : "Have you seen the videos of the guy that does like the condiments thing? Yeah oh yeah.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yes.",
+    "timestamp" : "58:55-58:55"
+  },
+  {
+    "timestamp" : "58:55-59:12",
+    "speaker" : "Greg",
+    "text" : "Yeah. Eighty five year old man just ketting like doused it's it's Strangely erotic. It's something. Oh, there's nothing like Buffalo."
+  },
+  {
+    "text" : "So I mean that's what hat that that's what losing four straight Super Bowls does to a fan base, though, I think.",
+    "speaker" : "Andy",
+    "timestamp" : "59:13-59:18"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "59:18-59:24",
+    "text" : "Yep. Oh, speaking of which, you Mike, do you have any um football or not footballs? Oh, that's a good question."
+  },
+  {
+    "timestamp" : "59:25-59:28",
+    "speaker" : "Mike Melo",
+    "text" : "I I do have three, but they're tricky ones."
+  },
+  {
+    "timestamp" : "59:29-59:30",
+    "speaker" : "Greg",
+    "text" : "I got one this week too."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Oh shoot. I'm curious to see if you uh if you also have some some similar questions this week. Uh you want me to go? Yeah, yeah. All right. Um first one, uh so to put it in context, he was talking about Lawyer Malloy. So Lawyer Malloy came unimpeded and got a clean shot on the quarterback. So football or not football on that one. Right.",
+    "timestamp" : "59:30-59:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think if I remember the play correctly.",
+    "timestamp" : "01:00:00-01:00:02"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:00:02-01:00:04",
+    "text" : "Oh, you remember it? Yeah, yeah. I think you're right."
+  },
+  {
+    "timestamp" : "01:00:04-01:00:27",
+    "text" : "This this one sounds familiar. Uh and I think If my context is correct, what they're talking about is Lawyer Molloy, who doesn't normally rush the passer, probably came on a blitz. Oh nobody picked him up. So he was coming unimpeded, which means nobody there was nobody in his way. between him and the quarterback.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "It probably would've helped if I knew what unimpeded was.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:00:28-01:00:30"
+  },
+  {
+    "timestamp" : "01:00:30-01:00:39",
+    "speaker" : "Andy",
+    "text" : "Yeah, so he took a a shot, he probably hit the quarterback Alex uh Pell Peterson Lamp held, whatever the fuck I want to call him."
+  },
+  {
+    "text" : "Right.",
+    "timestamp" : "01:00:39-01:00:40",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:00:40-01:00:43",
+    "speaker" : "Andy",
+    "text" : "Uh pretty hard. My guess is straight in the chest if I remember the play correctly."
+  },
+  {
+    "timestamp" : "01:00:44-01:00:44",
+    "text" : "I see.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You took a bunch of shots in the chest.",
+    "timestamp" : "01:00:44-01:00:46"
+  },
+  {
+    "timestamp" : "01:00:46-01:00:50",
+    "speaker" : "Steve",
+    "text" : "I don't see how it's not football. You think they're like drinking on the sidelines, Mike?"
+  },
+  {
+    "text" : "I don't know. I mean I I again Lawyer Malloy came unimpeded and got a clean shot on the quarterback. I mean, I don't know. I I'm also maybe um emphasizing certain words weirdly. So I don't know if I but They could have been drinking, I don't know. Well, Buffalo.",
+    "timestamp" : "01:00:50-01:01:07",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:01:08-01:01:23",
+    "text" : "Mine's actually similar, so might as well just And it's actually not from this game. This is from two days ago on the radio on the giant to work. You tricked me. Goal of the wingo show."
+  },
+  {
+    "text" : "Oh boy. Look what you've done to him, Mike.",
+    "timestamp" : "01:01:23-01:01:27",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "You've corrupted him. What do you mean corrupted?",
+    "timestamp" : "01:01:27-01:01:29",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Trey Wingo was discussing uh Joe Burroughs draft uh prospects and how he played in the national champion championship and how he handled the rush and he said um The the Clemson players were blitzing all over the place. I Isaiah Simmons was coming all over the place.",
+    "timestamp" : "01:01:32-01:01:53"
+  },
+  {
+    "text" : "Oh I I don't know. Based on previous weeks, I think I have a guess as to what it means. Ooh, let's hear it. He was coming all over the place. Yeah, that's that's not football, I don't think. I don't know. What do you think, Andy?",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:01:53-01:02:12"
+  },
+  {
+    "text" : "Well it's Trey Wingo. You gotta keep that in mind. He's a fucking nerd Oh, all right.",
+    "speaker" : "Greg",
+    "timestamp" : "01:02:12-01:02:17"
+  },
+  {
+    "timestamp" : "01:02:17-01:02:23",
+    "speaker" : "Andy",
+    "text" : "Oh yeah. Okay. Probably is football. It's just some deep sort of stat bullshit."
+  },
+  {
+    "timestamp" : "01:02:24-01:02:35",
+    "speaker" : "Mike Melo",
+    "text" : "Right. So it's like you guys are saying, I mean, coming All over the place is probably like the lawyer Malloy coming unimpeded in that sense. True, yeah."
+  },
+  {
+    "text" : "Although blitzing could kind of different spots, perhaps.",
+    "timestamp" : "01:02:35-01:02:38",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Oh, oh. Interesting.",
+    "timestamp" : "01:02:39-01:02:42"
+  },
+  {
+    "timestamp" : "01:02:42-01:02:45",
+    "speaker" : "Andy",
+    "text" : "Some nerd shit like that, because like Greg said, it's Treywingo."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Although blitzing can be kind of uh interpreted different ways, I guess.",
+    "timestamp" : "01:02:45-01:02:50"
+  },
+  {
+    "text" : "All in your addled mind, Michael.",
+    "timestamp" : "01:02:50-01:02:53",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:02:53-01:02:55",
+    "speaker" : "Mike Melo",
+    "text" : "No, no. I mean I think no, I think it's football."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Okay.",
+    "timestamp" : "01:02:56-01:02:56"
+  },
+  {
+    "text" : "Right. Uh uh knowing Trey, I think. Yeah, yeah. Is it pros pro But yeah, that was a good one, Greg. I mean you tricked me, I thought it was from this game.",
+    "timestamp" : "01:02:56-01:03:05",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "I was so excited when I heard in the car. Pulled over and wrote it down. And then like I was driving so I couldn't write it down. And then I was like, coming everywhere. I actually Googled their podcast the time in the show and they discussed it so I can write down the precise quote That's awesome. I love it. Coming on.",
+    "speaker" : "Greg",
+    "timestamp" : "01:03:06-01:03:31"
+  },
+  {
+    "timestamp" : "01:03:36-01:03:40",
+    "speaker" : "Andy",
+    "text" : "All right. I mean, if you want to keep doing yours, Mike, if you can top that."
+  },
+  {
+    "timestamp" : "01:03:40-01:04:02",
+    "speaker" : "Mike Melo",
+    "text" : "Alright, um this one is uh just an interesting one. I I I don't know. I don't know what you guys think. Uh Roman Pfeiffer, another one of those veteran free agents who came over, Belichick had a relationship with him Ooh. Yeah. Interesting. That kind of sparked the old noggin. Yeah, that's an extended word to use."
+  },
+  {
+    "timestamp" : "01:04:03-01:04:04",
+    "speaker" : "Andy",
+    "text" : "It's a little ambiguous, isn't it?"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Right. And I I mean w they don't really talk about relationships too much with him. I mean there is his girlfriend.",
+    "timestamp" : "01:04:04-01:04:12"
+  },
+  {
+    "text" : "Yeah, where we're they're not as open about these types of things. So yeah. Right. Maybe that's like a little code word in there?",
+    "timestamp" : "01:04:12-01:04:19",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:04:19-01:04:26",
+    "speaker" : "Mike Melo",
+    "text" : "I don't know. I just thought it was interesting. I mean he had a relationship with him is what the guy said, and I was like, oh that's okay."
+  },
+  {
+    "text" : "Yeah. I mean did did they know each other before the Patriots?",
+    "speaker" : "Andy",
+    "timestamp" : "01:04:26-01:04:30"
+  },
+  {
+    "text" : "Oh, did I think they did, didn't they? On the um was it the Jets?",
+    "timestamp" : "01:04:30-01:04:34",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:04:34-01:04:43",
+    "speaker" : "Andy",
+    "text" : "Oh, so okay, so th maybe it could be professional relationship then in that case? If they had worked together before. But it is ambiguous."
+  },
+  {
+    "text" : "It is ambiguous. Although the they did say we're women fight for another one of these veteran uh free agents. So I they must have been talking about the Jets and I missed that.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:04:43-01:04:54"
+  },
+  {
+    "text" : "Could be. I don't know. So that that's that's maybe football. We'll put that in the maybe pile.",
+    "timestamp" : "01:04:54-01:04:59",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Okay. And then finally this one was about Larry Senters, I know for sure. And um it was he took a dump over the middle.",
+    "timestamp" : "01:04:59-01:05:08",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There's no way that's football.",
+    "timestamp" : "01:05:09-01:05:10"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I thought uh yeah, it was interesting. I mean he was I I the game plan, which I thought was awesome, was to limit Larry Senders the fullback in this game. Um I guess that was a I'm shitting on people. Right.",
+    "timestamp" : "01:05:12-01:05:25"
+  },
+  {
+    "timestamp" : "01:05:25-01:05:29",
+    "speaker" : "Andy",
+    "text" : "So now you know why. Right. So I can messy if you don't."
+  },
+  {
+    "timestamp" : "01:05:29-01:05:34",
+    "speaker" : "Mike Melo",
+    "text" : "Well, I don't know if he was upset or nervous or frustrated, but he took a dump over the middle."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:05:34-01:05:38",
+    "text" : "I mean that whatever it is, that that's making a statement right there."
+  },
+  {
+    "timestamp" : "01:05:38-01:05:38",
+    "speaker" : "Mike Melo",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "01:05:39-01:05:40",
+    "speaker" : "Greg",
+    "text" : "It didn't have an effect in the game like that."
+  },
+  {
+    "text" : "You say have I ever? Because I'm gonna go with no.",
+    "timestamp" : "01:05:44-01:05:46",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Okay.",
+    "speaker" : "Greg",
+    "timestamp" : "01:05:47-01:05:47"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I haven't, but I've had many uh a time where I've had to pull off the side of the road, run to Lord knows where, and do some damage in the middle of nowhere.",
+    "timestamp" : "01:05:48-01:06:00"
+  },
+  {
+    "timestamp" : "01:06:00-01:06:00",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I pulled my pants watching sports once.",
+    "timestamp" : "01:06:00-01:06:03"
+  },
+  {
+    "timestamp" : "01:06:05-01:06:06",
+    "speaker" : "Steve",
+    "text" : "It was that good you can do."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "From on a left field.",
+    "timestamp" : "01:06:07-01:06:09"
+  },
+  {
+    "text" : "Uh it was the Patriots and the Seahawks Super Bowl It was half time and I I was like, I gotta pee looking bad. And the game was intense, you know? So I ran into the bathroom and like I peed but I was like forcing it a lot and I pooped a little bit and I was wearing my lucky and I was like, well, I can't just throw them out, so I had to clean them out and then watch the rest of the game standing. Oh my gosh.",
+    "speaker" : "Steve",
+    "timestamp" : "01:06:09-01:06:33"
+  },
+  {
+    "text" : "I probably sat when you pee when you poop when you pee.",
+    "timestamp" : "01:06:33-01:06:35",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "No, that's me. I sit when I pee.",
+    "timestamp" : "01:06:36-01:06:38",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "You sit when you pee?",
+    "timestamp" : "01:06:38-01:06:39",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:06:40-01:06:42",
+    "speaker" : "Andy",
+    "text" : "Yeah, it's a laziness thing."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "What on earth? Yeah, fuck it. So one time I was I was snowboarding and like this is when I was like just one When I like went through the woods, you know, they got a little path on the side. I was like, oh yeah, I'm a man now.",
+    "timestamp" : "01:06:42-01:06:55"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:06:55-01:06:55",
+    "text" : "Oh yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "As I'm coming back to the trail, there's a little jump. I'm like or came out from under me and I landed right on my ass.",
+    "timestamp" : "01:06:56-01:07:02"
+  },
+  {
+    "timestamp" : "01:07:03-01:07:04",
+    "speaker" : "Andy",
+    "text" : "Oh I've done that."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:07:04-01:07:07",
+    "text" : "As soon as I studied, I'm like Oh man."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I haven't done that.",
+    "timestamp" : "01:07:09-01:07:10"
+  },
+  {
+    "text" : "I know that feeling though. Mushy butt cheek syndrome. And I'm like, oh I don't know. So I like I you know, clenched her up, snowballed the lay down, went right into the bathroom, start wiping. It turns out I didn't shit my pants. What I think happened was like it got immediately swollen. So it felt like shit in there, but it was just one bubble.",
+    "timestamp" : "01:07:11-01:07:37",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:07:38-01:07:40",
+    "text" : "Oh yeah, yeah, I know that feeling."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:07:43-01:07:44",
+    "text" : "Good Lord. Yeah."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "I haven't had that one, but I have uh I've I've been at the gym once and uh doing leg press, so stereotypical situation, and I might have put a little bit too much weight and I ripped one. Um And it was extremely embarrassing, but nobody said a word or looked over. It was very loud too.",
+    "timestamp" : "01:07:45-01:08:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean I was kind of like annoyed that no one d said anything, but so I I I did that except it was in a yoga class.",
+    "timestamp" : "01:08:04-01:08:11"
+  },
+  {
+    "timestamp" : "01:08:13-01:08:14",
+    "text" : "That's even better.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:08:15-01:08:21",
+    "text" : "Apparently the pose is called wound relieving pose. And let me tell you. Get out of here. Works. Yeah. It's it's also known as it's a good thing."
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:08:21-01:08:24",
+    "text" : "Sounds like yoga or not yoga. Oh, okay."
+  },
+  {
+    "text" : "Yeah. And uh so you know you're you're on your back and you're holding on to your feet like a happy baby.",
+    "speaker" : "Andy",
+    "timestamp" : "01:08:24-01:08:30"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Yeah.",
+    "timestamp" : "01:08:30-01:08:30"
+  },
+  {
+    "timestamp" : "01:08:31-01:08:49",
+    "text" : "And uh I'll let one I'll let one slip. And this is like early in my yoga career. This is years ago. Uh and of course my reaction isn't to just ignore it or anything. My reaction is to say, uh To let everybody know apparently that it was me that did it.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "That's a good one.",
+    "timestamp" : "01:08:50-01:08:51",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:08:56-01:09:03",
+    "text" : "Yeah. Which Which actually leads me to another poop related story since we're doing this. Wait, wait.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:09:03-01:09:09",
+    "text" : "No no one how do they react? No one said a word? No reaction. No one said a word. No",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "The yoga teacher was probably like, Oh good, you guys are getting good with on the toes.",
+    "timestamp" : "01:09:09-01:09:14"
+  },
+  {
+    "text" : "No, she she's a good friend of mine, and apparently she was dying, she told me. She was the only one that that said anything, but she was like crying, laughing.",
+    "timestamp" : "01:09:15-01:09:23",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:09:23-01:09:26",
+    "text" : "Oh yes, everything's so centered. It's beautiful.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:09:27-01:10:21",
+    "text" : "Yeah, there's another thing that uh is more recent. That was years ago, but this um Every time I hear somebody close to me uh you know, sneeze or or anything, I I'd say bless you, and then it turned into like a cough or a burp or a fart or anything. I just you know I'd say bless you because I thought it was funny and my wife didn't. Um So if she ever farts, I I say bless you, and she gets angry and I laugh. But apparently that has become a uh just like a rote response. So I was in the stall at work a couple of weeks ago. Uh, you know, just doing my business. And the guy next to me in the stall lets it lets a big one rip. And just by default I said bless you. And then realize what I've done and go."
+  },
+  {
+    "text" : "Oh fuck That is hilarious.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:10:21-01:10:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So I'm literally sitting there lifting my feet up so he can't like recognize my shoes? And I'm like, I am waiting this motherfucker out. And I think at first he was like waiting for me to come out because he wanted to time it and be like, who the fuck was that? And I waited him out long enough. So I apologize if that person listens to this. That was me. You didn't say anything?",
+    "timestamp" : "01:10:25-01:10:47"
+  },
+  {
+    "timestamp" : "01:10:49-01:10:51",
+    "speaker" : "Mike Melo",
+    "text" : "That's a perfect opportunity."
+  },
+  {
+    "timestamp" : "01:10:51-01:11:03",
+    "speaker" : "Andy",
+    "text" : "No, yeah, no, it was That was that was rough. And I had like I had just started the job too. I hadn't been there very long. I'm like, oh man, this is a tough way to get fired."
+  },
+  {
+    "text" : "That is hilarious.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:11:04-01:11:05"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:11:05-01:11:16",
+    "text" : "You just gotta send a company wide email. Yeah, that was so. I'm sorry."
+  },
+  {
+    "text" : "I mean I feel like it's a nice there's there are worse things you can say when somebody does that, but",
+    "speaker" : "Andy",
+    "timestamp" : "01:11:18-01:11:22"
+  },
+  {
+    "text" : "But that's a pretty good one though. And it was like innocent, which I like.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:11:23-01:11:26"
+  },
+  {
+    "timestamp" : "01:11:26-01:11:29",
+    "text" : "Yeah, yeah, it was it was completely by accident. But",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Non-innocent ones like it.",
+    "speaker" : "Greg",
+    "timestamp" : "01:11:30-01:11:32"
+  },
+  {
+    "timestamp" : "01:11:36-01:11:41",
+    "speaker" : "Mike Melo",
+    "text" : "Right, exactly. Yeah. I I was thinking of a few different responses, so absolutely"
+  },
+  {
+    "text" : "Yeah, no, I I wish I had a story like that. To bring this back to Bill's Patriots, I just stat checked my earlier statement about Peterman versus Tom Brady. Close. Brady five, Peterman three.",
+    "speaker" : "Steve",
+    "timestamp" : "01:11:42-01:11:56"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "And what do you mean you thought? Because uh you you you said that you remembered only two of them and Look at that. You're trying to make a two off top of my head. Now I can't trust anything that you say, and I can only rely on Stephen Gregg for anything on this podcast. You gotta name it.",
+    "timestamp" : "01:11:59-01:12:19"
+  },
+  {
+    "timestamp" : "01:12:20-01:12:50",
+    "text" : "Obviously the tractor trailer one we all know and sort of love since we beat him 31-0 later that year. Nick Clements got one earlier in the year. Oh absolutely I saw this boss looking through all of your website, Andy. It's two thousand seven. Fifteen forty-three in the second period. Randy Moss, 16 yard touchdown, 633 left, Randy Moss, 6-yard pass, 10 seconds left, Randy Moss, 17-yard pass.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:12:50-01:12:51",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Three touchdowns in a quarter from Moss",
+    "timestamp" : "01:12:51-01:12:53",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:12:54-01:13:05",
+    "text" : "Oh yeah, it's brutal. I was in England when that season was happening and that's how I watched was there's just the stats coming up and I was like, this is broken?"
+  },
+  {
+    "text" : "Aaron Shobel had a twenty-six yard pick six. Oh show show the game that uh everyone's gonna remember from The remember the Patriots scored with two minutes left, Ben Watson, and then they fumbled the kickoff.",
+    "timestamp" : "01:13:08-01:13:25",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:13:26-01:13:31",
+    "speaker" : "Andy",
+    "text" : "And scored another touchdown of Ben Watson. Yep. With season opener, I think. Yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It was uh September 14, yeah sounds alright.",
+    "timestamp" : "01:13:31-01:13:35"
+  },
+  {
+    "text" : "Two thousand six, I wanna say? Nine. Nine rather, yeah. Sorry, that's what I meant. That was the same year as the uh The uh Titans blow out. Drayton Florence had one?",
+    "speaker" : "Andy",
+    "timestamp" : "01:13:36-01:13:48"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:13:49-01:13:59",
+    "text" : "Mm. No idea. That's a game the Bills won on a Ryan Lindell 28 yard field goal with time expiring."
+  },
+  {
+    "text" : "Yeah, I remember that. That was a Fred Jackson game",
+    "timestamp" : "01:13:59-01:14:03",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:14:04-01:14:08",
+    "text" : "Yeah. I'll give you a stat since I have that pulled up.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, not too bothered, not gonna lie.",
+    "timestamp" : "01:14:10-01:14:12"
+  },
+  {
+    "timestamp" : "01:14:15-01:14:31",
+    "speaker" : "Steve",
+    "text" : "Five or eighty-seven on catches. Yeah, he had that one big run that set up that kick or catch up. Probably the other one you're thinking of Andy Jordan Poirier. That's the one I was thinking of, yeah. So sorry, actually four to three. Yeah."
+  },
+  {
+    "text" : "Two, three, four. Yep. That's what I have too. Well all right. Wow. Well I'm glad we stat checked that. So let's uh let's do best and worse and wrap this up. Anybody want to go first?",
+    "speaker" : "Andy",
+    "timestamp" : "01:14:31-01:14:44"
+  },
+  {
+    "text" : "Steve, you go f no Steve, you go first. I didn't watch it. What if he steals mine?",
+    "speaker" : "Steve",
+    "timestamp" : "01:14:45-01:14:50"
+  },
+  {
+    "timestamp" : "01:14:50-01:14:52",
+    "text" : "Well, is that best or worst?",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:14:52-01:15:12",
+    "speaker" : "Steve",
+    "text" : "Well, all right. My best is, you know, seeing that guy open that Aaron Schobel program. He was so happy, but then the best is like him realizing that it brought back a memory of him burning Bill's memorabilia in his backyard."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:15:12-01:15:21",
+    "text" : "And the fact that his favorite player is a punter. Yeah. He's the best. Love it. All right, Greg, what's your best and worst?"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "All right. Uh my best is uh So Perioless Price. I was like, that's an awesome name. I'm wondering how like they got it. So I looked it up. Apparently his mom named him after like a moving company from Ohio where they grew up. Excuse me? Humanist Price.",
+    "timestamp" : "01:15:22-01:15:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Oh, I guess Pierless Moving Company.",
+    "timestamp" : "01:15:44-01:15:47"
+  },
+  {
+    "timestamp" : "01:15:47-01:15:53",
+    "speaker" : "Mike Melo",
+    "text" : "Exactly. Yeah, but what a name though. I mean she was on the money with that one. It's an A plus name. Yeah."
+  },
+  {
+    "text" : "Because it works. You don't think of it as like peel.",
+    "timestamp" : "01:15:54-01:15:56",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:15:56-01:16:07",
+    "text" : "Yeah, but imagine imagine if that guy didn't end up being a football player. What if he was like an accountant? That's like many rough price Yeah, I don't know. What if he was a terrible accountant?",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah.",
+    "timestamp" : "01:16:07-01:16:07"
+  },
+  {
+    "timestamp" : "01:16:08-01:16:08",
+    "speaker" : "Mike Melo",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "This reminded me of uh the Simpsons episode where he changes his name to Max Power and they're like Oh yeah. That's right. He's like, thanks, I got it from a hairdryer. And also, there's a guy on Sunderland. Did soccer team I support whose name's Matt Fower scored the the game tire last week.",
+    "timestamp" : "01:16:09-01:16:32"
+  },
+  {
+    "timestamp" : "01:16:32-01:16:34",
+    "speaker" : "Andy",
+    "text" : "Uh was that his given name?"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:16:35-01:16:39",
+    "text" : "Uh yeah. That's his name on the roster."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well yeah, but I mean Homer Simpson's name on some rosters is probably Max Power.",
+    "timestamp" : "01:16:39-01:16:44"
+  },
+  {
+    "text" : "Greg, you gotta start a funny name Hall of Fame on this podcast because you have a lot of them. Oh yeah. I had one at work today, I thought of you. Peter Peterson. That's pretty good.",
+    "speaker" : "Steve",
+    "timestamp" : "01:16:44-01:16:56"
+  },
+  {
+    "text" : "All right then. had contact with someone who had a hilarious name. We used to vote on it. There's some good ones. Kurt Guggenberger. That's not real.",
+    "timestamp" : "01:16:56-01:17:18",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:17:23-01:17:35",
+    "speaker" : "Andy",
+    "text" : "I like how he knows he's off of memory too. Like he's he just has him. He's not reading them. Some of these might be made up. She si wang Savage."
+  },
+  {
+    "timestamp" : "01:17:36-01:17:41",
+    "speaker" : "Mike Melo",
+    "text" : "I know. This seems almost inappropriate for today's uh day and age. I don't know."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "You had to you had to have like a documented proof of this person. Like you had to have like an email with their official name in it and stuff like this. We didn't take this lightly. We have a lot of people down from Hall of Fame. It was prestigious. There's only like six people.",
+    "timestamp" : "01:17:41-01:17:55"
+  },
+  {
+    "text" : "Wow. All right. I mean, we can probably start a Patriots podcast funny name Hall of Fame. All-time NFL. Funny name.",
+    "speaker" : "Steve",
+    "timestamp" : "01:17:55-01:18:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's probably true. All right.",
+    "timestamp" : "01:18:03-01:18:05"
+  },
+  {
+    "timestamp" : "01:18:05-01:18:12",
+    "text" : "Pearless price per century, my vote. Yeah. Yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:18:13-01:18:17",
+    "speaker" : "Mike Melo",
+    "text" : "Yeah, but it's an awesome name and he's got alliteration to boot, which is awesome. Yeah, yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And he's peerless, I mean.",
+    "timestamp" : "01:18:17-01:18:19"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "And he was pretty good. He was? He had one season with ninety plus catches, twelve hundred yards, and like ten touchdowns.",
+    "timestamp" : "01:18:19-01:18:27"
+  },
+  {
+    "text" : "Yeah. He straight up dropped a pass in this game though, but other than that he was fine. Uh so is that your best and worst? Yeah. All right. Mike, how about you?",
+    "timestamp" : "01:18:27-01:18:40",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:18:40-01:18:50",
+    "speaker" : "Mike Melo",
+    "text" : "Uh my worst was the first quarter. Uh I just wrote most uneventful quarter so far. And a close second was the second quarter."
+  },
+  {
+    "timestamp" : "01:18:51-01:18:56",
+    "speaker" : "Greg",
+    "text" : "It was just the whole thing was You could have just gone first half, no?"
+  },
+  {
+    "text" : "Yeah, but I wanted to be specific about this so that if anybody decides to watch the game, just really avoid the first quarter altogether. Um then my best is gonna be um you know Brady popping up and we talked about that. So I will go with uh the best part of the game for me was um as soon as it looked like Brady uh was was struggling and he might lose the game, the announcers were already calling for Bletto. Um so it was a very short leash. I mean he's he's uh put a few wins together and they're uh they were already saying I think it's time to put Bletto back in.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:18:56-01:19:36"
+  },
+  {
+    "text" : "Yeah, every time Tom Brady sailed a an incompletion, the next shot was of Brady's reaction and then a shot of Bloods on the sideline.",
+    "timestamp" : "01:19:36-01:19:45",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Right.",
+    "timestamp" : "01:19:45-01:19:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Every time.",
+    "timestamp" : "01:19:46-01:19:47"
+  },
+  {
+    "timestamp" : "01:19:47-01:19:51",
+    "text" : "So I thought that was pretty fun. They didn't uh wait too long to get to that point.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:19:51-01:20:03",
+    "speaker" : "Andy",
+    "text" : "Oh, they sure didn't. Um all right. So from mine, my best was um Troy Brown. He had uh they they tried to do a reverse pass with him."
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Oh yes.",
+    "timestamp" : "01:20:03-01:20:04"
+  },
+  {
+    "text" : "It got sniffed out. So, you know, Brady handed to him on the on the end of the round. And then it got sniffed out. And so Troy Brown is in the backfield like with nobody to throw it to and the pressure coming on. But he somehow manages to get out of trouble and still pick up nine yards using Tom Brady as his lead blocker. So that was fantastic.",
+    "timestamp" : "01:20:04-01:20:26",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yep. It was good.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:20:26-01:20:28"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:20:28-01:20:49",
+    "text" : "Uh I also an honorable mention was uh they were talking about Tom Brady and his newfound fame. And so they were they were asking him about it and they apparently he said that he was tired of of of reading about himself, which sounds like there's an easy fix for that. Um, but that after the season he was gonna go somewhere people don't know him and sleep for a week."
+  },
+  {
+    "text" : "Which is funny because again, when he sold his soul and that's up for debate on when we will address that. But um nowadays it seems like he gets his jollies off of putting stories out there and making everything as ambiguous and cryptic as possible.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:20:51-01:21:06"
+  },
+  {
+    "timestamp" : "01:21:06-01:21:09",
+    "speaker" : "Andy",
+    "text" : "Uh has discovered social media."
+  },
+  {
+    "timestamp" : "01:21:10-01:21:14",
+    "speaker" : "Mike Melo",
+    "text" : "Oh absolutely. Super Bowl commercials."
+  },
+  {
+    "text" : "He won the offset and like impregnated an actress out of wedlocks.",
+    "timestamp" : "01:21:14-01:21:18",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:21:19-01:21:20",
+    "text" : "Well that's true too."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:21:23-01:21:24",
+    "text" : "Yeah, it was."
+  },
+  {
+    "timestamp" : "01:21:25-01:21:28",
+    "speaker" : "Mike Melo",
+    "text" : "But I think he won a couple of Super Bowls by that point."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I thought so too.",
+    "timestamp" : "01:21:28-01:21:29"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "And the words of Trey Wingo, he was coming all over the place.",
+    "timestamp" : "01:21:29-01:21:33"
+  },
+  {
+    "timestamp" : "01:21:36-01:21:38",
+    "speaker" : "Mike Melo",
+    "text" : "I got that reference."
+  },
+  {
+    "text" : "Uh and my worst.",
+    "timestamp" : "01:21:39-01:21:40",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "He was also, by the way, around this time hanging out with uh Donald Trump and uh being a judge at like, you know, Miss America Universe or something. So I don't know. That's a interesting statement by the man.",
+    "timestamp" : "01:21:40-01:21:51"
+  },
+  {
+    "timestamp" : "01:21:52-01:21:54",
+    "speaker" : "Andy",
+    "text" : "Oh, Trewingo?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, no, it was just pre-bridgeting. 2004, 2006. Yeah, that's what it was.",
+    "timestamp" : "01:21:54-01:21:59"
+  },
+  {
+    "text" : "This is pre-bridgeting.",
+    "speaker" : "Andy",
+    "timestamp" : "01:22:00-01:22:01"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "But it it is interesting that he didn't uh he didn't want to be known and then a couple years later he's Tom Brady.",
+    "timestamp" : "01:22:02-01:22:09"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:22:09-01:22:15",
+    "text" : "Steve, um does it say in your fact checking what Bridget Moynihan's son's name is?"
+  },
+  {
+    "timestamp" : "01:22:16-01:22:18",
+    "speaker" : "Steve",
+    "text" : "Uh I'm pretty sure it's Tom Brady."
+  },
+  {
+    "text" : "Uh no, I'm pretty sure it's like Jason Edward Thomas some like Smith Moynihan or something. She named him Jets.",
+    "timestamp" : "01:22:18-01:22:27",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:22:28-01:22:29",
+    "text" : "Jack.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Oh, that's right. That's right. But like his the kids' initials are like jets just to get back at him or something.",
+    "timestamp" : "01:22:30-01:22:35",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:22:36-01:22:37",
+    "text" : "That's what I had heard.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:22:37-01:22:38",
+    "text" : "That's what I heard, yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:22:38-01:22:41",
+    "text" : "I had heard that he was with Tar Reed. I mean I'm bringing that back."
+  },
+  {
+    "timestamp" : "01:22:42-01:22:43",
+    "speaker" : "Steve",
+    "text" : "John Edward Thomas."
+  },
+  {
+    "text" : "See, there you go. John Edward Thomas.",
+    "speaker" : "Andy",
+    "timestamp" : "01:22:43-01:22:46"
+  },
+  {
+    "text" : "What a bitch.",
+    "speaker" : "Steve",
+    "timestamp" : "01:22:47-01:22:48"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Two thousand seven he was born.",
+    "timestamp" : "01:22:48-01:22:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um yeah, so my worst just to cap this off. Uh Terry Glenn. He played second game of the in a row that he played this season that I've forgotten about. Um And he there was a deep pass to him that got picked off by whoever was covering him there. And Terry Glenn made literally no effort to try to break that up whatsoever.",
+    "timestamp" : "01:22:52-01:23:14"
+  },
+  {
+    "timestamp" : "01:23:14-01:23:18",
+    "text" : "I mean, to be fair, was it wasn't he like sort of falling?",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:23:21-01:23:22",
+    "speaker" : "Andy",
+    "text" : "Maybe I know what you're talking about."
+  },
+  {
+    "timestamp" : "01:23:23-01:23:27",
+    "speaker" : "Mike Melo",
+    "text" : "Maybe I looked at it a couple of times. I'm like, I want to give him the benefit of the doubt for no reason whatsoever."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh earned it, but he made a strong catch later, like in the fourth quarter at some point. Like him and the defender both got to like he had he ran like a comeback and him and the defender both got to the ball at the same time. And he like fought the guy for it. And uh And so he put effort in that one, but not on the obvious interception. So that was my my worst.",
+    "timestamp" : "01:23:28-01:23:50"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Mike, do you think you're like the biggest Glen fan? Still around?",
+    "timestamp" : "01:23:50-01:23:54"
+  },
+  {
+    "timestamp" : "01:23:55-01:24:15",
+    "speaker" : "Mike Melo",
+    "text" : "Oh dude, what what did I say? It might have been a last episode, but he could have been the greatest wide receiver of all time. Yeah, yeah. So you're right, Steve. Um and I stand by that"
+  },
+  {
+    "text" : "Oh good.",
+    "timestamp" : "01:24:15-01:24:16",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He has so much swag.",
+    "timestamp" : "01:24:18-01:24:20",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:24:21-01:24:21",
+    "text" : "Oh yeah.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "text" : "I mean if we talked about that.",
+    "timestamp" : "01:24:22-01:24:23",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "If he and Deion Sanders hung out consistently, I would lose my freaking mind. Oh my god. It might be too much drama for me. Yeah. Dion's like drama, but like in a funny way. OBJ is like kind of forced swag, I feel like. That's true. Yeah. Which the Patriots might be a perfect fit for him so he can be his true self and not put on a show. Oh boy. Work with uh Chad Johnson. Yeah. If only he could learn the playbook.",
+    "timestamp" : "01:24:23-01:24:56",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right. I think we've filled up enough airtime with our",
+    "timestamp" : "01:24:58-01:25:03"
+  },
+  {
+    "text" : "Um poop stories and IBS.",
+    "timestamp" : "01:25:03-01:25:08",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:25:08-01:25:11",
+    "text" : "So we're leaving that in.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Sorry, Mom.",
+    "timestamp" : "01:25:13-01:25:14"
+  },
+  {
+    "text" : "Exactly. Until next week. Next week the Patriots uh hosts the Miami Dolphins, the AFC East leading Miami Dolphins for a battle of For the AFC East, really.",
+    "speaker" : "Andy",
+    "timestamp" : "01:25:17-01:25:28"
+  },
+  {
+    "timestamp" : "01:25:29-01:25:30",
+    "speaker" : "Greg",
+    "text" : "Grudge match."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Grudge match indeed. See if they can uh get some get some retribution for how badly they were beaten in Miami. So we'll see how that turns out. So join us next week. On the Patriots Pod Dynasty Podcast, I believe is what it's called.",
+    "timestamp" : "01:25:30-01:25:45"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:25:46-01:25:47",
+    "text" : "No, I was wrong."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:25:47-01:25:53",
+    "text" : "No, well what's it called? What's it called? The Patriots Dynasty Podcast."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:25:53-01:25:58",
+    "text" : "The Patriots Pod Dynasty Podcast. Mike's hot take hour."
+  },
+  {
+    "text" : "Watch the game. Go back to Mexico, man. Jesus. Let's get Connor in here. Whoa. What? Oh boy. What do you want us to build a wall to keep Steve out? Um we can build our own wall to keep him out. Yeah. Huh? You call me like a rapist and a drug dealer? Wow. I don't know, man. I didn't put those words anywhere near my mouth.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:25:59-01:26:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Browns aren't sending their best.",
+    "timestamp" : "01:26:23-01:26:25"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Sometimes. I'm assuming. That's a ma that's amazing, Eddie.",
+    "timestamp" : "01:26:25-01:26:32"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Well, maybe a rivalry between Steve and I is developing and uh we'll see where that goes. Oh good.",
+    "timestamp" : "01:26:32-01:26:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I can't wait.",
+    "timestamp" : "01:26:38-01:26:39"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Harry Glenn sucks. Oh god. Fuck yo!",
+    "timestamp" : "01:26:39-01:26:43"
+  },
+  {
+    "text" : "Alright, boys.",
+    "timestamp" : "01:26:45-01:26:47",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "You're the moderator, Andy.",
+    "timestamp" : "01:26:48-01:26:49",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "timestamp" : "01:26:50-01:26:55",
+    "speaker" : "Andy",
+    "text" : "Yeah, and I've lost all control. It's like it's like CNN up in this bitch."
+  },
+  {
+    "text" : "Fuck Donald Trump. Yes.",
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:26:55-01:26:59"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:27:00-01:27:04",
+    "text" : "Yeah. Alright boys, I'm calling it."
+  },
+  {
+    "timestamp" : "01:27:04-01:27:06",
+    "speaker" : "Steve",
+    "text" : "Yeah, good luck to figure out what to cut and what the keep in."
+  },
+  {
+    "text" : "Oh my god, yeah.",
+    "timestamp" : "01:27:07-01:27:07",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "She keeps everything, don't be fooled.",
+    "speaker" : "Steve",
+    "timestamp" : "01:27:08-01:27:10"
+  },
+  {
+    "timestamp" : "01:27:10-01:27:11",
+    "text" : "I don't know.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:27:13-01:27:16",
+    "text" : "Maybe I haven't listened either. I'm trusting him.",
+    "speaker" : "Mike Melo"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:27:16-01:27:22",
+    "text" : "Yeah, that's a bad decision. I'll leave stuff that makes me sound good and you guys sound like assholes, so Yeah."
+  },
+  {
+    "timestamp" : "01:27:23-01:27:24",
+    "speaker" : "Steve",
+    "text" : "Plenty of that."
+  },
+  {
+    "timestamp" : "01:27:24-01:27:29",
+    "speaker" : "Andy",
+    "text" : "Exactly. All right, boys. We'll uh I'll talk to you soon."
+  },
+  {
+    "timestamp" : "01:27:29-01:27:31",
+    "speaker" : "Greg",
+    "text" : "Uh hey, I got an idea."
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "01:27:31-01:27:32"
+  },
+  {
+    "timestamp" : "01:27:32-01:27:44",
+    "speaker" : "Greg",
+    "text" : "Um, you know how we often reference Some photo or something while we're in it. Maybe we should put those on the the social media"
+  },
+  {
+    "timestamp" : "01:27:45-01:27:45",
+    "text" : "Yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Because we're talking about what's his name, looking fat, Van Pelt.",
+    "timestamp" : "01:27:45-01:27:50",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:27:50-01:27:51",
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "You could put those on there with like a quote, you know",
+    "timestamp" : "01:27:52-01:27:55"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "True. And the um the poll thing is a good idea that happened on the uh the page as well. I think people like that sort of thing. Do you want me to do the f the social media?",
+    "timestamp" : "01:27:55-01:28:09"
+  },
+  {
+    "text" : "Yeah, if you want to run the social media, that'd be so much work",
+    "timestamp" : "01:28:09-01:28:12",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Is it? Well, it's not that bad, but not like the vi but you can post like stupid like not even relevant shit, but just anything Patriots related, you know. Yeah, it's true.",
+    "timestamp" : "01:28:13-01:28:24",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "timestamp" : "01:28:24-01:28:27",
+    "text" : "I mean, goofy stuff is fun. People like that shit."
+  },
+  {
+    "timestamp" : "01:28:28-01:28:37",
+    "text" : "That's what I'm saying. Or just like hilarious old photos of like There's so many pictures out there of Belichick looking like a fogging meat stick back in the day.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Mike Melo",
+    "text" : "Well, and it you make a good point, man, because the Pats just tried to do that, like the actual like Patriots Twitter or whatever, I saw it, and they're all like Look at the players, how they look back on their combine days, and everyone looked exactly the same. I'm like, this isn't fun.",
+    "timestamp" : "01:28:37-01:28:51"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:28:52-01:29:14",
+    "text" : "They had a better one where they had like weird faces from all, but I agree. I actually have posted on my desk this picture of Belichick in like a Cleveland Browns sweatshirt holding a football. Greg, I think you gave it to me. That sounds familiar. Uh Andy, you should be able to just give all of us access, right? Yeah, I can do that. Instead of one person trying to do it, just spread the content around. It's a lot easier that way."
+  },
+  {
+    "timestamp" : "01:29:14-01:29:16",
+    "speaker" : "Greg",
+    "text" : "Yeah, anytime it's funny."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep.",
+    "timestamp" : "01:29:17-01:29:18"
+  },
+  {
+    "timestamp" : "01:29:19-01:29:20",
+    "speaker" : "Andy",
+    "text" : "Works for me."
+  },
+  {
+    "text" : "I'll see if I can get um a picture of that guy's Chris Mormon jersey in his closet.",
+    "speaker" : "Steve",
+    "timestamp" : "01:29:21-01:29:26"
+  },
+  {
+    "text" : "Oh, that'd be dope. All right, boys. All right, guys.",
+    "timestamp" : "01:29:26-01:29:31",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Talk to you soon.",
+    "timestamp" : "01:29:32-01:29:32"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Later.",
+    "timestamp" : "01:29:34-01:29:34"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:29:35-01:29:36",
+    "text" : "Bye."
+  }
+]

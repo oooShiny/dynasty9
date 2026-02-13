@@ -15,9 +15,11 @@ dependencies:
     - field.field.node.podcast_episode.field_monthly_downloads
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
+    - field.field.node.podcast_episode.field_publication_date
     - field.field.node.podcast_episode.field_season
     - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_total_downloads
+    - field.field.node.podcast_episode.field_transcript_filename
     - field.field.node.podcast_episode.field_transcription
     - node.type.podcast_episode
   module:
@@ -154,6 +156,14 @@ content:
     third_party_settings: {  }
     weight: 114
     region: content
+  field_transcript_filename:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 118
+    region: content
   field_transcription:
     type: text_default
     label: hidden
@@ -167,5 +177,6 @@ content:
     weight: 100
     region: content
 hidden:
+  field_publication_date: true
   langcode: true
   search_api_excerpt: true

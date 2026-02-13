@@ -1,0 +1,19 @@
+uuid: 1274210e-dac5-4259-93b6-5c2534299865
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_transcript_filename
+    - node.type.podcast_episode
+id: node.podcast_episode.field_transcript_filename
+field_name: field_transcript_filename
+entity_type: node
+bundle: podcast_episode
+label: 'Transcript Filename'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

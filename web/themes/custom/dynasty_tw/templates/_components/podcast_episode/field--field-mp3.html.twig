@@ -38,15 +38,20 @@
 #}
 
 
+<div class="bg-white flex gap-1 h-fit justify-center my-auto px-2 rounded-full w-fit relative overflow-visible">
   <audio id="pod-{{ mp3 }}" src="{{ mp3_url }}"></audio>
-  <div id="back-pod-{{ mp3 }}" class="text-white p-1 rounded-full bg-white shadow-lg hidden">
+  <div id="back-pod-{{ mp3 }}" class="my-auto text-white transition-all duration-300 ease-out opacity-0 -mr-6 scale-0 cursor-pointer">
     <img src="/themes/custom/dynasty_tw/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
   </div>
-  <div class="text-white p-4 rounded-full bg-red-pats shadow-lg">
-    <img src="/themes/custom/dynasty_tw/icons/pod-play.svg" onclick="playPause('pod-{{ mp3 }}')" id="playpod-{{ mp3 }}" class="w-5 h-5" style="cursor: pointer" />
+  <div class="bg-red-pats outline outline-red-pats outline-4 p-4 rounded-full shadow-lg text-white w-12 z-10 relative">
+    <img src="/themes/custom/dynasty_tw/icons/pod-play.svg"
+         onclick="playPause('pod-{{ mp3 }}')"
+         id="playpod-{{ mp3 }}"
+         class="w-auto h-auto" style="cursor: pointer" />
   </div>
-  <div id="fwd-pod-{{ mp3 }}" class="text-white p-1 rounded-full bg-white shadow-lg hidden">
+  <div id="fwd-pod-{{ mp3 }}" class="my-auto text-white transition-all duration-300 ease-out opacity-0 -ml-6 scale-0 cursor-pointer">
     <img src="/themes/custom/dynasty_tw/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
   </div>
+</div>
 
 

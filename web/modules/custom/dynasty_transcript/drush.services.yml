@@ -1,0 +1,6 @@
+services:
+  dynasty_transcript.commands:
+    class: \Drupal\dynasty_transcript\Commands\TranscriptCommands
+    arguments: ['@http_client']
+    tags:
+      - { name: drush.command }

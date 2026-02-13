@@ -19,11 +19,18 @@
  */
 #}
 {% set mp3 = random() %}
-
-<audio id="pod-{{ mp3 }}" src="{{ output -}}"></audio>
-<div class="bg-red-pats mx-10 p-4 rounded-full shadow-lg text-white w-12">
-  <img src="/themes/custom/dynasty_tw/icons/pod-play.svg"
-       onclick="playPause('pod-{{ mp3 }}')"
-       id="playpod-{{ mp3 }}"
-       class="w-auto h-auto" style="cursor: pointer" />
+<div class="bg-white flex gap-1 h-fit justify-center my-auto px-2 rounded-full w-fit">
+  <audio id="pod-{{ mp3 }}" src="{{ mp3_time }}"></audio>
+  <div id="back-pod-{{ mp3 }}" class="my-auto text-white hidden">
+    <img src="/themes/custom/dynasty_tw/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
+  </div>
+  <div class="bg-red-pats outline outline-red-pats outline-4 p-4 rounded-full shadow-lg text-white w-12">
+    <img src="/themes/custom/dynasty_tw/icons/pod-play.svg"
+         onclick="playPause('pod-{{ mp3 }}')"
+         id="playpod-{{ mp3 }}"
+         class="w-auto h-auto" style="cursor: pointer" />
+  </div>
+  <div id="fwd-pod-{{ mp3 }}" class="my-auto text-white hidden">
+    <img src="/themes/custom/dynasty_tw/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
+  </div>
 </div>

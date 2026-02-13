@@ -1,0 +1,20 @@
+uuid: d9d2cea9-776c-49c1-b54f-6c24ee77759e
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_transcript
+    - taxonomy
+id: dynasty_transcript.field_speaker
+field_name: field_speaker
+entity_type: dynasty_transcript
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

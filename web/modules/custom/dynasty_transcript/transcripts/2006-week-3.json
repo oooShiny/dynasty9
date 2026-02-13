@@ -1,0 +1,2487 @@
+[
+  {
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to. My sons sometimes say some naughty things when they're trying to be funny. But really, they're just being stupid. Do you still want to listen? Go right ahead. I am not your mother.",
+    "speaker" : "Mom",
+    "timestamp" : "00:00-00:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Welcome back to the Patriots Dynasty Podcast. The only podcast in the history of podcasts that is going back and re-watching. every game of the Patriots Dynasty era. We do mean every game, the good, the bad, and the ugly. And so I guess that's a great segue because we have all of those here with me today. Um Steve Brown, I don't know if you're the bad or the ugly. Which one would you prefer?",
+    "timestamp" : "00:23-00:45"
+  },
+  {
+    "text" : "Oh, I am definitely the bad.",
+    "speaker" : "Steve",
+    "timestamp" : "00:46-00:47"
+  },
+  {
+    "timestamp" : "00:47-00:55",
+    "text" : "Okay. Alright, so bad Steve Brown is with us. And also ugly, I guess that leaves you, Greg Brown. Nice to see you again",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "00:55-00:57",
+    "speaker" : "Greg",
+    "text" : "I'm fine with ugly. I can live with that."
+  },
+  {
+    "text" : "Remember Dad used to call us Tweedle Dumb and Tweedle Dumber and we'd argue about who is dumber?",
+    "timestamp" : "00:57-01:02",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I do remember that. I still think you're dumber. No, no way. You're definitely dumber.",
+    "speaker" : "Greg",
+    "timestamp" : "01:02-01:09"
+  },
+  {
+    "timestamp" : "01:12-01:19",
+    "text" : "Andy is a dick measuring contest. No, it's kind of the opposite.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Andy, who's dumber?",
+    "timestamp" : "01:20-01:21",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:21-01:28",
+    "text" : "Oh god. Um It depends on the situation, but both of you I think have a fair claim to being dumber.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:29-01:32",
+    "text" : "I mean we're both dumb and that's why it's dumb and dumber, right? Right. Yeah.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:34-01:39",
+    "speaker" : "Andy",
+    "text" : "I don't know. I I don't think either of you are climbing out of that uh mud hole."
+  },
+  {
+    "timestamp" : "01:39-01:42",
+    "text" : "We'll just be a couple crabs in the bucket, in the dumb bucket.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:42-01:48",
+    "text" : "Yeah, maybe we'll just keep track throughout this podcast. Alright. You can give out points for dumb takes."
+  },
+  {
+    "text" : "Okay. And extra points for dumber takes?",
+    "timestamp" : "01:48-01:51",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. Steve What's your take on Josh Allen? He's no Ryan Tannehill.",
+    "speaker" : "Greg",
+    "timestamp" : "01:51-02:00"
+  },
+  {
+    "text" : "I love it. Alright, so where are we this week, boys? We are 2006, the forgotten season as we're calling it, because nobody remembers 2006. Greg, do you remember 2006?",
+    "speaker" : "Andy",
+    "timestamp" : "02:04-02:14"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Is this the Chargers playoff game?",
+    "timestamp" : "02:28-02:31"
+  },
+  {
+    "timestamp" : "02:31-02:41",
+    "text" : "Yes. That is the only game that anybody remembers. That one and then uh the game after that, the AFC Championship. The Rush. Yep.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "The flu game. Yeah. I can't I don't remember anything in between though.",
+    "speaker" : "Greg",
+    "timestamp" : "02:41-02:47"
+  },
+  {
+    "timestamp" : "02:47-03:14",
+    "speaker" : "Andy",
+    "text" : "No. Um I do remember, uh we can chalk this up as a point for you. Um after this season, you and I had a Uh a disagreement about um which wide receiver would still be playing on this team. Um You said Roshea Caldwell will definitely come back and I was on the Jabbar Gaffney train, um which goes to show you where this team was in terms of receiving talent in two thousand six."
+  },
+  {
+    "text" : "Um I thought they got hated on too much.",
+    "timestamp" : "03:15-03:17",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Um they're not good. There have been quite a few drops already. You may remember Doug Gabriel and his brief stint with the Patriots. I know he did catch a touchdown in this game and it was actually a legit catch. And all I remember from this season in Doug Gabriel is, I think I said it last week, um He showed up, he made some catches, and all of a sudden he just wasn't there anymore, and there was no talk about him or where he went or why he went or he just disappeared. And then I think Jabbar Gaffney shows up kind of halfway through the season and uh Kind of takes over that spot quietly. But something happens to Doug Gabriel somewhere in the middle of the season.",
+    "timestamp" : "03:18-04:00",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "And never plays again.",
+    "timestamp" : "04:00-04:01"
+  },
+  {
+    "timestamp" : "04:01-04:07",
+    "text" : "Yeah. Lost lost favor with the Patriots and just disappears. Even after being created for.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "04:07-04:09",
+    "speaker" : "Greg",
+    "text" : "He's no like ne never plays again in the NFL."
+  },
+  {
+    "text" : "Right.",
+    "timestamp" : "04:09-04:10",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "04:10-04:10",
+    "speaker" : "Greg",
+    "text" : "Interesting."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Just all done yet, so not sure what that was about. Uh but this week three game is um hosting the Denver Broncos, the same one that ended your season the w year before in the playoffs.",
+    "timestamp" : "04:11-04:22"
+  },
+  {
+    "text" : "Revenge game.",
+    "timestamp" : "04:22-04:23",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Hitting Tom Brady's first ever playoff loss. Um yes, in theory is a revenge game, except the Patriots loss. 177 at home. A rare home loss that you'd see. Although uh this was against a Mike Shanahan team, which is a team that the Patriots have kind of historically struggled against. Mike um they're only four and five against Mike Shanahan led teams, which Not many head coaches I think have a winning record against Belichick on the Patriots. So one of the only one unless they're like one and no Yeah, I think there's a few out there that are like one and two or two and three, but I think oh yeah, we'll have to look that up and then.",
+    "timestamp" : "04:23-05:05"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Those aren't winning records, Andy.",
+    "timestamp" : "05:05-05:06"
+  },
+  {
+    "text" : "That sounds like a point for maybe you're No the Patriots are the that record he's those coaches, Steve. Keep up. Point for Steven.",
+    "speaker" : "Andy",
+    "timestamp" : "05:06-05:14"
+  },
+  {
+    "text" : "So you just gotta keep your mouth shut. This is how you win this contest.",
+    "speaker" : "Greg",
+    "timestamp" : "05:16-05:20"
+  },
+  {
+    "timestamp" : "05:23-05:25",
+    "text" : "Steve, tell me about these number broncos.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Famously not a strong suit of mine keeping my mouth shut.",
+    "speaker" : "Steve",
+    "timestamp" : "05:25-05:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, fair",
+    "timestamp" : "05:29-05:30"
+  },
+  {
+    "text" : "Uh they're like now that I'm like a m a ball knower, you know, which I wasn't in two thousand and or two thousand six But you are now? I am now, yeah, obviously. I watch a lot of YouTube film film breakdowns. But I don't see that anymore. Me and JTL Sullivan are we're boys. We we talk on DMs and stuff.",
+    "speaker" : "Steve",
+    "timestamp" : "05:31-05:51"
+  },
+  {
+    "timestamp" : "05:51-05:52",
+    "text" : "Oh I bet you do.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Mm-hmm. Mm-hmm. But that that stretch zone is unique. What's unique about it, Steve? Well they like they I mean I I just didn't really realize it back then. But I don't think you see anyone else running that, especially back in two thousand and six. Now a lot of teams run it.",
+    "speaker" : "Steve",
+    "timestamp" : "05:52-06:10"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "06:11-06:25",
+    "text" : "Yeah, I think the Shanahan teams were the first ones to like really run it consistently. Yeah. I think the Colts were too, right? Greg, didn't they run the the zone stretch and then the play action off of that? It's kind of their bread and butter with Tate Manning."
+  },
+  {
+    "timestamp" : "06:25-06:30",
+    "speaker" : "Steve",
+    "text" : "I don't think so. I don't know. We'll find out. Watch w now that I'll you know I'm a ball knower."
+  },
+  {
+    "timestamp" : "06:31-06:54",
+    "text" : "Why are you a ball knower now? What what did YouTube. What if you YouTube. Okay. So you're watching a lot of All Twenty Two? Yeah. Okay. Me too. I'm addicted to Drake May, All Twenty Two. Oh yeah. Oh yeah. That and Mike Duff Patriots, that's like it's either end of the spectrum, but they're both beautiful.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh-huh. Uh yeah, you like you see it now all the time. I think this is probably the only team that runs it, at least as far as I've seen.",
+    "timestamp" : "06:54-07:03"
+  },
+  {
+    "text" : "Yeah. Um yeah, I do think they were at the fork for not running that stretch. Like they had a uh run, yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "07:03-07:13"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It was also a John Madden game, which fuck yeah.",
+    "timestamp" : "07:13-07:16"
+  },
+  {
+    "timestamp" : "07:16-07:17",
+    "speaker" : "Andy",
+    "text" : "Oh beautiful."
+  },
+  {
+    "timestamp" : "07:17-07:21",
+    "speaker" : "Steve",
+    "text" : "I don't know how many more of those we'll get, but I appreciate every single one of 'em."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I think he's on his way to retirement two thousand six. Um",
+    "timestamp" : "07:21-07:26"
+  },
+  {
+    "timestamp" : "07:28-07:36",
+    "speaker" : "Steve",
+    "text" : "But they had a whole graphic about how the the Broncos had the lightest offensive line in the league. And then like Madden's breaking down the whole stretch runs and"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Oh yeah.",
+    "timestamp" : "07:36-07:37"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Boots off of it and all that sort of stuff. And it was actually just made you love John Madden even more because he's now really breaking it down. He's the original ball knower.",
+    "timestamp" : "07:37-07:45"
+  },
+  {
+    "timestamp" : "07:45-08:03",
+    "text" : "He is the original ball knower. I don't know, is he? Yeah, he's all on Dodge, actually he probably is. Because he's uh Let's see, how long did he do Oh he will go to 2008. So 2006 was the first year he went to NBC Sports. So he got a couple more years with him.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "08:03-08:04",
+    "text" : "Ah good.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "08:04-08:04",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah Jake Jake the Snake plumber, quarterback.",
+    "speaker" : "Steve",
+    "timestamp" : "08:04-08:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "08:07-08:08"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Their offense kinda sucked though.",
+    "timestamp" : "08:09-08:10"
+  },
+  {
+    "timestamp" : "08:10-08:36",
+    "speaker" : "Andy",
+    "text" : "Their offense is bad. Um I mean just generally their offense was seventeenth in points, twenty-first in yards um overall But this defense is an absolute fucking monster, at least especially early in the season. Yeah. Yeah, they finished top ten in points and fourteenth in yards. Um but didn't they 'cause the the Patriots scored late in this game. They scored what the fourth quarter?"
+  },
+  {
+    "timestamp" : "08:37-08:39",
+    "text" : "Yeah well the behavior was nice touchdown. Nice touchdown, yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Exactly, yeah. But that was the first touchdown the Colts or the um the Broncos had. Let up this season. At its fourth quarter of week three. Yeah.",
+    "timestamp" : "08:39-08:48",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And it's kind of garbage time too. They're already up seventeen nothing.",
+    "timestamp" : "08:48-08:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. It was the first they'd be the Barners again the first team since 1942 Chicago Cardinals to begin their season with 11 straight quarters without allowing their opponents to score a touchdown, which is fucking wild.",
+    "timestamp" : "08:51-09:01"
+  },
+  {
+    "text" : "And then the Chicago Cardinals went like three and twelve.",
+    "speaker" : "Steve",
+    "timestamp" : "09:02-09:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Amazing.",
+    "timestamp" : "09:06-09:07"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And then John Madden was like, well, you bet no the Broncos don't repeat that. Where did they end up at the year at?",
+    "timestamp" : "09:08-09:15"
+  },
+  {
+    "text" : "Uh I'm glad you asked, Steve. They uh finished third in the AFC West at nine and seven and did not qualify for the playoffs. Jeez.",
+    "timestamp" : "09:15-09:22",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I guess on this game you think they'd be whooping people up.",
+    "speaker" : "Steve",
+    "timestamp" : "09:23-09:26"
+  },
+  {
+    "text" : "You would think. Um but uh do you want to hear their previous two games?",
+    "timestamp" : "09:26-09:30",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Sure.",
+    "timestamp" : "09:31-09:31",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "09:32-10:26",
+    "text" : "Uh uh so they started the season off oop wrong way. Um Losing to the Rams 18-10 without giving up a touchdown. So it's one, two, three, four, five, six field goals by Jeff Wilkins in the win. Um and then they beat the Kansas City Chiefs. Um In a game where no touchdowns were scored by either team, they won six to nine in overtime. Uh well Jason E. 39-yard field goal in overtime. Um and then this game was um 17-7. That was their their big coming out, their offensive coming out. Um and then the week after they'd score another 13 points to beat the Ravens and hold them without a touchdown, 13 to 3."
+  },
+  {
+    "timestamp" : "10:28-10:38",
+    "speaker" : "Greg",
+    "text" : "So they draft a quarterback in the first round. Yep. Don't start 'em. Yep. All year. Don't score a touchdown until week three. Yep."
+  },
+  {
+    "text" : "Do they make the switch at some point in the year?",
+    "timestamp" : "10:39-10:41",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "10:41-10:49",
+    "text" : "Uh they do because um let's see, I don't know when But both quarterbacks have stats on their thing."
+  },
+  {
+    "text" : "So Jay Cutler had pl he played five games.",
+    "timestamp" : "10:49-10:51",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah, he played he started five games and went two and three. Jake Fortnite went seven and four, but had eleven touchdowns and thirteen picks. Yeah, under two thousand yards. Um Jay Cutler had nine touchdowns and five picks. In all so many losses.",
+    "timestamp" : "10:52-11:09",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Jake the Snake stat line, fifteen foot thirty, two fifty-six, and he had that eighty-three yard bomb. Right. Well didn't even a bomb, it was just like a whole it was a cover two whole shot.",
+    "timestamp" : "11:10-11:20",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "11:23-11:24",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "But he I mean he seemed to be playing better than that, honestly.",
+    "timestamp" : "11:28-11:31",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "11:31-11:32",
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah."
+  },
+  {
+    "text" : "Um he wasn't the problem.",
+    "speaker" : "Steve",
+    "timestamp" : "11:32-11:34"
+  },
+  {
+    "text" : "No, but I mean the Patriots offense seemed to be the problem. Well the runners specifically, right? Well they run for fifty total yards.",
+    "timestamp" : "11:35-11:41",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, they were. Yeah, the well it just seemed like the Broncos defense was still overwhelming.",
+    "timestamp" : "11:41-11:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. I mean Brady had three hundred and twenty passing yards on fifty-five attempts though. Yeah. Just like they just could not run the ball.",
+    "timestamp" : "11:46-11:54"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And there was no one open, every single one they were like tight to him except for Troy Brown.",
+    "timestamp" : "11:55-11:59"
+  },
+  {
+    "timestamp" : "11:59-12:19",
+    "speaker" : "Andy",
+    "text" : "Yep. That tracks. Um the one run uh it wasn't run, actually it was a screenplay, but um I still think Lawrence Moroni is a better running back than I remember. He looks dangerous with the ball, which I do not remember at all. Yeah, he was pretty good. Isn't he your boy, Greg? We were talking about this the other week. Lawrence Moroni. Isn't that your boy?"
+  },
+  {
+    "timestamp" : "12:20-12:38",
+    "speaker" : "Greg",
+    "text" : "Mm. No, I mean I felt I feel like he was harshly judged, I remember thinking that at the time. Um I do not know the answer to that. I thought it I thought it was you that kept bringing it up."
+  },
+  {
+    "timestamp" : "12:39-12:41",
+    "text" : "No. Maybe you're thinking to sell you, Michelle.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I don't think so.",
+    "timestamp" : "12:41-12:42"
+  },
+  {
+    "text" : "Um similar careers? Yeah, I would say so, right? Both first round running backs.",
+    "speaker" : "Steve",
+    "timestamp" : "12:42-12:50"
+  },
+  {
+    "timestamp" : "12:53-13:03",
+    "text" : "Yeah. I don't know. That's not like he had the most the most touchdown score in a playoff run or something. But something like weird like that. That was Morroney.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "13:03-13:05",
+    "text" : "Well he never ran for a thousand yards.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "13:05-13:25",
+    "text" : "No. Two thousand seven was his best season and he gained eight hundred and thirty five total yards on the ground. But then again, the Patriots uh leading all-time yards uh all-purpose yards guy was a running back who never had a hundred yard rushing game. So you know"
+  },
+  {
+    "text" : "You want to hear some names from the Broncos defense that I remember? Yes. Champ Champ Bailey. Yeah. Can you name any more, Greg? Um play for the Patriots.",
+    "timestamp" : "13:27-13:40",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "John Lynch is on this team?",
+    "timestamp" : "13:40-13:41"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh-huh.",
+    "timestamp" : "13:42-13:42"
+  },
+  {
+    "timestamp" : "13:42-13:48",
+    "speaker" : "Greg",
+    "text" : "Wow. I'm trying to think. There's some big is there a big nose tackle guy that was on this team?"
+  },
+  {
+    "timestamp" : "13:49-13:55",
+    "text" : "No, they they kind of played like not not a big fat guy like uh Finn Swell Fork, yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Let's hear some names.",
+    "timestamp" : "13:56-13:57",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "13:57-13:58",
+    "text" : "Ebenezer Ecuban."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yes. Mm-hmm.",
+    "timestamp" : "13:59-14:00"
+  },
+  {
+    "text" : "DJ Williams. Oh yeah. Ian Gold.",
+    "speaker" : "Steve",
+    "timestamp" : "14:01-14:04"
+  },
+  {
+    "text" : "Al Wilson.",
+    "speaker" : "Andy",
+    "timestamp" : "14:05-14:05"
+  },
+  {
+    "timestamp" : "14:06-14:09",
+    "speaker" : "Steve",
+    "text" : "Al Wilson. Yeah, they had good linebackers. Dominique Foxworth."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "14:09-14:10",
+    "text" : "Dominique Foxworth."
+  },
+  {
+    "timestamp" : "14:11-14:15",
+    "speaker" : "Steve",
+    "text" : "Al Wilson. Oh, we already said that. Gerard Warren."
+  },
+  {
+    "text" : "Gerard Warren.",
+    "speaker" : "Greg",
+    "timestamp" : "14:15-14:16"
+  },
+  {
+    "timestamp" : "14:16-14:18",
+    "speaker" : "Steve",
+    "text" : "Michael Myers from Halloween."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "14:19-14:28",
+    "text" : "Happy Halloween to those who celebrate. Feliz Dia de los Muertos to our amigo listeners."
+  },
+  {
+    "timestamp" : "14:28-14:30",
+    "speaker" : "Steve",
+    "text" : "I don't think that's the same holiday, Greg."
+  },
+  {
+    "timestamp" : "14:31-14:32",
+    "text" : "It is.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, it's not.",
+    "timestamp" : "14:32-14:33"
+  },
+  {
+    "text" : "Well it it's like on the same like part of the sc calendar.",
+    "timestamp" : "14:33-14:39",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't think so.",
+    "timestamp" : "14:39-14:40"
+  },
+  {
+    "text" : "Yeah it is dude. My coworker is in Mexico City right now for Dia de los Muertos.",
+    "speaker" : "Greg",
+    "timestamp" : "14:40-14:44"
+  },
+  {
+    "text" : "Okay. Yeah, it is it is around this time.",
+    "speaker" : "Andy",
+    "timestamp" : "14:44-14:46"
+  },
+  {
+    "text" : "It's like different functionally in how they celebrate and shit, but it's just around the same time. Uh another dumb point for Steve. Put it on the fucking UM out. Come on, dude. That's an obvious one. Yeah, that was pretty that was yeah.",
+    "speaker" : "Greg",
+    "timestamp" : "14:46-15:03"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "15:03-15:05",
+    "text" : "I just instantly think anything you say is wrong."
+  },
+  {
+    "timestamp" : "15:06-15:07",
+    "speaker" : "Greg",
+    "text" : "Exactly. That's why you're dumb. Alright."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "15:08-15:11",
+    "text" : "Am I though? Am I or is that kind of a smart way to approach these things?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'll give you a point each for that.",
+    "timestamp" : "15:12-15:14"
+  },
+  {
+    "text" : "Oh, there you go. It's two one.",
+    "timestamp" : "15:14-15:18",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "15:20-15:23",
+    "text" : "I think the more points have been given out than that, Steve."
+  },
+  {
+    "text" : "Look, I'm not into counting Oh yeah, long as 20 stat line, twelve carries, eighteen yards. Whoa. Long on five.",
+    "speaker" : "Steve",
+    "timestamp" : "15:23-15:32"
+  },
+  {
+    "text" : "So was it just that uh The Denver defense is that good or is the Paige just struggling to run the ball?",
+    "timestamp" : "15:32-15:38",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "15:39-15:41",
+    "speaker" : "Steve",
+    "text" : "I think a Denver D'Ins is that good."
+  },
+  {
+    "timestamp" : "15:41-15:43",
+    "speaker" : "Andy",
+    "text" : "I think it has to be. Yeah."
+  },
+  {
+    "timestamp" : "15:53-15:55",
+    "text" : "And then you kind of cooked.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "15:55-16:05",
+    "speaker" : "Greg",
+    "text" : "I got a question. How do we throw for three hundred and twenty yards with no interceptions or fumbles and still only score six?"
+  },
+  {
+    "timestamp" : "16:05-16:06",
+    "text" : "And no sacks.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "16:07-16:09",
+    "text" : "How is that what happened?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Dude, the leading receiver is Doug Gabriel with 65 yards.",
+    "timestamp" : "16:08-16:12"
+  },
+  {
+    "text" : "Yeah, but he's got three hundred twenty yards. What did they just have like fifty yard driving punt every time?",
+    "timestamp" : "16:12-16:19",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah, pretty much I get one or two first downs and then stall out.",
+    "speaker" : "Steve",
+    "timestamp" : "16:19-16:22"
+  },
+  {
+    "text" : "Yeah, big more than ever, yeah. Uh our our efficiency gang.",
+    "timestamp" : "16:22-16:28",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "You want this big? You want you want the you want the drive shard here?",
+    "timestamp" : "16:28-16:31",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "The yards per attempt.",
+    "timestamp" : "16:31-16:33",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "16:34-16:36",
+    "speaker" : "Greg",
+    "text" : "What's the EPA per drop back? Yeah."
+  },
+  {
+    "timestamp" : "16:40-16:42",
+    "speaker" : "Steve",
+    "text" : "A over AY."
+  },
+  {
+    "timestamp" : "16:43-16:48",
+    "speaker" : "Greg",
+    "text" : "Plus minus. Dude, we should be a stats pod from here on out, Steve."
+  },
+  {
+    "timestamp" : "16:48-16:59",
+    "text" : "A couple of ball notes. Greg Greg gets a point for that, because you definitely fucking shouldn't be. Nothing dumb. I didn't even say anything dumb. Yes, it says that's pretty dumb.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "17:05-17:09",
+    "text" : "Oh god. Hmm. He might be go ahead Andy, say something."
+  },
+  {
+    "timestamp" : "17:09-17:10",
+    "speaker" : "Steve",
+    "text" : "Dumbest."
+  },
+  {
+    "text" : "You w you want the pages drivetrack, Greg? Yeah. You you want you want some stats? Here's some stats for ya. Uh 14 yards punt, 41 yards punt, 45 yards downs, turn over down, 60 yards block field goal, 13 yards end of the half. Second half, minus four yards punt, 30 yards punt, four yards punt, 17 yards punt, 80 yard touchdown, followed by 0 yards punt Twollow by six yards and then turn over and dance",
+    "timestamp" : "17:10-17:36",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "So the answer is two turnovers on downs and a block field goal. Yep. There's a hundred and sixty of those yards. Yep. Okay. Alright, I can live with that.",
+    "speaker" : "Greg",
+    "timestamp" : "17:37-17:50"
+  },
+  {
+    "text" : "Yeah, I mean it is what it is, right?",
+    "speaker" : "Andy",
+    "timestamp" : "17:51-17:52"
+  },
+  {
+    "text" : "As long as they're not punting from the 40, that that looking back on these games, they're all all the coaches are such pussies. It's fucking incredible.",
+    "timestamp" : "17:52-18:00",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "18:00-18:10",
+    "speaker" : "Steve",
+    "text" : "There's there's there's one in this one from the Broncos. The surrender index."
+  },
+  {
+    "text" : "Yes.",
+    "timestamp" : "18:10-18:10",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They punted from the thirty-four yard line.",
+    "timestamp" : "18:14-18:17"
+  },
+  {
+    "timestamp" : "18:17-18:17",
+    "speaker" : "Greg",
+    "text" : "Oh my god."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Passing a one-year-old fifty-one yard field goal from Jason Elam.",
+    "timestamp" : "18:18-18:22"
+  },
+  {
+    "text" : "Fifty-one yarder. Imagine someone passing on a fifty-one yard field goal in the modern NFL.",
+    "speaker" : "Greg",
+    "timestamp" : "18:23-18:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that's what happened. 61 you're still thinking about it.",
+    "timestamp" : "18:27-18:30"
+  },
+  {
+    "text" : "They punted it to the 17 yard line.",
+    "speaker" : "Steve",
+    "timestamp" : "18:31-18:33"
+  },
+  {
+    "text" : "They didn't even get it like the like Yeah, you don't need a fucking statistics degree to figure that that then wasn't worth it. Yeah, no, that's yeah.",
+    "speaker" : "Greg",
+    "timestamp" : "18:34-18:42"
+  },
+  {
+    "text" : "And then the pages get a fourth and one. You know, they're trailing from the thirty-sixth and they're like, oh, should they go for it? And like this this age is like, yeah, of course. Like",
+    "timestamp" : "18:43-18:54",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "From Hill thirty six down what? Fourteen? From there thirty six, yeah, I don't know what we're only down ten nothing at that point. So yeah. That's hard to go for when it's just yeah.",
+    "timestamp" : "18:54-19:03"
+  },
+  {
+    "timestamp" : "19:03-19:09",
+    "speaker" : "Greg",
+    "text" : "F That's incredible. It was a f it was a fourth and seven too. It's not like it was like fourth and twenty. Mm-hmm."
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "19:09-19:09",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "That put that high on the surrender index.",
+    "timestamp" : "19:10-19:12"
+  },
+  {
+    "text" : "Yeah, yeah, that's that's up there. Top twenty five for sure of all time.",
+    "speaker" : "Andy",
+    "timestamp" : "19:12-19:17"
+  },
+  {
+    "timestamp" : "19:17-19:28",
+    "text" : "It is wild how it's changed. And even now, like everyone's kicking field goals from way downtown, right? After they've changed kicking ball rules so they can work the balls before the games now. Yeah, they're just blasting them.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I think it's made it way better.",
+    "timestamp" : "19:29-19:30",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "19:30-19:31",
+    "text" : "Don't you have, yeah. Yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Oh yeah.",
+    "timestamp" : "19:32-19:32",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I love the embalms.",
+    "timestamp" : "19:32-19:34"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah. More points. More fun.",
+    "timestamp" : "19:34-19:36"
+  },
+  {
+    "timestamp" : "19:36-19:43",
+    "text" : "Yeah, it's like home run, it's like fuck it. Yeah. You can juice them balls, baby. Dude, that guy in Dallas, that's just a fuck.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Dude, shout out Borgallis too",
+    "timestamp" : "19:44-19:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Boregalis, right?",
+    "timestamp" : "19:46-19:47"
+  },
+  {
+    "timestamp" : "19:48-19:51",
+    "text" : "Underrated aspect of this Patriots team.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "19:51-20:07",
+    "speaker" : "Steve",
+    "text" : "This is Gostowski's rookie year? Yeah, this is rookie Gostowski. And Madden and uh Al Michaels are like Well his name was really hard to say. That first K is silent. Like this is a tough one. And it's like, yeah, I guess it was when he first came out, but eventually everyone just knew it, you know."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, because he was there for so fucking long. Yeah, yeah.",
+    "timestamp" : "20:07-20:10"
+  },
+  {
+    "text" : "Wait, why is it hard to pronounce? Has a second it has a K in it, has two Ks in it. And a silent K in the first. Guess goss Tauski, but there's a K in between the S and the T",
+    "speaker" : "Steve",
+    "timestamp" : "20:12-20:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Is that actually true?",
+    "timestamp" : "20:27-20:28"
+  },
+  {
+    "timestamp" : "20:28-20:39",
+    "text" : "Greg's Gosh. His last name is G-O-S-T. K-O-W-S-K-I-I. Gost Kowski. It's actually pronounced super phonetically.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "20:39-20:43",
+    "speaker" : "Steve",
+    "text" : "No, it there isn't Kowski, it's Gost. Gostowski?"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "20:43-20:59",
+    "text" : "Gostowski. Well you said the K was in between the S and the T, so put it on the board. Grange is hunting now. I'm just not gonna say anything except for challenges to Steve Statements."
+  },
+  {
+    "timestamp" : "21:00-21:03",
+    "text" : "Shocking. Oh boy",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "21:04-21:10",
+    "text" : "Yeah, gostowski instead of Guskowski, probably right? Yeah. Sure. Yeah.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "21:10-21:18",
+    "text" : "We'll go with that. Alright, anything else from this game, Steve? Because I think it's funny that's that uh Greg and I did not watch it.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "21:19-21:22",
+    "speaker" : "Steve",
+    "text" : "Wow, so I'm you're saying it's I'm the only one who watched the game."
+  },
+  {
+    "timestamp" : "21:22-21:24",
+    "speaker" : "Andy",
+    "text" : "I'm saying you're the only one that's unemployed."
+  },
+  {
+    "timestamp" : "21:24-21:24",
+    "text" : "Mm-hmm.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "21:25-21:25"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Jealous?",
+    "timestamp" : "21:26-21:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um a little bit. Yes. Yes.",
+    "timestamp" : "21:27-21:31"
+  },
+  {
+    "timestamp" : "21:31-21:31",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Not gonna lie.",
+    "speaker" : "Andy",
+    "timestamp" : "21:32-21:32"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "21:33-21:33",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Over under on this game, thirty-eight and a half. Did we hit the under? Yes.",
+    "speaker" : "Greg",
+    "timestamp" : "21:34-21:40"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just the uh the field looks like shit again and on that block field goal Madden being a G he's like, I think his plant foot slipped. And so they like slowed it down and showed the replay and like sure enough was a pretty close field goal. And it's like in the crappiest part of the field and you see his plant foot, it just like slides forward two inches.",
+    "timestamp" : "21:40-22:01"
+  },
+  {
+    "timestamp" : "22:02-22:02",
+    "speaker" : "Andy",
+    "text" : "That's all it takes."
+  },
+  {
+    "text" : "And so he gets a super low kick.",
+    "speaker" : "Steve",
+    "timestamp" : "22:03-22:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Damn right. It's all it takes to get it blocked. But when we talked to um Matt Chatham last last time, um he was talking about how this is the last season of them having this turf. Yeah. Yeah, yeah, yeah. So pretty soon I think, right?",
+    "timestamp" : "22:05-22:26"
+  },
+  {
+    "timestamp" : "22:26-22:27",
+    "text" : "Mm-hmm. Gotta be coming up.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, because he was Greg, he was on that Jets team. This is the year that he moved over with um the man genius. Yeah. Um oh yeah, they had an early bi week in week six. Um and so He's talking about how he remembers um this is the season that they they swapped over from the um grass to turf because he when they come back, when the Jets come back to New England it's it's turf again.",
+    "timestamp" : "22:27-22:55",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What didn't help was uh the Patriots are like down big on that uh touchdown drive at the end in garbage time. And like they're just r run the the Broncos defense and there's a Broncos like edge rusher just pukes on the field so then they like close up at a bunch. Like they call a timeout. Logistically. Imagine having to set up right where that guy just throw up now because like that's where the left tackle has to set up.",
+    "timestamp" : "22:55-23:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, Jesus Christ. That's a two point test right now.",
+    "timestamp" : "23:23-23:25"
+  },
+  {
+    "text" : "They like showed it like three times just the yak it on the field.",
+    "timestamp" : "23:25-23:28",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "23:29-23:30",
+    "text" : "Oh my god.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, I'm surprised they didn't reference the Super Bowl against the Eagles.",
+    "timestamp" : "23:30-23:33"
+  },
+  {
+    "text" : "Right, yeah. Mm-hmm. Chuckin' chunks.",
+    "timestamp" : "23:33-23:38",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't know, it was there. It was some guy I didn't even know.",
+    "timestamp" : "23:38-23:41"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "23:41-23:43",
+    "text" : "Oh, it was some backup guy, huh?"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "23:43-23:43",
+    "text" : "Mm-hmm."
+  },
+  {
+    "text" : "Jesus.",
+    "speaker" : "Andy",
+    "timestamp" : "23:44-23:44"
+  },
+  {
+    "timestamp" : "23:45-24:18",
+    "speaker" : "Steve",
+    "text" : "And there's something you can do a little uh stat checking right because I know you love Googling. There was a personal file on like a pun return where the guy just like fair caught it. And uh There's like some dude got hit away from the play and John Madden said that oh that's the old Chad Clifton rule. Chad Clifton was probably an old like famous NFL play from back in the day of someone just getting absolutely blown up blindsided on a punt block, not seeing it coming. They had to make a rule saying you can't do that anymore."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Ah yeah, against uh Warren Sapp was on the committee of that, believe it or not.",
+    "timestamp" : "24:20-24:23"
+  },
+  {
+    "text" : "Really?",
+    "timestamp" : "24:23-24:24",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "So it wasn't he he was uh Second round pick for the um Packers back in the 2000 draft, same as Brady. Took over starting left tackle position um halfway through his rookie season. Um Giffin's 2002 season seemed as promising as his first two. However, on November 24th, he suffered a severe pelvic injury after receiving a blindside hit from the Tampa Bay Bucks defensive tackle Warren Sapp. Because the incident occurred after an interception with Clifton far from the play, Sapp received harsh criticism for his action. After the game, when Packers head coach Mike Sherman told Sapp that his play was uncalled for, Sapp began angrily shouting at Sherman in attire that was caught on camera with Sapp famously screaming, put a jersey on. For his part, Sapp did not visit or telephone Clifton during his four-day stay in a Tampa Bay hospital. As a result of his injury, Clifton missed the rest of the season, was hospitalized for almost a week, and could not walk unaided for five more weeks. In 2005, the NFL Competition Committee agreed on new guidelines for unnecessary roughness, making hits such as that suffered by Clifton illegal.",
+    "speaker" : "Andy",
+    "timestamp" : "24:24-25:31"
+  },
+  {
+    "timestamp" : "25:32-25:34",
+    "speaker" : "Greg",
+    "text" : "Did you see the hit?"
+  },
+  {
+    "timestamp" : "25:34-25:35",
+    "speaker" : "Andy",
+    "text" : "No."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "25:35-25:36",
+    "text" : "It's pretty egregious."
+  },
+  {
+    "timestamp" : "25:36-25:38",
+    "text" : "Is it is it bad?",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "25:38-25:44",
+    "text" : "Yeah, it's like the prototypical launching yourself with your crown of your helmet first.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Oh Jesus, really?",
+    "speaker" : "Andy",
+    "timestamp" : "25:44-25:45"
+  },
+  {
+    "text" : "Yeah. by like a three hundred pound man. He like leaves his feet to hit him blind side. Warren's zap. We should have seen the signs. Yeah, right.",
+    "speaker" : "Greg",
+    "timestamp" : "25:45-25:55"
+  },
+  {
+    "timestamp" : "25:57-26:32",
+    "text" : "It's like he was born with BTST CTE. There's also like a Like they cut to the the m Sunday night football booth and they're talking about Chris Sims having his like spleen removed after the game and like blood transfusions and shit. I don't know. I didn't Google that either, but apparently he got like I don't know if it was like it was after the game. I don't know if that was like a during the game sort of thing, but he went to the hospital and had to have his spleen taken out. Jesus. Also, uh would you call Chris Sims a ball knower?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yes. Controversial take.",
+    "timestamp" : "26:33-26:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. He's a ball talker.",
+    "timestamp" : "26:35-26:37"
+  },
+  {
+    "text" : "He talks a lot of ball. Yeah, talks a lot of ball. He did call the Lamar Jackson thing.",
+    "timestamp" : "26:38-26:42",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "What do you mean he called the Lamar Jackson thing?",
+    "timestamp" : "26:42-26:44",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "26:44-27:09",
+    "speaker" : "Greg",
+    "text" : "He had Lamar way higher in his QB rankings before the draft than anybody else But then he had Drake Mayway low? Yeah, and then like the next couple seasons he botched it. But I appreciate that like All these an analysts just do like the same guys with like a slightly tweaked order. He's the only one that actually feels like they're like not just basing it on other people's opinions."
+  },
+  {
+    "text" : "The other thing was uh Darrent Williams has an is has his entire name on his jersey.",
+    "timestamp" : "27:12-27:18",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Really?",
+    "timestamp" : "27:18-27:19"
+  },
+  {
+    "text" : "I didn't know you could do that.",
+    "timestamp" : "27:19-27:20",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's usually because there's somebody else with like th they'll try to get as like as many letters to differentiate you from somebody with the same name.",
+    "timestamp" : "27:21-27:29"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "27:30-27:30",
+    "text" : "DJ Williams."
+  },
+  {
+    "text" : "Right. So they'll have like, yeah, they'll have somebody else Who has a similar name obviously?",
+    "speaker" : "Andy",
+    "timestamp" : "27:31-27:37"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "27:37-27:53",
+    "text" : "He's got his full name. Now he noticed it because he returns the punt, he catches it inside the five, doubles back, like almost gets a safety, he gets tackled on the one-yard line. Jesus Christ. Yeah, this game not worth watching."
+  },
+  {
+    "text" : "No, yeah, that's why we're talking about anything but. Um",
+    "speaker" : "Andy",
+    "timestamp" : "27:54-27:56"
+  },
+  {
+    "text" : "So maybe it's not so great not having a job.",
+    "speaker" : "Steve",
+    "timestamp" : "27:58-28:00"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "28:00-28:07",
+    "text" : "Just playing the Broncos early season. I mean playing the Broncos in the early 2000s just sucked, it seemed like"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well John John Madden was calling them out for the Pages have like no emotion. They're super flat. You'd think they'd be more amped up, but they couldn't hit big plays or anything. Like their biggest play was a Faked a double reverse and then threw it down the middle to the uh to Morone. But it was like a three yard pass that turned into a thirty yard gain. But that was like their biggest play of the whole game.",
+    "timestamp" : "28:08-28:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um yeah, it is weird, especially with this being like it is Sunday night. Um so you know, you're in prime time and you're trying you're playing at home revenge games. Yeah, exactly. You would think that this would be kind of the They're coming out, right? But the receivers suck.",
+    "timestamp" : "28:33-28:51"
+  },
+  {
+    "text" : "I mean even Madden was like, yeah, Troy Brown went from the third string receiver to the fourth string receiver to the first string receiver. He's right. I mean Troy's the only one getting open catching anything. There's every other pass that are just like blanketed.",
+    "speaker" : "Steve",
+    "timestamp" : "28:51-29:07"
+  },
+  {
+    "text" : "So Roshe Caldwell no good on second viewing.",
+    "speaker" : "Greg",
+    "timestamp" : "29:08-29:12"
+  },
+  {
+    "text" : "No, he wasn't great. Honestly looked pretty good at the end, but I guess he only plays a couple more times and then see ya later.",
+    "timestamp" : "29:12-29:19",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, I thought he was okay. Um But I don't remember him being, you know, great.",
+    "timestamp" : "29:19-29:26",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "29:26-29:29",
+    "speaker" : "Steve",
+    "text" : "Best of Cero on the field though? Rod Smith."
+  },
+  {
+    "text" : "Well yeah. Not Javon Walker and his two touchdowns?",
+    "timestamp" : "29:29-29:32",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "No, Javon Walker.",
+    "speaker" : "Steve",
+    "timestamp" : "29:33-29:34"
+  },
+  {
+    "timestamp" : "29:34-29:35",
+    "speaker" : "Greg",
+    "text" : "Put it on the board."
+  },
+  {
+    "text" : "No, Rod Smith was catching every first down. He was there, you know, he's there, Troy Brown.",
+    "speaker" : "Steve",
+    "timestamp" : "29:42-29:47"
+  },
+  {
+    "text" : "Six for forty-four. Javon Walker, three for one thirty and two touchdowns.",
+    "timestamp" : "29:47-29:51",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "29:52-29:56",
+    "speaker" : "Steve",
+    "text" : "Put it on the board. No, it doesn't count. He didn't watch the game, Craig."
+  },
+  {
+    "timestamp" : "29:56-30:00",
+    "speaker" : "Greg",
+    "text" : "I watched the highlights and that touchdown by Javon was pretty sick. It was pretty good."
+  },
+  {
+    "text" : "It wasn't even that was terrible tackling. It was an awful angle. Yeah.",
+    "timestamp" : "30:01-30:05",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "30:07-30:10",
+    "text" : "Yeah. Still pretty cool."
+  },
+  {
+    "text" : "I guess.",
+    "speaker" : "Steve",
+    "timestamp" : "30:10-30:11"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "30:11-31:00",
+    "text" : "Oh, I found the Chris Sims thing. You want to hear about it? Spleen removal? Yeah. So under life-threatening injury section of uh his Wikipedia page. Sims suffered a seizing ending ending injury in game three of the two thousand six schedule, so this week. On Sunday, September twenty-fourth, he was taken off the field after taking hard hits from the Carolina Panthers defense. Sims returned to the game and even led a successful scoring drive, but remained in physical duress. or distress, and was taken to a nearby hospital after the game. Tests revealed a ruptured spleen, and Sims immediately underwent emergency surgery. In the aftermath Sims said he lost five pints of blood before the operation and conceded that another forty five minutes without treatment could have been fatal. Playing on a one-year $2. 1 million contract signed before the season, Sims was eligible for free agency in 2007. Weird way to end that."
+  },
+  {
+    "timestamp" : "31:02-31:03",
+    "text" : "That's hockey tough right there.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "31:04-31:05",
+    "text" : "That is gonna be hockey tough, yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "31:05-31:07",
+    "text" : "I just got a lot of respect for him for that."
+  },
+  {
+    "timestamp" : "31:08-31:09",
+    "speaker" : "Steve",
+    "text" : "Does he play again?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh let's see. Um See on December twenty-seventh, two thousand six, Sims announced that he had signed a two-year extension remain with the Bucks, with the expectation that he would start. However, due to complications from his recovery and the performance of just Jeff Garcia and Minicamp Sims was expected to serve as a backup to Garcia. On October 9th, Sims was placed on IR for the rest of the season. The Bucks were expected to keep Sims on the Ross for minicamp as their fifth quarterback. But Sims' relationship with head coach John grew and worsened significantly during this period. Simms attributed his lack of playing time to how Gruden treated him during his recovery from the spleen injury. He even said that, quote, the relationship between me and Coach Gruden is broken, Simms said. I don't see any way it's going to get better Sindel also said that he will never forgive Gruden, although he still respects the Buccaneers as an organization.",
+    "timestamp" : "31:10-32:00"
+  },
+  {
+    "timestamp" : "32:03-32:05",
+    "speaker" : "Steve",
+    "text" : "So he's not joining Arstel anytime soon."
+  },
+  {
+    "timestamp" : "32:09-32:26",
+    "text" : "He worked out with the Baltimore Ravens, but the preseason will not sign. Let's see, he does go Oh, he signed with the Titans after Vince Young was sidelined with an MCL. when he was released to make room for punter Josh Miller, who was playing in this game also, right?",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "32:26-32:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh he was re-signed the following week, let's see. In 2009, signs a two year six million dollar contract with the Broncos. Uh back up to Kyle Orton. Jesus Christ. He's back up the downward dog shit quarterback. Hang on downward slide, Jesus. He took over the second half of a game against the Redskins after Orton left with a sprained ankle and eventually gave up the lead to the Redskins while going three for thirteen passing for 13 yards with no touchdowns and one interception. He started against the Chargers on November twenty second, two thousand nine, but was quickly replaced by Orton in the second quarter after going two for four for only ten yards. He was released on March fifteenth, twenty ten after Broncos traded for Brady Quinn.",
+    "timestamp" : "32:27-33:07"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "33:09-33:14",
+    "text" : "Jeez. Murderous row of average quarterbacks. Below average."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh That's not all. Tennessee Titans second stint in 2010. Sims was re-signed by the Titans. Um Well that was in April, and on September 2010 he was cut from the Titan's roster. November he was re signed to be a back of the quarterback behind Rusty Smith after the seasoning injury to Vince Young. He was not brought back for the 2011 season, nor was he picked up by another team.",
+    "timestamp" : "33:14-33:39"
+  },
+  {
+    "text" : "Anybody remember Rusty Smith? No. No. But being a backup quarterback's gotta be awesome. Oh yeah. Yeah, because it sets you up for YouTube stardom, you know? Yeah.",
+    "speaker" : "Greg",
+    "timestamp" : "33:40-33:50"
+  },
+  {
+    "text" : "All the ball new.",
+    "timestamp" : "33:50-33:51",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "You're not getting your fucking spleen ruptured either.",
+    "timestamp" : "33:51-33:54",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well you are. That's how you end up the backup.",
+    "timestamp" : "33:54-33:57"
+  },
+  {
+    "timestamp" : "33:57-33:59",
+    "speaker" : "Greg",
+    "text" : "Well, I just prefer to be the backup from the start, you know?"
+  },
+  {
+    "text" : "Well that's very You wanna hear about r Rusty Smith, the guy who beat uh Chris Simpson for a quarterback spot?",
+    "speaker" : "Andy",
+    "timestamp" : "34:00-34:08"
+  },
+  {
+    "text" : "And did he start? I've never even heard this guy's name before.",
+    "timestamp" : "34:09-34:13",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "We're gonna get replaced by AI just reading Wikipedia pages.",
+    "timestamp" : "34:13-34:16",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "34:18-34:24",
+    "speaker" : "Steve",
+    "text" : "Yeah, yeah, he's gonna crawl our podcast and then take that as like what's actually happened in the dynasty. That's what's gonna happen."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's gonna get completely wrong. Yeah. Russell Edgar Smith. Uh played college football for the Florida Atlantic Owls. Selected by the Titans in the sixth round of the 2010 draft. Yikes. Play for the Calgary St. Peters of the CFL. I was a high school football coach.",
+    "timestamp" : "34:25-34:45"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "34:46-34:48",
+    "text" : "That's all we got on Rusty. Does he have a U."
+  },
+  {
+    "timestamp" : "34:48-35:00",
+    "text" : "? I mean, uh let's see, career NFL statistics, 45 attempts, 23 completions Uh no touchdowns, four interceptions, two hundred and thirty-four yards. Pass rating twenty-nine point three.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "35:00-35:01",
+    "text" : "He's a ginger.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Oh yeah.",
+    "timestamp" : "35:02-35:02",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "35:08-35:08",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "35:09-35:11",
+    "text" : "Back to the drawing board."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. That's how you know time retired there.",
+    "timestamp" : "35:11-35:14"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "35:14-35:16",
+    "text" : "Fire up that YouTube channel."
+  },
+  {
+    "text" : "Interesting that uh Jake Hutler is in Denver this year and is like they're not sort of shot in the rain.",
+    "timestamp" : "35:17-35:24",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Chewing gum.",
+    "timestamp" : "35:26-35:27"
+  },
+  {
+    "timestamp" : "35:27-35:39",
+    "speaker" : "Greg",
+    "text" : "Smoking cool. I mean they moved up in the draft to get him, right? I don't remember that. Yeah, they traded a third and their first to move up. Yeah."
+  },
+  {
+    "text" : "Well they were like they were talking about the league kind of cause, you know, this game was not interesting. And uh John Madden was like, Well, you know, if the Bears have finally found their quarterback in in Rex Grossman, they might be dangerous. You know? It's like pretty soon after they've sh they'd shown Cutler on the sideline.",
+    "speaker" : "Steve",
+    "timestamp" : "35:39-35:59"
+  },
+  {
+    "timestamp" : "35:59-36:01",
+    "speaker" : "Andy",
+    "text" : "Yeah. That's awesome. Yeah."
+  },
+  {
+    "timestamp" : "36:01-36:13",
+    "speaker" : "Steve",
+    "text" : "And then he like he's like the Bears have always had a good defense and no no good quarterbacks, you know. He's like, how far back do you have to go to find a good quarterback? Maybe Rex Grossman is the guy He does play with a Super Bowl."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Super Bowl, right? 2006? The year they go is the year.",
+    "timestamp" : "36:15-36:18"
+  },
+  {
+    "timestamp" : "36:18-36:19",
+    "speaker" : "Steve",
+    "text" : "Yeah, he takes on the super."
+  },
+  {
+    "text" : "Kyle Bowler?",
+    "timestamp" : "36:26-36:27",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "36:27-36:32",
+    "speaker" : "Steve",
+    "text" : "Yeah, those two are like the two worst quarterbacks in the Super Bowl era, they think."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I'd I'd say so. With the two best defenses. That Bears defense and then like the the Ravens defense. Um This is a good draft by this Broncos team though. Jay Cutler picked number eleven. Is that a good draft? Let's talk about that. Pro bowler. Yeah.",
+    "timestamp" : "36:32-36:49"
+  },
+  {
+    "text" : "JCOJ. He just didn't give a shit. Do you think Broncos fans think that was a good pick? No, because he didn't really bowl out for them that much. I mean, did he bow out for anybody? He was a good player.",
+    "speaker" : "Steve",
+    "timestamp" : "36:49-37:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, he was good on the um the Bears. Was he?",
+    "timestamp" : "37:00-37:03"
+  },
+  {
+    "text" : "Are you just asking over in the question?",
+    "timestamp" : "37:07-37:08",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Point Greg. I'm just saying I remember thinking he was like super talented but sucked. And I'd probably if they used a what was it, 11th overall pick on him, I'd be like, that's that's a bad pick.",
+    "timestamp" : "37:10-37:25"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They'd trade him to Chicago, right?",
+    "timestamp" : "37:25-37:27"
+  },
+  {
+    "timestamp" : "37:28-37:28",
+    "speaker" : "Greg",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Why? It's like right after he won the Pro Bowl. Next year he's playing for Chicago.",
+    "timestamp" : "37:29-37:33",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "It's a good question. Probably because he just doesn't give a shit. Do you see him in the new DM in the news again this week? No. No, what do you do? DUI? Really? Yeah, there's body cam footage out there.",
+    "timestamp" : "37:33-37:47"
+  },
+  {
+    "text" : "Uh oh. Is it bad?",
+    "speaker" : "Andy",
+    "timestamp" : "37:47-37:49"
+  },
+  {
+    "timestamp" : "37:49-38:04",
+    "text" : "No, it's not that bad. I mean I think he crashed. Well I'll do it. This is my understanding. And basically the the video is like, you wanna do this field sobriety test? And he's like, No. And then they immediately fucking arrest him.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's like the entire thing. That's how it works.",
+    "timestamp" : "38:05-38:07"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah.",
+    "timestamp" : "38:07-38:07"
+  },
+  {
+    "timestamp" : "38:08-38:18",
+    "text" : "So but alright, so I I'm gonna argue that um that was a good pick by the Broncos. Because let me give you the other quarterbacks in this draft. And tell me who you would pick above him.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "38:18-38:20",
+    "speaker" : "Greg",
+    "text" : "Okay, this is a good exercise."
+  },
+  {
+    "timestamp" : "38:20-38:27",
+    "speaker" : "Andy",
+    "text" : "Alright, so we're gonna we're gonna start at the bottom and work our way up to the top. So uh seventh round, DJ Shockley. quarterback from Georgia."
+  },
+  {
+    "text" : "Never heard of him.",
+    "timestamp" : "38:27-38:28",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Sixth round to Tampa Bruce Bruce Gradkowski from Toledo. Yep.",
+    "timestamp" : "38:28-38:33"
+  },
+  {
+    "timestamp" : "38:33-38:33",
+    "text" : "Remember him.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "38:34-38:43",
+    "speaker" : "Andy",
+    "text" : "Yep. Uh Bengals in the sixth round drafted Reggie McNeil from Texas AM. Nope Fifth round, Pittsburgh Steelers draft Omar Jacobs from Bowling Green."
+  },
+  {
+    "timestamp" : "38:43-38:43",
+    "speaker" : "Greg",
+    "text" : "Nope."
+  },
+  {
+    "text" : "This is gonna be fun. Uh fifth round, Greenway Packers drafted Ingall Martin from Furman.",
+    "timestamp" : "38:44-38:50",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "38:51-38:55",
+    "speaker" : "Greg",
+    "text" : "Let us see if we can guess the top three or the three r uh like rounds."
+  },
+  {
+    "timestamp" : "38:56-39:22",
+    "speaker" : "Andy",
+    "text" : "I'll tell you when we get to three. Uh the Jets drafted Brad Smith in the fourth Yep. She's drafted Brody Croyle in the third. Yeah. Chargers drafted Charlie Whitehurst in the third. And now we're getting close. Uh I'll I want you um tell me the the Three first round picks. We got two more in the second round was the Vikings uh Tavaris Jackson Jets Kellen Clemens Jets double dipping Callon Clemens and Brad Smith"
+  },
+  {
+    "text" : "Oh.",
+    "speaker" : "Greg",
+    "timestamp" : "39:23-39:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So now you have three first rounders.",
+    "timestamp" : "39:24-39:26"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "39:27-39:29",
+    "text" : "Alright, give me the team that drafted him."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "39:29-39:42",
+    "text" : "Alright, so uh first round, third pick overall, Tennessee Titans. Vince Young. Vince Young out of Texas. Uh first round pick. Pick number ten overall, Arizona Cardinals."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "39:44-39:47",
+    "text" : "Arizona Cardinals ten overall."
+  },
+  {
+    "timestamp" : "39:47-39:53",
+    "speaker" : "Andy",
+    "text" : "Vince Young's college uh nemesis. Batliner. Yes, there you go."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Mm-hmm. I always get him in Sanchez.",
+    "timestamp" : "39:54-39:56"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "39:57-39:58",
+    "text" : "And then Jay Keller's pick the pick after him."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "39:58-40:06",
+    "text" : "And then pick number eleven, Denver Broncos, Jay Keller. From Vandy. So out of all those, who's the best quarterback out of that draft?"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "It's probably just a killer. So according to Google AI overview, he got traded because of a clash with with m Josh McDaniels.",
+    "timestamp" : "40:07-40:15"
+  },
+  {
+    "timestamp" : "40:16-40:22",
+    "speaker" : "Andy",
+    "text" : "Oh that's right, yes. McDaniels took over. He he booted everybody. Yeah. Try to make his own team."
+  },
+  {
+    "timestamp" : "40:24-40:31",
+    "speaker" : "Greg",
+    "text" : "A meeting where McDaniels was critical of him, Cutler asked to be traded. I mean that tracks."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean that tracks for both of them again, don't you think? That's Miguel's trying to beat the pellet. Fad's fucking cut and be like, you no, you can't say anything bad about betray me. Fuck this.",
+    "timestamp" : "40:33-40:43"
+  },
+  {
+    "text" : "I mean they sort of sold high on him.",
+    "timestamp" : "40:44-40:45",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, what'd they get for him? Oh gosh. First rounder?",
+    "timestamp" : "40:45-40:49"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "40:50-40:58",
+    "text" : "You would think he just he's a four four thousand five hundred yards, twenty-five touchdowns, eighteen interceptions, pro bowl."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "He was traded uh with the Broncos fifth round selection. to the Bears for quarterback Kyle Orton, the Bears first and third round selections and a first the following year. Wow. So two firsts, a third, and Kyle Orton for Cutler and a fifth.",
+    "timestamp" : "40:59-41:18"
+  },
+  {
+    "timestamp" : "41:19-41:20",
+    "speaker" : "Steve",
+    "text" : "That's pretty good."
+  },
+  {
+    "timestamp" : "41:20-41:25",
+    "text" : "That's that's a haul. It is. On the back end of his rookie contract.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Especially since he goes to Chicago and Chicago's where good quarterbacks. Just don't flourish.",
+    "timestamp" : "41:25-41:30"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "They're gonna die, yeah.",
+    "timestamp" : "41:30-41:31"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "41:32-41:35",
+    "text" : "They don't know if they're gonna die. They just kinda like just are there."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "He might be their best quarterback. Ever.",
+    "timestamp" : "41:36-41:38"
+  },
+  {
+    "timestamp" : "41:39-41:45",
+    "speaker" : "Steve",
+    "text" : "Uh Alex Grossman to go in the Super Bowl."
+  },
+  {
+    "timestamp" : "41:46-41:54",
+    "text" : "I guess it depends on how you how do you define best? I I don't yeah, uh Jim McMahon's the only one that came to mind, but like is that.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "42:00-42:09",
+    "text" : "So that first year he gets the thirty-six sixty-six and he gets a thirty-eight twelve in twenty fourteen, thirty-six hundred in twenty fifteen."
+  },
+  {
+    "timestamp" : "42:10-42:17",
+    "text" : "So there you go. Chicago Bears. He's first in the Bears, yeah. You see who's fifth?",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh no.",
+    "timestamp" : "42:20-42:20"
+  },
+  {
+    "text" : "Nitchy Mitch, dude.",
+    "timestamp" : "42:21-42:22",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Mitch. Itchy, Mitch, Mitch.",
+    "timestamp" : "42:23-42:24",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "42:25-42:25",
+    "speaker" : "Greg",
+    "text" : "Mitch."
+  },
+  {
+    "text" : "All-time pass yards for them.",
+    "timestamp" : "42:26-42:27",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah.",
+    "timestamp" : "42:27-42:29"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Jay Cutler's got twenty-three thousand. The next closest is Sid Luckman with 14,000 career.",
+    "timestamp" : "42:29-42:35"
+  },
+  {
+    "text" : "And well we'll just put this out there. Sid Luckman, uh he played from nineteen thirty-nine to nineteen fifty. Dude. Yeah. None of this is good It's just gets the words of the Oates, Jay Cutler, Sid Lockman, Jim Harbaugh, Jim McMahon, who won a Super Bowl, forget for him. Mitchell Trubisky, Eric Kramer, who wasn't he the uh the Lions quarterback? It Billy Wade, I think you're right, Ed Brown, never heard of him, Bob Avellane, Justin Fields, 10th.",
+    "timestamp" : "42:35-43:08",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Tenth. He played there two years.",
+    "timestamp" : "43:10-43:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Hey he put up six fixty six hundred yards and forty touchdowns. Thirty interceptions. He's tenth. Top ten. Mike Tomzak is 13th. Rex Grossman 15th. George Blanda 16th from 1949 to 1958 Jim Miller, Kyle Orton, Caleb Will, Caleb Willens in uh what one two seasons? Twentieth. Cade McNown on here. Dave Craig. Dave Craig, one season, twenty-eighth. Chris Chandler, uh seventeen games.",
+    "timestamp" : "43:12-43:48"
+  },
+  {
+    "timestamp" : "43:48-44:12",
+    "speaker" : "Greg",
+    "text" : "Alright, I don't think we need anybody. Nick Falls is on his list. Nick Falls is on his list. It's got two thousand though. Like He played ten games. I know, but like the I think the top end of the list is the most shocking part. Cornell Stewart's on this list. I didn't even know Cornell Stewart played Yeah, but you get any team you get down to the fucking forties, Andy, you're gonna have like guys that played like partial seasons."
+  },
+  {
+    "text" : "I guess.",
+    "timestamp" : "44:13-44:13",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "44:13-44:26",
+    "speaker" : "Greg",
+    "text" : "Brian Hoyer's on here. The top five having dude fucking s Jim Harbaugh, Jim McMahon, and Mitch Trubisky in the top five. That's like your fifth best quarterback ever is Mitch Trubisky, who's like an all-time bust."
+  },
+  {
+    "text" : "Mitch Trubisky",
+    "timestamp" : "44:27-44:29",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "44:30-44:42",
+    "speaker" : "Greg",
+    "text" : "Although he's sneaky not that bad. Five, four, four in Chicago, and then he's been backing up ever since then. Yep."
+  },
+  {
+    "text" : "That first year in Chicago after Cutler gets traded. 27 touchdowns, 26 INTs.",
+    "timestamp" : "44:42-44:49",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "44:50-44:51",
+    "text" : "Nice. Just slinging it.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah. Gunslinger Leaves the league twice nine tease when he played for the Bears.",
+    "speaker" : "Steve",
+    "timestamp" : "44:52-44:58"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "44:58-44:59",
+    "text" : "Did not care."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "44:59-45:06",
+    "text" : "He's like a reality star now too, you know that? Is he? Yeah. Um married to someone."
+  },
+  {
+    "timestamp" : "45:06-45:11",
+    "text" : "Yeah, so he's married to her, yeah. Um Kristen Cavalleri?",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "45:11-45:20",
+    "text" : "Yeah, I think she was one of those old like OG reality T V shows like the fucking Orange County or whatever.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Uh here we go. Uh your first shows of fame in two thousand four as a cast member of the popular MTV reality television series Laguna Beach, the real Orange County.",
+    "timestamp" : "45:20-45:30",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "45:30-45:34",
+    "speaker" : "Greg",
+    "text" : "There you go. Look at me. Put fucking put one on the board for me."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's that should be a me knowing that, Greg, come on.",
+    "timestamp" : "45:35-45:38"
+  },
+  {
+    "text" : "Color regular appeared all the time. Only the dumbest people watch that sort of stuff. I'm a ball mower, Steve, across the spectrum.",
+    "timestamp" : "45:39-45:45",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Different kind of balls. Kurtler regularly appeared on the show very cavallary between twenty eighteen and twenty twenty.",
+    "timestamp" : "45:46-45:52",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Ugh, I bet that show's so bad.",
+    "timestamp" : "45:52-45:54"
+  },
+  {
+    "text" : "Oh I guarantee it.",
+    "timestamp" : "45:54-45:56",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I bet he's pretty funny on it though. You know, because he's got just his attitude of like not giving a shit. He's definitely not like yucking it up for the camera, you know?",
+    "speaker" : "Greg",
+    "timestamp" : "45:57-46:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, I can yeah. Oh geez, alright. And his uh recent DUI is on here too. August twenty sixth, twenty twenty five. Cutler was sentenced to four days in jail as part of a plea deal with prosecutors. Uh as part of the agreement, prosecutors dismissed the weapons and weapons possession charge and Cutler entered a guilty plea of driving on the influence. He was ordered to surrender the pistol found in his car at the time of the accident, pay a three hundred fifty dollar fine, and attend a DUI safety class. His Tennessee driver's license was also revoked. Oops. Lock him up. Yeah.",
+    "timestamp" : "46:06-46:42"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "46:46-46:49",
+    "text" : "Yes. Yes. That whole show is probably the worst."
+  },
+  {
+    "text" : "No, I think um the Chicago Bears uh quarterback situation is the worst.",
+    "timestamp" : "46:50-46:55",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just their entire history of quarterbacking?",
+    "timestamp" : "46:56-46:58"
+  },
+  {
+    "text" : "Well w who's worse? Um Bears quarterbacks or Browns quarterbacks?",
+    "speaker" : "Andy",
+    "timestamp" : "46:58-47:04"
+  },
+  {
+    "timestamp" : "47:03-47:04",
+    "text" : "Or Jets quarterbacks.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I mean Browns quarterbacks gotta have some decent ones. You think? Yeah, let's take a look see. I mean the Jets are also number one, Brian Saipe. Yeah, he won an MVP.",
+    "speaker" : "Greg",
+    "timestamp" : "47:05-47:15"
+  },
+  {
+    "text" : "Yeah. Uh Otto Graham, Bernie Kozar, Baker Mayfield, number four.",
+    "timestamp" : "47:15-47:20",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "That's pretty crazy.",
+    "timestamp" : "47:20-47:21"
+  },
+  {
+    "text" : "Right?",
+    "speaker" : "Andy",
+    "timestamp" : "47:22-47:23"
+  },
+  {
+    "text" : "But at least they have like three players at more than twenty thousand passing yards. I mean that's true, yeah.",
+    "speaker" : "Greg",
+    "timestamp" : "47:24-47:29"
+  },
+  {
+    "timestamp" : "47:29-47:39",
+    "speaker" : "Andy",
+    "text" : "Baker Mayfield, Frank Ryan, Tim Couch, number six. It gets sad quick though. Vinny Tessaverdi, ten. Derek Anderson, eleven."
+  },
+  {
+    "text" : "Derek Anderson was good at times.",
+    "timestamp" : "47:39-47:41",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "47:41-47:53",
+    "speaker" : "Andy",
+    "text" : "Brandon Whedon, Colt McCoy, Brian Hoyer, fifteen. Brian Hoyer's all over these. Charlie Fry, Charlie Holcomb, Deshaun Watson, eighteenth. Played eight games. No, sorry, nineteen games. Yikes."
+  },
+  {
+    "text" : "Now do you now do the Jets.",
+    "timestamp" : "47:53-47:55",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Alright, let's find the Jets. Uh your Jets. Clearly using passing. Joe Namath, number one, makes sense. 27,000 passing yards. Number two, Ken O'Brien, who was like the guy all through the 80s, early 90s, 24,000 passing yards, Richard Todd. Four John Pennington, five, Vinny Testaverdi, six, Mark Sanchez, seven, Boomer Syazen.",
+    "speaker" : "Andy",
+    "timestamp" : "47:55-48:19"
+  },
+  {
+    "timestamp" : "48:19-48:24",
+    "speaker" : "Greg",
+    "text" : "How many did um Uh Pennington have how many yards?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Thirteen thousand. Eighty-two touchdowns, fifty-five picks.",
+    "timestamp" : "48:24-48:28"
+  },
+  {
+    "text" : "I would have thought more. Yeah, me too. He was one of those guys that was like better than his stats. Yeah. Yeah, I agree.",
+    "speaker" : "Greg",
+    "timestamp" : "48:28-48:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He died been on the podcast last week and we talked to Matt. We talked to him about that. What'd he say? That he's better than his stats.",
+    "timestamp" : "48:36-48:43"
+  },
+  {
+    "text" : "He's a Pennington truther.",
+    "speaker" : "Greg",
+    "timestamp" : "48:43-48:45"
+  },
+  {
+    "text" : "Yeah, no, you thought Pennington was great.",
+    "timestamp" : "48:45-48:47",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Old Noodle Arms.",
+    "speaker" : "Greg",
+    "timestamp" : "48:47-48:48"
+  },
+  {
+    "text" : "The 16th uh most passing yards by a jetch quarterback, Aaron Rodgers with 3897. Number 17, Brett Favre, 3472. And Rogers the better uh former Packer quarterback apparently by four hundred years.",
+    "speaker" : "Andy",
+    "timestamp" : "48:53-49:11"
+  },
+  {
+    "text" : "Is he number two yet?",
+    "timestamp" : "49:14-49:15",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Um no, because Bledsoe's gotta still be up there. Right? Yes. Brady, Bledsoe, Grogan, Babe Prilly, Tony Easton, Jim Plunkett, Mac Jones, seventh. Hell yeah, dude. Drake May eighth. Drake May eighth. All right. Drake May has just recently passed Hugh Millen and Matt Castle for ninth and tenth.",
+    "speaker" : "Andy",
+    "timestamp" : "49:15-49:37"
+  },
+  {
+    "text" : "Hey, we're coming. Oh yeah. We're coming for your ass.",
+    "speaker" : "Greg",
+    "timestamp" : "49:38-49:42"
+  },
+  {
+    "timestamp" : "49:42-49:44",
+    "speaker" : "Steve",
+    "text" : "We'll have to watch your back, Brady."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Andy, can you give me uh where are you at with our man Drake May? Consciously optimistic. I've seen all I need to see.",
+    "timestamp" : "49:44-49:53"
+  },
+  {
+    "text" : "What does that mean? I'm all the way in, buddy. All the way in, yeah. Next time Brady, alright. Pants off. How many soup bowls before he retires?",
+    "timestamp" : "49:54-50:06",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "50:07-50:09",
+    "text" : "I think he's better than Mahomes."
+  },
+  {
+    "timestamp" : "50:10-50:13",
+    "text" : "Yeah, more than booms. Whatever the homes ends up, that plus one.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Alright, you're on the board. See I think I think a big factor was that Bill's game where he showed he's a gamer, you know? Yeah. Like there's t there's plenty of good quarterbacks that like can like I have a talented arm. Yeah, I can run the ball. But like I feel like the difference and we didn't know before that Bills game is like he's a gamer And when a game's on the line, he's like gonna fucking go out there and be confident, you know?",
+    "timestamp" : "50:13-50:43",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, I I agree. I think you've actually seen it as well um last couple of weeks where the games haven't gone particularly well Um but there's still like uh what was the um New Orleans game? Like shit just like wasn't going right, but he's still just like slinging and pulling it out, like making it.",
+    "timestamp" : "50:43-51:00"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Calls going against you, still just fucking slinging.",
+    "timestamp" : "51:00-51:03"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "51:03-51:08",
+    "text" : "Yep. Same with kind of like the first half of the tendency we think we can see, for being honest."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Like didn't go well for Brown's game where he like has that huge scramble and then next play 40R bomb curtains. It was 237, then that was now 37. It's over.",
+    "timestamp" : "51:08-51:20"
+  },
+  {
+    "timestamp" : "51:20-51:23",
+    "text" : "Yep. It's such a joy having a good team to watch again.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "51:23-51:24",
+    "text" : "Oh yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm sure everyone else hates it though. Oh my god.",
+    "timestamp" : "51:24-51:27"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, not not the people who listen to this podcast. They're also on our side, but everybody else who doesn't listen to this podcast hates it.",
+    "timestamp" : "51:27-51:33"
+  },
+  {
+    "text" : "I mean I get it. I cannot listen to Collinsworth do a Mahomes game. I just can't do it.",
+    "speaker" : "Greg",
+    "timestamp" : "51:33-51:39"
+  },
+  {
+    "timestamp" : "51:41-51:43",
+    "speaker" : "Andy",
+    "text" : "It's real bad."
+  },
+  {
+    "text" : "There's a there's a great clip going around the internet of like the show, hey, three home run game. Yeah yeah. And it's like he hits the third home run and then they spliced in Maho uh Collinsworth being like, you know, this reminds me of how Mahomes does it. He does it with everyone though. He was doing it with uh yeah, any like star player. He's like a star fucker, you know? Like if it's like a big brand player, he just talks about 'em nonstop and it's like Yeah, he's doing the same with Brady all the time too. Yeah. And it's like I'm good if you point it out when they do something good. What drives me nuts is when he points it out when they're like it's not even a good play.",
+    "timestamp" : "51:44-52:25",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "52:25-52:25",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "52:26-52:28",
+    "text" : "You know, you're like, what are you talking about, dude?",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You know? Yeah, so he's trying to make the game more exciting than it actually is. And he's just being obnoxious I do what's it about a specific player.",
+    "timestamp" : "52:28-52:37"
+  },
+  {
+    "text" : "You know, he's trying to be like look how impressive this was. It's like I don't think you would have said that if it wasn't that player.",
+    "speaker" : "Greg",
+    "timestamp" : "52:37-52:44"
+  },
+  {
+    "text" : "Right, exactly, yeah. Yeah, Mike Jones making that play. You ain't saying the same thing, aren't you? Yeah, exactly. Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "52:44-52:49"
+  },
+  {
+    "timestamp" : "52:49-52:51",
+    "speaker" : "Steve",
+    "text" : "So shticking he's shticking to it."
+  },
+  {
+    "text" : "Alright, so give me some better some worse.",
+    "timestamp" : "52:53-52:56",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well, g can we count tally up the the dumb Tweedledum versus Tweedle Dumber?",
+    "timestamp" : "52:56-53:01"
+  },
+  {
+    "text" : "Yeah, you're both Tweedle Dumber. It's a tie right now.",
+    "speaker" : "Andy",
+    "timestamp" : "53:01-53:04"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So does that mean Andy's a Tweedledumbist?",
+    "timestamp" : "53:04-53:07"
+  },
+  {
+    "text" : "Uh no, Tim is for not showing up. Or maybe he's the only one that's not tweedled in this case. It's real dumb as anybody listened to this fucking episode, I think.",
+    "speaker" : "Andy",
+    "timestamp" : "53:07-53:18"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "53:19-53:29",
+    "text" : "Oh, although I talked to mom today, she is back listening to the episodes, but she's all the way back in February. Okay. And for reference, we're almost in September. November."
+  },
+  {
+    "text" : "I mean we haven't released that many episodes, so she'll catch up soon.",
+    "speaker" : "Andy",
+    "timestamp" : "53:29-53:32"
+  },
+  {
+    "text" : "True. Steve's tur a little peek behind the curtain. Steve's turned into our most reliable cast member here.",
+    "timestamp" : "53:33-53:40",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's because I don't have a job.",
+    "timestamp" : "53:40-53:41"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "No child, no job. He's free all the time. He's watching all the games. It's fucking ridiculous. Yeah.",
+    "timestamp" : "53:41-53:50"
+  },
+  {
+    "text" : "And Greg just shows up day out. I'm so jealous, Steve.",
+    "timestamp" : "53:50-53:55",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "53:56-54:04",
+    "speaker" : "Steve",
+    "text" : "What what game is it this week, guys? Well she calls me in the middle of the day and she's like, is this a good time? I'm like I'll every time's a good time, Mom."
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "54:05-54:07",
+    "text" : "Isn't that sick, Andy? Jesus."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "54:07-54:15",
+    "text" : "And she's like, oh I just listened to that podcast where Greg is, but you just quit your job and Greg's making funny about having to give back your laptop. What a what a punk"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Doesn't sound like me. No, doesn't it sound exactly like you. Point for Greg.",
+    "timestamp" : "54:16-54:21"
+  },
+  {
+    "timestamp" : "54:21-54:29",
+    "text" : "So I should probably go last because I have all of the best and worst. Or I can go first. Whatever. But you know, Andy, you're the quarterback here.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Greg, give me your give me your best and worse. Let's hear what you got.",
+    "speaker" : "Andy",
+    "timestamp" : "54:29-54:32"
+  },
+  {
+    "timestamp" : "54:32-55:00",
+    "speaker" : "Greg",
+    "text" : "Okay Um I was looking up like I thought thirty eight and a half was a a low over under, so I was trying to find like Super low ones. Yeah. And there was a game uh twenty twenty three Pats when they had Zappy. And the over under was thirty. And it was the lowest overunder points total in thirty years past Steelers in two thousand twenty."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I remember that. Didn't the Vegas win that game? They hit the over. Yeah, yeah. Oh wow. Yeah. Damn. I wonder what's the lowest under to hit under. The lowest over under to hit under.",
+    "timestamp" : "55:00-55:13"
+  },
+  {
+    "timestamp" : "55:14-55:15",
+    "text" : "That's a good question.",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "55:15-55:20",
+    "text" : "Like one of those games, like you know it's your low scoring and it still like disappoints, you know? Yeah."
+  },
+  {
+    "text" : "I was looking at some of the comments and uh it was saying like Felger was saying he was g he would have hammered the over uh the under if it was twenty.",
+    "speaker" : "Greg",
+    "timestamp" : "55:20-55:29"
+  },
+  {
+    "timestamp" : "55:35-55:37",
+    "speaker" : "Andy",
+    "text" : "And he would have lost because it's Felagrane."
+  },
+  {
+    "timestamp" : "55:37-56:00",
+    "speaker" : "Greg",
+    "text" : "That's right. And then he would have just ignored the mistake and never talked about it again. Yeah, yeah. How you do? Blood the Zone. Um, my best. Let's see. I'll give it to uh Jake the Snake. I'm a big Jake the Snake fan. I'm a s the snake truther."
+  },
+  {
+    "text" : "Yeah, he did have like a scramble for first down for like fifteen yards. He beat Junior Say out of the corner.",
+    "timestamp" : "56:01-56:07",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "56:07-56:10",
+    "text" : "Damn Still got a loss of step.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Well there were those two old guys just like walkers up there.",
+    "speaker" : "Steve",
+    "timestamp" : "56:10-56:13"
+  },
+  {
+    "timestamp" : "56:15-56:56",
+    "text" : "Just wheelchairing it down after each other All right, I'd say my best is uh Doug Gabriel breaking the um Broncos touchdown streak to start the season. Go Doug Gabriel. Might be the last play we see from you. I don't think there's many of them. My worst is the legal trouble section of um Brandon Marshall's on this team oh yeah he was drafted this is the year he was drafted It was a good draft for the the Denver Broncos. Jay Cutler, Brandon Marshall, Elvis Dumerville.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "56:56-56:56",
+    "speaker" : "Greg",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Solid draft. Um uh yes, uh not not a good he also has uh I think borderline personality disorder too, uh under his personal life section. Not quite sure what that is, um, but I think it may have uh impacted his off-the-field troubles, because there are a lot of them Uh long sticking for a legal lane change, then found to be without his license approval of insurance. Case eventually dropped as part of a plea bargain um for the October Uh incident driving incident involving alcohol.",
+    "timestamp" : "56:58-57:37"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "57:38-57:44",
+    "text" : "Uh it's gotta be worse than DUI has on it. What's the worst one? Beaten up. Uh can we take guesses, Steve?"
+  },
+  {
+    "text" : "Uh yeah, I'm gonna say DV. Okay.",
+    "speaker" : "Steve",
+    "timestamp" : "57:45-57:48"
+  },
+  {
+    "text" : "Uh there's uh adult or a child? Adult. Okay. Don't go child.",
+    "timestamp" : "57:48-57:53",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "57:54-58:33",
+    "speaker" : "Andy",
+    "text" : "Um On Halloween 2004, happy Halloween, followers to celebrate. While a student at UCF Marshall was arrested in Orlando on charge of assault of a law enforcement officer, refusal refusal to obey disorderly conduct and resisting an officer. Let's see. January 1st, 2007, Marshall was present at the shelter, a nightclub in Denver, Colorado, along with teammates Javon Walker and Darrell Williams. The trio were attending a birthday party hell for uh and by Denver Nuggets for Kenyon Martin. As the players were leaving the club and Limousine Williams was fatally shot in the neck. after an unknown assailant open fire the vehicle."
+  },
+  {
+    "text" : "I remember Darren Williams was? Yep. Yeah. They got his whole name on the jersey. Dude, rest in peace. Yep.",
+    "speaker" : "Steve",
+    "timestamp" : "58:33-58:38"
+  },
+  {
+    "text" : "I remember that because yeah they remember that you remember it you didn't bring it up when we had that old conversation with Darren Williams. Well I remember now.",
+    "timestamp" : "58:38-58:45",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um because yeah, because um Marshall was there like uh it like fucked him up uh mentally as well. Because he saw his like good friend on the team get shot to death.",
+    "timestamp" : "58:46-59:02"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "59:02-59:03",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "59:03-59:50",
+    "text" : "Um let's see. In March of that same two thousand seven season he was arrested in the Highlands Ranch suburb on suspicion of domestic violence after his girlfriend reported that following a domestic dispute. Um Uh let's see, and then October 2007 was arrested in Denver Aurora metropolitan area for DUI. Let's see. He is agreed to a plea bargain four years earlier, pleaded guilty, a reduced charge, driving while impaired. Um 2008 he was taken for a legal lane change where he didn't have his license. Uh 2008 That shouldn't even fucking make the list. Mistemeanor battery charges. Uh Jesus Christ."
+  },
+  {
+    "timestamp" : "59:50-59:53",
+    "text" : "Is there anything good on here? This is all kind of fucking Ricky Dink shit.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "On April twenty third, two thousand eleven, Marshall was stabbed near her stomach by his wife. Hell yeah, dude. Now we're talking about He was taken hospital at least two days later. He's since made a full recovery. Well yeah. It was later revealed by police that Marshall's wife did make a brief 901 call, but it only described as an unspecified emergency and no mention of a stabbing ever took place.",
+    "speaker" : "Andy",
+    "timestamp" : "59:54-01:00:12"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Got D D written all over it.",
+    "timestamp" : "01:00:14-01:00:16"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:00:16-01:00:39",
+    "text" : "On early Sunday, March 11, 2012, two days before his trade to the Bears, Marshall was accused of hitting a woman in the face at a New York club being involved in a melee. Uh Marshall punched one below her left eye, although he may have been attempting to hit the woman's friends. The investigation later ended after a lack of evidence of his role in the incident."
+  },
+  {
+    "timestamp" : "01:00:41-01:00:43",
+    "text" : "Uh I think that's it. That's not too bad.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah. Except for the D V stuff.",
+    "timestamp" : "01:00:43-01:00:45",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:00:45-01:01:07",
+    "text" : "Yeah, I mean that's more just like run of the mill fucking NFL shit, right? I guess. A little bit of D V, some fucking DUIs. Yeah, I mean. Just no Tyreek Hill. Adrian Peterson. Uh Lawrence Stein? Dave Meggett? It's too many.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:01:08-01:01:09",
+    "speaker" : "Andy",
+    "text" : "Oh boy."
+  },
+  {
+    "text" : "Lauren Sapp.",
+    "speaker" : "Greg",
+    "timestamp" : "01:01:09-01:01:10"
+  },
+  {
+    "text" : "Warren Sap. Yeah, Warren Sap again, yeah.",
+    "timestamp" : "01:01:10-01:01:14",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:01:14-01:01:14",
+    "speaker" : "Greg",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Yep. I like that Greg. Alright, Steve. Best and worst.",
+    "speaker" : "Andy",
+    "timestamp" : "01:01:14-01:01:18"
+  },
+  {
+    "timestamp" : "01:01:18-01:01:26",
+    "text" : "Uh worst, six hundred and thirty five combined yards punting. This is like don't watch this game.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But yeah, don't watch this game.",
+    "timestamp" : "01:01:26-01:01:27"
+  },
+  {
+    "timestamp" : "01:01:28-01:01:30",
+    "text" : "See it's not all it's not all sunshines and rainbows.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Nope.",
+    "speaker" : "Andy",
+    "timestamp" : "01:01:30-01:01:31"
+  },
+  {
+    "text" : "Yeah. Yeah, the rest were calling a lot of PIs. There's like two offensive pass interference on the Patriots. Punch of defense and none of the Broncos so then I just felt that was all one way. Got a lot of issues with the referees, although except there's one play, Pages like backed up and the guy came down the Broncos guy came down to make the tackle. And the ref blocked him. Courtney ripped off like a fifteen yard run.",
+    "speaker" : "Steve",
+    "timestamp" : "01:01:32-01:02:00"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:02:00-01:02:01",
+    "text" : "Nice."
+  },
+  {
+    "text" : "Yeah, but the pants The Boobers are out halftime too for the Patriots. Just they were just they were just crap. It was just bad offense all around. And then that 85 yard touchdown. Richard Seymour like throws the the left tackle to the ground instantly and is right in in Plummer's face and just like absolutely wrecks him, but he barely gets the pass off.",
+    "timestamp" : "01:02:02-01:02:27",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Uh that's the perfect pass.",
+    "timestamp" : "01:02:27-01:02:28",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:02:28-01:02:30",
+    "speaker" : "Steve",
+    "text" : "Yeah, and then Sanders takes the worst angle ever."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, if you ever wanna if you if you wanna think of this pass, think of uh the 2011 2011, 2012 Super Bowl against the Giants, but Eli Manning hits that whole shot. It was like that. Just like it's getting clovered but like puts the perfect pass. It's like motherfucker.",
+    "timestamp" : "01:02:31-01:02:45"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:02:46-01:03:16",
+    "text" : "The best Uh there was a It was like a Tom it was like a third and one Tom Brady takes a snap and then kneels down. And we're like, what the hell? He like immediately does like a like a victory formation kneel down. Uh but he was just catching them in too many men on the field. I don't know why he just took the kneel down. It was like it was like he was spotting the ball for a field goal. Yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yikes. Alright.",
+    "timestamp" : "01:03:17-01:03:18"
+  },
+  {
+    "text" : "And then uh there's a little foreshadowing in this game. Oh.",
+    "speaker" : "Steve",
+    "timestamp" : "01:03:18-01:03:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Love a good foreshadow.",
+    "timestamp" : "01:03:24-01:03:25"
+  },
+  {
+    "text" : "Yeah, a little uh Yeah, 'cause Tom Brady's just forcing the ball, chucking it fifty-five times. He throws like a pretty sure interception. And if it wasn't for Troy Brown breaking the pass up right right there, you know. Yeah. And then Madden to the point where Madden's like, oh yeah, Troy Brown's keeping his DB skill sharp from last year, you know?",
+    "speaker" : "Steve",
+    "timestamp" : "01:03:25-01:03:46"
+  },
+  {
+    "timestamp" : "01:03:48-01:03:49",
+    "speaker" : "Andy",
+    "text" : "Gotta love them."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. That was my best for sure.",
+    "timestamp" : "01:03:49-01:03:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Absolutely. Wonderful. Alright. So we finally got that game out of the book out of the uh off the books. So what's next week, Steve?",
+    "timestamp" : "01:03:53-01:04:03"
+  },
+  {
+    "text" : "I don't know.",
+    "speaker" : "Steve",
+    "timestamp" : "01:04:04-01:04:04"
+  },
+  {
+    "timestamp" : "01:04:05-01:04:05",
+    "speaker" : "Andy",
+    "text" : "Greg?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Greg's not gonna be here next week, so I don't know why you're asking.",
+    "timestamp" : "01:04:05-01:04:08"
+  },
+  {
+    "text" : "You already watched it, Jets. That was so this week the next week is gonna be um it's gonna kind of feel pretty familiar um to Patriots fans. Um the Patriots coming off of uh an ugly loss at home. Um to oh yeah uh AFC AFC North uh team will uh go to the Bengals um and blow the doors off uh Bengals team for retribution So, next week we will see you Cincinnati. We're on to Cincinnati, Steve. Nice. That's right. So until then, we will see it. A you like 'em. Tune in next week.",
+    "timestamp" : "01:04:08-01:04:56",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Just see how much of a blubbering little bitch Greg is. On the Patriots Dynasty Podcast. Steve, so committed",
+    "speaker" : "Steve",
+    "timestamp" : "01:04:57-01:05:06"
+  }
+]

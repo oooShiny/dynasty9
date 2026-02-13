@@ -15,9 +15,11 @@ dependencies:
     - field.field.node.podcast_episode.field_monthly_downloads
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
+    - field.field.node.podcast_episode.field_publication_date
     - field.field.node.podcast_episode.field_season
     - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_total_downloads
+    - field.field.node.podcast_episode.field_transcript_filename
     - field.field.node.podcast_episode.field_transcription
     - node.type.podcast_episode
   module:
@@ -181,6 +183,14 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_transcript_filename:
+    type: string_textfield
+    weight: 131
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_transcription:
     type: text_textarea
     weight: 18
@@ -211,6 +221,11 @@ content:
     third_party_settings: {  }
   simple_sitemap:
     weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -251,4 +266,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_publication_date: true
+  publish_on: true
+  unpublish_on: true

@@ -1,0 +1,21 @@
+uuid: ff004ce5-9330-4bab-b0cd-4078ae6511bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_transcript_filename
+field_name: field_transcript_filename
+entity_type: node
+type: string
+settings:
+  max_length: 2056
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

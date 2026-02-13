@@ -16,9 +16,11 @@ dependencies:
     - field.field.node.podcast_episode.field_monthly_downloads
     - field.field.node.podcast_episode.field_mp3
     - field.field.node.podcast_episode.field_podcast_guest
+    - field.field.node.podcast_episode.field_publication_date
     - field.field.node.podcast_episode.field_season
     - field.field.node.podcast_episode.field_subtitle
     - field.field.node.podcast_episode.field_total_downloads
+    - field.field.node.podcast_episode.field_transcript_filename
     - field.field.node.podcast_episode.field_transcription
     - node.type.podcast_episode
   module:
@@ -74,8 +76,10 @@ hidden:
   field_meta_tags: true
   field_monthly_downloads: true
   field_podcast_guest: true
+  field_publication_date: true
   field_season: true
   field_total_downloads: true
+  field_transcript_filename: true
   field_transcription: true
   langcode: true
   search_api_excerpt: true

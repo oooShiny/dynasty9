@@ -517,6 +517,12 @@
     .mt-10 {
       margin-top: calc(var(--spacing) * 10);
     }
+    .-mr-6 {
+      margin-right: calc(var(--spacing) * -6);
+    }
+    .mr-0 {
+      margin-right: calc(var(--spacing) * 0);
+    }
     .mr-2 {
       margin-right: calc(var(--spacing) * 2);
     }
@@ -549,6 +555,12 @@
     }
     .mb-auto {
       margin-bottom: auto;
+    }
+    .-ml-6 {
+      margin-left: calc(var(--spacing) * -6);
+    }
+    .ml-0 {
+      margin-left: calc(var(--spacing) * 0);
     }
     .\!flex {
       display: flex !important;
@@ -804,6 +816,18 @@
       --tw-translate-y: calc(calc(1/2 * 100%) * -1);
       translate: var(--tw-translate-x) var(--tw-translate-y);
     }
+    .scale-0 {
+      --tw-scale-x: 0%;
+      --tw-scale-y: 0%;
+      --tw-scale-z: 0%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+    .scale-100 {
+      --tw-scale-x: 100%;
+      --tw-scale-y: 100%;
+      --tw-scale-z: 100%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
     .transform {
       transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
     }
@@ -958,6 +982,9 @@
     }
     .overflow-hidden {
       overflow: hidden;
+    }
+    .overflow-visible {
+      overflow: visible;
     }
     .overflow-x-auto {
       overflow-x: auto;
@@ -1916,8 +1943,15 @@
       outline-style: var(--tw-outline-style);
       outline-width: 1px;
     }
+    .outline-4 {
+      outline-style: var(--tw-outline-style);
+      outline-width: 4px;
+    }
     .outline-offset-4 {
       outline-offset: 4px;
+    }
+    .outline-red-pats {
+      outline-color: var(--color-red-pats);
     }
     .outline-white {
       outline-color: var(--color-white);
@@ -3132,6 +3166,21 @@ label[for*="min"], label[for*="max"] {
   inherits: false;
   initial-value: 0;
 }
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -3374,6 +3423,9 @@ label[for*="min"], label[for*="max"] {
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
       --tw-rotate-x: initial;
       --tw-rotate-y: initial;
       --tw-rotate-z: initial;

@@ -8,6 +8,7 @@ dependencies:
     - field.field.dynasty_transcript.dynasty_transcript.field_minutes
     - field.field.dynasty_transcript.dynasty_transcript.field_podcast_episode
     - field.field.dynasty_transcript.dynasty_transcript.field_seconds
+    - field.field.dynasty_transcript.dynasty_transcript.field_speaker
     - field.field.dynasty_transcript.dynasty_transcript.field_timestamp
     - field.field.dynasty_transcript.dynasty_transcript.field_transcript
   module:
@@ -79,6 +80,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 23
+    region: content
+  field_speaker:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 28
     region: content
   field_timestamp:
     type: number_integer

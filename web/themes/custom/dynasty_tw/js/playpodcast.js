@@ -4,12 +4,18 @@ let playing = true;
 function playPause(id) {
   const pod_ep = document.querySelector('#'+id);
   let pIcon = document.querySelector('#play'+id);
+  const backBtn = document.querySelector('#back-'+id);
+  const fwdBtn = document.querySelector('#fwd-'+id);
+
   if (playing) {
     pod_ep.play();
     playing = false;
     pIcon.src = '/themes/custom/dynasty_tw/icons/pod-pause.svg';
-    document.querySelector('#back-'+id).classList.remove('tw-hidden');
-    document.querySelector('#fwd-'+id).classList.remove('tw-hidden');
+    // Slide buttons out from behind play button.
+    backBtn.classList.remove('opacity-0', '-mr-6', 'scale-0');
+    backBtn.classList.add('opacity-100', 'mr-0', 'scale-100');
+    fwdBtn.classList.remove('opacity-0', '-ml-6', 'scale-0');
+    fwdBtn.classList.add('opacity-100', 'ml-0', 'scale-100');
   } else {
     pod_ep.pause();
     playing = true;
@@ -33,3 +39,8 @@ function skipBackwards(id) {
     pod_ep.currentTime = 0;
   }
 }
+
+// Expose functions globally for inline onclick handlers
+window.playPause = playPause;
+window.skipForward = skipForward;
+window.skipBackwards = skipBackwards;

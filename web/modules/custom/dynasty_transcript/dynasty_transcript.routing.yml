@@ -5,3 +5,36 @@ entity.dynasty_transcript.settings:
     _title: 'dynasty_transcript'
   requirements:
     _permission: 'administer dynasty_transcript'
+
+dynasty_transcript.import:
+  path: '/admin/dynasty/transcript-import'
+  defaults:
+    _form: '\Drupal\dynasty_transcript\Form\TranscriptImportForm'
+    _title: 'Import Transcripts to Solr'
+  requirements:
+    _permission: 'administer dynasty_transcript'
+
+dynasty_transcript.status:
+  path: '/admin/dynasty/transcript-status'
+  defaults:
+    _controller: '\Drupal\dynasty_transcript\Controller\TranscriptStatusController::status'
+    _title: 'Transcript Import Status'
+  requirements:
+    _permission: 'administer dynasty_transcript'
+
+dynasty_transcript.mapping:
+  path: '/admin/dynasty/transcript-mapping'
+  defaults:
+    _form: '\Drupal\dynasty_transcript\Form\TranscriptMappingForm'
+    _title: 'Map Transcript Files to Episodes'
+  requirements:
+    _permission: 'administer dynasty_transcript'
+
+dynasty_transcript.search:
+  path: '/api/transcript-search'
+  defaults:
+    _controller: '\Drupal\dynasty_transcript\Controller\TranscriptSearchController::search'
+  requirements:
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE
