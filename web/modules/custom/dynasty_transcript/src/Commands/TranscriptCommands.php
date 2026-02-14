@@ -232,18 +232,47 @@ class TranscriptCommands extends DrushCommands {
   }
 
   /**
-   * Get podcast metadata from the site.
+   * Get podcast metadata by executing the View directly.
    */
   protected function getPodcastMetadata(): array {
     try {
-      // Generate absolute URL for the metadata endpoint.
-      $url = \Drupal\Core\Url::fromUri('internal:/admin/dynasty/podcast-metadata', ['absolute' => TRUE])->toString();
-      $response = $this->httpClient->request('GET', $url, [
-        'timeout' => 30,
-      ]);
+      $view = \Drupal\views\Views::getView('podcast_metadata');
+      if (!$view) {
+        $this->logger()->error('View "podcast_metadata" not found.');
+        return [];
+      }
 
-      $data = json_decode($response->getBody()->getContents(), TRUE);
-      return is_array($data) ? $data : [];
+      $view->setDisplay('rest_export_1');
+      $view->execute();
+
+      $metadata = [];
+      foreach ($view->result as $row) {
+        $node = $row->_entity;
+        $game = $node->get('field_game')->entity;
+
+        // Generate transcript filename using same logic as View.
+        $transcript_url = '';
+        if ($game) {
+          $filename = str_replace(' ', '-', $game->getTitle());
+          $transcript_url = strtolower(trim($filename)) . '.json';
+        }
+        else {
+          $filename = str_replace([' ', ':'], ['-', ''], $node->getTitle());
+          $transcript_url = strtolower(trim($filename)) . '.json';
+        }
+
+        $metadata[] = [
+          'title' => $node->getTitle(),
+          'season' => $node->get('field_season')->value ?? '',
+          'episode' => $node->get('field_episode')->value ?? '',
+          'mp3' => $node->get('field_mp3')->value ?? '',
+          'game_title' => $game ? $game->getTitle() : '',
+          'game_url' => $game ? $game->toUrl()->toString() : '',
+          'transcript_url' => $transcript_url,
+        ];
+      }
+
+      return $metadata;
     }
     catch (\Exception $e) {
       $this->logger()->error('Failed to fetch metadata: ' . $e->getMessage());
