@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Template for the transcript search interface.
+ *
+ * Available variables:
+ * - is_block: Boolean indicating if this is rendered as a block.
+ * - wrapper_classes: Additional classes for the wrapper element.
+ */
+#}
+
+<div id="transcript-search-app" class="transcript-search-widget {{ wrapper_classes|default('') }}">
+  <div class="bg-white border border-2 border-red-pats p-2 rounded-lg shadow-2xl sticky top-0 w-full z-10">
+    <div class="ts-search-box flex gap-2 mb-4">
+      <input
+        type="text"
+        id="ts-input"
+        placeholder="Search transcripts..."
+        autocomplete="off"
+        class="flex-1 px-4 py-3 text-base border-2 border-gray-300 rounded-md outline-none transition-colors focus:border-blue-pats"
+      />
+      <button id="ts-search-btn" class="btn btn-primary px-6 py-3 text-base bg-blue-pats text-white border-none rounded-md cursor-pointer transition-colors hover:bg-blue-900">
+        Search
+      </button>
+    </div>
+
+    <div id="ts-status" class="ts-status text-blue-pats text-sm mb-4"></div>
+  </div>
+
+  <div id="ts-results" class="ts-results"></div>
+  <div id="ts-pagination" class="ts-pagination flex justify-center gap-2 mt-6"></div>
+</div>

@@ -38,3 +38,11 @@ dynasty_transcript.search:
     _access: 'TRUE'
   options:
     no_cache: TRUE
+
+dynasty_transcript.search_page:
+  path: '/transcripts/search'
+  defaults:
+    _controller: '\Drupal\dynasty_transcript\Controller\TranscriptSearchPageController::page'
+    _title: 'Search Podcast Transcripts'
+  requirements:
+    _access: 'TRUE'

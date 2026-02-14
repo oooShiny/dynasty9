@@ -1,0 +1,71 @@
+/**
+ * @file
+ * Styles for the transcript search widget.
+ */
+
+/* Search result highlighting */
+.ts-result-snippet mark {
+  background: #fff3cd;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+}
+
+/* Focus state for search input */
+.transcript-search-widget .ts-search-box input:focus {
+  border-color: #002244;
+}
+
+/* Search button hover */
+.transcript-search-widget .ts-search-box button:hover {
+  background-color: #003366;
+}
+
+/* Pagination button styles */
+.transcript-search-widget .ts-pagination button:not(:disabled):hover {
+  background-color: #f3f4f6;
+}
+
+.transcript-search-widget .ts-pagination button.active {
+  background-color: #002244;
+  color: #fff;
+  border-color: #002244;
+}
+
+/* Loading state */
+.transcript-search-widget .ts-loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Block variant - compact mode */
+.transcript-search-widget.ts-compact .ts-search-box {
+  margin-bottom: 0.5rem;
+}
+
+.transcript-search-widget.ts-compact .ts-status {
+  font-size: 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .transcript-search-widget .flex.gap-4 {
+    flex-direction: column;
+  }
+
+  .transcript-search-widget .w-1\/3,
+  .transcript-search-widget .w-2\/3 {
+    width: 100%;
+  }
+
+  .transcript-search-widget .w-1\/3 {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -1,0 +1,10 @@
+transcript_search:
+  version: 1.x
+  css:
+    component:
+      css/transcript-search.css: {}
+  js:
+    js/transcript-search.js: {}
+  dependencies:
+    - core/drupal
+    - dynasty_tw/podcast

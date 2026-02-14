@@ -16,6 +16,13 @@ function dynasty_transcript_theme() {
     'dynasty_transcript' => [
       'render element' => 'elements',
     ],
+    'transcript_search' => [
+      'variables' => [
+        'is_block' => FALSE,
+        'wrapper_classes' => '',
+      ],
+      'template' => 'transcript-search',
+    ],
   ];
 }
 
