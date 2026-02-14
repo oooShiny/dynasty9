@@ -302,7 +302,8 @@ class TranscriptImportForm extends FormBase {
    */
   protected function getPodcastMetadata(): array {
     try {
-      $response = $this->httpClient->request('GET', 'https://dynasty9.ddev.site/admin/dynasty/podcast-metadata', [
+      $base_url = \Drupal::request()->getSchemeAndHttpHost();
+      $response = $this->httpClient->request('GET', $base_url . '/admin/dynasty/podcast-metadata', [
         'timeout' => 30,
       ]);
 

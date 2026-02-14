@@ -236,7 +236,9 @@ class TranscriptCommands extends DrushCommands {
    */
   protected function getPodcastMetadata(): array {
     try {
-      $response = $this->httpClient->request('GET', 'https://dynasty9.ddev.site/admin/dynasty/podcast-metadata', [
+      // Generate absolute URL for the metadata endpoint.
+      $url = \Drupal\Core\Url::fromUri('internal:/admin/dynasty/podcast-metadata', ['absolute' => TRUE])->toString();
+      $response = $this->httpClient->request('GET', $url, [
         'timeout' => 30,
       ]);
 
