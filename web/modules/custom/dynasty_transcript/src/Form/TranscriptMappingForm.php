@@ -245,15 +245,60 @@ class TranscriptMappingForm extends FormBase {
    * Generate a filename from episode title.
    */
   protected function generateFilename(string $title): string {
-    // Convert to lowercase
-    $filename = strtolower($title);
-    // Replace common patterns
+    // Normalize unicode characters (NFD decomposition).
+    if (function_exists('normalizer_normalize')) {
+      $filename = \Normalizer::normalize($title, \Normalizer::FORM_D);
+      // Remove combining diacritical marks.
+      $filename = preg_replace('/[\x{0300}-\x{036f}]/u', '', $filename);
+    }
+    else {
+      $filename = $title;
+    }
+
+    // Convert to lowercase.
+    $filename = mb_strtolower($filename, 'UTF-8');
+
+    // Replace common punctuation with readable equivalents.
+    $replacements = [
+      '&' => 'and',
+      '@' => 'at',
+      '+' => 'plus',
+      "'" => '',
+      "'" => '',  // Smart quote.
+      '"' => '',
+      '"' => '',  // Smart quotes.
+      '"' => '',
+      '–' => '-', // En dash.
+      '—' => '-', // Em dash.
+      '…' => '',  // Ellipsis.
+      ':' => '',
+      ';' => '',
+      ',' => '',
+      '.' => '',
+      '!' => '',
+      '?' => '',
+      '(' => '',
+      ')' => '',
+      '[' => '',
+      ']' => '',
+      '/' => '-',
+      '\\' => '-',
+    ];
+    $filename = str_replace(array_keys($replacements), array_values($replacements), $filename);
+
+    // Remove any remaining non-ASCII or special characters.
     $filename = preg_replace('/[^a-z0-9\s\-]/', '', $filename);
-    // Replace spaces with hyphens
+
+    // Replace spaces with hyphens.
     $filename = preg_replace('/\s+/', '-', trim($filename));
-    // Remove double hyphens
+
+    // Remove double hyphens.
     $filename = preg_replace('/-+/', '-', $filename);
-    // Add extension
+
+    // Trim hyphens from ends.
+    $filename = trim($filename, '-');
+
+    // Add extension.
     return $filename . '.json';
   }
 

@@ -251,15 +251,8 @@ class TranscriptCommands extends DrushCommands {
         $game = $node->get('field_game')->entity;
 
         // Generate transcript filename using same logic as View.
-        $transcript_url = '';
-        if ($game) {
-          $filename = str_replace(' ', '-', $game->getTitle());
-          $transcript_url = strtolower(trim($filename)) . '.json';
-        }
-        else {
-          $filename = str_replace([' ', ':'], ['-', ''], $node->getTitle());
-          $transcript_url = strtolower(trim($filename)) . '.json';
-        }
+        $source_title = $game ? $game->getTitle() : $node->getTitle();
+        $transcript_url = $this->generateFilename($source_title);
 
         $metadata[] = [
           'title' => $node->getTitle(),
@@ -300,6 +293,66 @@ class TranscriptCommands extends DrushCommands {
     catch (\Exception $e) {
       return 0;
     }
+  }
+
+  /**
+   * Generate a clean filename from a title.
+   */
+  protected function generateFilename(string $title): string {
+    // Normalize unicode characters (NFD decomposition).
+    if (class_exists('Normalizer')) {
+      $filename = \Normalizer::normalize($title, \Normalizer::FORM_D);
+      // Remove combining diacritical marks.
+      $filename = preg_replace('/[\x{0300}-\x{036f}]/u', '', $filename);
+    }
+    else {
+      $filename = $title;
+    }
+
+    // Convert to lowercase.
+    $filename = mb_strtolower($filename, 'UTF-8');
+
+    // Replace common punctuation with readable equivalents.
+    $replacements = [
+      '&' => 'and',
+      '@' => 'at',
+      '+' => 'plus',
+      "'" => '',
+      "'" => '',
+      '"' => '',
+      '"' => '',
+      '"' => '',
+      '–' => '-',
+      '—' => '-',
+      '…' => '',
+      ':' => '',
+      ';' => '',
+      ',' => '',
+      '.' => '',
+      '!' => '',
+      '?' => '',
+      '(' => '',
+      ')' => '',
+      '[' => '',
+      ']' => '',
+      '/' => '-',
+      '\\' => '-',
+    ];
+    $filename = str_replace(array_keys($replacements), array_values($replacements), $filename);
+
+    // Remove any remaining non-ASCII or special characters.
+    $filename = preg_replace('/[^a-z0-9\s\-]/', '', $filename);
+
+    // Replace spaces with hyphens.
+    $filename = preg_replace('/\s+/', '-', trim($filename));
+
+    // Remove double hyphens.
+    $filename = preg_replace('/-+/', '-', $filename);
+
+    // Trim hyphens from ends.
+    $filename = trim($filename, '-');
+
+    return $filename . '.json';
   }
 
 }

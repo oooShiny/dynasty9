@@ -10,7 +10,8 @@
 #}
 
 <div id="transcript-search-app" class="transcript-search-widget {{ wrapper_classes|default('') }}">
-  <div class="bg-white border border-2 border-red-pats p-2 rounded-lg shadow-2xl sticky top-0 w-full z-10">
+  <div class="bg-white border border-2 border-red-pats p-4 rounded-lg shadow-2xl sticky top-0 w-full z-10">
+    {# Search box #}
     <div class="ts-search-box flex gap-2 mb-4">
       <input
         type="text"
@@ -24,7 +25,42 @@
       </button>
     </div>
 
-    <div id="ts-status" class="ts-status text-blue-pats text-sm mb-4"></div>
+    {# Filters #}
+    <div id="ts-filters" class="ts-filters flex flex-wrap gap-3 mb-4">
+      <div class="ts-filter-group">
+        <label for="ts-filter-speaker" class="block text-xs text-gray-500 uppercase tracking-wide mb-1">Speaker</label>
+        <select id="ts-filter-speaker" class="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white min-w-[150px]">
+          <option value="">All Speakers</option>
+        </select>
+      </div>
+
+      <div class="ts-filter-group">
+        <label for="ts-filter-season" class="block text-xs text-gray-500 uppercase tracking-wide mb-1">Season</label>
+        <select id="ts-filter-season" class="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white min-w-[120px]">
+          <option value="">All Seasons</option>
+        </select>
+      </div>
+
+      <div class="ts-filter-group">
+        <label for="ts-filter-type" class="block text-xs text-gray-500 uppercase tracking-wide mb-1">Episode Type</label>
+        <select id="ts-filter-type" class="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white min-w-[140px]">
+          <option value="">All Episodes</option>
+          <option value="game">Game Recaps</option>
+          <option value="bonus">Bonus Episodes</option>
+        </select>
+      </div>
+
+      <div class="ts-filter-group flex items-end">
+        <button id="ts-clear-filters" class="px-3 py-2 text-sm text-gray-600 hover:text-red-pats transition-colors hidden">
+          Clear Filters
+        </button>
+      </div>
+    </div>
+
+    {# Active filters display #}
+    <div id="ts-active-filters" class="ts-active-filters flex flex-wrap gap-2 mb-2 hidden"></div>
+
+    <div id="ts-status" class="ts-status text-blue-pats text-sm"></div>
   </div>
 
   <div id="ts-results" class="ts-results"></div>
