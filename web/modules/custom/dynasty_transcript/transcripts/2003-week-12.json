@@ -1,0 +1,2457 @@
+[
+  {
+    "timestamp" : "00:00-00:17",
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to. My sons sometimes say some naughty things when they're trying to be funny. But really, they're just being stupid. Do you still want to listen? Go right ahead. I am not your mother.",
+    "speaker" : "Mom"
+  },
+  {
+    "timestamp" : "00:24-00:35",
+    "speaker" : "Andy",
+    "text" : "Welcome back to the Patriots Dynasty Podcast. I'm your host, Andy Brown. With me today is middle brother who gets no respect, Steve Brown. Steve, are you feeling respected today?"
+  },
+  {
+    "text" : "Uh yeah, you know.",
+    "timestamp" : "00:35-00:37",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "00:37-00:39",
+    "speaker" : "Andy",
+    "text" : "Have I respected you enough"
+  },
+  {
+    "timestamp" : "00:39-00:47",
+    "speaker" : "Steve",
+    "text" : "You have. I mean you carved out 15 minutes of your time tonight to come and talk to me. So that just shows how much you respect me."
+  },
+  {
+    "timestamp" : "00:47-01:34",
+    "speaker" : "Andy",
+    "text" : "I do respect you. I'm glad you're feeling respected today. Um There wasn't much respect in the game we're gonna cover this this evening. This Thursday evening in uh January in New England, nice and cold. But uh we're traveling back in time to November 23rd, 2003, and the Patriots are in Houston, Texas, at Reliance Stadium. uh pretty brand new and this would be where the Super Bowl was being held this year so we're getting a bit of a sneak preview spoiler alert Um, but the commentators in this game could not stop gushing about this. And I think they said something about how this was the largest like non-playoff crowd to watch a football game."
+  },
+  {
+    "text" : "Yeah, not Super Bowl crowd.",
+    "speaker" : "Steve",
+    "timestamp" : "01:34-01:36"
+  },
+  {
+    "timestamp" : "01:36-02:14",
+    "text" : "That's what it was. Yeah. And the attendance apparently according to Pro Football reference was 70,719. Yeah. I mean it's not like college football big. Those seems like a hundred thousand. But that's, I mean, I wonder where that ranks nowadays. I don't care. I actually don't wonder. Stack chat. No. Greg's not here today. Baby brother Greg Brown, not here again. He's uh busy with work or some like adult bullshit like that. But unlike the adults that we are, who are also busy with work and still doing shit, he's decided he can't join us.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "That's not true. I'm not busy with work. I play I work in golf, so I don't do shit.",
+    "speaker" : "Steve",
+    "timestamp" : "02:14-02:18"
+  },
+  {
+    "timestamp" : "02:18-02:23",
+    "speaker" : "Andy",
+    "text" : "That's true. And I and I build the internet, so I really don't do shit either. I build the wish."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh, thanks, Al Gore. Jesus fucking Christ, Sammy.",
+    "timestamp" : "02:24-02:27"
+  },
+  {
+    "timestamp" : "02:27-02:29",
+    "speaker" : "Andy",
+    "text" : "No, he invented it. I just built it."
+  },
+  {
+    "text" : "Oh, oh, so sorry.",
+    "speaker" : "Steve",
+    "timestamp" : "02:29-02:30"
+  },
+  {
+    "timestamp" : "02:31-02:52",
+    "text" : "Get it right, Steve. That's my fault. Right. So the Patriots coming into this game at 8-2. We are facing the Texans at 4-6. And just to point out. The Patriots would not lose another game this season. The Texans will not win another game this season. They would finish 4-12.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "02:53-02:55",
+    "speaker" : "Steve",
+    "text" : "Um team broke them."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "02:55-03:33",
+    "text" : "No, I lied. They will finish 5-11. They'll won't they'll win one more game. Last year, though, they're this is their second year in existence, the year before they went four and twelve. Um not great. But you know, there's still there's still an expansion team. So you even though the the other two expansion teams that came before them and the Jaguars and the Panthers had that early success, remember? They both kind of like made the playoffs the first year in existence. Yeah. Ridiculous. Uh that didn't happen to the Texans. Uh finished five and eleven, fourth, fourth, last in the AFC South. Did not make the playoffs. Um and they weren't great."
+  },
+  {
+    "timestamp" : "03:33-03:35",
+    "text" : "They they actually win next week.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I just looked it up. Yeah, well, that's the thing is um Their wins came against like the Falcons. Decent teams. Yeah, they beat the Falcons who were as eventual Super Bowl champion or Super Bowl runner-up Carolina Panthers. Well thanks for ruining that for me. That was gonna be my big uh big reveal. But they also beat the Bills with uh Drew Bledsoe and uh one of the other AFC East teams. I can't remember who it was. Do you have it there?",
+    "timestamp" : "03:35-04:03"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "04:03-04:10",
+    "text" : "Uh Falcons, Bills, Panthers. And the Jaguars and the Dolphins."
+  },
+  {
+    "timestamp" : "04:10-04:13",
+    "speaker" : "Andy",
+    "text" : "Yes, okay, so it's the Dolphins. Week one and the Bills."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "04:14-04:14",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "04:14-04:27",
+    "text" : "They'd actually beat the Bills the week before they came to New England at this New England game And they took New England, uh, we'll we'll say it at the beginning here, they took New England to overtime and ended up losing 23 at 20.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "It was only like four minutes left, five minutes left, something like that.",
+    "timestamp" : "04:29-04:33",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Uh I don't even think it was that long left.",
+    "timestamp" : "04:33-04:36",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Maybe two minutes. It was uh It wasn't really close to being tied, but it was deep.",
+    "timestamp" : "04:36-04:41",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "04:42-04:53",
+    "speaker" : "Andy",
+    "text" : "Um so the fuck it. We'll we'll start we'll start from the end today. The Patriots won this game with an Adam Vinateri 20 field goal with 45 seconds left in overtime."
+  },
+  {
+    "text" : "45 miles.",
+    "timestamp" : "04:53-04:54",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "45. Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "04:54-04:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Is this the longest game they've ever played?",
+    "timestamp" : "04:56-04:59"
+  },
+  {
+    "text" : "Uh without being a tie, maybe.",
+    "timestamp" : "04:59-05:01",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I'm sure there's probably been games that how many ties does Tom Brady have?",
+    "timestamp" : "05:01-05:05"
+  },
+  {
+    "timestamp" : "05:05-05:09",
+    "text" : "You tell me. I know. He doesn't have any, yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "05:09-05:09",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "05:09-05:11",
+    "speaker" : "Andy",
+    "text" : "Bill Belichick has never tied a football game."
+  },
+  {
+    "text" : "So if this is the this has got to be the time-wise the longest. I don't remember them ever kicking a Game-winning field goal with 40 seconds and OT. You know, they've had a bunch of OT wins. That's true. And they even said on this broadcast they had won eight straight.",
+    "speaker" : "Steve",
+    "timestamp" : "05:11-05:24"
+  },
+  {
+    "text" : "Yes. Yeah.",
+    "timestamp" : "05:25-05:26",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But for Tom Brady's, this might be his longest ever game.",
+    "timestamp" : "05:27-05:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I mean, and if it isn't, it's only by seconds, right?",
+    "timestamp" : "05:30-05:33"
+  },
+  {
+    "timestamp" : "05:34-05:36",
+    "speaker" : "Steve",
+    "text" : "Right, yeah. I mean a max like 43 seconds."
+  },
+  {
+    "text" : "Yeah. So yeah, I I'm I'm pretty comfortable putting this in longest game territory. 45.",
+    "timestamp" : "05:36-05:44",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I mean maybe not in like probably an actual time, right? That Halkins one maybe is the time longest game, right? From like 6 p. m. Eastern to and 9. 30 or whatever, but this as far as game time is probably the longest.",
+    "timestamp" : "05:45-05:59"
+  },
+  {
+    "text" : "Uh well they have that on Pro Football Reference. This took three hours and 44 minutes. And how much should the Super Bowl take? Well, I don't know. I don't have that. Let's see if we can look it up. Stat check. Let's actually look up longest no FL game.",
+    "timestamp" : "06:00-06:17",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What year was that Super Bowl? 2018?",
+    "timestamp" : "06:18-06:21"
+  },
+  {
+    "timestamp" : "06:23-06:30",
+    "text" : "Yeah. 2016. Wasn't it? No, sorry. You're right. 2018.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "We just win so many. It's hard to know. It wasn't.",
+    "timestamp" : "06:30-06:33",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "06:34-06:49",
+    "text" : "God damn. There's so many of them. No, it was 26. That was right the first time. Jesus. All right. The length of that game was three hours and 47 minutes.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And this is 344.",
+    "timestamp" : "06:49-06:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's 344. Wow. And it went to 45 seconds left in overtime. Whereas the Falcon Super Bowl went To it was the first drive of overtime, wasn't it? Yeah. Patrick's got the ball and never looked back.",
+    "timestamp" : "06:51-07:03"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "07:03-07:10",
+    "text" : "Tell you what, listeners will save you an hour of this and just don't watch the first half. Oh yeah."
+  },
+  {
+    "text" : "Oh yeah. Don't watch the first half. In fact, uh I let's let's give this a score. I want I wanna I want to hear what you have for uh watchability score out of six Lombardies.",
+    "timestamp" : "07:10-07:22",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "So I didn't know the I didn't know the score. I didn't remember this game before I watched it. Uh and I watched your first half and I was like Oh Celtics are on. Maybe I should watch that. And then I looked at the score. I was well, I was seeing if it if there's even touchdowns worth watching. And I saw that was an overtime, so I was like, all right, I'll watch the other half. And then I started playing it and I saw that it was like another, you know, it was an extra first half is an hour, second half is an hour and a half. I was like,",
+    "timestamp" : "07:22-07:51",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, this is a big commitment this week to for watching this game.",
+    "timestamp" : "07:52-07:55",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "07:56-07:59",
+    "text" : "Yeah. Or you can just make it an hour and a half, just cut out the other shit."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean, you could probably start in the fourth quarter if you want to be honest. Sure, yeah. I mean so I mean first quarter nothing happens. The Texans score a field goal off of uh like an actual legit drive. It was the only legit drive of the whole thing. For Tony Banks and the Texans. Yeah, to yeah. So actually, yeah, before before we dive right in, I actually want to talk about the Texans. Um Because this was the David Carr era, the David Carr King of Sax. Because in the one, two, three, four, five years he was with the the Texans.",
+    "timestamp" : "07:59-08:41"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He had yeah, it's not David Carr's fault, okay? Everything everyone needs to be.",
+    "timestamp" : "08:42-08:47"
+  },
+  {
+    "timestamp" : "08:47-08:52",
+    "speaker" : "Andy",
+    "text" : "No, I'm not I'm not saying it is. But with the Texans sacks. He was sacked."
+  },
+  {
+    "text" : "Well, I mean not the king He's the poor sap of sacks.",
+    "timestamp" : "08:52-08:58",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Well the fact that he was able to rack up so many so quickly.",
+    "speaker" : "Andy",
+    "timestamp" : "08:58-09:02"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "09:03-09:08",
+    "text" : "Their O-line was trash. There was no names on the O-line I had ever heard of."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "09:08-09:20",
+    "text" : "In the the five years he's with Houston, he had 249 sacks. He was sacked that many times. So he didn't have them. He was he was the victim of 249 sacks."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Poor sappy sack.",
+    "timestamp" : "09:20-09:22"
+  },
+  {
+    "text" : "And this was the only year he didn't get sacked. Uh actually, let's say this. Out of those, uh, this is the only year he didn't get sacked more than 40 times.",
+    "speaker" : "Andy",
+    "timestamp" : "09:23-09:34"
+  },
+  {
+    "text" : "Well, he wasn't even playing Andy. He's injured in this game.",
+    "speaker" : "Steve",
+    "timestamp" : "09:34-09:37"
+  },
+  {
+    "text" : "Right. He only lasted eleven games, but in those eleven games he was only sacked fifteen times. Where in 2002 he was sacked 76 times in one season, which uh let's do the math real quick. 76 divided by 16, he was sacked uh Four point four and three quarters sacks per game. He was at almost five times a game. And then this year was 15 because he didn't last the season. And then uh 49 the year after that, 68 the year after that, and then 41 before we finally left Houston. After he left Houston, um he never started a full season, but he also never got sacked more than 13 times in a season.",
+    "timestamp" : "09:37-10:24",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "10:24-10:32",
+    "text" : "That being true, Tom Brady took four sacks in this game. Um Banks took three."
+  },
+  {
+    "text" : "Yeah, David Carr wasn't sacked once.",
+    "timestamp" : "10:32-10:35",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, Carr took zero.",
+    "timestamp" : "10:35-10:37",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, because he'd been hurt the week before.",
+    "timestamp" : "10:37-10:39",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "10:39-10:43",
+    "speaker" : "Steve",
+    "text" : "But Tom Ray, he was fucking getting beaten his getting beaten up."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "10:43-10:46",
+    "text" : "He was, yeah. This uh Dom Caper's defense I think was legit."
+  },
+  {
+    "text" : "It was the Steve Martin revenge game. Is that is that the same Steve Martin?",
+    "timestamp" : "10:47-10:50",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yes, it is the same Steve Martin.",
+    "speaker" : "Andy",
+    "timestamp" : "10:50-10:52"
+  },
+  {
+    "timestamp" : "10:52-11:01",
+    "text" : "He played out of his mind. He was crushing it. He was so mad at Belchak. He was he had like two of the sacks or something like that. Something like yeah, he uh Bancho disruptive plaza, he was all over the field.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "He showed up in this game, yeah, because there was uh another banks on their in their defense. And both of them. Somet Both of them.",
+    "timestamp" : "11:01-11:08",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "They did recognize some guys on lending. Aaron Glenn, I guess the cornerback's the only one that I had actually heard of.",
+    "timestamp" : "11:08-11:14",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "True. Uh Marlon McCree was on this team. Who I mean we'll recognize.",
+    "timestamp" : "11:14-11:20"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But like this is like backside, right? Because didn't they form the expansion teams by just Picking a bunch of players off the rosters because the announcers kept like, eh, formally of this team, and formally of that team, and formally this team.",
+    "timestamp" : "11:20-11:31"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "11:31-12:14",
+    "text" : "Yeah, so basically it was um I think you could protect a certain amount of players, but then the Yeah, the the new team would get to like choose of a certain amount of players off of your team. Um but yeah, no real names um on this defense They're they're dear they're they're leaders on defense. Their cornerback Marcus Coleman had seven interceptions and 22 pass defense, which is pretty good. Jamie Sharper, who I don't think I recognize. Had four sacks on the team. But listen to this, four sacks, a hundred. He's a linebacker. Four sacks, 166 combined tackles, 107 solo. That's a lot of tackles."
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "12:14-12:14",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "12:15-12:19",
+    "speaker" : "Andy",
+    "text" : "Their other linebacker, 136 combined tackles, 101 solo."
+  },
+  {
+    "timestamp" : "12:20-12:22",
+    "text" : "The offense couldn't stay on the field because that's what it is.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "They just uh and the and the defense couldn't get off the field.",
+    "timestamp" : "12:22-12:25",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "The Records had some sick receivers though.",
+    "timestamp" : "12:26-12:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They did, but they didn't I guess they didn't have an offensive line or time to throw because they finished. uh 28th in the league in points for and 27th in the league in points against.",
+    "timestamp" : "12:28-12:42"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "12:42-12:45",
+    "text" : "I mean it's Andre Johnson's rookie year."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yep.",
+    "timestamp" : "12:45-12:46"
+  },
+  {
+    "text" : "And I mean Jabbar Gaffney is, I feel, not that old at this point. Right. This is we will see. This is his second year, so Yeah, we'll see. Johnson Gaffney, those receivers are legit.",
+    "timestamp" : "12:46-12:57",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "12:57-13:03",
+    "text" : "Yeah, Andre Johnson was uh rookie this year, picked third overall from uh Miami.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I mean you can't at least fall their first picks. I mean, David Carr, I think, was a consensus number one overall quarterback.",
+    "timestamp" : "13:03-13:10"
+  },
+  {
+    "timestamp" : "13:10-13:11",
+    "speaker" : "Andy",
+    "text" : "Something like that, yeah."
+  },
+  {
+    "text" : "And then second year, I mean Andre Johnson is a BC. He's probably the best player in Texans history.",
+    "timestamp" : "13:11-13:18",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "13:18-13:20",
+    "text" : "Yeah, he's if he's not, he's up there.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "13:20-13:28",
+    "text" : "He's gotta be, right? I mean you would think Watson when but when Watson's done he definitely will be. Assuming he doesn't get traded."
+  },
+  {
+    "text" : "And Hopkins too for that.",
+    "timestamp" : "13:28-13:29",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, exactly. Oh yeah, Hopkins had a chance, but no, he got traded.",
+    "timestamp" : "13:29-13:33",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But I think Andre Johnson's biggest claim to fame is beating the shit out of uh, what's his name, the cornerback from Tennessee.",
+    "timestamp" : "13:33-13:39"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh, maybe it should be being really good and then not getting traded. Uh entre ell. I think that's who that big beef was. Who was it? I feel like it was. I don't know. I'm just someone like that. I remember that though. Yeah.",
+    "timestamp" : "13:39-13:56"
+  },
+  {
+    "timestamp" : "13:56-13:59",
+    "speaker" : "Andy",
+    "text" : "Stat check. Stealers. Cortland Finnegan."
+  },
+  {
+    "timestamp" : "13:59-14:00",
+    "text" : "That's who it was.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "14:01-14:03",
+    "speaker" : "Andy",
+    "text" : "The man with two Irish first names."
+  },
+  {
+    "timestamp" : "14:04-14:20",
+    "speaker" : "Steve",
+    "text" : "Can we talk about our receivers in this game though? Wait, we had some? Dude, yeah, we had some ones I'd never even So one of them I had to take a Snapchat of some of my friends was like, is this for real? Is this real life?"
+  },
+  {
+    "timestamp" : "14:20-14:42",
+    "speaker" : "Andy",
+    "text" : "So we've talked about that. Yeah, the the uh injuries on this season are fucking out of control. The Patriots, they said in this game of now is had 42 different starters on offense and defense. Uh the last teams to have led the league in starters, like overall, none of them finished over 500. Most of them finished with like two or three wins."
+  },
+  {
+    "text" : "Yeah, and it was all on the defense and actually they're all back now pretty much.",
+    "timestamp" : "14:42-14:46",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, but now the offense is barren.",
+    "timestamp" : "14:46-14:48"
+  },
+  {
+    "timestamp" : "14:48-14:51",
+    "speaker" : "Steve",
+    "text" : "Now the now the wide receivers are just getting worked."
+  },
+  {
+    "text" : "David Patton is on IR, which did we know that? Did we know he was out for the season?",
+    "timestamp" : "14:51-14:55",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "No, I didn't think that that was news to me and they they dropped it real casual.",
+    "speaker" : "Steve",
+    "timestamp" : "14:56-14:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They did, yeah. So but I think that's a more recent development. I don't I don't remember hearing that up until this game. Uh David Givens is out, Troy Brown is out, which left. Bethel Johnson.",
+    "timestamp" : "14:59-15:14"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "15:14-15:17",
+    "text" : "Who had a bridge best game as a pro."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "15:18-15:20",
+    "text" : "Had his first uh career touchdown in this game."
+  },
+  {
+    "timestamp" : "15:20-15:22",
+    "speaker" : "Steve",
+    "text" : "He's he was terrifying this game."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "15:22-15:27",
+    "text" : "And Daniel Graham, who started the game with three consecutive dropped passes."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "15:27-15:28",
+    "text" : "Felt like more."
+  },
+  {
+    "text" : "Sure did. But Brady kept going back to him because he had nobody else.",
+    "timestamp" : "15:29-15:32",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "We had Dion out there.",
+    "timestamp" : "15:33-15:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So Tom Brady, I wrote this down too, was throwing to guys like Dietrich Ward.",
+    "timestamp" : "15:34-15:39"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, Dietrich Ward was the first one that I was like, who the fuck?",
+    "timestamp" : "15:40-15:44"
+  },
+  {
+    "text" : "And the commentators were even like Like, no, this isn't preseason, but yes, you are seeing a wide receiver with number 17 out there is Dietrich Ward.",
+    "speaker" : "Andy",
+    "timestamp" : "15:44-15:53"
+  },
+  {
+    "timestamp" : "15:53-15:57",
+    "speaker" : "Steve",
+    "text" : "He uh, I mean, he had some decent seasons with the Jets."
+  },
+  {
+    "text" : "Yeah. Long time before this, I think.",
+    "timestamp" : "15:57-16:01",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "16:01-16:05",
+    "text" : "No, not even 2000. Three years before. You had 54 catches, 800 yards."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "16:05-16:09",
+    "text" : "Yeah, and then what? And then what do you do in 2001, 2002?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh 200 yards.",
+    "timestamp" : "16:09-16:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "172. Right. But the other name was even better.",
+    "timestamp" : "16:12-16:17"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "106 yards. Ooh. And a T D. On the Patriots. What? Yes, dude. Petrick Ward? Petrick Ward gets a touchdown later this season. Oh hell yeah. Alright. Looking forward to that.",
+    "timestamp" : "16:17-16:30"
+  },
+  {
+    "text" : "Uh all right, and then the other big name. The biggest name. The biggest name. This is the one you Snapchatted, isn't it? Yes, yes. Was JJ Stokes. Former first round pick of the 49ers.",
+    "speaker" : "Andy",
+    "timestamp" : "16:31-16:44"
+  },
+  {
+    "text" : "Who's even there?",
+    "timestamp" : "16:45-16:46",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "16:48-17:08",
+    "text" : "But uh yeah, so both of those those both guys caught passes from Tom Brady in this game. And It was as bad as it sounds, really, on offense. But this is the perfect uh point for me to point out that uh Early dynasty MVP Troy Brown.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I thought it was Kevin Falk.",
+    "timestamp" : "17:08-17:09",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Kevin Falk. That's what he meant. I just have Troy Brown on the mind because he's injured and I miss him. But Kevin Falk, early, early Dynasty MVP Kevin Falk. Leading rusher and receiver in this game.",
+    "timestamp" : "17:10-17:22"
+  },
+  {
+    "text" : "Yeah, yeah. He was just like Similar though to Graham like earlier, he's just a beneficiary of ain't nobody else out there like limited.",
+    "timestamp" : "17:22-17:30",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "But he he ran for 80 of their 128 total rushing yards. So almost 60, almost two thirds.",
+    "speaker" : "Andy",
+    "timestamp" : "17:30-17:39"
+  },
+  {
+    "timestamp" : "17:40-17:43",
+    "speaker" : "Steve",
+    "text" : "So done at this point, it's it's hard to watch. Oh yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. And they even have Mike Cloud in here running a couple times and he just He's not bad. He didn't do anything though.",
+    "timestamp" : "17:43-17:49"
+  },
+  {
+    "timestamp" : "17:49-17:55",
+    "text" : "He's not like Is when he first debuted, which I was all about Mike Cloud. I think the touchdowns in him though.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "17:56-18:03",
+    "text" : "Mike Cloud, uh two carries, eight yards. Whatever. Longest of five. And then one catch frame.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "18:03-18:06",
+    "speaker" : "Steve",
+    "text" : "Five and three. He didn't any bounce. He was fine."
+  },
+  {
+    "text" : "Yeah. But then he then uh K. Falk also had uh 108 receiving errors as well.",
+    "speaker" : "Andy",
+    "timestamp" : "18:06-18:15"
+  },
+  {
+    "timestamp" : "18:15-18:23",
+    "text" : "Which was a third of the teams. And he had a uh crucial like penalty on third down on like a wheel route where he beat the linebacker and he had to hold him at the line.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "18:24-18:27",
+    "text" : "Yep. And he actually had another big screen call back too that went for like 20.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh yeah.",
+    "timestamp" : "18:28-18:28",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "So he had himself a day. And that's because, like you said, there was l literally nobody left. But the defense is starting to to come into form that you remember from this era, that 2003-2004 defense, it was basically impenetrable. And it started kind of early, didn't it?",
+    "timestamp" : "18:28-18:49",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Um they said Tony Banks had like seven yards passing or something.",
+    "timestamp" : "18:49-18:56"
+  },
+  {
+    "text" : "It wasn't great, yeah.",
+    "timestamp" : "18:56-18:57",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "But uh ridiculously low stat.",
+    "timestamp" : "18:57-18:59",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. I mean what is Tony Banks finished 10 of 25 for 93 yards, two touchdowns and interception, and three sacks. That's a rough day. Rating of 60. 9. So as bad as Brady's day was, it was Brady had a bad day too.",
+    "timestamp" : "19:00-19:17",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "19:18-19:24",
+    "speaker" : "Steve",
+    "text" : "Their offense didn't even gain 170 yards total. They have 169."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, then the Patriots, on the other hand, had 472 total offensive yards. And only put up 20 points. Like the the numbers were stacked for on the Paige's favor. They had uh like offensive plays was something. They they showed that too. And it felt similar to the uh the Falcon Super Bowl where they had Like 85 offensive plays, but just like kept turning the ball over and shit. Three times. Yeah. Uh I think all of them were Brady's fault. Oh yeah. Because they had the two interceptions. Every single one. And then Brady got hit as he threw and like oh he was getting dragged to the ground, tried to throw it, and he like it fell out backwards out of his hand. No his return, but getting ahead of ourselves here.",
+    "timestamp" : "19:24-20:08"
+  },
+  {
+    "text" : "You get so luggy too. On his turnovers. But yeah, we'll get there.",
+    "speaker" : "Steve",
+    "timestamp" : "20:08-20:13"
+  },
+  {
+    "timestamp" : "20:13-20:46",
+    "text" : "Yeah. But yeah, so the the basic the first quarter was just one drive uh surrounded by some three and outs and it was uh Texans try like they're they're starting to pull out all the stops in the first quarter. They tried a flea flicker that didn't work because the pages defensive backs didn't bite on it. But then they get that pass interference that brings them to New England 15. And then they tried another trick play where they did like a They they tossed it to Gaffney, but it was a it was technically a like a throw behind.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "20:48-20:50",
+    "speaker" : "Steve",
+    "text" : "He went to the throw and they covered it."
+  },
+  {
+    "text" : "Yeah. And so he reared back that he was gonna throw and there was nothing. So he tucked it down and ran for fifteen yards down to like inside the one.",
+    "timestamp" : "20:50-20:57",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "20:58-21:01",
+    "text" : "This is the same Gaffney that ends up playing on the 2017 team, yeah? Ye"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "21:01-21:06",
+    "text" : "Correct. This is that same Gaffney. Well, I mean he has 2006, I think."
+  },
+  {
+    "timestamp" : "21:06-21:12",
+    "text" : "It was even better if you remember from 2007. It was like that, but like faster and more shifty. He had a sick run there.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "21:12-22:00",
+    "speaker" : "Andy",
+    "text" : "Yeah. Oh yeah. No, he was uh he was a an elusive fellow. Um but so he takes it down to the one, and so they have First and goal from even inside the one, I'd say. And um from there they go three and out, doing the defense. And Ted Washington, there was a quote here. Randy Cross and Kevin Harlan in this one as commentators, which definitely not the A team, but that's fine. Uh I think it was Randy Cross is the color guy. And he was talking about Richard Seymour and how big of a man he was. And Ted Washington's back at this point. So he said, uh talk about Seymour as a man. Ted Washington is a man and a half. Which is fucking ridiculous."
+  },
+  {
+    "text" : "Yeah, yeah. Comedy is they're pretty aw on this game.",
+    "timestamp" : "22:00-22:03",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh I was not a fan of comments game. I did not. Um, but yeah, just like and they were they weren't wrong. Like Ted Washington anybody that can make Richard Seymour looks small is a fucking huge human being and Ted Washington's that deep.",
+    "timestamp" : "22:03-22:19"
+  },
+  {
+    "text" : "Him being back, their run defense, short right the fuck up.",
+    "timestamp" : "22:20-22:23",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. Oh yeah. Immediately. Especially on the especially on this this goal line stand where they basically the the Texans go three and out from the goal line, running it three times. No, they they ran it twice up the middle.",
+    "speaker" : "Andy",
+    "timestamp" : "22:23-22:33"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They threw Greg's favorite route.",
+    "timestamp" : "22:34-22:35"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "22:36-22:42",
+    "text" : "Yeah, through the fade route to Andre Johnson and Ty Law covered it and then basically teabagged Andre Johnson."
+  },
+  {
+    "timestamp" : "22:43-22:47",
+    "speaker" : "Steve",
+    "text" : "He should have got a taunting penalty first. Belichick, very mad about that."
+  },
+  {
+    "text" : "Yeah, not happy.",
+    "timestamp" : "22:47-22:48",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "22:48-22:54",
+    "text" : "Just believe Beljak was leg. You're so fucking lucky. Because I would have given a first that would have given three more downs."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Because that was on third down too.",
+    "timestamp" : "22:53-22:55"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "22:55-23:05",
+    "text" : "Yeah, you were getting off the field and you felt that you had to be such a dickhead, you had to fucking stand over him with your balls hanging in his face and waggle your finger at him. He didn't like legit did that in the commentators like that should have been a taunting. No."
+  },
+  {
+    "text" : "Yeah, sure, yeah, it should have. But it wasn't. So um Texans. Huh?",
+    "timestamp" : "23:06-23:10",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh, I just played that perfect.",
+    "speaker" : "Steve",
+    "timestamp" : "23:11-23:13"
+  },
+  {
+    "timestamp" : "23:13-23:38",
+    "text" : "Yeah, yeah. It was it was yeah, it was the perfect throw too, but yeah, great ball. Yep, Ty Law just knocked the hands down right at the last second as Andre Johnson got his hands on the football. So they set off a field goal. That's that's it for the first quarter. Um Second quarter, Brady says, fuck it, and um just drives the the team down the field immediately And then hits Bethel Johnson for a 27-yard touchdown.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Bethel Johnson's first ever as a he was what Bethel Johnson never really could do is break tackles, and he would he was breaking tackles left and right in this game.",
+    "timestamp" : "23:38-23:47",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "It wasn't bad, yeah. He was running routes and everything too.",
+    "timestamp" : "23:47-23:49",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "23:49-23:57",
+    "text" : "Yeah, he ran like a nice you know corner out, broke the tackle, and then he's gone. Yeah, you can see that on hype city Brady was too they on the replay."
+  },
+  {
+    "text" : "Oh yeah. He was the first one down there, congratulating him. Yeah into the map. Yeah. Um He don't do that no more. He does. Just not for us.",
+    "speaker" : "Andy",
+    "timestamp" : "23:58-24:09"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, I don't even see him getting like I don't know. Like a new player. I don't know. I haven't watched all the Bucks games, so I don't know if you like it.",
+    "timestamp" : "24:10-24:16"
+  },
+  {
+    "text" : "Well, I'm working on a new project, so I had to grab all of the touchdowns he's thrown as a buccaneer, and he does that.",
+    "timestamp" : "24:16-24:23",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Why are you grabbing never mind?",
+    "speaker" : "Steve",
+    "timestamp" : "24:24-24:25"
+  },
+  {
+    "timestamp" : "24:25-25:05",
+    "speaker" : "Andy",
+    "text" : "You know, I don't even When it's done, I'll not announce it, but yeah. He still does it. Um I'm not whatever whenever it's done, I'm not gonna watch it. Well, we'll see. Um we'll see. Yeah. Uh so Brady, uh yeah, so he throws a touchdown, pats are up, 7-3, and then Uh Texans go three and out and Brady immediately drives them right back down the field again. They get inside the Texans 20. And then this is fucking ridiculous. Brady gets picked off. Throws an interception on, I think it was on third down. Throws an interception basically on the goal line to one of their linebackers."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "25:06-25:18",
+    "text" : "I felt like it was an even worse decision than that of him forcing it. He's getting like half tackled. He's on the five-yard line. Yeah, he's yeah. Everybody's packed in there. He just tries to throw it and like three Texans converge in one pixel."
+  },
+  {
+    "timestamp" : "25:18-25:57",
+    "speaker" : "Andy",
+    "text" : "And it gets picked off. But as he starts returning it, Bethel Johnson comes and punches the ball out, and then the pages recover. I think Fourier jumped on it. So the pages actually advanced Like 10 yards. So now they're on like the five-yard line. But then we got a new set of downs out of it. Yeah, exactly. Because that's what happens when you fumble it and then refumble it. And the only reason I knew I knew that rule was when we used to play like Madden or whatever those games were and turn the fumbles all the way up so every play had three fumbles in it. Oh yeah. And every play was always a first down because you would fumble it and the other team would pick it up, return it, and they would fumble it and just back and forth. That makes sense, yeah. Yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So I remember that rule from it was a real roller coaster of a play.",
+    "timestamp" : "25:57-26:01"
+  },
+  {
+    "timestamp" : "26:01-26:26",
+    "speaker" : "Andy",
+    "text" : "Yeah. Uh so the pages have like first and goal from the five. Uh and I think it's like an immediate false start. Because this is the season where they almost lead the league in penalties. I think they're third at this point. So many penalties. But like eight and a half per game or something ridiculous. So unpatriot-like. Um, so I do that, and then Brady ends up like running it twice. Uh which is not good for your offense if Brady's trying to run it."
+  },
+  {
+    "timestamp" : "26:26-26:29",
+    "text" : "He puts it in the same situation again, then he throws it away.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "26:30-26:44",
+    "text" : "Yeah. But then so they settle for field goal. And at this point, the commentators are on Vinateri's nuts. Like dangling off of them for with their lips."
+  },
+  {
+    "text" : "Uh they actually stop blaming these commentators because every fucking single commentator said this for about three years. Oh Adam Vinateri is never missed in the dome. They threw that in the goddamn Super Bowl. I could try and jinx them. So it finally fucking worked.",
+    "timestamp" : "26:44-27:00",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh yeah, here it is. Uh go. Wide receiver position. Here is Adam Benateri, who has never missed in his career in a golden 20-yard, 21-yard field goal, and it is through. Cool. So why why are we playing that, Steve? Why are we uh sharing a fucking 21-yard field goal in the commentation on it?",
+    "timestamp" : "27:00-27:23"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Because later he misses one.",
+    "timestamp" : "27:23-27:25"
+  },
+  {
+    "timestamp" : "27:27-27:29",
+    "text" : "Okay. I mean that's one way of saying it.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He misses one of the end and a half.",
+    "timestamp" : "27:29-27:31",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "27:31-27:52",
+    "speaker" : "Andy",
+    "text" : "So, all right, well, yeah, way to bury the lead, but cool. So they so they they talk about that about how he's never missed inside the dome. He hasn't he's made 11 of his last 12 field goals. They mentioned it twice. They actually threw up another graphic on it, and they're talking about they were Constantly talking about Adam and a terrible. He never fucking misses all his kicks."
+  },
+  {
+    "text" : "My point is that happens all the time. Every time he kicks in a dome.",
+    "timestamp" : "27:52-27:55",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "But this was like aggressive.",
+    "speaker" : "Andy",
+    "timestamp" : "27:56-27:58"
+  },
+  {
+    "timestamp" : "28:02-28:12",
+    "text" : "They said I'm two years ago. Positive they said that in the Super Bowl against the Rams. They had that same fucking stat. This is the same stat, just updated. I don't I don't think they did because well maybe they did.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "28:13-28:14",
+    "text" : "Maybe they did"
+  },
+  {
+    "text" : "So it's like yeah all the announcers say that and I was and my note is finally they will stop talking about indoor field goals. I already know that. I watch every pages game and that",
+    "speaker" : "Steve",
+    "timestamp" : "28:14-28:28"
+  },
+  {
+    "timestamp" : "28:28-29:13",
+    "text" : "point you know yeah we'll get to more of it too but yes um yeah a lot of inventory talk on this all right i'm gonna get off that before i i go I thought they were great. So he kicks a field goal, pats up 10-3, and then nothing else happens. Makes up the Patriots right at the end of the half end up driving to the Texans 20. And Vinateri, who has never missed, Steve, I don't know if you know this, but he's never missed indoors ever. And because they've closed the roof because it was raining in Houston, this is technically indoors, so he's never missed inside a dome, uh doink it off the the right upright. And a half.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. Yeah, I knew that. So I'm thankful. I'm actually glad for him to miss that. Now the commentators were sneaky. They had great points and they said, you know, you're there's hidden points there where the Texans had first single on the one and they got three points out. He said that's four points you're gonna miss. And they missed it later. And he kicked the field goal miss. He said you're gonna miss those points.",
+    "timestamp" : "29:13-29:34"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "29:34-30:02",
+    "text" : "So all right, let's talk about these these guys. Randy Randy Cross and Kevin Harlan. So obviously not your your A team, right? But uh they there's a couple things that bother me, as there tends to be. They were I I don't want to say like learned a new trick where they were like told to do this, but they loved telling you what the defensive alignment was. It's like, oh, Patriots out in a 3-4. Oh."
+  },
+  {
+    "timestamp" : "30:04-30:12",
+    "text" : "Patriots out in a four-six. But they said if they're the up if they're playing dime or nickel, you know, they said five defensive backs for Texans, so you know they're playing nickel.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "30:13-30:18",
+    "speaker" : "Andy",
+    "text" : "But they didn't like Use that information for anything useful. They're just like told you."
+  },
+  {
+    "text" : "Yeah, because the viewer goes, oh, maybe that means the Texans are expecting pass, you know.",
+    "timestamp" : "30:18-30:23",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But they didn't even do that though. They just they're like, oh, and the Texans come out in a 3-4.",
+    "timestamp" : "30:23-30:27"
+  },
+  {
+    "text" : "I was like, well, but that was it. I guess some of us here, Andy, are smart enough to know. I didn't know.",
+    "timestamp" : "30:27-30:33",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But and like at times he was like, oh the the they only have two down the Texans only have two down linemen. Like that's cool.",
+    "timestamp" : "30:34-30:40"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Like expand on it. you know making a comment on how these two defenses are some of the only two in the league and stroke of luck who's coaching this team",
+    "timestamp" : "30:41-30:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Tom Capers.",
+    "timestamp" : "30:54-30:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Who ends up, you know, play uh coach with the Patriots.",
+    "timestamp" : "30:55-30:58"
+  },
+  {
+    "text" : "Oh yeah, he does, isn't he? Yep. That's right. Good call. Unlike their defensive coordinator. Vic Fangio, who's a current Broncos head coach. I didn't know he was a DC. Yep. And he's not doing great as a head coach, whether or not it's the Broncos situation or him.",
+    "timestamp" : "30:59-31:17",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Let's play there, John L way.",
+    "timestamp" : "31:17-31:18",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "31:19-31:31",
+    "speaker" : "Andy",
+    "text" : "They're 12 and 20 in his two years there, which is a 375 win percentage for those of you keeping those. Did he do better his first two years in no No."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So he's he's improving. From defensive coordinator first intent to head coach first in.",
+    "timestamp" : "31:32-31:36"
+  },
+  {
+    "text" : "It's about the same. Uh yeah, but they were also talking about um how Givens was out and he had scored an overtime touchdown against the Broncos or something. Which I don't he just mixed up the games.",
+    "timestamp" : "31:36-31:52",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He was talking about uh the Miami game maybe.",
+    "timestamp" : "31:52-31:55"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well that's what they're like, oh yeah, he caught a touchdown again in like in overtime against Miami. I'm like, well no, that was Troy Brown. He's like, no, actually no. Given's caught the overtime touchdown against the Broncos. I'm like, I no. They haven't been in overtime against the Broncos since whatever.",
+    "timestamp" : "31:55-32:09"
+  },
+  {
+    "timestamp" : "32:09-32:19",
+    "speaker" : "Steve",
+    "text" : "He that was a game was intense, you know? It felt like an overtime game with the fake with the intention of, you know, safety and shit like that. I guess, but had the in had the drama intensity of over time."
+  },
+  {
+    "text" : "I don't know. But and lastly on commentator shooting on the commentators section of the the podcast by Andy Brown. Um I believe it was Randy Cross who's talking about the the Patriots' biggest problem was that they had so many starters that uh they will dilute their own Pro Bowl votes. So they won't have anybody going to the Pro Bowl because they've had so many starters. Like Batai Law probably gets the votes, and Rodney Harris will get some.",
+    "speaker" : "Andy",
+    "timestamp" : "32:19-32:46"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "32:51-33:22",
+    "text" : "No care about the stats, which is true. Okay. Great little bit of commentating. He said this screen game, how many reception yards did Kevin Falk have? He's like, it is the deodorant for this Patriots offense. You know, because they stunk out loud, dude. The whole offense stunk out loud except for Kevin Fulk, your early season MVP. Early dynasty MVP. They rushing and receiving, because he's right, dude. The rest of the offense did stink. Well, they did not deserve to win this game. I'm gonna say that right now."
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "33:23-33:23",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They flipped it over. They had so many penalties. They were so Shit.",
+    "timestamp" : "33:24-33:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, and even like their their typical score both sides of the half, which they were kind of Set up to do. Vinateri hits the upright at the end of the half, and then they get the ball coming out of halftime. Drive down to the Texas 35. And uh",
+    "timestamp" : "33:29-33:46"
+  },
+  {
+    "timestamp" : "33:47-33:49",
+    "speaker" : "Steve",
+    "text" : "Go for it on fourth, right?"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "33:49-34:17",
+    "text" : "Yeah, it's it's fourth and five. And I don't know if they just like didn't trust that like if there was something going on with them or what, but They're like, it's it it's kind of out of his range. It was long. It was like what a fifty yarder. Yeah, it was fifty plus I think. Adam hits those. And your commentators, your boys there, like, oh, Adam Vinateri is like money from a 50 plus. He's got a his longest is 57, so there should be a chip shop for him. And then the pair's like, no, we're gonna go for a fourth and five and run down."
+  },
+  {
+    "text" : "Nope. Brent should have had it. Why would you go? The offense kind of, you know, let's dump. There's no big plays really. There's the one battle. A couple late, late, you know.",
+    "timestamp" : "34:17-34:27",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Well, and even on that play, they they took a deep shot too, uh, which almost made me think of like They were fine with giving up that field position because their defense was so good. And um the Texans had done literally nothing so far in the first half. And it worked out because uh the Texans only from the 34 got to about midfield before they had to punt. And they actually pointed out I'll give you this point. Uh they pointed out that the Patriots were actually doing a little bit of the zero blitz that we'd seen work more recently. And that what the what were they calling themselves?",
+    "speaker" : "Andy",
+    "timestamp" : "34:27-35:05"
+  },
+  {
+    "text" : "But it didn't work. Oh, in the Jets, the C and Ghost Darnell game.",
+    "timestamp" : "35:06-35:09",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "35:09-35:10"
+  },
+  {
+    "timestamp" : "35:10-35:11",
+    "speaker" : "Steve",
+    "text" : "Not quite the same, but yeah."
+  },
+  {
+    "timestamp" : "35:11-35:27",
+    "text" : "But it was that defense whereas the zero blitz, they had no strong save. But it it was also The blitz that bit the Cowboys in the ass last week against the Patriots, where the only plays the Patriots actually got yards off of where the Cowboys did that zero blitz. So I don't know if that was like Belichick.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "35:28-35:28",
+    "text" : "Definitely it was.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Give her the big old middle finger to Bill Parsons.",
+    "timestamp" : "35:28-35:31"
+  },
+  {
+    "text" : "You can blitz like inexperienced Tony Banks, but it's an experienced Tom Brady. He's got a Super Bowl win.",
+    "speaker" : "Steve",
+    "timestamp" : "35:32-35:37"
+  },
+  {
+    "timestamp" : "35:38-36:10",
+    "text" : "That's right. He feasts on that blitz. But speaking of Bill Balichek, this was they they showed a stat that he was in this game. 500 for his career. So this would be the last time he'd be 500, right? Oh, for sure. Because he'll never because he goes on this massive win streak and he'll never lose that many in a row. So uh not only was he 500, but he was 69 and 69. Oh, nice. Nice. So so yeah, I mean you can watch this game just for that if you want.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "36:11-36:16",
+    "text" : "Yeah. What what uh what's the timestamp for when that uh stat comes up, Andy? Oh, good question. Did I screenshot it?"
+  },
+  {
+    "timestamp" : "36:16-36:19",
+    "speaker" : "Andy",
+    "text" : "I don't think I did. I'll have to go back or find it. Please put that in the highlight."
+  },
+  {
+    "timestamp" : "36:19-36:21",
+    "speaker" : "Steve",
+    "text" : "How's it not the highlights on the website?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's true, it should be.",
+    "timestamp" : "36:21-36:22"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It should definitely be. Right after that possession though, Tom Brady throws a stupid pick.",
+    "timestamp" : "36:22-36:29"
+  },
+  {
+    "text" : "Yeah, he does.",
+    "timestamp" : "36:30-36:31",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Returned it to R29. So like if the Patriots hadn't just played like a bunch of assholes, they would have won this game easily. But they just turned it over at terrible times. Yep. Got so lucky. Yeah. Non-penalties, kill drives, and Just let the Texans hang around and actually take a pretty good lead.",
+    "timestamp" : "36:31-36:48",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Right. So instead of like putting the game way there, like the the each side of the half scoring a couple points in the middle there and being up by a couple of scores because they went in the halftime 10-3 Uh could have been 13-3 and then like score again on the second half, and now you're up by two scores. Instead, Bertie gets picked off Texans start at the Patriots 11. I think it was like two plays later, Andre Johnson had a touchdown. Um so now it's tie game, 10-10. Yeah, right. But then Brady, in true Brady fashion, gets the ball back and Midi storms right down the field again in like fuck you mode. This is where he hits JJ Stokes to get it inside the 10-yard line.",
+    "timestamp" : "36:49-37:29",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "31 yard bomb.",
+    "speaker" : "Steve",
+    "timestamp" : "37:29-37:30"
+  },
+  {
+    "timestamp" : "37:30-38:00",
+    "text" : "Yeah, that was your JJ Stokes siding, yeah, of the game. And so going into like Brady got sacked on third down, the last play of the third quarter. So fourth quarter starts with Vinateri hitting a short field goal, which he actually makes. So off the schneid again, kind of. Um and now we're in the fourth quarter, and this is where shit just kind of goes a little wild because it's It was 10-10 at the end of the third, and this game ends 23-20.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "38:00-38:02",
+    "text" : "In overtime. Right. 30 seconds left."
+  },
+  {
+    "text" : "In overtime. Right. So And Vinatarius just kicked the field goal to make it 13-10.",
+    "speaker" : "Andy",
+    "timestamp" : "38:02-38:07"
+  },
+  {
+    "text" : "Just skip to this quarter, you know? You don't need to see all that.",
+    "timestamp" : "38:07-38:10",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "That's what I'm saying. So skip to the fourth quarter. We've we've talked you through all of it.",
+    "timestamp" : "38:10-38:14",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah. Just You should we should mark what time that starts. So just get the video and start it at probably lasts like 45 minutes.",
+    "timestamp" : "38:14-38:23",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "38:23-38:37",
+    "text" : "It probably is, yeah. Just start at the second half. But yeah, and the game is on YouTube, so you can find on the website. I'll post a link in the show notes to the website so you can find all this stuff.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Patreondynasty.",
+    "speaker" : "Mom",
+    "timestamp" : "38:39-38:40"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "38:40-38:55",
+    "text" : "info. That's right. Where I used to think it was, I don't know why I thought this when you first started this website. I thought it was die nasty. It is. Well like nasty in all caps all like like you you didn't say dynasty was like the Patriots Dynasty was nasty."
+  },
+  {
+    "timestamp" : "38:55-38:57",
+    "text" : "We put the nasty in the dynasty.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "38:57-39:02",
+    "text" : "Yeah. I don't know why. I thought that for a good like year. I bet you did.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Well, I mean it is because you can't read probably. So that's just read what you want to read.",
+    "speaker" : "Andy",
+    "timestamp" : "39:02-39:07"
+  },
+  {
+    "text" : "Sounding it out.",
+    "speaker" : "Steve",
+    "timestamp" : "39:08-39:09"
+  },
+  {
+    "text" : "Oh boy, Steven How long did it take you to learn how to spell your name? Because it got the pH in there, so it probably wasn't easy.",
+    "timestamp" : "39:11-39:20",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "39:21-39:24",
+    "speaker" : "Steve",
+    "text" : "I don't know. They tried to hold me back in first grade, and mom said no."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Scargy for life.",
+    "timestamp" : "39:26-39:27"
+  },
+  {
+    "text" : "True story, yeah. She had a couple of the teachers and said, you're not holding them back. You can't be like he can't even read. And they're like she was like, And then I went on to second grade. Damn.",
+    "speaker" : "Steve",
+    "timestamp" : "39:28-39:39"
+  },
+  {
+    "text" : "Good for you.",
+    "speaker" : "Andy",
+    "timestamp" : "39:39-39:39"
+  },
+  {
+    "text" : "How can we be very convincing, Andy? You know that.",
+    "speaker" : "Steve",
+    "timestamp" : "39:39-39:42"
+  },
+  {
+    "timestamp" : "39:42-39:46",
+    "speaker" : "Andy",
+    "text" : "This is true, yeah. Yeah. Yeah, I have nothing to add. She's very convincing."
+  },
+  {
+    "text" : "That British accent people are like, oh. You're so charming and convincing.",
+    "speaker" : "Steve",
+    "timestamp" : "39:46-39:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Mm-hmm. Yeah, no, she convinced a lot of people to do a lot of things.",
+    "timestamp" : "39:50-39:53"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I won't give you a speeding ticket.",
+    "timestamp" : "39:53-39:55"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Oh, she well, that's because she used to cry or pretend to cry when she got pulled over",
+    "timestamp" : "39:56-40:01"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And being British, you know.",
+    "timestamp" : "40:01-40:02"
+  },
+  {
+    "text" : "Doing like 80 on the back roads in her little fucking Z4. Jesus. Some people. I wonder what she's yelling at the the radio right now because you I know she's listening to this. She's probably quilting. She's getting all fired up. She'll tell you about it She's she's oh yeah I'll get I'll get the text. We'll we'll we'll read it next next week.",
+    "timestamp" : "40:02-40:24",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "40:25-40:29",
+    "speaker" : "Steve",
+    "text" : "So let's get into the uh fake tuck rule because that's the next big play here."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It is, yeah. Because yeah, the Patriots hit the field goal to start the quarter, and then Texas is uh Texans immediately go three and out and punt it. And so New England again drives straight down the field. Um Like they even like Brady tries a he did this a couple times in the game, but he tried a QB sneak on third and like five.",
+    "timestamp" : "40:29-40:48"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "40:48-40:48"
+  },
+  {
+    "timestamp" : "40:49-40:58",
+    "speaker" : "Andy",
+    "text" : "And the last time he got he picked up seven. And this time he picked up four, so it's uh three, so it's fourth and two, and then they just run it straight down the Texans throat with Kevin Falk who picks up."
+  },
+  {
+    "timestamp" : "41:00-41:12",
+    "speaker" : "Steve",
+    "text" : "getting big chunk plays. It's three yards, twelve yards, three yards, two yards, three yards, four yards. So like yeah. That's kind of what it game's been. Like the Patrick offense is just like barely springing it together, you know"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But it kind of felt inevitable too.",
+    "timestamp" : "41:12-41:14"
+  },
+  {
+    "text" : "Like they're just picking up steam and just only because the Texans offense was absolute hot garbage. Hot. It was dust. As it hadn't been for our turnovers, they would have like zero points. Right. Yeah, oh yeah. They haven't been able to actually do anything and maybe get a field goal, but because we've been keeping them in the game, they've been just taking advantage, they've been capitalizing when they've been given some internal.",
+    "speaker" : "Steve",
+    "timestamp" : "41:14-41:35"
+  },
+  {
+    "timestamp" : "41:35-41:42",
+    "speaker" : "Andy",
+    "text" : "Which I think the the commentators were kind of alluding to that's kind of how this team was running where they're game, which is true."
+  },
+  {
+    "timestamp" : "41:43-41:48",
+    "speaker" : "Steve",
+    "text" : "And they were yeah, they were at next week we got the Colts, the who were also like eight and two or whatever."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "41:48-42:01",
+    "text" : "Yeah. But they were yeah, they were cause they're they would just like hang in with teams because they're good defense and then try to capitalize on the mistakes. And the Pages made plenty of those. Which is kind of a Patriot strategy anyways. Yeah."
+  },
+  {
+    "text" : "And I think what this past season. After one of these after one of these touchdowns. And you win it. Yeah, yeah, exactly.",
+    "speaker" : "Steve",
+    "timestamp" : "42:01-42:12"
+  },
+  {
+    "text" : "But after one of these touchdowns, they even said competitors like, I don't know what that noise is. It's either fireworks or it's the sound of the trap snapping shut. On the Patriots leg.",
+    "timestamp" : "42:12-42:22",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They talked about it all. I love that one.",
+    "timestamp" : "42:22-42:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "God, you would.",
+    "timestamp" : "42:25-42:27"
+  },
+  {
+    "text" : "Which I know exactly when they say that. It's coming up. Tom Brady fumbles it again.",
+    "timestamp" : "42:27-42:33",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, throws it backwards.",
+    "speaker" : "Andy",
+    "timestamp" : "42:33-42:34"
+  },
+  {
+    "text" : "They were on the same tuck rule, but they weren't, because the tuck rule is still in effect.",
+    "timestamp" : "42:34-42:38",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Sure is, but instead he actually threw it backwards.",
+    "timestamp" : "42:38-42:41",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "42:41-42:45",
+    "text" : "Yeah, it was actually a very similar looking play to the snowball."
+  },
+  {
+    "text" : "Unseen linebacker coming off the edge and just Yeah, so this guy was from his blind side, but yes. Um And so yeah, they just converted the fourth and two, and they're like inside Texans territory. And Brady gets hit from behind. Fumble, like literally fumbles the ball backwards as if he'd like throw it backwards. And one of the Texans linebackers picks it up on like the full sprint and gets down to Houston 36.",
+    "speaker" : "Andy",
+    "timestamp" : "42:46-43:12"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "43:12-43:15",
+    "text" : "Hum was it on the 35, they take it all the way."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "43:15-43:17",
+    "text" : "To New England's 31."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep.",
+    "timestamp" : "43:17-43:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And so starting there, they would eventually convert one of their few third downs because Saxons, this I did take a screenshot of. Houston Texans on the season were converting third downs at 33. 3%.",
+    "timestamp" : "43:18-43:34"
+  },
+  {
+    "text" : "Not great.",
+    "speaker" : "Steve",
+    "timestamp" : "43:35-43:35"
+  },
+  {
+    "text" : "I mean, and they were two",
+    "timestamp" : "43:37-43:38",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Andre in this game.",
+    "timestamp" : "43:38-43:39"
+  },
+  {
+    "text" : "He definitely were two of nine on the game until the this Andre Johnson third and nine conversion.",
+    "speaker" : "Andy",
+    "timestamp" : "43:39-43:45"
+  },
+  {
+    "text" : "He had a tough first half, but he uh he picked it up in the second half, which is I mean, this is Game what ten for him or whatever it is.",
+    "speaker" : "Steve",
+    "timestamp" : "43:45-43:53"
+  },
+  {
+    "timestamp" : "43:53-43:55",
+    "text" : "Yeah, or twelve or whatever. I think we're on week twelve.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "As a pro and he's getting covered by Taiwa. Right.",
+    "timestamp" : "43:55-43:58",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "44:02-44:25",
+    "speaker" : "Andy",
+    "text" : "But they actually even like before the game started, they were talking about how, oh, we talked to Ty Law and yeah, he's hurt, but usually he would cover the uh like the leading wide receiver and just like follow him across the field wherever he goes. But they're so happy with Tyrone Poole and the way he's covering. That Ty Law is just going to play one side of the field and if AJ goes the other side, he's just going to be covered by Tyrone."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "44:26-44:27",
+    "text" : "Tyrone Poole played really well."
+  },
+  {
+    "text" : "Tyrone Poole had himself a game in this game.",
+    "timestamp" : "44:28-44:30",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah similar to like the Steph uh Jacksonville AFC Championship battle I think similar but it was kind of over his head more and not like a dive out. It was a very similar play.",
+    "timestamp" : "44:31-44:42"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. And and he's been doing that for the past few weeks in a row now. Like they keep targeting him on the deep ball and he covers it textbook every time. He's in the receiver's back pocket. And as the ball gets there, he tips it away. Doesn't go over your step, just Just tips it away. Tyrone Pool. Yeah, he's like you could almost call him a shutdown corner this year.",
+    "timestamp" : "44:42-45:01"
+  },
+  {
+    "timestamp" : "45:01-45:01",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "He's not allowing anything.",
+    "timestamp" : "45:02-45:04",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It was like the early Brandon Browner days, but he wasn't as physical, obviously.",
+    "timestamp" : "45:04-45:07"
+  },
+  {
+    "text" : "Yeah, yeah, yeah. But having that like solid number two. And so he's better than like he can easily cover the number two. uh wide receiver on any offense basically.",
+    "speaker" : "Andy",
+    "timestamp" : "45:07-45:21"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "45:21-45:28",
+    "text" : "Andre Johnson had 13 targets, four catches, 37 yards and a touchdown."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Wait, how many targets?",
+    "timestamp" : "45:28-45:29"
+  },
+  {
+    "timestamp" : "45:30-45:45",
+    "speaker" : "Steve",
+    "text" : "13. Yeah, that was a that's the next highest on their team was three and then a couple of guys at two. Holy shit. Yeah, he had gaffey only had one. They only throw in once to Jabbar Gaffi. That's an impact."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They threw it 13 times at Andre Johnson. Yeah. And threw it 12 times not at Andre Johnson. And he had four catches for 37 yards and a touchdown.",
+    "timestamp" : "45:45-45:56"
+  },
+  {
+    "timestamp" : "45:56-46:04",
+    "speaker" : "Steve",
+    "text" : "Yeah, I mean, but like they he got that big touchdown in that big moment. That's true. Yeah, a good second half and uh even"
+  },
+  {
+    "text" : "Yeah. I mean for what their anemic offense was, he did he was the only one doing anything. He was their Kevin Falk, basically.",
+    "timestamp" : "46:04-46:11",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "46:11-46:14",
+    "text" : "Who scores that touchdown after the Tom Brady fumble there?"
+  },
+  {
+    "text" : "Uh their tight end Miller. Uh, you don't know his first name. Um Billy Miller. Whoof, rough name. Uh that's bad parenting. Rhyming your your kids' names. Billy Billy Roshan Miller. What? Okay. Uh yeah. Long time tight end. Played quite a few years.",
+    "timestamp" : "46:14-46:39",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "46:39-46:46",
+    "speaker" : "Steve",
+    "text" : "Pretty much at this point doing everything because he was so wide open that that's the one where Rodney Harrison slips in like Dude had no defender within 10 yards of him."
+  },
+  {
+    "timestamp" : "46:47-46:50",
+    "speaker" : "Andy",
+    "text" : "Oh yeah, it's super open because yeah, like I said, Ronnie Harrison fell on this."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And I wrote, they're doing everything they can to lose this game. Yeah. Everything they can.",
+    "timestamp" : "46:51-46:58"
+  },
+  {
+    "timestamp" : "46:58-46:58",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "There's a 10 from the 16.",
+    "timestamp" : "46:59-47:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And not only that, yeah, not only that, is they they do that, right? They allow the touchdown off of Brady's fumble, get the ball back, immediately go three and out, and then they have their punt blocked. So Texas start again on the New England 20-yard line. You're like, what the fuck? I I don't even think I've I've said this yet, but tried to have Ryan's story on today because you'll if you listen every week, you remember we had him on for A loss because like we only watch shitty games together. Like every game we watch together, the Patriots either lose in terrible fashion. And this was the one game we've watched where they won. And when I was talking to him, he's like, oh yeah, I remember that. They lost that game, didn't they? And then he looked it up. He's like, oh wait, they they won that game? I don't even remember it feeling that good. Like it didn't because it sucked. They tried their hardest to lose this game.",
+    "timestamp" : "47:01-47:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well, even on that three and out with the punt block, Tom Brady fumbles and gets it back on third down.",
+    "timestamp" : "47:47-47:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, I I think he he fumbled it on second down and got sacked on third down. Something like that. It was a third. The drive was an absolute trap.",
+    "timestamp" : "47:54-48:03"
+  },
+  {
+    "timestamp" : "48:03-48:07",
+    "text" : "Whatever it was. The third down and five. He sub fumbles a snap.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Oh okay, yeah, yeah.",
+    "timestamp" : "48:07-48:08",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Then they get the punt blocked and Belchak he cuts the Belchak and he looks so fucking mad.",
+    "timestamp" : "48:08-48:13",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "He is flipped.",
+    "speaker" : "Andy",
+    "timestamp" : "48:13-48:15"
+  },
+  {
+    "text" : "Because it's first and ten on R20. Yeah. For them after they just scored a touchdown",
+    "speaker" : "Steve",
+    "timestamp" : "48:16-48:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Right, and you're already down a touchdown. Yeah, a minute later, two minutes later.",
+    "timestamp" : "48:20-48:24"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "48:24-48:25",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "So it's no no you're down four because you're down seventeen thirteen at this point. So Texas The Texans start doing the 20 and just immediately go three and out because the defense just fucking nuts up and says, nah, we're just not having this.",
+    "speaker" : "Andy",
+    "timestamp" : "48:25-48:39"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Willy really sort of looking taking over at this point.",
+    "timestamp" : "48:39-48:42"
+  },
+  {
+    "timestamp" : "48:42-49:14",
+    "speaker" : "Andy",
+    "text" : "So that's that's their second like huge red zone stop. Apart from the goal line one at the beginning of the the game and now this one and it's just like This defense like, you know what? No, we're gonna drag you through this. We're gonna make you gonna give you one one last chance. The Texans settle for field goal. And there's a few minutes left. Um Pages get the ball like inside at the at their own 20, I want to say. Because they had a good kick return, but that got called back for holding because of fucking course it did. Unlike Dan Cleco of all people, who"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Three minutes, four seconds, first and ten from your twenty, down by a touchdown.",
+    "timestamp" : "49:14-49:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Right.",
+    "timestamp" : "49:19-49:20"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "49:20-49:22",
+    "text" : "Two timeouts."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "49:22-49:59",
+    "text" : "Yeah. So it gets so it gets to uh Third and ten, I think, right? I'm I'm doing this off the top of my head. And um they get a first down on their first play And then Oh right, yeah, because Bra Brady's like threads the needle to uh to Dion Branch for one of his like two catches on the entire game. Wasn't even targeted really. And then, yeah, first down, second down, just completely incomplete. Third and ten. Like this is your this is your drive. You gotta score here, or else you're gonna lose a game. And Brady running around the pocket looking like fucking Michael Vick or someone."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "49:59-50:00",
+    "text" : "He had some good escapability actually."
+  },
+  {
+    "timestamp" : "50:01-50:19",
+    "text" : "He had some great, he like spun out of a tackle because he kind of he was backing like to his left, like backed into the the defensive end that came there and spun out of them and then kind of like ran over to the right and then back to the middle. Oh I have. It's good it'll be up on the site once this this goes.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "50:19-50:25",
+    "text" : "I I grabbed it. We got the two touchdowns on here and there's a lot more great plays like that one.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "50:25-50:26",
+    "text" : "Well that that's that's the only other good point. Oh",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "These are kind of hidden plays because he doesn't score a touchdown, but he throws that awesome ball to Daniel Graham, who'd been absolute. Crap.",
+    "timestamp" : "50:27-50:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, who actually hangs on to it? Great catch.",
+    "timestamp" : "50:34-50:36"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "50:37-50:39",
+    "text" : "If you're gonna catch one Grambleisa's that one."
+  },
+  {
+    "timestamp" : "50:39-50:41",
+    "text" : "That's the one. Yeah. 33 yards on third down.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "50:42-50:47",
+    "text" : "Tom Brady did everything to like make eat the play alive. Yeah. He was dead and he kept it alive."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "50:47-51:01",
+    "text" : "And that throw is like a missile. So it hits Granny for 33 and then uh comes straight back and screens a Falk for 21. Now the pages are in business."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "This is their this is where their deodorant quote was. Oh was it? Yeah, they're like they're like dude that deodorant is the because like they're just catching them. And they get they've been screening them to death.",
+    "timestamp" : "51:01-51:10"
+  },
+  {
+    "timestamp" : "51:10-51:31",
+    "text" : "They have. Yeah, and the the Texans had no answer for it whatsoever. They're still just running straight up field. And there was some good quality, like they were they were doing the They did one screen where they faked like they faked the screen to the left to Falk and then Brady spun around the screen to the other side to Patrick Pass, who was playing fullback.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "They've always had a great screen game, you know.",
+    "timestamp" : "51:32-51:34",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. You haven't seen it as much of late. That's true. I feel like. But yeah, back in the day, their screen game was phenomenal. Um but so they get inside the um inside the Texans ten yard line, right? And it's third and five, and they do a quick draw to Kevin Falk, who picks up like four and three quarters.",
+    "timestamp" : "51:35-52:00",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "52:00-52:00",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "I think the spot was iffy, but it's fourth and one.",
+    "speaker" : "Andy",
+    "timestamp" : "52:01-52:04"
+  },
+  {
+    "text" : "From the four.",
+    "timestamp" : "52:05-52:06",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, with under a minute left. And so they do play action. Brady rolls out to his right. And it's like the bootleg, dude. They called the bootleg. It was the naked boot. It wasn't a naked boot.",
+    "timestamp" : "52:06-52:18",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It was the give going left, and he boots and the And the end guy doesn't fall for it. So Brady's like passes the the cornerback off to the corner and he doesn't fall for it. So his tight end is covered and Brady's like running there, getting chased. on fourth and one.",
+    "timestamp" : "52:19-52:34"
+  },
+  {
+    "timestamp" : "52:35-52:38",
+    "speaker" : "Andy",
+    "text" : "And like running like backwards diagonally away from the play."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "You're like, oh fuck, I've seen this. Away from the pressure. Yep. Goes against his body to Graham.",
+    "timestamp" : "52:38-52:43"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "52:43-53:04",
+    "text" : "Yeah, into double coverage. And Graham just like plucks it out of the defensive back's hands as he's going to the ground for the time touchdown with 40 seconds left. Like, talk about redemption. Man dropped his first three balls to the point where the commentator was talking about how uh he's like, Oh, have you seen little giants where the kid who can't catch is like talking to his hands? It's like Daniel Graham's gonna get to that point"
+  },
+  {
+    "timestamp" : "53:05-53:12",
+    "speaker" : "Steve",
+    "text" : "Dude. Brady, I just looked at on the highlight. Brady threw the ball from the 14 yard line on fourth and four."
+  },
+  {
+    "text" : "Running backwards. Yeah. Yeah.",
+    "timestamp" : "53:12-53:14",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "From from four yards from the goal line. So he threw it 18, probably he threw it all the way to the back of the end zone. So he probably threw that ball. Yeah, 30 yards on the run backwards.",
+    "timestamp" : "53:14-53:21"
+  },
+  {
+    "timestamp" : "53:22-53:27",
+    "speaker" : "Andy",
+    "text" : "Yep. And hit Graham in the hands who held onto it this time. Probably Graham's best touchdown."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He threaded it. Sweet, you can take those highlights and just like slow them down. You can see him thread the needle between two defenders at the goal line. And Graham just out jumps the cornerback and the throw is exactly where it needed to be.",
+    "timestamp" : "53:28-53:41"
+  },
+  {
+    "timestamp" : "53:41-54:07",
+    "text" : "Like you couldn't really put it anywhere else. Dude, and Vrape was was in there. Yep. Vrape was the first one to congratulate. And Cleco was the uh the fullback, I think, because they were talking about that. They did hard run. Yeah. Naked bootleg. They booted it. Oh ballsy. And it was covered and it still worked anyway. It was one of those Brady wasn't gonna let that not work. Yeah. Which is yeah different than what we see nowadays.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Awesome. One of the championship plays out of break right there.",
+    "timestamp" : "54:07-54:10"
+  },
+  {
+    "timestamp" : "54:10-54:11",
+    "speaker" : "Andy",
+    "text" : "Yep. Oh yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's when you knew, right? It was fucking when all the pressure was on.",
+    "timestamp" : "54:11-54:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "54:14-54:15"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Brady's at his best.",
+    "timestamp" : "54:15-54:16"
+  },
+  {
+    "text" : "It's that comparison. I mean, going back to watching Brady this week as a buccaneer playing against the uh Sure. Aaron Rodgers Vik uh Packers and Aaron Rodgers, he's kind of the opposite. Like he plays big until he gets to the big moment and just doesn't seem to I don't know. It's not that he can't hail. He just doesn't seem to make the right decision, I guess.",
+    "timestamp" : "54:17-54:38",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "54:38-54:44",
+    "text" : "He just I mean Brady has that, and no one else really, maybe Montana has that same just Extra gear, you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "54:44-54:45",
+    "text" : "Yeah, that killer instinct right there."
+  },
+  {
+    "timestamp" : "54:47-54:52",
+    "speaker" : "Steve",
+    "text" : "If he hadn't made that third and ten play, he wouldn't even have the opportunity to the fourth and one boot, you know"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But when it's third and long, and you've seen this, I mean I can think of a bunch of plays off the top of my head of like it's third and long and the seasons on the line, so or the even the games on the line or whatever, and Brady completes it in like Gets 17 on third and 16, you know, against the Jaguars and their top-ranked defense.",
+    "timestamp" : "54:52-55:11"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He also gets incredibly lucky, too. Sometimes. And he comes up in overtime. Let's get there.",
+    "timestamp" : "55:11-55:16"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "55:17-56:28",
+    "text" : "So uh speaking of luck, uh some bad luck on the Pagots part because the Texans win the toss. Did you hear the did you hear the off mic fuck? Yeah, from Tom Brady. That was Tom Brady. We want Tails. I want that one. And then I think somebody on his team was like, really? He's like, absolutely. And then he flips it to his heads. He's like, fuck. And they definitely didn't cut away from that quick enough. Yeah, that was great. Uh so Texans Receive the ball. First play from scrimmage. Your boy Tony Banks gets picked off by Mike Vrabel of all people. And returns it to the Texans 23. This game's fucking over. Yeah. Patriots, three runs up the middle. The third one is their patented Tom Brady fall to the middle of the field. QB sneak. So set it up perfectly. So 23-yard field goal from dead smack dab in the middle of the field. And at this point, you announced talking about how the Texans has as a franchise have never blocked a field goal. Adam Benateri has hasn't had a field goal block since opening day 1998."
+  },
+  {
+    "timestamp" : "56:28-56:33",
+    "speaker" : "Steve",
+    "text" : "Before we get there, pretty sure this is Mike Vrabel's first INT."
+  },
+  {
+    "timestamp" : "56:34-56:52",
+    "text" : "No, he's had one uh he has four the season. He's had one against Miami. I think it was Brady's second start to this season. The game started with a with a an interception by Mike Vrabel and then went down from there.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "56:52-56:56",
+    "text" : "He had two In 2001, I'm an idiot.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. That's what I'm saying. I remember one of them. Um, but yeah, so Don't worry about the first interception though.",
+    "timestamp" : "56:56-57:04"
+  },
+  {
+    "text" : "Overtime, first play, game game over, yes.",
+    "timestamp" : "57:04-57:07",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like, oh thank God. Let's get it. Let's get the fuck out of here.",
+    "timestamp" : "57:07-57:09"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "57:10-57:12",
+    "text" : "He's only missed one field goal at a dome."
+  },
+  {
+    "timestamp" : "57:12-57:31",
+    "speaker" : "Andy",
+    "text" : "Yeah, at this point, like I'm sitting at Ryan's stories after a very heavy night of drinking. I'm super hungover. I'm like, let's just end this so I can go back to sleep. uh Adam and Terry gets his field goal. His field goal from the 23 yard line blocked. And you're like, you gotta be fucking kidding me. This game is never gonna end."
+  },
+  {
+    "timestamp" : "57:31-57:48",
+    "speaker" : "Steve",
+    "text" : "I was about to turn it off. I actually didn't even know what time was left and I was like, I'll turn it off right after some put the Celtics on. And then it blocked and I was like Didn't see that coming. Nope. I should have because I saw how long the second half was. I really should have like put two and two together and be like, why is there an extra 30 minutes on this?"
+  },
+  {
+    "timestamp" : "57:48-58:05",
+    "speaker" : "Andy",
+    "text" : "And yet Uh and then from there the Texas drive like inside New England territory, get to the 40. And this is like they have a good kicker too. Oh, I did."
+  },
+  {
+    "text" : "Oh, you did.",
+    "speaker" : "Steve",
+    "timestamp" : "58:05-58:06"
+  },
+  {
+    "text" : "Yeah, the Texans have never blocked a field goal and Adam Vinateri hasn't had a field goal blocked in their in their history as a a team. Yes. And Adam and Atari, last time he had a field goal block was opening day 1998.",
+    "timestamp" : "58:06-58:21",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "58:22-58:26",
+    "text" : "That's I mean we're 2003, so that's five years. Right.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "He hasn't had a kick block in five years. So of course you know what happens it gets blocked. Of course. Because of fucking course it does. And then the Texans drive to about New England 40, right? And so they have a decision to make. Yep, this is the first drive they put together outside the first quarter. Because they've been on the sidelines the whole time. Right. Um, so they drive to the New England 40-yard line and they have a decision to make, and their decision apparently is to punt it.",
+    "timestamp" : "58:26-58:52",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "58:52-59:02",
+    "speaker" : "Steve",
+    "text" : "Yes, I thought this is the worst. God. I thought this is the worst decision ever, but I got punting, playing not to lose. Oh, so you know? I hate that. I hate that."
+  },
+  {
+    "timestamp" : "59:02-59:09",
+    "text" : "Yeah. Punting from the New England 40s. It's such a Tough look. But we've seen that a lot against these Patriots teams.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But like just go for it, you know, like just try to win. If you hit that, you're you're You got the win. Game over. Already had possessions too. You know, actually didn't even count. Didn't even matter at that point. Right. First score wins.",
+    "timestamp" : "59:10-59:21"
+  },
+  {
+    "text" : "I mean they did pin New England inside their own tent, right?",
+    "timestamp" : "59:22-59:26",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "59:26-59:28",
+    "speaker" : "Steve",
+    "text" : "Oh, their strategy actually works."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "59:28-59:36",
+    "text" : "Yeah. Because they yeah, the pages is oh this is where Brady got sacked, isn't it? They go three and out, Brady gets sacked on third down and they're punting out of their own end zone."
+  },
+  {
+    "timestamp" : "59:36-59:37",
+    "speaker" : "Steve",
+    "text" : "No."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No? All right. Well whatever. It's what it's around here.",
+    "timestamp" : "59:37-59:40"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, four yards, no, yeah, four yards and no gain, nine yards sack. They're on their 13. Okay, yeah, yeah. No, on their four.",
+    "timestamp" : "59:40-59:47"
+  },
+  {
+    "timestamp" : "59:48-59:54",
+    "speaker" : "Andy",
+    "text" : "Right. And so the pages basically punt from their own end zone. And Texans do nothing."
+  },
+  {
+    "timestamp" : "59:54-01:00:00",
+    "speaker" : "Steve",
+    "text" : "Well, they don't need to because like they already started in field goal range. They get it on the Patriots 35."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, that's right. Yeah, because Ken Walder was freaking 31-yard punt.",
+    "timestamp" : "01:00:00-01:00:04"
+  },
+  {
+    "timestamp" : "01:00:04-01:00:10",
+    "speaker" : "Steve",
+    "text" : "Just I actually looked away at that point, so I was glad I didn't see that. Such a bad game."
+  },
+  {
+    "text" : "And this is a bad season for Kevin Martin in general.",
+    "timestamp" : "01:00:10-01:00:12",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I didn't expect anything better out of him.",
+    "timestamp" : "01:00:14-01:00:15",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Not yeah, oh yeah, not at this point of the season.",
+    "speaker" : "Andy",
+    "timestamp" : "01:00:16-01:00:17"
+  },
+  {
+    "text" : "Or punter in AC, they keep saying that.",
+    "timestamp" : "01:00:18-01:00:19",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:00:20-01:00:27",
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah. He's he's I think he's maybe the second worst in the league. If not the worst at this point, he's just not good."
+  },
+  {
+    "timestamp" : "01:00:27-01:00:30",
+    "speaker" : "Steve",
+    "text" : "We feel bad. Last time."
+  },
+  {
+    "timestamp" : "01:00:31-01:00:46",
+    "text" : "But yeah, so uh The drive chart for this next drive. Dominic Williams, right tackle, no gain. Left end minus five yards. And now they're back on the New England 40 again. And what do they do?",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They go at uh Poole and Poole makes a great is Willie for tackle no gain. Willie tackle five-yard loss.",
+    "timestamp" : "01:00:47-01:00:53"
+  },
+  {
+    "timestamp" : "01:00:54-01:01:33",
+    "text" : "Yeah. And then Tyrone Poole makes a fantastic play on third down on Andre Johnson. I think that's a good thing. But it wasn't even like they they were they were going for the shot again. It was like a 20-yard route. Yeah. And like if they had picked up the the five yards that they lost Like that's that's a f they're in field goal range, they can give it a shot. But instead they're back on the Patriots 40 yard line and we know from last time they didn't kick a field goal from there, so they punt it again. And again, fair catch at the 14-yard line for Kevin Falls Patrick started 14. Something there again, like I don't know, go for it. Just anything. Like just try something. And uh then what happens to you?",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And then it's Tom Brady time again.",
+    "timestamp" : "01:01:33-01:01:35"
+  },
+  {
+    "timestamp" : "01:01:36-01:01:51",
+    "text" : "Mm-hmm. So 16 yards, Kevin Falk. Five yards to Dietrich Ward, 14 yards to Bethel Johnson, 13 yards to Deion Branch, 10 yards to Christian Fourier, and now they're just running.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "This is also the best of Patriots offensive side. I think because the Texas defense was so tired too at this point.",
+    "speaker" : "Steve",
+    "timestamp" : "01:01:52-01:01:57"
+  },
+  {
+    "timestamp" : "01:01:57-01:02:02",
+    "speaker" : "Andy",
+    "text" : "They'd ran so yeah, they've been on the field for so long that you know similar to the Atlanta."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:02:02-01:02:09",
+    "text" : "This game has some similarities to Atlanta Super Bowl in that. Eventually, just they just couldn't stand to the onslaught of Tom Brady and they're just Yeah."
+  },
+  {
+    "text" : "And so this this this drive was especially inevitable. Um but the bra it didn't end in a touchdown like it did in the Super Bowl, but They get inside the 20. Kevin Falk up the middle five yards. Kevin Falk on the middle three yards. And on third and two with 45 seconds left out of Vinateri finally manages to connect on a 28-yard field goal. That uh makes it through the uprights. And the Patriots escape with how many wins in a row. Yeah. Snuck out of the trap, managed to to shed their the the trap that closed on their leg. One, two, three, four, five, six. This is now their seventh win in a row. They're 9-2. First place in the AFC East. And they're showing the Chiefs were 9-1 and were playing again later in the day. And the Colts were also 9-2 after beating the um after beating the Buffalo Bills coming from behind in similar fashion. Which is great because next week, speaking of Indianapolis Colts.",
+    "speaker" : "Andy",
+    "timestamp" : "01:02:09-01:03:21"
+  },
+  {
+    "text" : "Let me touch on my Brady is lucky. And not just great. I'm not saying he's not saying he's not great. I'm saying he's great and lucky. Touch it, Steve. Touch. The second play of that overtime drive where he just says, see you later. He throws that brutally bad pick. The safety comes over, intercepts it. And it was just way overthrown. Just an awful ball. And he gets picked. And there's like a no-dotter, you know? And there's that. holding penalty on the receiver and they showed the replay of it pretty a couple times and I saw nothing there. Yeah. It was like the softest call of all time and he just got so big because he almost just three minutes left in overtime throws a pick.",
+    "timestamp" : "01:03:21-01:04:02",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah there was There was a few soft calls in this game. Like they they called um the Texans linebacker for roughing the passer too on Brady's like game-tying touchdown. That's true. He pushed him as he threw the ball.",
+    "speaker" : "Andy",
+    "timestamp" : "01:04:02-01:04:16"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:04:16-01:04:31",
+    "text" : "Yeah. In today's standards, it wasn't that bad. And back then, this is actually kind of when it starts though. It is. It is. This season is sort of when it really starts those uh they call it so much harder on the quarterback when the Yeah, it was uh"
+  },
+  {
+    "text" : "Yeah, I'll give you that. He was lucky on that play.",
+    "timestamp" : "01:04:32-01:04:36",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "All right, let's do some best and worse.",
+    "timestamp" : "01:04:36-01:04:38",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right. You go first. time I always go first.",
+    "timestamp" : "01:04:38-01:04:42"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Hmm. I'm happy that they didn't jinx the overtime with their they've won eighths or seventh straight in overtime. They put that up a couple times. So I thought they were gonna jinx that too",
+    "timestamp" : "01:04:42-01:04:53"
+  },
+  {
+    "timestamp" : "01:04:52-01:05:07",
+    "speaker" : "Andy",
+    "text" : "They also said that they had won sixteen consecutive games when leading in halftime too. Didn't manage to jinx that. It was a Josh Beckett siding. Yeah, he's a Texas boy."
+  },
+  {
+    "text" : "We'll see you again, Josh. We sure will. Very, very rich man. Very rich man. There was a air horn during a fair catch. Oh, Patrice player is catching a punt and they air horned it right as soon as he's about to catch it. I thought, you know, we gotta respect that. That's some good hustle. Nah, it's fucked up. Lasers in the eyes, that's not legit. You know? True. But an air horn, I don't know. There's whistles, there's air, and you gotta be able to concentrate. Yeah. Yeah. It's just like making noise. I don't think you can just hold an airborne down. That's just a fucking noise. But if you blew it right when they're trying to make a catch, I'm kind of in on that. Yeah, get it. And my best of the best.",
+    "speaker" : "Steve",
+    "timestamp" : "01:05:07-01:05:56"
+  },
+  {
+    "text" : "No.",
+    "timestamp" : "01:05:56-01:05:56",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't know if you noticed this, but I certainly did. And the commentators actually very briefly touched on it because like I first noticed it and I was like, oh I wonder when they're gonna comment on it. And they did the first game, and I was like, whoa. Uh the Belichick cut-off sleeves hoodie. This is the first cutoff sleeve hoodie game. It was so bad.",
+    "timestamp" : "01:05:56-01:06:15"
+  },
+  {
+    "timestamp" : "01:06:15-01:06:19",
+    "speaker" : "Andy",
+    "text" : "I don't know it was the first, it was the first time they talked about it. I'm telling you, go back and watch the other."
+  },
+  {
+    "timestamp" : "01:06:20-01:06:21",
+    "text" : "I've been waiting for this thing.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's so bad. And he has like around his chest.",
+    "timestamp" : "01:06:21-01:06:25"
+  },
+  {
+    "text" : "No way, does Belichick have someone lay his clothes out for him? Nope. No. That's because he won the Super Bowl, buddy.",
+    "speaker" : "Steve",
+    "timestamp" : "01:06:28-01:06:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, he grabbed that out of the dirty hamper. You fucking know it. He's like, oh fuck it. Uh that'll do. Oh these sleeves are a little long. Let's cut these off real quick. Where's my box cutter?",
+    "timestamp" : "01:06:35-01:06:45"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:06:45-01:06:48",
+    "text" : "He probably does his own laundry too, you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, but badly. He probably just like throws everything in once a week. And it's like completely s over stuff the thing so nothing actually gets clean. Let's it sit for a a day so it gets all moldy. Yeah.",
+    "timestamp" : "01:06:48-01:06:58"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's what I do, yeah. Yeah, just cleaning it right away. You know, I don't get that shit to get moldy.",
+    "timestamp" : "01:06:59-01:07:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm not. I I I wash my shit at least twice because I forget the first time. It's not great.",
+    "timestamp" : "01:07:04-01:07:09"
+  },
+  {
+    "text" : "And then probably the worst. You can see Ty Law super hurt and he was limping everywhere. Yeah, they said something about he had like uh a peck strain or something like that or something. No, it was his his angle's been hurt all year. He's missed a couple games. Yeah, but his hamstring is also tweaked.",
+    "timestamp" : "01:07:09-01:07:26",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "But uh they said something about like something to do with his like ribs or his his pecs or like something like that too, yeah. Cause he cause the commentator was like, you know, that's the sort of shit that would like hurt me getting out of bed. Yeah. And he's out there playing a football game with it. Yeah. So yeah. All right. Is that your best and worst? Love it. All right, let's see. Um my best sneaky best was Tyrone Poole not only playing great defense, but returning punts today. And doing a damn good job of it. And Patrick Pass was back on kick returns, and I liked that.",
+    "timestamp" : "01:07:26-01:08:03",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:08:03-01:08:05",
+    "text" : "I like Patrick Pass returning kicks."
+  },
+  {
+    "text" : "I remember liking him returning kicks, yeah. Um But Tyrone Poole, four returns, 42 yards. He's averaging over 10 yards a punt return, which is not too shabby. So not bad.",
+    "timestamp" : "01:08:05-01:08:17",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:08:17-01:08:24",
+    "text" : "He's yeah, he's concerned on special teams. He's like a number two corner. He's A great signing and I got he was this good.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, and his fucking coverage is outstanding. Yeah. Um, I mean, the worst is the first three quarters of this game. And the goddamn commentators talking about Adam and Atari never missing so that he would miss. They did talk a lot about how great the field was, though. And I guess there's like trays of grass that they they move in and out. Sure. But they clip together seamlessly. But then Adam Vineterry couldn't kick a field goal and uh Rodney Harrison fell over nothing.",
+    "timestamp" : "01:08:24-01:08:57"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's not the crafts' fault, but Bethel Johnson at a touchdown that he's not roll it inside. It's the same idea. Grow it outside and then pull it in. So I'm sure it was in good shape. Better shape than the Patriots Stadium. That shit is.",
+    "timestamp" : "01:08:57-01:09:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You know what they should have done though? If they wanted to grow grass outside? Not put a fucking roof on it. You're in Texas. Why play in the fucking rain? How often does it rain in Texas?",
+    "timestamp" : "01:09:12-01:09:23"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, it's so hot.",
+    "timestamp" : "01:09:23-01:09:25"
+  },
+  {
+    "text" : "Who cares?",
+    "timestamp" : "01:09:25-01:09:26",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Dude, it's fucking ridiculously on it. It was so fucking hot there. I didn't go there. But fuck it.",
+    "timestamp" : "01:09:26-01:09:34"
+  },
+  {
+    "timestamp" : "01:09:36-01:09:37",
+    "speaker" : "Andy",
+    "text" : "I didn't go because it's too fucking hot."
+  },
+  {
+    "timestamp" : "01:09:39-01:09:47",
+    "text" : "I couldn't even stay outside for more than 30 minutes. We had a pool too. Dolphins outside it. I need to be sitting in the shade in this pool. It's so fucking hot.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well you're also like the whitest skinned person I know with that forehead like you know down here Virginian real hot doesn't get that hot doesn't get Texas hot apparently different fucking Humid. Uh-huh. This is no humid's New England.",
+    "timestamp" : "01:09:48-01:10:09"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's a dry heat in Texas. That's fine. But that's why they don't have that's why they play in the dome, because it's so hot. Florida does the same thing. I guess. I mean the Dolphins don't, but the Marlins do.",
+    "timestamp" : "01:10:10-01:10:21"
+  },
+  {
+    "timestamp" : "01:10:21-01:10:25",
+    "speaker" : "Andy",
+    "text" : "Sounds like some millennial snowflake bullshit to me."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Sitting in the sun? Shit sucks. Oh no.",
+    "timestamp" : "01:10:25-01:10:28"
+  },
+  {
+    "timestamp" : "01:10:29-01:10:31",
+    "speaker" : "Andy",
+    "text" : "How do the how do they handle it, Miami?"
+  },
+  {
+    "text" : "I guess they just do a bunch of drugs. You know what the fuck's going on?",
+    "timestamp" : "01:10:32-01:10:37",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "It's true. Just so much cocaine. Uh They just sweat it all out immediately. And my worst, I will do this, is uh they showed a graphic of um The Texans in games following a win, so the week after they win a game, the title of it was one and done. Because they had never won two games in a row as a franchise yet. They were 0-7. They averaged 12 points per game and allowed an average of 30 points a game. And they were outgained 259 to 355. And their turnover ratio was negative 11.",
+    "speaker" : "Andy",
+    "timestamp" : "01:10:37-01:11:20"
+  },
+  {
+    "timestamp" : "01:11:20-01:11:34",
+    "speaker" : "Steve",
+    "text" : "Yeah. So they don't this year, but because they only win one more game, right? And not the next game, right? Right. Or maybe it was. Well it it doesn't win two more in a row, yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They don't win two in a row, right? So let's see. When's the when's the first time we win two in a row? 2004. Yeah, three yeah, 2004, week three and four.",
+    "timestamp" : "01:11:34-01:11:43"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:11:43-01:11:44",
+    "text" : "They go seven and nine."
+  },
+  {
+    "text" : "And then they lose again.",
+    "timestamp" : "01:11:45-01:11:45",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Under Dom. Yeah.",
+    "timestamp" : "01:11:46-01:11:48"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:11:49-01:11:57",
+    "text" : "They win two games in a row, then lose. They don't win more than two games in a row. When what when does that happen?"
+  },
+  {
+    "timestamp" : "01:11:58-01:12:01",
+    "speaker" : "Steve",
+    "text" : "And then they go 2 and 14 under Capers and he gets five. Yeah."
+  },
+  {
+    "text" : "Okay, so that's not good. And then so 2006 still don't win. Oh, they they win their last two games of the season to go six and ten. And get a shitty draft spot. 2007, they win their first two games and then lose. And then win two games back to back in week 14 and 15. And then Oh, they start 2008 with four losses. Oh, they win three games in a row. They start off four losses and then win three in a row. It's the first time they win more than two games in a row.",
+    "timestamp" : "01:12:01-01:12:33",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh boy. It's two thousand eight. Well they can go four and oh, he's already gone sixteen and oh",
+    "speaker" : "Steve",
+    "timestamp" : "01:12:34-01:12:43"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:12:43-01:12:49",
+    "text" : "So that's the first time they win more than two games in a row and they still finish eight and eight. They have a three-game win streak and a four-game win streak."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They follow a four-game up with a three-game lose streak.",
+    "timestamp" : "01:12:50-01:12:52"
+  },
+  {
+    "text" : "That's not great.",
+    "timestamp" : "01:12:53-01:12:54",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And then follow that up with another four-game win streak.",
+    "timestamp" : "01:12:54-01:12:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "2009, they have their first winning season. By winning the last four games of the season. Oh my goodness.",
+    "timestamp" : "01:12:57-01:13:06"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:13:06-01:13:15",
+    "text" : "I mean there's there's some big Texan games to come. When Andre is like a even more of a beast, you know? Right. So he gets real good in the Matt Schaub years."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yep. Yeah, we'll see that coming up. But before that, we have Maybe the regular season game of the the season? Like the the premiere Most memory.",
+    "timestamp" : "01:13:15-01:13:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't even remember any of these games, so I'm looking forward to it. I I was thinking when I was watching this, I was like, I don't even remember who we play in the playoffs. Steve. I really don't. I can't remember like The AC championship. For the life of you, don't tell me. I want to figure it out. He'll figure it out. Yeah.",
+    "timestamp" : "01:13:33-01:13:49"
+  },
+  {
+    "text" : "But yeah, so next week it's the 9-2 New England Patriots facing the 9-2 Indianapolis Colts. For battle for, I think technically second place in the AFC. Yeah, yeah. At this point, maybe. Yeah. Depending on how the Chiefs do. I don't actually know at this point. Um But yeah, so it's uh going to Peyton Manning's house. We haven't been there since the David Patton game, I think. You know, one.",
+    "speaker" : "Andy",
+    "timestamp" : "01:13:50-01:14:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yes, for sure.",
+    "timestamp" : "01:14:14-01:14:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So it's been a couple years we're back there because they were recently out of the division.",
+    "timestamp" : "01:14:15-01:14:19"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:14:19-01:14:21",
+    "text" : "Once the Texans joined, that's when the Colts left."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Correct. 2002 was when the realignment happened. So they're no longer in the division. Although I will say one of my favorite uh Jets statistics is that the uh Indianapolis Colts have more AFC East championships than the New York Jets do. And they haven't been in the AFC East since 2002.",
+    "timestamp" : "01:14:21-01:14:42"
+  },
+  {
+    "timestamp" : "01:14:42-01:14:44",
+    "speaker" : "Steve",
+    "text" : "That's great."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Houston Oilers also have as many AFC East championships. And they haven't been in since like who the hell knows how long. Uh so that's a good time. So yeah, next week, the The battle wagons meeting.",
+    "timestamp" : "01:14:44-01:15:01"
+  },
+  {
+    "timestamp" : "01:15:01-01:15:04",
+    "speaker" : "Steve",
+    "text" : "It sounds a bit because Greg said he would be on that one."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, oh yeah. He's not gonna he he said he may even watch the game, so that's how you know it's uh Yeah, that's true.",
+    "timestamp" : "01:15:04-01:15:09"
+  },
+  {
+    "text" : "So I have big expectations",
+    "speaker" : "Steve",
+    "timestamp" : "01:15:09-01:15:11"
+  },
+  {
+    "text" : "So get ready for a five Lombardi watchability score or something for uh next week on the Patriots. Oh wait, before we call out, don't forget Um if you would like to drop us a line, Steve, if people want to get a hold of us. Yeah, I can't remember it. If you're if you're Mama Brown, what do you do? You just you just fucking call up Steve and yell at him. Or um you can uh text the Dynasty Hotline 603-505 Troy Brown for three. 8043. That's right. Troy Brown for three.",
+    "speaker" : "Andy",
+    "timestamp" : "01:15:11-01:15:45"
+  },
+  {
+    "timestamp" : "01:15:47-01:15:49",
+    "text" : "I can never remember the 505. I'm so bad at it.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's all right. Give us a text. It's SOS So you see it.",
+    "timestamp" : "01:15:49-01:15:55"
+  },
+  {
+    "timestamp" : "01:15:55-01:15:58",
+    "text" : "Save our souls, Troy Brown for three.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:15:59-01:16:21",
+    "speaker" : "Andy",
+    "text" : "Save our season, Troy Brown for three. Oh not bad. So yeah, 603-505-8043. If you shoot us a text, we'll probably shout out. And uh if you're exciting enough, we may even have you on the podcast. We'll see. So, uh, until next week, we will see you then. See you, Lana. See you, Lana."
+  }
+]

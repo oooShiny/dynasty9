@@ -1,0 +1,2452 @@
+[
+  {
+    "speaker" : "Mom",
+    "timestamp" : "00:00-00:17",
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to to. My sons sometimes say some naughty things when they're trying to be funny. But really, they're just being stupid. Do you still want to listen? Go right ahead. I am not your mother."
+  },
+  {
+    "timestamp" : "00:23-01:00",
+    "text" : "Alright, welcome back to the Patriots Dynasty Podcast season three. We've actually done two full fucking seasons of this We're now on the 2003 season. We've suffered through uh the 2002 season. We managed to finish that off with uh interviewing Mama Brown. That was great. But now we're back. We're doing a season uh where the Patriots, spoiler alert, will win the Super Bowl. Um not that anybody realized that going into this game. But Steven, I think you've you've brought a friend along to kind of help us through this start, rough start to the uh beginning of the 2003 season.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:00-01:29",
+    "text" : "Well, let's be clear. I uh I've always had a soft spot for Bills fans. I truly have. And same. Part of that is is our guest here today, Brian Greer. Known him for a long time. One of my first friends when I moved to Virginia. So we've been friends for 12, 13 years. Well, maybe more like a we're acquaintances. Uh But no one's been more of a Bills fan than this guy. So this is the ultimate, this is the pinnacle of Bills fandom, I feel"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah. Really? I wish it could be different, but this is just how it is, you know?",
+    "timestamp" : "01:29-01:33"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep. So I figure, you know, let's give him his chance to shine. And we're going to do that.",
+    "timestamp" : "01:33-01:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I mean I think for a a Bills fan to come on a Patriots podcast, this is exactly the game you want to do it for.",
+    "timestamp" : "01:38-01:46"
+  },
+  {
+    "text" : "Yeah, this there's a reason why I didn't come on last time and I I waited for this game. So this is the I don't blame you. The Drew Bleds uh revenge game, as I like to call it",
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:46-01:58"
+  },
+  {
+    "text" : "All right. Yeah, because we've been calling all the other games the Drew Bloods a Revenge game. He just hasn't gotten revenge until now.",
+    "timestamp" : "01:59-02:04",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. And let's be clear. Let's be very clear about this. This is only one of two Bills games where they actually won. Right? Because one was like a week 17 where Brady only paid in a half. One was like the um game where uh you know brady was suspended and we were on our fourth quarterback and when he had Tordan Lingham in his hand.",
+    "timestamp" : "02:04-02:29"
+  },
+  {
+    "text" : "So this game and I think we watched that game together. I think we watched uh succeed enough and Jacoby's the tech game together.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "02:30-02:37"
+  },
+  {
+    "timestamp" : "02:37-02:44",
+    "speaker" : "Steve",
+    "text" : "We did. We were at that bar in DC and as I was leaving I and I encouraged everybody to enjoy their Super Bowl. At that door."
+  },
+  {
+    "text" : "Steve.",
+    "speaker" : "Andy",
+    "timestamp" : "02:45-02:45"
+  },
+  {
+    "text" : "It was week four.",
+    "speaker" : "Steve",
+    "timestamp" : "02:47-02:48"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "02:48-02:57",
+    "text" : "And you guys are hyped. There was another game too where Ryan Fitzpatrick went off and he threw like Four interceptions in the first half and then four touchdowns in the second half or something."
+  },
+  {
+    "timestamp" : "02:57-03:01",
+    "speaker" : "Steve",
+    "text" : "That's that Welker game we talked about earlier, Andy, where he had like 218 yards."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "03:01-03:09",
+    "text" : "Oh, right, yeah. And this is a loss somehow. That game was it was your typical Ryan Fitzpatrick just Shit fuckery game."
+  },
+  {
+    "timestamp" : "03:09-03:13",
+    "speaker" : "Steve",
+    "text" : "Those are the two games. This game and that game are like the two Bills peaks."
+  },
+  {
+    "timestamp" : "03:14-03:14",
+    "speaker" : "Andy",
+    "text" : "Officially."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And everything else has been a deep, deep valley.",
+    "timestamp" : "03:14-03:17"
+  },
+  {
+    "timestamp" : "03:17-03:33",
+    "text" : "Well, so I was actually wondering because I knew we were having Brian on. In terms of like like top bills games over the past 20 years, does this one rank pretty high? It's a good question.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, I mean it's gotta. It really has to. Um you know it's funny that like some of the losses stick out harder than some of the wins. Like uh Like Dallas on Monday night when they came back, kinda like the last minute of the game, that one's brutal. But I'd say for wins this has to be really at the top thirty two nothing Doesn't get any better than that.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "03:33-03:54"
+  },
+  {
+    "timestamp" : "03:54-03:59",
+    "speaker" : "Andy",
+    "text" : "Whoa, whoa, whoa, whoa. Let's not giving yourself points."
+  },
+  {
+    "timestamp" : "03:59-04:06",
+    "speaker" : "Brian Greer",
+    "text" : "Yeah, right. Damn it. Hey, I was drunk for I was drunk for like twenty-three years here, so give me a break."
+  },
+  {
+    "text" : "Spoke it like a true Bills fan. I love it.",
+    "speaker" : "Andy",
+    "timestamp" : "04:07-04:10"
+  },
+  {
+    "text" : "So yeah, I think I'm gonna tell this one story about Greer, just to illustrate his whole Bills fandom. When you go to a bar, we watched a lot of Patriots Bills games together for for better or worse. He's he's in it and he always wants to watch together. So we go to this crazy bar near my house and the bills go up big in the first half as they may want to do and then blow it. Which they're a want to do. So he's drinking heavy cause they're up and then he's drinking heavier cause they're down and blowing it. I meet some other people I'm hanging out and then I have to go back to my house. Collect him out of the house, bundle him into a cab, send him to his friend's house, and apparently in his blacked out state, convince a cabbie to stop and get McDonald's. So he shows up with the like 50 bucks in McDonald's.",
+    "speaker" : "Steve",
+    "timestamp" : "04:11-04:59"
+  },
+  {
+    "timestamp" : "04:59-05:06",
+    "speaker" : "Brian Greer",
+    "text" : "Oh that was rough man. It was the last second field goal if I remember correctly. I don't think you remember shit."
+  },
+  {
+    "text" : "But tell you what, when we get to that game, we'll have you back on. How about that? We can re-watch it together and re-experience it.",
+    "timestamp" : "05:09-05:16",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "All right, do you want me to tell the whole story then or now? No, that's good. We're good.",
+    "timestamp" : "05:16-05:20",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "05:20-05:21",
+    "speaker" : "Steve",
+    "text" : "We'll save that."
+  },
+  {
+    "text" : "We'll tease it. Yeah. For whenever the hell it is for ten years from now Uh so we've uh we've had some other uh fans of opponents on. And last year the one that stuck out to me was the uh the Lions fan we had on. And I'm curious if being a Bills fan is similar to being a Lions fan in terms of um he would Every year at the beginning of the season, he would get his hopes like super high. Like this is the year. We're gonna make the playoffs. Matt Stafford's gonna be MVP. Everything's gonna click. And then he will go through like the phases of denial as the season wore on. Is that similar being a Bills fan?",
+    "timestamp" : "05:22-06:05",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "06:06-06:27",
+    "text" : "Yeah, a hundred percent. Um I feel f I feel for those types of teams, you know, the Browns, the Lions, you know, the blue collar teams are that struggle. It's just really heartbreaking for their fan base, so I kinda relate to that. But uh Yeah, I don't know. We had a few years there, like four straight years we went to the Super Bowl. They've not had anything even remotely close, so",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "Well, I believe we we asked the Lions fan um if he would rather have Like just being bad all the time or getting to four suit bowls in a row and losing all of them? And I don't remember what his answer was, but I remember he had to think really hard about it.",
+    "speaker" : "Andy",
+    "timestamp" : "06:28-06:47"
+  },
+  {
+    "timestamp" : "06:48-06:53",
+    "speaker" : "Brian Greer",
+    "text" : "Yeah, I think I'd rather make it to four straight. I think I'd rather that's a lot of wins we had in those four years."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So I feel that Trevor is just desperate for winning. And let's be real, no one's I mean Bills fans love them. They are downtrodden, but you know, they've had flashes, including the 31 to nothing game. Yeah. But you know, they're they're not nearly as drown downtrodden as those poor Detroiters.",
+    "timestamp" : "06:53-07:11"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "07:11-07:14",
+    "text" : "Didn't you guys beat us thirty-one nothing to end the season as well?"
+  },
+  {
+    "text" : "Yes, yes. We'll get there. We have uh it was a nice little book to go, but He will we will certainly you can come on to that game too if you want, Greer.",
+    "speaker" : "Steve",
+    "timestamp" : "07:15-07:22"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I th I think that's only fair that I come on for the thirty-one nothing win and the thirty one nothing walk.",
+    "timestamp" : "07:23-07:28"
+  },
+  {
+    "timestamp" : "07:28-07:31",
+    "text" : "Did you watch this game the in in its entirety",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Absolutely. Uh well I watched like the first quarter of it. Um before I had to get back to work. I just snuck off to the bathroom and watch the first quarter.",
+    "timestamp" : "07:31-07:39"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So Well, thank God. Whatever whatever video you had, Andy, it cut off. before the final field goal. Yeah. And like in the second half, they stopped like doing all the in-between plays and just started going snap to snap to snap like a NFL rewind.",
+    "timestamp" : "07:39-07:54"
+  },
+  {
+    "text" : "Like the condensed, yeah. Uh I that was not on purpose. I just found the first YouTube uh search result for this game and it looked like it was two hours long. I'm like, yeah, it's gotta be it. But yeah, like halfway through, even whoever was recording is like, nah, fuck this. Like this is nothing else is happening. And it ended when uh the Bills kicked their last field goal in the fourth quarter to go up 31-0. That was the end of the video.",
+    "timestamp" : "07:55-08:17",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Let's I guess let's get into it a little bit.",
+    "speaker" : "Steve",
+    "timestamp" : "08:17-08:20"
+  },
+  {
+    "timestamp" : "08:20-08:30",
+    "speaker" : "Andy",
+    "text" : "Which is fine because that my notes had ended shortly before that anyway. I think I just wrote uh yeah, fuck this. Actually no, I wrote who the fuck cares uh in my little drive chart that I do. Uh because"
+  },
+  {
+    "text" : "You guys gotta get pretty upset that you don't have some of these players like still on your team, you know. It's uh it's like a trip down memory lane for me. I I don't like follow the d you know, every game like this, so you guys like are step by step going through it, so",
+    "timestamp" : "08:31-08:45",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "08:45-08:52",
+    "speaker" : "Steve",
+    "text" : "Yeah, it's it's it's a good point because like the turnover oh two to oh three was pretty massive, right?"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "08:53-08:57",
+    "text" : "Uh, for both teams it seemed like. It it seemed like this Bills defense was completely revamped."
+  },
+  {
+    "text" : "Yeah, they're like the Bills made all the right calls and the Patriots made all the wrong calls, at least in this game. Yeah. Spikes was like their big linebacker signing and he played out of his goddamn mind.",
+    "timestamp" : "08:58-09:08",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "09:08-09:37",
+    "speaker" : "Andy",
+    "text" : "Yeah, so here like they showed uh like an infographic on the screen. of the uh the key Buffalo defensive additions. It was Laurie Malloy who had five tackles, a sack, and a tipped pass that got intercepted in the end zone. Uh TKO Spikes, who had at this point six tackles and one interception, he would end with two interceptions on the day. Sam Adams, who had At least one sack. I think it was two sacks plus uh a pick six, which is probably one of the slowest pick sixes I've ever seen in my life."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "09:38-09:39",
+    "text" : "This is the defining playlist game. Yeah."
+  },
+  {
+    "timestamp" : "09:40-09:59",
+    "speaker" : "Andy",
+    "text" : "That and yeah, oh yeah. Uh and and his dance on the way into the end zone, which looked a bit to me like the the Tight Law dance, which was fantastic. Yeah, yep. And uh linebacker Jeff Posey, who Compared to the rest of them didn't actually do much. But uh like that core was solid, yeah."
+  },
+  {
+    "timestamp" : "09:59-10:23",
+    "speaker" : "Brian Greer",
+    "text" : "Yeah. Uh, this is kind of like the stereotypical like nineties, like eighties, like, you know, quarterback tall, like big arm. Uh and then like the defens the defensive linemen are massive human beings. Like they're like not as athletic as they are now. They're just like meatballs in the center, dude, that just don't get moved."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And to see one of them catch a pick six was like again like the the one moment anybody has out of this game, Bills fan, Patriots fan. casual fan is that Sam Adams pick six. A hundred percent. Yeah. Yeah. Which was honestly a great play from him. He like I thought it was a screenplay that busted, but it wasn't when you look at it. It was like Brady was trying to throw the slant, and for some reason the nose tackle dropped into the slant zone and just",
+    "timestamp" : "10:24-10:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, I I I think it was still supposed to be a screen, but it it was just that bad.",
+    "timestamp" : "10:53-10:57"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "10:58-10:58"
+  },
+  {
+    "timestamp" : "10:58-11:02",
+    "speaker" : "Andy",
+    "text" : "That might make the execution. Because it was a screen to Kevin Falk out of the backfield."
+  },
+  {
+    "timestamp" : "11:02-11:02",
+    "text" : "Yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "11:03-11:21",
+    "text" : "And the line I don't know if it was a screen because the the offensive lineman of the Patriots in this game just didn't block regardless. So every play looked like it was supposed to be a screen play. That's brutal. Brady got absolutely lit up and the times he didn't, he just was completely off target. So he threw this is one of his worst games Uh yeah."
+  },
+  {
+    "text" : "Ever, ever, right? It's gotta be up there. For sure.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "11:21-11:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's yeah. Uh he threw four interceptions on the day. Sacked twice and had 123 passing yards total.",
+    "timestamp" : "11:24-11:33"
+  },
+  {
+    "timestamp" : "11:33-11:39",
+    "text" : "Where's that checkpoint? We need to figure out how many inn's how many four INT games has Bertie ever had.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "11:38-11:44",
+    "text" : "I believe this is one of two, maybe three. Um, I'll look it up."
+  },
+  {
+    "timestamp" : "11:44-12:05",
+    "text" : "Wow. While you're looking it up, I have a hot take. Based on Greer's th point earlier of like it's a different game, I think the NFL single season rushing record will never ever even come close to being broken. Because I looked up CMC's last year, but she was running a rough shot over the NFL, tied 147.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "12:06-12:17",
+    "text" : "Wow. Yeah, I mean these I mean back in those days like the running game was the focus and you're looking for yeah and you're never getting enough work to even get to like two thousand",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "12:18-12:20",
+    "speaker" : "Steve",
+    "text" : "150 yards, whatever it is. I guess 21 something."
+  },
+  {
+    "timestamp" : "12:21-12:37",
+    "speaker" : "Andy",
+    "text" : "Yeah. 2175 and you have a trying to cross that 2000 barrier was like the goal. So I mean last year we saw Ricky Williams led the league and he had what like 1800 rushing yards? You don't see that at all anymore, just because people don't even rush it. They don't sling to be able to do that. Yeah."
+  },
+  {
+    "timestamp" : "12:37-12:41",
+    "speaker" : "Brian Greer",
+    "text" : "I mean how many times was he touching the ball again though, Ricky, last year?"
+  },
+  {
+    "text" : "Oh yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "12:41-12:41"
+  },
+  {
+    "timestamp" : "12:42-12:52",
+    "speaker" : "Andy",
+    "text" : "That's what I'm saying. Like oh yeah, it was still like four yard four or five yards of carry. I think it was like high fours yards per carry. So he's getting at least 20, 25, 30 touches a game, you know?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh, I'm sure uh Christian McCaffrey last year tied 147, his average was probably blowing people out of the water higher on the list, right?",
+    "timestamp" : "12:52-12:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Probably just not handing the ball off that much because everyone's yeah, the short pass and the the screen game and uh RPO is kind of taking over. Yeah.",
+    "timestamp" : "12:59-13:11"
+  },
+  {
+    "timestamp" : "13:11-13:16",
+    "text" : "No more Ted Washingtons who Big fan of Ted Washington.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "13:17-13:20",
+    "speaker" : "Andy",
+    "text" : "I was a big fan of those big boys in the middle. Just all of them."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "What was the guy that uh the Redskins got from Tennessee. Uh never did anything. Never did anything after he went to the Redskins. Just got paid and then just sat down.",
+    "timestamp" : "13:21-13:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep. He played on the Pats too. We saw him his rookie year was last year. He talked about him in the Titans game.",
+    "timestamp" : "13:33-13:39"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "13:39-13:59",
+    "text" : "Yeah. Yeah, he's a rookie year 2002, but then he he yeah, like right at the end of his career, he did one of those like stops that all like disgraced veterans do with the Patriots and and lasted like three weeks before. Didn't he like get into a fight with Pepper Johnson during a game on the sideline? Oh yeah. And that was the end of him. Yeah we talked about that."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "14:00-14:43",
+    "text" : "Ooh. All right. To set this game up, I had this, I did watch this in through the whatever through the YouTube video was. And uh the commentators were talking about listening to Buffalo Sports Talk Radio driving in. And Buffalo Sports Talk Radio called this a must-win game. Which I I mean I love that week one because Andy you complain about Boston Sports Talk Radio and Grimm, I don't have like a good sense of like what Buffalo Sports Talk Radio is like if Because like Boston hates the everybody in Boston and they're always talking shit and like that's such a a Boston Sports Talk radio. Week one is a must-win game. Yeah."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "14:43-15:23",
+    "text" : "Yeah I mean I've you know I've never lived in Buffalo. My dad's from Orchard Park, so I've never like uh really gotten to sports talk radio, but I do know for a fact that all Bills fans are completely delusional That makes complete sense that we would think it was a must-win game against the Patriots nonetheless. I mean those are always the games we we pay attention to most at the beginning of the season. It's like, you know, when do we play the Patriots? Like we want it so bad, but it just never happens. Like Never happened."
+  },
+  {
+    "timestamp" : "15:24-15:57",
+    "speaker" : "Andy",
+    "text" : "Uh to yeah, to that point, um it really, especially in the past 20 years, never happens to the the level that um For most wins by a quarterback uh in in Buffalo in Orchard Park, uh, you have obviously Jim Kelly. Top of that list, 66 wins in Buffalo. Joe Ferguson, number two, Frank Reich, strangely. Number four is Drew Bledsoe with 18. Number five, Tom Brady, 16 wins in Buffalo."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "15:58-16:06",
+    "text" : "Uh I have I've I've been posting that stat for years and I just think it's absolutely incredible. I I don't even know how that's possible."
+  },
+  {
+    "text" : "I yeah He's he's fifth on the list of quarterback wins in Buffalo, having never actually played for the Buffalo Bills.",
+    "speaker" : "Andy",
+    "timestamp" : "16:06-16:14"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I mean, there's never been a stat like that for any other quarterback, I feel like. To have it like such control on one particular team.",
+    "timestamp" : "16:15-16:24"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I feel like Dan Reno might have dominated someone else in the AC East. Maybe the Patsy.",
+    "timestamp" : "16:24-16:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Patriots probably.",
+    "timestamp" : "16:29-16:30"
+  },
+  {
+    "timestamp" : "16:31-16:35",
+    "speaker" : "Brian Greer",
+    "text" : "No, they they beat the Bills like twenty straight times in the eighties, so it might have been."
+  },
+  {
+    "timestamp" : "16:37-16:38",
+    "speaker" : "Steve",
+    "text" : "Game Marino's number six."
+  },
+  {
+    "text" : "Uh not in Buffalo, I don't think.",
+    "timestamp" : "16:41-16:44",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "No.",
+    "timestamp" : "16:44-16:44",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, one more of the teams don't fare well in Buffalo.",
+    "timestamp" : "16:45-16:47",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "All right, Andy, let's uh let's get into a little bit on the changes in the Pats O two to O three.",
+    "speaker" : "Steve",
+    "timestamp" : "16:48-16:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, uh cause that kind of segues into this game too, because the the big change was the Patriots bringing in Rodney Harrison at safety. And because of that, um They ended up two days before. Well, actually, I think it was a few more days than that. On the the Tuesday before, I want to say the start of the season, they released Lori Malloy. Which is crazy. Yeah. Because it wouldn't take a pickup, basically.",
+    "timestamp" : "16:53-17:24"
+  },
+  {
+    "text" : "I mean, honestly, that that move is the reason this game turned out the way it was. It just shocked the whole team. Like he was he was best friends with Tom Brady. Two days before the season opener to release. And like there's nobody else. They were fucking starting Antoine Harris as fucking safety. Are you kidding me?",
+    "timestamp" : "17:24-17:42",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, because they also got rid of uh never understood that.",
+    "speaker" : "Andy",
+    "timestamp" : "17:42-17:45"
+  },
+  {
+    "text" : "I never understood why they let him go.",
+    "timestamp" : "17:45-17:47",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "17:47-18:26",
+    "text" : "Uh basically it was just a contract dispute where they needed him to restructure his contract and they couldn't meet on I still see one in the middle. And so I mean who knows what was actually said. I mean Laurie Malloy hasn't actually come out and said it, but he's he was pissed at the time. But basically I think there was like an ultimatum of Either like you we need you to sign a pay take a pay cut or we're gonna cut you. And he's like, Well, I'm not taking a fucking pay cut. Probably thinking they weren't actually gonna cut him."
+  },
+  {
+    "timestamp" : "18:27-18:27",
+    "speaker" : "Steve",
+    "text" : "Right."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "18:27-18:38",
+    "text" : "But this is Bill Belichick, so he fucking deal what was best with team. Cut them and signed with the bills literally the next day. So it was cut on Tuesday. Signed on the ball."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's a great point, Greg. I was always saying the same thing. Because everyone says Belgichev, you know, can do whatever he wants, can get away with everything because he's so established. But like Well even watching these games and watching the moves, he's been doing that the entire time. And what a fucking risk to cut your starting safety soul of the team and then immediately come out week one and shit the absolute bed and Lawyer Malloy plays out of his goddamn mind right and like has the interception and gets a sack and like you just look like absolute dog shit. Yeah. And then you go on the fucking biggest win streak in NFL history. Yeah.",
+    "timestamp" : "18:43-19:22"
+  },
+  {
+    "text" : "And part of that was because bringing in guys like uh Rodney Harrison, who basically started the whole Nobody Believes in Us.",
+    "timestamp" : "19:24-19:32",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Could we not have Lawyer and Rodney back there",
+    "timestamp" : "19:35-19:38",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I I think that's what they wanted.",
+    "timestamp" : "19:39-19:41",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah. That would have been sick.",
+    "speaker" : "Steve",
+    "timestamp" : "19:41-19:43"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "19:44-19:45",
+    "text" : "But it didn't happen."
+  },
+  {
+    "text" : "We can also throw in two rookies that showed up in this game. Eugene Wilson, who had his first interception of his career in his first game, which was off a tip ball by Asante Samuel.",
+    "timestamp" : "19:46-19:59",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "19:59-20:01",
+    "text" : "Who was also a rookie in this, yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "20:01-20:10",
+    "text" : "Yeah. And that was literally the only highlight in this game for the What was the uh when when did the Sante get drafted? He wasn't like a high draft pick, right?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh I don't know. Uh yeah. Stat check, Craig. I want to say it was like middle of the round, somewhere like that.",
+    "timestamp" : "20:11-20:20"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "20:20-20:23",
+    "text" : "Um stat check, Craig."
+  },
+  {
+    "timestamp" : "20:23-20:28",
+    "speaker" : "Andy",
+    "text" : "If I could be useless. So Grant uh fourth round."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Right? With the with a hard poke to the brown eye.",
+    "timestamp" : "20:32-20:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah, he he's pulling uh his uh his own Terry Glenn where he's he's not joining us for a podcast due to an eye injury. Because those are very useful in podcasts that you use a podcast.",
+    "timestamp" : "20:35-20:46"
+  },
+  {
+    "timestamp" : "20:47-20:53",
+    "text" : "I mean it's it it is it is a a good poke to the brown eye, so that's that's that's legitimate, huh?",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "20:53-20:55",
+    "speaker" : "Brian Greer",
+    "text" : "That's actually why he's not here."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, apparently",
+    "timestamp" : "20:55-20:57"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Going to the eye doctor today.",
+    "timestamp" : "20:57-20:59"
+  },
+  {
+    "timestamp" : "21:00-21:01",
+    "text" : "Looking like a pirate.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "21:01-21:02",
+    "text" : "Yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "How convenient how convenient that he misses this game with a Bills fan coming on, huh?",
+    "timestamp" : "21:02-21:06"
+  },
+  {
+    "text" : "Well see, I I I I'm coming up with a theory here. Uh every time we do a game like this, where the Patriots play like dog shit and lose, Greg mysteriously disappears. If you think about if you think back to the games that he hasn't been to. Yeah, it hasn't been on here? They're usually shitty games. That's a good point, Andy.",
+    "timestamp" : "21:06-21:29",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "21:30-21:37",
+    "text" : "Although to be fair, he doesn't watch any of the games anyways except like the best ones. He's only watched like Four games his entire fucking two seasons.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "21:38-21:43",
+    "text" : "That's true, but he but even then like he won't show up and watch the highlights of games like this. Which is pretty fucked up."
+  },
+  {
+    "text" : "So he'll jump on when we're about to wrap it up and extend it for like an extra hour by talking about some stupid shit. F",
+    "speaker" : "Steve",
+    "timestamp" : "21:44-21:50"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "21:50-22:03",
+    "text" : "And when he does, we'll we'll ask him uh like which fans he is of other teams in other sports like uh want to know his thoughts on his Lakers and uh how he thinks the Yankees are gonna do this year too."
+  },
+  {
+    "timestamp" : "22:03-22:03",
+    "text" : "Yeah, let's go.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Is he a y a Yankees, Lakers, Patriots fan?",
+    "timestamp" : "22:06-22:10",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "22:11-22:13",
+    "speaker" : "Andy",
+    "text" : "It feels that way sometimes, yes."
+  },
+  {
+    "text" : "Oh, he makes I dude, that would make me sick.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "22:13-22:15"
+  },
+  {
+    "text" : "He's like me, but worse. That's tough to do. I know. But Andy, you know that's right.",
+    "timestamp" : "22:17-22:26",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Which which one you guys are the one that pours up beer on the Bills fans head every time you beat them up in Buffalo? That's Greg. That's Greg.",
+    "timestamp" : "22:26-22:33"
+  },
+  {
+    "text" : "Yeah He's also the one that uh was made semi-internet famous by standing on the roof of his RV with a large inflatable penis and a Tom Brady jersey on.",
+    "speaker" : "Andy",
+    "timestamp" : "22:33-22:45"
+  },
+  {
+    "timestamp" : "22:45-22:46",
+    "text" : "Yeah, I'm not sure.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Throwing beers at Bill's fan. Yeah.",
+    "timestamp" : "22:46-22:47"
+  },
+  {
+    "text" : "The anatomically correct Tom Brady question. You've seen that, Gregor. I've definitely sending that to you.",
+    "timestamp" : "22:48-22:52",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I don't think I've seen that, but can you make that the picture for this podcast? Like I don't know if you click on the picture to like the podcast.",
+    "timestamp" : "22:53-22:59"
+  },
+  {
+    "timestamp" : "22:59-23:01",
+    "speaker" : "Andy",
+    "text" : "We'll put it in the show notes. Yeah. I'll find a way."
+  },
+  {
+    "text" : "I think we should make this picture.",
+    "speaker" : "Steve",
+    "timestamp" : "23:01-23:03"
+  },
+  {
+    "timestamp" : "23:03-23:07",
+    "speaker" : "Andy",
+    "text" : "I think we should make Greg's picture a t shirt."
+  },
+  {
+    "timestamp" : "23:08-23:11",
+    "text" : "Yes, actually you're not that we could sell it, Andy. You're right.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "23:12-23:51",
+    "speaker" : "Andy",
+    "text" : "Well, I don't think anybody would buy it, but we could try to sell it. Yeah, there you go. It'd be tough to give away. Yeah, so Asante Samuel's drafted in the fourth round, Eugene Wilson in the second. Also notable names in this draft. In the sixth round, the Pages drafted a quarterback out of Texas Tech, one Cliff Kingsbury. Oh. Who is now the coach of your Arizona Cardinals? How about that? Um he was a backup because I remember we went to training camp, me and Greg. And uh Greg was like, oh, he's the next Tom Brady. Greg thought he had that."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Said a million times over in New England.",
+    "timestamp" : "23:51-23:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Uh he only ever played in one game. In 2005 for the Jets, he went one for two for 17 yards.",
+    "timestamp" : "23:54-24:04"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But like he was with us for what, three years then? I'm just wondering how long because like everyone's like, oh, Cliff Kingsbury and the old Patriots quarterback. And I don't know if that was like one year when we drafted him and cut him or how long he sat behind us.",
+    "timestamp" : "24:04-24:15"
+  },
+  {
+    "timestamp" : "24:16-24:22",
+    "text" : "It doesn't really say He didn't he didn't do anything. He didn't do enough to put up any stats.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "24:23-24:32",
+    "speaker" : "Brian Greer",
+    "text" : "Uh the other who is that quarterback from Arkansas that you guys had, like Matt Jones or something? A tall guy."
+  },
+  {
+    "text" : "Um Oh, um God damn it, I know exactly what you're talking about. Uh exactly. Ryan. Smallet, yes.",
+    "speaker" : "Andy",
+    "timestamp" : "24:32-24:39"
+  },
+  {
+    "text" : "Ryan Smallet, yeah. I think Matt Jones was like uh like an athlete and he like went to the Jaguars and like was doing a bunch of blow. Yeah, I think he his career ended, but yeah, that's it. Ryan Mallet. He never really developed into what they thought he would.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "24:39-24:55"
+  },
+  {
+    "timestamp" : "24:56-25:41",
+    "speaker" : "Steve",
+    "text" : "No, he was a goober. As good of a signing as Rodney Harrison was, which, let's be real, was one of the all-time great signings of Belcheck's career, right? Underrated one, I think, yeah. I don't know what his contract was, and I have that question. And while you're stat checking that, Andy slash Craig, we also had like the Maybe the you most universally panned Belichick signing of all time the same season and Rosie Colvin I didn't think he was bad. I remember being so hyped for him though. And uh the commentators made note of this in this game. He had back-to-back ten and a half sack seasons from the linebacker position. And this is back in you know 2000. 2001 or 2001 and 2002."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "When he was on the Bears, right?",
+    "timestamp" : "25:42-25:43"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "25:44-25:59",
+    "text" : "Before that, yeah. Yeah, I remember I remember like my expectations for him were gonna be like an absolute So hype. And then he has that sweet sack in this game too where he just abs the ragdolls a tight end and gets a sweet sack of Bledsoe in the first half."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "25:59-26:00"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "26:01-26:17",
+    "text" : "And then it was gonna probably his best play of his career. I mean, and now he got hurt and he had like a hippie shoe, if I remember correct. But man, I remember we paid him. He's like, he was like the Steph Gilmore contract of the early 2000s."
+  },
+  {
+    "timestamp" : "26:17-26:25",
+    "speaker" : "Andy",
+    "text" : "Yeah, because they did it again with uh who's that other linebacker from the Ravens a few years later. In 07 they did it."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "26:25-26:30",
+    "text" : "Um yeah. Um What's his name?"
+  },
+  {
+    "timestamp" : "26:32-26:35",
+    "speaker" : "Andy",
+    "text" : "Yeah. People are screaming at their podcast right now."
+  },
+  {
+    "timestamp" : "26:36-26:41",
+    "text" : "But either way, at least we figured out with the third time around and stuff Gilmore, because that's pretty learning.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "26:42-26:50",
+    "speaker" : "Andy",
+    "text" : "That's true. Uh to answer your question, Steve. Um Rodney Harrison signed a six-year, fifteen million dollar contract with the Patriots."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Six for fifteen. Yeah. What was uh Rosie's? And Adalius Thomas is the other guy.",
+    "timestamp" : "26:50-26:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Adalius Thomas.",
+    "timestamp" : "26:58-26:59"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "26:59-27:04",
+    "text" : "I've been thinking Adelius Thomas, actually. Maybe I'm I'm confusing Thomas and Rosie Colvin."
+  },
+  {
+    "timestamp" : "27:05-27:07",
+    "text" : "I think that's probably one of those two in my mind.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "27:07-27:14",
+    "text" : "Because they're both like super hyped linebackers that were great on teams we played that came to the Pats and just did not."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "27:15-27:19",
+    "text" : "Well I think I I I think part of that is the Patriots defensive system too, though."
+  },
+  {
+    "text" : "Right, right, right. Doesn't prioritize sacks or anything. Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "27:19-27:22"
+  },
+  {
+    "text" : "I have such a hatred for Stephon Gilmore, like for just talking shit and then leaving Buffalo.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "27:22-27:27"
+  },
+  {
+    "text" : "Like we dropped Oh, let's get it let's let's really get into this 'cause I'm I'm interested.",
+    "timestamp" : "27:27-27:31",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "27:32-27:47",
+    "speaker" : "Brian Greer",
+    "text" : "Uh like if you want to leave Buffalo, like go ahead, pick up your stuff and go. But when you're talking shit about like a city that loves its team, you know What did he say? He said something like finally I'll get to play like on primetime T V like that is fair."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "27:47-27:59",
+    "text" : "It is fair and true That's not his fault. That's not his fault. That's not the fans' fault. That's just the team sucking in general. Okay? Yeah. Greg Williams' fault. Let's blame Greg. The two G's."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I think we just we like a few years ago we went like eight years between Monday night games. Like it was like It was like thirteen before we had a home game home Monday night game in Buffalo.",
+    "timestamp" : "28:00-28:11"
+  },
+  {
+    "timestamp" : "28:11-28:11",
+    "speaker" : "Steve",
+    "text" : "Oh my gosh."
+  },
+  {
+    "text" : "And that was the that was the Dallas game.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "28:12-28:14"
+  },
+  {
+    "timestamp" : "28:14-28:25",
+    "speaker" : "Steve",
+    "text" : "Do you also hate Travis Henry Because of his quote of his quote like why hey Travis, why do you have so many kids? Or maybe this is Willis Willis McGay is not a Henry or"
+  },
+  {
+    "timestamp" : "28:29-28:40",
+    "speaker" : "Brian Greer",
+    "text" : "And we had like seven kids from seven different baby mamas or something like that. And then they asked him why Roger Camardi. It wasn't as bad as Roger Camardi, but uh it was pretty bad"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But they asked one wherever it was why and he said all there is to do in Buffalo is fuck",
+    "timestamp" : "28:40-28:45"
+  },
+  {
+    "text" : "Uh I know Marshawn Lynch said the only the the coolest place in Buffalo is in Applebee's.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "28:48-28:54"
+  },
+  {
+    "timestamp" : "28:54-29:16",
+    "text" : "So you're up here hating on Steph Odd for just be like, hey, I'd like to play in prime time. That'd be cool. Get out of here. You're just jealous that he uh came to the Patriots. Remember when he first came and he sucked? I bet you were so hype on that. Yeah, he wasn't.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "There was a game earlier this year, I think it was maybe the Seahawks game where he got torched Um but uh yeah I just I don't know. I I think Trey White had a better season last year and he got overlooked",
+    "speaker" : "Brian Greer",
+    "timestamp" : "29:17-29:33"
+  },
+  {
+    "timestamp" : "29:34-29:42",
+    "speaker" : "Steve",
+    "text" : "It's weird because Stefan won defensive player of the year, but whatever. Yeah, yeah, yeah. That's right. He's on more primetime."
+  },
+  {
+    "text" : "But uh Trey White didn't let it in a touchdown last year, so I mean, you know.",
+    "timestamp" : "29:46-29:50",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "29:50-29:57",
+    "text" : "Yeah, yeah, cool. Cool. I think Trey White's been getting torched this year too, but whatever. We'll get we'll we'll just keep moving to uh two thousand two three."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah, right about that.",
+    "timestamp" : "29:58-29:59"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "29:59-30:48",
+    "text" : "2003, yeah. Um speaking of top end cornerbacks having bad games, uh Tylaw did not play well in this. The opening drive Bill's touchdown was because of a Tylaw end zone defensive pass interference. Put the ball at the one. Uh Travis Henry scored with a touchdown plunge. And the Patriots immediately go three and out. And the Bills, like this first quarter, was literally three drives. It was actually I don't know if you can call Patriots three and out uh a drive really. So it was just two Bills drives. And that was the entire first quarter. So the Bills had something like Like halfway through the second had like 10 minutes of possession to like the Patriots three or something ridiculous like that."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So I have a theory on this.",
+    "timestamp" : "30:49-30:50"
+  },
+  {
+    "text" : "All right.",
+    "speaker" : "Andy",
+    "timestamp" : "30:51-30:51"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh This is the point where the Patriots switch from 4-3 to 3-4. Correct. This season right here. Yep. This is the first game where NFL is playing a 4-3, and this is where they they buck trend and go back to the old school and play 3-4.",
+    "timestamp" : "30:52-31:07"
+  },
+  {
+    "text" : "Yep, they've they picked up the book.",
+    "speaker" : "Andy",
+    "timestamp" : "31:07-31:09"
+  },
+  {
+    "text" : "They signed the fattest boy they can get in Ted Washington and say we got pretty good linebackers because we think Brabel's pretty good. Yep. Willie and this is where Willie moves from end to out outside linebacker. We got Brucey, Ted Johnson. And like they just they could not figure it out. They couldn't stop the Bills at all.",
+    "speaker" : "Steve",
+    "timestamp" : "31:12-31:31"
+  },
+  {
+    "timestamp" : "31:32-31:38",
+    "speaker" : "Andy",
+    "text" : "Well, I I don't even think he was there because the Bills didn't rush for many yards in this game."
+  },
+  {
+    "text" : "I mean also we're starting Tyrone Poole across from Ty Law, who then gets hurt and is out for like a series or two. Right. And like we're just throwing out Asante Samuel as a rookie and Eugene Wilson rookies and say, all right, get out there and cover Eric Molds and Josh Reed. Good luck.",
+    "speaker" : "Steve",
+    "timestamp" : "31:38-31:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And I I mean I think they did. Like the the Bills didn't put up massive offensive numbers. They had 107 rushing yards on 33 carries, so that's not great. Uh and blood's only through for 230 passing yards.",
+    "timestamp" : "31:58-32:14"
+  },
+  {
+    "text" : "Yeah, I feel like pathetic. I like couldn't believe that what I was looking at.",
+    "timestamp" : "32:14-32:20",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "32:20-32:20"
+  },
+  {
+    "text" : "Eric Mold's only had like 700 yards and a touchdown offseason.",
+    "timestamp" : "32:21-32:25",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "32:25-32:28",
+    "text" : "Uh and he led the team.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "32:30-32:34",
+    "text" : "I don't even know who that second guy is and I feel bad about it, but uh Bobby Shaw."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Never heard of him.",
+    "timestamp" : "32:35-32:35"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "32:36-32:37",
+    "text" : "Yeah. Nope."
+  },
+  {
+    "text" : "But he was second on the team with seven hundred and thirty-two yards and four touchdowns. I feel like Josh Reed was good eventually, right?",
+    "speaker" : "Andy",
+    "timestamp" : "32:37-32:43"
+  },
+  {
+    "timestamp" : "32:44-33:16",
+    "speaker" : "Steve",
+    "text" : "Yeah decent. But yeah, the the Brady pick six to open the second quarter just sealed because they're down 14-0. And like you said, Andy, there's two drives in the first quarter, which are both Bills touchdowns, and we went three and out in between them. Maybe a two, three notes, I don't remember, but No, just the one. He just throws a pick six to start that open quarter or whatever it was. And it's just that Sam Adams one is twenty-one nothing. It's just And his ass on like the return to Brady. It's like he smashes his head on the turf."
+  },
+  {
+    "timestamp" : "33:16-33:45",
+    "speaker" : "Andy",
+    "text" : "And Damian Woody goes down and like was down for a long time. And uh this is the part of the podcast where uh I bring up my hatred for these commentators because it was Dan fucking Deerdorf. My as you can see here, my notice, fuck me, it's Dan Deerdorf. Uh he And and he was with Vern Lundquist, who I vaguely remember. I recognize a name."
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "33:46-33:46"
+  },
+  {
+    "text" : "Yeah. Um, and When Vern Lundquist wasn't telling all the stories that was getting into the case.",
+    "speaker" : "Andy",
+    "timestamp" : "33:46-33:52"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "33:53-34:06",
+    "text" : "Before we get into this, Andy, I'm just gonna read your note to the crowds. Fuck me is Dan Deerdorf bullet underneath that. Holy shit, he's annoying already. It's only three plays in. Might have to watch this game on mute. Yeah. And so"
+  },
+  {
+    "timestamp" : "34:07-34:20",
+    "text" : "I I I don't know who Dan Dan Dierdorf used to be a uh player in the NFL, right? And I don't know who he used to play for, but I don't think he was a Dan Fouts? No, Deirdorf, I think he was like a lineman.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Um your game notes are hilarious. Haven't had a joke land yet.",
+    "timestamp" : "34:20-34:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, so and he was he was giddy in this game because the pages were getting their their shit kicked in. Shit kicked in. And so Even Vern Lunquist, like, when he wasn't telling awful stories that were getting interrupted by like the rest trying to make a call or going to commercial break, um he he like halfway through the second quarter stopped laughing at Dan Dieror's jokes. Because they weren't funny. You could tell it was a forced laugh to begin with, and he just like just stopped. So but the pick six was like This was peak Dan Deerdorf, so I'll play you the audio here.",
+    "timestamp" : "34:25-34:58"
+  },
+  {
+    "speaker" : "Announcer",
+    "text" : "Matt Williams. Well, how total has this domination been? Take a look at a statistical update. Rushing yards.",
+    "timestamp" : "34:58-35:07"
+  },
+  {
+    "text" : "This is ten minutes left in the second quarter.",
+    "timestamp" : "35:07-35:09",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "35:10-35:34",
+    "speaker" : "Announcer",
+    "text" : "Passing yards. Minus three. Not good. Not good. Total yards. Even first I'm sure Bill Belichick can hardly believe it. Right now, this New England offense has got to get off its butt and do something. Their defense had a three and out, reward them for it. Intercepted. Picked off right side. Here goes Sig. Sab."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So that to me, like it sounds like why do you hate that so much? I just hate Dan Deerdorf and this is like peak Dan Deerdorf just giggling with glee. Sound like he's fucking commentating the WWF.",
+    "timestamp" : "35:41-35:55"
+  },
+  {
+    "timestamp" : "35:56-36:04",
+    "speaker" : "Steve",
+    "text" : "I can't believe he did that! Okay, I can see that. But I don't know. It's better than fucking Pat Summerall being emotionless."
+  },
+  {
+    "timestamp" : "36:05-36:08",
+    "speaker" : "Andy",
+    "text" : "I'd take Pat Summer all over this garbage any day though."
+  },
+  {
+    "timestamp" : "36:08-36:18",
+    "speaker" : "Steve",
+    "text" : "And wait, wait, wait. Let's rewind this again because at that point the Bills had 153 passing yards, the PS negative three, and you said they ended up with 200 and something."
+  },
+  {
+    "text" : "They end up with 230 total passing yards. They only added like 70 yards after that? They're up 21-0 at that point. They're like they don't need to do anything.",
+    "timestamp" : "36:18-36:27",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Savage Henry.",
+    "timestamp" : "36:28-36:29"
+  },
+  {
+    "timestamp" : "36:29-36:30",
+    "text" : "Yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "But even he didn't get above a hundred yards. They had all hundred yards rushing. That's crazy.",
+    "timestamp" : "36:30-36:34",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well the thing is, like, then Brady gets picked off on the deep shot in the next drive.",
+    "timestamp" : "36:34-36:40"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "36:40-36:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They had a good job going.",
+    "timestamp" : "36:41-36:42"
+  },
+  {
+    "timestamp" : "36:42-37:20",
+    "text" : "Then that was that was on less I'm gonna be real real right here. And that was a great play by Lawyer Malloy. Because he got fooled by that flea flicker or whatever, whatever the action was in the backfield. He definitely took a step in and he was beat and he busted his ass back and got into Dion branch and Tom Brady underthrewed a little bit and he just kind of got his shoulder on it and it bounced up and Nate Clemens intercepted it. Yep. And now I was like, that's like, I mean it goes right back to the whole point of like I bet Boston Media is absolutely wrestling Belcheck the next day being like you caught Lori Beloy and he had that straight great covery and then the sack he had later and like",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, oh yeah. Um but yeah, like that was like I always like Bird I always like Bird Longcliffe.",
+    "timestamp" : "37:20-37:28"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Say it again? I always liked Burn. I had no problem with Burn, but Chris Holland's worth dude. I have a um that dude sucks",
+    "timestamp" : "37:29-37:39"
+  },
+  {
+    "text" : "Yeah, I'm not a f well I'm not a fan of most commentator. Andy hates every comment. Andy's gonna be talking for the next two hours about every commentator he hates and why. We are almost on you just you just I could do two hours on Dan Deerdorf alone. This fucking guy. Holy shit. But at that point, Tom Brady was two for seven, four yards with two interceptions.",
+    "timestamp" : "37:40-38:07",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "38:08-38:08",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Yeah, not great. And then the Bills go three and out, I'm pretty sure. They don't do shit with the interception. And Brian Mormon. I know another Bills fan that I work with. This is his favorite player of all time. He has his jersey, a Brian Mormon jersey. As you do. Yeah, that's a punter. You know, get a lot of work. He hits the floor. Wait, you don't have a Zoltan Mesco, Jersey? He hits the so flush. He hits the punt. They punted from their 21. We took the ball in our nine yard line. Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "38:10-38:46"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah, he was pretty solid.",
+    "timestamp" : "38:46-38:47"
+  },
+  {
+    "timestamp" : "38:48-38:57",
+    "text" : "Penalty on that as well, but like still. Troy Brown punted it like 80 years. Troy Brown caught it facing his own end zone, had to like catch it over shoulder like a pass and turn around and try and run it back.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "38:57-39:12",
+    "speaker" : "Andy",
+    "text" : "Yeah. And that was my one highlight of the game actually was that return from Troy Brown, the punt return that got him like he caught it Over his shoulder running back towards zone end zone on like the nine-yard line and got it back out to the 30, but it was called back for holding, so it didn't even count."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "39:12-39:18",
+    "text" : "Did you uh did you guys catch the uh the Bills had a guy named Antonio Brown uh receiving the first kick?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yes. I said this keyboard.",
+    "timestamp" : "39:19-39:20"
+  },
+  {
+    "timestamp" : "39:26-39:34",
+    "text" : "I I wrote down that uh it would have sucked to draft that Antonio Brown in fantasy. I guarantee somebody did.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "39:34-39:47",
+    "speaker" : "Steve",
+    "text" : "And weirdly the commentators were like all over him like oh he's so fast oh my god his it his speed they have a they clocked him and then they like this can't be right we need to clock him again and it's just like"
+  },
+  {
+    "text" : "Oh, I wrote down the numbers because they uh the bill the Bills coaches clocked him at four point one eight. And they're like, oh, there's no way that can be right. So so they ran him again. And they got between a four point two three and a four point two five.",
+    "timestamp" : "39:47-39:59",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What's the combine record? Chris Johnson? No, it's been beaten recently by one of those super fast receivers.",
+    "timestamp" : "40:00-40:09"
+  },
+  {
+    "text" : "Uh 4. 22 John Ross",
+    "speaker" : "Andy",
+    "timestamp" : "40:10-40:13"
+  },
+  {
+    "text" : "Yeah, so they're clocking him at below the combine the the day this day and age combine record. Get the fuck out of here.",
+    "timestamp" : "40:14-40:20",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "40:20-40:22",
+    "speaker" : "Andy",
+    "text" : "And before that it was Chris Johnson 424."
+  },
+  {
+    "text" : "Yeah. So they're talking to 4-1?",
+    "timestamp" : "40:23-40:26",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, 4-1-8. No, they're not.",
+    "timestamp" : "40:27-40:29"
+  },
+  {
+    "timestamp" : "40:29-40:34",
+    "text" : "Cool. I think you play in the arena league and had like zero return yards this whole game.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "40:34-40:52",
+    "speaker" : "Andy",
+    "text" : "It's cool. I run a 4-4. Just I'm not gonna do it on camera because I don't need to prove that to me. Because he didn't even look that fast either. Like, oh, look out, here he goes. Every time he got a kick return and he would just like get run down from behind by like Patrick Pass or someone."
+  },
+  {
+    "timestamp" : "40:52-41:00",
+    "text" : "All right, let's talk about the one pages drive actually worth watching. Wait, there was one? The the all Kevin Falk drive.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Oh yes, yep.",
+    "timestamp" : "41:00-41:01",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "41:01-41:04",
+    "speaker" : "Steve",
+    "text" : "So run plays, draw plays, screen plays."
+  },
+  {
+    "text" : "Remember remember when I uh last year you guys tried to roast me? Looking good, Greg. Uh about saying that Kevin Falk was the team MVP of 2002 I can't do this. Hello. Hey guys. It's Captain Crunch who's joined us.",
+    "timestamp" : "41:04-41:30",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I'm playing playing through injury. This is like the Jordan Flu game. It's like Kanye West through the wire right now.",
+    "timestamp" : "41:30-41:45",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "41:46-41:46",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah, so I was poked severely poked in the eye last night. By what sort of and It was I actually poked myself in the eye with my finger. Yeah. It was playing soccer and like I just like got caught up with someone and I like poked myself in the eye. Yeah, scratched cornea. A mess.",
+    "timestamp" : "41:51-42:18"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yes.",
+    "timestamp" : "42:24-42:24"
+  },
+  {
+    "timestamp" : "42:24-42:25",
+    "speaker" : "Greg",
+    "text" : "Shit. Yes."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Was it that bad?",
+    "timestamp" : "42:26-42:28"
+  },
+  {
+    "text" : "I mean it's not as bad. I'm probably milking it, but you know what? I got an eye patch on it, looks kick-ass. If you say so. I couldn't miss this game though. I had to come on because this is an amazing game. Oh, give us your thoughts. I watched it, Andy. I don't believe you, but okay. I did. Well, I watched the entire first half. And I tell you why. What a game, man. What a game. Yeah, all right, who's your MVP of this game?",
+    "timestamp" : "42:28-43:05",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "43:05-43:07",
+    "speaker" : "Andy",
+    "text" : "Give it a actually give us a watchability score."
+  },
+  {
+    "text" : "No? I'm giving it a uh a four out of six. What'd you give it, Andy?",
+    "timestamp" : "43:08-43:17",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "43:17-43:36",
+    "speaker" : "Andy",
+    "text" : "Uh I didn't. Why not? Um well first of all we forgot. Uh just to explain, Brian, we uh We tend to because we're we have to watch all these games, but our listeners don't, we tend to give a rateability score. So we do it out of six Lombardies. Um"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "43:38-43:51",
+    "text" : "I give this one a god, get out of your own asshole for five seconds. If that's the scale I have to work if this is a zero out of a zero."
+  },
+  {
+    "timestamp" : "43:51-43:56",
+    "text" : "Well yours would be uh like a zero to four Super Bowl losses in a row. Yeah, I I would tell.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "43:57-44:01",
+    "text" : "Well this is our Super Bowl, so this is a four then.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "Fair enough.",
+    "speaker" : "Greg",
+    "timestamp" : "44:02-44:03"
+  },
+  {
+    "text" : "Yeah, this is this is one of those zeros for me, I think.",
+    "timestamp" : "44:03-44:06",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "But you have to admit that like from an entertainment standpoint this game was super watchable, right? It might if from a Patriots standpoint it sucked, but Just from like a storylines coming out of this, going into the game and then both and coming out of the game, it was unbelievable. Right?",
+    "timestamp" : "44:06-44:22",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah, but uh you're you're talking about everything except the game.",
+    "speaker" : "Andy",
+    "timestamp" : "44:23-44:27"
+  },
+  {
+    "timestamp" : "44:28-44:39",
+    "text" : "I don't know. The game was incredible too. There was some we had a fat man touchdown, Andy. Like, how is that not rank at least some points? That thing was ridiculous.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "44:39-44:45",
+    "text" : "It was before you came on, we discussed how much badder the players were then than they are now. They're like sack guys that's a good thing.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "Literal heifers.",
+    "speaker" : "Andy",
+    "timestamp" : "44:53-44:54"
+  },
+  {
+    "timestamp" : "44:55-45:10",
+    "speaker" : "Greg",
+    "text" : "But I like that must have been the best game ever to be at for a Bills fan. Like week one when your expectations are the highest. You come in, you have like all these new signs. They got spikes. They got Lawyer Malloy. They're like signs."
+  },
+  {
+    "timestamp" : "45:10-45:16",
+    "speaker" : "Steve",
+    "text" : "I wrote them down actually. Uh one was you can't have the law without a lawyer."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Good one. Well it doesn't really stand up because they still have law, but I'll allow it.",
+    "timestamp" : "45:17-45:23"
+  },
+  {
+    "timestamp" : "45:27-45:29",
+    "speaker" : "Steve",
+    "text" : "Uh I'm trying to find my notes hold on."
+  },
+  {
+    "text" : "Well before. That place was like rocking too. When when he's when Yeah when when",
+    "speaker" : "Greg",
+    "timestamp" : "45:30-45:35"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah when Adam scores that touchdown dude it gives me the chill.",
+    "timestamp" : "45:37-45:39"
+  },
+  {
+    "timestamp" : "45:39-45:45",
+    "speaker" : "Greg",
+    "text" : "It was the place was and they like panned out and like the whole place is just going bonkers."
+  },
+  {
+    "timestamp" : "45:47-45:58",
+    "speaker" : "Brian Greer",
+    "text" : "It feels like it feels like Buffalo Stadium is like uh like a super good like D three school stadium. Like I don't know, like when it's kids popping off, like they're just there to party and it's it's just a good time Yeah."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Knowing the atmosphere, like when the Bills are like losing and it's still an amazing atmosphere, I can't imagine what it feels like when they're blowing a team out. It must be just so awesome to be at.",
+    "timestamp" : "45:59-46:10"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I found the other uh sign I saw. It's a championship bill season. Oh so we didn't actually miss this. You missed this, Greg, because we were talking about the the announcer talking about when they were driving into the stadium. Buffalo Sports Talk Radio said this is a must-win game.",
+    "timestamp" : "46:10-46:36"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Week one must-win. Unbelievable.",
+    "timestamp" : "46:36-46:38"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "For their championship bill season, because you can't have law without lawyer.",
+    "timestamp" : "46:39-46:43"
+  },
+  {
+    "text" : "Yeah. And then they went thirty one goes six and ten. Well not just that.",
+    "timestamp" : "46:43-46:50",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "And about fifteen years before we ever made the playoffs again. I don't know if I would have stuck around if I knew it was gonna be fifteen years until we made the playoffs again.",
+    "timestamp" : "46:54-47:02",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "That's fair. So the Bills also Uh the week after this put up 38 points in a 38-17 win over the Jags, too. So they start off 2-0, averaging 34 and a half points a game. They finished the season six and ten, ranked thirtieth in offense, and fifth in Uh defense. The top five defense, 30th ranked offense.",
+    "timestamp" : "47:03-47:34",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "That's tough. That's been the story for the past 20 years. It's just been awful, awful offenses and like great defenses.",
+    "timestamp" : "47:34-47:42"
+  },
+  {
+    "timestamp" : "47:42-48:07",
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah, that's fair. It's it's so painfully bills. Like Drew Bledsoe for some reason would finish this season with only 2800 Passing yards, which is eat low even for two thousand three. Yeah. Eleven touchdowns, twelve. Uh it was hard to tell, but I didn't see like any other like anybody else starting games. Like he started all 16 games."
+  },
+  {
+    "timestamp" : "48:12-48:15",
+    "text" : "What year did you guys draft Rob Gronkowski?",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "48:17-48:25",
+    "text" : "Uh 25. Yeah, would have been before oh seven, right? Because he was part of that team. So yeah, probably Yeah."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "48:25-48:39",
+    "text" : "Because we drafted a player right before him, even though he's from Buffalo. He's Buffalo kids. We drafted a lineman that ended up playing one game from us and then had a career ending injury when we could have had Rob Gronkowski."
+  },
+  {
+    "timestamp" : "48:39-48:43",
+    "text" : "So a local kid too. That's a nightmare. Yep.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "48:44-48:45",
+    "text" : "That's brutal",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "And he fits Buffalo too. Oh yeah, he definitely fits the Buff Bill's Mafia. Can we talk about the Bills Mafia for a sec as well? Because the commentators touched on this. Right when the Chaos Spikes had his second INT. Yeah. And like the Chaos Spikes was pretty good. He was amazing. Yeah, even on the Bengals too. Yeah. He was good for the Bills for a while. And he had an absolute monster game this game with two INTs and a couple sacks, whatever it was. Yeah. And the b the commentator telling a story about when he was playing Cincinnati at Buffalo the year before and everyone knew he was gonna be a free agent. Some schlub from the Bills Mafia bought a Tako Spikes 51 Bills jersey. Sat right behind the bench Yes. The entire st like chant of like the the section to chant the KO come to the bills or whatever it was, right? Yeah. You should come here next year. And it fucking worked. Yeah, it worked. And so Buffalo Dividends Week One. He was playing out of his mind.",
+    "speaker" : "Steve",
+    "timestamp" : "48:45-49:59"
+  },
+  {
+    "timestamp" : "50:00-50:16",
+    "speaker" : "Brian Greer",
+    "text" : "The Bills love the Bengals too. I'll tell you that much. After Andy Dalton got a few playoffs ago. Yep. This is pretty good. That's right. I'm shocked we didn't pick him up in the offseason. I'm I'm a little shocked too."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah. I think um There's no there's like Buffalo is the easiest team to root for as a non-Bills like fan, right? Yeah. Like some of these losses we've watched are like brutal to watch. You're like, I fucking hate some of these people. But you just can't hate Buffalo. I was like rooting for the Bills in this game because you just like see the atmosphere. You know they're like how it turns out for them too so that might be part of it but like just watching is like this looks like they needed this they are in this one show show Greg your tat",
+    "timestamp" : "50:18-50:51"
+  },
+  {
+    "text" : "So wait, have you ever had a beer pou on your head at the stadium? So I got the the old school OJ logo.",
+    "timestamp" : "50:52-50:58",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "50:59-51:00",
+    "text" : "Very nice. Very nice."
+  },
+  {
+    "text" : "So you guys both have experience with Bill's Mafia maybe on opposite end of the spectrum. Right? Because you've been how many games you been to an Orchard Park here? Uh like six or six.",
+    "timestamp" : "51:00-51:10",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "51:11-51:19",
+    "text" : "Oh me or him? Both. I've probably been to like probably ten, I'd say."
+  },
+  {
+    "text" : "Yeah, I've been like six or seven times.",
+    "speaker" : "Greg",
+    "timestamp" : "51:20-51:22"
+  },
+  {
+    "text" : "How many PAS games have you been to Greer at Orcher Park? Any?",
+    "timestamp" : "51:22-51:26",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Never. Oh I see I see a live remote episode in our future.",
+    "timestamp" : "51:26-51:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh god.",
+    "timestamp" : "51:34-51:34"
+  },
+  {
+    "text" : "If they ever let if they ever let fans back, I will fly there to go I I I went to the Houston game in Houston last year. Thank God I was blacked out for the second half because uh I watched the highlights and it's just miserable.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "51:35-51:49"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "The playoff game",
+    "timestamp" : "51:50-51:51"
+  },
+  {
+    "timestamp" : "51:51-51:52",
+    "text" : "Yeah, the playoff game.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "51:52-52:01",
+    "text" : "Oh well you you missed the Josh Allen Phantom Fumble. That was hilarious."
+  },
+  {
+    "timestamp" : "52:03-52:09",
+    "speaker" : "Brian Greer",
+    "text" : "I just remember being carried up the stadium stairs afterwards. That's right wrong."
+  },
+  {
+    "text" : "That's called being consistent with the narrative. That",
+    "timestamp" : "52:09-52:12",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "52:14-52:20",
+    "text" : "Like the Bill's Mafia narrative, everything I've known about Rear for fucking twelve years. Yeah. It's very consistent."
+  },
+  {
+    "text" : "We w we went to a strip club after and I like apparently got like forty five minutes of lap dances and refused to pay. And then I got kicked out of the strip club. You know how it goes.",
+    "timestamp" : "52:20-52:32",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "52:32-52:37",
+    "speaker" : "Greg",
+    "text" : "Yeah. We've all been there. Yeah. You're you're just wearing sweatpants in there too."
+  },
+  {
+    "timestamp" : "52:37-52:39",
+    "text" : "Everyone in Bill's mafia is nodding along.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I got to meet Finto Ron at the Houston game, so that was exciting. But I didn't know he only does that at uh at home games. He doesn't do the ketchup and mustard thing at away games.",
+    "timestamp" : "52:49-52:59",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "52:59-53:02",
+    "speaker" : "Greg",
+    "text" : "So Oh that's the old guy that does the the mustard bath?"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah.",
+    "timestamp" : "53:02-53:03"
+  },
+  {
+    "timestamp" : "53:03-53:03",
+    "text" : "Yeah.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "So this is like the first year he hasn't been to uh all the Bills games in like thirty one years and it's because of this pandemic. Damn Right.",
+    "timestamp" : "53:05-53:13",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "Back to 2003 and talk about the hard.",
+    "timestamp" : "53:14-53:17",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "It's so hard. When the build of four and one, it's so hard to go backwards.",
+    "timestamp" : "53:17-53:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We know how this ends.",
+    "timestamp" : "53:21-53:22"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah.",
+    "timestamp" : "53:23-53:23"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "53:25-53:50",
+    "text" : "MAD the absolute most frustrating drive of the entire game because like there's a 31 to 1, 31-0 bookends, right? This season, right? Beginning in the last game. And I remember the very end of the last game where they threw a pick in the end zone and I'm like, yeah, they didn't have a chance, and then they're driving garbage time. But I don't remember this game specifically, and like, did we have a chance to make it not a shutout?"
+  },
+  {
+    "timestamp" : "53:50-53:50",
+    "text" : "Yes.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "53:51-54:13",
+    "text" : "And we did because Travis Henry fumbled it on his own 20 just on a handoff and just just didn't yeah. He was like, oh, I'm just gonna put this on the ground instead. And Willie jumped on it. So we have the ball on the 20. And I have in my in my how do we not score? Yeah. And then I have in my caps. We have it on the two in all caps. Like how do we not score?"
+  },
+  {
+    "timestamp" : "54:14-54:16",
+    "speaker" : "Andy",
+    "text" : "Right. First and goal from the two."
+  },
+  {
+    "timestamp" : "54:17-54:22",
+    "text" : "Yeah. And we end up 31-0. Yeah. So how did they?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "What did happen? I don't remember. I didn't want us that far in the highlights.",
+    "timestamp" : "54:23-54:26"
+  },
+  {
+    "text" : "I haven't my next note is give it to Kevin, please, because he's been the only one. One of the other earlier stats is Kevin Falk 53 yards, the rest of the team, negative two.",
+    "timestamp" : "54:26-54:37",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "54:37-54:54",
+    "text" : "That's what I was gonna bring up before Greg showed up, is that y'all fucking were shitting on me for last season for saying that my hot take was Kevin Falk was the team MVP of 2002. Well, he fucking was the team MVP of this game too. He kept it going. Literally the only guy doing anything in this game."
+  },
+  {
+    "timestamp" : "54:54-55:14",
+    "text" : "And then right after that we had the fourth and one where we got a fucking false start. And I said, who are we at the goddamn Bills? And then the Buffalo, we punt it and the Buffalo turns it over and we have the ball in the 20. We get it all the way down to the two. And I said it's give it to Kevin. And they run Antoine Smith into the line twice for nothing. Yep.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then there must be a penalty because they're they're back on the eight yard line and",
+    "timestamp" : "55:14-55:17"
+  },
+  {
+    "timestamp" : "55:17-55:27",
+    "speaker" : "Steve",
+    "text" : "Yeah, the video cut it out. Yeah, the the video cuts the penalty out. For some reason we go from the three to the eight. Yeah, it got a little choppy here."
+  },
+  {
+    "text" : "Do you think Belichick wanted to be skunked just so he could skunk the Bills to 31-0 at the end of the season?",
+    "timestamp" : "55:31-55:36",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "55:36-55:44",
+    "speaker" : "Andy",
+    "text" : "Is that No Belichick wanted us to I think uh the fact it was 31-0, the the I vaguely remember when it was."
+  },
+  {
+    "timestamp" : "55:46-55:49",
+    "speaker" : "Steve",
+    "text" : "And the Nazis is saying if we score here it's 21-7, like"
+  },
+  {
+    "text" : "No, I'm I'm talking about the end of the season when the Patriots are up thirty-one nothing and the Bills are driving at the end. The Patriots have put in their yes their their second team defense, but as soon as they started driving, they put all the first team guys back in to make sure it stayed 31-0.",
+    "speaker" : "Andy",
+    "timestamp" : "55:49-56:02"
+  },
+  {
+    "text" : "Yeah, and Teddy had that in his Belichick has proved that he is willing to do the fuck you fourth quarter place. Like he did that every week in 07 with the fourth quarter fuck you touchdown. Oh yeah. He he's not above that for sure.",
+    "timestamp" : "56:02-56:17",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "And I think we can all appreciate one or the fourth and three or whatever that he would always go for, even if it was up thirty points. It's like fuck you.",
+    "timestamp" : "56:17-56:26"
+  },
+  {
+    "text" : "Yeah. With a full usually with like a fullback dive. Like I dare you to stop this. It was never asked.",
+    "speaker" : "Andy",
+    "timestamp" : "56:26-56:32"
+  },
+  {
+    "timestamp" : "56:38-57:01",
+    "speaker" : "Greg",
+    "text" : "Oh, I just do what we need to win the games and I don't play these like, you know, other games that within the game. But that is so clearly like contradictory to what he does when he's trying to spite people and like play with emotion. So it's like All right, Belichick, like there's definitely something there that he doesn't show us like publicly facing, you know. Oh, definitely. Yep."
+  },
+  {
+    "timestamp" : "57:01-57:13",
+    "speaker" : "Steve",
+    "text" : "So eight minutes left in the third quarter. I wrote this down. Fourth and goal from the eight-yard line. Could have kicked the field goal, made it 21-3, and we go for it."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Got him.",
+    "timestamp" : "57:13-57:14"
+  },
+  {
+    "text" : "And he has and Brady hits Branch right in the hands. He drops it in the end zone.",
+    "speaker" : "Steve",
+    "timestamp" : "57:14-57:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well even before that, the play before that on third down. Yeah. Brady hitting Patton on a perfect play. Yep. Patton couldn't tap both feet down. Second foot down, yeah. And that was easy to get the second foot down too. It looked like it should have been, yeah. Yeah.",
+    "timestamp" : "57:18-57:30"
+  },
+  {
+    "text" : "I mean it was like the Chicago, but easier.",
+    "timestamp" : "57:30-57:33",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "In the first half though, it it felt like it wasn't so much the Patriots playing terrible, but the Bills were just on fire.",
+    "timestamp" : "57:33-57:40"
+  },
+  {
+    "text" : "Yes.",
+    "timestamp" : "57:41-57:41",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Like T KO Spikes was flying around, fucking knocking helmets off. Like it I just thought the Bills came out with more oomph.",
+    "speaker" : "Greg",
+    "timestamp" : "57:41-57:50"
+  },
+  {
+    "text" : "Quite honestly, it might have something to do with the Lauren Meloy. That's happened a fair amount though in the Patriots over the years, like and they've always been able to like let that pass by the storm and like make it a fucking full game. And yeah. At that point they would and like in any other year. After this, they score there, they get 21-7, and then they make it 14-21. Now the fucking bills are shit in their pants and they kick it off a little bit. And then we get two touchdowns in a minute.",
+    "timestamp" : "57:50-58:15",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And I think uh Like you guys were talking about how you were like able to root for the Bills in this one, how fun it was. I think the reason I couldn't, because I was I was almost there, but then I realized that Greg Williams was a coach and they did a halftime interview with him. And I don't know if this is like trash talking, but I found it interesting.",
+    "timestamp" : "58:16-58:36"
+  },
+  {
+    "speaker" : "Gregg Williams",
+    "timestamp" : "58:43-58:52",
+    "text" : "Well right now we're a little bit faster on defense, maybe a little bit smarter. Uh we had those two penalties and we're off the field and they get nothing, so we gotta come out and play a strong second half."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Did he just call this defense smarter than Bill Belichick?",
+    "timestamp" : "58:53-58:56"
+  },
+  {
+    "text" : "Well, could that have played into the end of the game? I have I I I know why he says that because he's telling all of his defensive players to hit the other guys in the head, therefore they're smarter.",
+    "timestamp" : "58:57-59:08",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Less concussions. Yes.",
+    "timestamp" : "59:10-59:12"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I mean I think we can look now in the future in twenty twenty with him with the jet. And just kind of laugh at that.",
+    "timestamp" : "59:12-59:18"
+  },
+  {
+    "timestamp" : "59:19-59:27",
+    "text" : "Yeah. Dude, he's still around. That's the fuck the most fucked up part. He still sucks, dude. The jets are god-awful, like. Dumpster fire.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "That guy just is just not a good coach. And also, I believe, let me double check before I'm going to be able to do that.",
+    "speaker" : "Andy",
+    "timestamp" : "59:28-59:33"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "59:35-59:43",
+    "text" : "Episode we did Greg on the Bounty Gate thing. Yeah. My whole feelings about Greg Williams have changed significantly. I'm like, fuck."
+  },
+  {
+    "text" : "Yeah. He's a scumbag through and through.",
+    "timestamp" : "59:44-59:47",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "59:47-59:54",
+    "speaker" : "Steve",
+    "text" : "Also, this was his only win against the Patriots. This is his only win? Yeah. As a coordinator war coach or what?"
+  },
+  {
+    "timestamp" : "59:55-59:57",
+    "speaker" : "Andy",
+    "text" : "Uh as a head coach. He had six shots at him."
+  },
+  {
+    "text" : "I still hate Tan Gailey more. I think that was the worst hire in the w history of Buffalo Bills. He didn't even have a good he didn't even have a good offense at Georgia at Tech. Like I don't know what the fuck we were thinking when we hired his ass. Greg still sits above Chan Gailey in my book.",
+    "speaker" : "Brian Greer",
+    "timestamp" : "59:59-01:00:20"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:00:20-01:00:26",
+    "text" : "Wow, Chan Gailey. He came from Georgia Tech Don't they run the witchbone offense there?"
+  },
+  {
+    "timestamp" : "01:00:26-01:00:32",
+    "text" : "Exactly. They don't even they didn't even throw the ball. They just had like they'd run the same offense for 30 years.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah. It's like the least relatable to the NFL game offense that you could possibly imagine.",
+    "timestamp" : "01:00:32-01:00:38"
+  },
+  {
+    "text" : "I think that was towards uh the end of Ralph Wilson's life. So I just I don't think he was making the right decisions at that point. So",
+    "timestamp" : "01:00:39-01:00:47",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh boy.",
+    "timestamp" : "01:00:48-01:00:48"
+  },
+  {
+    "text" : "And uh unfortunately for me that means I went my whole teens and my whole twenties without making the playoffs.",
+    "timestamp" : "01:00:49-01:00:53",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "01:00:53-01:01:23",
+    "text" : "So So yeah, you coached at Georgia Tech from 02 to 07. Uh his first five years of Joja Tech he compiled a 37-27 record, not too bad. Went to bowl games each year. Uh he compiled six winning seasons, but however, he never defeated Tech's biggest rival, University of Georgia, never won the ACC, never went to a BCS bowl, never won more than nine games, and never finished in the top twenty-five. Never finished top twenty-five. Good god.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:01:23-01:01:24",
+    "text" : "What was that higher?"
+  },
+  {
+    "text" : "Uh so that he was hired by the Bills in twenty ten? Uh the Bills went four and twelve in his first season with the twenty-fifth ranked offense and twenty-fourth ranked defense in the league.",
+    "timestamp" : "01:01:25-01:01:37",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:01:37-01:01:39",
+    "text" : "Oh no shock there."
+  },
+  {
+    "text" : "The following year, the Bills ranked 14th in offense, 26th in defense, and improved slightly to finish with 6 and 10 record. They finished six and ten the year after that, uh and it they were nineteenth in offense and twenty second in defense",
+    "timestamp" : "01:01:39-01:01:54",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:01:54-01:02:06",
+    "speaker" : "Steve",
+    "text" : "All right, let's not get all let's not get all Bills depressed here. This is like a 2003 episode. We gotta shut a focus on this. Let's put best somewhere out here and put a bow on this shit."
+  },
+  {
+    "timestamp" : "01:02:06-01:02:20",
+    "speaker" : "Andy",
+    "text" : "Alright, yeah. So So Briar, we do uh best and worse uh like we used to do growing up at the dinner table for our day. But in this case we'll do it for the game. So as the Resident Bills fan who probably has some bests in this, would you like to go first?"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I mean it's gotta be the Sam uh pick six.",
+    "timestamp" : "01:02:21-01:02:25"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Mm-hmm. And then what was it the worst moment?",
+    "timestamp" : "01:02:25-01:02:28"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "And then the crowd just The worst of this whole game? I don't I don't know. Is there one?",
+    "timestamp" : "01:02:28-01:02:34"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "In fact it was ended.",
+    "timestamp" : "01:02:35-01:02:36"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "It's beautiful, the whole thing is beautiful.",
+    "timestamp" : "01:02:37-01:02:39"
+  },
+  {
+    "timestamp" : "01:02:39-01:02:59",
+    "speaker" : "Steve",
+    "text" : "Well you're about to hear all our best, so I guess all of our best count as your worst. I don't even think that will. I'll go. I'll get I'll give my best. Alright, give me your best. Uh Rodney Harrison looked right back there. Yeah, he did. He played well. He tackled really surely and like he looked like Rodney."
+  },
+  {
+    "timestamp" : "01:02:59-01:03:08",
+    "speaker" : "Andy",
+    "text" : "He was super. He was starting shit down like twenty-eight nothing in the fourth quarter. He's like out there starting shit with with Rodney looked legit."
+  },
+  {
+    "text" : "I could see why people call him like where he was voted like the dirtiest player in the league, though. He was always hit in the first quarter. Yeah.",
+    "timestamp" : "01:03:10-01:03:18",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:03:18-01:03:20",
+    "speaker" : "Andy",
+    "text" : "Yeah. Super bull."
+  },
+  {
+    "text" : "But I mean he definitely set a tone. Like, that's not something you really see in modern NFL anymore. Someone that like stands out and jumps off the page is like this guy is physical. Yeah. And he doesn't give a fuck.",
+    "speaker" : "Greg",
+    "timestamp" : "01:03:20-01:03:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And then the worst is maybe all four INTs, but the worst, the last one was just like, oh my god. The last one with the KO Spikes was just",
+    "timestamp" : "01:03:33-01:03:43"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:03:44-01:03:44",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Woof. There's there's a couple that like, oh, Larry Millet tipped it, and like there's a couple that weren't really Brady's fault, but that last one was just brutal. And a four INT game.",
+    "timestamp" : "01:03:45-01:03:54"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "At least it's not five and one half like Nathan Peterman.",
+    "timestamp" : "01:03:56-01:03:59"
+  },
+  {
+    "text" : "So there's all there is that out there about that.",
+    "speaker" : "Steve",
+    "timestamp" : "01:03:59-01:04:04"
+  },
+  {
+    "timestamp" : "01:04:04-01:04:10",
+    "text" : "Oh god. All right, Greg, you got uh you got some best and worse?",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I mean I try not to do the same as someone else's, but I think it's hard to argue against the Sam Adams touchdown not being the best from this game. Like watching a 350-pound man run like 30 yards as fast as he can. And then when Bledsoe like put his arm Uh Trevelle carried him off after the time to carry him off. Yeah. Like you know, the whole the whole crowd's going crazy. The commentators are laughing their ass off. Like it's just Everybody loves a Fat Man touchdown. You know, it's it's never not fun to watch, even if it happens to your own team. So I think that was my favorite play of the game. And you know what? That's what made this game memorable. Like Looking back and being like, oh yeah, that 31-0 game, I remember that fat man touchdown. So it's like that that was certainly a memorable play. in Patriots lore, right?",
+    "speaker" : "Greg",
+    "timestamp" : "01:04:10-01:05:01"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Definitely is.",
+    "timestamp" : "01:05:01-01:05:02"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:05:02-01:05:11",
+    "text" : "Um my worst, I mean I guess you have to say Brady's four picks. He looked like trash."
+  },
+  {
+    "timestamp" : "01:05:11-01:05:32",
+    "speaker" : "Andy",
+    "text" : "He did, yeah. And the fact that the offensive line looked like uh they were considering every play a screenplay. Yeah, that block on the lawyer Malloy sack. Oh, but that was Fourier. Fourier just like Fourier did just yeah. He got turnstyled. It was, yeah."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:05:33-01:05:51",
+    "text" : "I think even though Brady has like the the whatever, the fourth or fifth most wins in Bill's, you know, history um at Buffalo Uh he's like I don't know, he's struggled against Buffalo at times and um I think it's just but the Bills offense has been so bad for so many years and he still came out with a victory"
+  },
+  {
+    "text" : "Yeah, he always seems to be able to put like just enough together to beat the Bills in Buffalo. That's just like the feeling I get watching him play in Buffalo. Like they they always give him trouble, but he's finds some way to just like stumble his way through those games and pull out the victory. Yeah, I agree with that. Just a bit. Because it was like uh the one that sticks out to me is uh it was like Danny Amendola's first game as a patriot and he was like playing on one leg, but he was literally the only person that Brady was looking at. And he went for like almost 200 receiving yards with like a broken foot or something ridiculous like that. And They managed to like kick a last-minute field goal to win it when they probably didn't even deserve to be in it in the first place Unlike this game.",
+    "timestamp" : "01:05:52-01:06:37",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "That's the Patriot West.",
+    "timestamp" : "01:06:38-01:06:39",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:06:39-01:06:44",
+    "text" : "Yep. That's more of the Bill's way to just choke it away at the end. It's both."
+  },
+  {
+    "text" : "Symbiotic relationship. Uh Greg, did you have a worst? Oh, it was uh big.",
+    "timestamp" : "01:06:45-01:06:54",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:06:55-01:07:05",
+    "text" : "I mean I guess I don't know. I I wanted to bring it up. I don't know if it's the worst, but what do you guys think about them? Uh Cut in Malloy looking back."
+  },
+  {
+    "text" : "I remember the time to get a no I thought it was a trade and I don't get that it was a cut and we talked about this earlier before you jumped on Greg and it's like I guess it was a money thing and Like a fucking brinkmanship. Take a pay cut, we'll cut you. I don't give a shit. And then they cut 'em.",
+    "timestamp" : "01:07:05-01:07:20",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah. That's what it sounds like. Yeah, basically.",
+    "timestamp" : "01:07:21-01:07:23"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's crazy. I mean I don't just have him play out the rest of this contract. It probably wasn't like that much money, right?",
+    "timestamp" : "01:07:24-01:07:30"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Pat's cleared 5. 86 million in cap space with his release. Yeah.",
+    "timestamp" : "01:07:31-01:07:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And what do they do with it though? Like not that they signed Rodney Harrison the next day either, right?",
+    "timestamp" : "01:07:35-01:07:39"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:07:41-01:07:44",
+    "text" : "Like the week of week one doesn't really make sense, right?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Right. The timing is crazy. So it kind of makes you think Off season.",
+    "timestamp" : "01:07:45-01:07:50"
+  },
+  {
+    "text" : "Yeah, it feels like a power play more than like a actual like financial move.",
+    "timestamp" : "01:07:50-01:07:56",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:07:57-01:08:11",
+    "speaker" : "Andy",
+    "text" : "Yeah, it almost felt like the the Patriots knew like what he was worth to them, like they they always do nowadays. It's like, all right, this is what you're worth to us, take it or leave it. And this was the first player who left it, you know?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Like it wasn't he like it wasn't like he was a free agent though. Like they cut him. They still had them on the contract and they always like if you're not taking it, we'll they'll play at your contract and then go fuck it somewhere else. Yeah. We're not the goddamn jets, you know, we're like Levion Bell and be like Oh well, see you later. We'll just eat the fucking guaranteed salary, which is crazy to me.",
+    "timestamp" : "01:08:11-01:08:32"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:08:32-01:08:37",
+    "text" : "Yeah, but I also don't know if he he knew it was gonna be like quite the dynasty that it was, you know, at that point."
+  },
+  {
+    "text" : "Well yeah, nobody did. I mean the way that we played the offensive line couldn't block shit. Defense looked like absolute garbage. Nobody on offense flashed except for Kevin Falk. Tom Brady through four INTs. Nothing about this game says this team in six games is gonna start the most the longest win streak in NFL history. Right.",
+    "timestamp" : "01:08:38-01:08:59",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Well, how important do you think Lawyer Malloy was to this game? Like do you think you just kind of like told them what they like to do? And not even that. I think it's more emotional than anything.",
+    "timestamp" : "01:08:59-01:09:06",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, because they even said that I I looked at the Boston Globe from that like week and Uh lawyer Malloy, I think they were talking to Drew Bledsoe, and he's like, like, lawyer told us some stuff, but it wasn't really anything we didn't know already. Like there's a few things like, yeah, this is definitely gonna happen, but Like we'd already assume that anyway. So it was more like you said, the emotional side of things.",
+    "timestamp" : "01:09:07-01:09:30"
+  },
+  {
+    "text" : "And I have a I have a I have a uh a quote attributed to Lawyer Malloy. from the commentators that Greg with two G's loved apparently. No giggling on Fridays. Because I guess they're like the big on giggling in Buffalo on Fridays. Now Larry Malloy came in and the and and he said no giggling on Fridays and Greg Williams like, oh yeah",
+    "timestamp" : "01:09:31-01:09:56",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:09:56-01:10:32",
+    "text" : "Next thing you know, 31 nothing. Just because we cut out that fucking giggling, goddammit. You want to hear a quote from Ty Law about the Mo uh Moa Getting Cut. He said it it is it's scary in the timing. There's such a thing as good business and bad mis bad business. I don't know what category this one falls under, but to my eyes, and being selfish at this late in the game and in regard to him and his family, I'm quite sure this is something that could have been done a long time ago. So that sounds like he's like pretty openly criticizing the Patriots organization.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:10:32-01:10:33",
+    "text" : "And that's not that's not unfair though.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:10:34-01:10:38",
+    "speaker" : "Greg",
+    "text" : "I feel I And that's the all-pro cornerback that's doing that too. Yeah."
+  },
+  {
+    "timestamp" : "01:10:39-01:10:45",
+    "speaker" : "Steve",
+    "text" : "Yeah, I think the timing of the Miller Molloy cut caused a 31-0 game. Right."
+  },
+  {
+    "text" : "Didn't uh undeniable impact. Isn't this when they said that uh was it Jackson from primetime that said like It was Patriots hate their coach.",
+    "timestamp" : "01:10:45-01:10:54",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:10:54-01:11:04",
+    "speaker" : "Andy",
+    "text" : "Yes. This was in NFL primetime. That yeah, I put that in the show notes, I think, but I don't know if it's actually in Andy."
+  },
+  {
+    "timestamp" : "01:11:04-01:11:06",
+    "text" : "We all know we don't read those.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I think they probably did to a degree though. Maybe not Belichick, but like they're pretty like pissed off at the organization.",
+    "timestamp" : "01:11:09-01:11:16",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And then at that point, how long had the lawyer been there? Eight, ten years, something like that.",
+    "timestamp" : "01:11:16-01:11:21"
+  },
+  {
+    "text" : "Right. And it's different if you have like if if you've won Super Bowls and you have this culture and they've made it like clear that there's no one above the team, blah, blah, blah. Like it's almost expected, but when it's like the first one and you don't have that like history to lie on, then it's it's a kind of a different ball game.",
+    "timestamp" : "01:11:22-01:11:40",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Cause it it just at one point though, I don't think he's the first one. Drew's the first one.",
+    "timestamp" : "01:11:40-01:11:45"
+  },
+  {
+    "timestamp" : "01:11:46-01:11:49",
+    "speaker" : "Greg",
+    "text" : "But that one I think everyone agrees to have Brady."
+  },
+  {
+    "timestamp" : "01:11:50-01:11:56",
+    "text" : "You know, that was yeah, that wasn't the timing of it wasn't bad either. I think it's the timing that was the issue.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:11:56-01:12:04",
+    "text" : "I mean there's never been anything like that since though, right? When's the last time we've cut a starter a week before the first game of the season?"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:12:04-01:12:06",
+    "text" : "They've made some pretty aggressive moves though."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:12:06-01:12:09",
+    "text" : "But they never cut a starter right before trade."
+  },
+  {
+    "timestamp" : "01:12:10-01:12:17",
+    "speaker" : "Greg",
+    "text" : "Yeah. Collins, Jamie Collins. They just got rid of him for a bag of balls in the middle of the season. Yeah, in the middle of the season."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then brought him back and he was amazing.",
+    "timestamp" : "01:12:20-01:12:22"
+  },
+  {
+    "timestamp" : "01:12:23-01:12:37",
+    "text" : "But never like I was I was reading in the a Yahoo article this year, like you guys had a running back that led the team And then the next year he was like party to a meeting or something like that and and uh Belichick just Jonas Gray. Yeah, yeah.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "timestamp" : "01:12:38-01:12:53",
+    "text" : "You're wrong the time frame. He ran for 200 yards against the Colts and then missed him like overslept because his phone didn't charge or some shit like that. And then showed up late to a meeting and never played again. Right.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:12:53-01:13:03",
+    "speaker" : "Greg",
+    "text" : "That was the first time he like started a game and he gets 200 yards and four touchdowns and then benched the very next week and never play together again."
+  },
+  {
+    "text" : "So I'm gonna be fantasy honors are like, what the fuck, bro? That was a good fantasy film.",
+    "timestamp" : "01:13:04-01:13:11",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:13:15-01:13:15",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:13:15-01:13:17",
+    "speaker" : "Steve",
+    "text" : "It wasn't even that long ago, I feel."
+  },
+  {
+    "timestamp" : "01:13:18-01:13:21",
+    "speaker" : "Greg",
+    "text" : "Yeah, I saw some fantasy commercials in this game. I thought that was interesting."
+  },
+  {
+    "text" : "Yeah, the fantasy has been around longer than I thought.",
+    "speaker" : "Steve",
+    "timestamp" : "01:13:21-01:13:24"
+  },
+  {
+    "timestamp" : "01:13:24-01:13:29",
+    "speaker" : "Andy",
+    "text" : "Yeah, this is when I feel like it started to take off online too was this this time frame."
+  },
+  {
+    "timestamp" : "01:13:29-01:13:33",
+    "speaker" : "Steve",
+    "text" : "You mean NFL I mean AOL keyword NFL. com?"
+  },
+  {
+    "timestamp" : "01:13:33-01:13:42",
+    "text" : "That's right. Alright, uh my best and worst. Hmm. Let me see if I can find a best.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "timestamp" : "01:13:45-01:13:56",
+    "text" : "Uh uh You know you can say something nice about the other team, Andy. It's it's okay to no say something nice about the commentators, Andy. You got a nice commentator or maybe the rest of the other thing."
+  },
+  {
+    "timestamp" : "01:13:57-01:13:58",
+    "text" : "No, they're they're my worst.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Come on, they were adorable. They were adorable.",
+    "timestamp" : "01:13:59-01:14:02"
+  },
+  {
+    "text" : "It was damn fucking dear to him. Fucking dear.",
+    "timestamp" : "01:14:02-01:14:07",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I thought they were funny because they were kind of dopey. Oh you would hate him. Oh, it's awful.",
+    "speaker" : "Greg",
+    "timestamp" : "01:14:08-01:14:15"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:14:15-01:14:20",
+    "text" : "Come on, take it take a page out of Dave Portnoy's book and say something nice about the Bills, dude."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Let's hear it, Andy. I don't know if I can do that. Come on.",
+    "timestamp" : "01:14:20-01:14:24"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Not the Jets, okay?",
+    "timestamp" : "01:14:25-01:14:26"
+  },
+  {
+    "text" : "I'm all I'm all about. I will say that uh Greg Williams Uh Bounty Gate did not affect anybody in this game. So that was nice. That's your best. No one got it. No, oh, oh, oh, here we go. My best in this game was Sammy Morris sighting. I fucking love Sammy Morris. Yeah. And I I have a hot take. If Sammy Morris didn't get hurt in 07, the Patriots would have gone undefeated and won that Super Bowl. Putting that out there. But when we get there. We will. But Sammy Morris, I think, is an underrated player in general. Because he there was one play in here where uh Bruce came on the blitz. And Sammy Morris lit him up so badly, like just straight up stonewalled him and knocked his ass over backwards. Yeah. Which you don't see from running backs picking up a blitz from somebody like Teddy Bruskey.",
+    "timestamp" : "01:14:26-01:15:22",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He was one of those like Back half, back nine career guys that Belichick's always admired. And we talked about this early about why did Wayne Krebett never play for the Patriots sort of guy. Yeah. But Samuel Morris did. And you're right. I mean, you got her, but I don't think that's gonna make him win the Super Bowl, but okay, Andy. We'll get there.",
+    "timestamp" : "01:15:23-01:15:41"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:15:43-01:15:47",
+    "text" : "You still hear those names and I still get irritated. Like I fucking hate them."
+  },
+  {
+    "timestamp" : "01:15:47-01:15:55",
+    "speaker" : "Steve",
+    "text" : "I actually I I wrote this down. This is Brabel's seventh year. 2003 was his seventh year, which is way old."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah, he was a special teams guy in Pittsburgh.",
+    "timestamp" : "01:15:55-01:15:58"
+  },
+  {
+    "text" : "Yeah, yeah. I said it was like one or two seasons there, but he must have been there for five years. Toiling on Pittsburgh special teams because he took over last year, right? 2002 or 2001, maybe?",
+    "timestamp" : "01:15:58-01:16:11",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, he was there in 2002.",
+    "timestamp" : "01:16:11-01:16:12"
+  },
+  {
+    "timestamp" : "01:16:12-01:16:16",
+    "text" : "So this is his seventh year. It's crazy. That is nuts.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:16:16-01:16:29",
+    "text" : "Maybe it was there in 2001. Because wasn't he the one that got pressure on um Kurt Warner in the Super Bowl on the Tylap pick six? Yeah, he was. Yeah. So yeah, it came over in 2001."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yep. Can we talk about uh real quick Malcolm Bowler putting it into Bill's butt cheeks on Tuesday night? Two interceptions.",
+    "timestamp" : "01:16:29-01:16:36"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "I mean I could have caught one of them not.",
+    "timestamp" : "01:16:37-01:16:39"
+  },
+  {
+    "text" : "I love that. Oh should we share where Steve's I just I'm glad they got brought down a little bit. They're riding they're fucking flying",
+    "timestamp" : "01:16:40-01:16:50",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I think they still look like pretty good though. No.",
+    "timestamp" : "01:16:50-01:16:53",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "I think Josh Allen was good on Tuesday night, but I think we were just a little cocky that they hadn't practiced Because of COVID and we can't get a lot of people.",
+    "timestamp" : "01:16:54-01:16:59"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "That's what yeah. It was kind of fluky though. I mean, I think Allen still looked good. I mean he had a one pick that was brutal, but the other one wasn't his fault. And then he was that touchdown throw to Yeldon. Whoa, baby. That was a fucking dime.",
+    "timestamp" : "01:16:59-01:17:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "You talked about this, Greg, earlier, and I thought you were gonna bring up every week uh my happy back, Greg. My hot take earlier was that Josh Allen and Ryan Tannehill not good You said they were both.",
+    "timestamp" : "01:17:14-01:17:30"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Josh Allen's not the smart he's not the smartest cat in the world. I'll give you that. Josh Allen's like that's not one word to describe him.",
+    "timestamp" : "01:17:31-01:17:38"
+  },
+  {
+    "timestamp" : "01:17:38-01:17:42",
+    "speaker" : "Steve",
+    "text" : "He's either wicked good or wicked bad."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Yeah, if you look at his career stats, like even in high school, he never has had over like a fifty five percent completion percentage. So like It's it's kinda crazy this year that he's like was over seventy percent before this game, so I knew it was gonna it tank at some point, but uh he's been playing great and I I can't take that away from him. So Uh hopefully he just doesn't sometimes he's a gunslinger like Fitzpatrick and just makes dumb plays.",
+    "timestamp" : "01:17:42-01:18:10"
+  },
+  {
+    "timestamp" : "01:18:10-01:18:14",
+    "speaker" : "Steve",
+    "text" : "So uh now we have to ask you what you think about Cam Newton on the Patriots."
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Dude, scum scum bag. I mean I hate that motherfucker. I hated him and and I drafted him his second year And fantasy, the sophomore swamp was a real thing. I I've never liked Cam Newton. I I thought when he was starting shit at the end of the game or the first game of the season that Belichick was gonna put him in his place, but that just never happened. That just like kinda went by the wayside. Well they yanked his chain.",
+    "timestamp" : "01:18:15-01:18:40"
+  },
+  {
+    "text" : "Yeah, the guy it was the other guy who was fucking coming at him and tried to yank his chain. So",
+    "timestamp" : "01:18:41-01:18:46",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:18:46-01:18:51",
+    "text" : "But it's very anti Belichick to let anything sli like and he doesn't let shit slide.",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So it was shocking to me that he didn't get like Gronkowski on his team for ten years.",
+    "timestamp" : "01:18:51-01:18:56"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:18:59-01:19:02",
+    "text" : "So as long as you're playing good, you can do whatever the fuck you want, huh?"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "You are absolutely correct.",
+    "timestamp" : "01:19:02-01:19:03"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:19:03-01:19:04",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "text" : "That's what's best for the team. Yeah.",
+    "timestamp" : "01:19:04-01:19:06",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "timestamp" : "01:19:06-01:19:17",
+    "text" : "I think as long as you put in the work. It's like Dennis Rodman, dude. Yeah, you can go to Vegas for three days but be back here apart like to play, you know? It's mind blowing."
+  },
+  {
+    "timestamp" : "01:19:17-01:19:32",
+    "speaker" : "Andy",
+    "text" : "Yeah, you know he's gonna handle his shit. All right. Anybody got anything else on this this game? All I have is negatives. So surprise, surprise, Andy."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "We've covered this game way too much for how much the game deserves to be covered.",
+    "timestamp" : "01:19:32-01:19:36"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "What do you mean? This is like a pivotal moment. In this season. This is an amazing game. You guys are just butthurt because you're Pats fans and you're gonna be a good one. You've been showing up two hours late. I c I have an eye injury, Steve. Can't you see that? I'm playing to paint it. This is a gutsy performance by me, okay?",
+    "timestamp" : "01:19:36-01:19:58"
+  },
+  {
+    "timestamp" : "01:20:00-01:20:14",
+    "speaker" : "Brian Greer",
+    "text" : "You guys for the next thirty Pat Spills uh podcast that you guys are doing, I'm pretty sure I'm gonna be busy. Call me when Jacoby Percent plays for you guys."
+  },
+  {
+    "timestamp" : "01:20:15-01:20:23",
+    "speaker" : "Steve",
+    "text" : "No, we already talked about this career. We're doing the one where we went to A Town and you fucking blacked out at the beginning and the end of the game."
+  },
+  {
+    "text" : "Then tried to hook up with your roommate. Yep. Double bladder.",
+    "timestamp" : "01:20:23-01:20:27",
+    "speaker" : "Brian Greer"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:20:27-01:20:37",
+    "text" : "Send me a picture of him sleeping in our bed and said, Can you come get your friend? Do you still have that picture? Do you still have that picture? I'll send it to you."
+  },
+  {
+    "text" : "How about that? Yeah. Yeah. We'll let everybody see it.",
+    "timestamp" : "01:20:41-01:20:44",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Brian Greer",
+    "text" : "Great. Thanks, guys.",
+    "timestamp" : "01:20:45-01:20:46"
+  },
+  {
+    "text" : "That's awesome. All right.",
+    "timestamp" : "01:20:46-01:20:48",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:20:48-01:20:50",
+    "speaker" : "Brian Greer",
+    "text" : "Well, guys, well, I appreciate you having me on."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, absolutely. This has been a hell of a start to the 2003 season. Thanks for coming on, Brian. And we'll see everybody next week on the Patriots Dynasty Podcast. See you later. Go bills. Oh Bills. Go fuck yourself, Greg.",
+    "timestamp" : "01:20:50-01:21:05"
+  },
+  {
+    "timestamp" : "01:21:06-01:21:10",
+    "speaker" : "Greg",
+    "text" : "Nobody circles the wagons like the Buffalo Bills."
+  }
+]
