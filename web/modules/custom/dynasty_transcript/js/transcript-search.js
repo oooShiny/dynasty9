@@ -44,9 +44,10 @@
       let currentQuery = "";
       let currentPage = 0;
       let currentFacets = {};
+      let facetsLoaded = false;
 
-      // --- Load initial facets ---
-      loadFacets();
+      // Note: We don't pre-load facets on page load to avoid Cloudflare blocking.
+      // Facets will populate with the first search request.
 
       // --- Event listeners ---
       input.addEventListener("keyup", function (e) {
