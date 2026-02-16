@@ -1,0 +1,2397 @@
+[
+  {
+    "timestamp" : "00:00-00:17",
+    "speaker" : "Mom",
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to. My sons sometimes say some naughty things when they're trying to be funny. But really, they're just being stupid. Do you still want to listen? Go right ahead. I am not your mother."
+  },
+  {
+    "text" : "Welcome back to the Pages Dynasty Podcast. I'm your host, Andy Brown. Uh we are going through Every game of the Patriots dynasty era. We started in 2001. We are now week 14 of 2004. Patriots hosting the Cincinnati Bengals. Uh so with me as always is reliable brother Steve Brown.",
+    "timestamp" : "00:21-00:44",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's right. Mr. Reliable, Steve Reliable Brown, just like Troy Brown, also very reliable.",
+    "timestamp" : "00:44-00:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Sure. We'll we'll go with that. No Greg Brown today because he's tired. From working.",
+    "timestamp" : "00:50-00:57"
+  },
+  {
+    "text" : "No, that's not true. We got rid of Greg. We upgraded him.",
+    "speaker" : "Steve",
+    "timestamp" : "00:57-01:00"
+  },
+  {
+    "text" : "So yeah. So uh yeah, well, without further ado, Steve, uh, you have brought a brought us a guest. Would you like to introduce him?",
+    "timestamp" : "01:00-01:07",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:07-01:19",
+    "speaker" : "Steve",
+    "text" : "I know all of the long-suffering NFL franchise fans, so my my my buddy David Prue, the Bengals fan, is joining us for this 2004 week 14. First the Bengals."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Hello everybody and uh thanks for the opportunity to join you guys. I look forward to uh discussing the uh Bengals and Carson Palmer's first year as a four starter.",
+    "timestamp" : "01:21-01:33"
+  },
+  {
+    "timestamp" : "01:33-01:46",
+    "text" : "Yeah. Long suffering no more as well. That's true, yeah. You guys are riding high finally. We'll see. I remember I was in the car with you before the season started. You were stoked about the Bengals, and you were right.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:46-01:52",
+    "speaker" : "Andy",
+    "text" : "Yeah. All right. Yeah. So should we start there? Um how do you feel about this most recent Super Bowl?"
+  },
+  {
+    "timestamp" : "01:53-03:17",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Uh yeah. Yeah, no, seriously, it was a um better than expected year. Um, you know, we're riding high with Jerry Burrow, uh Jamar Chase, what a great pickup Um, you know, the the young man uh playing quarterback got sacked way more times than we wished. Looks like our um Off this offensive line has been addressed very well. Um, you know, but this I I've now I don't know the experience of being a New England sports fan because you guys have rings. We have disappointment. So you know, as as h happy as we were about making it the Super Bowl, it ended the way Cincinnati's words ends as always. with a close call and a and a loss. But but we feel great, but but I the what I do notice still The national media still thinks that was a one-year wonder. And it puts doubt in the uh Cincinnati sports fans' head when we hear that. So um we you know we're we're we're hoping to you know, accomplish our goals, get get back there, but when you when you watch ESPN and uh you know all these other channels we're not picked Yeah, and the other top of the FC still. So it you know it's still a question whether or not it's retainable."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well, that's your problem right there, listen to ESPN. That is yeah. You should hear Boston sports talk, apparently the Patriots are fucking never gonna win a game ever again. Yeah.",
+    "timestamp" : "03:17-03:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We already talked about packaging um Mac Jones and two first-round draft picks for Russell Wilson. Even though he's already been traded. So that's cool.",
+    "timestamp" : "03:28-03:38"
+  },
+  {
+    "text" : "There was a there was a note from the commentators or a stat in this game that the Bengals hadn't had a winning season since 1990.",
+    "speaker" : "Steve",
+    "timestamp" : "03:38-03:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "This is but they had been eight and eight for the past what two or three years or something like that.",
+    "timestamp" : "03:46-03:50"
+  },
+  {
+    "text" : "And they would finish their eight and eight games, right? And then they go to the playoffs a bunch of years in a row and lose because Carson's good and then just couldn't get over that first round hump.",
+    "timestamp" : "03:50-04:00",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well they had they had the Carson injury too, which was like that was their one year where they were kind of similar to this past year.",
+    "timestamp" : "04:00-04:07"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Um team of one often with the Steelers Went low on Carson Palmer. But uh Cincinnati true Cincinnati sports fans are not Carson Palmer fans because Carson Palmer has been uh very negative. um towards the Bengals for a very long time, even recently saying that the um uh the the Bengals will never protect him and he needs to find his way out after Two great years. So interesting. Uh we Carson Palmer's a uh uh a four-letter word here in uh the greater Cincinnati area.",
+    "timestamp" : "04:07-04:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "This is why we brought you on. I I would have assumed that they love Carson Palmer. Yeah.",
+    "timestamp" : "04:45-04:49"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "04:49-05:14",
+    "text" : "Not at all. Not at all. He forced his way out of town and um and obviously over the Super Bowl um coverage. Carson Palmer was spoke up very heavily against uh the Bengals front office. And um you know, I I he's been out of the league for a couple years now. I don't know why He's even irrelevant anymore. Don't make him a Cinsei sports fan."
+  },
+  {
+    "text" : "Okay, so what do they think about Corey Dillon?",
+    "timestamp" : "05:14-05:16",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "05:16-05:18",
+    "speaker" : "Andy",
+    "text" : "That was gonna be my next Corey Dylan Revenge game."
+  },
+  {
+    "text" : "That's a great transition We love Cordon.",
+    "timestamp" : "05:19-05:22",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Okay. Okay.",
+    "timestamp" : "05:23-05:24"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "But he also shot his way out of town.",
+    "timestamp" : "05:24-05:25"
+  },
+  {
+    "text" : "Like worse. It's easy to listen to.",
+    "speaker" : "Andy",
+    "timestamp" : "05:26-05:28"
+  },
+  {
+    "text" : "Yeah, but he did it right. Um he did it right because Corey was a exceptional talent, got very little support, and got frustrated And you know, you know, the obviously the uh the the you know number one thing was he threw his pads and his helmet and his stands. He did get his helmet back, uh which was a big deal for him. But at that time the the the franchise was in shambles and uh and and it very very much should have been and Carson Palmer didn't have what he needed Uh and he forced his way out and Marvin Lewis actually endorsed him to Belichick uh when they were gonna make the trade Mm-hmm. Well, I at that time he needed his way up. Very similar to what's going on with Cincinnati Sports now with the Reds. Um the Reds owner just um one of the Reds front office owners Just told the fans on opening day, where else are you gonna go if you don't like the product? Get out of here.",
+    "timestamp" : "05:28-06:31",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "Yeah, it's alright",
+    "speaker" : "Steve",
+    "timestamp" : "06:31-06:32"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "And that was motto in two thousand and four and five and six. And now the the Bengals PR team and front office are rock stars in this town. So Corey did what he needed to do. I mean I'm I'm fully supported that and I'm glad he got his ring.",
+    "timestamp" : "06:32-06:50"
+  },
+  {
+    "text" : "So you were rooting for him in 04. Was that the Super Bowl that he plays in? You were definitely all about him.",
+    "timestamp" : "06:50-06:56",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Nah, we were we were we were rooting for we were rooting for Cordillon.",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "06:57-07:01"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "07:02-07:04",
+    "text" : "Not the Patriots, just Corey Dylan. Got it."
+  },
+  {
+    "timestamp" : "07:04-07:06",
+    "text" : "No, we're rooting for Corey Dylan, not the Patriots.",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "I get that.",
+    "speaker" : "Steve",
+    "timestamp" : "07:06-07:06"
+  },
+  {
+    "text" : "We're rooting for Corey Dillon. But just going back and watching the video Um just in, you know, fifth year for Belichick and all the everything they were building up to It's kind of neat to go back and watch that in hindsight and look at where they were. We're not patriot haters as much as you think we are, Mr. Brown. We're bigger bingo supporters. We're doing it. We were rooting for Chad Johnson when Chad got there. And I'm I'm gonna say I wish that would have worked out. You know, you guys got our uh Can we call him sloppy seconds on air?",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "07:07-07:42"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "07:42-07:43"
+  },
+  {
+    "timestamp" : "07:44-07:48",
+    "text" : "But you guys got her sloppy fronts and Corey worked up, Chen didn't.",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "You know Burkhead. Can He was sweet. Oh Rex Burkinson.",
+    "timestamp" : "07:48-07:52",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Rex Rex actually played a lot of golf at one of our former uh properties. So uh Rex was a very nice young man. You Yeah, yeah, you guys got cut caught a couple sloppy sloppy seconds, but but no, we were rooting for Cordillon. We really were. He worked his tail off. Yeah",
+    "timestamp" : "07:52-08:07"
+  },
+  {
+    "text" : "Yeah, that's what it seems like when I was I was doing my deep dive on him. He was just the kind of guy who was like the lone bright spot on the Bengals for basically his entire career.",
+    "timestamp" : "08:07-08:17",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, yeah, Willie Anderson was awesome at that time and should be in Hall of Fame in my opinion as a tackle. But Corey was just a he was a blue collar. Grinder, Cincinnati, I hate to say the word Pittsburgh. But you know, one of those one of the not one of those not one of those Northeast You know Country type Northeast America types. They get it all handed to him. Corey Dillon was a grinder and uh he just worked his tail off. So that's why we we supported him when he left, even though he went to the enemy.",
+    "timestamp" : "08:17-08:53",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "See, you can tell David's never even been out of the state of Kentucky.",
+    "timestamp" : "08:54-08:56",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Oh boy. Yeah. All right. Um Let's see, let's talk about this 2004 Bengals team briefly, too. Um, because like you said, this is Carson Palmer's first year as a starter. Uh start off a little rocky and then seem to turn it around. They had won coming into this game, they had won their four of their last five. The week before they had beat the Ravens. Fourth quarter comeback. Carson Palmer played probably his best game of his career at this point. And the week before that was the uh shootout with the Browns that we talked about last week when the Pages played the Browns. Um that's the What was it? It was like 48, 45. I think it's still the second highest scoring non-overtime game in the history of the NFL. And it was Browns-Bengals. And the Bengals still won by two scores in a shootout. So uh so they're coming in flying pretty high. Um they're even though they're only six and six, but uh Carson Palmer does get hurt in this game in the second half. Uh kind of it was uh almost foreshadowing the the Kimo Van Ohlhofsen hit, I thought, because it was kind of like low in the side of his knee, and he I guess he had a A sprain in his knee is what they they said on the uh the highlights afterwards.",
+    "timestamp" : "09:00-10:23",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Um someone hit Tom Brady like that and the NFL made it illegal.",
+    "timestamp" : "10:23-10:28",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Right. Well actually they made it illegal. Well in Carson Palmer.",
+    "timestamp" : "10:28-10:32",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "10:34-10:37",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Not the Carson Palmer rule. Unfortunately."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I I think it is the Carson Palmer rule, though. Didn't they they put it in that offseason And then it's just everybody remembers the Tom Brady one because he was coming off his 2007 season. Yeah. Um very sad. Yeah. Uh so yeah, but um so this is this is a kind of a promising upstart Bengals team. Um but Uh a bright spot would be that they would make their first appearance on Monday Night Football since 1992, where they would uh beat the Denver Broncos at home. Uh but their one I would say Achilles heel for this team up until just very recently was that they were coached by Marvin Lewis. And so I'm I'm curious to get a Bengals fan's perspective on Marvin Lewis because he was one of those coaches who uh I mean it's almost like the Andy Dalton line where It's the Marvin Lewis line where he will get you the playoffs, but you will not win a playoff game. And is that good or is that not good? He's like a little bit better Jeff Fisher. Yeah. Yeah.",
+    "timestamp" : "10:38-11:45"
+  },
+  {
+    "timestamp" : "11:46-13:35",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Well well, you know, in two thousand five, Marvel O's was great. You know, we we came out of nowhere. We started to win games. Uh 2005, they were the AFC champions, if I believe right Um that was the year after uh this year. So you could you know Marvin came in and changed the culture, but he changed the culture to we're good enough You know, we're good enough to make the playoffs. We're good enough to win nine or ten games. And that was great until it good enough became the standard. Right. And so that was a problem. But in that 2004 game, with the talent that they had with a first year starter, um Marvin was a hero. uh in you know not to get into anything much more more you know we we had an African American um coach, one of the few And and I think it resonated great with the players at that time to have one of the few and chan and horsemenzada who's a very strong personality I don't know if we could have had a different coach at the time to get to the home. The problem was Marvin couldn't ever get him over the hump. But if we're going back to the 2004, 2005, 2006 era, uh it certainly was better than Dave Shuha. And, you know, a lot of the coaches we had uh pre-Marvin Lewis. And he he's had a great tenure, but But you know, if you ask me that question in two thousand four, we were ecstatic."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "13:35-13:35"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "You asked me that question in two thousand and eight, seventeen, sixteen before we made the switch Ah, it's time to make us witch. And the same would have been said for a current current coach after year one and year two. So I really believe, you know, you have to give these guys a little more leash than what they need. It's hard to change culture. As uh Mr. Brown knows in everything we do. Uh Steve, you know, it's hard to change culture. Sometimes you gotta be the bad guy.",
+    "timestamp" : "13:35-14:04"
+  },
+  {
+    "timestamp" : "14:04-14:06",
+    "speaker" : "Steve",
+    "text" : "It's not hard for me. I don't have to do any of it."
+  },
+  {
+    "timestamp" : "14:06-14:08",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Well, it's easy for that."
+  },
+  {
+    "text" : "It looks hard, sure.",
+    "timestamp" : "14:09-14:10",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Yeah, it's easier from your studio bedroom, but it's a little harder when you're on the ground.",
+    "timestamp" : "14:10-14:15"
+  },
+  {
+    "timestamp" : "14:16-14:18",
+    "speaker" : "Andy",
+    "text" : "That feels about right. That sums up."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "But no, we love modern. We loved modern for a long time, and it was time for a change. That's all.",
+    "timestamp" : "14:18-14:22"
+  },
+  {
+    "text" : "Fair enough. All right. Yeah, uh he didn't fare very well against uh Belichick and the Patriots. Um the Pats went six and one versus uh Marvin Lewis led Bengals. Uh Steve, do you remember the loss? Or do we do either of you remember the Patriots loss to the Bengals? Happened in 2000.",
+    "timestamp" : "14:23-14:40",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Pre-season? Was it preseason?",
+    "timestamp" : "14:41-14:42"
+  },
+  {
+    "timestamp" : "14:43-14:43",
+    "text" : "That's it. It was not.",
+    "speaker" : "Mom"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was not It was uh I remember I only remember because it was in the rain and Brady just couldn't throw a touchdown. And it was one of those like slog games in Cincinnati and it was just awful.",
+    "timestamp" : "14:44-14:54"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What year was it?",
+    "timestamp" : "14:55-14:55"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "2013.",
+    "timestamp" : "14:56-14:57"
+  },
+  {
+    "timestamp" : "14:57-14:59",
+    "text" : "It was just those like the lost years.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "14:59-15:02",
+    "speaker" : "Andy",
+    "text" : "Yeah. It was yeah. It was a tough game."
+  },
+  {
+    "text" : "This this game does have a name though. Okay. Remember we talked about how certain games have names and you rewatch them like, oh yeah, that's the whatever game.",
+    "speaker" : "Steve",
+    "timestamp" : "15:02-15:11"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "15:11-15:11",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "15:11-15:15",
+    "text" : "This is the I don't know what do you call it. Well what's your name for this game, Andy?"
+  },
+  {
+    "timestamp" : "15:15-15:17",
+    "text" : "The Corey Dillon Revenge game?",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, no. Oh, you're thinking that you missed the big play.",
+    "timestamp" : "15:17-15:21"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "15:23-15:26",
+    "text" : "Well, I mean, witch pig play. There's a few."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Do you call it like a butt pass or the seated pass?",
+    "timestamp" : "15:27-15:29"
+  },
+  {
+    "timestamp" : "15:30-16:20",
+    "text" : "Oh that okay, so there is that. I mean, there's a lot to get into in this game. Um But before we do that, let's just real quick, I want to go over some of the other coaches in this this team. Um because just the fact that they were um Fuck it. Doesn't matter. Never mind. I'll try to shoehorn Hugh Jackson in there somehow, but eh, fuck it. It's not where yeah. I mean he's he's the wide receivers coach and he's coaching Chad Jackson and TJ Hush Mazu. And somehow managed to turn that into um head coaching. career where he went three and thirty-six and one um with the Browns. Perhaps some more.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "16:27-16:29",
+    "text" : "Yeah, one and one.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I think he was eight and eight with the Raiders.",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "16:29-16:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right, all right.",
+    "timestamp" : "16:32-16:33"
+  },
+  {
+    "text" : "I mean you you you is not a a a someone else we're gonna really want to talk much about in Cincinnati because he's he's still a little disgruntled since um He didn't get the head coaching job here when Marvin decided to step down.",
+    "timestamp" : "16:33-16:50",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "Oh, that's right, right, right, right. Yeah. No, he did. Yeah, he went eight and eight in Oakland before going One and fifteen, oh and sixteen, and then two five and one in Cleveland in three years. How do you get that third season?",
+    "timestamp" : "16:50-17:01",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I've got my stats there. Yeah, Brown. I I know on you, Jackson. But no, I mean the stuff I that stuck out from that ball game with me with with the revenge game one, I don't think Dylan got much revenge.",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "17:01-17:16"
+  },
+  {
+    "timestamp" : "17:16-17:16",
+    "text" : "He did?",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He scored on a touchdown that wasn't a touchdown.",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "17:16-17:19"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "17:19-17:20",
+    "text" : "True."
+  },
+  {
+    "text" : "He was actually down.",
+    "timestamp" : "17:20-17:21",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yep.",
+    "timestamp" : "17:21-17:22"
+  },
+  {
+    "timestamp" : "17:22-17:27",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Uh Rudy John it looked like a Rudy Johnson revenge game in the first half."
+  },
+  {
+    "timestamp" : "17:27-17:29",
+    "text" : "Yeah. Yeah, he was pretty good. Yeah, he was pretty good.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "17:31-17:52",
+    "text" : "It was mostly a ball control game. Wasn't it I mean pretty much it came down to ball control that uh that Um the interception for a touchdown, I think, changed it and and I love Troy Brown. Two-way player. Troy Brown And um who scored the touchdown on the interception?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Asante Samuel.",
+    "timestamp" : "17:52-17:53"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Yeah.",
+    "timestamp" : "17:54-17:54"
+  },
+  {
+    "timestamp" : "17:55-17:55",
+    "speaker" : "Andy",
+    "text" : "Rookie."
+  },
+  {
+    "timestamp" : "17:55-18:05",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "But looking at that defense On that team, how are the bingos gonna win against Brisky? Harrison Seymour McGuinness Will Fork?"
+  },
+  {
+    "timestamp" : "18:05-18:14",
+    "speaker" : "Steve",
+    "text" : "You can keep going. Coming into the game, everyone was worried because the Bengals could throw the ball around the yard and we're starting Earthwind Moreland and Yeah, this was a season where they just didn't have to."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "But that's that defense. I don't know how many Hall of Famers you have on that defense. But you got a lot of names.",
+    "timestamp" : "18:15-18:20"
+  },
+  {
+    "timestamp" : "18:20-18:20",
+    "speaker" : "Andy",
+    "text" : "Oh yeah."
+  },
+  {
+    "text" : "They just their secondary is so bad.",
+    "timestamp" : "18:21-18:22",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, it was just the secondary that was the issue. And so going up against uh a pass heavy team, you would kind of expect that the Bengals come out just slinging the ball and they really didn't",
+    "timestamp" : "18:22-18:31",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "They ran Rudy a lot and Rudy had a great game, except for that fumble that I don't think was a fumble either, but we can Between the non-fumble and non non-touchdown, the Bengals probably win that game.",
+    "timestamp" : "18:34-18:47"
+  },
+  {
+    "text" : "But I don't know, I just cause it was a third down. They would have gone for it on fourth and Corey Dill would have punched that through.",
+    "speaker" : "Steve",
+    "timestamp" : "18:47-18:52"
+  },
+  {
+    "text" : "But I think that was one of the first times That Brady Sneak really turned into a Brady Sneak.",
+    "timestamp" : "18:52-18:59",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "You think so?",
+    "timestamp" : "18:59-19:00",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "19:00-19:06",
+    "text" : "He he he snuck it on fourth down and got about three yards and that changed the game too",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "19:06-19:45",
+    "text" : "But that's I mean that's just what he's been doing. Like for since since week one that uh like of his career, that's kind of what he's been doing. That is. I don't I don't know how it took so many teams so long to stop it. I'm a little surprised that um the play that I keep seeing pop up is the Patriots go five wide real quick. Um and Brazing the shotgun to start out with, sends everybody out wide so that you don't have much of defenders in the box, then just steps up underneath the the center and gooses them in and gets the the the two, three, however many yards he needs that way. And it's just so he gets three when he needs one."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "19:45-19:49",
+    "text" : "Yeah. I mean he gets three when he needs one. He doesn't get one and a half."
+  },
+  {
+    "text" : "No.",
+    "timestamp" : "19:49-19:49",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He always gets great.",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "19:49-19:50"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "19:51-20:01",
+    "text" : "Yeah. And he does it every time. I think he has like a 98% success rate or something. He's been doing it for 20 years. It's unbelievable. One of the best short short yardage backs in the history of the NFL."
+  },
+  {
+    "timestamp" : "20:01-20:03",
+    "text" : "Well that's how he got to he got to a thousand yards doing it, right?",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Like two yards at a time. He did. I think his longest carry is like twenty-two yards. I think we've already seen it too. Yeah. Way it was like oh two. Yeah, oh yeah. It was not recent.",
+    "speaker" : "Andy",
+    "timestamp" : "20:04-20:16"
+  },
+  {
+    "timestamp" : "20:17-20:20",
+    "speaker" : "Steve",
+    "text" : "Um they have baby gazelle out there that all arms and legs."
+  },
+  {
+    "timestamp" : "20:20-20:25",
+    "speaker" : "Andy",
+    "text" : "Oh my god, yeah, it does. It looks yeah, it looks like a baby giraffe. Just been born, learning how to use its arms and legs."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "So from Patch fans, why is this called the Dylan Revenge game if Dylan was a non-factor?",
+    "timestamp" : "20:26-20:36"
+  },
+  {
+    "text" : "It's because he really only plays one year. Right? Because Corey Dillon's not really a factor outside of this one season.",
+    "speaker" : "Steve",
+    "timestamp" : "20:36-20:43"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "20:43-20:49",
+    "text" : "I mean this is yeah, this is his big I think he next season does okay, but yeah, if he the wheels kind of fall off and he gets hurt."
+  },
+  {
+    "text" : "And I I say this is not known for the Corey Dillon revenge game. This game is known for that play where Tom Brady lands on his ass after like stumbling over his own feet, dropping back, and throws That that's in my nose.",
+    "timestamp" : "20:52-21:04",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "And I love that. Yeah.",
+    "timestamp" : "21:04-21:06",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't want to uh sum that up in a name, but like I don't know, the butt pass name game. I don't know.",
+    "timestamp" : "21:06-21:11"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Uh yeah, yeah. I don't know why it's a Brady's revenge game Because I've got in my notes Brady passes from his ass.",
+    "timestamp" : "21:12-21:23"
+  },
+  {
+    "text" : "The ass pass, there you go",
+    "timestamp" : "21:26-21:27",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "21:28-21:53",
+    "text" : "Yeah it should be the as pass game, but I still don't think he had the I think people are still figuring out who he was, and I think between the quarterback snake, the ass pass and just the way he handled himself. I mean you got Christian Fourier scoring a touch. I mean you got Troy Brown scoring, you know, getting an interception."
+  },
+  {
+    "timestamp" : "21:53-21:54",
+    "text" : "Yep.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "21:54-22:00",
+    "text" : "I mean it's just always been the no name. You know, other than the the names are on the defense and on that team.",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "22:00-22:01",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "And that that's awesome. And I wish in Cincinnati we had that kind of luck.",
+    "timestamp" : "22:01-22:08"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And no receivers over like five foot ten.",
+    "timestamp" : "22:08-22:10"
+  },
+  {
+    "timestamp" : "22:10-22:48",
+    "speaker" : "Andy",
+    "text" : "Yeah. All these tiny little guys. Yeah. But I mean, yeah, to to your point, I think the reason this is the Dylan Revenge game is because that's how it was. post pregame, you know? And like all the highlights were about how um Corey Dillon was still hated by the Bengals and Like even in the announcers when he scored his first touchdown, he's like, Oh, it's it's nice to see everybody still being professional and that there's no extra pushing and shoving after he scored, sort of shit. So I think they were expecting it to be this like super kind of like scrappy touch-and-go sort of thing, and it just wasn't."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Well that's a testament to his work out there in Cincinnati. The people that were in the trenches with them that grinded with them. were happy for him. Yeah. And at that time, most of them probably wished they were him and were out of Cincinnati. And so they didn't hold that against him. They were they were happy for him because he actually found his way It was this up dysfunctional in all means here at that time and has been up until the last couple years. So So yeah, I mean I get it. And the last the last image of him in Cincinnati was throwing his pads in the in the stands. You know, so what you know, what how else are you gonna do the you know, the story going into it as broadcasters other than he's going back up against them. But but no, I think that everybody was classy And uh he still didn't score on that touchdown.",
+    "timestamp" : "22:48-23:42"
+  },
+  {
+    "timestamp" : "23:43-23:59",
+    "speaker" : "Steve",
+    "text" : "Okay, and let's not let's not pretend like Corey Dillard didn't have a good game. Twenty-two carries, eighty eight yards, a touchdown. It's four yards a game. And they said in the broadcast he's the only player ever, and that this may even still stand to get 75 plus rushing yards in every game he's played."
+  },
+  {
+    "timestamp" : "23:59-24:01",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "What was Rudy Johnson's stats?"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "24:02-24:04",
+    "text" : "Uh they're kind of similar."
+  },
+  {
+    "text" : "Very similar. Yeah. Yeah.",
+    "timestamp" : "24:04-24:08",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "timestamp" : "24:09-24:13",
+    "speaker" : "Steve",
+    "text" : "Dylan had one less yard, but a better average in a tutty. Right."
+  },
+  {
+    "timestamp" : "24:13-24:16",
+    "text" : "And Kitna came in and played pretty well at the end.",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He did, yeah. Kitten had nine for thirteen, one twenty-six, a touchdown, and a pick.",
+    "timestamp" : "24:16-24:21"
+  },
+  {
+    "text" : "Yeah, but I mean Detroit Brown. It's tough to say you've had a good day as a quarterback when the one interception you threw was to uh a converted wide receiver.",
+    "timestamp" : "24:21-24:32",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "24:32-24:36",
+    "speaker" : "Steve",
+    "text" : "In the end zone. Yeah, yeah, that's not true. That's a bad place to throw a pick, too."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And you know, I mean Drew Bledsoe can attest. But my favorite fact from this game is after this game, Troy Brown has now three interceptions on the season, which is tied for the team lead in interceptions. Troy Brown is leading the team. Leading this defense of all defenses, the two thousand four doing a player.",
+    "timestamp" : "24:36-24:56"
+  },
+  {
+    "text" : "That was right when I mean he played everywhere. And then he wound up didn't his uh career end at the Pro Bowl. With a uh catch in the sand and he hurt himself?",
+    "timestamp" : "24:58-25:09",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, that was what that was a running back, yeah. Robert Edwards.",
+    "timestamp" : "25:09-25:12"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "25:12-25:19",
+    "text" : "Oh, that was a running back, sure Yeah. But no, Joy, yeah. I mean he played everything. He did everything. That wasn't Troy that hurt himself in the purple. No."
+  },
+  {
+    "timestamp" : "25:19-25:24",
+    "speaker" : "Andy",
+    "text" : "No. Robert Edwards, what's like what, 2005? No, Robert Edwards is like uh early 2000s."
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "I was Robert Edwards in the FM.",
+    "timestamp" : "25:24-25:26"
+  },
+  {
+    "timestamp" : "25:26-25:33",
+    "text" : "I think it was like E may have actually been 2000. Um Because he was the he was supposed to be the replacement for uh Curtis Martin, I believe.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "25:34-25:34"
+  },
+  {
+    "text" : "Um and like he had a great rookie season in the Pro Bowl. He tore it and like was just never the same. Played sand football.",
+    "speaker" : "Andy",
+    "timestamp" : "25:34-25:41"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "This like exploded his knee, never played again. No, he did play again.",
+    "timestamp" : "25:41-25:44"
+  },
+  {
+    "timestamp" : "25:44-25:53",
+    "speaker" : "Andy",
+    "text" : "He did. He played for the podcast, yeah. Yeah, we he played for Miami. Yeah, and did nothing. Uh, because he just wasn't the same guy."
+  },
+  {
+    "timestamp" : "25:54-26:04",
+    "speaker" : "Steve",
+    "text" : "Can I list off the Bengals turnovers in this game? Okay. First drive, Rudy Johnson fumble on the 12, even though David is actually a fumble."
+  },
+  {
+    "speaker" : "Mom",
+    "timestamp" : "26:05-26:07",
+    "text" : "That's what that's on the screen."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. Then pick six, right after the Patriots score a touchdown, they come out and immediately throw a pick six.",
+    "timestamp" : "26:09-26:15"
+  },
+  {
+    "text" : "Yeah, so the Patriots scored two touchdowns in 12 seconds.",
+    "speaker" : "Andy",
+    "timestamp" : "26:15-26:18"
+  },
+  {
+    "timestamp" : "26:17-26:24",
+    "speaker" : "Steve",
+    "text" : "Yeah. And then John Kitna throwing that interception to Troy Brown in Troy Brown's own end zone late in the game."
+  },
+  {
+    "timestamp" : "26:24-26:27",
+    "text" : "And he took it out of the three, which he should have stayed down.",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "timestamp" : "26:28-26:37",
+    "speaker" : "Andy",
+    "text" : "He should have. When you're a wide receiver and a punt returner, like all that just looks like green fields. You can't help yourself."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "26:37-26:43",
+    "text" : "But they're on the New England 10-yard line, so that's three turnovers. Inside the 15."
+  },
+  {
+    "timestamp" : "26:43-26:44",
+    "speaker" : "Andy",
+    "text" : "Yeah. In the red zone, at least."
+  },
+  {
+    "timestamp" : "26:47-27:25",
+    "text" : "And Corey Dill Corey Dillon was traded for the Medea Williams, I think, is what that pick wind up being. Uh he was traded for a pick that turned into Medea Williams and Medea was a fan favorite here. But yes, yes. Brady falls and completes pass from his ass is the biggest thing I have circled in my notes. And that that should be it should be the the the buck fumble and the ass pass. That should be the Those two games should go down on history. I got a difference. I bet you if they replayed that on ESPN now, most people probably forgot about that as fast",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "text" : "Oh definitely. Yeah. But you see it as a baby just saying you go, oh shit, I remember that, but you never really thought about it.",
+    "timestamp" : "27:25-27:30",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, yeah.",
+    "timestamp" : "27:30-27:31"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "27:31-27:35",
+    "text" : "That's the difference between us and the Jets. The Jets have the butt fumble. We have the ass pass."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "27:35-27:43",
+    "text" : "You know, this is two totally different franchises going in totally different directions for the We also won that game and I don't think the Jets won the buttbundle game."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They got like forty they got they got four touchdowns scored in like a minute and a half, right?",
+    "timestamp" : "27:46-27:50"
+  },
+  {
+    "text" : "Uh it was it is the f it was three touchdowns in under a minute Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "27:51-27:54"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "27:54-27:57",
+    "text" : "Mark Sanchez looks great on TV though."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "27:57-27:59",
+    "text" : "He does. He's a very pretty man."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Guys, any other questions for me before I uh bog down your Your stuff too much? I could do this for days and days. I love this stuff.",
+    "timestamp" : "28:01-28:09"
+  },
+  {
+    "timestamp" : "28:09-28:16",
+    "speaker" : "Andy",
+    "text" : "I know you can. I mean we we started a podcast to do this, so we could also do this for days and days. What's Brainbox?"
+  },
+  {
+    "timestamp" : "28:16-28:18",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "So what's Brady gonna do?"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Uh is his last hurrah?",
+    "timestamp" : "28:18-28:20"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "28:21-28:36",
+    "text" : "What do you guys think? You know what? It's nice not to have to worry about that anymore. Yeah. It's basically nice. You know, you don't have to, that's not really my problem. Yeah. Mac Jones. He's reached his uh Brett Favre era. Yeah."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "You're secretly stalking him, Steve Brown. I know you are. Oh yeah. Don't get me wrong, you're always watching. You're keeping an eye on him. I know you are.",
+    "timestamp" : "28:36-28:46"
+  },
+  {
+    "timestamp" : "28:46-28:59",
+    "speaker" : "Steve",
+    "text" : "Of course I keep an eye on him. He's like it's like an ex-girlfriend. You know you sometimes check their social medias or whatever. Just yeah. Just to see if they're happier or or less happy without you. Hopefully everything's working out for them. Wish them all the best."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And if it's not the best, that's fine too.",
+    "timestamp" : "28:59-29:01"
+  },
+  {
+    "timestamp" : "29:04-29:05",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Whatever."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "29:09-29:13",
+    "text" : "Troy Brown is the pages player that you marry. You know, you love Troy Brown. He's everything you ever wanted."
+  },
+  {
+    "text" : "I love Troy Brown as well.",
+    "speaker" : "David Prue (Bengals)",
+    "timestamp" : "29:14-29:16"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "We are the number one Troy Brown fans. We're working our hardest to get him on this podcast. Yeah. Yeah. Then we'll stop it. Or I might stop. Then my life's mission will be accomplished.",
+    "timestamp" : "29:16-29:26"
+  },
+  {
+    "timestamp" : "29:26-29:28",
+    "speaker" : "Andy",
+    "text" : "Yeah. I mean, what what more is there after that, right?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, I agree.",
+    "timestamp" : "29:28-29:29"
+  },
+  {
+    "text" : "Being able to talk to Tori Brown about His time on the Patriots.",
+    "speaker" : "Andy",
+    "timestamp" : "29:29-29:32"
+  },
+  {
+    "timestamp" : "29:33-29:35",
+    "speaker" : "Steve",
+    "text" : "And how much we love him. It'll be weird for him."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, it definitely will be. Yeah. Um, all right, let's see. Do I have any more Bengal stuff? I don't think so. I mean this is just it's kind of it's one of those like forgotten games where there's like a lot of cool stuff that happens, but there's nothing particularly memorable about the game itself. Like it wasn't It was a watchability score, Andy. It wasn't really back and forth. I mean watchability score, so what do uh we do it out of six Lombardies? Um I would say four. There's a good amount of scoring. There's some great plays. It's definitely re-watchable. Um and it's one of those maybe like uh not quite on the the forgotten gems level, but it's it's close to that, I would say. I give it a four and a half. Okay.",
+    "timestamp" : "29:35-30:22"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh for an AOC championship ring if you I could be I could be. Because there's a lot of convinced great big name players in this and they all ball out. TJ Hushmanzada has his Yeah, like twelve catches or something, yeah? Yeah, Earthwood and Boris.",
+    "timestamp" : "30:23-30:35"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "It a lot on the last I I kept track of TJ was a ball. I would say on the Bengal side, I know this is a uh Patriots podcast, but on the bingo side, it was definitely a little bit of a turning point. Like we can play with these guys.",
+    "timestamp" : "30:36-30:53"
+  },
+  {
+    "timestamp" : "30:53-30:53",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "And the next year They, you know, they won the AFC North. Um and that started their um you know, couple year run in the playoffs with Marvin. They never won a playoff game, but I think it was a measuring stick game for them.",
+    "timestamp" : "30:54-31:13",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "31:14-31:14"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Um you could see there was a little chippiness, but overall, I mean the Patriots Dynasty had already started, but nobody knew what it was gonna actually be. Right. But they lived toe to toe with them and they kept it close. And so, you know, from a bigger fan fan perspective It was like, okay, we're close. You know, we we don't fumble. We, you know, we don't throw that interception. And maybe we win that game and we're seven and six. instead of six and seven. And from then on it it it went great. And and you know and Belichick was in his fifth year, I think, as a coach. And what you know now look at him.",
+    "timestamp" : "31:14-31:59"
+  },
+  {
+    "text" : "Still the same guy. Yeah.",
+    "timestamp" : "31:59-32:02",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "32:04-32:08",
+    "text" : "His halftime interview was great. And I was it it looked like",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "32:12-32:16",
+    "text" : "Well he talks a little bit more back in the day. He talks he's a little he r recently."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Um I feel sorry for you and the AFC going forward because with this new offensive line um and all the skill players we have, it's gonna be, you know You'll be on my podcast here in about three years.",
+    "timestamp" : "32:21-32:34"
+  },
+  {
+    "text" : "All right. We will hold you to that. Sure. We'll come we'll come on your podcast.",
+    "timestamp" : "32:35-32:40",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Someone just has to teach me how to do a podcast.",
+    "timestamp" : "32:40-32:43"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well when is the when is the Joe Burrow versus Mac Jones matchup? That'll be good.",
+    "timestamp" : "32:46-32:50"
+  },
+  {
+    "text" : "Oh yeah.",
+    "timestamp" : "32:51-32:51",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Isn't this year coming up? I think so.",
+    "speaker" : "Steve",
+    "timestamp" : "32:51-32:55"
+  },
+  {
+    "text" : "I don't know.",
+    "speaker" : "Andy",
+    "timestamp" : "32:55-32:56"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "32:57-32:59",
+    "text" : "I'm Googling it right now. We need our stat check, bro."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Fact check. Yeah, that's that's uh return to schedule there? They do play the Bengals at Foxboro. There you go. This year. What week?",
+    "timestamp" : "32:59-33:11"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh it hasn't been determined yet. Oh right. It hasn't been released yet.",
+    "timestamp" : "33:11-33:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Correct.",
+    "timestamp" : "33:14-33:15"
+  },
+  {
+    "timestamp" : "33:15-33:25",
+    "speaker" : "Steve",
+    "text" : "Do they know? We'll see. We're about to find out. Maybe the Patriots would be like, wow, we can really hang with these guys. They went to the Super Bowl last year. Super bowl last year."
+  },
+  {
+    "text" : "Yeah, measuring stickers.",
+    "timestamp" : "33:25-33:26",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "33:41-33:43",
+    "text" : "Andrew, anything else I can answer about Steve?"
+  },
+  {
+    "text" : "You want to know his deepest, darkest secrets?",
+    "timestamp" : "33:44-33:45",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "33:49-33:54",
+    "text" : "I already know. We're all 34, yeah. Yeah, there's there's there's nothing good in that that closet, unfortunately."
+  },
+  {
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Thank you so much for inviting me and I appreciate being on.",
+    "timestamp" : "33:55-33:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I really liked having you. Thanks a lot, David.",
+    "timestamp" : "33:58-34:00"
+  },
+  {
+    "timestamp" : "34:00-34:01",
+    "speaker" : "David Prue (Bengals)",
+    "text" : "Anytime. Thanks, guys."
+  },
+  {
+    "timestamp" : "34:01-34:03",
+    "speaker" : "Andy",
+    "text" : "All right, take it easy."
+  },
+  {
+    "text" : "Take it easy, guys.",
+    "timestamp" : "34:03-34:04",
+    "speaker" : "David Prue (Bengals)"
+  },
+  {
+    "timestamp" : "34:04-34:06",
+    "speaker" : "Andy",
+    "text" : "I mean he's got some Coach O vibes."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, I told you, Coach O.",
+    "timestamp" : "34:06-34:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "34:08-34:08"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Kentucky Coach O, he's the best.",
+    "timestamp" : "34:08-34:10"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "34:10-35:45",
+    "text" : "Yeah. I'm a little disappointed Greg's not here because I had a uh uh genius Bill Belichick thing for him to scoff at. Yes. Uh so a couple of them actually. Oh, multiple. Right. Yeah. So maybe we'll save this for Greg. We'll we'll cut this clip and play it for him. Um but at the beginning of the game, they're talking about how Yeah, the Patriots are what 11 and 1 coming into this game. So, you know, they need some motivation to play a 500 Bengals team. But I guess these two teams have played in the preseason. And the Bengals were up 31-0 at halftime over the Patriots. So Belichak spent the entire week playing the lowlights because he's saying that uh We got whooped and they're like, oh, it's just preseason. He's like, yeah, all our starters were in though. So he was playing all of the the bullshit stuff that happened in the preseason just to get him hype for this. And the other thing was that um One of the Bengals defensive backs, Tori James, apparently super long dude, big long arms. So Belichick had the um defensive backs carrying racquetball rackets. to knock down footballs. That's a classic. Right? It's it's so belly. It's it's like uh the 2001 Super Bowl where he had all the uh wide receivers lineup three yards off sides. Yep to simulate the speed of the the Rams offense. Just thinking outside the box, Steve. You know what that is? It's genius. Oh yeah. Fucking genius. Nobody else does that."
+  },
+  {
+    "text" : "No one else has thought to use pregame.",
+    "timestamp" : "35:46-35:47",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, no one knows the thing. No one even knows the thing about that.",
+    "timestamp" : "35:47-35:50"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I think that is on our team. Oh my god, yeah. Oh yeah, he's the best. He's a little Troy Brown. This is a another peak Troy Brown game. Troy Brown's he's he's the this is a premium Troy Brown we're in right now.",
+    "timestamp" : "35:50-36:05"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "36:06-36:18",
+    "text" : "Yeah. Even the fact that he was uh he actually got a defensive holding call. That was declined. Because he's he's covering uh TJ Hushmanzada on third downs out of the slot."
+  },
+  {
+    "timestamp" : "36:18-36:21",
+    "text" : "He also draws uh OPI on Hushmanzada.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Oh, that's right. Yeah. Yeah.",
+    "timestamp" : "36:21-36:22",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "36:22-36:24",
+    "speaker" : "Steve",
+    "text" : "One of the two, yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's like it's amazing. Yeah, yeah, yeah. This is this is Peak Troy Brown. This in 2001, like 2001 Peak, like uh offensive troy brown you know like oh one oh two uh and this is peak just like patriot troy brown right you're you're prototypical player Prototypical New England Patriots. Football player, you know? Yeah. I'm wondering if actually if it was this season that um he lined up as the emergency quarterback in the preseason. Probably. Let's see. Talk amongst yourselves, Steven.",
+    "timestamp" : "36:24-37:00"
+  },
+  {
+    "text" : "I'm going through whatever else I got on my notes here.",
+    "timestamp" : "37:00-37:03",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, no, it's 2006. So he hasn't even done that yet. Line up a quarterback.",
+    "timestamp" : "37:03-37:07"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "This one is back nine. He's on like 17 at that point.",
+    "timestamp" : "37:08-37:11"
+  },
+  {
+    "text" : "2006. Well he's still he's still around 2007 when Yeah, we talked about if him and Randy Moss crossed and they did. Yeah. Um so here's a a good stat that I wanted to bring up about Corey Dillon. Um because they showed how he's doing this year compared to his career high numbers. Um like just across the board. So um his career high rushes per game were just over 21. This season he's averaging 23 carries a game. Um His career high for rushing yards per game in a season was uh previously just over 89. This year it's over 100. It's 111 yards. Uh his yards per rush is still 4. 8, which matches his career high. And he in this game gets his 10th touchdown of the season, which matches yet another career high. So this is he's setting career highs in literally every statistic this season.",
+    "timestamp" : "37:12-38:10",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's tough that he doesn't bawl out more years than just this one, you know? He does. Yeah, I mean he he's I feel like it's like the only year I even remember Corey Dylan.",
+    "timestamp" : "38:10-38:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well that's because you were like 12. He's been around.",
+    "timestamp" : "38:22-38:25"
+  },
+  {
+    "timestamp" : "38:26-38:34",
+    "speaker" : "Steve",
+    "text" : "No, no, but like also when I think back about the Patriots dynasty, it's like yeah, Corey Dillon, oh four. But no one's like Cordillon 05, 06, 07. It could have been."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, oh, you're talking about on the page. Yeah. Okay. I see what you're saying.",
+    "timestamp" : "38:34-38:36"
+  },
+  {
+    "timestamp" : "38:36-38:37",
+    "speaker" : "Steve",
+    "text" : "Yeah, yeah. Yeah, yeah, yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, 05. He uh he struggled with injuries and stuff. Um this looks sort of the end of his career.",
+    "timestamp" : "38:37-38:42"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Like this is his last good season, I feel like.",
+    "timestamp" : "38:42-38:44"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, pretty much.",
+    "timestamp" : "38:44-38:45"
+  },
+  {
+    "text" : "Yeah, I think it goes somewhere else eventually.",
+    "speaker" : "Steve",
+    "timestamp" : "38:45-38:48"
+  },
+  {
+    "text" : "Nope. No, he retires as a a patriot.",
+    "timestamp" : "38:48-38:51",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "38:52-38:53",
+    "text" : "There you go.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "38:53-38:53",
+    "text" : "Yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Put him in the hall.",
+    "timestamp" : "38:53-38:54"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "38:55-38:56",
+    "text" : "Put him in the hall. I would agree."
+  },
+  {
+    "timestamp" : "38:57-38:59",
+    "speaker" : "Steve",
+    "text" : "Is he actually using Hall of Famer NFL?"
+  },
+  {
+    "text" : "Um it doesn't say anything anywhere of him being a Hall of Famer in his Wikipedia, so I'm gonna say no, which is a shame because he I mean, he set the rookie record for rushing yards in a game, which again has since been broken. 39 times for 246 yards and four touchdowns. over the Tennessee Oilers, um, which broke Jim Brown's rookie single season game record that had stood at that point for four years. I think it's still been it's been broken since by somebody weird. Where is it? Oh, Mike Anderson. Oh yeah. Yeah, has has since broken that. He also held the single game, like singles game rushing record overall. Um, which again has since been broken, but he ran for uh 278 yards against the Broncos, which broke Walter Payton's 275. Which again had stood for like 40 years because you know Walter Payton was way back then. Yeah. He said it in 77. Um",
+    "speaker" : "Andy",
+    "timestamp" : "39:01-40:12"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "40:14-40:17",
+    "text" : "And then he plays all 16 games in 2006."
+  },
+  {
+    "timestamp" : "40:18-40:27",
+    "speaker" : "Andy",
+    "text" : "Yeah, but I think he's hurt when he's doing it. Oh actually, no, uh 2006 he was sharing um the the backfield with Lawrence Moroney."
+  },
+  {
+    "text" : "He still has 13 touchdowns. That's his career high.",
+    "timestamp" : "40:28-40:30",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "That's not bad. So I think he may have been the short short yardage back perhaps.",
+    "speaker" : "Andy",
+    "timestamp" : "40:31-40:34"
+  },
+  {
+    "text" : "I mean his touchdowns for the Page go 12-12-13. Yeah we can his yards go from 1600 to 733 to 812, but his carries are 200-ish.",
+    "speaker" : "Steve",
+    "timestamp" : "40:34-40:44"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean boy can score a touchdown.",
+    "timestamp" : "40:44-40:46"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "40:48-41:05",
+    "text" : "I feel like this is the only year he's good, but looking at the stats He definitely only plays 12 games in 05, but six, he plays all the whole whole year. Carries at a 4. 1 average and scores 13 touchdowns in 800 yards. Like today, that's like that's like Damien Harris balling out. Right. You know?"
+  },
+  {
+    "text" : "Yeah. But that's not the four point eight yards of carries getting in two thousand four, right? Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "41:05-41:10"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "41:10-41:25",
+    "text" : "So I guess he didn't play long enough really to get in the hall, but still. If you think he's eight years into his career, played every single game except for a couple in this last year in Cincinnati, and he gets over 75 yards every single one of them."
+  },
+  {
+    "text" : "He's a true workhorseback. Yeah. He's like, yeah, he's one of those old school Well, I don't think he I don't think he got 75 yards in every single game he's ever played. I think I think it was with the Patriots.",
+    "timestamp" : "41:25-41:35",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "41:35-41:37",
+    "speaker" : "Steve",
+    "text" : "No, I think they said in his career."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, because I I saw something where um He there was some drama about him like coming off the field and like not going back on because um He had like twelve carries for nine yards in one game because his offensive line was so bad. I refuse to believe that's fake news. Okay. I mean, it's probably easily looked up.",
+    "timestamp" : "41:37-42:02"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Probably easy looked up, but trying to move this stat has been beat, Andy.",
+    "timestamp" : "42:03-42:07"
+  },
+  {
+    "text" : "What stat?",
+    "timestamp" : "42:07-42:07",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Um Patriots extend their record to eighteen straight games scoring first.",
+    "timestamp" : "42:08-42:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I saw that, yeah. And also um Uh they also have not allowed an opening drive touchdown in the last 28 games, which is fucking bananas.",
+    "timestamp" : "42:13-42:24"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "42:24-42:30",
+    "text" : "That is because they were about to score a touchdown. They're driving on this thing and then he fumbles it. Unless you ask David, and then it wasn't a fumble."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They figured out every time.",
+    "timestamp" : "42:30-42:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "42:32-42:33"
+  },
+  {
+    "timestamp" : "42:33-42:35",
+    "speaker" : "Andy",
+    "text" : "Unbelievable, yeah."
+  },
+  {
+    "timestamp" : "42:35-42:45",
+    "speaker" : "Steve",
+    "text" : "That good that's gotta be a a record, right? I would have to imagine. Well those scoring first is an eighteenth straight. I mean It's a season plus."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Scoring first consecutive games NFL record. Let's see. Top NFL streaks. It's a fucking slideshow. Get the hell out of here. Oh, geez. Brutal. Most consecutive, most Super Bowl appearances. Games won. Yeah, I don't know if this is gonna losses. Scoring. Uh oh boy.",
+    "timestamp" : "42:45-43:14"
+  },
+  {
+    "timestamp" : "43:15-43:22",
+    "text" : "All right. I don't care. Yeah. We'll find out when it ends, what it actually ends up, and then we can figure it out then. How about that?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "43:22-43:23",
+    "text" : "Okay. All right."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What else you got on this game?",
+    "timestamp" : "43:23-43:25"
+  },
+  {
+    "timestamp" : "43:25-43:26",
+    "speaker" : "Andy",
+    "text" : "Let's see."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Um you have big feelings on those.",
+    "timestamp" : "43:26-43:31"
+  },
+  {
+    "timestamp" : "43:31-43:33",
+    "speaker" : "Andy",
+    "text" : "No, I blocked them out. Really?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What about the time when the dude saw a piece of trash on the field and thought it was a flag?",
+    "timestamp" : "43:33-43:37"
+  },
+  {
+    "timestamp" : "43:37-43:37",
+    "speaker" : "Andy",
+    "text" : "Mm-hmm."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I feel when I saw that I thought, oh Amy's gonna be real triggered by that.",
+    "timestamp" : "43:38-43:42"
+  },
+  {
+    "timestamp" : "43:42-44:08",
+    "text" : "Uh-huh. Because it was on the Asante Samuel pick six. Yeah, yeah. And they're like, oh wait, there's a flag down there. And they even like flipped a little like yellow flag thing in the uh in the presentation. Like there's a flag on the field. And obviously somebody whispered in his ear, that's not a flag, that's trash. You're like, oh, oh wait, no, it's it's a McDonald's box. It but look, it's got yellow on the side of it. Yep.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh no, you didn't like it? Okay. What about saying Belchek never pounds a square peg into a round hole?",
+    "timestamp" : "44:09-44:18"
+  },
+  {
+    "timestamp" : "44:20-44:22",
+    "speaker" : "Andy",
+    "text" : "He does it all the time."
+  },
+  {
+    "timestamp" : "44:23-44:29",
+    "speaker" : "Steve",
+    "text" : "You're just a hater, Andy. Yes. It was that fumble was like they they waited to call that too."
+  },
+  {
+    "text" : "Oh my god, yeah.",
+    "timestamp" : "44:30-44:31",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It was like the play was over and like, uh, you know what? Let's call that a fumble.",
+    "timestamp" : "44:31-44:35"
+  },
+  {
+    "timestamp" : "44:35-44:56",
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, it took him a while to figure out what was going on. But yeah, I mean it's par for the court because this is Deerdorf, wasn't it? Yep. Definitely sounded like Deerdorf. So we all know how I feel about Deordorf as if he's watching a different game. So water off a duck's back, Steve. I'm a father now. I can't carry that anger."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "You're trying to do this, but I know deep down that No.",
+    "timestamp" : "44:56-45:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm a father now.",
+    "timestamp" : "45:00-45:01"
+  },
+  {
+    "text" : "Yeah. Makes it worse, now you're all stressed out and now you gotta watch this guy. Or listen to Deirdorf.",
+    "timestamp" : "45:01-45:07",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "45:07-45:23",
+    "text" : "No, it's very naughty. That's fine. Uh oh, they did talk about uh Charlie Weiss though, because apparently he has officially officially, unofficially, that they kept kind of going back and forth because you know it's Dan Deodorf. Announced that he's going to be the head coach of Notre Dame."
+  },
+  {
+    "text" : "I don't think it had been announced, but it was like Adam Schefter at this point had tweeted it.",
+    "timestamp" : "45:23-45:27",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's what it felt like. Yeah. Yeah.",
+    "timestamp" : "45:28-45:29"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That version of whatever that is in 04.",
+    "timestamp" : "45:29-45:31"
+  },
+  {
+    "timestamp" : "45:32-45:43",
+    "speaker" : "Andy",
+    "text" : "Yeah, exactly. So it was like unofficially official, basically. Yeah. Uh and the other thing kind of swirling around this game that didn't have anything to do with it was Peyton Manning chasing Merino touchdown records."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "45:44-45:53",
+    "text" : "Insufferable. Yeah. It's insufferable. And I remember hating it at the time too. Yeah. Now that I'm seeing these against bring back all that PTSD above, I don't give a shit."
+  },
+  {
+    "text" : "Right. And also like all his touchdowns were within the five-yard line. So he's just like He's throwing on every single like drives just so we can get the the record. Because there was actually a stat recently that I saw. Um I wonder if I saved it, but there was basically Uh, you know, Tom Brady has thrown all these touchdowns, but they went uh somebody went back and found how many short yardage touchdowns all the the uh offenses of the top quarterbacks had and tom Brady had like twice as many who was whoever was in second uh Peyton or um Aaron Rodgers or something like that. But they had like twice as many like touch like rushing touchdowns within five yards than any other quarterback. So Brady was never the one to go, or you know, Belichick or whoever it's calling the offense was never one to be like, oh, we're just gonna sling it from the the five just to get Brady some some touchdown stats. Whatever is that. You did it without that. So he did it without patting. You know? Yeah. So whatever won the game.",
+    "timestamp" : "45:53-47:02",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Some other idiot on the internet went and got a gif of every single Tom Brady touchdown pass and put it on a website.",
+    "timestamp" : "47:03-47:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Tom Brady Touchdowns. com.",
+    "timestamp" : "47:08-47:10"
+  },
+  {
+    "timestamp" : "47:10-47:11",
+    "speaker" : "Steve",
+    "text" : "Fucking loser."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "47:11-47:21",
+    "text" : "TombradyTDs. com. And in fact, uh, there is new There's a new um graph on there, Steve. I don't know if you've been there."
+  },
+  {
+    "timestamp" : "47:22-47:22",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "It's a scatter plot.",
+    "speaker" : "Andy",
+    "timestamp" : "47:25-47:26"
+  },
+  {
+    "text" : "Um what did Greg say? Today in the group chat.",
+    "speaker" : "Steve",
+    "timestamp" : "47:26-47:30"
+  },
+  {
+    "timestamp" : "47:31-47:32",
+    "text" : "Yeah, I don't know.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "47:32-47:34",
+    "speaker" : "Steve",
+    "text" : "You don't even read it, anyhow."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh I usually just tune you guys out.",
+    "timestamp" : "47:34-47:36"
+  },
+  {
+    "text" : "No, this isn't the family one. Those picks would do numbies on the gram. Oh that.",
+    "timestamp" : "47:37-47:42",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "47:42-47:48",
+    "speaker" : "Andy",
+    "text" : "Yeah. Well this this this is uh probably too nerdy to do numbies. Um"
+  },
+  {
+    "text" : "Because it's we have another website, tombradytds. com.",
+    "speaker" : "Steve",
+    "timestamp" : "47:49-47:53"
+  },
+  {
+    "timestamp" : "47:53-48:01",
+    "text" : "Yeah. And it's just all his touchdowns. Because I could I couldn't track all his Buccaneers touchdowns on patsdynasty. com. Oh yeah, of course not.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "48:01-48:02",
+    "text" : "Of course not.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "48:02-48:50",
+    "speaker" : "Andy",
+    "text" : "So right now it only has um his Patriots touchdowns. Uh but I have tracked the game time, like time remaining in the quarter for each touchdown. And create a scatter plot uh uh touchdowns. Uh the x-axis is game time and the y-axis is the distance of the touchdown pass. So it just kind of shows you where all the grouping is. There's a whole mess of touchdowns within a minute of the second quarter ending. Like a stack of them. Uh and then again kind of towards the end of the game as well. Kind of the end of every quarter kind of seems. And for some reason with twelve minutes left in the second quarter there's a massive stack as well."
+  },
+  {
+    "timestamp" : "48:50-48:55",
+    "speaker" : "Steve",
+    "text" : "How does Tom Brady have two touchdowns with negative seven air yards? He's just what throwing it behind the line?"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "48:55-49:01",
+    "text" : "Uh screenplays, yeah. The air yards I I based on uh screen screenplays aren't like negative sevens though."
+  },
+  {
+    "text" : "I mean I get the fours, five, the three is fourteen three yards behind. Those are screens.",
+    "speaker" : "Steve",
+    "timestamp" : "49:01-49:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, some of them I'm well, here's the thing. You can click on any single fours One that's there and it will show you the video of the play. Not your your site's broken, bro. Click on it now. It's not sending me click. I I just did it. I'm looking at it. Nope.",
+    "timestamp" : "49:05-49:21"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Maybe it just renders wrong.",
+    "timestamp" : "49:21-49:23"
+  },
+  {
+    "text" : "So it's uh Brady Antoine Smith where he rolled out to the right. Oh, this is against the Saints um in 2001. That game we rolled to the right and then threw it back to the left. Antoine Smith, he was seven yards behind the line of scrimmage. And similar to the James White one too. It's kind of he's out of his shotgun and he like has to drift back and then throws it kind of out as like a swing pass behind the line of scrimmage. James White behind the line of scrimmage.",
+    "timestamp" : "49:23-49:46",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "49:46-49:50",
+    "text" : "Oh, so I was clicking on the graph. I didn't click on the right, the bars."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "49:51-49:54",
+    "text" : "Well, how how is clicking on the graph gonna do it, Steve?"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "49:54-49:57",
+    "text" : "Because it would it would bring it up and then I'd VLC."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I know reading comprehension is hard, but all the touchdowns at the top you can click on all the dots and that will play the video.",
+    "timestamp" : "49:59-50:06"
+  },
+  {
+    "text" : "It's crazy as long as touchdown's only 55 air yards.",
+    "timestamp" : "50:06-50:09",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I mean, that's kind of a lot.",
+    "timestamp" : "50:11-50:13",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "50:13-50:16",
+    "speaker" : "Steve",
+    "text" : "I don't know. I feel like not not really anymore."
+  },
+  {
+    "timestamp" : "50:17-50:23",
+    "speaker" : "Andy",
+    "text" : "I mean, I don't know. You'd have to look up. And this is just like From the line of scrimmage, how far did the ball go?"
+  },
+  {
+    "timestamp" : "50:24-50:29",
+    "text" : "If you only count yards gained on passes that went for TDs, he has more yards than Rex Grossman.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Correct.",
+    "timestamp" : "50:29-50:29",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's not that's not very impressive. Rex Grossman fucking sucks. Rex Grossman went to a Super Bowl. I know he did, and he's like universally panned as like the worst Super Bowl quarterback of all time.",
+    "timestamp" : "50:30-50:40"
+  },
+  {
+    "text" : "Oh, that's not true.",
+    "speaker" : "Andy",
+    "timestamp" : "50:40-50:41"
+  },
+  {
+    "text" : "Who's the worst? The Ravens guy?",
+    "timestamp" : "50:42-50:45",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, who is the cowbowler? Wasn't it?",
+    "timestamp" : "50:46-50:49"
+  },
+  {
+    "timestamp" : "50:49-50:51",
+    "speaker" : "Steve",
+    "text" : "Yeah, is either 2000 Ravens."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "50:51-50:52"
+  },
+  {
+    "timestamp" : "50:53-50:55",
+    "text" : "Uh it was right there with him.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "50:55-51:14",
+    "speaker" : "Andy",
+    "text" : "Kerry Collins. Yeah, oh yeah. I mean he's he's but he was still a starting quarterback that won the Super Bowl, and Tom Brady has thrown more passing yards just on touchdowns alone than he has. Tom Brady has thrown more touchdown, uh playoff touchdowns than uh Joey Harrington or Jay Fiedler. And they're creat they ever threw it in."
+  },
+  {
+    "timestamp" : "51:14-51:16",
+    "text" : "Yeah, those aren't like super impressive.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Those guys suck. Well yeah, I mean that's kind of how this works, Steve. It's not like he's going to throw more playoff touchdowns than Peyton Manning has ever thrown touchdowns, is it?",
+    "timestamp" : "51:16-51:25",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "You're right. There's a lot of touchdowns in the last second of the second quarter. Yep. There's a lot. There is one Bucks TD on here.",
+    "timestamp" : "51:26-51:34",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "51:34-51:39",
+    "text" : "What are you talking about? There is one. Yeah. So it's two playoffs. This is a riveting, I'm sure, for people listening."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well, they should go on the website. It is it is actually very interesting. And I can't believe you found time to make this fucking website. Don't you have a newborn?",
+    "timestamp" : "51:40-51:47"
+  },
+  {
+    "text" : "This is this is pre-newborn. And and the graph at the top is all just data entry when I'm waiting for Um stuff to compile at work, so I can do that in chunks.",
+    "speaker" : "Andy",
+    "timestamp" : "51:47-51:58"
+  },
+  {
+    "timestamp" : "51:58-52:00",
+    "text" : "You're a goddamn loser, Andy.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, well, you know what You're here with me, Steve. So what does that say about you? You are the company you keep.",
+    "timestamp" : "52:00-52:06",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "52:06-52:11",
+    "speaker" : "Steve",
+    "text" : "Well, you know, the whole pick your boogers, pick your friends, but not your family thing."
+  },
+  {
+    "timestamp" : "52:11-52:19",
+    "speaker" : "Andy",
+    "text" : "I mean you moved away you moved away from us and yet you're still here Thursday nights on our Zoom call without fail. Yeah."
+  },
+  {
+    "timestamp" : "52:20-52:20",
+    "speaker" : "Steve",
+    "text" : "Not missing anything."
+  },
+  {
+    "timestamp" : "52:24-52:25",
+    "speaker" : "Andy",
+    "text" : "It's tough."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "52:27-52:30",
+    "text" : "I agree. Can we talk more about Troy Brown though? Because I like that part."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right. Talk to me about Troy Brown.",
+    "timestamp" : "52:30-52:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He seals the game with a first down reception.",
+    "timestamp" : "52:32-52:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, after getting the interception.",
+    "timestamp" : "52:35-52:37"
+  },
+  {
+    "timestamp" : "52:38-52:38",
+    "speaker" : "Steve",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "And that was what one of his two catches in the game?",
+    "speaker" : "Andy",
+    "timestamp" : "52:38-52:41"
+  },
+  {
+    "text" : "No, it wasn't uh it wasn't right after the interception. Early fourth quarter, his last drive, two minutes left, they have no more timeouts. Tom Brady second and ten goes to Troy Brown for 20 yards.",
+    "timestamp" : "52:42-52:55",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Right.",
+    "timestamp" : "52:55-52:55"
+  },
+  {
+    "text" : "Neil, neil, neil. Game over.",
+    "timestamp" : "52:56-52:57",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "52:58-53:02",
+    "speaker" : "Andy",
+    "text" : "One of his two receptions on the game was the biggest catch of the game."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's why he's out there the two-minute drill after playing defense the whole goddamn game. Right. Say get out there. Get out there, Troy. We need you to catch us a goddamn first down.",
+    "timestamp" : "53:02-53:11"
+  },
+  {
+    "text" : "Yeah, you gotta seal this.",
+    "speaker" : "Andy",
+    "timestamp" : "53:12-53:13"
+  },
+  {
+    "timestamp" : "53:13-53:14",
+    "text" : "Yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But I think the uh And do you know who was covering him and who had the tackle?",
+    "timestamp" : "53:14-53:19"
+  },
+  {
+    "text" : "This is funny, I didn't realize this.",
+    "speaker" : "Steve",
+    "timestamp" : "53:19-53:20"
+  },
+  {
+    "text" : "Who was it? Medea Williams. Oh shit. The Corey yeah, the the Corey Dillon draft pick. The Corey Dill and Pick, yeah. That's hysterical. So yeah, I I I'd say um This is a relatively watchable game, uh if you can find it. I don't think this one's on YouTube, so you have to go digging for it. Um But yeah, I think uh if you can only watch a bit of it, watch the second quarter because that's when all the action happens really. Um",
+    "speaker" : "Andy",
+    "timestamp" : "53:21-53:50"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "This is an eminently watchable game though because they got a little out of him, but the Bengals kept keeping it close and they're they're slinging the ball. They're actually running it. So it Generally, a lot of these games recently, the Patriots defense has just been absolutely a lockdown. Suffocating. Yeah. And the games get out of hand quick where this game You think it could have, you know, people just kind of go up a little bit, but then Mangles come back. It's definitely a little back and forth and got a bunch of big names.",
+    "timestamp" : "53:52-54:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Bunch of big like early big names too.",
+    "timestamp" : "54:17-54:20"
+  },
+  {
+    "timestamp" : "54:20-54:24",
+    "text" : "And obviously it's a sick for Brown game.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "54:24-54:26",
+    "speaker" : "Andy",
+    "text" : "Right. Yeah, which is worth watching."
+  },
+  {
+    "text" : "Generally. He's out there outperforming Earthwind Moreland, who's just getting absolutely eaten up by TJ Ushmazada.",
+    "timestamp" : "54:26-54:32",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, I mean, think everybody was.",
+    "speaker" : "Andy",
+    "timestamp" : "54:32-54:33"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "54:34-54:38",
+    "text" : "TJ Ushmazou. I have a note. Earthwind is overmatched by everybody."
+  },
+  {
+    "text" : "I mean not his small but no because wasn't he uh undraft or something? Yeah, he was he was back up on his team in college or something. Isn't that what we decided last week or the week before? He's not uh not not something you would expect to be a starting NFL player. But you know, this is where the Pages are this season, and yet This 2004 defense is considered like one of the best defenses that the Pages have ever had. Even with this struggle on defensive pack.",
+    "timestamp" : "54:39-55:11",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "So yeah, I mean you don't really think about that because we were talking about if this is the best defense they ever had. And By B, even with just absolutely nobody in the I mean to get Rodney, that's probably crucial. If you got hurt in this year, they'd probably be a lot worse.",
+    "timestamp" : "55:12-55:28",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "55:27-55:30",
+    "text" : "That's true. Sante Samuel who's been around for a while.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "By Samuel's not he's a rookie this year.",
+    "timestamp" : "55:29-55:32",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "No, that's right. That's why he's like he's actually been on the field. But yeah, I think uh Yeah, this is kind of the reason we go back and watch these games because we just forget that like oh yeah 2004 is really good but it's like how the fuck did this defense play so well with Literally a makeshift MacGyver defensive backfield of Troy Brown and Earthwind Moreland.",
+    "timestamp" : "55:32-55:57",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, and Dexter Reed playing significant time. Significant time.",
+    "timestamp" : "55:57-56:01",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "56:02-56:04",
+    "text" : "He was like a core special TV."
+  },
+  {
+    "timestamp" : "56:05-56:06",
+    "speaker" : "Steve",
+    "text" : "Drawed Cherry."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh-huh.",
+    "timestamp" : "56:06-56:07"
+  },
+  {
+    "timestamp" : "56:07-56:10",
+    "text" : "He's getting in there. It's just, oh my God.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. Yeah, it's ridiculous. So yeah, but I also um I think we gotta shout out the kind of the fuck you Tom Brady. This was kind of peaked that era too. Where um, you know, Patriots score a touchdown and then Bengals come right back and score their touchdown. So it's a tie game. And that answered the drive to answer that, um, where Brady. Like immediately scored a touchdown was uh Brady complete for nine yards to somebody named Jed Weaver, who is with a neck roll. Yeah, a tight end with a neck roll.",
+    "speaker" : "Andy",
+    "timestamp" : "56:10-56:45"
+  },
+  {
+    "timestamp" : "56:46-56:47",
+    "text" : "Who the fuck is that guy?",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "56:47-57:27",
+    "speaker" : "Andy",
+    "text" : "Beautiful. He was the third string tight end because Daniel Graham was out. Um So nine yards to him, 13 yards to Kevin Falk on the play that you never see them run anymore, where he fakes the screen to the left and then spins around backwards and then throws the screen to the right. Yep. Which you just I used to love that play, but they never run anymore. Um and then a deep bomb, 48 yards to Patton. And it's just like one of those, you know, fuck you response drives. And then the next play is literally Carson Palmer pick six. This game went from tied at seven to the pets up by two touchdowns."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, 1005, tied at seven at 827. It was Patriots up two touchdowns.",
+    "timestamp" : "57:27-57:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, like the Pages real quick drive, three plays to drive the length of the field. And then pick six. And it's just like, Jesus Christ.",
+    "timestamp" : "57:33-57:42"
+  },
+  {
+    "timestamp" : "57:42-57:48",
+    "text" : "That that even changing it is the Bengals go on a long drive and and get it down to another touchdown, right?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "57:48-57:48",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "So Chosenko, two and a half minutes left.",
+    "speaker" : "Steve",
+    "timestamp" : "57:48-57:51"
+  },
+  {
+    "text" : "Right.",
+    "timestamp" : "57:51-57:51",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "57:52-57:54",
+    "text" : "Pete just come back and score 25 seconds left.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, exactly. It was just that this is what I'm talking about. It was just that like fuck you. response Patriots. This is that situation football that they've always been really good at. Yeah. But they were but it's not like they were driving up and down the field the entire game. It's just kind of every time The Bengal score, the patient's like, all right, well fuck it. Now we gotta do it. Like if they, you know, they go three and out every once in a while, but like as soon as they needed to score, like, fuck it, we're gonna go get a score. And they just did it, marched straight down the field.",
+    "timestamp" : "57:54-58:22"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "58:22-58:26",
+    "text" : "Maybe know what about here about TJ Duckett coming in or is that just a highlight that I saw?"
+  },
+  {
+    "text" : "That was a high that was uh that was the Falcons highlight. Give me the Duckett. Ma TJ Ducket. Also something Rossom. I don't remember his first name. He was the kick returner. And I only know him because I would play Madden with my college roommates. And I was the Falcons. And I I told my roommate not to kick it to Rossom because his name rhymes with awesome. And then for the first and only time ever, I returned the kickoff for a touchdown and was just screaming the fact that his name rhymes with awesome the entire play. And uh I was I did not let my roommate live that down. This is when you were doing that instead of going to class, right? Uh no, this is after that. Oh, this is not Penn State. Right, yeah, yeah. This is this is afterwards. This is after I learned to go.",
+    "speaker" : "Andy",
+    "timestamp" : "58:26-59:20"
+  },
+  {
+    "timestamp" : "59:20-59:23",
+    "text" : "This is yeah, you're you're Corey Dillon and on the Patriots.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "59:24-59:28",
+    "speaker" : "Andy",
+    "text" : "Yes, I am a I'm a 21-year-old freshman at UNH at this point, I believe."
+  },
+  {
+    "timestamp" : "59:28-59:29",
+    "speaker" : "Steve",
+    "text" : "Got it."
+  },
+  {
+    "text" : "Thanks for bringing that up, Steve.",
+    "timestamp" : "59:30-59:32",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, well, as you can bring me on this podcast, Andy. All your dirty laundry aired up for the tens of listeners we have to hear.",
+    "timestamp" : "59:33-59:40"
+  },
+  {
+    "text" : "That's right.",
+    "timestamp" : "59:40-59:41",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Hey, we have like twenties of listeners. What episode are we on? Are we getting close to 100?",
+    "timestamp" : "59:41-59:47"
+  },
+  {
+    "timestamp" : "59:47-59:48",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "59:48-59:49",
+    "speaker" : "Steve",
+    "text" : "What are we on, do you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh 80 something.",
+    "timestamp" : "59:50-59:51"
+  },
+  {
+    "text" : "Well you better something. You better get Troy Brown on for number 100.",
+    "speaker" : "Steve",
+    "timestamp" : "59:51-59:54"
+  },
+  {
+    "timestamp" : "59:55-59:58",
+    "speaker" : "Andy",
+    "text" : "Or what? You gonna leave? You got something better to do?"
+  },
+  {
+    "text" : "What if number 100 would be the Chargers game?",
+    "timestamp" : "59:59-01:00:02",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:00:02-01:00:18",
+    "text" : "Oh. Uh I don't I mean Chargers games is in like 2005, right? No, I think it's not this year, isn't it? I don't think no. No, Treasures game's like way in the past. I thought it was this year. We have released 82 total episodes."
+  },
+  {
+    "text" : "So we're on eighty-three.",
+    "timestamp" : "01:00:18-01:00:20",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:00:20-01:00:32",
+    "speaker" : "Andy",
+    "text" : "This will be eighty-three, yes, when it goes live. And at this rate there won't be eighty four. This right there will not be an eighty-four. What else you got in this game, Steve? Anything?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "There's a note about Marvin Harrison getting a $22 million signing bonus and how Massive that was. How quaint. And that compared us into all the guys who are recently getting 75 million guaranteed.",
+    "timestamp" : "01:00:32-01:00:45"
+  },
+  {
+    "text" : "Right. Yeah. Unbelievable.",
+    "timestamp" : "01:00:45-01:00:47",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:00:47-01:00:48",
+    "speaker" : "Steve",
+    "text" : "Unbelievable."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, the numbers these days are just outrageous. That shit ain't inflation, tell you what. No, no, well. It's NFL inflation, I guess. Yeah.",
+    "timestamp" : "01:00:49-01:00:58"
+  },
+  {
+    "timestamp" : "01:00:59-01:01:02",
+    "text" : "But let's do best and worst.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Alright. Well let me go first. Sure. Uh my best is Troy Brown. Everything about him. Everything. Steve, he made a tackle. He he he got credited for a tackle in that game. Did you know? Yeah, but I mean he did everything. Like he was he was catching game ceiling passes. He's making tackles. He's blocking. Getting interceptions in the end zone, trying to return them. Two catches, two first downs. He had a pass defended as well. Oh yeah, two tackles. Both solo. Troy Brown. Defensive player of the game. No? Okay. Um, and I think uh I think my worst is just uh having to look at Marvin Lewis again. Cause he just he makes me sad for Bengals fans. Because I mean David, you know, he's like, oh yeah, no, we we still kind of like him. But you could just like hear the sadness in his voice when he talked about Marvin Lewis. And I think also probably the the ownership as well, I think had something to do with how bad they were. Because the ownership's, I think, known to be pretty cheap. Just generally. So yeah.",
+    "timestamp" : "01:01:02-01:02:21",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh, I mean that's that's all of them. Until that guy came and bought the Browns.",
+    "timestamp" : "01:02:21-01:02:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "01:02:26-01:02:26"
+  },
+  {
+    "timestamp" : "01:02:26-01:02:29",
+    "speaker" : "Steve",
+    "text" : "They were like that too. The Pittsburgh Pirates are like that."
+  },
+  {
+    "timestamp" : "01:02:29-01:02:51",
+    "speaker" : "Andy",
+    "text" : "That guy's super stingy. Yeah. They just don't give a shit. So it just makes me sad when uh other teams aren't run as well as the Patriots are and also makes me thankful that we have Robert Kraft. who was actually a fan before he bought the team. Yeah. So he like gives a shit, you know, instead of it just being like a money-making operation. So yeah. What about you?"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:02:52-01:03:06",
+    "text" : "Uh I don't have a lot of worsts except the whole Charlie Weiss leaving, cause You know, I think that actually affects the team pretty significantly. Him and and uh Romeo Carnell leaving right after right around this time."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's fair.",
+    "timestamp" : "01:03:06-01:03:07"
+  },
+  {
+    "text" : "It takes him a while to get back from that. Um So it's like that's like the first sign, I guess, of the beginning of the the lost years.",
+    "timestamp" : "01:03:07-01:03:15",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:03:15-01:03:16",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "This is what I'm gonna call it. Fair. And then watching the Patriots defensive backs play defense on Ocho and Hoosh. Ocho Tumucho I have on here. Ocho tu and they both went to Oregon State, which I didn't know.",
+    "speaker" : "Steve",
+    "timestamp" : "01:03:17-01:03:31"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:03:32-01:03:38",
+    "text" : "That was pretty cool, yeah. Uh that and they both graduated the same year. They were both drafted by the Bengals in 2001."
+  },
+  {
+    "text" : "Yep.",
+    "timestamp" : "01:03:38-01:03:39",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:03:39-01:03:45",
+    "speaker" : "Andy",
+    "text" : "But that's gonna be fun. But Chad Johnson was drafted like in the first or second round."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, he's a first round, I think.",
+    "timestamp" : "01:03:45-01:03:46"
+  },
+  {
+    "text" : "TJ was drafted in like the sixth or seventh round.",
+    "timestamp" : "01:03:46-01:03:49",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yep.",
+    "timestamp" : "01:03:49-01:03:50",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:03:50-01:03:54",
+    "text" : "But that's pretty fucking cool. And they were both like studs. Impressive."
+  },
+  {
+    "text" : "Steven Neal, NCAA champion. I didn't know that. Uh undefeated wrestler NCAA championship.",
+    "timestamp" : "01:03:55-01:04:00",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "It was like 83 and and zero or 80 something and zero.",
+    "timestamp" : "01:04:01-01:04:05",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:04:05-01:04:12",
+    "speaker" : "Steve",
+    "text" : "Someone, uh the Belchek or Skarnekia had said he is the most like improved player they've ever coached."
+  },
+  {
+    "timestamp" : "01:04:12-01:04:21",
+    "speaker" : "Andy",
+    "text" : "Well yeah, because he didn't play football. Exactly. Another another uh is that is that another um Example of Belichick's genius, would you say?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. Well, I mean that's fair. He finds guys that like no one even thinks to look at.",
+    "timestamp" : "01:04:21-01:04:25"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:04:26-01:04:31",
+    "text" : "Right. Sebastian Vollmer from the Ebner. Ebner, yep."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's gonna comp that that Marilyn Lacrosse guy. You know he's got a huge heart on for that dude.",
+    "timestamp" : "01:04:32-01:04:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, you mean Hogan? Chris Hogan?",
+    "timestamp" : "01:04:38-01:04:40"
+  },
+  {
+    "timestamp" : "01:04:41-01:04:52",
+    "text" : "No, no, no. There's a guy uh he is like the all-time leading score for Maryland Cross. He played for some D3 school quarterback and led them to the D three championship and won it.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Nice.",
+    "timestamp" : "01:04:52-01:04:52"
+  },
+  {
+    "text" : "Yeah. All right. And no one knows what he's going to be in the NFL.",
+    "timestamp" : "01:04:53-01:04:57",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "But Oh yeah. You'll be invited to camp at the very least, right? And this this best is gonna throw you off a little bit.",
+    "timestamp" : "01:04:57-01:05:08",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:05:08-01:05:13",
+    "speaker" : "Steve",
+    "text" : "But it was the Bengals fake field goal touchdown."
+  },
+  {
+    "timestamp" : "01:05:13-01:05:14",
+    "speaker" : "Andy",
+    "text" : "We didn't talk about that."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, I can't believe we've been talking about this whole time. I've been sitting on this thing.",
+    "timestamp" : "01:05:15-01:05:18"
+  },
+  {
+    "timestamp" : "01:05:18-01:05:24",
+    "text" : "That was a sweet play. I'm surprised David didn't bring it up. That was like probably the Bengals highlight of the game.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And it was right after Palmer gets hurt, right?",
+    "timestamp" : "01:05:25-01:05:28"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:05:28-01:05:29",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "And like Kitna hasn't even come out yet and like Yeah, it's it's literally the play that that he gets hurt, Carson Palmer's last play.",
+    "speaker" : "Steve",
+    "timestamp" : "01:05:29-01:05:37"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "01:05:37-01:05:37"
+  },
+  {
+    "text" : "It's on the third and five.",
+    "timestamp" : "01:05:37-01:05:39",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:05:39-01:05:39",
+    "speaker" : "Andy",
+    "text" : "Right."
+  },
+  {
+    "text" : "From the eleven, and they run this sweep. I'm I don't know put the highlight up on the website because it's actually worth watching.",
+    "timestamp" : "01:05:39-01:05:45",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well I'm not gonna do that, but okay. I'll find a YouTube video and link it. We don't put other teams highlights on this on the it's on the it's on the prime time. It is, yeah.",
+    "timestamp" : "01:05:45-01:05:54"
+  },
+  {
+    "text" : "And that's just a cool play.",
+    "timestamp" : "01:05:55-01:05:57",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was just well designed, yeah. Yeah. It was kind of like a running back off tackle.",
+    "timestamp" : "01:05:57-01:06:02"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That was kind of a good call from Marvin Lewis. Everyone was like, what the fuck? Fuck the quarterback just got blown up and down and like you know about that and no one's thinking about the fake field goal at that point. So it was actually a pretty good coaching call in his part.",
+    "timestamp" : "01:06:02-01:06:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Hey, so we did have one. That's good.",
+    "timestamp" : "01:06:15-01:06:17"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:06:19-01:06:26",
+    "text" : "I mean, for the Bengals in the 2004 hadn't had a winning season since 1990. They'll take mediocrity, you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah.",
+    "timestamp" : "01:06:26-01:06:27"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Mediocrity is a big step up for them.",
+    "timestamp" : "01:06:27-01:06:29"
+  },
+  {
+    "timestamp" : "01:06:29-01:06:37",
+    "text" : "Yeah, that was a touchdown run by Bengals uh legend Kyle Larson, air punter. Yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep.",
+    "timestamp" : "01:06:37-01:06:38"
+  },
+  {
+    "timestamp" : "01:06:39-01:07:02",
+    "text" : "This was his rookie season, 2004. Life would never get better. Yeah, he he peaked early, week week 14. I mean, you know, it happens. Yeah, that that was his only ever Rush touchdown. His only ever yeah, his only ever non-punt. Oh, yeah, a couple kickoffs. Three kickoffs in his career.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well, it'd be the worst if one of those was the one where uh What's his name? Mr. Big Chess stomps him in the chest. Oh god, yeah.",
+    "timestamp" : "01:07:02-01:07:11"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:07:11-01:07:35",
+    "text" : "Oh, I think that that must have been past his time. Yeah, that's that's he only played till 2008. But yeah, that would be tough. Although in 2008 his final season, he did uh crack the century mark in punts. Because it's almost every he kicked a hundred punts, which feels like a lot. Yeah. Like a lot, a lot. The Bengals went four and eleven and one that year. So yeah, yeah, that makes sense."
+  },
+  {
+    "timestamp" : "01:07:35-01:07:37",
+    "text" : "Yeah. When you're shitty, you putting a lot.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:07:38-01:07:46",
+    "text" : "Yeah, yeah, you know. So all right. You got anything else, Steve? Talk about anything else? You good?",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Gucci. All right. As the kids say. Do they? Suppose this to the Graham get the numbies, as Greg says.",
+    "timestamp" : "01:07:47-01:07:55",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I don't think anybody says that.",
+    "timestamp" : "01:07:55-01:07:57"
+  },
+  {
+    "text" : "Greg says it. He said it in the group chat in the family and everyone ignored him.",
+    "speaker" : "Steve",
+    "timestamp" : "01:07:57-01:08:01"
+  },
+  {
+    "text" : "Well, right, because that's what you do when somebody says something stupid like that. You ignore them. Yeah. All right. Well, I mean, I I think since he's here Um we should uh tune in next week to see how much of a blubbering little bitch Greg is on the Patriots Dynasty podcast.",
+    "timestamp" : "01:08:01-01:08:19",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "I'm assuming he's gonna be here next week, but okay.",
+    "speaker" : "Steve",
+    "timestamp" : "01:08:20-01:08:23"
+  },
+  {
+    "text" : "We'll let him lead us out. Well, I mean, you'll have to tune in next week. What is next week, Steve? I don't know. That's what I'm asking you. Well, next week. Um This is a game that I vaguely remember. It's one of the losses that I care the least about, I will say.",
+    "timestamp" : "01:08:23-01:08:43",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:08:43-01:08:45",
+    "speaker" : "Steve",
+    "text" : "But is also I know it's a loss."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:08:46-01:09:05",
+    "text" : "Yep, you do. So go into it knowing that. But it's also a game that the uh the winning team has named it themselves. So we'll just we'll just we'll just tickle your teaser with that, Steve, okay?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Okay, fine. I'll find out when I watch it.",
+    "timestamp" : "01:09:05-01:09:08"
+  },
+  {
+    "timestamp" : "01:09:08-01:09:11",
+    "text" : "Okay. If I watch it. You'll watch it. You always watch it.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:09:11-01:09:14",
+    "speaker" : "Steve",
+    "text" : "I don't know. Always watch it. Always watch it."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right. I think that's it. Uh thank you for joining us. Uh thank you, David, for coming on and giving us a Bengals perspective on the old school. Early 2000s years. It was always nice to hear the suffering of other fans.",
+    "timestamp" : "01:09:14-01:09:30"
+  },
+  {
+    "timestamp" : "01:09:31-01:09:33",
+    "speaker" : "Steve",
+    "text" : "Yeah, it makes me feel better about my life for sure."
+  },
+  {
+    "timestamp" : "01:09:33-01:10:06",
+    "speaker" : "Andy",
+    "text" : "Yeah, exactly. Yeah, that we we were uh We made the right decision following the New England Patriots instead of the city. Awful, awful team, yep. So yeah. So next week the Patriots will travel to Miami. Pro player stadium for a Monday night game against the 2 and 11 Miami Dolphins. Oof. And we will see what happens next week on the Pagers Dynasty Podcast. See Atlanta. See Lena."
+  }
+]

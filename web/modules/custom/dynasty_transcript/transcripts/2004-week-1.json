@@ -1,0 +1,1662 @@
+[
+  {
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to. My sons sometimes say some naughty things when they're trying to be funny. But really, they're just being stupid. Do you still want to listen? Go right ahead. I am not your mother.",
+    "timestamp" : "00:00-00:17",
+    "speaker" : "Mom"
+  },
+  {
+    "timestamp" : "00:21-00:42",
+    "speaker" : "Andy",
+    "text" : "Alright, welcome back to the Pages Dynasty Podcast. Yes, we're doing this again. 2004 season we've done 01, 02, and 03 all the way through. And we are now doing 2004. And to celebrate, we decided uh to bring, well, I decided to bring both the brothers back. Steve Brown, middle brother. How's it going?"
+  },
+  {
+    "timestamp" : "00:43-00:50",
+    "text" : "Andy, I appreciate you paying me to do this 2004 season with that. Money hit my bank account, so let's go.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. Um I'm glad you didn't cost more. Uh because I don't think I can afford it. Uh and also Greg Brown, baby brother. How's it going, Greg?",
+    "timestamp" : "00:50-00:58",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "00:58-01:00",
+    "text" : "I didn't get a paycheck.",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "That was all this. Yeah. He pays even hugs and love, Greg. I pay Steven dog treats for his new dog, so don't worry about it.",
+    "speaker" : "Andy",
+    "timestamp" : "01:01-01:08"
+  },
+  {
+    "timestamp" : "01:08-01:09",
+    "text" : "There you go.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Um but to really celebrate we thought Um, we would actually get somebody who knows what they're talking about on the podcast. And so this episode we have on Uh I don't know if infamous is the right word. Give me a good give me a good descriptor descriptor, boys. Oh you boys are useless. Alright, cool. The uh more famous than us. This is the worst descriptor of all.",
+    "speaker" : "Andy",
+    "timestamp" : "01:09-01:34"
+  },
+  {
+    "text" : "Everybody's more famous than us. Only mom listens to us.",
+    "speaker" : "Steve",
+    "timestamp" : "01:34-01:38"
+  },
+  {
+    "text" : "Patriots Writer, Jeff Howe from uh The Athletic. So uh Jeff, thanks for coming on.",
+    "timestamp" : "01:38-01:44",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yeah, not famous at all though, so thanks for having me in the very nice words.",
+    "speaker" : "Jeff Howe",
+    "timestamp" : "01:43-01:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, no, I actually I tried to to do my research and uh And like introduce you with all the stuff that you've done and all the stuff that you're doing. But for somebody who writes articles online, there's not much out there about you.",
+    "timestamp" : "01:48-02:01"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Just how I like it.",
+    "timestamp" : "02:02-02:02"
+  },
+  {
+    "timestamp" : "02:03-02:23",
+    "speaker" : "Andy",
+    "text" : "Yeah. Um so I asked a whole bunch of people if they would give us some questions. So uh the first question I told them that I would ask. Uh and this only really works on paper, but we're gonna do it anyway because that's the kind of podcast we are. And it is uh Jeff, how's it going?"
+  },
+  {
+    "timestamp" : "02:24-02:29",
+    "speaker" : "Jeff Howe",
+    "text" : "I've never heard that one before. That's that's good. It's going great. It's fantastic."
+  },
+  {
+    "text" : "Oh, it's I didn't say it was a good question. I just said these are the questions we got. So when he says he asked people",
+    "speaker" : "Andy",
+    "timestamp" : "02:30-02:35"
+  },
+  {
+    "text" : "He just thought of him in his head.",
+    "speaker" : "Steve",
+    "timestamp" : "02:35-02:36"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "02:36-02:57",
+    "text" : "Like the voices in the back of his head. Oh no, I would take credit for that if I came up with it. I ain't that quick. Nice Andy. Well yeah, so um so tell us a bit about yourself then because I know you've been uh covering the page since 2009, but how did you kind of get into that?"
+  },
+  {
+    "text" : "Uh well I failed out of business school and uh my father told me I had to make something of myself, so I somehow figured it out from there. I mean, I grew up in Lowell. Uh I Did fail out of business school at UNH. That took uh s three semesters for us to realize that we should mutually agree to part ways. Uh I went back to Middlesex Community College, got into um some journalism classes. I mean, I had like a little bit of a media background just from Lowell High, and it was something that I kind of wanted to get into. So Uh uh to make a very long story as short as possible. I then I went to UMass. I did the student paper there, the Daily Collegiate, and graduated from UMass in 06. Uh worked a bunch of different jobs in and around Boston for about three years. And I reached out to Nesson in 2009. I was working at the Boston Metro, which no longer exists. It was the, you know, for people who don't know, that was the free paper that was passed out on the trains.",
+    "timestamp" : "02:58-04:01",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "04:01-04:02",
+    "text" : "Oh yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "And I was I was so desperate to get out of there. I was just bypassed for a job that I deserved. Um but I you know in uh glad I didn't get Uh and so I reached out to Nesson and I was like, hey, you know, this was like when WEI and you know Comcast and were just sort of like, you know, doing up their websites. Nesson. com's website was basically like Hey, the uh the Red Sox are playing tonight at 705 on our station, like tune in. Like that was the extent of it. I was like, do you need somebody to cover the Celtics or the Red Sox? Like I've handled those things a couple times. You know, I I kind of know my way around both buildings and, you know, I've been to Gillette like a handful of times on like Wednesdays and covered a couple Tom Brady press conferences. And the guy running the site was like, yeah, you know what? Why don't you do a Patriot story a week and we'll give you 25 bucks? And I was like, sure, whatever. I remember the first story I wrote. was after they traded Matt Castle and Mike Vrabel to the Chiefs for a second round pick.",
+    "speaker" : "Jeff Howe",
+    "timestamp" : "04:02-05:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah.",
+    "timestamp" : "05:04-05:05"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "And I wrote a $25 column. And I'm telling you, it probably wasn't even worth that. So it was uh I I joke that Bill Belichick got his start in the NFL. in 1975 making twenty-five dollars a week. I got my start in the NFL in 2009 making $25 a week. So uh just two birds of a feather there But you know, worked at Nesson. It was great. Uh I learned a lot in Nesson. Um, they started putting me on TV for who knows what reason. Uh Went to the Herald in 2012 when Ian Rapport got hired by NFL Network. I was at the Herald for six awesome years. I mean loved it, absolutely loved my time at the Herald. Had no intentions in leaving. But, you know, the the the Reaper started to come for for everyone there and at the same time the athletic was toying with the idea of coming to Boston. So I got, you know, very fortunate because this is This is the best job I've ever had. Other than like scooping ice cream in high school, which is awesome. Uh this the working for the athletic has been Just amazing. They just they prioritize like the the things that that are great about journalism and you know taking your time to write a good story rather than rushing out something and then blogging three more things and then getting to you know, start working on a notebook for something else. I mean, it's just like, hey, take all the time you need to write something that you think is the best version of a story that you can put out there and uh it's just been great. So that's my long-winded story.",
+    "timestamp" : "05:05-06:40"
+  },
+  {
+    "timestamp" : "06:40-07:01",
+    "speaker" : "Andy",
+    "text" : "Yeah, I mean I think that's how I got hooked on the athletic was I was missing all that long form like deep dive writing about sports. And you don't really get it many other places because it's now it just seems to be who's getting there first as opposed to like who's actually getting it right or getting the details."
+  },
+  {
+    "timestamp" : "07:02-08:23",
+    "speaker" : "Jeff Howe",
+    "text" : "Yeah. And and that's There that's fine. I mean I I enjoyed doing that. And and when I was at the Herald, and again, I loved my time at the Herald. You won't hear me say a bad word about that place. Working with Karen was amazing. It was just every uh it was just such a good group of people. Um and I I loved it. I can't stress that enough. But you know, working on a main story every day, a notebook every single day, and then blogging everything that's happening. I mean, there's just there's so much going on compared to now when Basically, you know, right now I'm going through feature stories of the rookie draft class. And there are other things going on with the team. There's a you know a transaction or two every day, and for the most part, they haven't been major transactions. So My bosses aren't sitting here saying, hey, write 300 words on this or put up something on that or whatever. I mean, yeah, there's you know, every now and then there's player availability through a virtual press conference. But my boss is like, look, you got features to write. Just worry about those. Do the best job you can with those. And that's why I take a lot of pride in writing these features. and and telling these players stories the best way I possibly can, because they're getting introduced to a new fan base and a new readership. And I want the people who are reading these stories to realize To know that like when they come away from that, they're gonna know just about everything possible about this this player."
+  },
+  {
+    "text" : "If only we took pride in this podcast, maybe I do a lot of work on this.",
+    "timestamp" : "08:23-08:27",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "08:28-08:58",
+    "text" : "This is long floor. Maybe if me and Greg took part of this. Um, so do you uh it sounds like you actually have a lot of, unlike us, a lot of access to these these players over the years. Um I guess two-part question. One, uh how? And is there a way for us to do that? Uh and more seriously, uh, do you have any like good Like favorite players, favorite stories, that sort of stuff.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "This is a three-part question, Andy. Oh, three-part question. What's the third part? Part three. Do you know Troy Brown Right. And he's as awesome as we all know and love, right?",
+    "timestamp" : "08:58-09:09",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I I was told to bring a Troy Brown story. It wa I was doing a story on Julian Edelman a f I don't know a few years ago during a postseason, you know, r probably like a playoff preview type of story. And it was, I was talking to Troy Brown, and Troy was telling me it's 2009 training camp. So they had just drafted Edelman in the seventh round. And at that point, everybody It's not the cliche. This guy was a college quarterback and now he's like a punt returner slash slot receiver and everybody thought he was going to be the next coming of West Welker. Uh you know, best case scenario. So Troy Brown is sitting there, he just retired and he's at practice and you know he's not even close to getting into the coaching capacity yet. So he watches it and you know, Edelman's running around like you know, with his hair on fire like he usually does. In and Edelman was way, way, way more raw. I mean he was he was a legitimate project, a guy who needed to Go through a lot of bumps and bruises and really fine-tune his game for a number of years before he became the outstanding player that he was for his career. Troy Brown goes down to the field and and seeks out Belichick. He seeks out, that was probably extreme way to put it. When Troy Brown walks onto the field, he doesn't need to like go looking for Bill Belichick. But Troy says to Bill, hey, it looks like you found the next welker. And Belichick goes, No, I found the next you. It was it's amazing because I want to say that it was like 2015 when Troy Brown so maybe 2016 because it was probably like I I'm thinking it was it was a playoff story. But It was probably after he like really made a name for himself. uh and the Super Bowl run against the Seahawks and all that. It was probably like a returning to the playoffs type of deal. Um and he's It he was so much more of a Troy Brown type of player than he ever was a West Walker type of player. Not that's a bad thing or whatever, but it's just And Belichick knew it right away before Julian Edelman was anywhere close to becoming the Julian Edelman that we've all gotten to know. To get to the first couple parts of the question. I don't know how you guys can get access. I mean you can reach out to the papers.",
+    "timestamp" : "09:09-11:25",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "11:25-11:28",
+    "speaker" : "Steve",
+    "text" : "We don't care about the other players. We only care about boy."
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Yeah, yeah. I don't know. There was uh there was the story of that guy who kind of held the sign out on Route One saying, you know, every single day, seeing if he can get some access uh to the team. I don't think that worked out, so maybe you're gonna need maybe you don't want to do that one either. Um yeah, the access, I mean it's i over the over the course of the years, I mean I've been in the locker room since two thousand nine and During the season, it's three to five times a week, uh 45 minutes every day. Made a lot of relationships. The thing I I really enjoy about covering this team is the the quality of human beings that Belichick brings into the locker room. I mean, these guys, more often than not, I mean, there there's a lot of really good people who For n I'm not sitting here saying like, you know, they know everything about me, I know everything about them, but they will take the time to talk to you and they're not gonna blow you off. And I've got friends who cover other teams and they'll be like, yeah, you know, they're There are twenty good guys in the locker room and the rest of them, you know, they get angry every time they see me. Whereas in at Gillette, you know, with very, very few exceptions over the last twelve plus years. I mean it's it's like 52 53 guys on that roster who were just really good people to talk to. Um I've had I've had a good run with the linebackers. I mean I've always had a good rapport with guys like Hightower, you know, even Brandon Spikes and Gerard Mayo and you know guys who um I mean there's this there's just Gronk was always great to deal with Edelman. I mean Brady to an extent, uh even though he's he he's just at a different caliber as to how available he always is. He was always very cordial. I mean, just a lot of good interactions with him.",
+    "timestamp" : "11:28-13:19"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Um What about the staff?",
+    "timestamp" : "13:19-13:21"
+  },
+  {
+    "text" : "What's that?",
+    "speaker" : "Jeff Howe",
+    "timestamp" : "13:22-13:22"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What about the staff, the coaches?",
+    "timestamp" : "13:22-13:24"
+  },
+  {
+    "timestamp" : "13:25-13:43",
+    "speaker" : "Jeff Howe",
+    "text" : "A little bit different. I mean they're They're much more reserved. The thing with the players is it's in their contracts that they have to be in the locker room uh every day during media access. And sometimes, you know, it's for ten seconds, sometimes those guys will hang around for a half hour or whatever."
+  },
+  {
+    "text" : "Uh the coaches don't have that same",
+    "timestamp" : "13:43-13:46",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "No, the coaches don't have that. Basically, the coaches have to be available like Belichick has to be available every day. Well, not every day, but like most days of the week. Um the coordinators have to be available once a week, the assistant coaches once a month. And it's it because it's so rare to get that access, you you're very rarely talking to these guys one-on-one. There there have been some, you know, good ones who have come by and have taken the time and stuff like that. And, you know, I don't know, I don't really want to get into names, but you know, I've gotten to know some of them on a personal level. Uh but it's just it's harder because you just don't have that face-to-face time with them as often.",
+    "timestamp" : "13:46-14:23",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "text" : "So like Belichick has that media reputation of being like ornery and just dry. But everyone here is the other side of it where he's super funny and witty. I don't know, where do you fall on that?",
+    "timestamp" : "14:24-14:37",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "14:37-15:22",
+    "text" : "We still don't get the witty, funny side of it all that often. I mean it's still different. I mean he's but I get it. What he is what his approach to the media is everything he says to us, he expects is going to filter into the locker room in some capacity. So when he's relaying these dry messages, I mean they're not it's not too far from the things that he's saying to the team. And like for example uh the unpopular trades that he's made in the middle of the season. I mean the Jamie Collins trade in 2016. You know, that was that was not a popular move in that locker room. I mean, really, really not a popular move. Shades of Lloyd Malloy."
+  },
+  {
+    "text" : "Even that and Mike Brable trade. Yeah. Yeah.",
+    "timestamp" : "15:22-15:25",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "15:26-16:23",
+    "text" : "So he got to the the or the front of the meeting room, the morning of that trade, or then whenever it happened to go down, and he got in front of the locker room and he said, We made a transaction, it was my decision, it's final, and it's time to move on. And then an hour later, or whatever it is, he steps in front of the podium and he has his news conference with us. And you know, everyone's asking questions and he's basically saying the same thing. Right. Because he's not going to tell us anything that he's not going to tell the team. And there's obviously he's He's going to tell the team how they're going to game plan for the Bills. He's going to tell us, or let's he's got an 0-16 team coming to town. He's going to tell the team they're the greatest team ever. He's going to tell us they're the greatest team ever. You know, it's not the same rule, the same standard for every single story. But I think I wanted to get across like the point with like the Collins thing to sort of give you a glimpse into how and why he handles certain situations.",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "16:23-16:28",
+    "text" : "Yeah. Were you there in person for the uh we're on to Cincinnati?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Oh yeah, absolutely. Yep.",
+    "timestamp" : "16:28-16:30"
+  },
+  {
+    "text" : "How was that received by like the press? Because like you said, yeah, I mean it's again this",
+    "timestamp" : "16:30-16:39",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "It's so it's so different because I'm I'm just used to it. Like I've been doing this for for years at this over a decade. And at that point that was That was 2014. So I'd been doing that for five years. I guess that was my sixth season. So he just he didn't want to deal with This was just after drafting Garoppolo. Brady didn't play well. Garoppolo came in. The team showed some life. I think he threw a touchdown pass to Gronk at the end of that Kansas City game or whatever it was. And he he wasn't going to hear the the quarterback uh controversy types of questions. And that was how he wanted to handle it. So Clearly.",
+    "timestamp" : "16:40-17:20"
+  },
+  {
+    "timestamp" : "17:20-17:26",
+    "text" : "So what do you do in that situation as as somebody who has to ask him questions to find something to write about?",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "17:27-17:27",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "You you know somebody else is gonna do it, you know, sometimes so do you know before you ask the question whether or not he's gonna bite your head off?",
+    "timestamp" : "17:36-17:45",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "If you have a well-thought out question and this isn't like an off-the-cuff thing Like if you bring a question to the table that you've thought about and you've, you know, whatever, he's gonna give you more often than not a well-thought out answer. Now if you're gonna if you wanna get into the hot take stuff, if you want to ask, I mean, if you want to just outright piss him off, like he's he's not gonna take to that. You know, different coaches handle things differently, and there are certain certainly there are times when you wish that he was more forthright or forthcoming with his answers. But at the other side of it, it's like if somebody's asked the same question three different times, like what are you gonna do? Like do you want to sit there and ask it a fourth time, knowing that He's not gonna like it, he's not gonna give you a better answer, and then you're just starting to waste everybody's time. And then the other thing is like if you just keep pissing them off with quite like if you guys asked me the same question five times in a row here, I'd be like, all right guys, you know, we we've had a good night. I'm gonna go take care of kids. Like there are just there's got to be some tact to it from both sides. So you gotta be professionally respectful of each other's times.",
+    "timestamp" : "17:53-19:10",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "text" : "Those situations are hilarious when like a third person asking the same question and like hearing them try and rephrase the same question a different way. Is is always peak comedy. Oh man.",
+    "timestamp" : "19:11-19:23",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "19:23-19:35",
+    "text" : "Yeah, I mean look, I've I've sat there and tried not to laugh in the middle of somebody's But to quote an old saying that I've heard once or twice, it is what it is.",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "text" : "So I got a question speaking of like other media members in New England. So uh I grew up in New Hampshire listening to 985 WEI and then I moved to North Carolina and it was like shocking how differently the media here treats local sports teams than back in New England. So I I think it's it's it's fair to say that the new uh the Boston sports talk media is like relatively like tough on their teams as far as like being critical. So specifically like Felger and Maz is a good example where it seems like they're almost at a point where they're like trolling you as far as like hating on the Patriots. Do you think that that's kind of like a tactic that they use as far as like, yeah, we get a lot of listeners because we know we rile them up? Or do you think those are their legitimate like opinions?",
+    "timestamp" : "19:39-20:36",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "20:37-20:49",
+    "speaker" : "Jeff Howe",
+    "text" : "Uh that's a tough question for me to answer. Um 'cause I don't I don't wanna do what the thing that pisses me off about those guys. I don't want to talk about their jobs."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah.",
+    "timestamp" : "20:49-20:50"
+  },
+  {
+    "text" : "Like the way that they talk about my job, that pisses me off. Uh so I'm not gonna answer like why or I mean they have the number one rated show in the world, in the country, whatever. They're they're good at what they do. The ratings say they are. Um, there are things that I wish they didn't do. I I don't want them, you know, they don't need to be talking shit about what I do and the way I do my job. Uh But I'm not gonna be a hypocrite and sit here and say, you know, I'm not gonna flip that this and do that about them when they don't have a chance to sit here and defend themselves. So I'm gonna respectfully pass on the rest of the thing.",
+    "timestamp" : "20:50-21:27",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "text" : "You know what you said enough? Do you only talk about mom? Yeah, right. It's only mom listen. Do you feel like there's Because from like an outsider's point of view, people, some the type of person who like takes in all this media, it feels like there's been for a long time an undercurrent of I don't know if negativity is the right word, but just kind of like waiting for the teams to do badly. And kind of like for us growing up, it was always like eventually. the sports media would be proven correctly eventually. No, you got your Bill Buckners or your whatever. Um basically your Red Sox of every year up until 2004. Um and the Patriots were also lumped into that. And so it felt like from the outside there was this waiting for the other shoe to drop in a lot of the the content that was written. And even when the team started getting success, it felt like A lot of the maybe the older media members were kind of like hanging on to that a bit. And I don't know if you've seen that in like your interactions with like other media members or like players kind of um like recognizing that and and not necessarily opening up to you as quickly maybe",
+    "timestamp" : "21:28-22:48",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Uh I j it's just it's hard. I have such a different job because you know those guys they they have to have an opinion. You know, if you're on talk radio, you have to have an opinion. Whereas it's my job to just relay information. And sometimes I do it differently, sometimes I'll do it in an entertaining way, sometimes I'll do it in a column fashion. But ultimately, my goal is to just relay information. So I I just pride myself on being accurate, being credible, you know, my having my reputation is Just somebody that I just I want people to appreciate and respect my work. And I'm not ever gonna put something out there just to get attention. Um whereas that's just it's just totally different. an old school columnist um for you know any of the big papers in the city. I'm not going to mention any names because I don't want anybody to think I'm talking about them.",
+    "timestamp" : "22:49-23:46"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Rob Boy Jones.",
+    "timestamp" : "23:48-23:49"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "But you know what their job is or was, and it's very similar to what it is on talk radio. I mean that's just I've got great friends in on radio in town. I mean, I went to college with Mark Bertrand. I wrote a book with Zolak. So I've got that show monopolized there. I'm good there. But like they they just their job is just so different. And sometimes when I come out and I bore them with just middle of the road facts with objective you know just being objective because that's what you can't do anything with right yeah exactly right but you know sometimes I bore those guys and sometimes they take shots of me for it and as long as it's playful than or like I'm there to defend myself. I'm cool at that. Like that's that's totally fine. It's just um but as opposed to it's just we just have such different jobs. So like Who's are they rooting for negativity? I'm not going to speak for them. All I can say is I just try to tell you what's happening and why it's happening. You know, if if something's not working, like the quarterback situation last year, I'm gonna tell you why it's not happening or what they need to do from here. Like there was there was a time last year when I wrote that, you know, through three games, Cam Newton was playing so well. What is he looking at for a contract extension? And I started comparing like this guy was looking at a deal worth like $25 million annually after week three. And then they became so one dimensional and so easy to defend after that Rams game, I was like, all right, and now it's time to put in stittim. W But like neither of those things were me just saying, hey, you know what, I gotta get myself some attention. It's just like, all right, the quarterback um the quarterback topic is is the topic with this team right now. Until they find somebody to handle this thing for a long time. So how can you at least extrapolate on that and to push it forward after you know certain situations?",
+    "timestamp" : "23:52-25:44"
+  },
+  {
+    "timestamp" : "25:44-25:46",
+    "speaker" : "Andy",
+    "text" : "So who's starting week one then?"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "I think it's gonna be Cam.",
+    "timestamp" : "25:46-25:48"
+  },
+  {
+    "text" : "Yeah, me too.",
+    "timestamp" : "25:48-25:48",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "25:49-28:02",
+    "text" : "I think I mean Belichick, uh with how strongly he said Cam was their quarterback the night that they drafted Mac Jones, I mean I have to believe it will be. Mm-hmm. I'm not saying Mac Jones has zero percent chance or whatever. I mean if I I know that they do believe, the team does believe that Like he he had his shortcomings last season. I mean just look at the contract they gave him. Um just judge them by their actions. Cam Newton had accuracy issues, he had mechanical issues, uh they were very predictable in the in the red zone Now, they went on a shopping spree this offseason. They are well built to handle or they are much more, much better equipped. To throw the ball now just with the talent around them. And they want to see if adding John Hugh Smith and Hunter Henry and Nelson Aguilar and Kendrick Bourne uh is gonna have an impact on Cam Newton. And if who knows how much of that the COVID uh how much of that truly impact you We don't know yet. We'll see if all of these things help Cam Newton become a better quarterback in training camp. The great thing that they have going for them right now You know, last year they had they had a two-week training camp, and Jarrett Stidham was bad and then hurt by the end of the fourth practice. And at that point, Cam Newton had established himself as the number one guy. And it he was good. Like Cam Newton was good enough in practice to have that. Now they're gonna have a normal training camp. They're gonna have three preseason games. They're gonna have upwards of six weeks before the opener. to figure out whether or not Cam Newton is going to be a better version of himself than he was last year. And if they find out over those six weeks that he's the same guy despite all the additions around him. And Mac Jones comes in and plays well, and he he I'm not saying he's gonna look like he did last year at Alabama, but if he's a facilitator of the offense, if he's accurate, if he I mean think about it. The way that they're built, they're built to throw the ball over the middle of the field. You have to be accurate. That's what Mac Jones does. If that accuracy starts to pop and Cam Newton doesn't progress the way that they hope Then Mac Jones, I think, has a very realistic chance to start. But those are two big ifs. Yeah."
+  },
+  {
+    "text" : "So what's this book you wrote with Zoac?",
+    "speaker" : "Steve",
+    "timestamp" : "28:05-28:07"
+  },
+  {
+    "timestamp" : "28:07-28:32",
+    "text" : "Oh yes. Oh you mean the one right there? There it is. There it is. Right above the Mickey Ward glove. Yeah, if These Walls Could Talk, it was just a fun book that we did. Uh just twenty-five years of Patriot stories between Him showing up in Foxboro and his overlap with me and the time that we've you know covered the theme in various capacities together.",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "28:32-28:36",
+    "text" : "So it was just how the editing process work because can't Zolak not read"
+  },
+  {
+    "text" : "It's a coloring book.",
+    "timestamp" : "28:37-28:38",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "28:40-28:56",
+    "text" : "No, I read I read the first half, and I'm gonna I'm gonna guess that um The way it went down is somebody recorded Scott Zolek just talking for like probably hours and then Jeff probably did the heavy lifting on the writing of the book.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "28:57-29:08",
+    "text" : "What I like to tell people was we just alternated words. So I would just throw one word. And then Zoe would come in and he'd type the next word. And then we just we alternated until we got to 80,000."
+  },
+  {
+    "timestamp" : "29:08-29:40",
+    "speaker" : "Andy",
+    "text" : "And it was like We're actually we're actually trying to write a book like that because we did a um We did a review of uh a Cam Newton-themed erotic novel, and it was so badly written we thought we can do better than that. So we're We're we're alternating chapters um without telling the other person what we're writing. So I I'm writing the first chapter and I'm gonna hand it off to one of the brothers and then it's a Bill Belichick erotic. No, no. We don't even know. We don't know how where it's gonna go. Who knows where it's gonna go? So I know where it's gonna go."
+  },
+  {
+    "timestamp" : "29:40-29:43",
+    "speaker" : "Steve",
+    "text" : "Yeah, you're in. We can tag you in, but yeah."
+  },
+  {
+    "timestamp" : "29:43-29:47",
+    "text" : "It's gonna end in graphic penetration, okay? I know where it's going.",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "29:50-29:52",
+    "text" : "Uh yeah, well there you go.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "29:53-29:55",
+    "speaker" : "Jeff Howe",
+    "text" : "At some point I have to make sure I'm invited back to the locker room."
+  },
+  {
+    "timestamp" : "29:56-29:59",
+    "speaker" : "Andy",
+    "text" : "So maybe. No one's gonna read this book."
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Yeah, we won't put your name on it. It'll be fine.",
+    "timestamp" : "29:59-30:01"
+  },
+  {
+    "text" : "You're good, buddy.",
+    "speaker" : "Andy",
+    "timestamp" : "30:02-30:03"
+  },
+  {
+    "timestamp" : "30:03-30:05",
+    "speaker" : "Jeff Howe",
+    "text" : "I'm not gonna tell you guys how to live your lives."
+  },
+  {
+    "text" : "I gotta be able to invit it to this the the uh the locker room already, so I mean no skin off our bag, right?",
+    "speaker" : "Andy",
+    "timestamp" : "30:06-30:13"
+  },
+  {
+    "text" : "I only want to go to locker room if Troy Brown's there.",
+    "speaker" : "Steve",
+    "timestamp" : "30:15-30:17"
+  },
+  {
+    "timestamp" : "30:18-30:20",
+    "speaker" : "Jeff Howe",
+    "text" : "Yeah. Well he's a he's a coach, so he'll be there."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's right.",
+    "timestamp" : "30:20-30:20"
+  },
+  {
+    "text" : "All right. Yeah, we're we're gonna question about the media landscape.",
+    "timestamp" : "30:21-30:26",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Oh, okay.",
+    "timestamp" : "30:26-30:27"
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "So I think with like the invention of like YouTube and basically, I mean, look at three random brothers can have a podcast. You've seen like the the old guard like media being like, okay, we need to be objective. We can't be fans or we can't like, you know, step over that line. But now You're seeing like more and more like like the bar stool guys, a lot of them are like openly fans of the teams that they cover, and you're like, you know, go to YouTube and it's all like fan journalism pseudo kind of thing. Where do you what do you think as far as like where that's heading? And do you ever like struggle with that yourself as far as like, okay, I have to remain objective even though I grew up in low and you know?",
+    "timestamp" : "30:28-31:11"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "31:12-33:20",
+    "text" : "No, I mean, believe it or not, like the that that fades really quickly. Um because You know, I'm there to do a job and I'm not gonna do it well if I'm a fan. It's just that's not gonna happen. Now, I can't hide the fact that, you know, I have family members who are seasoned ticket holders and uh, you know Um like this my daughters are growing up in in the area. Like they're gonna like the Patriots. Like there's there are parts of your life that you just can't like I can't erase the fact that I grew up in Lowell and and you know the fact that who I grew up cheering for. But once I get in once you get into it, it really is pretty easy to push that stuff aside. In I mean 2009, like the whole media landscape changed with just the way that the websites were You didn't need to be a traditional media outlet. I mean, again, WEI. com really blew up in like, I think it was 2008 and Comcast. com or whatever they were at the time. Comcast New England, whatever, whatever that they were branded at that point, you know, they were starting to blow up. And Nesson. com was just a little bit behind them, but then they started to move. So The the traditional media landscape changed big time around that, like really right when I started, I got my first break. And you like at the same time, there was I mean There was no Twitter at at that point, I don't think. I mean, I know I started Twitter in 2009, but it was probably after I started covering the Patriots. And there was like here's another random story. I broke, believe it or not, I I broke the story that Ovechkin signed his like, I don't know, 13 year, $125 million contract with the Capitals back in, I want to say 2008. And I put it on the Metros website, which I mean my mom maybe read. Like no I I was calling people being like can you We understand. We know that. Can you guys get this onto like the news tonight? Because like I just broke this massive story. But like the tree fell in the woods and there is nobody within miles to even hit the ground."
+  },
+  {
+    "timestamp" : "33:21-33:24",
+    "speaker" : "Greg",
+    "text" : "Um How did you get the how'd you get the info?"
+  },
+  {
+    "text" : "I had a very well-placed source. It worked out. But I didn't cover hockey.",
+    "timestamp" : "33:24-33:33",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "33:35-33:43",
+    "speaker" : "Steve",
+    "text" : "I will say I live in DC and the sports media here is also very negative for the Redskins, but rightfully so."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "33:43-33:44",
+    "text" : "Yeah. Deservedly."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Deservedly so.",
+    "timestamp" : "33:45-33:46"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "But the Tabarstool, like, they do things their own way and they do a great job of it. Like it makes it In a different sort of comparison, like do you remember this when Bill Simmons was the Boston sports guy? Oh yeah. Well when when he was going in the early 2000s, I mean he was a blast to read.",
+    "timestamp" : "33:47-34:06"
+  },
+  {
+    "text" : "That's true. He probably set that that standard there.",
+    "timestamp" : "34:06-34:09",
+    "speaker" : "Greg"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "He did. But in every kid, I mean when I got to the student paper at UMass, it I had great mentors there, and these guys were like, they said it to me, they said it with every new kid there. You are not gonna try to write like Bill Simmons. Like Bill Simmons is great at what Boston Sports Guy is great at what he does because he's funny, he knows how to write, he knows how to tell stories, and he knows how to do it in a way that keeps people engaged for thousands of words at a time. You are a slappy, you know, nineteen, twenty-year-old college kid. You can't write worth a damn. You're not nearly as funny as you think you are. And it takes me four hours to edit your crap that you hand in every night to stick to cover in the lacrosse game.",
+    "timestamp" : "34:10-34:51"
+  },
+  {
+    "timestamp" : "34:51-34:54",
+    "speaker" : "Steve",
+    "text" : "So no one needs to tell Greg that."
+  },
+  {
+    "text" : "So it was like People can try to replicate the barstool stuff, but they're not gonna be as funny. They're not gonna be as innovative. Like those Portnoy is is is a millionaire because he does what nobody else can do as good as him. And You know, people who try will more likely than not fail. So like I've always just taken it like think about what you're good at. Focus on that stuff. Don't try to be who you're not. Write whatever you know, say whatever you feel. Write whatever you feel. Don't try to like have a personality that isn't yours. You know, when I'm on with Toucher and Rich, like I don't know, I s I think I'm like I have some dry humor. I might sneak in here from time to time or whatever. Those guys are like way funnier than me. So I'm not gonna go on Toucher and Rich and try to match those guys joke for joke and make an ass out of myself. So I just like stay in my own lane. I just, you know, be who you are Yeah. And and don't try to force it because when you start forcing stuff, you get exposed way too quickly.",
+    "speaker" : "Jeff Howe",
+    "timestamp" : "34:56-36:00"
+  },
+  {
+    "text" : "Patriots game part to finish of 286 and spend ninety minutes talking about each one.",
+    "timestamp" : "36:06-36:14",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "36:14-36:20",
+    "text" : "It's like 300 and that's what you guys can do, and nobody else can do it the way nobody else has this sort of fortitude."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "Yeah. Tell us the truth. When you heard that, you were like, that's the dumbest thing I've ever heard.",
+    "timestamp" : "36:20-36:24"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "No, I I like the idea I really do. Execution wise, yeah.",
+    "timestamp" : "36:25-36:30"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But the idea is coming to be designed, we'll say.",
+    "timestamp" : "36:30-36:33"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "36:33-36:53",
+    "text" : "Yeah, I mean hey, it's it's a h it's a cool idea. It's I mean Abs it's it's a really cool idea to go back and look at all this stuff because think of how many people have watched ninety-five percent of Patriots games that every Patriots game over the last two decades. I mean I know I have."
+  },
+  {
+    "text" : "But how many do you remember from the forgetter season?",
+    "speaker" : "Andy",
+    "timestamp" : "36:53-36:56"
+  },
+  {
+    "text" : "I can't even remember ninety five percent of the game.",
+    "speaker" : "Jeff Howe",
+    "timestamp" : "36:57-36:58"
+  },
+  {
+    "text" : "Yeah. Yeah. It's interesting what you do remember and what you don't remember. Yeah. That's why there's odd things that are like clear as day, remember at like multiple plays from this game, and another game is like not a clue. You couldn't even tell you the score here.",
+    "timestamp" : "37:01-37:14",
+    "speaker" : "Greg"
+  },
+  {
+    "text" : "Yeah, I mean I think if I went through the box score of that season opener in 2004, I'm sure things would start to come back to me. But I think that was No I want to say I might even be thinking of the the op the banner raising against the Raiders more than you know the the Brady Manning season opener than anything. So it's and those things start to run together. Yeah. That'd be fun though to kind of sit back and re-watch all those games from fifteen plus years ago.",
+    "speaker" : "Jeff Howe",
+    "timestamp" : "37:16-37:46"
+  },
+  {
+    "timestamp" : "37:46-37:49",
+    "speaker" : "Steve",
+    "text" : "The team quality gets better the longer you watch it."
+  },
+  {
+    "timestamp" : "37:49-37:54",
+    "speaker" : "Andy",
+    "text" : "Yeah. It's it's finding games that you can actually make out who the players are. Yeah."
+  },
+  {
+    "timestamp" : "37:55-38:13",
+    "speaker" : "Jeff Howe",
+    "text" : "I mean I've talked to I love doing stories like oral histories of of games that happened 15 years ago, whatever, 10 years ago. And I'll talk to guys who played in those games and they'll you know some of them are like, yeah, I I don't remember what happened. Oh yeah. It's uh it's it's a fun exercise. It's gotta be a fun exercise."
+  },
+  {
+    "timestamp" : "38:14-38:15",
+    "speaker" : "Andy",
+    "text" : "Yeah, no, it has been so far."
+  },
+  {
+    "timestamp" : "38:15-38:22",
+    "speaker" : "Greg",
+    "text" : "Yeah, the good games are awesome, but then like the slogs against Buffalo in December and you're like, oh, why am I watching this?"
+  },
+  {
+    "text" : "You don't even watch them.",
+    "timestamp" : "38:23-38:24",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "38:24-38:29",
+    "text" : "Exactly why. It's a 9-6 uh Browns game that almost burnt me."
+  },
+  {
+    "timestamp" : "38:34-38:53",
+    "speaker" : "Jeff Howe",
+    "text" : "Even like now, like when they were you know a juggernaut and in the middle of winning three Super Bowls and in five years or whatever um you know recently show up it on the road in Buffalo no a Jets game or whatever and the Jets wouldn't be good and it'd be a one o'clock game."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "38:53-38:54"
+  },
+  {
+    "text" : "And you're you're sh I'm going to the stadium like this is just gonna be a boring like thirty-five to ten game but I'll write my game. Yep, I'll be out I'll be out of the building by six or something like that. It's just Yeah.",
+    "timestamp" : "38:54-39:08",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "39:09-39:43",
+    "text" : "There's always like some of those gems that you like remembered it at the time, like those one Jets game that ended with like a huge brawl that I think Matt Light started. Off of a I think it was a Geno Smith Interception or something to end it. I'm like, I I don't even remember this game. This is amazing. How do I how did I forget that this game ended in a brawl? And so that was actually what got me to start this podcast was like, we need to go back and watch some of these games. Because uh what else have I forgotten? And it's a shit ton.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "39:45-39:53",
+    "text" : "And then you re-watch them and forget them again. Oh yeah. But we can always re-listen to our podcast and remember it again. That's true."
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "39:54-39:55",
+    "text" : "Eclipse notes."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "39:55-39:57",
+    "text" : "Yeah, exactly. Oh, they're long. So"
+  },
+  {
+    "text" : "Uh all right. Well we should probably let you go because I know you have other stuff to do. You're on to uh bigger and better than this. But um before you go, we ask everybody this. Uh who is your favorite Patriot?",
+    "speaker" : "Andy",
+    "timestamp" : "39:59-40:11"
+  },
+  {
+    "text" : "Uh all time.",
+    "timestamp" : "40:12-40:13",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "timestamp" : "40:14-40:16",
+    "text" : "And why is it Troy Brown?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "I d I don't know. It's hard for me to say I have a favorite Patriot just because again, it's get back it gets to the job aspect of it. I mean Like, yeah, you're growing up there there's a fan and stuff like that. But like I don't want to put myself out there and be like, yeah, you know, because I've gotten to know some of those guys. Like even guys that I didn't cover like had been long been retired or whatever. I think m recently I've stuck and this isn't like a favorite or whatever. A recent calling of mine has been to figure out why the hell Stanley Morgan isn't in the Hall of Fame. I I think I've gone on more than my share of social media rants over over that topic in the last couple months. Um So, I mean if I have to give a shout out to an old school Patriot, I'm gonna go with Stanley Morgan because that guy won't fame. His numbers in his first six seasons are absolutely absurd. They're better than some guys who are in the Hall of Fame who played in the same era. I mean 20 plus yards a catch for six consecutive seasons to start his career.",
+    "timestamp" : "40:22-41:22"
+  },
+  {
+    "timestamp" : "41:22-41:23",
+    "text" : "It's insane.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Second fastest guy to 10,000 yards And he did it for bad teams.",
+    "timestamp" : "41:24-41:28"
+  },
+  {
+    "text" : "I mean who was throwing in the football.",
+    "speaker" : "Andy",
+    "timestamp" : "41:28-41:30"
+  },
+  {
+    "timestamp" : "41:31-41:44",
+    "speaker" : "Jeff Howe",
+    "text" : "Right. I mean Grogan was great, but for parts of that he was hurt. Uh for large parts of that. So it's uh Stanley Morgan should be in the Hall of Fame and I will not rest until it happened."
+  },
+  {
+    "speaker" : "Greg",
+    "text" : "That's why I wanted to have you on here, Jeff. You're a Stanley Morgan Hall of Famer. That's what I like to fucking listen to.",
+    "timestamp" : "41:45-41:52"
+  },
+  {
+    "timestamp" : "41:54-41:57",
+    "speaker" : "Jeff Howe",
+    "text" : "That's that long. Yeah."
+  },
+  {
+    "timestamp" : "41:57-41:57",
+    "text" : "Hell yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "41:58-41:58",
+    "speaker" : "Jeff Howe",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "41:58-42:50",
+    "speaker" : "Andy",
+    "text" : "Also, um In honor of having Jeff on, we've decided that uh we're going to give away uh a year subscription to the athletic to a listener. Um so I think what did we land on? We landed on If you you gotta leave a review of the podcast, uh doesn't have to be good. Um we understand we're human. But yeah, so just leave a review anywhere, iTunes or PodChase or whatever app you use, and then text the the Dynasty Hotline to let us know that it's you. And we're gonna pick one at random. Uh and if you don't text us, we won't know because they don't actually tell you who leaves these reviews. So you gotta leave a review and then you gotta text the hotline. Steve, what's the number?"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "42:51-42:56",
+    "text" : "603 505 Troy Brown for three."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's right. 603 505-8043.",
+    "timestamp" : "42:56-43:03"
+  },
+  {
+    "text" : "So I I appreciate you guys doing that.",
+    "timestamp" : "43:04-43:06",
+    "speaker" : "Jeff Howe"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Absolutely.",
+    "timestamp" : "43:07-43:07"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "43:07-43:17",
+    "text" : "Supporting the athletic and and I hope whoever gets that free subscription like truly enjoys it. I mean I can't say I I love the work that they let us do at the athletic."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's so good.",
+    "timestamp" : "43:17-43:18"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "timestamp" : "43:19-43:49",
+    "text" : "We do everything we can to make sure like we understand, especially like it's a little easier now than it was three years ago when I joined the company and you know the thought of paying a subscription fee for for online content, you know, it it was it was not common whatsoever three years ago. No, it wasn't. And it it's tough to to get people to I mean I I know what it was like you know downloading free music twenty years ago and now having to pay for like I get it."
+  },
+  {
+    "text" : "It's mad napster, I know.",
+    "timestamp" : "43:49-43:51",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Right. Lime wire, baby.",
+    "timestamp" : "43:52-43:53"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Lime wire.",
+    "timestamp" : "43:54-43:54"
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "I I work my ass off. I know everybody else at the company does to make sure that when you are, you know, putting a few bucks a month into our products. We want to make sure that you not only enjoy it, but like you are willing to keep coming back. Um so Everything I write for the most part, I should so almost everything I write is I aim to have unique content. I try to give my access to the readers as much as possible. Like I know that people are paying money to read our stuff. And we want to make it worth it. So thank you again for supporting it. And again, to whoever gets the subscription. I hope you can see the work and the effort that we put into this stuff.",
+    "timestamp" : "43:54-44:36"
+  },
+  {
+    "timestamp" : "44:36-44:47",
+    "speaker" : "Steve",
+    "text" : "Anyone listening to this podcast where we're going way deep on a Patriots game from how to do it. Yeah, it's Taylor made with like the athletic. We love the athletic content for sure."
+  },
+  {
+    "timestamp" : "44:47-44:48",
+    "text" : "Yes. For sure.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "44:48-44:48",
+    "text" : "Yeah."
+  },
+  {
+    "text" : "Because it it's like what we're doing, but like for stuff that's happening now.",
+    "timestamp" : "44:48-44:52",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Oh no, I was gonna say actually good.",
+    "timestamp" : "44:52-44:54",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "44:54-45:05",
+    "speaker" : "Andy",
+    "text" : "Well that too. Doesn't have Greg in it. Yeah. But we're doing by yet. Bye yet. All right."
+  },
+  {
+    "speaker" : "Jeff Howe",
+    "text" : "Thanks for having me.",
+    "timestamp" : "45:05-45:06"
+  },
+  {
+    "text" : "Absolutely Jeff. Thanks for coming on, bud. Talk to you soon. Take care. Wait, wait, wait. All right. I think it's gonna be tough to follow that With. I like Jeff. Yeah, good. Super show. Yeah. Yeah. Oh, but he didn't shit on Colby. Damn it. Oh yeah. So Colby, if you're listening. Go fuck yourself. Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "45:07-45:35"
+  },
+  {
+    "timestamp" : "45:35-45:36",
+    "text" : "Get out of his driveway.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "45:37-45:38",
+    "speaker" : "Andy",
+    "text" : "Yeah, right? What the fuck you fucking stop?"
+  },
+  {
+    "timestamp" : "45:38-45:40",
+    "text" : "Did you drive your own house, buddy? Jesus, right?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, but he's my neighbor. I can look through his windows. It's cool. It's not it's not Colby. Fucking knock it off. Put the binoculars down, Colby. All right. So speaking of football, there was some football that happened back in 2004. And uh I think we should probably talk about it, Steve. What do you think?",
+    "timestamp" : "45:40-46:01"
+  },
+  {
+    "timestamp" : "46:01-46:13",
+    "text" : "Yeah, I mean, it was nice. It was like a uh rematch. Yeah. AFC Championship. Everyone remembers that AFC Championship game. No one remembers a rematch week one season opener.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "46:13-47:00",
+    "speaker" : "Andy",
+    "text" : "So the only reason I remember this game was because Madden, that year's Madden had just come out, like not too far before it, and I had just played this game in Madden. And it came down to a last second field goal, and I was like, this is so realistic. Which back in 2004, I don't think it was, but I sure felt it. Did you hit a fucking duck squib kick wide right? No, I hit the game winner with Adam Minateri because he doesn't miss. Um but the controller was vibrating as like a heartbeat. Yeah because it was clutch. And I'm like, oh my god, this is so fucking my adrenaline's racing. And it was great. And it was probably as we've talked about before on rookie because I like to beat the piss out of things. Ye Oh yeah, yeah. Still came down a lot."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "How did it come down to a last minute field goal?",
+    "timestamp" : "47:01-47:03"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "47:03-47:31",
+    "text" : "It's the Colts, man. It's fucking Peyton Manning. And it's the first game I ever played on on that Madden. You know, it happens. What's that? That may have been the year with the fucking like the vision cone and shit. Oh man. I don't know. I'm not a big Madden guy. I'm terrible at video games. Yeah, I know. That's why I played on easy, Steve. Who is favored in this game? So the New England Patriots favored by three, which basically means it was a push because you had three points of playing at home. So it was even."
+  },
+  {
+    "timestamp" : "47:32-47:40",
+    "speaker" : "Steve",
+    "text" : "Because I feel like this is back when the Patriots were still underrated because Madden is in there talking about how he thinks Brady is better than people give him credit for."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, no, I I'm I'm back to being a Madden stan. I love the dude.",
+    "timestamp" : "47:40-47:46"
+  },
+  {
+    "timestamp" : "47:46-47:48",
+    "speaker" : "Steve",
+    "text" : "I've been a Madden guy."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's what I mean. But like uh since we started this podcast. Yes. I'm all in on John Mann. I actually wrote that down. I'm all in. I love early 2000s, John Brady. I love it. So good. Yeah, his quote was to me, Tom Brady is one of the best quarterbacks in all of football. Week one, 2004. He can already see. He already knows.",
+    "timestamp" : "47:48-48:05"
+  },
+  {
+    "timestamp" : "48:06-48:13",
+    "text" : "He's made those comments before about him joking about, you know, him giving Brady shit in that Super Bowl.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, calling it completely wrong on that on that last drive. He's like, I have another one. I would have. But not with Tom Brady anymore. I'm never gonna say that about him.",
+    "timestamp" : "48:15-48:23"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "48:23-48:45",
+    "text" : "Here's another quote Madden quote A fumble is a fumble is a fumble And you know what I can't agree with that more No yeah Everyone's getting way too you know Yeah 'cause he was got out of button like that clear you look at it at live speed, that's a fumble. And then like you s oh it's super duper duper duper duper slow. Like, oh maybe, I don't know. Oh was was his elbow touching that blade of grass before the ball"
+  },
+  {
+    "text" : "started to slightly move for one frame. Yeah, Madden hates. Enhance. Yeah, and I yeah, I think he had a point because if you look at the game now It's gotten a little out of hand with all the reviews of slows it down. Oh my god. And year two of instant replay. I mean, I guess we're just we're just going straight in on the the commentators. But John Madden also said that the um Because this is the first game of the new um uh what am I trying to say the the new emphasis on the um touching the wide receivers of defensive holding and whatever the fuck. Which they call the good",
+    "speaker" : "Andy",
+    "timestamp" : "48:46-49:21"
+  },
+  {
+    "text" : "five times in this game?",
+    "speaker" : "Steve",
+    "timestamp" : "49:21-49:23"
+  },
+  {
+    "text" : "Yeah. Best part was though, the first time they called it this season, on the Colts. But that's like the only time they called on the Colts. Yeah. But but Madden said uh that the Colts holding claims for last year's AFC championship team or over or championship game was over exaggerated. Yeah. Like they weren't. They were fine. Madden was on team, fucked those receivers up. Yeah. I mean, as he should be. Let's talk about the new guys.",
+    "speaker" : "Andy",
+    "timestamp" : "49:23-49:48"
+  },
+  {
+    "text" : "The greatest history, yeah. Yeah, I I I think you could probably make until until the past offseason, the twenty twenty-one.",
+    "timestamp" : "49:54-50:02",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "No, that's fair.",
+    "timestamp" : "50:02-50:03",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "50:03-50:08",
+    "text" : "Uh uh 2007, pre-2007 too, with the Welker and the Moss.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah, she's freed out too. But this one, yeah, talk to me. Talk to me about because the Patriots came in, they had basically one weakness, right? And that was no running game. And also, I think if you had a second weakness, it would be the the the defensive line and not being able to stop the run. Yeah. So what do the pages do, Steve? Well we got we had two first round picks, right? Right. So oh that's the other thing. Yeah. So we had Wow. Uh we are because we had our own first round pick, which was 32, obviously, because you which was Ben Watson. Yeah. But we also had number 21, which we got from Baltimore the year before. I think Baltimore traded up into the first, so they traded for the New England first round pick. And then they gave us their first round pick in 2004 as well. Which VW.",
+    "timestamp" : "50:09-51:02",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "51:02-51:15",
+    "speaker" : "Steve",
+    "text" : "Yeah, was only Vince Wolf. No big deal. One of the greatest picks of the Patriots. All time. Yes. Just from not only a production, but also a personality standpoint. Yeah. Oh yeah."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And just like a great human being.",
+    "timestamp" : "51:16-51:17"
+  },
+  {
+    "text" : "Oh yeah. What do they trade for Corey Dillon?",
+    "timestamp" : "51:17-51:20",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh it wasn't a lot, yeah. It was",
+    "timestamp" : "51:21-51:26"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I won't say it's a second round pick.",
+    "timestamp" : "51:29-51:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Second round and like something else, I think. But yeah.",
+    "timestamp" : "51:32-51:35"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "51:35-51:48",
+    "text" : "And he was I mean he was already like one of the best backs in the league by far. This is pre uh Marvin Lewis. Or Marvin Lewis got hired the year before, maybe."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "51:48-51:49",
+    "text" : "Yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And before uh Carson Palmer, he must have come next year or this year. He's It's pretty the Bengals actually becoming mediocre where they're mediocre forever.",
+    "timestamp" : "51:49-52:00"
+  },
+  {
+    "timestamp" : "52:01-53:24",
+    "speaker" : "Andy",
+    "text" : "Yeah, so Corey Dillon was Cincinnati from ninety-seven to two thousand three. And let's see. Six years from back? Cincinnati. Let's just go through there there. So from ninety-seven They were seven and nine and then three and thirteen, four and twelve, four and twelve, six and ten, two and fourteen, and then two thousand and three they were eight and eight. And that eight and eight was the first year with Marvin Lewis. But let's see the quarterbacks. Jeff Blake, Neil O'Donnell at the end of his career. Jeff Blake again. Is this Achilles Smith? And then John Kitna Tough. Yeah. And all he did was run for uh let's see. Uh 1100, 1100, 1200, 1400, 1300, 1300. And then in 2003 he ran for 541, and then he got injured. But there was some bad blood at the end of that 2003, like the end of the run with the Bengals, which is why Patriots got him for cheap because he was you know, quote unquote malcontent. And I was trying to find the quote, but I couldn't really find it anywhere. There's just like mentions of it. But apparently, and they they mentioned it, the commentators mentioned in this game where The Bengals offensive line basically told Corey Dillon, we don't want to block for you, we'll want to block for somebody else."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. Which is crazy if that he puts up all that production. Right. That's tough.",
+    "timestamp" : "53:25-53:31"
+  },
+  {
+    "timestamp" : "53:31-54:02",
+    "speaker" : "Andy",
+    "text" : "On like two and fourteen teams. Yeah. He's fucking like he is the offense. We we saw them in 2001, that was the first game we watched, remember? Yeah, and he crushed us. And he just it was just the Corey Dillon show. I think it was Achilles Smith back then. And Achilles Smith didn't do shit because all you had to do was hand it off to Corey Dillon and watch him run for Four or five yards a game. Yeah, don't listen to that episode. That's a terrible episode of this podcast. Yeah, I I wouldn't I wouldn't start I wouldn't start with that. I wouldn't go back and leave that one. But Yeah."
+  },
+  {
+    "text" : "Well, I like the start for the Patriots in this game because they get Corey Dylan, who's by far of those names we listed, everyone else in retrospect, Vince Woolfork is sick. But You know, back then he's a rookie.",
+    "speaker" : "Steve",
+    "timestamp" : "54:02-54:16"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "54:17-54:17",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Shiny new toy on offense. Yeah. So they come out two tight ends. And spread the field and don't even put Cory Dylan out there and just throw the shit out of the ball.",
+    "speaker" : "Steve",
+    "timestamp" : "54:18-54:27"
+  },
+  {
+    "timestamp" : "54:27-54:33",
+    "speaker" : "Andy",
+    "text" : "Yeah. No huddle five wide Drove immediately down the field throwing at every play."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "54:36-54:43",
+    "text" : "That's that's what Belichick that's what his like His blanky is, you know, the two tight end set wide. Right."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "54:43-54:58",
+    "text" : "Yeah, yeah. Which he would perfect in like 2011. Yeah. But and looks like he's trying to do again. I mean he's been doing that two tight end set for I think longer than we know. I think he tried to do it in um Cleveland as well."
+  },
+  {
+    "text" : "Yeah, let's just do a whole do a Cleveland Browns podcast where we watch every Cleveland game. We'll find out.",
+    "speaker" : "Steve",
+    "timestamp" : "54:59-55:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I I don't know if you're gonna be able to find those games. I think they've been burned. the the tape of them. No nobody save those. Ain't nobody trying to watch that again. No, I don't think so. Um Yeah, so uh but before we get in the game, I just want to touch on the draft a little bit too, because this draft was bananas, uh the 2004. This was uh well known for the first two picks, which was the Chargers drafting Eli Manning number one. And then Eli being like, I ain't playing for you. So then they Chargers traded Eli Manning to Giants, who had the fourth pick for Phillip Rivers. Which fucking ridiculous. But also, other records were set where the most wide receivers were selected in the first round was seven. Just a lot of fucking wide receivers over the first round, which you never see anymore. Yeah. We have like two this year. Like a quarter almost. Right. And uh the most trades in the first round ever with 28. There were 28 trades. Like this first round was an absolute shit show. Did the Patriots trade at all? No, I mean technically they they they got the trade for uh Baltimore, so that counts, but like 28 trades involved involved in that first round.",
+    "timestamp" : "55:04-56:24"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Where was Rotha's burger pick? Because he's the same draft class.",
+    "timestamp" : "56:25-56:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's a good question.",
+    "timestamp" : "56:29-56:31"
+  },
+  {
+    "text" : "He was pretty early, I feel. Wasn't he like three?",
+    "timestamp" : "56:31-56:35",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "56:36-56:42",
+    "text" : "Um let's see. Rothesberger, no, he was picked at eleven.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "56:42-56:43",
+    "speaker" : "Steve",
+    "text" : "Well, list them off."
+  },
+  {
+    "timestamp" : "56:44-57:34",
+    "text" : "Let's let's hear the uh Alright, so I'm just gonna give you the players that uh made a Pro Bowl. Eli Manning, number one, obviously. Pick number three, Arizona Cardinals, Larry Fitzgerald. Oh, good pick. And then Phillip Rivers, who swapped pick number five, Washington Reds against Sean Taylor. Kellen Winslow the second, Roy Williams, D'Angelo Hall, Ben Rothesberger, Jonathan Vilma, Chicago Bears, defensive tackle, Tommy Harris. Eagles guard Sean Andrews. Saints defensive end Will Smith. Number 21, Vince Wilfork, nose tackle, Miami. The U. Rams picked Steven Jackson at 24. Texans picked Jason Babin. Offensive end at 27. Benjamin Watson never went to a Pro Bowl.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "57:34-57:38",
+    "speaker" : "Steve",
+    "text" : "Never went to a pro. Ah, that makes sense. He's not he was always solid but never spectacular."
+  },
+  {
+    "timestamp" : "57:38-57:48",
+    "text" : "Yeah. Colts picked at number 44. In the second round, Bob Sanders. A pretty solid draft. However, I have a friend. Wait, wait, wait.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "57:48-57:54",
+    "speaker" : "Steve",
+    "text" : "You listed a bunch of people. You said seven wide receivers are drafted. Only Fitzy made the Pro Bowl."
+  },
+  {
+    "timestamp" : "57:54-58:20",
+    "speaker" : "Andy",
+    "text" : "Yeah. Sheesh. Here, I'll give you some other names. Jags picked Reggie Williams. Bills Buffalo Bills legend Lee Evans. He was okay. Bucks picked Michael Clayton, who is I remember his name. Bills also picked JP Lawsman. Uh let's see, Michael Jenkins for the Falcons, Rashawn Woods for the Niners."
+  },
+  {
+    "text" : "Okay, none of us. The Bills must have come out of that draft field pretty They were yeah, they're like our offense.",
+    "timestamp" : "58:20-58:26",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Fix the offense. What's next? Uh but yeah, so um I have a f I have a friend who's almost as big a nerd as we are, or I am, I guess. Yeah, don't watch football. And he put together uh all the players who are still left. In drafts since Tom Brady got drafted. So Brady got drafted in 2000, right? So he's obviously the last person left in the 2000 draft. Uh nobody left in 2001 drafts now that Drew Bree is retired. Nobody left in 2002 drafts since Josh McCown retired two years ago. Nobody left in 2003 since Jason Witt retired uh this year. Again, I think. Did he? Yeah. From 2004, there are three players left. One of them is Andy Lee the punter. Can you name the other two? Fitzy Rothensburger. That's right. Although Larry Fitzgerald not technically currently on a team right now. That's true. He doesn't have a team right now. So it might be down to two. And then 2005? Aaron Rodgers, Mike Nugent, Frank Gore, Richie Incognito, Dan Colquitt, and Ryan Fitzpatrick. So Brady might outlast one, two, three, four, five. That's definitely full drafts. Yeah, a lot of those guys are ready to hang it up. That's insane. So shout out to Brian from Pat's chat for putting that together because that's fucking crazy shit. But yes, all right, so that was a draft. Batshit crazy. Uh and this Colts team is one of because I th I think Like you always see a lot of people talking about the uh premier offense of the day. Nobody's like, oh, Patrick Mahomes is the second best quarterback ever behind Tom Brady. And I think people forget about how terrifying Peyton Manning was as a quarterback.",
+    "timestamp" : "58:28-01:00:19"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Do you think Mahomes is supplanted man? I don't know.",
+    "timestamp" : "01:00:20-01:00:23"
+  },
+  {
+    "text" : "Not yet. That's what I'm saying. But people are like, oh, I mean, it's it's it's Tom Brady, uh Aaron Rodgers, and Patrick Mahomes, the only people you hear about. And I think people forget. Well, it's because they're not still playing Andy. I I no, I agree. But like this, especially like this like 2004",
+    "speaker" : "Andy",
+    "timestamp" : "01:00:24-01:00:44"
+  },
+  {
+    "text" : "It's kind of the team was so stacked. I mean the receivers are good through five. Brandon Stokely was like their fifth receiver, right? Something like that, yeah. And Brandon Stokely is a household name.",
+    "timestamp" : "01:00:45-01:00:57",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Everyone knows who he is. So When I was doing the research on this, I found that this season, the Colts had three wide receivers over a thousand receiving yards. Three.",
+    "timestamp" : "01:00:57-01:01:10",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:01:11-01:01:16",
+    "text" : "I'm like, I mean that's I mean, yeah, if you throw four thousand yards in a season, you're doing good as a quarterback.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:01:16-01:01:20",
+    "text" : "Right. And he's thrown three just to wide receivers. So"
+  },
+  {
+    "text" : "Harrison, Reggie Wayne. Yep. Who's the third?",
+    "speaker" : "Steve",
+    "timestamp" : "01:01:20-01:01:24"
+  },
+  {
+    "timestamp" : "01:01:25-01:01:25",
+    "text" : "Brandon Stokely.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Stokely? Yeah, just a little bit. Alice Clark is on that team. Yep. Who was their other receiver? They had another good receiver.",
+    "speaker" : "Steve",
+    "timestamp" : "01:01:26-01:01:32"
+  },
+  {
+    "timestamp" : "01:01:33-01:03:23",
+    "speaker" : "Andy",
+    "text" : "I mean that was kind of it really. Is that it? Yeah. Um But so I'm like, how many times has this happened? Like teams having three Players get over a thousand receiving yards in one year. And since 2000, as far back as I went, because you know, fuck it. Two, three, four, five, six, seven, eight times, right? And uh I did it like regular season and playoffs, just because otherwise it would be two times. Um this 2004 Colts was the one one of the two teams that did it in the regular season. So all three guys had over a thousand yards going into the playoffs, which is insane. Um before that, it was the 2002 Raiders, which was Jim Brown, Jerry Rice. And Charlie Garner, the running back. What? Right at 1,073 yards. 2004 Colts, 2008 Cardinals. This is insane. This is this is the Cardinal team that I think went to the Super Bowl, right? With that Kurt Warner at the helm, I think. Who again, another quarterback who I don't think gets his due. But listen to these numbers. Um Larry Fitzgerald. Oh, actually, no, we'll start at the bottom. Uh Bolden had. Oh sorry, that's not the name Brad. Uh what's his name? Steve Breston, I think it was. 1,154 yards. Um Bolden had twelve hundred twenty-eight yards. Larry Fitzgerald 1,977 yards. Yeah. Dude almost had 2,000 yards and two other guys had a thousand as well. That's incredible. Are you fucking kidding me?"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What's the receiver record for yards in a season? I don't know. It's gotta be up there though. Has anyone broke 2,000? I feel like 2,000 hours receiving is gonna be like would be like a huge I feel like somebody I f I feel like Megatron did it.",
+    "timestamp" : "01:03:23-01:03:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um yeah you may be right Greg, stat check. So we'd stat check this. Uh no. In regular season, uh Calvin Johnson had 1,967. And then Julio Jones is second with 1871. And then Jerry Rice, 1848.",
+    "timestamp" : "01:03:36-01:03:57"
+  },
+  {
+    "timestamp" : "01:03:59-01:04:03",
+    "text" : "That's crazy to have one guy on your team who's like top five. All-time receiving yards.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "01:04:04-01:04:04"
+  },
+  {
+    "text" : "I mean that that's including the playoffs. Two other thousand yard guys too. No, not even two other two thousand two other eleven hundred yard guys. Right.",
+    "speaker" : "Steve",
+    "timestamp" : "01:04:04-01:04:11"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:04:11-01:05:05",
+    "text" : "Yeah, eleven and twelve hundred yards. I mean they're just cracking it. Some other interesting notes here. Then it was uh the 09 Colts with Garcon, Wayne, and Dallas Clark, the tight end. 2011 Patriots, it was Wes Walker and two tight ends. All three of those had over a thousand yards. 2012 Falcons, Gonzalez, Jones, and White. 2014 Patriots, Lafelle, Edelman, Gronkowski. LaFelle had a thousand yards. If you include playoffs, yes. Same with uh the 2017 Patriots with Gronkowski, Cooks, and Amendola. Amendola had 1,07 yards. Uh but that season, I think he actually ended the regular season with like 600 something yards and then had 300 yards in the playoffs to get over the hump. Bananas."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:05:06-01:05:11",
+    "text" : "But I mean it is just philosophic bullshit that they don't count playoff stats and that's that sort of stuff."
+  },
+  {
+    "text" : "I agree, which is why I count them every fucking time.",
+    "speaker" : "Andy",
+    "timestamp" : "01:05:11-01:05:14"
+  },
+  {
+    "text" : "Yeah, because like, oh, well, you know, not everyone gets to play. Well, no shit. Yeah.",
+    "timestamp" : "01:05:13-01:05:17",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So this is a this is a Colts Manning team that's gonna put up fucking yards. Yeah. Um And they kind of did it in this game. Just like they have the last two times we've watched them.",
+    "timestamp" : "01:05:17-01:05:30"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:05:31-01:05:40",
+    "text" : "4,500 yards from Peyton. 49 touchdowns. Yep. Which is the record until Brady breaks it, right? Right."
+  },
+  {
+    "text" : "And then Manning breaks it again. And Brady will probably break it this year. With Denver.",
+    "speaker" : "Andy",
+    "timestamp" : "01:05:40-01:05:45"
+  },
+  {
+    "text" : "All I remember is Tom Brady's 50.",
+    "timestamp" : "01:05:46-01:05:48",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:05:48-01:05:52",
+    "text" : "Oh yeah. I mean, and the 50th in style, too."
+  },
+  {
+    "text" : "He also threw 10 interceptions, what a pussy.",
+    "speaker" : "Steve",
+    "timestamp" : "01:05:52-01:05:54"
+  },
+  {
+    "text" : "Who throws interceptions? All right, so talk to me about this game. I think we've been dancing around it long enough. Give it a Lombardi score. Out of six, I would say A solid four. Season opener against the co it's a rematch of the AFC Championship a game again, just like it was in 2002 against the Steelers. Um back and forth game, lot of uh lot of new faces that are going to be playing a big part. You got to see Corey Dillon, who is And also Vince Wilfork, you could say this about him too. Surprisingly loud on his feet for how big they are. He chased down that running back in that play. It was sweet. Those boys can dance though. Like Corey Dillon had one run where he like He juke two guys out of out of their shoes and then lowered his shoulder ran over the third guy. God, I didn't know he could juke too. That's almost unfair. No wonder he's",
+    "timestamp" : "01:05:55-01:06:46",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:06:46-01:07:07",
+    "text" : "For in an AFC Championship game. This game is one of those sneaky great watches. Yeah, exactly. Because it was a rematch of that AFC Championship game, so there's a ton of hype around it and it lived up. Came down to a last second field goal. Real back and forth. It seemed a little bit like that um Colts at the Colts game where Willie makes that stop on the goal line."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Similar game. Cause they 'cause there was a lot of like um It's similar storylines too, where the Patriots actually had trouble stopping the run in this game. Yeah, Edrian James was a beast in this game. Yeah, I think one of the One of yeah, the the Colts first touchdown drive was just nine straight runs. And that's all they did was just run. Yeah. Yeah, I think Egrin James finished like 140 something, right? On 30 carries, yeah, 30 carries for 142. And you know, not really what you're expecting. And then Manning started getting his play action going. So now both these teams are going back and forth.",
+    "timestamp" : "01:07:07-01:07:46"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:07:46-01:07:47",
+    "speaker" : "Greg"
+  },
+  {
+    "timestamp" : "01:07:47-01:08:04",
+    "text" : "And it was just like answering all all over the place. Like the pages start off with um that five-wide drive all the way down, then they kick a field goal. Um Indianapolis gets stuffed on third and one, but then there's like a defensive penalty. Bullshit.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Um the uh Vince Wolf stuff on that third and one too.",
+    "timestamp" : "01:08:04-01:08:08",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, oh yeah.",
+    "timestamp" : "01:08:08-01:08:09"
+  },
+  {
+    "timestamp" : "01:08:09-01:08:18",
+    "speaker" : "Steve",
+    "text" : "Because they had Vince Wolf or they still had was it Keith Trailer, I think it was? Yeah, they had they they went out and signed a bunch of fat boys and drafted the best fat boy in the draft and then give up two hundred and two yards."
+  },
+  {
+    "timestamp" : "01:08:18-01:08:34",
+    "speaker" : "Andy",
+    "text" : "You know, a fucking run. Yeah. But they were still doing um red zone turnovers in this game. The Patriots defense and the Colts defense. Three of them. Yeah, so there was a Bruce goal line interception on the Colts first drive."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, catch.",
+    "timestamp" : "01:08:35-01:08:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That was an awesome catch. It was su it was like one of his typical like Like he's not really covering the guy across the middle. He just kind of like drops back and kind of like is watching Manning's eyes and then does that like dive to his sideways almost like he's a a soccer goalkeeper diving to make a like a stop. And somehow managed to catch that football.",
+    "timestamp" : "01:08:35-01:08:54"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "You need to put that as a highlight on the website, Andy.",
+    "timestamp" : "01:08:54-01:08:56"
+  },
+  {
+    "timestamp" : "01:08:56-01:09:00",
+    "speaker" : "Andy",
+    "text" : "Otherwise, I've got it. I've got it cut and it's ready to go."
+  },
+  {
+    "text" : "All right.",
+    "timestamp" : "01:09:01-01:09:01",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:09:02-01:09:41",
+    "text" : "Um and then yeah, so it was just back and forth, back and forth. Uh I thought in this game, one thing that stuck out to me was Tom Brady's pocket presence. Because he's finally, it feels like growing into that. Because I remember watching like 2001, 2002, there's some times where he just made like very unbrady like mistakes where he didn't feel pressure or he felt pressure and it wasn't there, but now it's just like It seems like this is where his mastery of it started to come in. That's just like you take for granted nowadays, just like he just He doesn't get sacked because he just knows he he's able to feel that pressure.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "And there's some plays like Mac Jones, I know.",
+    "timestamp" : "01:09:42-01:09:44",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah. Well uh we'll see. But there was like one play where the pages were backed up in their own end zone after one of these red zone turnovers by the Colts. It's that one where uh Vince Bulford recovers a fumble. Yeah. And and it was like uh third and eleven or something like that. In and he's in his own end zone passing it. It has to wait for the play to develop. And sidesteps like two rushing defenders. Like cool as a cucumber. Has no issue doing it. Still keep his eyes outfield. Then throws the perfect bomb to, I think it was uh Gibbons that time. My boy had a good game. Yeah. But there was, yeah, it was just like back and forth. Like the the cold score touchdown on that nine straight runs Brady comes right back. Oh, Dylan had a huge run after that to answer. And then Brady throws a touchdown of branch. And then the Colts draw straight back down with a huge play on their first play to Dallas Clark. And then Manning throws a session to Harrison, and the Patriots have like, you know, less than two minutes left, and they drive down and manage to get a Pinatary field goal to end the half. So it was just like back and forth the entire time. Definitely worth watching.",
+    "timestamp" : "01:09:44-01:10:55",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Yep. We get entertaining.",
+    "timestamp" : "01:10:55-01:10:57",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. And there was like some great Like Colts moments that I remember where they would make a really great play and then fuck it up the next one. You know what was really missing though? What? Some solid manning face. There wasn't a ton. You're absolutely right. There was the time where uh after that first interception he threw on the goal line on the first drive. The commentary is talking about like he went to the sideline and didn't take his helmet off. He just stood there waiting to go back in. Like I love it. It's such like a petulant child thing to do. It's great. And then the fourth quarter. Alone roller coaster. It was all over the place. Page just go into the fourth quarter up. 2717, up up 10. Which is never safe. You know that with Manny. Right, and that's the thing. And this is this is that fear that I I was actually talking to mom recently and she was listening to that that Colts game that we talked about last time. And she's like, that that's the piece that I remember is the feeling of it's not enough yet. Like, yes, we're up 10 and we're going full quarter, but we need to be up more because The Peyton Manning was a scary offense. You know what?",
+    "timestamp" : "01:10:58-01:12:11"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:12:11-01:12:15",
+    "text" : "Tom Brady has struck that fear in many people's hearts as well."
+  },
+  {
+    "text" : "I think so too. It's similar to like the way you were feeling in the AFC Championship game against Patrick Mahomes, right? Yeah. It's like, yeah, they didn't score in the first half, and that's great, but like this isn't gonna last.",
+    "timestamp" : "01:12:15-01:12:27",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "01:12:27-01:12:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And it fucking didn't. They put up 31. And this was very similar. Like you're up 10, you're going into the fourth quarter. Didn't feel safe. Um And then this is where you started to see the the soft uh defensive holding calls. That you know the league's just trying to prove to the Colts say, Oh yeah, look, we're calling it for real now.",
+    "timestamp" : "01:12:28-01:12:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Okay, buddy. I don't know.",
+    "timestamp" : "01:12:48-01:12:51"
+  },
+  {
+    "timestamp" : "01:12:51-01:12:52",
+    "speaker" : "Andy",
+    "text" : "So the that first driver."
+  },
+  {
+    "timestamp" : "01:12:55-01:12:58",
+    "speaker" : "Steve",
+    "text" : "Dion Branch muffs a punt. Well, wait before that."
+  },
+  {
+    "text" : "Before that though, before that, like the the like at the beginning of the fourth quarter. The Colts score a touchdown, so it's 27-24. So it's a three-point game now. Yeah. And then the next drive, Bray throws his first interception in Jesus, I have it here. 288, some of that? Yeah. Yeah, it's not loading. Yeah, it was like uh I think it was 288, yeah, because he came into the game with the most consecutive passes at home without an interception at 263. Tie with Mark Brunnell, which might be why Brunell is such a baby about things. And it's 288. Yep, there it is. In the fourth quarter, right after the Colts just score a touchdown to bring it within three. And then Patriots defense holds. Uh and the Colts have to punt, but because Troy Brown is inactive for this game, as was Kevin Falk, by the way, which I think Uh Madden was hypothesizing that's why the Patriots kept going like five wide for a drive was basically just give um Corey Dillon a spell because they didn't have another running back. It was Corey Dillon and Patrick passed the fullback and that was it. So that makes sense. So no Troy Brown. So Dion Branch is back there. Returning punts and he muffs it. And the culture cover at the pat's 33. And uh and then a couple plays later Uh Asante Samuels called for pass interference in the end zone. Clear pass interference, yes. Yeah, I I he didn't look back for the ball.",
+    "speaker" : "Andy",
+    "timestamp" : "01:13:00-01:14:33"
+  },
+  {
+    "timestamp" : "01:14:33-01:14:45",
+    "speaker" : "Steve",
+    "text" : "What? What's that, Andy? It was Was that a clear pass interference? I don't think it was clear, but I understand why that's it. What do you mean wh he like he like had his hand holding down the other guy's arm?"
+  },
+  {
+    "timestamp" : "01:14:45-01:14:47",
+    "text" : "No, he had his hand in his face. It was like a big thing.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He looked back eventually. Eventually, after the ball hit the guy in the face because he held down his arm. Okay. God, you're ridiculous. You're ridiculous.",
+    "timestamp" : "01:14:49-01:14:59",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:14:59-01:15:35",
+    "speaker" : "Andy",
+    "text" : "Thought you were a fan of this football team. The pass interference in the end zone. Pass interference in the end zone. And this is the point where I paused the game and went back to pro football reference and said, what was the score of this game? Oh, it ends 27-24, even though the Colts have it. First and goal from the one with like five minutes left. Like, what the fuck is going on? Literally the next play. This is what I'm talking about. Literally the next play. Handoff to Egrand James up the middle, and he gets absolutely walloped by I think it was Eugene Angens Will Fork. And the ball pops straight down and Wilfork just falls on it."
+  },
+  {
+    "text" : "Yeah, Eugene set him up. Crushed. Eugene had some bigots in this game too. He did. That guy was a hitter. Rewatching all these games, I can see why Greg bought a Eugene Wilson jersey.",
+    "timestamp" : "01:15:35-01:15:49",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:15:50-01:17:19",
+    "text" : "He was laying a lumber. I mean, Eugene with that whole defensive backfield definitely learned from the king of heavy hits. And they're even talking about Ronnie Harrison about the the broadcast tried to find out if he was the most fined person in the the league. And the league basically wouldn't give out those numbers. Like we're not going to tell you. Which means yes. Yeah. And so they tried to look it up. And he was like, uh It was like over a hundred thousand dollars worth of fines. And they asked him about it. He's like, I don't give a fuck. I'm just gonna play my game. And if they don't like it, they can go screw. I like that's so uh now's Michelle Tafoya basically translating what was obviously a um uh a swear laced um actual comment from body yeah she was like he does he just he just doesn't even care i'm like that's not what he said he said he doesn't give a fuck But yeah, I and and I think that set the tone for this defense because they all came out hitting like that. But they they there was definitely a few times where teammates had to pull Rodney Harrison off of a referee, like drag him away. But yeah, so the Patriots get the ball on the one-yard line. This is where Brady gets that big third down pass from the end zone. Um But they don't do anything with it."
+  },
+  {
+    "text" : "Not even they almost fuck it up.",
+    "timestamp" : "01:17:19-01:17:22",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah. Brady gets stripped set.",
+    "timestamp" : "01:17:22-01:17:24"
+  },
+  {
+    "text" : "Yeah. It's like you run the ball, right? Or take it down to eight seconds or whatever. Now we try a pass play. Yep. Take it at least off the edge, strip sack Brady. And Cory Dylan falls on the phone. Corey Dylan jumps on it right at the two minute. Like luckily, since the ball's goddamn bouncing around back there and everyone's just running around their hair on fire. It got all the way to two minute warning, but God, that could have been a disaster. Because the Colts had no timeouts too. Right. Yeah. It was nuts.",
+    "speaker" : "Steve",
+    "timestamp" : "01:17:27-01:17:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um, and then so the Pagers Punt Indy starts their own 35 and literally first play. This huge play to Stokely. Did no regard. Yeah, right down the center of the field. He's got a free run. Runs all the way down to the 18-yard line. So it's first and ten from the 18 with Still like over, like probably about a minute and a half left, I think, give or take. Um, and they basically can have a couple shots at the end zone. If they don't do it, they can still kick the field goal with a field goal kicker. Who hit did not miss a field goal the entire last season, 2003. He hasn't missed since 2002. Yeah.",
+    "timestamp" : "01:17:55-01:18:33"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "To be fair, the commentators jinxed the fuck out of it. And they probably been jinxing him. Forever, but yeah, they've been jinxing this dude. Oh, he hasn't missed. Oh, he went a whole season without me. Oh, he's never missed. Oh, never misses.",
+    "timestamp" : "01:18:33-01:18:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, and also They were uh Madden at one point was like, oh well, you know, they can kick a field goal here with a uh a guy who hasn't missed, but his last couple of field goals have looked a bit like ducks. Like they've been ugly, but they've been getting through. Uh-huh. And so what happens is um yes ball at the 18, Colts uh a couple plays, but then on third down Willie McGuinness comes screaming off the edge and sacks Peyton Manning for what felt like a very Drew Bledzo-esque play.",
+    "timestamp" : "01:18:48-01:19:18"
+  },
+  {
+    "timestamp" : "01:19:19-01:20:19",
+    "speaker" : "Steve",
+    "text" : "No, I have a great I have a way better comp it looks actually very, very similar to the Hightower Atlanta. Minus the back in the play because he comes off the same edge. Yep. That's true. And he kind of like he starts out wide, takes like a little shuffle step in right before the step, comes right off the end. And Manning doesn't really see them. And it's the same sort of situation, right? The Atlanta was in field goal range and that pushed him out the punt range. And they were in. Easy, easy chip shot range, and then he took a big ass sack, and now it's like, ooh, I don't know, it's gonna be a good one. Now it's a 48 yarder. Yeah, now it's forty-eight and like ooh, that's gonna be tougher. Yeah. And really rogue graded manic here. Oh my god. It might have even been a penalty this day and it he got him a little high. Yeah, I don't know. His clothes speeding really so underrated because his closing speed on sacks is Awesome. He's such a good edge setter. He can cover guys coming out the backfield. He he could do it all. And Madden, another credit to him was just like, dude, this is the guy you want. He can do everything."
+  },
+  {
+    "text" : "Exactly. Exactly. And it was. It was just like just off the edge, exactly untouched off the edge, and just Manning was waiting was like looking off to his left, so he didn't even see him coming from his right. Yeah. Until right at the last second, he just managed to tuck the ball down.",
+    "timestamp" : "01:20:20-01:20:34",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "On the replay, you can see Madden or uh Manning just like Catch him out of the corner of his eye and be like, oh shit. Exactly.",
+    "timestamp" : "01:20:34-01:20:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "His elbow, his shoulder comes up to his ear and just braces frame pack because you know there's nothing else he can do. So this is the part that I loved and I'm I'm gonna I'm just gonna call this out this is my best for this game is apparently, and this is another thing that was like people talked about it, but I couldn't actually find the specific of it. But apparently Mike Vanderjack came out onto the the field for this field goal, and I have the quote here. Where is it? Where is it? Where is it? So he hadn't missed an attempt all last season. And the quote is uh from ESPN. So confident was Colts kicker Mike Vanderjack that he would make a tying 48-yard field goal with 24 seconds remaining in Thursday night's league opener. against the Patriots at Gillette Stadium, and why wouldn't he be? He had only connected on a league record 42 in a row, that he turned towards the Patriots sideline before setting up for the kick. and rubbed a few of his fingers together. For those who don't speak sign language, that's universal for money. So he turned to the Patriot sideline and did the money thing. With his hands like a money. And then he turns around and fucking shanked the field goal to lose the game.",
+    "timestamp" : "01:20:41-01:21:52"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It seemed like it was all in Vanderjack too. He just didn't hit it right.",
+    "timestamp" : "01:21:53-01:21:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was bad. Yeah, it just fucking Like it came up it looked like it came off clean, then just kinda like knuckled off to the right.",
+    "timestamp" : "01:21:56-01:22:02"
+  },
+  {
+    "timestamp" : "01:22:03-01:22:11",
+    "text" : "It didn't even come out clean. It did can't it come out like you you see kick spinning right? Ooh, that's a good this kind of like a weird like off-kilter spin to it.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:22:11-01:22:39",
+    "text" : "It did. And it was it was a thing of beauty. He just comes out and does the money thing and misses That feels like a Greg Brown move. Oh, for sure. You're like Kobe and then shoots and then just like misses the table playing beer pong or something, you know? Yeah. That's such a Greg Brown thing. Uh so I love that. That was that was my best.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:22:39-01:22:41",
+    "text" : "What do you got for worst?",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:22:42-01:22:57",
+    "text" : "Oh, all right. My worst was um ESPN's new thing that they tried to roll out here or ABC or wherever the fuck it was. Uh it was called Max Stats, which is kind of similar. It was like the precursor of what you see now where they have like"
+  },
+  {
+    "text" : "Oh, this ball traveled like seventy eight yards in the air and the next gen stack.",
+    "timestamp" : "01:22:57-01:23:02",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, exactly. The running back got up to thirty-two point seven miles an hour, top speed. This one was uh how fast was a ball thrown? And it was so they they use one of Manning's touchdowns where he gunned it in. He's like, that ball, Manning's touchdown was 55 miles an hour. And then Like that part, fine, great. Like, but we're gonna translate that into a baseball pitch. If that were a baseball, it would have it would have been an 83 mile an hour pitch. And John Matt's like, that's not very fast. Yeah, I would've mashed they would have mashed that out of the stadium.",
+    "timestamp" : "01:23:02-01:23:35"
+  },
+  {
+    "timestamp" : "01:23:36-01:23:37",
+    "text" : "If that was a fast ball.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:23:41-01:23:53",
+    "text" : "Maybe they'll throw it faster. Tom Brady definitely will. Like, oh Jesus. Yeah, that's pretty sad. So not great. Um, so yeah, that that was probably my worst. What about you?",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:23:54-01:24:23",
+    "text" : "Uh you know, I have a worst and the worst is it keeps carrying over from last year. Oh we still won the Super Bowl. Despite the absolute and atrocious red zone offense. Yeah. First time they get inside, they get inside the Colts 10. They're in their first and first single from the 10. And a fourth and goal, the kick uh field goal from the 11. Yeah. Because like they scroll a four-yard pass, and then Tom Brady takes a delay a game.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Right, exactly.",
+    "speaker" : "Andy",
+    "timestamp" : "01:24:23-01:24:24"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "01:24:24-01:24:27",
+    "text" : "God. Just drive killer, you know?"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Brutal. Absolutely brutal.",
+    "timestamp" : "01:24:27-01:24:29"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh my best. Yeah, I got two. Okay. I'll give you a light one. Did you see the the Tom Brady what's your favorite this and that? I have it. I have the clip.",
+    "timestamp" : "01:24:29-01:24:42"
+  },
+  {
+    "timestamp" : "01:24:42-01:24:47",
+    "speaker" : "Andy",
+    "text" : "I was just gonna play that actually. Yeah, let me uh let's hit this. Let me fire this up real quick."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, I I'll I'll see if I can post this bearded Brady.",
+    "timestamp" : "01:24:53-01:24:57"
+  },
+  {
+    "timestamp" : "01:24:57-01:25:01",
+    "text" : "Yeah, it was like five o'clock shadow, but it wasn't even like a- No, it's like a it's like a legitimate beard.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "He definitely did this in the offseason because this is like a this is the most beard up. I didn't even know Brady could grow this sort of facial hair.",
+    "timestamp" : "01:25:01-01:25:08",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "01:25:08-01:25:14",
+    "text" : "I think that's fair. So here it is. This is the like a Just like a little one-off they did. It comes with a big thing."
+  },
+  {
+    "timestamp" : "01:25:14-01:25:34",
+    "speaker" : "Tom Brady",
+    "text" : "We wear a ball cap, a regular jersey, and like a like a the one word that defines me is persistence. I'd love to meet Bill Gates. My favorite food is chicken wings. Teriyaki. I am a horrible Horrible cook. My favorite movie line from Scarface. Take a nice little bad guy. Cause you ain't gonna see a bad guy like this again."
+  },
+  {
+    "timestamp" : "01:25:37-01:25:51",
+    "speaker" : "Andy",
+    "text" : "That laugh. So bad. The beard. Yeah. No the the laugh. Here we go. So awkward. Wait, should say me do the little Scarface line again."
+  },
+  {
+    "text" : "Scarface. Take a nice little bad guy. Cause you ain't gonna see a bad guy like this again.",
+    "speaker" : "Tom Brady",
+    "timestamp" : "01:25:51-01:25:56"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's so bad.",
+    "timestamp" : "01:25:57-01:25:59"
+  },
+  {
+    "timestamp" : "01:26:00-01:26:01",
+    "text" : "Such a goober.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I mean like because like right now he has like a very intentionally crafted public image. Yes. And that is entirely contrasting. That ain't it. Yeah. He's got this fucking, he's got this the biggest beard I've ever seen Brady ever have.",
+    "timestamp" : "01:26:03-01:26:20"
+  },
+  {
+    "timestamp" : "01:26:21-01:26:51",
+    "speaker" : "Andy",
+    "text" : "That's true, yeah. But and like and in between and his hat, he's got like a baseball cap on, but it's like it's just slightly crooked too. So he was trying to do like that cool thing where people like turn their caps a little bit sideways, but he didn't do it enough, so it's just like your your your hat's not on straight dude. And then like in between each of those cuts, which you can't see because it's an audio medium, but they like cut to like a picture of like a video of him on a billboard or something. And he's doing finger guns to each one with this stupid fucking smile. We'll definitely have to post that."
+  },
+  {
+    "text" : "I mean, because it's just and the best part is how Dichotomous it is to like where he's currently at, you know.",
+    "timestamp" : "01:26:52-01:26:58",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "01:26:58-01:26:59"
+  },
+  {
+    "timestamp" : "01:26:59-01:27:02",
+    "speaker" : "Steve",
+    "text" : "What's your favorite food? Chicken wings. Tiyaki"
+  },
+  {
+    "timestamp" : "01:27:04-01:27:26",
+    "text" : "I'm a terrible kid. Nice. Ten years. Yeah. Oh my god. And then the other cli I have another clip since we're we're here. And it was um Before the game, uh, who was the sideline reporter? I've already said it. Michelle Tefoya was talking to Bill Balichek about the uh the jamming of the wide receivers. Oh yeah, and the new role.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "Al, you could say Bill Belichick's passion for football is reflected in his friend John Bon Jovi's song, It's My Life. The son of a college coach began his own career in pro football 30 years ago. Now entering the prime of his NFL life, the 52 I'm joined now by Bill Belichick, coach. How is this team different from the one that tried to repeat as Super Bowl champions two years ago?",
+    "timestamp" : "01:27:27-01:27:55",
+    "speaker" : "Announcer"
+  },
+  {
+    "text" : "Well, I think we're a little younger. one and um a little more experienced at quarterback but uh you know a lot of some of the same things are there some of the same guys are there but there's some new ones too but I think we're a little younger.",
+    "speaker" : "Bill Belichick",
+    "timestamp" : "01:27:55-01:28:06"
+  },
+  {
+    "timestamp" : "01:28:07-01:28:21",
+    "speaker" : "Announcer",
+    "text" : "A mark has been made in the preseason of the rules emphasis on illegal defense Many people think that might be a result of the way your defensive bats play the Colts wide receivers in the AFC championship game. How will the rules emphasis affect the way your defense plays?"
+  },
+  {
+    "timestamp" : "01:28:22-01:28:31",
+    "speaker" : "Bill Belichick",
+    "text" : "Well, there's been no change in the rules. It's the same rule. You can't jam them after five years. yards and you're okay before or five. So you know that's the way we coached it before, that's the way we're coaching it now."
+  },
+  {
+    "speaker" : "Announcer",
+    "text" : "Coach, thanks to the block.",
+    "timestamp" : "01:28:32-01:28:33"
+  },
+  {
+    "text" : "Okay, thanks Michelle.",
+    "timestamp" : "01:28:33-01:28:34",
+    "speaker" : "Bill Belichick"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He's yeah, he's just a fucking masterclass at not answering a question. And it's it's perfect. All right, you want to hear my best best?",
+    "timestamp" : "01:28:38-01:28:47"
+  },
+  {
+    "text" : "Yeah, give me your best best. I'm surprised you didn't bring this up. There is the stat where Patriots haven't had more than four yards per carry in a season for 18 years. What's I mean that's including the 2003 season. I don't know how gold what's 2003 minus 18 Andy.",
+    "timestamp" : "01:28:48-01:29:05",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "76? I don't know. Something like that, yeah.",
+    "timestamp" : "01:29:08-01:29:10"
+  },
+  {
+    "text" : "In the 70s.",
+    "timestamp" : "01:29:10-01:29:11",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Back when the Patriots rushed for 2,000 yards.",
+    "timestamp" : "01:29:12-01:29:14",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "We get Corey Dillon. What do you think we got this year?",
+    "timestamp" : "01:29:14-01:29:17"
+  },
+  {
+    "timestamp" : "01:29:18-01:29:19",
+    "speaker" : "Andy",
+    "text" : "I think it's probably over four yards."
+  },
+  {
+    "text" : "Four point one, baby. Oh baby. Just got there. Yeah. Corey Dillon. I mean again, I think people under you know value his uh you know value to this team and he's awesome and changing that whole running game and you know Antoine Smith was Just they just kind of got by with them last year where Corey Dillon adds a whole new dimension to this offense. There's a play where he gets uh pass protection thing too. And John Madden's calling this out where Corey Dillon gets his guy coming off the edge. He's free. They run a stunt and he gets the dude, he cuts him under, and by cutting him under, he gets the guy coming around him too. So he gets a two for one on Corey Dillon on that, and Tom Burdy throws a strike on the play.",
+    "timestamp" : "01:29:20-01:30:00",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So",
+    "timestamp" : "01:30:00-01:30:00"
+  },
+  {
+    "text" : "Yeah, that was a great cough. Corey Dillon's impact on the team felt A right off game one and B all year.",
+    "timestamp" : "01:30:00-01:30:08",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yeah.",
+    "timestamp" : "01:30:09-01:30:09",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:30:10-01:30:11",
+    "speaker" : "Steve",
+    "text" : "For the first time in 18 years."
+  },
+  {
+    "text" : "Yeah. Also, uh, if we're gonna talk about stuff that I thought you would bring up, so I didn't. Um The Patriots have a new punter. Didn't even notice. No more Ken Walter, babe. It's uh Josh Miller from Pittsburgh. And he hit his first punt like fifty-eight yards and the crowd gave him a standing O, but then he got called back for holding. So they had to do it again.",
+    "speaker" : "Andy",
+    "timestamp" : "01:30:11-01:30:35"
+  },
+  {
+    "timestamp" : "01:30:35-01:30:38",
+    "text" : "The fact I didn't notice means that's a huge improvement.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Good thing, yeah. Um oh here's another worst. Uh the reason Kevin Falk wasn't there was because his mom had passed away recently and so he'd taken time off to deal with that. So hopefully we'll see him back. I'm wearing my my uh Kevin Falk jersey for for him in remembrance of his mom. What a good guy, Andy. Hell yeah. You gotta do it, man. Um all right, sho oh since Greg left, should we do best worst for him? Uh I mean Greg's worst is Ty Law. Because the man just quit can't stay healthy and is just like on and off the field and he got beat for the uh the last touchdown by Brandon fucking Stokely.",
+    "speaker" : "Andy",
+    "timestamp" : "01:30:39-01:31:15"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "01:31:16-01:31:16"
+  },
+  {
+    "timestamp" : "01:31:16-01:31:17",
+    "speaker" : "Andy",
+    "text" : "Just fucking yeah."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Greg would never say it's his worst, but okay.",
+    "timestamp" : "01:31:17-01:31:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well, we're saying it for him. That's why. Because he's not here. Greg's best is Bill Belichick coming out after halftime saying uh he's unhappy with the play in the first half. But he's not making any adjustments. It's like the team's just gotta fucking play better. I don't know. Be better. Yeah. Hey, you know what we're gonna change up? Not fucking suck in this half. How about that? Go out and do your job like I fucking told you to. Love it. Beautiful. All right, I think that that pretty much covers this game. We've we've covered the fucking gamut tonight, I think. So uh don't forget Post a review of the podcast. It can be good, it can be bad. We don't really care. We just want some feedback. Um and that will end you in the running for a subscription to the athletic year long yeah but don't forget to to text the the hotline to let us know that it's you otherwise we won't be able to reach out to you and let you know you won",
+    "timestamp" : "01:31:19-01:32:22"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So and uh I would say mom doesn't count, but she's not a big online review lady.",
+    "timestamp" : "01:32:22-01:32:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I I don't I don't think she I mean if she can figure out how to relieve relieve a review then she's at the end at this point. Yeah, mom would probably love the athletic. Yeah, she probably would. So, yeah, uh don't forget to text us, Dynasty Hotline 603-505-8043. Hopefully we'll hear from you soon. Uh and until next time, we will see you later.",
+    "timestamp" : "01:32:29-01:32:52"
+  }
+]

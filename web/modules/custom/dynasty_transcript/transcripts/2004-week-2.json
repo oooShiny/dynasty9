@@ -1,0 +1,1232 @@
+[
+  {
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to. My sons sometimes say some naughty things when they're trying to be funny. But really, they're just being stupid. Do you still want to listen? Go right ahead. I am not your mother.",
+    "speaker" : "Mom",
+    "timestamp" : "00:00-00:17"
+  },
+  {
+    "text" : "Alright, welcome back to the Pages Dynasty Podcast, week two of the 2004 season. Uh not gonna lie, this was one of the games I just had no memory of. And rewatching it, you can kind of see why. Um but We have with me today Steve Brown. The best brother, maybe? Ah, definitely the most best brother. In podcast terms, yes. I would say the best brother. Greg Brown is um babysitting. Repeat uh guest infinite guest, Connor. Yeah, we'll just call him Connor. Yeah. Um so he's babysitting, so he can't be here for this. Um but Steve you have brought a friend along.",
+    "speaker" : "Andy",
+    "timestamp" : "00:21-01:05"
+  },
+  {
+    "text" : "Yeah, I keep finding friends from other teams. So we have uh our buddy Jared joining us who's a big Arizona Cardinals fan.",
+    "timestamp" : "01:06-01:12",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The few the proud. Yeah, he is the big Arizona Cardinals fan.",
+    "timestamp" : "01:13-01:17"
+  },
+  {
+    "text" : "The only one I know.",
+    "speaker" : "Steve",
+    "timestamp" : "01:17-01:18"
+  },
+  {
+    "text" : "Shocking. Well Jared, thanks for joining us.",
+    "timestamp" : "01:19-01:23",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:23-01:40",
+    "text" : "Um Yeah, it's a pleasure to kind of step outside of, you know, you know, your comfort zone and join another team's podcast. This will be a first for me. So excited to get into the weeds with you and Explain to Pat's Nation that we're not the biggest joke of a franchise that everyone thinks we are.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "So we we're on your side of that one. Okay, there you go. You should see Bill's fans right now. They are living their best life because they won the AFC East for the first time in 20 years.",
+    "speaker" : "Andy",
+    "timestamp" : "01:42-01:54"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yep.",
+    "timestamp" : "01:54-01:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And they don't know what to do with it. It's fantastic.",
+    "timestamp" : "01:55-01:57"
+  },
+  {
+    "timestamp" : "01:57-02:13",
+    "text" : "I'm sure there's a comp to how us and Phoenix are as Suns fans about how we just defeated the Lakers in the first round of the playoffs. And I'm sure Lakers fans are looking at us Very similar to Le similarly to how you guys look at Bill's fans. So I kind of empathize a little bit with them.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Well everyone in Boston's happy about that, so Go feast go sons, go everybody.",
+    "timestamp" : "02:14-02:19",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Go everybody else. Yeah. Nice. All right. So um Jared, just to get an idea of I guess how did you become a Cardinals fan? Is probably the question on my mind.",
+    "timestamp" : "02:19-02:34"
+  },
+  {
+    "text" : "Yeah, well to start, I'm born and raised in Phoenix. Um and the Cardinals arrived from St. Louis when I was two years old. They they came to uh the Valley of the Sun, played at Sun Devil Stadium. Yeah. My parents, big football fans. My mom uh grew up in Chicago, so she uh was a um We're coming off a few years past, uh a few years ahead of the Cardinals coming to Arizona. We watched the Chicago Bears and the one of the greatest, you know. seasons ever from a football team. And then uh my dad is from New York, um but was not Giants or Jets fan. He had a lot of family in Miami, so you guys won't be pleased to know that he's a he's he actually was a a Dolphins fan.",
+    "timestamp" : "02:34-03:20",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Um or a Giants fan. What do you mean?",
+    "timestamp" : "03:20-03:23"
+  },
+  {
+    "timestamp" : "03:24-04:57",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yeah, yeah, right. Yeah, I I th I think it is. I I I think it's way better personally. But um so you know, a lot of us in Arizona Still to this day, there isn't really a true, you know, contingent of people who are from Phoenix. There's just, you know, my generation and younger is really the first, you know, full-fledged you know, bigger population of people who are actually from the Phoenix or from Arizona, like Phoenix area. So you gotta have a hodgepodge of random people that'll come through. So I'm sure you guys When you watch this game back, you heard how many New England Patriots fans were in Sun Devil Stadium that day. That was like that every single week of the season. until the Cardinals moved into their new stadium. But how did I become a Cardinals fan? I was, you know, born and raised in Arizona. My dad and mom were big football fans and they jumped in on season tickets un uh immediately because they were NFL fans. Um And um they they stuck with it. I grew up going to those games in Sun Devil Stadium. I will say that this game in particular, being eighty-nine degrees in September, like talk about like golden opportunity for the Patriots. To give you some perspective, we had uh we set a record last year for most consecutive days over 110 degrees in Phoenix last year. I know, right? And it bled into October of last year. Good luck. So it's so for it to be eighty-nine degrees in September for the Patriots, it was basically like a a nice little vacation."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Ooh, 109 on the field, unseasonably cool.",
+    "timestamp" : "04:59-05:02"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "05:03-05:29",
+    "text" : "No, really though, like that was a thing. Like like you'd have guys passing out Like on the sidelines because when you were kicking off at f like two o'clock on a Sunday at Sundevil Stadium and it was outside, it was a you know, a hundred and five degrees out on the field with no roof or no uh No way to hide from the sun. It was it would touch down to like 125-130 and they were full pads. Like it's just brutal"
+  },
+  {
+    "text" : "So and of course the Cardinals are wearing their their all whites, which they wore white at home all the time.",
+    "speaker" : "Andy",
+    "timestamp" : "05:29-05:34"
+  },
+  {
+    "text" : "Yeah. Which used to piss Cowboys fans off because you know the Cowboys prefer to wear white. Um But um so yeah, so I grew up the same thing actually.",
+    "timestamp" : "05:34-05:43",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "05:44-05:44",
+    "speaker" : "Andy",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "05:44-06:48",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yeah, yeah. So they it just to to help with the heat. So um I'm one of the few the proud local born and raised in Phoenix. I am extremely loyal to uh local teams. And um and up until you know the maybe the last decade the Cardinals didn't really give a lot to root for. Um but actually to give you a little launching pad into this game in this season, the draft class going into this season Easily the best draft class in the history of the Phoenix slash Arizona Cardinals, and I would argue maybe a top 50 draft class ever in NFL history. Uh we could have that debate for another day, but you're looking at you're looking at, you know, four guys, three guys that made multiple Pro Bowls, four guys that got big time contracts, a plug-and-play starting center. uh right out of the gates. So it was it was it was kind of a launch pad for the core team that made it to their first Super Bowl, you know, several years later against the Steelers."
+  },
+  {
+    "timestamp" : "06:48-06:54",
+    "speaker" : "Andy",
+    "text" : "Right. So because this was Uh the Larry Fitzgerald draft is the Yep, it was."
+  },
+  {
+    "timestamp" : "06:54-07:01",
+    "speaker" : "Steve",
+    "text" : "It was. This whole class was decked because they were talking about how they skipped over Rivers and Rothesberger to draft Fitzgerald. Right."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. So that was gonna be my question. Yeah. How do you feel about that?",
+    "timestamp" : "07:01-07:05"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "So there's a whole story behind this. Um if you if you want to go back to the week 17 the year before The Cardinals were playing against the Minnesota Vikings. And the Vikings, if they win, they're in the playoffs. If they lose, they somehow are out. The Cardinals had literally nothing to play for other than if they lose they get the number one pick and they can draft Eli Manning. And at the time you guys remember what Peyton Manning was in the NFL, because you guys had the rivalry going. Getting Peyton's getting Peyton's brother was a big deal. And so Josh McCown and his first, you know, f opportunity really in that stretch of games to be a starter, um the Cardinals stay around and they end up throwing the uh the Hail Mary to Nate Poole in the back of the end zone, the force out play to win the game. It knocked the Vikings out of the playoffs. It it basically ended the Culpeper Moss era in Minnesota. Um because what Moss not sh shortly later went over to Oakland before he went and played with you guys and then you know Dante Culpepper was never the same. So it basically ended that great stretch of Vikings teams. I was actually at that game. And it was very con it was very conflicting because everyone there everyone like like even the Vikings fans that were trying to talk smack to us all game were just like we don't really care because we're gonna get Eli and then we'll beat you next year, you know? Like so What transpires is they lose the number one pick in which in the most Cardinals fashion they would pull out a remarkable You know, uh Eli Manning didn't want to play for San Diego. San Diego had the number one pick in the draft that year and there was that big deal that they wanted to swap with the Giants um because the Manning family wasn't gonna play play in San Diego. Well if he wasn't going to play in San Diego, he sure as hell wasn't going to play in Phoenix.",
+    "timestamp" : "07:05-09:05"
+  },
+  {
+    "text" : "Right?",
+    "timestamp" : "09:05-09:06",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "So the way I look at it is Um yeah, missing out on Eli because of a Hail Mary ended up being unfortunate. Phillip Rivers ended up having a phenomenal career. But Larry Fitzgerald. is is going down as the the greatest athlete in the history of Arizona sports. And And we maybe that's not saying much for some, but he's one of the greatest wide receivers ever to suit it up. And in fact you could argue that if he actually had quite a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a little bit of a a competent quarterback for a good chunk of his career, um, he would be smashing Jerry Rice's records right now. Um he's not that far off from some of them, but But if he had had actual not Kevin Cobb throwing to him for a number of years, Josh McCann. And all the the the the who's who's of quarterbacks that w aren't named Kurt Warner or Carson Palmer, you could argue that he would be smashing Jerry Rice's records and could be going down as the greatest wide receiver ever to play the game. So I absolutely no regrets. I think if you asked any Cardinals fan they would be thrilled to end up with Larry over either of those quarterbacks. Um and uh and it's It's gonna be sad, you know, as as they're recording this podcast. He hasn't announced if he's retiring yet, but uh uh a lot of signs point to he's going to. But um but who knows, he might be back.",
+    "timestamp" : "09:06-10:32"
+  },
+  {
+    "text" : "He's a rumor every year in New England that he's gonna sign with the Patriots, but we're gonna trade for him.",
+    "timestamp" : "10:32-10:36",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "10:36-11:27",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Every year, yeah. Every year. Now that rumor Te Now that rumor is that he's gonna end up on the Bucks with Bruce Arians. Um but uh yeah, there was that rumor for a long time, ever since they did that Randy Moss experiment, right? And they guys they set incredible records throwing you know, with the Brady Moss relationship, but but looking at that draft class, like Carlos Stansby, Pro Bowl linebacker, Darnell Dockett was is is an inc was an incredible D tackle, even though he's a nut job. Uh Stepanovich was a uh the fourth round pick. He was started week one at center and Antonio Smith was a huge piece on that team that made that run to the Super Bowl um that played the Steelers and ended up getting a huge contract with the Texans and had an a a great care career. career with them too. So this draft class was insanely good. Um and uh and so it's just you look back at this team and it's just interesting to recall that that group."
+  },
+  {
+    "text" : "Yeah I think this draft in general, we look back on it and Yep. Like the first round of this draft had like almost all pro bowlers. It was ridiculous.",
+    "speaker" : "Andy",
+    "timestamp" : "11:28-11:39"
+  },
+  {
+    "text" : "The whole draft was completely That being said, like the starting defense for the Cardinals in this game, I was like There's so many nobodies on here, and they had those eyes, they just got them, so they weren't even starting yet. Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "11:39-11:48"
+  },
+  {
+    "timestamp" : "11:49-11:53",
+    "speaker" : "Andy",
+    "text" : "But they were good there. This defense seemed like it was the strength of this team, too, though."
+  },
+  {
+    "timestamp" : "11:53-12:50",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "It was. I mean Adrian Wilson is gonna be like in the ring of honor for the Cardinals if he, you know, isn't already great safety. I know he had a tough year with you guys at the end of his career, but But he's he he was he's an all-time great, you know, from cardinal standpoint. Uh you know, Kyle Vandenbosch, you know, was a really good defensive end for the Cardinals who came from that Nebraska program, the Black Shirts. Dwayne Starks won a Super Bowl with the with the Ravens. And I already mentioned Dockett Dansby and Antonio Smith. Um and even Ronald McKinnon who played middle linebacker had a really good NFL career. So this defense was really good. The problem was they just weren't good against the run. And I think you guys saw that in the very first quarter with Corey Dillon running wild. Um that that The pro the problem was they couldn't get themselves off the field because stopping the run was tough. Their their their pass defense was really good and the pressure they'd get on quarterbacks was great. Uh but they couldn't stop the run, and that was the problem with that team this year. The"
+  },
+  {
+    "timestamp" : "12:51-13:19",
+    "text" : "Yeah, and uh the even the um the announcers at the beginning of the game W when the Patriots first got on the field, uh said something about how the the one of the Arizona linebackers like, Oh we're gonna we're focusing on stopping the run Uh so they're just not gonna be able to run it. And then I think Dylan had like 31 yards on that first drive alone. He had fifty one by the end of the first quarter.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "13:19-13:28",
+    "speaker" : "Steve",
+    "text" : "He's like, He ended with thirty-two carries, a hundred and fifty-eight yards. Which he should have had a touchdown. They got called back on an absolute bullshit penalty."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "13:28-13:32",
+    "text" : "Yeah, which they called twice, but we'll save the referee."
+  },
+  {
+    "timestamp" : "13:32-13:53",
+    "text" : "Good day for fantasy managers for sure. Absolutely. Back in 2004. Yeah, Corey Dillon, what a pluck. You know, uh another one of those guys that, you know, the Patriots have gotten for years that you just get, you know, after they have some great careers with bad teams and just grab them to have a couple more great years before they sail off into the sunset.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Should have been Julio.",
+    "timestamp" : "13:54-13:55",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "13:56-14:02",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Oh right. Right how we talked about Fitzgerald. Yep, no doubt."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "14:03-14:11",
+    "text" : "But yeah, th they actually said that uh when he went over 150 that this was the eighth time in his career that he had A game with at least 150 yards."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They also said he had the Cardinals get let me with yeah, as the Cardinals gash like two hundred and twenty yards once.",
+    "timestamp" : "14:11-14:17"
+  },
+  {
+    "timestamp" : "14:17-14:20",
+    "speaker" : "Andy",
+    "text" : "Yeah, uh 216 when he was with the when he was with the Bengals."
+  },
+  {
+    "text" : "I remember that game. He set records. Yeah. Yeah. Yep, there's I think there's a few of those uh records that have Cardinals defenses on the other side of it.",
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "14:20-14:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean, uh it's either that or the Browns. Because uh who was it that we we we did a Browns game last year.",
+    "timestamp" : "14:30-14:38"
+  },
+  {
+    "text" : "Priest Holmes? Just Priest Holmes.",
+    "timestamp" : "14:38-14:41",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "It may have been I thought it was the Ravens guy um back back in those days. Who was it Steve? I don't think you know what you're trying to do. Jamal Adam Jamal uh what's his name? Lewis. Yeah. And I think the the Browns linebacker the day before. Said I d like called him up, called up Jamal Lewis and said I dare you to run it. Um we're gonna be on you all day and was like trash talking him. And so then Jamal Lewis the next day ran for like 250 yards on them. Yeah. He done for 200 yards in both games against the Browns that season. Yeah.",
+    "speaker" : "Andy",
+    "timestamp" : "14:42-15:14"
+  },
+  {
+    "text" : "Just doubling down after going down 200 yards.",
+    "timestamp" : "15:14-15:17",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, tough work.",
+    "timestamp" : "15:17-15:18"
+  },
+  {
+    "timestamp" : "15:18-15:47",
+    "text" : "What stood out to me watching this game though is a just a reminder of some of the random ass wide receivers that were on the Patriots that just had great careers for just the Patriots and then no one else. David Patton, Dion Branch, like That was that was back at the time where it was like, how are they able to even move the ball with these guys who are barely, you know, six feet tall and don't look like they're the fastest guys in the world either. Just it doesn't it does it defies science with with the success that they had.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "15:48-15:49",
+    "speaker" : "Steve",
+    "text" : "It was all steam. They had that."
+  },
+  {
+    "text" : "Although in this game neither of those guys did anything. I think uh Branch got hurt on what may have been the play of the game, just from like a a podcast perspective, I guess, where Uh the Patriots get the ball back at um oh so actually no they'll drive before there's like a few seconds left and the Cardinals are going for a field goal. It's like a 57 yard field goal. Yeah, because Neil Rackers has already kicked two, one from fifty-one, one from fifty-two. And so this one's fifty-eight. They're like, you know what? Fuck it. Let's give it a shot. You tried about it. And it got blocked. So the patron of the ball at like the 40-yard line. And they're like, all right, let's try it. And so they tried like the quick screenplay to try like get a few yards if they get in uh um field goal range. And it was dropped by I think it was David Gibbons.",
+    "timestamp" : "15:49-16:40",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "16:41-16:45",
+    "text" : "David Gibbons, there's another good name that would do nothing on any other team."
+  },
+  {
+    "text" : "He got hurt. Hey, come on. He went to the Redskins and got hurt. That's my guy.",
+    "speaker" : "Steve",
+    "timestamp" : "16:46-16:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But uh yeah, so the field goal gets blocks, the pass get the ball, and they run one play and they think the the half is over. And so everybody starts like filing off the field and the refs like no no no there's one second left. So everybody has to file back on the field because you know refs are dickheads and then um the pages are like you know what fuck it we're doing a hail mary so they throw a hail mary And it looked like the play was actually supposed to be David Givens jumps up and bats it back down to Troy Brown, weirdly. And it almost worked, except it got intercepted by uh a cardinal linebacker. I don't remember who it was. And he's like, you know what? Fuck it. I'm returning this. So he takes off downfield and tries to return it. And uh this is probably a good time to introduce Commentators Don Cricket and Steve Tasker. I'd say they're the J V team, but I don't know what's lower than that because he's got a lot of things.",
+    "timestamp" : "16:54-17:40"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Can we w while you introduce him, can we talk about how when they intro Dwayne Starks in the starting lineup, Steve Tasker calls uh says Dwayne Starks will play for the won a Super Bowl with the Baltimore Colts in two thousand and two. Uh that that was uh that was uh worth making note of for me. Uh Cardinals fans are used to the B, C and D teams when it comes to telecasts.",
+    "timestamp" : "17:42-18:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So um the barrel, yeah.",
+    "timestamp" : "18:03-18:06"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "A lot of times you mute um especially when Cardinals are on CBS B teams, because not very often does the CBS teams, you know, groups go and do NFC games. Um so uh and that goes back decades now. So it was uh there was a few of those where it was like what is he even talking about right now?",
+    "timestamp" : "18:06-18:26"
+  },
+  {
+    "timestamp" : "18:26-18:27",
+    "text" : "I thought they were good.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right, well uh Josh McCown scrambles. They couldn't even uh agree on how to pronounce Josh McCowan's name. Oh yeah, the but they did pr mispronounce his name a lot. Oh, but and then they go back to the right pronunciation, then they go back to McCowan. Yeah.",
+    "timestamp" : "18:27-18:42"
+  },
+  {
+    "text" : "Where are you getting the e from? He's been playing for 30 years. Of course you know how to say his name. This is like Josh McCown's third start.",
+    "timestamp" : "18:43-18:49",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "18:49-18:53",
+    "text" : "But they got it right, and then they went off of it to McCowan, and then they went back to McCown."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Either way, so he's scrambling. Right, he's rolling all right, he's got nothing, just throw the ball away. He's like, Nope, it's third and nine. I have nine yards to go. There's five guys that are probably gonna try and do it anyways, and they say, Well You have to admire his courage, if not his discretion. That's great, you're right.",
+    "timestamp" : "18:53-19:11"
+  },
+  {
+    "timestamp" : "19:11-20:18",
+    "speaker" : "Andy",
+    "text" : "Yeah, but so uh during this return, I'll get to go back to the the Hail Mary play. This this linebacker size is gonna run probably like 110 yards try score touchdown. Um and For some reason, I don't know like what happened off the player or whatever it was because the way that they had the the view of it was like from the back of the end zone like running out away from the camera And all of a sudden you see Dion Branch running back to go catch the guy. And all of a sudden, one of the Patriots offensive linemen comes hammering out of like Diving from off-screen and just clips Dion Branch at the knees and he goes up and over and lands directly on his back. And commentators at this point I think it was probably Steve Tasker was bullshit about how it was an illegal block. Completely missing the fact that it was his own teammate, so it was not a block. He was like, that should be a penalty. Like they yeah, they called the other penalty. That should be a penalty too. Until the he finally I think somebody must have told him or something at the at the fourth quarter when they were showing it. Like a as the game was wrapping up and they're doing the highlights."
+  },
+  {
+    "text" : "So maybe this is by no means uh allowing, you know uh uh saying that that's okay from a commentary standpoint. Has someone who's spent time in the press box at Sun Devil Stadium. It is really high up there. Like it is it is a really tall press box. And I'm sure with technology back in 2004 the monitors that they were looking at were probably the size of, you know, maybe the small screen that we're looking at to see each other that isn't the main screen. So In the moment, I can see where maybe he could have made that error until seeing the replay, but the fact that he stuck with it after seeing the replay should should should ruin the competency of this this group writer.",
+    "timestamp" : "20:19-21:05",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Jared, stop stop trying to reason with Andy on commentator's data.",
+    "timestamp" : "21:07-21:11",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "21:12-21:44",
+    "text" : "Well the problem is the problem is I am Before I got into the world I'm in now, and how Steve and I know each other is in the golf world, um, I was in the media and broadcasting for about ten years. Oh wow. And so I worked I worked, you know, behind the scenes and and part of TV productions and some of those were at Sun Devil Stadium for for uh random games. So but but but Steve Tasker calling you know the Baltimore Ravens, the Baltimore Colts was uh was an all was a good one for me. Right when I heard him say that I was like, oh this is gonna be a great game. This is gonna be a good one.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "21:49-21:58",
+    "text" : "Uh they go to Steve and his his uh pearls of wisdom were oh Arizona's gonna have to start throwing the ball to catch up. Like bro you're down seven points."
+  },
+  {
+    "timestamp" : "21:58-22:00",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Seven nothing in the first quarter."
+  },
+  {
+    "timestamp" : "22:00-22:03",
+    "speaker" : "Andy",
+    "text" : "I think you can stick to your game plan still."
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yep. Yep, no doubt. No doubt.",
+    "timestamp" : "22:03-22:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Very worried about that too. But and but, you know, and and you know, maybe maybe Denny Green heard him.",
+    "timestamp" : "22:05-22:10"
+  },
+  {
+    "timestamp" : "22:11-22:53",
+    "text" : "Because what Josh McCown started throwing it like crazy and threw a couple picks not not long after that. Um Josh McCown that season got a really quick hook. You know, for a guy that had such a long NFL career um with so many teams, you would have thought that with how much Denny Green didn't like the guy, that he wouldn't have made it past that season. Uh they ended up going to Sean King. Remember he played with the Tampa Bay Buccaneers for a while after Trent Bilfer? Um Denny Green went to Sean King for a majority of that season. Um Josh McCown got the quick hook, Cardinal career ended, and his incredible career with just about every NFL team happened uh kind of a la Ryan Fitzpatrick now. Um came from there.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Yeah, Josh McCown on this season, uh twenty five hundred yards, eleven touchdowns, ten interceptions.",
+    "timestamp" : "22:54-23:00",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "He wasn't that bad. He was kind of a s he was kind of talented. It was the Cowboys that discovered that Leonard Davis would be better at playing guard than at tackle. But they they wrote out Leonard Davis, who is a former top five pick out of Texas at tackle. Um for years and he was I think among the league leaders in fall starts and he was just covering the blind side of these quarterbacks and they just had no chance.",
+    "timestamp" : "23:00-23:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it did seem that way. Yeah, Mike Fradel coming off that end every time.",
+    "timestamp" : "23:29-23:34"
+  },
+  {
+    "text" : "Can we spend some time the Cardinals uh touchdown score in this game? Probably the most famous name in the game, except for Tom Brady.",
+    "speaker" : "Steve",
+    "timestamp" : "23:35-23:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Mr.",
+    "timestamp" : "23:44-23:44"
+  },
+  {
+    "timestamp" : "23:44-23:46",
+    "text" : "Emmett Smith talked about it.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Didn't you?",
+    "speaker" : "Andy",
+    "timestamp" : "23:46-23:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't even really remember him being on the Cardinals. Definitely if you said Emmett Smith as a Cardinal scores a touchdown in the game against the Patriots, you go, Are you sure? That sounds like",
+    "timestamp" : "23:48-23:55"
+  },
+  {
+    "text" : "So yeah, Emmett Smith, uh he was uh one of many professional athletes who, like many, like to retire coming to the state of uh the the state of Arizona. A lot of professional athletes like to move to Arizona to finish their careers uh ahead of their retirement. There's a long list of people in across all professional sports, you know, the Suns, the Diamondbacks, the Cardinals have had more than their fair share. Uh but the Emmett Smith era was weird because Everyone hated him here. Really? Uh the Cardinals and Cow the Cardinals and Cowboys up until a few years before that. were in the same division. When the Cardinals first moved to the Valley, they did not take them out of the NFC East.",
+    "timestamp" : "23:56-24:38",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Right.",
+    "speaker" : "Andy",
+    "timestamp" : "24:39-24:39"
+  },
+  {
+    "timestamp" : "24:39-24:42",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "It wasn't until I think the late nineties"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That they finally wasn't it?",
+    "timestamp" : "24:42-24:44"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "24:44-24:49",
+    "text" : "Yeah, I I I forgive me, I don't remember the same time. The patriotism."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "24:50-24:51"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "They did that whole realignment to where you see it how it is today, but uh that was it was within a few years, like you said, maybe but two thousand and two. that, you know, the Cardinals were no longer in the same division as the Cowboys. And I I have PTSD of going to Sun Devil Stadium And having to deal with Cowboys fans. They're the worst in in all of sports in my opinion.",
+    "timestamp" : "24:52-25:14"
+  },
+  {
+    "text" : "And so not gonna do Boston fans. One wearing a shirt that is just literally a collage of Tom Brady's face all over it",
+    "speaker" : "Steve",
+    "timestamp" : "25:15-25:22"
+  },
+  {
+    "text" : "Yeah, yeah. I I you know, I don't have anything against Boston teams, so maybe if I was around Boston, you know, teams more that might be different. I was around Cowboys fans growing up and they're just the worst. So All of a sudden Emmett Smith pulls up and in most cases you'd think getting an all-time great coming to your team would be an exciting thing, but but a lot of people here were pretty lukewarm about it because no one liked Emmett Smith. And then he came here and averaged three yards a carry in this final year of his career. Um and uh sure he had that nice touchdown in this game, you know, at the first to get the Cardinals on board and I'm sure it got everyone excited, but uh But it it was uh uh definitely a a a little era to forget. And I think even Emmett Smith forgot it when he gave his Hall of Fame acception uh acceptance speech too. I don't remember a shout out to the Cardinals in that speech.",
+    "timestamp" : "25:22-26:12",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Yeah, I was surprised I was gonna say I was surprised, yeah.",
+    "timestamp" : "26:15-26:18",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "That's just the volume, the sheer volume. They had no one else to to get the rock to.",
+    "timestamp" : "26:18-26:23"
+  },
+  {
+    "timestamp" : "26:23-26:30",
+    "speaker" : "Steve",
+    "text" : "I mean that's true. That's still impressive. He was pretty old at this point and he played all he played fifteen games. Two hundred sixty seven carries. That's a lot."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's Frank Gore esque. Yeah. Who's also at this point averaging probably three yards a carry.",
+    "timestamp" : "26:34-26:39"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "So Yeah, it was three i it was around three yards per carry for for Emmett that season and And you know, you could have blamed the offensive line, but there was a lot of games where it looked like he was still trying to channel that running through the tackles, you know, between the guards types of runs that were maybe two steps slow as opposed to one step slow at that point in his career.",
+    "timestamp" : "26:39-26:58"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "27:05-27:06",
+    "text" : "Didn't have that burst."
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Not at all. Yep. Yep. So when when do we get talk about to talk about my boy Teddy Bruski? Oh one of the one of the one of the first of you know s many Arizona wildcats that have come to have great careers. I went to college with Gronk. Feel free to ask questions about that too. I was I'm a couple years older than him, but we were there at the same time. So we can we can go down that path, but if you want to start with Teddy Bruskey, I I I was hoping we would talk about him a little bit.",
+    "timestamp" : "27:08-27:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Absolutely. I mean Teddy Bruski is well, him and Rodney Harrison are the heart of this defense in war for This entire first half of the dynasty, I would say. Oh yeah. I mean, just a guy who comes back from having a hole in his heart and having to miss a season and then decides, you know what? Yeah, no, let's go let's go back to playing football. Especially in the style that he does, which A lot of people have like specific images of him in their mind when you think of Teddy Bruski. Mine is him Coming in on a blitz and trying to like dive headfirst over the the um running back trying to pick 'em up And basically just being upside down in the quarterback's face, like legs first, trying to tackle him with his knees, like back of his knees. And that's like, that's who Teddy Bruski is to me. Like he's just",
+    "timestamp" : "27:41-28:30"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "28:31-29:49",
+    "text" : "So the U of A football team, like the Arizona Cardinals, isn't known for a a ha a pristine history of or tradition of excellence. But the years that he was there They had a defense that was called the Desert Swarm. And they were one of the classic. You can go Google right now the Sports Illustrated cover issue with Teddy Bruski. Um that also included Chris uh was it Chris McAllister, there's a couple other guys. It started a run of Arizona defenses. that even though the teams never made it to like the Rose Bowl or won a conference championship, were regularly ranked and were among the best in the country. It was kind of like a a model they had a style of play and a model they were kind of becoming known like the Nebraska Black Shirts were in college football. And Teddy Brusky was one of the pioneers of that era. And so he to this day is one of the most beloved alumni of the football program. In fact, uh a couple years ago they did a uh a history, uh was it a twenty-five-year history anniversary of the Desert Swarm team, maybe it was longer than that, and the team on homecoming wore the uniforms that they wore that year and Teddy Brusky's jersey was the one they were selling uh online to commemorate that anniversary."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So um mean mugging in this picture.",
+    "timestamp" : "29:49-29:52"
+  },
+  {
+    "text" : "Yeah. I mean Maybe maybe when we're done or maybe for your audience you can tell him to YouTube Desert Swarm. highlights because that defense the way you described the way he played in the NFL was the way that whole defense played in college and him included and um some of the best highlights that the football program has ever had. I love it. Yeah, that's a great picture.",
+    "timestamp" : "29:52-30:17",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Well I'll have to make sure to uh so really though, what what thanks for new kill Harry? What the fuck?",
+    "timestamp" : "30:17-30:23",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "You like many on the East Coast don't pay attention to us out here and don't realize, you know, Bristol, Connecticut gets this wrong on the regular and we always make fun of it. They'll put the U of A logo with Arizona State next to it, or vice versa. Nikhil Harry played for Arizona State, but I know Nikhil since he was in eighth grade. He uh he yeah, he's uh he's a local Phoenix product and uh it it it's sad for me because to to s to see him being known as someone who is soft is just so not on brand for what I watched him in high school and what I watched out of him at the college level. Um It's it's kinda bizarre for me, um 'cause he used a a special talent uh coming up out of high school, one of the top ranked Wide receivers on the West Coast was getting recruited by everybody, had a great career at ASU, even though I'm not an ASU fan. Um but w But to see what he has turned into at the pro level, to be honest, is very surprising. And I'm pretty pretty taken back by it. Not a guy that I expected. to to have a a tough career.",
+    "timestamp" : "30:27-31:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I mean honestly it might be coaching. Maybe he just doesn't take Belichick style because we've seen it's not everybody's cup of team.",
+    "timestamp" : "31:35-31:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And just the the learning that offense is Yeah, yeah.",
+    "timestamp" : "31:41-31:44"
+  },
+  {
+    "timestamp" : "31:44-31:48",
+    "text" : "And Brady at the end of his career is super demanding too. Yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Yep, I can see it. I can see it.",
+    "timestamp" : "31:48-31:50",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Jersey's done though, you know, you never know. Yep. Oh yeah.",
+    "timestamp" : "31:50-31:54",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "31:54-32:27",
+    "text" : "You know, he maybe it just takes one season. He's got the physical gifts and the talent, um, the speed for his size. Yeah. So, you know, you never know. You never know what what can happen, but it is pretty disappointing to see what what it's turned into. Um but there was at one point Where he and Byron Murphy, who's technically the number two corner on the Cardinals right now, were on the same high school team. Oh damn. So um So it it's it was pretty wild it's pretty wild to see, you know, two NFL guys were at one time on the same high school team here in Phoenix. Um"
+  },
+  {
+    "timestamp" : "32:28-32:35",
+    "text" : "Does this really happen here in New Hampshire? You don't see no no anybody here in high school go on to play in the NFL.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Football and high school football in Phoenix has become no joke. They play year-round I mean, if you look you look at the BCS bowl games last year at the college level. You know, almost every quarterback was from Phoenix. Spencer Rattler on Oklahoma. Um, you got Brock Purdy who was on Iowa State, uh, Slovis on USC. You know, you've got the the Oregon starting quarterback was from here. You know, there were and all of them conveniently not playing for Arizona universities. They can't keep their they they they can't they can't keep the best talent here in state, except for Nikhil Harry.",
+    "timestamp" : "32:35-33:06"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, right. Yeah.",
+    "timestamp" : "33:07-33:14"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Absolutely. Maybe there's your point right there. His four years at Arizona Sturge Three years at Arizona State sucked all the life out of him.",
+    "timestamp" : "33:14-33:21"
+  },
+  {
+    "text" : "So uh did you guys see the uh the Pat Tillman tribute video in this game, in this broadcast? Yeah, because this was the year that he he died. It was.",
+    "speaker" : "Steve",
+    "timestamp" : "33:21-33:32"
+  },
+  {
+    "timestamp" : "33:33-33:36",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "And this was the first home game. This was the first home game since he had passed."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Right, right, right. So yeah, everyone in the whole league was wearing the forty stickers. Yep.",
+    "timestamp" : "33:37-33:41"
+  },
+  {
+    "timestamp" : "33:42-34:50",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yeah, Pat Tillman played for ASU before he played for the Cardinals, and so he's a legend here. Um and even though I like we've you know well established I'm not an Arizona State fan, but anyone's a good one. who is a s fan of football here in the state of Arizona is a Pat Tillman fan. He was of extremely all the stuff you hear and read about him was true, extremely well liked. Um an unbelievably hardworking overachiever who was went from being a seventh round pick to a guy that was one of the, you know, more exciting safeties in the league that was, you know, gearing up to earn a nice second contract. and just decided to hang it all up to go fight in the war after nine eleven. So it's an unbelievable story and it's sad to hear the conspiracy theories that have come from that um since. But uh but there's an awesome statue out in front of the State Farm Stadium in in Glendale with a Cardinals play of him right outside one of the entrances. And His jersey still to this day is one of the best selling Cardinals jerseys year in and year out. That's cool. Yeah, makes sense."
+  },
+  {
+    "text" : "He said he had something like two hundred and twenty-five tackles in a season.",
+    "speaker" : "Steve",
+    "timestamp" : "34:51-34:54"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yeah, he was a monster. That's incredible.",
+    "timestamp" : "34:55-34:57"
+  },
+  {
+    "text" : "Yeah, he was he was uh that didn't seem like pro football reference doesn't have it that high, but it's like they only have his offensive stats, which is weird.",
+    "timestamp" : "34:58-35:07",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Pat Tillman? Offensive stats? I don't know. Maybe I can't still Yeah.",
+    "timestamp" : "35:08-35:14"
+  },
+  {
+    "text" : "Well what's crazy, Greg, you goddamn stat check. I mean he's still in two thousand he had uh 155 combined tackles, one eight. Solo for a safety. That's that's a lot.",
+    "timestamp" : "35:14-35:26",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "35:26-36:48",
+    "text" : "For a safety who was a linebacker in college. Right. Yeah, like this this guy was You know, literally the person that you think of, at least locally, when you think of maximizing every ounce of your being to be as good as you can. Yeah. He he was incredible. And they still honor him regularly out here. I mean every year ASU football team does a uh a salute to service game and they always, you know, have a Pat Tillman reference just a few years ago. Everyone on the back of the ASU football team, instead of having their own name, had Tillman on the back of their jerseys. Um they do what's called the Tillman Run, which is a I think it's a a 5k Oh, yeah. And it's always attended by thousands of thousands of people raising money for the foundation that they've created, uh the Tillman Foundation. So he is still someone to this day that is honored and talked about regularly. That's the type of impact that he had on the community out here. It's pretty c pretty crazy that of all games that you know we're talking about and looking back on, it's the first home game since he had been you know killed in action. It's just of of all things it seems pretty pretty wild."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "36:49-37:10",
+    "text" : "And and that's kind of like why we started doing this podcast is because we like when we're experiencing it in real time, you're like, oh that's that's a cool moment. But then you go back and rewatch it like I don't remember this at all. Like I don't remember this being the first Arizona Cardinals home game since Pat Tillman died. You know, like that's these are the things that almost get lost to to history."
+  },
+  {
+    "text" : "Yeah, absolutely. What did Corey Dillon end up doing that season?",
+    "timestamp" : "37:10-37:15",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "37:17-37:17",
+    "speaker" : "Andy",
+    "text" : "Oh, you know."
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "37:18-37:21",
+    "text" : "Outside of that. I mean was he like That's all that matters, Jerry."
+  },
+  {
+    "timestamp" : "37:21-37:27",
+    "text" : "Come on, man You're on a beat up my cast. He only ran for sixteen hundred yards and twelve touchdowns.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "37:27-37:33",
+    "text" : "He piec he basically had the Randy Moss, you know, breakout with a new team season before Randy Moss.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "37:33-37:51",
+    "speaker" : "Andy",
+    "text" : "Yes. He was the original. Um yeah, he he went off. And I think uh spoiler alert in the playoffs against the Colts he kind of single-handedly won that game in the in the slop. The Patriots controlled the ball for like Seventy percent of the game or something ridiculous."
+  },
+  {
+    "timestamp" : "37:51-37:58",
+    "text" : "Just well now everyone knows how the season's ending, Annie. No one's gonna listen to the rest of the episodes. Steve, they'd have to see the biggest thing.",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "So like gosh, I guess I could just fast forward to twenty two thousand and five.",
+    "timestamp" : "38:00-38:04",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just skip all the way to like twenty sixteen.",
+    "timestamp" : "38:06-38:07"
+  },
+  {
+    "timestamp" : "38:07-38:56",
+    "speaker" : "Andy",
+    "text" : "You're fine. Um so I want I want to touch on Gronk, but uh just to kind of tie it into this game. Um Brady had a kind of an up and down game. He threw two picks that were bad interceptions. Well what was the Hail Mary bullshit? Oh that's true, yeah. But the other one was was bad. Yeah, that one was bad. But he also threw two touchdowns both to who I think was supposed to be the original Gronk, Daniel Graham. Uh who is one of those guys who I think had all the physical tools that Gronkowski had coming into the league, but could not catch a football to save his goddamn life. Yeah. So but he managed to snag two in this one. Uh basically both off play action because Corey Dillon was running it down everybody's throat. Yeah."
+  },
+  {
+    "timestamp" : "38:57-39:02",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Um one of us but that first touchdown of the game, right? Yes, yeah, yeah. That play action."
+  },
+  {
+    "timestamp" : "39:02-39:20",
+    "text" : "Yeah. Which I think is kind of the almost stereotypical touchdown of early Tom Brady career is that really hard play action with two tight ends and throw it to whoever's like From the goal line, yeah. Yeah, yeah, underneath the underneath the the um goalpost there.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "39:20-39:36",
+    "text" : "And then the second one, as pointed out by the commentators, which I had missed, so great kudos to them. Uh the Patriots missed Patrick pass on like a you know 10-yard touchdown. He just Tom Brady overthrew him, they just flipped the play and ran to the other side to Graham and he's wide open.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "That's that's great.",
+    "timestamp" : "39:37-39:38"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just running the same play twice. Yeah.",
+    "timestamp" : "39:38-39:40"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "being like, hey, you know what, let's just run that same play again against these schmucks.",
+    "timestamp" : "39:45-39:48"
+  },
+  {
+    "timestamp" : "39:48-39:52",
+    "speaker" : "Andy",
+    "text" : "It may have been out of here. But I wanna I want to do it to the right."
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "39:53-40:01",
+    "text" : "Did he have that sh those chops back then? After he had won Super Bowls, this one he got kinda those chops or he's like F it's not a It was really that first two thousand one."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Since then it's been coasted for him",
+    "timestamp" : "40:01-40:03"
+  },
+  {
+    "text" : "Nah, I th I think he's just starting to get that fuck you attitude now. Like O three, he was still struggling cause well O three, he played hurt through the whole thing. Because we like I completely forgot in the last game of 02, he was playing on a separated shoulder and then like re-separated it. So the whole O3 season he was playing basically on a separated shoulder that hadn't fixed itself. Um, so this is like the first year he's he's like officially healthy and knows the system and everything. So I think this is the start of the the fuck you, Tom Brady. But he still doesn't quite look like today's Tom Brady, where he just knows what's gonna happen all the time.",
+    "timestamp" : "40:03-40:38",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Belichick, though, he's getting close to fuck you mode.",
+    "timestamp" : "40:40-40:43"
+  },
+  {
+    "text" : "Yeah. He's still wearing polos at this point, so he's not there yet in this game. He doesn't have the hoodie going. He's in a nice golf house. Yeah, yeah, right? It's only 109 on the field, everybody. It's nice out.",
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "40:43-40:55"
+  },
+  {
+    "text" : "Yeah. Um Yeah, I think the just to kind of sum this game up, it was um just uh Patriots keeping it closer than it should be because they kept doing stupid turnovers. And the Cardinals not taking any of those turnovers and doing anything with them because except for putting Neil Rackers on the field and kicking field goals. Yeah. He was their offense.",
+    "timestamp" : "40:58-41:24",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "He was awesome, okay. I know you guys think it's like ridiculous that we're talking about kickers here. You should get it. You should get it with the you know the career and Adam Vinateri had uh he was the kicker for you guys this season. Neil Rackers was a drive saver for this team for a number of years and kept them in a lot of games and and and it was just, you know As much as this team didn't amount to much during this era, I mean, you forget, you know, they they did make the Super Bowl in two thousand and seven. Um, so this just a few years away from that where Rackers was the kicker and they made that playoff run. But like when you're a young trying to figure it out team, uh having a kicker that could, you know, was automatic from fifty-five plus was a big deal. Not to mention he was according to many More handsome than Tom Brady, you know. So it's the Cardinals had to have something going for it. They might as well have a supercharged, you know, creative player style kicker that had amazing looks.",
+    "timestamp" : "41:25-42:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's like me playing Madden. Yeah.",
+    "timestamp" : "42:28-42:30"
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "42:32-42:36",
+    "text" : "One guy we work with, he's a Bills fan, his favorite player is Brian Mormon, the punter."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Of course. So So Bill like we said Bills fans have it worse, they don't even have kickers they can root for, it's just punters. Slightly worse.",
+    "timestamp" : "42:37-42:47"
+  },
+  {
+    "text" : "Speaking of punters, Scott Player, the Cardinals punter, the last guy left in the NFL to wear the single bar helmet, he's in this game.",
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "42:47-42:55"
+  },
+  {
+    "timestamp" : "42:56-43:00",
+    "text" : "That's like such a goober. Those those are the dumbest helmets.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "They're they didn't do anything because like it's like it's like a chin strap. Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "43:00-43:03"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "It was basically a chin strap.",
+    "timestamp" : "43:04-43:05"
+  },
+  {
+    "text" : "Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "43:05-43:05"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "43:06-43:14",
+    "text" : "At that point, can you just not wear one or is it like part of the NFL rules you have to have a You have to have a uh face mask where he's like, you know what, fuck it, this'll do."
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "43:14-43:43",
+    "text" : "I just don't understand. Like I I get like it's just in in all aspects of life. There are certain things where it's like, you know, you want to wear stuff that maybe is a little off or different because it speaks to who you are. And then there are some things that are just so awful looking that it's like just Even if you're trying to go for something here, just don't do it. And the Scott player single bar, like the Cardinals would have the last guy ever to wear the single bar helmet. Like, those are the types of things that the Cardinals have in NFL history."
+  },
+  {
+    "text" : "See where does the shirt fit on that continuum then? So that's bad.",
+    "timestamp" : "43:43-43:47",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "43:47-43:58",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "That shirt is It's up there, but um if as awesome and who you are and just like a part of yeah. It does say a lot about you, Steve. Let's say that."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think that face mask is second worst only to uh I believe it was a San Diego punter at the time He had it was like the thin double bar, but uh like the top of it, like where it would like go over his eyes, kind of like raised up is almost like His face mask had raised eyebrows, so it gave the whole helmet a quizzical look. And every time I look at it, I couldn't help. I had to laugh at it. It's the most ridiculous looking helmet. Like, why do you need that to go up? So it's is it so it's is it blocking your view? I don't understand. Like it's it's it's the dumbest face mask I've ever seen.",
+    "timestamp" : "44:02-44:41"
+  },
+  {
+    "timestamp" : "44:41-44:58",
+    "text" : "Hunters are so weird. If we're talking about helmets too, can we talk about how Larry Fitzgerald has the same hunter? Helmet in this game than he still does. That retro like Revo helmet, you know, that was super cool and trendy at the time and now literally no one else has except for Larry.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "44:57-45:16",
+    "speaker" : "Andy",
+    "text" : "It's just if he's been grandfathered and nobody else is allowed to wear those anymore, probably. Not even. Probably not. Amazing. Yeah, I I think Larry Fitzgerald in this game, they were already talking about how he was like The focal point of the game two games uh the focal point of the offense two games in. And the Patriots were double teaming him every play."
+  },
+  {
+    "text" : "Yeah, Ty Law on him. Yeah, that's pretty cool. What a what a kind of looking back on it, what a cool matchup. Right, yeah. Um a good example of looking for the commentators.",
+    "timestamp" : "45:16-45:26",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "45:26-45:32",
+    "speaker" : "Steve",
+    "text" : "Uh-uh, one of the guys with the least amount of experience being covered by one of the guys with the most, talking about the Tyla Larry Fitzgerald matchup."
+  },
+  {
+    "timestamp" : "45:33-45:35",
+    "text" : "What great commentary.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "Well, just looking back it is, because like now as Fitzgerald is forever old.",
+    "timestamp" : "45:35-45:40",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean Ty Law wasn't exactly on the back nine of his career. I don't know if you can say most.",
+    "timestamp" : "45:41-45:46"
+  },
+  {
+    "text" : "Yeah, but he was well accomplished at that point. So it's just you know, d when you think about, you know, some cool matchups that, you know, transpired over the years. You know, people love to talk about, you know, what if Jordan could have played against LeBron? You know, like like, you know, it would have been really cool to see Ty Law in his prime against Larry in his prime. They actually got to face off against each other though in this game and it's and it's pretty cool. Yeah.",
+    "timestamp" : "45:46-46:09",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "46:09-46:20",
+    "speaker" : "Steve",
+    "text" : "It just would have been good to have Larry have a quarterback that could throw to a scroll's probably played against Tylaw all the way up to Stefan Gilmore. Yeah, he has. That's impressive."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That that is pretty impressive. Oh man. All right, what else we got?",
+    "timestamp" : "46:20-46:26"
+  },
+  {
+    "text" : "Uh you want to do best and worse",
+    "timestamp" : "46:26-46:29",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "I just want to see if there's anything else in here.",
+    "timestamp" : "46:30-46:32",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "46:33-46:53",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Throw out, you know, the name Bertrand Barry was a pro bowler, you know, was pro bowler for the Denver Broncos, Pro Bowler for the Cardinals, the only Pro Bowler for the Cardinals in this season. Think he got to Larry or got to Brady in this game. Yeah. So uh shout out to Bert, the B train. Getting he getting in on the action against the Pats."
+  },
+  {
+    "text" : "Yeah, he had he had a hell of a season. He had uh fourteen and a half sacks, four fur forced fumbles. on the season this year.",
+    "speaker" : "Andy",
+    "timestamp" : "46:53-47:01"
+  },
+  {
+    "timestamp" : "47:01-47:09",
+    "text" : "There is a guy who also had a sack named Ross Kolodej, K-O-L-O-D-Z-I-E-J.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "47:09-47:10",
+    "text" : "Nailed it.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "47:11-47:18",
+    "speaker" : "Steve",
+    "text" : "They said it I couldn't get it, but like man, that guy's sitting there being like, I sack Tom Brady and everyone's like, No, you didn't dude."
+  },
+  {
+    "timestamp" : "47:18-47:27",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Oh yeah, he's probably probably Steve, he probably has a podcast about the same game and he test talks about on repeat that time that he sacked Tom Brady."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "com But there was some great there was a couple of great names in this um that I that I came across. Uh the fullback Obafemi Iambidejo. Bedejo. Yep, I'm Bedejo. Yep. That's a great fucking name. Yep. And also Peppy Zellner was Fappy. Peppy Zellner. What a great name.",
+    "timestamp" : "47:30-47:51"
+  },
+  {
+    "timestamp" : "47:51-47:56",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Pepe had a few quarterback uh hurries in this the first half of this game."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. Yeah, he was a solid defensive end, but every time they said Pepe's Elner I he couldn't help but smark a little",
+    "timestamp" : "47:56-48:02"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "48:02-48:05",
+    "text" : "Yeah, chuckle a little bit, right? Yeah. It's great."
+  },
+  {
+    "timestamp" : "48:05-49:00",
+    "speaker" : "Andy",
+    "text" : "Bring some levity to the situation that is Take it easy. Um one last note before we do best and worst. With this win, New England moves to 17 wins in a row on their way to their record setting. That would tie the 76-77 Oakland Raiders. Uh 18 is the record held by a few teams. One, two, three, four, five teams. Most recently Denver. Burke. Uh the ninety seven ninety eight Denver team that cheated their way past the um salary cap, good for them. Uh the 8990 San Francisco 49ers, which I think that was like the Steve Young switchover. Yeah, yeah, it was. It was a transition to Steve Young. Obviously the 72 Dolphins, they went 60-0 and then won the next two games in 73. I think. Or maybe yeah, something like that."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And let's restrict this because this is regular season wins.",
+    "timestamp" : "49:00-49:03"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "49:05-49:05",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "49:05-49:13",
+    "text" : "Isn't it? No. This is the first time. I thought the NFL does all the records in regular season wins because you have to Sometimes, yeah.",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "49:13-49:35",
+    "text" : "Uh but the the last two on this are the 3330 here's an asterisk for you the 3334 and 4142 Chicago Bears. Wow Pre pre-NFL Chicago Bears when there was still an AFL to compete with them. Yeah, each game was like two to one. Yeah.",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Speaking of things that transpired, um, you know, you guys talked about all these records. Two things that happened to the Cardinals this season were two losses to the 49ers who didn't beat any other teams that season.",
+    "timestamp" : "49:35-49:47"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "49:48-49:49",
+    "text" : "They went two and fourteen."
+  },
+  {
+    "timestamp" : "49:49-50:10",
+    "text" : "They went two and fourteen. So if say, you know, the Cardinals, you know, pulled something out of their ass and beat the worst team in football, um they would have finished eight and eight. And the Rams finished eight and eight that season and made the playoffs. And the Cardinals split with the Rams that season. I I'm not going to do a deep enough dive to know if they had the tiebreaker with the Rams.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "text" : "It would have been close.",
+    "speaker" : "Andy",
+    "timestamp" : "50:10-50:11"
+  },
+  {
+    "text" : "If the Cardinals could have found a way to figure out to beat the worst team in the NFL, um, which I think led to them drafting Alex Smith one overall. I'm pretty sure that's the draft. Um I could be wrong. I'm just going off the top of the brain here. But if they could have figured out a way to do that They might have made the playoffs that year, and we're talking about a playoff team that the Patriots beat in week two on the road, as opposed to, ha ha, this was a whatever Cardinals win or a win over the Cardinals, you know. So just another fun little tidbit for you to talk about how glorious the season was.",
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "50:12-50:49"
+  },
+  {
+    "timestamp" : "50:50-50:57",
+    "text" : "You were correct. Uh Pick number one overall, San Francisco 49ers, Alex Smith.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "And before that, I watched Alex Smith, coached by Urban Meyer, play in the Fiestable. I was at that game in person.",
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "50:57-51:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh damn. Damn.",
+    "timestamp" : "51:05-51:06"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Yeah. Just round and round we go.",
+    "timestamp" : "51:06-51:08"
+  },
+  {
+    "text" : "Arizona Cardinals picked uh Andrail Roll, great pick.",
+    "speaker" : "Andy",
+    "timestamp" : "51:10-51:14"
+  },
+  {
+    "text" : "Who was big time, big time player again? Like uh that that stretch of th those two drafts were like the groundwork for a defense that got the Cardinals all the way to the Super Bowl just a few years later.",
+    "timestamp" : "51:14-51:26",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "51:26-51:40",
+    "speaker" : "Andy",
+    "text" : "And this is a great draft too though. Alex Smith, Ronnie Brown, Braylon Edwards, Adam Jones, Pac-Man Jones, Andrew Roll, Carlos Rogers, Demarcus Ware, Sean Merriman, Jamal Brown from the Saints. Always offense."
+  },
+  {
+    "speaker" : "Steve",
+    "timestamp" : "51:40-51:45",
+    "text" : "We're in week two of season 2004, and he's already talking about the 05 draft. Jesus Christ."
+  },
+  {
+    "timestamp" : "51:45-52:24",
+    "speaker" : "Andy",
+    "text" : "Patriots number 32, Logan Mankins. Another guy. Yeah, we'll get to that though, right, Steve? Yes, Andy. Alright, so uh um just to explain to Jared, uh Growing up around the w around the dinner table, our parents used to make us do um best and worst for your days. You have to pick a best and a worst. happen. So we we've carried that into the the podcast where you just well glad to join the Brown family dinner here. Absolutely. So you just uh so we'll start with Steve. Steve give me your uh your best and worst from this game."
+  },
+  {
+    "text" : "Uh my best was I could just hear this highlight on prime time. They they try to pitch to Corey Dillon and he like fumbled it. He didn't even catch it really. And the Cardinals pick it up, but like there's two of them. Running down the sidelines like big boys, both trying to pick it up and run at the same time and they're like bumping into each other and I can just hear Chris Berman go rumbling, rumbling, rumbling.",
+    "timestamp" : "52:24-52:46",
+    "speaker" : "Steve"
+  },
+  {
+    "text" : "Exactly.",
+    "timestamp" : "52:47-52:48",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "52:48-52:49",
+    "speaker" : "Steve",
+    "text" : "That was the best."
+  },
+  {
+    "text" : "It was also a worst because that was a sh Yeah, yeah. That was one of those terrible turnovers that Cardinals hadn't done anything. I think had like 13 total yards of offense and yet they're still in field goal range because Corey Dillon, your superstar running back, can't catch a pitch.",
+    "speaker" : "Andy",
+    "timestamp" : "52:50-53:06"
+  },
+  {
+    "timestamp" : "53:06-53:08",
+    "speaker" : "Steve",
+    "text" : "Like 30 yards and six points."
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "53:09-53:09",
+    "text" : "Yeah."
+  },
+  {
+    "timestamp" : "53:10-53:21",
+    "text" : "Which is pretty impressive. On field goals, not even I saw a gif of Romeo Cornell doing the voodoo thing, you know, that's like a famous Belcheck GIF.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah. And I was like, oh shit. Came from this game. Yeah. No, I snagged that. That'll be on the website. Nice. Good call.",
+    "timestamp" : "53:21-53:28"
+  },
+  {
+    "text" : "And hey, connection for ya. Romeo Cornell's defensive coordinator when he became the head coach of was it the Chiefs? Brown. Clan Clan was it the Browns?",
+    "timestamp" : "53:28-53:38",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "speaker" : "Andy",
+    "timestamp" : "53:38-53:50",
+    "text" : "Oh no, I think you're right. Another great name."
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Clancy Pendergast. Yeah. Yeah, that's right.",
+    "timestamp" : "53:50-53:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I I didn't have too much more of the worst outside of the the Patriots inability to really put the Cardinals away. Yeah. There was a worse for the Cardinals where they they had like a they're in their own end zone.",
+    "timestamp" : "53:55-54:09"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "54:09-54:24",
+    "text" : "You have that look that so many people have when they talk about Cardinals games. Just if you could just take a screen grab This isn't good podcasting right now because they're not looking at you. But you just have this look where it's just like, oh, it's just oh come on. Like it's a smile."
+  },
+  {
+    "timestamp" : "54:25-54:29",
+    "speaker" : "Andy",
+    "text" : "Like it's a very small thing. It's like cute, but you're being obnoxious."
+  },
+  {
+    "text" : "Yeah, I could have done without that. Oh gosh. So continue, Steve, but I just I wanted you to capture that face because that is the face of a Cardinals fan.",
+    "timestamp" : "54:28-54:38",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "54:38-54:50",
+    "speaker" : "Steve",
+    "text" : "So it's like third and fifteen, they get sacked. But oh there's an off sides. Oh we get to run another play. Throwing interceptions, just like, oh god damn, we should just take him just decline the offsides, taking the sack and punted."
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, well no, because didn't he They threw an interception and then uh it got called back for defensive holding on I think Ty Law And then so the very next play, and that was like third and long. So the very next play is not like sh third and less long. And McCowan or McCowan, however you want to pronounce it. decides to just chuck it six feet over a double covered Larry's Fitzgerald into Eugene Arms waiting arms. Um For his second interception in two places. Yeah. And this one didn't get called back. Yeah. That was the thing.",
+    "timestamp" : "54:52-55:29"
+  },
+  {
+    "text" : "I think the pages take that and score a touchdown, and it's it's starting to look then out of hand and then They kept fumbling the ball, coughing it up, and letting the Cardinals a little bit back into it. Yeah.",
+    "speaker" : "Steve",
+    "timestamp" : "55:30-55:38"
+  },
+  {
+    "timestamp" : "55:38-55:47",
+    "text" : "Yeah, it's a not a good not a good look. Uh yeah, alright. Uh Jared, you want to give us your best and worst?",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "55:47-56:59",
+    "text" : "Sure. I'll do it from a cardinal's perspective. Um The best, you know, easy one we talked about, the honoring of Pat Thoman. Pretty cool watching that back and uh seeing the decals. And the worst was a play in I think it was the second drive of the game where it's just a flawlessly executed screenplay to Patrick Pass who runs for about twenty five thirty yards and fumbles the ball forward for another twenty and there's three cardinals right there to recover it and yet somehow was it was it Dion Branch comes out comes out of nowhere and ends up with the ball inside the ten yard line. So it ended up being like a fifty-five yard play. I can't remember, you know, Tasker probably made something up on that play of the amount of yards that it ended up covering. But That that was a I guess a microcosm for the rest of the game where even when the Patriots were making mistakes and were trying to lose the game. You know, the Cardinals would just the Cardinals would just be like, nah, you you take the win. You you can have it. You can have it. So the uh the Patrick Pass fumble forward for another fifteen plus yards to get inside the ten first and goal, which led to a that first play action touchdown that we referenced.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah. Yeah.",
+    "timestamp" : "57:06-57:07"
+  },
+  {
+    "text" : "And half of that. And you know what? And guess what? That screenplay was so well executed that it probably could have happened like that without the fumble. Yeah. But he decided to basically just throw the ball forward another ten, fifteen yards and His boy Dion Branch was there to get it.",
+    "speaker" : "Jared (Cardinals)",
+    "timestamp" : "57:07-57:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It worked. That's what you gotta do.",
+    "timestamp" : "57:22-57:24"
+  },
+  {
+    "timestamp" : "57:24-57:26",
+    "speaker" : "Jared (Cardinals)",
+    "text" : "Flawless execution there."
+  },
+  {
+    "text" : "Just like they wrote it up. Uh all right. Let's see. My best um was probably the fact that this was Uh after having suffered through the run game of last season, where the Pages were, I think, twenty-ninth in the league With uh an old broken down Antoine Smith. This is the first time the Patriots had a hundred yard receiver and a hundred yard rusher in the same game since nineteen ninety-seven. Ooh, Dougie. Steve, can you name either of those players? Oh boy. One of them should be pretty easy. The rusher or the receiver? The rusher. 97. Oh, Robert Edwards. No, goddammit. It's your boy. Yeah, Curtis Martin.",
+    "timestamp" : "57:27-58:16",
+    "speaker" : "Andy"
+  },
+  {
+    "speaker" : "Jared (Cardinals)",
+    "text" : "My favorite Martin?",
+    "timestamp" : "58:17-58:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, exactly. And uh Sean Jefferson was the wide receiver to go over a hundred yards. Uh yeah, uh Charger Hall of Famer, Sean Jefferson his career there. Um let's see. Uh I have like a mix best and worst. Okay. And it was Dennis Green. The best was that they shared this fact that When Dennis Green was coaching the Vikings, the ball boy on that team.",
+    "timestamp" : "58:18-58:53"
+  },
+  {
+    "text" : "Oh yeah.",
+    "timestamp" : "58:53-58:53",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "58:54-58:55",
+    "text" : "Larry Fitzgerald.",
+    "speaker" : "Andy"
+  },
+  {
+    "text" : "That's right.",
+    "timestamp" : "58:55-58:56",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "58:57-01:00:08",
+    "speaker" : "Andy",
+    "text" : "Also, true story. So that that's kind of the best. The worst, uh, when Denny Green was coaching in college at Northeastern, Northwestern rather, um, on that on that northwestern team, Steve Tasker. That's your worst. And they showed it. But well they they yeah, so they put up this they put up the picture and uh Don Cricky goes, What's this? As Steve's like, oh well let me tell you. And also it was funny because for some reason like the the video that we have to watch this um In the second half, all of a sudden like they're they were having trouble with the audio or something, but you could actually hear the guy who was probably in their ear, the commentators. So you could you started to hear like the count of it's like, oh going to commercial in six, five. Four and then you hear them like do the thing to go to commercial like oh brutal so bad but and then they did it for the Steve Tasker thing, like Tasker in three Two and they went to it and Kriggy's like, what's this?"
+  },
+  {
+    "text" : "Jared is cringing hard right now.",
+    "timestamp" : "01:00:11-01:00:13",
+    "speaker" : "Steve"
+  },
+  {
+    "timestamp" : "01:00:14-01:00:20",
+    "text" : "Oh gosh. That's just that shouldn't happen. That should not happen. Not at this level of the game.",
+    "speaker" : "Jared (Cardinals)"
+  },
+  {
+    "timestamp" : "01:00:21-01:00:22",
+    "speaker" : "Steve",
+    "text" : "Two thousand four, you know different time."
+  },
+  {
+    "text" : "Professionals. Both of them. All right. So we have one last thing to announce. Last week we had uh Jeff Howe on from the Athletic. And he uh In honor of him, we said we're going to give away a year-long athletic subscription for uh a randomly selected person who wrote us a review of the podcast, uh good or bad, and then texted the hotline to let us know that it was you that that left the review. Um so picking randomly was was pretty easy because we got one review over the past three weeks. Um and of course that would uh be our mother who figured out technology enough to be able to leave a review. So thanks mom. Yes. So thank you for that. She told us uh she told me the other day not to buy it for her. We didn't need to waste the money. But she's getting it because we are well, I am a man of my word. I'm not gonna vouch for my either of my brother. Yeah, don't love me with that, Andy. So no, yes. So we'll be giving mom I'm buying my mother. Yeah, I'm buying my mother a subscription to the athletic for a year.",
+    "speaker" : "Andy",
+    "timestamp" : "01:00:23-01:01:36"
+  },
+  {
+    "text" : "So congrats to Mama Brown, yeah. Wait, wait, wait. Did she text the Dynasty Hotline to let you know?",
+    "speaker" : "Steve",
+    "timestamp" : "01:01:36-01:01:42"
+  },
+  {
+    "timestamp" : "01:01:42-01:02:27",
+    "text" : "She did, yeah. Okay. Well she she did it twice. She texted me first to say she did it uh and she hadn't. So I had to let her know that no, you haven't left a review. Oh, so she Aw dam, I forgot to hit the submit button. Oh god. So she texted first and then left the review. Yeah. Uh and then texted again afterwards, be like, I think I got it this time. Yeah. Good work, mom. Yep. So Very nice. So yeah, so Mara Brown, winner of that. And thanks to everybody for listening and not telling us what you think of us, maybe. Yeah. I mean no news is good news, I guess, so we'll keep doing this. We're not doing it for the reviews.",
+    "speaker" : "Andy"
+  },
+  {
+    "timestamp" : "01:02:27-01:02:28",
+    "text" : "We're doing it for mom, clearly.",
+    "speaker" : "Steve"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "At this point, yes. All right. Well, this has been yet another Thrilling episode of the Patriots Dynasty podcast. I think this one actually was. Thank you, Jared, for joining us. We all appreciate when we have kind of other perspectives of of uh these games that we kind of remember but don't remember. Um so that was really cool. Absolutely. Next week? I don't even know. One of these days you're gonna shock the shit out of me. No, no, I'm not. And be like, oh yeah, no, they're playing this. I remember this game. I was there. Uh we are traveling to Ralph Olson Stadium. Going uh back across country.",
+    "timestamp" : "01:02:28-01:03:13"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, from the desert to the frozen tundra.",
+    "timestamp" : "01:03:14-01:03:17"
+  },
+  {
+    "timestamp" : "01:03:17-01:03:29",
+    "speaker" : "Andy",
+    "text" : "Uh pretty much. Yeah, I mean It was fifty-eight degrees in this next game in Buffalo. Down from a hundred and nine. So eighty-nine to fifty eight. It's not even that big."
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Unseason will be cool and then on seasonal be warm. Boom. Yeah. It kind of is. It could be worse.",
+    "timestamp" : "01:03:29-01:03:35"
+  },
+  {
+    "timestamp" : "01:03:35-01:03:49",
+    "speaker" : "Andy",
+    "text" : "So I'm gonna go visit the uh windless Buffalo Bills in their hometown and we'll see how How they do there. But all right. Thank you, gentlemen. And we will see you next week on the Patriots Odyssey Podcast. See you later."
+  },
+  {
+    "timestamp" : "01:03:50-01:03:51",
+    "speaker" : "Mom",
+    "text" : "See you later."
+  }
+]
