@@ -292,7 +292,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: "<div class=\"flex justify-center py-3\">\r\n<a class=\"btn btn-primary\" href=\"/search/transcripts\">Transcript Search</a>\r\n</div>"
+          content: "<div class=\"flex justify-center py-3\">\r\n<a class=\"btn btn-primary px-6 py-3 text-base bg-blue-pats text-white border-none rounded-md cursor-pointer transition-colors hover:bg-blue-900\" href=\"/transcripts/search\">Transcript Search</a>\r\n</div>"
           tokenize: false
       footer: {  }
       display_extenders: {  }
@@ -323,12 +323,15 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'facets_filter:f'
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:facets.facet.podblock_opponent'
+        - 'config:facets.facet.podblock_season'
         - 'config:field.storage.node.field_subtitle'
         - 'config:search_api.index.podcast_index'
         - 'search_api_list:podcast_index'
@@ -358,12 +361,16 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
+        - 'facets_filter:f'
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
         - 'user.node_grants:view'
       tags:
+        - 'config:facets.facet.episode_type'
+        - 'config:facets.facet.podcast_opponent'
+        - 'config:facets.facet.podcast_season'
         - 'config:field.storage.node.field_subtitle'
         - 'config:search_api.index.podcast_index'
         - 'search_api_list:podcast_index'
