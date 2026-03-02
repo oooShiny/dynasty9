@@ -28,9 +28,15 @@ class RemoveFooter extends ProcessPluginBase {
    * {@inheritdoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    // Remove old Acast footer format.
     $footer = "<br /><hr><p style='color:grey; font-size:0.75em;'>";
     $body_array = explode($footer, $value);
+    $value = $body_array[0];
 
-    return $body_array[0];
+    // Remove new Acast footer format: "Support this show" paragraph and
+    // everything that follows (the <hr> and privacy notice).
+    $value = preg_replace('/<p[^>]*>\s*Support this show.*$/s', '', $value);
+
+    return trim($value);
   }
 }

@@ -39,6 +39,7 @@ function dynasty_newsletter_theme($existing, $type, $theme, $path) {
         'news_items' => [],
         'recent_games' => [],
         'recent_podcasts' => [],
+        'external_podcasts' => [],
         'on_this_date' => [],
         'birthdays' => [],
         'historical_events' => [],

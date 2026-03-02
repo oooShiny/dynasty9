@@ -2,13 +2,31 @@
 
 namespace Drupal\dynasty_newsletter\Form;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure newsletter settings.
  */
 class NewsletterSettingsForm extends ConfigFormBase {
+
+  /**
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+    $instance->database = $container->get('database');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -133,6 +151,32 @@ class NewsletterSettingsForm extends ConfigFormBase {
       '#max' => 20,
     ];
 
+    // Build a list of aggregator feeds so the admin can tag podcast feeds.
+    $feed_options = [];
+    try {
+      $feed_options = $this->database->select('aggregator_feed', 'af')
+        ->fields('af', ['fid', 'title'])
+        ->orderBy('af.title')
+        ->execute()
+        ->fetchAllKeyed();
+    }
+    catch (\Exception $e) {
+      // Aggregator table may not exist.
+    }
+
+    $form['podcast_feeds'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Podcast Feeds'),
+      '#open' => TRUE,
+    ];
+    $form['podcast_feeds']['podcast_feed_ids'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Podcast RSS Feeds'),
+      '#description' => $this->t('Mark which aggregator feeds contain podcast episodes. These will appear in the "External Podcast Episodes" section instead of the News Items section.'),
+      '#options' => $feed_options,
+      '#default_value' => $config->get('podcast_feed_ids') ?? [],
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -154,6 +198,7 @@ class NewsletterSettingsForm extends ConfigFormBase {
       ->set('historical_games_limit', $form_state->getValue('historical_games_limit'))
       ->set('birthdays_limit', $form_state->getValue('birthdays_limit'))
       ->set('events_limit', $form_state->getValue('events_limit'))
+      ->set('podcast_feed_ids', array_values(array_filter($form_state->getValue('podcast_feed_ids'))))
       ->save();
 
     parent::submitForm($form, $form_state);

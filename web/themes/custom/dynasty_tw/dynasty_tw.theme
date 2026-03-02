@@ -407,7 +407,7 @@ function dynasty_tw_preprocess_region(&$variables) {
     if (!is_object($node)) {
       $node = Node::load($node);
     }
-    $node_type = $node->bundle(); // Or $node->getType()
+    $node_type = $node->bundle();
 
     // Add the node type as a variable to the region template.
     $variables['content_type'] = $node_type;

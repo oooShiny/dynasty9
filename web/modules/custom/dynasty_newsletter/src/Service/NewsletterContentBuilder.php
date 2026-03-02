@@ -76,12 +76,17 @@ class NewsletterContentBuilder {
    *   Rendered HTML for newsletter.
    */
   public function buildNewsletterContent(array $config = []) {
+    $news_iids = $config['news_iids'] ?? NULL;
+    $podcast_nids = $config['podcast_nids'] ?? NULL;
+    $external_podcast_iids = $config['external_podcast_iids'] ?? NULL;
+
     $content = [
       'newsletter_title' => 'Patriots Dynasty Weekly - ' . date('F j, Y'),
       'newsletter_date' => date('F j, Y'),
-      'news_items' => $this->getRecentNews(),
+      'news_items' => $this->getRecentNews(5, $news_iids),
       'recent_games' => $this->getRecentGames(),
-      'recent_podcasts' => $this->getRecentPodcasts(),
+      'recent_podcasts' => $this->getRecentPodcasts(3, $podcast_nids),
+      'external_podcasts' => $this->getExternalPodcasts(5, $external_podcast_iids),
       'on_this_date' => $this->getHistoricalContent(),
       'birthdays' => $this->getPlayerBirthdays(),
       'historical_events' => $this->getHistoricalEvents(),
@@ -95,6 +100,7 @@ class NewsletterContentBuilder {
       '#news_items' => $content['news_items'],
       '#recent_games' => $content['recent_games'],
       '#recent_podcasts' => $content['recent_podcasts'],
+      '#external_podcasts' => $content['external_podcasts'],
       '#on_this_date' => $content['on_this_date'],
       '#birthdays' => $content['birthdays'],
       '#historical_events' => $content['historical_events'],
@@ -108,24 +114,41 @@ class NewsletterContentBuilder {
    *
    * @param int $limit
    *   Number of items to retrieve.
+   * @param array|null $iids
+   *   Optional list of aggregator item IDs to fetch directly.
    *
    * @return array
    *   Array of news items.
    */
-  protected function getRecentNews($limit = 5) {
+  protected function getRecentNews($limit = 5, ?array $iids = NULL) {
     $config = \Drupal::config('dynasty_newsletter.settings');
     $limit = $config->get('news_items_limit') ?? $limit;
 
-    // Query aggregator items from last 7 days
-    $timestamp = strtotime('-7 days');
+    if (!empty($iids)) {
+      $items = $this->database->select('aggregator_item', 'ai')
+        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+        ->condition('ai.iid', $iids, 'IN')
+        ->orderBy('ai.timestamp', 'DESC')
+        ->execute()
+        ->fetchAll();
+    }
+    else {
+      // Query aggregator items from last 7 days, excluding podcast feeds.
+      $timestamp = strtotime('-7 days');
+      $podcast_feed_ids = \Drupal::config('dynasty_newsletter.settings')->get('podcast_feed_ids') ?? [];
 
-    $items = $this->database->select('aggregator_item', 'ai')
-      ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
-      ->condition('ai.timestamp', $timestamp, '>')
-      ->orderBy('ai.timestamp', 'DESC')
-      ->range(0, $limit)
-      ->execute()
-      ->fetchAll();
+      $query = $this->database->select('aggregator_item', 'ai')
+        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+        ->condition('ai.timestamp', $timestamp, '>')
+        ->orderBy('ai.timestamp', 'DESC')
+        ->range(0, $limit);
+
+      if (!empty($podcast_feed_ids)) {
+        $query->condition('ai.fid', $podcast_feed_ids, 'NOT IN');
+      }
+
+      $items = $query->execute()->fetchAll();
+    }
 
     $news_items = [];
     foreach ($items as $item) {
@@ -212,41 +235,29 @@ class NewsletterContentBuilder {
    *
    * @param int $limit
    *   Number of episodes to retrieve.
+   * @param array|null $nids
+   *   Optional list of node IDs to load directly.
    *
    * @return array
    *   Array of podcast data.
    */
-  protected function getRecentPodcasts($limit = 3) {
+  protected function getRecentPodcasts($limit = 3, ?array $nids = NULL) {
     $config = \Drupal::config('dynasty_newsletter.settings');
     $limit = $config->get('recent_podcasts_limit') ?? $limit;
 
-    // First try to query by publication date field (if it exists)
-    $timestamp = strtotime('-7 days');
-    $date_string = date('Y-m-d', $timestamp);
-
-    try {
-      // Try publication date field first
-      $podcast_nids = $this->database->select('node__field_publication_date', 'fpd')
-        ->fields('fpd', ['entity_id'])
-        ->condition('fpd.bundle', 'podcast_episode')
-        ->condition('fpd.field_publication_date_value', $date_string, '>')
-        ->orderBy('fpd.field_publication_date_value', 'DESC')
-        ->range(0, $limit)
-        ->execute()
-        ->fetchCol();
+    if (!empty($nids)) {
+      $podcast_nids = $nids;
     }
-    catch (\Exception $e) {
-      // Fall back to created date if publication date field doesn't exist yet
+    else {
       $podcast_nids = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
         ->condition('type', 'podcast_episode')
-        ->condition('created', $timestamp, '>')
         ->sort('created', 'DESC')
         ->range(0, $limit)
         ->accessCheck(TRUE)
         ->execute();
-    }
+  }
 
     if (empty($podcast_nids)) {
       return [];
@@ -258,9 +269,20 @@ class NewsletterContentBuilder {
 
     $recent_podcasts = [];
     foreach ($podcasts as $podcast) {
+      // Remove the following from podcast descriptions:
+      //<p>
+      //We want to know what you think of our podcast (no, seriously!): <a href="http://bit.ly/patriotsdynastypodcast-survey" rel="noopener noreferrer" target="_blank">http://bit.ly/patriotsdynastypodcast-survey</a>
+      //</p>
+      //<p>
+      //Support this show <a href="http://supporter.acast.com/patriots-dynasty-podcast" target="_blank" rel="payment">http://supporter.acast.com/patriots-dynasty-podcast</a>.
+      //</p>
+      //<hr>
+      //<p style="color:grey;font-size:0.75em;">
+      //Hosted on Acast. See <a style="color:grey;" href="https://acast.com/privacy" target="_blank" rel="noopener noreferrer">acast.com/privacy</a> for more information.
+      //</p>
       $recent_podcasts[] = [
         'title' => $podcast->getTitle(),
-        'subtitle' => $podcast->get('field_subtitle')->value ?? '',
+        'description' => $podcast->get('body')->value ?? '',
         'url' => \Drupal::request()->getSchemeAndHttpHost() . $this->pathAliasManager->getAliasByPath('/node/' . $podcast->id()),
         'episode' => $podcast->get('field_episode')->value,
         'season' => $podcast->get('field_season')->value,
@@ -268,6 +290,64 @@ class NewsletterContentBuilder {
     }
 
     return $recent_podcasts;
+  }
+
+  /**
+   * Get podcast episodes from external RSS feeds via the aggregator.
+   *
+   * @param int $limit
+   *   Number of items to retrieve.
+   * @param array|null $iids
+   *   Optional list of aggregator item IDs to fetch directly.
+   *
+   * @return array
+   *   Array of external podcast items.
+   */
+  protected function getExternalPodcasts($limit = 5, ?array $iids = NULL) {
+    $config = \Drupal::config('dynasty_newsletter.settings');
+    $podcast_feed_ids = $config->get('podcast_feed_ids') ?? [];
+
+    if (!empty($iids)) {
+      $items = $this->database->select('aggregator_item', 'ai')
+        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+        ->condition('ai.iid', $iids, 'IN')
+        ->orderBy('ai.timestamp', 'DESC')
+        ->execute()
+        ->fetchAll();
+    }
+    elseif (!empty($podcast_feed_ids)) {
+      $timestamp = strtotime('-14 days');
+      $items = $this->database->select('aggregator_item', 'ai')
+        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+        ->condition('ai.fid', $podcast_feed_ids, 'IN')
+        ->condition('ai.timestamp', $timestamp, '>')
+        ->orderBy('ai.timestamp', 'DESC')
+        ->range(0, $limit)
+        ->execute()
+        ->fetchAll();
+    }
+    else {
+      return [];
+    }
+
+    $external_podcasts = [];
+    foreach ($items as $item) {
+      $feed_name = $this->database->select('aggregator_feed', 'af')
+        ->fields('af', ['title'])
+        ->condition('af.fid', $item->fid)
+        ->execute()
+        ->fetchField();
+
+      $external_podcasts[] = [
+        'title' => $item->title,
+        'link' => $item->link,
+        'description' => strip_tags($item->description),
+        'source' => $feed_name,
+        'date' => date('M j, Y', $item->timestamp),
+      ];
+    }
+
+    return $external_podcasts;
   }
 
   /**
@@ -359,9 +439,9 @@ class NewsletterContentBuilder {
     $config = \Drupal::config('dynasty_newsletter.settings');
     $limit = $config->get('birthdays_limit') ?? $limit;
 
-    // Get current date range (today + next 7 days)
-    $start_date = date('m-d');
-    $end_date = date('m-d', strtotime('+7 days'));
+    // Get current date range (upcoming Sunday + next 7 days)
+    $start_date = date('m-d', strtotime('+2 days'));
+    $end_date = date('m-d', strtotime('+8 days'));
 
     [$start_month, $start_day] = explode('-', $start_date);
     [$end_month, $end_day] = explode('-', $end_date);
@@ -417,16 +497,25 @@ class NewsletterContentBuilder {
       ->getStorage('node')
       ->loadMultiple($player_nids);
 
+
     $birthdays = [];
+    // Add each day from $start_date to $end_date to the $birthdays array.
+    $current = strtotime('+2 days');
+    $end = strtotime('+8 days');
+    while ($current <= $end) {
+      $birthdays[date('m', $current)][date('j', $current)] = [];
+      $current = strtotime('+1 day', $current);
+    }
+
     foreach ($players as $player) {
       $birthday_value = $player->get('field_birthday')->value;
       $position = $player->get('field_player_position')->entity;
 
-      $birthdays[] = [
+      $birthdays[date('m', strtotime($birthday_value))][date('j', strtotime($birthday_value))][] = [
         'player_name' => $player->getTitle(),
-        'date' => date('F j', strtotime($birthday_value)),
         'position' => $position ? $position->getName() : '',
         'birth_year' => substr($birthday_value, 0, 4),
+        'nid' => $player->id(),
       ];
     }
 
