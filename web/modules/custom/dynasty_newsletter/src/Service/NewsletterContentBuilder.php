@@ -174,25 +174,28 @@ class NewsletterContentBuilder {
   /**
    * Get recent game results.
    *
+   * @param int $limit
+   *   Number of games to retrieve.
    *
    * @return array
    *   Array of game data.
    */
-  protected function getRecentGames() {
+  protected function getRecentGames($limit = 3) {
     $config = \Drupal::config('dynasty_newsletter.settings');
+    $limit = $config->get('recent_games_limit') ?? $limit;
 
     // Query games from last 7 days
     $timestamp = strtotime('-7 days');
     $date_string = date('Y-m-d', $timestamp);
 
-
-    $game_nids = $this->entityTypeManager
-      ->getStorage('node')
-      ->getQuery()
-      ->condition('type', 'game')
-      ->sort('field_date', 'ASC')
-      ->accessCheck(TRUE)
-      ->execute();
+    $game_nids = $this->database->select('node__field_date', 'fd')
+      ->fields('fd', ['entity_id'])
+      ->condition('fd.bundle', 'game')
+      ->condition('fd.field_date_value', $date_string, '>')
+      ->orderBy('fd.field_date_value', 'DESC')
+      ->range(0, $limit)
+      ->execute()
+      ->fetchCol();
 
     if (empty($game_nids)) {
       return [];
