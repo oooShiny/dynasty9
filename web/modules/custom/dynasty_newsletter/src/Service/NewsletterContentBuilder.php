@@ -174,28 +174,25 @@ class NewsletterContentBuilder {
   /**
    * Get recent game results.
    *
-   * @param int $limit
-   *   Number of games to retrieve.
    *
    * @return array
    *   Array of game data.
    */
-  protected function getRecentGames($limit = 3) {
+  protected function getRecentGames() {
     $config = \Drupal::config('dynasty_newsletter.settings');
-    $limit = $config->get('recent_games_limit') ?? $limit;
 
     // Query games from last 7 days
     $timestamp = strtotime('-7 days');
     $date_string = date('Y-m-d', $timestamp);
 
-    $game_nids = $this->database->select('node__field_date', 'fd')
-      ->fields('fd', ['entity_id'])
-      ->condition('fd.bundle', 'game')
-      ->condition('fd.field_date_value', $date_string, '>')
-      ->orderBy('fd.field_date_value', 'DESC')
-      ->range(0, $limit)
-      ->execute()
-      ->fetchCol();
+
+    $game_nids = $this->entityTypeManager
+      ->getStorage('node')
+      ->getQuery()
+      ->condition('type', 'game')
+      ->sort('field_date', 'ASC')
+      ->accessCheck(TRUE)
+      ->execute();
 
     if (empty($game_nids)) {
       return [];
@@ -269,20 +266,14 @@ class NewsletterContentBuilder {
 
     $recent_podcasts = [];
     foreach ($podcasts as $podcast) {
-      // Remove the following from podcast descriptions:
-      //<p>
-      //We want to know what you think of our podcast (no, seriously!): <a href="http://bit.ly/patriotsdynastypodcast-survey" rel="noopener noreferrer" target="_blank">http://bit.ly/patriotsdynastypodcast-survey</a>
-      //</p>
-      //<p>
-      //Support this show <a href="http://supporter.acast.com/patriots-dynasty-podcast" target="_blank" rel="payment">http://supporter.acast.com/patriots-dynasty-podcast</a>.
-      //</p>
-      //<hr>
-      //<p style="color:grey;font-size:0.75em;">
-      //Hosted on Acast. See <a style="color:grey;" href="https://acast.com/privacy" target="_blank" rel="noopener noreferrer">acast.com/privacy</a> for more information.
-      //</p>
+      $description = $podcast->get('body')->value ?? '';
+      // Temporarily remove the survey prompt added by Acast.
+      $description = preg_replace('/<p[^>]*>\s*We want to know what you think.*?<\/p>/s', '', $description);
+      $description = trim($description);
+
       $recent_podcasts[] = [
         'title' => $podcast->getTitle(),
-        'description' => $podcast->get('body')->value ?? '',
+        'description' => $description,
         'url' => \Drupal::request()->getSchemeAndHttpHost() . $this->pathAliasManager->getAliasByPath('/node/' . $podcast->id()),
         'episode' => $podcast->get('field_episode')->value,
         'season' => $podcast->get('field_season')->value,

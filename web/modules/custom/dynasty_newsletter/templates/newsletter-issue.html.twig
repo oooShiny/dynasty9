@@ -169,15 +169,25 @@
     /* Podcast episode */
     .podcast-episode {
       background-color: #b1b7bd;
+      height: 250px;
+      width: 250px;
+      margin: 5px;
     }
-    .podcast-episode .episode-title {
-      background-color: #024;
-      color: #ffffff;
-    }
-
+    .podcast-episode .episode-title,
     .podcast-episode .episode-meta {
       background-color: #024;
       color: #ffffff;
+      font-size: large;
+      text-align: center;
+    }
+
+    .podcast-episode td {
+      padding: 4px 10px;
+    }
+
+    .podcast-episode .episode-description {
+      font-size: small;
+      color: #002244;
     }
     /* Birthday item */
     table.calendar {
@@ -297,19 +307,25 @@
           <!-- Recent Podcasts Section -->
           {% if recent_podcasts %}
           <div class="section">
-            <h2 class="section-title">Latest Podcast Episodes</h2>
+            <h2 class="section-title">Patriots Dynasty Podcast</h2>
+            <p>
+              We're the only podcast going back and rewatching each game of the Patriots' Dynasty Era.
+              Tune in to see how it's going.
+            </p>
             {% for podcast in recent_podcasts %}
-            <div class="podcast-episode">
-              <div class="episode-title">
-                <a href="{{ podcast.url }}">{{ podcast.title }}</a>
-              </div>
-              {% if podcast.description %}
-              <div class="episode-description">{{ podcast.description|raw }}</div>
-              {% endif %}
-              <div class="episode-meta">
-                Season {{ podcast.season }}, Episode {{ podcast.episode }}
-              </div>
-            </div>
+              <table class="podcast-episode">
+                <tr class="episode-title"><td><a href="{{ podcast.url }}">{{ podcast.title }}</a></td></tr>
+                {% if podcast.description %}
+                  <tr class="episode-description"><td>{{ podcast.description|raw }}</td></tr>
+                {% endif %}
+                <tr class="episode-meta">
+                  {% if podcast.season %}
+                    <td>Season {{ podcast.season }}, Episode {{ podcast.episode }}</td>
+                  {% else %}
+                    <td>Special Episode</td>
+                  {% endif %}
+                </tr>
+              </table>
             {% endfor %}
           </div>
           {% endif %}
@@ -317,7 +333,7 @@
           <!-- External Podcast Episodes Section -->
           {% if external_podcasts %}
           <div class="section">
-            <h2 class="section-title">From Around the Podcast World</h2>
+            <h2 class="section-title">What We're Listening To</h2>
             {% for podcast in external_podcasts %}
             <div class="news-item">
               <div class="news-item-title">
