@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_field\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Utility\NestedArray;
@@ -58,6 +60,7 @@ class SourceWidget extends WidgetBase {
     $element['#tag_filter'] = $this->getSetting('tag_filter') ?? [];
     $source_form = ComponentSlotForm::buildSourceForm($element, $form_state, [], $default_value);
     $source_form['source_id']['#empty_option'] = t("- Select a source to add -");
+
     return $element + $source_form;
   }
 

@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for Dynasty Voicemail.
+ */
+
+use Drupal\Core\Extension\Requirement\RequirementSeverity;
+
+/**
+ * Implements hook_install().
+ */
+function dynasty_voicemail_install() {
+  // Create the voicemails directory in private files.
+  $directory = 'private://voicemails';
+  \Drupal::service('file_system')->prepareDirectory($directory, \Drupal\Core\File\FileSystemInterface::CREATE_DIRECTORY | \Drupal\Core\File\FileSystemInterface::MODIFY_PERMISSIONS);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function dynasty_voicemail_uninstall() {
+  // Remove module configuration.
+  \Drupal::configFactory()->getEditable('dynasty_voicemail.settings')->delete();
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function dynasty_voicemail_requirements($phase) {
+  $requirements = [];
+
+  if ($phase === 'runtime') {
+    // Check if FFmpeg is available.
+    $ffmpeg_path = shell_exec('which ffmpeg 2>/dev/null');
+    $ffmpeg_available = !empty(trim($ffmpeg_path ?? ''));
+
+    $requirements['dynasty_voicemail_ffmpeg'] = [
+      'title' => t('Dynasty Voicemail - FFmpeg'),
+      'value' => $ffmpeg_available ? t('Available') : t('Not found'),
+      'description' => $ffmpeg_available
+        ? t('FFmpeg is available for audio conversion.')
+        : t('FFmpeg is not installed. Audio files will be stored in WebM format. Install FFmpeg to convert to MP3.'),
+      'severity' => $ffmpeg_available ? RequirementSeverity::OK : RequirementSeverity::Warning,
+    ];
+
+    // Check private file system.
+    $private_path = \Drupal::service('file_system')->realpath('private://');
+    $private_configured = !empty($private_path);
+
+    $requirements['dynasty_voicemail_private'] = [
+      'title' => t('Dynasty Voicemail - Private Files'),
+      'value' => $private_configured ? t('Configured') : t('Not configured'),
+      'description' => $private_configured
+        ? t('Private file system is configured for secure voicemail storage.')
+        : t('Private file system is not configured. Configure $settings[\'file_private_path\'] in settings.php.'),
+      'severity' => $private_configured ? RequirementSeverity::OK : RequirementSeverity::Error,
+    ];
+  }
+
+  return $requirements;
+}

@@ -55,6 +55,7 @@ return array(
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
     'Robo\\' => array($vendorDir . '/consolidation/robo/src'),
     'Revolt\\' => array($vendorDir . '/revolt/event-loop/src'),
+    'Resend\\' => array($vendorDir . '/resend/resend-php/src'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),

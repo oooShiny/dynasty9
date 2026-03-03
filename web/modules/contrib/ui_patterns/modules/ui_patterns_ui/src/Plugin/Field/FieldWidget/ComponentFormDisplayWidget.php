@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_ui\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -74,12 +76,13 @@ class ComponentFormDisplayWidget extends WidgetBase {
   protected function getFormModeOptions(): array {
     $options = [];
 
+    /** @var \Drupal\ui_patterns_ui\Entity\ComponentFormDisplay[] $form_displays */
     $form_displays = $this->entityTypeManager
       ->getStorage('component_form_display')
       ->loadByProperties(['status' => TRUE]);
 
     foreach ($form_displays as $id => $form_display) {
-      $label = $form_display->label();
+      $label = sprintf('[%s] %s', $form_display->getComponentId(), $form_display->label());
       $options[$this->escapeDisplayId($id)] = $label;
     }
 
@@ -183,7 +186,8 @@ class ComponentFormDisplayWidget extends WidgetBase {
     $settings = $this->getSettings() ?? [];
     $display_id = $this->unescapeDisplayId($settings['display_id']) ?? NULL;
     $display_component_form = $settings['display_component_form'] ?? FALSE;
-    $additional_display_ids = $settings['additional_display_ids'] ?? NULL;
+    $additional_display_ids = $settings['additional_display_ids'] ?? [];
+    $additional_display_ids = array_filter($additional_display_ids);
     $additional_display_ids_values = [$display_id];
     if ($additional_display_ids) {
       foreach ($additional_display_ids as $additional_display_id) {

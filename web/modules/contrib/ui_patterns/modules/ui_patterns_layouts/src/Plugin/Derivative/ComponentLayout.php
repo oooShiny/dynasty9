@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_layouts\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
@@ -52,14 +54,12 @@ class ComponentLayout extends DeriverBase implements ContainerDeriverInterface {
    * {@inheritdoc}
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
-    /* @phpstan-ignore method.notFound */
-    $sorted_definitions = $this->pluginManager->getNegotiatedSortedDefinitions(NULL, 'label', TRUE);
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->pluginManager;
+    $sorted_definitions = $manager->getNegotiatedSortedDefinitions(NULL, 'label', TRUE);
 
     foreach ($sorted_definitions as $definition) {
-
-      /* @phpstan-ignore method.notFound */
-
-      $component = $this->pluginManager->find($definition['id']);
+      $component = $manager->find($definition['id']);
       /** @var \Drupal\Core\Layout\LayoutDefinition $base_plugin_definition */
       $layout_definition_definition = array_merge([
         "deriver" => $base_plugin_definition->getDeriver(),

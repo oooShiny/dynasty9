@@ -53,10 +53,7 @@ class FormSystemThemeSettingsAlter implements ContainerInjectionInterface {
     if (isset($form['config_key']['#value']) && \is_string($form['config_key']['#value'])) {
       $config_key = $form['config_key']['#value'];
       $config_key_parts = \explode('.', $config_key);
-
-      if (isset($config_key_parts[0])) {
-        $form_theme_name = $config_key_parts[0];
-      }
+      $form_theme_name = $config_key_parts[0];
     }
     // Impossible to determine on which theme settings form we are.
     if (empty($form_theme_name)) {

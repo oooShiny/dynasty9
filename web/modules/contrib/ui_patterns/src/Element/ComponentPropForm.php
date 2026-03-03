@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns\Element;
 
 use Drupal\Core\Form\FormStateInterface;

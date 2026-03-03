@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_field\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\Attribute\FieldType;
@@ -34,18 +36,40 @@ class SourceValueItem extends MapItem {
   /**
    * {@inheritdoc}
    */
+  public function setValue($values, $notify = TRUE): void {
+    if (!isset($values)) {
+      return;
+    }
+    // Set empty value otherwise it leads to an empty array and warnings.
+    if (empty($values['node_id'])) {
+      $values['node_id'] = '';
+    }
+    parent::setValue($values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
     return [
       'columns' => [
         'source_id' => [
           'type' => 'varchar_ascii',
           'length' => 255,
-
         ],
         'source' => [
           'type' => 'blob',
           'size' => 'big',
           'serialize' => TRUE,
+        ],
+        'third_party_settings' => [
+          'type' => 'blob',
+          'size' => 'big',
+          'serialize' => TRUE,
+        ],
+        'node_id' => [
+          'type' => 'varchar_ascii',
+          'length' => 255,
         ],
       ],
     ];

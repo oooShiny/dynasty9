@@ -26,6 +26,9 @@ class NumberWidget extends SourcePluginPropValueWidget {
    */
   public function getPropValue(): mixed {
     $value = parent::getPropValue();
+    if (self::isConvertibleToString($value)) {
+      $value = $this->replaceTokens($value, FALSE);
+    }
     // Add 0 to automatically cast to a float OR an integer.
     if (empty($value)) {
       return $value;

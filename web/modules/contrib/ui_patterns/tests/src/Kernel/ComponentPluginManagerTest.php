@@ -55,8 +55,9 @@ final class ComponentPluginManagerTest extends KernelTestBase {
    * Test the method ::getCategories().
    */
   public function testGetCategories() : void {
-    /* @phpstan-ignore method.notFound */
-    $categories = $this->manager->getCategories();
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->manager;
+    $categories = $manager->getCategories();
     $this->assertNotEmpty($categories);
   }
 
@@ -64,8 +65,9 @@ final class ComponentPluginManagerTest extends KernelTestBase {
    * Test the method ::getSortedDefinitions().
    */
   public function testGetSortedDefinitions(): void {
-    /* @phpstan-ignore method.notFound */
-    $sortedDefinitions = $this->manager->getSortedDefinitions();
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->manager;
+    $sortedDefinitions = $manager->getSortedDefinitions();
     $this->assertNotEmpty($sortedDefinitions);
   }
 
@@ -73,8 +75,9 @@ final class ComponentPluginManagerTest extends KernelTestBase {
    * Test the method ::getGroupedDefinitions().
    */
   public function testGetGroupedDefinitions(): void {
-    /* @phpstan-ignore method.notFound */
-    $groupedDefinitions = $this->manager->getGroupedDefinitions();
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->manager;
+    $groupedDefinitions = $manager->getGroupedDefinitions();
     $this->assertNotEmpty($groupedDefinitions);
   }
 
@@ -82,21 +85,45 @@ final class ComponentPluginManagerTest extends KernelTestBase {
    * Test the method ::getNegotiatedGroupedDefinitions().
    */
   public function testGetNegotiatedGroupedDefinitions(): void {
-    /* @phpstan-ignore method.notFound */
-    $groupedDefinitions = $this->manager->getNegotiatedGroupedDefinitions();
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->manager;
+    $sortedDefinitions = $manager->getSortedDefinitions();
+    $groupedDefinitions = $manager->getNegotiatedGroupedDefinitions();
     $this->assertNotEmpty($groupedDefinitions);
     $this->assertArrayNotHasKey('ui_patterns_test:test-form-component-replaced', $groupedDefinitions['Other']);
     $this->assertArrayHasKey('ui_patterns_test:test-form-component', $groupedDefinitions['Other']);
+    $this->assertArrayHasKey('ui_patterns_test:no-ui-component', $sortedDefinitions);
+    $this->assertArrayNotHasKey('ui_patterns_test:no-ui-component', $groupedDefinitions['Other']);
+  }
+
+  /**
+   * Test the method ::getNegotiatedGroupedDefinitions().
+   */
+  public function testGetNegotiatedGroupedDefinitionsIncludeReplaces(): void {
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->manager;
+    $sortedDefinitions = $manager->getSortedDefinitions();
+    $groupedDefinitions = $manager->getNegotiatedGroupedDefinitions(NULL, 'label', TRUE);
+    $this->assertNotEmpty($groupedDefinitions);
+    $this->assertArrayHasKey('ui_patterns_test:test-form-component-replaced', $groupedDefinitions['Other']);
+    $this->assertArrayHasKey('ui_patterns_test:test-form-component', $groupedDefinitions['Other']);
+    $this->assertArrayHasKey('ui_patterns_test:no-ui-component', $sortedDefinitions);
+    $this->assertArrayNotHasKey('ui_patterns_test:no-ui-component', $groupedDefinitions['Other']);
   }
 
   /**
    * Test the method ::getNegotiatedSortedDefinitions().
    */
   public function testGetNegotiatedSortedDefinitions(): void {
-    /* @phpstan-ignore method.notFound */
-    $groupedDefinitions = $this->manager->getNegotiatedSortedDefinitions();
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->manager;
+    $sortedDefinitions = $manager->getSortedDefinitions();
+    $groupedDefinitions = $manager->getNegotiatedSortedDefinitions();
     $this->assertNotEmpty($groupedDefinitions);
     $this->assertArrayNotHasKey('ui_patterns_test:test-form-component-replaced', $groupedDefinitions);
+    $this->assertArrayNotHasKey('ui_patterns_test:no-ui-component', $groupedDefinitions);
+    $this->assertArrayNotHasKey('ui_patterns_test:ui-component', $groupedDefinitions);
+    $this->assertArrayNotHasKey('ui_patterns_test:ui-component-replaces-no-ui', $groupedDefinitions);
     $this->assertArrayHasKey('ui_patterns_test:test-form-component', $groupedDefinitions);
   }
 

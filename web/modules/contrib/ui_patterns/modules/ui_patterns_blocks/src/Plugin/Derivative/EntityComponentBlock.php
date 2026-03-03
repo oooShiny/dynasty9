@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_blocks\Plugin\Derivative;
 
 use Drupal\Core\Plugin\Context\ContextDefinition;

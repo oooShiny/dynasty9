@@ -17,8 +17,8 @@ use Drupal\Core\Plugin\Component;
 use Drupal\Core\Theme\Component\ComponentValidator;
 use Drupal\Core\Theme\Component\SchemaCompatibilityChecker;
 use Drupal\Core\Theme\ComponentNegotiator;
-use Drupal\Core\Theme\ComponentPluginManager as SdcPluginManager;
 use Drupal\Core\Theme\ComponentPluginManager as CoreComponentPluginManager;
+use Drupal\Core\Theme\ComponentPluginManager as SdcPluginManager;
 use Drupal\Core\Theme\ThemeManagerInterface;
 use Drupal\ui_patterns\SchemaManager\ReferencesResolver;
 
@@ -129,12 +129,27 @@ class ComponentPluginManager extends SdcPluginManager implements CategorizingPlu
   }
 
   /**
+   * Correct SDC Component definition.
+   *
+   * @param array $definition
+   *   The definition to clean.
+   */
+  protected function cleanDefinition(array &$definition): void {
+    // Name is mandatory, so this precaution should never happen. But we have
+    // seen SDC without name property in the wild.
+    if (!isset($definition['name'])) {
+      $definition['name'] = explode(':', $definition['id'])[1];
+    }
+  }
+
+  /**
    * {@inheritdoc}
    *
    * @phpstan-ignore-next-line
    */
   public function processDefinition(&$definition, $plugin_id): void {
     parent::processDefinition($definition, $plugin_id);
+    $this->cleanDefinition($definition);
     $this->processDefinitionCategory($definition);
   }
 
@@ -144,8 +159,9 @@ class ComponentPluginManager extends SdcPluginManager implements CategorizingPlu
    * @phpstan-ignore-next-line
    */
   protected function processDefinitionCategory(&$definition): void {
-    // Name is mandatory, so undefined should never happen.
-    $definition['label'] = $definition['name'] ?? $this->t('Undefined');
+    // 'label' and 'category' are expected by CategorizingPluginManagerTrait.
+    $this->cleanDefinition($definition);
+    $definition['label'] = $definition['name'];
     $definition['category'] = $definition['group'] ?? $this->t('Other');
   }
 
@@ -394,10 +410,32 @@ class ComponentPluginManager extends SdcPluginManager implements CategorizingPlu
       // because the replaced component must behave like the original.
       $definition['replaced_by'] = $definition['id'];
       $definition['id'] = $component_id;
+      unset($definition['replaces']);
       $definition['machineName'] = $original_definition['machineName'];
       $definition['provider'] = $original_definition['provider'];
+      if (isset($original_definition['noUi'])) {
+        $definition['noUi'] = $original_definition['noUi'];
+      }
     }
     return $definition;
+  }
+
+  /**
+   * Determine if a definition is hidden.
+   *
+   * @param array $definition
+   *   The definition to check.
+   * @param bool $include_replaces
+   *   Whether to include definitions that replace others.
+   *
+   * @return bool
+   *   TRUE if the definition is hidden, FALSE otherwise.
+   */
+  protected function isHiddenDefinition(array $definition, bool $include_replaces = FALSE): bool {
+    if (!empty($definition['replaces']) && $include_replaces === FALSE) {
+      return TRUE;
+    }
+    return $definition['noUi'] ?? FALSE;
   }
 
   /**
@@ -407,10 +445,12 @@ class ComponentPluginManager extends SdcPluginManager implements CategorizingPlu
     $definitions = $this->getSortedDefinitions($definitions, $label_key);
     $negotiated_definitions = [];
     foreach ($definitions as $id => $definition) {
-      if (!empty($definition['replaces']) && $include_replaces === FALSE) {
+      $negotiated_definition = $this->negotiateDefinition($id);
+
+      if ($this->isHiddenDefinition($negotiated_definition, $include_replaces)) {
         continue;
       }
-      $negotiated_definitions[$id] = $this->negotiateDefinition($id);
+      $negotiated_definitions[$id] = $negotiated_definition;
       if (!empty($definition['replaces']) && $include_replaces === TRUE) {
         $suffix = ' (don\'t use. Use: ' . $definition['replaces'] . ')';
         if ($negotiated_definitions[$id]['annotated_name']) {

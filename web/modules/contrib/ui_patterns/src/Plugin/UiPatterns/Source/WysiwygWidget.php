@@ -96,7 +96,7 @@ class WysiwygWidget extends SourcePluginBase implements TrustedCallbackInterface
     if (is_array($value) && array_key_exists("value", $value)) {
       $element['#default_value'] = $value['value'];
     }
-    if (is_array($value) && array_key_exists("format", $value)) {
+    if (is_array($value) && array_key_exists("format", $value) && !empty($value['format'])) {
       $element['#format'] = $value['format'];
     }
     else {

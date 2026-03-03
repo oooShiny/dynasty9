@@ -61,4 +61,18 @@ class IconSource extends SourcePluginBase {
     return $element;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary(): array {
+    $value = $this->getSetting('value');
+    if (empty($value)) {
+      return [];
+    }
+    [$pack, $icon] = explode(':', $value['target_id']);
+    return [
+      $icon . ' (' . $pack . ')',
+    ];
+  }
+
 }

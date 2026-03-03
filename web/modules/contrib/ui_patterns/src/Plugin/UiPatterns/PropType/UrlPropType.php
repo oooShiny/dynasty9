@@ -8,7 +8,6 @@ use Drupal\Core\Render\RenderableInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\ui_patterns\Attribute\PropType;
-use Drupal\ui_patterns\PropTypeConversionTrait;
 use Drupal\ui_patterns\PropTypePluginBase;
 
 /**
@@ -24,8 +23,6 @@ use Drupal\ui_patterns\PropTypePluginBase;
   typed_data: ['uri']
 )]
 class UrlPropType extends PropTypePluginBase {
-
-  use PropTypeConversionTrait;
 
   /**
    * {@inheritdoc}
@@ -85,7 +82,7 @@ class UrlPropType extends PropTypePluginBase {
     if (is_array($value) && isset($value['#url'])) {
       $value = $value['#url']->toString();
     }
-    static::convertToScalar($value, TRUE);
+    static::normalizer()->convertToScalar($value, TRUE);
     return $value;
   }
 

@@ -58,4 +58,30 @@ class EntityFieldSource extends DerivableContextSourceBase {
     ];
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getChoiceSettings(string $choice_id): array {
+    [, $entity_type, $bundle, $field_name] = explode(':', $choice_id);
+    $derived_context = $this->getDerivedContexts($choice_id)[0] ?? [];
+    /** @var \Drupal\ui_patterns\Plugin\UiPatterns\Source\FieldFormatterSource $source_field_formatter */
+    $source_field_formatter = $this->sourcePluginManager->getSource(
+      $this->getPropId(), $this->propDefinition, [
+        'source_id' => implode(':', ['field_formatter', $entity_type, $bundle, $field_name]),
+      ], $derived_context);
+    return [
+      'derivable_context' => $choice_id,
+      $choice_id => [
+        'value' => [
+          'sources' => [
+            [
+              'source_id' => $source_field_formatter->getPluginId(),
+              'source' => $source_field_formatter->defaultSettings(),
+            ],
+          ],
+        ],
+      ],
+    ];
+  }
+
 }

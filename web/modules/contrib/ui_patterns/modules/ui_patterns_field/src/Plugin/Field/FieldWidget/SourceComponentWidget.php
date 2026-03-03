@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_field\Plugin\Field\FieldWidget;
 
 use Drupal\Component\Utility\NestedArray;
@@ -13,10 +15,10 @@ use Drupal\Core\Plugin\Context\EntityContext;
 use Drupal\Core\Render\Component\Exception\ComponentNotFoundException;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Theme\ComponentPluginManager;
+use Drupal\ui_patterns\ComponentPluginManager as UIPatternsComponentPluginManager;
 use Drupal\ui_patterns\Form\ComponentFormBuilderTrait;
 use Drupal\ui_patterns\Plugin\Context\RequirementsContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\ui_patterns\ComponentPluginManager as UIPatternsComponentPluginManager;
 
 /**
  * A widget to display the UI Patterns configuration form.
@@ -311,6 +313,18 @@ class SourceComponentWidget extends WidgetBase {
     ];
     $element['source']["component"] = $this->buildComponentsForm($form_state, $contexts, $component_id, !$hide_slots, TRUE, 'ui_patterns', $form_element_overrides);
     $element['source_id'] = ['#type' => 'hidden', '#value' => $source_id];
+    // Add hidden fields for optional columns.
+    $element['node_id'] = [
+      '#type' => 'hidden',
+      '#title' => 'Node id',
+      '#value' => $item_delta_value['node_id'] ?? '',
+    ];
+    $element['third_party_settings'] = [
+      '#type' => 'hidden',
+      '#title' => 'Third party settings',
+      '#value' => $item_delta_value['third_party_settings'] ?? [],
+    ];
+
     return $element;
   }
 

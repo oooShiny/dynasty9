@@ -114,7 +114,7 @@ class ZfExtensionManagerSfContainer implements ReaderManagerInterface, WriterMan
   /**
    * {@inheritdoc}
    */
-  public function setContainer(ContainerInterface $container = NULL) {
+  public function setContainer(?ContainerInterface $container = NULL) {
     $this->container = $container;
   }
 

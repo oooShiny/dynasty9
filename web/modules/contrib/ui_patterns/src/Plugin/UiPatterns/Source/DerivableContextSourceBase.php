@@ -125,7 +125,7 @@ abstract class DerivableContextSourceBase extends SourcePluginBase implements So
    * @return array
    *   The derived contexts.
    */
-  private function getDerivedContexts(string $derivable_context) : array {
+  protected function getDerivedContexts(string $derivable_context) : array {
     /** @var \Drupal\ui_patterns\DerivableContextInterface $derivable_context_plugin */
     $derivable_context_plugin = $this->derivableContextManager->createInstance($derivable_context, DerivableContextPluginBase::buildConfiguration($this->getContextForDerivation()));
     if (!$derivable_context_plugin) {

@@ -7,7 +7,6 @@ namespace Drupal\ui_patterns\Plugin\UiPatterns\PropType;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ui_patterns\Attribute\PropType;
-use Drupal\ui_patterns\PropTypeConversionTrait;
 use Drupal\ui_patterns\PropTypePluginBase;
 
 /**
@@ -24,8 +23,6 @@ use Drupal\ui_patterns\PropTypePluginBase;
   typed_data: ['string']
 )]
 class StringPropType extends PropTypePluginBase {
-
-  use PropTypeConversionTrait;
 
   /**
    * {@inheritdoc}
@@ -59,7 +56,7 @@ class StringPropType extends PropTypePluginBase {
    * {@inheritdoc}
    */
   public static function normalize(mixed $value, ?array $definition = NULL): mixed {
-    $value = static::convertToString($value);
+    $value = static::normalizer()->convertToString($value);
     $contentMediaType = $definition['contentMediaType'] ?? NULL;
     return ($contentMediaType === 'text/plain') ? strip_tags($value) : $value;
   }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns\Element;
 
 use Drupal\Component\Utility\NestedArray;
@@ -133,6 +135,8 @@ class ComponentForm extends ComponentFormBase {
         'variant_id' => $input['variant_id'] ?? NULL,
         'props' => $input['props'] ?? [],
         'slots' => $input['slots'] ?? [],
+        'third_party_settings' => $input['third_party_settings'] ?? NULL,
+        'node_id' => $input['node_id'] ?? NULL,
       ];
       $element['#default_value'] = $value;
       return $value;
@@ -143,6 +147,8 @@ class ComponentForm extends ComponentFormBase {
         'variant_id' => NULL,
         'props' => [],
         'slots' => [],
+        'third_party_settings' => NULL,
+        'node_id' => NULL,
       ];
     }
   }
@@ -218,6 +224,18 @@ class ComponentForm extends ComponentFormBase {
     }
     $element['slots'] = self::buildSlotsForm($element, $component_id);
     $element['props'] = self::buildPropsForm($element, $component_id);
+
+    // Add hidden fields for optional columns.
+    $element['third_party_settings'] = [
+      '#type' => 'hidden',
+      '#title' => 'Third party settings',
+      '#value' => $element['#default_value']['third_party_settings'] ?? NULL,
+    ];
+    $element['node_id'] = [
+      '#type' => 'hidden',
+      '#title' => 'Node id',
+      '#value' => $element['#default_value']['node_id'] ?? NULL,
+    ];
   }
 
   /**

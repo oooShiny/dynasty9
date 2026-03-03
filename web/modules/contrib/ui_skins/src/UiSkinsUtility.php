@@ -15,7 +15,7 @@ class UiSkinsUtility {
    * Keyed lists in config cannot accept dot. So this character is used when
    * saving are reading the scopes in config.
    */
-  public const DOT_CONVERSION_CHARACTER = '%';
+  public const string DOT_CONVERSION_CHARACTER = '%';
 
   /**
    * Prepare a scope for CSS usage.
@@ -73,8 +73,15 @@ class UiSkinsUtility {
   public static function getCssVariablesInlineCss(array $cssVariables): string {
     $inline_css = '';
     foreach ($cssVariables as $scope => $variables) {
+      if (!\is_array($variables) || empty($variables)) {
+        continue;
+      }
+
       $scope_variables = [];
       foreach ($variables as $variable_name => $variable_value) {
+        if (!\is_scalar($variable_value)) {
+          continue;
+        }
         $scope_variables[] = "{$variable_name}:{$variable_value};";
       }
       $inline_css .= "{$scope}{" . \implode('', $scope_variables) . '}';

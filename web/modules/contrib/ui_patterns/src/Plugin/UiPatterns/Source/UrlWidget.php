@@ -35,4 +35,15 @@ class UrlWidget extends SourcePluginPropValueWidget {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getPropValue(): mixed {
+    $value = parent::getPropValue();
+    if (empty($value)) {
+      return $value;
+    }
+    return $this->replaceTokens($value, FALSE);
+  }
+
 }

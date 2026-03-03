@@ -5,6 +5,8 @@
  * API file.
  */
 
+declare(strict_types=1);
+
 use Drupal\ui_patterns_ui\Entity\ComponentFormDisplay;
 
 /**

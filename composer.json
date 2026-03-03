@@ -171,6 +171,7 @@
         "drupal/quicklink": "^2.0",
         "drupal/rate": "^3.2",
         "drupal/redirect": "^1.9",
+        "drupal/resend_api": "^1.0@dev",
         "drupal/scheduler": "^2.1",
         "drupal/search_api": "^1.35",
         "drupal/search_api_solr": "^4.3",

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns\Plugin\Context;
 
 use Drupal\Core\Plugin\Context\Context;

@@ -64,11 +64,11 @@ class SlotPropType extends PropTypePluginBase {
       // sequence (integer, consecutive) keys. For example a list of blocks
       // from page layout or layout builder: each block is keyed by its UUID.
       // So, transform this list of renderables to a proper Twig sequence.
-      return array_map(static fn($item) => self::normalize($item), array_is_list($value) ? $value : array_values($value));
+      return array_map(static fn($item) => static::normalize($item), array_is_list($value) ? $value : array_values($value));
     }
     foreach ($value as $key => & $item) {
       if (!in_array($key, $element_properties, TRUE)) {
-        $item = self::normalize($item);
+        $item = static::normalize($item);
       }
     }
     return $value;

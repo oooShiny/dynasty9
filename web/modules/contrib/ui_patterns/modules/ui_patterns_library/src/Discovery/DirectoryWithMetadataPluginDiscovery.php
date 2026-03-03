@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_library\Discovery;
 
 use Drupal\Core\File\FileSystemInterface;

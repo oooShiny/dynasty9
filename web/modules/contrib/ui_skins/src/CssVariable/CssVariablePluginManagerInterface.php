@@ -18,7 +18,7 @@ interface CssVariablePluginManagerInterface extends PluginManagerInterface, Cate
    * @return \Drupal\ui_skins\Definition\CssVariableDefinition|null
    *   The plugin definition. NULL if not found.
    *
-   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+   * @SuppressWarnings("PHPMD.BooleanArgumentFlag")
    */
   public function getDefinition($plugin_id, $exception_on_invalid = TRUE);
 

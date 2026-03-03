@@ -4,6 +4,7 @@ namespace Drupal\Tests\aggregator\Functional\Jsonapi;
 
 use Drupal\aggregator\Entity\Feed;
 use Drupal\Core\Url;
+use Drupal\jsonapi\JsonApiSpec;
 use Drupal\Tests\jsonapi\Functional\ResourceTestBase;
 use Drupal\Tests\jsonapi\Traits\CommonCollectionFilterAccessTestPatternsTrait;
 
@@ -15,6 +16,13 @@ use Drupal\Tests\jsonapi\Traits\CommonCollectionFilterAccessTestPatternsTrait;
 class FeedTest extends ResourceTestBase {
 
   use CommonCollectionFilterAccessTestPatternsTrait;
+
+  /**
+   * A feed title.
+   *
+   * @see Drupal\Tests\aggregator\Functional\Jsonapi\FeedTest::getPostDocument()
+   */
+  const POST_DOCUMENT_TITLE = 'Feed Resource Post Test';
 
   /**
    * {@inheritdoc}
@@ -112,10 +120,10 @@ class FeedTest extends ResourceTestBase {
       'jsonapi' => [
         'meta' => [
           'links' => [
-            'self' => ['href' => 'http://jsonapi.org/format/1.0/'],
+            'self' => ['href' => JsonApiSpec::SUPPORTED_SPECIFICATION_PERMALINK],
           ],
         ],
-        'version' => '1.0',
+        'version' => JsonApiSpec::SUPPORTED_SPECIFICATION_VERSION,
       ],
       'links' => [
         'self' => ['href' => $self_url],
@@ -152,13 +160,36 @@ class FeedTest extends ResourceTestBase {
       'data' => [
         'type' => 'aggregator_feed--aggregator_feed',
         'attributes' => [
-          'title' => 'Feed Resource Post Test',
+          'title' => self::POST_DOCUMENT_TITLE,
           'url' => 'http://example.com/feed',
           'refresh' => 900,
           'description' => 'Feed Resource Post Test Description',
         ],
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function doTestPatchIndividual(): void {
+    // doTestPostIndividual() runs before this and creates a feed based on
+    // getPostDocument(). Because of that, Aggregator's title and URL uniqueness
+    // validation cause doTestPatchIndividual() to fail when it tries to edit
+    // the feed to have that same title and URL. The feed created by
+    // doTestPostIndividual() must first be deleted from the database.
+    $ids = \Drupal::entityQuery('aggregator_feed')
+      ->accessCheck(FALSE)
+      ->condition('title', self::POST_DOCUMENT_TITLE)
+      ->execute();
+    $feeds = \Drupal::entityTypeManager()
+      ->getStorage('aggregator_feed')
+      ->loadMultiple($ids);
+    foreach ($feeds as $feed) {
+      $feed->delete();
+    }
+
+    parent::doTestPatchIndividual();
   }
 
   /**

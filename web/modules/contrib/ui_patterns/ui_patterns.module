@@ -37,10 +37,6 @@ function ui_patterns_plugin_filter_block__ui_patterns_alter(array &$definitions,
     return $definition['id'] !== 'inline_block';
   });
   // Those blocks are not allowed in layout builder. Let's do the same.
-  unset($definitions['system_messages_block']);
-  unset($definitions['help_block']);
-  unset($definitions['local_tasks_block']);
-  unset($definitions['local_actions_block']);
   unset($definitions['system_main_block']);
   unset($definitions['page_title_block']);
   // Add a boolean marker '_ui_patterns_compatible' to all remaining definitions

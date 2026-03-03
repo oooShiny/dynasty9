@@ -70,6 +70,7 @@ class Select extends SourcePluginBase {
       '#attributes' => [
         'class' => [
           'ui-styles-source-select-plugin',
+          'js-ui-styles-source-select-plugin',
         ],
       ],
       '#attached' => [
@@ -95,6 +96,7 @@ class Select extends SourcePluginBase {
     ];
 
     foreach ($definition->getOptionsWithIcon() as $option_id => $option) {
+      /** @var string $label */
       $label = $option['label'];
       $icon = $option['icon'];
       if (!empty($icon)) {
@@ -109,6 +111,7 @@ class Select extends SourcePluginBase {
         $options[$option_id] = $this->renderer->renderInIsolation($iconRenderable);
       }
       else {
+        /** @var array $classes */
         $classes = $option['previewed_with'] ?? [];
         $classes[] = 'ui-styles-source-select-plugin-option';
         $classes[] = $option_id;

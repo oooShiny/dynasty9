@@ -1,0 +1,4 @@
+administer dynasty voicemail:
+  title: 'Administer Dynasty Voicemail'
+  description: 'Configure voicemail settings including notification emails and rate limits.'
+  restrict access: true

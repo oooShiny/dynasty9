@@ -1,0 +1,9 @@
+{
+    "name": "drupal/ui_skins",
+    "description": "Allow handle some theme settings like CSS variables.",
+    "license": "GPL-2.0-or-later",
+    "type": "drupal-module",
+    "require": {
+        "php": ">=8.3"
+    }
+}

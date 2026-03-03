@@ -69,7 +69,7 @@ class AttributesPropType extends PropTypePluginBase {
       return [];
     }
     foreach ($value as $attr => $attr_value) {
-      $value[$attr] = self::normalizeAttrValue($attr_value);
+      $value[$attr] = static::normalizeAttrValue($attr_value);
     }
     return $value;
   }
@@ -79,13 +79,13 @@ class AttributesPropType extends PropTypePluginBase {
    */
   protected static function normalizeAttrValue(mixed $value): mixed {
     if (is_object($value)) {
-      return self::normalizeObject($value);
+      return static::normalizeObject($value);
     }
     if (is_array($value) && array_is_list($value)) {
-      return self::normalizeList($value);
+      return static::normalizeList($value);
     }
     if (is_array($value) && !array_is_list($value)) {
-      return self::normalizeMapping($value);
+      return static::normalizeMapping($value);
     }
     // We don't allow markup in attribute value.
     return strip_tags((string) $value);
@@ -96,14 +96,14 @@ class AttributesPropType extends PropTypePluginBase {
    */
   protected static function normalizeListItem(mixed $value): mixed {
     if (is_object($value)) {
-      return self::normalizeObject($value);
+      return static::normalizeObject($value);
     }
     if (is_array($value) && array_is_list($value)) {
       // We encode to JSON because we don't know how deep is the nesting.
       return json_encode($value, 0, 3) ?: "";
     }
     if (is_array($value) && !array_is_list($value)) {
-      return self::normalizeRenderArray($value);
+      return static::normalizeRenderArray($value);
     }
     // Integer and number are always allowed values.
     if (is_int($value) || is_float($value)) {
@@ -139,7 +139,7 @@ class AttributesPropType extends PropTypePluginBase {
    */
   protected static function normalizeList(array $value): array {
     foreach ($value as $index => $item) {
-      $value[$index] = self::normalizeListItem($item);
+      $value[$index] = static::normalizeListItem($item);
     }
     return $value;
   }

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Drupal\ui_patterns\Element;
 
-use Drupal\ui_patterns\Plugin\UiPatterns\PropType\SlotPropType;
 use Drupal\Component\Plugin\Exception\ContextException;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\Component;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Theme\ComponentPluginManager;
 use Drupal\ui_patterns\ComponentPluginManager as UiPatternsComponentPluginManager;
+use Drupal\ui_patterns\Plugin\UiPatterns\PropType\SlotPropType;
 use Drupal\ui_patterns\PropTypeInterface;
 use Drupal\ui_patterns\SourcePluginBase;
 use Drupal\ui_patterns\SourcePluginManager;
 use Psr\Log\LoggerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * Component render element builder.

@@ -1,0 +1,119 @@
+/**
+ * @file
+ * Styles for the voicemail recorder.
+ */
+
+/* Honeypot field - hidden from users */
+.voicemail-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Recording indicator */
+.recording-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.recording-pulse {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #c60c30;
+  animation: pulse-recording 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-recording {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* State visibility helpers */
+#state-idle,
+#state-recording,
+#state-stopped,
+#state-sending,
+#state-complete,
+#state-error {
+  width: 100%;
+}
+
+/* Audio preview styling */
+#audio-preview {
+  border-radius: 0.5rem;
+}
+
+/* Form adjustments */
+#voicemail-form .divider {
+  margin: 1.5rem 0;
+}
+
+/* Button loading state */
+#btn-submit.loading {
+  pointer-events: none;
+}
+
+#btn-submit.loading::before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 0.5em;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .voicemail-recorder {
+    padding: 1rem;
+  }
+
+  #recording-timer {
+    font-size: 2rem;
+  }
+
+  .recording-pulse {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Success animation */
+#state-complete svg {
+  animation: success-bounce 0.5s ease-out;
+}
+
+@keyframes success-bounce {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -45,7 +45,7 @@ class PageTop implements ContainerInjectionInterface {
   /**
    * The page top key for CSS variables.
    */
-  public const PAGE_TOP_CSS_VARIABLES_KEY = 'ui_skins_css_variables';
+  public const string PAGE_TOP_CSS_VARIABLES_KEY = 'ui_skins_css_variables';
 
   /**
    * Inject inline CSS variables.
@@ -62,6 +62,10 @@ class PageTop implements ContainerInjectionInterface {
     // Prepare list of variables grouped by scope.
     $css_variables = [];
     foreach ($ui_skins_css_variables_settings as $plugin_id => $scoped_values) {
+      if (!\is_array($scoped_values)) {
+        continue;
+      }
+
       $variable_name = UiSkinsUtility::getCssVariableName($plugin_id);
       foreach ($scoped_values as $scope => $value) {
         $css_variables = NestedArray::mergeDeep($css_variables, [

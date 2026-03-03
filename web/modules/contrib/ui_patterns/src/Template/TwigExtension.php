@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Drupal\ui_patterns\Template;
 
 use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\ui_patterns\ComponentPluginManager;
+use Drupal\Core\Theme\ComponentPluginManager;
 use Drupal\ui_patterns\Plugin\UiPatterns\PropType\SlotPropType;
 use Drupal\ui_patterns\PropTypeAdapterPluginManager;
 use Twig\Extension\AbstractExtension;
@@ -101,7 +101,7 @@ class TwigExtension extends AbstractExtension {
         $context[$variable] = SlotPropType::normalize($value);
         continue;
       }
-      if (!isset($props[$variable])) {
+      if (!isset($props[$variable]['ui_patterns'])) {
         continue;
       }
       $prop_type = $props[$variable]['ui_patterns']['type_definition'];
@@ -146,7 +146,7 @@ class TwigExtension extends AbstractExtension {
     $component = $this->componentManager->find($component_id);
     $props = $component->metadata->schema['properties'] ?? [];
     foreach ($context as $variable => $value) {
-      if (!isset($props[$variable])) {
+      if (!isset($props[$variable]['ui_patterns'])) {
         continue;
       }
       $prop_type = $props[$variable]['ui_patterns']['type_definition'];

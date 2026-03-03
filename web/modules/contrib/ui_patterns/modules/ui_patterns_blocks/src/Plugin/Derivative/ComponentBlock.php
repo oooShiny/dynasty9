@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_blocks\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
@@ -44,8 +46,10 @@ class ComponentBlock extends DeriverBase implements ContainerDeriverInterface {
    * {@inheritdoc}
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->pluginManager;
     /** @var array<string, array> $components */
-    $components = $this->pluginManager->getSortedDefinitions();
+    $components = $manager->getNegotiatedSortedDefinitions(NULL, 'label', TRUE);
     foreach ($components as $component_id => $component) {
       $this->derivatives[$component_id] = $base_plugin_definition;
       $this->derivatives[$component_id]['admin_label'] = $component['annotated_name'] ?? $component['name'] ?? $component['id'];

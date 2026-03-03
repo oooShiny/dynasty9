@@ -27,12 +27,15 @@ class ComponentElementAlter implements TrustedCallbackInterface {
    *   The story plugin manager.
    * @param \Drupal\ui_patterns_library\StoriesSyntaxConverter $storiesConverter
    *   The stories syntax converter.
+   * @param \Drupal\ui_patterns_legacy\RenderableConverter $renderableConverter
+   *   The renderable converter.
    */
   public function __construct(
     protected ThemeManagerInterface $themeManager,
     protected ComponentPluginManager $componentPluginManager,
     protected StoryPluginManager $storyPluginManager,
     protected StoriesSyntaxConverter $storiesConverter,
+    protected RenderableConverter $renderableConverter,
   ) {
   }
 
@@ -47,10 +50,9 @@ class ComponentElementAlter implements TrustedCallbackInterface {
    * Convert legacy render element to SDC render element.
    */
   public function convert(array $element): array {
-    $converter = new RenderableConverter($this->componentPluginManager);
     $theme = $this->themeManager->getActiveTheme()->getName();
-    $converter->setExtension($theme);
-    $element = $converter->convertPattern($element, "#");
+    $this->renderableConverter->setExtension($theme);
+    $element = $this->renderableConverter->convertPattern($element, "#");
     return $this->addPreviewStory($element);
   }
 

@@ -60,6 +60,7 @@ class PreprocessHtml implements ContainerInjectionInterface {
       }
 
       $variables[$target] = AttributeHelper::mergeCollections(
+        // @phpstan-ignore-next-line
         $variables[$target] ?? [],
         [
           $key => $value,

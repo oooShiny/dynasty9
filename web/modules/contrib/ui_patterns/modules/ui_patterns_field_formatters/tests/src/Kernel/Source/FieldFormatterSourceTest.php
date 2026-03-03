@@ -9,7 +9,7 @@ use Drupal\Tests\ui_patterns\Kernel\SourcePluginsTestBase;
 /**
  * Test FieldFormatterSource.
  *
- * @coversDefaultClass \Drupal\ui_patterns_field_formatters\Plugin\UiPatterns\Source\FieldFormatterSource
+ * @coversDefaultClass \Drupal\ui_patterns\Plugin\UiPatterns\Source\FieldFormatterSource
  * @group ui_patterns_field_formatters
  */
 class FieldFormatterSourceTest extends SourcePluginsTestBase {

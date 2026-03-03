@@ -19,7 +19,7 @@ ui_patterns_source.path:
   label: 'Source: Path'
   mapping:
     value:
-      type: path
+      type: ignore
       label: 'Path value'
 
 ui_patterns_source.url:

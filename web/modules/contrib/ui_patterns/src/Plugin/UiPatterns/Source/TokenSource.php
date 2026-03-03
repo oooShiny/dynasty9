@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\ui_patterns\Plugin\UiPatterns\Source;
 
-use Drupal\Component\Plugin\Exception\ContextException;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,7 +13,6 @@ use Drupal\Core\Render\Markup;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ui_patterns\Attribute\Source;
 use Drupal\ui_patterns\SourcePluginBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the source.
@@ -35,27 +33,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class TokenSource extends SourcePluginBase {
 
   /**
-   * The token manager.
-   *
-   * @var \Drupal\Core\Utility\Token
-   */
-  protected $tokenManager;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $plugin = parent::create(
-      $container,
-      $configuration,
-      $plugin_id,
-      $plugin_definition
-    );
-    $plugin->tokenManager = $container->get('token');
-    return $plugin;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function defaultSettings(): array {
@@ -65,70 +42,53 @@ class TokenSource extends SourcePluginBase {
   }
 
   /**
+   * Determines if we are in preview mode.
+   *
+   * @return bool
+   *   TRUE if in preview mode, FALSE otherwise.
+   */
+  protected function hasSampleEntity(): bool {
+    $tokenData = $this->getTokenData();
+    foreach ($tokenData as $tokenEntity) {
+      if ($tokenEntity instanceof EntityInterface && $tokenEntity->id() === NULL) {
+        return TRUE;
+      }
+    }
+    return FALSE;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getPropValue(): mixed {
     $value = $this->getSetting('value') ?? "";
     $isSlot = ($this->propDefinition["ui_patterns"]["type_definition"]->getPluginId() === "slot");
-    $tokenData = $this->getTokenData();
-
-    // If the entity is new, we are probably in a preview system and there can
-    // be side effects. So skip rendering.
-    foreach ($tokenData as $tokenEntity) {
-      if ($tokenEntity instanceof EntityInterface && $tokenEntity->id() === NULL) {
-        return $isSlot ? [] : "";
-      }
+    $has_sample_entity = $this->hasSampleEntity();
+    $bubbleable_metadata = new BubbleableMetadata();
+    try {
+      $value = $this->replaceTokens($value, $isSlot, $bubbleable_metadata);
     }
-
-    if (empty($value) || !is_scalar($value)) {
+    catch (\Exception $e) {
+      if (!$has_sample_entity) {
+        throw $e;
+      }
+      // We are probably in a preview system and there can
+      // be side effects.
+      $value = NULL;
+    }
+    if (empty($value)) {
       return $isSlot ? [] : "";
     }
     if ($isSlot) {
-      $bubbleable_metadata = new BubbleableMetadata();
       $build = [
-        "#markup" => Markup::create($this->tokenManager->replace((string) $value, $tokenData, ['clear' => TRUE], $bubbleable_metadata)),
+        "#markup" => Markup::create($value),
       ];
-      $bubbleable_metadata->applyTo($build);
+      if (!$has_sample_entity) {
+        $bubbleable_metadata->applyTo($build);
+      }
       return $build;
     }
-    return Html::escape($this->tokenManager->replacePlain((string) $value, $tokenData, ['clear' => TRUE]));
-  }
-
-  /**
-   * Return the token type for the given entity.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity.
-   *
-   * @return string
-   *   The token type.
-   */
-  protected function getTokenTypeForEntity(EntityInterface $entity): string {
-    $entity_type_id = $entity->getEntityTypeId();
-    // Use token module service when available.
-    if ($this->moduleHandler->moduleExists('token')) {
-      // @phpstan-ignore-next-line
-      return \Drupal::service('token.entity_mapper')->getTokenTypeForEntityType($entity_type_id);
-    }
-    // Emulate token module service.
-    return str_starts_with($entity_type_id, 'taxonomy_') ? str_replace('taxonomy_', '', $entity_type_id) : $entity_type_id;
-  }
-
-  /**
-   * Get token data.
-   */
-  protected function getTokenData(): array {
-    try {
-      $entity = $this->getContextValue('entity');
-      if ($entity instanceof EntityInterface) {
-        return [
-          $this->getTokenTypeForEntity($entity) => $entity,
-        ];
-      }
-    }
-    catch (ContextException) {
-    }
-    return [];
+    return Html::escape($value);
   }
 
   /**
@@ -143,12 +103,7 @@ class TokenSource extends SourcePluginBase {
       // '#pattern' => '^\[.+\]$',.
     ];
     $this->addRequired($form['value']);
-    if ($this->moduleHandler->moduleExists('token')) {
-      $form['help'] = [
-        '#theme' => 'token_tree_link',
-        '#token_types' => array_keys($this->getTokenData()),
-      ];
-    }
+    $this->addTokenTreeLink($form, "help");
     return $form;
   }
 

@@ -34,7 +34,7 @@ class VariantPropType extends PropTypePluginBase {
     if (!is_array($enum)) {
       $enum = [];
     }
-    return static::normalizeEnumValue($value, $enum);
+    return static::normalizer()->normalizeEnumValue($value, $enum);
   }
 
   /**

@@ -15,22 +15,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class BlockComponentRenderArraySubscriber implements EventSubscriberInterface {
 
-  /**
-   * The style manager.
-   *
-   * @var \Drupal\ui_styles\StylePluginManagerInterface
-   */
-  protected $styleManager;
-
-  /**
-   * Constructor.
-   *
-   * @param \Drupal\ui_styles\StylePluginManagerInterface $style_manager
-   *   The style manager.
-   */
-  public function __construct(StylePluginManagerInterface $style_manager) {
-    $this->styleManager = $style_manager;
-  }
+  public function __construct(
+    protected StylePluginManagerInterface $styleManager,
+  ) {}
 
   /**
    * {@inheritdoc}
@@ -72,7 +59,9 @@ class BlockComponentRenderArraySubscriber implements EventSubscriberInterface {
     $extra = $component->get('ui_styles_wrapper_extra') ?: '';
 
     $dummy = $this->styleManager->addClasses($dummy, $selected, $extra);
+    /** @var \Drupal\Core\Template\Attribute|array $dummy_attributes */
     $dummy_attributes = $dummy['#attributes'] ?? [];
+    /** @var \Drupal\Core\Template\Attribute|array $block_attributes */
     $block_attributes = $build['#attributes'] ?? [];
     $build['#attributes'] = AttributeHelper::mergeCollections(
       $block_attributes,

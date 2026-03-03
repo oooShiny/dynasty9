@@ -19,7 +19,7 @@ use Drupal\ui_patterns\UnicodePatternValidatorTrait;
   label: new TranslatableMarkup('Textfield'),
   description: new TranslatableMarkup('One-line text field.'),
   prop_types: ['string', 'identifier'],
-  tags: ['widget', 'widget:dismissible']
+  tags: ['widget']
 )]
 class TextfieldWidget extends SourcePluginPropValueWidget implements TrustedCallbackInterface {
 
@@ -66,6 +66,17 @@ class TextfieldWidget extends SourcePluginPropValueWidget implements TrustedCall
       $form['value']['#element_validate'][] = [static::class, 'validateUnicodePattern'];
     }
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPropValue(): mixed {
+    $value = parent::getPropValue();
+    if (empty($value)) {
+      return $value;
+    }
+    return $this->replaceTokens($value, FALSE);
   }
 
 }

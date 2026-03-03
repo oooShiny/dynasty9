@@ -23,12 +23,12 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
   /**
    * Scope element size.
    */
-  public const SCOPE_SIZE = 30;
+  public const int SCOPE_SIZE = 30;
 
   /**
    * The key to store multiple groups in form state.
    */
-  public const MULTIPLE_GROUPS_KEY = 'ui_skins_multiple_groups';
+  public const string MULTIPLE_GROUPS_KEY = 'ui_skins_multiple_groups';
 
   /**
    * The CSS variables plugin manager.
@@ -54,7 +54,8 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container): self {
+  public static function create(ContainerInterface $container): static {
+    /** @var static $instance */
     $instance = parent::create($container);
     $instance->cssVariablePluginManager = $container->get('plugin.manager.ui_skins.css_variable');
     $instance->transliteration = $container->get('transliteration');
@@ -148,14 +149,20 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
     }
 
     foreach ($ui_skins_css_variables as $root_plugin_id => $group_variables) {
+      if (!\is_array($group_variables)) {
+        continue;
+      }
+
       // Variable without group.
-      if (isset($group_variables['values_container'])) {
+      if (isset($group_variables['values_container']) && \is_array($group_variables['values_container'])) {
         $this->filterPluginValues($saved_variables, $root_plugin_id, $group_variables['values_container']);
         continue;
       }
 
       foreach ($group_variables as $plugin_id => $plugin_scope_values) {
-        $this->filterPluginValues($saved_variables, $plugin_id, $plugin_scope_values['values_container']);
+        if (isset($plugin_scope_values['values_container']) && \is_array($plugin_scope_values['values_container'])) {
+          $this->filterPluginValues($saved_variables, $plugin_id, $plugin_scope_values['values_container']);
+        }
       }
     }
 
@@ -166,6 +173,7 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
+    /** @var string $theme */
     $theme = $form_state->get('theme_name');
     $this->editableConfig = [
       $theme . '.settings',
@@ -185,6 +193,9 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
    *   An associative array containing the structure of the form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
+   *
+   * @return array
+   *   The updated form.
    */
   public function addNewScopeCallback(array &$form, FormStateInterface $form_state): array {
     $triggering_element = $form_state->getTriggeringElement();
@@ -192,14 +203,17 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
     if (!isset($triggering_element['#context']['plugin_id'])) {
       return [];
     }
+    /** @var string $plugin_id */
     $plugin_id = $triggering_element['#context']['plugin_id'];
     /** @var \Drupal\ui_skins\Definition\CssVariableDefinition $plugin_definition */
     $plugin_definition = $this->cssVariablePluginManager->getDefinition($plugin_id, FALSE);
     if ($form_state->get(static::MULTIPLE_GROUPS_KEY) && $plugin_definition->hasCategory()) {
       $group_key = $this->getMachineName($plugin_definition->getCategory());
+      // @phpstan-ignore-next-line
       return $form[UiSkinsInterface::CSS_VARIABLES_THEME_SETTING_KEY][$group_key][$plugin_id]['values_container'];
     }
 
+    // @phpstan-ignore-next-line
     return $form[UiSkinsInterface::CSS_VARIABLES_THEME_SETTING_KEY][$plugin_id]['values_container'];
   }
 
@@ -217,9 +231,11 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
     if (!isset($triggering_element['#context']['plugin_id'])) {
       return;
     }
+    /** @var string $plugin_id */
     $plugin_id = $triggering_element['#context']['plugin_id'];
     $plugin_scopes_number_form_state_key = $plugin_id . '_scope_number';
 
+    /** @var int $plugin_scopes_number */
     $plugin_scopes_number = $form_state->get($plugin_scopes_number_form_state_key);
     $form_state->set($plugin_scopes_number_form_state_key, $plugin_scopes_number + 1);
 
@@ -353,7 +369,9 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
     $plugin_definition = $this->cssVariablePluginManager->getDefinition($plugin_id, FALSE);
 
     foreach ($plugin_scope_values as $plugin_scope_value) {
+      /** @var string $scope */
       $scope = $plugin_scope_value['scope'];
+      /** @var string $value */
       $value = $plugin_scope_value['value'];
 
       // Remove entries where scope is empty.
@@ -402,7 +420,7 @@ class CssVariablesThemeSettingsForm extends ConfigFormBase {
     }
 
     // Remaining scopes in settings are scopes created using theme settings.
-    if (isset($ui_skins_css_variables_settings[$plugin_id])) {
+    if (isset($ui_skins_css_variables_settings[$plugin_id]) && \is_array($ui_skins_css_variables_settings[$plugin_id])) {
       foreach ($ui_skins_css_variables_settings[$plugin_id] as $new_scope => $value) {
         $new_scope = UiSkinsUtility::getConfigScopeName($new_scope);
         $scopes_infos[$new_scope] = [

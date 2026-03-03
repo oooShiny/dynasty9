@@ -17,7 +17,7 @@ interface ThemePluginManagerInterface extends PluginManagerInterface {
    * @return \Drupal\ui_skins\Definition\ThemeDefinition|null
    *   The plugin definition. NULL if not found.
    *
-   * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+   * @SuppressWarnings("PHPMD.BooleanArgumentFlag")
    */
   public function getDefinition($plugin_id, $exception_on_invalid = TRUE);
 

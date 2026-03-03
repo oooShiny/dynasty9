@@ -3,7 +3,7 @@ type: module
 description: 'Provides test plugin.'
 package: 'Testing'
 
-# Information added by Drupal.org packaging script on 2024-10-17
-version: '1.1.0-alpha3'
+# Information added by Drupal.org packaging script on 2025-09-09
+version: '1.1.0-alpha5'
 project: 'ui_skins'
-datestamp: 1729181908
+datestamp: 1757425854

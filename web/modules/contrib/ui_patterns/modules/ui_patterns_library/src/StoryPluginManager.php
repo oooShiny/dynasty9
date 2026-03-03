@@ -12,7 +12,7 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Plugin\Factory\ContainerFactory;
-use Drupal\ui_patterns\ComponentPluginManager;
+use Drupal\Core\Theme\ComponentPluginManager;
 use Drupal\ui_patterns_library\Discovery\DirectoryWithMetadataPluginDiscovery;
 
 /**
@@ -78,7 +78,9 @@ final class StoryPluginManager extends DefaultPluginManager {
   public function getComponentStories(string $component_id): array {
     $stories = [];
     $definitions = $this->getDefinitions();
-    $negotiated_definition = $this->componentPluginManager->negotiateDefinition($component_id);
+    /** @var \Drupal\ui_patterns\ComponentPluginManager $manager */
+    $manager = $this->componentPluginManager;
+    $negotiated_definition = $manager->negotiateDefinition($component_id);
     $replacer_component_id = $negotiated_definition['replaced_by'] ?? $component_id;
 
     $definitions = array_filter($definitions, static function ($definition) use ($component_id, $replacer_component_id) {
@@ -92,6 +94,9 @@ final class StoryPluginManager extends DefaultPluginManager {
       // We use machineName as a key instead of plugin ID because we are
       // already inside the component scope.
       $stories[$machineName] = $definition;
+    }
+    if (empty($stories)) {
+      $stories['examples'] = $this->addStoryFromExamples($negotiated_definition);
     }
     return $stories;
   }
@@ -181,6 +186,94 @@ final class StoryPluginManager extends DefaultPluginManager {
    */
   protected function providerExists(mixed $provider): bool {
     return $this->moduleHandler->moduleExists($provider) || $this->themeHandler->themeExists($provider);
+  }
+
+  /**
+   * Add story from examples.
+   *
+   * SDC theme can use the JSON schema examples property instead of relying on
+   * stories.
+   */
+  protected function addStoryFromExamples(array $definition): array {
+    $story = $this->initStoryFromSlots($definition['slots'] ?? []);
+    foreach ($definition['props']['properties'] ?? [] as $prop_id => $prop) {
+      // To avoid InvalidComponentException: Data provided to prop
+      // is not a valid instance of "Drupal\Core\Template\Attribute".
+      if ($prop['type'] === 'Drupal\Core\Template\Attribute') {
+        $story['props'][$prop_id] = [];
+      }
+      if (!isset($prop["examples"]) || empty($prop["examples"])) {
+        if (in_array($prop_id, $definition['props']['required'] ?? [])) {
+          $default = $this->getDefaultValue($prop);
+          if (!is_null($default)) {
+            $story['props'][$prop_id] = $default;
+          }
+        }
+        continue;
+      }
+      $story['props'][$prop_id] = $prop["examples"][0];
+    }
+    return $story;
+  }
+
+  /**
+   * Init story from slots.
+   *
+   * @param array $slots
+   *   Component slots.
+   *
+   * @return array
+   *   Story data.
+   */
+  protected function initStoryFromSlots(array $slots): array {
+    $story = [];
+    foreach ($slots as $slot_id => $slot) {
+      if (!isset($slot["examples"]) || empty($slot["examples"])) {
+        $slot["examples"] = [$slot['title']];
+      }
+      $story['slots'][$slot_id] = $slot["examples"][0];
+    }
+    return $story;
+  }
+
+  /**
+   * Get default value for prop.
+   *
+   * @param array $prop
+   *   Prop JSON schema definition.
+   *
+   * @return mixed
+   *   NULL if no default value found.
+   */
+  protected function getDefaultValue(array $prop): mixed {
+    if (isset($prop['default'])) {
+      return $prop['default'];
+    }
+
+    // Then, we try to get the first value from enumeration.
+    if (isset($prop['enum']) && !empty($prop['enum'])) {
+      return $prop['enum'][0];
+    }
+
+    // Finally, we set the boolean value to false. Boolean is the only JSON
+    // schema type where we can be sure the default value is OK because there is
+    // no additional criteria to deal with:
+    // - string has minLength, maxLength, pattern...
+    // - array has items, minItems, maxItems, uniqueItems...
+    // - object has properties...
+    // - number and integer have multipleOf, minimum, maximum...
+    if ($prop['type'] === 'boolean') {
+      return FALSE;
+    }
+
+    // There is this weird mechanism in SDC adding the object type to all
+    // props. We need to deal with that until we remove it.
+    // @see \Drupal\Core\Theme\Component\ComponentMetadata::parseSchemaInfo()
+    if (is_array($prop['type']) && empty(\array_diff($prop['type'], ['object', 'boolean']))) {
+      return FALSE;
+    }
+
+    return NULL;
   }
 
 }

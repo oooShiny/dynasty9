@@ -1,6 +1,6 @@
 # Migration from UI Patterns 1
 
-# Ecosystem consolidation
+## Ecosystem consolidation
 
 If you are coming from UI Patterns 1.x, you may not find UI Patterns 2.x version of your favourite modules on https://www.drupal.org/project/project_module
 
@@ -12,6 +12,43 @@ So, you can now found most of the UI Patterns integration inside the main `ui_pa
 
 - Display Suite. Now found in https://www.drupal.org/project/ui_patterns_ds
 - Field Group. Now found in https://www.drupal.org/project/ui_patterns_field_group
+
+## Migration steps
+
+To migrate to UI Patterns 2.x, you need to:
+
+1. Update your codebase
+1. Update your configuration
+
+To update your codebase, see the [Automatic components migration section](#automatic-components-migration) or do manual updates.
+
+To update your configuration, UI Patterns 2.x provides update hooks. But the codebase needs to be updated first!
+
+### Update workflow
+
+On your local development environment:
+
+1. Update your composer.json to use UI Patterns 2.x codebase (same for related contrib modules).
+1. Update your codebase: you may need to delete some configuration to be able to execute Drush commands.
+1. Update your configuration `drush updatedb` (restore a database dump if you had to delete configuration to update your codebase), the updates will:
+    1. Enable `ui_patterns_legacy`, `ui_patterns_blocks` modules
+    1. Loop on `core.entity_view_display.*` config and config with dependencies on UI Patterns modules to update the configuration
+    1. Uninstall legacy modules which features had been merged into UI Patterns 2.x.
+    1. Loop on content entities with Layout Builder overrides to convert sections using patterns derived layout plugins into components derived layout plugins.
+
+You can then deploy like any standard update.
+
+Note about Layout Builder: you may need to apply a patch on Core to avoid fatal error when Layout Builder tries to instantiate a missing layout plugin.
+
+```JSON
+{
+  "patches": {
+    "drupal/core": {
+      "1 - Layout builder cannot recover on missing layout - https://www.drupal.org/project/drupal/issues/3204271#comment-16145796": "https://www.drupal.org/files/issues/2025-06-13/drupal-3204271-40.patch"
+    }
+  }
+}
+```
 
 ## Automatic components migration
 

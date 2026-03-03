@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\Context\ContextRepositoryInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Utility\Token;
 use Drupal\ui_patterns\Attribute\Source;
 use Drupal\ui_patterns\ComponentPluginManager;
 use Drupal\ui_patterns\Element\ComponentElementBuilder;
@@ -17,6 +18,7 @@ use Drupal\ui_patterns\Entity\SampleEntityGeneratorInterface;
 use Drupal\ui_patterns\PropTypePluginManager;
 use Drupal\ui_patterns\SourcePluginBase;
 use Drupal\ui_patterns\SourceWithChoicesInterface;
+use Drupal\ui_patterns\UiPatternsNormalizerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -42,10 +44,12 @@ class ComponentSource extends SourcePluginBase implements SourceWithChoicesInter
     RouteMatchInterface $routeMatch,
     SampleEntityGeneratorInterface $sampleEntityGenerator,
     ModuleHandlerInterface $moduleHandler,
+    Token $token,
+    UiPatternsNormalizerInterface $normalizer,
     protected ComponentElementBuilder $componentElementBuilder,
     protected ComponentPluginManager $componentManager,
   ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $propTypeManager, $contextRepository, $routeMatch, $sampleEntityGenerator, $moduleHandler);
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $propTypeManager, $contextRepository, $routeMatch, $sampleEntityGenerator, $moduleHandler, $token, $normalizer);
   }
 
   /**
@@ -66,6 +70,8 @@ class ComponentSource extends SourcePluginBase implements SourceWithChoicesInter
       $container->get('current_route_match'),
       $container->get('ui_patterns.sample_entity_generator'),
       $container->get('module_handler'),
+      $container->get('token'),
+      $container->get('ui_patterns.normalizer'),
       $container->get('ui_patterns.component_element_builder'),
       $container->get('plugin.manager.sdc'),
     );
@@ -111,6 +117,23 @@ class ComponentSource extends SourcePluginBase implements SourceWithChoicesInter
     ];
     $this->moduleHandler->alter('ui_patterns_form', $form["component"], $form_state);
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary(): array {
+    $component = $this->getSetting('component');
+
+    $component_id = $component['component_id'];
+    $definition = $this->componentManager->getDefinition($component_id);
+
+    $label = $definition['annotated_name'] ?? $definition['label'] ?? $component_id;
+    $variant_id = $component['variant_id']['source']['value'] ?? '';
+    $variant = $definition['props']['properties']['variant'] ?? [];
+    $variant = $variant['meta:enum'][$variant_id] ?? '';
+
+    return array_filter([$label, $variant]);
   }
 
   /**

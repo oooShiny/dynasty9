@@ -81,6 +81,7 @@ class SelectSourceTest extends SourceTestBase {
       '#attributes' => [
         'class' => [
           'ui-styles-source-select-plugin',
+          'js-ui-styles-source-select-plugin',
         ],
       ],
       '#attached' => [
@@ -94,6 +95,7 @@ class SelectSourceTest extends SourceTestBase {
       $option = $option instanceof MarkupInterface ? $option->__toString() : $option;
     }
 
+    /** @var array{"#options": array} $form */
     $form = $source->getWidgetForm($styleDefinition);
     foreach ($form['#options'] as &$option) {
       $option = $option instanceof MarkupInterface ? $option->__toString() : $option;
@@ -102,6 +104,7 @@ class SelectSourceTest extends SourceTestBase {
 
     // With a default value.
     $expected['#default_value'] = 'simple';
+    /** @var array{"#options": array} $form */
     $form = $source->getWidgetForm($styleDefinition, 'simple');
     foreach ($form['#options'] as &$option) {
       $option = $option instanceof MarkupInterface ? $option->__toString() : $option;

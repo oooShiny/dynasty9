@@ -152,14 +152,14 @@ class ItemTest extends ResourceTestBase {
   /**
    * {@inheritdoc}
    */
-  public function testPostIndividual(): void {
+  public function doTestPostIndividual(): void {
     $this->markTestSkipped('Remove this override in https://www.drupal.org/project/drupal/issues/2149851');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function testPatchIndividual(): void {
+  public function doTestPatchIndividual(): void {
     $this->markTestSkipped('Remove this override in https://www.drupal.org/project/drupal/issues/2149851');
   }
 

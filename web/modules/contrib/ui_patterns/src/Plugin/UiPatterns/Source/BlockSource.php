@@ -23,11 +23,13 @@ use Drupal\Core\Plugin\PluginFormFactoryInterface;
 use Drupal\Core\Plugin\PluginWithFormsInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Utility\Token;
 use Drupal\ui_patterns\Attribute\Source;
 use Drupal\ui_patterns\Entity\SampleEntityGeneratorInterface;
 use Drupal\ui_patterns\PropTypePluginManager;
 use Drupal\ui_patterns\SourcePluginBase;
 use Drupal\ui_patterns\SourceWithChoicesInterface;
+use Drupal\ui_patterns\UiPatternsNormalizerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -60,11 +62,13 @@ class BlockSource extends SourcePluginBase implements SourceWithChoicesInterface
     RouteMatchInterface $routeMatch,
     SampleEntityGeneratorInterface $sampleEntityGenerator,
     ModuleHandlerInterface $moduleHandler,
+    Token $token,
+    UiPatternsNormalizerInterface $normalizer,
     protected BlockManagerInterface $blockManager,
     protected PluginFormFactoryInterface $pluginFormFactory,
     protected ContextHandlerInterface $contextHandler,
   ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $propTypeManager, $contextRepository, $routeMatch, $sampleEntityGenerator, $moduleHandler);
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $propTypeManager, $contextRepository, $routeMatch, $sampleEntityGenerator, $moduleHandler, $token, $normalizer);
   }
 
   /**
@@ -85,6 +89,8 @@ class BlockSource extends SourcePluginBase implements SourceWithChoicesInterface
       $container->get('current_route_match'),
       $container->get('ui_patterns.sample_entity_generator'),
       $container->get('module_handler'),
+      $container->get('token'),
+      $container->get('ui_patterns.normalizer'),
       $container->get('plugin.manager.block'),
       $container->get('plugin_form.factory'),
       $container->get('context.handler'),

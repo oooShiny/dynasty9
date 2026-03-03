@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\ui_patterns_legacy;
 
-use Drupal\Core\Theme\ComponentPluginManager;
-
 /**
  * Extract "preview" story from fields & settings preview properties.
  */
@@ -16,7 +14,9 @@ class StoryExtractor {
    */
   protected string $extension = '';
 
-  public function __construct(protected ComponentPluginManager $componentPluginManager) {
+  public function __construct(
+    protected RenderableConverter $renderableConverter,
+  ) {
     $this->extension = '';
   }
 
@@ -51,8 +51,7 @@ class StoryExtractor {
    * Extract slots from fields previews.
    */
   private function getSlotsFromFields(array $fields, array $story): array {
-    $converter = new RenderableConverter($this->componentPluginManager);
-    $converter->setExtension($this->extension);
+    $this->renderableConverter->setExtension($this->extension);
     foreach ($fields as $field_id => $field) {
       if (!\array_key_exists('preview', $field)) {
         continue;
@@ -62,8 +61,8 @@ class StoryExtractor {
         continue;
       }
       if (is_array($renderable)) {
-        $renderable = $converter->convert($renderable);
-        $renderable = $converter->convertListSlot($renderable, '');
+        $renderable = $this->renderableConverter->convert($renderable);
+        $renderable = $this->renderableConverter->convertListSlot($renderable, '');
       }
       $story['slots'][$field_id] = $renderable;
     }

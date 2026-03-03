@@ -12,9 +12,11 @@ use Drupal\ui_skins\UiSkinsInterface;
 use Drupal\ui_skins\UiSkinsUtility;
 use Drupal\ui_styles\StylePluginManagerInterface;
 use Psr\Log\LoggerInterface;
+use Sabberworm\CSS\CSSList\AtRuleBlockList;
+use Sabberworm\CSS\CSSList\CSSBlockList;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
-use Sabberworm\CSS\Property\Selector;
+use Sabberworm\CSS\RuleSet\DeclarationBlock;
 use Sabberworm\CSS\Settings;
 
 /**
@@ -22,7 +24,7 @@ use Sabberworm\CSS\Settings;
  */
 class StylesheetGenerator implements StylesheetGeneratorInterface {
 
-  public const LIBRARY_PARSING_LIMIT = 2;
+  public const int LIBRARY_PARSING_LIMIT = 2;
 
   /**
    * The output format.
@@ -49,6 +51,8 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
    */
   public function generateStylesheet(string $prefix = ''): string {
     [$cssFiles, $styleOptionsClasses] = $this->getCssFilesAndOptions();
+    /** @var string[] $cssFiles */
+    /** @var string[] $styleOptionsClasses */
 
     $generatedCss = $this->generateCss($cssFiles, $styleOptionsClasses, $prefix);
     $generatedCssVariables = $this->generateCssVariables($cssFiles, $generatedCss);
@@ -58,8 +62,8 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
   /**
    * Return the CSS files content and the styles options for all the themes.
    *
-   * @return array
-   *   return the CSS files and the styles options for all the themes.
+   * @return array[]
+   *   Return the CSS files and the styles options for all the themes.
    */
   protected function getCssFilesAndOptions(): array {
     $cssFiles = [];
@@ -80,9 +84,9 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
   /**
    * Generate CSS file for styles.
    *
-   * @param array $cssFiles
+   * @param string[] $cssFiles
    *   The CSS files to parse.
-   * @param array $styleOptionsClasses
+   * @param string[] $styleOptionsClasses
    *   The style option classes.
    * @param string $prefix
    *   The CSS selector prefix.
@@ -98,28 +102,60 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
         Settings::create()->withLenientParsing(),
       ))->parse();
 
-      foreach ($parsedCss->getAllDeclarationBlocks() as $block) {
-        foreach ($block->getSelectors() as $selector) {
-          if (!($selector instanceof Selector)) {
-            continue;
+      $cnt = $parsedCss->getContents();
+      foreach ($cnt as $item) {
+        if ($item instanceof AtRuleBlockList) {
+          $atCloned = clone $item;
+          $atCloned->setContents([]);
+          foreach ($item->getAllDeclarationBlocks() as $block) {
+            $this->cleanBlockFromUnwantedSelectors($block, $styleOptionsClasses, $prefix);
+            if (!empty($block->getSelectors())) {
+              $atCloned->append($block);
+            }
           }
-
-          if (!\in_array($selector->getSelector(), $styleOptionsClasses, TRUE)) {
-            $block->removeSelector($selector);
-            continue;
-          }
-
-          if (!empty($prefix)) {
-            $selector->setSelector($prefix . ' ' . $selector->getSelector());
+          if (\count($atCloned->getContents()) > 0) {
+            $generatedCss .= $atCloned->render($this->outputFormat);
           }
         }
-
-        if (!empty($block->getSelectors())) {
-          $generatedCss .= $block->render($this->outputFormat);
+        elseif ($item instanceof CSSBlockList) {
+          foreach ($item->getAllDeclarationBlocks() as $block) {
+            $this->cleanBlockFromUnwantedSelectors($block, $styleOptionsClasses, $prefix);
+            if (!empty($block->getSelectors())) {
+              $generatedCss .= $block->render($this->outputFormat);
+            }
+          }
+        }
+        elseif ($item instanceof DeclarationBlock) {
+          $this->cleanBlockFromUnwantedSelectors($item, $styleOptionsClasses, $prefix);
+          if (!empty($item->getSelectors())) {
+            $generatedCss .= $item->render($this->outputFormat);
+          }
         }
       }
     }
     return $generatedCss;
+  }
+
+  /**
+   * Removes unwanted selectors and add prefix from the block.
+   *
+   * @param \Sabberworm\CSS\RuleSet\DeclarationBlock $block
+   *   The block to alter selectors.
+   * @param array $styleOptionsClasses
+   *   The style option classes.
+   * @param string $prefix
+   *   The CSS selector prefix.
+   */
+  protected function cleanBlockFromUnwantedSelectors(DeclarationBlock &$block, array $styleOptionsClasses, string $prefix = ''): void {
+    foreach ($block->getSelectors() as $selector) {
+      if (!\in_array($selector->getSelector(), $styleOptionsClasses, TRUE)) {
+        $block->removeSelector($selector);
+        continue;
+      }
+      if (!empty($prefix)) {
+        $selector->setSelector($prefix . ' ' . $selector->getSelector());
+      }
+    }
   }
 
   /**
@@ -128,7 +164,7 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
    * Parse generated CSS file to extract the CSS variable used.
    * Parse again CSS files to get the CSS variables.
    *
-   * @param array $cssFiles
+   * @param string[] $cssFiles
    *   The CSS files to parse.
    * @param string $generatedCss
    *   The generated CSS from style options.
@@ -169,6 +205,7 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
     if ($this->moduleHandler->moduleExists('ui_skins')) {
       $css_variables = [];
       foreach ($this->themeHandler->listInfo() as $theme => $themeObject) {
+        /** @var array<string, array<string, array<string>>>|null $ui_skins_css_variables_settings */
         $ui_skins_css_variables_settings = \theme_get_setting(UiSkinsInterface::CSS_VARIABLES_THEME_SETTING_KEY, $theme);
         if (!\is_array($ui_skins_css_variables_settings)) {
           continue;
@@ -192,7 +229,15 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
       }
 
       if (!empty($css_variables)) {
-        $generatedCssVariables .= UiSkinsUtility::getCssVariablesInlineCss($css_variables);
+        $inlineCssVariables = UiSkinsUtility::getCssVariablesInlineCss($css_variables);
+        if (!empty($inlineCssVariables)) {
+          // Compact again.
+          $parsedCss = (new Parser(
+            $inlineCssVariables,
+            Settings::create()->withLenientParsing(),
+          ))->parse();
+          $generatedCssVariables .= $parsedCss->render(OutputFormat::createCompact());
+        }
       }
     }
 
@@ -229,24 +274,25 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
    * @param string $theme
    *   The theme machine name.
    *
-   * @return array
+   * @return string[]
    *   An array of libraries defined for the theme.
    */
   protected function getThemeLibraries(string $theme): array {
     $themeExtension = $this->themeHandler->getTheme($theme);
+    // @phpstan-ignore-next-line
     return $themeExtension->info['libraries'] ?? [];
   }
 
   /**
    * Retrieve all CSS file content used for libraries of a given theme.
    *
-   * @param array $libraries
+   * @param string[] $libraries
    *   An array of libraries.
    *
    * @return array
    *   An array of CSS file content used.
    *
-   * @SuppressWarnings(PHPMD.ErrorControlOperator)
+   * @SuppressWarnings("PHPMD.ErrorControlOperator")
    */
   protected function getCssFilesFromLibraries(array $libraries): array {
     $cssFiles = [];
@@ -254,10 +300,22 @@ class StylesheetGenerator implements StylesheetGeneratorInterface {
       [$extension, $name] = \explode('/', $library, static::LIBRARY_PARSING_LIMIT);
       $definition = $this->libraryDiscovery->getLibraryByName($extension, $name);
 
-      if (!$definition || !isset($definition['css'])) {
+      if (!$definition) {
         continue;
       }
 
+      // Recursively get dependencies.
+      if (isset($definition['dependencies']) && \is_array($definition['dependencies'])) {
+        /** @var string[] $dependencies */
+        $dependencies = $definition['dependencies'];
+        $cssFiles = \array_merge($cssFiles, $this->getCssFilesFromLibraries($dependencies));
+      }
+
+      if (!isset($definition['css']) || !\is_array($definition['css'])) {
+        continue;
+      }
+
+      /** @var array{type: string, data: string} $cssLevelFiles */
       foreach ($definition['css'] as $cssLevelFiles) {
         if ($cssLevelFiles['type'] == 'external') {
           $cssFilePath = $cssLevelFiles['data'];

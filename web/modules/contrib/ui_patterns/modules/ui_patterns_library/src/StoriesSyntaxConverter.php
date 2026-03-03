@@ -22,15 +22,23 @@ class StoriesSyntaxConverter {
     'markup',
     'plain_text',
     'theme',
+    'item_list',
     'type',
     '#markup',
     '#plain_text',
     '#theme',
+    '#item_list',
     '#type',
   ];
 
   public const KNOWN_PROPERTIES = [
     'type' => [
+      'item_list' => [
+        'list_type',
+        'items',
+        '#list_type',
+        '#items',
+      ],
       'html_tag' => [
         'attached',
         'attributes',
@@ -72,6 +80,10 @@ class StoriesSyntaxConverter {
       'status_messages' => [
         'message_list',
         '#message_list',
+      ],
+      'item_list' => [
+        'items',
+        '#items',
       ],
       'table' => [
         'header',

@@ -9,7 +9,7 @@ use Drupal\Tests\ui_patterns\Kernel\SourcePluginsTestBase;
 /**
  * Test FieldLabelSource.
  *
- * @coversDefaultClass \Drupal\ui_patterns_field_formatters\Plugin\UiPatterns\Source\FieldLabelSource
+ * @coversDefaultClass \Drupal\ui_patterns\Plugin\UiPatterns\Source\FieldLabelSource
  * @group ui_patterns_field_formatters
  */
 class FieldLabelSourceTest extends SourcePluginsTestBase {

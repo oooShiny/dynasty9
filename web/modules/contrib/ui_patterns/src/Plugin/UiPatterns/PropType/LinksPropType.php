@@ -13,7 +13,6 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Drupal\ui_patterns\Attribute\PropType;
-use Drupal\ui_patterns\PropTypeConversionTrait;
 use Drupal\ui_patterns\PropTypePluginBase;
 use Drupal\ui_patterns\SchemaManager\ReferencesResolver;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -47,8 +46,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
   priority: 10
 )]
 class LinksPropType extends PropTypePluginBase implements ContainerFactoryPluginInterface {
-
-  use PropTypeConversionTrait;
 
   /**
    * {@inheritdoc}
@@ -89,7 +86,7 @@ class LinksPropType extends PropTypePluginBase implements ContainerFactoryPlugin
     if (!is_array($value)) {
       return [];
     }
-    return self::normalizeLinks($value);
+    return static::normalizeLinks($value);
   }
 
   /**
@@ -109,7 +106,7 @@ class LinksPropType extends PropTypePluginBase implements ContainerFactoryPlugin
       if (!isset($item["title"])) {
         $item["title"] = (string) $index;
       }
-      $value[$index] = self::normalizeLink($item);
+      $value[$index] = static::normalizeLink($item);
     }
     return array_values($value);
   }
@@ -118,7 +115,7 @@ class LinksPropType extends PropTypePluginBase implements ContainerFactoryPlugin
    * Normalize link.
    */
   protected static function normalizeLink(array $item): array {
-    $item = self::normalizeAttributes($item);
+    $item = static::normalizeAttributes($item);
     // Do not normalize title as it can be a string or a renderable array.
     if (array_key_exists("text", $item)) {
       // Examples: links.html.twig, breadcrumb.html.twig, pager.html.twig,
@@ -126,7 +123,7 @@ class LinksPropType extends PropTypePluginBase implements ContainerFactoryPlugin
       $item["title"] = $item["text"];
       unset($item["text"]);
     }
-    $item["title"] = static::convertToString($item["title"]);
+    $item["title"] = static::normalizer()->convertToString($item["title"]);
 
     if (array_key_exists("href", $item)) {
       // Examples: pager.html.twig, views_mini_pager.html.twig.
@@ -137,7 +134,7 @@ class LinksPropType extends PropTypePluginBase implements ContainerFactoryPlugin
     $item = self::normalizeUrl($item);
     $item = static::normalizeAttributes($item, "link_attributes");
     if (array_key_exists("below", $item)) {
-      $item["below"] = self::normalize($item["below"]);
+      $item["below"] = static::normalize($item["below"]);
     }
     return $item;
   }

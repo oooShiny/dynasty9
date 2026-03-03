@@ -21,7 +21,7 @@ class ThemeDefinitionTest extends UnitTestCase {
    *   The getter callback.
    * @param string $name
    *   The name of the plugin attributes.
-   * @param string $value
+   * @param mixed $value
    *   The attribute's value.
    *
    * @covers ::getDescription
@@ -32,10 +32,11 @@ class ThemeDefinitionTest extends UnitTestCase {
    * @covers ::getTarget
    * @covers ::getValue
    * @covers ::id
+   * @covers ::isEnabled
    *
    * @dataProvider definitionGettersProvider
    */
-  public function testGetters(string $getter, string $name, string $value): void {
+  public function testGetters(string $getter, string $name, $value): void {
     $definition = new ThemeDefinition([$name => $value]);
     // @phpstan-ignore-next-line
     $this->assertEquals(\call_user_func([$definition, $getter]), $value);
@@ -57,6 +58,8 @@ class ThemeDefinitionTest extends UnitTestCase {
       ['getProvider', 'provider', 'my_module'],
       ['getTarget', 'target', 'html'],
       ['getValue', 'value', 'value-example'],
+      ['isEnabled', 'enabled', FALSE],
+      ['isEnabled', 'enabled', TRUE],
     ];
   }
 

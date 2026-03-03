@@ -1,0 +1,4 @@
+notification_emails: ''
+max_duration: 120
+rate_limit_per_hour: 5
+honeypot_enabled: true

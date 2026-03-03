@@ -14,10 +14,23 @@ class ThemeDefinition extends PluginDefinition {
   /**
    * Theme definition.
    *
-   * @var array
+   * @var array{
+   *   id: string,
+   *   enabled: bool,
+   *   label: \Drupal\Core\StringTranslation\TranslatableMarkup|string,
+   *   description: \Drupal\Core\StringTranslation\TranslatableMarkup|string,
+   *   target: string,
+   *   key: string,
+   *   value: string,
+   *   library: string,
+   *   additional: array<string, mixed>,
+   *   provider: string,
+   *   dependencies: array<string>,
+   * }
    */
   protected array $definition = [
     'id' => '',
+    'enabled' => TRUE,
     'label' => '',
     'description' => '',
     'target' => 'body',
@@ -31,10 +44,14 @@ class ThemeDefinition extends PluginDefinition {
 
   /**
    * Constructor.
+   *
+   * @param array<string, mixed> $definition
+   *   The definition.
    */
   public function __construct(array $definition = []) {
     foreach ($definition as $name => $value) {
       if (\array_key_exists($name, $this->definition)) {
+        // @phpstan-ignore-next-line
         $this->definition[$name] = $value;
       }
       else {
@@ -43,6 +60,16 @@ class ThemeDefinition extends PluginDefinition {
     }
 
     $this->id = $this->definition['id'];
+  }
+
+  /**
+   * Getter.
+   *
+   * @return bool
+   *   Property value.
+   */
+  public function isEnabled(): bool {
+    return $this->definition['enabled'];
   }
 
   /**
@@ -209,7 +236,7 @@ class ThemeDefinition extends PluginDefinition {
   /**
    * Setter.
    *
-   * @param array $additional
+   * @param array<string, mixed> $additional
    *   Property value.
    *
    * @return $this
@@ -245,7 +272,7 @@ class ThemeDefinition extends PluginDefinition {
   /**
    * Getter.
    *
-   * @return array
+   * @return string[]
    *   Property value.
    */
   public function getDependencies(): array {
@@ -255,7 +282,7 @@ class ThemeDefinition extends PluginDefinition {
   /**
    * Setter.
    *
-   * @param array $dependencies
+   * @param string[] $dependencies
    *   Property value.
    *
    * @return $this

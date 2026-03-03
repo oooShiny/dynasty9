@@ -54,7 +54,7 @@ class EnumSetPropType extends PropTypePluginBase {
    */
   public static function normalize(mixed $value, ?array $definition = NULL): mixed {
     $definition_items = (!is_array($definition)) ? [] : ($definition['items'] ?? []);
-    $value = array_unique(static::normalizeEnumValues($value, $definition_items['enum'] ?? []));
+    $value = array_unique(static::normalizer()->normalizeEnumValues($value, $definition_items['enum'] ?? []));
     return static::normalizeEnumListSize($value, $definition, TRUE);
   }
 

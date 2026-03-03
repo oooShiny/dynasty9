@@ -95,3 +95,7 @@ services:
     class: Drupal\ui_patterns\Resolver\ChainContextEntityResolver
     tags:
       - { name: service_collector, call: addResolver, tag: ui_patterns.context_entity_resolver }
+
+  ui_patterns.normalizer:
+    class: Drupal\ui_patterns\UiPatternsNormalizer
+    arguments: ["@renderer"]

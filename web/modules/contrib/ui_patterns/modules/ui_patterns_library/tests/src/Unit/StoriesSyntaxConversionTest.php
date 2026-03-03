@@ -37,6 +37,7 @@ final class StoriesSyntaxConversionTest extends UnitTestCase {
       "Daisy Grid Row 4" => self::daisyGridRow4(),
       "Props special words" => self::componentSpecialProps(),
       'Theme layout' => self::themeLayout(),
+      'Theme item_list' => self::themeItemList(),
     ];
     foreach ($data as $label => $test) {
       yield $label => [
@@ -537,6 +538,86 @@ final class StoriesSyntaxConversionTest extends UnitTestCase {
     ];
     return [
       'value' => $slots,
+      'expected' => $expected,
+    ];
+  }
+
+  /**
+   * Theme item_list.
+   */
+  protected static function themeItemList(): array {
+    $value = [
+      [
+        'theme' => 'item_list',
+        'list_type' => 'ul',
+        'items' => [
+          [
+            'type' => 'html_tag',
+            'tag' => 'p',
+            'value' => 'Item One',
+          ],
+          [
+            'type' => 'html_tag',
+            'tag' => 'p',
+            'value' => 'Item Two',
+          ],
+        ],
+      ],
+      [
+        '#theme' => 'item_list',
+        '#list_type' => 'ul',
+        '#items' => [
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'p',
+            '#value' => 'Item One',
+          ],
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'p',
+            '#value' => 'Item Two',
+          ],
+        ],
+      ],
+    ];
+
+    $expected = [
+      [
+        '#theme' => 'item_list',
+        '#list_type' => 'ul',
+        '#items' => [
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'p',
+            '#value' => 'Item One',
+          ],
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'p',
+            '#value' => 'Item Two',
+          ],
+        ],
+      ],
+      [
+        '#theme' => 'item_list',
+        '#list_type' => 'ul',
+        '#items' => [
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'p',
+            '#value' => 'Item One',
+          ],
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'p',
+            '#value' => 'Item Two',
+          ],
+        ],
+      ],
+    ];
+
+    return [
+      'value' => $value,
       'expected' => $expected,
     ];
   }

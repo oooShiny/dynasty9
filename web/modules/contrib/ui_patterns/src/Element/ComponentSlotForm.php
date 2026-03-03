@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns\Element;
 
 use Drupal\Component\Utility\Html;
@@ -109,6 +111,32 @@ class ComponentSlotForm extends ComponentFormBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function afterBuild(array $element, FormStateInterface $form_state) : array {
+    $trigger_element = $form_state->getTriggeringElement();
+    if (isset($trigger_element['#ui_patterns_slot']) && ($trigger_element['#ui_patterns_slot_parents'] == $element['#parents'])) {
+      $value = $form_state->getValue($trigger_element['#ui_patterns_slot_parents']);
+      if (isset($trigger_element['#ui_patterns_slot_operation']) && $slot_operation = $trigger_element['#ui_patterns_slot_operation']) {
+        switch ($slot_operation) {
+          case 'remove':
+            $delta_to_remove = $trigger_element['#delta'];
+            $value['sources'] = array_filter($value['sources'], function ($key) use ($delta_to_remove) {
+              return $key !== $delta_to_remove;
+            }, ARRAY_FILTER_USE_KEY);
+            $element["sources"] = array_filter($element["sources"], function ($key) use ($delta_to_remove) {
+              return $key !== $delta_to_remove;
+            }, ARRAY_FILTER_USE_KEY);
+            break;
+        }
+      }
+      $element['#default_value'] = $value;
+    }
+    parent::afterBuild($element, $form_state);
+    return $element;
+  }
+
+  /**
    * Handle the rebuild of the form and operations.
    */
   protected static function handleFormRebuild(array &$element, FormStateInterface $form_state) : void {
@@ -118,13 +146,6 @@ class ComponentSlotForm extends ComponentFormBase {
         $value = $form_state->getValue($trigger_element['#ui_patterns_slot_parents']);
         if (isset($trigger_element['#ui_patterns_slot_operation']) && $slot_operation = $trigger_element['#ui_patterns_slot_operation']) {
           switch ($slot_operation) {
-            case 'remove':
-              $delta_to_remove = $trigger_element['#delta'];
-              $value['sources'] = array_filter($value['sources'], function ($key) use ($delta_to_remove) {
-                return $key !== $delta_to_remove;
-              }, ARRAY_FILTER_USE_KEY);
-              break;
-
             case 'add':
               $value['sources'][] = [
                 'source_id' => $trigger_element['#source_id'] ?? ($trigger_element["#value"] ?? NULL),
@@ -143,7 +164,7 @@ class ComponentSlotForm extends ComponentFormBase {
    */
   public static function buildForm(array &$element, FormStateInterface $form_state): array {
     static::handleFormRebuild($element, $form_state);
-    $slot_id = $element['#slot_id'];
+    $slot_id = self::getSlotId($element);
     $component = static::getComponent($element);
     if ($component !== NULL) {
       $slots = $component->metadata->slots;
@@ -235,7 +256,7 @@ class ComponentSlotForm extends ComponentFormBase {
     if (!isset($configuration['sources'])) {
       return $form;
     }
-    $slot_id = $element['#slot_id'] ?? '';
+    $slot_id = self::getSlotId($element);
     $n_sources = count($configuration['sources']);
     foreach ($configuration['sources'] as $delta => $source_configuration) {
       $form[$delta] = static::buildSourceForm(
@@ -274,7 +295,7 @@ class ComponentSlotForm extends ComponentFormBase {
    * Build single source form.
    */
   public static function buildSourceForm(array $element, FormStateInterface $form_state, array $definition, array $configuration): array {
-    $slot_id = $element['#slot_id'] ?? "";
+    $slot_id = self::getSlotId($element);
     if (!isset($element['#default_value'])) {
       $element['#default_value'] = $configuration;
     }
@@ -290,7 +311,10 @@ class ComponentSlotForm extends ComponentFormBase {
           'id' => $wrapper_id,
         ],
       ],
+      'node_id' => ['#type' => 'hidden', '#default_value' => $configuration['node_id'] ?? ''],
+      'third_party_settings' => ['#type' => 'hidden', '#default_value' => $configuration['third_party_settings'] ?? []],
     ];
+
     if (empty($slot_id)) {
       return $form;
     }
@@ -319,7 +343,9 @@ class ComponentSlotForm extends ComponentFormBase {
       '#ui_patterns_slot_operation' => 'remove',
       '#ui_patterns_slot_parents' => $element['#parents'],
       '#ui_patterns_slot_array_parents' => $element['#array_parents'],
-      '#limit_validation_errors' => [],
+      // We used to have an empty array, but that caused issues with
+      // handleErrorsWithLimitedValidation in FormValidator.
+      '#limit_validation_errors' => FALSE,
       '#ajax' => [
         'callback' => [static::class, 'refreshForm'],
         'wrapper' => $wrapper_id,
@@ -338,7 +364,7 @@ class ComponentSlotForm extends ComponentFormBase {
    * Build source selector.
    */
   protected static function buildAddSourceButton(array $element, array $definition, string $wrapper_id): array {
-    $slot_id = $element['#slot_id'];
+    $slot_id = self::getSlotId($element);
     $sources = static::getSources($slot_id, $definition, $element);
     $options = static::sourcesToOptions($sources);
     return [

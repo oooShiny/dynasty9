@@ -33,6 +33,7 @@ module:
   dynasty_social_post: 0
   dynasty_timeline: 0
   dynasty_transcript: 0
+  dynasty_voicemail: 0
   editor: 0
   entity_browser: 0
   entity_reference_revisions: 0
@@ -98,6 +99,7 @@ module:
   quicklink: 0
   rate: 0
   redirect: 0
+  resend_api: 0
   rest: 0
   scheduler: 0
   search_api: 0
@@ -106,8 +108,6 @@ module:
   seckit: 0
   select2: 0
   select2_facets: 0
-  sendgrid_integration: 0
-  sendgrid_integration_reports: 0
   serialization: 0
   shortcut: 0
   simple_sitemap: 0

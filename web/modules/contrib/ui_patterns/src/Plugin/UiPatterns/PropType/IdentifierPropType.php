@@ -6,7 +6,6 @@ namespace Drupal\ui_patterns\Plugin\UiPatterns\PropType;
 
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ui_patterns\Attribute\PropType;
-use Drupal\ui_patterns\PropTypeConversionTrait;
 use Drupal\ui_patterns\PropTypePluginBase;
 
 /**
@@ -25,13 +24,11 @@ use Drupal\ui_patterns\PropTypePluginBase;
 )]
 class IdentifierPropType extends PropTypePluginBase {
 
-  use PropTypeConversionTrait;
-
   /**
    * {@inheritdoc}
    */
   public static function normalize(mixed $value, ?array $definition = NULL): mixed {
-    $value = strip_tags(static::convertToString($value));
+    $value = strip_tags(static::normalizer()->convertToString($value));
     // Clean the value.
     $value = preg_replace('/[^A-Za-z0-9-_\x{00A0}-\x{10FFFF}\.]/u', '-', $value);
     return $value;

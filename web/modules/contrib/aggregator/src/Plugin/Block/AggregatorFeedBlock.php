@@ -58,10 +58,10 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
    *   The entity storage for feeds.
    * @param \Drupal\aggregator\ItemStorageInterface $item_storage
    *   The entity storage for feed items.
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface|null $logger_factory
    *   Logger factory.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, FeedStorageInterface $feed_storage, ItemStorageInterface $item_storage, LoggerChannelFactoryInterface $logger_factory = NULL) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, FeedStorageInterface $feed_storage, ItemStorageInterface $item_storage, ?LoggerChannelFactoryInterface $logger_factory = NULL) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->feedStorage = $feed_storage;
     $this->itemStorage = $item_storage;

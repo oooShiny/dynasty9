@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ui_patterns_field module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Add additional columns.
+ *
+ * Add third_party_settings and node_id to ui_patterns_source fields.
+ */
+function ui_patterns_field_update_10201(): void {
+  $database = Database::getConnection();
+  $schema = $database->schema();
+
+  // Define columns to add with their configurations.
+  $columns = [
+    'third_party_settings' => [
+      'type' => 'blob',
+      'size' => 'big',
+      'not null' => FALSE,
+    ],
+    'node_id' => [
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    ],
+  ];
+
+  // Find all field storage configs of type ui_patterns_source.
+  $field_storages = \Drupal::entityTypeManager()
+    ->getStorage('field_storage_config')
+    ->loadByProperties(['type' => 'ui_patterns_source']);
+
+  foreach ($field_storages as $field_storage) {
+    $field_name = $field_storage->getName();
+    $entity_type = $field_storage->getTargetEntityTypeId();
+
+    // Build table names.
+    $tables = [
+      $entity_type . '__' . $field_name,
+      $entity_type . '_revision__' . $field_name,
+    ];
+
+    // Add each column to each table.
+    foreach ($tables as $table_name) {
+      if (!$schema->tableExists($table_name)) {
+        continue;
+      }
+
+      foreach ($columns as $column_name => $column_spec) {
+        $real_column_name = $field_name . '_' . $column_name;
+        if (!$schema->fieldExists($table_name, $real_column_name)) {
+          $schema->addField($table_name, $real_column_name, $column_spec);
+        }
+      }
+    }
+  }
+}

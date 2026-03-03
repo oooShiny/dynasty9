@@ -53,7 +53,6 @@ class UiIconsMenuTest extends KernelTestBase {
     $this->assertIsArray($form_display_options);
     $this->assertArrayHasKey('type', $form_display_options);
     $this->assertContains($form_display_options['type'], ['icon_link_widget', 'icon_link_attributes_widget']);
-    $this->assertFalse($link_field->isRequired());
   }
 
   /**

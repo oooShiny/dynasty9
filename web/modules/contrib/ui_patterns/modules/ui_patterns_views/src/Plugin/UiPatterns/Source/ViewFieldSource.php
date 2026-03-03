@@ -33,7 +33,7 @@ class ViewFieldSource extends ViewsSourceBase {
     // Get field name inside the configuration.
     $field_name = $this->getSetting('ui_patterns_views_field') ?? "";
     $view = $this->getView();
-    $options = $this->getViewsFieldOptions($view);
+    $options = self::getViewsFieldOptions($view);
     // Get row index inside the configuration.
     $row_index = isset($this->context["ui_patterns_views:row:index"]) ? $this->getContextValue("ui_patterns_views:row:index") : 0;
     if (empty($field_name) || !($view instanceof ViewExecutable) || !is_array($options) || !array_key_exists($field_name, $options)) {
@@ -41,12 +41,12 @@ class ViewFieldSource extends ViewsSourceBase {
     }
     // Get the output of the field.
     $view->build();
-    $field_output = $view->style_plugin->getField($row_index, $field_name);
+    $field_output = $view->getStyle()->getField($row_index, $field_name);
     // Remove field if need it.
-    if ($this->isViewFieldHidden($field_name, $field_output, $view)) {
+    if ($this->isViewFieldExcluded($field_name, $view) || $this->isViewFieldHidden($field_name, $field_output, $view)) {
       $field_output = NULL;
     }
-    return $this->renderOutput($field_output);
+    return self::renderOutput($field_output);
   }
 
   /**
@@ -54,7 +54,7 @@ class ViewFieldSource extends ViewsSourceBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
     $form = parent::settingsForm($form, $form_state);
-    $options = $this->getViewsFieldOptions($this->getView());
+    $options = self::getViewsFieldOptions($this->getView());
     if (!is_array($options) || count($options) < 1) {
       return $form;
     }

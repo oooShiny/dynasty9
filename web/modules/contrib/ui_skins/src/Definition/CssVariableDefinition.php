@@ -14,7 +14,18 @@ class CssVariableDefinition extends PluginDefinition {
   /**
    * CSS variable definition.
    *
-   * @var array
+   * @var array{
+   *   id: string,
+   *   enabled: bool,
+   *   type: string,
+   *   label: \Drupal\Core\StringTranslation\TranslatableMarkup|string,
+   *   description: \Drupal\Core\StringTranslation\TranslatableMarkup|string,
+   *   category: \Drupal\Core\StringTranslation\TranslatableMarkup|string,
+   *   default_values: array<string, string>,
+   *   weight: int,
+   *   additional: array<string, mixed>,
+   *   provider: string,
+   * }
    */
   protected array $definition = [
     'id' => '',
@@ -31,10 +42,14 @@ class CssVariableDefinition extends PluginDefinition {
 
   /**
    * Constructor.
+   *
+   * @param array<string, mixed> $definition
+   *   The definition.
    */
   public function __construct(array $definition = []) {
     foreach ($definition as $name => $value) {
       if (\array_key_exists($name, $this->definition)) {
+        // @phpstan-ignore-next-line
         $this->definition[$name] = $value;
       }
       else {
@@ -137,7 +152,7 @@ class CssVariableDefinition extends PluginDefinition {
   /**
    * Setter.
    *
-   * @param array $defaultValues
+   * @param array<string, string> $defaultValues
    *   Property value.
    *
    * @return $this
@@ -241,7 +256,7 @@ class CssVariableDefinition extends PluginDefinition {
   /**
    * Setter.
    *
-   * @param array $additional
+   * @param array<string, mixed> $additional
    *   Property value.
    *
    * @return $this

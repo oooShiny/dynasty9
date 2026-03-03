@@ -1,0 +1,9 @@
+name: Dynasty Voicemail
+type: module
+description: 'Allows podcast listeners to record and submit audio messages.'
+core_version_requirement: ^10.3 || ^11
+package: Dynasty
+dependencies:
+  - drupal:file
+  - drupal:user
+configure: dynasty_voicemail.settings

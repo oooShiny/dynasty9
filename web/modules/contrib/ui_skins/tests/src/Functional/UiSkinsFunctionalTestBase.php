@@ -20,7 +20,7 @@ abstract class UiSkinsFunctionalTestBase extends BrowserTestBase {
   /**
    * The configuration form route.
    */
-  public const CONFIG_ROUTE_NAME = 'ui_skins.css_variables.theme_settings';
+  public const string CONFIG_ROUTE_NAME = 'ui_skins.css_variables.theme_settings';
 
   /**
    * {@inheritdoc}

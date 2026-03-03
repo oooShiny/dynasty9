@@ -30,7 +30,13 @@ class SelectsWidget extends SourcePluginPropValueWidget {
   public function getPropValue(): mixed {
     $value = parent::getPropValue() ?? [];
     $value = is_scalar($value) ? [$value] : $value;
-    return array_values($value);
+    $returned = array_values($value);
+    return array_map(function ($item) {
+      if (!is_string($item) && !is_object($item) && !is_array($item)) {
+        return $item;
+      }
+      return $this->replaceTokens($item, FALSE);
+    }, $returned);
   }
 
   /**

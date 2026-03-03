@@ -27,6 +27,12 @@ class PathSource extends SourcePluginBase {
    */
   public function getPropValue(): mixed {
     $value = $this->getSetting('value');
+    if (is_scalar($value)) {
+      $value = $this->replaceTokens($value, FALSE);
+    }
+    elseif (isset($value["route_name"])) {
+      $value["route_name"] = $this->replaceTokens($value["route_name"], FALSE);
+    }
     return $this->getUrlFromRoute($value);
   }
 

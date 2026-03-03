@@ -7,7 +7,7 @@ dependencies:
   - drupal:views
   - ui_styles:ui_styles
 
-# Information added by Drupal.org packaging script on 2025-02-07
-version: '8.x-1.16'
+# Information added by Drupal.org packaging script on 2025-11-12
+version: '8.x-1.19'
 project: 'ui_styles'
-datestamp: 1738948268
+datestamp: 1762942727

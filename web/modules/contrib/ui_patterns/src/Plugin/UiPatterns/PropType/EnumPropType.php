@@ -47,7 +47,7 @@ class EnumPropType extends PropTypePluginBase {
     if (!is_array($enum)) {
       $enum = [];
     }
-    return static::normalizeEnumValue($value, $enum) ?? static::enumDefaultValue($definition);
+    return static::normalizer()->normalizeEnumValue($value, $enum) ?? static::enumDefaultValue($definition);
   }
 
 }

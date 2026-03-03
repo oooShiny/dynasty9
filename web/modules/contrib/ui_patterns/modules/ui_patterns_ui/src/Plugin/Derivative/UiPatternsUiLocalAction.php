@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns_ui\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;

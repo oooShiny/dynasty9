@@ -55,7 +55,7 @@ final class IconFilterController implements ContainerInjectionInterface {
     $html = $this->renderer->renderInIsolation($build);
 
     if (empty($html)) {
-      return (new Response(sprintf('Icon %s not found!', $icon_full_id), 404));
+      return (new Response('Icon not found!', 404));
     }
 
     return (new Response((string) $html, 200))

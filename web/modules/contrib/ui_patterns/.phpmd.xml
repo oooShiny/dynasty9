@@ -11,7 +11,15 @@
     </description>
 
     <!-- Import the entire unused code rule set -->
-    <rule ref="rulesets/unusedcode.xml" />
+    <rule ref="rulesets/unusedcode.xml">
+      <!-- Excluded to use it with a different configuration. -->
+      <exclude name="UnusedLocalVariable" />
+    </rule>
+    <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable">
+      <properties>
+        <property name="allow-unused-foreach-variables" value="true" />
+      </properties>
+    </rule>
 
     <!--
         Import the entire cyclomatic complexity rule and

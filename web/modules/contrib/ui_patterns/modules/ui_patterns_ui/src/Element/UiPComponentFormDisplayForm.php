@@ -64,6 +64,9 @@ class UiPComponentFormDisplayForm extends FormElementBase {
           $variant_id = $source;
           continue;
         }
+        if (in_array($key, ['props', 'slots', 'component_id', 'display_id', 'variant_id'])) {
+          continue;
+        }
         if ($display->isSlot($key)) {
           $display_options = $display->getPropSlotOption($key);
           if ($display_options['source_id'] === '') {
@@ -84,6 +87,7 @@ class UiPComponentFormDisplayForm extends FormElementBase {
         'variant_id' => $variant_id,
         'props' => $props,
         'slots' => $slots,
+        'node_id' => $input['node_id'] ?? '',
       ];
       $element['#default_value'] = $output;
       return $output;
@@ -181,6 +185,11 @@ class UiPComponentFormDisplayForm extends FormElementBase {
     $element[$prop_slot_id]['#type'] = 'container';
     $element[$prop_slot_id]['source'] = $form;
     $element[$prop_slot_id]['source_id'] = ['#type' => 'hidden', '#default_value' => $source_id];
+    $element[$prop_slot_id]['node_id'] = ['#type' => 'hidden', '#default_value' => $configuration['node_id'] ?? ''];
+    $element[$prop_slot_id]['third_party_settings'] = [
+      '#type' => 'hidden',
+      '#default_value' => $configuration['third_party_settings'] ?? '',
+    ];
   }
 
   /**

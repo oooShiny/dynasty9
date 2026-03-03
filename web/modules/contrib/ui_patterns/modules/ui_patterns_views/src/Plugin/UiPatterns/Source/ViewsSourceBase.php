@@ -91,11 +91,10 @@ abstract class ViewsSourceBase extends SourcePluginBase {
    * @return array|null
    *   The options or NULL if not applicable.
    */
-  protected function getViewsFieldOptions(?ViewExecutable $view = NULL) : ?array {
-    if (!$view) {
+  protected static function getViewsFieldOptions(?ViewExecutable $view = NULL) : ?array {
+    if (!$view || !$view->display_handler) {
       return NULL;
     }
-
     $fields_options = $view->display_handler->getOption("fields") ?? [];
     // Maybe a test on $row_options type could be done here
     // $row_options = $view->display_handler->getOption("row") ?? [];.
@@ -107,6 +106,25 @@ abstract class ViewsSourceBase extends SourcePluginBase {
       $options[$field_id] = empty($field['label']) ? $field_id : sprintf("%s (%s)", $field['label'], $field_id);
     }
     return $options;
+  }
+
+  /**
+   * Test if field is excluded.
+   *
+   * @param string $field_name
+   *   The field name.
+   * @param \Drupal\views\ViewExecutable $view
+   *   The current view.
+   *
+   * @return bool
+   *   Return TRUE if the field need to be removed from render.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\ContextException
+   */
+  protected function isViewFieldExcluded(string $field_name, ViewExecutable $view): bool {
+    $field = $this->getViewField($field_name, $view);
+    // Exclude field.
+    return !$field || (is_array($field->options) && ($field->options['exclude'] ?? FALSE));
   }
 
   /**
@@ -126,8 +144,8 @@ abstract class ViewsSourceBase extends SourcePluginBase {
    */
   protected function isViewFieldHidden(string $field_name, mixed $field_output, ?ViewExecutable $view = NULL): bool {
     $field = $this->getViewField($field_name, $view);
-    // Exclude field.
-    if (!$field || !is_array($field->options) || $field->options['exclude']) {
+    if (!$field) {
+      // If the field is not found, we consider it as excluded.
       return TRUE;
     }
     $options = $this->getViewPluginOptions();
@@ -191,7 +209,7 @@ abstract class ViewsSourceBase extends SourcePluginBase {
    * @return array
    *   The render array.
    */
-  protected function renderOutput($output) {
+  protected static function renderOutput($output) {
     if (empty($output)) {
       return ['#markup' => ''];
     }

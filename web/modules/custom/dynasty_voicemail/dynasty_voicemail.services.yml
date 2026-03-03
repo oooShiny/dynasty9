@@ -1,0 +1,11 @@
+services:
+  logger.channel.dynasty_voicemail:
+    parent: logger.channel_base
+    arguments: ['dynasty_voicemail']
+
+  dynasty_voicemail.storage:
+    class: Drupal\dynasty_voicemail\Service\VoicemailStorageService
+    arguments:
+      - '@file_system'
+      - '@config.factory'
+      - '@logger.channel.dynasty_voicemail'

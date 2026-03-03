@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Drupal\ui_patterns;
 
 use Drupal\Component\Plugin\Definition\PluginDefinitionInterface;
+use Drupal\Component\Plugin\Exception\ContextException;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -15,8 +17,10 @@ use Drupal\Core\Plugin\ContextAwarePluginAssignmentTrait;
 use Drupal\Core\Plugin\ContextAwarePluginTrait;
 use Drupal\Core\Plugin\Definition\DependentPluginDefinitionInterface;
 use Drupal\Core\Plugin\PluginDependencyTrait;
+use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Utility\Token;
 use Drupal\ui_patterns\Entity\SampleEntityGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -104,7 +108,9 @@ abstract class SourcePluginBase extends PluginBase implements
       $container->get('context.repository'),
       $container->get('current_route_match'),
       $container->get('ui_patterns.sample_entity_generator'),
-      $container->get('module_handler')
+      $container->get('module_handler'),
+      $container->get('token'),
+      $container->get('ui_patterns.normalizer')
     );
   }
 
@@ -127,6 +133,10 @@ abstract class SourcePluginBase extends PluginBase implements
    *   The sample entity generator service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler service.
+   * @param \Drupal\Core\Utility\Token $token
+   *   The token service.
+   * @param \Drupal\ui_patterns\UiPatternsNormalizerInterface $normalizer
+   *   The normalizer service.
    */
   public function __construct(
     array $configuration,
@@ -137,6 +147,8 @@ abstract class SourcePluginBase extends PluginBase implements
     protected RouteMatchInterface $routeMatch,
     protected SampleEntityGeneratorInterface $sampleEntityGenerator,
     protected ModuleHandlerInterface $moduleHandler,
+    protected Token $token,
+    protected UiPatternsNormalizerInterface $normalizer,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->setConfiguration($configuration);
@@ -189,8 +201,8 @@ abstract class SourcePluginBase extends PluginBase implements
   /**
    * {@inheritdoc}
    */
-  public function label(): string {
-    if ($this instanceof SourceWithChoicesInterface) {
+  public function label(bool $with_context = FALSE): string {
+    if ($with_context && $this instanceof SourceWithChoicesInterface) {
       $choice_id = $this->getChoice($this->settings);
       if ($choice_id) {
         $choices = $this->getChoices();
@@ -450,6 +462,105 @@ abstract class SourcePluginBase extends PluginBase implements
     $form_element['#description'] = $this->getConfiguration()['widget_settings']['description'];
     $form_element['#description_display'] = $this->getConfiguration()['widget_settings']['description_display'];
     $form_element['#required'] = $this->getConfiguration()['widget_settings']['required'];
+  }
+
+  /**
+   * Return the token type for the given entity.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity.
+   *
+   * @return string
+   *   The token type.
+   */
+  protected function getTokenTypeForEntity(EntityInterface $entity): string {
+    $entity_type_id = $entity->getEntityTypeId();
+    // Use token module service when available.
+    if ($this->moduleHandler->moduleExists('token')) {
+      // @phpstan-ignore-next-line
+      return \Drupal::service('token.entity_mapper')->getTokenTypeForEntityType($entity_type_id);
+    }
+    // Emulate token module service.
+    return str_starts_with($entity_type_id, 'taxonomy_') ? str_replace('taxonomy_', '', $entity_type_id) : $entity_type_id;
+  }
+
+  /**
+   * Get token data.
+   *
+   * @return array
+   *   An array of token data.
+   */
+  protected function getTokenData(): array {
+    try {
+      $entity = $this->getContextValue('entity');
+      if ($entity instanceof EntityInterface) {
+        return [
+          $this->getTokenTypeForEntity($entity) => $entity,
+        ];
+      }
+    }
+    catch (ContextException) {
+    }
+    return [];
+  }
+
+  /**
+   * Add a token tree link to a form.
+   *
+   * @param array $form
+   *   The form.
+   * @param string $form_key
+   *   The form key to use.
+   */
+  protected function addTokenTreeLink(array &$form, string $form_key = "help"): void {
+    if ($this->moduleHandler->moduleExists('token')) {
+      $form[$form_key] = [
+        '#theme' => 'token_tree_link',
+        '#token_types' => array_keys($this->getTokenData()),
+      ];
+    }
+  }
+
+  /**
+   * Replace tokens.
+   *
+   * @param mixed $value
+   *   The string to replace tokens in.
+   * @param bool $markup
+   *   Whether to return markup (TRUE) or plain text (FALSE).
+   * @param \Drupal\Core\Render\BubbleableMetadata|null $bubbleable_metadata
+   *   Bubbleable metadata to populate.
+   *
+   * @return mixed
+   *   The string with tokens replaced or original value.
+   */
+  protected function replaceTokens(mixed $value, bool $markup = FALSE, ?BubbleableMetadata $bubbleable_metadata = NULL): mixed {
+    if (!static::isConvertibleToString($value)) {
+      return $value;
+    }
+    $this->normalizer->convertToScalar($value);
+    if (empty($value)) {
+      return "";
+    }
+    // If the entity is new, we are probably in a preview system and there can
+    // be side effects. Determine if we need to skip rendering?
+    $tokenData = $this->getTokenData();
+    return $markup ?
+        $this->token->replace($value, $tokenData, ['clear' => TRUE], $bubbleable_metadata) :
+        $this->token->replacePlain($value, $tokenData, ['clear' => TRUE], $bubbleable_metadata);
+  }
+
+  /**
+   * Check if a prop value would be naturally a string.
+   *
+   * @param mixed $value
+   *   The value to check.
+   *
+   * @return bool
+   *   TRUE if the value is naturally convertible to string.
+   */
+  protected static function isConvertibleToString(mixed $value) : bool {
+    return (is_string($value) || is_object($value) || is_array($value));
   }
 
 }

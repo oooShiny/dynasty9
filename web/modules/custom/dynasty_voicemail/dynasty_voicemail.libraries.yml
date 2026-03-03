@@ -1,0 +1,11 @@
+voicemail-recorder:
+  version: 1.x
+  css:
+    component:
+      css/voicemail-recorder.css: {}
+  js:
+    js/voicemail-recorder.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

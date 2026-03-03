@@ -84,10 +84,14 @@ class ListTextareaWidget extends SourcePluginBase {
    */
   private function castValue($value, string $type): mixed {
     try {
+      if (self::isConvertibleToString($value)) {
+        $value = $this->replaceTokens($value, FALSE);
+      }
       return match ($type) {
         'integer' => (is_int($value) || is_numeric($value) || ($value === "")) ? (int) $value : NULL,
         'float', 'decimal' => is_float($value) ? $value : (float) $value,
         'boolean' => is_bool($value) ? $value : (boolean) $value,
+        'string' => $value,
         default => NULL,
       };
     }

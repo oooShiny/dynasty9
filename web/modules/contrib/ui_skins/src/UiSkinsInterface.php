@@ -12,11 +12,11 @@ interface UiSkinsInterface {
   /**
    * The theme config key added for CSS variables.
    */
-  public const CSS_VARIABLES_THEME_SETTING_KEY = 'ui_skins_css_variables';
+  public const string CSS_VARIABLES_THEME_SETTING_KEY = 'ui_skins_css_variables';
 
   /**
    * The theme config key form theme.
    */
-  public const THEME_THEME_SETTING_KEY = 'ui_skins_theme';
+  public const string THEME_THEME_SETTING_KEY = 'ui_skins_theme';
 
 }

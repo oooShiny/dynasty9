@@ -6,7 +6,6 @@ namespace Drupal\ui_patterns\Plugin\UiPatterns\PropType;
 
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ui_patterns\Attribute\PropType;
-use Drupal\ui_patterns\PropTypeConversionTrait;
 use Drupal\ui_patterns\PropTypePluginBase;
 
 /**
@@ -23,8 +22,6 @@ use Drupal\ui_patterns\PropTypePluginBase;
 )]
 class BooleanPropType extends PropTypePluginBase {
 
-  use PropTypeConversionTrait;
-
   /**
    * {@inheritdoc}
    */
@@ -32,7 +29,7 @@ class BooleanPropType extends PropTypePluginBase {
     if (is_bool($value)) {
       return $value;
     }
-    static::convertToScalar($value);
+    static::normalizer()->convertToScalar($value);
     if (is_numeric($value) && is_string($value)) {
       $value = (int) $value;
       return (bool) $value;

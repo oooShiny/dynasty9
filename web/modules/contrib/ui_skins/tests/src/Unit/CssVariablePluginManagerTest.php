@@ -10,7 +10,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\Tests\UnitTestCase;
-use Drupal\ui_skins\CssVariable\CssVariablePluginManager;
 use Drupal\ui_skins\Definition\CssVariableDefinition;
 use Drupal\ui_skins_test\DummyCssVariablePluginManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -73,18 +72,6 @@ class CssVariablePluginManagerTest extends UnitTestCase {
   }
 
   /**
-   * Tests the constructor.
-   *
-   * @covers ::__construct
-   */
-  public function testConstructor(): void {
-    $this->assertInstanceOf(
-      CssVariablePluginManager::class,
-      $this->cssVariablePluginManager
-    );
-  }
-
-  /**
    * Tests the processDefinition().
    *
    * @covers ::processDefinition
@@ -92,12 +79,8 @@ class CssVariablePluginManagerTest extends UnitTestCase {
   public function testProcessDefinitionWillReturnException(): void {
     $plugin_id = 'test';
     $definition = ['no_id' => $plugin_id];
-    try {
-      $this->cssVariablePluginManager->processDefinition($definition, $plugin_id);
-    }
-    catch (PluginException $exception) {
-      $this->assertTrue(TRUE, 'The expected exception happened.');
-    }
+    $this->expectException(PluginException::class);
+    $this->cssVariablePluginManager->processDefinition($definition, $plugin_id);
   }
 
   /**
@@ -112,7 +95,6 @@ class CssVariablePluginManagerTest extends UnitTestCase {
     $expected = new CssVariableDefinition($definition);
     $expected->setCategory($this->stringTranslation->translate('Other'));
 
-    /** @var \Drupal\ui_skins\Definition\CssVariableDefinition $definition */
     $this->cssVariablePluginManager->processDefinition($definition, $plugin_id);
     $this->assertInstanceOf(CssVariableDefinition::class, $definition);
     $this->assertEquals($definition->toArray(), $expected->toArray());

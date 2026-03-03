@@ -68,11 +68,10 @@ class FeedAdminDisplayTest extends AggregatorTestBase {
   /**
    * {@inheritdoc}
    */
-  public function randomMachineName($length = 8) {
+  public function randomMachineName($length = 8): string {
     $value = parent::randomMachineName($length);
     // See expected values in testFeedUpdateFields().
-    $value = str_replace(['never', 'imminently', 'ago', 'left'], 'x', $value);
-    return $value;
+    return str_replace(['never', 'imminently', 'ago', 'left'], 'x', $value);
   }
 
 }

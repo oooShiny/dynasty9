@@ -51,7 +51,10 @@ class SelectWidget extends SourcePluginPropValueWidget {
       return $value;
     }
     $enum = $this->propDefinition['enum'] ?? [];
-    return $this->convertValueToEnumType($value, $enum);
+    if (self::isConvertibleToString($value)) {
+      $value = $this->replaceTokens($value, FALSE);
+    }
+    return $this->normalizer->convertValueToEnumType($value, $enum);
   }
 
 }

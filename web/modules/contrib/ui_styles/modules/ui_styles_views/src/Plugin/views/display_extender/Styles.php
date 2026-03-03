@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Drupal\ui_styles_views\Plugin\views\display_extender;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\ui_styles\StylePluginManagerInterface;
+use Drupal\views\Attribute\ViewsDisplayExtender;
 use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -12,14 +15,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Styles display extender plugin.
  *
  * @ingroup views_display_extender_plugins
- *
- * @ViewsDisplayExtender(
- *     id = "ui_styles",
- *     title = @Translation("Styles display extender"),
- *     help = @Translation("Settings to styles to many view sections."),
- *     no_ui = FALSE
- * )
  */
+#[ViewsDisplayExtender(
+  id: 'ui_styles',
+  title: new TranslatableMarkup('Styles display extender'),
+  help: new TranslatableMarkup('Settings to styles to many view sections.'),
+  no_ui: FALSE
+)]
 class Styles extends DisplayExtenderPluginBase {
 
   /**
@@ -27,7 +29,7 @@ class Styles extends DisplayExtenderPluginBase {
    *
    * @var \Drupal\ui_styles\StylePluginManagerInterface
    */
-  protected $stylesManager;
+  protected StylePluginManagerInterface $stylesManager;
 
   /**
    * {@inheritdoc}
@@ -47,6 +49,7 @@ class Styles extends DisplayExtenderPluginBase {
     if ($form_state->get('section') != 'ui_styles') {
       return;
     }
+    // @phpstan-ignore-next-line
     $form['#title'] .= $this->t('UI Styles');
 
     if (empty($this->stylesManager->getGroupedDefinitions())) {
@@ -134,6 +137,7 @@ class Styles extends DisplayExtenderPluginBase {
     if (!\array_key_exists($section, $this->options)) {
       return [];
     }
+    // @phpstan-ignore-next-line
     return \array_values($this->options[$section]['selected'] ?? []);
   }
 
@@ -150,6 +154,7 @@ class Styles extends DisplayExtenderPluginBase {
     if (!\array_key_exists($section, $this->options)) {
       return '';
     }
+    // @phpstan-ignore-next-line
     return $this->options[$section]['extra'] ?? '';
   }
 

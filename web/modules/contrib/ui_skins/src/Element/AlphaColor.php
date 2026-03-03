@@ -28,27 +28,27 @@ class AlphaColor extends FormElementBase {
   /**
    * Length when encoding a color channel value in hexadecimal.
    */
-  public const HEXADECIMAL_CHANNEL_LENGTH = 2;
+  public const int HEXADECIMAL_CHANNEL_LENGTH = 2;
 
   /**
    * Position of the RGB channels in parsing regex.
    */
-  public const RGB_CHANNELS_POSITION = 1;
+  public const int RGB_CHANNELS_POSITION = 1;
 
   /**
    * Position of the alpha channel in parsing regex.
    */
-  public const ALPHA_CHANNEL_POSITION = 2;
+  public const int ALPHA_CHANNEL_POSITION = 2;
 
   /**
    * Sie of the number for the alpha element.
    */
-  public const ALPHA_ELEMENT_SIZE = 3;
+  public const int ALPHA_ELEMENT_SIZE = 3;
 
   /**
    * Maximum value of the integer representation of a hexadecimal number.
    */
-  public const HEXADECIMAL_INTEGER_MAX = 255;
+  public const int HEXADECIMAL_INTEGER_MAX = 255;
 
   /**
    * {@inheritdoc}
@@ -74,7 +74,11 @@ class AlphaColor extends FormElementBase {
    * {@inheritdoc}
    */
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
-    if (\is_array($input) && isset($input['color'], $input['alpha'])) {
+    if (\is_array($input)
+      && isset($input['color'], $input['alpha'])
+      && \is_scalar($input['color'])
+      && \is_scalar($input['alpha'])
+    ) {
       $alpha = \str_pad(\dechex((int) $input['alpha']), self::HEXADECIMAL_CHANNEL_LENGTH, '0', \STR_PAD_LEFT);
       return $input['color'] . $alpha;
     }
@@ -96,6 +100,7 @@ class AlphaColor extends FormElementBase {
    *   The processed element.
    */
   public static function processAlphaColor(array &$element, FormStateInterface $form_state, array &$complete_form): array {
+    // @phpstan-ignore-next-line
     $parsed_value = self::parseValue($element['#default_value']);
 
     $element['#tree'] = TRUE;
@@ -144,7 +149,7 @@ class AlphaColor extends FormElementBase {
    * @param string $value
    *   The value to parse.
    *
-   * @return array
+   * @return array{color: string, alpha: string}
    *   The resulting value,
    */
   protected static function parseValue(string $value): array {

@@ -49,7 +49,7 @@ class MigrateBlockTest extends MigrateDrupal7TestBase {
       'd7_user_role',
       'd7_block',
     ]);
-    block_rebuild();
+    \Drupal::service('module_handler')->invoke('block', 'rebuild');
   }
 
   /**
@@ -72,7 +72,7 @@ class MigrateBlockTest extends MigrateDrupal7TestBase {
    *
    * @internal
    */
-  public function assertEntity(string $id, array $visibility, string $region, string $theme, int $weight, array $settings = NULL, bool $status = TRUE): void {
+  public function assertEntity(string $id, array $visibility, string $region, string $theme, int $weight, array $settings = [], bool $status = TRUE): void {
     $block = Block::load($id);
     $this->assertInstanceOf(Block::class, $block);
     $this->assertSame($visibility, $block->getVisibility());

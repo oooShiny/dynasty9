@@ -47,6 +47,7 @@ class ThemePluginManager extends DefaultPluginManager implements ThemePluginMana
     // Set defaults in the constructor to be able to use string translation.
     $this->defaults = [
       'id' => '',
+      'enabled' => TRUE,
       'label' => '',
       'description' => '',
       'target' => 'body',
@@ -73,11 +74,29 @@ class ThemePluginManager extends DefaultPluginManager implements ThemePluginMana
    *
    * @phpstan-ignore-next-line
    */
+  protected function alterDefinitions(&$definitions) {
+    /** @var \Drupal\ui_skins\Definition\ThemeDefinition[] $definitions */
+    foreach ($definitions as $definition_key => $definition) {
+      if (!$definition->isEnabled()) {
+        unset($definitions[$definition_key]);
+      }
+    }
+
+    parent::alterDefinitions($definitions);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line
+   */
   public function processDefinition(&$definition, $plugin_id): void {
+    /** @var string $plugin_id */
     // Call parent first to set defaults while still manipulating an array.
     // Otherwise, as there is currently no derivative system among CSS variable
     // plugins, there is no deriver or class attributes.
     parent::processDefinition($definition, $plugin_id);
+    /** @var array<string, mixed> $definition */
 
     if (empty($definition['id'])) {
       throw new PluginException(\sprintf('Theme plugin property (%s) definition "id" is required.', $plugin_id));
@@ -92,6 +111,7 @@ class ThemePluginManager extends DefaultPluginManager implements ThemePluginMana
    * @phpstan-ignore-next-line
    */
   protected function providerExists($provider): bool {
+    /** @var string $provider */
     return $this->moduleHandler->moduleExists($provider) || $this->themeHandler->themeExists($provider);
   }
 
@@ -101,7 +121,7 @@ class ThemePluginManager extends DefaultPluginManager implements ThemePluginMana
   public function getDefinitionsForTheme(string $theme): array {
     $themes = $this->themeHandler->listInfo();
     // Create a list which includes the current theme and all its base themes.
-    if (isset($themes[$theme]->base_themes)) {
+    if (isset($themes[$theme]->base_themes) && \is_array($themes[$theme]->base_themes)) {
       $theme_keys = \array_keys($themes[$theme]->base_themes);
       $theme_keys[] = $theme;
     }

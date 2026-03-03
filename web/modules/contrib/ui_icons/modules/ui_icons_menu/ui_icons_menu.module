@@ -45,13 +45,11 @@ function ui_icons_menu_entity_base_field_info_alter(array &$fields, EntityTypeIn
     'type' => $type,
     // Allow icon position and settings.
     'settings' => [
+      'icon_required' => FALSE,
       'icon_position' => TRUE,
       'show_settings' => TRUE,
     ],
   ]);
-
-  // Icon is always optional.
-  $fields['link']->setRequired(FALSE);
 }
 
 /**

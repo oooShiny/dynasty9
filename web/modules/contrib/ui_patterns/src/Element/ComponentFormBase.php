@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns\Element;
 
 use Drupal\Component\Utility\Html;
@@ -37,7 +39,7 @@ abstract class ComponentFormBase extends FormElementBase implements TrustedCallb
     if (!isset($element["#wrap"]) || !$element["#wrap"]) {
       return NULL;
     }
-    $prop_or_slot_id = $element["#prop_id"] ?? $element["#slot_id"];
+    $prop_or_slot_id = $element["#prop_id"] ?? self::getSlotId($element);
     $title_in_component = $element["#title_in_component"] ?? $prop_or_slot_id;
     $title = !empty($element['#title']) ? $element['#title'] : $title_in_component;
     if (!array_key_exists($prop_or_slot_id, $element)) {
@@ -195,6 +197,19 @@ abstract class ComponentFormBase extends FormElementBase implements TrustedCallb
     }
     unset($source);
     return static::orderSources($valid_sources, $default_source_id);
+  }
+
+  /**
+   * Helper function to get the prop ID from an element.
+   *
+   * @param array $element
+   *   The form element.
+   *
+   * @return string
+   *   The prop ID or empty string if not set.
+   */
+  protected static function getSlotId(array $element): string {
+    return (string) ($element['#slot_id'] ?? "");
   }
 
   /**
@@ -444,11 +459,12 @@ abstract class ComponentFormBase extends FormElementBase implements TrustedCallb
     $context_switchers = [];
     foreach ($sources as $valid_source_plugin) {
       $plugin_configuration = $valid_source_plugin->getConfiguration();
+      $label = (string) $valid_source_plugin->getPluginDefinition()["label"];
       if ($use_group && isset($plugin_configuration['selection']) && isset($plugin_configuration['selection']["tags"]) && in_array("context_switcher", $plugin_configuration['selection']["tags"])) {
-        $context_switchers[$valid_source_plugin->getPluginId()] = $valid_source_plugin->label();
+        $context_switchers[$valid_source_plugin->getPluginId()] = $label;
         continue;
       }
-      $options[$valid_source_plugin->getPluginId()] = $valid_source_plugin->label();
+      $options[$valid_source_plugin->getPluginId()] = $label;
     }
     if ($context_switchers) {
       $label = (string) t("More data");

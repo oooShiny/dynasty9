@@ -11,7 +11,6 @@ use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\ui_skins\Definition\ThemeDefinition;
-use Drupal\ui_skins\Theme\ThemePluginManager;
 use Drupal\ui_skins_test\DummyThemePluginManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -72,18 +71,6 @@ class ThemePluginManagerTest extends UnitTestCase {
   }
 
   /**
-   * Tests the constructor.
-   *
-   * @covers ::__construct
-   */
-  public function testConstructor(): void {
-    $this->assertInstanceOf(
-      ThemePluginManager::class,
-      $this->themePluginManager
-    );
-  }
-
-  /**
    * Tests the processDefinition().
    *
    * @covers ::processDefinition
@@ -91,12 +78,8 @@ class ThemePluginManagerTest extends UnitTestCase {
   public function testProcessDefinitionWillReturnException(): void {
     $plugin_id = 'test';
     $definition = ['no_id' => $plugin_id];
-    try {
-      $this->themePluginManager->processDefinition($definition, $plugin_id);
-    }
-    catch (PluginException $exception) {
-      $this->assertTrue(TRUE, 'The expected exception happened.');
-    }
+    $this->expectException(PluginException::class);
+    $this->themePluginManager->processDefinition($definition, $plugin_id);
   }
 
   /**
@@ -110,7 +93,6 @@ class ThemePluginManagerTest extends UnitTestCase {
 
     $expected = new ThemeDefinition($definition);
 
-    /** @var \Drupal\ui_skins\Definition\ThemeDefinition $definition */
     $this->themePluginManager->processDefinition($definition, $plugin_id);
     $this->assertInstanceOf(ThemeDefinition::class, $definition);
     $this->assertEquals($definition->toArray(), $expected->toArray());
@@ -160,25 +142,18 @@ class ThemePluginManagerTest extends UnitTestCase {
 
     $definitions = $this->themePluginManager->getDefinitionWithDependencies('no_dependencies');
     $this->assertCount(1, $definitions);
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[0]);
     $this->assertSame('No dependencies', $definitions[0]->getLabel());
 
     $definitions = $this->themePluginManager->getDefinitionWithDependencies('dependency_1');
     $this->assertCount(2, $definitions);
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[0]);
     $this->assertSame('Dependency 1 1', $definitions[0]->getLabel());
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[1]);
     $this->assertSame('Dependency 1', $definitions[1]->getLabel());
 
     $definitions = $this->themePluginManager->getDefinitionWithDependencies('with_dependencies');
     $this->assertCount(4, $definitions);
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[0]);
     $this->assertSame('Dependency 1 1', $definitions[0]->getLabel());
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[1]);
     $this->assertSame('Dependency 1', $definitions[1]->getLabel());
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[2]);
     $this->assertSame('Dependency 2', $definitions[2]->getLabel());
-    $this->assertInstanceOf(ThemeDefinition::class, $definitions[3]);
     $this->assertSame('With dependencies', $definitions[3]->getLabel());
   }
 

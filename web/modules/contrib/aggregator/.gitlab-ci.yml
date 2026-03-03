@@ -12,3 +12,8 @@ variables:
   _CSPELL_WORDS: 'feededit, aggregatorentry, XMLURL, SSRF, hijklmn, xfiles, atomentry, guids'
   OPT_IN_TEST_NEXT_MINOR: 1
   OPT_IN_TEST_NEXT_MAJOR: 1
+  OPT_IN_TEST_MAX_PHP: 1
+
+# Allow failures for the next major php version.
+phpunit (max PHP version):
+  allow_failure: true

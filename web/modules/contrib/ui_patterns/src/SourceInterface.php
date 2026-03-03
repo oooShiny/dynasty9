@@ -16,8 +16,14 @@ interface SourceInterface extends ConfigurableInterface, PluginInspectionInterfa
 
   /**
    * Returns the translated plugin label.
+   *
+   * @param bool $with_context
+   *   Whether to include context information in the label.
+   *
+   * @return string
+   *   The translated title.
    */
-  public function label(): string;
+  public function label(bool $with_context = FALSE): string;
 
   /**
    * Retrieve and process the prop value.

@@ -1,0 +1,25 @@
+dynasty_voicemail.page:
+  path: '/voicemail'
+  defaults:
+    _controller: '\Drupal\dynasty_voicemail\Controller\VoicemailPageController::content'
+    _title: 'Leave a Voicemail'
+  requirements:
+    _access: 'TRUE'
+
+dynasty_voicemail.settings:
+  path: '/admin/config/dynasty/voicemail'
+  defaults:
+    _form: '\Drupal\dynasty_voicemail\Form\VoicemailSettingsForm'
+    _title: 'Voicemail Settings'
+  requirements:
+    _permission: 'administer dynasty voicemail'
+  options:
+    _admin_route: TRUE
+
+dynasty_voicemail.upload:
+  path: '/api/voicemail/upload'
+  defaults:
+    _controller: '\Drupal\dynasty_voicemail\Controller\VoicemailUploadController::upload'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'

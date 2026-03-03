@@ -1,0 +1,178 @@
+{#
+/**
+ * @file
+ * Template for the voicemail recorder interface.
+ *
+ * Available variables:
+ * - max_duration: Maximum recording duration in seconds.
+ * - csrf_token: CSRF token for form submission.
+ * - honeypot_enabled: Whether honeypot field is enabled.
+ */
+#}
+<div class="voicemail-recorder prose max-w-2xl mx-auto py-8 px-4" id="voicemail-recorder">
+  <div class="text-center mb-8">
+    <h2 class="text-2xl font-bold mb-4">Leave Us a Voicemail</h2>
+    <p class="text-base-content/70">
+      Record a message for the podcast! Share your thoughts, questions, or feedback.
+      Maximum recording time: {{ max_duration }} seconds.
+    </p>
+  </div>
+
+  {# Browser support warning #}
+  <div id="voicemail-unsupported" class="alert alert-warning mb-6 hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span>Your browser doesn't support audio recording. Please use a modern browser like Chrome, Firefox, or Safari.</span>
+  </div>
+
+  {# Permission denied warning #}
+  <div id="voicemail-permission-denied" class="alert alert-error mb-6 hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Microphone access denied. Please allow microphone access in your browser settings and refresh the page.</span>
+  </div>
+
+  {# Main recorder interface #}
+  <div id="voicemail-main" class="card bg-base-200 shadow-xl">
+    <div class="card-body items-center text-center">
+
+      {# Recording controls #}
+      <div id="recording-controls" class="mb-6">
+        {# Idle state - Start button #}
+        <div id="state-idle">
+          <button type="button" id="btn-start" class="btn btn-primary btn-lg gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+            </svg>
+            Start Recording
+          </button>
+        </div>
+
+        {# Recording state #}
+        <div id="state-recording" class="hidden">
+          <div class="recording-indicator mb-4">
+            <div class="recording-pulse"></div>
+          </div>
+          <div id="recording-timer" class="text-4xl font-mono font-bold mb-4">0:00</div>
+          <div class="text-sm text-base-content/60 mb-4">
+            Recording... (max {{ max_duration }}s)
+          </div>
+          <div class="flex gap-4 justify-center">
+            <button type="button" id="btn-stop" class="btn btn-error btn-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+              Stop
+            </button>
+            <button type="button" id="btn-cancel" class="btn btn-ghost btn-lg">
+              Start Over
+            </button>
+          </div>
+        </div>
+
+        {# Stopped state - Review recording #}
+        <div id="state-stopped" class="hidden w-full">
+          <div class="mb-4">
+            <p class="text-sm text-base-content/60 mb-2">Review your recording:</p>
+            <audio id="audio-preview" controls class="w-full max-w-md mx-auto"></audio>
+          </div>
+          <div class="mb-4">
+            <button type="button" id="btn-restart" class="btn btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Record Again
+            </button>
+          </div>
+
+          {# Submission form #}
+          <form id="voicemail-form" class="w-full max-w-md mx-auto text-left">
+            <div class="divider">Your Information</div>
+
+            <div class="form-control mb-4">
+              <label class="label" for="voicemail-name">
+                <span class="label-text">Your Name <span class="text-error">*</span></span>
+              </label>
+              <input type="text" id="voicemail-name" name="name" class="input input-bordered w-full" required maxlength="100" />
+            </div>
+
+            <div class="form-control mb-4">
+              <label class="label" for="voicemail-email">
+                <span class="label-text">Your Email <span class="text-error">*</span></span>
+              </label>
+              <input type="email" id="voicemail-email" name="email" class="input input-bordered w-full" required maxlength="254" />
+              <label class="label">
+                <span class="label-text-alt">We'll only use this to follow up if needed.</span>
+              </label>
+            </div>
+
+            {% if honeypot_enabled %}
+              {# Honeypot field - hidden from users, catches bots #}
+              <div class="voicemail-hp" aria-hidden="true">
+                <label for="voicemail-website">Website</label>
+                <input type="text" id="voicemail-website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
+            {% endif %}
+
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+
+            <div class="form-control mt-6">
+              <button type="submit" id="btn-submit" class="btn btn-primary btn-lg w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {# Sending state #}
+        <div id="state-sending" class="hidden">
+          <span class="loading loading-spinner loading-lg text-primary"></span>
+          <p class="mt-4">Sending your voicemail...</p>
+        </div>
+
+        {# Complete state #}
+        <div id="state-complete" class="hidden">
+          <div class="text-success mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Thank You!</h3>
+          <p class="text-base-content/70 mb-6">Your voicemail has been sent. We'll listen to it soon!</p>
+          <button type="button" id="btn-another" class="btn btn-primary">
+            Record Another Message
+          </button>
+        </div>
+
+        {# Error state #}
+        <div id="state-error" class="hidden">
+          <div class="alert alert-error mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="error-message">Something went wrong. Please try again.</span>
+          </div>
+          <button type="button" id="btn-retry" class="btn btn-primary">
+            Try Again
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# Tips section #}
+  <div class="mt-8 text-sm text-base-content/60">
+    <h4 class="font-semibold mb-2">Tips for a great voicemail:</h4>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Find a quiet place to record</li>
+      <li>Speak clearly and at a normal pace</li>
+      <li>Include your name and where you're from</li>
+      <li>Keep it under {{ max_duration }} seconds</li>
+    </ul>
+  </div>
+</div>

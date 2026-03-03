@@ -48,4 +48,24 @@ class ThemePluginTest extends KernelTestBase {
     }
   }
 
+  /**
+   * Test that it is possible to override an already declared plugin.
+   */
+  public function testOverridingDefinition(): void {
+    $this->enableModules(['ui_skins_test_disabled']);
+
+    // Test when the module overriding the definition is executed before.
+    \module_set_weight('ui_skins_test_disabled', -1);
+    /** @var \Drupal\ui_skins\Theme\ThemePluginManagerInterface $themePluginManager */
+    $themePluginManager = $this->container->get('plugin.manager.ui_skins.theme');
+    $this->assertArrayHasKey('theme_from_module', $themePluginManager->getDefinitions());
+
+    // Test when the module overriding the definition is executed after.
+    \module_set_weight('ui_skins_test_disabled', 1);
+    \drupal_flush_all_caches();
+    /** @var \Drupal\ui_skins\Theme\ThemePluginManagerInterface $themePluginManager */
+    $themePluginManager = $this->container->get('plugin.manager.ui_skins.theme');
+    $this->assertArrayNotHasKey('theme_from_module', $themePluginManager->getDefinitions());
+  }
+
 }

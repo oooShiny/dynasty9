@@ -6,6 +6,15 @@ label: Test
 component_id: 'ui_patterns_test:test-component'
 form_mode_name: test
 content:
+  variant:
+    widget_settings: { }
+    source_id: select
+    source:
+      value: primary
+    parent: ''
+    weight: '2'
+    region: configure
+    third_party_settings: { }
   string:
     source_id: textfield
     weight: '1'

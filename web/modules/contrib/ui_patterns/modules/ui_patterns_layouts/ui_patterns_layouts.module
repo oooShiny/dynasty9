@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Plugin\Context\Context;
 use Drupal\Core\Plugin\Context\ContextDefinition;
 use Drupal\Core\Plugin\Context\EntityContext;
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
  * Implements hook_element_info_alter().

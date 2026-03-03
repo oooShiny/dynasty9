@@ -96,6 +96,23 @@ select_integer:
         same: 2
   entity: {}
 
+
+select_integer_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      enum_integer:
+        source_id: select
+        source:
+          value: '[node:title]'
+  output:
+    props:
+      enum_integer:
+        same: 2
+  entity:
+    title:
+      value: '2'
+
 textfield_slot:
   component:
     component_id: ui_patterns_test:test-component
@@ -112,6 +129,49 @@ textfield_slot:
       slot:
         -
           rendered_value: "test input"
+
+textfield_slot_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    slots:
+      slot:
+        sources:
+          -
+            source_id: textfield
+            source:
+              value: '[node:title]'
+  entity:
+    title:
+      value: 'test input'
+  output:
+    slots:
+      slot:
+        -
+          rendered_value: "test input"
+
+textfield_default_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      string:
+        source_id: textfield
+        source:
+          value: '[node:title]'
+  output:
+    props:
+      string:
+        value: test input
+  entity:
+    title:
+      value: 'test input'
+  assertSession:
+    #pageTextContains:
+    #  - [ 'title_entity_1' ]
+    elementExists:
+      - [ 'css', '.ui-patterns-test-component' ]
+    elementTextEquals:
+      - [ 'css', '.ui-patterns-props-string', 'test input' ]
+
 textfield_default:
   component:
     component_id: ui_patterns_test:test-component
@@ -201,6 +261,31 @@ selects_2:
         source:
           value:
             - "2"
+  output:
+    props:
+      enum_list_multiple:
+        same:
+          - "2"
+      enum_set:
+        same:
+          - "2"
+selects_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      enum_list_multiple:
+        source_id: selects
+        source:
+          value:
+            - "[node:title]"
+      enum_set:
+        source_id: selects
+        source:
+          value:
+            - "[node:title]"
+  entity:
+    title:
+      value: '2'
   output:
     props:
       enum_list_multiple:
@@ -592,7 +677,7 @@ list_textarea_3:
     props:
       list_mixed:
         same:
-          - 1
+          - "1"
           - "A"
   assertSession:
     elementExists:
@@ -601,6 +686,30 @@ list_textarea_3:
       - [ 'xpath', "//div[contains(@class, 'ui-patterns-test-component')]//div[contains(@class, 'ui-patterns-props-list_mixed')]//span[contains(text(), 'A')]" ]
     elementsCount:
       - [ 'xpath', "//div[@class='ui-patterns-props-list_mixed']//span", 2 ]
+
+list_textarea_4:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      list_mixed:
+        source_id: list_textarea
+        source:
+          value: "[node:title]"
+  entity:
+    title:
+      value: 'title_entity_1'
+  output:
+    props:
+      list_mixed:
+        same:
+          - "title_entity_1"
+  assertSession:
+    elementExists:
+      - [ 'css', '.ui-patterns-test-component' ]
+      - [ 'xpath', "//div[contains(@class, 'ui-patterns-test-component')]//div[contains(@class, 'ui-patterns-props-list_mixed')]//span[contains(text(), 'title_entity_1')]" ]
+    elementsCount:
+      - [ 'xpath', "//div[@class='ui-patterns-props-list_mixed']//span", 1 ]
+
 
 number_default:
   component:
@@ -622,6 +731,28 @@ number_default:
       - [ 'css', '.ui-patterns-props-number', '2' ]
 
 
+
+number_with_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      number:
+        source_id: number
+        source:
+          value: '[node:title]'
+  output:
+    props:
+      number:
+        same: 2
+  entity:
+    title:
+      value: '2'
+  assertSession:
+    elementExists:
+      - [ 'css', '.ui-patterns-test-component' ]
+    elementTextEquals:
+      - [ 'css', '.ui-patterns-props-number', '2' ]
+
 path_1:
   component:
     component_id: ui_patterns_test:test-component
@@ -635,6 +766,41 @@ path_1:
       url:
         value: '/user'
   entity: {}
+  assertSession:
+    elementExists:
+      - [ 'css', '.ui-patterns-test-component' ]
+    elementTextEquals:
+      - [ 'css', '.ui-patterns-props-url', '/user' ]
+path_2:
+  skip_schema_check: true
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      url:
+        source_id: path
+        source:
+          value:
+            route_name: 'node.add_page'
+  output:
+    props:
+      url:
+        value: '/node/add'
+
+path_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      url:
+        source_id: path
+        source:
+          value: '[node:title]'
+  output:
+    props:
+      url:
+        value: '/user'
+  entity:
+    title:
+      value: '/user'
   assertSession:
     elementExists:
       - [ 'css', '.ui-patterns-test-component' ]
@@ -658,6 +824,28 @@ url_1:
       - [ 'css', '.ui-patterns-test-component' ]
     elementTextEquals:
       - [ 'css', '.ui-patterns-props-url', 'https://drupal.org?k=v#anchor' ]
+
+url_token:
+  component:
+    component_id: ui_patterns_test:test-component
+    props:
+      url:
+        source_id: url
+        source:
+          value: '[node:title]'
+  output:
+    props:
+      url:
+        value: 'https://drupal.org?k=v#anchor'
+  entity:
+    title:
+      value: 'https://drupal.org?k=v#anchor'
+  assertSession:
+    elementExists:
+      - [ 'css', '.ui-patterns-test-component' ]
+    elementTextEquals:
+      - [ 'css', '.ui-patterns-props-url', 'https://drupal.org?k=v#anchor' ]
+
 
 wysiwyg_1:
   component:

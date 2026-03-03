@@ -5,6 +5,8 @@
  * API file.
  */
 
+declare(strict_types=1);
+
 /**
  * Alter Hook for SDC Component definition.
  *

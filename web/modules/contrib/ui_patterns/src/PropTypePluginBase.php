@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\ui_patterns;
 
 use Drupal\Component\Plugin\Definition\PluginDefinitionInterface;
@@ -14,6 +16,26 @@ abstract class PropTypePluginBase extends PluginBase implements PropTypeInterfac
 
   use DependencySerializationTrait;
   use StringTranslationTrait;
+
+  /**
+   * Normalizer service.
+   *
+   * @var \Drupal\ui_patterns\UiPatternsNormalizerInterface|null
+   */
+  protected static ?UiPatternsNormalizerInterface $uiPatternsNormalizer;
+
+  /**
+   * Retrieves statically the normalizer service.
+   *
+   * @return \Drupal\ui_patterns\UiPatternsNormalizerInterface
+   *   The normalizer service.
+   */
+  protected static function normalizer() : UiPatternsNormalizerInterface {
+    if (!isset(static::$uiPatternsNormalizer)) {
+      static::$uiPatternsNormalizer = \Drupal::service('ui_patterns.normalizer');
+    }
+    return static::$uiPatternsNormalizer;
+  }
 
   /**
    * {@inheritdoc}
