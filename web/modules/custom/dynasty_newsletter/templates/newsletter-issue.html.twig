@@ -189,6 +189,13 @@
       font-size: small;
       color: #002244;
     }
+
+    .button {
+      background-color: #c60c30;
+      color: #ffffff;
+      padding: 10px;
+    }
+
     /* Birthday item */
     table.calendar {
 
@@ -314,19 +321,20 @@
             </p>
             {% for podcast in recent_podcasts %}
               <table class="podcast-episode">
-                <tr class="episode-title"><td><a href="{{ podcast.url }}">{{ podcast.title }}</a></td></tr>
+                <tr class="episode-title"><td><a style="color: #fff;" href="{{ podcast.url }}">{{ podcast.title }}</a></td></tr>
                 {% if podcast.description %}
                   <tr class="episode-description"><td>{{ podcast.description|raw }}</td></tr>
                 {% endif %}
                 <tr class="episode-meta">
                   {% if podcast.season %}
-                    <td>Season {{ podcast.season }}, Episode {{ podcast.episode }}</td>
+                    <td><a style="color: #fff;" href="{{ podcast.url }}">Season {{ podcast.season }}, Episode {{ podcast.episode }}</a></td>
                   {% else %}
-                    <td>Special Episode</td>
+                    <td><a style="color: #fff;" href="{{ podcast.url }}">Special Episode</a></td>
                   {% endif %}
                 </tr>
               </table>
             {% endfor %}
+            <div class="button"><a href="https://patspod.com">Listen to more episodes &raquo;</a></div>
           </div>
           {% endif %}
 
@@ -334,6 +342,7 @@
           {% if external_podcasts %}
           <div class="section">
             <h2 class="section-title">What We're Listening To</h2>
+            <p>We don't just make podcasts, we listen to them as well. Here's what we're listening to these days.</p>
             {% for podcast in external_podcasts %}
             <div class="news-item">
               <div class="news-item-title">
