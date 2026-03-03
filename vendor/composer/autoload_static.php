@@ -18,11 +18,11 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '89efb1254ef2d1c5d80096acd12c4098' => __DIR__ . '/..' . '/twig/twig/src/Resources/core.php',
         'ffecb95d45175fd40f75be8a23b34f90' => __DIR__ . '/..' . '/twig/twig/src/Resources/debug.php',
         'c7baa00073ee9c61edf148c51917cfb4' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
         'f844ccf1d25df8663951193c3fc307c8' => __DIR__ . '/..' . '/twig/twig/src/Resources/string_loader.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2f69d3914119f042cca9e44442d5ce95' => __DIR__ . '/../..' . '/web/core/includes/bootstrap.inc',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
@@ -110,7 +110,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         '0174385c3be07e86008907d06ee66531' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Rule/Rule.php',
         '98aea6e41b9cb79b379b10f37ba1f0b7' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/RuleSet/RuleContainer.php',
         'ace6d88241f812b4accb2d847454aef6' => __DIR__ . '/..' . '/halaxa/json-machine/src/functions.php',
-        '79f66bc0a1900f77abe4a9a299057a0a' => __DIR__ . '/..' . '/starkbank/ecdsa/src/ellipticcurve.php',
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
@@ -187,7 +186,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'Solarium\\' => 9,
-            'SendGrid\\' => 9,
             'Sabberworm\\CSS\\' => 15,
         ),
         'R' =>
@@ -230,10 +228,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             'JsonSchema\\' => 11,
             'JsonMachine\\' => 12,
-        ),
-        'H' =>
-        array (
-            'Html2Text\\' => 10,
         ),
         'G' =>
         array (
@@ -464,10 +458,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             0 => __DIR__ . '/..' . '/solarium/solarium/src',
         ),
-        'SendGrid\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/fastglass/sendgrid/src',
-        ),
         'Sabberworm\\CSS\\' =>
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
@@ -576,10 +566,6 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'JsonMachine\\' =>
         array (
             0 => __DIR__ . '/..' . '/halaxa/json-machine/src',
-        ),
-        'Html2Text\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/html2text/html2text/src',
         ),
         'GuzzleHttp\\Psr7\\' =>
         array (

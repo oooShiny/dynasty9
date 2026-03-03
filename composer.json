@@ -177,7 +177,6 @@
         "drupal/search_api_solr": "^4.3",
         "drupal/seckit": "^2.0",
         "drupal/select2": "^2",
-        "drupal/sendgrid_integration": "^2.2",
         "drupal/simple_sitemap": "^4.1",
         "drupal/simplenews": "^4.0",
         "drupal/smart_trim": "^2.1",
