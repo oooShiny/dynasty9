@@ -7,7 +7,7 @@ label: Resend SMTP
 plugin: smtp
 configuration:
   user: resend
-  pass: '%env(RESEND_API_KEY)%'
+  pass: ''
   query:
     host: smtp.resend.com
     port: 465
