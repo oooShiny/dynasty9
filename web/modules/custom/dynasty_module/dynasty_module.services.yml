@@ -1,7 +1,4 @@
 services:
-  Drupal\search_api\Task\TaskManagerInterface:
-    alias: search_api.task_manager
-
   dynasty_module.player_cleanup_commands:
     class: Drupal\dynasty_module\Commands\PlayerCleanupCommands
     arguments: ['@entity_type.manager']
