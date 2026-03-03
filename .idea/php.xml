@@ -11,7 +11,7 @@
   </component>
   <component name="PhpCodeSniffer">
     <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="86f7bdab-8321-41af-ab3a-9985b06a75af" timeout="30000" />
+      <PhpCSConfiguration asDefaultInterpreter="true" timeout="30000" />
     </phpcs_settings>
   </component>
   <component name="PhpIncludePathManager">
@@ -99,9 +99,6 @@
       <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
       <path value="$PROJECT_DIR$/vendor/cweagans/composer-patches" />
       <path value="$PROJECT_DIR$/vendor/solarium/solarium" />
-      <path value="$PROJECT_DIR$/vendor/html2text/html2text" />
-      <path value="$PROJECT_DIR$/vendor/sendgrid/smtpapi" />
-      <path value="$PROJECT_DIR$/vendor/fastglass/sendgrid" />
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/patreon/patreon" />
@@ -182,7 +179,6 @@
       <path value="$PROJECT_DIR$/vendor/phootwork/collection" />
       <path value="$PROJECT_DIR$/vendor/phpowermove/docblock" />
       <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/vendor/starkbank/ecdsa" />
       <path value="$PROJECT_DIR$/vendor/fileeye/pel" />
       <path value="$PROJECT_DIR$/vendor/dompdf/php-font-lib" />
       <path value="$PROJECT_DIR$/vendor/php-tuf/composer-stager" />
@@ -209,6 +205,10 @@
       <path value="$PROJECT_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core" />
       <path value="$PROJECT_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core-recommended" />
       <path value="$PROJECT_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core-dev" />
+      <path value="$PROJECT_DIR$/vendor/thecodingmachine/safe" />
+      <path value="$PROJECT_DIR$/vendor/resend/resend-php" />
+      <path value="$PROJECT_DIR$/vendor/html2text/html2text" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -323,7 +323,6 @@
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
-      <phpstan_by_interpreter asDefaultInterpreter="true" interpreter_id="86f7bdab-8321-41af-ab3a-9985b06a75af" tool_path="$PROJECT_DIR$/vendor/bin/phpstan" timeout="60000" />
     </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
@@ -336,7 +335,7 @@
   </component>
   <component name="Psalm">
     <Psalm_settings>
-      <psalm_fixer_by_interpreter asDefaultInterpreter="true" interpreter_id="86f7bdab-8321-41af-ab3a-9985b06a75af" timeout="60000" />
+      <PsalmConfiguration asDefaultInterpreter="true" timeout="60000" />
     </Psalm_settings>
   </component>
   <component name="PsalmOptionsConfiguration">

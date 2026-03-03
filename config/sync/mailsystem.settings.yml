@@ -3,7 +3,7 @@ _core:
 theme: current
 defaults:
   sender: resend_api
-  formatter: resend_api
+  formatter: symfony_mailer
 modules:
   sendgrid_integration:
     none:

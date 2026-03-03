@@ -149,6 +149,7 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
             'Twig\\' => 5,
             'TwigStorybook\\Tests\\' => 20,
             'TwigStorybook\\' => 14,
+            'TijsVerkoyen\\CssToInlineStyles\\' => 31,
         ),
         'S' =>
         array (
@@ -228,6 +229,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         array (
             'JsonSchema\\' => 11,
             'JsonMachine\\' => 12,
+        ),
+        'H' =>
+        array (
+            'Html2Text\\' => 10,
         ),
         'G' =>
         array (
@@ -321,6 +326,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'TwigStorybook\\' =>
         array (
             0 => __DIR__ . '/..' . '/e0ipso/twig-storybook/src',
+        ),
+        'TijsVerkoyen\\CssToInlineStyles\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
         ),
         'Symfony\\Polyfill\\Php84\\' =>
         array (
@@ -566,6 +575,10 @@ class ComposerStaticInitdbca2bfad3c0a70ea93a4bffcf1579e6
         'JsonMachine\\' =>
         array (
             0 => __DIR__ . '/..' . '/halaxa/json-machine/src',
+        ),
+        'Html2Text\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/html2text/html2text/src',
         ),
         'GuzzleHttp\\Psr7\\' =>
         array (

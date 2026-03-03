@@ -39,6 +39,7 @@
       <sourceFolder url="file://$MODULE_DIR$/web/core/tests/PHPStan/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/web/modules/contrib/cloudflare_purge/src" isTestSource="false" packagePrefix="Drupal\cloudflare_purge\" />
       <sourceFolder url="file://$MODULE_DIR$/web/modules/contrib/markdownify/src" isTestSource="false" packagePrefix="Drupal\markdownify\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
@@ -118,8 +119,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/grasmash/yaml-expander" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/html2text/html2text" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/sendgrid/smtpapi" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/fastglass/sendgrid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/patreon/patreon" />
@@ -143,6 +142,9 @@
       <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core" />
       <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core-dev" />
       <excludeFolder url="file://$MODULE_DIR$/web/core/modules/package_manager/tests/fixtures/fake_site/vendor/drupal/core-recommended" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/resend/resend-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/thecodingmachine/safe" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

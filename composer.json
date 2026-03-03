@@ -181,6 +181,7 @@
         "drupal/simplenews": "^4.0",
         "drupal/smart_trim": "^2.1",
         "drupal/storybook": "^1.0",
+        "drupal/symfony_mailer": "^1.6",
         "drupal/tailwindcss": "^5",
         "drupal/twig_tweak": "^3.4",
         "drupal/twigsuggest": "^2.0@RC",
