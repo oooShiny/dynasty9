@@ -8,7 +8,5 @@ plugin: smtp
 configuration:
   user: resend
   pass: ''
-  query:
-    host: smtp.resend.com
-    port: 465
-    encryption: ssl
+  host: smtp.resend.com
+  port: 465
