@@ -75,9 +75,8 @@ class OnThisDayBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function getCacheMaxAge() {
-    // Cache for 6 hours - date won't change that often
-    // and this is an extremely expensive operation
-    return 21600;
+    // Cache until midnight so the block refreshes with the new day's content.
+    return strtotime('tomorrow midnight') - time();
   }
 
   /**

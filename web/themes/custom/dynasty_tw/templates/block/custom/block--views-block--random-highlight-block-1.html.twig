@@ -32,6 +32,7 @@
   {% endif %}
   {{ title_suffix }}
   {% block content %}
-    {{ content }}
+    <div id="random-highlight-placeholder" data-src="/dynasty/random-highlight"></div>
+    {{ attach_library('dynasty_tw/random_highlight') }}
   {% endblock %}
 </div>

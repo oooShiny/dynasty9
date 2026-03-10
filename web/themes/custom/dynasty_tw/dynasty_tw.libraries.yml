@@ -95,3 +95,6 @@ player_uniforms:
   css:
     theme:
       css/player-uniforms.css: {}
+random_highlight:
+  js:
+    js/random_highlight.js: {}

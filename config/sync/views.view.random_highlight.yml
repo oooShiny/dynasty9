@@ -158,9 +158,9 @@ display:
         type: time
         options:
           results_lifespan: 0
-          results_lifespan_custom: 43200
+          results_lifespan_custom: 7200
           output_lifespan: 0
-          output_lifespan_custom: 43200
+          output_lifespan_custom: 7200
       empty: {  }
       sorts:
         random:

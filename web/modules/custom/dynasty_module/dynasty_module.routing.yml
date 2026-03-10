@@ -1,3 +1,11 @@
+dynasty.random_highlight:
+  path: '/dynasty/random-highlight'
+  defaults:
+    _controller: '\Drupal\dynasty_module\Controller\RandomHighlightController::content'
+    _title: 'Random Highlight'
+  requirements:
+    _permission: 'access content'
+
 dynasty.maphighlights:
   path: '/admin/dynasty/map-highlights'
   defaults:
