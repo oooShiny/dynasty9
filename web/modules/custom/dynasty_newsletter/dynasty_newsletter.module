@@ -141,10 +141,10 @@ function dynasty_newsletter_mail($key, &$message, $params) {
   switch ($key) {
     case 'editor_notification':
       $message['subject'] = t('Newsletter Draft Ready: @title', ['@title' => $params['newsletter_title']]);
-      $message['body'][] = t('A new newsletter draft has been automatically generated and is ready for review.');
-      $message['body'][] = t('Title: @title', ['@title' => $params['newsletter_title']]);
-      $message['body'][] = t('Edit the newsletter: @url', ['@url' => $params['edit_url']]);
-      $message['body'][] = t('Review and schedule the newsletter at: @admin_url', ['@admin_url' => \Drupal::request()->getSchemeAndHttpHost() . '/admin/content/simplenews']);
+      $message['body'][] = t(' A new newsletter draft has been automatically generated and is ready for review.');
+      $message['body'][] = t(' Title: @title', ['@title' => $params['newsletter_title']]);
+      $message['body'][] = t(' Edit the newsletter: @url', ['@url' => $params['edit_url']]);
+      $message['body'][] = t(' Review and schedule the newsletter at: @admin_url', ['@admin_url' => \Drupal::request()->getSchemeAndHttpHost() . '/admin/content/simplenews']);
       break;
   }
 }
