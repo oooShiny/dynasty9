@@ -15,3 +15,8 @@ podcast_feed_ids:
   - '8'
   - '6'
   - '7'
+remote_site_url: ''
+llm_enabled: false
+llm_api_url: 'http://host.docker.internal:11434'
+llm_model: llama3.2
+llm_news_pool_size: 20

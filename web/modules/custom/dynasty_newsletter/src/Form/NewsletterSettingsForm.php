@@ -151,6 +151,62 @@ class NewsletterSettingsForm extends ConfigFormBase {
       '#max' => 20,
     ];
 
+    $form['ai_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('AI / LLM Integration'),
+      '#open' => (bool) $config->get('llm_enabled'),
+      '#description' => $this->t('Configure a local LLM to curate news items and write summaries. Run <code>ddev drush dynasty-newsletter:generate --remote</code> to generate a draft on the live site using your local LLM.'),
+    ];
+
+    $form['ai_settings']['remote_site_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Remote site URL'),
+      '#description' => $this->t('Production site URL used by the <code>--remote</code> Drush flag. Credentials are read from <code>NEWSLETTER_REMOTE_USER</code> and <code>NEWSLETTER_REMOTE_PASS</code> environment variables — never stored in config.'),
+      '#default_value' => $config->get('remote_site_url') ?? '',
+      '#placeholder' => 'https://patriotsdynasty.info',
+    ];
+
+    $form['ai_settings']['llm_enabled'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable LLM news curation'),
+      '#description' => $this->t('Use a local LLM to select the most relevant news items and write short summaries. Runs when generating newsletters via Drush. Requires Ollama or LMStudio running on your machine.'),
+      '#default_value' => $config->get('llm_enabled') ?? FALSE,
+    ];
+
+    $form['ai_settings']['llm_api_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('LLM API Base URL'),
+      '#description' => $this->t('Base URL of an OpenAI-compatible API. From DDEV, use <code>http://host.docker.internal:11434</code> for Ollama or <code>http://host.docker.internal:1234</code> for LMStudio.'),
+      '#default_value' => $config->get('llm_api_url') ?? 'http://host.docker.internal:11434',
+      '#placeholder' => 'http://host.docker.internal:11434',
+      '#states' => [
+        'visible' => [':input[name="llm_enabled"]' => ['checked' => TRUE]],
+      ],
+    ];
+
+    $form['ai_settings']['llm_model'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Model name'),
+      '#description' => $this->t('The model to use, e.g. <code>llama3.2</code>, <code>mistral</code>, or whatever is loaded in your LLM runtime.'),
+      '#default_value' => $config->get('llm_model') ?? 'llama3.2',
+      '#placeholder' => 'llama3.2',
+      '#states' => [
+        'visible' => [':input[name="llm_enabled"]' => ['checked' => TRUE]],
+      ],
+    ];
+
+    $form['ai_settings']['llm_news_pool_size'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Candidate pool size'),
+      '#description' => $this->t('Number of recent news items to fetch and send to the LLM before it selects the best ones. Should be larger than the News Items Limit above.'),
+      '#default_value' => $config->get('llm_news_pool_size') ?? 20,
+      '#min' => 5,
+      '#max' => 50,
+      '#states' => [
+        'visible' => [':input[name="llm_enabled"]' => ['checked' => TRUE]],
+      ],
+    ];
+
     // Build a list of aggregator feeds so the admin can tag podcast feeds.
     $feed_options = [];
     try {
@@ -199,6 +255,11 @@ class NewsletterSettingsForm extends ConfigFormBase {
       ->set('birthdays_limit', $form_state->getValue('birthdays_limit'))
       ->set('events_limit', $form_state->getValue('events_limit'))
       ->set('podcast_feed_ids', array_values(array_filter($form_state->getValue('podcast_feed_ids'))))
+      ->set('remote_site_url', rtrim(trim($form_state->getValue('remote_site_url')), '/'))
+      ->set('llm_enabled', (bool) $form_state->getValue('llm_enabled'))
+      ->set('llm_api_url', trim($form_state->getValue('llm_api_url')))
+      ->set('llm_model', trim($form_state->getValue('llm_model')))
+      ->set('llm_news_pool_size', (int) $form_state->getValue('llm_news_pool_size'))
       ->save();
 
     parent::submitForm($form, $form_state);

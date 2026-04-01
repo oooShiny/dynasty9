@@ -50,6 +50,13 @@ class NewsletterContentBuilder {
   protected $pathAliasManager;
 
   /**
+   * The newsletter AI service.
+   *
+   * @var \Drupal\dynasty_newsletter\Service\NewsletterAiService
+   */
+  protected $aiService;
+
+  /**
    * Constructs a NewsletterContentBuilder object.
    */
   public function __construct(
@@ -57,13 +64,15 @@ class NewsletterContentBuilder {
     Connection $database,
     DateFormatterInterface $date_formatter,
     RendererInterface $renderer,
-    $path_alias_manager
+    $path_alias_manager,
+    NewsletterAiService $ai_service
   ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->database = $database;
     $this->dateFormatter = $date_formatter;
     $this->renderer = $renderer;
     $this->pathAliasManager = $path_alias_manager;
+    $this->aiService = $ai_service;
   }
 
   /**
@@ -79,11 +88,15 @@ class NewsletterContentBuilder {
     $news_iids = $config['news_iids'] ?? NULL;
     $podcast_nids = $config['podcast_nids'] ?? NULL;
     $external_podcast_iids = $config['external_podcast_iids'] ?? NULL;
+    $skip_ai = $config['skip_ai'] ?? FALSE;
+    $pre_processed_news = $config['pre_processed_news'] ?? NULL;
 
     $content = [
       'newsletter_title' => 'Patriots Dynasty Weekly - ' . date('F j, Y'),
       'newsletter_date' => date('F j, Y'),
-      'news_items' => $this->getRecentNews(5, $news_iids),
+      'news_items' => $pre_processed_news !== NULL
+        ? $pre_processed_news
+        : $this->getRecentNews(5, $news_iids, $skip_ai),
       'recent_games' => $this->getRecentGames(),
       'recent_podcasts' => $this->getRecentPodcasts(3, $podcast_nids),
       'external_podcasts' => $this->getExternalPodcasts(5, $external_podcast_iids),
@@ -110,49 +123,37 @@ class NewsletterContentBuilder {
   }
 
   /**
-   * Get recent news items from RSS aggregator.
+   * Get a raw pool of news items for remote AI curation.
+   *
+   * Unlike getRecentNews(), this method uses $limit directly (ignoring
+   * news_items_limit config) and never runs AI processing. Intended for
+   * the GET /api/newsletter/news-items endpoint.
    *
    * @param int $limit
    *   Number of items to retrieve.
-   * @param array|null $iids
-   *   Optional list of aggregator item IDs to fetch directly.
    *
    * @return array
-   *   Array of news items.
+   *   Array of raw news items.
    */
-  protected function getRecentNews($limit = 5, ?array $iids = NULL) {
+  public function getNewsItemsForApi(int $limit = 20): array {
     $config = \Drupal::config('dynasty_newsletter.settings');
-    $limit = $config->get('news_items_limit') ?? $limit;
+    $podcast_feed_ids = $config->get('podcast_feed_ids') ?? [];
+    $timestamp = strtotime('-7 days');
 
-    if (!empty($iids)) {
-      $items = $this->database->select('aggregator_item', 'ai')
-        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
-        ->condition('ai.iid', $iids, 'IN')
-        ->orderBy('ai.timestamp', 'DESC')
-        ->execute()
-        ->fetchAll();
+    $query = $this->database->select('aggregator_item', 'ai')
+      ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+      ->condition('ai.timestamp', $timestamp, '>')
+      ->orderBy('ai.timestamp', 'DESC')
+      ->range(0, $limit);
+
+    if (!empty($podcast_feed_ids)) {
+      $query->condition('ai.fid', $podcast_feed_ids, 'NOT IN');
     }
-    else {
-      // Query aggregator items from last 7 days, excluding podcast feeds.
-      $timestamp = strtotime('-7 days');
-      $podcast_feed_ids = \Drupal::config('dynasty_newsletter.settings')->get('podcast_feed_ids') ?? [];
 
-      $query = $this->database->select('aggregator_item', 'ai')
-        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
-        ->condition('ai.timestamp', $timestamp, '>')
-        ->orderBy('ai.timestamp', 'DESC')
-        ->range(0, $limit);
-
-      if (!empty($podcast_feed_ids)) {
-        $query->condition('ai.fid', $podcast_feed_ids, 'NOT IN');
-      }
-
-      $items = $query->execute()->fetchAll();
-    }
+    $items = $query->execute()->fetchAll();
 
     $news_items = [];
     foreach ($items as $item) {
-      // Get feed name
       $feed = $this->database->select('aggregator_feed', 'af')
         ->fields('af', ['title'])
         ->condition('af.fid', $item->fid)
@@ -166,6 +167,79 @@ class NewsletterContentBuilder {
         'source' => $feed,
         'date' => date('M j, Y', $item->timestamp),
       ];
+    }
+
+    return $news_items;
+  }
+
+  /**
+   * Get recent news items from RSS aggregator.
+   *
+   * @param int $limit
+   *   Number of items to retrieve.
+   * @param array|null $iids
+   *   Optional list of aggregator item IDs to fetch directly.
+   *
+   * @return array
+   *   Array of news items.
+   */
+  protected function getRecentNews($limit = 5, ?array $iids = NULL, bool $skip_ai = FALSE) {
+    $config = \Drupal::config('dynasty_newsletter.settings');
+    $limit = $config->get('news_items_limit') ?? $limit;
+
+    if (!empty($iids)) {
+      // Manual selection — fetch exactly those items.
+      $items = $this->database->select('aggregator_item', 'ai')
+        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+        ->condition('ai.iid', $iids, 'IN')
+        ->orderBy('ai.timestamp', 'DESC')
+        ->execute()
+        ->fetchAll();
+    }
+    else {
+      // Automatic: fetch a larger pool when AI is enabled so the model has
+      // more candidates to choose from.
+      $use_ai = !$skip_ai && $this->aiService->isEnabled();
+      $fetch_limit = $use_ai
+        ? ($config->get('llm_news_pool_size') ?? 20)
+        : $limit;
+
+      $timestamp = strtotime('-7 days');
+      $podcast_feed_ids = $config->get('podcast_feed_ids') ?? [];
+
+      $query = $this->database->select('aggregator_item', 'ai')
+        ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
+        ->condition('ai.timestamp', $timestamp, '>')
+        ->orderBy('ai.timestamp', 'DESC')
+        ->range(0, $fetch_limit);
+
+      if (!empty($podcast_feed_ids)) {
+        $query->condition('ai.fid', $podcast_feed_ids, 'NOT IN');
+      }
+
+      $items = $query->execute()->fetchAll();
+    }
+
+    $news_items = [];
+    foreach ($items as $item) {
+      $feed = $this->database->select('aggregator_feed', 'af')
+        ->fields('af', ['title'])
+        ->condition('af.fid', $item->fid)
+        ->execute()
+        ->fetchField();
+
+      $news_items[] = [
+        'title' => $item->title,
+        'link' => $item->link,
+        'description' => strip_tags($item->description),
+        'source' => $feed,
+        'date' => date('M j, Y', $item->timestamp),
+      ];
+    }
+
+    // When AI is enabled and this is an automatic run, curate and summarize.
+    if (!$skip_ai && empty($iids) && $this->aiService->isEnabled()) {
+      $news_items = $this->aiService->curateAndSummarizeNews($news_items, (int) $limit);
     }
 
     return $news_items;

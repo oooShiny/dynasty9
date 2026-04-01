@@ -38,3 +38,23 @@ dynasty_newsletter.preview:
   requirements:
     _permission: 'administer simplenews'
     node: \d+
+
+dynasty_newsletter.api_news_items:
+  path: '/api/newsletter/news-items'
+  defaults:
+    _controller: '\Drupal\dynasty_newsletter\Controller\NewsletterApiController::getNewsItems'
+  methods: [GET]
+  requirements:
+    _permission: 'administer simplenews'
+  options:
+    _auth: ['basic_auth', 'cookie']
+
+dynasty_newsletter.api_create_draft:
+  path: '/api/newsletter/create-draft'
+  defaults:
+    _controller: '\Drupal\dynasty_newsletter\Controller\NewsletterApiController::createDraft'
+  methods: [POST]
+  requirements:
+    _permission: 'administer simplenews'
+  options:
+    _auth: ['basic_auth', 'cookie']

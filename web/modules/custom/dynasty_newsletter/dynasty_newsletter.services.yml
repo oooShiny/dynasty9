@@ -1,7 +1,11 @@
 services:
+  dynasty_newsletter.ai_service:
+    class: Drupal\dynasty_newsletter\Service\NewsletterAiService
+    arguments: ['@http_client', '@logger.factory', '@config.factory']
+
   dynasty_newsletter.content_builder:
     class: Drupal\dynasty_newsletter\Service\NewsletterContentBuilder
-    arguments: ['@entity_type.manager', '@database', '@date.formatter', '@renderer', '@path_alias.manager']
+    arguments: ['@entity_type.manager', '@database', '@date.formatter', '@renderer', '@path_alias.manager', '@dynasty_newsletter.ai_service']
 
   dynasty_newsletter.historical_data:
     class: Drupal\dynasty_newsletter\Service\NewsletterHistoricalData
