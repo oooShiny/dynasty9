@@ -53,7 +53,9 @@ class NewsletterApiController extends ControllerBase {
 
     $items = $this->contentBuilder->getNewsItemsForApi($limit);
 
-    return new JsonResponse($items);
+    $response = new JsonResponse($items);
+    $response->headers->set('Cache-Control', 'no-store, private');
+    return $response;
   }
 
   /**
@@ -110,11 +112,13 @@ class NewsletterApiController extends ControllerBase {
 
       $edit_url = $newsletter->toUrl('edit-form', ['absolute' => TRUE])->toString();
 
-      return new JsonResponse([
+      $response = new JsonResponse([
         'nid' => $newsletter->id(),
         'title' => $newsletter->getTitle(),
         'edit_url' => $edit_url,
       ]);
+      $response->headers->set('Cache-Control', 'no-store, private');
+      return $response;
     }
     catch (\Exception $e) {
       $this->getLogger('dynasty_newsletter')->error(
