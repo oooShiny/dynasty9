@@ -1,7 +1,7 @@
 uuid: bde012c8-1847-4b8f-9ef7-7a5bdb2bbcb3
 langcode: en
 status: true
-dependencies: {}
+dependencies: {  }
 id: dynasty_event_import
 class: null
 field_plugin_method: null
@@ -11,7 +11,7 @@ migration_group: null
 label: 'Import Patriots historical events'
 source:
   plugin: csv
-  path: 'modules/custom/dynasty_module/data/patriots_events.csv'
+  path: modules/custom/dynasty_module/data/patriots_events.csv
   header_row_count: 1
   delimiter: ','
   ids:
