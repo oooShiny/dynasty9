@@ -285,6 +285,17 @@
     </div>
   </div>
 
+{# Screenshots #}
+  {% if content.field_game_screenshots|render %}
+  <a id="screenshots"></a>
+  <div class="bg-gray-400 py-5">
+    <h2 class="text-center mb-6 text-3xl uppercase font-light">Images from the Game</h2>
+    <div class="flex flex-wrap justify-center">
+      {{ content.field_game_screenshots }}
+    </div>
+  </div>
+  {% endif %}
+
 {# Game Video #}
 {% if content.field_game_video|render %}
   <div id="game-summary" class="py-5">

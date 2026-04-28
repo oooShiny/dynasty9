@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.game.field_defensive_leaders
     - field.field.node.game.field_drive_charts
     - field.field.node.game.field_game_links
+    - field.field.node.game.field_game_screenshots
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
     - field.field.node.game.field_highlight_video_url
@@ -68,10 +69,12 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_youtube_highlights
+    - image.style.thumbnail
     - node.type.game
   module:
     - datetime
     - entity_reference_revisions
+    - image
     - link
     - metatag
     - options
@@ -190,6 +193,17 @@ content:
       target: ''
     third_party_settings: {  }
     weight: 25
+    region: content
+  field_game_screenshots:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 41
     region: content
   field_game_summary:
     type: text_default

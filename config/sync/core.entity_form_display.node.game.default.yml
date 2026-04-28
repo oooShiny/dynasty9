@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.game.field_defensive_leaders
     - field.field.node.game.field_drive_charts
     - field.field.node.game.field_game_links
+    - field.field.node.game.field_game_screenshots
     - field.field.node.game.field_game_summary
     - field.field.node.game.field_game_video
     - field.field.node.game.field_highlight_video_url
@@ -68,11 +69,13 @@ dependencies:
     - field.field.node.game.field_week
     - field.field.node.game.field_weekday
     - field.field.node.game.field_youtube_highlights
+    - image.style.thumbnail
     - node.type.game
   module:
     - datetime
     - entity_reference_revisions
     - field_group
+    - image
     - inline_entity_form
     - link
     - metatag
@@ -100,7 +103,7 @@ third_party_settings:
       label: Boxscore
       region: content
       parent_name: ''
-      weight: 1
+      weight: 2
       format_type: details
       format_settings:
         classes: ''
@@ -122,7 +125,7 @@ third_party_settings:
       label: 'Starting QB'
       region: content
       parent_name: ''
-      weight: 6
+      weight: 7
       format_type: details
       format_settings:
         classes: ''
@@ -138,7 +141,7 @@ third_party_settings:
       label: 'Game Summary'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: details
       format_settings:
         classes: ''
@@ -163,7 +166,7 @@ third_party_settings:
       label: 'Game Details'
       region: content
       parent_name: ''
-      weight: 0
+      weight: 1
       format_type: details
       format_settings:
         classes: ''
@@ -180,7 +183,7 @@ third_party_settings:
       label: Extras
       region: content
       parent_name: ''
-      weight: 7
+      weight: 8
       format_type: details
       format_settings:
         classes: ''
@@ -197,7 +200,7 @@ third_party_settings:
       label: 'Calculated Fields'
       region: content
       parent_name: ''
-      weight: 8
+      weight: 9
       format_type: details
       format_settings:
         classes: ''
@@ -210,10 +213,11 @@ third_party_settings:
         - field_game_video
         - field_youtube_highlights
         - field_highlight_video_url
+        - field_game_screenshots
       label: 'Game Media'
       region: content
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: details
       format_settings:
         classes: ''
@@ -230,7 +234,7 @@ third_party_settings:
       label: 'Patriots Coaches'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: details
       format_settings:
         classes: ''
@@ -319,7 +323,7 @@ content:
     third_party_settings: {  }
   field_defensive_leaders:
     type: text_textarea
-    weight: 140
+    weight: 26
     region: content
     settings:
       rows: 5
@@ -327,7 +331,7 @@ content:
     third_party_settings: {  }
   field_drive_charts:
     type: text_textarea
-    weight: 143
+    weight: 29
     region: content
     settings:
       rows: 5
@@ -341,6 +345,14 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_game_screenshots:
+    type: image_image
+    weight: 24
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   field_game_summary:
     type: text_textarea
     weight: 13
@@ -351,7 +363,7 @@ content:
     third_party_settings: {  }
   field_game_video:
     type: string_textfield
-    weight: 26
+    weight: 21
     region: content
     settings:
       size: 60
@@ -359,7 +371,7 @@ content:
     third_party_settings: {  }
   field_highlight_video_url:
     type: string_textfield
-    weight: 28
+    weight: 23
     region: content
     settings:
       size: 60
@@ -373,7 +385,7 @@ content:
     third_party_settings: {  }
   field_meta_tags:
     type: metatag_firehose
-    weight: 11
+    weight: 13
     region: content
     settings:
       sidebar: true
@@ -389,7 +401,7 @@ content:
     third_party_settings: {  }
   field_offensive_leaders:
     type: text_textarea
-    weight: 139
+    weight: 25
     region: content
     settings:
       rows: 5
@@ -397,7 +409,7 @@ content:
     third_party_settings: {  }
   field_opp_dc:
     type: select2_entity_reference
-    weight: 12
+    weight: 13
     region: content
     settings:
       width: 100%
@@ -407,7 +419,7 @@ content:
     third_party_settings: {  }
   field_opp_draft_picks:
     type: text_textarea
-    weight: 138
+    weight: 24
     region: content
     settings:
       rows: 5
@@ -415,7 +427,7 @@ content:
     third_party_settings: {  }
   field_opp_hc_notes:
     type: text_textarea
-    weight: 136
+    weight: 22
     region: content
     settings:
       rows: 5
@@ -423,7 +435,7 @@ content:
     third_party_settings: {  }
   field_opp_oc:
     type: select2_entity_reference
-    weight: 11
+    weight: 12
     region: content
     settings:
       width: 100%
@@ -433,14 +445,14 @@ content:
     third_party_settings: {  }
   field_opp_ot:
     type: number
-    weight: 22
+    weight: 21
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_opp_pro_bowlers:
     type: string_textfield
-    weight: 137
+    weight: 23
     region: content
     settings:
       size: 60
@@ -448,28 +460,28 @@ content:
     third_party_settings: {  }
   field_opp_q1:
     type: number
-    weight: 18
+    weight: 16
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_opp_q2:
     type: number
-    weight: 19
+    weight: 17
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_opp_q3:
     type: number
-    weight: 20
+    weight: 18
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_opp_q4:
     type: number
-    weight: 21
+    weight: 19
     region: content
     settings:
       placeholder: ''
@@ -486,7 +498,7 @@ content:
     third_party_settings: {  }
   field_opponent_pfr:
     type: link_default
-    weight: 132
+    weight: 18
     region: content
     settings:
       placeholder_url: ''
@@ -494,14 +506,14 @@ content:
     third_party_settings: {  }
   field_opponent_score:
     type: number
-    weight: 23
+    weight: 22
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_opponent_season_finish:
     type: text_textarea
-    weight: 134
+    weight: 20
     region: content
     settings:
       rows: 5
@@ -509,7 +521,7 @@ content:
     third_party_settings: {  }
   field_opponent_season_record:
     type: string_textfield
-    weight: 133
+    weight: 19
     region: content
     settings:
       size: 60
@@ -517,7 +529,7 @@ content:
     third_party_settings: {  }
   field_opponent_team_ranks:
     type: text_textarea
-    weight: 141
+    weight: 27
     region: content
     settings:
       rows: 5
@@ -525,7 +537,7 @@ content:
     third_party_settings: {  }
   field_opponent_wikipedia:
     type: link_default
-    weight: 131
+    weight: 17
     region: content
     settings:
       placeholder_url: ''
@@ -533,7 +545,7 @@ content:
     third_party_settings: {  }
   field_opposing_coach:
     type: select2_entity_reference
-    weight: 10
+    weight: 11
     region: content
     settings:
       width: 100%
@@ -613,49 +625,49 @@ content:
     third_party_settings: {  }
   field_patriots_score:
     type: number
-    weight: 17
+    weight: 15
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_pats_ot:
     type: number
-    weight: 16
+    weight: 14
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_pats_q1:
     type: number
-    weight: 12
+    weight: 10
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_pats_q2:
     type: number
-    weight: 13
+    weight: 11
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_pats_q3:
     type: number
-    weight: 14
+    weight: 12
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_pats_q4:
     type: number
-    weight: 15
+    weight: 13
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_pats_record_vs_coach:
     type: link_default
-    weight: 135
+    weight: 21
     region: content
     settings:
       placeholder_url: ''
@@ -678,7 +690,7 @@ content:
     third_party_settings: {  }
   field_result:
     type: options_select
-    weight: 24
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -691,7 +703,7 @@ content:
     third_party_settings: {  }
   field_scoring_plays:
     type: entity_reference_autocomplete
-    weight: 142
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
@@ -762,7 +774,7 @@ content:
     third_party_settings: {  }
   field_youtube_highlights:
     type: link_default
-    weight: 27
+    weight: 22
     region: content
     settings:
       placeholder_url: ''
@@ -770,30 +782,30 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 3
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  simple_sitemap:
     weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
+  simple_sitemap:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   simple_sitemap_index_now:
-    weight: 130
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 10
+    weight: 11
     region: content
     settings:
       display_label: true
@@ -807,12 +819,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
   promote: true
+  publish_on: true
   sticky: true
   uid: true
+  unpublish_on: true

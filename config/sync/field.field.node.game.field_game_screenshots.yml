@@ -1,0 +1,36 @@
+uuid: 1d705d5a-c150-4cd4-8a26-7decf8cd082b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_game_screenshots
+    - node.type.game
+id: node.game.field_game_screenshots
+field_name: field_game_screenshots
+entity_type: node
+bundle: game
+label: 'Game Screenshots'
+description: 'Upload screenshots or images from the game.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+  file_directory: 'game-screenshots/[date:custom:Y]'
+  file_extensions: 'png gif jpg jpeg webp'
+  max_filesize: '10 MB'
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

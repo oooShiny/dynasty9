@@ -71,6 +71,20 @@ function dynasty_tw_preprocess_field(&$variables) {
         }
       }
       break;
+    case 'field_game_screenshots':
+      $image_style_thumb = \Drupal\image\Entity\ImageStyle::load('thumbnail');
+      $image_style_large = \Drupal\image\Entity\ImageStyle::load('large');
+      $screenshots = [];
+      foreach ($variables['element']['#items'] as $item) {
+        $uri = $item->entity->getFileUri();
+        $screenshots[] = [
+          'thumbnail_url' => $image_style_thumb ? $image_style_thumb->buildUrl($uri) : \Drupal::service('file_url_generator')->generateAbsoluteString($uri),
+          'full_url' => $image_style_large ? $image_style_large->buildUrl($uri) : \Drupal::service('file_url_generator')->generateAbsoluteString($uri),
+          'alt' => $item->alt ?? '',
+        ];
+      }
+      $variables['screenshots'] = $screenshots;
+      break;
     case 'field_highlight_video_url':
       $variables['video_id'] = $variables["element"][0]["#context"]["value"];
       break;
