@@ -473,9 +473,7 @@ class BlueskyService {
 
     // Get the play description.
     $description = $highlight->get('field_play_description')->value;
-    if (empty($description)) {
-      $description = $highlight->getTitle();
-    }
+    $title = $highlight->getTitle();
 
     // Build the full post text.
     $post_parts = [];
@@ -489,8 +487,13 @@ class BlueskyService {
       $post_parts[] = "";
     }
 
-    // Add description.
-    $post_parts[] = $description;
+    // Add title and description.
+    if (!empty($description) && $description !== $title) {
+      $post_parts[] = "{$title}\n({$description})";
+    }
+    else {
+      $post_parts[] = $title;
+    }
     $post_parts[] = "";
 
     // Add hashtags.
