@@ -15,8 +15,8 @@ podcast_feed_ids:
   - '8'
   - '6'
   - '7'
-remote_site_url: ''
-llm_enabled: false
-llm_api_url: 'http://host.docker.internal:11434'
-llm_model: llama3.2
+remote_site_url: 'https://patsdynasty.com'
+llm_enabled: true
+llm_api_url: 'http://192.168.20.230:1234'
+llm_model: qwen/qwen3.5-9b
 llm_news_pool_size: 20

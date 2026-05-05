@@ -67,6 +67,7 @@ module:
   layout_paragraphs: 0
   link: 0
   linkit: 0
+  mail_login: 0
   mailer_transport: 0
   mailsystem: 0
   markdownify: 0

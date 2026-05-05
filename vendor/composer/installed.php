@@ -631,6 +631,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/mail_login' => array(
+            'pretty_version' => '4.2.2',
+            'version' => '4.2.2.0',
+            'reference' => '4.2.2',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/mail_login',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/mailer_transport' => array(
             'pretty_version' => '1.6.2',
             'version' => '1.6.2.0',

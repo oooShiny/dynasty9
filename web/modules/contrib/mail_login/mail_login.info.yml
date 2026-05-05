@@ -1,0 +1,12 @@
+name: Mail Login
+description: This module enables users to login by email address.
+package: Administration
+
+type: module
+configure: mail_login.admin
+core_version_requirement: ^10.3 || ^11
+
+# Information added by Drupal.org packaging script on 2025-07-12
+version: '4.2.2'
+project: 'mail_login'
+datestamp: 1752318598

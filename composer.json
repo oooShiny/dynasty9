@@ -155,6 +155,7 @@
         "drupal/key": "^1.19",
         "drupal/layout_paragraphs": "^2.0",
         "drupal/linkit": "^7",
+        "drupal/mail_login": "^4.2",
         "drupal/markdownify": "^1.1",
         "drupal/metatag": "^2.0",
         "drupal/migrate_cs": "^2",
@@ -206,6 +207,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
+        "audit": {
+            "block-insecure": false
+        },
         "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
