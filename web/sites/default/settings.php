@@ -801,3 +801,18 @@ $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
 if (is_readable($ddev_settings) && getenv('IS_DDEV_PROJECT') == 'true') {
   require $ddev_settings;
 }
+
+
+// Resend API key for symfony_mailer transport.
+// On production, set this via environment variable.
+if (getenv('RESEND_API_KEY')) {
+  $config['symfony_mailer.mailer_transport.resend']['configuration']['pass'] = getenv('RESEND_API_KEY');
+}
+
+// Cloudflare credentials - kept out of config/sync to avoid committing secrets.
+// On production, set CLOUDFLARE_ZONE_ID and CLOUDFLARE_API_TOKEN env vars.
+  $settings['cloudflare_purge_credentials'] = [
+    'zone_id' => '1cf3bfaded3728fb2dd9a9cffaacba11',
+    'authorization' => 'BrTycMtVUwBRnyDGjC1slCKR75HaUOwdS0-4Q-r4',
+    'use_bearer_token' => TRUE,
+  ];

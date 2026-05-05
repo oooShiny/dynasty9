@@ -3791,8 +3791,7 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
-                },
-                "patches_applied": []
+                }
             },
             "installation-source": "dist",
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -4179,7 +4178,7 @@
                 "shasum": "473afabaedc5968e6b37f7e880d316f8ca4c29a5"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12",
                 "drupal/migrate_plus": "*"
             },
             "type": "drupal-module",
