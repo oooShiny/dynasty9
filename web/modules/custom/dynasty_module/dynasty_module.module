@@ -5,7 +5,7 @@ use Drupal\Core\Utility\Error;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\node\Entity\Node;
 use Drupal\dynasty_module\DynastyHelpers;
-use Drupal\migrate\MigrateExecutable;
+use Drupal\migrate_tools\MigrateExecutable;
 use Drupal\migrate\MigrateMessage;
 use GuzzleHttp\Exception\RequestException;
 
@@ -437,14 +437,10 @@ function dynasty_module_cron() {
         // Set execution options with safety limits
         $migration->getIdMap()->prepareUpdate();
 
-        $executable = new \Drupal\migrate\MigrateExecutable(
+        $executable = new MigrateExecutable(
           $migration,
-          new \Drupal\migrate\MigrateMessage(),
-          [
-            'limit' => 50,        // Process max 50 items per run
-            'update' => TRUE,     // Update existing items
-            'force' => FALSE,     // Don't force re-import
-          ]
+          new MigrateMessage(),
+          ['limit' => 50]
         );
 
         // Run the migration
