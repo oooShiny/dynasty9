@@ -1,0 +1,5957 @@
+[
+  {
+    "speaker" : "Mom",
+    "text" : "This is Christine Brown, and while I have to listen to this podcast, as my motherly duty, you have the choice not to.",
+    "timestamp" : "00:00-00:07"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "My sons sometimes say some naughty things when they're trying to be funny.",
+    "timestamp" : "00:07-00:11"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "But really, they're just being stupid.",
+    "timestamp" : "00:11-00:13"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Do you still want to listen?",
+    "timestamp" : "00:13-00:14"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Go right ahead.",
+    "timestamp" : "00:15-00:16"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "I am not your mother.",
+    "timestamp" : "00:16-00:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Alright, welcome back to the Patriots Dynasty Podcast, the only podcast rewatching every game of the Patriots Dynasty era.",
+    "timestamp" : "00:23-00:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Move uh slowly but surely.",
+    "timestamp" : "00:30-00:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um but we're actually recording two weeks in a row for the first time in probably a year.",
+    "timestamp" : "00:32-00:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So uh we're back at it again pretty quickly.",
+    "timestamp" : "00:36-00:39"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So I don't know if you boys even remember last game, but I kinda do",
+    "timestamp" : "00:39-00:42"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh with me this week we have Steve Brown.",
+    "timestamp" : "00:43-00:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Steve, how you doing?",
+    "timestamp" : "00:46-00:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh the reliable Brown brother.",
+    "timestamp" : "00:47-00:49"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "As always, I want to go on record that it was my text that said, are you recording this week?",
+    "timestamp" : "00:49-00:55"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That is very low bar, Steven.",
+    "timestamp" : "00:55-00:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The reliable brown brother?",
+    "timestamp" : "00:58-01:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Jesus, the tallest midget.",
+    "timestamp" : "01:00-01:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Good for you.",
+    "timestamp" : "01:01-01:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The award is in the mail.",
+    "timestamp" : "01:04-01:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We also have uh Tim Turn who is um paying full attention to the podcast and definitely not driving at the moment.",
+    "timestamp" : "01:06-01:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "How are you doing, Tim?",
+    "timestamp" : "01:12-01:13"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I'm doing wonderful Andy.",
+    "timestamp" : "01:13-01:14"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "How we doing?",
+    "timestamp" : "01:14-01:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, you know, living the dream.",
+    "timestamp" : "01:15-01:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And Steve has somehow convinced yet another person uh that he has a work relationship with, uh apparently, to join the podcast um and find out who he really is.",
+    "timestamp" : "01:17-01:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Steve, you want to enter us into uh uh",
+    "timestamp" : "01:25-01:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Introduce your guest there, bud.",
+    "timestamp" : "01:28-01:29"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, this is Matt.",
+    "timestamp" : "01:29-01:31"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh I actually don't even know him that well.",
+    "timestamp" : "01:31-01:33"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I just met him like two weeks ago, but you know",
+    "timestamp" : "01:33-01:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Anytime you get a true believer Bills fan, they they just sort of identify themselves right away.",
+    "timestamp" : "01:37-01:43"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So he said, you know what Matt?",
+    "timestamp" : "01:43-01:46"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Come on, get some punishment.",
+    "timestamp" : "01:46-01:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Let's let's do that.",
+    "timestamp" : "01:48-01:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Exact yeah, I mean I live in this like this terrible this terrible time like where you know, I used to so my family had both tickets from nineteen eighty eight",
+    "timestamp" : "01:50-02:04"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "until the year before we drafted Josh Allen.",
+    "timestamp" : "02:04-02:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So gone through a lot of Bills games, but like I was kinda too young to remember when they were really good.",
+    "timestamp" : "02:08-02:15"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And I've only kind of seen them struggle and like and now that they're good, I've only really known heartaches.",
+    "timestamp" : "02:15-02:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So it's it's a very interesting paradox to to live in.",
+    "timestamp" : "02:21-02:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah that that's uh that's a that's a rough time to have season tickets.",
+    "timestamp" : "02:25-02:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Although they're probably pretty inexpensive at that point, right?",
+    "timestamp" : "02:30-02:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "From those that that time frame there.",
+    "timestamp" : "02:32-02:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, I mean my dad and his drunk buddies picked them up one night just because they were starting to get good and they figured it would be a good time to",
+    "timestamp" : "02:36-02:43"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "you know, to to hide out from their families once a week, uh eight times a year or more and and they did it.",
+    "timestamp" : "02:43-02:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And then, you know, as a writer passage I kinda aged into going with those guys and they were all terrible role models.",
+    "timestamp" : "02:49-02:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean in true Bill's mafia form.",
+    "timestamp" : "02:55-02:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean, my dad's friend had me bring in like what we would call a Stanley Now full of gin into the stadium when I was probably like ten years old.",
+    "timestamp" : "02:57-03:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that's that sounds like the old Fox River Stadium back before they tore it down because the toilets wouldn't flush.",
+    "timestamp" : "03:09-03:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that's uh good that's that's a good upbringing, yeah.",
+    "timestamp" : "03:16-03:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's the way to be",
+    "timestamp" : "03:20-03:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Life license.",
+    "timestamp" : "03:21-03:23"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, exactly.",
+    "timestamp" : "03:23-03:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So terrible Romano's terrible product for a lot of it.",
+    "timestamp" : "03:24-03:27"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "03:27-03:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well what was your uh let's say strongest memory uh at the stadium",
+    "timestamp" : "03:27-03:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Uh well I was at the the game where we had just I think we had just got Drew Bloodsoe, we had l I think Lawyer Malloy came in like really late and I was at that game and like we had no expectations",
+    "timestamp" : "03:33-03:45"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I don't know.",
+    "timestamp" : "03:46-03:47"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like we probably actually get our asses beat once again.",
+    "timestamp" : "03:47-03:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And they they come in and just like play the game of their lives.",
+    "timestamp" : "03:50-03:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So",
+    "timestamp" : "03:54-03:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, in a sea of heartache, like that game stands out as like one of the good times.",
+    "timestamp" : "03:54-04:01"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "We don't care about that though, Matt.",
+    "timestamp" : "04:01-04:02"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Worse time",
+    "timestamp" : "04:03-04:04"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So I was that I was the worst time was probably we were just on the cusp of making the playoffs and we only had to beat Pittsburgh's third team.",
+    "timestamp" : "04:08-04:17"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And Willie Parker came in and he looked like a fast Jerome Bettis and just eviscerated a really good Bills defense.",
+    "timestamp" : "04:17-04:25"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Just eviscerated us at home in the snow with everything on the line.",
+    "timestamp" : "04:25-04:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh my god.",
+    "timestamp" : "04:29-04:30"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And we went home.",
+    "timestamp" : "04:30-04:32"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Heartbroken once again missed the playoffs, you know.",
+    "timestamp" : "04:32-04:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Wow.",
+    "timestamp" : "04:35-04:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah",
+    "timestamp" : "04:39-04:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Impressive of of all the the heartbreak that the Bills have suffered lately, that's the one.",
+    "timestamp" : "04:40-04:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I like that.",
+    "timestamp" : "04:45-04:45"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That is a deep cut.",
+    "timestamp" : "04:45-04:46"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I thought you were gonna say that Super Bowl where you got whacked by the Cowboys.",
+    "timestamp" : "04:46-04:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That was last kind of before his time by the way.",
+    "timestamp" : "04:50-04:52"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well, I I was telling Steve I was telling Steve about well that's that's a good point.",
+    "timestamp" : "04:52-04:56"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So here's here's another fond Bill's memory, right?",
+    "timestamp" : "04:56-04:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So",
+    "timestamp" : "04:59-04:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "The ninety-two ninety-three season before the year starts, okay, you pick a team, I'll pick a team.",
+    "timestamp" : "05:00-05:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "If they go to the Super Bowl, I'll get tickets",
+    "timestamp" : "05:07-05:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So the Bills had been back to back years.",
+    "timestamp" : "05:09-05:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He he went with the he went with the Bills for the three P thinking, okay, there's no way I'm I'm off the hook just by picking them, right?",
+    "timestamp" : "05:11-05:17"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And for some reason I was like",
+    "timestamp" : "05:17-05:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'll pick the Cowboys.",
+    "timestamp" : "05:19-05:20"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "This is ninety two.",
+    "timestamp" : "05:20-05:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I was like nine years old.",
+    "timestamp" : "05:21-05:22"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I have no idea why I picked the Cowboys.",
+    "timestamp" : "05:22-05:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I must have known that they had like a a mountain of",
+    "timestamp" : "05:24-05:27"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "cocaine that they could, you know, nib at throughout the year and fuel this this super bull run.",
+    "timestamp" : "05:27-05:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But so sure as shit the playoffs are heating up and my dad's like",
+    "timestamp" : "05:33-05:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh shit, like I'm actually gonna need to get tickets to this thing.",
+    "timestamp" : "05:36-05:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So they both make it and now he's really on the hook, but he found he got tickets.",
+    "timestamp" : "05:40-05:44"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It was the year they it was in Pasadena, so we flew out to LA.",
+    "timestamp" : "05:44-05:47"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'd never been to LA",
+    "timestamp" : "05:47-05:48"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "had this magic weekend with my dad and it was like one of the first Super Bowls.",
+    "timestamp" : "05:49-05:52"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think it was the first Super Bowl where they had a lot of fanfare leading up to like the week of Super Bowl was like a big to-do that year, starting that year",
+    "timestamp" : "05:52-06:01"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So we soaked that up, had the time of our life, got to the game, and they lost what was it like fifty-two to ten or something?",
+    "timestamp" : "06:00-06:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it was bad.",
+    "timestamp" : "06:07-06:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So",
+    "timestamp" : "06:09-06:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Upside is I went to the Super Bowl with my god, like lifeline memory.",
+    "timestamp" : "06:10-06:14"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Downside is we got absolutely destroyed.",
+    "timestamp" : "06:14-06:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think I was the worst one.",
+    "timestamp" : "06:16-06:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Upside was that Michael Jackson was the halftime show.",
+    "timestamp" : "06:18-06:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh shit.",
+    "timestamp" : "06:22-06:23"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Which was really cool.",
+    "timestamp" : "06:23-06:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Downside was that it was heal the world Michael Jackson, not like thriller and heat at Michael Jackson.",
+    "timestamp" : "06:24-06:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh man.",
+    "timestamp" : "06:31-06:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So Wife of Little Girls fan.",
+    "timestamp" : "06:32-06:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I was just gonna say, yeah.",
+    "timestamp" : "06:34-06:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well speaking of um",
+    "timestamp" : "06:36-06:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Successful Bills Coaches.",
+    "timestamp" : "06:39-06:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "This is actually uh ties in with the game we watched this week, which is uh 2006 week seven in Buffalo, New York.",
+    "timestamp" : "06:41-06:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um",
+    "timestamp" : "06:48-06:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "where it is um Marv Levy's first season as the GM taking over from who the hell knows.",
+    "timestamp" : "06:49-06:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and uh it looks like he brought in Dick Jiron and this is his first season as the head coach of the Bills this year",
+    "timestamp" : "06:56-07:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and he had come from coaching the Bears for five seasons.",
+    "timestamp" : "07:03-07:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um kind of mediocre is thirty-five and forty-five over that.",
+    "timestamp" : "07:07-07:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But he had uh he was coach of the year in two thousand one when the Bears went thirteen and three.",
+    "timestamp" : "07:12-07:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They also went 8-0-1-score games, including back-to-back overtime wins.",
+    "timestamp" : "07:17-07:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And I can think of another coach who actually probably had a case for Coach of the Year in 2001.",
+    "timestamp" : "07:23-07:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um so part of me wonders if that plays a factor in this game.",
+    "timestamp" : "07:29-07:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um but maybe not.",
+    "timestamp" : "07:34-07:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um but the look on Dictoron's face every time they were cut to him on the sidelines in this game",
+    "timestamp" : "07:36-07:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "um makes you think that he was not having um a coach of the year um experience in this game.",
+    "timestamp" : "07:42-07:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He looked like surprised, which was weird because the Bills are doing like classic Bill shit.",
+    "timestamp" : "07:48-07:53"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "07:53-07:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "07:54-07:54"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I got I got a sequence.",
+    "timestamp" : "07:54-07:56"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "First, third down, pass, nice pass, convert it.",
+    "timestamp" : "07:56-08:00"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh, procedural penalty.",
+    "timestamp" : "08:00-08:02"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "They didn't like set get set for a second.",
+    "timestamp" : "08:02-08:04"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep.",
+    "timestamp" : "08:04-08:05"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Then they get a false start after that and it cuts the hand just like the lay of game, yep.",
+    "timestamp" : "08:05-08:09"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Right?",
+    "timestamp" : "08:09-08:09"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It's like yeah, of course, dude, of course they're gonna double down on a dumb procedural penalty with another one.",
+    "timestamp" : "08:09-08:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh uh I actually have that written down too, but it keeps going because the next play, it was like third and",
+    "timestamp" : "08:15-08:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "like I don't know long third and umpteen.",
+    "timestamp" : "08:20-08:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And they throw a shovel pass to the only player on this offense who had any sort of mojo whatsoever, Mil Willis McGahee.",
+    "timestamp" : "08:23-08:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and he goes for 56 yards.",
+    "timestamp" : "08:31-08:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and so everybody's so excited that uh they have to call a timeout to prevent another delay of game",
+    "timestamp" : "08:34-08:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "which is what the first penalty was, uh, because they didn't get the play in in time.",
+    "timestamp" : "08:39-08:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then uh coming out of the timeout, they try to do a trick play where they line up, I don't remember which receiver it was, uh, in the Wildcat and it gets stuff for uh minus one",
+    "timestamp" : "08:43-08:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh that springing the wildcat out of a timeout classic.",
+    "timestamp" : "08:54-08:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Nice move.",
+    "timestamp" : "08:57-08:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yep, nobody saw that coming.",
+    "timestamp" : "08:58-09:00"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No.",
+    "timestamp" : "09:00-09:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No.",
+    "timestamp" : "09:01-09:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No.",
+    "timestamp" : "09:01-09:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So tough uh tough day for the Bills offense, which um kind of par for the course uh in these like early mid-2000s",
+    "timestamp" : "09:02-09:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "uh Buffalo Bills.",
+    "timestamp" : "09:13-09:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But their defense, like Steve said, was um kind of top ten in the league, I think.",
+    "timestamp" : "09:15-09:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They were lights out for a long time.",
+    "timestamp" : "09:21-09:22"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Even after",
+    "timestamp" : "09:23-09:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "The Super Bowl run.",
+    "timestamp" : "09:24-09:25"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like the defense was in really good hands.",
+    "timestamp" : "09:25-09:27"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Wade f Wade Phillips was there.",
+    "timestamp" : "09:28-09:29"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean we could have just kept Wade Phillips all along.",
+    "timestamp" : "09:29-09:32"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Probably should have.",
+    "timestamp" : "09:32-09:32"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, he showed back up in LA",
+    "timestamp" : "09:32-09:34"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Mm-hmm.",
+    "timestamp" : "09:35-09:35"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They absolutely should have.",
+    "timestamp" : "09:35-09:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean they probably could have kept Giron too.",
+    "timestamp" : "09:37-09:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They were what, seven and nine, I think I saw in twenty uh two thousand six, so like they were",
+    "timestamp" : "09:38-09:43"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Probably right there despite having JP Lossman at the helm.",
+    "timestamp" : "09:43-09:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Right.",
+    "timestamp" : "09:47-09:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I mean the quarterbacks were always an issue in Buffalo.",
+    "timestamp" : "09:47-09:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um I think there was some I think I looked it up f a while ago and I think the",
+    "timestamp" : "09:50-09:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh Tom Brady, I think, had uh third most wins uh uh quarterbacks playing in Buffalo in the history of the Buffalo Bills.",
+    "timestamp" : "09:57-10:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and then everybody I mean it's always it's like Jim Kelly and then um who was the guy from like way the fuck back in the day?",
+    "timestamp" : "10:08-10:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Tom Brady.",
+    "timestamp" : "10:13-10:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Jack Kemp probably yeah yeah it's all like that and then then Tom Brady and then just like a list of no names",
+    "timestamp" : "10:14-10:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um I think Josh Allen is climbing that list pretty quickly, but still.",
+    "timestamp" : "10:20-10:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He might be.",
+    "timestamp" : "10:25-10:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um yeah, I mean they actually had a good draft this year too.",
+    "timestamp" : "10:28-10:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They they drafted uh Dante Whitner, who uh we talked about in the season opener.",
+    "timestamp" : "10:31-10:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "uh literally officially changed his name.",
+    "timestamp" : "10:36-10:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He dropped the H in Whitner and changed the name to Dante Hitner.",
+    "timestamp" : "10:38-10:42"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He did that um legally change his name on his uh certificate.",
+    "timestamp" : "10:42-10:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So playing Dante Hitner because he got called for so many hits",
+    "timestamp" : "10:46-10:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um they also drafted Kyle Williams, uh defensive tackle from LSU in the fifth round, who um was a pro bowl of them too.",
+    "timestamp" : "10:50-10:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So solid draft.",
+    "timestamp" : "10:58-10:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um but both of those guys, defensive guys.",
+    "timestamp" : "10:59-11:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They actually",
+    "timestamp" : "11:02-11:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Drafted just about uh they drafted two offensive tackles and an offensive guard in this draft.",
+    "timestamp" : "11:04-11:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Everybody else is on defense.",
+    "timestamp" : "11:10-11:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Which, you know, um interesting approach considering your quarterback is JP Lawson, but you know, what are you gonna do?",
+    "timestamp" : "11:12-11:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, they have like Well I feel like their run of this would probably be decent.",
+    "timestamp" : "11:19-11:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, they they've always had, you know, Wills McGahey and um who was the other thing.",
+    "timestamp" : "11:24-11:28"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They had Travis Henry before him, who was a pretty good he was a true three down back and pounder.",
+    "timestamp" : "11:28-11:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean he had some ideas there and",
+    "timestamp" : "11:33-11:35"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think it was Marshawn Lynch after that, right?",
+    "timestamp" : "11:35-11:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Lynch was there, yeah.",
+    "timestamp" : "11:38-11:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean he didn't want to be there.",
+    "timestamp" : "11:39-11:40"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And good defenses and bad quarterbacks as well.",
+    "timestamp" : "11:44-11:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Literally everything but the quarterback feels like.",
+    "timestamp" : "11:47-11:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "11:49-11:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "We had a young Jason Peters at left tackle that year.",
+    "timestamp" : "11:50-11:53"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean, you know, like",
+    "timestamp" : "11:53-11:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "The defense alone was g probably good enough to carry.",
+    "timestamp" : "11:56-11:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean, Tequio Spikes was there.",
+    "timestamp" : "11:58-12:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yep.",
+    "timestamp" : "12:00-12:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "London Fletcher.",
+    "timestamp" : "12:00-12:01"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "London Fletcher was there.",
+    "timestamp" : "12:01-12:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean Schobel was there.",
+    "timestamp" : "12:02-12:04"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah, Shobel is the one that you always think about as a Patriots fan to be like, you have to watch out for him.",
+    "timestamp" : "12:04-12:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, he would just demolish Matt Lane.",
+    "timestamp" : "12:10-12:13"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "12:13-12:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "12:14-12:14"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Multiple size of the top of signs to it.",
+    "timestamp" : "12:14-12:19"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "12:18-12:18"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Well, you mean them look really good one or the other?",
+    "timestamp" : "12:19-12:20"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I'm about to do that.",
+    "timestamp" : "12:20-12:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well he just struggled with speed, guys, and Iron Trobble is that kind of like smaller defensive end who just used speed kind of all the time.",
+    "timestamp" : "12:21-12:29"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "12:29-12:30"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, that that was a really good defensive line and right the front seven was pretty solid overall, especially with a young Kyle Williams in there and",
+    "timestamp" : "12:30-12:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, we're they I feel like they had a a decent a one two for that corners, right?",
+    "timestamp" : "12:39-12:44"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Was McGee still there?",
+    "timestamp" : "12:44-12:46"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, Clemens and McGay.",
+    "timestamp" : "12:47-12:48"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Nick Clemens was a really good corner.",
+    "timestamp" : "12:50-12:52"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He moved to safety and was also very effective later in his career.",
+    "timestamp" : "12:52-12:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think maybe out of San Francisco or something, but",
+    "timestamp" : "12:55-12:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um yeah, I mean it was a good young team and except for the quarterback.",
+    "timestamp" : "12:58-13:03"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well and I guess the receivers are pretty old at that point too.",
+    "timestamp" : "13:03-13:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Peelers Price and Eric Molds were probably pretty old and beat at that",
+    "timestamp" : "13:05-13:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "by oh six I would think.",
+    "timestamp" : "13:10-13:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it wasn't crazy.",
+    "timestamp" : "13:11-13:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, Lee Evans led the team.",
+    "timestamp" : "13:12-13:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh Lee Evans, yeah.",
+    "timestamp" : "13:14-13:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, twelve hundred yards, eight touchdowns.",
+    "timestamp" : "13:15-13:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So pretty decent.",
+    "timestamp" : "13:17-13:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh Josh Reed was second on the team with four hundred yards and two touchdowns, which",
+    "timestamp" : "13:18-13:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Actually compared to the Patriots, I mean the Patriots in 2006, like this is what they're known for is their receiving woes.",
+    "timestamp" : "13:22-13:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um they made a comment the commentators made a comment about how Ben Watson was leading the team in reception so far in week seven.",
+    "timestamp" : "13:29-13:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and anybody want to guess top five who the the leading receivers end up being on this Patriots team?",
+    "timestamp" : "13:37-13:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh, it's a good one.",
+    "timestamp" : "13:44-13:46"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Ben Watson.",
+    "timestamp" : "13:46-13:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Corey Gillen.",
+    "timestamp" : "13:47-13:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Ben Watson number two.",
+    "timestamp" : "13:48-13:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "She Caldwell is number one, sixty one catches, seven hundred and sixty yards",
+    "timestamp" : "13:53-13:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Was uh Jabbar Gaffney there at that point?",
+    "timestamp" : "13:58-14:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He might have been He he came in at the end of the season actually.",
+    "timestamp" : "14:00-14:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So he wasn't actually on the list, but yeah, he does come in at the end of the season and then sixth round in 07.",
+    "timestamp" : "14:03-14:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um Kevin Falk maybe?",
+    "timestamp" : "14:08-14:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Kevin Falk was number four.",
+    "timestamp" : "14:10-14:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That's good.",
+    "timestamp" : "14:11-14:12"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Are you good?",
+    "timestamp" : "14:12-14:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Troy Brown number three.",
+    "timestamp" : "14:13-14:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Troy Brown, yes",
+    "timestamp" : "14:14-14:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then number five, Doug Gabriel.",
+    "timestamp" : "14:16-14:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Twenty five.",
+    "timestamp" : "14:18-14:18"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I was gonna say I talked about Gabriel, but I thought that we said that his run went kinda short, so I didn't think he",
+    "timestamp" : "14:19-14:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well he gets twenty-five catches in that run, and that's it for three hundred and forty-five catches, and he's the fifth on the team.",
+    "timestamp" : "14:27-14:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "14:32-14:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think Doug Gabriel is like a legendary athlete.",
+    "timestamp" : "14:33-14:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think Doug Gabriel was like one of those guys that was supposed to be the next thing and just never for or injuries or whatever.",
+    "timestamp" : "14:36-14:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Wouldn't quite hold on the ball.",
+    "timestamp" : "14:45-14:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think his route running wasn't particular I he never seemed to be on the same page as Brady anyway.",
+    "timestamp" : "14:47-14:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You could say the same with Roshea Caldwell.",
+    "timestamp" : "14:51-14:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean this game the o it was it felt like Brady was",
+    "timestamp" : "14:53-14:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We'd try to find call try to find Calwell, try to find Gabriel, and then say, fuck it, I'm throwing it at Watson or Brown on third down every time.",
+    "timestamp" : "14:56-15:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Which is kind of how it's a shitty day.",
+    "timestamp" : "15:03-15:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Too, right?",
+    "timestamp" : "15:05-15:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like wasn't it rainy or Yeah, it was raining.",
+    "timestamp" : "15:05-15:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was yeah, it was kind of it was warm, I think.",
+    "timestamp" : "15:08-15:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was like in the fifties, but it was raining and just a little bit miserable.",
+    "timestamp" : "15:10-15:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um",
+    "timestamp" : "15:13-15:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There was nobody in the stands by the end of this game.",
+    "timestamp" : "15:14-15:16"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Which yeah, Steve gets angry, we don't say the score.",
+    "timestamp" : "15:16-15:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Pajers win this one 28-6.",
+    "timestamp" : "15:20-15:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh didn't feel that close.",
+    "timestamp" : "15:22-15:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um I think the Pages, let's see, they um",
+    "timestamp" : "15:24-15:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Bills first four drives field goal punt fumble interception fumble.",
+    "timestamp" : "15:28-15:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Patriots uh scored two touchdowns on the first two drives, punt of the next four drives, and then two touchdowns after that",
+    "timestamp" : "15:34-15:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So it was like a bit of a slog.",
+    "timestamp" : "15:41-15:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was one of these things where the Patriots couldn't move the ball at all.",
+    "timestamp" : "15:43-15:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think they had I wrote it down somewhere.",
+    "timestamp" : "15:46-15:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was rough.",
+    "timestamp" : "15:50-15:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like m not many yards.",
+    "timestamp" : "15:52-15:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Two sixty five.",
+    "timestamp" : "15:54-15:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, but in like the uh in the the third quarter they had like",
+    "timestamp" : "15:56-16:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Or the second quarter.",
+    "timestamp" : "16:01-16:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh oh yeah, the Bills outgame the Patriots ninety yards to seven in the second quarter.",
+    "timestamp" : "16:03-16:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But the Bills also had three straight uh",
+    "timestamp" : "16:08-16:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "the last three uh all three actually um drives in the second quarter turned into um turnovers, a fumble interception, and a fumble.",
+    "timestamp" : "16:11-16:19"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So I just looked up JP Lossman's season stats.",
+    "timestamp" : "16:20-16:25"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He throws nineteen interceptions.",
+    "timestamp" : "16:26-16:29"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And fumbles 13 times.",
+    "timestamp" : "16:29-16:31"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "13 fumbles.",
+    "timestamp" : "16:33-16:34"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "13 interceptions, 13 fumbles.",
+    "timestamp" : "16:35-16:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He gets three like three of them back, but thhous and whole yards.",
+    "timestamp" : "16:36-16:43"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He was so bad.",
+    "timestamp" : "16:43-16:46"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I don't know how the guy ever fell in love with him and was like, oh yeah, like that's it.",
+    "timestamp" : "16:46-16:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like we're trading back into the first round for him.",
+    "timestamp" : "16:51-16:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I don't know I don't know",
+    "timestamp" : "16:54-16:56"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "16:56-16:56"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'd like to go back to that draft and see who else, you know, who else could have been there.",
+    "timestamp" : "16:57-17:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean, that's kind of how it works.",
+    "timestamp" : "17:01-17:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean the thing is, uh",
+    "timestamp" : "17:02-17:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like uh I saw some I don't know some like stupid nerd video on YouTube where they say that like there was some analysis done where",
+    "timestamp" : "17:05-17:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um like the two positions that aren't drafted enough in the first round are quarterbacks and offensive linemen.",
+    "timestamp" : "17:13-17:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Even though everybody drafts offensive linemen and quarterbacks in the first round, nobody's doing it enough.",
+    "timestamp" : "17:20-17:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like you should just always take a quarterback and an offensive lineman in the first round.",
+    "timestamp" : "17:24-17:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Because they're just so hard to hit on and if you do hit on them, like the return on investment is massive.",
+    "timestamp" : "17:27-17:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "17:33-17:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And the economics now with the fifth year option.",
+    "timestamp" : "17:34-17:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like you pretty much have to take a quarterback in the four.",
+    "timestamp" : "17:36-17:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You'd be smart too at least",
+    "timestamp" : "17:38-17:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "17:40-17:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You might pay more, but you get the option at least.",
+    "timestamp" : "17:40-17:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "17:43-17:43"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well you're right, I agree.",
+    "timestamp" : "17:43-17:44"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think you swing till you hit on that because the first round is such a crapshoot, mostly bus.",
+    "timestamp" : "17:44-17:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, I kinda I think that's kind of what you need to do, it's just like",
+    "timestamp" : "17:50-17:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean if somebody if something like the Browns came out and just drafted a quarterback every round, I wouldn't be angry at that.",
+    "timestamp" : "17:53-17:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like fuck it.",
+    "timestamp" : "17:58-17:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Take your swing.",
+    "timestamp" : "17:58-17:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Figure it out.",
+    "timestamp" : "18:00-18:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And if it doesn't work this year, do it again next year until you find the quarterback and then build something around him.",
+    "timestamp" : "18:00-18:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Fuck it.",
+    "timestamp" : "18:04-18:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "18:04-18:04"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Right?",
+    "timestamp" : "18:04-18:05"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I agree",
+    "timestamp" : "18:05-18:06"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "We already have eight active quarterbacks on the roster.",
+    "timestamp" : "18:06-18:09"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "18:09-18:09"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I think we should be swinging at a twelve.",
+    "timestamp" : "18:09-18:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well that's when you start trash offensive linemen.",
+    "timestamp" : "18:12-18:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's one or the other, right?",
+    "timestamp" : "18:14-18:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "18:15-18:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "If they don't work out, trade 'em for someone.",
+    "timestamp" : "18:17-18:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like whatever.",
+    "timestamp" : "18:18-18:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You can you can get",
+    "timestamp" : "18:19-18:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You can get decent return for even back em quarterbacks, right?",
+    "timestamp" : "18:20-18:24"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "That's saying you know.",
+    "timestamp" : "18:24-18:26"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Uh just a side note, I am now starting",
+    "timestamp" : "18:26-18:29"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "to watch the game.",
+    "timestamp" : "18:30-18:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh good.",
+    "timestamp" : "18:31-18:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Thanks.",
+    "timestamp" : "18:31-18:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's exactly what we need.",
+    "timestamp" : "18:32-18:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Not even bothered.",
+    "timestamp" : "18:33-18:34"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I just want I just want the fans of the podcast to know how dedicated I am to this.",
+    "timestamp" : "18:34-18:39"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So yeah.",
+    "timestamp" : "18:39-18:40"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Are you planning to finish the game after we're done here?",
+    "timestamp" : "18:40-18:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, I'd like to lay on and just keep watching it or are you just gonna watch for like the next forty five minutes and then be done with it?",
+    "timestamp" : "18:45-18:51"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I'm gonna try to do my best guess to where I get the start of the where I start and the duration of this podcast it ends right as we end.",
+    "timestamp" : "18:50-19:02"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So I'm gonna have to do a little investigation, uh, updates to come.",
+    "timestamp" : "19:01-19:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No chance.",
+    "timestamp" : "19:07-19:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right.",
+    "timestamp" : "19:09-19:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um",
+    "timestamp" : "19:10-19:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Let's talk about Wills McGahey a bit a little bit more.",
+    "timestamp" : "19:11-19:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um because coming into this game, he is the AFC's leading rusher.",
+    "timestamp" : "19:14-19:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and it seems like he was like the way that the announcers were talking about him, he was like",
+    "timestamp" : "19:17-19:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "just all that the Bills had in two thousand six.",
+    "timestamp" : "19:24-19:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and I think they were Dick Duran was quoted saying, like, we want to give him at least like twenty-five to thirty-five touches a game, which",
+    "timestamp" : "19:27-19:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like in this day and age, like like I understand like Bell Cow backs, but just like coming to me like no he we're just gonna give it to him every play and see what happens",
+    "timestamp" : "19:35-19:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And he has 516 yards coming into this, but like he was averaging 3.",
+    "timestamp" : "19:45-19:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "9 yards a carry or something, which, you know, so it's it's more just like volume over like quality.",
+    "timestamp" : "19:49-19:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But I mean he's a good good uh running back, but he was a fantastic back.",
+    "timestamp" : "19:57-20:02"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean I can vividly remember watching his knee get",
+    "timestamp" : "20:02-20:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "blown out in the college championship game.",
+    "timestamp" : "20:05-20:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like you know, I could I could still see it.",
+    "timestamp" : "20:07-20:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It was burned into my memory.",
+    "timestamp" : "20:09-20:10"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Sadly for that poor young man.",
+    "timestamp" : "20:10-20:12"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But you know he bounced back so well and became",
+    "timestamp" : "20:12-20:15"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, a really good back in the NFL.",
+    "timestamp" : "20:15-20:18"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I can't help but think like, yeah, I mean what what would he look like on a great team or like just, you know, if he didn't get hurt?",
+    "timestamp" : "20:18-20:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like how good was that guy?",
+    "timestamp" : "20:24-20:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, absolutely.",
+    "timestamp" : "20:26-20:26"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But maybe that signaled that knees could be rebuilt and you could bounce back and you know guys like Adrian Peterson could come back and leave the league after uh an ACL tear.",
+    "timestamp" : "20:27-20:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I don't know if it was quite to that scale in fairness, but",
+    "timestamp" : "20:36-20:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean yeah I mean definitely all we had.",
+    "timestamp" : "20:39-20:42"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And a prolific fucker.",
+    "timestamp" : "20:42-20:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I think Greg's already covered that on this podcast.",
+    "timestamp" : "20:44-20:46"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I think we did, yeah.",
+    "timestamp" : "20:46-20:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that was Wolf McGay, wasn't it?",
+    "timestamp" : "20:47-20:49"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Ten kids, nine women.",
+    "timestamp" : "20:49-20:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "There uh Travis Henry was prolific as well.",
+    "timestamp" : "20:50-20:53"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean he had like uh he had a plethora of maybe a Baker's dozen even, I don't know.",
+    "timestamp" : "20:53-20:57"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I seriously think he had like twelve kids or something.",
+    "timestamp" : "20:58-21:00"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Did Greg had a Greg had a whole top like a Mount Rush move?",
+    "timestamp" : "21:00-21:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah he did.",
+    "timestamp" : "21:03-21:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Didn't did Cromarty ever play for Bills?",
+    "timestamp" : "21:04-21:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Antonio Cromani, did he ever play for the Bills?",
+    "timestamp" : "21:06-21:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I I don't think so.",
+    "timestamp" : "21:08-21:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And it might just be there's nothing to do in Buffalo.",
+    "timestamp" : "21:14-21:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Which isn't wasn't that w McGahee's um excuse",
+    "timestamp" : "21:15-21:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like what else do you do?",
+    "timestamp" : "21:19-21:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Of course I have to do it.",
+    "timestamp" : "21:20-21:20"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well I know Marston Lynch hated it there too, but like you know the bars are it's not that bad.",
+    "timestamp" : "21:20-21:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "The bars are open till four AM, which is like nowhere else well, at least in western New York, that's like unique",
+    "timestamp" : "21:24-21:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah.",
+    "timestamp" : "21:31-21:32"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um you're close to Toronto, which is a great city.",
+    "timestamp" : "21:32-21:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean Niagara Falls, there's like plenty of shots of Niagara Falls.",
+    "timestamp" : "21:34-21:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Have you guys ever been there?",
+    "timestamp" : "21:39-21:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh yeah.",
+    "timestamp" : "21:41-21:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Don't go don't go in the off season though.",
+    "timestamp" : "21:43-21:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I've been there in the off season and it's sketchy as shit.",
+    "timestamp" : "21:45-21:48"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It's real sketchy.",
+    "timestamp" : "21:48-21:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It's but yeah, I don't know.",
+    "timestamp" : "21:49-21:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You gotta you gotta really embrace Buffalo",
+    "timestamp" : "21:51-21:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, it's it's not for everyone, which I understand completely.",
+    "timestamp" : "21:54-21:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, but to be fair, like uh I think as a football player in Buffalo, like that crowd gets out for games.",
+    "timestamp" : "21:58-22:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like even this one, halfway through the third and and you're like",
+    "timestamp" : "22:04-22:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It it sounded like a playoff game, even though you got JP Lawson out there turning the ball over three times all by himself.",
+    "timestamp" : "22:08-22:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and just like Yeah",
+    "timestamp" : "22:14-22:17"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "The fans are really good.",
+    "timestamp" : "22:18-22:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean I'm like I maybe you could say that about every stadium.",
+    "timestamp" : "22:19-22:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'm sure you guys have amazing fans.",
+    "timestamp" : "22:21-22:23"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You've been been pretty spoiled with a lot of success, which is cool.",
+    "timestamp" : "22:23-22:27"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But like fans are good probably everywhere.",
+    "timestamp" : "22:27-22:30"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But like",
+    "timestamp" : "22:30-22:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know the Buffalo fans that are pretty high IQ, like, you know, they may not have a lot of money in a lot of cases, but they're spending it all on that team",
+    "timestamp" : "22:31-22:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "22:38-22:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Which is just like I mean it's like a cult around here.",
+    "timestamp" : "22:39-22:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean saying grill bills is like saying hello to somebody.",
+    "timestamp" : "22:41-22:45"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I do I do I have heard some interesting stories about",
+    "timestamp" : "22:45-22:49"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "uh the Bills Mafia.",
+    "timestamp" : "22:49-22:51"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Like I think I know a Patriots fan that got batteries thrown at them.",
+    "timestamp" : "22:51-22:56"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Not cool.",
+    "timestamp" : "22:58-22:59"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "But like I mean I was still fine.",
+    "timestamp" : "23:01-23:02"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I mean the the I've seen uh Patriots fans get in fights with Eagles fans at a preseason game",
+    "timestamp" : "23:04-23:10"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So like we are we we are the bottom arrow when it comes to the representation of a good f like fan base",
+    "timestamp" : "23:10-23:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And and this is actually uh the new and improved fan base too of Patriots fans.",
+    "timestamp" : "23:18-23:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "23:23-23:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Because like you said, they're they're they're real soft now.",
+    "timestamp" : "23:23-23:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh because of success.",
+    "timestamp" : "23:26-23:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But back in the day it used to be real rough",
+    "timestamp" : "23:28-23:30"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh I think we can all disagree that the Eagles are the worst though.",
+    "timestamp" : "23:30-23:32"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "23:33-23:35"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It was two women in that fought that I saw.",
+    "timestamp" : "23:35-23:37"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Oh yeah, that was the crazy part.",
+    "timestamp" : "23:38-23:39"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Two women.",
+    "timestamp" : "23:40-23:40"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It shells in ones.",
+    "timestamp" : "23:41-23:42"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah Wall was from South.",
+    "timestamp" : "23:42-23:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm against the Beijing's fan was from Lynn.",
+    "timestamp" : "23:43-23:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, Lynn, yeah",
+    "timestamp" : "23:47-23:48"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Honestly, that's like a hell of a throwdown.",
+    "timestamp" : "23:48-23:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I would probably pay to see the something like that go yeah.",
+    "timestamp" : "23:50-23:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh hell yeah.",
+    "timestamp" : "23:53-23:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "24:02-24:02"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, but Bill's f and like I have two young kids, one of whom I'm watching play baseball right now.",
+    "timestamp" : "24:03-24:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I haven't taken",
+    "timestamp" : "24:08-24:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "To to that point, I haven't taken them to a Bills game yet because it is really, really rough.",
+    "timestamp" : "24:09-24:14"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And maybe I'm like, you know, maybe I'm too soft at this point, but like you know, I",
+    "timestamp" : "24:14-24:18"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You gotta get in that experience.",
+    "timestamp" : "24:19-24:20"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "How old are they?",
+    "timestamp" : "24:20-24:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Nine and six, you know.",
+    "timestamp" : "24:22-24:23"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So I don't I haven't cared.",
+    "timestamp" : "24:23-24:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They're the perfect age for the yeah, the Stanley for the gin, exactly.",
+    "timestamp" : "24:27-24:30"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And everyone asked, this is water.",
+    "timestamp" : "24:30-24:32"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I know.",
+    "timestamp" : "24:32-24:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It's a rite of passage.",
+    "timestamp" : "24:33-24:35"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yes.",
+    "timestamp" : "24:35-24:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You gotta hand the torch down.",
+    "timestamp" : "24:36-24:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You will carry the gin myself",
+    "timestamp" : "24:37-24:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Just as your son will for you.",
+    "timestamp" : "24:42-24:44"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yes, yeah absolutely.",
+    "timestamp" : "24:45-24:47"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So Matt, I do have a question for you.",
+    "timestamp" : "24:47-24:49"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "24:49-24:49"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "If you could if you could give you me a top five of your",
+    "timestamp" : "24:49-24:54"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "uh Bill's quarterbacks who would they be?",
+    "timestamp" : "24:54-24:57"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "'Cause I feel like we're shitting on JP Lossman a lot, but I think he's actually like higher up there in Bill's echelon over the last at least twenty-five years",
+    "timestamp" : "24:57-25:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He's so it's that is that is uh wild if that's like a true statue, that's just like so wild and demoralizing",
+    "timestamp" : "25:08-25:16"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um yeah, like I think like I think Josh Allen, yeah and Homer, but I think he's the best player I've ever seen play football.",
+    "timestamp" : "25:16-25:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He's really good.",
+    "timestamp" : "25:26-25:27"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "There's only a few guys I've ever seen that can truly control a game.",
+    "timestamp" : "25:29-25:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like you had one of them.",
+    "timestamp" : "25:33-25:35"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh for sure.",
+    "timestamp" : "25:37-25:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um he's better than he's way better than Cam Newton was.",
+    "timestamp" : "25:38-25:42"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um he's bigger, he's faster, he throws better, like",
+    "timestamp" : "25:42-25:45"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, there's no comp to me.",
+    "timestamp" : "25:46-25:47"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I I haven't seen it yet.",
+    "timestamp" : "25:47-25:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It's like L way but bigger.",
+    "timestamp" : "25:49-25:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, maybe he should win something first, and then he can be L Way but bigger.",
+    "timestamp" : "25:50-25:53"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well it's L way a very long time.",
+    "timestamp" : "25:53-25:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So true",
+    "timestamp" : "25:55-25:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean the AFC's just so loaded, I'd feel like if last year wasn't our year it's just the the mountain gets taller each year with Burrow Lamar",
+    "timestamp" : "25:58-26:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Mahomes.",
+    "timestamp" : "26:06-26:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean the list goes on.",
+    "timestamp" : "26:07-26:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But to answer your question, like Josh Allen at the top, for me, I just love him.",
+    "timestamp" : "26:08-26:12"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'm I wasn't like a big Jim Kelly guy just 'cause I always heard that he was a kind of a disaster behind the scenes and if he wasn't we probably would have won at least one of those",
+    "timestamp" : "26:12-26:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Super Bowls.",
+    "timestamp" : "26:21-26:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I've heard the same thing, yeah.",
+    "timestamp" : "26:22-26:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I've heard a huge dickhead too.",
+    "timestamp" : "26:23-26:25"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He doesn't carry like an amazing reputation like, you know.",
+    "timestamp" : "26:27-26:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But folks that like are in the Yeah.",
+    "timestamp" : "26:31-26:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So but you know, of course he was a G and like he deserves that spot.",
+    "timestamp" : "26:33-26:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He might be like a one B.",
+    "timestamp" : "26:36-26:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um wasn't old enough to watch Jack Kemp play, but I mean I suppose he belongs in that conversation just because it was so good",
+    "timestamp" : "26:38-26:44"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah, but I mean I'm talking just like what you've seen as a Bills fan.",
+    "timestamp" : "26:44-26:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I want you to watch the Alan Bloodsoe for sure.",
+    "timestamp" : "26:49-26:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'm sorry.",
+    "timestamp" : "26:55-26:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh Floodie.",
+    "timestamp" : "26:55-26:56"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Fu fuck yeah.",
+    "timestamp" : "26:56-26:57"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, dude.",
+    "timestamp" : "26:57-26:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That Footy was one of the thick I love watching that dude play football.",
+    "timestamp" : "26:58-27:02"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh yeah",
+    "timestamp" : "27:02-27:03"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He would be I think he could play in today's game and be fairly successful.",
+    "timestamp" : "27:03-27:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think he probably might be better at today's game.",
+    "timestamp" : "27:07-27:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I think so.",
+    "timestamp" : "27:09-27:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's so much more wide open, yeah.",
+    "timestamp" : "27:10-27:13"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But flu floody for sure.",
+    "timestamp" : "27:12-27:14"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Uh I drew blood, so I would put in that conversation.",
+    "timestamp" : "27:14-27:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "27:18-27:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, the last spot gets a little murky.",
+    "timestamp" : "27:19-27:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "How do you feel about Ryan Fitzpatrick?",
+    "timestamp" : "27:22-27:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "27:24-27:25"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "He kinda like brought you guys like he raised that Barbie a little bit.",
+    "timestamp" : "27:25-27:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He did and he got a raw deal too.",
+    "timestamp" : "27:31-27:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He's like well they I feel like we paid him and then kicked him out like shortly there after.",
+    "timestamp" : "27:33-27:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "like bad business.",
+    "timestamp" : "27:39-27:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "If he had just stayed, that dude would be you know, circle of hall of fame, you know, circle of fame in Buffalo.",
+    "timestamp" : "27:41-27:48"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um yeah, probably I guess Fitz I I don't I feel like he didn't play long enough, but he is kind of a legend there, isn't he?",
+    "timestamp" : "27:48-27:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "27:55-27:56"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "All right, fun fact to support Tim's point.",
+    "timestamp" : "27:59-28:02"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "JP Lossman, 10th all-time Bills passing leader.",
+    "timestamp" : "28:02-28:06"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep.",
+    "timestamp" : "28:06-28:07"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Not bad.",
+    "timestamp" : "28:08-28:09"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just ahead of Trent Edwards, Rob Johnson, EJ Manuel, Todd Collins, Kyle Orton, Alex Van Delt.",
+    "timestamp" : "28:09-28:17"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I'll take that, dude.",
+    "timestamp" : "28:20-28:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, well uh sneakly on here at number seven is Tyrod Taylor.",
+    "timestamp" : "28:22-28:28"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, I mean he was the first one that led us back to the playoffs.",
+    "timestamp" : "28:28-28:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think we I don't know if we won or lost in Jacksonville.",
+    "timestamp" : "28:31-28:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It was like nine to three, but he brought us right.",
+    "timestamp" : "28:34-28:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He was good.",
+    "timestamp" : "28:37-28:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "28:39-28:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "28:39-28:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Uh we've given some good guys raw deals, I feel like.",
+    "timestamp" : "28:40-28:43"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Then there's just some really bad ones too in there.",
+    "timestamp" : "28:43-28:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like like he just said, Alex Van Pelt.",
+    "timestamp" : "28:45-28:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Alex Van Pelt.",
+    "timestamp" : "28:49-28:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He was like a playing coach.",
+    "timestamp" : "28:51-28:53"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Kyle Orton, right?",
+    "timestamp" : "28:53-28:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Did you guys trap him?",
+    "timestamp" : "28:54-28:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, they brought in Kyle Orton, like the ghost of Kyle Orton late in his career.",
+    "timestamp" : "28:55-29:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think he had like a",
+    "timestamp" : "29:00-29:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "six pack clipped to his belt at that point or was like actively smoking a cigar in the huddle or something like that.",
+    "timestamp" : "29:00-29:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like for real?",
+    "timestamp" : "29:06-29:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think I think he seriously was like smoking cigars in the locker room.",
+    "timestamp" : "29:07-29:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We call that the Jay Cutler",
+    "timestamp" : "29:11-29:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "29:12-29:13"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, yeah.",
+    "timestamp" : "29:15-29:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "29:18-29:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But to be fair, he went uh he played one he played twelve games in twenty fourteen, went summoning five",
+    "timestamp" : "29:18-29:24"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So good enough for fifteenth on the on the fancy one.",
+    "timestamp" : "29:25-29:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's almost a boy.",
+    "timestamp" : "29:31-29:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean Rob Johnson Rob Johnson was like the biggest one of all 'cause like Doug Foodie, that was his team and like they were a they were a playoff team, like a legit that was the Music City Miracle game.",
+    "timestamp" : "29:33-29:44"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "And they fucked like",
+    "timestamp" : "29:44-29:46"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "openly fucked him like and didn't let him start a game that he earned and like would just arbitrarily put in Rob Johnson.",
+    "timestamp" : "29:46-29:53"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like what team would do that right now in the NFL I wonder",
+    "timestamp" : "29:53-29:57"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Jets?",
+    "timestamp" : "29:57-29:57"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like who who would do that?",
+    "timestamp" : "29:57-29:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Jets.",
+    "timestamp" : "29:59-29:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "The Jets.",
+    "timestamp" : "29:59-30:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Maybe the Jets.",
+    "timestamp" : "30:00-30:01"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They'd have to get that far first.",
+    "timestamp" : "30:01-30:03"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Fast.",
+    "timestamp" : "30:03-30:03"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They'd have to get that far.",
+    "timestamp" : "30:03-30:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Also true.",
+    "timestamp" : "30:05-30:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, good point.",
+    "timestamp" : "30:06-30:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Imagine like that's",
+    "timestamp" : "30:10-30:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like Brady gets you guys to the playoffs.",
+    "timestamp" : "30:12-30:14"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Now that's an extreme comp, but we're gonna let Jim Storgy take this one, I think.",
+    "timestamp" : "30:14-30:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well you're just throwing Bledsoe back in.",
+    "timestamp" : "30:18-30:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's like, well that I mean that was the talk in two thousand one.",
+    "timestamp" : "30:20-30:22"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well that would have probably worked",
+    "timestamp" : "30:23-30:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well, I don't know.",
+    "timestamp" : "30:24-30:25"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean he was good enough.",
+    "timestamp" : "30:25-30:26"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Good at keeping you in it for the first three quarters and then he will fuck you in the end.",
+    "timestamp" : "30:33-30:39"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "He'll do something.",
+    "timestamp" : "30:39-30:40"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Brady was good at he could suck through the first three quarters, but if you gave him just enough",
+    "timestamp" : "30:40-30:45"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Like time the last like eighteen minutes of the game, don't do that because it it really gives him a chance to prove himself and",
+    "timestamp" : "30:46-30:54"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "30:55-30:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Don't fumble the kickoff.",
+    "timestamp" : "30:57-30:58"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "You know, if if he kicks if you if you get it and you kick it off and all you gotta do is take a knee and the game's over, don't take it out of the end zone and fumble it and give him a chance.",
+    "timestamp" : "30:58-31:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "31:05-31:05"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Don't do that.",
+    "timestamp" : "31:05-31:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Don't do that.",
+    "timestamp" : "31:06-31:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Remember that time you guys played the Falcons you knew you were way down?",
+    "timestamp" : "31:06-31:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The rings of bell.",
+    "timestamp" : "31:10-31:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I couldn't believe what I was seeing watching that game.",
+    "timestamp" : "31:13-31:16"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I remember my son was like a just born like newborn baby.",
+    "timestamp" : "31:16-31:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I was watching it with him.",
+    "timestamp" : "31:19-31:20"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And I'm like trying not to scream, I didn't have a horse in the race.",
+    "timestamp" : "31:20-31:23"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I probably didn't want you guys technically, but I was like, yeah, after a while I'm like, yeah, yeah.",
+    "timestamp" : "31:23-31:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There's no way they pull this off, yeah.",
+    "timestamp" : "31:28-31:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I remember right before the the sack, I'm like what trying to do the math in my head like well if they were to get a turnover here instead of like having the Falcons run out the clock, then maybe",
+    "timestamp" : "31:31-31:39"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then like the next play it happened, like oh fuck no, this isn't really gonna happen, is it?",
+    "timestamp" : "31:39-31:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Me and Greg are doing that in the Seattle Super Bowl that just happened.",
+    "timestamp" : "31:44-31:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh you do it every year.",
+    "timestamp" : "31:48-31:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You do it every game.",
+    "timestamp" : "31:52-31:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You're like, well there's still a chance 'cause I've played enough Madden to know that if I score a touchdown here, get the onsized kick and then do it again, I'm only down by two touchdowns and there's still about four minutes left",
+    "timestamp" : "31:53-32:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well very much alive.",
+    "timestamp" : "32:06-32:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Exactly.",
+    "timestamp" : "32:08-32:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "When Brady are.",
+    "timestamp" : "32:09-32:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "32:11-32:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "32:12-32:13"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, no, you guys",
+    "timestamp" : "32:13-32:15"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You I mean you just could come into Buffalo when we were down and put this like vanilla milk toast game plan together, kick our ass easily",
+    "timestamp" : "32:15-32:25"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, easy flight, wipe your hands clean, fly back to Boston like, you know.",
+    "timestamp" : "32:25-32:29"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Just like procedural ass kickings.",
+    "timestamp" : "32:29-32:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I feel like we suffered those for",
+    "timestamp" : "32:31-32:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "you know, over a decade and a half or more.",
+    "timestamp" : "32:33-32:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean about right, yeah.",
+    "timestamp" : "32:36-32:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Pro yeah, probably closer to two decades.",
+    "timestamp" : "32:39-32:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um yeah, it's just one of those things where",
+    "timestamp" : "32:41-32:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh even in this game the commentators made some remark about um I think I wrote it down.",
+    "timestamp" : "32:45-32:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah, the second meeting um between",
+    "timestamp" : "32:52-32:55"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "the Bills and the Patriots for the past three seasons had all been Patriots blowouts.",
+    "timestamp" : "32:55-33:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like the first game was always close or in the case of what was it, 2004 the four the um",
+    "timestamp" : "33:01-33:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Or three, the the huge blowout by the Bills, the third-one-nothing.",
+    "timestamp" : "33:07-33:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But Patrick Season like the second game is always just like a laugher.",
+    "timestamp" : "33:12-33:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And this game wasn't particularly close either, so I I guess you'd call it a blowout.",
+    "timestamp" : "33:15-33:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um this game was over the fourth quarter for sure.",
+    "timestamp" : "33:20-33:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it was it definitely was.",
+    "timestamp" : "33:22-33:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um, yeah, I mean so good.",
+    "timestamp" : "33:24-33:30"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, if he saw it once",
+    "timestamp" : "33:30-33:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, you and you guys have such amazing personnel too.",
+    "timestamp" : "33:32-33:35"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I mean your defense in those days was, you know, top three, I feel like, every year.",
+    "timestamp" : "33:35-33:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I mean this was this was the year where yeah they they had this the era where like the whole defensive line was just first round draft picks.",
+    "timestamp" : "33:40-33:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You had Vince Will Fork, you had Richard Seymour, you had um who else is uh on the front there?",
+    "timestamp" : "33:48-33:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um I think it was Travis Green was there, Willie McGuinness was still uh",
+    "timestamp" : "33:54-33:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Just like yeah.",
+    "timestamp" : "34:00-34:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, Vrabel and then I'll know.",
+    "timestamp" : "34:02-34:04"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I think I think McGuinness is already in uh Cleveland now.",
+    "timestamp" : "34:04-34:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Is he in Cleveland at this point?",
+    "timestamp" : "34:08-34:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah.",
+    "timestamp" : "34:08-34:09"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "We got Rosie Colvin.",
+    "timestamp" : "34:09-34:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's right, Rosie Colvin.",
+    "timestamp" : "34:10-34:11"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Um we just got j junior sayao",
+    "timestamp" : "34:11-34:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He was like he was legit good for",
+    "timestamp" : "34:26-34:28"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "A wow.",
+    "timestamp" : "34:29-34:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "34:29-34:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He was one of those guys that was always like he's either get the interception or give up the touchdown",
+    "timestamp" : "34:30-34:36"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "34:36-34:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You know?",
+    "timestamp" : "34:37-34:37"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It's his career where where that that like nostalgia kind of washes over because he talks so much shit",
+    "timestamp" : "34:37-34:44"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "34:44-34:44"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "And it's just like as a homer, that's just kind of your natural reaction.",
+    "timestamp" : "34:44-34:48"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "34:48-34:49"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It's like Brady, Brady hasn't done himself any favors post post retirement as you know, and the advanced Jason fan.",
+    "timestamp" : "34:49-34:55"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "34:55-34:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "34:56-34:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He's a shut shut the fuck up is what he needs.",
+    "timestamp" : "34:56-34:59"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, I only care about what they do on the field.",
+    "timestamp" : "34:59-35:01"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And on this one, like they're lost when it's like I think it was seven three and the bills are in the red zone, maybe fourteen three.",
+    "timestamp" : "35:01-35:08"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And he just tries to throw an out route, just doesn't have the arm strength at all.",
+    "timestamp" : "35:07-35:12"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But steers him down.",
+    "timestamp" : "35:12-35:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Easy pick.",
+    "timestamp" : "35:14-35:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, and it was like like uh he was on the right hash and tried to throw it to the left sideline, he just didn't have the arm for that.",
+    "timestamp" : "35:15-35:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like",
+    "timestamp" : "35:21-35:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Remind me watching Mac and Matt's like, don't throw to Mac, don't throw to Ohio.",
+    "timestamp" : "35:21-35:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, we all saw that one coming.",
+    "timestamp" : "35:28-35:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But then you also have the the very um Buffaloesque It's in the fourth court, he's trying to make something happen.",
+    "timestamp" : "35:31-35:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "JB Law you know voids like",
+    "timestamp" : "35:36-35:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Two rushers in the backfield, takes off upfield, and then goes to uh jump out of the way of the umpire and drops the football and the patriot.",
+    "timestamp" : "35:38-35:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's like we were stumbled by the referee.",
+    "timestamp" : "35:47-35:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "35:50-35:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I wonder whose pocket he was in.",
+    "timestamp" : "35:51-35:54"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I mean the announcers are like how can your luck be that bad?",
+    "timestamp" : "35:55-35:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah that was a reaction.",
+    "timestamp" : "35:58-36:01"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Sometimes you gotta wonder.",
+    "timestamp" : "36:01-36:03"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I wonder what the spread was and like how close the bills were coming to it and you know",
+    "timestamp" : "36:03-36:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh god.",
+    "timestamp" : "36:08-36:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, I mean what was a spread in this game?",
+    "timestamp" : "36:09-36:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was probably I don't know how it was that class.",
+    "timestamp" : "36:13-36:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There wasn't wasn't enough.",
+    "timestamp" : "36:16-36:18"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "They're so Yeah.",
+    "timestamp" : "36:20-36:22"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It probably was like half or something.",
+    "timestamp" : "36:22-36:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I couldn't have been too crazy at that point.",
+    "timestamp" : "36:24-36:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Then the over-under was 37.",
+    "timestamp" : "36:28-36:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They hit the under.",
+    "timestamp" : "36:30-36:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's very early 2000s football games.",
+    "timestamp" : "36:31-36:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Hitting the under on 37.",
+    "timestamp" : "36:34-36:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Nice.",
+    "timestamp" : "36:36-36:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, yeah, yeah.",
+    "timestamp" : "36:38-36:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "When running backs we get 30 carries.",
+    "timestamp" : "36:39-36:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You had the blessing of Corey Dillon late in his career and then who was another you had another great back late in uh Fred Taylor",
+    "timestamp" : "36:43-36:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah.",
+    "timestamp" : "36:50-36:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He he did not play well for the page, but yeah, he was there.",
+    "timestamp" : "36:51-36:53"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "We hit we have more in Spalone and at this time uh he was a rookie this year.",
+    "timestamp" : "36:57-37:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, Lawrence Morrone actually looking shockingly good",
+    "timestamp" : "37:02-37:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Better than I remember.",
+    "timestamp" : "37:05-37:06"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He's looked awesome all year so far.",
+    "timestamp" : "37:06-37:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And he's returning kicks.",
+    "timestamp" : "37:08-37:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I did not remember that at all.",
+    "timestamp" : "37:09-37:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But he had one where he literally stole it out of Kevin Falk's hands.",
+    "timestamp" : "37:11-37:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then just like took off with it and goes like 60 yards.",
+    "timestamp" : "37:16-37:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Almost returned to it.",
+    "timestamp" : "37:20-37:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "37:21-37:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He's a big dude.",
+    "timestamp" : "37:25-37:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And so, you know, these",
+    "timestamp" : "37:26-37:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "um kickoff guys are coming down trying to tackle him one on one.",
+    "timestamp" : "37:28-37:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He just runs through 'em.",
+    "timestamp" : "37:32-37:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Which makes you think like why don't they have more running backs returning kicks?",
+    "timestamp" : "37:33-37:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean they kind of do now with the new kickoff rules, but I'm surprised he didn't see that more often.",
+    "timestamp" : "37:37-37:42"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Because it was, I mean, you you did see it back in the day.",
+    "timestamp" : "37:42-37:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um, you know, Kevin Falk were obviously returning kicks.",
+    "timestamp" : "37:47-37:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um we've seen Deion Lewis returning kicks.",
+    "timestamp" : "37:50-37:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um",
+    "timestamp" : "37:53-37:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You know, uh sprolls, I think.",
+    "timestamp" : "37:54-37:55"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Uh from the lot.",
+    "timestamp" : "37:55-37:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, okay.",
+    "timestamp" : "37:58-37:59"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So like um oh there's a couple",
+    "timestamp" : "37:59-38:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I remember um Legarrett Blunt returning kicks in the playoffs against the Colts one year.",
+    "timestamp" : "38:03-38:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, and he had so many guys.",
+    "timestamp" : "38:10-38:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was in the rain too.",
+    "timestamp" : "38:12-38:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm just like there's there's nothing I would want to do less than tackle Legarrett Blunt who has a",
+    "timestamp" : "38:13-38:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Twenty yard head start in the rain in the cold?",
+    "timestamp" : "38:17-38:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Fuck no.",
+    "timestamp" : "38:20-38:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That the Flake Eight game like always pissed me off so bad because I was like I watched every snap of that game and it wasn't the softball.",
+    "timestamp" : "38:21-38:28"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It was",
+    "timestamp" : "38:28-38:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The soft defense.",
+    "timestamp" : "38:29-38:30"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Blunt getting thirty-five carries and just like destroying you with for like three touchdowns and a hundred eighty or whatever.",
+    "timestamp" : "38:30-38:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, he could have done that with a beach ball.",
+    "timestamp" : "38:36-38:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It didn't matter.",
+    "timestamp" : "38:38-38:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, yeah.",
+    "timestamp" : "38:38-38:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He was he dominated that.",
+    "timestamp" : "38:39-38:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He had nothing to do with the ball.",
+    "timestamp" : "38:40-38:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Stupid.",
+    "timestamp" : "38:43-38:44"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I love watching that dude play though.",
+    "timestamp" : "38:44-38:46"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I thought he was Yeah, so right.",
+    "timestamp" : "38:46-38:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm mad that some of these other guys did it, but I'm so mad that he was Yeah.",
+    "timestamp" : "38:52-38:57"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Well, he just like coming out of Oregon when he punched that dude, like he totally deserved that.",
+    "timestamp" : "38:57-39:01"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh yeah.",
+    "timestamp" : "39:01-39:02"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Scarlet letterly he did not deserve or his you know the majority of his career.",
+    "timestamp" : "39:07-39:12"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So I always kinda pulled for him like",
+    "timestamp" : "39:12-39:14"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, on and to be successful.",
+    "timestamp" : "39:14-39:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We've kind of been learning a lot about those sorts of things, um, just from doing the podcast.",
+    "timestamp" : "39:16-39:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like just we will do a deep dive on someone and realize like this person we vilified was like",
+    "timestamp" : "39:21-39:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Didn't deserve it.",
+    "timestamp" : "39:25-39:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like uh Randy Moss was actually like a super chill dude, but just like Yeah.",
+    "timestamp" : "39:26-39:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Was kind of a weird guy.",
+    "timestamp" : "39:30-39:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You know, he lived in like an over fifty-five community just because he didn't want to be bothered.",
+    "timestamp" : "39:32-39:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And just like kind of uh, you know, not not exactly socially he's a bit socially awkward, but you know, because he was such a free athlete, everything was completely overblown.",
+    "timestamp" : "39:36-39:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's like, yeah, whatever it is",
+    "timestamp" : "39:46-39:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "39:49-39:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, it's gotta be so hard, like just in general.",
+    "timestamp" : "39:50-39:52"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I always think like in a celebrity, like what that's like trying to go out to dinner, like trying to eat your spaghetti and meatballs and everyone's staring at you.",
+    "timestamp" : "39:52-39:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like no uh no thanks",
+    "timestamp" : "39:59-40:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, you can't you can't eat that politely.",
+    "timestamp" : "40:00-40:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There's no way.",
+    "timestamp" : "40:02-40:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like it's spaghetti meatballs.",
+    "timestamp" : "40:03-40:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like you're gonna make a mess of that.",
+    "timestamp" : "40:04-40:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Exact yeah, yeah.",
+    "timestamp" : "40:08-40:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I can't believe he used it with his hands.",
+    "timestamp" : "40:09-40:11"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I'm waiting for the Vrabel in uh Diana Rossini.",
+    "timestamp" : "40:12-40:15"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Spaghetti and meatballs photos to drop.",
+    "timestamp" : "40:14-40:17"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Hell yeah.",
+    "timestamp" : "40:18-40:19"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Man, what a it's it's nice to see something negative come up.",
+    "timestamp" : "40:19-40:24"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "She I mean what a discredit to her like industry though, like, you know.",
+    "timestamp" : "40:25-40:29"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I can't say that stuff's not been happening class for a while, but like",
+    "timestamp" : "40:29-40:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh I'm sure.",
+    "timestamp" : "40:33-40:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That's really bad.",
+    "timestamp" : "40:34-40:35"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Who's a weird chick?",
+    "timestamp" : "40:36-40:37"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "If you like I I would listen to her sometimes, she would go on the sports hub and uh like she would say just bizarre things sometimes and I would just be like",
+    "timestamp" : "40:37-40:47"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Frame will be caught in the middle of that but like Yeah yeah.",
+    "timestamp" : "40:55-40:58"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah, you know, you could see it that there was something weird about it.",
+    "timestamp" : "40:58-41:03"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So it's gonna blow over, like but no we should play it back to this game and I'm just like you know as I'm just seeing like most career stat uh sacks versus Tom Brady, Aaron Schobel nine and a half right now",
+    "timestamp" : "41:04-41:16"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Jason Taylor, eight and a half.",
+    "timestamp" : "41:16-41:18"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "John Abraham five and Sean Ellis four.",
+    "timestamp" : "41:18-41:21"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So Shobo and Shobull fights uh",
+    "timestamp" : "41:21-41:24"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "He was a beast.",
+    "timestamp" : "41:25-41:25"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "He's the one that has the most career uh sacks against where he do a fourteen as well too.",
+    "timestamp" : "41:26-41:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah, he ends it with yeah, nobody sacked anymore.",
+    "timestamp" : "41:30-41:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I've uh I've met and hit balls with Kyle Williams before.",
+    "timestamp" : "41:33-41:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um and he's he's cool.",
+    "timestamp" : "41:37-41:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He's a really good golfer.",
+    "timestamp" : "41:38-41:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um he's a member of my club, so I see I've seen him a few times like around training camp and then just like bringing guests through occasionally but",
+    "timestamp" : "41:40-41:47"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That dude is a block of a human being.",
+    "timestamp" : "41:47-41:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh my god, yeah.",
+    "timestamp" : "41:50-41:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like he's like double as wide as me, and shaking his hand is like shaking like a grizzly bear's paw.",
+    "timestamp" : "41:51-41:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I imagine that's what Vince Wilfrock is like.",
+    "timestamp" : "41:57-41:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Just like, yeah.",
+    "timestamp" : "41:59-42:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like super friendly, super happy, but just like, this this man probably could rip my head off my body if he wanted to.",
+    "timestamp" : "42:00-42:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like he physically has that capability.",
+    "timestamp" : "42:06-42:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He won't.",
+    "timestamp" : "42:08-42:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, that's another size human being yet.",
+    "timestamp" : "42:09-42:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean Kyle Williams is like regular big, but then there's Vince Wilfort.",
+    "timestamp" : "42:11-42:15"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "42:15-42:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well I think he's slimmed down now.",
+    "timestamp" : "42:16-42:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Now he's not playing football.",
+    "timestamp" : "42:17-42:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "A lot of them do that.",
+    "timestamp" : "42:18-42:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They just can't look completely different than what they used to look like",
+    "timestamp" : "42:19-42:22"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh yeah, Joe Thomas was like skinny after playing.",
+    "timestamp" : "42:22-42:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "42:27-42:27"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Doesn't this rule for it?",
+    "timestamp" : "42:30-42:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, just to carry the mask.",
+    "timestamp" : "42:31-42:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Uh doesn't Vince Wilfork have like a great barbecue joint somewhere?",
+    "timestamp" : "42:33-42:37"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like in I feel like in Texas he he has something.",
+    "timestamp" : "42:37-42:39"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, he was big into into that.",
+    "timestamp" : "42:39-42:41"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "42:41-42:41"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's cool.",
+    "timestamp" : "42:41-42:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "42:43-42:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So we had some actually three rare Brady touchdowns in a row.",
+    "timestamp" : "42:44-42:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I was yeah, I was gonna bring that up.",
+    "timestamp" : "42:49-42:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I was gonna say when we're talking about um Randy Moss, I'm saying speaking of Randy Moss, um Chad Jackson uh highlighted in this game.",
+    "timestamp" : "42:50-42:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "who was supposed to be the second coming of Randy Moss, um, gets his only touchdown of his career.",
+    "timestamp" : "42:58-43:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Is that is that what you decided, Steve?",
+    "timestamp" : "43:05-43:07"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh that wouldn't surprise me, yeah.",
+    "timestamp" : "43:08-43:09"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He only plays eighteen games in his whole career.",
+    "timestamp" : "43:10-43:12"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "43:12-43:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So he gets his only career touchdowns.",
+    "timestamp" : "43:13-43:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Three touchdowns.",
+    "timestamp" : "43:15-43:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh 35 yard in the back corner.",
+    "timestamp" : "43:17-43:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was nice.",
+    "timestamp" : "43:19-43:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was a good play.",
+    "timestamp" : "43:19-43:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "A quality touchdown dance too, I thought.",
+    "timestamp" : "43:21-43:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There's some good touchdown dances in this game",
+    "timestamp" : "43:23-43:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um between him and Cory Dylan.",
+    "timestamp" : "43:25-43:27"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Corey Dillon had a real nice one, yeah.",
+    "timestamp" : "43:27-43:29"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Like a precursor to the gritty.",
+    "timestamp" : "43:29-43:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it was it was gritty-ish.",
+    "timestamp" : "43:32-43:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I was thinking that.",
+    "timestamp" : "43:33-43:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it was a little bouncier, a little bit lower.",
+    "timestamp" : "43:34-43:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "43:36-43:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was nice, yeah",
+    "timestamp" : "43:37-43:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and then who else had a touch house?",
+    "timestamp" : "43:38-43:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "A good time for end zone celebrations.",
+    "timestamp" : "43:40-43:42"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah.",
+    "timestamp" : "43:42-43:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, this is this is peak end zone celebration.",
+    "timestamp" : "43:43-43:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "This is a peak uh Chad Ochocinko",
+    "timestamp" : "43:45-43:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "43:47-43:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, oh yeah.",
+    "timestamp" : "43:51-43:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There's a cell phone.",
+    "timestamp" : "43:52-43:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah.",
+    "timestamp" : "43:54-43:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That was clutch.",
+    "timestamp" : "43:55-43:56"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Sliding down the end zone post too.",
+    "timestamp" : "43:56-43:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That was awesome.",
+    "timestamp" : "43:58-43:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I love that.",
+    "timestamp" : "43:59-44:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "44:00-44:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "44:00-44:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Randy Moss mooning the the Britannia Moon the Crowd in Green Bay.",
+    "timestamp" : "44:00-44:04"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "44:04-44:05"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "My favorite.",
+    "timestamp" : "44:05-44:05"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "44:05-44:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Love that",
+    "timestamp" : "44:06-44:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So Brady.",
+    "timestamp" : "44:07-44:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Brady and Moss Brady and Moss together.",
+    "timestamp" : "44:09-44:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Imagine if you had that for ten years.",
+    "timestamp" : "44:11-44:13"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "What would the record book actually look like?",
+    "timestamp" : "44:13-44:15"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um I think they'd probably retire before ten years because there'd be nothing left to do",
+    "timestamp" : "44:15-44:20"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, like what challenge there would there be?",
+    "timestamp" : "44:21-44:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "'Cause I I think they after two thousand seven, if they had won that Super Bowl, I think Brady may have called it quits.",
+    "timestamp" : "44:23-44:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think that fueled a second coming.",
+    "timestamp" : "44:31-44:33"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "No way, dude.",
+    "timestamp" : "44:33-44:34"
+  },
+  {
+    "speaker" : "Mom",
+    "text" : "Yeah.",
+    "timestamp" : "44:34-44:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You go off setting all those passing records and ending it with a perfect season that nobody's done",
+    "timestamp" : "44:38-44:44"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "In an eighteen game season?",
+    "timestamp" : "44:44-44:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "44:45-44:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like what else is there to do?",
+    "timestamp" : "44:45-44:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Literally.",
+    "timestamp" : "44:47-44:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Dude's crazy.",
+    "timestamp" : "44:47-44:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He's too much of a competitor to just quit.",
+    "timestamp" : "44:48-44:50"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Maybe.",
+    "timestamp" : "44:50-44:51"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Maybe.",
+    "timestamp" : "44:51-44:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I don't know.",
+    "timestamp" : "44:52-44:53"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "The other touchdowns from Mabrill.",
+    "timestamp" : "44:53-44:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "One of his three touchdowns as well.",
+    "timestamp" : "44:55-44:58"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Whose?",
+    "timestamp" : "44:58-44:59"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Doug Gabriel.",
+    "timestamp" : "44:59-45:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah, Doug Gabriel had a touchdown.",
+    "timestamp" : "45:00-45:01"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It was a good ratio, 25 catches.",
+    "timestamp" : "45:01-45:03"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Three of them were touchdowns.",
+    "timestamp" : "45:03-45:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah.",
+    "timestamp" : "45:04-45:06"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, that was yeah, one of his twenty-five catches for three hundred yards.",
+    "timestamp" : "45:05-45:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "To be fair, uh Doug Gabriel in this game, how many catches did he have, Steve?",
+    "timestamp" : "45:10-45:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Do you have it on there?",
+    "timestamp" : "45:14-45:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "'Cause",
+    "timestamp" : "45:14-45:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Three three for forty five yards and a touchdown.",
+    "timestamp" : "45:15-45:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Because my note is oh shit, there he is.",
+    "timestamp" : "45:17-45:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He finally gets a catch in the fourth quarter.",
+    "timestamp" : "45:19-45:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and then like two plays later he's catching a touchdown.",
+    "timestamp" : "45:21-45:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So, more stop on",
+    "timestamp" : "45:24-45:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh uh let's see what else.",
+    "timestamp" : "45:29-45:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, um another uh pages player in this game, uh Andre Davis citing.",
+    "timestamp" : "45:32-45:36"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um",
+    "timestamp" : "45:36-45:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "in his uh cup of tea with the with the uh Buffalo Bills almost had a deep catch, but you know, was playing about the same as he was on the Patriots the year before",
+    "timestamp" : "45:37-45:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "There was a features player I've never heard of.",
+    "timestamp" : "45:48-45:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh.",
+    "timestamp" : "45:51-45:51"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That I saw.",
+    "timestamp" : "45:51-45:52"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "And I just looked him up and he played 41 games.",
+    "timestamp" : "45:52-45:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh.",
+    "timestamp" : "45:55-45:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Billy Yates.",
+    "timestamp" : "45:56-45:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah, Bill Yeats from uh This is his rookie season.",
+    "timestamp" : "45:57-46:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um he's like a backup backup line lineman.",
+    "timestamp" : "46:00-46:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh it's not, it's his third year.",
+    "timestamp" : "46:03-46:05"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Oh yeah",
+    "timestamp" : "46:05-46:05"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Like and he's like, Billy Yay.",
+    "timestamp" : "46:05-46:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "What?",
+    "timestamp" : "46:07-46:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "How the fuck?",
+    "timestamp" : "46:08-46:08"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "How do you not know who Billy Yeates?",
+    "timestamp" : "46:08-46:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No",
+    "timestamp" : "46:13-46:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "No, all right.",
+    "timestamp" : "46:13-46:14"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Trash in two thousand three by Miami, didn't play at all in two thousand four.",
+    "timestamp" : "46:14-46:18"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Mm-hmm.",
+    "timestamp" : "46:18-46:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, so it was supposed to yeah, so this yeah.",
+    "timestamp" : "46:19-46:22"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "It starts with 14 games in his career.",
+    "timestamp" : "46:22-46:24"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He's on the Patriots for 2008.",
+    "timestamp" : "46:24-46:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, he was just he was like the the swing guy that they would put in whenever everybody got hurt.",
+    "timestamp" : "46:27-46:33"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Because goddamn Yates.",
+    "timestamp" : "46:33-46:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, because this whole this whole uh this is the time when the offensive line couldn't stay healthy too.",
+    "timestamp" : "46:35-46:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and so they were cycling through guys and like um",
+    "timestamp" : "46:40-46:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They even talked in this game, Nick Cajur and Stephen Neal didn't make the trip.",
+    "timestamp" : "46:44-46:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "They were so hard.",
+    "timestamp" : "46:47-46:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And so they only had two backups and Billy Gates was one of them.",
+    "timestamp" : "46:48-46:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So that he came in late in the fourth.",
+    "timestamp" : "46:52-46:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Never heard of that fucking guy.",
+    "timestamp" : "46:55-46:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh, interesting.",
+    "timestamp" : "46:56-46:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You guys always had such great offensive lines too.",
+    "timestamp" : "46:58-47:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like I feel like your s scouting department just",
+    "timestamp" : "47:00-47:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "always came up with get with hits and I think it was uh the secret weapon was probably the um offensive line coach um",
+    "timestamp" : "47:03-47:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Dante Skarnekia was just giving anybody, yeah.",
+    "timestamp" : "47:12-47:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "47:16-47:16"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He's a legend, yeah.",
+    "timestamp" : "47:16-47:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, like they brought in Stephen Neal who wasn't even a wrestler, right?",
+    "timestamp" : "47:17-47:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Exactly, yeah.",
+    "timestamp" : "47:22-47:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He was a wrestler in college and they were like, Yeah, we can teach him how to",
+    "timestamp" : "47:23-47:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "play football.",
+    "timestamp" : "47:25-47:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like it's kind of the same thing.",
+    "timestamp" : "47:26-47:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And you know, he had a bunch of holding calls uh early on, but he figured it out.",
+    "timestamp" : "47:28-47:33"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "47:33-47:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That's a uh that's a good call right there.",
+    "timestamp" : "47:34-47:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Just that that coach is like royalty.",
+    "timestamp" : "47:36-47:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, yeah.",
+    "timestamp" : "47:38-47:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And when he did, um the Patriots lost that game in Denver because",
+    "timestamp" : "47:41-47:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Whoever the right tackle was was tipping the snap and Brady's getting beat up all game.",
+    "timestamp" : "47:46-47:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and then they brought him back the next year and I think they didn't they go to the Super Bowl next year?",
+    "timestamp" : "47:51-47:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Whatever the offensive line got a whole lot better real quick",
+    "timestamp" : "47:56-47:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um, but rarely uh they always seem to struggle against the the Bills, regardless of who was the head coach, who was the defensive coordinator.",
+    "timestamp" : "48:01-48:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The Bills defensive line always gave Brady trouble.",
+    "timestamp" : "48:08-48:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You could always tell like he was never comfortable.",
+    "timestamp" : "48:11-48:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "A little bit of trouble.",
+    "timestamp" : "48:13-48:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Not a lot of trouble.",
+    "timestamp" : "48:14-48:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean they they had a highlight package in this, I think like at the half",
+    "timestamp" : "48:16-48:20"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "of all the hits Brady had taken and they were like legit early 2000 hits.",
+    "timestamp" : "48:20-48:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like he was getting lit up.",
+    "timestamp" : "48:24-48:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "There was that one, that field reverse where he just got completely Yeah, turned around into somebody and just got, yeah, just lit up.",
+    "timestamp" : "48:27-48:35"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's a personal foul these days.",
+    "timestamp" : "48:35-48:36"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's body weight on top of the quarterback.",
+    "timestamp" : "48:36-48:38"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "You can't do that.",
+    "timestamp" : "48:38-48:39"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh yeah.",
+    "timestamp" : "48:39-48:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I think one of the biggest hits Brady's ever taken was in Buffalo.",
+    "timestamp" : "48:41-48:45"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "He got absolutely leveled there.",
+    "timestamp" : "48:45-48:47"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh yeah.",
+    "timestamp" : "48:47-48:48"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean it was probably a hit that",
+    "timestamp" : "48:48-48:49"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I suspended somebody for for this you know this year, but that was uh Greg Williams team, I believe, when he was head coach back then.",
+    "timestamp" : "48:49-48:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh now it makes sense.",
+    "timestamp" : "48:58-49:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Now it makes sense why they hit him like that.",
+    "timestamp" : "49:00-49:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "49:03-49:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, where it it took his helmet off, yeah.",
+    "timestamp" : "49:04-49:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "And he popped back up and and Belichick uh Yeah, he got absolutely smug.",
+    "timestamp" : "49:06-49:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, but Belichick um in um",
+    "timestamp" : "49:11-49:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "In film session the the next week was like uh just playing it over and over again and said, Brady, get the fuck out of bounds.",
+    "timestamp" : "49:15-49:23"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, right, yeah, yeah, yeah.",
+    "timestamp" : "49:24-49:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh but yeah, I mean they always like Brady always seemed to have to get the ball out quick, which is kind of how they approach this game, because they came in with like a really good um",
+    "timestamp" : "49:28-49:38"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "A a bad receiving core and some quality running game, but they just came out just hocking the ball.",
+    "timestamp" : "49:39-49:45"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like going five wide and just throwing it real quick.",
+    "timestamp" : "49:45-49:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and it worked well enough.",
+    "timestamp" : "49:47-49:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah",
+    "timestamp" : "49:49-49:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But I think I I remember seeing Rochet Caldwell had like four catches, five catches for like 17 yards or something like that at the beginning of the game.",
+    "timestamp" : "49:51-50:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So you know",
+    "timestamp" : "50:01-50:02"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Four sacks for the bills, but one of them was Brady just sitting down.",
+    "timestamp" : "50:02-50:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah, giving up and then getting lit up by two separate Bills players for a personal foul which put them uh",
+    "timestamp" : "50:08-50:15"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He was like, alright fine, we'll just take the field goal.",
+    "timestamp" : "50:19-50:21"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I'll just sit down right here.",
+    "timestamp" : "50:21-50:21"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I'm not gonna take a shot and then take the shot anyways.",
+    "timestamp" : "50:21-50:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Takes two shots and then yeah, ends up scoring a touchdown.",
+    "timestamp" : "50:24-50:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Which again, you know, that's the Bills.",
+    "timestamp" : "50:27-50:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's the Bills, baby.",
+    "timestamp" : "50:29-50:30"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just do a b uh cut cut the dig Jira being like, what?",
+    "timestamp" : "50:30-50:34"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "50:34-50:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And it was literally the next play, Corey Dylan goes for a touchdown.",
+    "timestamp" : "50:34-50:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's like, alright, well, what are you gonna do?",
+    "timestamp" : "50:37-50:41"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Not just because we're touched on Corey Dillon gets the edge on them.",
+    "timestamp" : "50:41-50:45"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Like we thought Corey Dillon gets real Cory Divents.",
+    "timestamp" : "50:45-50:49"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "What are you doing, man?",
+    "timestamp" : "50:49-50:50"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "50:50-50:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "H and Corey Dillon hitting the edge of post that's great.",
+    "timestamp" : "50:53-50:56"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Never fast.",
+    "timestamp" : "50:57-50:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "No, no.",
+    "timestamp" : "50:58-50:59"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You don't want him in space though.",
+    "timestamp" : "50:59-51:01"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, because you will that will hurt",
+    "timestamp" : "51:01-51:03"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "2006 Corey Dylan was definitely not fast.",
+    "timestamp" : "51:03-51:05"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "No.",
+    "timestamp" : "51:05-51:06"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "So I'm watching this at two times speed and just watching this out like the Patriots defense, like they're violent.",
+    "timestamp" : "51:06-51:15"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "51:15-51:15"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Like it like",
+    "timestamp" : "51:15-51:17"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "To realize the type of like um aggression that like uh junior sayout and",
+    "timestamp" : "51:17-51:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, they're just throwing their bodies at things.",
+    "timestamp" : "51:35-51:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like it's it's uh I I think the epitome of it is",
+    "timestamp" : "51:37-51:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "watching um Teddy Bruskey on a blitz.",
+    "timestamp" : "51:41-51:44"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And if the back would come to pick him up, he would just try to jump over him and they would clip his legs every time.",
+    "timestamp" : "51:44-51:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "He'd be like, well hopefully my my flailing body will just careen into the quarterback and take him out that way.",
+    "timestamp" : "51:48-51:54"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I don't give a fuck.",
+    "timestamp" : "51:54-51:55"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "51:55-51:56"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "See uh like uh Harrison's trying to get the receiver and only like trips him a bit",
+    "timestamp" : "52:00-52:06"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "But then he just crashes into the linebacker that's going after him.",
+    "timestamp" : "52:06-52:09"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It's like, holy shit, that must have fucking hurt.",
+    "timestamp" : "52:09-52:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "52:12-52:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Just yeah, and and yeah, and there was one play where um um",
+    "timestamp" : "52:13-52:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Junior Seo just like shoots the gap and just absolutely annihilates the running back.",
+    "timestamp" : "52:17-52:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think it was probably Bay.",
+    "timestamp" : "52:22-52:23"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "52:23-52:24"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And then I don't think you've got there yet, but I think the last the third quarter.",
+    "timestamp" : "52:25-52:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um Chad Scott.",
+    "timestamp" : "52:29-52:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Pure Less Price catches the ball and turns around and just gets absolutely just flattened.",
+    "timestamp" : "52:31-52:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like it was one of those hits where you can like hear it, but you can feel it like through the TV sort of hit.",
+    "timestamp" : "52:37-52:43"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I'll be looking for it.",
+    "timestamp" : "52:43-52:44"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "We're in the third quarter right now.",
+    "timestamp" : "52:44-52:46"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Literally the last part of the third quarter.",
+    "timestamp" : "52:46-52:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um, that's how it ends.",
+    "timestamp" : "52:47-52:48"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You're like, oh geez, yeah.",
+    "timestamp" : "52:48-52:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's tough",
+    "timestamp" : "52:50-52:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Your defense was ferocious though.",
+    "timestamp" : "52:52-52:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "When they say defense wins championships, it's that type of defense wins championships.",
+    "timestamp" : "52:54-52:57"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Exactly.",
+    "timestamp" : "52:58-52:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You know, like that's the difference.",
+    "timestamp" : "52:58-53:00"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "'Cause this is this isn't that far removed from that O four team, which I think is arguably the best defense that the Pacers ever put together.",
+    "timestamp" : "53:00-53:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "53:07-53:07"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um Brady coming into his own, but that defense was just like we need to watch some of those games.",
+    "timestamp" : "53:07-53:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I think especially that um Dolphins game in the snow and Gillette where Bruski had the the pick six and they're just throwing the snow up everywhere because everybody had to like dig their way into the the stadium.",
+    "timestamp" : "53:12-53:23"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um like it was a game where like Miami, I don't even know if they made it past half.",
+    "timestamp" : "53:23-53:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It was one of those games where it's just like an absolute demolition.",
+    "timestamp" : "53:28-53:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "You're like, yeah, Brady's good, but like it doesn't matter who's playing quarterback.",
+    "timestamp" : "53:32-53:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "This guy could have gone out there and won that game.",
+    "timestamp" : "53:35-53:38"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "53:38-53:39"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Steve could have won that game.",
+    "timestamp" : "53:39-53:41"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well let's not get too far ahead of our side.",
+    "timestamp" : "53:41-53:44"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah.",
+    "timestamp" : "53:46-53:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like Corey Dill do the rest.",
+    "timestamp" : "53:47-53:49"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Are you gonna do best and worst, Andy?",
+    "timestamp" : "53:50-53:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Alright, yeah, let's do some best and worst.",
+    "timestamp" : "53:52-53:54"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Uh well we gotta explain to Matt what this is.",
+    "timestamp" : "53:54-53:56"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yeah, yeah, go ahead.",
+    "timestamp" : "53:57-53:58"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "When we were kids we would sit around the dinner table and our mom would make us say the best and the worst parts of our day.",
+    "timestamp" : "53:59-54:06"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Mm-hmm.",
+    "timestamp" : "54:06-54:06"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "So we apply that to our games here.",
+    "timestamp" : "54:06-54:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "54:09-54:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So uh let's see.",
+    "timestamp" : "54:10-54:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "My best was um watching Vince Wilfork get uh enough air to bat down a third down pass.",
+    "timestamp" : "54:13-54:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um",
+    "timestamp" : "54:21-54:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The the original Air Vince um which would actually become a logo.",
+    "timestamp" : "54:23-54:28"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Somebody made uh you know the the Air Jordan logo?",
+    "timestamp" : "54:28-54:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Somebody made that little fork after he blocked a field goal to to beat the uh the Jets one year",
+    "timestamp" : "54:31-54:36"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Um bird down.",
+    "timestamp" : "54:36-54:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "54:40-54:40"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "That's awesome.",
+    "timestamp" : "54:44-54:45"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "That's more of an Andy thing.",
+    "timestamp" : "54:46-54:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I'm just a talent.",
+    "timestamp" : "54:48-54:50"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Talent's a strong word.",
+    "timestamp" : "54:50-54:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um I think uh my um honorable mention is Eugene Wilson on that McGay He shovel pass I went for a 56, saved a touchdown.",
+    "timestamp" : "54:52-55:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "by running McGahee down from the other side of the field on a bad hamstring, which fucking Jesus Christ.",
+    "timestamp" : "55:02-55:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um McGahee's not someone you run down generally.",
+    "timestamp" : "55:08-55:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So",
+    "timestamp" : "55:12-55:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and I think my worst is probably the fact that Roshe Caldwell um showed some flashes just enough to get you excited, like, oh maybe this guy, maybe this guy's gonna be it.",
+    "timestamp" : "55:14-55:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um and he just like every time there's like a ball that he needs to catch he doesn't.",
+    "timestamp" : "55:26-55:32"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Like he drops, I think, two touchdowns, but then he makes a diving catch for it to convert like third and four.",
+    "timestamp" : "55:32-55:39"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So congrats.",
+    "timestamp" : "55:39-55:40"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um, so that's my worst is you know, Roshe Calwell showing some flashes, knowing what he will become.",
+    "timestamp" : "55:40-55:47"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "This is my worst too.",
+    "timestamp" : "55:47-55:49"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Because it was in the red zone and it was like a perfect ball from Grady hits him right in the hands.",
+    "timestamp" : "55:49-55:55"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He just hit him in the hands.",
+    "timestamp" : "55:55-55:56"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Drop him.",
+    "timestamp" : "55:56-55:57"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Touchdown.",
+    "timestamp" : "55:57-55:57"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Yep.",
+    "timestamp" : "55:57-55:58"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "But then that was also my best where Tom Barry says, fuck this shit, third down going right to Troy Brown.",
+    "timestamp" : "55:58-56:02"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's exactly what he did.",
+    "timestamp" : "56:02-56:03"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Third mate gets into that shit.",
+    "timestamp" : "56:05-56:07"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just classic.",
+    "timestamp" : "56:07-56:08"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Oh yeah.",
+    "timestamp" : "56:08-56:09"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh Timothy, you got a best and worst?",
+    "timestamp" : "56:10-56:13"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Uh yeah, I'll say uh my best is",
+    "timestamp" : "56:13-56:18"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "The graphic I just saw of the two-headed monster of Hory Dylan and Lawrence Moroney",
+    "timestamp" : "56:19-56:26"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Oh yeah.",
+    "timestamp" : "56:26-56:27"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "And uh my worst, I'm gonna go with Aaron Schobel just because um like I don't really hear his name ever be called, but like the fact that he just would",
+    "timestamp" : "56:27-56:39"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "rain havoc and be the all-time like leading sack header of Tom Brady is uh I think it's disgraceful.",
+    "timestamp" : "56:40-56:47"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "And I and and I I won't I mean he does get a sack in this game.",
+    "timestamp" : "56:47-56:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh so",
+    "timestamp" : "56:51-56:52"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "56:52-56:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "It's in there somewhere.",
+    "timestamp" : "56:53-56:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah.",
+    "timestamp" : "56:54-56:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Two actually it looks like.",
+    "timestamp" : "56:56-56:58"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I don't know if they counted that as a sack, but he definitely had at least a another tackle for loss.",
+    "timestamp" : "57:01-57:06"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "57:06-57:07"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Okay.",
+    "timestamp" : "57:07-57:08"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Yeah.",
+    "timestamp" : "57:08-57:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um best for me and my two sacks.",
+    "timestamp" : "57:09-57:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "57:13-57:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right.",
+    "timestamp" : "57:13-57:13"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, go ahead, Matt.",
+    "timestamp" : "57:13-57:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "What you got?",
+    "timestamp" : "57:14-57:15"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, I mean best for me is Willis McGahey with twenty two touch and over a hundred yards of total offense, clearly the only thing that we had going at all that day.",
+    "timestamp" : "57:16-57:29"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Um",
+    "timestamp" : "57:29-57:29"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Not to say much.",
+    "timestamp" : "57:30-57:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Uh worse.",
+    "timestamp" : "57:31-57:31"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I go with Ryan Lindell missing two field goals.",
+    "timestamp" : "57:31-57:34"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like that dude was pretty money.",
+    "timestamp" : "57:34-57:35"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "That's true.",
+    "timestamp" : "57:35-57:36"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Pick in worse conditions out in Seattle.",
+    "timestamp" : "57:36-57:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Like he was like",
+    "timestamp" : "57:38-57:39"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, pretty good kick.",
+    "timestamp" : "57:39-57:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'm sure like those were critical misses that really kept us from being in the game like any longer than we were, but you know, bad kicking in Buffalo, which is not something",
+    "timestamp" : "57:41-57:51"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Other than the other well I guess we are kinda known for bad kicking, aren't we?",
+    "timestamp" : "57:51-57:55"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You can set yourself up for that one.",
+    "timestamp" : "57:57-58:00"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I guess yeah, we kinda are known for bad kicking, aren't we?",
+    "timestamp" : "58:03-58:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Tough place to get questions.",
+    "timestamp" : "58:06-58:07"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I I I just want the fans to acknowledge what kind of coping",
+    "timestamp" : "58:10-58:15"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "a Bills fan has to do when they have to say, yeah, kicking's not that bad.",
+    "timestamp" : "58:15-58:20"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It's actually",
+    "timestamp" : "58:21-58:21"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I'm not the worst.",
+    "timestamp" : "58:23-58:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean that's about all these all these pages at least complaining about",
+    "timestamp" : "58:27-58:31"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "58:32-58:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Complaining about having three years of not making the playoffs in a row.",
+    "timestamp" : "58:33-58:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "How dare they?",
+    "timestamp" : "58:37-58:38"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Yeah, I know you guys how do you deal with droughts like that?",
+    "timestamp" : "58:38-58:42"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean",
+    "timestamp" : "58:42-58:42"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "But then on those years it's like, well the Celtics won the championship or the Bruins or both, you know?",
+    "timestamp" : "58:44-58:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "I mean there is that.",
+    "timestamp" : "58:49-58:53"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So Yeah, I mean I think that kind of sums up this game",
+    "timestamp" : "58:53-58:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um Steve, what's next week?",
+    "timestamp" : "58:58-59:00"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I don't fucking know.",
+    "timestamp" : "59:00-59:01"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Well you asked me every week, I never know.",
+    "timestamp" : "59:01-59:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So maybe next time you'll you'll like look at it.",
+    "timestamp" : "59:03-59:05"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No, I'm not gonna do it.",
+    "timestamp" : "59:05-59:06"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "No fucking chance.",
+    "timestamp" : "59:06-59:07"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Just take your wins and get out of here.",
+    "timestamp" : "59:10-59:13"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "You focus on the game at hand and I'm I'm gonna be on Steve's side with that one, you know.",
+    "timestamp" : "59:12-59:16"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "He's he's just focused on the here and the and the then",
+    "timestamp" : "59:16-59:20"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I guess.",
+    "timestamp" : "59:20-59:20"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Because it's not the now.",
+    "timestamp" : "59:20-59:21"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "It certainly isn't the now.",
+    "timestamp" : "59:21-59:22"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Well, yeah, I'm gonna I'm gonna take uh, you know, criticism from the guy who's literally still watching the game that we're supposed to have watched to do this this episode.",
+    "timestamp" : "59:22-59:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So thanks Tim.",
+    "timestamp" : "59:30-59:32"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "There, also fair.",
+    "timestamp" : "59:32-59:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Next week.",
+    "timestamp" : "59:33-59:34"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Patriots will go to Minnesota to vis the Vikings.",
+    "timestamp" : "59:34-59:37"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um in uh what looks like another game that probably won't be close",
+    "timestamp" : "59:37-59:41"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Feel like this is the Chad Jackson career game.",
+    "timestamp" : "59:42-59:46"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "I feel like he had a good catch on this game.",
+    "timestamp" : "59:46-59:48"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Don't ruin it for me.",
+    "timestamp" : "59:48-59:49"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "I've never watched this game.",
+    "timestamp" : "59:49-59:50"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "He's talking about it.",
+    "timestamp" : "59:50-59:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh yeah, well, all right.",
+    "timestamp" : "59:54-59:56"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh thank you, Matt, for joining us.",
+    "timestamp" : "59:56-59:58"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Really appreciate it.",
+    "timestamp" : "59:58-59:59"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Thank you guys so much, Jerry.",
+    "timestamp" : "59:59-01:00:01"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, it's a treat to be on with you and meet you guys and thank you for uh you know the opportunity.",
+    "timestamp" : "01:00:01-01:00:07"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "It's really cool what you have here.",
+    "timestamp" : "01:00:07-01:00:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I I'm I'm really into it",
+    "timestamp" : "01:00:08-01:00:10"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah, it's great to hear from, you know, fans of other other organizations.",
+    "timestamp" : "01:00:10-01:00:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh just to kind of see how it compares.",
+    "timestamp" : "01:00:14-01:00:17"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So, you know, how we grew up here we kind of grew up in uh",
+    "timestamp" : "01:00:17-01:00:19"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "era of unprecedente success and we know that's not particularly um common.",
+    "timestamp" : "01:00:20-01:00:25"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um so it's nice to hear it's nice to hear how uh you know the rest of the world had to deal with their football",
+    "timestamp" : "01:00:25-01:00:30"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Upbringing.",
+    "timestamp" : "01:00:30-01:00:32"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "W would you call this a positive",
+    "timestamp" : "01:00:37-01:00:38"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Experience?",
+    "timestamp" : "01:00:38-01:00:39"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Oh yeah, of course, yeah, dude.",
+    "timestamp" : "01:00:39-01:00:41"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I mean I've never like I never got too into like I mean I love my team, I love the game, but like",
+    "timestamp" : "01:00:41-01:00:46"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, I'm not that kind of Bills fan where I would ruin my Monday or anything like that.",
+    "timestamp" : "01:00:46-01:00:50"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "You know, I but I guess you kinda get used to it and that's how you have to have the the callus, right?",
+    "timestamp" : "01:00:50-01:00:54"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Beat you down.",
+    "timestamp" : "01:00:54-01:00:55"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "Does that mean that you would come back",
+    "timestamp" : "01:00:56-01:00:58"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Oh yeah, if you if you'd have me, I mean you might like to say w we we get way worse than the oh six bills, so yeah, we want to test your your strength, you know how the bills go.",
+    "timestamp" : "01:00:58-01:01:11"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "So it's really lean I think the next bunch of years.",
+    "timestamp" : "01:01:11-01:01:14"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So I did look it up.",
+    "timestamp" : "01:01:15-01:01:16"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Um the last time the Bills beat the Patriots was that 2003 week one",
+    "timestamp" : "01:01:16-01:01:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Yeah.",
+    "timestamp" : "01:01:21-01:01:21"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "The next time the Bills beat the Patriots, anybody want to guess?",
+    "timestamp" : "01:01:21-01:01:24"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "2011.",
+    "timestamp" : "01:01:27-01:01:27"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Steven, correct.",
+    "timestamp" : "01:01:27-01:01:29"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "2011 week three.",
+    "timestamp" : "01:01:29-01:01:31"
+  },
+  {
+    "speaker" : "Steve",
+    "text" : "Doesn't like Walker fuck that up or something?",
+    "timestamp" : "01:01:30-01:01:33"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Uh one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen straight victories for the Patriots against the Bills",
+    "timestamp" : "01:01:33-01:01:43"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "So Matt, if you want to wait a while until we hit 2011, we will have to be calling it.",
+    "timestamp" : "01:01:43-01:01:49"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We'd never fucking get there, Andy.",
+    "timestamp" : "01:01:49-01:01:51"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We're not getting to 2011, dude.",
+    "timestamp" : "01:01:51-01:01:52"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We're halfway there.",
+    "timestamp" : "01:01:52-01:01:54"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "2006.",
+    "timestamp" : "01:01:54-01:01:55"
+  },
+  {
+    "speaker" : "Tim",
+    "text" : "We're gonna see have to see if we survive in twenty twenty th uh twenty thirty-five when we get to double level.",
+    "timestamp" : "01:01:56-01:02:03"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "But yeah, it was a pleasure.",
+    "timestamp" : "01:02:03-01:02:04"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "We appreciate you having you on, Bob.",
+    "timestamp" : "01:02:04-01:02:06"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Thank you for coming back, guys.",
+    "timestamp" : "01:02:06-01:02:08"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "All right.",
+    "timestamp" : "01:02:08-01:02:08"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "I appreciate it so much.",
+    "timestamp" : "01:02:08-01:02:09"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Have a great night, guys.",
+    "timestamp" : "01:02:10-01:02:11"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Thank you.",
+    "timestamp" : "01:02:11-01:02:12"
+  },
+  {
+    "speaker" : "Andy",
+    "text" : "Alright, we'll see you here.",
+    "timestamp" : "01:02:12-01:02:13"
+  },
+  {
+    "speaker" : "Matt (Bills fan)",
+    "text" : "Turn in next week to see how much of a blubbering little bitch Greg is on the Patriots Dynasty Podcast.",
+    "timestamp" : "01:02:15-01:02:23"
+  }
+]
