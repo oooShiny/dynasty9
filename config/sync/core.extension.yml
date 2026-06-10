@@ -102,6 +102,7 @@ module:
   quicklink: 0
   rate: 0
   redirect: 0
+  redis: 0
   resend_api: 0
   rest: 0
   scheduler: 0
