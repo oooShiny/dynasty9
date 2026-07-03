@@ -1,0 +1,6 @@
+services:
+  dynasty_module.cloudflare_purge_commands:
+    class: Drupal\dynasty_module\Commands\CloudflarePurgeCommands
+    arguments: ['@cloudflare_purge.purge', '@messenger']
+    tags:
+      - { name: drush.command }
