@@ -321,14 +321,6 @@
 
     localStorage.removeItem('bannerNight');
 
-    function setNight(on) {
-      if (on) {
-        section.classList.add('night');
-      } else {
-        section.classList.remove('night');
-      }
-    }
-
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
     setNight(mq.matches);
     mq.addEventListener('change', function (e) { setNight(e.matches); });
