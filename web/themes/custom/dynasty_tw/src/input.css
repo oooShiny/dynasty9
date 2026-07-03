@@ -7,8 +7,8 @@
 
 @plugin "@tailwindcss/forms";
 
-/* Prevent dark theme unless specified. */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Dark mode respects system prefers-color-scheme. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 @layer base {
   *,
@@ -201,7 +201,7 @@ label[for*="max"] {
   @apply text-3xl uppercase font-thin text-center;
 }
 .header-block {
-  @apply bg-blue-pats font-light py-3 my-3 text-2xl text-center text-white;
+  @apply bg-blue-pats font-light py-3 my-3 text-2xl text-center text-white dark:bg-gray-800;
 }
 
 .divider {
@@ -223,15 +223,15 @@ label[for*="max"] {
 
 /* Table overrides */
 .table {
-  @apply divide-gray-400 divide-y;
+  @apply divide-gray-400 dark:divide-gray-600 divide-y;
 }
 
 .table thead {
-  @apply font-extrabold text-start text-xs uppercase;
+  @apply font-extrabold text-start text-xs uppercase dark:text-gray-300;
 }
 
 .table tbody {
-  @apply bg-gray-100;
+  @apply bg-gray-100 dark:bg-gray-800 dark:text-gray-100;
 }
 
 .table tbody td,
@@ -239,7 +239,24 @@ label[for*="max"] {
   @apply px-6 py-3;
 }
 
+.table tbody tr {
+  @apply dark:border-gray-600;
+}
+
 
 .btn-pats {
-  @apply bg-blue-pats p-3 my-1 text-center text-white border-2 border-red-pats;
+  @apply bg-blue-pats p-3 my-1 text-center text-white border-2 border-red-pats cursor-pointer;
+}
+
+/* ── Dark mode overrides ── */
+@media (prefers-color-scheme: dark) {
+  .bg-white {
+    background-color: var(--color-gray-500);
+  }
+  .paragraph--type--section.bg-gray-200 {
+    background-color: var(--color-gray-500);
+  }
+  .paragraph--type--section.bg-gray-400 {
+    background-color: var(--color-gray-800);
+  }
 }

@@ -98,3 +98,10 @@ player_uniforms:
 random_highlight:
   js:
     js/random_highlight.js: {}
+
+championship_banners:
+  js:
+    js/championship-banners.js: {}
+  css:
+    theme:
+      css/championship-banners.css: {}

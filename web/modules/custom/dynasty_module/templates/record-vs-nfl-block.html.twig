@@ -1,36 +1,37 @@
 <div class="actions flex justify-evenly flex-wrap">
   <div class="button-group filter-button-group">
-      <h2 class="text-2xl">Filter</h2>
-      <button class="p-4 bg-white text-blue-pats text-center w-full" data-filter=":not(.conference, .division)">Entire NFL</button>
+      <h2 class="text-2xl divider">Filter</h2>
+
     <div class="flex">
-      <div class="w-1/2">
-        <button class="p-4 bg-red-pats text-white text-center w-full border-b" data-filter=".afc:not(.division)">AFC</button>
+      <div>
+        <button class="cursor-pointer p-4 bg-red-pats text-white text-center w-full border-b" data-filter=".afc:not(.division)">AFC</button>
         <div class="hidden md:block">
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.north">North</button>
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.south">South</button>
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.east">East</button>
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.west">West</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.north">North</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.south">South</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.east">East</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.west">West</button>
         </div>
         <div class="block md:hidden">
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.north">&uarr;</button>
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.south">&darr;</button>
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.east">&rarr;</button>
-          <button class="p-4 bg-red-pats text-white text-center" data-filter=".afc.west">&larr;</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.north">&uarr;</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.south">&darr;</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.east">&rarr;</button>
+          <button class="cursor-pointer p-4 bg-red-pats text-white text-center" data-filter=".afc.west">&larr;</button>
         </div>
       </div>
-      <div class="w-1/2">
-        <button class="p-4 bg-blue-pats text-white text-center w-full border-b" data-filter=".nfc:not(.division)">NFC</button>
+      <button class="cursor-pointer p-4 bg-white text-blue-pats text-center w-full" data-filter=":not(.conference, .division)">Entire NFL</button>
+      <div>
+        <button class="cursor-pointer p-4 bg-blue-pats text-white text-center w-full border-b" data-filter=".nfc:not(.division)">NFC</button>
         <div class="hidden md:block">
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.north">North</button>
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.south">South</button>
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.east">East</button>
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.west">West</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.north">North</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.south">South</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.east">East</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.west">West</button>
         </div>
         <div class="block md:hidden">
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.north">&uarr;</button>
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.south">&darr;</button>
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.east">&rarr;</button>
-          <button class="p-4 bg-blue-pats text-white text-center" data-filter=".nfc.west">&larr;</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.north">&uarr;</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.south">&darr;</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.east">&rarr;</button>
+          <button class="cursor-pointer p-4 bg-blue-pats text-white text-center" data-filter=".nfc.west">&larr;</button>
         </div>
       </div>
     </div>
@@ -38,11 +39,11 @@
 
 
   <div class="button-group sort-by-button-group">
-      <h2 class="text-2xl">Sort</h2>
-      <button class="p-4 bg-white text-blue-pats text-center" data-sort-by="name">Name</button>
-      <button class="p-4 bg-white text-blue-pats text-center" data-sort-by="wins">Most Wins</button>
-      <button class="p-4 bg-white text-blue-pats text-center" data-sort-by="losses">Most Losses</button>
-      <button class="p-4 bg-white text-blue-pats text-center" data-sort-by="pct">Highest Win %</button>
+      <h2 class="text-2xl divider">Sort</h2>
+      <button class="btn-pats" data-sort-by="name">Name</button>
+      <button class="btn-pats" data-sort-by="wins">Most Wins</button>
+      <button class="btn-pats" data-sort-by="losses">Most Losses</button>
+      <button class="btn-pats" data-sort-by="pct">Highest Win %</button>
   </div>
 </div>
 

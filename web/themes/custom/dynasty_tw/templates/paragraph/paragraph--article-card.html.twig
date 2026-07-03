@@ -45,11 +45,12 @@
   'rounded-lg',
   'shadow-gray-500',
   'shadow-lg',
+  'dark:shadow-neutral-700/70',
 ] %}
 
 {% if card_style == 'blog' %}
-  {% set classes = classes|merge(['bg-white']) %}
-  {% set title_classes = 'bg-blue-pats text-2xl text-white p-4 rounded-t-lg' %}
+  {% set classes = classes|merge(['bg-white', 'dark:text-white']) %}
+  {% set title_classes = 'bg-blue-pats text-2xl text-white p-4 rounded-t-lg dark:bg-gray-700' %}
 {% else %}
   {%
     set classes = classes|merge([card_style])

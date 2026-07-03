@@ -515,6 +515,9 @@ function dynasty_tw_preprocess_views_view_table(&$variables) {
       // Add game results/scores to totals.
       $qb = '';
       foreach ($view->field as $fid => $field) {
+        if ($field instanceof \Drupal\views\Plugin\views\field\Broken) {
+          continue;
+        }
         $values = $field->getItems($row);
         $value = $values[0]['value'] ?? $values[0]['rendered']['#markup'] ?? '';
         switch ($fid) {
