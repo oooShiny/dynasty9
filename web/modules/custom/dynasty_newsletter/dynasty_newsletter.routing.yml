@@ -28,7 +28,7 @@ dynasty_newsletter.generate:
     _form: '\Drupal\dynasty_newsletter\Form\NewsletterGenerateForm'
     _title: 'Generate Newsletter'
   requirements:
-    _permission: 'administer simplenews'
+    _permission: 'administer newsletters'
 
 dynasty_newsletter.preview:
   path: '/admin/dynasty/newsletter/preview/{node}'
@@ -36,7 +36,7 @@ dynasty_newsletter.preview:
     _controller: '\Drupal\dynasty_newsletter\Controller\NewsletterPreviewController::preview'
     _title: 'Preview Newsletter'
   requirements:
-    _permission: 'administer simplenews'
+    _permission: 'administer newsletters'
     node: \d+
 
 dynasty_newsletter.api_news_items:
@@ -45,7 +45,7 @@ dynasty_newsletter.api_news_items:
     _controller: '\Drupal\dynasty_newsletter\Controller\NewsletterApiController::getNewsItems'
   methods: [GET]
   requirements:
-    _permission: 'administer simplenews'
+    _permission: 'administer newsletters'
   options:
     _auth: ['basic_auth', 'cookie']
 
@@ -55,6 +55,6 @@ dynasty_newsletter.api_create_draft:
     _controller: '\Drupal\dynasty_newsletter\Controller\NewsletterApiController::createDraft'
   methods: [POST]
   requirements:
-    _permission: 'administer simplenews'
+    _permission: 'administer newsletters'
   options:
     _auth: ['basic_auth', 'cookie']
