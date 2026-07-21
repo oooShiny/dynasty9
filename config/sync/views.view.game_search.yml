@@ -1469,6 +1469,8 @@ display:
                   is_secondary: false
                   hide_label: false
                 select_all_none: false
+                scrollable: false
+                scrollable_height: 300
               facets_home_away:
                 plugin_id: bef_links
                 advanced:
@@ -1480,6 +1482,8 @@ display:
                   is_secondary: false
                   hide_label: false
                 select_all_none: false
+                scrollable: false
+                scrollable_height: 300
               facets_ot:
                 plugin_id: bef_links
                 advanced:
@@ -1491,6 +1495,8 @@ display:
                   is_secondary: false
                   hide_label: false
                 select_all_none: false
+                scrollable: false
+                scrollable_height: 300
               facets_playoff_game:
                 plugin_id: bef_links
                 advanced:
@@ -1502,6 +1508,8 @@ display:
                   is_secondary: false
                   hide_label: false
                 select_all_none: false
+                scrollable: false
+                scrollable_height: 300
               facets_season_int:
                 plugin_id: bef_links
                 advanced:
@@ -1513,6 +1521,8 @@ display:
                   is_secondary: false
                   hide_label: false
                 select_all_none: true
+                scrollable: false
+                scrollable_height: 300
               facets_week_string:
                 plugin_id: bef_select2
                 advanced:

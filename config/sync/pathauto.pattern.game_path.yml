@@ -2,17 +2,18 @@ uuid: f24d8bc7-342c-4b0c-b78c-41818e47d06e
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.game
   module:
     - node
 id: game_path
 label: 'Game Path'
 type: 'canonical_entities:node'
-pattern: 'game/[node:field_season]/[node:field_week:entity:name]'
+pattern: '/game/[node:field_season]/[node:field_week:entity:name]'
 selection_criteria:
   5571d608-6ae0-4683-9f7b-da928699e248:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 5571d608-6ae0-4683-9f7b-da928699e248
     context_mapping:
       node: node
     bundles:

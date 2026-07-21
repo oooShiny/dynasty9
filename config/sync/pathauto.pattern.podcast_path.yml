@@ -2,17 +2,18 @@ uuid: 422f1ca3-f1d4-4ac9-b524-d4a47c2da1f0
 langcode: en
 status: true
 dependencies:
+  config:
+    - node.type.podcast_episode
   module:
     - node
 id: podcast_path
 label: 'Podcast Path'
 type: 'canonical_entities:node'
-pattern: 'podcast/[node:title]'
+pattern: '/podcast/[node:title]'
 selection_criteria:
   41ca27b3-0f06-42c5-ba81-f53827195d00:
     id: 'entity_bundle:node'
     negate: false
-    uuid: 41ca27b3-0f06-42c5-ba81-f53827195d00
     context_mapping:
       node: node
     bundles:
