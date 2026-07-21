@@ -1,4 +1,0 @@
-services:
-  twigsuggest.helper_functions:
-    class: Drupal\twigsuggest\Utils\HelperFunctions
-    arguments: ['@entity_type.manager', '@current_route_match']

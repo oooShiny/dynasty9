@@ -1,7 +1,0 @@
-name: Voting API
-type: module
-description: 'Provides a voting API that other modules can make use of.'
-package: Voting
-core_version_requirement: ^10.3 || ^11
-
-configure: votingapi.admin_settings

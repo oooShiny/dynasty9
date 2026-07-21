@@ -1,8 +1,0 @@
-node_modules
-# Source maps when building in dev mode.
-js/vendor/gutenberg/**/*.js.map
-# Temporary folder to store the Gutenberg repo.
-.gutenberg/
-# Temporary folder for storing miscellaneous files.
-.gutenberg-temp/
-/vendor

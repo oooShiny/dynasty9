@@ -1,9 +1,0 @@
-name: 'Aggregator configurable display module tests'
-type: module
-description: 'Support module for aggregator \Drupal\Core\Field\BaseFieldDefinition::setDisplayConfigurable() testing.'
-package: Testing
-
-# Information added by Drupal.org packaging script on 2026-02-16
-version: '2.2.3'
-project: 'aggregator'
-datestamp: 1771280904

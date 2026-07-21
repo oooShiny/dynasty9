@@ -1,7 +1,0 @@
-name: 'Voting API test'
-type: module
-description: 'Support module for Voting API testing.'
-package: Testing
-dependencies:
-  - drupal:node
-  - votingapi:votingapi

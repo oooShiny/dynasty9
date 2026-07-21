@@ -1,5 +1,0 @@
-ui_patterns_ui.component.overview:
-  title: Component
-  parent: system.admin_structure
-  description: 'Manage form settings of components'
-  route_name: component.collection

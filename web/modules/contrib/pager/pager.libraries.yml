@@ -1,5 +1,0 @@
-drupal.pager-links:
-  version: 1.x
-  css:
-    component:
-      css/pager.css: {}

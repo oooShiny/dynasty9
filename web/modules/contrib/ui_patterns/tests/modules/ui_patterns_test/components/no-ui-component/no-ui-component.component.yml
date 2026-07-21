@@ -1,5 +1,0 @@
-name: "UI Patterns Test noUi component"
-noUi: true
-props:
-  type: object
-  properties: {}

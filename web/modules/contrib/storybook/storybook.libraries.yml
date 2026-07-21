@@ -1,5 +1,0 @@
-attach_behaviors:
-  js:
-    src/assets/js/attach-behaviors.js: { }
-  dependencies:
-    - core/drupal

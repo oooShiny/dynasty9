@@ -1,7 +1,0 @@
-name: Default
-slots:
-  content: 320×568
-props:
-  variant: default
-  demo: true
-  size: 1

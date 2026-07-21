@@ -1,7 +1,0 @@
-name: Default
-slots:
-  text: Register
-library_wrapper: >
-  <ul class="steps">
-  {{ _story }}
-  </ul>

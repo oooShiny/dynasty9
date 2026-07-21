@@ -1,4 +1,0 @@
-dist/**/*
-node_modules/**/*
-postcss.config.js
-webpack.config.js
