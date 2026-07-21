@@ -1,0 +1,7 @@
+dynasty.admin:
+  title: 'Dynasty'
+  description: 'Dynasty module administration'
+  route_name: dynasty.admin
+  parent: system.admin
+  weight: -5
+  menu_name: admin
