@@ -288,6 +288,24 @@
           </div>
           {% endif %}
 
+          <!-- Reddit Threads Section -->
+          {% if reddit_threads %}
+          <div class="section">
+            <h2 class="section-title">What the Fans are Talking About</h2>
+            {% for thread in reddit_threads %}
+            <div class="news-item">
+              <div class="news-item-title">
+                <a href="{{ thread.link }}">{{ thread.title }}</a>
+              </div>
+              {% if thread.description %}
+              <div class="news-item-description">{{ thread.description }}</div>
+              {% endif %}
+              <div class="news-item-meta">r/Patriots &bull; {{ thread.score }} upvotes &bull; {{ thread.num_comments }} comments &bull; {{ thread.date }}</div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           <!-- Recent Games Section -->
           {% if recent_games %}
           <div class="section">
