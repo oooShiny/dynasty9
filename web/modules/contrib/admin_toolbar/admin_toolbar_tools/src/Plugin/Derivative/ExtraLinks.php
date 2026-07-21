@@ -513,11 +513,13 @@ class ExtraLinks extends DeriverBase implements ContainerDeriverInterface {
           'parent' => 'system.themes_page',
         ] + $base_plugin_definition;
       }
-      $links['update.theme_update'] = [
-        'title' => $this->t('Update'),
-        'route_name' => 'update.theme_update',
-        'parent' => 'system.themes_page',
-      ] + $base_plugin_definition;
+      if ($this->routeExists('update.theme_update')) {
+        $links['update.theme_update'] = [
+          'title' => $this->t('Update'),
+          'route_name' => 'update.theme_update',
+          'parent' => 'system.themes_page',
+        ] + $base_plugin_definition;
+      }
     }
 
     // If module Devel is enabled.
