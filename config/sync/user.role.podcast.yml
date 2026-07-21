@@ -4,9 +4,14 @@ status: true
 dependencies:
   config:
     - filter.format.full_html
+    - node.type.simplenews_issue
   module:
+    - aggregator
+    - field_ui
     - filter
+    - node
     - rate
+    - simplenews
     - system
     - votingapi
 id: podcast
@@ -15,8 +20,17 @@ weight: 8
 is_admin: false
 permissions:
   - 'access administration pages'
+  - 'access news feeds'
+  - 'administer newsletters'
+  - 'administer simplenews settings'
+  - 'administer simplenews subscriptions'
+  - 'administer simplenews_subscriber display'
   - 'cast rate vote on node of highlight'
+  - 'create simplenews_issue content'
+  - 'edit own simplenews_issue content'
   - 'use text format full_html'
   - 'view any vote'
   - 'view own vote'
+  - 'view simplenews subscriptions'
+  - 'view simplenews_issue revisions'
   - 'view the administration theme'
