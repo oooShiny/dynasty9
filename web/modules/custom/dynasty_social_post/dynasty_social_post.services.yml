@@ -6,3 +6,7 @@ services:
   dynasty_social_post.youtube:
     class: Drupal\dynasty_social_post\Service\YouTubeService
     arguments: ['@http_client', '@config.factory', '@entity_type.manager', '@file_system', '@logger.factory', '@state']
+
+  dynasty_social_post.instagram:
+    class: Drupal\dynasty_social_post\Service\InstagramService
+    arguments: ['@http_client', '@config.factory', '@entity_type.manager', '@logger.factory', '@state']

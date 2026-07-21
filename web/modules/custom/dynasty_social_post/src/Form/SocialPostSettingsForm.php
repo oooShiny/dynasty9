@@ -6,11 +6,12 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\dynasty_social_post\Service\InstagramService;
 use Drupal\dynasty_social_post\Service\YouTubeService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Configure Social Post settings for Bluesky and YouTube.
+ * Configure Social Post settings for Bluesky, YouTube, and Instagram.
  */
 class SocialPostSettingsForm extends ConfigFormBase {
 
@@ -22,13 +23,18 @@ class SocialPostSettingsForm extends ConfigFormBase {
   protected $youtubeService;
 
   /**
-   * Constructs a SocialPostSettingsForm object.
+   * The Instagram service.
    *
-   * @param \Drupal\dynasty_social_post\Service\YouTubeService $youtube_service
-   *   The YouTube service.
+   * @var \Drupal\dynasty_social_post\Service\InstagramService
    */
-  public function __construct(YouTubeService $youtube_service) {
+  protected $instagramService;
+
+  /**
+   * Constructs a SocialPostSettingsForm object.
+   */
+  public function __construct(YouTubeService $youtube_service, InstagramService $instagram_service) {
     $this->youtubeService = $youtube_service;
+    $this->instagramService = $instagram_service;
   }
 
   /**
@@ -36,7 +42,8 @@ class SocialPostSettingsForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('dynasty_social_post.youtube')
+      $container->get('dynasty_social_post.youtube'),
+      $container->get('dynasty_social_post.instagram')
     );
   }
 
@@ -230,6 +237,109 @@ class SocialPostSettingsForm extends ConfigFormBase {
       ],
     ];
 
+    // Instagram Configuration.
+    $form['instagram_credentials'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Instagram Configuration'),
+      '#description' => $this->t('Configure a Meta (Facebook) App for Instagram Graph API access. Your Instagram account must be a Business or Creator account connected to a Facebook Page. Register <code>/admin/config/dynasty/social-post/instagram-callback</code> as a valid OAuth redirect URI in your Facebook App settings.'),
+      '#open' => TRUE,
+    ];
+
+    $form['instagram_credentials']['enable_instagram'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable Instagram posting'),
+      '#description' => $this->t('When enabled, highlights will be posted to Instagram as Reels.'),
+      '#default_value' => $config->get('enable_instagram') ?? FALSE,
+    ];
+
+    $form['instagram_credentials']['instagram_app_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Facebook App ID'),
+      '#description' => $this->t('The App ID from your Meta for Developers dashboard.'),
+      '#default_value' => $config->get('instagram_app_id'),
+      '#states' => [
+        'visible' => [':input[name="enable_instagram"]' => ['checked' => TRUE]],
+      ],
+    ];
+
+    $form['instagram_credentials']['instagram_app_secret'] = [
+      '#type' => 'password',
+      '#title' => $this->t('Facebook App Secret'),
+      '#description' => $this->t('The App Secret from your Meta for Developers dashboard. Leave blank to keep existing.'),
+      '#default_value' => '',
+      '#states' => [
+        'visible' => [':input[name="enable_instagram"]' => ['checked' => TRUE]],
+      ],
+    ];
+
+    if ($config->get('instagram_app_secret')) {
+      $form['instagram_credentials']['instagram_secret_status'] = [
+        '#markup' => '<p><strong>' . $this->t('Facebook App Secret is configured.') . '</strong></p>',
+        '#states' => [
+          'visible' => [':input[name="enable_instagram"]' => ['checked' => TRUE]],
+        ],
+      ];
+    }
+
+    // Instagram authorization status.
+    $form['instagram_credentials']['instagram_auth_status'] = [
+      '#type' => 'container',
+      '#states' => [
+        'visible' => [':input[name="enable_instagram"]' => ['checked' => TRUE]],
+      ],
+    ];
+
+    if ($this->instagramService->isConfigured()) {
+      $account_info = $this->instagramService->getAccountInfo();
+      if ($account_info) {
+        $display = $account_info['username'] ?? $account_info['name'] ?? 'Connected';
+        $form['instagram_credentials']['instagram_auth_status']['status'] = [
+          '#markup' => '<p class="color-success"><strong>' . $this->t('Connected to Instagram account: @account', ['@account' => '@' . $display]) . '</strong></p>',
+        ];
+
+        $form['instagram_credentials']['instagram_auth_status']['disconnect'] = [
+          '#type' => 'link',
+          '#title' => $this->t('Disconnect Instagram Account'),
+          '#url' => Url::fromRoute('dynasty_social_post.instagram_disconnect'),
+          '#attributes' => ['class' => ['button', 'button--danger']],
+        ];
+      }
+      else {
+        $form['instagram_credentials']['instagram_auth_status']['status'] = [
+          '#markup' => '<p class="color-warning"><strong>' . $this->t('Instagram tokens exist but could not verify account. Try re-authorizing.') . '</strong></p>',
+        ];
+      }
+    }
+    else {
+      $has_credentials = $config->get('instagram_app_id') && $config->get('instagram_app_secret');
+
+      if ($has_credentials) {
+        $auth_url = $this->instagramService->getAuthorizationUrl();
+        $form['instagram_credentials']['instagram_auth_status']['status'] = [
+          '#markup' => '<p>' . $this->t('Instagram is not authorized. Click the button below to connect your account.') . '</p>',
+        ];
+        $form['instagram_credentials']['instagram_auth_status']['authorize'] = [
+          '#type' => 'link',
+          '#title' => $this->t('Authorize Instagram Account'),
+          '#url' => Url::fromUri($auth_url),
+          '#attributes' => ['class' => ['button', 'button--primary']],
+        ];
+      }
+      else {
+        $form['instagram_credentials']['instagram_auth_status']['status'] = [
+          '#markup' => '<p>' . $this->t('Enter your App ID and App Secret above, save the form, then authorize.') . '</p>',
+        ];
+      }
+    }
+
+    $instagram_posted_count = count(\Drupal::state()->get('dynasty_social_post.instagram_posted_highlights', []));
+    $form['instagram_credentials']['instagram_posted_count'] = [
+      '#markup' => '<p>' . $this->t('Highlights posted to Instagram: @count', ['@count' => $instagram_posted_count]) . '</p>',
+      '#states' => [
+        'visible' => [':input[name="enable_instagram"]' => ['checked' => TRUE]],
+      ],
+    ];
+
     // Posting Settings.
     $form['posting_settings'] = [
       '#type' => 'details',
@@ -292,6 +402,13 @@ class SocialPostSettingsForm extends ConfigFormBase {
       '#limit_validation_errors' => [],
     ];
 
+    $form['actions']['reset_instagram_posted'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Reset Instagram posted highlights list'),
+      '#submit' => ['::resetInstagramPostedHighlights'],
+      '#limit_validation_errors' => [],
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -319,6 +436,15 @@ class SocialPostSettingsForm extends ConfigFormBase {
       $config->set('youtube_client_secret', $youtube_secret);
     }
 
+    // Instagram settings.
+    $config->set('enable_instagram', $form_state->getValue('enable_instagram'));
+    $config->set('instagram_app_id', $form_state->getValue('instagram_app_id'));
+
+    $instagram_secret = $form_state->getValue('instagram_app_secret');
+    if (!empty($instagram_secret)) {
+      $config->set('instagram_app_secret', $instagram_secret);
+    }
+
     // Posting settings.
     $config->set('enable_auto_post', $form_state->getValue('enable_auto_post'));
     $config->set('post_interval', $form_state->getValue('post_interval'));
@@ -342,6 +468,14 @@ class SocialPostSettingsForm extends ConfigFormBase {
   public function resetYouTubePostedHighlights(array &$form, FormStateInterface $form_state) {
     \Drupal::state()->set('dynasty_social_post.youtube_posted_highlights', []);
     \Drupal::messenger()->addStatus($this->t('YouTube posted highlights list has been reset.'));
+  }
+
+  /**
+   * Submit handler to reset the Instagram posted highlights list.
+   */
+  public function resetInstagramPostedHighlights(array &$form, FormStateInterface $form_state) {
+    \Drupal::state()->set('dynasty_social_post.instagram_posted_highlights', []);
+    \Drupal::messenger()->addStatus($this->t('Instagram posted highlights list has been reset.'));
   }
 
 }

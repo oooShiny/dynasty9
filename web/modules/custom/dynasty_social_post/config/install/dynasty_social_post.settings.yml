@@ -2,3 +2,6 @@ bluesky_identifier: ''
 bluesky_password: ''
 enable_auto_post: false
 post_interval: 86400
+enable_instagram: false
+instagram_app_id: ''
+instagram_app_secret: ''

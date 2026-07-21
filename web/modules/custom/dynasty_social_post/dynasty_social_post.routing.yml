@@ -37,3 +37,19 @@ dynasty_social_post.youtube_disconnect:
     _title: 'Disconnect YouTube'
   requirements:
     _permission: 'administer site configuration'
+
+dynasty_social_post.instagram_callback:
+  path: '/admin/config/dynasty/social-post/instagram-callback'
+  defaults:
+    _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::instagramCallback'
+    _title: 'Instagram Authorization'
+  requirements:
+    _permission: 'administer site configuration'
+
+dynasty_social_post.instagram_disconnect:
+  path: '/admin/config/dynasty/social-post/instagram-disconnect'
+  defaults:
+    _controller: '\Drupal\dynasty_social_post\Controller\SocialPostController::instagramDisconnect'
+    _title: 'Disconnect Instagram'
+  requirements:
+    _permission: 'administer site configuration'

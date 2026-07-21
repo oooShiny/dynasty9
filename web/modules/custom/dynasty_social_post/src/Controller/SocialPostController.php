@@ -4,6 +4,7 @@ namespace Drupal\dynasty_social_post\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\dynasty_social_post\Service\BlueskyService;
+use Drupal\dynasty_social_post\Service\InstagramService;
 use Drupal\dynasty_social_post\Service\YouTubeService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -29,16 +30,19 @@ class SocialPostController extends ControllerBase {
   protected $youtubeService;
 
   /**
-   * Constructs a SocialPostController object.
+   * The Instagram service.
    *
-   * @param \Drupal\dynasty_social_post\Service\BlueskyService $bluesky_service
-   *   The Bluesky service.
-   * @param \Drupal\dynasty_social_post\Service\YouTubeService $youtube_service
-   *   The YouTube service.
+   * @var \Drupal\dynasty_social_post\Service\InstagramService
    */
-  public function __construct(BlueskyService $bluesky_service, YouTubeService $youtube_service) {
+  protected $instagramService;
+
+  /**
+   * Constructs a SocialPostController object.
+   */
+  public function __construct(BlueskyService $bluesky_service, YouTubeService $youtube_service, InstagramService $instagram_service) {
     $this->blueskyService = $bluesky_service;
     $this->youtubeService = $youtube_service;
+    $this->instagramService = $instagram_service;
   }
 
   /**
@@ -47,7 +51,8 @@ class SocialPostController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('dynasty_social_post.bluesky'),
-      $container->get('dynasty_social_post.youtube')
+      $container->get('dynasty_social_post.youtube'),
+      $container->get('dynasty_social_post.instagram')
     );
   }
 
@@ -61,9 +66,11 @@ class SocialPostController extends ControllerBase {
     $config = $this->config('dynasty_social_post.settings');
     $bluesky_enabled = $config->get('enable_bluesky') ?? TRUE;
     $youtube_enabled = $config->get('enable_youtube') ?? FALSE;
+    $instagram_enabled = $config->get('enable_instagram') ?? FALSE;
 
     $bluesky_success = FALSE;
     $youtube_success = FALSE;
+    $instagram_success = FALSE;
 
     // Post to Bluesky if enabled.
     if ($bluesky_enabled) {
@@ -102,8 +109,28 @@ class SocialPostController extends ControllerBase {
       $this->messenger()->addWarning($this->t('YouTube is enabled but not authorized. Please authorize YouTube first.'));
     }
 
+    // Post to Instagram if enabled and configured.
+    if ($instagram_enabled && $this->instagramService->isConfigured()) {
+      try {
+        $instagram_success = $this->instagramService->postRandomHighlight();
+        if ($instagram_success) {
+          $this->messenger()->addStatus($this->t('Successfully posted a highlight to Instagram!'));
+        }
+        else {
+          $this->messenger()->addWarning($this->t('Failed to post to Instagram. Check the logs for details.'));
+        }
+      }
+      catch (\Exception $e) {
+        $this->messenger()->addError($this->t('Error posting to Instagram: @message', ['@message' => $e->getMessage()]));
+        \Drupal::logger('dynasty_social_post')->error('Error in manual Instagram post: @message', ['@message' => $e->getMessage()]);
+      }
+    }
+    elseif ($instagram_enabled && !$this->instagramService->isConfigured()) {
+      $this->messenger()->addWarning($this->t('Instagram is enabled but not authorized. Please authorize Instagram first.'));
+    }
+
     // Update last post time if at least one platform succeeded.
-    if ($bluesky_success || $youtube_success) {
+    if ($bluesky_success || $youtube_success || $instagram_success) {
       \Drupal::state()->set('dynasty_social_post.last_post_time', \Drupal::time()->getRequestTime());
     }
 
@@ -168,6 +195,61 @@ class SocialPostController extends ControllerBase {
   }
 
   /**
+   * Handles Instagram OAuth callback.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The request object.
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   */
+  public function instagramCallback(Request $request) {
+    $code = $request->query->get('code');
+    $error = $request->query->get('error');
+
+    if ($error) {
+      $this->messenger()->addError($this->t('Instagram authorization failed: @error', ['@error' => $error]));
+      \Drupal::logger('dynasty_social_post')->error('Instagram OAuth error: @error', ['@error' => $error]);
+      return new RedirectResponse('/admin/config/dynasty/social-post');
+    }
+
+    if (!$code) {
+      $this->messenger()->addError($this->t('No authorization code received from Instagram.'));
+      return new RedirectResponse('/admin/config/dynasty/social-post');
+    }
+
+    $success = $this->instagramService->exchangeCodeForTokens($code);
+
+    if ($success) {
+      $account_info = $this->instagramService->getAccountInfo();
+      if ($account_info) {
+        $display = $account_info['username'] ?? $account_info['name'] ?? 'account';
+        $this->messenger()->addStatus($this->t('Successfully connected to Instagram account: @account', [
+          '@account' => '@' . $display,
+        ]));
+      }
+      else {
+        $this->messenger()->addStatus($this->t('Successfully connected to Instagram!'));
+      }
+    }
+    else {
+      $this->messenger()->addError($this->t('Failed to complete Instagram authorization. Ensure your Instagram account is a Business or Creator account connected to a Facebook Page, then try again.'));
+    }
+
+    return new RedirectResponse('/admin/config/dynasty/social-post');
+  }
+
+  /**
+   * Disconnects Instagram account.
+   *
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   */
+  public function instagramDisconnect() {
+    $this->instagramService->disconnect();
+    $this->messenger()->addStatus($this->t('Instagram account has been disconnected.'));
+    return new RedirectResponse('/admin/config/dynasty/social-post');
+  }
+
+  /**
    * Displays a list of posted highlights.
    *
    * @return array
@@ -208,6 +290,23 @@ class SocialPostController extends ControllerBase {
     }
     else {
       $build['youtube']['content'] = $this->buildHighlightTable($youtube_posted);
+    }
+
+    // Instagram posted highlights.
+    $instagram_posted = \Drupal::state()->get('dynasty_social_post.instagram_posted_highlights', []);
+    $build['instagram'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Instagram Posted Highlights (@count)', ['@count' => count($instagram_posted)]),
+      '#open' => TRUE,
+    ];
+
+    if (empty($instagram_posted)) {
+      $build['instagram']['content'] = [
+        '#markup' => $this->t('No highlights have been posted to Instagram yet.'),
+      ];
+    }
+    else {
+      $build['instagram']['content'] = $this->buildHighlightTable($instagram_posted);
     }
 
     return $build;

@@ -48,9 +48,11 @@ function dynasty_social_post_cron() {
 
   $bluesky_enabled = $config->get('enable_bluesky') ?? TRUE;
   $youtube_enabled = $config->get('enable_youtube') ?? FALSE;
+  $instagram_enabled = $config->get('enable_instagram') ?? FALSE;
 
   $bluesky_success = FALSE;
   $youtube_success = FALSE;
+  $instagram_success = FALSE;
 
   // Post to Bluesky if enabled.
   if ($bluesky_enabled) {
@@ -91,8 +93,30 @@ function dynasty_social_post_cron() {
     }
   }
 
+  // Post to Instagram if enabled and configured.
+  if ($instagram_enabled) {
+    $instagram_service = \Drupal::service('dynasty_social_post.instagram');
+    if ($instagram_service->isConfigured()) {
+      try {
+        $instagram_success = $instagram_service->postRandomHighlight();
+        if ($instagram_success) {
+          \Drupal::logger('dynasty_social_post')->info('Successfully posted highlight to Instagram via cron.');
+        }
+        else {
+          \Drupal::logger('dynasty_social_post')->warning('Failed to post to Instagram via cron.');
+        }
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('dynasty_social_post')->error('Error posting to Instagram via cron: @message', ['@message' => $e->getMessage()]);
+      }
+    }
+    else {
+      \Drupal::logger('dynasty_social_post')->warning('Instagram is enabled but not authorized. Skipping Instagram post.');
+    }
+  }
+
   // Update last post time if at least one platform succeeded.
-  if ($bluesky_success || $youtube_success) {
+  if ($bluesky_success || $youtube_success || $instagram_success) {
     \Drupal::state()->set('dynasty_social_post.last_post_time', $current_time);
   }
 }
