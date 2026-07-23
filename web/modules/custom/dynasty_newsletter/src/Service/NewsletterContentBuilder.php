@@ -178,12 +178,12 @@ class NewsletterContentBuilder {
   }
 
   /**
-   * Get recent news items, using Claude+RSS or local aggregator depending on config.
+   * Get recent news items from the local aggregator, optionally curated by LLM.
    *
    * @param int $limit
    *   Number of items to retrieve.
    * @param array|null $iids
-   *   Optional list of aggregator item IDs to fetch directly (bypasses Claude).
+   *   Optional list of aggregator item IDs to fetch directly (bypasses LLM).
    * @param bool $skip_ai
    *   Skip all AI curation.
    *
@@ -193,12 +193,6 @@ class NewsletterContentBuilder {
   protected function getRecentNews($limit = 5, ?array $iids = NULL, bool $skip_ai = FALSE) {
     $config = \Drupal::config('dynasty_newsletter.settings');
     $limit = $config->get('news_items_limit') ?? $limit;
-
-    // Claude path: fetch from external RSS and curate with Claude API.
-    // Only when no manual item selection is active and AI is not suppressed.
-    if (empty($iids) && !$skip_ai && $this->aiService->isClaudeEnabled()) {
-      return $this->getNewsViaClaude((int) $limit, $config);
-    }
 
     if (!empty($iids)) {
       // Manual selection — fetch exactly those items.
@@ -261,103 +255,6 @@ class NewsletterContentBuilder {
         );
         $news_items = array_slice($news_items, 0, (int) $limit);
       }
-    }
-
-    return $news_items;
-  }
-
-  /**
-   * Fetch articles from the configured external RSS feed and curate with Claude.
-   *
-   * Falls back to the local Drupal aggregator database if the RSS fetch fails
-   * (e.g. when running on the same server as the RSS URL, or if it requires auth).
-   *
-   * @param int $limit
-   *   Target number of articles to return.
-   * @param \Drupal\Core\Config\ImmutableConfig $config
-   *   Newsletter settings config.
-   *
-   * @return array
-   *   Curated and summarized news items, or raw items on Claude failure.
-   */
-  protected function getNewsViaClaude(int $limit, $config): array {
-    $rss_url = $config->get('external_rss_url') ?: 'https://patsdynasty.com/aggregator/rss';
-    $pool_size = (int) ($config->get('llm_news_pool_size') ?? 20);
-
-    $raw_items = $this->aiService->fetchArticlesFromRss($rss_url);
-
-    // Fall back to local aggregator DB if RSS is unavailable or returns nothing.
-    if (empty($raw_items)) {
-      \Drupal::logger('dynasty_newsletter')->info(
-        'RSS feed @url returned no items; falling back to local aggregator database.',
-        ['@url' => $rss_url]
-      );
-      $raw_items = $this->fetchFromLocalAggregator($pool_size, $config);
-    }
-
-    if (empty($raw_items)) {
-      return [];
-    }
-
-    try {
-      $curated = $this->aiService->curateAndSummarizeWithClaude($raw_items, $limit);
-      \Drupal::logger('dynasty_newsletter')->info(
-        'Claude curated @count news items from @total candidates.',
-        ['@count' => count($curated), '@total' => count($raw_items)]
-      );
-      return $curated;
-    }
-    catch (\RuntimeException $e) {
-      \Drupal::logger('dynasty_newsletter')->warning(
-        'Claude curation failed, using unprocessed items: @message',
-        ['@message' => $e->getMessage()]
-      );
-      return array_slice($raw_items, 0, $limit);
-    }
-  }
-
-  /**
-   * Fetch a pool of recent articles from the local Drupal aggregator database.
-   *
-   * @param int $limit
-   *   Maximum number of items to return.
-   * @param \Drupal\Core\Config\ImmutableConfig $config
-   *   Newsletter settings config.
-   *
-   * @return array
-   *   Array of raw news items.
-   */
-  protected function fetchFromLocalAggregator(int $limit, $config): array {
-    $podcast_feed_ids = $config->get('podcast_feed_ids') ?? [];
-    $timestamp = strtotime('-7 days');
-
-    $query = $this->database->select('aggregator_item', 'ai')
-      ->fields('ai', ['iid', 'title', 'link', 'description', 'timestamp', 'fid'])
-      ->condition('ai.timestamp', $timestamp, '>')
-      ->orderBy('ai.timestamp', 'DESC')
-      ->range(0, $limit);
-
-    if (!empty($podcast_feed_ids)) {
-      $query->condition('ai.fid', $podcast_feed_ids, 'NOT IN');
-    }
-
-    $items = $query->execute()->fetchAll();
-    $news_items = [];
-
-    foreach ($items as $item) {
-      $feed = $this->database->select('aggregator_feed', 'af')
-        ->fields('af', ['title'])
-        ->condition('af.fid', $item->fid)
-        ->execute()
-        ->fetchField();
-
-      $news_items[] = [
-        'title' => $item->title,
-        'link' => $item->link,
-        'description' => strip_tags($item->description),
-        'source' => $feed,
-        'date' => date('M j, Y', $item->timestamp),
-      ];
     }
 
     return $news_items;
