@@ -1,22 +1,22 @@
 _core:
   default_config_hash: FcBoGj5iTmea6nLIzgYTlp0Qaiu7Y1FtdkWkRJrWlcA
-frequency: weekly
+frequency: manual
 send_day: thursday
-send_time: '10:00'
+send_time: '08:00'
 editor_emails:
   - arbrown83@gmail.com
 news_items_limit: '5'
-recent_games_limit: '3'
-recent_podcasts_limit: '3'
+recent_games_limit: '1'
+recent_podcasts_limit: '1'
 historical_games_limit: '5'
-birthdays_limit: '10'
+birthdays_limit: '50'
 events_limit: '5'
 podcast_feed_ids:
   - '8'
   - '6'
   - '7'
 remote_site_url: 'https://patsdynasty.com'
-llm_enabled: true
+llm_enabled: false
 llm_api_url: 'http://192.168.20.230:1234'
 llm_model: qwen/qwen3.5-9b
 llm_news_pool_size: 20
