@@ -62,7 +62,13 @@ class NewsletterApiController extends ControllerBase {
    * Creates a newsletter draft from AI-processed news items.
    *
    * POST /api/newsletter/create-draft
-   * Body: { "news_items": [ {title, link, description, source, date}, ... ] }
+   * Body: {
+   *   "news_items": [ {title, link, description, source, date}, ... ],
+   *   "reddit_items": [ {title, link, description, source, score, num_comments, date}, ... ]
+   * }
+   *
+   * news_items is required. reddit_items is optional; when provided it
+   * replaces the live Reddit API fetch.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    */
@@ -79,22 +85,42 @@ class NewsletterApiController extends ControllerBase {
       return new JsonResponse(['error' => 'news_items must be a non-empty array.'], 400);
     }
 
-    // Validate each item has the required keys.
+    // Validate each news item has the required keys.
     $required_keys = ['title', 'link', 'description', 'source', 'date'];
     foreach ($news_items as $i => $item) {
       foreach ($required_keys as $key) {
         if (!isset($item[$key])) {
           return new JsonResponse([
-            'error' => "Item {$i} is missing required key '{$key}'.",
+            'error' => "news_items[{$i}] is missing required key '{$key}'.",
           ], 400);
         }
       }
     }
 
+    // Validate optional reddit_items.
+    $reddit_items = $body['reddit_items'] ?? NULL;
+    if ($reddit_items !== NULL) {
+      if (!is_array($reddit_items)) {
+        return new JsonResponse(['error' => 'reddit_items must be an array.'], 400);
+      }
+      foreach ($reddit_items as $i => $item) {
+        foreach (['title', 'link'] as $key) {
+          if (!isset($item[$key])) {
+            return new JsonResponse([
+              'error' => "reddit_items[{$i}] is missing required key '{$key}'.",
+            ], 400);
+          }
+        }
+      }
+    }
+
+    $content_options = ['pre_processed_news' => $news_items];
+    if ($reddit_items !== NULL) {
+      $content_options['pre_processed_reddit'] = $reddit_items;
+    }
+
     try {
-      $html = $this->contentBuilder->buildNewsletterContent([
-        'pre_processed_news' => $news_items,
-      ]);
+      $html = $this->contentBuilder->buildNewsletterContent($content_options);
 
       $newsletter = Node::create([
         'type' => 'simplenews_issue',

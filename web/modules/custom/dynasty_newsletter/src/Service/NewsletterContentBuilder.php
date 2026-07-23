@@ -90,6 +90,7 @@ class NewsletterContentBuilder {
     $external_podcast_iids = $config['external_podcast_iids'] ?? NULL;
     $skip_ai = $config['skip_ai'] ?? FALSE;
     $pre_processed_news = $config['pre_processed_news'] ?? NULL;
+    $pre_processed_reddit = $config['pre_processed_reddit'] ?? NULL;
 
     $content = [
       'newsletter_title' => 'Patriots Dynasty Weekly - ' . date('F j, Y'),
@@ -100,7 +101,9 @@ class NewsletterContentBuilder {
       'recent_games' => $this->getRecentGames(),
       'recent_podcasts' => $this->getRecentPodcasts(3, $podcast_nids),
       'external_podcasts' => $this->getExternalPodcasts(5, $external_podcast_iids),
-      'reddit_threads' => $this->getRedditThreads(),
+      'reddit_threads' => $pre_processed_reddit !== NULL
+        ? $pre_processed_reddit
+        : $this->getRedditThreads(),
       'on_this_date' => $this->getHistoricalContent(),
       'birthdays' => $this->getPlayerBirthdays(),
       'historical_events' => $this->getHistoricalEvents(),

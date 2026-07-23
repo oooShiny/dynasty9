@@ -1,8 +1,8 @@
 dynasty_newsletter.admin_dynasty:
-  title: 'Dynasty'
+  title: 'Dynasty Newsletter'
   description: 'Dynasty module administration and newsletter management'
   route_name: dynasty_newsletter.dashboard
-  parent: system.admin_config
+  parent: dynasty.admin
   weight: -10
 
 dynasty_newsletter.dashboard:
