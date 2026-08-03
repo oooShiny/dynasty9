@@ -291,7 +291,7 @@ function dynasty_module_entity_presave(EntityInterface $entity) {
       // Format muse video ID field if a link is posted.
       if ($entity->field_video_file_id->isEmpty()) {
         $video_id = $entity->field_muse_video_id->value;
-        $url = 'https://muse.ai/api/files/videos/' . $video_id;
+        $url = 'https://skiv.com/api/files/videos/' . $video_id;
         $client = \Drupal::httpClient();
 
         try{

@@ -10,7 +10,7 @@ field_name: field_highlight_video_url
 entity_type: node
 bundle: game
 label: 'Highlight Video URL'
-description: 'Videos copied from Youtube and uploaded to muse.ai. The video link here will be embedded on the page.'
+description: 'Videos copied from Youtube and uploaded to skiv.com. The video link here will be embedded on the page.'
 required: false
 translatable: false
 default_value: {  }

@@ -38,7 +38,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
 
     $form['instructions'] = [
       '#type' => 'item',
-      '#markup' => '<p class="messages messages--status">Import the latest videos from <a href="https://muse.ai/">Muse.ai</a> by clicking the
+      '#markup' => '<p class="messages messages--status">Import the latest videos from <a href="https://skiv.com/">skiv.com</a> by clicking the
                     <strong>Save configuration</strong> button below.</p>'
     ];
     $collections = $this->get_muse_collections();
@@ -63,7 +63,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
     $fields = $form_state->getValues();
     // Get the collection from the form.
     $collection = $fields['collection'];
-    // Get list of videos from muse.ai.
+    // Get list of videos from skiv.com.
     $muse_vids = $this->get_muse_videos($collection);
     $operations = [];
     $vid_links = [];
@@ -142,7 +142,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
   }
 
   private function get_muse_videos($collection) {
-    $url = 'https://muse.ai/api/files/collections/' . $collection;
+    $url = 'https://skiv.com/api/files/collections/' . $collection;
     $client = \Drupal::httpClient();
     $data = NULL;
     try{
@@ -159,7 +159,7 @@ class GfycatMuseImportForm extends ConfigFormBase {
   }
 
   private function get_muse_collections() {
-    $url = 'https://muse.ai/api/files/collections';
+    $url = 'https://skiv.com/api/files/collections';
     $client = \Drupal::httpClient();
     $data = NULL;
     try{

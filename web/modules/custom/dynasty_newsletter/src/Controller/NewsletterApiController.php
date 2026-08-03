@@ -38,7 +38,7 @@ class NewsletterApiController extends ControllerBase {
   }
 
   /**
-   * Returns a pool of recent news items for local LLM curation.
+   * Returns a pool of recent news items for external LLM curation.
    *
    * GET /api/newsletter/news-items
    * Optional query param: ?limit=20

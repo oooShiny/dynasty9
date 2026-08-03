@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muse.ai Video Switcher Example</title>
+  <title>skiv.com Video Switcher Example</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,18 +11,18 @@
       margin: 0 auto;
       padding: 20px;
     }
-    
+
     .video-container {
       margin-bottom: 30px;
     }
-    
+
     .video-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 20px;
     }
-    
+
     .video-link {
       padding: 10px 20px;
       background: #002244;
@@ -32,11 +32,11 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    
+
     .video-link:hover {
       background: #003366;
     }
-    
+
     .video-link.active {
       background: #c60c30;
       font-weight: bold;
@@ -44,13 +44,13 @@
   </style>
 </head>
 <body>
-  <h1>Muse.ai Video Switcher Example</h1>
+  <h1>skiv.com Video Switcher Example</h1>
 
   <!-- Example 1: Longest Plays -->
   <div class="video-container">
     <h2>Longest Plays</h2>
     <div id="longest-plays" class="aspect-video h-full" style="width: 100%; height: 500px;"></div>
-    
+
     <div class="video-list">
       <a class="video-link active" data-video-id="smZ3M7x" data-video-category="longest-plays">
         Video 1
@@ -68,7 +68,7 @@
   <div class="video-container">
     <h2>Best Touchdowns</h2>
     <div id="best-touchdowns" class="aspect-video h-full" style="width: 100%; height: 500px;"></div>
-    
+
     <div class="video-list">
       <a class="video-link active" data-video-id="xyz789A" data-video-category="best-touchdowns">
         TD Video 1
@@ -79,9 +79,9 @@
     </div>
   </div>
 
-  <!-- Load Muse.ai player script -->
-  <script src="https://muse.ai/static/js/embed-player.min.js"></script>
-  
+  <!-- Load skiv.com player script -->
+  <script src="https://skiv.com/static/js/embed-player.min.js"></script>
+
   <!-- Initialize players and register them -->
   <script>
     // Create the first player
@@ -111,7 +111,7 @@
       players: {},
       registerPlayer: function(category, player) {
         this.players[category] = player;
-        console.log('Registered Muse.ai player:', category);
+        console.log('Registered skiv.com player:', category);
       },
       switchVideo: function(category, videoId) {
         const player = this.players[category];

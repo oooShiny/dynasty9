@@ -494,37 +494,37 @@ class YouTubeService {
   }
 
   /**
-   * Fetches video metadata from muse.ai API.
+   * Fetches video metadata from skiv.com API.
    *
    * @param string $muse_video_id
-   *   The muse.ai video ID.
+   *   The skiv.com video ID.
    *
    * @return array|null
    *   Video metadata including download URL, or NULL on failure.
    */
   protected function getMuseVideoInfo($muse_video_id) {
     try {
-      $response = $this->httpClient->get("https://muse.ai/api/files/info/{$muse_video_id}");
+      $response = $this->httpClient->get("https://skiv.com/api/files/info/{$muse_video_id}");
       $data = json_decode($response->getBody()->getContents(), TRUE);
 
       if (isset($data['url']) && isset($data['width']) && isset($data['height'])) {
         return $data;
       }
 
-      $this->logger->error('Invalid response from muse.ai API for video: @id', ['@id' => $muse_video_id]);
+      $this->logger->error('Invalid response from skiv.com API for video: @id', ['@id' => $muse_video_id]);
       return NULL;
     }
     catch (GuzzleException $e) {
-      $this->logger->error('Failed to fetch muse.ai video info: @message', ['@message' => $e->getMessage()]);
+      $this->logger->error('Failed to fetch skiv.com video info: @message', ['@message' => $e->getMessage()]);
       return NULL;
     }
   }
 
   /**
-   * Downloads a video from muse.ai to a temporary file.
+   * Downloads a video from skiv.com to a temporary file.
    *
    * @param string $video_url
-   *   The video download URL from muse.ai.
+   *   The video download URL from skiv.com.
    * @param string $filename
    *   The filename to use for the temporary file.
    *
@@ -536,7 +536,7 @@ class YouTubeService {
       $temp_dir = $this->fileSystem->getTempDirectory();
       $temp_file = $temp_dir . '/' . $filename;
 
-      $this->logger->info('Downloading video from muse.ai to: @path', ['@path' => $temp_file]);
+      $this->logger->info('Downloading video from skiv.com to: @path', ['@path' => $temp_file]);
 
       $response = $this->httpClient->get($video_url, [
         'sink' => $temp_file,
@@ -722,16 +722,16 @@ class YouTubeService {
           return FALSE;
         }
 
-        // Get the muse.ai video ID.
+        // Get the skiv.com video ID.
         $muse_video_id = $highlight->get('field_muse_video_id')->value;
         if (empty($muse_video_id)) {
-          $this->logger->error('Highlight @nid has no muse.ai video ID.', ['@nid' => $highlight->id()]);
+          $this->logger->error('Highlight @nid has no skiv.com video ID.', ['@nid' => $highlight->id()]);
           $this->markAsPosted($highlight->id());
           $highlight = NULL;
           continue;
         }
 
-        // Fetch video metadata from muse.ai.
+        // Fetch video metadata from skiv.com.
         $video_info = $this->getMuseVideoInfo($muse_video_id);
         if (!$video_info) {
           $this->markAsPosted($highlight->id());

@@ -1,13 +1,13 @@
 /**
  * @file
- * Video Switcher for Muse.ai iframes.
+ * Video Switcher for skiv.com iframes.
  *
- * This script allows switching videos in Muse.ai iframe embeds by clicking on elements
+ * This script allows switching videos in skiv.com iframe embeds by clicking on elements
  * with data-video-id and data-video-category attributes.
  *
  * Usage:
  * 1. Create an iframe with an ID and register it:
- *    <iframe id="longest-plays-player" src="https://muse.ai/embed/VIDEO_ID?..."></iframe>
+ *    <iframe id="longest-plays-player" src="https://skiv.com/embed/VIDEO_ID?..."></iframe>
  *    MuseVideoSwitcher.registerIframe('longest-plays', 'longest-plays-player');
  *
  * 2. Add clickable elements with data attributes:
@@ -44,7 +44,7 @@ window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
         }
       }
 
-      console.log('Registered Muse.ai iframe:', category);
+      console.log('Registered skiv.com iframe:', category);
     } else {
       console.error('Iframe not found:', iframeId);
     }
@@ -67,7 +67,7 @@ window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
    * Switch video for a specific category.
    *
    * @param {string} category - The category name
-   * @param {string} videoId - The Muse.ai video ID
+   * @param {string} videoId - The skiv.com video ID
    * @param {HTMLElement} clickedElement - Optional element that was clicked (to extract data from)
    */
   switchVideo: function(category, videoId, clickedElement) {
@@ -77,7 +77,7 @@ window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
       // Add autoplay parameter, handling both ? and & cases
       const separator = params.includes('?') ? '&' : '?';
       const autoplayParam = separator + 'autoplay=1';
-      iframe.src = 'https://muse.ai/embed/' + videoId + params + autoplayParam;
+      iframe.src = 'https://skiv.com/embed/' + videoId + params + autoplayParam;
       console.log('Switched to video:', videoId, 'for category:', category);
 
       // Update text container if registered and element provided
@@ -158,7 +158,7 @@ window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
         const iframe = this.iframes[category];
         if (iframe) {
           const params = this.baseParams[category] || '';
-          iframe.src = 'https://muse.ai/embed/' + videoId + params;
+          iframe.src = 'https://skiv.com/embed/' + videoId + params;
           console.log('Initialized with first video:', videoId, 'for category:', category);
         }
 

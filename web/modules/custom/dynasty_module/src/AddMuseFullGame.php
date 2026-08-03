@@ -9,7 +9,7 @@ class AddMuseFullGame {
     $results = [];
 
     $node = Node::load($video['nid']);
-    $node->field_game_video->appendItem('https://muse.ai/e/' . $video['muse_id']);
+    $node->field_game_video->appendItem('https://skiv.com/e/' . $video['muse_id']);
 
     $results[] = $node->save();
     $context['results'] = $results;

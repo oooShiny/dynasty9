@@ -1,8 +1,8 @@
 {#
 /**
  * @file
- * Example Twig template showing how to use the Muse.ai Video Switcher
- * 
+ * Example Twig template showing how to use the skiv.com Video Switcher
+ *
  * This example shows:
  * - Loading the video_switcher library
  * - Creating a player
@@ -14,19 +14,19 @@
 {{ attach_library('dynasty_tw/video_switcher') }}
 
 <div class="container mx-auto px-4 py-8">
-  
+
   {# Example 1: Video player with list of plays #}
   <div class="mb-12">
     <h2 class="text-3xl font-bold mb-4">Longest Plays of the Dynasty</h2>
-    
+
     {# Video container #}
     <div id="longest-plays" class="aspect-video w-full mb-6 bg-black"></div>
-    
+
     {# Video list with Tailwind/DaisyUI styling #}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <a 
-        href="#" 
-        data-video-id="smZ3M7x" 
+      <a
+        href="#"
+        data-video-id="smZ3M7x"
         data-video-category="longest-plays"
         class="btn btn-outline btn-primary active:btn-secondary [&.active]:btn-secondary [&.active]:font-bold"
       >
@@ -35,10 +35,10 @@
           <div class="text-sm opacity-70">vs. Dolphins, 2011</div>
         </span>
       </a>
-      
-      <a 
-        href="#" 
-        data-video-id="UaeHcHT" 
+
+      <a
+        href="#"
+        data-video-id="UaeHcHT"
         data-video-category="longest-plays"
         class="btn btn-outline btn-primary active:btn-secondary [&.active]:btn-secondary [&.active]:font-bold"
       >
@@ -47,10 +47,10 @@
           <div class="text-sm opacity-70">vs. Ravens, 2014</div>
         </span>
       </a>
-      
-      <a 
-        href="#" 
-        data-video-id="abc123X" 
+
+      <a
+        href="#"
+        data-video-id="abc123X"
         data-video-category="longest-plays"
         class="btn btn-outline btn-primary active:btn-secondary [&.active]:btn-secondary [&.active]:font-bold"
       >
@@ -65,9 +65,9 @@
   {# Example 2: Card layout with thumbnails #}
   <div class="mb-12">
     <h2 class="text-3xl font-bold mb-4">Best Touchdowns</h2>
-    
+
     <div id="best-touchdowns" class="aspect-video w-full mb-6 bg-black"></div>
-    
+
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       {% set touchdown_videos = [
         { id: 'xyz789A', title: 'Gronk Spike', game: 'Super Bowl XLIX' },
@@ -75,10 +75,10 @@
         { id: 'ghi789C', title: 'White OT TD', game: 'Super Bowl LI' },
         { id: 'jkl012D', title: 'Amendola TD', game: 'AFC Championship' }
       ] %}
-      
+
       {% for video in touchdown_videos %}
-        <div 
-          data-video-id="{{ video.id }}" 
+        <div
+          data-video-id="{{ video.id }}"
           data-video-category="best-touchdowns"
           class="card card-compact bg-base-100 shadow-xl cursor-pointer hover:shadow-2xl transition-shadow [&.active]:ring-4 [&.active]:ring-secondary"
         >
@@ -102,8 +102,8 @@
 
 </div>
 
-{# Initialize the Muse.ai players #}
-<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+{# Initialize the skiv.com players #}
+<script src="https://skiv.com/static/js/embed-player.min.js"></script>
 <script>
   (function() {
     // Wait for DOM to be ready
@@ -140,7 +140,7 @@
       if (window.MuseVideoSwitcher) {
         MuseVideoSwitcher.registerPlayer('longest-plays', longestPlays);
         MuseVideoSwitcher.registerPlayer('best-touchdowns', bestTouchdowns);
-        
+
         // Set initial active states
         document.querySelector('[data-video-id="smZ3M7x"][data-video-category="longest-plays"]')?.classList.add('active');
         document.querySelector('[data-video-id="xyz789A"][data-video-category="best-touchdowns"]')?.classList.add('active');

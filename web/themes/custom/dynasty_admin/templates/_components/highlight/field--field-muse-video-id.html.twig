@@ -1,8 +1,8 @@
-{# Using iframe method to avoid CORS issues with muse.ai API #}
+{# Using iframe method to avoid CORS issues with skiv.com API #}
 {% for item in items %}
   {% set muse_id = item.content['#context']['value'] %}
 
-  <iframe src="https://muse.ai/embed/{{ muse_id }}"
+  <iframe src="https://skiv.com/embed/{{ muse_id }}"
           style="width: 100%; aspect-ratio: 16/9;"
           allowfullscreen
           allow="autoplay; fullscreen"

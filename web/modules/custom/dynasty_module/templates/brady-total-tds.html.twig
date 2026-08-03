@@ -75,7 +75,7 @@
               <h4 onclick="hideShow('brady-td-wr-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center hover:opacity-75 hover:shadow">{{ player }} ({{ gifs|length }})</h4>
                   <ol class="pt-2 px-4 border pl-10 list-decimal divide-gray-400 divide-y" id="brady-td-wr-{{ loop.index }}"  style="display: none;">
                     {% for gif in gifs %}
-                      <li class="py-1"><a href="https://muse.ai/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
+                      <li class="py-1"><a href="https://skiv.com/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
                   </ol>
             </li>
@@ -141,7 +141,7 @@
                 <h4 onclick="hideShow('brady-td-q-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center hover:opacity-75 hover:shadow">{{ quarter }} ({{ gifs|length }})</h4>
                   <ol class="pt-2 px-4 border pl-10 list-decimal divide-gray-400 divide-y" id="brady-td-q-{{ loop.index }}" style="display: none;">
                     {% for gif in gifs %}
-                      <li class="py-1"><a href="https://muse.ai/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} vs {{ gif.opp }})</a></li>
+                      <li class="py-1"><a href="https://skiv.com/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
                   </ol>
               </li>
@@ -221,7 +221,7 @@
                 <h4 onclick="hideShow('brady-td-dist-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center hover:opacity-75 hover:shadow">{{ distance }} yards ({{ gifs|length }})</h4>
                 <ol class="pt-2 px-4 border pl-10 list-decimal divide-gray-400 divide-y" id="brady-td-dist-{{ loop.index }}" style="display: none;">
                     {% for gif in gifs %}
-                      <li class="py-1"><a href="https://muse.ai/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
+                      <li class="py-1"><a href="https://skiv.com/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
                 </ol>
               </li>
@@ -287,7 +287,7 @@
                 <h4 onclick="hideShow('brady-td-pos-{{ loop.index }}')" class="cursor-pointer px-5 py-3 bg-blue-pats text-white text-center hover:opacity-75 hover:shadow">{{ pos }}s ({{ gifs|length }})</h4>
                 <ol class="pt-2 px-4 border pl-10 list-decimal divide-gray-400 divide-y" id="brady-td-pos-{{ loop.index }}"  style="display: none;">
                     {% for gif in gifs %}
-                      <li class="py-1"><a href="https://muse.ai/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
+                      <li class="py-1"><a href="https://skiv.com/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                     {% endfor %}
                 </ol>
               </li>
@@ -374,7 +374,7 @@
                     {% for gifs in weeks %}
                       {% for gif in gifs %}
                         {% set i = i + 1 %}
-                        <li class="py-1"><a href="https://muse.ai/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
+                        <li class="py-1"><a href="https://skiv.com/{{ gif.link }}" class="brady-td-link collection-item blue-text">{{ gif.title }} ({{ gif.season }} {{ gif.week }} vs {{ gif.opp }})</a></li>
                       {% endfor %}
                     {% endfor %}
                 </ol>

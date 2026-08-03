@@ -502,7 +502,7 @@ class InstagramService {
   }
 
   /**
-   * Fetches video metadata from the muse.ai API.
+   * Fetches video metadata from the skiv.com API.
    *
    * @param string $muse_video_id
    *
@@ -510,18 +510,18 @@ class InstagramService {
    */
   protected function getMuseVideoInfo($muse_video_id) {
     try {
-      $response = $this->httpClient->get("https://muse.ai/api/files/info/{$muse_video_id}");
+      $response = $this->httpClient->get("https://skiv.com/api/files/info/{$muse_video_id}");
       $data = json_decode($response->getBody()->getContents(), TRUE);
 
       if (isset($data['url'])) {
         return $data;
       }
 
-      $this->logger->error('Invalid muse.ai API response for video: @id', ['@id' => $muse_video_id]);
+      $this->logger->error('Invalid skiv.com API response for video: @id', ['@id' => $muse_video_id]);
       return NULL;
     }
     catch (GuzzleException $e) {
-      $this->logger->error('Failed to fetch muse.ai video info: @message', ['@message' => $e->getMessage()]);
+      $this->logger->error('Failed to fetch skiv.com video info: @message', ['@message' => $e->getMessage()]);
       return NULL;
     }
   }
@@ -567,7 +567,7 @@ class InstagramService {
 
       $muse_video_id = $highlight->get('field_muse_video_id')->value;
       if (empty($muse_video_id)) {
-        $this->logger->error('Highlight @nid has no muse.ai video ID.', ['@nid' => $highlight->id()]);
+        $this->logger->error('Highlight @nid has no skiv.com video ID.', ['@nid' => $highlight->id()]);
         $this->markAsPosted($highlight->id());
         continue;
       }

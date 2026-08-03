@@ -51,7 +51,7 @@ console.log(typeof player.setVideo); // Should be "function"
 player.setVideo('UaeHcHT'); // Should switch video
 ```
 
-If `setVideo` is undefined, check Muse.ai documentation for the correct method name.
+If `setVideo` is undefined, check skiv.com documentation for the correct method name.
 
 ### Check 4: Are click handlers attached?
 Check if clicking logs to console:
@@ -81,12 +81,12 @@ Your CSS might be overriding the active styles. Try adding `!important`:
 ### Check 3: Inspect Element
 Right-click the link and "Inspect". Check if the `active` class is being added/removed when you click.
 
-## Muse.ai Player Not Loading
+## skiv.com Player Not Loading
 
 ### Check 1: Script Tag
-Make sure the Muse.ai script is loaded:
+Make sure the skiv.com script is loaded:
 ```html
-<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+<script src="https://skiv.com/static/js/embed-player.min.js"></script>
 ```
 
 ### Check 2: Container Exists
@@ -137,7 +137,7 @@ $response->addCommand(new InvokeCommand(NULL, 'attachBehaviors'));
 1. ✅ Clear Drupal cache: `ddev drush cr`
 2. ✅ Check browser console for errors
 3. ✅ Verify library is attached to page (check page source)
-4. ✅ Ensure video IDs are correct Muse.ai IDs
+4. ✅ Ensure video IDs are correct skiv.com IDs
 5. ✅ Test in browser console manually:
    ```javascript
    MuseVideoSwitcher.switchVideo('your-category', 'videoId');

@@ -23,7 +23,7 @@ gfycat:
     - core/jquery
     - core/drupal.dialog
 muse_video:
-  remote: https://muse.ai/static/js/embed-player.js
+  remote: https://skiv.com/static/js/embed-player.js
   version: 1.0
   header: true
   license:
@@ -31,7 +31,7 @@ muse_video:
     url: https://github.com/angular/angular.js/blob/master/LICENSE
     gpl-compatible: true
   js:
-    https://muse.ai/static/js/embed-player.min.js: { type: external, minified: true }
+    https://skiv.com/static/js/embed-player.min.js: { type: external, minified: true }
 muse_modal:
   js:
     js/muse_ai_modal.js: {}

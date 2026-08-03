@@ -59,8 +59,8 @@ To post a random highlight immediately:
 ## How It Works
 
 1. **Selection**: The module queries for published highlight nodes that haven't been posted yet
-2. **Fetch from muse.ai**: Retrieves video metadata and download URL from muse.ai API using the `field_muse_video_id`
-3. **Temporary Download**: Downloads the video from muse.ai to Drupal's temporary directory
+2. **Fetch from skiv.com**: Retrieves video metadata and download URL from skiv.com API using the `field_muse_video_id`
+3. **Temporary Download**: Downloads the video from skiv.com to Drupal's temporary directory
 4. **Video Upload**: Uploads the video file to Bluesky's video service
 5. **Processing**: Waits for Bluesky to process the video (transcode, optimize)
 6. **Posting**: Creates a post with the video and highlight description
@@ -71,9 +71,9 @@ When all highlights have been posted, the tracking list resets automatically.
 
 ### Video Storage
 
-This module works with highlights that have videos hosted on muse.ai:
+This module works with highlights that have videos hosted on skiv.com:
 - Uses the `field_muse_video_id` field to identify the video
-- Fetches video metadata (URL, dimensions) from muse.ai's API
+- Fetches video metadata (URL, dimensions) from skiv.com's API
 - Downloads videos temporarily for upload to Bluesky
 - Automatically cleans up temporary files after posting
 
@@ -99,8 +99,8 @@ ddev drush watchdog-show --type=dynasty_social_post
 ```
 
 Common issues:
-- **No muse.ai video ID**: The highlight must have a muse.ai video ID in the `field_muse_video_id` field
-- **Video not accessible**: Ensure the video is publicly accessible on muse.ai
+- **No skiv.com video ID**: The highlight must have a skiv.com video ID in the `field_muse_video_id` field
+- **Video not accessible**: Ensure the video is publicly accessible on skiv.com
 - **Download failed**: Check server internet connectivity and firewall settings
 - **Authentication failed**: Verify your Bluesky credentials are correct
 - **Email not verified**: Your Bluesky account email must be verified to post videos

@@ -1,6 +1,6 @@
-# Muse.ai Video Switcher
+# skiv.com Video Switcher
 
-A flexible JavaScript utility for switching videos in Muse.ai players by clicking on links or buttons.
+A flexible JavaScript utility for switching videos in skiv.com players by clicking on links or buttons.
 
 ## Features
 
@@ -86,10 +86,10 @@ The main library will still attach the click handlers when it loads, but this en
 <div id="longest-plays" class="aspect-video h-full"></div>
 ```
 
-### Step 2: Initialize the Muse.ai player
+### Step 2: Initialize the skiv.com player
 
 ```html
-<script src="https://muse.ai/static/js/embed-player.min.js"></script>
+<script src="https://skiv.com/static/js/embed-player.min.js"></script>
 <script>
   // Ensure MuseVideoSwitcher is available (inline initialization)
   window.MuseVideoSwitcher = window.MuseVideoSwitcher || {
@@ -140,7 +140,7 @@ The main library will still attach the click handlers when it loads, but this en
 
 ## Data Attributes
 
-- `data-video-id` (required): The Muse.ai video ID
+- `data-video-id` (required): The skiv.com video ID
 - `data-video-category` (required): The category/player name (must match the name used in `registerPlayer()`)
 
 ## Active State Styling
@@ -158,8 +158,8 @@ Add CSS to style the active link:
 Or use Tailwind/DaisyUI classes:
 
 ```html
-<a 
-  data-video-id="UaeHcHT" 
+<a
+  data-video-id="UaeHcHT"
   data-video-category="longest-plays"
   class="btn btn-primary [&.active]:btn-secondary [&.active]:font-bold"
 >
@@ -226,7 +226,7 @@ The switcher works with any clickable element:
 
 ### MuseVideoSwitcher.registerPlayer(category, player)
 
-Register a Muse.ai player instance.
+Register a skiv.com player instance.
 
 **Parameters:**
 - `category` (string): The category name (matches `data-video-category`)
@@ -244,7 +244,7 @@ Manually switch to a different video.
 
 **Parameters:**
 - `category` (string): The category/player name
-- `videoId` (string): The Muse.ai video ID
+- `videoId` (string): The skiv.com video ID
 
 **Example:**
 ```javascript

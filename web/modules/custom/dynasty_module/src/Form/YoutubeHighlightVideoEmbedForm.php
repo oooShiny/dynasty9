@@ -38,7 +38,7 @@ class YoutubeHighlightVideoEmbedForm extends ConfigFormBase {
     $form['instructions'] = [
       '#type' => 'item',
       '#markup' => '<p class="messages messages--status">
-                    Import videos from muse.ai that have been copied from youtube
+                    Import videos from skiv.com that have been copied from youtube
                     by clicking the <strong>Save configuration</strong> button below.
                     </p>'
     ];
@@ -52,7 +52,7 @@ class YoutubeHighlightVideoEmbedForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
-    // Get videos from Muse.ai.
+    // Get videos from skiv.com.
     $muse_vids = $this->get_muse_videos('figxfpq');
 
     // Get list of games in Drupal.
@@ -79,7 +79,7 @@ class YoutubeHighlightVideoEmbedForm extends ConfigFormBase {
   }
 
   private function get_muse_videos($collection) {
-    $url = 'https://muse.ai/api/files/collections/' . $collection;
+    $url = 'https://skiv.com/api/files/collections/' . $collection;
     $client = \Drupal::httpClient();
     $data = NULL;
     try{

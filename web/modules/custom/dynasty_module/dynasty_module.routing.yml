@@ -19,7 +19,7 @@ dynasty.videoimport:
   path: '/admin/dynasty/muse/import'
   defaults:
     _form: '\Drupal\dynasty_module\Form\GfycatMuseImportForm'
-    _title: 'Import Gfycat Videos from Muse.ai'
+    _title: 'Import Gfycat Videos from skiv.com'
   requirements:
     _permission: 'add muse videos'
   options:
@@ -28,7 +28,7 @@ dynasty.youtubehighlights:
   path: '/admin/dynasty/muse/youtube'
   defaults:
     _form: '\Drupal\dynasty_module\Form\YoutubeHighlightVideoEmbedForm'
-    _title: 'Import Youtube Videos from Muse.ai'
+    _title: 'Import Youtube Videos from skiv.com'
   requirements:
     _permission: 'add muse videos'
   options:
