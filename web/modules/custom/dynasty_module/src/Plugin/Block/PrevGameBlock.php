@@ -3,7 +3,6 @@
 namespace Drupal\dynasty_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\node\Entity\Node;
 
 /**
  * Provides a Block that displays a link to the previous game.
@@ -27,29 +26,24 @@ class PrevGameBlock extends BlockBase {
     $node = $this->getContextValue('node');
     $date = $node->get('field_date')->value;
 
-    // Get all game nodes.
-    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','game')->execute();
-    $nodes = Node::loadMultiple($nids);
+    // Find the previous game by querying only games before the current date.
+    $prev_nids = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
+      ->condition('type', 'game')
+      ->condition('field_date', $date, '<')
+      ->sort('field_date', 'DESC')
+      ->range(0, 1)
+      ->execute();
 
-    $games = [];
-    foreach ($nodes as $n) {
-      $games[$n->get('field_date')->value] = $n->id();
+    $previous = NULL;
+    if (!empty($prev_nids)) {
+      $prev_nid = reset($prev_nids);
+      $previous = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $prev_nid);
     }
 
-    // Find the previous game by date.
-    krsort($games);
-    $nid = $this->get_adjacent_game($games, $date);
-    if ($nid) {
-    $previous_nid = $games[$nid];
-      $previous = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $previous_nid);
-    }
-    else {
-      $previous = NULL;
-    }
-    // Display both as links.
     return [
       '#theme' => 'prev_block',
-      '#previous' => $previous
+      '#previous' => $previous,
     ];
   }
 
@@ -62,13 +56,4 @@ class PrevGameBlock extends BlockBase {
     return $mapping ?: ['node' => '@node.node_route_context:node'];
   }
 
-  private function get_adjacent_game($array, $key)  {
-    $keys = array_keys($array);
-    $index = array_search($key, $keys);
-    if ( count($array) <= $index + 1 ) {
-      return;
-    } else {
-      return $keys[$index + 1];
-    }
-  }
 }

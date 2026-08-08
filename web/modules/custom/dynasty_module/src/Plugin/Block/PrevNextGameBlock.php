@@ -3,7 +3,6 @@
 namespace Drupal\dynasty_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\node\Entity\Node;
 
 /**
  * Provides a Block that displays buttons to go to the prev/next show notes.
@@ -27,39 +26,40 @@ class PrevNextGameBlock extends BlockBase {
     $node = $this->getContextValue('node');
     $date = $node->get('field_date')->value;
 
-    // Get all game nodes.
-    $nids = \Drupal::entityQuery('node')->accessCheck(TRUE)->condition('type','game')->execute();
-    $nodes = Node::loadMultiple($nids);
+    // Find the next game by querying only games after the current date.
+    $next_nids = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
+      ->condition('type', 'game')
+      ->condition('field_date', $date, '>')
+      ->sort('field_date', 'ASC')
+      ->range(0, 1)
+      ->execute();
 
-    $games = [];
-    foreach ($nodes as $n) {
-      $games[$n->get('field_date')->value] = $n->id();
-    }
-    // Find the next game by date.
-    ksort($games);
-    $nid = $this->get_adjacent_game($games, $date);
-    if ($nid) {
-      $next_nid = $games[$nid];
+    $next = NULL;
+    if (!empty($next_nids)) {
+      $next_nid = reset($next_nids);
       $next = '/show-notes/' . $next_nid;
     }
-    else {
-      $next = NULL;
+
+    // Find the previous game by querying only games before the current date.
+    $prev_nids = \Drupal::entityQuery('node')
+      ->accessCheck(TRUE)
+      ->condition('type', 'game')
+      ->condition('field_date', $date, '<')
+      ->sort('field_date', 'DESC')
+      ->range(0, 1)
+      ->execute();
+
+    $previous = NULL;
+    if (!empty($prev_nids)) {
+      $prev_nid = reset($prev_nids);
+      $previous = '/show-notes/' . $prev_nid;
     }
-    // Find the previous game by date.
-    krsort($games);
-    $nid = $this->get_adjacent_game($games, $date);
-    if ($nid) {
-      $previous_nid = $games[$nid];
-      $previous = '/show-notes/' . $previous_nid;
-    }
-    else {
-      $previous = NULL;
-    }
-    // Display both as links.
+
     return [
       '#theme' => 'prev_next_block',
       '#previous' => $previous,
-      '#next' => $next
+      '#next' => $next,
     ];
   }
 
@@ -72,13 +72,4 @@ class PrevNextGameBlock extends BlockBase {
     return $mapping ?: ['node' => '@node.node_route_context:node'];
   }
 
-  private function get_adjacent_game($array, $key)  {
-    $keys = array_keys($array);
-    $index = array_search($key, $keys);
-    if ( count($array) <= $index + 1 ) {
-      return;
-    } else {
-      return $keys[$index + 1];
-    }
-  }
 }
