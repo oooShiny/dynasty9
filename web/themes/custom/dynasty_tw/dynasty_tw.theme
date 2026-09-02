@@ -96,14 +96,17 @@ function dynasty_tw_preprocess_field(&$variables) {
       $variables['view_mode'] = $variables['element']['#view_mode'];
       break;
     case 'field_muse_video_id':
-      // Using iframe embed method - no external script needed
-      if ($variables['element']['#view_mode'] == 'card') {
+      // Map node view mode → video SDC card_type.
+      $view_mode = $variables['element']['#view_mode'];
+      $vertical_modes = ['card', 'simple_card'];
+      if (in_array($view_mode, $vertical_modes)) {
         $variables['card'] = 'vertical';
       }
-      elseif ($variables['element']['#view_mode'] == 'horizontal_card') {
+      elseif ($view_mode == 'horizontal_card') {
         $variables['card'] = 'horizontal';
       }
       else {
+        // 'full', 'media_only', 'teaser', 'timeline', etc. → full 16:9 wrapper.
         $variables['card'] = 'none';
       }
       break;
@@ -314,7 +317,7 @@ function dynasty_tw_preprocess_paragraph(&$variables) {
       // bg-red-pats text-white|Red
       // section-header
       // header-block
-      $css = explode(' ', $p->field_background_color->value);
+      $css = explode(' ', $p->field_background_color->value ?? '');
       $variables['bg_color'] = $css[0];
       if (isset($css[1]) && $css[1] == 'text-white') {
         $text_css = 'text-white border-white';
@@ -578,17 +581,7 @@ function dynasty_tw_preprocess_views_view_table(&$variables) {
 }
 
 function _check_name_alts($team_node, $season) {
-  // See if the team node has any alternate names.
-  if (!$team_node->field_alternate_team_name->isEmpty()) {
-    foreach ($team_node->field_alternate_team_name->referencedEntities() as $alt) {
-      if ($alt->field_season->value == $season) {
-        // If we have an alt for this season, return it.
-        return $alt->field_alternate_name->value;
-      }
-    }
-  }
-  // Nothing found, return null.
-  return $team_node->label();
+  return \Drupal\dynasty_module\DynastyHelpers::check_name_alts($team_node, $season);
 }
 
 function _get_team_location($team) {

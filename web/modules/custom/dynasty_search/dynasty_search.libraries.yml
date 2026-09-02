@@ -1,0 +1,27 @@
+game_search:
+  version: 1.x
+  css:
+    component:
+      css/game-search.css: {}
+  js:
+    js/game-search.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+    - select2/select2
+    - dynasty_tw/select2.theme
+
+play_search:
+  version: 1.x
+  css:
+    component:
+      css/play-search.css: {}
+  js:
+    js/play-search.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+    - select2/select2
+    - dynasty_tw/select2.theme

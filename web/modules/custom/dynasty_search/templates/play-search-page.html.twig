@@ -1,0 +1,119 @@
+{#
+/**
+ * @file
+ * Play Search page shell. All data is loaded client-side from
+ * /dynasty/search/plays by js/play-search.js — this template only provides
+ * the filter controls, sort/fulltext controls, and empty result containers.
+ *
+ * Single-copy responsive filter panel, same reasoning as
+ * game-search-page.html.twig.
+ */
+#}
+
+{% set play_type_filter %}
+  <label for="ps-filter-play-type" class="block text-sm mb-1">Play Type</label>
+  <select id="ps-filter-play-type" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Play Type -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set play_tag_filter %}
+  <label for="ps-filter-play-tag" class="block text-sm mb-1">Play Tag</label>
+  <select id="ps-filter-play-tag" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Tag -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set season_filter %}
+  <label for="ps-filter-season" class="block text-sm mb-1">Season</label>
+  <select id="ps-filter-season" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Season(s) -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set down_filter %}
+  <label for="ps-filter-down" class="block text-sm mb-1">Down</label>
+  <select id="ps-filter-down" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Down -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set quarter_filter %}
+  <label for="ps-filter-quarter" class="block text-sm mb-1">Quarter</label>
+  <select id="ps-filter-quarter" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Quarter -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set td_filter %}
+  <div class="text-sm mb-1">TD Scored</div>
+  <div class="ps-toggle-group flex gap-1" data-filter="td_scored">
+    <button type="button" class="ps-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="ps-toggle px-3 py-1 border rounded" data-value="1">Yes</button>
+    <button type="button" class="ps-toggle px-3 py-1 border rounded" data-value="0">No</button>
+  </div>
+{% endset %}
+
+{% set range_filters %}
+  <div class="mb-2">
+    <div class="text-sm mb-1">Yards Gained</div>
+    <div class="flex gap-2 items-center">
+      <input type="number" id="ps-min-yards" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
+      <input type="number" id="ps-max-yards" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
+    </div>
+  </div>
+  <div>
+    <div class="text-sm mb-1">Air Yards</div>
+    <div class="flex gap-2 items-center">
+      <input type="number" id="ps-min-air-yards" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
+      <input type="number" id="ps-max-air-yards" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
+    </div>
+  </div>
+{% endset %}
+
+{% set reset_filter %}
+  <button type="button" id="ps-reset" class="w-full px-3 py-2 bg-red-pats text-white rounded">Reset Search</button>
+{% endset %}
+
+<div id="play-search-app" class="md:!w-4/5 mx-auto">
+  <div class="bg-gray-400 m-2 p-2 text-center">
+    <h2 class="font-bold">Popular Searches</h2>
+    <div class="flex justify-center py-5 w-full gap-2">
+      <button type="button" class="badge badge-primary ps-popular-search" data-search="butt fumble">Butt Fumble</button>
+      <button type="button" class="badge badge-primary ps-popular-search" data-search="edelman amendola">Edelman to Amendola</button>
+      <button type="button" class="badge badge-primary ps-popular-search" data-search="edelman circus catch">The Catch</button>
+    </div>
+  </div>
+
+  <div class="flex gap-2 p-4">
+    <input type="text" id="ps-search" placeholder="Search plays, players, opponents..." class="flex-1 border rounded px-3 py-2">
+  </div>
+
+  <div class="flex flex-wrap md:!flex-nowrap gap-4">
+    <div class="md:!w-1/4">
+      <h2 id="ps-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
+      <div id="ps-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
+        <div class="p-3">{{ play_type_filter }}</div>
+        <div class="p-3">{{ play_tag_filter }}</div>
+        <div class="p-3">{{ season_filter }}</div>
+        <div class="p-3">{{ down_filter }}</div>
+        <div class="p-3">{{ quarter_filter }}</div>
+        <div class="p-3">{{ td_filter }}</div>
+        <div class="p-3">{{ range_filters }}</div>
+        <div class="p-3">{{ reset_filter }}</div>
+      </div>
+    </div>
+
+    <div class="w-full md:!w-3/4">
+      <div class="flex flex-wrap items-center justify-between px-2 gap-2">
+        <div id="ps-active-filters" class="flex flex-wrap gap-2"></div>
+        <div class="flex gap-2 items-center">
+          <label for="ps-sort" class="text-sm">Sort:</label>
+          <select id="ps-sort" class="border rounded px-2 py-1">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="longest">Longest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mx-auto p-2 patriots text-xl w-fit" id="ps-result-summary">Displaying 0 - 0 of 0 plays</div>
+
+      {# Cards use the same w-1/2 md:w-1/3 lg:w-1/4 self-sizing as dynasty_tw:highlight-card
+         elsewhere on the site, so this is a flex-wrap container, not a grid. #}
+      <div id="ps-results" class="flex flex-wrap"></div>
+
+      <div id="ps-pagination" class="flex justify-center gap-2 mt-6 p-4"></div>
+    </div>
+  </div>
+</div>

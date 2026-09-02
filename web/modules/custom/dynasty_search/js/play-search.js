@@ -1,0 +1,464 @@
+/**
+ * @file
+ * Play Search: fetches /dynasty/search/plays once, then does all
+ * filtering/sorting/pagination client-side.
+ */
+
+(function (Drupal, once) {
+  'use strict';
+
+  const DATA_URL = '/dynasty/search/plays';
+  const DEBOUNCE_MS = 300;
+  const PER_PAGE = 12;
+
+  const DOWNLOAD_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">' +
+    '<path class="fill-white" d="M11.24 13.59L11.24 4C11.24 3.45 11.69 3 12.24 3C12.8 3 13.24 3.45 13.24 4L13.24 13.59' +
+    'L15.78 11.05C16.17 10.66 16.8 10.66 17.19 11.05C17.58 11.44 17.58 12.07 17.19 12.46' +
+    'L12.95 16.71C12.56 17.1 11.93 17.1 11.54 16.71L7.29 12.46C6.9 12.07 6.9 11.44 7.29 11.05' +
+    'C7.68 10.66 8.32 10.66 8.71 11.05L11.24 13.59Z' +
+    'M2 14C2 13.45 2.45 13 3 13C3.55 13 4 13.45 4 14C4 14.98 4 17.39 4 18' +
+    'C4 18.55 4.45 19 5 19L19 19C19.55 19 20 18.55 20 18L20 14' +
+    'C20 13.45 20.45 13 21 13C21.55 13 22 13.45 22 14L22 18' +
+    'C22 19.66 20.66 21 19 21L5 21C3.34 21 2 19.66 2 18C2 17.39 2 14.98 2 14Z" />' +
+    '</svg>';
+
+  Drupal.behaviors.playSearch = {
+    attach: function (context) {
+      once('play-search-init', '#play-search-app', context).forEach(function (app) {
+        initPlaySearch(app);
+      });
+    }
+  };
+
+  function initPlaySearch(app) {
+    const filterToggle = app.querySelector('#ps-filter-toggle');
+    const filterPanel = app.querySelector('#ps-filters-panel');
+    if (filterToggle && filterPanel) {
+      filterToggle.addEventListener('click', function () {
+        filterPanel.classList.toggle('hidden');
+        filterPanel.classList.toggle('block');
+      });
+    }
+
+    const els = {
+      search: app.querySelector('#ps-search'),
+      sort: app.querySelector('#ps-sort'),
+      results: app.querySelector('#ps-results'),
+      pagination: app.querySelector('#ps-pagination'),
+      summary: app.querySelector('#ps-result-summary'),
+      activeFilters: app.querySelector('#ps-active-filters'),
+      playType: app.querySelector('#ps-filter-play-type'),
+      playTag: app.querySelector('#ps-filter-play-tag'),
+      season: app.querySelector('#ps-filter-season'),
+      down: app.querySelector('#ps-filter-down'),
+      quarter: app.querySelector('#ps-filter-quarter'),
+      minYards: app.querySelector('#ps-min-yards'),
+      maxYards: app.querySelector('#ps-max-yards'),
+      minAirYards: app.querySelector('#ps-min-air-yards'),
+      maxAirYards: app.querySelector('#ps-max-air-yards'),
+      reset: app.querySelector('#ps-reset'),
+    };
+
+    let plays = [];
+    let currentPage = 0;
+    let debounceTimer = null;
+    let restoring = false;
+
+    fetch(DATA_URL)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        plays = data;
+        populateFilterOptions();
+        bindEvents();
+        initToggleDefaults();
+        restoreFromUrl();
+        render();
+      })
+      .catch(function (err) {
+        if (els.results) {
+          els.results.innerHTML = '<div class="p-5">Failed to load plays: ' + escapeHtml(err.message) + '</div>';
+        }
+      });
+
+    // --- Filter option lists ---
+
+    function populateFilterOptions() {
+      fillSelect(els.playType, uniqueSorted(plays, function (p) { return p.play_type ? p.play_type.label : null; }));
+      fillSelect(els.playTag, uniqueSorted(plays, null, function (p) { return p.tag_play || []; }));
+      fillSelect(els.season, uniqueSorted(plays, function (p) { return String(p.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
+      fillSelect(els.down, uniqueSorted(plays, function (p) { return p.down ? String(p.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+      fillSelect(els.quarter, uniqueSorted(plays, function (p) { return p.quarter ? String(p.quarter) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+      [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(refreshSelect2);
+    }
+
+    function fillSelect(select, values) {
+      if (!select) return;
+      select.innerHTML = values.map(function (v) {
+        return '<option value="' + escapeHtml(v) + '">' + escapeHtml(v) + '</option>';
+      }).join('');
+    }
+
+    function uniqueSorted(rows, getter, multiGetter) {
+      const set = new Set();
+      rows.forEach(function (r) {
+        if (multiGetter) {
+          multiGetter(r).forEach(function (v) { if (v) set.add(v); });
+        } else {
+          const v = getter(r);
+          if (v) set.add(v);
+        }
+      });
+      return Array.from(set).sort();
+    }
+
+    function refreshSelect2(select) {
+      if (select && window.jQuery && window.jQuery(select).data('select2')) {
+        window.jQuery(select).trigger('change');
+      }
+    }
+
+    // --- Events ---
+
+    function bindEvents() {
+      if (els.search) {
+        els.search.addEventListener('input', function () {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(onFilterChange, DEBOUNCE_MS);
+        });
+      }
+      if (els.sort) {
+        els.sort.addEventListener('change', onFilterChange);
+      }
+
+      [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
+        if (!select) return;
+        select.addEventListener('change', onFilterChange);
+        if (window.jQuery) window.jQuery(select).on('change', onFilterChange);
+      });
+
+      app.querySelectorAll('.ps-toggle-group').forEach(function (group) {
+        group.querySelectorAll('.ps-toggle').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
+            btn.classList.add('ps-toggle-active');
+            onFilterChange();
+          });
+        });
+      });
+
+      [els.minYards, els.maxYards, els.minAirYards, els.maxAirYards].forEach(function (input) {
+        if (!input) return;
+        input.addEventListener('input', function () {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(onFilterChange, DEBOUNCE_MS);
+        });
+      });
+
+      app.querySelectorAll('.ps-popular-search').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (els.search) els.search.value = btn.dataset.search;
+          onFilterChange();
+        });
+      });
+
+      if (els.reset) {
+        els.reset.addEventListener('click', function () {
+          resetFilters();
+          onFilterChange();
+        });
+      }
+
+      if (els.activeFilters) {
+        els.activeFilters.addEventListener('click', function (e) {
+          const btn = e.target.closest('[data-remove]');
+          if (!btn) return;
+          removeFilter(btn.dataset.remove);
+          onFilterChange();
+        });
+      }
+
+      if (els.pagination) {
+        els.pagination.addEventListener('click', function (e) {
+          const btn = e.target.closest('[data-page]');
+          if (!btn || btn.disabled) return;
+          currentPage = parseInt(btn.dataset.page, 10);
+          renderResults();
+          app.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    }
+
+    function initToggleDefaults() {
+      app.querySelectorAll('.ps-toggle-group').forEach(function (group) {
+        group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+      });
+    }
+
+    function onFilterChange() {
+      if (restoring) return;
+      currentPage = 0;
+      syncUrl();
+      render();
+    }
+
+    function resetFilters() {
+      if (els.search) els.search.value = '';
+      if (els.sort) els.sort.value = 'newest';
+      [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
+        if (!select) return;
+        Array.from(select.options).forEach(function (o) { o.selected = false; });
+        refreshSelect2(select);
+      });
+      app.querySelectorAll('.ps-toggle-group').forEach(function (group) {
+        group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
+        group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+      });
+      [els.minYards, els.maxYards, els.minAirYards, els.maxAirYards].forEach(function (input) {
+        if (input) input.value = '';
+      });
+    }
+
+    // --- Reading current filter state ---
+
+    function selected(select) {
+      return select ? Array.from(select.selectedOptions).map(function (o) { return o.value; }) : [];
+    }
+
+    function toggleValue(filterName) {
+      const group = app.querySelector('.ps-toggle-group[data-filter="' + filterName + '"]');
+      if (!group) return '';
+      const active = group.querySelector('.ps-toggle-active');
+      return active ? active.dataset.value : '';
+    }
+
+    function numOrNull(input) {
+      if (!input || input.value === '') return null;
+      const n = Number(input.value);
+      return Number.isNaN(n) ? null : n;
+    }
+
+    function getFilters() {
+      return {
+        q: els.search ? els.search.value.trim().toLowerCase() : '',
+        sort: els.sort ? els.sort.value : 'newest',
+        playType: selected(els.playType),
+        playTag: selected(els.playTag),
+        season: selected(els.season),
+        down: selected(els.down),
+        quarter: selected(els.quarter),
+        td_scored: toggleValue('td_scored'),
+        minYards: numOrNull(els.minYards),
+        maxYards: numOrNull(els.maxYards),
+        minAirYards: numOrNull(els.minAirYards),
+        maxAirYards: numOrNull(els.maxAirYards),
+      };
+    }
+
+    function matches(p, f) {
+      if (f.q) {
+        const haystack = [p.title, p.opponent, p.game_title].concat(p.players_involved || []).join(' ').toLowerCase();
+        if (haystack.indexOf(f.q) === -1) return false;
+      }
+      if (f.playType.length && (!p.play_type || f.playType.indexOf(p.play_type.label) === -1)) return false;
+      if (f.playTag.length && !f.playTag.some(function (t) { return (p.tag_play || []).indexOf(t) !== -1; })) return false;
+      if (f.season.length && f.season.indexOf(String(p.season)) === -1) return false;
+      if (f.down.length && f.down.indexOf(String(p.down)) === -1) return false;
+      if (f.quarter.length && f.quarter.indexOf(String(p.quarter)) === -1) return false;
+      if (f.td_scored !== '' && Boolean(p.td_scored) !== (f.td_scored === '1')) return false;
+      if (f.minYards !== null && p.yards_gained < f.minYards) return false;
+      if (f.maxYards !== null && p.yards_gained > f.maxYards) return false;
+      if (f.minAirYards !== null && p.air_yards < f.minAirYards) return false;
+      if (f.maxAirYards !== null && p.air_yards > f.maxAirYards) return false;
+      return true;
+    }
+
+    function sortPlays(rows, sort) {
+      const sorted = rows.slice();
+      if (sort === 'oldest') {
+        sorted.sort(function (a, b) { return a.season - b.season; });
+      } else if (sort === 'longest') {
+        sorted.sort(function (a, b) { return (b.yards_gained || 0) - (a.yards_gained || 0); });
+      } else {
+        sorted.sort(function (a, b) { return b.season - a.season; });
+      }
+      return sorted;
+    }
+
+    // --- Render ---
+
+    let filteredCache = [];
+
+    function render() {
+      const f = getFilters();
+      filteredCache = sortPlays(plays.filter(function (p) { return matches(p, f); }), f.sort);
+      renderActiveFilters(f);
+      renderResults();
+    }
+
+    function renderActiveFilters(f) {
+      if (!els.activeFilters) return;
+      const chips = [];
+      if (f.q) chips.push(chip('q', 'Search: ' + f.q));
+      f.playType.forEach(function (v) { chips.push(chip('playType:' + v, 'Play Type: ' + v)); });
+      f.playTag.forEach(function (v) { chips.push(chip('playTag:' + v, 'Tag: ' + v)); });
+      f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season: ' + v)); });
+      f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down: ' + v)); });
+      f.quarter.forEach(function (v) { chips.push(chip('quarter:' + v, 'Quarter: ' + v)); });
+      if (f.td_scored !== '') chips.push(chip('td_scored', 'TD: ' + (f.td_scored === '1' ? 'Yes' : 'No')));
+      els.activeFilters.innerHTML = chips.join('');
+    }
+
+    function chip(removeKey, label) {
+      return '<span class="badge badge-outline gap-1">' + escapeHtml(label) +
+        '<button type="button" data-remove="' + escapeHtml(removeKey) + '" class="ml-1">&times;</button></span>';
+    }
+
+    function removeFilter(key) {
+      if (key === 'q') {
+        if (els.search) els.search.value = '';
+        return;
+      }
+      const [type, value] = key.split(/:(.*)/s);
+      const map = { playType: els.playType, playTag: els.playTag, season: els.season, down: els.down, quarter: els.quarter };
+      if (map[type]) {
+        Array.from(map[type].options).forEach(function (o) {
+          if (o.value === value) o.selected = false;
+        });
+        refreshSelect2(map[type]);
+      } else {
+        const group = app.querySelector('.ps-toggle-group[data-filter="' + type + '"]');
+        if (group) {
+          group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
+          group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+        }
+      }
+    }
+
+    function renderResults() {
+      const total = filteredCache.length;
+      const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+      if (currentPage >= totalPages) currentPage = totalPages - 1;
+      if (currentPage < 0) currentPage = 0;
+
+      const start = currentPage * PER_PAGE;
+      const pageRows = filteredCache.slice(start, start + PER_PAGE);
+
+      if (els.summary) {
+        els.summary.textContent = total
+          ? 'Displaying ' + (start + 1) + ' - ' + Math.min(start + PER_PAGE, total) + ' of ' + total + ' plays'
+          : 'No plays match these filters';
+      }
+
+      if (els.results) {
+        els.results.innerHTML = pageRows.map(renderCard).join('');
+      }
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      if (!els.pagination) return;
+      if (totalPages <= 1) {
+        els.pagination.innerHTML = '';
+        return;
+      }
+      let html = '';
+      html += '<button class="px-4 py-2 border border-gray-300 bg-white rounded disabled:opacity-40" data-page="' +
+        (currentPage - 1) + '" ' + (currentPage <= 0 ? 'disabled' : '') + '>&laquo;&laquo;</button>';
+      html += '<span class="px-2 py-2">Page ' + (currentPage + 1) + ' of ' + totalPages + '</span>';
+      html += '<button class="px-4 py-2 border border-gray-300 bg-white rounded disabled:opacity-40" data-page="' +
+        (currentPage + 1) + '" ' + (currentPage >= totalPages - 1 ? 'disabled' : '') + '>&raquo;&raquo;</button>';
+      els.pagination.innerHTML = html;
+    }
+
+    function renderCard(p) {
+      const bg = p.td_scored ? 'bg-red-pats' : 'bg-blue-pats';
+      const videoHtml = p.muse_id
+        ? '<iframe src="https://skiv.com/embed/' + encodeURIComponent(p.muse_id) +
+          '?links=0&search=0&title=0&controls=[-settings,-chromecast,-airplay]&&logo=0" class="bg-black w-full h-40 border-0" ' +
+          'allowfullscreen allow="autoplay; fullscreen" loading="lazy"></iframe>'
+        : '';
+      const downloadHtml = p.video_file
+        ? '<a href="https://cdn.skiv.com/w/' + encodeURIComponent(p.video_file) + '/videos/video.mp4" download class="" title="Download video">' +
+          DOWNLOAD_SVG + '<span class="sr-only">Download video</span></a>'
+        : '';
+      return '<div class="w-1/2 md:w-1/3 lg:w-1/4 ' + bg + ' m-3 shadow-lg max-h-80 flex flex-col justify-between">' +
+        videoHtml +
+        '<div class="p-2 ' + bg + ' text-white flex flex-col gap-4 justify-between">' +
+        '<div><a href="' + escapeHtml(p.url) + '">' + escapeHtml(p.title) + '</a></div>' +
+        '<div class="flex justify-between">' +
+        '<p class="badge badge-outline">' + escapeHtml(p.game_title || '') + '</p>' +
+        downloadHtml +
+        '</div></div></div>';
+    }
+
+    // --- URL state (shareable links, popular-search links) ---
+
+    function syncUrl() {
+      const f = getFilters();
+      const params = new URLSearchParams();
+      if (f.q) params.set('search', f.q);
+      if (f.sort !== 'newest') params.set('sort', f.sort);
+      f.playType.forEach(function (v) { params.append('play_type', v); });
+      f.playTag.forEach(function (v) { params.append('play_tag', v); });
+      f.season.forEach(function (v) { params.append('season', v); });
+      f.down.forEach(function (v) { params.append('down', v); });
+      f.quarter.forEach(function (v) { params.append('quarter', v); });
+      if (f.td_scored !== '') params.set('td_scored', f.td_scored);
+      if (f.minYards !== null) params.set('min_yards', f.minYards);
+      if (f.maxYards !== null) params.set('max_yards', f.maxYards);
+      if (f.minAirYards !== null) params.set('min_air_yards', f.minAirYards);
+      if (f.maxAirYards !== null) params.set('max_air_yards', f.maxAirYards);
+      const qs = params.toString();
+      history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+    }
+
+    function restoreFromUrl() {
+      restoring = true;
+      const params = new URLSearchParams(location.search);
+      if (els.search && params.get('search')) els.search.value = params.get('search');
+      if (els.sort && params.get('sort')) els.sort.value = params.get('sort');
+      setMulti(els.playType, params.getAll('play_type'));
+      setMulti(els.playTag, params.getAll('play_tag'));
+      setMulti(els.season, params.getAll('season'));
+      setMulti(els.down, params.getAll('down'));
+      setMulti(els.quarter, params.getAll('quarter'));
+      setToggle('td_scored', params.get('td_scored') || '');
+      if (els.minYards) els.minYards.value = params.get('min_yards') || '';
+      if (els.maxYards) els.maxYards.value = params.get('max_yards') || '';
+      if (els.minAirYards) els.minAirYards.value = params.get('min_air_yards') || '';
+      if (els.maxAirYards) els.maxAirYards.value = params.get('max_air_yards') || '';
+      restoring = false;
+    }
+
+    function setMulti(select, values) {
+      if (!select || !values.length) return;
+      Array.from(select.options).forEach(function (o) {
+        o.selected = values.indexOf(o.value) !== -1;
+      });
+      refreshSelect2(select);
+    }
+
+    function setToggle(filterName, value) {
+      const group = app.querySelector('.ps-toggle-group[data-filter="' + filterName + '"]');
+      if (!group) return;
+      group.querySelectorAll('.ps-toggle').forEach(function (b) {
+        b.classList.toggle('ps-toggle-active', b.dataset.value === value);
+      });
+      if (!group.querySelector('.ps-toggle-active')) {
+        group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+      }
+    }
+  }
+
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    const div = document.createElement('div');
+    div.textContent = String(str);
+    return div.innerHTML;
+  }
+
+})(Drupal, once);

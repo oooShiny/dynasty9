@@ -167,4 +167,28 @@ class DynastyHelpers {
     }
     return $term_names;
   }
+
+  /**
+   * Get the display name for a team in a given season, honoring any
+   * season-specific alternate team name (field_alternate_team_name).
+   *
+   * @param \Drupal\node\Entity\Node $team_node
+   *   The team node.
+   * @param $season
+   *   The season to check for an alternate name.
+   * @return string
+   */
+  public static function check_name_alts($team_node, $season) {
+    // See if the team node has any alternate names.
+    if (!$team_node->field_alternate_team_name->isEmpty()) {
+      foreach ($team_node->field_alternate_team_name->referencedEntities() as $alt) {
+        if ($alt->field_season->value == $season) {
+          // If we have an alt for this season, return it.
+          return $alt->field_alternate_name->value;
+        }
+      }
+    }
+    // Nothing found, return null.
+    return $team_node->label();
+  }
 }

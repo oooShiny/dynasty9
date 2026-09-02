@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Client-side JSON search for the Game Search and Play Search pages.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function dynasty_search_theme() {
+  return [
+    'dynasty_search_game_page' => [
+      'variables' => [],
+      'template' => 'game-search-page',
+    ],
+    'dynasty_search_play_page' => [
+      'variables' => [],
+      'template' => 'play-search-page',
+    ],
+  ];
+}

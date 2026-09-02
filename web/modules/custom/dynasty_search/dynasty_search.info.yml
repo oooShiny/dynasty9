@@ -1,0 +1,8 @@
+name: Dynasty Search
+description: 'Client-side JSON search for Game and Play (Highlight) search pages, replacing the old Solr-backed views.'
+package: Dynasty
+
+type: module
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+dependencies:
+  - drupal:node
