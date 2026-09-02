@@ -98,7 +98,7 @@
   `facets` twice, once per breakpoint, which would duplicate these hard-coded
   filter element ids).
 #}
-<div id="game-search-app" class="md:!w-4/5 mx-auto">
+<div id="game-search-app" class="mx-auto">
   <div class="flex flex-wrap md:!flex-nowrap gap-4">
     <div class="md:!w-1/4">
       <h2 id="gs-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <div class="w-full md:!w-3/4">
+    <div class="w-full md:!w-3/4 min-w-0">
       <div id="gs-summary" class="px-4 py-5 text-lg">
         <h2>Displaying <span class="text-red-pats"><span id="gs-count">0</span> games</span></h2>
         <div id="gs-active-filters" class="flex flex-wrap gap-2 mt-2"></div>
