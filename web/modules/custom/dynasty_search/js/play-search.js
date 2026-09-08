@@ -391,19 +391,21 @@
       if (!els.activeFilters) return;
       const chips = [];
       if (f.q) chips.push(chip('q', 'Search: ' + f.q));
-      f.playType.forEach(function (v) { chips.push(chip('playType:' + v, 'Play Type: ' + v)); });
-      f.player.forEach(function (v) { chips.push(chip('player:' + v, 'Player: ' + v)); });
-      f.playTag.forEach(function (v) { chips.push(chip('playTag:' + v, 'Tag: ' + v)); });
-      f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season: ' + v)); });
-      f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down: ' + v)); });
-      f.quarter.forEach(function (v) { chips.push(chip('quarter:' + v, 'Quarter: ' + v)); });
-      if (f.td_scored !== '') chips.push(chip('td_scored', 'TD: ' + (f.td_scored === '1' ? 'Yes' : 'No')));
+      f.playType.forEach(function (v) { chips.push(chip('playType:' + v, 'Play Type', v)); });
+      f.player.forEach(function (v) { chips.push(chip('player:' + v, 'Player', v)); });
+      f.playTag.forEach(function (v) { chips.push(chip('playTag:' + v, 'Tag', v)); });
+      f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
+      f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down', v)); });
+      f.quarter.forEach(function (v) { chips.push(chip('quarter:' + v, 'Quarter', v)); });
+      if (f.td_scored !== '') chips.push(chip('td_scored', 'TD', (f.td_scored === '1' ? 'Yes' : 'No')));
       els.activeFilters.innerHTML = chips.join('');
     }
 
-    function chip(removeKey, label) {
-      return '<span class="badge badge-outline gap-1">' + escapeHtml(label) +
-        '<button type="button" data-remove="' + escapeHtml(removeKey) + '" class="ml-1">&times;</button></span>';
+    function chip(removeKey, label, filter) {
+      return '<span class="bg-white border-2 border-red-pats gap-1 p-1 rounded-full">'
+        + '<strong class="">' + escapeHtml(label) + ':</strong> ' + filter
+        + '<button type="button" data-remove="' + escapeHtml(removeKey) + '" class="p-1 text-red-pats cursor-pointer">&times;</button>'
+        + '</span>';
     }
 
     function removeFilter(key) {
