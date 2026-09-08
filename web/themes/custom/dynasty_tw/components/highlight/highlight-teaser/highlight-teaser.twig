@@ -1,0 +1,18 @@
+{# dynasty_tw:highlight-teaser #}
+<div class="md:w-1/2 lg:w-1/4 m-3">
+  {{ video }}
+  <div class="flex justify-between">
+    <a href="{{ url }}">{{ label }}</a>
+    <div class="flex">
+      {% if muse_id %}
+        <a href="https://skiv.com/vc/{{ muse_id }}" class="icon-link">
+          <img class="h-4 icon-link" src="/themes/custom/dynasty_tw/icons/link.svg" alt="Video Link">
+        </a>
+      {% endif %}
+
+      {% if video_file %}
+        {% include 'dynasty_tw:download-icon' with { href: 'https://cdn.skiv.com/w/' ~ video_file ~ '/videos/video.mp4' } only %}
+      {% endif %}
+    </div>
+  </div>
+</div>

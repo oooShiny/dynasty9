@@ -1,0 +1,29 @@
+{% set cover_img = ep_art ?: 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
+
+<div class="py-5 flex">
+  <div class="w-40 h-40 mr-5 justify-center items-center flex"
+       style="background-image: url('{{ cover_img }}');
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-position: center;">
+    {{ audio_player }}
+  </div>
+  <div class="flex flex-col justify-between w-3/4">
+    <h2>
+      <a href="{{ url }}" rel="bookmark" class="uppercase text-l">
+        <span class="font-extrabold">{{ label }}</span>
+        {% if subtitle|render %}
+          - {{ subtitle }}
+        {% endif %}
+      </a>
+      <span class="uppercase font-light text-l">({{ duration }})</span>
+    </h2>
+    {{ body }}
+    <div class="flex gap-2">
+      {% include 'dynasty_tw:button' with { label: 'Episode Info', url: url, size: 'sm' } only %}
+      {% if game_node_url %}
+        {% include 'dynasty_tw:button' with { label: 'Game Info', url: game_node_url, size: 'sm' } only %}
+      {% endif %}
+    </div>
+  </div>
+</div>

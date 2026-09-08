@@ -1,0 +1,20 @@
+{% set cover_img = ep_art ?: 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
+
+<div class="mb-5 flex h-48">
+  <div class="aspect-square justify-center items-center flex"
+       style="background-image: url('{{ cover_img }}');
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-position: center;">
+    {{ audio_player }}
+  </div>
+  <div class="bg-blue-pats p-2 text-white flex flex-col justify-between">
+    <h2>
+      <a href="{{ url }}" rel="bookmark" class="uppercase font-light text-l">{{ label }}</a>
+    </h2>
+    {% if subtitle|render %}
+      <h3 class="font-light text-l">{{ subtitle }}</h3>
+    {% endif %}
+    <br><span class="uppercase font-light text-l">{{ duration }}</span>
+  </div>
+</div>

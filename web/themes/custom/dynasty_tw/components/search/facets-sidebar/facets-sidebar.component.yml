@@ -1,0 +1,15 @@
+name: Facets Sidebar
+description: Responsive facets filter panel — desktop shows a stacked blue sidebar, mobile shows a togglable drawer triggered by a "Filters ▼" button. Toggle ID is generated with random() at render time.
+group: Search
+
+props:
+  type: object
+  properties:
+    show_title:
+      type: boolean
+      title: Show facet titles
+      description: When true, renders each facet's title as an h2 above its content.
+    facets:
+      type: array
+      title: Facet items
+      description: "Array of facet objects, each with 'title' (string) and 'content' (render array). Provided by the Facets module block template preprocess."

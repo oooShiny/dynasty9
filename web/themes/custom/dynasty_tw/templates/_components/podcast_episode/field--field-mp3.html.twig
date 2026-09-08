@@ -1,57 +1,14 @@
 {#
 /**
  * @file
- * Theme override for a field.
+ * Thin bridge → dynasty_tw:audio-player SDC.
  *
- * To override output, copy the "field.html.twig" from the templates directory
- * to your theme's directory and customize it, just like customizing other
- * Drupal templates such as page.html.twig or node.html.twig.
- *
- * Instead of overriding the theming for all fields, you can also just override
- * theming for a subset of fields using
- * @link themeable Theme hook suggestions. @endlink For example,
- * here are some theme hook suggestions that can be used for a field_foo field
- * on an article node type:
- * - field--node--field-foo--article.html.twig
- * - field--node--field-foo.html.twig
- * - field--node--article.html.twig
- * - field--field-foo.html.twig
- * - field--text-with-summary.html.twig
- * - field.html.twig
- *
- * Available variables:
- * - attributes: HTML attributes for the containing element.
- * - label_hidden: Whether to show the field label or not.
- * - title_attributes: HTML attributes for the title.
- * - label: The label for the field.
- * - multiple: TRUE if a field can contain multiple items.
- * - items: List of all the field items. Each item contains:
- *   - attributes: List of HTML attributes for each item.
- *   - content: The field item's content.
- * - entity_type: The entity type to which the field belongs.
- * - field_name: The name of the field.
- * - field_type: The type of the field.
- * - label_display: The display settings for the label.
- *
- * @see template_preprocess_field()
+ * Variables set by dynasty_tw_preprocess_field():
+ *   - mp3:     Unique slug for this episode's player IDs.
+ *   - mp3_url: Full URL to the MP3 file.
  */
 #}
-
-
-<div class="bg-white flex gap-1 h-fit justify-center my-auto px-2 rounded-full w-fit relative overflow-visible">
-  <audio id="pod-{{ mp3 }}" src="{{ mp3_url }}"></audio>
-  <div id="back-pod-{{ mp3 }}" class="my-auto text-white transition-all duration-300 ease-out opacity-0 -mr-6 scale-0 cursor-pointer">
-    <img src="/themes/custom/dynasty_tw/icons/back15-blue.svg" onclick="skipBackwards('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
-  </div>
-  <div class="bg-red-pats outline outline-red-pats outline-4 p-4 rounded-full shadow-lg text-white w-12 z-10 relative">
-    <img src="/themes/custom/dynasty_tw/icons/pod-play.svg"
-         onclick="playPause('pod-{{ mp3 }}')"
-         id="playpod-{{ mp3 }}"
-         class="w-auto h-auto" style="cursor: pointer" />
-  </div>
-  <div id="fwd-pod-{{ mp3 }}" class="my-auto text-white transition-all duration-300 ease-out opacity-0 -ml-6 scale-0 cursor-pointer">
-    <img src="/themes/custom/dynasty_tw/icons/plus15-blue.svg" onclick="skipForward('pod-{{ mp3 }}')" class="w-6 h-6" style="cursor: pointer;" />
-  </div>
-</div>
-
-
+{% include 'dynasty_tw:audio-player' with {
+  mp3:     mp3,
+  mp3_url: mp3_url,
+} only %}

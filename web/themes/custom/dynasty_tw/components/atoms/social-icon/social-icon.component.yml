@@ -1,0 +1,21 @@
+name: Social Icon
+description: Icon + link for a social media platform. SVG rendered inline with svg-white filter class.
+group: Atoms
+
+props:
+  type: object
+  properties:
+    platform:
+      type: string
+      title: Platform
+      description: 'twitter | facebook | instagram | reddit'
+    url:
+      type: string
+      title: URL
+    classes:
+      type: string
+      title: Extra classes
+      default: 'h-6 pr-2 svg-white'
+  required:
+    - platform
+    - url

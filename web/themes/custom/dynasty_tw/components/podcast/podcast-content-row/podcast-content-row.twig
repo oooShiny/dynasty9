@@ -1,0 +1,25 @@
+{% set cover_img = ep_art ?: 'https://assets.pippa.io/shows/5d23d6cdd5ef084d07ef59b9/1580131386118-8bc942a3e5ac0342ac6ba7eb55da12fe.jpeg' %}
+
+<div class="bg-blue-pats text-white px-8 py-16">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="mb-6 text-xl uppercase font-light text-center">Podcast Episode</h2>
+    <div class="float-left">
+      <div class="w-40 h-40 mr-5 justify-center items-center flex"
+           style="background-image: url('{{ cover_img }}');
+             background-size: contain;
+             background-repeat: no-repeat;
+             background-position: center;">
+        {{ audio_player }}
+      </div>
+    </div>
+    <div>
+      <h2 class="uppercase font-light text-xl">
+        {{ label }} ({{ duration }})
+      </h2>
+      {% if subtitle|render %}
+        <h3 class="font-light text-lg">{{ subtitle }}</h3>
+      {% endif %}
+      <div class="text-l">{{ body }}</div>
+    </div>
+  </div>
+</div>

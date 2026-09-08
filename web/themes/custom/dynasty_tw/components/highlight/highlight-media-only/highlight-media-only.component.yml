@@ -1,0 +1,33 @@
+name: Highlight Media Only
+description: Minimal highlight view showing only the video embed and a truncated title link. Used in media-only listings.
+group: Highlight
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    label:
+      type: string
+      title: Title
+    attributes:
+      type: object
+      title: Article element attributes
+      description: Drupal Attribute object for the <article> element.
+    content_attributes:
+      type: object
+      title: Content wrapper attributes
+      description: Drupal Attribute object for the inner content <div>.
+    title_attributes:
+      type: object
+      title: Title element attributes
+      description: Drupal Attribute object for the <p> title element. The component adds the 'truncate' class automatically.
+  required:
+    - url
+    - label
+
+slots:
+  video:
+    title: Video embed
+    description: Rendered field_muse_video_id field output.

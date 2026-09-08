@@ -1,0 +1,293 @@
+{#
+/**
+ * @file
+ * Single Directory Component: Game Show Notes
+ *
+ * Props:
+ * - url       (string)  Canonical node URL — used for the "Game Page" link.
+ * - label     (string)  Game title.
+ * - vs        (string)  "vs" for home, "at" for away.
+ * - team_css  (string)  Opponent team CSS class (e.g. "kansas-city-chiefs").
+ * - opp_name  (string)  Opponent full name.
+ * - opp_short (string)  Opponent abbreviated name.
+ * - ot        (boolean) True when the game went to overtime.
+ * - season    (integer) Season year.
+ * - playoff   (boolean) True for playoff games.
+ * - node_id   (integer) Numeric node ID for edit/show-notes links.
+ *
+ * Slots: prev_next, field_date, patriots_score, opponent_score,
+ *   field_pats_q1-q4, field_pats_ot, field_opp_q1-q4, field_opp_ot,
+ *   video_links, field_pfr_link, field_drive_charts, scoring_plays,
+ *   opp_season_info, opp_team_ranks, opp_coaches, opp_draft_picks,
+ *   opp_pro_bowlers, opp_offense, opp_defense, field_game_summary,
+ *   game_highlights, field_other_media
+ */
+#}
+
+{# ── Admin quick-links ──────────────────────────────────────────────────── #}
+<ul class="list-reset flex items-center border-b-2 border-blue-pats">
+  <li class="p-2 mr-6 uppercase"><a href="{{ url }}">Game Page</a></li>
+  <li class="p-2 mr-6 uppercase"><a href="/node/{{ node_id }}/edit-podcast?destination=/show-notes/{{ node_id }}">Edit</a></li>
+</ul>
+
+{# ── Sticky secondary nav ───────────────────────────────────────────────── #}
+<div class="bg-blue-pats text-white p-6 w-full z-10 sticky top-12 shadow-gray-500 shadow-lg drop-shadow-2xl">
+  <ul class="flex font-light gap-4 justify-center uppercase">
+    <li><a href="#game_info">Game Info</a></li>
+    <li><a href="#opp_info">Opponent Info</a></li>
+    <li><a href="#team_lead">Team Leaders</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+  </ul>
+</div>
+
+<article class="mx-2 text-center">
+
+  {# ── Hero: title, score box, prev/next, box score ─────────────────────── #}
+  <div class="grid grid-flow-col">
+
+    <div>
+      <h1 class="text-4xl py-2">{{ label }}</h1>
+      <div class="text-center text-xl">{{ field_date }}</div>
+
+      {# Score box — delegates layout to dynasty_tw:score-box #}
+      {% include 'dynasty_tw:score-box' with {
+        vs: vs,
+        team_css: team_css,
+        opp_name: opp_name,
+        opp_short: opp_short,
+        patriots_score: patriots_score,
+        opponent_score: opponent_score
+      } only %}
+
+      <div class="flex items-center justify-evenly py-2">
+        {{ prev_next }}
+      </div>
+
+      {# Box score — Preline collapse/collapse-arrow #}
+      <details class="collapse collapse-arrow">
+        <summary class="collapse-title text-3xl w-fit mx-auto">Boxscore</summary>
+        <div id="boxscore" class="collapse-content flex items-center justify-around py-5">
+          <table>
+            <thead>
+              <tr class="border-b border-black">
+                <th class="p-4"></th>
+                <th class="p-4">1</th>
+                <th class="p-4">2</th>
+                <th class="p-4">3</th>
+                <th class="p-4">4</th>
+                {% if ot %}
+                  <th class="p-4">OT</th>
+                {% endif %}
+                <th class="p-4 pl-10">Final</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-4 pr-10 hidden md:table-cell">New England Patriots</td>
+                <td class="p-4 pr-10 table-cell md:hidden">Patriots</td>
+                <td class="p-4">{{ field_pats_q1 }}</td>
+                <td class="p-4">{{ field_pats_q2 }}</td>
+                <td class="p-4">{{ field_pats_q3 }}</td>
+                <td class="p-4">{{ field_pats_q4 }}</td>
+                {% if ot %}
+                  <td class="p-4">{{ field_pats_ot }}</td>
+                {% endif %}
+                <td class="p-4 font-extrabold pl-10">{{ patriots_score }}</td>
+              </tr>
+              <tr>
+                <td class="p-4 pr-10 hidden md:table-cell">{{ opp_name }}</td>
+                <td class="p-4 pr-10 table-cell md:hidden">{{ opp_short }}</td>
+                <td class="p-4">{{ field_opp_q1 }}</td>
+                <td class="p-4">{{ field_opp_q2 }}</td>
+                <td class="p-4">{{ field_opp_q3 }}</td>
+                <td class="p-4">{{ field_opp_q4 }}</td>
+                {% if ot %}
+                  <td class="p-4">{{ field_opp_ot }}</td>
+                {% endif %}
+                <td class="p-4 font-extrabold pl-10">{{ opponent_score }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>{# /left column #}
+
+    <div>
+      <div class="w-fit mx-auto">
+
+        {# Game Videos card — <li> items pre-built by the calling template #}
+        <div class="m-4 border border-blue-pats w-fit rounded-lg">
+          <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Game Videos</h3>
+          <div class="p-4 text-left">
+            <ul class="list-inside list-disc">
+              {{ video_links }}
+            </ul>
+          </div>
+        </div>
+
+        {# Game Info card (Zoom link is static; PFR link is conditional) #}
+        <div class="m-4 border border-blue-pats w-fit rounded-lg">
+          <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Game Info</h3>
+          <div class="p-4 text-left">
+            <ul class="list-inside list-disc">
+              <li>
+                <img class="h-5 inline-block pr-2" src="/themes/custom/dynasty_tw/icons/zoom.png">
+                <a href="https://us02web.zoom.us/j/474551358" target="_blank" class="font-bold text-blue-600">Zoom Link</a>
+              </li>
+              {% if field_pfr_link|render %}
+                <li>
+                  <img class="h-5 inline-block pr-2" src="/themes/custom/dynasty_tw/icons/pfr.png">
+                  <a href="{{ field_pfr_link|render|trim }}" class="text-green-900 font-bold">PFR Boxscore Page</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      {# Patriots season Wikipedia link #}
+      <div class="p-4 patriots w-fit text-lg mx-auto">
+        <a href="https://wikipedia.org/wiki/{{ season }}_New_England_Patriots_season" target="_blank">Patriots {{ season }} Wikipedia</a>
+      </div>
+    </div>{# /right column #}
+
+  </div>{# /grid #}
+
+
+  {# ── Game Information ──────────────────────────────────────────────────── #}
+  <h2 id="game_info" class="divider text-3xl py-4">Game Information</h2>
+
+  <div class="flex justify-center">
+    {# Scoring plays — rendered view passed as a slot #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Scoring Plays</h3>
+      <div class="p-4 text-left">
+        {{ scoring_plays }}
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center">
+    {# Drive charts #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Drive Charts</h3>
+      <div class="flex gap-4 p-4">
+        {{ field_drive_charts }}
+      </div>
+    </div>
+  </div>
+
+
+  {# ── Opponent Information ──────────────────────────────────────────────── #}
+  <h2 id="opp_info" class="divider text-3xl py-4">{{ opp_short }} Information</h2>
+
+  <div class="flex justify-center">
+
+    {# Season Info card — body slot contains wikipedia/pfr icons, record, finish #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Season Info</h3>
+      <div class="p-4 text-left">
+        {{ opp_season_info }}
+      </div>
+    </div>
+
+    {# Team Ranks card #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Team Ranks</h3>
+      <div class="p-4 text-left">
+        {{ opp_team_ranks }}
+      </div>
+    </div>
+
+    {# Coaches card — body slot contains the full nested coach list #}
+    <div class="flex justify-center">
+      <div class="m-4 border border-blue-pats w-fit rounded-lg">
+        <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">{{ opp_short }} Coaches</h3>
+        <div class="p-4 text-left">
+          {{ opp_coaches }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {# Draft Picks card — body slot contains the picks table and colour legend #}
+  <div class="flex justify-center">
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">{{ season }} Draft Picks</h3>
+      <div class="p-4 text-left">
+        {{ opp_draft_picks }}
+      </div>
+    </div>
+  </div>
+
+
+  {# ── Team Leaders ──────────────────────────────────────────────────────── #}
+  <h2 id="team_lead" class="divider text-3xl py-4">Team Leaders</h2>
+
+  <div class="flex justify-center">
+
+    {# Pro Bowlers card — slot provides <li> items #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Pro Bowlers</h3>
+      <div class="p-4 text-left">
+        <ul class="list-inside list-disc">
+          {{ opp_pro_bowlers }}
+        </ul>
+      </div>
+    </div>
+
+    {# Offense card #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Offense</h3>
+      <div class="p-4 text-left">
+        {{ opp_offense }}
+      </div>
+    </div>
+
+    {# Defense card #}
+    <div class="m-4 border border-blue-pats w-fit rounded-lg">
+      <h3 class="{{ team_css }} p-2 text-2xl text-center rounded-t-lg nowrap">Defense</h3>
+      <div class="p-4 text-left">
+        {{ opp_defense }}
+      </div>
+    </div>
+
+  </div>
+
+
+  {# ── Game Summary (conditional) ────────────────────────────────────────── #}
+  {% if field_game_summary|render %}
+    {{ attach_library('dynasty_tw/muse_modal') }}
+    <a id="game-summary"></a>
+    <div id="game-summary" class="py-5">
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">Game Summary</h2>
+      <div class="m-auto w-2/3">
+        {{ field_game_summary }}
+      </div>
+    </div>
+  {% endif %}
+
+
+  {# ── Highlights ────────────────────────────────────────────────────────── #}
+  <a id="highlights"></a>
+  <div class="bg-gray-400 py-5">
+    <h2 class="text-center mb-6 text-3xl uppercase font-light">Highlights</h2>
+    <div class="flex flex-wrap justify-center">
+      {{ game_highlights }}
+    </div>
+  </div>
+
+
+  {# ── Other Videos (conditional) ────────────────────────────────────────── #}
+  {% if field_other_media|render %}
+    <div id="other-media" class="py-5">
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">Other Videos</h2>
+      <div id="other-videos" class="w-1/2 m-auto">
+        {{ field_other_media }}
+      </div>
+    </div>
+  {% endif %}
+
+</article>

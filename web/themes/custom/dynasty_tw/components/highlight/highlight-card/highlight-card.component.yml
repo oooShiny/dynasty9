@@ -1,0 +1,33 @@
+name: Highlight Card
+description: Vertical highlight clip card. Patriots blue or red background driven by the 'td' (touchdown) flag. Shows video thumbnail, title link, game badge, and optional download button.
+group: Highlight
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    label:
+      type: string
+      title: Title
+    td:
+      type: integer
+      title: Touchdown flag
+      description: 1 if this play scored a TD (red background), 0 otherwise (blue background).
+      default: 0
+    video_file:
+      type: string
+      title: Video file ID
+      description: Skiv.com video file ID for the download link. If empty, download button is omitted.
+  required:
+    - url
+    - label
+
+slots:
+  video:
+    title: Video embed
+    description: Rendered dynasty_tw:video component (vertical card_type).
+  game:
+    title: Game reference
+    description: Rendered field_game field output for the badge.

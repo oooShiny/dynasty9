@@ -46,3 +46,8 @@ web/themes/contrib/
 /.idea
 patreon.settings.yml
 **/.DS_Store
+
+# Added by saggar — local files that shouldn't be committed
+.saggar/**/*.local.*
+.saggar/scratchpad.md
+.saggar/jobs/

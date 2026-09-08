@@ -1,0 +1,11 @@
+name: Site Footer
+description: Full-width Patriots-blue footer — Patriots loop-border cap above, footer-menu region, content region, social icons, copyright, and Drupal logo.
+group: Navigation
+
+slots:
+  footer_menu:
+    title: Footer menu region
+    description: Rendered page.footer_menu region.
+  footer_content:
+    title: Footer content region
+    description: Rendered page.footer region.

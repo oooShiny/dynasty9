@@ -1,0 +1,37 @@
+{# dynasty_tw:game-timeline #}
+<article class="bg-gray-400 border rounded-lg">
+
+  <h2 class="bg-patriots-primary p-2 rounded-t-lg text-2xl text-white w-full">{{ label }}</h2>
+
+  {# Score boxes — compact variant #}
+  <div class="flex gap-2 items-center justify-center p-2">
+    <div class="patriots p-2 w-1/2 shadow-gray-500 shadow-lg">
+      <div class="text-2xl text-center block">Patriots</div>
+      <br>
+      <div class="text-5xl text-center">{{ patriots_score }}</div>
+    </div>
+    <div class="w-1/6 text-4xl text-center">{{ vs }}</div>
+    <div class="{{ team_css }} p-2 w-1/2 shadow-gray-500 shadow-lg">
+      <div class="text-2xl text-center block">{{ opp_short }}</div>
+      <br>
+      <div class="text-5xl text-center">{{ opponent_score }}</div>
+    </div>
+  </div>
+
+  {# Date #}
+  <div class="text-center py-2">{{ date }}</div>
+
+  {# External links #}
+  <div class="flex items-center justify-evenly my-2">
+    {% if pfr_link %}
+      <a href="{{ pfr_link|render|trim }}" class="p-4 bg-green-900 text-white text-center">View game on PFR</a>
+    {% endif %}
+    {% if youtube_highlights %}
+      <a href="{{ youtube_highlights[0]['#url'] }}" class="p-4 bg-red-600 text-white text-center">Youtube Highlights</a>
+    {% endif %}
+    {% if youtube_game_link %}
+      <a href="{{ youtube_game_link|render|trim }}" class="bg-white border border-red-600 p-4 text-center text-red-600">Youtube Game Video</a>
+    {% endif %}
+  </div>
+
+</article>

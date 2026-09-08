@@ -1139,6 +1139,14 @@
       border-bottom-style: var(--tw-border-style);
       border-bottom-width: 2px;
     }
+    .border-l-1 {
+      border-left-style: var(--tw-border-style);
+      border-left-width: 1px;
+    }
+    .border-l-2 {
+      border-left-style: var(--tw-border-style);
+      border-left-width: 2px;
+    }
     .border-none {
       --tw-border-style: none;
       border-style: none;
@@ -1601,6 +1609,9 @@
     }
     .pb-4 {
       padding-bottom: calc(var(--spacing) * 4);
+    }
+    .pl-1 {
+      padding-left: calc(var(--spacing) * 1);
     }
     .pl-10 {
       padding-left: calc(var(--spacing) * 10);
@@ -2179,6 +2190,13 @@
       &:hover {
         @media (hover: hover) {
           background-color: var(--color-red-800);
+        }
+      }
+    }
+    .hover\:bg-red-pats {
+      &:hover {
+        @media (hover: hover) {
+          background-color: var(--color-red-pats);
         }
       }
     }
@@ -2927,6 +2945,15 @@
   *, ::after, ::before, ::backdrop, ::file-selector-button {
     border-color: var(--color-blue-pats, currentcolor);
   }
+}
+.select2-selection__choice__display {
+  color: var(--color-blue-pats);
+}
+.select2-selection__choice__remove {
+  color: var(--color-red-pats) !important;
+}
+.select2-selection__choice__remove:focus {
+  background-color: var(--color-red-300) !important;
 }
 .bef-slider.noUi-target {
   border-radius: var(--radius-lg);

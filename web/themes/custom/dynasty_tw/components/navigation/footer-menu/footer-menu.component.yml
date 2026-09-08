@@ -1,0 +1,11 @@
+name: Footer Menu
+description: Footer navigation — a flex horizontal list with font-light labels and recursive sub-menu support.
+group: Navigation
+
+props:
+  type: object
+  properties:
+    items:
+      type: array
+      title: Menu items
+      description: "Nested Drupal menu items. Each item has: title, url, attributes, below, is_expanded, is_collapsed, in_active_trail."

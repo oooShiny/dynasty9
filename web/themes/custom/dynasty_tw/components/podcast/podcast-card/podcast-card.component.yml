@@ -1,0 +1,33 @@
+name: Podcast Card
+description: Horizontal card view of a podcast episode — cover art with audio player, title, description, and Episode/Game action buttons.
+group: Podcast
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Episode URL
+      description: Canonical URL of the podcast episode node.
+    label:
+      type: string
+      title: Episode title
+    ep_art:
+      type: string
+      title: Cover image URL
+      description: URL to the episode cover art. Falls back to the default show artwork when empty.
+    game_node_url:
+      type: string
+      title: Related game path
+      description: "Path to the related game node (e.g. 'node/123'). Pre-extracted in the bridge template. Empty string or omit when no game is linked."
+
+slots:
+  audio_player:
+    title: Audio player field
+    description: Rendered content.field_mp3 — the custom HTML5 audio player with play/skip controls.
+  subtitle:
+    title: Episode subtitle field
+  duration:
+    title: Duration field
+  body:
+    title: Episode body / summary text

@@ -1,0 +1,11 @@
+name: Site Header
+description: Page-top banner — Patriots-stripe vertical sidebar, blue header panel with dynasty logo, and Patriots-stripe corner-bracket border below.
+group: Navigation
+
+props:
+  type: object
+  properties:
+    front_page:
+      type: string
+      title: Front page URL
+      description: The canonical front-page URL (from Drupal's front_page template variable). Used as the logo link href.

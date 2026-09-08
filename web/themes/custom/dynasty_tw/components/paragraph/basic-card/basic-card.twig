@@ -1,0 +1,9 @@
+<div class="card p-4 m-4 rounded-lg shadow-gray-500 shadow-lg dark:shadow-neutral-700/70 {{ card_bg }}">
+  {% if card_image|render %}
+    {{ card_image }}
+  {% endif %}
+  {% if card_title|render %}
+    <h2 class="card-title mx-auto w-fit">{{ card_title }}</h2>
+    {{ card_text }}
+  {% endif %}
+</div>

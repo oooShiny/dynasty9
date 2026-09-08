@@ -1,0 +1,11 @@
+{# dynasty_tw:badge #}
+{% set var_cls = {
+  'primary': 'badge-primary',
+  'success': 'badge-success',
+  'error':   'badge-error',
+  'outline': 'badge-outline',
+}[variant] ?? 'badge-outline' %}
+
+<span class="badge {{ var_cls }} {{ classes }}">
+  {% if content %}{{ content }}{% else %}{{ text }}{% endif %}
+</span>

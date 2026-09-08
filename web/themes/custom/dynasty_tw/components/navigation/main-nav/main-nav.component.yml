@@ -1,0 +1,19 @@
+name: Main Nav
+description: Sticky Patriots-red navigation bar that holds the header block and primary menu region. Adjusts top offset when the Drupal admin toolbar is visible.
+group: Navigation
+
+props:
+  type: object
+  properties:
+    is_admin:
+      type: boolean
+      title: Admin toolbar visible
+      description: When true, offsets the sticky nav by top-12 to account for the Drupal toolbar height.
+
+slots:
+  header_block:
+    title: Header region
+    description: Rendered page.header region (typically the site branding / logo block).
+  primary_menu:
+    title: Primary menu region
+    description: Rendered page.primary_menu region.

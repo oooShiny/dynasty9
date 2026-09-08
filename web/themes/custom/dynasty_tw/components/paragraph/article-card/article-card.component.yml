@@ -1,0 +1,28 @@
+name: Article Card
+description: Linked article preview card. Style and content are driven by preprocess variables — supports "blog" and arbitrary Tailwind class styles.
+group: Paragraph
+
+props:
+  type: object
+  properties:
+    card_style:
+      type: string
+      title: Card style identifier
+      description: '"blog" applies the white/blue-header treatment; any other value is used as a direct Tailwind class on the card div.'
+    card_link:
+      type: string
+      title: Card URL
+      description: href for the wrapping <a> element.
+    card_title:
+      type: string
+      title: Card title text
+      description: Plain-text title. Rendered directly (not a render array).
+    article_summary:
+      type: string
+      title: Article summary
+      description: Body summary text from the linked article. When null, card_blurb slot is rendered instead.
+
+slots:
+  card_blurb:
+    title: Blurb field
+    description: Rendered content.field_card_blurb — shown only when article_summary is null.

@@ -1,0 +1,35 @@
+name: Podcast Full
+description: Full episode page — body, Acast embed, podcast-platform badges, optional game info, transcript, and Highcharts download-history chart.
+group: Podcast
+
+props:
+  type: object
+  properties:
+    mp3:
+      type: string
+      title: Acast episode slug
+      description: The episode path segment used in the Acast embed URL (preprocess var from the MP3 URL).
+    ep_art:
+      type: string
+      title: Cover image URL
+      description: Falls back to the default show artwork when empty (unused in this template but available for future use).
+    downloads:
+      type: object
+      title: Downloads data for Highcharts
+      description: "PHP associative array keyed by year; each year is an array of {month_name, dls} objects. Passed from the preprocess downloads variable."
+
+slots:
+  subtitle:
+    title: Episode subtitle field
+  duration:
+    title: Duration field
+  body:
+    title: Episode body text
+  game:
+    title: Related game field
+    description: Conditional — the game-info section only renders when this slot has content.
+  transcript:
+    title: Transcript field
+    description: Conditional — the transcript section only renders when this slot has content.
+  total_downloads:
+    title: Total downloads count field

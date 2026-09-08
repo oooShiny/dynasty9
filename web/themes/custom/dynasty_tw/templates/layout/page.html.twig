@@ -45,69 +45,13 @@
  * @ingroup themeable
  */
 #}
-{% set top_margin = 'top-0' %}
-{% if is_admin %}
-  {% set top_margin = 'top-12' %}
-{% endif %}
 <div class="">
-  <div class="flex">
-    <div class="flex">
-      <div class="bg-white w-1/3">&nbsp;</div>
-      <div class="bg-red-pats w-1/3">&nbsp;</div>
-      <div class="bg-white w-1/3">&nbsp;</div>
-    </div>
-    <header>
-      <div class="page-banner bg-blue-pats rounded-bl-md">
-        <a href="/"><img src="/themes/custom/dynasty_tw/images/dynasty-white.png" alt="dynasty logo" class="w-1/6 mx-auto"></a>
-      </div>
-    </header>
-  </div>
-  <div class="flex h-4 bg-blue-pats">
-{# Left turn from up #}
-    <div class="flex bg-white rounded-bl-md">
-      <div class="bg-white w-1/3">&nbsp;</div>
-      <div class="w-1/3">
-        <div class="bg-red-pats h-2/3 rounded-bl-md">&nbsp;</div>
-        <div class="h-1/3 bg-white">&nbsp;</div>
-      </div>
-      <div class="bg-red-pats w-1/3">
-        <div class="h-1/3 bg-white rounded-bl-md">&nbsp;</div>
-        <div class="h-1/3 bg-red-pats">&nbsp;</div>
-        <div class="h-1/3 bg-white">&nbsp;</div>
-      </div>
-    </div>
-{# Horizontal stripe #}
-    <div class="w-full">
-      <div class="bg-white h-1/3">&nbsp;</div>
-      <div class="bg-red-pats h-1/3">&nbsp;</div>
-      <div class="bg-white h-1/3">&nbsp;</div>
-    </div>
-{# Right turn down #}
-    <div class="flex bg-blue-pats rounded-tr-md">
-      <div class="bg-red-pats w-1/3">
-        <div class="h-1/3 bg-white">&nbsp;</div>
-        <div class="h-1/3 bg-red-pats">&nbsp;</div>
-        <div class="h-1/3 bg-white rounded-tr-md">&nbsp;</div>
-      </div>
-      <div class="w-1/3 bg-white">
-        <div class="h-1/3 bg-white">&nbsp;</div>
-        <div class="bg-red-pats h-2/3 rounded-tr-md">&nbsp;</div>
-      </div>
-      <div class="bg-white w-1/3 rounded-tr-md">&nbsp;</div>
-    </div>
-  </div>
-  <div class="flex">
-
-    <div id="main-nav" class="bg-red-pats rounded-tr-md text-white p-6 w-full z-10 sticky {{ top_margin }} shadow-gray-500 shadow-lg drop-shadow-2xl">
-      {{ page.header }}
-      {{ page.primary_menu }}
-    </div>
-    <div class="flex">
-      <div class="bg-white w-1/3">&nbsp;</div>
-      <div class="bg-red-pats w-1/3">&nbsp;</div>
-      <div class="bg-white w-1/3">&nbsp;</div>
-    </div>
-  </div>
+  {% include 'dynasty_tw:site-header' with { front_page: front_page } only %}
+  {% include 'dynasty_tw:main-nav' with {
+    is_admin:     is_admin,
+    header_block: page.header,
+    primary_menu: page.primary_menu,
+  } only %}
   {% if is_front %}
     {{ attach_library('dynasty_tw/championship_banners') }}
     <div id="banner-section">
@@ -155,70 +99,10 @@
     </div>
   </main>
   {% if page.footer %}
-    {# From top down to left. #}
-    <div class="flex h-4 bg-gray-200 dark:bg-gray-950">
-      <div class="flex bg-blue-pats rounded-tl-md">
-        <div class="bg-white w-1/3 rounded-tl-md">&nbsp;</div>
-        <div class="w-1/3 bg-white">
-          <div class="h-1/3 bg-white">&nbsp;</div>
-          <div class="bg-red-pats h-2/3 rounded-tl-md">&nbsp;</div>
-        </div>
-        <div class="bg-red-pats w-1/3">
-          <div class="h-1/3 bg-white">&nbsp;</div>
-          <div class="h-1/3 bg-red-pats">&nbsp;</div>
-          <div class="h-1/3 bg-white rounded-tl-md">&nbsp;</div>
-        </div>
-      </div>
-      {# Top Border #}
-      <div class="w-full">
-        <div class="bg-white h-1/3">&nbsp;</div>
-        <div class="bg-red-pats h-1/3">&nbsp;</div>
-        <div class="bg-white h-1/3">&nbsp;</div>
-      </div>
-      {# From right down to top. #}
-      <div class="flex rounded-br-md">
-        <div class="bg-red-pats w-1/3">
-          <div class="h-1/3 bg-white">&nbsp;</div>
-          <div class="h-1/3 bg-red-pats">&nbsp;</div>
-          <div class="h-1/3 bg-white">&nbsp;</div>
-        </div>
-        <div class="w-1/3 bg-white">
-          <div class="bg-red-pats h-2/3 ">&nbsp;</div>
-          <div class="h-1/3 bg-white rounded-br-md">&nbsp;</div>
-        </div>
-        <div class="bg-white w-1/3 rounded-br-md">&nbsp;</div>
-
-      </div>
-    </div>
-
-    {# Left Border #}
-    <div class="flex">
-      <div class="flex">
-        <div class="bg-white w-1/3">&nbsp;</div>
-        <div class="bg-red-pats w-1/3">&nbsp;</div>
-        <div class="bg-white w-1/3">&nbsp;</div>
-      </div>
-    <footer class="bg-blue-pats text-white p-6 w-full z-10 flex flex-col gap-4 divide-y divide-gray-400">
-      <div class="flex justify-around">
-        {{ page.footer_menu }}
-      </div>
-      {{ page.footer }}
-      <div class="border-gray-400 border-t md:!flex justify-between pt-2 text-gray-400">
-        <div class="md:!pt-0 flex justify-center pt-4">
-          <a href="https://drupal.org" target="_blank"><img src="/themes/custom/dynasty_tw/icons/drupal.svg" alt="drupal" class="h-6 svg-white"></a>
-        </div>
-        <div class="pt-4 md:!pt-0">
-          <span>&copy; Patriots Dynasty 2017-{{ 'now'|date('Y') }}</span>
-        </div>
-        <div class="flex pt-4 md:!pt-0 justify-evenly">
-          <a href="https://twitter.com/PatsDynastyInfo" target="_blank"><img src="/themes/custom/dynasty_tw/icons/twitter.svg" alt="twitter" class="h-6 pr-2 svg-white"></a>
-          <a href="https://www.facebook.com/patriotsdynasty2001" target="_blank"><img src="/themes/custom/dynasty_tw/icons/facebook.svg" alt="facebook" class="h-6 pr-2 svg-white"></a>
-          <a href="https://www.instagram.com/patriotsdynasty2001/" target="_blank"><img src="/themes/custom/dynasty_tw/icons/instagram.svg" alt="instagram" class="h-6 pr-2 svg-white"></a>
-          <a href="https://www.reddit.com/user/arbrown83/" target="_blank"><img src="/themes/custom/dynasty_tw/icons/reddit.svg" alt="reddit" class="h-6 pr-2 svg-white"></a>
-        </div>
-      </div>
-    </footer>
-    </div>
+    {% include 'dynasty_tw:site-footer' with {
+      footer_menu:    page.footer_menu,
+      footer_content: page.footer,
+    } only %}
   {% endif %}
 
 </div>

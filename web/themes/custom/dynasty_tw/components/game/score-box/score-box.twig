@@ -1,0 +1,20 @@
+{# dynasty_tw:score-box #}
+{% set score_size = size == 'sm' ? 'text-3xl' : 'text-5xl' %}
+
+<div class="flex items-center justify-center py-10">
+  <div class="patriots p-2 w-1/4 shadow-gray-500 shadow-lg">
+    <div class="text-2xl text-center hidden md:block">New England Patriots</div>
+    <div class="text-2xl text-center block md:hidden">Patriots</div>
+    <br>
+    <div class="{{ score_size }} text-center">{{ patriots_score }}</div>
+  </div>
+
+  <div class="px-10 text-4xl">{{ vs }}</div>
+
+  <div class="{{ team_css }} p-2 w-1/4 shadow-gray-500 shadow-lg">
+    <div class="text-2xl text-center hidden md:block">{{ opp_name }}</div>
+    <div class="text-2xl text-center block md:hidden">{{ opp_short }}</div>
+    <br>
+    <div class="{{ score_size }} text-center">{{ opponent_score }}</div>
+  </div>
+</div>

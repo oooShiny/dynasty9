@@ -1,0 +1,114 @@
+{% set classes = [
+  'paragraph',
+  type_class,
+  view_mode_class,
+  not published ? 'paragraph--unpublished',
+  bg_color,
+  text_color,
+  'w-full',
+]|filter(v => v)|join(' ') %}
+
+{% set inner_classes = (full_width ? '' : 'px-6') ~ ' py-6' %}
+
+{% if section_border == 'loop' %}
+  {# Top Patriots-stripe corner bracket (top-left → top-right) #}
+  <div class="flex h-4 bg-gray-200 dark:bg-gray-950">
+    <div class="flex bg-blue-pats rounded-tl-md">
+      <div class="bg-white w-1/3 rounded-tl-md">&nbsp;</div>
+      <div class="w-1/3 bg-white">
+        <div class="h-1/3 bg-white">&nbsp;</div>
+        <div class="bg-red-pats h-2/3 rounded-tl-md">&nbsp;</div>
+      </div>
+      <div class="bg-red-pats w-1/3">
+        <div class="h-1/3 bg-white">&nbsp;</div>
+        <div class="h-1/3 bg-red-pats">&nbsp;</div>
+        <div class="h-1/3 bg-white rounded-tl-md">&nbsp;</div>
+      </div>
+    </div>
+    {# Top Border #}
+    <div class="w-full">
+      <div class="bg-white h-1/3">&nbsp;</div>
+      <div class="bg-red-pats h-1/3">&nbsp;</div>
+      <div class="bg-white h-1/3">&nbsp;</div>
+    </div>
+    {# Top-right corner #}
+    <div class="flex rounded-br-md">
+      <div class="bg-red-pats w-1/3">
+        <div class="h-1/3 bg-white">&nbsp;</div>
+        <div class="h-1/3 bg-red-pats">&nbsp;</div>
+        <div class="h-1/3 bg-white">&nbsp;</div>
+      </div>
+      <div class="w-1/3 bg-white">
+        <div class="bg-red-pats h-2/3">&nbsp;</div>
+        <div class="h-1/3 bg-white rounded-br-md">&nbsp;</div>
+      </div>
+      <div class="bg-white w-1/3 rounded-br-md">&nbsp;</div>
+    </div>
+  </div>
+
+  {# Left Border + Content #}
+  <div class="flex">
+    <div class="flex">
+      <div class="bg-white w-1/3">&nbsp;</div>
+      <div class="bg-red-pats w-1/3">&nbsp;</div>
+      <div class="bg-white w-1/3">&nbsp;</div>
+    </div>
+    <div class="{{ classes }}"{% if anchor_id %} id="{{ anchor_id }}"{% endif %}>
+      <div class="{{ inner_classes }}">
+        {{ section_content }}
+      </div>
+    </div>
+  </div>
+
+  {# Bottom Patriots-stripe corner bracket (bottom-left → bottom-right) #}
+  <div class="flex h-4 bg-blue-pats">
+    <div class="flex bg-white rounded-bl-md">
+      <div class="bg-white w-1/3 rounded-bl-md">&nbsp;</div>
+      <div class="w-1/3">
+        <div class="bg-red-pats h-2/3 rounded-bl-md">&nbsp;</div>
+        <div class="h-1/3 bg-white">&nbsp;</div>
+      </div>
+      <div class="bg-red-pats w-1/3">
+        <div class="h-1/3 bg-white rounded-bl-md">&nbsp;</div>
+        <div class="h-1/3 bg-red-pats">&nbsp;</div>
+        <div class="h-1/3 bg-white">&nbsp;</div>
+      </div>
+    </div>
+    {# Horizontal stripe #}
+    <div class="w-full">
+      <div class="bg-white h-1/3">&nbsp;</div>
+      <div class="bg-red-pats h-1/3">&nbsp;</div>
+      <div class="bg-white h-1/3">&nbsp;</div>
+    </div>
+    {# Bottom-right corner #}
+    <div class="flex bg-blue-pats rounded-tr-md">
+      <div class="bg-red-pats w-1/3">
+        <div class="h-1/3 bg-white">&nbsp;</div>
+        <div class="h-1/3 bg-red-pats">&nbsp;</div>
+        <div class="h-1/3 bg-white rounded-tr-md">&nbsp;</div>
+      </div>
+      <div class="w-1/3 bg-white">
+        <div class="h-1/3 bg-white">&nbsp;</div>
+        <div class="bg-red-pats h-2/3 rounded-tr-md">&nbsp;</div>
+      </div>
+      <div class="bg-white w-1/3 rounded-tr-md">&nbsp;</div>
+    </div>
+  </div>
+
+{% else %}
+
+  {# Default: content + right Patriots stripe #}
+  <div class="flex w-full justify-between">
+    <div class="{{ classes }}"{% if anchor_id %} id="{{ anchor_id }}"{% endif %}>
+      <div class="{{ inner_classes }}">
+        {{ section_content }}
+      </div>
+    </div>
+    <div class="flex h-auto">
+      <div class="bg-white dark:bg-gray-950 w-1/3">&nbsp;</div>
+      <div class="bg-red-pats w-1/3">&nbsp;</div>
+      <div class="bg-white dark:bg-gray-950 w-1/3">&nbsp;</div>
+    </div>
+  </div>
+
+{% endif %}

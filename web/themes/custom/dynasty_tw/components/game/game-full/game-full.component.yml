@@ -1,0 +1,116 @@
+name: Game Full
+description: Full-page view for a single game — schema.org JSON-LD, score display, quarter-by-quarter box score, QB passing stats table, and linked media sections.
+group: Game
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    label:
+      type: string
+      title: Game title / page heading
+    ot:
+      type: boolean
+      title: Overtime flag
+      description: Set true when the game went to overtime so the OT column is shown.
+      default: false
+    vs:
+      type: string
+      title: Home/away indicator
+      description: '"vs" for home games, "at" for away games.'
+      default: vs
+    team_css:
+      type: string
+      title: Opponent team CSS class
+      description: e.g. "kansas-city-chiefs". Maps to a class in team-colors.css.
+    opp_name:
+      type: string
+      title: Opponent full name
+      description: Full name shown at md+ breakpoints.
+    opp_short:
+      type: string
+      title: Opponent short name
+      description: Last word of the team name, shown on mobile.
+    season:
+      type: integer
+      title: Season year
+    schema_date:
+      type: string
+      title: Schema.org startDate
+    schema_city:
+      type: string
+      title: Schema.org venue city
+    schema_state:
+      type: string
+      title: Schema.org venue state
+    schema_opp:
+      type: string
+      title: Schema.org opponent name
+    schema_name:
+      type: string
+      title: Schema.org event name
+    playoff:
+      type: boolean
+      title: Playoff game flag
+      default: false
+    qbs:
+      type: array
+      title: Additional QB stats rows
+      description: Associative array keyed by player name; each entry has comp, att, yds, tds, ints, qbr, url. No schema enforcement on items.
+
+slots:
+  highlight_video:
+    title: Highlight video embed (desktop header)
+  patriots_score:
+    title: Patriots final score
+  opponent_score:
+    title: Opponent final score
+  game_date:
+    title: Game date field
+  pats_q1:
+    title: Patriots Q1 score
+  pats_q2:
+    title: Patriots Q2 score
+  pats_q3:
+    title: Patriots Q3 score
+  pats_q4:
+    title: Patriots Q4 score
+  pats_ot:
+    title: Patriots OT score
+  opp_q1:
+    title: Opponent Q1 score
+  opp_q2:
+    title: Opponent Q2 score
+  opp_q3:
+    title: Opponent Q3 score
+  opp_q4:
+    title: Opponent Q4 score
+  opp_ot:
+    title: Opponent OT score
+  game_links:
+    title: Game links section (PFR, YouTube highlights, YouTube full game)
+    description: Rendered by the parent template; contains the full flex row of link buttons.
+  starting_qb:
+    title: Starting QB name field
+  brady_completions:
+    title: QB completions
+  brady_attempts:
+    title: QB attempts — also used as existence check for the stats section
+  brady_yards:
+    title: QB passing yards
+  brady_tds:
+    title: QB touchdown passes
+  brady_ints:
+    title: QB interceptions
+  passer_rating:
+    title: Passer rating
+  game_summary:
+    title: Game summary body text
+  game_screenshots:
+    title: Game screenshots gallery
+  game_video:
+    title: Full game video embed
+  other_media:
+    title: Other videos

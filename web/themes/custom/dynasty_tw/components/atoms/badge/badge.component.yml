@@ -1,0 +1,24 @@
+name: Badge
+description: Preline badge. Variant drives the color — use outline for game references, primary/success/error for play-by-play states.
+group: Atoms
+
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      description: Badge label when not using the slot.
+    variant:
+      type: string
+      title: Variant
+      description: 'outline | primary | success | error'
+      default: outline
+    classes:
+      type: string
+      title: Extra classes
+
+slots:
+  content:
+    title: Content
+    description: Rendered field output or arbitrary markup — overrides `text` prop.

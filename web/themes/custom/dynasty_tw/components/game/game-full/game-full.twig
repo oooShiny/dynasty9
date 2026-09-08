@@ -1,0 +1,215 @@
+{# dynasty_tw:game-full #}
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type": "SportsEvent",
+    "name": "{{ schema_name }}",
+    "competitor": [
+      {
+        "@type": "SportsTeam",
+        "name": "New England Patriots"
+      },
+      {
+        "@type": "SportsTeam",
+        "name": "{{ schema_opp }}"
+      }
+    ],
+    "startDate": "{{ schema_date }}",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ schema_city }}",
+        "addressRegion": "{{ schema_state }}"
+      }
+    }
+  }
+</script>
+<article>
+
+  {# Header — desktop: prev/next nav, title, highlight video #}
+  <div class="hidden md:!block text-center text-xl" style="min-height: 10em;">
+    <div class="bg-blue-pats p-2 w-fill justify-evenly flex">
+      {{ drupal_block('prev_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
+      <h1 class="text-3xl uppercase font-thin text-white p-4">{{ label }}</h1>
+      {{ drupal_block('next_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
+    </div>
+    {{ highlight_video }}
+  </div>
+
+  {# Score boxes #}
+  {% include 'dynasty_tw:score-box' with {
+    vs:             vs,
+    team_css:       team_css,
+    opp_name:       opp_name,
+    opp_short:      opp_short,
+    patriots_score: patriots_score,
+    opponent_score: opponent_score,
+  } only %}
+
+  {# Previous/Next Game buttons — mobile only #}
+  <div class="block md:!hidden text-center text-xl">
+    {{ drupal_block('prev_next_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
+  </div>
+
+  {# Game date #}
+  <div class="text-center py-10 text-xl">{{ game_date }}</div>
+
+  {# Box score table #}
+  <a id="boxscore"></a>
+  <div id="boxscore" class="flex items-center justify-around py-5">
+    <table>
+      <thead>
+        <tr class="border-b border-black">
+          <th class="p-4"></th>
+          <th class="p-4">1</th>
+          <th class="p-4">2</th>
+          <th class="p-4">3</th>
+          <th class="p-4">4</th>
+          {% if ot %}
+            <th class="p-4">OT</th>
+          {% endif %}
+          <th class="p-4 pl-10">Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="p-4 pr-10 hidden md:!table-cell">New England Patriots</td>
+          <td class="p-4 pr-10 table-cell md:!hidden">Patriots</td>
+          <td class="p-4">{{ pats_q1 }}</td>
+          <td class="p-4">{{ pats_q2 }}</td>
+          <td class="p-4">{{ pats_q3 }}</td>
+          <td class="p-4">{{ pats_q4 }}</td>
+          {% if ot %}<td class="p-4">{{ pats_ot }}</td>{% endif %}
+          <td class="p-4 font-extrabold pl-10">{{ patriots_score }}</td>
+        </tr>
+        <tr>
+          <td class="p-4 pr-10 hidden md:!table-cell">{{ opp_name }}</td>
+          <td class="p-4 pr-10 table-cell md:!hidden">{{ opp_short }}</td>
+          <td class="p-4">{{ opp_q1 }}</td>
+          <td class="p-4">{{ opp_q2 }}</td>
+          <td class="p-4">{{ opp_q3 }}</td>
+          <td class="p-4">{{ opp_q4 }}</td>
+          {% if ot %}<td class="p-4">{{ opp_ot }}</td>{% endif %}
+          <td class="p-4 font-extrabold pl-10">{{ opponent_score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {# Game links: PFR, YouTube highlights, YouTube full game (rendered by parent template) #}
+  <a id="game-links"></a>
+  {{ game_links }}
+
+  {# QB passing stats — only rendered when brady_attempts slot is populated #}
+  {% if brady_attempts %}
+    <a id="brady-stats"></a>
+    <div id="brady-stats" class="bg-gray-400 text-blue-pats py-5">
+      {% if qbs is not empty %}
+        {% set qbtitle = 'QB Passing Stats' %}
+      {% else %}
+        {% set qbtitle %}{{ starting_qb }} Passing Stats{% endset %}
+      {% endif %}
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">{{ qbtitle }}</h2>
+      <div class="flex justify-center">
+        <table>
+          <thead>
+            <tr class="border-b border-blue-pats">
+              {% if qbs is not empty %}
+                <th class="p-4">QB</th>
+              {% endif %}
+              <th class="p-4">COM</th>
+              <th class="p-4">ATT</th>
+              <th class="p-4">YDS</th>
+              <th class="p-4">TD</th>
+              <th class="p-4">INT</th>
+              <th class="p-4">QBR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if qbs is not empty %}
+                <td class="p-4">{{ starting_qb }}</td>
+              {% endif %}
+              <td class="p-4">{{ brady_completions }}</td>
+              <td class="p-4">{{ brady_attempts }}</td>
+              <td class="p-4">{{ brady_yards }}</td>
+              <td class="p-4">{{ brady_tds }}</td>
+              <td class="p-4">{{ brady_ints }}</td>
+              <td class="p-4">{{ passer_rating }}</td>
+            </tr>
+            {% if qbs is not empty %}
+              {% for name, qb in qbs %}
+                <tr>
+                  <td class="p-4"><a href="{{ qb.url }}">{{ name }}</a></td>
+                  <td class="p-4">{{ qb.comp }}</td>
+                  <td class="p-4">{{ qb.att }}</td>
+                  <td class="p-4">{{ qb.yds }}</td>
+                  <td class="p-4">{{ qb.tds }}</td>
+                  <td class="p-4">{{ qb.ints }}</td>
+                  <td class="p-4">{{ qb.qbr }}</td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+
+  {# Podcast episodes for this game #}
+  {{ drupal_view('podcast_episode_game_page', 'block_1') }}
+
+  {# Game summary #}
+  {% if game_summary %}
+    {{ attach_library('dynasty_tw/muse_modal') }}
+    <a id="game-summary"></a>
+    <div id="game-summary" class="py-5">
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">Game Summary</h2>
+      <div class="m-auto w-2/3">
+        {{ game_summary }}
+      </div>
+    </div>
+  {% endif %}
+
+  {# Highlights (view) #}
+  <a id="highlights"></a>
+  <div class="bg-gray-400 py-5">
+    <h2 class="text-center mb-6 text-3xl uppercase font-light">Highlights</h2>
+    <div class="flex flex-wrap justify-center">
+      {{ drupal_view('game_highlights', 'block_1') }}
+    </div>
+  </div>
+
+  {# Screenshots #}
+  {% if game_screenshots %}
+    <a id="screenshots"></a>
+    <div class="bg-gray-400 py-5">
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">Images from the Game</h2>
+      <div class="flex flex-wrap justify-center">
+        {{ game_screenshots }}
+      </div>
+    </div>
+  {% endif %}
+
+  {# Full game video #}
+  {% if game_video %}
+    <div id="game-video" class="py-5">
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">Full Game Video</h2>
+      <div id="full-video" class="w-1/2 m-auto">
+        {{ game_video }}
+      </div>
+    </div>
+  {% endif %}
+
+  {# Other videos #}
+  {% if other_media %}
+    <div id="other-media" class="py-5">
+      <h2 class="text-center mb-6 text-3xl uppercase font-light">Other Videos</h2>
+      <div id="other-videos" class="w-1/2 m-auto">
+        {{ other_media }}
+      </div>
+    </div>
+  {% endif %}
+
+</article>

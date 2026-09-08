@@ -1,0 +1,16 @@
+name: Exposed Form
+description: Generic Views exposed filter form wrapper. Merges Drupal's form attributes (action, method, data-drupal-selector, etc.) with custom Tailwind layout classes.
+group: Search
+
+props:
+  type: object
+  properties:
+    rendered_attrs:
+      type: string
+      title: Rendered form attributes
+      description: "Pre-rendered form attributes string from {{ attributes.addClass(extra_classes) }} in the bridge template. Passed through |raw in the SDC."
+
+slots:
+  form_children:
+    title: Form elements
+    description: Rendered {{ children }} from the form template — all form inputs, selects, and submit buttons.

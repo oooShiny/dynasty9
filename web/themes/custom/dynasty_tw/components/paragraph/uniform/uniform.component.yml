@@ -1,0 +1,8 @@
+name: Uniform
+description: Narrow column wrapper for a single uniform display (helmet, jersey, pants, socks stacked vertically).
+group: Paragraph
+
+slots:
+  uniform_content:
+    title: All uniform fields
+    description: Full {{ content }} render of the uniform paragraph — all fields rendered together.
