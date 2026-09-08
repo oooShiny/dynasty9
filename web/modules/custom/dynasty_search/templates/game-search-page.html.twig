@@ -42,6 +42,20 @@
   <select id="gs-filter-opp-dc" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set coaches_group %}
+  <details class="gs-filter-group" id="gs-group-coaches">
+    <summary class="cursor-pointer font-semibold">Coaches</summary>
+    <div class="pt-3 space-y-3">
+      <div>{{ coach_filter }}</div>
+      <div>{{ patriots_hc_filter }}</div>
+      <div>{{ patriots_oc_filter }}</div>
+      <div>{{ patriots_dc_filter }}</div>
+      <div>{{ opp_oc_filter }}</div>
+      <div>{{ opp_dc_filter }}</div>
+    </div>
+  </details>
+{% endset %}
+
 {% set qb_filter %}
   <label for="gs-filter-qb" class="block text-sm mb-1">Starting QB</label>
   <select id="gs-filter-qb" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select QB -","allowClear":true,"width":"100%"}'></select>
@@ -138,12 +152,7 @@
       <h2 id="gs-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
       <div id="gs-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
         <div class="p-3">{{ opponent_filter }}</div>
-        <div class="p-3">{{ coach_filter }}</div>
-        <div class="p-3">{{ patriots_hc_filter }}</div>
-        <div class="p-3">{{ patriots_oc_filter }}</div>
-        <div class="p-3">{{ patriots_dc_filter }}</div>
-        <div class="p-3">{{ opp_oc_filter }}</div>
-        <div class="p-3">{{ opp_dc_filter }}</div>
+        <div class="p-3">{{ coaches_group }}</div>
         <div class="p-3">{{ qb_filter }}</div>
         <div class="p-3">{{ week_filter }}</div>
         <div class="p-3">{{ season_filter }}</div>

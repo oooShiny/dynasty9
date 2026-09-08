@@ -620,6 +620,15 @@
       setSliderFromUrl(sliders.patsScore, params.get('min_pats'), params.get('max_pats'));
       setSliderFromUrl(sliders.oppScore, params.get('min_opp'), params.get('max_opp'));
       setSliderFromUrl(sliders.diff, params.get('min_diff'), params.get('max_diff'));
+
+      // Auto-expand collapsed filter groups that have an active filter from
+      // the URL, so it isn't hidden behind a closed <details> on load.
+      const coachParams = ['coach', 'patriots_hc', 'patriots_oc', 'patriots_dc', 'opp_oc', 'opp_dc'];
+      const coachesGroup = app.querySelector('#gs-group-coaches');
+      if (coachesGroup && coachParams.some(function (p) { return params.getAll(p).length > 0; })) {
+        coachesGroup.open = true;
+      }
+
       restoring = false;
     }
 

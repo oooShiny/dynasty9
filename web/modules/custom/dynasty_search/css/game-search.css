@@ -9,3 +9,21 @@
   border-color: #fff;
   color: #fff;
 }
+
+/* Collapsible filter groups (e.g. "Coaches") in the sidebar. */
+.gs-filter-group > summary {
+  list-style: none;
+  color: #fff;
+}
+.gs-filter-group > summary::-webkit-details-marker {
+  display: none;
+}
+.gs-filter-group > summary::before {
+  content: '\25B8';
+  display: inline-block;
+  width: 1em;
+  transition: transform 0.15s ease;
+}
+.gs-filter-group[open] > summary::before {
+  transform: rotate(90deg);
+}
