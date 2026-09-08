@@ -1,5 +1,7 @@
 #!/bin/bash
-# Deploy script that purges Cloudflare cache and re-warms it
+# Purges the Cloudflare cache. Run manually after deploying code changes
+# that affect rendered HTML/CSS/JS (deploy itself is still git pull +
+# drush cim/cr, done separately).
 # Usage: ./deploy-and-warm.sh
 #
 # Requires CF_ZONE_ID and CF_API_TOKEN in the environment. Copy .env.example
@@ -19,32 +21,11 @@ if [ -z "$CF_ZONE_ID" ] || [ -z "$CF_API_TOKEN" ]; then
   exit 1
 fi
 
-SITE_URL="https://patsdynasty.com"
-
-echo "=== Dynasty Deploy & Cache Warm ==="
-echo ""
-
-# Step 1: Deploy code changes (if any)
-echo "Step 1: Checking for code deployment..."
-# Add your deploy commands here if needed
-# git pull, composer install, drush updb, drush cim, etc.
-
-# Step 2: Purge Cloudflare cache
-echo ""
-echo "Step 2: Purging Cloudflare cache..."
+echo "=== Purging Cloudflare cache ==="
 curl -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
   -H "Authorization: Bearer ${CF_API_TOKEN}" \
   -H "Content-Type: application/json" \
   --data '{"purge_everything":true}' \
   -s | jq -r '.success'
 
-echo "Waiting 5 seconds for purge to complete..."
-sleep 5
-
-# Step 3: Warm important caches
-echo ""
-echo "Step 3: Warming Cloudflare cache..."
-bash warm-cache.sh "$SITE_URL"
-
-echo ""
-echo "=== Deploy Complete ==="
+echo "Done."
