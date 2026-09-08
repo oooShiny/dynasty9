@@ -21,7 +21,7 @@ class FooterSeasonsBlock extends BlockBase {
   public function build() {
     $seasons = [];
     for ($i = 2000; $i < 2020; $i++) {
-      $seasons[$i] = '/search/games?season['. $i . ']=' . $i;
+      $seasons[$i] = '/search/games?season=' . $i;
     }
     return [
       '#theme' => 'footer_seasons_block',
