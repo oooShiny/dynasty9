@@ -47,6 +47,7 @@
       pagination: app.querySelector('#ps-pagination'),
       summary: app.querySelector('#ps-result-summary'),
       activeFilters: app.querySelector('#ps-active-filters'),
+      clearFilters: app.querySelector('#ps-clear-filters'),
       playType: app.querySelector('#ps-filter-play-type'),
       playTag: app.querySelector('#ps-filter-play-tag'),
       season: app.querySelector('#ps-filter-season'),
@@ -166,6 +167,13 @@
 
       if (els.reset) {
         els.reset.addEventListener('click', function () {
+          resetFilters();
+          onFilterChange();
+        });
+      }
+
+      if (els.clearFilters) {
+        els.clearFilters.addEventListener('click', function () {
           resetFilters();
           onFilterChange();
         });
@@ -298,7 +306,16 @@
       renderResults();
     }
 
+    function hasActiveFilters(f) {
+      return Boolean(f.q) || f.playType.length > 0 || f.playTag.length > 0 || f.season.length > 0 ||
+        f.down.length > 0 || f.quarter.length > 0 || f.td_scored !== '' ||
+        f.minYards !== null || f.maxYards !== null || f.minAirYards !== null || f.maxAirYards !== null;
+    }
+
     function renderActiveFilters(f) {
+      if (els.clearFilters) {
+        els.clearFilters.classList.toggle('hidden', !hasActiveFilters(f));
+      }
       if (!els.activeFilters) return;
       const chips = [];
       if (f.q) chips.push(chip('q', 'Search: ' + f.q));

@@ -9,7 +9,7 @@
 
 {% set opponent_filter %}
   <label for="gs-filter-opponent" class="block text-sm mb-1">Opponent</label>
-  <select id="gs-filter-opponent" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Team -","allowClear":true,"width":"100%"}'></select>
+  <select id="gs-filter-opponent" multiple class="text-blue-pats select2-widget w-full" data-select2-config='{"placeholder":"- Select Team -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
 {% set coach_filter %}
@@ -118,7 +118,10 @@
 
     <div class="w-full md:!w-3/4 min-w-0">
       <div id="gs-summary" class="px-4 py-5 text-lg">
-        <h2>Displaying <span class="text-red-pats"><span id="gs-count">0</span> games</span></h2>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h2>Displaying <span class="text-red-pats"><span id="gs-count">0</span> games</span></h2>
+          <button type="button" id="gs-clear-filters" class="hidden px-3 py-1 text-sm border-2 border-red-pats text-red-pats rounded cursor-pointer hover:bg-red-pats hover:text-white">Clear Filters</button>
+        </div>
         <div id="gs-active-filters" class="flex flex-wrap gap-2 mt-2"></div>
       </div>
 

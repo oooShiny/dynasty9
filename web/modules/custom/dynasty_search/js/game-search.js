@@ -33,6 +33,7 @@
       thead: app.querySelector('thead'),
       count: app.querySelector('#gs-count'),
       activeFilters: app.querySelector('#gs-active-filters'),
+      clearFilters: app.querySelector('#gs-clear-filters'),
       winloss: app.querySelector('#gs-winloss'),
       winpct: app.querySelector('#gs-winpct'),
       avgscore: app.querySelector('#gs-avgscore'),
@@ -148,6 +149,13 @@
 
       if (els.reset) {
         els.reset.addEventListener('click', function () {
+          resetFilters();
+          onFilterChange();
+        });
+      }
+
+      if (els.clearFilters) {
+        els.clearFilters.addEventListener('click', function () {
           resetFilters();
           onFilterChange();
         });
@@ -301,23 +309,35 @@
       if (els.count) els.count.textContent = n.toLocaleString();
     }
 
+    function hasActiveFilters(f) {
+      return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 ||
+        f.home_away !== '' || f.after_bye !== '' || f.ot !== '' || f.playoff_game !== '' ||
+        f.min_pats !== null || f.max_pats !== null || f.min_opp !== null || f.max_opp !== null ||
+        f.min_diff !== null || f.max_diff !== null;
+    }
+
     function renderActiveFilters(f) {
+      if (els.clearFilters) {
+        els.clearFilters.classList.toggle('hidden', !hasActiveFilters(f));
+      }
       if (!els.activeFilters) return;
       const chips = [];
-      f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent: ' + v)); });
-      f.coach.forEach(function (v) { chips.push(chip('coach:' + v, 'Coach: ' + v)); });
-      f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season: ' + v)); });
-      f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week: ' + v)); });
-      if (f.home_away) chips.push(chip('home_away', f.home_away));
-      if (f.after_bye !== '') chips.push(chip('after_bye', 'After Bye: ' + (f.after_bye === '1' ? 'Yes' : 'No')));
-      if (f.ot !== '') chips.push(chip('ot', 'OT: ' + (f.ot === '1' ? 'Yes' : 'No')));
-      if (f.playoff_game !== '') chips.push(chip('playoff_game', 'Playoff: ' + (f.playoff_game === '1' ? 'Yes' : 'No')));
+      f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent', v)); });
+      f.coach.forEach(function (v) { chips.push(chip('coach:' + v, 'Coach', v)); });
+      f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
+      f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week', v)); });
+      if (f.home_away) chips.push(chip('home_away', 'Location', f.home_away));
+      if (f.after_bye !== '') chips.push(chip('after_bye', 'After Bye', (f.after_bye === '1' ? 'Yes' : 'No')));
+      if (f.ot !== '') chips.push(chip('ot', 'OT', (f.ot === '1' ? 'Yes' : 'No')));
+      if (f.playoff_game !== '') chips.push(chip('playoff_game', 'Playoff', (f.playoff_game === '1' ? 'Yes' : 'No')));
       els.activeFilters.innerHTML = chips.join('');
     }
 
-    function chip(removeKey, label) {
-      return '<span class="badge badge-outline gap-1">' + escapeHtml(label) +
-        '<button type="button" data-remove="' + escapeHtml(removeKey) + '" class="ml-1">&times;</button></span>';
+    function chip(removeKey, label, filter) {
+      return '<span class="bg-white border-2 border-red-pats gap-1 p-1 rounded-full">'
+        + '<strong class="">' + escapeHtml(label) + ':</strong> ' + filter
+        + '<button type="button" data-remove="' + escapeHtml(removeKey) + '" class="p-1 text-red-pats cursor-pointer">&times;</button>'
+        + '</span>';
     }
 
     function removeFilter(key) {
