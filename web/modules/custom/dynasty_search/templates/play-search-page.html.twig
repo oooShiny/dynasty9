@@ -67,19 +67,6 @@
 {% endset %}
 
 <div id="play-search-app" class="mx-auto">
-  <div class="bg-gray-400 m-2 p-2 text-center">
-    <h2 class="font-bold">Popular Searches</h2>
-    <div class="flex justify-center py-5 w-full gap-2">
-      <button type="button" class="bg-white border-2 border-red-pats gap-1 p-1 rounded-full cursor-pointer ps-popular-search" data-search="butt fumble">Butt Fumble</button>
-      <button type="button" class="bg-white border-2 border-red-pats gap-1 p-1 rounded-full cursor-pointer ps-popular-search" data-search="edelman amendola">Edelman to Amendola</button>
-      <button type="button" class="bg-white border-2 border-red-pats gap-1 p-1 rounded-full cursor-pointer ps-popular-search" data-search="edelman circus catch">The Catch</button>
-    </div>
-  </div>
-
-  <div class="flex gap-2 p-4">
-    <input type="text" id="ps-search" placeholder="Search plays, players, opponents..." class="flex-1 border rounded px-3 py-2">
-  </div>
-
   <div class="flex flex-wrap md:!flex-nowrap gap-4">
     <div class="md:!w-1/4">
       <h2 id="ps-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
@@ -114,7 +101,7 @@
 
       {# Cards use the same w-1/2 md:w-1/3 lg:w-1/4 self-sizing as dynasty_tw:highlight-card
          elsewhere on the site, so this is a flex-wrap container, not a grid. #}
-      <div id="ps-results" class="flex flex-wrap"></div>
+      <div id="ps-results" class="flex flex-wrap justify-around"></div>
 
       <div id="ps-pagination" class="flex justify-center gap-2 mt-6 p-4"></div>
     </div>
