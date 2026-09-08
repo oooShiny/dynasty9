@@ -11,6 +11,7 @@ game_search:
     - core/jquery
     - select2/select2
     - dynasty_tw/select2.theme
+    - better_exposed_filters/nouislider
 
 play_search:
   version: 1.x
@@ -25,3 +26,4 @@ play_search:
     - core/jquery
     - select2/select2
     - dynasty_tw/select2.theme
+    - better_exposed_filters/nouislider

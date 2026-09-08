@@ -45,19 +45,15 @@
 {% endset %}
 
 {% set range_filters %}
-  <div class="mb-2">
-    <div class="text-sm mb-1">Yards Gained</div>
-    <div class="flex gap-2 items-center">
-      <input type="number" id="ps-min-yards" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
-      <input type="number" id="ps-max-yards" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
-    </div>
+  <div class="mb-8">
+    <div class="text-sm mb-4">Yards Gained</div>
+    <div id="ps-slider-yards" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
   </div>
-  <div>
-    <div class="text-sm mb-1">Air Yards</div>
-    <div class="flex gap-2 items-center">
-      <input type="number" id="ps-min-air-yards" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
-      <input type="number" id="ps-max-air-yards" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
-    </div>
+  <div class="mb-4">
+    <div class="text-sm mb-4">Air Yards</div>
+    <div id="ps-slider-air-yards" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
   </div>
 {% endset %}
 

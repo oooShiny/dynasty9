@@ -64,26 +64,20 @@
 {% endset %}
 
 {% set score_range_filters %}
-  <div class="mb-2">
-    <div class="text-sm mb-1">Patriots Score</div>
-    <div class="flex gap-2 items-center">
-      <input type="number" id="gs-min-patriots-score" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
-      <input type="number" id="gs-max-patriots-score" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
-    </div>
+  <div class="mb-8">
+    <div class="text-sm mb-4">Patriots Score</div>
+    <div id="gs-slider-patriots-score" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
   </div>
-  <div class="mb-2">
-    <div class="text-sm mb-1">Opponent Score</div>
-    <div class="flex gap-2 items-center">
-      <input type="number" id="gs-min-opponent-score" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
-      <input type="number" id="gs-max-opponent-score" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
-    </div>
+  <div class="mb-8">
+    <div class="text-sm mb-4">Opponent Score</div>
+    <div id="gs-slider-opponent-score" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
   </div>
-  <div>
-    <div class="text-sm mb-1">Score Differential</div>
-    <div class="flex gap-2 items-center">
-      <input type="number" id="gs-min-score-differential" placeholder="Min" class="w-1/2 border rounded px-2 py-1">
-      <input type="number" id="gs-max-score-differential" placeholder="Max" class="w-1/2 border rounded px-2 py-1">
-    </div>
+  <div class="mb-4">
+    <div class="text-sm mb-4">Score Differential</div>
+    <div id="gs-slider-score-differential" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
   </div>
 {% endset %}
 

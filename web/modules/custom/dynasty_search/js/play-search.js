@@ -53,10 +53,6 @@
       season: app.querySelector('#ps-filter-season'),
       down: app.querySelector('#ps-filter-down'),
       quarter: app.querySelector('#ps-filter-quarter'),
-      minYards: app.querySelector('#ps-min-yards'),
-      maxYards: app.querySelector('#ps-max-yards'),
-      minAirYards: app.querySelector('#ps-min-air-yards'),
-      maxAirYards: app.querySelector('#ps-max-air-yards'),
       reset: app.querySelector('#ps-reset'),
     };
 
@@ -64,6 +60,7 @@
     let currentPage = 0;
     let debounceTimer = null;
     let restoring = false;
+    const sliders = {};
 
     fetch(DATA_URL)
       .then(function (r) {
@@ -73,6 +70,7 @@
       .then(function (data) {
         plays = data;
         populateFilterOptions();
+        initRangeSliders();
         bindEvents();
         initToggleDefaults();
         restoreFromUrl();
@@ -121,6 +119,69 @@
       }
     }
 
+    // --- Range sliders ---
+
+    function initRangeSliders() {
+      sliders.yards = createRangeSlider('ps-slider-yards', fieldRange(plays, 'yards_gained'));
+      sliders.airYards = createRangeSlider('ps-slider-air-yards', fieldRange(plays, 'air_yards'));
+    }
+
+    function fieldRange(rows, field) {
+      let min = Infinity, max = -Infinity;
+      rows.forEach(function (r) {
+        const v = r[field];
+        if (v === null || v === undefined) return;
+        if (v < min) min = v;
+        if (v > max) max = v;
+      });
+      if (min === Infinity) { min = 0; max = 0; }
+      return { min: min, max: max };
+    }
+
+    function createRangeSlider(elId, range) {
+      const el = app.querySelector('#' + elId);
+      if (!el || typeof noUiSlider === 'undefined') return null;
+      noUiSlider.create(el, {
+        start: [range.min, range.max],
+        connect: true,
+        range: { min: range.min, max: range.max > range.min ? range.max : range.min + 1 },
+        step: 1,
+        tooltips: [true, true],
+        format: {
+          to: function (v) { return Math.round(v); },
+          from: function (v) { return Number(v); }
+        }
+      });
+      const labels = el.parentElement.querySelector('.slider-min-max-labels');
+      if (labels) {
+        const minLabel = labels.querySelector('.min-label');
+        const maxLabel = labels.querySelector('.max-label');
+        if (minLabel) minLabel.textContent = range.min;
+        if (maxLabel) maxLabel.textContent = range.max;
+      }
+      el.noUiSlider.on('update', function () {
+        if (restoring) return;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(onFilterChange, DEBOUNCE_MS);
+      });
+      return { el: el, range: range };
+    }
+
+    function sliderRange(slider) {
+      if (!slider || !slider.el.noUiSlider) return [null, null];
+      const values = slider.el.noUiSlider.get().map(Number);
+      const min = values[0] <= slider.range.min ? null : values[0];
+      const max = values[1] >= slider.range.max ? null : values[1];
+      return [min, max];
+    }
+
+    function setSliderFromUrl(slider, minParam, maxParam) {
+      if (!slider || !slider.el.noUiSlider) return;
+      const min = (minParam !== null && minParam !== '') ? Number(minParam) : slider.range.min;
+      const max = (maxParam !== null && maxParam !== '') ? Number(maxParam) : slider.range.max;
+      slider.el.noUiSlider.set([min, max]);
+    }
+
     // --- Events ---
 
     function bindEvents() {
@@ -150,13 +211,6 @@
         });
       });
 
-      [els.minYards, els.maxYards, els.minAirYards, els.maxAirYards].forEach(function (input) {
-        if (!input) return;
-        input.addEventListener('input', function () {
-          clearTimeout(debounceTimer);
-          debounceTimer = setTimeout(onFilterChange, DEBOUNCE_MS);
-        });
-      });
 
       app.querySelectorAll('.ps-popular-search').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -224,8 +278,8 @@
         group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
         group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
       });
-      [els.minYards, els.maxYards, els.minAirYards, els.maxAirYards].forEach(function (input) {
-        if (input) input.value = '';
+      [sliders.yards, sliders.airYards].forEach(function (s) {
+        if (s && s.el.noUiSlider) s.el.noUiSlider.set([s.range.min, s.range.max]);
       });
     }
 
@@ -242,13 +296,9 @@
       return active ? active.dataset.value : '';
     }
 
-    function numOrNull(input) {
-      if (!input || input.value === '') return null;
-      const n = Number(input.value);
-      return Number.isNaN(n) ? null : n;
-    }
-
     function getFilters() {
+      const yards = sliderRange(sliders.yards);
+      const airYards = sliderRange(sliders.airYards);
       return {
         q: els.search ? els.search.value.trim().toLowerCase() : '',
         sort: els.sort ? els.sort.value : 'newest',
@@ -258,10 +308,10 @@
         down: selected(els.down),
         quarter: selected(els.quarter),
         td_scored: toggleValue('td_scored'),
-        minYards: numOrNull(els.minYards),
-        maxYards: numOrNull(els.maxYards),
-        minAirYards: numOrNull(els.minAirYards),
-        maxAirYards: numOrNull(els.maxAirYards),
+        minYards: yards[0],
+        maxYards: yards[1],
+        minAirYards: airYards[0],
+        maxAirYards: airYards[1],
       };
     }
 
@@ -444,10 +494,8 @@
       setMulti(els.down, params.getAll('down'));
       setMulti(els.quarter, params.getAll('quarter'));
       setToggle('td_scored', params.get('td_scored') || '');
-      if (els.minYards) els.minYards.value = params.get('min_yards') || '';
-      if (els.maxYards) els.maxYards.value = params.get('max_yards') || '';
-      if (els.minAirYards) els.minAirYards.value = params.get('min_air_yards') || '';
-      if (els.maxAirYards) els.maxAirYards.value = params.get('max_air_yards') || '';
+      setSliderFromUrl(sliders.yards, params.get('min_yards'), params.get('max_yards'));
+      setSliderFromUrl(sliders.airYards, params.get('min_air_yards'), params.get('max_air_yards'));
       restoring = false;
     }
 

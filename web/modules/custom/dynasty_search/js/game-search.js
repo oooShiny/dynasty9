@@ -42,12 +42,6 @@
       coach: app.querySelector('#gs-filter-coach'),
       week: app.querySelector('#gs-filter-week'),
       season: app.querySelector('#gs-filter-season'),
-      minPats: app.querySelector('#gs-min-patriots-score'),
-      maxPats: app.querySelector('#gs-max-patriots-score'),
-      minOpp: app.querySelector('#gs-min-opponent-score'),
-      maxOpp: app.querySelector('#gs-max-opponent-score'),
-      minDiff: app.querySelector('#gs-min-score-differential'),
-      maxDiff: app.querySelector('#gs-max-score-differential'),
       reset: app.querySelector('#gs-reset'),
     };
 
@@ -56,6 +50,7 @@
     let sortDir = 'desc';
     let debounceTimer = null;
     let restoring = false;
+    const sliders = {};
 
     fetch(DATA_URL)
       .then(function (r) {
@@ -65,6 +60,7 @@
       .then(function (data) {
         games = data;
         populateFilterOptions();
+        initRangeSliders();
         bindEvents();
         initToggleDefaults();
         restoreFromUrl();
@@ -118,6 +114,70 @@
       }
     }
 
+    // --- Range sliders ---
+
+    function initRangeSliders() {
+      sliders.patsScore = createRangeSlider('gs-slider-patriots-score', fieldRange(games, 'patriots_score'));
+      sliders.oppScore = createRangeSlider('gs-slider-opponent-score', fieldRange(games, 'opponent_score'));
+      sliders.diff = createRangeSlider('gs-slider-score-differential', fieldRange(games, 'score_differential'));
+    }
+
+    function fieldRange(rows, field) {
+      let min = Infinity, max = -Infinity;
+      rows.forEach(function (r) {
+        const v = r[field];
+        if (v === null || v === undefined) return;
+        if (v < min) min = v;
+        if (v > max) max = v;
+      });
+      if (min === Infinity) { min = 0; max = 0; }
+      return { min: min, max: max };
+    }
+
+    function createRangeSlider(elId, range) {
+      const el = app.querySelector('#' + elId);
+      if (!el || typeof noUiSlider === 'undefined') return null;
+      noUiSlider.create(el, {
+        start: [range.min, range.max],
+        connect: true,
+        range: { min: range.min, max: range.max > range.min ? range.max : range.min + 1 },
+        step: 1,
+        tooltips: [true, true],
+        format: {
+          to: function (v) { return Math.round(v); },
+          from: function (v) { return Number(v); }
+        }
+      });
+      const labels = el.parentElement.querySelector('.slider-min-max-labels');
+      if (labels) {
+        const minLabel = labels.querySelector('.min-label');
+        const maxLabel = labels.querySelector('.max-label');
+        if (minLabel) minLabel.textContent = range.min;
+        if (maxLabel) maxLabel.textContent = range.max;
+      }
+      el.noUiSlider.on('update', function () {
+        if (restoring) return;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(onFilterChange, DEBOUNCE_MS);
+      });
+      return { el: el, range: range };
+    }
+
+    function sliderRange(slider) {
+      if (!slider || !slider.el.noUiSlider) return [null, null];
+      const values = slider.el.noUiSlider.get().map(Number);
+      const min = values[0] <= slider.range.min ? null : values[0];
+      const max = values[1] >= slider.range.max ? null : values[1];
+      return [min, max];
+    }
+
+    function setSliderFromUrl(slider, minParam, maxParam) {
+      if (!slider || !slider.el.noUiSlider) return;
+      const min = (minParam !== null && minParam !== '') ? Number(minParam) : slider.range.min;
+      const max = (maxParam !== null && maxParam !== '') ? Number(maxParam) : slider.range.max;
+      slider.el.noUiSlider.set([min, max]);
+    }
+
     // --- Events ---
 
     function bindEvents() {
@@ -136,14 +196,6 @@
             btn.classList.add('gs-toggle-active');
             onFilterChange();
           });
-        });
-      });
-
-      [els.minPats, els.maxPats, els.minOpp, els.maxOpp, els.minDiff, els.maxDiff].forEach(function (input) {
-        if (!input) return;
-        input.addEventListener('input', function () {
-          clearTimeout(debounceTimer);
-          debounceTimer = setTimeout(onFilterChange, DEBOUNCE_MS);
         });
       });
 
@@ -209,8 +261,8 @@
         group.querySelectorAll('.gs-toggle').forEach(function (b) { b.classList.remove('gs-toggle-active'); });
         group.querySelector('.gs-toggle[data-value=""]').classList.add('gs-toggle-active');
       });
-      [els.minPats, els.maxPats, els.minOpp, els.maxOpp, els.minDiff, els.maxDiff].forEach(function (input) {
-        if (input) input.value = '';
+      [sliders.patsScore, sliders.oppScore, sliders.diff].forEach(function (s) {
+        if (s && s.el.noUiSlider) s.el.noUiSlider.set([s.range.min, s.range.max]);
       });
     }
 
@@ -228,6 +280,9 @@
     }
 
     function getFilters() {
+      const pats = sliderRange(sliders.patsScore);
+      const opp = sliderRange(sliders.oppScore);
+      const diff = sliderRange(sliders.diff);
       return {
         opponent: selected(els.opponent),
         coach: selected(els.coach),
@@ -237,19 +292,13 @@
         after_bye: toggleValue('after_bye'),
         ot: toggleValue('ot'),
         playoff_game: toggleValue('playoff_game'),
-        min_pats: numOrNull(els.minPats),
-        max_pats: numOrNull(els.maxPats),
-        min_opp: numOrNull(els.minOpp),
-        max_opp: numOrNull(els.maxOpp),
-        min_diff: numOrNull(els.minDiff),
-        max_diff: numOrNull(els.maxDiff),
+        min_pats: pats[0],
+        max_pats: pats[1],
+        min_opp: opp[0],
+        max_opp: opp[1],
+        min_diff: diff[0],
+        max_diff: diff[1],
       };
-    }
-
-    function numOrNull(input) {
-      if (!input || input.value === '') return null;
-      const n = Number(input.value);
-      return Number.isNaN(n) ? null : n;
     }
 
     function matches(game, f) {
@@ -499,12 +548,9 @@
       setToggle('after_bye', params.get('after_bye') || '');
       setToggle('ot', params.get('ot') || '');
       setToggle('playoff_game', params.get('playoff_game') || '');
-      if (els.minPats) els.minPats.value = params.get('min_pats') || '';
-      if (els.maxPats) els.maxPats.value = params.get('max_pats') || '';
-      if (els.minOpp) els.minOpp.value = params.get('min_opp') || '';
-      if (els.maxOpp) els.maxOpp.value = params.get('max_opp') || '';
-      if (els.minDiff) els.minDiff.value = params.get('min_diff') || '';
-      if (els.maxDiff) els.maxDiff.value = params.get('max_diff') || '';
+      setSliderFromUrl(sliders.patsScore, params.get('min_pats'), params.get('max_pats'));
+      setSliderFromUrl(sliders.oppScore, params.get('min_opp'), params.get('max_opp'));
+      setSliderFromUrl(sliders.diff, params.get('min_diff'), params.get('max_diff'));
       restoring = false;
     }
 
