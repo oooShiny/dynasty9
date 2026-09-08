@@ -429,19 +429,6 @@ function dynasty_tw_preprocess_region(&$variables) {
     // Add the node type as a variable to the region template.
     $variables['content_type'] = $node_type;
   }
-  else {
-    // Non-node routes (custom controller pages) have no bundle to key off
-    // of. Treat them like a plain 'page' node so region.html.twig gives
-    // them the same undecorated content region as a basic page, instead of
-    // the decorative flag-stripe branch meant for node content types.
-    $plain_page_routes = [
-      'dynasty_search.games_page',
-      'dynasty_search.plays_page',
-    ];
-    if (in_array(\Drupal::routeMatch()->getRouteName(), $plain_page_routes, TRUE)) {
-      $variables['content_type'] = 'page';
-    }
-  }
 
 }
 /**
