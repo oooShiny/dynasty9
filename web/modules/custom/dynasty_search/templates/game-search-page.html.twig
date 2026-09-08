@@ -27,6 +27,16 @@
   <select id="gs-filter-season" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Season(s) -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set result_filter %}
+  <div class="text-sm mb-1">Result</div>
+  <div class="gs-toggle-group flex gap-1" data-filter="result">
+    <button type="button" class="gs-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="gs-toggle px-3 py-1 border rounded" data-value="Win">Win</button>
+    <button type="button" class="gs-toggle px-3 py-1 border rounded" data-value="Loss">Loss</button>
+    <button type="button" class="gs-toggle px-3 py-1 border rounded" data-value="Tie">Tie</button>
+  </div>
+{% endset %}
+
 {% set home_away_filter %}
   <div class="text-sm mb-1">Home/Away</div>
   <div class="gs-toggle-group flex gap-1" data-filter="home_away">
@@ -101,6 +111,7 @@
         <div class="p-3">{{ coach_filter }}</div>
         <div class="p-3">{{ week_filter }}</div>
         <div class="p-3">{{ season_filter }}</div>
+        <div class="p-3">{{ result_filter }}</div>
         <div class="p-3">{{ home_away_filter }}</div>
         <div class="p-3">{{ bye_filter }}</div>
         <div class="p-3">{{ ot_filter }}</div>

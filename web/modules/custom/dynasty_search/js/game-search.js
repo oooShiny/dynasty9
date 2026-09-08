@@ -288,6 +288,7 @@
         coach: selected(els.coach),
         season: selected(els.season),
         week: selected(els.week),
+        result: toggleValue('result'),
         home_away: toggleValue('home_away'),
         after_bye: toggleValue('after_bye'),
         ot: toggleValue('ot'),
@@ -306,6 +307,7 @@
       if (f.coach.length && f.coach.indexOf(game.opposing_coach) === -1) return false;
       if (f.season.length && f.season.indexOf(String(game.season)) === -1) return false;
       if (f.week.length && (!game.week || f.week.indexOf(game.week.label) === -1)) return false;
+      if (f.result && game.result !== f.result) return false;
       if (f.home_away && game.home_away !== f.home_away) return false;
       if (f.after_bye !== '' && Boolean(game.after_bye) !== (f.after_bye === '1')) return false;
       if (f.ot !== '' && Boolean(game.ot) !== (f.ot === '1')) return false;
@@ -360,7 +362,7 @@
 
     function hasActiveFilters(f) {
       return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 ||
-        f.home_away !== '' || f.after_bye !== '' || f.ot !== '' || f.playoff_game !== '' ||
+        f.result !== '' || f.home_away !== '' || f.after_bye !== '' || f.ot !== '' || f.playoff_game !== '' ||
         f.min_pats !== null || f.max_pats !== null || f.min_opp !== null || f.max_opp !== null ||
         f.min_diff !== null || f.max_diff !== null;
     }
@@ -375,6 +377,7 @@
       f.coach.forEach(function (v) { chips.push(chip('coach:' + v, 'Coach', v)); });
       f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
       f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week', v)); });
+      if (f.result) chips.push(chip('result', 'Result', f.result));
       if (f.home_away) chips.push(chip('home_away', 'Location', f.home_away));
       if (f.after_bye !== '') chips.push(chip('after_bye', 'After Bye', (f.after_bye === '1' ? 'Yes' : 'No')));
       if (f.ot !== '') chips.push(chip('ot', 'OT', (f.ot === '1' ? 'Yes' : 'No')));
@@ -523,6 +526,7 @@
       f.coach.forEach(function (v) { params.append('coach', v); });
       f.season.forEach(function (v) { params.append('season', v); });
       f.week.forEach(function (v) { params.append('week', v); });
+      if (f.result) params.set('result', f.result);
       if (f.home_away) params.set('home_away', f.home_away);
       if (f.after_bye !== '') params.set('after_bye', f.after_bye);
       if (f.ot !== '') params.set('ot', f.ot);
@@ -544,6 +548,7 @@
       setMulti(els.coach, params.getAll('coach'));
       setMulti(els.season, params.getAll('season'));
       setMulti(els.week, params.getAll('week'));
+      setToggle('result', params.get('result') || '');
       setToggle('home_away', params.get('home_away') || '');
       setToggle('after_bye', params.get('after_bye') || '');
       setToggle('ot', params.get('ot') || '');
