@@ -49,6 +49,7 @@
       activeFilters: app.querySelector('#ps-active-filters'),
       clearFilters: app.querySelector('#ps-clear-filters'),
       playType: app.querySelector('#ps-filter-play-type'),
+      player: app.querySelector('#ps-filter-player'),
       playTag: app.querySelector('#ps-filter-play-tag'),
       season: app.querySelector('#ps-filter-season'),
       down: app.querySelector('#ps-filter-down'),
@@ -91,6 +92,7 @@
     // season.
     function updateFilterOptions(f) {
       const withoutPlayType = plays.filter(function (p) { return matches(p, f, 'playType'); });
+      const withoutPlayer = plays.filter(function (p) { return matches(p, f, 'player'); });
       const withoutPlayTag = plays.filter(function (p) { return matches(p, f, 'playTag'); });
       const withoutSeason = plays.filter(function (p) { return matches(p, f, 'season'); });
       const withoutDown = plays.filter(function (p) { return matches(p, f, 'down'); });
@@ -99,11 +101,12 @@
       const wasRestoring = restoring;
       restoring = true;
       fillSelect(els.playType, uniqueSorted(withoutPlayType, function (p) { return p.play_type ? p.play_type.label : null; }));
+      fillSelect(els.player, uniqueSorted(withoutPlayer, null, function (p) { return p.players_involved || []; }));
       fillSelect(els.playTag, uniqueSorted(withoutPlayTag, null, function (p) { return p.tag_play || []; }));
       fillSelect(els.season, uniqueSorted(withoutSeason, function (p) { return String(p.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
       fillSelect(els.down, uniqueSorted(withoutDown, function (p) { return p.down ? String(p.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
       fillSelect(els.quarter, uniqueSorted(withoutQuarter, function (p) { return p.quarter ? String(p.quarter) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
-      [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(refreshSelect2);
+      [els.playType, els.player, els.playTag, els.season, els.down, els.quarter].forEach(refreshSelect2);
       restoring = wasRestoring;
     }
 
@@ -211,7 +214,7 @@
         els.sort.addEventListener('change', onFilterChange);
       }
 
-      [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
+      [els.playType, els.player, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
         if (!select) return;
         select.addEventListener('change', onFilterChange);
         if (window.jQuery) window.jQuery(select).on('change', onFilterChange);
@@ -285,7 +288,7 @@
     function resetFilters() {
       if (els.search) els.search.value = '';
       if (els.sort) els.sort.value = 'newest';
-      [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
+      [els.playType, els.player, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
         if (!select) return;
         Array.from(select.options).forEach(function (o) { o.selected = false; });
         refreshSelect2(select);
@@ -319,6 +322,7 @@
         q: els.search ? els.search.value.trim().toLowerCase() : '',
         sort: els.sort ? els.sort.value : 'newest',
         playType: selected(els.playType),
+        player: selected(els.player),
         playTag: selected(els.playTag),
         season: selected(els.season),
         down: selected(els.down),
@@ -337,6 +341,7 @@
         if (haystack.indexOf(f.q) === -1) return false;
       }
       if (excludeField !== 'playType' && f.playType.length && (!p.play_type || f.playType.indexOf(p.play_type.label) === -1)) return false;
+      if (excludeField !== 'player' && f.player.length && !f.player.some(function (pl) { return (p.players_involved || []).indexOf(pl) !== -1; })) return false;
       if (excludeField !== 'playTag' && f.playTag.length && !f.playTag.some(function (t) { return (p.tag_play || []).indexOf(t) !== -1; })) return false;
       if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(p.season)) === -1) return false;
       if (excludeField !== 'down' && f.down.length && f.down.indexOf(String(p.down)) === -1) return false;
@@ -374,7 +379,7 @@
     }
 
     function hasActiveFilters(f) {
-      return Boolean(f.q) || f.playType.length > 0 || f.playTag.length > 0 || f.season.length > 0 ||
+      return Boolean(f.q) || f.playType.length > 0 || f.player.length > 0 || f.playTag.length > 0 || f.season.length > 0 ||
         f.down.length > 0 || f.quarter.length > 0 || f.td_scored !== '' ||
         f.minYards !== null || f.maxYards !== null || f.minAirYards !== null || f.maxAirYards !== null;
     }
@@ -387,6 +392,7 @@
       const chips = [];
       if (f.q) chips.push(chip('q', 'Search: ' + f.q));
       f.playType.forEach(function (v) { chips.push(chip('playType:' + v, 'Play Type: ' + v)); });
+      f.player.forEach(function (v) { chips.push(chip('player:' + v, 'Player: ' + v)); });
       f.playTag.forEach(function (v) { chips.push(chip('playTag:' + v, 'Tag: ' + v)); });
       f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season: ' + v)); });
       f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down: ' + v)); });
@@ -406,7 +412,7 @@
         return;
       }
       const [type, value] = key.split(/:(.*)/s);
-      const map = { playType: els.playType, playTag: els.playTag, season: els.season, down: els.down, quarter: els.quarter };
+      const map = { playType: els.playType, player: els.player, playTag: els.playTag, season: els.season, down: els.down, quarter: els.quarter };
       if (map[type]) {
         Array.from(map[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -487,6 +493,7 @@
       if (f.q) params.set('search', f.q);
       if (f.sort !== 'newest') params.set('sort', f.sort);
       f.playType.forEach(function (v) { params.append('play_type', v); });
+      f.player.forEach(function (v) { params.append('player', v); });
       f.playTag.forEach(function (v) { params.append('play_tag', v); });
       f.season.forEach(function (v) { params.append('season', v); });
       f.down.forEach(function (v) { params.append('down', v); });
@@ -506,6 +513,7 @@
       if (els.search && params.get('search')) els.search.value = params.get('search');
       if (els.sort && params.get('sort')) els.sort.value = params.get('sort');
       setMulti(els.playType, params.getAll('play_type'));
+      setMulti(els.player, params.getAll('player'));
       setMulti(els.playTag, params.getAll('play_tag'));
       setMulti(els.season, params.getAll('season'));
       setMulti(els.down, params.getAll('down'));

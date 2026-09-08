@@ -15,6 +15,11 @@
   <select id="ps-filter-play-type" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Play Type -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set player_filter %}
+  <label for="ps-filter-player" class="block text-sm mb-1">Player</label>
+  <select id="ps-filter-player" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Player -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
 {% set play_tag_filter %}
   <label for="ps-filter-play-tag" class="block text-sm mb-1">Play Tag</label>
   <select id="ps-filter-play-tag" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Tag -","allowClear":true,"width":"100%"}'></select>
@@ -80,6 +85,7 @@
       <h2 id="ps-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
       <div id="ps-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
         <div class="p-3">{{ play_type_filter }}</div>
+        <div class="p-3">{{ player_filter }}</div>
         <div class="p-3">{{ play_tag_filter }}</div>
         <div class="p-3">{{ season_filter }}</div>
         <div class="p-3">{{ down_filter }}</div>
