@@ -1,0 +1,19 @@
+name: Blockquote
+description: Pull-quote with a Patriots-red SVG quotation mark, italic body text, and an optional linked attribution.
+group: Paragraph
+
+props:
+  type: object
+  properties:
+    quote_link:
+      type: string
+      title: Attribution URL
+      description: Optional URL wrapping the attribution text. Empty when field_quote_link is not set.
+
+slots:
+  quote_text:
+    title: Quote body text field
+    description: Rendered content.field_quote_text — displayed in italic Patriots blue.
+  attribution:
+    title: Attribution / speaker field
+    description: Rendered content.field_attribution — wrapped in an <a> when quote_link is set.

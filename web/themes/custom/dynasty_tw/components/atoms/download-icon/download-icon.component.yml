@@ -1,0 +1,15 @@
+name: Download Icon
+description: SVG download arrow link. Used on highlight cards to let users save video files.
+group: Atoms
+
+props:
+  type: object
+  properties:
+    href:
+      type: string
+      title: Download URL
+    classes:
+      type: string
+      title: Extra classes
+  required:
+    - href

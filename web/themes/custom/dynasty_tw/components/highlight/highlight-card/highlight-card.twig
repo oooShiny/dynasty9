@@ -1,0 +1,13 @@
+{% set bg_color = td == 1 ? 'bg-red-pats' : 'bg-blue-pats' %}
+<div class="w-1/2 md:w-1/3 lg:w-1/4 {{ bg_color }} m-3 shadow-lg max-h-80 flex flex-col justify-between">
+  {{ video }}
+  <div class="p-2 {{ bg_color }} text-white flex flex-col gap-4 justify-between">
+    <div><a href="{{ url }}">{{ label }}</a></div>
+    <div class="flex justify-between">
+      <p class="badge badge-outline">{{ game }}</p>
+      {% if video_file %}
+        {% include 'dynasty_tw:download-icon' with { href: 'https://cdn.skiv.com/w/' ~ video_file ~ '/videos/video.mp4' } only %}
+      {% endif %}
+    </div>
+  </div>
+</div>

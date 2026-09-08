@@ -1,0 +1,39 @@
+name: Score Box
+description: Patriots vs opponent score display — two coloured team boxes with big score numbers and a vs/at separator. Used across game teaser, full, timeline, and show-notes.
+group: Game
+
+props:
+  type: object
+  properties:
+    vs:
+      type: string
+      title: Home/away indicator
+      description: '"vs" for home games, "at" for away games.'
+      default: vs
+    team_css:
+      type: string
+      title: Opponent team CSS class
+      description: e.g. "kansas-city-chiefs". Maps to a class in team-colors.css.
+    opp_name:
+      type: string
+      title: Opponent full name
+      description: Full name shown at md+ breakpoints.
+    opp_short:
+      type: string
+      title: Opponent short name
+      description: Last word of the team name, shown on mobile.
+    size:
+      type: string
+      title: Score size variant
+      description: '"lg" (default, text-5xl) or "sm" (text-3xl) for compact contexts.'
+      default: lg
+  required:
+    - team_css
+    - opp_name
+    - opp_short
+
+slots:
+  patriots_score:
+    title: Patriots score field
+  opponent_score:
+    title: Opponent score field

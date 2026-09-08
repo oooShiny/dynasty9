@@ -1,101 +1,20 @@
 {#
 /**
  * @file
- * Theme override to display a pager.
+ * Thin bridge → dynasty_tw:pager SDC.
  *
  * Available variables:
- * - heading_id: Pagination heading ID.
- * - items: List of pager items.
- *   The list is keyed by the following elements:
- *   - first: Item for the first page; not present on the first page of results.
- *   - previous: Item for the previous page; not present on the first page
- *     of results.
- *   - next: Item for the next page; not present on the last page of results.
- *   - last: Item for the last page; not present on the last page of results.
- *   - pages: List of pages, keyed by page number.
- *   Sub-sub elements:
- *   items.first, items.previous, items.next, items.last, and each item inside
- *   items.pages contain the following elements:
- *   - href: URL with appropriate query parameters for the item.
- *   - attributes: A keyed list of HTML attributes for the item.
- *   - text: The visible text used for the item link, such as "‹ Previous"
- *     or "Next ›".
- * - current: The page number of the current page.
- * - ellipses: If there are more pages than the quantity allows, then an
- *   ellipsis before or after the listed pages may be present.
- *   - previous: Present if the currently visible list of pages does not start
- *     at the first page.
- *   - next: Present if the visible list of pages ends before the last page.
- *
- * @see template_preprocess_pager()
+ *   - heading_id: Unique heading ID for the aria-labelledby link.
+ *   - items: Pager item object (first, previous, pages, next, last).
+ *   - current: Current page number (integer).
+ *   - ellipses: Object with 'previous' and 'next' boolean flags.
  */
 #}
 {% if items %}
-  <nav class="flex justify-center pager p-6" role="navigation" aria-labelledby="{{ heading_id }}">
-    <h4 id="{{ heading_id }}" class="visually-hidden">{{ 'Pagination'|t }}</h4>
-    <ul class="pager__items js-pager__items flex gap-4">
-      {# Print first item if we are not on the first page. #}
-      {% if items.first %}
-          <a href="{{ items.first.href }}" title="{{ 'Go to first page'|t }}"{{ items.first.attributes|without('href', 'title') }}>
-        <li class="pager__item pager__item--first min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white">
-            <span class="visually-hidden">{{ 'First page'|t }}</span>
-            <span aria-hidden="true">{{ items.first.text|default('« First'|t) }}</span>
-        </li>
-          </a>
-      {% endif %}
-      {# Print previous item if we are not on the first page. #}
-      {% if items.previous %}
-          <a href="{{ items.previous.href }}" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
-        <li class="pager__item pager__item--previous min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white">
-            <span class="visually-hidden">{{ 'Previous page'|t }}</span>
-            <span aria-hidden="true">{{ items.previous.text|default('‹ Previous'|t) }}</span>
-        </li>
-          </a>
-      {% endif %}
-      {# Add an ellipsis if there are further previous pages. #}
-      {% if ellipses.previous %}
-        <li class="pager__item pager__item--ellipsis min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white" role="presentation">&hellip;</li>
-      {% endif %}
-      {# Now generate the actual pager piece. #}
-      {% for key, item in items.pages %}
-        {% if current == key %}
-          {% set title = 'Current page'|t %}
-        {% else %}
-          {% set title = 'Go to page @key'|t({'@key': key}) %}
-        {% endif %}
-        <a href="{{ item.href }}" title="{{ title }}"{{ item.attributes|without('href', 'title') }}>
-        <li class="pager__item{{ current == key ? ' is-active bg-red-pats text-white' : '' }} min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white">
-
-            <span class="visually-hidden">
-              {{ current == key ? 'Current page'|t : 'Page'|t }}
-            </span>
-            {{- key -}}
-        </li>
-          </a>
-      {% endfor %}
-      {# Add an ellipsis if there are further next pages. #}
-      {% if ellipses.next %}
-        <li class="pager__item pager__item--ellipsis min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white" role="presentation">&hellip;</li>
-      {% endif %}
-      {# Print next item if we are not on the last page. #}
-      {% if items.next %}
-          <a href="{{ items.next.href }}" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
-        <li class="pager__item pager__item--next min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white">
-            <span class="visually-hidden">{{ 'Next page'|t }}</span>
-            <span aria-hidden="true">{{ items.next.text|default('Next ›'|t) }}</span>
-        </li>
-          </a>
-      {% endif %}
-      {# Print last item if we are not on the last page. #}
-      {% if items.last %}
-          <a href="{{ items.last.href }}" title="{{ 'Go to last page'|t }}"{{ items.last.attributes|without('href', 'title') }}>
-        <li class="pager__item pager__item--last min-w-10 text-center rounded p-2 hover:bg-blue-pats hover:text-white">
-            <span class="visually-hidden">{{ 'Last page'|t }}</span>
-            <span aria-hidden="true">{{ items.last.text|default('Last »'|t) }}</span>
-        </li>
-          </a>
-      {% endif %}
-    </ul>
-  </nav>
+  {% include 'dynasty_tw:pager' with {
+    heading_id: heading_id|default(''),
+    items:      items,
+    current:    current is not null ? current : 0,
+    ellipses:   ellipses is not null ? ellipses : {previous: false, next: false},
+  } only %}
 {% endif %}
-

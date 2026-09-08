@@ -1,0 +1,60 @@
+name: Game Teaser
+description: Game score card for listing contexts — score boxes, date, Q1–Q4 box score table, and a link to the full game page.
+group: Game
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    vs:
+      type: string
+      title: Home/away indicator
+      default: vs
+    team_css:
+      type: string
+      title: Opponent team CSS class
+    opp_name:
+      type: string
+      title: Opponent full name
+    opp_short:
+      type: string
+      title: Opponent short name
+    ot:
+      type: boolean
+      title: Overtime flag
+      default: false
+  required:
+    - url
+    - team_css
+    - opp_name
+    - opp_short
+
+slots:
+  patriots_score:
+    title: Patriots final score
+  opponent_score:
+    title: Opponent final score
+  date:
+    title: Game date
+  pats_q1:
+    title: Patriots Q1
+  pats_q2:
+    title: Patriots Q2
+  pats_q3:
+    title: Patriots Q3
+  pats_q4:
+    title: Patriots Q4
+  pats_ot:
+    title: Patriots OT
+  opp_q1:
+    title: Opponent Q1
+  opp_q2:
+    title: Opponent Q2
+  opp_q3:
+    title: Opponent Q3
+  opp_q4:
+    title: Opponent Q4
+  opp_ot:
+    title: Opponent OT

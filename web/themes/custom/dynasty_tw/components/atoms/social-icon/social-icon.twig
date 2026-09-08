@@ -1,0 +1,14 @@
+{# dynasty_tw:social-icon #}
+{% set label_map = {
+  'twitter':   'Twitter / X',
+  'facebook':  'Facebook',
+  'instagram': 'Instagram',
+  'reddit':    'Reddit',
+} %}
+{% set default_classes = 'h-6 pr-2 svg-white' %}
+
+<a href="{{ url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label_map[platform] ?? platform }}">
+  <img src="/themes/custom/dynasty_tw/icons/{{ platform }}.svg"
+       alt="{{ label_map[platform] ?? platform }}"
+       class="{{ classes ?: default_classes }}" />
+</a>

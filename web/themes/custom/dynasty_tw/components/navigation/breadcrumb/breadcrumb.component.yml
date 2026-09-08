@@ -1,0 +1,11 @@
+name: Breadcrumb
+description: Accessible breadcrumb trail with landmark nav element and visually-hidden heading.
+group: Navigation
+
+props:
+  type: object
+  properties:
+    breadcrumb:
+      type: array
+      title: Breadcrumb items
+      description: "Array of breadcrumb objects, each with 'text' (string) and 'url' (string, empty for current page)."

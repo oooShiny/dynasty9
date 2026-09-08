@@ -1,0 +1,44 @@
+name: Section
+description: Full-width layout section paragraph with optional Patriots-stripe "loop" border, configurable background/text colour, anchor ID, and full-width toggle.
+group: Paragraph
+
+props:
+  type: object
+  properties:
+    bg_color:
+      type: string
+      title: Background CSS class
+      description: Tailwind class from field_background_color (e.g. "bg-blue-pats"). May be empty.
+    text_color:
+      type: string
+      title: Text colour CSS classes
+      description: '"text-white border-white" or "text-blue-pats border-blue-pats" derived from field_background_color.'
+    full_width:
+      type: boolean
+      title: Full-width flag
+      description: When truthy, removes horizontal padding from the inner content div.
+    section_border:
+      type: string
+      title: Border style
+      description: '"loop" renders the Patriots-stripe corner brackets; empty string renders the plain right-stripe layout.'
+    type_class:
+      type: string
+      title: Paragraph type CSS class
+      description: "e.g. 'paragraph--type--section'. Built from paragraph.bundle|clean_class in the bridge."
+    view_mode_class:
+      type: string
+      title: View-mode CSS class
+      description: "e.g. 'paragraph--view-mode--default'. Empty string when view_mode is falsy."
+    published:
+      type: boolean
+      title: Published flag
+      description: From paragraph.isPublished(). False adds paragraph--unpublished to the class list.
+    anchor_id:
+      type: string
+      title: Section anchor ID
+      description: From content.field_anchor_id[0]['#context']['value']. Empty string when not set.
+
+slots:
+  section_content:
+    title: Section body content
+    description: "Remaining content fields rendered with content|without('field_background_color', 'field_full_width_section', 'field_anchor_id', 'field_section_border'). Built as a {% set %}…{% endset %} block in the bridge."

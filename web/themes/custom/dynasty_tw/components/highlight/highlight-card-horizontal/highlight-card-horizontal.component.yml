@@ -1,0 +1,35 @@
+name: Highlight Card — Horizontal
+description: Side-by-side highlight card. Square video thumbnail on left, play details on right with a dark-to-team-colour gradient overlay.
+group: Highlight
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    label:
+      type: string
+      title: Title
+    td:
+      type: integer
+      title: Touchdown flag
+      description: 1 = red background, 0 = blue background.
+      default: 0
+    video_file:
+      type: string
+      title: Video file ID
+  required:
+    - url
+    - label
+
+slots:
+  video:
+    title: Video embed
+    description: dynasty_tw:video with card_type=horizontal (aspect-square w-48 h-48).
+  game:
+    title: Game reference
+  yards_gained:
+    title: Yards gained field
+  play_type:
+    title: Play type field

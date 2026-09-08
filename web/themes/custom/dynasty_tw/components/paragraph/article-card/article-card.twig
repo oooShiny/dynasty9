@@ -1,0 +1,18 @@
+{% if card_style == 'blog' %}
+  {% set card_classes = 'lg:mx-20 my-4 py-4 rounded-lg shadow-gray-500 shadow-lg dark:shadow-neutral-700/70 bg-white dark:text-white' %}
+  {% set title_classes = 'bg-blue-pats text-2xl text-white p-4 rounded-t-lg dark:bg-gray-700' %}
+{% else %}
+  {% set card_classes = 'lg:mx-20 my-4 py-4 rounded-lg shadow-gray-500 shadow-lg dark:shadow-neutral-700/70 ' ~ card_style %}
+  {% set title_classes = '' %}
+{% endif %}
+
+<a class="article-card" href="{{ card_link }}">
+  <div class="{{ card_classes }}">
+    <h2 class="{{ title_classes }}">{{ card_title }}</h2>
+    {% if article_summary is null %}
+      {{ card_blurb }}
+    {% else %}
+      <p>{{ article_summary }}</p>
+    {% endif %}
+  </div>
+</a>

@@ -1,0 +1,40 @@
+name: Button
+description: Preline btn component. Use `url` for link-style buttons, omit for click handlers.
+group: Atoms
+
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Label
+      description: Button text.
+    url:
+      type: string
+      title: URL
+      description: If set, renders as an <a> tag instead of <button>.
+    variant:
+      type: string
+      title: Variant
+      description: 'primary | outline | ghost'
+      default: primary
+    size:
+      type: string
+      title: Size
+      description: 'sm | md | lg'
+      default: md
+    type_attr:
+      type: string
+      title: Button type attribute
+      description: 'button | submit — only used when url is not set'
+      default: button
+    onclick:
+      type: string
+      title: Onclick handler
+      description: Raw onclick value, e.g. window.open('/node/1', '_self')
+    classes:
+      type: string
+      title: Extra classes
+      description: Additional Tailwind classes to append.
+  required:
+    - label

@@ -1,0 +1,11 @@
+{% set classes = [
+  'paragraph',
+  type_class,
+  view_mode_class,
+  not published ? 'paragraph--unpublished',
+  bg_color,
+]|filter(v => v)|join(' ') %}
+
+<div class="{{ classes }}">
+  {{ preview_content }}
+</div>

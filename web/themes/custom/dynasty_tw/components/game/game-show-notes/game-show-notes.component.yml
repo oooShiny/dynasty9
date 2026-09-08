@@ -1,0 +1,111 @@
+name: Game Show Notes
+description: Full podcast show-notes view for a game node — sticky nav, score box, box score, opponent info cards, team leaders, highlights, and media.
+group: Game
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+      description: Canonical URL of the game node (used for the "Game Page" link).
+    label:
+      type: string
+      title: Game title
+    vs:
+      type: string
+      title: Home/away indicator
+      description: '"vs" for home games, "at" for away games.'
+    team_css:
+      type: string
+      title: Opponent team CSS class
+      description: e.g. "kansas-city-chiefs". Maps to a class in team-colors.css.
+    opp_name:
+      type: string
+      title: Opponent full name
+    opp_short:
+      type: string
+      title: Opponent abbreviated name
+    ot:
+      type: boolean
+      title: Overtime flag
+      description: True when the game went to overtime.
+    season:
+      type: integer
+      title: Season year
+    playoff:
+      type: boolean
+      title: Playoff game flag
+    node_id:
+      type: integer
+      title: Node numeric ID
+      description: Used to build the edit-podcast and show-notes links.
+
+slots:
+  prev_next:
+    title: Previous/next game navigation block
+    description: Render array from the prev_next_block preprocess variable.
+  field_date:
+    title: Game date field
+  patriots_score:
+    title: Patriots final score field
+  opponent_score:
+    title: Opponent final score field
+  field_pats_q1:
+    title: Patriots Q1 score
+  field_pats_q2:
+    title: Patriots Q2 score
+  field_pats_q3:
+    title: Patriots Q3 score
+  field_pats_q4:
+    title: Patriots Q4 score
+  field_pats_ot:
+    title: Patriots OT score
+  field_opp_q1:
+    title: Opponent Q1 score
+  field_opp_q2:
+    title: Opponent Q2 score
+  field_opp_q3:
+    title: Opponent Q3 score
+  field_opp_q4:
+    title: Opponent Q4 score
+  field_opp_ot:
+    title: Opponent OT score
+  video_links:
+    title: Game video links
+    description: Pre-formatted <li> items for the Game Videos card (YouTube highlights, game video, patriots.games fallback). Built in the calling template so URL extraction from field render arrays stays outside the component.
+  field_pfr_link:
+    title: Pro Football Reference boxscore link field
+    description: Rendered as the href of the PFR link in the Game Info card (URL-only formatter expected).
+  field_drive_charts:
+    title: Drive charts field
+  scoring_plays:
+    title: Scoring plays view output
+    description: drupal_view("scoring_plays", "block_1", node_id) rendered in the calling template.
+  opp_season_info:
+    title: Opponent season info card body
+    description: Wikipedia/PFR icons, season record, and division finish — all content.field_opponent_* for the season card.
+  opp_team_ranks:
+    title: Opponent team ranks card body
+  opp_coaches:
+    title: Opponent coaching staff card body
+    description: Nested list with head coach, record vs coach, OC, DC, and optional HC notes.
+  opp_draft_picks:
+    title: Opponent draft picks card body
+    description: Draft picks table plus the roster/pro-bowl colour legend.
+  opp_pro_bowlers:
+    title: Pro bowlers card body
+    description: Pre-formatted <li> items — rendered inside a <ul class="list-inside list-disc">.
+  opp_offense:
+    title: Offensive leaders card body
+  opp_defense:
+    title: Defensive leaders card body
+  field_game_summary:
+    title: Game summary field
+    description: Conditional — card only renders when this slot has content.
+  game_highlights:
+    title: Game highlights view output
+    description: drupal_view("game_highlights", "block_1", node_id) rendered in the calling template.
+  field_other_media:
+    title: Other videos/media field
+    description: Conditional — section only renders when this slot has content.

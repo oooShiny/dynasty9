@@ -1,0 +1,11 @@
+/**
+ * Small bits that aren't plain Tailwind utility classes.
+ */
+.ps-toggle {
+  background: #fff;
+}
+.ps-toggle-active {
+  background-color: #C60C30;
+  border-color: #fff;
+  color: #fff;
+}

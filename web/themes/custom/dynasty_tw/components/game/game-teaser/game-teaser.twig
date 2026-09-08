@@ -1,0 +1,66 @@
+{# dynasty_tw:game-teaser #}
+<article class="mt-10">
+
+  {# Score boxes #}
+  {% include 'dynasty_tw:score-box' with {
+    vs:              vs,
+    team_css:        team_css,
+    opp_name:        opp_name,
+    opp_short:       opp_short,
+    patriots_score:  patriots_score,
+    opponent_score:  opponent_score,
+  } only %}
+
+  {# Game date #}
+  <div class="text-center py-10 text-xl">{{ date }}</div>
+
+  {# Box score table #}
+  <a id="boxscore"></a>
+  <div class="flex items-center justify-around py-10">
+    <table>
+      <thead>
+        <tr class="border-b border-black">
+          <th class="p-4"></th>
+          <th class="p-4">1</th>
+          <th class="p-4">2</th>
+          <th class="p-4">3</th>
+          <th class="p-4">4</th>
+          {% if ot %}
+            <th class="p-4">OT</th>
+          {% endif %}
+          <th class="p-4 pl-10">Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="p-4 pr-10">New England Patriots</td>
+          <td class="p-4">{{ pats_q1 }}</td>
+          <td class="p-4">{{ pats_q2 }}</td>
+          <td class="p-4">{{ pats_q3 }}</td>
+          <td class="p-4">{{ pats_q4 }}</td>
+          {% if ot %}<td class="p-4">{{ pats_ot }}</td>{% endif %}
+          <td class="p-4 font-extrabold pl-10">{{ patriots_score }}</td>
+        </tr>
+        <tr>
+          <td class="p-4 pr-10">{{ opp_name }}</td>
+          <td class="p-4">{{ opp_q1 }}</td>
+          <td class="p-4">{{ opp_q2 }}</td>
+          <td class="p-4">{{ opp_q3 }}</td>
+          <td class="p-4">{{ opp_q4 }}</td>
+          {% if ot %}<td class="p-4">{{ opp_ot }}</td>{% endif %}
+          <td class="p-4 font-extrabold pl-10">{{ opponent_score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {# CTA #}
+  <div class="flex items-center justify-around py-10">
+    {% include 'dynasty_tw:button' with {
+      label:    'View Full Game Page',
+      onclick:  "window.open('" ~ url ~ "', '_self')",
+      classes:  'p-4 w-1/6',
+    } only %}
+  </div>
+
+</article>

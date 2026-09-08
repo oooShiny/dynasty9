@@ -1,0 +1,38 @@
+name: Game Timeline
+description: Compact game entry for the dynasty timeline view. Score boxes, date, and external links (PFR, YouTube).
+group: Game
+
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Game title
+    vs:
+      type: string
+      title: Home/away indicator
+      default: vs
+    team_css:
+      type: string
+      title: Opponent team CSS class
+    opp_short:
+      type: string
+      title: Opponent short name
+  required:
+    - label
+    - team_css
+    - opp_short
+
+slots:
+  patriots_score:
+    title: Patriots score
+  opponent_score:
+    title: Opponent score
+  date:
+    title: Game date
+  pfr_link:
+    title: PFR link field
+  youtube_highlights:
+    title: YouTube highlights field
+  youtube_game_link:
+    title: YouTube game video field

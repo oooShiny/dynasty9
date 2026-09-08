@@ -1,0 +1,24 @@
+name: Section Preview
+description: Simplified read-only preview rendering of a section paragraph — used in the admin preview view mode.
+group: Paragraph
+
+props:
+  type: object
+  properties:
+    bg_color:
+      type: string
+      title: Background CSS class
+    type_class:
+      type: string
+      title: Paragraph type CSS class
+    view_mode_class:
+      type: string
+      title: View-mode CSS class
+    published:
+      type: boolean
+      title: Published flag
+
+slots:
+  preview_content:
+    title: Preview content
+    description: "content|without('field_background_color', 'field_full_width_section') rendered in the bridge."

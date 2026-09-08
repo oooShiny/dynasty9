@@ -1,0 +1,31 @@
+dynasty_search.api_games:
+  path: '/dynasty/search/games'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchDataController::games'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
+
+dynasty_search.api_plays:
+  path: '/dynasty/search/plays'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchDataController::plays'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
+
+dynasty_search.games_page:
+  path: '/search/games'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::gamesPage'
+    _title: 'Game Search'
+  requirements:
+    _access: 'TRUE'
+
+dynasty_search.plays_page:
+  path: '/search/plays'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::playsPage'
+    _title: 'Play Search'
+  requirements:
+    _access: 'TRUE'

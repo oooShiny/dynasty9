@@ -1,0 +1,18 @@
+name: Audio Player
+description: Custom HTML5 podcast audio player with Patriots-styled play button and slide-in skip controls. Requires dynasty_tw/podcast library (playpodcast.js).
+group: Atoms
+
+props:
+  type: object
+  properties:
+    mp3_url:
+      type: string
+      title: MP3 URL
+      description: Full URL to the MP3 file.
+    mp3:
+      type: string
+      title: Player ID
+      description: Unique identifier used to namespace element IDs on the page (typically the field filename slug).
+  required:
+    - mp3_url
+    - mp3

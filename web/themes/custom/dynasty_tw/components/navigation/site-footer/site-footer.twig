@@ -1,0 +1,68 @@
+{# Patriots loop-border cap above the footer #}
+<div class="flex h-4 bg-gray-200 dark:bg-gray-950">
+  {# Top-left corner #}
+  <div class="flex bg-blue-pats rounded-tl-md">
+    <div class="bg-white w-1/3 rounded-tl-md">&nbsp;</div>
+    <div class="w-1/3 bg-white">
+      <div class="h-1/3 bg-white">&nbsp;</div>
+      <div class="bg-red-pats h-2/3 rounded-tl-md">&nbsp;</div>
+    </div>
+    <div class="bg-red-pats w-1/3">
+      <div class="h-1/3 bg-white">&nbsp;</div>
+      <div class="h-1/3 bg-red-pats">&nbsp;</div>
+      <div class="h-1/3 bg-white rounded-tl-md">&nbsp;</div>
+    </div>
+  </div>
+  {# Top horizontal stripe #}
+  <div class="flex-1 min-w-0">
+    <div class="bg-white h-1/3">&nbsp;</div>
+    <div class="bg-red-pats h-1/3">&nbsp;</div>
+    <div class="bg-white h-1/3">&nbsp;</div>
+  </div>
+  {# Top-right corner #}
+  <div class="flex rounded-br-md">
+    <div class="bg-red-pats w-1/3">
+      <div class="h-1/3 bg-white">&nbsp;</div>
+      <div class="h-1/3 bg-red-pats">&nbsp;</div>
+      <div class="h-1/3 bg-white">&nbsp;</div>
+    </div>
+    <div class="w-1/3 bg-white">
+      <div class="bg-red-pats h-2/3">&nbsp;</div>
+      <div class="h-1/3 bg-white rounded-br-md">&nbsp;</div>
+    </div>
+    <div class="bg-white w-1/3 rounded-br-md">&nbsp;</div>
+  </div>
+</div>
+
+{# Left stripe + footer content #}
+<div class="flex">
+  <div class="flex">
+    <div class="bg-white w-1/3">&nbsp;</div>
+    <div class="bg-red-pats w-1/3">&nbsp;</div>
+    <div class="bg-white w-1/3">&nbsp;</div>
+  </div>
+  <footer class="bg-blue-pats text-white p-6 flex-1 min-w-0 z-10 flex flex-col gap-4 divide-y divide-gray-400">
+    <div class="flex justify-around">
+      {{ footer_menu }}
+    </div>
+    {{ footer_content }}
+    <div class="border-gray-400 border-t md:!flex justify-between pt-2 text-gray-400">
+      <div class="md:!pt-0 flex justify-center pt-4">
+        <a href="https://drupal.org" target="_blank">
+          <img src="/themes/custom/dynasty_tw/icons/drupal.svg"
+               alt="drupal"
+               class="h-6 svg-white">
+        </a>
+      </div>
+      <div class="pt-4 md:!pt-0">
+        <span>&copy; Patriots Dynasty 2017-{{ 'now'|date('Y') }}</span>
+      </div>
+      <div class="flex pt-4 md:!pt-0 justify-evenly">
+        {% include 'dynasty_tw:social-icon' with { platform: 'twitter',   url: 'https://twitter.com/PatsDynastyInfo' } only %}
+        {% include 'dynasty_tw:social-icon' with { platform: 'facebook',  url: 'https://www.facebook.com/patriotsdynasty2001' } only %}
+        {% include 'dynasty_tw:social-icon' with { platform: 'instagram', url: 'https://www.instagram.com/patriotsdynasty2001/' } only %}
+        {% include 'dynasty_tw:social-icon' with { platform: 'reddit',    url: 'https://www.reddit.com/user/arbrown83/' } only %}
+      </div>
+    </div>
+  </footer>
+</div>

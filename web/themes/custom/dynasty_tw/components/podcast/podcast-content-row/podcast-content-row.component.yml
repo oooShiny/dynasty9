@@ -1,0 +1,25 @@
+name: Podcast Content Row
+description: Full-width blue row with cover art, inline audio player, episode title, and body — for the game/episode association display.
+group: Podcast
+
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Episode title
+    ep_art:
+      type: string
+      title: Cover image URL
+      description: URL to the episode cover art. Falls back to the default show artwork when empty.
+
+slots:
+  audio_player:
+    title: Audio player field
+    description: Rendered content.field_mp3 — sits inside the cover art div.
+  subtitle:
+    title: Episode subtitle field
+  duration:
+    title: Duration field
+  body:
+    title: Episode body / description

@@ -1,0 +1,22 @@
+name: Basic Card
+description: Simple content card with optional image, title, and body text. Background colour is driven by a preprocess variable from field_background_color.
+group: Paragraph
+
+props:
+  type: object
+  properties:
+    card_bg:
+      type: string
+      title: Card background CSS class
+      description: Tailwind background class from field_background_color (e.g. "bg-blue-pats"). May be empty.
+
+slots:
+  card_image:
+    title: Card image field
+    description: Rendered content.field_card_image — conditional, only rendered when not empty.
+  card_title:
+    title: Card title field
+    description: Rendered content.field_basic_card_title — conditional.
+  card_text:
+    title: Card body text field
+    description: Rendered content.field_card_text — only shown when card_title has content.

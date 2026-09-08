@@ -1,14 +1,21 @@
-name: video
+name: Video Embed
+description: Skiv.com iframe embed. card_type controls the aspect ratio and sizing — 'horizontal' for square thumbnails inside cards, 'vertical' for tall card thumbnails, leave unset (or 'none') for a full 16:9 responsive embed.
+group: Atoms
 
 props:
   type: object
   properties:
     muse_id:
       type: string
-      title: 'Muse ID'
+      title: Skiv Video ID
+      description: The muse_id / skiv.com clip identifier.
     vid:
       type: string
-      title: 'Video ID'
+      title: Legacy Video ID
+      description: Kept for backwards compatibility.
     card_type:
       type: string
-      title: 'Card Type'
+      title: Card Type
+      description: 'horizontal | vertical | none (default — full aspect-ratio wrapper)'
+  required:
+    - muse_id

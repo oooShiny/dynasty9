@@ -1,0 +1,23 @@
+name: Highlight Card — Simple
+description: Compact highlight card for dense grids. Blue background, small icons for play type and game context, truncated title. Max width 75px.
+group: Highlight
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    label:
+      type: string
+      title: Title
+  required:
+    - url
+    - label
+
+slots:
+  video:
+    title: Video embed
+    description: dynasty_tw:video with card_type=vertical (w-full h-40).
+  game:
+    title: Game reference field

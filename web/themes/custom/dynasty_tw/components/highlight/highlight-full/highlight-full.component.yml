@@ -1,0 +1,25 @@
+name: Highlight — Full
+description: Full-page highlight display. Two-column at lg breakpoint — video on left (1/2 width), metadata sidebar on right with description, players, game link, shareable URL, and download.
+group: Highlight
+
+props:
+  type: object
+  properties:
+    muse_id:
+      type: string
+      title: Skiv Video ID
+      description: Used to build the shareable skiv.com link.
+    video_file:
+      type: string
+      title: Video file ID
+      description: Used for the direct CDN download link.
+slots:
+  video:
+    title: Video embed
+    description: dynasty_tw:video with default card_type (none — 16:9 wrapper).
+  play_description:
+    title: Play description
+  players_involved:
+    title: Players involved
+  game:
+    title: Game reference

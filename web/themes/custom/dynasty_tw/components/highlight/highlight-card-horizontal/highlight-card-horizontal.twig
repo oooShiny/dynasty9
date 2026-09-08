@@ -1,0 +1,26 @@
+{%
+  set bg_color = td ? 'bg-red-pats' : 'bg-blue-pats'
+%}
+<div class="{{ bg_color }} flex shadow-lg w-lg">
+  {# Left: square video thumbnail #}
+  {{ video }}
+
+  {# Right: play details panel with gradient overlay #}
+  <div class="p-4 {{ bg_color }} text-white flex flex-col w-full gap-4 justify-between bg-linear-to-r from-black to-5% to-{{ bg_color }}">
+
+    {# Title and play summary #}
+    <div>
+      <a href="{{ url }}" class="text-2xl">{{ label }}</a>
+      <div>{{ yards_gained }} yard {{ play_type }}</div>
+    </div>
+
+    {# Footer row: game badge + optional download link #}
+    <div class="flex justify-between">
+      <p class="badge badge-outline">{{ game }}</p>
+      {% if video_file %}
+        {% include 'dynasty_tw:download-icon' with { href: 'https://cdn.skiv.com/w/' ~ video_file ~ '/videos/video.mp4' } only %}
+      {% endif %}
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,17 @@
+name: Patriots Stripe
+description: The Patriots three-colour stripe decoration (white / red / white). Horizontal bar used as a section divider throughout the site.
+group: Atoms
+
+props:
+  type: object
+  properties:
+    height:
+      type: string
+      title: Height class
+      description: Tailwind height class. Defaults to h-4.
+      default: h-4
+    bg:
+      type: string
+      title: Outer background class
+      description: Background of the element behind the stripes (visible in the corners). Match the surrounding section bg.
+      default: bg-white

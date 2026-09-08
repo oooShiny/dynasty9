@@ -1,0 +1,24 @@
+<article class="mt-10">
+  <div class="lg:flex flex-1 items-center justify-around py-10 m-auto lg:w-3/4">
+    {% if video %}
+      <div class="lg:w-1/2 py-10">
+        {{ video }}
+      </div>
+    {% endif %}
+    <div>
+      <h2>{{ play_description }}</h2>
+      <div class="flex gap-1">
+        {{ players_involved }}
+      </div>
+      <ul>
+        <li>{{ game }}</li>
+        {% if muse_id %}
+          <li><a href="https://skiv.com/vc/{{ muse_id }}" target="_blank">Shareable Video Link</a></li>
+        {% endif %}
+        {% if video_file %}
+          <li><a href="https://cdn.skiv.com/w/{{ video_file }}/videos/video.mp4" target="_blank">Download Video File</a> (Right click &rarr; Save Link As)</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</article>

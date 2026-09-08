@@ -1,0 +1,15 @@
+name: Media Embed
+description: Simple responsive image rendered from a Drupal media entity using an image style. URI resolution and image-style transformation happen in the bridge template.
+group: Paragraph
+
+props:
+  type: object
+  properties:
+    image_src:
+      type: string
+      title: Resolved image URL
+      description: "Final image URL produced by card_media|file_uri|image_style(card_img_style) in the bridge. Empty string when the media entity is missing."
+    image_css:
+      type: string
+      title: Image CSS classes
+      description: Tailwind classes on the <img> element. Empty when the paragraph is inside a card (parent bundle == card); "rounded-2xl mx-auto" otherwise.

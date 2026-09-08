@@ -1,0 +1,17 @@
+name: Uniform Left
+description: Wider left-column uniform layout — helmet, jersey, pants, and socks each in their own sized container.
+group: Paragraph
+
+slots:
+  helmet:
+    title: Helmet image field (right-facing)
+    description: Rendered content.field_helmet_right.
+  jersey:
+    title: Jersey image field
+    description: Rendered content.field_jersey.
+  pants:
+    title: Pants image field
+    description: Rendered content.field_pants.
+  socks:
+    title: Socks image field
+    description: Rendered content.field_socks.

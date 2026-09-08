@@ -1,0 +1,19 @@
+name: Filter Summary
+description: Active-filter chips bar — shows each applied filter as a labelled badge with an optional remove link, plus a global reset link.
+group: Search
+
+props:
+  type: object
+  properties:
+    rendered_attrs:
+      type: string
+      title: Rendered wrapper attributes
+      description: Pre-rendered attributes string from the bridge (includes data-exposed-form-id and any AJAX classes).
+    summary:
+      type: array
+      title: Active filter items
+      description: "Array of active filter objects. Each item has: label, value (or groups array for grouped filters), link (remove link render array)."
+    options:
+      type: object
+      title: Display options
+      description: "Object with show_label (bool), show_remove_link (bool), show_reset_link (bool), has_group_values (bool), use_ajax (bool), reset_link.title (string), filters_summary.prefix (string), filters_summary.separator (string)."

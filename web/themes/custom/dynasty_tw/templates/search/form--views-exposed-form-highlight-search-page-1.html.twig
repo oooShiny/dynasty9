@@ -1,15 +1,12 @@
 {#
 /**
  * @file
- * Theme override for a 'form' element.
- *
- * Available variables
- * - attributes: A list of HTML attributes for the wrapper element.
- * - children: The child elements of the form.
- *
- * @see template_preprocess_form()
+ * Thin bridge → dynasty_tw:exposed-form SDC.
+ * Highlight search page — horizontal flex layout.
  */
 #}
-<form{{ attributes.addClass('flex gap-2') }}>
-  {{ children }}
-</form>
+{% set rendered_attrs %}{{ attributes.addClass('flex gap-2') }}{% endset %}
+{% include 'dynasty_tw:exposed-form' with {
+  rendered_attrs: rendered_attrs,
+  form_children:  children,
+} only %}

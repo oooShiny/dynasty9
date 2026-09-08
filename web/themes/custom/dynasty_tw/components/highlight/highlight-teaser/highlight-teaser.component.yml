@@ -1,0 +1,29 @@
+name: Highlight Teaser
+description: Responsive highlight clip teaser. Shows an embedded video, a title link, an optional Skiv.com video link, and an optional download button.
+group: Highlight
+
+props:
+  type: object
+  properties:
+    url:
+      type: string
+      title: Node URL
+    label:
+      type: string
+      title: Title
+    muse_id:
+      type: string
+      title: Skiv/Muse video ID
+      description: If set, shows an external link icon pointing to skiv.com/vc/{muse_id}.
+    video_file:
+      type: string
+      title: Video file ID
+      description: If set, shows a download button pointing to cdn.skiv.com.
+  required:
+    - url
+    - label
+
+slots:
+  video:
+    title: Video embed
+    description: Rendered field_muse_video_id or field_gfycat_id field output.

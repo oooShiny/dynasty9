@@ -1,0 +1,22 @@
+name: Pager
+description: Full page navigation with first/prev/numbered pages/next/last links and ellipsis support. Active page is highlighted in Patriots red.
+group: Navigation
+
+props:
+  type: object
+  properties:
+    heading_id:
+      type: string
+      title: Heading ID
+      description: Unique ID linking the visually-hidden "Pagination" heading to the nav landmark.
+    items:
+      type: object
+      title: Pager items
+      description: "Drupal pager items object with optional keys: first, previous, next, last (each with href, text, attributes), and pages (keyed by page number, each with href and attributes)."
+    current:
+      type: integer
+      title: Current page number
+    ellipses:
+      type: object
+      title: Ellipsis flags
+      description: "Object with boolean 'previous' and 'next' keys indicating whether ellipsis markers should appear before/after the page list."

@@ -1,0 +1,15 @@
+{# dynasty_tw:button #}
+{% set size_cls = size == 'sm' ? 'btn-sm' : (size == 'lg' ? 'btn-lg' : '') %}
+{% set var_cls  = variant == 'outline' ? 'btn-outline' : (variant == 'ghost' ? 'btn-ghost' : 'btn-primary') %}
+
+{% if url %}
+  <a href="{{ url }}" class="btn {{ var_cls }} {{ size_cls }} {{ classes }}">{{ label }}</a>
+{% elseif type_attr == 'submit' %}
+  <button type="submit"
+          class="btn {{ var_cls }} {{ size_cls }} {{ classes }}"
+          {% if onclick %}onclick="{{ onclick }}"{% endif %}>{{ label }}</button>
+{% else %}
+  <button type="button"
+          class="btn {{ var_cls }} {{ size_cls }} {{ classes }}"
+          {% if onclick %}onclick="{{ onclick }}"{% endif %}>{{ label }}</button>
+{% endif %}

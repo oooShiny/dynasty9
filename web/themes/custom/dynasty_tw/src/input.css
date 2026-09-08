@@ -96,6 +96,18 @@
   --color-alert-error: red;
 }
 
+.select2-selection__choice__display {
+  @apply text-blue-pats;
+}
+
+.select2-selection__choice__remove {
+  @apply !text-red-pats;
+}
+
+.select2-selection__choice__remove:focus {
+  @apply !bg-red-300;
+}
+
 /* Dynasty-themed NoUI Slider Styles */
 .bef-slider.noUi-target {
   @apply bg-gray-200 border-0 rounded-lg shadow-xs;
@@ -246,6 +258,17 @@ label[for*="max"] {
 
 .btn-pats {
   @apply bg-blue-pats p-3 my-1 text-center text-white border-2 border-red-pats cursor-pointer;
+}
+
+/*
+ * Drupal's default text/email widgets render an HTML `size` attribute
+ * (e.g. Simplenews's subscribe field uses size="60"), which sets an
+ * intrinsic width in characters that wins over any container width and
+ * can overflow narrow containers (seen on the footer newsletter signup
+ * at mobile widths). CSS width always overrides the size attribute.
+ */
+input[size] {
+  @apply w-full max-w-full;
 }
 
 /* ── Dark mode overrides ── */
