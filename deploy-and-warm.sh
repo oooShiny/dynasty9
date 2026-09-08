@@ -1,11 +1,24 @@
 #!/bin/bash
 # Deploy script that purges Cloudflare cache and re-warms it
 # Usage: ./deploy-and-warm.sh
+#
+# Requires CF_ZONE_ID and CF_API_TOKEN in the environment. Copy .env.example
+# to .env (gitignored) and fill in real values, or export them yourself
+# before running this script.
 
 set -e  # Exit on error
 
-CF_ZONE_ID="1cf3bfaded3728fb2dd9a9cffaacba11"  # From cloudflare_purge.settings.yml
-CF_API_TOKEN="cc51a733a6f417cb62cd40311aa18ae54618f"  # From cloudflare_purge.settings.yml
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/.env" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/.env"
+fi
+
+if [ -z "$CF_ZONE_ID" ] || [ -z "$CF_API_TOKEN" ]; then
+  echo "Error: CF_ZONE_ID and CF_API_TOKEN must be set (in your environment or in $SCRIPT_DIR/.env)." >&2
+  exit 1
+fi
+
 SITE_URL="https://patsdynasty.com"
 
 echo "=== Dynasty Deploy & Cache Warm ==="

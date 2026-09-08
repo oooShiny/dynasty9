@@ -51,3 +51,6 @@ patreon.settings.yml
 .saggar/**/*.local.*
 .saggar/scratchpad.md
 .saggar/jobs/
+
+# Local secrets for deploy-and-warm.sh (see .env.example)
+.env
