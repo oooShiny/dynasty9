@@ -45,8 +45,16 @@ class SearchDataController extends ControllerBase {
       $week_term = $node->get('field_week')->entity;
       $coach_term = $node->get('field_opposing_coach')->entity;
       $qb = $node->get('field_starting_qb')->entity;
+      $patriots_hc_term = $node->get('field_patriots_head_coach')->entity;
+      $patriots_oc_term = $node->get('field_patriots_oc')->entity;
+      $patriots_dc_term = $node->get('field_patriots_dc')->entity;
+      $opp_oc_term = $node->get('field_opp_oc')->entity;
+      $opp_dc_term = $node->get('field_opp_dc')->entity;
 
-      foreach ([$opponent, $week_term, $coach_term, $qb] as $referenced) {
+      foreach ([
+        $opponent, $week_term, $coach_term, $qb,
+        $patriots_hc_term, $patriots_oc_term, $patriots_dc_term, $opp_oc_term, $opp_dc_term,
+      ] as $referenced) {
         if ($referenced) {
           $cache->addCacheableDependency($referenced);
         }
@@ -71,6 +79,11 @@ class SearchDataController extends ControllerBase {
           'css_slug' => $team_css[$opponent->id()] ?? strtolower(str_replace(' ', '-', $opponent->label())),
         ] : NULL,
         'opposing_coach' => $coach_term ? $coach_term->label() : NULL,
+        'patriots_hc' => $patriots_hc_term ? $patriots_hc_term->label() : NULL,
+        'patriots_oc' => $patriots_oc_term ? $patriots_oc_term->label() : NULL,
+        'patriots_dc' => $patriots_dc_term ? $patriots_dc_term->label() : NULL,
+        'opp_oc' => $opp_oc_term ? $opp_oc_term->label() : NULL,
+        'opp_dc' => $opp_dc_term ? $opp_dc_term->label() : NULL,
         'patriots_score' => (int) $node->get('field_patriots_score')->value,
         'opponent_score' => (int) $node->get('field_opponent_score')->value,
         'score_differential' => (int) $node->get('field_score_differential')->value,

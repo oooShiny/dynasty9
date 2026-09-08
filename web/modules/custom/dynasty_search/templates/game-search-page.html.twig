@@ -17,6 +17,31 @@
   <select id="gs-filter-coach" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set patriots_hc_filter %}
+  <label for="gs-filter-patriots-hc" class="block text-sm mb-1">Patriots HC</label>
+  <select id="gs-filter-patriots-hc" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set patriots_oc_filter %}
+  <label for="gs-filter-patriots-oc" class="block text-sm mb-1">Patriots OC</label>
+  <select id="gs-filter-patriots-oc" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set patriots_dc_filter %}
+  <label for="gs-filter-patriots-dc" class="block text-sm mb-1">Patriots DC</label>
+  <select id="gs-filter-patriots-dc" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set opp_oc_filter %}
+  <label for="gs-filter-opp-oc" class="block text-sm mb-1">Opp OC</label>
+  <select id="gs-filter-opp-oc" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set opp_dc_filter %}
+  <label for="gs-filter-opp-dc" class="block text-sm mb-1">Opp DC</label>
+  <select id="gs-filter-opp-dc" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
 {% set qb_filter %}
   <label for="gs-filter-qb" class="block text-sm mb-1">Starting QB</label>
   <select id="gs-filter-qb" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select QB -","allowClear":true,"width":"100%"}'></select>
@@ -114,6 +139,11 @@
       <div id="gs-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
         <div class="p-3">{{ opponent_filter }}</div>
         <div class="p-3">{{ coach_filter }}</div>
+        <div class="p-3">{{ patriots_hc_filter }}</div>
+        <div class="p-3">{{ patriots_oc_filter }}</div>
+        <div class="p-3">{{ patriots_dc_filter }}</div>
+        <div class="p-3">{{ opp_oc_filter }}</div>
+        <div class="p-3">{{ opp_dc_filter }}</div>
         <div class="p-3">{{ qb_filter }}</div>
         <div class="p-3">{{ week_filter }}</div>
         <div class="p-3">{{ season_filter }}</div>

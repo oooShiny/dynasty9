@@ -40,6 +40,11 @@
       qbStats: app.querySelector('#gs-qb-stats'),
       opponent: app.querySelector('#gs-filter-opponent'),
       coach: app.querySelector('#gs-filter-coach'),
+      patriotsHc: app.querySelector('#gs-filter-patriots-hc'),
+      patriotsOc: app.querySelector('#gs-filter-patriots-oc'),
+      patriotsDc: app.querySelector('#gs-filter-patriots-dc'),
+      oppOc: app.querySelector('#gs-filter-opp-oc'),
+      oppDc: app.querySelector('#gs-filter-opp-dc'),
       week: app.querySelector('#gs-filter-week'),
       qb: app.querySelector('#gs-filter-qb'),
       season: app.querySelector('#gs-filter-season'),
@@ -83,6 +88,11 @@
     function updateFilterOptions(f) {
       const withoutOpponent = games.filter(function (g) { return matches(g, f, 'opponent'); });
       const withoutCoach = games.filter(function (g) { return matches(g, f, 'coach'); });
+      const withoutPatriotsHc = games.filter(function (g) { return matches(g, f, 'patriots_hc'); });
+      const withoutPatriotsOc = games.filter(function (g) { return matches(g, f, 'patriots_oc'); });
+      const withoutPatriotsDc = games.filter(function (g) { return matches(g, f, 'patriots_dc'); });
+      const withoutOppOc = games.filter(function (g) { return matches(g, f, 'opp_oc'); });
+      const withoutOppDc = games.filter(function (g) { return matches(g, f, 'opp_dc'); });
       const withoutSeason = games.filter(function (g) { return matches(g, f, 'season'); });
       const withoutWeek = games.filter(function (g) { return matches(g, f, 'week'); });
       const withoutQb = games.filter(function (g) { return matches(g, f, 'qb'); });
@@ -91,10 +101,15 @@
       restoring = true;
       fillSelect(els.opponent, uniqueSorted(withoutOpponent, function (g) { return g.opponent ? g.opponent.name : null; }));
       fillSelect(els.coach, uniqueSorted(withoutCoach, function (g) { return g.opposing_coach; }));
+      fillSelect(els.patriotsHc, uniqueSorted(withoutPatriotsHc, function (g) { return g.patriots_hc; }));
+      fillSelect(els.patriotsOc, uniqueSorted(withoutPatriotsOc, function (g) { return g.patriots_oc; }));
+      fillSelect(els.patriotsDc, uniqueSorted(withoutPatriotsDc, function (g) { return g.patriots_dc; }));
+      fillSelect(els.oppOc, uniqueSorted(withoutOppOc, function (g) { return g.opp_oc; }));
+      fillSelect(els.oppDc, uniqueSorted(withoutOppDc, function (g) { return g.opp_dc; }));
       fillSelect(els.season, uniqueSorted(withoutSeason, function (g) { return String(g.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
       fillSelect(els.week, uniqueWeeks(withoutWeek));
       fillSelect(els.qb, uniqueSorted(withoutQb, function (g) { return g.starting_qb; }));
-      [els.opponent, els.coach, els.season, els.week, els.qb].forEach(refreshSelect2);
+      [els.opponent, els.coach, els.patriotsHc, els.patriotsOc, els.patriotsDc, els.oppOc, els.oppDc, els.season, els.week, els.qb].forEach(refreshSelect2);
       restoring = wasRestoring;
     }
 
@@ -199,7 +214,7 @@
     // --- Events ---
 
     function bindEvents() {
-      [els.opponent, els.coach, els.season, els.week, els.qb].forEach(function (select) {
+      [els.opponent, els.coach, els.patriotsHc, els.patriotsOc, els.patriotsDc, els.oppOc, els.oppDc, els.season, els.week, els.qb].forEach(function (select) {
         if (!select) return;
         select.addEventListener('change', onFilterChange);
         if (window.jQuery) {
@@ -270,7 +285,7 @@
     }
 
     function resetFilters() {
-      [els.opponent, els.coach, els.season, els.week, els.qb].forEach(function (select) {
+      [els.opponent, els.coach, els.patriotsHc, els.patriotsOc, els.patriotsDc, els.oppOc, els.oppDc, els.season, els.week, els.qb].forEach(function (select) {
         if (!select) return;
         Array.from(select.options).forEach(function (o) { o.selected = false; });
         refreshSelect2(select);
@@ -304,6 +319,11 @@
       return {
         opponent: selected(els.opponent),
         coach: selected(els.coach),
+        patriotsHc: selected(els.patriotsHc),
+        patriotsOc: selected(els.patriotsOc),
+        patriotsDc: selected(els.patriotsDc),
+        oppOc: selected(els.oppOc),
+        oppDc: selected(els.oppDc),
         season: selected(els.season),
         week: selected(els.week),
         qb: selected(els.qb),
@@ -324,6 +344,11 @@
     function matches(game, f, excludeField) {
       if (excludeField !== 'opponent' && f.opponent.length && (!game.opponent || f.opponent.indexOf(game.opponent.name) === -1)) return false;
       if (excludeField !== 'coach' && f.coach.length && f.coach.indexOf(game.opposing_coach) === -1) return false;
+      if (excludeField !== 'patriots_hc' && f.patriotsHc.length && f.patriotsHc.indexOf(game.patriots_hc) === -1) return false;
+      if (excludeField !== 'patriots_oc' && f.patriotsOc.length && f.patriotsOc.indexOf(game.patriots_oc) === -1) return false;
+      if (excludeField !== 'patriots_dc' && f.patriotsDc.length && f.patriotsDc.indexOf(game.patriots_dc) === -1) return false;
+      if (excludeField !== 'opp_oc' && f.oppOc.length && f.oppOc.indexOf(game.opp_oc) === -1) return false;
+      if (excludeField !== 'opp_dc' && f.oppDc.length && f.oppDc.indexOf(game.opp_dc) === -1) return false;
       if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(game.season)) === -1) return false;
       if (excludeField !== 'week' && f.week.length && (!game.week || f.week.indexOf(game.week.label) === -1)) return false;
       if (excludeField !== 'qb' && f.qb.length && (!game.starting_qb || f.qb.indexOf(game.starting_qb) === -1)) return false;
@@ -382,7 +407,7 @@
     }
 
     function hasActiveFilters(f) {
-      return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 || f.qb.length > 0 ||
+      return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 || f.qb.length > 0 || f.patriotsHc.length > 0 || f.patriotsOc.length > 0 || f.patriotsDc.length > 0 || f.oppOc.length > 0 || f.oppDc.length > 0 ||
         f.result !== '' || f.home_away !== '' || f.after_bye !== '' || f.ot !== '' || f.playoff_game !== '' ||
         f.min_pats !== null || f.max_pats !== null || f.min_opp !== null || f.max_opp !== null ||
         f.min_diff !== null || f.max_diff !== null;
@@ -396,6 +421,11 @@
       const chips = [];
       f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent', v)); });
       f.coach.forEach(function (v) { chips.push(chip('coach:' + v, 'Coach', v)); });
+      f.patriotsHc.forEach(function (v) { chips.push(chip('patriots_hc:' + v, 'Patriots HC', v)); });
+      f.patriotsOc.forEach(function (v) { chips.push(chip('patriots_oc:' + v, 'Patriots OC', v)); });
+      f.patriotsDc.forEach(function (v) { chips.push(chip('patriots_dc:' + v, 'Patriots DC', v)); });
+      f.oppOc.forEach(function (v) { chips.push(chip('opp_oc:' + v, 'Opp OC', v)); });
+      f.oppDc.forEach(function (v) { chips.push(chip('opp_dc:' + v, 'Opp DC', v)); });
       f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
       f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week', v)); });
       f.qb.forEach(function (v) { chips.push(chip('qb:' + v, 'QB', v)); });
@@ -416,7 +446,7 @@
 
     function removeFilter(key) {
       const [type, value] = key.split(/:(.*)/s);
-      const multiMap = { opponent: els.opponent, coach: els.coach, season: els.season, week: els.week, qb: els.qb };
+      const multiMap = { opponent: els.opponent, coach: els.coach, season: els.season, week: els.week, qb: els.qb, patriots_hc: els.patriotsHc, patriots_oc: els.patriotsOc, patriots_dc: els.patriotsDc, opp_oc: els.oppOc, opp_dc: els.oppDc };
       if (multiMap[type]) {
         Array.from(multiMap[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -546,6 +576,11 @@
       const params = new URLSearchParams();
       f.opponent.forEach(function (v) { params.append('opponent', v); });
       f.coach.forEach(function (v) { params.append('coach', v); });
+      f.patriotsHc.forEach(function (v) { params.append('patriots_hc', v); });
+      f.patriotsOc.forEach(function (v) { params.append('patriots_oc', v); });
+      f.patriotsDc.forEach(function (v) { params.append('patriots_dc', v); });
+      f.oppOc.forEach(function (v) { params.append('opp_oc', v); });
+      f.oppDc.forEach(function (v) { params.append('opp_dc', v); });
       f.season.forEach(function (v) { params.append('season', v); });
       f.week.forEach(function (v) { params.append('week', v); });
       f.qb.forEach(function (v) { params.append('qb', v); });
@@ -569,6 +604,11 @@
       const params = new URLSearchParams(location.search);
       setMulti(els.opponent, params.getAll('opponent'));
       setMulti(els.coach, params.getAll('coach'));
+      setMulti(els.patriotsHc, params.getAll('patriots_hc'));
+      setMulti(els.patriotsOc, params.getAll('patriots_oc'));
+      setMulti(els.patriotsDc, params.getAll('patriots_dc'));
+      setMulti(els.oppOc, params.getAll('opp_oc'));
+      setMulti(els.oppDc, params.getAll('opp_dc'));
       setMulti(els.season, params.getAll('season'));
       setMulti(els.week, params.getAll('week'));
       setMulti(els.qb, params.getAll('qb'));
