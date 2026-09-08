@@ -59,7 +59,7 @@
       })
       .then(function (data) {
         games = data;
-        populateFilterOptions();
+        updateFilterOptions(getFilters());
         initRangeSliders();
         bindEvents();
         initToggleDefaults();
@@ -74,18 +74,33 @@
 
     // --- Filter option lists ---
 
-    function populateFilterOptions() {
-      fillSelect(els.opponent, uniqueSorted(games, function (g) { return g.opponent ? g.opponent.name : null; }));
-      fillSelect(els.coach, uniqueSorted(games, function (g) { return g.opposing_coach; }));
-      fillSelect(els.season, uniqueSorted(games, function (g) { return String(g.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
-      fillSelect(els.week, uniqueWeeks(games));
+    // Cross-filtering: each select's option list is recomputed from games
+    // matching every OTHER active filter (excluding its own dimension, so
+    // the current selection stays visible/editable) -- e.g. picking an
+    // opponent narrows the Coach list to only coaches who actually faced
+    // that opponent.
+    function updateFilterOptions(f) {
+      const withoutOpponent = games.filter(function (g) { return matches(g, f, 'opponent'); });
+      const withoutCoach = games.filter(function (g) { return matches(g, f, 'coach'); });
+      const withoutSeason = games.filter(function (g) { return matches(g, f, 'season'); });
+      const withoutWeek = games.filter(function (g) { return matches(g, f, 'week'); });
+
+      const wasRestoring = restoring;
+      restoring = true;
+      fillSelect(els.opponent, uniqueSorted(withoutOpponent, function (g) { return g.opponent ? g.opponent.name : null; }));
+      fillSelect(els.coach, uniqueSorted(withoutCoach, function (g) { return g.opposing_coach; }));
+      fillSelect(els.season, uniqueSorted(withoutSeason, function (g) { return String(g.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
+      fillSelect(els.week, uniqueWeeks(withoutWeek));
       [els.opponent, els.coach, els.season, els.week].forEach(refreshSelect2);
+      restoring = wasRestoring;
     }
 
     function fillSelect(select, values) {
       if (!select) return;
+      const currentlySelected = Array.from(select.selectedOptions).map(function (o) { return o.value; });
       select.innerHTML = values.map(function (v) {
-        return '<option value="' + escapeHtml(v) + '">' + escapeHtml(v) + '</option>';
+        const sel = currentlySelected.indexOf(v) !== -1 ? ' selected' : '';
+        return '<option value="' + escapeHtml(v) + '"' + sel + '>' + escapeHtml(v) + '</option>';
       }).join('');
     }
 
@@ -302,11 +317,11 @@
       };
     }
 
-    function matches(game, f) {
-      if (f.opponent.length && (!game.opponent || f.opponent.indexOf(game.opponent.name) === -1)) return false;
-      if (f.coach.length && f.coach.indexOf(game.opposing_coach) === -1) return false;
-      if (f.season.length && f.season.indexOf(String(game.season)) === -1) return false;
-      if (f.week.length && (!game.week || f.week.indexOf(game.week.label) === -1)) return false;
+    function matches(game, f, excludeField) {
+      if (excludeField !== 'opponent' && f.opponent.length && (!game.opponent || f.opponent.indexOf(game.opponent.name) === -1)) return false;
+      if (excludeField !== 'coach' && f.coach.length && f.coach.indexOf(game.opposing_coach) === -1) return false;
+      if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(game.season)) === -1) return false;
+      if (excludeField !== 'week' && f.week.length && (!game.week || f.week.indexOf(game.week.label) === -1)) return false;
       if (f.result && game.result !== f.result) return false;
       if (f.home_away && game.home_away !== f.home_away) return false;
       if (f.after_bye !== '' && Boolean(game.after_bye) !== (f.after_bye === '1')) return false;
@@ -354,6 +369,7 @@
       renderActiveFilters(filters);
       renderRecord(filtered);
       renderTable(filtered);
+      updateFilterOptions(filters);
     }
 
     function renderCount(n) {

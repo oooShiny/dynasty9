@@ -69,7 +69,7 @@
       })
       .then(function (data) {
         plays = data;
-        populateFilterOptions();
+        updateFilterOptions(getFilters());
         initRangeSliders();
         bindEvents();
         initToggleDefaults();
@@ -84,19 +84,35 @@
 
     // --- Filter option lists ---
 
-    function populateFilterOptions() {
-      fillSelect(els.playType, uniqueSorted(plays, function (p) { return p.play_type ? p.play_type.label : null; }));
-      fillSelect(els.playTag, uniqueSorted(plays, null, function (p) { return p.tag_play || []; }));
-      fillSelect(els.season, uniqueSorted(plays, function (p) { return String(p.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
-      fillSelect(els.down, uniqueSorted(plays, function (p) { return p.down ? String(p.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
-      fillSelect(els.quarter, uniqueSorted(plays, function (p) { return p.quarter ? String(p.quarter) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+    // Cross-filtering: each select's option list is recomputed from plays
+    // matching every OTHER active filter (excluding its own dimension, so
+    // the current selection stays visible/editable) -- e.g. picking a
+    // season narrows Play Type to only types that actually occurred that
+    // season.
+    function updateFilterOptions(f) {
+      const withoutPlayType = plays.filter(function (p) { return matches(p, f, 'playType'); });
+      const withoutPlayTag = plays.filter(function (p) { return matches(p, f, 'playTag'); });
+      const withoutSeason = plays.filter(function (p) { return matches(p, f, 'season'); });
+      const withoutDown = plays.filter(function (p) { return matches(p, f, 'down'); });
+      const withoutQuarter = plays.filter(function (p) { return matches(p, f, 'quarter'); });
+
+      const wasRestoring = restoring;
+      restoring = true;
+      fillSelect(els.playType, uniqueSorted(withoutPlayType, function (p) { return p.play_type ? p.play_type.label : null; }));
+      fillSelect(els.playTag, uniqueSorted(withoutPlayTag, null, function (p) { return p.tag_play || []; }));
+      fillSelect(els.season, uniqueSorted(withoutSeason, function (p) { return String(p.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
+      fillSelect(els.down, uniqueSorted(withoutDown, function (p) { return p.down ? String(p.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+      fillSelect(els.quarter, uniqueSorted(withoutQuarter, function (p) { return p.quarter ? String(p.quarter) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
       [els.playType, els.playTag, els.season, els.down, els.quarter].forEach(refreshSelect2);
+      restoring = wasRestoring;
     }
 
     function fillSelect(select, values) {
       if (!select) return;
+      const currentlySelected = Array.from(select.selectedOptions).map(function (o) { return o.value; });
       select.innerHTML = values.map(function (v) {
-        return '<option value="' + escapeHtml(v) + '">' + escapeHtml(v) + '</option>';
+        const sel = currentlySelected.indexOf(v) !== -1 ? ' selected' : '';
+        return '<option value="' + escapeHtml(v) + '"' + sel + '>' + escapeHtml(v) + '</option>';
       }).join('');
     }
 
@@ -315,16 +331,16 @@
       };
     }
 
-    function matches(p, f) {
+    function matches(p, f, excludeField) {
       if (f.q) {
         const haystack = [p.title, p.opponent, p.game_title].concat(p.players_involved || []).join(' ').toLowerCase();
         if (haystack.indexOf(f.q) === -1) return false;
       }
-      if (f.playType.length && (!p.play_type || f.playType.indexOf(p.play_type.label) === -1)) return false;
-      if (f.playTag.length && !f.playTag.some(function (t) { return (p.tag_play || []).indexOf(t) !== -1; })) return false;
-      if (f.season.length && f.season.indexOf(String(p.season)) === -1) return false;
-      if (f.down.length && f.down.indexOf(String(p.down)) === -1) return false;
-      if (f.quarter.length && f.quarter.indexOf(String(p.quarter)) === -1) return false;
+      if (excludeField !== 'playType' && f.playType.length && (!p.play_type || f.playType.indexOf(p.play_type.label) === -1)) return false;
+      if (excludeField !== 'playTag' && f.playTag.length && !f.playTag.some(function (t) { return (p.tag_play || []).indexOf(t) !== -1; })) return false;
+      if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(p.season)) === -1) return false;
+      if (excludeField !== 'down' && f.down.length && f.down.indexOf(String(p.down)) === -1) return false;
+      if (excludeField !== 'quarter' && f.quarter.length && f.quarter.indexOf(String(p.quarter)) === -1) return false;
       if (f.td_scored !== '' && Boolean(p.td_scored) !== (f.td_scored === '1')) return false;
       if (f.minYards !== null && p.yards_gained < f.minYards) return false;
       if (f.maxYards !== null && p.yards_gained > f.maxYards) return false;
@@ -354,6 +370,7 @@
       filteredCache = sortPlays(plays.filter(function (p) { return matches(p, f); }), f.sort);
       renderActiveFilters(f);
       renderResults();
+      updateFilterOptions(f);
     }
 
     function hasActiveFilters(f) {
