@@ -17,6 +17,11 @@
   <select id="gs-filter-coach" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Coach -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set qb_filter %}
+  <label for="gs-filter-qb" class="block text-sm mb-1">Starting QB</label>
+  <select id="gs-filter-qb" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select QB -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
 {% set week_filter %}
   <label for="gs-filter-week" class="block text-sm mb-1">Week</label>
   <select id="gs-filter-week" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select a Week -","allowClear":true,"width":"100%"}'></select>
@@ -109,6 +114,7 @@
       <div id="gs-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
         <div class="p-3">{{ opponent_filter }}</div>
         <div class="p-3">{{ coach_filter }}</div>
+        <div class="p-3">{{ qb_filter }}</div>
         <div class="p-3">{{ week_filter }}</div>
         <div class="p-3">{{ season_filter }}</div>
         <div class="p-3">{{ result_filter }}</div>

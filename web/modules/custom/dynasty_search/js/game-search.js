@@ -41,6 +41,7 @@
       opponent: app.querySelector('#gs-filter-opponent'),
       coach: app.querySelector('#gs-filter-coach'),
       week: app.querySelector('#gs-filter-week'),
+      qb: app.querySelector('#gs-filter-qb'),
       season: app.querySelector('#gs-filter-season'),
       reset: app.querySelector('#gs-reset'),
     };
@@ -84,6 +85,7 @@
       const withoutCoach = games.filter(function (g) { return matches(g, f, 'coach'); });
       const withoutSeason = games.filter(function (g) { return matches(g, f, 'season'); });
       const withoutWeek = games.filter(function (g) { return matches(g, f, 'week'); });
+      const withoutQb = games.filter(function (g) { return matches(g, f, 'qb'); });
 
       const wasRestoring = restoring;
       restoring = true;
@@ -91,7 +93,8 @@
       fillSelect(els.coach, uniqueSorted(withoutCoach, function (g) { return g.opposing_coach; }));
       fillSelect(els.season, uniqueSorted(withoutSeason, function (g) { return String(g.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
       fillSelect(els.week, uniqueWeeks(withoutWeek));
-      [els.opponent, els.coach, els.season, els.week].forEach(refreshSelect2);
+      fillSelect(els.qb, uniqueSorted(withoutQb, function (g) { return g.starting_qb; }));
+      [els.opponent, els.coach, els.season, els.week, els.qb].forEach(refreshSelect2);
       restoring = wasRestoring;
     }
 
@@ -196,7 +199,7 @@
     // --- Events ---
 
     function bindEvents() {
-      [els.opponent, els.coach, els.season, els.week].forEach(function (select) {
+      [els.opponent, els.coach, els.season, els.week, els.qb].forEach(function (select) {
         if (!select) return;
         select.addEventListener('change', onFilterChange);
         if (window.jQuery) {
@@ -267,7 +270,7 @@
     }
 
     function resetFilters() {
-      [els.opponent, els.coach, els.season, els.week].forEach(function (select) {
+      [els.opponent, els.coach, els.season, els.week, els.qb].forEach(function (select) {
         if (!select) return;
         Array.from(select.options).forEach(function (o) { o.selected = false; });
         refreshSelect2(select);
@@ -303,6 +306,7 @@
         coach: selected(els.coach),
         season: selected(els.season),
         week: selected(els.week),
+        qb: selected(els.qb),
         result: toggleValue('result'),
         home_away: toggleValue('home_away'),
         after_bye: toggleValue('after_bye'),
@@ -322,6 +326,7 @@
       if (excludeField !== 'coach' && f.coach.length && f.coach.indexOf(game.opposing_coach) === -1) return false;
       if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(game.season)) === -1) return false;
       if (excludeField !== 'week' && f.week.length && (!game.week || f.week.indexOf(game.week.label) === -1)) return false;
+      if (excludeField !== 'qb' && f.qb.length && (!game.starting_qb || f.qb.indexOf(game.starting_qb) === -1)) return false;
       if (f.result && game.result !== f.result) return false;
       if (f.home_away && game.home_away !== f.home_away) return false;
       if (f.after_bye !== '' && Boolean(game.after_bye) !== (f.after_bye === '1')) return false;
@@ -377,7 +382,7 @@
     }
 
     function hasActiveFilters(f) {
-      return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 ||
+      return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 || f.qb.length > 0 ||
         f.result !== '' || f.home_away !== '' || f.after_bye !== '' || f.ot !== '' || f.playoff_game !== '' ||
         f.min_pats !== null || f.max_pats !== null || f.min_opp !== null || f.max_opp !== null ||
         f.min_diff !== null || f.max_diff !== null;
@@ -393,6 +398,7 @@
       f.coach.forEach(function (v) { chips.push(chip('coach:' + v, 'Coach', v)); });
       f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
       f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week', v)); });
+      f.qb.forEach(function (v) { chips.push(chip('qb:' + v, 'QB', v)); });
       if (f.result) chips.push(chip('result', 'Result', f.result));
       if (f.home_away) chips.push(chip('home_away', 'Location', f.home_away));
       if (f.after_bye !== '') chips.push(chip('after_bye', 'After Bye', (f.after_bye === '1' ? 'Yes' : 'No')));
@@ -410,7 +416,7 @@
 
     function removeFilter(key) {
       const [type, value] = key.split(/:(.*)/s);
-      const multiMap = { opponent: els.opponent, coach: els.coach, season: els.season, week: els.week };
+      const multiMap = { opponent: els.opponent, coach: els.coach, season: els.season, week: els.week, qb: els.qb };
       if (multiMap[type]) {
         Array.from(multiMap[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -542,6 +548,7 @@
       f.coach.forEach(function (v) { params.append('coach', v); });
       f.season.forEach(function (v) { params.append('season', v); });
       f.week.forEach(function (v) { params.append('week', v); });
+      f.qb.forEach(function (v) { params.append('qb', v); });
       if (f.result) params.set('result', f.result);
       if (f.home_away) params.set('home_away', f.home_away);
       if (f.after_bye !== '') params.set('after_bye', f.after_bye);
@@ -564,6 +571,7 @@
       setMulti(els.coach, params.getAll('coach'));
       setMulti(els.season, params.getAll('season'));
       setMulti(els.week, params.getAll('week'));
+      setMulti(els.qb, params.getAll('qb'));
       setToggle('result', params.get('result') || '');
       setToggle('home_away', params.get('home_away') || '');
       setToggle('after_bye', params.get('after_bye') || '');
