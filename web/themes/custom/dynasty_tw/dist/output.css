@@ -3215,6 +3215,10 @@ label[for*="min"], label[for*="max"] {
   text-align: center;
   color: var(--color-white);
 }
+input[size] {
+  width: 100%;
+  max-width: 100%;
+}
 @media (prefers-color-scheme: dark) {
   .bg-white {
     background-color: var(--color-gray-500);

@@ -248,6 +248,17 @@ label[for*="max"] {
   @apply bg-blue-pats p-3 my-1 text-center text-white border-2 border-red-pats cursor-pointer;
 }
 
+/*
+ * Drupal's default text/email widgets render an HTML `size` attribute
+ * (e.g. Simplenews's subscribe field uses size="60"), which sets an
+ * intrinsic width in characters that wins over any container width and
+ * can overflow narrow containers (seen on the footer newsletter signup
+ * at mobile widths). CSS width always overrides the size attribute.
+ */
+input[size] {
+  @apply w-full max-w-full;
+}
+
 /* ── Dark mode overrides ── */
 @media (prefers-color-scheme: dark) {
   .bg-white {
