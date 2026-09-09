@@ -54,6 +54,8 @@
     let games = [];
     let sortField = 'date';
     let sortDir = 'desc';
+    let qbSortField = null;
+    let qbSortDir = 'desc';
     let debounceTimer = null;
     let restoring = false;
     const sliders = {};
@@ -268,6 +270,24 @@
           if (!btn) return;
           removeFilter(btn.dataset.remove);
           onFilterChange();
+        });
+      }
+
+      // The QB Stats table is rebuilt on every render, so its <th> click
+      // handlers can't be bound directly -- delegate from the (stable)
+      // container instead.
+      if (els.qbStats) {
+        els.qbStats.addEventListener('click', function (e) {
+          const th = e.target.closest('th[data-field]');
+          if (!th) return;
+          const field = th.dataset.field;
+          if (qbSortField === field) {
+            qbSortDir = qbSortDir === 'asc' ? 'desc' : 'asc';
+          } else {
+            qbSortField = field;
+            qbSortDir = 'desc';
+          }
+          render();
         });
       }
     }
@@ -500,14 +520,27 @@
         return;
       }
       if (qbs.length > 1) {
-        let rowsHtml = qbs.map(function (qb) {
+        const sortedQbs = qbSortField ? qbs.slice().sort(function (a, b) {
+          const dir = qbSortDir === 'asc' ? 1 : -1;
+          const av = qbSortField === 'qb' ? a : qbStats[a][qbSortField];
+          const bv = qbSortField === 'qb' ? b : qbStats[b][qbSortField];
+          if (av === bv) return 0;
+          return av > bv ? dir : -dir;
+        }) : qbs;
+        let rowsHtml = sortedQbs.map(function (qb) {
           const s = qbStats[qb];
           return '<tr><td>' + escapeHtml(qb) + '</td><td>' + fmt(s.attempts) + '</td><td>' + fmt(s.completions) +
             '</td><td>' + fmt(s.tds) + '</td><td>' + fmt(s.ints) + '</td></tr>';
         }).join('');
+        const headers = [
+          ['qb', 'QB'], ['attempts', 'ATT'], ['completions', 'COMP'], ['tds', 'TD'], ['ints', 'INT']
+        ].map(function (h) {
+          const arrow = qbSortField === h[0] ? (qbSortDir === 'asc' ? ' ▲' : ' ▼') : '';
+          return '<th data-field="' + h[0] + '" class="cursor-pointer">' + h[1] + arrow + '</th>';
+        }).join('');
         els.qbStats.innerHTML = '<details class="px-14 py-5"><summary class="p-2 text-xl patriots-white font-medium">QB Stats</summary>' +
           '<div class="bg-gray-100"><table class="table table-sm bg-white w-full"><thead class="bg-blue-pats text-white">' +
-          '<tr><th>QB</th><th>ATT</th><th>COMP</th><th>TD</th><th>INT</th></tr></thead><tbody>' + rowsHtml + '</tbody></table></div></details>';
+          '<tr>' + headers + '</tr></thead><tbody>' + rowsHtml + '</tbody></table></div></details>';
       } else {
         const qb = qbs[0];
         const s = qbStats[qb];
@@ -627,6 +660,12 @@
       const coachesGroup = app.querySelector('#gs-group-coaches');
       if (coachesGroup && coachParams.some(function (p) { return params.getAll(p).length > 0; })) {
         coachesGroup.open = true;
+      }
+
+      const gameTypeParams = ['result', 'home_away', 'after_bye', 'ot', 'playoff_game', 'min_pats', 'max_pats', 'min_opp', 'max_opp', 'min_diff', 'max_diff'];
+      const gameTypeGroup = app.querySelector('#gs-group-game-type');
+      if (gameTypeGroup && gameTypeParams.some(function (p) { return params.get(p); })) {
+        gameTypeGroup.open = true;
       }
 
       restoring = false;
