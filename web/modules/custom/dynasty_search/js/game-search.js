@@ -495,9 +495,10 @@
 
         const qb = g.starting_qb || '';
         if (qb) {
-          if (!qbStats[qb]) qbStats[qb] = { attempts: 0, completions: 0, tds: 0, ints: 0 };
+          if (!qbStats[qb]) qbStats[qb] = { attempts: 0, completions: 0, yards: 0, tds: 0, ints: 0 };
           qbStats[qb].attempts += g.brady_attempts || 0;
           qbStats[qb].completions += g.brady_completions || 0;
+          qbStats[qb].yards += g.brady_yards || 0;
           qbStats[qb].tds += g.brady_tds || 0;
           qbStats[qb].ints += g.brady_ints || 0;
         }
@@ -536,10 +537,10 @@
         let rowsHtml = sortedQbs.map(function (qb) {
           const s = qbStats[qb];
           return '<tr><td>' + escapeHtml(qb) + '</td><td>' + fmt(s.attempts) + '</td><td>' + fmt(s.completions) +
-            '</td><td>' + fmt(s.tds) + '</td><td>' + fmt(s.ints) + '</td></tr>';
+            '</td><td>' + fmt(s.yards) + '</td><td>' + fmt(s.tds) + '</td><td>' + fmt(s.ints) + '</td></tr>';
         }).join('');
         const headers = [
-          ['qb', 'QB'], ['attempts', 'ATT'], ['completions', 'COMP'], ['tds', 'TD'], ['ints', 'INT']
+          ['qb', 'QB'], ['attempts', 'ATT'], ['completions', 'COMP'], ['yards', 'YD'], ['tds', 'TD'], ['ints', 'INT']
         ].map(function (h) {
           const arrow = qbSortField === h[0] ? (qbSortDir === 'asc' ? ' ▲' : ' ▼') : '';
           return '<th data-field="' + h[0] + '" class="cursor-pointer">' + h[1] + arrow + '</th>';
@@ -550,14 +551,16 @@
       } else {
         const qb = qbs[0];
         const s = qbStats[qb];
-        const totalsHtml = ['attempts', 'completions', 'tds', 'ints'].map(function (key) {
+        const statLabels = { attempts: 'ATT', completions: 'COMP', yards: 'YD', tds: 'TD', ints: 'INT' };
+        const statKeys = ['attempts', 'completions', 'yards', 'tds', 'ints'];
+        const totalsHtml = statKeys.map(function (key) {
           return '<div class="patriots p-2 w-1/4 md:!w-1/2"><div class="text-2xl text-center hidden md:!block">' +
-            key.slice(0, 3).toUpperCase() + '</div><div class="text-xl md:!text-3xl text-center">' + fmt(s[key]) + '</div></div>';
+            statLabels[key] + '</div><div class="text-xl md:!text-3xl text-center">' + fmt(s[key]) + '</div></div>';
         }).join('');
-        const avgHtml = ['attempts', 'completions', 'tds', 'ints'].map(function (key) {
+        const avgHtml = statKeys.map(function (key) {
           const avg = games ? s[key] / games : 0;
           return '<div class="patriots p-2 w-1/4 md:!w-1/2"><div class="text-2xl text-center hidden md:!block">' +
-            key.slice(0, 3).toUpperCase() + '</div><div class="text-xl md:!text-3xl text-center">' + fmt(avg) + '</div></div>';
+            statLabels[key] + '</div><div class="text-xl md:!text-3xl text-center">' + fmt(avg) + '</div></div>';
         }).join('');
         els.qbStats.innerHTML = '<details class="px-14 py-5"' + openAttr + '><summary class="p-2 text-xl bg-red-pats text-white font-medium">' +
           escapeHtml(qb) + ' Stats</summary><div class="bg-white p-2 shadow-gray-500 shadow-md">' +
