@@ -2505,11 +2505,6 @@
         justify-content: space-evenly !important;
       }
     }
-    .md\:\!px-14 {
-      @media (width >= 48rem) {
-        padding-inline: calc(var(--spacing) * 14) !important;
-      }
-    }
     .md\:py-0 {
       @media (width >= 48rem) {
         padding-block: calc(var(--spacing) * 0);

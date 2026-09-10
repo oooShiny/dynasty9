@@ -580,7 +580,7 @@
           const arrow = qbSortField === h[0] ? (qbSortDir === 'asc' ? ' ▲' : ' ▼') : '';
           return '<th data-field="' + h[0] + '" class="cursor-pointer">' + h[1] + arrow + '</th>';
         }).join('');
-        els.qbStats.innerHTML = '<details class="px-4 md:!px-14 py-5"' + openAttr + '><summary class="p-2 text-xl patriots-white font-medium">QB Stats</summary>' +
+        els.qbStats.innerHTML = '<details class="py-5"' + openAttr + '><summary class="p-2 text-xl patriots-white font-medium">QB Stats</summary>' +
           '<div class="bg-gray-100 overflow-x-auto"><table class="table table-sm bg-white w-full"><thead class="bg-blue-pats text-white">' +
           '<tr>' + headers + '</tr></thead><tbody>' + rowsHtml + '</tbody></table></div></details>';
       } else {
@@ -597,7 +597,7 @@
           return '<div class="patriots p-2 w-1/4 md:!w-1/2"><div class="text-2xl text-center hidden md:!block">' +
             statLabels[key] + '</div><div class="text-xl md:!text-3xl text-center">' + fmt(avg) + '</div></div>';
         }).join('');
-        els.qbStats.innerHTML = '<details class="px-4 md:!px-14 py-5"' + openAttr + '><summary class="p-2 text-xl bg-red-pats text-white font-medium">' +
+        els.qbStats.innerHTML = '<details class="py-5"' + openAttr + '><summary class="p-2 text-xl bg-red-pats text-white font-medium">' +
           escapeHtml(qb) + ' Stats</summary><div class="bg-white p-2 shadow-gray-500 shadow-md">' +
           '<h3 class="bg-blue-pats p-2 text-center text-lg text-white uppercase w-full">Totals</h3>' +
           '<div class="flex items-center justify-evenly gap-2">' + totalsHtml + '</div>' +
