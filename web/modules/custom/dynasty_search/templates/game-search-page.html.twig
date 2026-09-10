@@ -61,6 +61,41 @@
   <select id="gs-filter-qb" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select QB -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set qb_stat_range_filters %}
+  <div class="mb-8">
+    <div class="text-sm mb-4">Attempts</div>
+    <div id="gs-slider-qb-attempts" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+  <div class="mb-8">
+    <div class="text-sm mb-4">Completions</div>
+    <div id="gs-slider-qb-completions" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+  <div class="mb-8">
+    <div class="text-sm mb-4">Passing Yards</div>
+    <div id="gs-slider-qb-yards" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+  <div class="mb-8">
+    <div class="text-sm mb-4">Touchdowns</div>
+    <div id="gs-slider-qb-tds" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+  <div class="mb-4">
+    <div class="text-sm mb-4">Interceptions</div>
+    <div id="gs-slider-qb-ints" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+{% endset %}
+
+{% set qb_stats_group %}
+  <details class="gs-filter-group" id="gs-group-qb-stats">
+    <summary class="cursor-pointer font-semibold">QB Stats</summary>
+    <div class="pt-3">{{ qb_stat_range_filters }}</div>
+  </details>
+{% endset %}
+
 {% set week_filter %}
   <label for="gs-filter-week" class="block text-sm mb-1">Week</label>
   <select id="gs-filter-week" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select a Week -","allowClear":true,"width":"100%"}'></select>
@@ -162,11 +197,12 @@
 #}
 <div id="game-search-app" class="mx-auto">
   <div class="flex flex-wrap md:!flex-nowrap gap-4">
-    <div class="md:!w-1/4">
+    <div class="w-full md:!w-1/4">
       <h2 id="gs-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
       <div id="gs-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
         <div class="p-3">{{ opponent_filter }}</div>
         <div class="p-3">{{ qb_filter }}</div>
+        <div class="border border-white p-3 my-1">{{ qb_stats_group }}</div>
         <div class="p-3">{{ week_filter }}</div>
         <div class="p-3">{{ season_filter }}</div>
         <div class="border border-white p-3 my-1">{{ coaches_group }}</div>

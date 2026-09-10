@@ -155,6 +155,11 @@
       sliders.patsScore = createRangeSlider('gs-slider-patriots-score', fieldRange(games, 'patriots_score'));
       sliders.oppScore = createRangeSlider('gs-slider-opponent-score', fieldRange(games, 'opponent_score'));
       sliders.diff = createRangeSlider('gs-slider-score-differential', fieldRange(games, 'score_differential'));
+      sliders.qbAtt = createRangeSlider('gs-slider-qb-attempts', fieldRange(games, 'brady_attempts'));
+      sliders.qbCmp = createRangeSlider('gs-slider-qb-completions', fieldRange(games, 'brady_completions'));
+      sliders.qbYd = createRangeSlider('gs-slider-qb-yards', fieldRange(games, 'brady_yards'));
+      sliders.qbTd = createRangeSlider('gs-slider-qb-tds', fieldRange(games, 'brady_tds'));
+      sliders.qbInt = createRangeSlider('gs-slider-qb-ints', fieldRange(games, 'brady_ints'));
     }
 
     function fieldRange(rows, field) {
@@ -314,7 +319,7 @@
         group.querySelectorAll('.gs-toggle').forEach(function (b) { b.classList.remove('gs-toggle-active'); });
         group.querySelector('.gs-toggle[data-value=""]').classList.add('gs-toggle-active');
       });
-      [sliders.patsScore, sliders.oppScore, sliders.diff].forEach(function (s) {
+      [sliders.patsScore, sliders.oppScore, sliders.diff, sliders.qbAtt, sliders.qbCmp, sliders.qbYd, sliders.qbTd, sliders.qbInt].forEach(function (s) {
         if (s && s.el.noUiSlider) s.el.noUiSlider.set([s.range.min, s.range.max]);
       });
     }
@@ -336,6 +341,11 @@
       const pats = sliderRange(sliders.patsScore);
       const opp = sliderRange(sliders.oppScore);
       const diff = sliderRange(sliders.diff);
+      const qbAtt = sliderRange(sliders.qbAtt);
+      const qbCmp = sliderRange(sliders.qbCmp);
+      const qbYd = sliderRange(sliders.qbYd);
+      const qbTd = sliderRange(sliders.qbTd);
+      const qbInt = sliderRange(sliders.qbInt);
       return {
         opponent: selected(els.opponent),
         coach: selected(els.coach),
@@ -358,6 +368,16 @@
         max_opp: opp[1],
         min_diff: diff[0],
         max_diff: diff[1],
+        min_qb_att: qbAtt[0],
+        max_qb_att: qbAtt[1],
+        min_qb_cmp: qbCmp[0],
+        max_qb_cmp: qbCmp[1],
+        min_qb_yd: qbYd[0],
+        max_qb_yd: qbYd[1],
+        min_qb_td: qbTd[0],
+        max_qb_td: qbTd[1],
+        min_qb_int: qbInt[0],
+        max_qb_int: qbInt[1],
       };
     }
 
@@ -383,6 +403,16 @@
       if (f.max_opp !== null && game.opponent_score > f.max_opp) return false;
       if (f.min_diff !== null && game.score_differential < f.min_diff) return false;
       if (f.max_diff !== null && game.score_differential > f.max_diff) return false;
+      if (f.min_qb_att !== null && game.brady_attempts < f.min_qb_att) return false;
+      if (f.max_qb_att !== null && game.brady_attempts > f.max_qb_att) return false;
+      if (f.min_qb_cmp !== null && game.brady_completions < f.min_qb_cmp) return false;
+      if (f.max_qb_cmp !== null && game.brady_completions > f.max_qb_cmp) return false;
+      if (f.min_qb_yd !== null && game.brady_yards < f.min_qb_yd) return false;
+      if (f.max_qb_yd !== null && game.brady_yards > f.max_qb_yd) return false;
+      if (f.min_qb_td !== null && game.brady_tds < f.min_qb_td) return false;
+      if (f.max_qb_td !== null && game.brady_tds > f.max_qb_td) return false;
+      if (f.min_qb_int !== null && game.brady_ints < f.min_qb_int) return false;
+      if (f.max_qb_int !== null && game.brady_ints > f.max_qb_int) return false;
       return true;
     }
 
@@ -430,7 +460,12 @@
       return f.opponent.length > 0 || f.coach.length > 0 || f.season.length > 0 || f.week.length > 0 || f.qb.length > 0 || f.patriotsHc.length > 0 || f.patriotsOc.length > 0 || f.patriotsDc.length > 0 || f.oppOc.length > 0 || f.oppDc.length > 0 ||
         f.result !== '' || f.home_away !== '' || f.after_bye !== '' || f.ot !== '' || f.playoff_game !== '' ||
         f.min_pats !== null || f.max_pats !== null || f.min_opp !== null || f.max_opp !== null ||
-        f.min_diff !== null || f.max_diff !== null;
+        f.min_diff !== null || f.max_diff !== null ||
+        f.min_qb_att !== null || f.max_qb_att !== null ||
+        f.min_qb_cmp !== null || f.max_qb_cmp !== null ||
+        f.min_qb_yd !== null || f.max_qb_yd !== null ||
+        f.min_qb_td !== null || f.max_qb_td !== null ||
+        f.min_qb_int !== null || f.max_qb_int !== null;
     }
 
     function renderActiveFilters(f) {
@@ -637,6 +672,16 @@
       if (f.max_opp !== null) params.set('max_opp', f.max_opp);
       if (f.min_diff !== null) params.set('min_diff', f.min_diff);
       if (f.max_diff !== null) params.set('max_diff', f.max_diff);
+      if (f.min_qb_att !== null) params.set('min_qb_att', f.min_qb_att);
+      if (f.max_qb_att !== null) params.set('max_qb_att', f.max_qb_att);
+      if (f.min_qb_cmp !== null) params.set('min_qb_cmp', f.min_qb_cmp);
+      if (f.max_qb_cmp !== null) params.set('max_qb_cmp', f.max_qb_cmp);
+      if (f.min_qb_yd !== null) params.set('min_qb_yd', f.min_qb_yd);
+      if (f.max_qb_yd !== null) params.set('max_qb_yd', f.max_qb_yd);
+      if (f.min_qb_td !== null) params.set('min_qb_td', f.min_qb_td);
+      if (f.max_qb_td !== null) params.set('max_qb_td', f.max_qb_td);
+      if (f.min_qb_int !== null) params.set('min_qb_int', f.min_qb_int);
+      if (f.max_qb_int !== null) params.set('max_qb_int', f.max_qb_int);
       const qs = params.toString();
       history.replaceState(null, '', qs ? '?' + qs : location.pathname);
     }
@@ -662,6 +707,11 @@
       setSliderFromUrl(sliders.patsScore, params.get('min_pats'), params.get('max_pats'));
       setSliderFromUrl(sliders.oppScore, params.get('min_opp'), params.get('max_opp'));
       setSliderFromUrl(sliders.diff, params.get('min_diff'), params.get('max_diff'));
+      setSliderFromUrl(sliders.qbAtt, params.get('min_qb_att'), params.get('max_qb_att'));
+      setSliderFromUrl(sliders.qbCmp, params.get('min_qb_cmp'), params.get('max_qb_cmp'));
+      setSliderFromUrl(sliders.qbYd, params.get('min_qb_yd'), params.get('max_qb_yd'));
+      setSliderFromUrl(sliders.qbTd, params.get('min_qb_td'), params.get('max_qb_td'));
+      setSliderFromUrl(sliders.qbInt, params.get('min_qb_int'), params.get('max_qb_int'));
 
       // Auto-expand collapsed filter groups that have an active filter from
       // the URL, so it isn't hidden behind a closed <details> on load.
@@ -675,6 +725,12 @@
       const gameTypeGroup = app.querySelector('#gs-group-game-type');
       if (gameTypeGroup && gameTypeParams.some(function (p) { return params.get(p); })) {
         gameTypeGroup.open = true;
+      }
+
+      const qbStatParams = ['min_qb_att', 'max_qb_att', 'min_qb_cmp', 'max_qb_cmp', 'min_qb_yd', 'max_qb_yd', 'min_qb_td', 'max_qb_td', 'min_qb_int', 'max_qb_int'];
+      const qbStatsGroup = app.querySelector('#gs-group-qb-stats');
+      if (qbStatsGroup && qbStatParams.some(function (p) { return params.get(p); })) {
+        qbStatsGroup.open = true;
       }
 
       restoring = false;
