@@ -448,9 +448,6 @@
     .-m-1\.5 {
       margin: calc(var(--spacing) * -1.5);
     }
-    .m-2 {
-      margin: calc(var(--spacing) * 2);
-    }
     .m-3 {
       margin: calc(var(--spacing) * 3);
     }
@@ -576,9 +573,6 @@
     }
     .ml-0 {
       margin-left: calc(var(--spacing) * 0);
-    }
-    .ml-1 {
-      margin-left: calc(var(--spacing) * 1);
     }
     .ml-5 {
       margin-left: calc(var(--spacing) * 5);
@@ -1146,14 +1140,6 @@
       border-bottom-style: var(--tw-border-style);
       border-bottom-width: 2px;
     }
-    .border-l-1 {
-      border-left-style: var(--tw-border-style);
-      border-left-width: 1px;
-    }
-    .border-l-2 {
-      border-left-style: var(--tw-border-style);
-      border-left-width: 2px;
-    }
     .border-none {
       --tw-border-style: none;
       border-style: none;
@@ -1616,9 +1602,6 @@
     }
     .pb-4 {
       padding-bottom: calc(var(--spacing) * 4);
-    }
-    .pl-1 {
-      padding-left: calc(var(--spacing) * 1);
     }
     .pl-10 {
       padding-left: calc(var(--spacing) * 10);
@@ -2520,6 +2503,11 @@
     .md\:\!justify-evenly {
       @media (width >= 48rem) {
         justify-content: space-evenly !important;
+      }
+    }
+    .md\:\!px-14 {
+      @media (width >= 48rem) {
+        padding-inline: calc(var(--spacing) * 14) !important;
       }
     }
     .md\:py-0 {
