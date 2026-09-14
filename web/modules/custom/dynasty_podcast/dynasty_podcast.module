@@ -9,7 +9,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\dynasty_module\DynastyHelpers;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
-use Drupal\views\Views;
 
 /**
  * Implements hook_entity_type_alter().
@@ -129,31 +128,31 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
     if (!$entity->field_opposing_coach->isEmpty()) {
       $opp = Term::load($entity->get('field_opposing_coach')->target_id);
       $coach = $opp->label();
-      // Get W/L record from the game search view.
-      $view = Views::getView('game_search');
-      $view->setExposedInput([
-        'game_opposing_coach' => $coach,
-      ]);
-      $view->execute();
-      $results = $view->result;
+      // Get W/L record by querying Game nodes directly. This used to go
+      // through the `game_search` view, which no longer exists (replaced
+      // by the flat-JSON /search/games page -- see dynasty_search) --
+      // Views::getView() returned NULL for it, and calling
+      // setExposedInput() on that broke every Game node save.
+      $game_ids = \Drupal::entityQuery('node')
+        ->condition('type', 'game')
+        ->condition('status', 1)
+        ->condition('field_opposing_coach', $opp->id())
+        ->accessCheck(FALSE)
+        ->execute();
       $wins = 0;
       $losses = 0;
-      foreach ($results as $row) {
-        // Access the entity and get the field value.
-        // For entity-based views, use _entity to get the loaded entity.
-        if (isset($row->_entity)) {
-          $result = $row->_entity->get('field_result')->value;
-          if ($result === 'Win') {
-            $wins++;
-          }
-          elseif ($result === 'Loss') {
-            $losses++;
-          }
+      foreach (Node::loadMultiple($game_ids) as $game) {
+        $result = $game->get('field_result')->value;
+        if ($result === 'Win') {
+          $wins++;
+        }
+        elseif ($result === 'Loss') {
+          $losses++;
         }
       }
       $record = "{$wins}-{$losses}";
       $entity->set('field_pats_record_vs_coach', [
-        'uri' => "/search/games?game_opposing_coach[]=" . rawurlencode($coach),
+        'uri' => "/search/games?coach=" . rawurlencode($coach),
         'title' => "The Patriots are {$record} against {$coach} led teams.",
         'options' => [
           'attributes' => [
