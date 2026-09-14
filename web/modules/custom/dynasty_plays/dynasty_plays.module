@@ -28,9 +28,6 @@ function dynasty_plays_help($route_name, RouteMatchInterface $route_match) {
  */
 function dynasty_plays_theme() {
   return [
-    'play' => [
-      'render element' => 'elements',
-    ],
     'player_game_stat' => [
       'render element' => 'elements',
     ],
