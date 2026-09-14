@@ -565,3 +565,41 @@ function dynasty_plays_update_9007() {
     '@count' => count($fields_to_add),
   ]);
 }
+
+/**
+ * Uninstall the retired Play entity type.
+ *
+ * pbp_play now covers everything play did: scoring plays are derivable
+ * from pbp_play's own running-score data (pbp_scoring_play/
+ * pbp_scoring_team, added in dynasty_plays_update_9007()), and its two
+ * real highlight links were migrated onto the matching pbp_play rows.
+ * Every config/code reference to the `play` entity type (views,
+ * displays, permissions, routing, PHP classes, theming) was removed in
+ * prior commits, so nothing should still depend on it by the time this
+ * runs.
+ */
+function dynasty_plays_update_9008() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_manager->clearCachedDefinitions();
+
+  $entity_type_id = 'play';
+  $storage = $entity_type_manager->getStorage($entity_type_id);
+  $ids = $storage->getQuery()->accessCheck(FALSE)->execute();
+  $deleted_count = count($ids);
+  if ($ids) {
+    foreach (array_chunk($ids, 500) as $slice) {
+      $storage->delete($storage->loadMultiple($slice));
+    }
+  }
+
+  $entity_type = $entity_definition_update_manager->getEntityType($entity_type_id);
+  if ($entity_type) {
+    $entity_definition_update_manager->uninstallEntityType($entity_type);
+  }
+
+  return t('Deleted @count Play entities and uninstalled the Play entity type.', [
+    '@count' => $deleted_count,
+  ]);
+}
