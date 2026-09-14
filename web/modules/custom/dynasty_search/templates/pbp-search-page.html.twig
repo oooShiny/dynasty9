@@ -1,0 +1,141 @@
+{#
+/**
+ * @file
+ * Play-by-Play Search page shell. All data is loaded client-side from
+ * /dynasty/search/play-by-play by js/pbp-search.js -- this template only
+ * provides the filter controls and empty result containers.
+ */
+#}
+
+{% set search_filter %}
+  <label for="pbp-search" class="block text-sm mb-1">Search Play Text</label>
+  <input type="text" id="pbp-search" class="w-full rounded p-2 text-blue-pats" placeholder="e.g. Grogan, fumble, touchdown..." />
+{% endset %}
+
+{% set season_filter %}
+  <label for="pbp-filter-season" class="block text-sm mb-1">Season</label>
+  <select id="pbp-filter-season" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Season(s) -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set week_filter %}
+  <label for="pbp-filter-week" class="block text-sm mb-1">Week</label>
+  <select id="pbp-filter-week" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select a Week -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set opponent_filter %}
+  <label for="pbp-filter-opponent" class="block text-sm mb-1">Opponent</label>
+  <select id="pbp-filter-opponent" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Team -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set quarter_filter %}
+  <label for="pbp-filter-quarter" class="block text-sm mb-1">Quarter</label>
+  <select id="pbp-filter-quarter" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Quarter -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set down_filter %}
+  <label for="pbp-filter-down" class="block text-sm mb-1">Down</label>
+  <select id="pbp-filter-down" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Down -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set home_away_filter %}
+  <div class="text-sm mb-1">Home/Away</div>
+  <div class="pbp-toggle-group flex gap-1" data-filter="home_away">
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="Home">Home</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="Away">Away</button>
+  </div>
+{% endset %}
+
+{% set result_filter %}
+  <div class="text-sm mb-1">Game Result</div>
+  <div class="pbp-toggle-group flex gap-1" data-filter="result">
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="Win">Win</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="Loss">Loss</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="Tie">Tie</button>
+  </div>
+{% endset %}
+
+{% set playoff_filter %}
+  <div class="text-sm mb-1">Playoff Game</div>
+  <div class="pbp-toggle-group flex gap-1" data-filter="playoff_game">
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="1">Yes</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="0">No</button>
+  </div>
+{% endset %}
+
+{% set game_type_group %}
+  <details class="pbp-filter-group" id="pbp-group-game-type">
+    <summary class="cursor-pointer font-semibold">Game Type</summary>
+    <div class="pt-3 space-y-3">
+      <div>{{ home_away_filter }}</div>
+      <div>{{ result_filter }}</div>
+      <div>{{ playoff_filter }}</div>
+    </div>
+  </details>
+{% endset %}
+
+{% macro slider(id, label) %}
+  <div class="mb-8">
+    <div class="text-sm mb-4">{{ label }}</div>
+    <div id="{{ id }}" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+{% endmacro %}
+{% import _self as self %}
+
+{% set play_context_group %}
+  <details class="pbp-filter-group" id="pbp-group-play-context">
+    <summary class="cursor-pointer font-semibold">Play Context</summary>
+    <div class="pt-3">
+      {{ self.slider('pbp-slider-distance', 'Distance to go (yards)') }}
+      {{ self.slider('pbp-slider-patriots-score', 'Patriots Score') }}
+      {{ self.slider('pbp-slider-opponent-score', 'Opponent Score') }}
+    </div>
+  </details>
+{% endset %}
+
+{% set reset_filter %}
+  <button type="button" id="pbp-reset" class="w-full px-3 py-2 bg-red-pats text-white rounded">Reset Search</button>
+{% endset %}
+
+<div id="pbp-search-app" class="mx-auto">
+  <div class="flex flex-wrap md:!flex-nowrap gap-4">
+    <div class="w-full md:!w-1/4">
+      <h2 id="pbp-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
+      <div id="pbp-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
+        <div class="p-3">{{ search_filter }}</div>
+        <div class="p-3">{{ season_filter }}</div>
+        <div class="p-3">{{ week_filter }}</div>
+        <div class="p-3">{{ opponent_filter }}</div>
+        <div class="p-3">{{ quarter_filter }}</div>
+        <div class="p-3">{{ down_filter }}</div>
+        <div class="border border-white p-3 my-1">{{ game_type_group }}</div>
+        <div class="border border-white p-3 my-1">{{ play_context_group }}</div>
+        <div class="p-3">{{ reset_filter }}</div>
+      </div>
+    </div>
+
+    <div class="w-full md:!w-3/4 min-w-0">
+      <div id="pbp-summary" class="px-4 py-5 text-lg">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h2>Displaying <span class="text-red-pats"><span id="pbp-count">0</span> plays</span></h2>
+          <button type="button" id="pbp-clear-filters" class="hidden px-3 py-1 text-sm border-2 border-red-pats text-red-pats rounded cursor-pointer hover:bg-red-pats hover:text-white">Clear Filters</button>
+        </div>
+        <div id="pbp-active-filters" class="flex flex-wrap gap-2 mt-2"></div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <div class="min-w-full inline-block align-middle">
+          <div class="overflow-hidden">
+            <table class="table w-full">
+              <thead id="pbp-thead" class="bg-blue-pats text-white"></thead>
+              <tbody id="pbp-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

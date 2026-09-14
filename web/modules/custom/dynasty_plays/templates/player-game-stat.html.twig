@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Theme override to display a Player Game Stat entity.
+ *
+ * Available variables:
+ * - player_game_stat: The player_game_stat entity.
+ * - content: All player_game_stat items.
+ * - attributes: HTML attributes for the containing element.
+ * - title_attributes: HTML attributes for the title.
+ * - content_attributes: HTML attributes for the content wrapper.
+ */
+#}
+<div{{ attributes.addClass('player-game-stat-item', 'mb-4', 'p-4', 'border', 'border-gray-300', 'rounded-lg', 'bg-white', 'shadow-sm') }}>
+  <div class="stat-meta mb-2 flex items-center gap-2 flex-wrap">
+    {% if content.stat_quarter %}
+      <span class="badge badge-primary text-xs font-bold px-2 py-1 rounded bg-blue-600 text-white">
+        {{ content.stat_quarter }}
+      </span>
+    {% endif %}
+    {% if content.stat_category %}
+      <span class="badge badge-secondary text-xs font-bold px-2 py-1 rounded bg-gray-600 text-white">
+        {{ content.stat_category }}
+      </span>
+    {% endif %}
+    {% if content.stat_player %}
+      <span class="stat-player text-sm font-semibold text-gray-700">
+        {{ content.stat_player }}
+      </span>
+    {% elseif content.stat_player_name %}
+      <span class="stat-player text-sm font-semibold text-gray-700">
+        {{ content.stat_player_name }}
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="stat-lines grid grid-cols-2 md:!grid-cols-4 gap-2 text-sm">
+    {% for field_name in ['stat_completions', 'stat_attempts', 'stat_pass_yards', 'stat_interceptions', 'stat_pass_td', 'stat_carries', 'stat_rush_yards', 'stat_rush_td', 'stat_targets', 'stat_receptions', 'stat_rec_yards', 'stat_rec_td'] %}
+      {% if content[field_name] is defined and content[field_name]|render|trim is not empty %}
+        <div class="stat-line">
+          {{ content[field_name] }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if content.stat_game %}
+    <div class="stat-game mt-2 pt-2 border-t border-gray-200">
+      <span class="text-sm text-gray-500 mr-2">Game:</span>
+      {{ content.stat_game }}
+    </div>
+  {% endif %}
+</div>

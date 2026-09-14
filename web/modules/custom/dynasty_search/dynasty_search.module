@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Client-side JSON search for the Game Search and Play Search pages.
+ * Client-side JSON search for the Game Search and Highlight Search pages.
  */
 
 /**
@@ -14,9 +14,17 @@ function dynasty_search_theme() {
       'variables' => [],
       'template' => 'game-search-page',
     ],
-    'dynasty_search_play_page' => [
+    'dynasty_search_highlight_page' => [
       'variables' => [],
-      'template' => 'play-search-page',
+      'template' => 'highlight-search-page',
+    ],
+    'dynasty_search_stat_page' => [
+      'variables' => [],
+      'template' => 'stat-search-page',
+    ],
+    'dynasty_search_pbp_page' => [
+      'variables' => [],
+      'template' => 'pbp-search-page',
     ],
   ];
 }

@@ -458,6 +458,43 @@ class Play extends ContentEntityBase implements PlayInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    // Player field - entity reference to Player nodes (multi-value; the
+    // player(s) directly involved in this play). Replaces the previous
+    // practice of borrowing a player from the linked Highlight's
+    // field_players_involved.
+    $fields['play_player'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Player(s)'))
+      ->setDescription(t('The player(s) directly involved in this play.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'player' => 'player',
+        ],
+      ])
+      ->setCardinality(\Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 10,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 10,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     return $fields;
   }
 

@@ -62,6 +62,14 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  play_player:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
   quarter:
     type: list_default
     label: hidden

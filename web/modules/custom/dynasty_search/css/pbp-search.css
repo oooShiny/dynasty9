@@ -1,0 +1,33 @@
+/**
+ * Small bits that aren't plain Tailwind utility classes.
+ */
+.pbp-toggle {
+  /* Explicit text color -- this button is always on a white background,
+   * but without this it inherits the page's text color, which in dark
+   * mode is light and unreadable here. */
+  background: #fff;
+  color: #002244;
+}
+.pbp-toggle-active {
+  background-color: #C60C30;
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Collapsible filter groups (e.g. "Play Context") in the sidebar. */
+.pbp-filter-group > summary {
+  list-style: none;
+  color: #fff;
+}
+.pbp-filter-group > summary::-webkit-details-marker {
+  display: none;
+}
+.pbp-filter-group > summary::before {
+  content: '\25B8';
+  display: inline-block;
+  width: 1em;
+  transition: transform 0.15s ease;
+}
+.pbp-filter-group[open] > summary::before {
+  transform: rotate(90deg);
+}

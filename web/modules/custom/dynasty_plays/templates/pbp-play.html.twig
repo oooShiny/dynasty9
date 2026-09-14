@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Theme override to display a Play-by-Play entity.
+ *
+ * Available variables:
+ * - pbp_play: The pbp_play entity.
+ * - content: All pbp_play items.
+ * - attributes: HTML attributes for the containing element.
+ * - title_attributes: HTML attributes for the title.
+ * - content_attributes: HTML attributes for the content wrapper.
+ */
+#}
+<div{{ attributes.addClass('pbp-play-item', 'mb-4', 'p-4', 'border', 'border-gray-300', 'rounded-lg', 'bg-white', 'shadow-sm') }}>
+  <div class="pbp-meta mb-2 flex items-center gap-2 flex-wrap">
+    {% if content.pbp_quarter %}
+      <span class="badge badge-primary text-xs font-bold px-2 py-1 rounded bg-blue-600 text-white">
+        {{ content.pbp_quarter }}
+      </span>
+    {% endif %}
+    {% if content.pbp_time %}
+      <span class="pbp-time text-sm text-gray-600 font-mono">
+        {{ content.pbp_time }}
+      </span>
+    {% endif %}
+    {% if content.pbp_down and content.pbp_distance %}
+      <span class="pbp-down-distance text-sm text-gray-600">
+        {{ content.pbp_down }} &amp; {{ content.pbp_distance }}
+      </span>
+    {% endif %}
+    {% if content.pbp_location %}
+      <span class="pbp-location text-sm text-gray-600">
+        {{ content.pbp_location }}
+      </span>
+    {% endif %}
+  </div>
+
+  {% if content.pbp_detail %}
+    <div class="pbp-detail text-base mb-2">
+      {{ content.pbp_detail }}
+    </div>
+  {% endif %}
+
+  {% if content.pbp_patriots_score or content.pbp_opponent_score %}
+    <div class="pbp-score text-sm text-gray-600">
+      {{ content.pbp_patriots_score }} - {{ content.pbp_opponent_score }}
+    </div>
+  {% endif %}
+
+  {% if content.pbp_game %}
+    <div class="pbp-game mt-2 pt-2 border-t border-gray-200">
+      <span class="text-sm text-gray-500 mr-2">Game:</span>
+      {{ content.pbp_game }}
+    </div>
+  {% endif %}
+</div>

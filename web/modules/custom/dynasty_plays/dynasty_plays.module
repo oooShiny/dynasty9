@@ -31,5 +31,11 @@ function dynasty_plays_theme() {
     'play' => [
       'render element' => 'elements',
     ],
+    'player_game_stat' => [
+      'render element' => 'elements',
+    ],
+    'pbp_play' => [
+      'render element' => 'elements',
+    ],
   ];
 }

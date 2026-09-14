@@ -9,7 +9,7 @@ use Drupal\dynasty_module\DynastyHelpers;
 use Drupal\node\Entity\Node;
 
 /**
- * JSON data endpoints backing the Game Search and Play Search pages.
+ * JSON data endpoints backing the Game Search and Highlight Search pages.
  *
  * These replace the old Solr/Search API-backed game_search and
  * highlight_search views: the data sets are small and bounded, so instead
@@ -17,6 +17,18 @@ use Drupal\node\Entity\Node;
  * once and filtered/sorted/paginated client-side.
  */
 class SearchDataController extends ControllerBase {
+
+  /**
+   * Per-request memoization of ::gameContext() results, keyed by Game
+   * node ID. Several rows (PlayerGameStat/Play/PbpPlay) usually share the
+   * same Game -- pbp_play especially so, at ~170 plays per game -- so
+   * without this, ::stats() and ::playByPlay() would recompute the same
+   * season/opponent/week/URL lookups for every single row instead of once
+   * per distinct game.
+   *
+   * @var array
+   */
+  protected $gameContextCache = [];
 
   /**
    * All published `game` nodes, flattened for client-side filtering.
@@ -111,10 +123,9 @@ class SearchDataController extends ControllerBase {
   }
 
   /**
-   * All published `highlight` (play) nodes, flattened for client-side
-   * filtering.
+   * All published `highlight` nodes, flattened for client-side filtering.
    */
-  public function plays(): CacheableJsonResponse {
+  public function highlights(): CacheableJsonResponse {
     $cache = new CacheableMetadata();
     $cache->addCacheTags(['node_list:highlight']);
     $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
@@ -187,6 +198,304 @@ class SearchDataController extends ControllerBase {
     $response = new CacheableJsonResponse($data);
     $response->addCacheableDependency($cache);
     return $response;
+  }
+
+  /**
+   * Maps the Play entity's integer `quarter` field (1-5) onto the same
+   * 'Q1'..'OT' strings used by PlayerGameStat::stat_quarter, so both row
+   * kinds can share one `quarter` filter/group-by dimension on the Stat
+   * Finder page.
+   */
+  private const PLAY_QUARTER_MAP = [1 => 'Q1', 2 => 'Q2', 3 => 'Q3', 4 => 'Q4', 5 => 'OT'];
+
+  /**
+   * All published Player Game Stat entities *and* Play (scoring play)
+   * entities, flattened onto one shared row shape for client-side
+   * filtering, sorting, and grouping on the Stat Finder page.
+   *
+   * The two entity types describe different things (a per-quarter stat
+   * line vs. a single notable/scoring play), so most fields only apply to
+   * one or the other -- each row carries every field, left NULL/blank
+   * where not applicable, the same way an individual PlayerGameStat row
+   * already leaves the 8 stat columns from other categories NULL.
+   * `category` is 'Passing'/'Rushing'/'Receiving' for stat lines and
+   * 'Scoring Play' for plays, so the existing Category filter doubles as
+   * the row-kind switch.
+   *
+   * @see \Drupal\dynasty_plays\Entity\PlayerGameStat
+   * @see \Drupal\dynasty_plays\Entity\Play
+   */
+  public function stats(): CacheableJsonResponse {
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags([
+      'player_game_stat_list', 'play_list', 'node_list:game', 'node_list:player', 'node_list:highlight',
+    ]);
+    $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
+
+    $team_css = DynastyHelpers::get_team_css();
+    $data = [];
+
+    $stat_storage = $this->entityTypeManager()->getStorage('player_game_stat');
+    $stat_ids = $stat_storage->getQuery()
+      ->condition('status', 1)
+      ->accessCheck(TRUE)
+      ->execute();
+
+    // Loaded in slices to keep peak memory bounded; the (small) set of
+    // distinct Game/Player nodes referenced stays in the entity static
+    // cache across slices, so this doesn't repeat those loads.
+    foreach (array_chunk($stat_ids, 500) as $slice) {
+      foreach ($stat_storage->loadMultiple($slice) as $stat) {
+        $cache->addCacheableDependency($stat);
+
+        $game = $stat->get('stat_game')->entity;
+        if (!$game) {
+          continue;
+        }
+
+        $player = $stat->get('stat_player')->entity;
+        if ($player) {
+          $cache->addCacheableDependency($player);
+        }
+
+        $data[] = $this->gameContext($game, $cache, $team_css) + [
+          'id' => 'stat-' . $stat->id(),
+          'player_name' => $stat->get('stat_player_name')->value,
+          'player' => $player ? [
+            'nid' => (int) $player->id(),
+            'name' => $player->label(),
+          ] : NULL,
+          'quarter' => $stat->get('stat_quarter')->value,
+          'category' => $stat->get('stat_category')->value,
+          'completions' => $this->intOrNull($stat, 'stat_completions'),
+          'attempts' => $this->intOrNull($stat, 'stat_attempts'),
+          'pass_yards' => $this->intOrNull($stat, 'stat_pass_yards'),
+          'interceptions' => $this->intOrNull($stat, 'stat_interceptions'),
+          'pass_td' => $this->intOrNull($stat, 'stat_pass_td'),
+          'carries' => $this->intOrNull($stat, 'stat_carries'),
+          'rush_yards' => $this->intOrNull($stat, 'stat_rush_yards'),
+          'rush_td' => $this->intOrNull($stat, 'stat_rush_td'),
+          'targets' => $this->intOrNull($stat, 'stat_targets'),
+          'receptions' => $this->intOrNull($stat, 'stat_receptions'),
+          'rec_yards' => $this->intOrNull($stat, 'stat_rec_yards'),
+          'rec_td' => $this->intOrNull($stat, 'stat_rec_td'),
+          'distance' => NULL,
+          'scoring_team' => NULL,
+          'turnover' => NULL,
+          'description' => NULL,
+          'highlight_url' => NULL,
+        ];
+      }
+    }
+
+    $play_storage = $this->entityTypeManager()->getStorage('play');
+    $play_ids = $play_storage->getQuery()
+      ->condition('status', 1)
+      ->accessCheck(TRUE)
+      ->execute();
+
+    foreach (array_chunk($play_ids, 500) as $slice) {
+      foreach ($play_storage->loadMultiple($slice) as $play) {
+        $cache->addCacheableDependency($play);
+
+        $game = $play->get('play_game')->entity;
+        if (!$game) {
+          continue;
+        }
+
+        // Prefer the directly-set play_player field. Fall back to borrowing
+        // the linked Highlight's first "players involved" entry -- kept for
+        // back-compat with any Play rows that predate play_player and
+        // haven't been manually backfilled yet.
+        $player = NULL;
+        $involved_players = $play->get('play_player')->referencedEntities();
+        if ($involved_players) {
+          $first = reset($involved_players);
+          $cache->addCacheableDependency($first);
+          $player = ['nid' => (int) $first->id(), 'name' => $first->label()];
+        }
+
+        $highlight = $play->get('play_highlight')->entity;
+        $highlight_url = NULL;
+        if ($highlight) {
+          $cache->addCacheableDependency($highlight);
+          $highlight_url = $highlight->toUrl()->toString();
+          if (!$player) {
+            $involved = $highlight->get('field_players_involved')->referencedEntities();
+            if ($involved) {
+              $first = reset($involved);
+              $cache->addCacheableDependency($first);
+              $player = ['nid' => (int) $first->id(), 'name' => $first->label()];
+            }
+          }
+        }
+
+        $minutes = $play->get('minutes')->isEmpty() ? NULL : (int) $play->get('minutes')->value;
+        $seconds = $play->get('seconds')->isEmpty() ? NULL : (int) $play->get('seconds')->value;
+
+        $description = $play->get('play_description')->value;
+        $description = $description ? trim(preg_replace('/\s+/', ' ', strip_tags($description))) : NULL;
+
+        $quarter_value = (int) $play->get('quarter')->value;
+
+        $data[] = $this->gameContext($game, $cache, $team_css) + [
+          'id' => 'play-' . $play->id(),
+          'player_name' => $player ? $player['name'] : NULL,
+          'player' => $player,
+          'quarter' => self::PLAY_QUARTER_MAP[$quarter_value] ?? NULL,
+          'category' => 'Scoring Play',
+          'completions' => NULL,
+          'attempts' => NULL,
+          'pass_yards' => NULL,
+          'interceptions' => NULL,
+          'pass_td' => NULL,
+          'carries' => NULL,
+          'rush_yards' => NULL,
+          'rush_td' => NULL,
+          'targets' => NULL,
+          'receptions' => NULL,
+          'rec_yards' => NULL,
+          'rec_td' => NULL,
+          'distance' => $play->get('distance')->isEmpty() ? NULL : (int) $play->get('distance')->value,
+          'scoring_team' => $play->get('scoring_team')->value ?: NULL,
+          'turnover' => (bool) $play->get('turnover')->value,
+          'description' => $description,
+          'highlight_url' => $highlight_url,
+        ];
+      }
+    }
+
+    $response = new CacheableJsonResponse($data);
+    $response->addCacheableDependency($cache);
+    return $response;
+  }
+
+  /**
+   * All published Play-by-Play entries (raw per-play log, 1978-1999),
+   * flattened for client-side filtering/searching on the Play-by-Play
+   * Search page.
+   *
+   * @see \Drupal\dynasty_plays\Entity\PbpPlay
+   */
+  public function playByPlay(): CacheableJsonResponse {
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags(['pbp_play_list', 'node_list:game', 'node_list:player']);
+    $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
+
+    $team_css = DynastyHelpers::get_team_css();
+
+    // At ~61,000 rows (vs. a few hundred games), loading every row through
+    // the Entity API -- as the other endpoints in this class do -- takes
+    // over a minute: per-entity field API overhead dominates when it's
+    // repeated tens of thousands of times. A direct query for the ~170
+    // plays-per-game field values, resolving only the ~350 *distinct*
+    // Game nodes through the Entity API (via ::gameContext(), which
+    // memoizes per game), cuts this from minutes to well under a second.
+    $rows = \Drupal::database()->select('pbp_play', 'p')
+      ->fields('p', [
+        'id', 'pbp_game', 'pbp_sequence', 'pbp_quarter', 'pbp_time', 'pbp_down',
+        'pbp_distance', 'pbp_location', 'pbp_patriots_score', 'pbp_opponent_score',
+        'pbp_detail__value', 'pbp_epb', 'pbp_epa', 'pbp_source_url', 'pbp_player',
+      ])
+      ->condition('status', 1)
+      ->orderBy('id', 'ASC')
+      ->execute()
+      ->fetchAll(\PDO::FETCH_ASSOC);
+
+    $game_ids = array_unique(array_filter(array_column($rows, 'pbp_game')));
+    $games = $game_ids ? Node::loadMultiple($game_ids) : [];
+
+    // Batch-load only the distinct Player nodes actually referenced, same
+    // pattern as $games above -- cheap even at ~61,000 rows since the
+    // number of distinct players involved is small.
+    $player_ids = array_unique(array_filter(array_column($rows, 'pbp_player')));
+    $players = $player_ids ? Node::loadMultiple($player_ids) : [];
+
+    $data = [];
+    foreach ($rows as $row) {
+      $game = $games[$row['pbp_game']] ?? NULL;
+      if (!$game) {
+        continue;
+      }
+
+      $player = $players[$row['pbp_player']] ?? NULL;
+      if ($player) {
+        $cache->addCacheableDependency($player);
+      }
+
+      $data[] = $this->gameContext($game, $cache, $team_css) + [
+        'id' => (int) $row['id'],
+        'sequence' => (int) $row['pbp_sequence'],
+        'quarter' => $row['pbp_quarter'],
+        'time' => $row['pbp_time'],
+        'down' => $row['pbp_down'] !== NULL ? (int) $row['pbp_down'] : NULL,
+        'distance' => $row['pbp_distance'] !== NULL ? (int) $row['pbp_distance'] : NULL,
+        'location' => $row['pbp_location'],
+        'patriots_score' => $row['pbp_patriots_score'] !== NULL ? (int) $row['pbp_patriots_score'] : NULL,
+        'opponent_score' => $row['pbp_opponent_score'] !== NULL ? (int) $row['pbp_opponent_score'] : NULL,
+        'detail' => $row['pbp_detail__value'],
+        'epb' => $row['pbp_epb'] !== NULL ? (float) $row['pbp_epb'] : NULL,
+        'epa' => $row['pbp_epa'] !== NULL ? (float) $row['pbp_epa'] : NULL,
+        'source_url' => $row['pbp_source_url'],
+        'player' => $player ? ['nid' => (int) $player->id(), 'name' => $player->label()] : NULL,
+      ];
+    }
+
+    $response = new CacheableJsonResponse($data);
+    $response->addCacheableDependency($cache);
+    return $response;
+  }
+
+  /**
+   * Builds the shared game-context fields (season, week, opponent, etc.)
+   * used by ::stats() and ::playByPlay(), so they stay identical no matter
+   * which entity type (PlayerGameStat, Play, or PbpPlay) a row came from.
+   */
+  private function gameContext($game, CacheableMetadata $cache, array $team_css): array {
+    $cache->addCacheableDependency($game);
+
+    $nid = (int) $game->id();
+    if (isset($this->gameContextCache[$nid])) {
+      return $this->gameContextCache[$nid];
+    }
+
+    $season = (int) $game->get('field_season')->value;
+    $opponent = $game->get('field_opponent')->entity;
+    $week_term = $game->get('field_week')->entity;
+    foreach ([$opponent, $week_term] as $referenced) {
+      if ($referenced) {
+        $cache->addCacheableDependency($referenced);
+      }
+    }
+
+    return $this->gameContextCache[$nid] = [
+      'game_nid' => (int) $game->id(),
+      'game_title' => $game->label(),
+      'game_url' => $game->toUrl()->toString(),
+      'season' => $season,
+      'week' => $week_term ? [
+        'id' => (int) $week_term->id(),
+        'label' => $week_term->label(),
+        'weight' => (int) $week_term->getWeight(),
+      ] : NULL,
+      'opponent' => $opponent ? [
+        'nid' => (int) $opponent->id(),
+        'name' => DynastyHelpers::check_name_alts($opponent, $season),
+        'css_slug' => $team_css[$opponent->id()] ?? strtolower(str_replace(' ', '-', $opponent->label())),
+      ] : NULL,
+      'home_away' => $game->get('field_home_away')->value,
+      'playoff_game' => (bool) $game->get('field_playoff_game')->value,
+      'result' => $game->get('field_result')->value,
+    ];
+  }
+
+  /**
+   * Reads an integer field's value, preserving NULL (as opposed to the
+   * (int) cast elsewhere in this controller, which would turn NULL into 0
+   * for fields that are legitimately not applicable to a given stat row).
+   */
+  private function intOrNull($entity, string $field_name): ?int {
+    return $entity->get($field_name)->isEmpty() ? NULL : (int) $entity->get($field_name)->value;
   }
 
 }

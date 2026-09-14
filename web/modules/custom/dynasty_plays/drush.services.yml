@@ -1,0 +1,11 @@
+services:
+  dynasty_plays.quarterly_stats_import_commands:
+    class: Drupal\dynasty_plays\Commands\QuarterlyStatsImportCommands
+    arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher']
+    tags:
+      - { name: drush.command }
+  dynasty_plays.play_by_play_import_commands:
+    class: Drupal\dynasty_plays\Commands\PlayByPlayImportCommands
+    arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher']
+    tags:
+      - { name: drush.command }

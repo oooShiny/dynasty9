@@ -1,0 +1,4 @@
+services:
+  dynasty_plays.game_player_matcher:
+    class: Drupal\dynasty_plays\Service\GamePlayerMatcher
+    arguments: ['@entity_type.manager']

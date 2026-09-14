@@ -34,6 +34,7 @@ third_party_settings:
         - name
         - play_description
         - play_game
+        - play_player
         - scoring_team
         - quarter
         - minutes
@@ -118,6 +119,16 @@ content:
       field_widget_display_settings:
         view_mode: full
       selection_mode: selection_append
+    third_party_settings: {  }
+  play_player:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   quarter:
     type: options_select

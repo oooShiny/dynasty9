@@ -4,3 +4,17 @@ play.add:
   title: 'Add Play'
   appears_on:
     - entity.play.collection
+
+# Player Game Stat action links
+player_game_stat.add:
+  route_name: entity.player_game_stat.add_form
+  title: 'Add Player Game Stat'
+  appears_on:
+    - entity.player_game_stat.collection
+
+# Play-by-Play action links
+pbp_play.add:
+  route_name: entity.pbp_play.add_form
+  title: 'Add Play-by-Play Entry'
+  appears_on:
+    - entity.pbp_play.collection

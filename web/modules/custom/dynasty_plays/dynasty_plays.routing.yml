@@ -6,3 +6,21 @@ play.settings:
     _title: 'Play settings'
   requirements:
     _permission: 'administer play entities'
+
+# Player Game Stat routing definition
+player_game_stat.settings:
+  path: '/admin/structure/player-game-stat/settings'
+  defaults:
+    _form: '\Drupal\dynasty_plays\Form\PlayerGameStatSettingsForm'
+    _title: 'Player Game Stat settings'
+  requirements:
+    _permission: 'administer player game stat entities'
+
+# Play-by-Play routing definition
+pbp_play.settings:
+  path: '/admin/structure/pbp-play/settings'
+  defaults:
+    _form: '\Drupal\dynasty_plays\Form\PbpPlaySettingsForm'
+    _title: 'Play-by-Play settings'
+  requirements:
+    _permission: 'administer pbp play entities'

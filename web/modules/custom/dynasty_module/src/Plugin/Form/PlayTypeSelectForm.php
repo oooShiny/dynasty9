@@ -54,8 +54,15 @@ class PlayTypeSelectForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    $path = '/search/plays?f[0]=play_type:' . $values['play_types'];
-    $url = Url::fromUserInput($path);
+    // The select's option keys are rawurlencode()'d term labels (see
+    // ::buildForm() above); decode back to the plain label and let Url
+    // handle query-string encoding, so it matches what the Highlight
+    // Search page's JS actually filters on (play_type.label), rather than
+    // the old f[0]=play_type:<value> Facets/Views-style param it never
+    // understood.
+    $url = Url::fromUserInput('/search/highlights', [
+      'query' => ['play_type' => rawurldecode($values['play_types'])],
+    ]);
     $form_state->setRedirectUrl($url);
   }
 }

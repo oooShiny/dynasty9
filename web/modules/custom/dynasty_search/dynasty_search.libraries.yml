@@ -13,13 +13,43 @@ game_search:
     - dynasty_tw/select2.theme
     - better_exposed_filters/nouislider
 
-play_search:
+highlight_search:
   version: 1.x
   css:
     component:
-      css/play-search.css: {}
+      css/highlight-search.css: {}
   js:
-    js/play-search.js: {}
+    js/highlight-search.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+    - select2/select2
+    - dynasty_tw/select2.theme
+    - better_exposed_filters/nouislider
+
+stat_search:
+  version: 1.x
+  css:
+    component:
+      css/stat-search.css: {}
+  js:
+    js/stat-search.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - core/jquery
+    - select2/select2
+    - dynasty_tw/select2.theme
+    - better_exposed_filters/nouislider
+
+pbp_search:
+  version: 1.x
+  css:
+    component:
+      css/pbp-search.css: {}
+  js:
+    js/pbp-search.js: {}
   dependencies:
     - core/drupal
     - core/once

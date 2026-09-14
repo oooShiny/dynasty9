@@ -18,3 +18,45 @@ edit play entities:
 view play entities:
   title: 'View play entities'
   description: 'Allow to view Play entities.'
+
+administer player game stat entities:
+  title: 'Administer player game stat entities'
+  description: 'Allow to access the administration form to configure Player Game Stat entities.'
+  restrict access: true
+
+add player game stat entities:
+  title: 'Add player game stat entities'
+  description: 'Allow to add Player Game Stat entities.'
+
+delete player game stat entities:
+  title: 'Delete player game stat entities'
+  description: 'Allow to delete Player Game Stat entities.'
+
+edit player game stat entities:
+  title: 'Edit player game stat entities'
+  description: 'Allow to edit Player Game Stat entities.'
+
+view player game stat entities:
+  title: 'View player game stat entities'
+  description: 'Allow to view Player Game Stat entities.'
+
+administer pbp play entities:
+  title: 'Administer play-by-play entities'
+  description: 'Allow to access the administration form to configure Play-by-Play entities.'
+  restrict access: true
+
+add pbp play entities:
+  title: 'Add play-by-play entities'
+  description: 'Allow to add Play-by-Play entities.'
+
+delete pbp play entities:
+  title: 'Delete play-by-play entities'
+  description: 'Allow to delete Play-by-Play entities.'
+
+edit pbp play entities:
+  title: 'Edit play-by-play entities'
+  description: 'Allow to edit Play-by-Play entities.'
+
+view pbp play entities:
+  title: 'View play-by-play entities'
+  description: 'Allow to view Play-by-Play entities.'

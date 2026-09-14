@@ -1,0 +1,216 @@
+{#
+/**
+ * @file
+ * Stat Finder page shell. All data is loaded client-side from
+ * /dynasty/search/stats by js/stat-search.js — this template only provides
+ * the filter controls, group-by controls, and empty result containers.
+ * The results table's <thead> and <tbody> are both built by JS, since the
+ * columns shown depend on the current "group by" selection.
+ */
+#}
+
+{% set player_filter %}
+  <label for="ss-filter-player" class="block text-sm mb-1">Player</label>
+  <select id="ss-filter-player" multiple class="text-blue-pats select2-widget w-full" data-select2-config='{"placeholder":"- Select Player -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set category_filter %}
+  <label for="ss-filter-category" class="block text-sm mb-1">Category</label>
+  <select id="ss-filter-category" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Category -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set quarter_filter %}
+  <label for="ss-filter-quarter" class="block text-sm mb-1">Quarter</label>
+  <select id="ss-filter-quarter" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Quarter -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set season_filter %}
+  <label for="ss-filter-season" class="block text-sm mb-1">Season</label>
+  <select id="ss-filter-season" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Season(s) -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set week_filter %}
+  <label for="ss-filter-week" class="block text-sm mb-1">Week</label>
+  <select id="ss-filter-week" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select a Week -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set opponent_filter %}
+  <label for="ss-filter-opponent" class="block text-sm mb-1">Opponent</label>
+  <select id="ss-filter-opponent" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Team -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set home_away_filter %}
+  <div class="text-sm mb-1">Home/Away</div>
+  <div class="ss-toggle-group flex gap-1" data-filter="home_away">
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="Home">Home</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="Away">Away</button>
+  </div>
+{% endset %}
+
+{% set result_filter %}
+  <div class="text-sm mb-1">Game Result</div>
+  <div class="ss-toggle-group flex gap-1" data-filter="result">
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="Win">Win</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="Loss">Loss</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="Tie">Tie</button>
+  </div>
+{% endset %}
+
+{% set playoff_filter %}
+  <div class="text-sm mb-1">Playoff Game</div>
+  <div class="ss-toggle-group flex gap-1" data-filter="playoff_game">
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="1">Yes</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="0">No</button>
+  </div>
+{% endset %}
+
+{% set game_type_group %}
+  <details class="ss-filter-group" id="ss-group-game-type">
+    <summary class="cursor-pointer font-semibold">Game Type</summary>
+    <div class="pt-3 space-y-3">
+      <div>{{ home_away_filter }}</div>
+      <div>{{ result_filter }}</div>
+      <div>{{ playoff_filter }}</div>
+    </div>
+  </details>
+{% endset %}
+
+{% macro slider(id, label) %}
+  <div class="mb-8">
+    <div class="text-sm mb-4">{{ label }}</div>
+    <div id="{{ id }}" class="bef-slider"></div>
+    <div class="slider-min-max-labels"><span class="min-label"></span><span class="max-label"></span></div>
+  </div>
+{% endmacro %}
+{% import _self as self %}
+
+{% set passing_group %}
+  <details class="ss-filter-group" id="ss-group-passing">
+    <summary class="cursor-pointer font-semibold">Passing Stats</summary>
+    <div class="pt-3">
+      {{ self.slider('ss-slider-completions', 'Completions') }}
+      {{ self.slider('ss-slider-attempts', 'Attempts') }}
+      {{ self.slider('ss-slider-pass-yards', 'Passing Yards') }}
+      {{ self.slider('ss-slider-pass-td', 'Passing Touchdowns') }}
+      {{ self.slider('ss-slider-interceptions', 'Interceptions') }}
+    </div>
+  </details>
+{% endset %}
+
+{% set rushing_group %}
+  <details class="ss-filter-group" id="ss-group-rushing">
+    <summary class="cursor-pointer font-semibold">Rushing Stats</summary>
+    <div class="pt-3">
+      {{ self.slider('ss-slider-carries', 'Carries') }}
+      {{ self.slider('ss-slider-rush-yards', 'Rushing Yards') }}
+      {{ self.slider('ss-slider-rush-td', 'Rushing Touchdowns') }}
+    </div>
+  </details>
+{% endset %}
+
+{% set receiving_group %}
+  <details class="ss-filter-group" id="ss-group-receiving">
+    <summary class="cursor-pointer font-semibold">Receiving Stats</summary>
+    <div class="pt-3">
+      {{ self.slider('ss-slider-targets', 'Targets') }}
+      {{ self.slider('ss-slider-receptions', 'Receptions') }}
+      {{ self.slider('ss-slider-rec-yards', 'Receiving Yards') }}
+      {{ self.slider('ss-slider-rec-td', 'Receiving Touchdowns') }}
+    </div>
+  </details>
+{% endset %}
+
+{% set scoring_team_filter %}
+  <label for="ss-filter-scoring-team" class="block text-sm mb-1">Scoring Team</label>
+  <select id="ss-filter-scoring-team" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Team -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set turnover_filter %}
+  <div class="text-sm mb-1">Turnover</div>
+  <div class="ss-toggle-group flex gap-1" data-filter="turnover">
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="1">Yes</button>
+    <button type="button" class="ss-toggle px-3 py-1 border rounded" data-value="0">No</button>
+  </div>
+{% endset %}
+
+{% set scoring_play_group %}
+  <details class="ss-filter-group" id="ss-group-scoring-play">
+    <summary class="cursor-pointer font-semibold">Scoring Plays</summary>
+    <div class="pt-3 space-y-3">
+      <p class="text-xs opacity-80">Filters below apply to Scoring Play rows (Category: Scoring Play).</p>
+      <div>{{ scoring_team_filter }}</div>
+      <div>{{ turnover_filter }}</div>
+      {{ self.slider('ss-slider-distance', 'Distance (yards)') }}
+    </div>
+  </details>
+{% endset %}
+
+{% set reset_filter %}
+  <button type="button" id="ss-reset" class="w-full px-3 py-2 bg-red-pats text-white rounded">Reset Search</button>
+{% endset %}
+
+{#
+  A single copy of the filter panel, shown as an always-visible sidebar on
+  desktop and a collapsible "Filters ▼" drawer on mobile.
+#}
+<div id="stat-search-app" class="mx-auto">
+  <div class="flex flex-wrap md:!flex-nowrap gap-4">
+    <div class="w-full md:!w-1/4">
+      <h2 id="ss-filter-toggle" class="md:!hidden bg-gray-500 font-light p-2 text-center text-white text-xl uppercase" style="cursor: pointer">Filters &#9660;</h2>
+      <div id="ss-filters-panel" class="hidden md:!block bg-blue-pats text-gray-300 border border-gray-400 p-2 shadow-lg divide-y">
+        <div class="p-3">{{ player_filter }}</div>
+        <div class="p-3">{{ category_filter }}</div>
+        <div class="p-3">{{ quarter_filter }}</div>
+        <div class="p-3">{{ season_filter }}</div>
+        <div class="p-3">{{ week_filter }}</div>
+        <div class="p-3">{{ opponent_filter }}</div>
+        <div class="border border-white p-3 my-1">{{ game_type_group }}</div>
+        <div class="border border-white p-3 my-1">{{ passing_group }}</div>
+        <div class="border border-white p-3 my-1">{{ rushing_group }}</div>
+        <div class="border border-white p-3 my-1">{{ receiving_group }}</div>
+        <div class="border border-white p-3 my-1">{{ scoring_play_group }}</div>
+        <div class="p-3">{{ reset_filter }}</div>
+      </div>
+    </div>
+
+    <div class="w-full md:!w-3/4 min-w-0">
+      <div id="ss-summary" class="px-4 py-5 text-lg">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h2>Displaying <span class="text-red-pats"><span id="ss-count">0</span> stat lines</span></h2>
+          <button type="button" id="ss-clear-filters" class="hidden px-3 py-1 text-sm border-2 border-red-pats text-red-pats rounded cursor-pointer hover:bg-red-pats hover:text-white">Clear Filters</button>
+        </div>
+        <div id="ss-active-filters" class="flex flex-wrap gap-2 mt-2"></div>
+      </div>
+
+      <div class="px-4 pb-2">
+        <div class="text-sm mb-1">Group by</div>
+        <div id="ss-groupby" class="flex flex-wrap gap-1">
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="player">Player</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="season">Season</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="game">Game</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="category">Category</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="quarter">Quarter</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="opponent">Opponent</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="home_away">Home/Away</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="result">Result</button>
+          <button type="button" class="ss-groupby px-3 py-1 border rounded" data-dimension="scoring_team">Scoring Team</button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <div class="min-w-full inline-block align-middle">
+          <div class="overflow-hidden">
+            <table class="table w-full">
+              <thead id="ss-thead" class="bg-blue-pats text-white"></thead>
+              <tbody id="ss-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

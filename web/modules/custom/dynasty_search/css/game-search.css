@@ -2,7 +2,11 @@
  * Small bits that aren't plain Tailwind utility classes.
  */
 .gs-toggle {
+  /* Explicit text color -- this button is always on a white background,
+   * but without this it inherits the page's text color, which in dark
+   * mode is light and unreadable here. */
   background: #fff;
+  color: #002244;
 }
 .gs-toggle-active {
   background-color: #C60C30;

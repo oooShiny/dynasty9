@@ -294,3 +294,161 @@ function dynasty_plays_update_9002() {
 
   return $message;
 }
+
+/**
+ * Install the new Player Game Stat entity type.
+ */
+function dynasty_plays_update_9003() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  // Clear the definitions cache so the new entity type annotation is picked
+  // up before we try to install it.
+  $entity_type_manager->clearCachedDefinitions();
+
+  $entity_type = \Drupal::entityTypeManager()->getDefinition('player_game_stat');
+  $entity_definition_update_manager->installEntityType($entity_type);
+
+  return t('Installed the Player Game Stat entity type.');
+}
+
+/**
+ * Install the new Play-by-Play entity type.
+ */
+function dynasty_plays_update_9004() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_manager->clearCachedDefinitions();
+
+  $entity_type = \Drupal::entityTypeManager()->getDefinition('pbp_play');
+  $entity_definition_update_manager->installEntityType($entity_type);
+
+  return t('Installed the Play-by-Play entity type.');
+}
+
+/**
+ * Add the Player reference field to the Play entity.
+ */
+function dynasty_plays_update_9005() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_id = 'play';
+  $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+
+  $fields_to_add = [];
+
+  // Player(s) field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('play_player', $entity_type_id)) {
+    $fields_to_add['play_player'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Player(s)'))
+      ->setDescription(t('The player(s) directly involved in this play.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'player' => 'player',
+        ],
+      ])
+      ->setCardinality(\Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 10,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 10,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  foreach ($fields_to_add as $field_name => $field_definition) {
+    $entity_definition_update_manager->installFieldStorageDefinition(
+      $field_name,
+      $entity_type_id,
+      'dynasty_plays',
+      $field_definition
+    );
+  }
+
+  return t('Added @count new field(s) to the Play entity.', [
+    '@count' => count($fields_to_add),
+  ]);
+}
+
+/**
+ * Add the best-effort Player match field to the Play-by-Play entity.
+ */
+function dynasty_plays_update_9006() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_id = 'pbp_play';
+  $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+
+  $fields_to_add = [];
+
+  // Player field. Deliberately single-value (no ->setCardinality()
+  // override) and NOT translatable, so it lands as a plain `pbp_player`
+  // column on the `pbp_play` base table -- same as `pbp_game` already does
+  // -- so SearchDataController::playByPlay()'s raw SQL ->fields('p', [...])
+  // select can read it directly with no join or per-row Entity API load.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('pbp_player', $entity_type_id)) {
+    $fields_to_add['pbp_player'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Player'))
+      ->setDescription(t('Best-effort match of the primary player in this play, parsed from the detail text. Empty when no single confident match was found.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'player' => 'player',
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 13,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 13,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  foreach ($fields_to_add as $field_name => $field_definition) {
+    $entity_definition_update_manager->installFieldStorageDefinition(
+      $field_name,
+      $entity_type_id,
+      'dynasty_plays',
+      $field_definition
+    );
+  }
+
+  return t('Added @count new field(s) to the Play-by-Play entity.', [
+    '@count' => count($fields_to_add),
+  ]);
+}

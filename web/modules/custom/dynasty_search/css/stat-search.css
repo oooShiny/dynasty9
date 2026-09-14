@@ -1,0 +1,47 @@
+/**
+ * Small bits that aren't plain Tailwind utility classes.
+ */
+.ss-toggle {
+  /* Explicit text color -- this button is always on a white background,
+   * but without this it inherits the page's text color, which in dark
+   * mode is light and unreadable here. */
+  background: #fff;
+  color: #002244;
+}
+.ss-toggle-active {
+  background-color: #C60C30;
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Collapsible filter groups (e.g. "Passing Stats") in the sidebar. */
+.ss-filter-group > summary {
+  list-style: none;
+  color: #fff;
+}
+.ss-filter-group > summary::-webkit-details-marker {
+  display: none;
+}
+.ss-filter-group > summary::before {
+  content: '\25B8';
+  display: inline-block;
+  width: 1em;
+  transition: transform 0.15s ease;
+}
+.ss-filter-group[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+/* "Group by" chips -- unlike the exclusive toggle groups above, any number
+ * of these can be active at once. */
+.ss-groupby {
+  /* Same fix as .ss-toggle above -- always on a white background, so pin
+   * the text color instead of letting it inherit dark mode's light text. */
+  background: #fff;
+  color: #002244;
+}
+.ss-groupby-active {
+  background-color: #002244;
+  border-color: #fff;
+  color: #fff;
+}

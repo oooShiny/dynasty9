@@ -11,3 +11,31 @@ play.admin.structure.settings:
   description: 'Configure Play entity'
   route_name: play.settings
   parent: system.admin_structure
+
+# Player Game Stat menu items definition
+entity.player_game_stat.collection:
+  title: 'Player Game Stats'
+  route_name: entity.player_game_stat.collection
+  description: 'List of Player Game Stat entities'
+  parent: system.admin_content
+  weight: 99
+
+player_game_stat.admin.structure.settings:
+  title: Player Game Stat settings
+  description: 'Configure Player Game Stat entity'
+  route_name: player_game_stat.settings
+  parent: system.admin_structure
+
+# Play-by-Play menu items definition
+entity.pbp_play.collection:
+  title: 'Play-by-Play Entries'
+  route_name: entity.pbp_play.collection
+  description: 'List of Play-by-Play entities'
+  parent: system.admin_content
+  weight: 99
+
+pbp_play.admin.structure.settings:
+  title: Play-by-Play settings
+  description: 'Configure Play-by-Play entity'
+  route_name: pbp_play.settings
+  parent: system.admin_structure

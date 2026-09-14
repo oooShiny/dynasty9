@@ -22,17 +22,17 @@
     'C22 19.66 20.66 21 19 21L5 21C3.34 21 2 19.66 2 18C2 17.39 2 14.98 2 14Z" />' +
     '</svg>';
 
-  Drupal.behaviors.playSearch = {
+  Drupal.behaviors.highlightSearch = {
     attach: function (context) {
-      once('play-search-init', '#play-search-app', context).forEach(function (app) {
+      once('highlight-search-init', '#highlight-search-app', context).forEach(function (app) {
         initPlaySearch(app);
       });
     }
   };
 
   function initPlaySearch(app) {
-    const filterToggle = app.querySelector('#ps-filter-toggle');
-    const filterPanel = app.querySelector('#ps-filters-panel');
+    const filterToggle = app.querySelector('#hs-filter-toggle');
+    const filterPanel = app.querySelector('#hs-filters-panel');
     if (filterToggle && filterPanel) {
       filterToggle.addEventListener('click', function () {
         filterPanel.classList.toggle('hidden');
@@ -41,20 +41,20 @@
     }
 
     const els = {
-      search: app.querySelector('#ps-search'),
-      sort: app.querySelector('#ps-sort'),
-      results: app.querySelector('#ps-results'),
-      pagination: app.querySelector('#ps-pagination'),
-      summary: app.querySelector('#ps-result-summary'),
-      activeFilters: app.querySelector('#ps-active-filters'),
-      clearFilters: app.querySelector('#ps-clear-filters'),
-      playType: app.querySelector('#ps-filter-play-type'),
-      player: app.querySelector('#ps-filter-player'),
-      playTag: app.querySelector('#ps-filter-play-tag'),
-      season: app.querySelector('#ps-filter-season'),
-      down: app.querySelector('#ps-filter-down'),
-      quarter: app.querySelector('#ps-filter-quarter'),
-      reset: app.querySelector('#ps-reset'),
+      search: app.querySelector('#hs-search'),
+      sort: app.querySelector('#hs-sort'),
+      results: app.querySelector('#hs-results'),
+      pagination: app.querySelector('#hs-pagination'),
+      summary: app.querySelector('#hs-result-summary'),
+      activeFilters: app.querySelector('#hs-active-filters'),
+      clearFilters: app.querySelector('#hs-clear-filters'),
+      playType: app.querySelector('#hs-filter-play-type'),
+      player: app.querySelector('#hs-filter-player'),
+      playTag: app.querySelector('#hs-filter-play-tag'),
+      season: app.querySelector('#hs-filter-season'),
+      down: app.querySelector('#hs-filter-down'),
+      quarter: app.querySelector('#hs-filter-quarter'),
+      reset: app.querySelector('#hs-reset'),
     };
 
     let plays = [];
@@ -141,8 +141,8 @@
     // --- Range sliders ---
 
     function initRangeSliders() {
-      sliders.yards = createRangeSlider('ps-slider-yards', fieldRange(plays, 'yards_gained'));
-      sliders.airYards = createRangeSlider('ps-slider-air-yards', fieldRange(plays, 'air_yards'));
+      sliders.yards = createRangeSlider('hs-slider-yards', fieldRange(plays, 'yards_gained'));
+      sliders.airYards = createRangeSlider('hs-slider-air-yards', fieldRange(plays, 'air_yards'));
     }
 
     function fieldRange(rows, field) {
@@ -220,18 +220,18 @@
         if (window.jQuery) window.jQuery(select).on('change', onFilterChange);
       });
 
-      app.querySelectorAll('.ps-toggle-group').forEach(function (group) {
-        group.querySelectorAll('.ps-toggle').forEach(function (btn) {
+      app.querySelectorAll('.hs-toggle-group').forEach(function (group) {
+        group.querySelectorAll('.hs-toggle').forEach(function (btn) {
           btn.addEventListener('click', function () {
-            group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
-            btn.classList.add('ps-toggle-active');
+            group.querySelectorAll('.hs-toggle').forEach(function (b) { b.classList.remove('hs-toggle-active'); });
+            btn.classList.add('hs-toggle-active');
             onFilterChange();
           });
         });
       });
 
 
-      app.querySelectorAll('.ps-popular-search').forEach(function (btn) {
+      app.querySelectorAll('.hs-popular-search').forEach(function (btn) {
         btn.addEventListener('click', function () {
           if (els.search) els.search.value = btn.dataset.search;
           onFilterChange();
@@ -273,8 +273,8 @@
     }
 
     function initToggleDefaults() {
-      app.querySelectorAll('.ps-toggle-group').forEach(function (group) {
-        group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+      app.querySelectorAll('.hs-toggle-group').forEach(function (group) {
+        group.querySelector('.hs-toggle[data-value=""]').classList.add('hs-toggle-active');
       });
     }
 
@@ -293,9 +293,9 @@
         Array.from(select.options).forEach(function (o) { o.selected = false; });
         refreshSelect2(select);
       });
-      app.querySelectorAll('.ps-toggle-group').forEach(function (group) {
-        group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
-        group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+      app.querySelectorAll('.hs-toggle-group').forEach(function (group) {
+        group.querySelectorAll('.hs-toggle').forEach(function (b) { b.classList.remove('hs-toggle-active'); });
+        group.querySelector('.hs-toggle[data-value=""]').classList.add('hs-toggle-active');
       });
       [sliders.yards, sliders.airYards].forEach(function (s) {
         if (s && s.el.noUiSlider) s.el.noUiSlider.set([s.range.min, s.range.max]);
@@ -309,9 +309,9 @@
     }
 
     function toggleValue(filterName) {
-      const group = app.querySelector('.ps-toggle-group[data-filter="' + filterName + '"]');
+      const group = app.querySelector('.hs-toggle-group[data-filter="' + filterName + '"]');
       if (!group) return '';
-      const active = group.querySelector('.ps-toggle-active');
+      const active = group.querySelector('.hs-toggle-active');
       return active ? active.dataset.value : '';
     }
 
@@ -421,10 +421,10 @@
         });
         refreshSelect2(map[type]);
       } else {
-        const group = app.querySelector('.ps-toggle-group[data-filter="' + type + '"]');
+        const group = app.querySelector('.hs-toggle-group[data-filter="' + type + '"]');
         if (group) {
-          group.querySelectorAll('.ps-toggle').forEach(function (b) { b.classList.remove('ps-toggle-active'); });
-          group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+          group.querySelectorAll('.hs-toggle').forEach(function (b) { b.classList.remove('hs-toggle-active'); });
+          group.querySelector('.hs-toggle[data-value=""]').classList.add('hs-toggle-active');
         }
       }
     }
@@ -535,13 +535,13 @@
     }
 
     function setToggle(filterName, value) {
-      const group = app.querySelector('.ps-toggle-group[data-filter="' + filterName + '"]');
+      const group = app.querySelector('.hs-toggle-group[data-filter="' + filterName + '"]');
       if (!group) return;
-      group.querySelectorAll('.ps-toggle').forEach(function (b) {
-        b.classList.toggle('ps-toggle-active', b.dataset.value === value);
+      group.querySelectorAll('.hs-toggle').forEach(function (b) {
+        b.classList.toggle('hs-toggle-active', b.dataset.value === value);
       });
-      if (!group.querySelector('.ps-toggle-active')) {
-        group.querySelector('.ps-toggle[data-value=""]').classList.add('ps-toggle-active');
+      if (!group.querySelector('.hs-toggle-active')) {
+        group.querySelector('.hs-toggle[data-value=""]').classList.add('hs-toggle-active');
       }
     }
   }

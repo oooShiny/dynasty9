@@ -30,7 +30,7 @@ class LinkButtonsBlock extends BlockBase {
       ],
       'plays' => [
         ['link' => '/top-plays', 'text' => 'Top Plays'],
-        ['link' => '/search/plays', 'text' => 'Search Plays'],
+        ['link' => '/search/highlights', 'text' => 'Search Highlights'],
         ['link' => '/players', 'text' => 'Players'],
       ],
       'pod' => [

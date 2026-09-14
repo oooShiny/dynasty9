@@ -20,3 +20,49 @@ play.settings:
   route_name: play.settings
   base_route: play.settings
   title: 'Settings'
+
+# Player Game Stat task links
+entity.player_game_stat.canonical:
+  route_name: entity.player_game_stat.canonical
+  base_route: entity.player_game_stat.canonical
+  title: 'View'
+
+entity.player_game_stat.edit_form:
+  route_name: entity.player_game_stat.edit_form
+  base_route: entity.player_game_stat.canonical
+  title: 'Edit'
+
+entity.player_game_stat.delete_form:
+  route_name: entity.player_game_stat.delete_form
+  base_route: entity.player_game_stat.canonical
+  title: Delete
+  weight: 10
+
+# Player Game Stat settings task links
+player_game_stat.settings:
+  route_name: player_game_stat.settings
+  base_route: player_game_stat.settings
+  title: 'Settings'
+
+# Play-by-Play task links
+entity.pbp_play.canonical:
+  route_name: entity.pbp_play.canonical
+  base_route: entity.pbp_play.canonical
+  title: 'View'
+
+entity.pbp_play.edit_form:
+  route_name: entity.pbp_play.edit_form
+  base_route: entity.pbp_play.canonical
+  title: 'Edit'
+
+entity.pbp_play.delete_form:
+  route_name: entity.pbp_play.delete_form
+  base_route: entity.pbp_play.canonical
+  title: Delete
+  weight: 10
+
+# Play-by-Play settings task links
+pbp_play.settings:
+  route_name: pbp_play.settings
+  base_route: pbp_play.settings
+  title: 'Settings'
