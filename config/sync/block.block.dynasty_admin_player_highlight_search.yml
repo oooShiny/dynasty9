@@ -1,0 +1,30 @@
+uuid: bf3ff48e-b6d2-4a22-9abd-7e9ef043c063
+langcode: en
+status: true
+dependencies:
+  module:
+    - dynasty_search
+    - node
+  theme:
+    - dynasty_admin
+id: dynasty_admin_player_highlight_search
+theme: dynasty_admin
+region: content
+weight: -7
+provider: null
+plugin: player_highlight_search_block
+settings:
+  id: player_highlight_search_block
+  label: ''
+  label_display: '0'
+  provider: dynasty_search
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      player: player
