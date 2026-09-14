@@ -146,25 +146,39 @@ class GamePlayerMatcher {
    * free-text play description.
    *
    * Unlike ::matchPlayer(), which parses a clean "X. Lastname" CSV column,
-   * this scans unstructured text (e.g. pbp_play's `pbp_detail`, such as
-   * "Steve Grogan pass complete to Stanley Morgan for 12 yards") for
-   * capitalized First Last name bigrams, matches each against the player
-   * index by *exact* first name (free text spells names out in full, unlike
-   * the CSV's initials), and returns a match only when exactly one distinct
-   * Player node is identified across the whole string.
+   * this scans unstructured text and handles two distinct detail-text
+   * styles depending on source era:
+   *
+   * - Pre-2000 rows spell names out in full prose (e.g. "Steve Grogan pass
+   *   complete to Stanley Morgan for 12 yards") -- matched as capitalized
+   *   First Last bigrams, resolved against the player index by *exact*
+   *   first name (free text spells names out in full, unlike the CSV's
+   *   initials).
+   * - 2000+ rows use Pro Football Reference's "<jersey>-<Initial(s)>.
+   *   <Surname>" box-score shorthand instead (e.g. "9-C.Palmer pass
+   *   complete to 81-T.Owens", or a truncated multi-letter initial for
+   *   disambiguation like "14-Sh.Hill"). The "Initial(s).Surname" portion
+   *   is the exact same shape as the quarterly-stats CSV's player column,
+   *   so each token found is resolved by handing it to ::matchPlayer().
+   *
+   * Both passes accumulate into one set of distinct matched Player node
+   * IDs; a match is returned only when exactly one distinct Player node is
+   * identified across the whole string, regardless of which pattern(s)
+   * found it.
    *
    * This is deliberately conservative: most rows describing a pass (passer
    * + receiver, often plus a parenthetical tackler) will resolve to more
    * than one distinct player and therefore return NULL by design, the same
    * way ::matchPlayer() leaves ambiguous CSV rows unmatched rather than
-   * guessing. A low overall hit rate is expected, not a bug.
+   * guessing. A low overall hit rate on pass plays is expected, not a bug.
    *
    * Known limitations: common-surname false positives are theoretically
-   * possible (rare, given the full-name + single-match requirement);
-   * 3+-word surnames aren't matched (only two-token windows are scanned);
-   * nicknames/short first names miss safely (return NULL rather than a
-   * wrong guess). Since this only affects import-time population, the
-   * heuristic can be improved later without any schema change.
+   * possible (rare, given the full-name/initial + single-match
+   * requirement); 3+-word surnames aren't matched by the prose pattern
+   * (only two-token windows are scanned); nicknames/short first names miss
+   * safely (return NULL rather than a wrong guess). Since this only
+   * affects import-time population, the heuristic can be improved later
+   * without any schema change.
    *
    * @param string $detail
    *   The raw play-by-play detail text.
@@ -180,25 +194,35 @@ class GamePlayerMatcher {
       return NULL;
     }
 
-    if (!preg_match_all('/\b([A-Z][a-zA-Z\'\-]*)\s+([A-Z][a-zA-Z\'\-]*)\b/', $detail, $matches, PREG_SET_ORDER)) {
-      return NULL;
+    $resolved = [];
+
+    // Pre-2000 style: "First Last" prose bigrams.
+    if (preg_match_all('/\b([A-Z][a-zA-Z\'\-]*)\s+([A-Z][a-zA-Z\'\-]*)\b/', $detail, $matches, PREG_SET_ORDER)) {
+      foreach ($matches as $match) {
+        [, $first, $last] = $match;
+        $key = mb_strtolower($last);
+        if (empty($player_index[$key])) {
+          continue;
+        }
+
+        $first_lower = mb_strtolower($first);
+        $candidates = array_filter($player_index[$key], function ($candidate) use ($first_lower) {
+          return $candidate['first'] === $first_lower;
+        });
+
+        if (count($candidates) === 1) {
+          $resolved[reset($candidates)['nid']] = TRUE;
+        }
+      }
     }
 
-    $resolved = [];
-    foreach ($matches as $match) {
-      [, $first, $last] = $match;
-      $key = mb_strtolower($last);
-      if (empty($player_index[$key])) {
-        continue;
-      }
-
-      $first_lower = mb_strtolower($first);
-      $candidates = array_filter($player_index[$key], function ($candidate) use ($first_lower) {
-        return $candidate['first'] === $first_lower;
-      });
-
-      if (count($candidates) === 1) {
-        $resolved[reset($candidates)['nid']] = TRUE;
+    // 2000+ style: "<jersey>-<Initial(s)>.<Surname>" PFR box-score tokens.
+    if (preg_match_all('/\d{1,2}-([A-Za-z]{1,4}\.[A-Za-z\'\-]+)/', $detail, $matches2)) {
+      foreach ($matches2[1] as $token) {
+        $nid = $this->matchPlayer($token, $player_index);
+        if ($nid) {
+          $resolved[$nid] = TRUE;
+        }
       }
     }
 
