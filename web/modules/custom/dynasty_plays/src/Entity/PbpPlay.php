@@ -532,6 +532,94 @@ class PbpPlay extends ContentEntityBase implements PbpPlayInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    // Scoring Play field - computed at import time from a running-score
+    // delta against the previous row in the same game (reliable; not a
+    // text-pattern guess). Replaces the old `play` entity's scoring_play
+    // field, now derivable for every imported season instead of just one.
+    $fields['pbp_scoring_play'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Scoring Play'))
+      ->setDescription(t('Whether the running score changed on this play, relative to the previous play in the same game.'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'boolean',
+        'weight' => 14,
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => 14,
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Scoring Team field - 'Patriots' if the Patriots' score increased on
+    // this play, the opponent's name (from the source CSV's own `opponent`
+    // column) if the opponent's score increased, NULL otherwise.
+    $fields['pbp_scoring_team'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Scoring Team'))
+      ->setDescription(t('The team that scored on this play, if any.'))
+      ->setSettings([
+        'max_length' => 50,
+        'text_processing' => 0,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => 15,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 15,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Highlight field - manually-curated link to a Highlight node for this
+    // play, where one exists. Deliberately single-value and NOT
+    // translatable/multi-cardinality, same reasoning as pbp_player: keeps
+    // this a plain column on the pbp_play base table so
+    // SearchDataController::playByPlay()'s raw SQL query can keep reading
+    // it directly. Populated only via manual curation, not fuzzy
+    // auto-matching (the same scope decision made for pbp_player's
+    // matchPlayerInDetail(), applied here: matching a play's text against
+    // a highlight's context was judged lower-value/higher-risk).
+    $fields['pbp_highlight'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Highlight'))
+      ->setDescription(t('The Highlight video for this play, if one has been manually linked.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'highlight' => 'highlight',
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 16,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 16,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     return $fields;
   }
 

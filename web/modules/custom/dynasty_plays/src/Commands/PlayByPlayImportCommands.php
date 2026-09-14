@@ -94,6 +94,7 @@ class PlayByPlayImportCommands extends DrushCommands {
     $processed = 0;
     $missing_games = [];
     $player_matched = 0;
+    $scoring_plays_found = 0;
     $limit = $options['limit'] ? (int) $options['limit'] : NULL;
 
     foreach ($files as $file) {
@@ -114,6 +115,10 @@ class PlayByPlayImportCommands extends DrushCommands {
       // Sequence is per-game, not per-file: reset whenever the matched
       // game changes so plays are numbered 1, 2, 3... within each game.
       $sequence_by_game = [];
+      // Tracks the last [patriots_score, opponent_score] seen for each
+      // game, so a scoring play can be detected as a delta against the
+      // previous row -- reliable, unlike guessing from detail text.
+      $prev_score_by_game = [];
 
       while (($row = fgetcsv($handle)) !== FALSE) {
         if ($limit !== NULL && $file_rows >= $limit) {
@@ -149,6 +154,29 @@ class PlayByPlayImportCommands extends DrushCommands {
         }
         $sequence_by_game[$nid]++;
 
+        $patriots_score = $this->intOrNull($data['patriots_score'] ?? '');
+        $opponent_score = $this->intOrNull($data['opponent_score'] ?? '');
+
+        // Scoring play/team: a play is scoring when the running score
+        // strictly increased versus the previous play in this game. The
+        // scoring team's name comes straight from the CSV's own `opponent`
+        // column when the opponent scored, so it matches whatever label
+        // that season's source data already uses.
+        $scoring_play = FALSE;
+        $scoring_team = NULL;
+        if (isset($prev_score_by_game[$nid])) {
+          [$prev_patriots_score, $prev_opponent_score] = $prev_score_by_game[$nid];
+          if ($patriots_score !== NULL && $prev_patriots_score !== NULL && $patriots_score > $prev_patriots_score) {
+            $scoring_play = TRUE;
+            $scoring_team = 'Patriots';
+          }
+          elseif ($opponent_score !== NULL && $prev_opponent_score !== NULL && $opponent_score > $prev_opponent_score) {
+            $scoring_play = TRUE;
+            $scoring_team = trim($data['opponent'] ?? '') ?: NULL;
+          }
+        }
+        $prev_score_by_game[$nid] = [$patriots_score, $opponent_score];
+
         $values = [
           'pbp_game' => $nid,
           'pbp_sequence' => $sequence_by_game[$nid],
@@ -157,16 +185,22 @@ class PlayByPlayImportCommands extends DrushCommands {
           'pbp_down' => $this->intOrNull($data['down'] ?? ''),
           'pbp_distance' => $this->intOrNull($data['yds_to_go'] ?? ''),
           'pbp_location' => trim($data['location'] ?? '') ?: NULL,
-          'pbp_patriots_score' => $this->intOrNull($data['patriots_score'] ?? ''),
-          'pbp_opponent_score' => $this->intOrNull($data['opponent_score'] ?? ''),
+          'pbp_patriots_score' => $patriots_score,
+          'pbp_opponent_score' => $opponent_score,
           'pbp_detail' => $detail,
           'pbp_epb' => $this->floatOrNull($data['epb'] ?? ''),
           'pbp_epa' => $this->floatOrNull($data['epa'] ?? ''),
           'pbp_source_url' => trim($data['boxscore_url'] ?? '') ?: NULL,
+          'pbp_scoring_play' => $scoring_play,
+          'pbp_scoring_team' => $scoring_team,
         ];
 
         if ($player_nid) {
           $values['pbp_player'] = $player_nid;
+        }
+
+        if ($scoring_play) {
+          $scoring_plays_found++;
         }
 
         $entity = $pbp_storage->create($values);
@@ -181,12 +215,13 @@ class PlayByPlayImportCommands extends DrushCommands {
     }
 
     $this->logger()->success(sprintf(
-      '%s %d of %d rows across %d files. Players matched: %d. Games not found: %d distinct labels (%d rows).',
+      '%s %d of %d rows across %d files. Players matched: %d. Scoring plays: %d. Games not found: %d distinct labels (%d rows).',
       $options['dry-run'] ? 'Checked' : 'Imported',
       $created,
       $processed,
       count($files),
       $player_matched,
+      $scoring_plays_found,
       count($missing_games),
       array_sum($missing_games)
     ));

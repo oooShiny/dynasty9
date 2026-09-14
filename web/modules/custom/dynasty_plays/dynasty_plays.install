@@ -452,3 +452,116 @@ function dynasty_plays_update_9006() {
     '@count' => count($fields_to_add),
   ]);
 }
+
+/**
+ * Add scoring-play, scoring-team, and highlight fields to the Play-by-Play
+ * entity, so it can take over the retired Play entity's role.
+ */
+function dynasty_plays_update_9007() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_id = 'pbp_play';
+  $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+
+  $fields_to_add = [];
+
+  // Scoring Play field. Computed at import time from a running-score delta
+  // against the previous row in the same game.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('pbp_scoring_play', $entity_type_id)) {
+    $fields_to_add['pbp_scoring_play'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Scoring Play'))
+      ->setDescription(t('Whether the running score changed on this play, relative to the previous play in the same game.'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'boolean',
+        'weight' => 14,
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => 14,
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Scoring Team field.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('pbp_scoring_team', $entity_type_id)) {
+    $fields_to_add['pbp_scoring_team'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Scoring Team'))
+      ->setDescription(t('The team that scored on this play, if any.'))
+      ->setSettings([
+        'max_length' => 50,
+        'text_processing' => 0,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => 15,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 15,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  // Highlight field. Deliberately single-value (no ->setCardinality()
+  // override) and NOT translatable, so it lands as a plain `pbp_highlight`
+  // column on the `pbp_play` base table -- same as `pbp_player` -- so
+  // SearchDataController::playByPlay()'s raw SQL ->fields('p', [...])
+  // select can read it directly with no join or per-row Entity API load.
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('pbp_highlight', $entity_type_id)) {
+    $fields_to_add['pbp_highlight'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Highlight'))
+      ->setDescription(t('The Highlight video for this play, if one has been manually linked.'))
+      ->setSetting('target_type', 'node')
+      ->setSetting('handler', 'default:node')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'highlight' => 'highlight',
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'entity_reference_label',
+        'weight' => 16,
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 16,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  foreach ($fields_to_add as $field_name => $field_definition) {
+    $entity_definition_update_manager->installFieldStorageDefinition(
+      $field_name,
+      $entity_type_id,
+      'dynasty_plays',
+      $field_definition
+    );
+  }
+
+  return t('Added @count new field(s) to the Play-by-Play entity.', [
+    '@count' => count($fields_to_add),
+  ]);
+}
