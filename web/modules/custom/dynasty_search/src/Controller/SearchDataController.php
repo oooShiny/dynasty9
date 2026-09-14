@@ -154,7 +154,10 @@ class SearchDataController extends ControllerBase {
 
       $players = [];
       foreach ($node->get('field_players_involved')->referencedEntities() as $player) {
-        $players[] = $player->label();
+        $players[] = [
+          'nid' => (int) $player->id(),
+          'name' => $player->label(),
+        ];
         $cache->addCacheableDependency($player);
       }
 

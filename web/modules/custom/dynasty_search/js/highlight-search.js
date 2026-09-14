@@ -52,7 +52,9 @@
       player: app.querySelector('#hs-filter-player'),
       playTag: app.querySelector('#hs-filter-play-tag'),
       season: app.querySelector('#hs-filter-season'),
+      opponent: app.querySelector('#hs-filter-opponent'),
       down: app.querySelector('#hs-filter-down'),
+      week: app.querySelector('#hs-filter-week'),
       quarter: app.querySelector('#hs-filter-quarter'),
       reset: app.querySelector('#hs-reset'),
     };
@@ -70,6 +72,22 @@
       })
       .then(function (data) {
         plays = data;
+
+        // Player-page embedding: when the app container carries a
+        // data-player-nid attribute (set by the Player Highlight Search
+        // block), scope the whole dataset to that player up front so every
+        // other filter dimension (down/season/opponent/etc.) cross-filters
+        // within just their highlights, and hide the now-redundant player
+        // select.
+        const playerNid = app.dataset.playerNid ? parseInt(app.dataset.playerNid, 10) : null;
+        if (playerNid) {
+          plays = plays.filter(function (p) {
+            return (p.players_involved || []).some(function (pl) { return pl.nid === playerNid; });
+          });
+          const playerWrapper = app.querySelector('#hs-filter-player-wrapper');
+          if (playerWrapper) playerWrapper.classList.add('hidden');
+        }
+
         updateFilterOptions(getFilters());
         initRangeSliders();
         bindEvents();
@@ -95,18 +113,22 @@
       const withoutPlayer = plays.filter(function (p) { return matches(p, f, 'player'); });
       const withoutPlayTag = plays.filter(function (p) { return matches(p, f, 'playTag'); });
       const withoutSeason = plays.filter(function (p) { return matches(p, f, 'season'); });
+      const withoutOpponent = plays.filter(function (p) { return matches(p, f, 'opponent'); });
       const withoutDown = plays.filter(function (p) { return matches(p, f, 'down'); });
+      const withoutWeek = plays.filter(function (p) { return matches(p, f, 'week'); });
       const withoutQuarter = plays.filter(function (p) { return matches(p, f, 'quarter'); });
 
       const wasRestoring = restoring;
       restoring = true;
       fillSelect(els.playType, uniqueSorted(withoutPlayType, function (p) { return p.play_type ? p.play_type.label : null; }));
-      fillSelect(els.player, uniqueSorted(withoutPlayer, null, function (p) { return p.players_involved || []; }));
+      fillPlayerSelect(els.player, uniquePlayers(withoutPlayer));
       fillSelect(els.playTag, uniqueSorted(withoutPlayTag, null, function (p) { return p.tag_play || []; }));
       fillSelect(els.season, uniqueSorted(withoutSeason, function (p) { return String(p.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
+      fillSelect(els.opponent, uniqueSorted(withoutOpponent, function (p) { return p.opponent || null; }));
       fillSelect(els.down, uniqueSorted(withoutDown, function (p) { return p.down ? String(p.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+      fillSelect(els.week, uniqueWeeks(withoutWeek));
       fillSelect(els.quarter, uniqueSorted(withoutQuarter, function (p) { return p.quarter ? String(p.quarter) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
-      [els.playType, els.player, els.playTag, els.season, els.down, els.quarter].forEach(refreshSelect2);
+      [els.playType, els.player, els.playTag, els.season, els.opponent, els.down, els.week, els.quarter].forEach(refreshSelect2);
       restoring = wasRestoring;
     }
 
@@ -130,6 +152,42 @@
         }
       });
       return Array.from(set).sort();
+    }
+
+    // week is {id, label, weight} like play_type -- sort by weight (season
+    // order), not alphabetically.
+    function uniqueWeeks(rows) {
+      const map = new Map();
+      rows.forEach(function (r) {
+        if (r.week) map.set(r.week.label, r.week.weight);
+      });
+      return Array.from(map.entries())
+        .sort(function (a, b) { return a[1] - b[1]; })
+        .map(function (e) { return e[0]; });
+    }
+
+    // players_involved is [{nid, name}, ...] -- dedupe by nid (not name) so
+    // two different Player nodes that happen to share a display name don't
+    // collide, matching the exact-match player scoping used elsewhere.
+    function uniquePlayers(rows) {
+      const map = new Map();
+      rows.forEach(function (r) {
+        (r.players_involved || []).forEach(function (pl) {
+          if (pl && pl.nid) map.set(pl.nid, pl.name);
+        });
+      });
+      return Array.from(map.entries())
+        .map(function (e) { return { nid: e[0], name: e[1] }; })
+        .sort(function (a, b) { return a.name.localeCompare(b.name); });
+    }
+
+    function fillPlayerSelect(select, players) {
+      if (!select) return;
+      const currentlySelected = Array.from(select.selectedOptions).map(function (o) { return o.value; });
+      select.innerHTML = players.map(function (p) {
+        const sel = currentlySelected.indexOf(String(p.nid)) !== -1 ? ' selected' : '';
+        return '<option value="' + p.nid + '"' + sel + '>' + escapeHtml(p.name) + '</option>';
+      }).join('');
     }
 
     function refreshSelect2(select) {
@@ -214,7 +272,7 @@
         els.sort.addEventListener('change', onFilterChange);
       }
 
-      [els.playType, els.player, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
+      [els.playType, els.player, els.playTag, els.season, els.opponent, els.down, els.week, els.quarter].forEach(function (select) {
         if (!select) return;
         select.addEventListener('change', onFilterChange);
         if (window.jQuery) window.jQuery(select).on('change', onFilterChange);
@@ -288,7 +346,7 @@
     function resetFilters() {
       if (els.search) els.search.value = '';
       if (els.sort) els.sort.value = 'newest';
-      [els.playType, els.player, els.playTag, els.season, els.down, els.quarter].forEach(function (select) {
+      [els.playType, els.player, els.playTag, els.season, els.opponent, els.down, els.week, els.quarter].forEach(function (select) {
         if (!select) return;
         Array.from(select.options).forEach(function (o) { o.selected = false; });
         refreshSelect2(select);
@@ -325,7 +383,9 @@
         player: selected(els.player),
         playTag: selected(els.playTag),
         season: selected(els.season),
+        opponent: selected(els.opponent),
         down: selected(els.down),
+        week: selected(els.week),
         quarter: selected(els.quarter),
         td_scored: toggleValue('td_scored'),
         minYards: yards[0],
@@ -337,14 +397,19 @@
 
     function matches(p, f, excludeField) {
       if (f.q) {
-        const haystack = [p.title, p.opponent, p.game_title].concat(p.players_involved || []).join(' ').toLowerCase();
+        const playerNames = (p.players_involved || []).map(function (pl) { return pl.name; });
+        const haystack = [p.title, p.opponent, p.game_title].concat(playerNames).join(' ').toLowerCase();
         if (haystack.indexOf(f.q) === -1) return false;
       }
       if (excludeField !== 'playType' && f.playType.length && (!p.play_type || f.playType.indexOf(p.play_type.label) === -1)) return false;
-      if (excludeField !== 'player' && f.player.length && !f.player.some(function (pl) { return (p.players_involved || []).indexOf(pl) !== -1; })) return false;
+      if (excludeField !== 'player' && f.player.length && !f.player.some(function (nid) {
+        return (p.players_involved || []).some(function (pl) { return String(pl.nid) === nid; });
+      })) return false;
       if (excludeField !== 'playTag' && f.playTag.length && !f.playTag.some(function (t) { return (p.tag_play || []).indexOf(t) !== -1; })) return false;
       if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(p.season)) === -1) return false;
+      if (excludeField !== 'opponent' && f.opponent.length && f.opponent.indexOf(p.opponent) === -1) return false;
       if (excludeField !== 'down' && f.down.length && f.down.indexOf(String(p.down)) === -1) return false;
+      if (excludeField !== 'week' && f.week.length && (!p.week || f.week.indexOf(p.week.label) === -1)) return false;
       if (excludeField !== 'quarter' && f.quarter.length && f.quarter.indexOf(String(p.quarter)) === -1) return false;
       if (f.td_scored !== '' && Boolean(p.td_scored) !== (f.td_scored === '1')) return false;
       if (f.minYards !== null && p.yards_gained < f.minYards) return false;
@@ -380,7 +445,7 @@
 
     function hasActiveFilters(f) {
       return Boolean(f.q) || f.playType.length > 0 || f.player.length > 0 || f.playTag.length > 0 || f.season.length > 0 ||
-        f.down.length > 0 || f.quarter.length > 0 || f.td_scored !== '' ||
+        f.opponent.length > 0 || f.down.length > 0 || f.week.length > 0 || f.quarter.length > 0 || f.td_scored !== '' ||
         f.minYards !== null || f.maxYards !== null || f.minAirYards !== null || f.maxAirYards !== null;
     }
 
@@ -392,10 +457,19 @@
       const chips = [];
       if (f.q) chips.push(chip('q', 'Search: ' + f.q));
       f.playType.forEach(function (v) { chips.push(chip('playType:' + v, 'Play Type', v)); });
-      f.player.forEach(function (v) { chips.push(chip('player:' + v, 'Player', v)); });
+      // f.player values are nids -- look up the display name from the
+      // select's own option text (present since updateFilterOptions()
+      // excludes the 'player' dimension from its own cross-filter, keeping
+      // the currently-selected option in the list).
+      f.player.forEach(function (v) {
+        const opt = els.player ? Array.from(els.player.options).find(function (o) { return o.value === v; }) : null;
+        chips.push(chip('player:' + v, 'Player', opt ? opt.textContent : v));
+      });
       f.playTag.forEach(function (v) { chips.push(chip('playTag:' + v, 'Tag', v)); });
       f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
+      f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent', v)); });
       f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down', v)); });
+      f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week', v)); });
       f.quarter.forEach(function (v) { chips.push(chip('quarter:' + v, 'Quarter', v)); });
       if (f.td_scored !== '') chips.push(chip('td_scored', 'TD', (f.td_scored === '1' ? 'Yes' : 'No')));
       els.activeFilters.innerHTML = chips.join('');
@@ -414,7 +488,7 @@
         return;
       }
       const [type, value] = key.split(/:(.*)/s);
-      const map = { playType: els.playType, player: els.player, playTag: els.playTag, season: els.season, down: els.down, quarter: els.quarter };
+      const map = { playType: els.playType, player: els.player, playTag: els.playTag, season: els.season, opponent: els.opponent, down: els.down, week: els.week, quarter: els.quarter };
       if (map[type]) {
         Array.from(map[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -498,7 +572,9 @@
       f.player.forEach(function (v) { params.append('player', v); });
       f.playTag.forEach(function (v) { params.append('play_tag', v); });
       f.season.forEach(function (v) { params.append('season', v); });
+      f.opponent.forEach(function (v) { params.append('opponent', v); });
       f.down.forEach(function (v) { params.append('down', v); });
+      f.week.forEach(function (v) { params.append('week', v); });
       f.quarter.forEach(function (v) { params.append('quarter', v); });
       if (f.td_scored !== '') params.set('td_scored', f.td_scored);
       if (f.minYards !== null) params.set('min_yards', f.minYards);
@@ -518,7 +594,9 @@
       setMulti(els.player, params.getAll('player'));
       setMulti(els.playTag, params.getAll('play_tag'));
       setMulti(els.season, params.getAll('season'));
+      setMulti(els.opponent, params.getAll('opponent'));
       setMulti(els.down, params.getAll('down'));
+      setMulti(els.week, params.getAll('week'));
       setMulti(els.quarter, params.getAll('quarter'));
       setToggle('td_scored', params.get('td_scored') || '');
       setSliderFromUrl(sliders.yards, params.get('min_yards'), params.get('max_yards'));
