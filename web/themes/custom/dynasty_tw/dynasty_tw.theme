@@ -172,6 +172,11 @@ function dynasty_tw_preprocess_node(&$variables) {
       $variables['muse_id'] = $node->get('field_muse_video_id')->value;
       break;
     case 'game':
+      // Entity ->id() comes back as a numeric string through Twig, but the
+      // game-show-notes SDC declares node_id as type: integer -- cast here
+      // rather than at the {% include %} call site, matching how the
+      // other typed props (e.g. season, below) are already handled.
+      $variables['node_id'] = (int) $node->id();
       if ($node->get('field_ot')->value == '0') {
         $variables['ot'] = FALSE;
       }
@@ -222,12 +227,16 @@ function dynasty_tw_preprocess_node(&$variables) {
       $variables['schema_opp'] = $opp->label();
       $variables['schema_name'] = $node->label();
 
-      // Multiple QB stats.
+      // Multiple QB stats. Always an array (never left unset), since the
+      // game-full/game-show-notes components declare `qbs` as a
+      // type: array prop -- an unset Twig variable resolves to NULL,
+      // which fails that schema check for any game with no "other QBs".
+      $variables['qbs'] = [];
       if (!$node->get('field_other_qbs')->isEmpty()) {
         foreach ($node->field_other_qbs->referencedEntities() as $qb) {
           $qb_node = Node::load($qb->field_qb->target_id);
 
-          $qbs[$qb_node->label()] = [
+          $variables['qbs'][$qb_node->label()] = [
             'url' => $qb_node->toUrl(),
             'att' => $qb->field_attempts->value,
             'comp' => $qb->field_completions->value,
@@ -237,7 +246,6 @@ function dynasty_tw_preprocess_node(&$variables) {
             'qbr' => $qb->field_qbr->value,
           ];
         }
-        $variables['qbs'] = $qbs;
       }
 
       // Add prev/next game blocks for podcast show notes view mode.
