@@ -1,13 +1,13 @@
 /**
  * @file
- * Play Search: fetches /dynasty/search/plays once, then does all
+ * Highlight Search: fetches /dynasty/search/highlights once, then does all
  * filtering/sorting/pagination client-side.
  */
 
 (function (Drupal, once) {
   'use strict';
 
-  const DATA_URL = '/dynasty/search/plays';
+  const DATA_URL = '/dynasty/search/highlights';
   const DEBOUNCE_MS = 300;
   const PER_PAGE = 12;
 
