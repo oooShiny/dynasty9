@@ -79,9 +79,6 @@ slots:
     description: Rendered as the href of the PFR link in the Game Info card (URL-only formatter expected).
   field_drive_charts:
     title: Drive charts field
-  scoring_plays:
-    title: Scoring plays view output
-    description: drupal_view("scoring_plays", "block_1", node_id) rendered in the calling template.
   opp_season_info:
     title: Opponent season info card body
     description: Wikipedia/PFR icons, season record, and division finish — all content.field_opponent_* for the season card.

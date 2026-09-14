@@ -17,7 +17,7 @@
  *
  * Slots: prev_next, field_date, patriots_score, opponent_score,
  *   field_pats_q1-q4, field_pats_ot, field_opp_q1-q4, field_opp_ot,
- *   video_links, field_pfr_link, field_drive_charts, scoring_plays,
+ *   video_links, field_pfr_link, field_drive_charts,
  *   opp_season_info, opp_team_ranks, opp_coaches, opp_draft_picks,
  *   opp_pro_bowlers, opp_offense, opp_defense, field_game_summary,
  *   game_highlights, field_other_media
@@ -157,16 +157,6 @@
 
   {# ── Game Information ──────────────────────────────────────────────────── #}
   <h2 id="game_info" class="divider text-3xl py-4">Game Information</h2>
-
-  <div class="flex justify-center">
-    {# Scoring plays — rendered view passed as a slot #}
-    <div class="m-4 border border-blue-pats w-fit rounded-lg">
-      <h3 class="bg-blue-pats text-white p-2 text-2xl text-center rounded-t-lg">Scoring Plays</h3>
-      <div class="p-4 text-left">
-        {{ scoring_plays }}
-      </div>
-    </div>
-  </div>
 
   <div class="flex justify-center">
     {# Drive charts #}
