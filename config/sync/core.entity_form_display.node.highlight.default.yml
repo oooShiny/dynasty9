@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.highlight.field_distance
     - field.field.node.highlight.field_down
     - field.field.node.highlight.field_game
-    - field.field.node.highlight.field_gfycat_id
     - field.field.node.highlight.field_meta_tags
     - field.field.node.highlight.field_minutes
     - field.field.node.highlight.field_muse_video_id
@@ -39,7 +38,6 @@ third_party_settings:
     group_video_info:
       children:
         - title
-        - field_gfycat_id
         - field_muse_video_id
         - field_video_file_id
         - field_play_of_the_game
@@ -140,14 +138,6 @@ content:
     settings:
       match_operator: CONTAINS
       match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_gfycat_id:
-    type: string_textfield
-    weight: 2
-    region: content
-    settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
@@ -286,6 +276,16 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 1
@@ -307,6 +307,8 @@ hidden:
   field_week: true
   path: true
   promote: true
+  publish_on: true
   status: true
   sticky: true
   uid: true
+  unpublish_on: true

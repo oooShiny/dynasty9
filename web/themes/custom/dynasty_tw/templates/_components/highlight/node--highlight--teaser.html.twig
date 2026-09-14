@@ -7,11 +7,11 @@
  *   - muse_id:    Skiv clip ID (used for shareable link).
  *   - video_file: Skiv CDN file ID (used for download link).
  *
- * The video slot receives whichever embed field is available.
- * field_muse_video_id is wired to dynasty_tw:video via the field template.
+ * The video slot receives field_muse_video_id, wired to dynasty_tw:video
+ * via the field template.
  */
 #}
-{% set video_slot = content.field_muse_video_id|render ? content.field_muse_video_id : content.field_gfycat_id %}
+{% set video_slot = content.field_muse_video_id %}
 
 {% include 'dynasty_tw:highlight-teaser' with {
   url:        url,

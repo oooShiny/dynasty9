@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.highlight.field_distance
     - field.field.node.highlight.field_down
     - field.field.node.highlight.field_game
-    - field.field.node.highlight.field_gfycat_id
     - field.field.node.highlight.field_meta_tags
     - field.field.node.highlight.field_minutes
     - field.field.node.highlight.field_muse_video_id
@@ -37,14 +36,6 @@ targetEntityType: node
 bundle: highlight
 mode: teaser
 content:
-  field_gfycat_id:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
   field_muse_video_id:
     type: string
     label: hidden

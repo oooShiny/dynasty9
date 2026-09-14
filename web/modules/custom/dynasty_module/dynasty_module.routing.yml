@@ -19,7 +19,7 @@ dynasty.videoimport:
   path: '/admin/dynasty/muse/import'
   defaults:
     _form: '\Drupal\dynasty_module\Form\GfycatMuseImportForm'
-    _title: 'Import Gfycat Videos from skiv.com'
+    _title: 'Import Videos from skiv.com'
   requirements:
     _permission: 'add muse videos'
   options:

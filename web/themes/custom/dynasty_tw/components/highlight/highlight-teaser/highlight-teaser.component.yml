@@ -26,4 +26,4 @@ props:
 slots:
   video:
     title: Video embed
-    description: Rendered field_muse_video_id or field_gfycat_id field output.
+    description: Rendered field_muse_video_id field output.

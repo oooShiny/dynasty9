@@ -15,13 +15,6 @@ basic_page:
   css:
     theme:
       css/basic-page.css: {}
-gfycat:
-  js:
-    js/gfycat_video.js: {}
-    js/gfycat_modal.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal.dialog
 muse_video:
   remote: https://skiv.com/static/js/embed-player.js
   version: 1.0

@@ -6,7 +6,6 @@ dependencies:
     - field.field.paragraph.highlight.field_air_yards
     - field.field.paragraph.highlight.field_distance
     - field.field.paragraph.highlight.field_down
-    - field.field.paragraph.highlight.field_gfycat_id
     - field.field.paragraph.highlight.field_minutes
     - field.field.paragraph.highlight.field_muse_video_id
     - field.field.paragraph.highlight.field_opponent
@@ -49,7 +48,6 @@ third_party_settings:
     group_video_info:
       children:
         - field_play_title
-        - field_gfycat_id
         - field_muse_video_id
       label: 'Video Info'
       region: content
@@ -123,14 +121,6 @@ content:
     weight: 3
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_gfycat_id:
-    type: string_textfield
-    weight: 2
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_minutes:
     type: number

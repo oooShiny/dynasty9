@@ -21,7 +21,7 @@ class PatsAdminController extends ControllerBase {
       ],
       'videos' => [
         '/admin/dynasty/map-highlights' => 'Map Highlights to Games',
-        '/admin/dynasty/muse/import' => 'Import Gfycat Videos from skiv.com',
+        '/admin/dynasty/muse/import' => 'Import Videos from skiv.com',
         '/admin/dynasty/muse/youtube' => 'Import Youtube Videos from skiv.com',
         '/admin/dynasty/missing-youtube-highlights' => 'Missing Youtube highlights',
       ],

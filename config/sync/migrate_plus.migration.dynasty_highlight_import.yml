@@ -74,9 +74,6 @@ source:
       name: field_down
       selector: field_down/0/value
     -
-      name: field_gfycat_id
-      selector: field_gfycat_embed_code/0/value
-    -
       name: field_opponent
       selector: field_opponent/0/target_id
     -
@@ -130,7 +127,6 @@ process:
   field_air_yards: field_air_yards
   field_distance: field_distance
   field_down: field_down
-  field_gfycat_id: field_gfycat_id
   field_minutes: field_minutes
   field_muse_video_id: field_muse_video_id
   field_opponent:
