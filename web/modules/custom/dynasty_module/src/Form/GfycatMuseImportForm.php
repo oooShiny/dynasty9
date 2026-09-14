@@ -114,7 +114,11 @@ class GfycatMuseImportForm extends ConfigFormBase {
         ->execute();
       $highlights =  Node::loadMultiple($nids);
       foreach ($highlights as $video) {
-        $vid_links[strtolower($video->get('field_gfycat_id')->value)] = $video->id();
+        // Match on the Highlight node's own title, same as the "Full Game"
+        // branch above matches on the Game node's title -- previously this
+        // matched on field_gfycat_id's value instead, which could never
+        // equal a skiv.com video title and left this branch a silent no-op.
+        $vid_links[strtolower($video->label())] = $video->id();
       }
 
       // Save the data as new video nodes.
