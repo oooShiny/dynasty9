@@ -130,7 +130,7 @@ class PlayByPlayImportCommands extends DrushCommands {
         $data = array_combine($header, array_pad($row, count($header), ''));
 
         $season = (int) ($data['season'] ?? 0);
-        $date_key = $this->buildDateKey($data['game_date'] ?? '', $season);
+        $date_key = $this->matcher->normalizeGameDate($data['game_date'] ?? '', $season);
         $nid = $date_key ? ($game_map[$date_key] ?? NULL) : NULL;
         if (!$nid) {
           $label = trim(($data['game_date'] ?? '') . ' ' . $season);
@@ -229,36 +229,6 @@ class PlayByPlayImportCommands extends DrushCommands {
     if ($missing_games) {
       $this->logger()->warning('Play rows with no matching Game node (by date): ' . implode(', ', array_keys($missing_games)));
     }
-  }
-
-  /**
-   * Builds a 'Y-m-d' date key from the CSV's "<Month> <Day>" game_date
-   * column plus the season. Postseason games in January/February belong
-   * to the following calendar year (e.g. season 1985's Super Bowl was
-   * played "January 26" 1986).
-   *
-   * @param string $game_date
-   *   E.g. "September 3" or "January 26".
-   * @param int $season
-   *   The season year, e.g. 1985.
-   *
-   * @return string|null
-   *   A 'Y-m-d' string, or NULL if $game_date couldn't be parsed.
-   */
-  protected function buildDateKey($game_date, $season) {
-    $game_date = trim($game_date);
-    if ($game_date === '' || !$season) {
-      return NULL;
-    }
-    $parts = explode(' ', $game_date, 2);
-    if (count($parts) !== 2) {
-      return NULL;
-    }
-    [$month, $day] = $parts;
-    $year = in_array($month, ['January', 'February'], TRUE) ? $season + 1 : $season;
-
-    $date = \DateTime::createFromFormat('F j Y', "$month $day $year");
-    return $date ? $date->format('Y-m-d') : NULL;
   }
 
   /**

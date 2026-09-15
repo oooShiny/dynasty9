@@ -103,12 +103,16 @@ class GamePlayerMatcher {
   /**
    * Attempts to match a CSV player label to a single Player node.
    *
-   * Handles both the standard "X. Lastname" format and the truncated
-   * disambiguator format used when two players share an initial in the same
-   * season (e.g. "Jak.Johnson", "Ma.Jones").
+   * Handles three formats, depending on CSV era: the standard "X. Lastname"
+   * shorthand (2000+ quarterly-stats CSV rows) and its truncated
+   * disambiguator variant used when two players share an initial in the
+   * same season (e.g. "Jak.Johnson", "Ma.Jones"); and a full "First Last"
+   * name (the quarterly-stats CSV's 1978-1999 rows, which spell names out
+   * in full rather than using the shorthand) -- delegated to
+   * ::matchPlayerFullName().
    *
    * @param string $name
-   *   The raw player label from the CSV (e.g. "D. Bledsoe").
+   *   The raw player label from the CSV (e.g. "D. Bledsoe" or "Steve Grogan").
    * @param array $player_index
    *   The index built by ::buildPlayerIndex().
    *
@@ -117,8 +121,13 @@ class GamePlayerMatcher {
    *   could be found.
    */
   public function matchPlayer($name, array $player_index) {
-    if ($name === '' || strpos($name, '.') === FALSE) {
+    $name = trim($name);
+    if ($name === '') {
       return NULL;
+    }
+
+    if (strpos($name, '.') === FALSE) {
+      return $this->matchPlayerFullName($name, $player_index);
     }
 
     [$prefix, $rest] = explode('.', $name, 2);
@@ -139,6 +148,91 @@ class GamePlayerMatcher {
     }
 
     return NULL;
+  }
+
+  /**
+   * Attempts to match a full "First Last" player name to a single Player
+   * node.
+   *
+   * Tokenizes the same way ::buildPlayerIndex() built its index (the first
+   * token is the first name; the remaining tokens, joined and with any
+   * suffix stripped, are the surname), so multi-word surnames (e.g. "Mark
+   * van Eeghen") match correctly. The first name must match exactly --
+   * unlike ::matchPlayer()'s initial-prefix matching, a full name is
+   * already unambiguous input, so there's no truncation to account for.
+   *
+   * @param string $name
+   *   A full player name, e.g. "Steve Grogan".
+   * @param array $player_index
+   *   The index built by ::buildPlayerIndex().
+   *
+   * @return int|null
+   *   The matched Player node ID, or NULL if no single confident match
+   *   could be found.
+   */
+  protected function matchPlayerFullName($name, array $player_index) {
+    $tokens = preg_split('/\s+/', $name);
+    if (count($tokens) < 2) {
+      return NULL;
+    }
+
+    $first = array_shift($tokens);
+    $last = trim(preg_replace(self::SUFFIX_PATTERN, '', implode(' ', $tokens)));
+    $key = mb_strtolower($last);
+
+    if ($key === '' || empty($player_index[$key])) {
+      return NULL;
+    }
+
+    $first_lower = mb_strtolower($first);
+    $candidates = array_filter($player_index[$key], function ($candidate) use ($first_lower) {
+      return $candidate['first'] === $first_lower;
+    });
+
+    return count($candidates) === 1 ? reset($candidates)['nid'] : NULL;
+  }
+
+  /**
+   * Normalizes a CSV row's game-date value to the 'Y-m-d' key used by
+   * ::buildGameDateMap(), accepting either format the dynasty_plays CSVs
+   * use: an already-'Y-m-d' string (the quarterly-stats CSV's 2000+ rows),
+   * or PFR's raw "<Month> <Day>" box-score style (the play-by-play CSV's
+   * rows, and the quarterly-stats CSV's 1978-1999 rows) which needs the
+   * season to resolve the year. Postseason games in January/February
+   * belong to the following calendar year (e.g. season 1985's Super Bowl
+   * was played "January 26" 1986).
+   *
+   * @param string $game_date
+   *   E.g. "2005-09-08", "September 3", or "January 26".
+   * @param int $season
+   *   The season year, e.g. 1985. Only consulted for the "<Month> <Day>"
+   *   format; ignored for an already-'Y-m-d' value.
+   *
+   * @return string|null
+   *   A 'Y-m-d' string, or NULL if $game_date couldn't be parsed.
+   */
+  public function normalizeGameDate($game_date, $season) {
+    $game_date = trim($game_date);
+    if ($game_date === '') {
+      return NULL;
+    }
+
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $game_date)) {
+      return $game_date;
+    }
+
+    if (!$season) {
+      return NULL;
+    }
+    $parts = explode(' ', $game_date, 2);
+    if (count($parts) !== 2) {
+      return NULL;
+    }
+    [$month, $day] = $parts;
+    $year = in_array($month, ['January', 'February'], TRUE) ? $season + 1 : $season;
+
+    $date = \DateTime::createFromFormat('F j Y', "$month $day $year");
+    return $date ? $date->format('Y-m-d') : NULL;
   }
 
   /**

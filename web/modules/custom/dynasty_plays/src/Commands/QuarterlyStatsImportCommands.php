@@ -132,8 +132,14 @@ class QuarterlyStatsImportCommands extends DrushCommands {
       // doesn't matter.
       $data = array_combine($header, array_pad($row, count($header), ''));
 
+      // The CSV mixes two date formats depending on era: 2000+ rows are
+      // already 'Y-m-d', while 1978-1999 rows use PFR's raw "<Month> <Day>"
+      // box-score style (matching the play-by-play CSV) and need the
+      // season to resolve the year -- ::normalizeGameDate() handles both.
+      $season = (int) ($data['season'] ?? 0);
       $game_date = trim($data['game_date'] ?? '');
-      $nid = $game_map[$game_date] ?? NULL;
+      $date_key = $this->matcher->normalizeGameDate($game_date, $season);
+      $nid = $date_key ? ($game_map[$date_key] ?? NULL) : NULL;
       if (!$nid) {
         $missing_games[$game_date] = ($missing_games[$game_date] ?? 0) + 1;
         continue;
