@@ -107,6 +107,11 @@
 .select2-selection__choice__remove:focus {
   @apply !bg-red-300;
 }
+.select2-container .select2-results__option {
+  @media (prefers-color-scheme: dark) {
+    @apply dark:text-blue-500;
+  }
+}
 
 /* Dynasty-themed NoUI Slider Styles */
 .bef-slider.noUi-target {

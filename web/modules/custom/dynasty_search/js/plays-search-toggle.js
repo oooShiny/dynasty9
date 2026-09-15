@@ -36,6 +36,7 @@
         buttons.forEach(function (btn) {
           const active = btn.dataset.mode === mode;
           btn.classList.toggle('bg-red-pats', active);
+          btn.classList.toggle('text-red-pats', false);
           btn.classList.toggle('text-white', active);
           btn.setAttribute('aria-pressed', active ? 'true' : 'false');
         });
