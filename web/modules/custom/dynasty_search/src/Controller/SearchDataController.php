@@ -219,6 +219,16 @@ class SearchDataController extends ControllerBase {
    * browsing individual plays -- duplicating individual play rows into
    * this per-player-stat-line endpoint no longer made sense.
    *
+   * Like ::playByPlay(), this queries the `player_game_stat` base table
+   * directly via raw SQL rather than the Entity API: at 25,000+ rows,
+   * per-entity field API overhead is expensive enough to exhaust PHP's
+   * memory limit on a constrained server (confirmed in production after
+   * the 1978-1999 data expansion roughly doubled this table's size). A
+   * direct query for the stat columns, resolving only the much smaller set
+   * of *distinct* Game/Player nodes through the Entity API (via
+   * ::gameContext(), which memoizes per game), keeps this well within
+   * normal memory bounds the same way it already does for ::playByPlay().
+   *
    * @see \Drupal\dynasty_plays\Entity\PlayerGameStat
    */
   public function stats(): CacheableJsonResponse {
@@ -227,54 +237,57 @@ class SearchDataController extends ControllerBase {
     $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
 
     $team_css = DynastyHelpers::get_team_css();
-    $data = [];
 
-    $stat_storage = $this->entityTypeManager()->getStorage('player_game_stat');
-    $stat_ids = $stat_storage->getQuery()
+    $rows = \Drupal::database()->select('player_game_stat', 's')
+      ->fields('s', [
+        'id', 'stat_game', 'stat_player_name', 'stat_player', 'stat_quarter', 'stat_category',
+        'stat_completions', 'stat_attempts', 'stat_pass_yards', 'stat_interceptions', 'stat_pass_td',
+        'stat_carries', 'stat_rush_yards', 'stat_rush_td',
+        'stat_targets', 'stat_receptions', 'stat_rec_yards', 'stat_rec_td',
+      ])
       ->condition('status', 1)
-      ->accessCheck(TRUE)
-      ->execute();
+      ->orderBy('id', 'ASC')
+      ->execute()
+      ->fetchAll(\PDO::FETCH_ASSOC);
 
-    // Loaded in slices to keep peak memory bounded; the (small) set of
-    // distinct Game/Player nodes referenced stays in the entity static
-    // cache across slices, so this doesn't repeat those loads.
-    foreach (array_chunk($stat_ids, 500) as $slice) {
-      foreach ($stat_storage->loadMultiple($slice) as $stat) {
-        $cache->addCacheableDependency($stat);
+    $game_ids = array_unique(array_filter(array_column($rows, 'stat_game')));
+    $games = $game_ids ? Node::loadMultiple($game_ids) : [];
 
-        $game = $stat->get('stat_game')->entity;
-        if (!$game) {
-          continue;
-        }
+    $player_ids = array_unique(array_filter(array_column($rows, 'stat_player')));
+    $players = $player_ids ? Node::loadMultiple($player_ids) : [];
 
-        $player = $stat->get('stat_player')->entity;
-        if ($player) {
-          $cache->addCacheableDependency($player);
-        }
+    $int_fields = [
+      'stat_completions', 'stat_attempts', 'stat_pass_yards', 'stat_interceptions', 'stat_pass_td',
+      'stat_carries', 'stat_rush_yards', 'stat_rush_td',
+      'stat_targets', 'stat_receptions', 'stat_rec_yards', 'stat_rec_td',
+    ];
 
-        $data[] = $this->gameContext($game, $cache, $team_css) + [
-          'id' => 'stat-' . $stat->id(),
-          'player_name' => $stat->get('stat_player_name')->value,
-          'player' => $player ? [
-            'nid' => (int) $player->id(),
-            'name' => $player->label(),
-          ] : NULL,
-          'quarter' => $stat->get('stat_quarter')->value,
-          'category' => $stat->get('stat_category')->value,
-          'completions' => $this->intOrNull($stat, 'stat_completions'),
-          'attempts' => $this->intOrNull($stat, 'stat_attempts'),
-          'pass_yards' => $this->intOrNull($stat, 'stat_pass_yards'),
-          'interceptions' => $this->intOrNull($stat, 'stat_interceptions'),
-          'pass_td' => $this->intOrNull($stat, 'stat_pass_td'),
-          'carries' => $this->intOrNull($stat, 'stat_carries'),
-          'rush_yards' => $this->intOrNull($stat, 'stat_rush_yards'),
-          'rush_td' => $this->intOrNull($stat, 'stat_rush_td'),
-          'targets' => $this->intOrNull($stat, 'stat_targets'),
-          'receptions' => $this->intOrNull($stat, 'stat_receptions'),
-          'rec_yards' => $this->intOrNull($stat, 'stat_rec_yards'),
-          'rec_td' => $this->intOrNull($stat, 'stat_rec_td'),
-        ];
+    $data = [];
+    foreach ($rows as $row) {
+      $game = $games[$row['stat_game']] ?? NULL;
+      if (!$game) {
+        continue;
       }
+
+      $player = $players[$row['stat_player']] ?? NULL;
+      if ($player) {
+        $cache->addCacheableDependency($player);
+      }
+
+      $stat_row = $this->gameContext($game, $cache, $team_css) + [
+        'id' => 'stat-' . $row['id'],
+        'player_name' => $row['stat_player_name'],
+        'player' => $player ? [
+          'nid' => (int) $player->id(),
+          'name' => $player->label(),
+        ] : NULL,
+        'quarter' => $row['stat_quarter'],
+        'category' => $row['stat_category'],
+      ];
+      foreach ($int_fields as $field) {
+        $stat_row[substr($field, 5)] = $row[$field] !== NULL ? (int) $row[$field] : NULL;
+      }
+      $data[] = $stat_row;
     }
 
     $response = new CacheableJsonResponse($data);
@@ -413,15 +426,6 @@ class SearchDataController extends ControllerBase {
       'playoff_game' => (bool) $game->get('field_playoff_game')->value,
       'result' => $game->get('field_result')->value,
     ];
-  }
-
-  /**
-   * Reads an integer field's value, preserving NULL (as opposed to the
-   * (int) cast elsewhere in this controller, which would turn NULL into 0
-   * for fields that are legitimately not applicable to a given stat row).
-   */
-  private function intOrNull($entity, string $field_name): ?int {
-    return $entity->get($field_name)->isEmpty() ? NULL : (int) $entity->get($field_name)->value;
   }
 
 }
