@@ -11,6 +11,12 @@
   const DEBOUNCE_MS = 300;
   const PER_PAGE = 12;
 
+  // Shown in the results area while the (permanently-cached, but sometimes
+  // slow on a cold cache) dataset is loading.
+  const LOADING_MARKUP = '<div class="p-5 w-full text-center">' +
+    '<span class="inline-block h-4 w-4 border-2 border-red-pats border-t-transparent rounded-full animate-spin align-middle mr-2"></span>' +
+    'Loading&hellip;</div>';
+
   const DOWNLOAD_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">' +
     '<path class="fill-white" d="M11.24 13.59L11.24 4C11.24 3.45 11.69 3 12.24 3C12.8 3 13.24 3.45 13.24 4L13.24 13.59' +
     'L15.78 11.05C16.17 10.66 16.8 10.66 17.19 11.05C17.58 11.44 17.58 12.07 17.19 12.46' +
@@ -64,6 +70,10 @@
     let debounceTimer = null;
     let restoring = false;
     const sliders = {};
+
+    if (els.results) {
+      els.results.innerHTML = LOADING_MARKUP;
+    }
 
     fetch(DATA_URL)
       .then(function (r) {

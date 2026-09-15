@@ -19,6 +19,12 @@
   const DEBOUNCE_MS = 300;
   const PER_PAGE = 50;
 
+  // Shown in the results table while the (permanently-cached, but
+  // sometimes slow on a cold cache) dataset is loading.
+  const LOADING_ROW = '<tr><td class="p-5 text-center">' +
+    '<span class="inline-block h-4 w-4 border-2 border-red-pats border-t-transparent rounded-full animate-spin align-middle mr-2"></span>' +
+    'Loading&hellip;</td></tr>';
+
   // Numeric stat columns: [data key, slider element id, label]. `distance`
   // only applies to Scoring Play rows, the rest only to player stat lines
   // -- both kinds leave the other's columns blank/NULL, same idea.
@@ -104,6 +110,10 @@
     let restoring = false;
     const sliders = {};
     const groupBy = new Set();
+
+    if (els.tbody) {
+      els.tbody.innerHTML = LOADING_ROW;
+    }
 
     fetch(DATA_URL)
       .then(function (r) {

@@ -38,14 +38,6 @@ dynasty_search.api_stats:
     _access: 'TRUE'
   methods: [GET]
 
-dynasty_search.stats_page:
-  path: '/search/stats'
-  defaults:
-    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::statsPage'
-    _title: 'Stat Finder'
-  requirements:
-    _access: 'TRUE'
-
 dynasty_search.api_play_by_play:
   path: '/dynasty/search/play-by-play'
   defaults:
@@ -54,10 +46,24 @@ dynasty_search.api_play_by_play:
     _access: 'TRUE'
   methods: [GET]
 
-dynasty_search.play_by_play_page:
+dynasty_search.plays_page:
+  path: '/search/plays'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::playsPage'
+    _title: 'Play Search'
+  requirements:
+    _access: 'TRUE'
+
+dynasty_search.stats_page_redirect:
+  path: '/search/stats'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::statsPageRedirect'
+  requirements:
+    _access: 'TRUE'
+
+dynasty_search.play_by_play_page_redirect:
   path: '/search/play-by-play'
   defaults:
-    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::playByPlayPage'
-    _title: 'Play-by-Play Search'
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::playByPlayPageRedirect'
   requirements:
     _access: 'TRUE'

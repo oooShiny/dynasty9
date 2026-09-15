@@ -14,6 +14,12 @@
   const DEBOUNCE_MS = 300;
   const PER_PAGE = 50;
 
+  // Shown in the results table while the (permanently-cached, but
+  // sometimes slow on a cold cache) dataset is loading.
+  const LOADING_ROW = '<tr><td class="p-5 text-center">' +
+    '<span class="inline-block h-4 w-4 border-2 border-red-pats border-t-transparent rounded-full animate-spin align-middle mr-2"></span>' +
+    'Loading&hellip;</td></tr>';
+
   const RANGE_FIELDS = [
     ['distance', 'pbp-slider-distance'],
     ['patriots_score', 'pbp-slider-patriots-score'],
@@ -61,6 +67,10 @@
     let debounceTimer = null;
     let restoring = false;
     const sliders = {};
+
+    if (els.tbody) {
+      els.tbody.innerHTML = LOADING_ROW;
+    }
 
     fetch(DATA_URL)
       .then(function (r) {
@@ -517,6 +527,7 @@
           '<td class="p-2">' + (r.patriots_score != null ? r.patriots_score : '') + '</td>' +
           '<td class="p-2">' + (r.opponent_score != null ? r.opponent_score : '') + '</td>' +
           '<td class="p-2">' + escapeHtml(r.detail) +
+          (r.highlight_url ? ' <a href="' + escapeHtml(r.highlight_url) + '">&#9654; Watch</a>' : '') +
           (r.source_url ? ' <a href="' + escapeHtml(r.source_url) + '" target="_blank" rel="noopener" class="text-xs whitespace-nowrap">[source]</a>' : '') +
           '</td>' +
           '</tr>';

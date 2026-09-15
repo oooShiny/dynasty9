@@ -18,13 +18,9 @@ function dynasty_search_theme() {
       'variables' => [],
       'template' => 'highlight-search-page',
     ],
-    'dynasty_search_stat_page' => [
-      'variables' => [],
-      'template' => 'stat-search-page',
-    ],
-    'dynasty_search_pbp_page' => [
-      'variables' => [],
-      'template' => 'pbp-search-page',
+    'dynasty_search_plays_page' => [
+      'variables' => ['active_mode' => 'plays'],
+      'template' => 'plays-search-page',
     ],
     'dynasty_search_player_highlight_block' => [
       'variables' => ['player_nid' => NULL],

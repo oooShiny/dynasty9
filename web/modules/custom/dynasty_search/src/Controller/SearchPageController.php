@@ -3,6 +3,8 @@
 namespace Drupal\dynasty_search\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Controllers for the Game Search and Highlight Search page shells.
@@ -53,18 +55,27 @@ class SearchPageController extends ControllerBase {
   }
 
   /**
-   * Renders the Stat Finder page.
+   * Renders the merged Play Search page (Player Stats / All Plays modes).
+   *
+   * Both modes' markup is included in the response (see
+   * templates/plays-search-page.html.twig); only the active mode's is live
+   * in the initial DOM, the other sits inert inside a <template> tag until
+   * the visitor switches to it, so only one of the two (large) datasets is
+   * ever fetched unless a visitor actually asks for both.
    */
-  public function statsPage(): array {
+  public function playsPage(Request $request): array {
+    $active_mode = $request->query->get('mode') === 'stats' ? 'stats' : 'plays';
+
     return [
-      '#theme' => 'dynasty_search_stat_page',
+      '#theme' => 'dynasty_search_plays_page',
+      '#active_mode' => $active_mode,
       '#attached' => [
         'library' => [
-          'dynasty_search/stat_search',
+          'dynasty_search/plays_search',
         ],
       ],
       '#cache' => [
-        'contexts' => [],
+        'contexts' => ['url.query_args:mode'],
         'tags' => [],
         'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
       ],
@@ -72,22 +83,17 @@ class SearchPageController extends ControllerBase {
   }
 
   /**
-   * Renders the Play-by-Play Search page.
+   * Redirects the old Stat Finder URL to its mode on the merged page.
    */
-  public function playByPlayPage(): array {
-    return [
-      '#theme' => 'dynasty_search_pbp_page',
-      '#attached' => [
-        'library' => [
-          'dynasty_search/pbp_search',
-        ],
-      ],
-      '#cache' => [
-        'contexts' => [],
-        'tags' => [],
-        'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
-      ],
-    ];
+  public function statsPageRedirect(): RedirectResponse {
+    return new RedirectResponse('/search/plays?mode=stats', 301);
+  }
+
+  /**
+   * Redirects the old Play-by-Play Search URL to the merged page.
+   */
+  public function playByPlayPageRedirect(): RedirectResponse {
+    return new RedirectResponse('/search/plays', 301);
   }
 
 }

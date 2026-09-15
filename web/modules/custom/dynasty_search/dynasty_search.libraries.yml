@@ -28,27 +28,15 @@ highlight_search:
     - dynasty_tw/select2.theme
     - better_exposed_filters/nouislider
 
-stat_search:
+plays_search:
   version: 1.x
   css:
     component:
       css/stat-search.css: {}
-  js:
-    js/stat-search.js: {}
-  dependencies:
-    - core/drupal
-    - core/once
-    - core/jquery
-    - select2/select2
-    - dynasty_tw/select2.theme
-    - better_exposed_filters/nouislider
-
-pbp_search:
-  version: 1.x
-  css:
-    component:
       css/pbp-search.css: {}
   js:
+    js/plays-search-toggle.js: {}
+    js/stat-search.js: {}
     js/pbp-search.js: {}
   dependencies:
     - core/drupal

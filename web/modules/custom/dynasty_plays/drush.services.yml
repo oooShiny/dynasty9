@@ -9,3 +9,8 @@ services:
     arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher']
     tags:
       - { name: drush.command }
+  dynasty_plays.highlight_match_commands:
+    class: Drupal\dynasty_plays\Commands\HighlightMatchCommands
+    arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher']
+    tags:
+      - { name: drush.command }

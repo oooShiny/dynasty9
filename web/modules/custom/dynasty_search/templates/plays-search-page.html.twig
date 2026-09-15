@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Play Search page shell -- one page, two modes: "All Plays" (the raw
+ * play-by-play log) and "Player Stats" (Stat Finder's per-player/per-game
+ * stat lines and Scoring Plays). Both modes' filter panels and results
+ * tables are the existing, unmodified stat-search-page.html.twig and
+ * pbp-search-page.html.twig, included as-is below.
+ *
+ * Only {{ active_mode }}'s markup is live on first render; the other is
+ * wrapped in an inert <template> tag and only hydrated into the DOM (by
+ * js/plays-search-toggle.js) the first time a visitor switches to it, so
+ * only one of the two datasets is ever fetched unless a visitor actually
+ * asks for both. See js/plays-search-toggle.js for the toggle/hydration
+ * logic; js/stat-search.js and js/pbp-search.js are untouched.
+ */
+#}
+
+{% set stats_markup %}
+  {% include '@dynasty_search/stat-search-page.html.twig' %}
+{% endset %}
+{% set plays_markup %}
+  {% include '@dynasty_search/pbp-search-page.html.twig' %}
+{% endset %}
+
+<div id="plays-search-app" class="mx-auto">
+  <div id="plays-mode-toggle" class="flex gap-2 mb-4 px-4" data-active-mode="{{ active_mode }}">
+    <button type="button" data-mode="plays" class="plays-mode-btn px-4 py-2 rounded font-semibold border-2 border-red-pats text-red-pats" aria-pressed="{{ active_mode == 'plays' ? 'true' : 'false' }}">All Plays</button>
+    <button type="button" data-mode="stats" class="plays-mode-btn px-4 py-2 rounded font-semibold border-2 border-red-pats text-red-pats" aria-pressed="{{ active_mode == 'stats' ? 'true' : 'false' }}">Player Stats</button>
+  </div>
+
+  <div id="plays-mode-mount-plays" class="{{ active_mode == 'plays' ? '' : 'hidden' }}">
+    {% if active_mode == 'plays' %}
+      {{ plays_markup }}
+    {% else %}
+      <template>{{ plays_markup }}</template>
+    {% endif %}
+  </div>
+
+  <div id="plays-mode-mount-stats" class="{{ active_mode == 'stats' ? '' : 'hidden' }}">
+    {% if active_mode == 'stats' %}
+      {{ stats_markup }}
+    {% else %}
+      <template>{{ stats_markup }}</template>
+    {% endif %}
+  </div>
+</div>

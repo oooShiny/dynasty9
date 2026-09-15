@@ -10,6 +10,12 @@
   const DATA_URL = '/dynasty/search/games';
   const DEBOUNCE_MS = 300;
 
+  // Shown in the results table while the (permanently-cached, but
+  // sometimes slow on a cold cache) dataset is loading.
+  const LOADING_ROW = '<tr><td class="p-5 text-center">' +
+    '<span class="inline-block h-4 w-4 border-2 border-red-pats border-t-transparent rounded-full animate-spin align-middle mr-2"></span>' +
+    'Loading&hellip;</td></tr>';
+
   Drupal.behaviors.gameSearch = {
     attach: function (context) {
       once('game-search-init', '#game-search-app', context).forEach(function (app) {
@@ -59,6 +65,15 @@
     let debounceTimer = null;
     let restoring = false;
     const sliders = {};
+
+    // The dataset is served as flat JSON, cached permanently -- fast after
+    // the first request, but that first request (e.g. right after a cache
+    // clear) can take a while, so show a loading state rather than leaving
+    // the results area looking empty. ::render() overwrites this once data
+    // arrives; ::catch() below overwrites it on failure.
+    if (els.tbody) {
+      els.tbody.innerHTML = LOADING_ROW;
+    }
 
     fetch(DATA_URL)
       .then(function (r) {
