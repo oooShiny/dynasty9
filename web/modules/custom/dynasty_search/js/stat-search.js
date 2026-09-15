@@ -1,15 +1,14 @@
 /**
  * @file
  * Stat Finder: fetches /dynasty/search/stats once -- one row per player per
- * game per quarter per stat category, PLUS one row per scoring/notable Play
- * (category "Scoring Play") -- then does all filtering, sorting,
+ * game per quarter per stat category -- then does all filtering, sorting,
  * grouping/summing, and pagination client-side.
  *
  * Results can be grouped: picking one or more "Group by" dimensions
- * (Player, Season, Game, Category, Quarter, Opponent, Home/Away, Result,
- * Scoring Team) collapses matching rows into summed totals per group --
- * e.g. "Julian Edelman's receiving totals by season", or "every stat line
- * with 100+ receiving yards", or "scoring plays by Scoring Team".
+ * (Player, Season, Game, Category, Quarter, Opponent, Home/Away, Result)
+ * collapses matching rows into summed totals per group -- e.g. "Julian
+ * Edelman's receiving totals by season", or "every stat line with 100+
+ * receiving yards".
  */
 
 (function (Drupal, once) {
@@ -25,9 +24,7 @@
     '<span class="inline-block h-4 w-4 border-2 border-red-pats border-t-transparent rounded-full animate-spin align-middle mr-2"></span>' +
     'Loading&hellip;</td></tr>';
 
-  // Numeric stat columns: [data key, slider element id, label]. `distance`
-  // only applies to Scoring Play rows, the rest only to player stat lines
-  // -- both kinds leave the other's columns blank/NULL, same idea.
+  // Numeric stat columns: [data key, slider element id, label].
   const STAT_FIELDS = [
     ['completions', 'ss-slider-completions', 'Comp'],
     ['attempts', 'ss-slider-attempts', 'Att'],
@@ -41,15 +38,6 @@
     ['receptions', 'ss-slider-receptions', 'Rec'],
     ['rec_yards', 'ss-slider-rec-yards', 'Rec Yd'],
     ['rec_td', 'ss-slider-rec-td', 'Rec TD'],
-    ['distance', 'ss-slider-distance', 'Distance'],
-  ];
-
-  // Extra identity/descriptive columns for Scoring Play rows, always shown
-  // in the ungrouped table (blank for player stat lines) but never summed.
-  const PLAY_COLUMNS = [
-    ['scoring_team', 'Scoring Team'],
-    ['turnover', 'Turnover'],
-    ['description', 'Description'],
   ];
 
   // "Group by" dimensions, in the fixed order they're always displayed,
@@ -63,7 +51,6 @@
     { key: 'opponent', label: 'Opponent' },
     { key: 'home_away', label: 'Home/Away' },
     { key: 'result', label: 'Result' },
-    { key: 'scoring_team', label: 'Scoring Team' },
   ];
 
   Drupal.behaviors.statSearch = {
@@ -97,10 +84,9 @@
       season: app.querySelector('#ss-filter-season'),
       week: app.querySelector('#ss-filter-week'),
       opponent: app.querySelector('#ss-filter-opponent'),
-      scoringTeam: app.querySelector('#ss-filter-scoring-team'),
       reset: app.querySelector('#ss-reset'),
     };
-    const MULTI_SELECTS = [els.player, els.category, els.quarter, els.season, els.week, els.opponent, els.scoringTeam];
+    const MULTI_SELECTS = [els.player, els.category, els.quarter, els.season, els.week, els.opponent];
 
     let rows = [];
     let sortField = null;
@@ -150,7 +136,6 @@
       const withoutSeason = rows.filter(function (r) { return matches(r, f, 'season'); });
       const withoutWeek = rows.filter(function (r) { return matches(r, f, 'week'); });
       const withoutOpponent = rows.filter(function (r) { return matches(r, f, 'opponent'); });
-      const withoutScoringTeam = rows.filter(function (r) { return matches(r, f, 'scoringTeam'); });
 
       const wasRestoring = restoring;
       restoring = true;
@@ -160,7 +145,6 @@
       fillSelect(els.season, uniqueSorted(withoutSeason, function (r) { return String(r.season); }).sort(function (a, b) { return Number(b) - Number(a); }));
       fillSelect(els.week, uniqueWeeks(withoutWeek));
       fillSelect(els.opponent, uniqueSorted(withoutOpponent, function (r) { return r.opponent ? r.opponent.name : null; }));
-      fillSelect(els.scoringTeam, uniqueSorted(withoutScoringTeam, function (r) { return r.scoring_team; }));
       MULTI_SELECTS.forEach(refreshSelect2);
       restoring = wasRestoring;
     }
@@ -411,11 +395,9 @@
         season: selected(els.season),
         week: selected(els.week),
         opponent: selected(els.opponent),
-        scoringTeam: selected(els.scoringTeam),
         home_away: toggleValue('home_away'),
         result: toggleValue('result'),
         playoff_game: toggleValue('playoff_game'),
-        turnover: toggleValue('turnover'),
         stats: stats,
       };
     }
@@ -427,13 +409,9 @@
       if (excludeField !== 'season' && f.season.length && f.season.indexOf(String(r.season)) === -1) return false;
       if (excludeField !== 'week' && f.week.length && (!r.week || f.week.indexOf(r.week.label) === -1)) return false;
       if (excludeField !== 'opponent' && f.opponent.length && (!r.opponent || f.opponent.indexOf(r.opponent.name) === -1)) return false;
-      if (excludeField !== 'scoringTeam' && f.scoringTeam.length && (!r.scoring_team || f.scoringTeam.indexOf(r.scoring_team) === -1)) return false;
       if (f.home_away && r.home_away !== f.home_away) return false;
       if (f.result && r.result !== f.result) return false;
       if (f.playoff_game !== '' && Boolean(r.playoff_game) !== (f.playoff_game === '1')) return false;
-      // turnover is only meaningful for Scoring Play rows -- treat rows
-      // where it's not applicable (NULL) as matching neither Yes nor No.
-      if (f.turnover !== '' && (r.turnover === null || Boolean(r.turnover) !== (f.turnover === '1'))) return false;
       for (let i = 0; i < STAT_FIELDS.length; i++) {
         const field = STAT_FIELDS[i][0];
         const range = f.stats[field];
@@ -455,7 +433,6 @@
         case 'opponent': return r.opponent ? r.opponent.name : '';
         case 'home_away': return r.home_away || '';
         case 'result': return r.result || '';
-        case 'scoring_team': return r.scoring_team || '';
         default: return '';
       }
     }
@@ -560,8 +537,8 @@
     }
 
     function hasActiveFilters(f) {
-      if (f.player.length || f.category.length || f.quarter.length || f.season.length || f.week.length || f.opponent.length || f.scoringTeam.length) return true;
-      if (f.home_away || f.result || f.playoff_game !== '' || f.turnover !== '') return true;
+      if (f.player.length || f.category.length || f.quarter.length || f.season.length || f.week.length || f.opponent.length) return true;
+      if (f.home_away || f.result || f.playoff_game !== '') return true;
       return STAT_FIELDS.some(function (sf) {
         const r = f.stats[sf[0]];
         return r.min !== null || r.max !== null;
@@ -580,11 +557,9 @@
       f.season.forEach(function (v) { chips.push(chip('season:' + v, 'Season', v)); });
       f.week.forEach(function (v) { chips.push(chip('week:' + v, 'Week', v)); });
       f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent', v)); });
-      f.scoringTeam.forEach(function (v) { chips.push(chip('scoringTeam:' + v, 'Scoring Team', v)); });
       if (f.home_away) chips.push(chip('home_away', 'Location', f.home_away));
       if (f.result) chips.push(chip('result', 'Result', f.result));
       if (f.playoff_game !== '') chips.push(chip('playoff_game', 'Playoff', (f.playoff_game === '1' ? 'Yes' : 'No')));
-      if (f.turnover !== '') chips.push(chip('turnover', 'Turnover', (f.turnover === '1' ? 'Yes' : 'No')));
       els.activeFilters.innerHTML = chips.join('');
     }
 
@@ -597,7 +572,7 @@
 
     function removeFilter(key) {
       const [type, value] = key.split(/:(.*)/s);
-      const multiMap = { player: els.player, category: els.category, quarter: els.quarter, season: els.season, week: els.week, opponent: els.opponent, scoringTeam: els.scoringTeam };
+      const multiMap = { player: els.player, category: els.category, quarter: els.quarter, season: els.season, week: els.week, opponent: els.opponent };
       if (multiMap[type]) {
         Array.from(multiMap[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -633,9 +608,6 @@
         headers += '<th data-field="season" class="cursor-pointer p-2">Season' + sortArrow('season') + '</th>';
         headers += '<th data-field="quarter" class="cursor-pointer p-2">Qtr' + sortArrow('quarter') + '</th>';
         headers += '<th data-field="category" class="cursor-pointer p-2">Category' + sortArrow('category') + '</th>';
-        PLAY_COLUMNS.forEach(function (pc) {
-          headers += '<th data-field="' + pc[0] + '" class="cursor-pointer p-2">' + escapeHtml(pc[1]) + sortArrow(pc[0]) + '</th>';
-        });
       }
       STAT_FIELDS.forEach(function (sf) {
         headers += '<th data-field="' + sf[0] + '" class="cursor-pointer p-2">' + sf[2] + sortArrow(sf[0]) + '</th>';
@@ -645,7 +617,7 @@
 
     function renderTbody(displayRows, grouped) {
       if (!els.tbody) return;
-      const colCount = (grouped ? activeDims().length + 1 : 5 + PLAY_COLUMNS.length) + STAT_FIELDS.length;
+      const colCount = (grouped ? activeDims().length + 1 : 5) + STAT_FIELDS.length;
       const total = displayRows.length;
       const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
       if (currentPage >= totalPages) currentPage = totalPages - 1;
@@ -676,10 +648,6 @@
           cells += '<td class="p-2">' + row.season + '</td>';
           cells += '<td class="p-2">' + escapeHtml(row.quarter) + '</td>';
           cells += '<td class="p-2">' + escapeHtml(row.category) + '</td>';
-          cells += '<td class="p-2">' + escapeHtml(row.scoring_team) + '</td>';
-          cells += '<td class="p-2">' + (row.turnover === null || row.turnover === undefined ? '' : (row.turnover ? 'Yes' : 'No')) + '</td>';
-          cells += '<td class="p-2">' + escapeHtml(row.description) +
-            (row.highlight_url ? ' <a href="' + escapeHtml(row.highlight_url) + '">&#9654; Watch</a>' : '') + '</td>';
           STAT_FIELDS.forEach(function (sf) {
             const v = row[sf[0]];
             cells += '<td class="p-2">' + (v === null || v === undefined ? '' : v.toLocaleString()) + '</td>';
@@ -729,11 +697,9 @@
       f.season.forEach(function (v) { params.append('season', v); });
       f.week.forEach(function (v) { params.append('week', v); });
       f.opponent.forEach(function (v) { params.append('opponent', v); });
-      f.scoringTeam.forEach(function (v) { params.append('scoring_team', v); });
       if (f.home_away) params.set('home_away', f.home_away);
       if (f.result) params.set('result', f.result);
       if (f.playoff_game !== '') params.set('playoff_game', f.playoff_game);
-      if (f.turnover !== '') params.set('turnover', f.turnover);
       STAT_FIELDS.forEach(function (sf) {
         const r = f.stats[sf[0]];
         if (r.min !== null) params.set('min_' + sf[0], r.min);
@@ -753,11 +719,9 @@
       setMulti(els.season, params.getAll('season'));
       setMulti(els.week, params.getAll('week'));
       setMulti(els.opponent, params.getAll('opponent'));
-      setMulti(els.scoringTeam, params.getAll('scoring_team'));
       setToggle('home_away', params.get('home_away') || '');
       setToggle('result', params.get('result') || '');
       setToggle('playoff_game', params.get('playoff_game') || '');
-      setToggle('turnover', params.get('turnover') || '');
       STAT_FIELDS.forEach(function (sf) {
         setSliderFromUrl(sliders[sf[0]], params.get('min_' + sf[0]), params.get('max_' + sf[0]));
       });
@@ -778,10 +742,6 @@
       openIfActive('ss-group-passing', ['completions', 'attempts', 'pass_yards', 'pass_td', 'interceptions']);
       openIfActive('ss-group-rushing', ['carries', 'rush_yards', 'rush_td']);
       openIfActive('ss-group-receiving', ['targets', 'receptions', 'rec_yards', 'rec_td']);
-      const scoringPlayGroup = app.querySelector('#ss-group-scoring-play');
-      if (scoringPlayGroup && (params.getAll('scoring_team').length || params.get('turnover') || params.get('min_distance') || params.get('max_distance'))) {
-        scoringPlayGroup.open = true;
-      }
 
       function openIfActive(groupId, fields) {
         const group = app.querySelector('#' + groupId);

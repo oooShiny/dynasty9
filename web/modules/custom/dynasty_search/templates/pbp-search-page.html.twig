@@ -65,6 +65,20 @@
   </div>
 {% endset %}
 
+{% set scoring_play_filter %}
+  <div class="text-sm mb-1">Scoring Play</div>
+  <div class="pbp-toggle-group flex gap-1" data-filter="scoring_play">
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="">All</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="1">Yes</button>
+    <button type="button" class="pbp-toggle px-3 py-1 border rounded" data-value="0">No</button>
+  </div>
+{% endset %}
+
+{% set scoring_team_filter %}
+  <label for="pbp-filter-scoring-team" class="block text-sm mb-1">Scoring Team</label>
+  <select id="pbp-filter-scoring-team" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Team -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
 {% set game_type_group %}
   <details class="pbp-filter-group" id="pbp-group-game-type">
     <summary class="cursor-pointer font-semibold">Game Type</summary>
@@ -72,6 +86,8 @@
       <div>{{ home_away_filter }}</div>
       <div>{{ result_filter }}</div>
       <div>{{ playoff_filter }}</div>
+      <div>{{ scoring_play_filter }}</div>
+      <div>{{ scoring_team_filter }}</div>
     </div>
   </details>
 {% endset %}

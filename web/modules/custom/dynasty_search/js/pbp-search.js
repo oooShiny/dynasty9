@@ -56,9 +56,10 @@
       opponent: app.querySelector('#pbp-filter-opponent'),
       quarter: app.querySelector('#pbp-filter-quarter'),
       down: app.querySelector('#pbp-filter-down'),
+      scoringTeam: app.querySelector('#pbp-filter-scoring-team'),
       reset: app.querySelector('#pbp-reset'),
     };
-    const MULTI_SELECTS = [els.season, els.week, els.opponent, els.quarter, els.down];
+    const MULTI_SELECTS = [els.season, els.week, els.opponent, els.quarter, els.down, els.scoringTeam];
 
     let rows = [];
     let sortField = null;
@@ -99,6 +100,7 @@
       const withoutOpponent = rows.filter(function (r) { return matches(r, f, 'opponent'); });
       const withoutQuarter = rows.filter(function (r) { return matches(r, f, 'quarter'); });
       const withoutDown = rows.filter(function (r) { return matches(r, f, 'down'); });
+      const withoutScoringTeam = rows.filter(function (r) { return matches(r, f, 'scoringTeam'); });
 
       const wasRestoring = restoring;
       restoring = true;
@@ -107,6 +109,7 @@
       fillSelect(els.opponent, uniqueSorted(withoutOpponent, function (r) { return r.opponent ? r.opponent.name : null; }));
       fillSelect(els.quarter, sortQuarters(uniqueSorted(withoutQuarter, function (r) { return r.quarter; })));
       fillSelect(els.down, uniqueSorted(withoutDown, function (r) { return r.down ? String(r.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+      fillSelect(els.scoringTeam, uniqueSorted(withoutScoringTeam, function (r) { return r.scoring_team; }));
       MULTI_SELECTS.forEach(refreshSelect2);
       restoring = wasRestoring;
     }
@@ -341,9 +344,11 @@
         opponent: selected(els.opponent),
         quarter: selected(els.quarter),
         down: selected(els.down),
+        scoringTeam: selected(els.scoringTeam),
         home_away: toggleValue('home_away'),
         result: toggleValue('result'),
         playoff_game: toggleValue('playoff_game'),
+        scoring_play: toggleValue('scoring_play'),
         ranges: ranges,
       };
     }
@@ -358,9 +363,11 @@
       if (excludeField !== 'opponent' && f.opponent.length && (!r.opponent || f.opponent.indexOf(r.opponent.name) === -1)) return false;
       if (excludeField !== 'quarter' && f.quarter.length && f.quarter.indexOf(r.quarter) === -1) return false;
       if (excludeField !== 'down' && f.down.length && f.down.indexOf(r.down ? String(r.down) : '') === -1) return false;
+      if (excludeField !== 'scoringTeam' && f.scoringTeam.length && (!r.scoring_team || f.scoringTeam.indexOf(r.scoring_team) === -1)) return false;
       if (f.home_away && r.home_away !== f.home_away) return false;
       if (f.result && r.result !== f.result) return false;
       if (f.playoff_game !== '' && Boolean(r.playoff_game) !== (f.playoff_game === '1')) return false;
+      if (f.scoring_play !== '' && Boolean(r.scoring_play) !== (f.scoring_play === '1')) return false;
       for (let i = 0; i < RANGE_FIELDS.length; i++) {
         const field = RANGE_FIELDS[i][0];
         const range = f.ranges[field];
@@ -417,8 +424,8 @@
     }
 
     function hasActiveFilters(f) {
-      if (f.q || f.season.length || f.week.length || f.opponent.length || f.quarter.length || f.down.length) return true;
-      if (f.home_away || f.result || f.playoff_game !== '') return true;
+      if (f.q || f.season.length || f.week.length || f.opponent.length || f.quarter.length || f.down.length || f.scoringTeam.length) return true;
+      if (f.home_away || f.result || f.playoff_game !== '' || f.scoring_play !== '') return true;
       return RANGE_FIELDS.some(function (rf) {
         const r = f.ranges[rf[0]];
         return r.min !== null || r.max !== null;
@@ -437,9 +444,11 @@
       f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent', v)); });
       f.quarter.forEach(function (v) { chips.push(chip('quarter:' + v, 'Quarter', v)); });
       f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down', v)); });
+      f.scoringTeam.forEach(function (v) { chips.push(chip('scoringTeam:' + v, 'Scoring Team', v)); });
       if (f.home_away) chips.push(chip('home_away', 'Location', f.home_away));
       if (f.result) chips.push(chip('result', 'Result', f.result));
       if (f.playoff_game !== '') chips.push(chip('playoff_game', 'Playoff', (f.playoff_game === '1' ? 'Yes' : 'No')));
+      if (f.scoring_play !== '') chips.push(chip('scoring_play', 'Scoring Play', (f.scoring_play === '1' ? 'Yes' : 'No')));
       els.activeFilters.innerHTML = chips.join('');
     }
 
@@ -456,7 +465,7 @@
         return;
       }
       const [type, value] = key.split(/:(.*)/s);
-      const map = { season: els.season, week: els.week, opponent: els.opponent, quarter: els.quarter, down: els.down };
+      const map = { season: els.season, week: els.week, opponent: els.opponent, quarter: els.quarter, down: els.down, scoringTeam: els.scoringTeam };
       if (map[type]) {
         Array.from(map[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -574,9 +583,11 @@
       f.opponent.forEach(function (v) { params.append('opponent', v); });
       f.quarter.forEach(function (v) { params.append('quarter', v); });
       f.down.forEach(function (v) { params.append('down', v); });
+      f.scoringTeam.forEach(function (v) { params.append('scoring_team', v); });
       if (f.home_away) params.set('home_away', f.home_away);
       if (f.result) params.set('result', f.result);
       if (f.playoff_game !== '') params.set('playoff_game', f.playoff_game);
+      if (f.scoring_play !== '') params.set('scoring_play', f.scoring_play);
       RANGE_FIELDS.forEach(function (rf) {
         const r = f.ranges[rf[0]];
         if (r.min !== null) params.set('min_' + rf[0], r.min);
@@ -595,16 +606,18 @@
       setMulti(els.opponent, params.getAll('opponent'));
       setMulti(els.quarter, params.getAll('quarter'));
       setMulti(els.down, params.getAll('down'));
+      setMulti(els.scoringTeam, params.getAll('scoring_team'));
       setToggle('home_away', params.get('home_away') || '');
       setToggle('result', params.get('result') || '');
       setToggle('playoff_game', params.get('playoff_game') || '');
+      setToggle('scoring_play', params.get('scoring_play') || '');
       RANGE_FIELDS.forEach(function (rf) {
         setSliderFromUrl(sliders[rf[0]], params.get('min_' + rf[0]), params.get('max_' + rf[0]));
       });
 
-      const gameTypeParams = ['home_away', 'result', 'playoff_game'];
+      const gameTypeParams = ['home_away', 'result', 'playoff_game', 'scoring_play'];
       const gameTypeGroup = app.querySelector('#pbp-group-game-type');
-      if (gameTypeGroup && gameTypeParams.some(function (p) { return params.get(p); })) {
+      if (gameTypeGroup && (gameTypeParams.some(function (p) { return params.get(p); }) || params.getAll('scoring_team').length)) {
         gameTypeGroup.open = true;
       }
       const playContextGroup = app.querySelector('#pbp-group-play-context');

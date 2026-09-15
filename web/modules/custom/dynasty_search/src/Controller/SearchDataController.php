@@ -204,36 +204,26 @@ class SearchDataController extends ControllerBase {
   }
 
   /**
-   * All published Player Game Stat entities *and* scoring Play-by-Play
-   * entries, flattened onto one shared row shape for client-side
-   * filtering, sorting, and grouping on the Stat Finder page.
+   * All published Player Game Stat entities, flattened for client-side
+   * filtering, sorting, and grouping on the Player Stats mode of the Play
+   * Search page.
    *
-   * The two sources describe different things (a per-quarter stat line vs.
-   * a single scoring play), so most fields only apply to one or the other
-   * -- each row carries every field, left NULL/blank where not applicable,
-   * the same way an individual PlayerGameStat row already leaves the 8
-   * stat columns from other categories NULL. `category` is
-   * 'Passing'/'Rushing'/'Receiving' for stat lines and 'Scoring Play' for
-   * pbp_play entries, so the existing Category filter doubles as the
-   * row-kind switch.
+   * `category` is 'Passing'/'Rushing'/'Receiving'.
    *
-   * The 'Scoring Play' rows used to come from the (now-retired) `play`
-   * entity, which only ever covered one season (2006), hand-curated. They
-   * now come from `pbp_play` filtered to `pbp_scoring_play = 1` -- a
-   * reliable score-delta computed at import time -- giving this category
-   * full historical coverage (1978-2023) instead of one season.
-   * `pbp_play` has no `turnover` signal (no reliable way to derive it from
-   * play text), so that column is always NULL for these rows now; the
-   * frontend already tolerates a null turnover value.
+   * This used to also include a 'Scoring Play' category merged in from
+   * `pbp_play` (filtered to `pbp_scoring_play = 1`), giving that category
+   * full historical coverage instead of the one season the old `play`
+   * entity covered. It moved to being an All Plays-mode-only concept (see
+   * ::playByPlay(), which already exposes `pbp_scoring_play`/
+   * `pbp_scoring_team`) once All Plays existed as a dedicated home for
+   * browsing individual plays -- duplicating individual play rows into
+   * this per-player-stat-line endpoint no longer made sense.
    *
    * @see \Drupal\dynasty_plays\Entity\PlayerGameStat
-   * @see \Drupal\dynasty_plays\Entity\PbpPlay
    */
   public function stats(): CacheableJsonResponse {
     $cache = new CacheableMetadata();
-    $cache->addCacheTags([
-      'player_game_stat_list', 'pbp_play_list', 'node_list:game', 'node_list:player', 'node_list:highlight',
-    ]);
+    $cache->addCacheTags(['player_game_stat_list', 'node_list:game', 'node_list:player']);
     $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
 
     $team_css = DynastyHelpers::get_team_css();
@@ -283,69 +273,6 @@ class SearchDataController extends ControllerBase {
           'receptions' => $this->intOrNull($stat, 'stat_receptions'),
           'rec_yards' => $this->intOrNull($stat, 'stat_rec_yards'),
           'rec_td' => $this->intOrNull($stat, 'stat_rec_td'),
-          'distance' => NULL,
-          'scoring_team' => NULL,
-          'turnover' => NULL,
-          'description' => NULL,
-          'highlight_url' => NULL,
-        ];
-      }
-    }
-
-    $pbp_storage = $this->entityTypeManager()->getStorage('pbp_play');
-    $pbp_ids = $pbp_storage->getQuery()
-      ->condition('status', 1)
-      ->condition('pbp_scoring_play', 1)
-      ->accessCheck(TRUE)
-      ->execute();
-
-    foreach (array_chunk($pbp_ids, 500) as $slice) {
-      foreach ($pbp_storage->loadMultiple($slice) as $pbp) {
-        $cache->addCacheableDependency($pbp);
-
-        $game = $pbp->get('pbp_game')->entity;
-        if (!$game) {
-          continue;
-        }
-
-        $player = $pbp->get('pbp_player')->entity;
-        if ($player) {
-          $cache->addCacheableDependency($player);
-        }
-
-        $highlight = $pbp->get('pbp_highlight')->entity;
-        $highlight_url = NULL;
-        if ($highlight) {
-          $cache->addCacheableDependency($highlight);
-          $highlight_url = $highlight->toUrl()->toString();
-        }
-
-        $data[] = $this->gameContext($game, $cache, $team_css) + [
-          'id' => 'pbp-' . $pbp->id(),
-          'player_name' => $player ? $player->label() : NULL,
-          'player' => $player ? [
-            'nid' => (int) $player->id(),
-            'name' => $player->label(),
-          ] : NULL,
-          'quarter' => $pbp->get('pbp_quarter')->value,
-          'category' => 'Scoring Play',
-          'completions' => NULL,
-          'attempts' => NULL,
-          'pass_yards' => NULL,
-          'interceptions' => NULL,
-          'pass_td' => NULL,
-          'carries' => NULL,
-          'rush_yards' => NULL,
-          'rush_td' => NULL,
-          'targets' => NULL,
-          'receptions' => NULL,
-          'rec_yards' => NULL,
-          'rec_td' => NULL,
-          'distance' => $this->intOrNull($pbp, 'pbp_distance'),
-          'scoring_team' => $pbp->get('pbp_scoring_team')->value ?: NULL,
-          'turnover' => NULL,
-          'description' => $pbp->get('pbp_detail')->value ?: NULL,
-          'highlight_url' => $highlight_url,
         ];
       }
     }
