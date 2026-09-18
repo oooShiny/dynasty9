@@ -23,11 +23,15 @@ use Drush\Commands\DrushCommands;
  * "only match when unambiguous" philosophy: game+quarter+down+distance
  * alone often isn't enough (common situations like "1st & 10" repeat many
  * times within a single game), so when it doesn't uniquely resolve, the
- * player(s) tagged on the highlight are used as a tie-break against
- * ::matchPlayerInDetail()'s free-text detection on each candidate's
- * pbp_detail -- never as a hard filter, since only 44% of pbp_play rows
- * have pbp_player set at import time. Anything still ambiguous, or missing
- * the structured fields needed to even attempt a match, is left unmatched.
+ * player(s) tagged on the highlight are used as a tie-break -- checked
+ * against every one of a candidate row's role fields (pbp_passer,
+ * pbp_rusher, pbp_tackler_1, etc. -- see ROLE_FIELDS below), falling back
+ * to ::matchPlayerInDetail()'s free-text detection on pbp_detail for any
+ * candidate none of whose role fields matched, e.g. a row from before the
+ * enriched CSV import that only ever had pbp_player set -- never as a
+ * hard filter, since not every pbp_play row has any player field set.
+ * Anything still ambiguous, or missing the structured fields needed to
+ * even attempt a match, is left unmatched.
  */
 class HighlightMatchCommands extends DrushCommands {
 
@@ -41,6 +45,21 @@ class HighlightMatchCommands extends DrushCommands {
     3 => 'Q3',
     4 => 'Q4',
     5 => 'OT',
+  ];
+
+  /**
+   * Every pbp_play role field consulted by ::involvedPlayerIds(), in
+   * addition to pbp_player itself. Same field list as
+   * SearchDataController::ROLE_FIELD_LABELS, just without the display
+   * labels this command has no use for.
+   *
+   * @var string[]
+   */
+  const ROLE_FIELDS = [
+    'pbp_passer', 'pbp_rusher', 'pbp_receiver', 'pbp_interceptor', 'pbp_sacker',
+    'pbp_punter', 'pbp_kicker', 'pbp_returner', 'pbp_blocker',
+    'pbp_tackler_1', 'pbp_tackler_2',
+    'pbp_forced_fumble_player', 'pbp_fumble_recovery_player', 'pbp_penalized_player',
   ];
 
   /**
@@ -181,8 +200,8 @@ class HighlightMatchCommands extends DrushCommands {
 
           if ($involved_player_ids) {
             $narrowed = array_filter($candidates, function ($candidate) use ($involved_player_ids, $player_index) {
-              $detected = $this->matcher->matchPlayerInDetail((string) $candidate->get('pbp_detail')->value, $player_index);
-              return $detected && in_array($detected, $involved_player_ids, TRUE);
+              $candidate_player_ids = $this->involvedPlayerIds($candidate, $player_index);
+              return $candidate_player_ids && array_intersect($candidate_player_ids, $involved_player_ids);
             });
 
             if (count($narrowed) === 1) {
@@ -213,6 +232,47 @@ class HighlightMatchCommands extends DrushCommands {
       $skipped_no_candidates,
       $skipped_bad_quarter
     ));
+  }
+
+  /**
+   * Returns every distinct Player node ID this candidate `pbp_play` row
+   * has on it: pbp_player plus every role field in ROLE_FIELDS. Falls
+   * back to ::matchPlayerInDetail()'s free-text scan of pbp_detail only
+   * when none of those structured fields resolved anyone -- e.g. a row
+   * that predates the enriched CSV import and only ever got pbp_player
+   * set. This is a superset of what pbp_player alone would give: a row
+   * with a passer AND a receiver AND a tackler is a much stronger tie-
+   * break signal (any one of them matching a highlight's tagged players
+   * settles it) than the single, often-NULL, free-text guess this used
+   * to rely on exclusively.
+   *
+   * @param \Drupal\dynasty_plays\Entity\PbpPlayInterface $candidate
+   *   The candidate pbp_play row.
+   * @param array $player_index
+   *   The index built by GamePlayerMatcher::buildPlayerIndex(), passed
+   *   through to ::matchPlayerInDetail() for the free-text fallback.
+   *
+   * @return int[]
+   *   Distinct Player node IDs, possibly empty.
+   */
+  protected function involvedPlayerIds($candidate, array $player_index): array {
+    $ids = [];
+    foreach (self::ROLE_FIELDS as $field) {
+      $target_id = $candidate->get($field)->target_id;
+      if ($target_id) {
+        $ids[(int) $target_id] = TRUE;
+      }
+    }
+    if (!$candidate->get('pbp_player')->isEmpty()) {
+      $ids[(int) $candidate->get('pbp_player')->target_id] = TRUE;
+    }
+
+    if ($ids) {
+      return array_keys($ids);
+    }
+
+    $detected = $this->matcher->matchPlayerInDetail((string) $candidate->get('pbp_detail')->value, $player_index);
+    return $detected ? [$detected] : [];
   }
 
 }

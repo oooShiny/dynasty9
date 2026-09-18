@@ -1,10 +1,17 @@
 /**
  * @file
  * Play-by-Play Search: fetches /dynasty/search/play-by-play once (one row
- * per play, 1978-1999 seasons), then does all filtering/searching/sorting/
+ * per play, 1978-present), then does all filtering/searching/sorting/
  * pagination client-side. No grouping/summing here -- this is a raw play
  * log, browsed and searched, not summable stat columns (see Stat Finder
- * for that, over the 2000+ seasons that have per-player numbers).
+ * for that, over the 2000+ seasons that have per-player numbers). The
+ * endpoint's response is normalized (games/players sent once, rows
+ * reference them by id -- see SearchDataController::playByPlay()) and
+ * denormalize() below expands it back into the flat per-row shape
+ * (r.opponent, r.week, r.players[].name, etc.) everything past that
+ * point expects, including play_type_label and `players` (role-tagged
+ * Player nodes -- passer, rusher, tackler, etc.; see
+ * SearchDataController::ROLE_FIELD_LABELS for the full role list).
  */
 
 (function (Drupal, once) {
@@ -56,10 +63,12 @@
       opponent: app.querySelector('#pbp-filter-opponent'),
       quarter: app.querySelector('#pbp-filter-quarter'),
       down: app.querySelector('#pbp-filter-down'),
+      playType: app.querySelector('#pbp-filter-play-type'),
+      player: app.querySelector('#pbp-filter-player'),
       scoringTeam: app.querySelector('#pbp-filter-scoring-team'),
       reset: app.querySelector('#pbp-reset'),
     };
-    const MULTI_SELECTS = [els.season, els.week, els.opponent, els.quarter, els.down, els.scoringTeam];
+    const MULTI_SELECTS = [els.season, els.week, els.opponent, els.quarter, els.down, els.playType, els.player, els.scoringTeam];
 
     let rows = [];
     let sortField = null;
@@ -79,7 +88,7 @@
         return r.json();
       })
       .then(function (data) {
-        rows = data;
+        rows = denormalize(data);
         updateFilterOptions(getFilters());
         initRangeSliders();
         bindEvents();
@@ -92,6 +101,42 @@
         }
       });
 
+    // --- Data normalization ---
+
+    // The endpoint sends `{games, players, play_type_labels, rows}`: each
+    // row references its game by `game_nid` and its players by nid,
+    // rather than repeating a game's title/url/season/week/opponent on
+    // every one of its ~380 plays or a player's name on every role they
+    // appear in (see SearchDataController::playByPlay()'s normalization
+    // comments -- this keeps that endpoint inside production's PHP-FPM
+    // memory budget at ~135,000 rows). Denormalizing once here, right
+    // after fetch, means every filter/sort/render function below can
+    // keep reading r.opponent/r.week/r.players[].name/etc. directly, the
+    // same shape this file used before the endpoint was normalized.
+    function denormalize(data) {
+      const games = data.games || {};
+      const playerNames = data.players || {};
+      const playTypeLabels = data.play_type_labels || {};
+      return (data.rows || []).map(function (r) {
+        const g = games[r.game_nid] || {};
+        return Object.assign({}, r, {
+          game_title: g.title,
+          game_url: g.url,
+          season: g.season,
+          week: g.week,
+          opponent: g.opponent,
+          home_away: g.home_away,
+          playoff_game: g.playoff_game,
+          result: g.result,
+          play_type_label: playTypeLabels[r.play_type] || r.play_type,
+          player: (r.player != null) ? { nid: r.player, name: playerNames[r.player] } : null,
+          players: (r.players || []).map(function (p) {
+            return { nid: p[0], name: playerNames[p[0]], role: p[1] };
+          }),
+        });
+      });
+    }
+
     // --- Filter option lists ---
 
     function updateFilterOptions(f) {
@@ -100,6 +145,8 @@
       const withoutOpponent = rows.filter(function (r) { return matches(r, f, 'opponent'); });
       const withoutQuarter = rows.filter(function (r) { return matches(r, f, 'quarter'); });
       const withoutDown = rows.filter(function (r) { return matches(r, f, 'down'); });
+      const withoutPlayType = rows.filter(function (r) { return matches(r, f, 'playType'); });
+      const withoutPlayer = rows.filter(function (r) { return matches(r, f, 'player'); });
       const withoutScoringTeam = rows.filter(function (r) { return matches(r, f, 'scoringTeam'); });
 
       const wasRestoring = restoring;
@@ -109,6 +156,8 @@
       fillSelect(els.opponent, uniqueSorted(withoutOpponent, function (r) { return r.opponent ? r.opponent.name : null; }));
       fillSelect(els.quarter, sortQuarters(uniqueSorted(withoutQuarter, function (r) { return r.quarter; })));
       fillSelect(els.down, uniqueSorted(withoutDown, function (r) { return r.down ? String(r.down) : null; }).sort(function (a, b) { return Number(a) - Number(b); }));
+      fillSelect(els.playType, uniqueSorted(withoutPlayType, function (r) { return r.play_type_label; }));
+      fillSelect(els.player, uniquePlayers(withoutPlayer));
       fillSelect(els.scoringTeam, uniqueSorted(withoutScoringTeam, function (r) { return r.scoring_team; }));
       MULTI_SELECTS.forEach(refreshSelect2);
       restoring = wasRestoring;
@@ -145,6 +194,18 @@
       return Array.from(map.entries())
         .sort(function (a, b) { return a[1] - b[1]; })
         .map(function (e) { return e[0]; });
+    }
+
+    // Distinct player names across every role (passer, rusher, tackler,
+    // etc.) a row's `players` array can carry -- see
+    // SearchDataController::ROLE_FIELD_LABELS. A player filtered on
+    // matches a row regardless of which role they appear in on it.
+    function uniquePlayers(list) {
+      const set = new Set();
+      list.forEach(function (r) {
+        (r.players || []).forEach(function (p) { set.add(p.name); });
+      });
+      return Array.from(set).sort();
     }
 
     function refreshSelect2(select) {
@@ -344,6 +405,8 @@
         opponent: selected(els.opponent),
         quarter: selected(els.quarter),
         down: selected(els.down),
+        playType: selected(els.playType),
+        player: selected(els.player),
         scoringTeam: selected(els.scoringTeam),
         home_away: toggleValue('home_away'),
         result: toggleValue('result'),
@@ -363,6 +426,8 @@
       if (excludeField !== 'opponent' && f.opponent.length && (!r.opponent || f.opponent.indexOf(r.opponent.name) === -1)) return false;
       if (excludeField !== 'quarter' && f.quarter.length && f.quarter.indexOf(r.quarter) === -1) return false;
       if (excludeField !== 'down' && f.down.length && f.down.indexOf(r.down ? String(r.down) : '') === -1) return false;
+      if (excludeField !== 'playType' && f.playType.length && f.playType.indexOf(r.play_type_label) === -1) return false;
+      if (excludeField !== 'player' && f.player.length && !(r.players || []).some(function (p) { return f.player.indexOf(p.name) !== -1; })) return false;
       if (excludeField !== 'scoringTeam' && f.scoringTeam.length && (!r.scoring_team || f.scoringTeam.indexOf(r.scoring_team) === -1)) return false;
       if (f.home_away && r.home_away !== f.home_away) return false;
       if (f.result && r.result !== f.result) return false;
@@ -424,7 +489,7 @@
     }
 
     function hasActiveFilters(f) {
-      if (f.q || f.season.length || f.week.length || f.opponent.length || f.quarter.length || f.down.length || f.scoringTeam.length) return true;
+      if (f.q || f.season.length || f.week.length || f.opponent.length || f.quarter.length || f.down.length || f.playType.length || f.player.length || f.scoringTeam.length) return true;
       if (f.home_away || f.result || f.playoff_game !== '' || f.scoring_play !== '') return true;
       return RANGE_FIELDS.some(function (rf) {
         const r = f.ranges[rf[0]];
@@ -444,6 +509,8 @@
       f.opponent.forEach(function (v) { chips.push(chip('opponent:' + v, 'Opponent', v)); });
       f.quarter.forEach(function (v) { chips.push(chip('quarter:' + v, 'Quarter', v)); });
       f.down.forEach(function (v) { chips.push(chip('down:' + v, 'Down', v)); });
+      f.playType.forEach(function (v) { chips.push(chip('playType:' + v, 'Play Type', v)); });
+      f.player.forEach(function (v) { chips.push(chip('player:' + v, 'Player', v)); });
       f.scoringTeam.forEach(function (v) { chips.push(chip('scoringTeam:' + v, 'Scoring Team', v)); });
       if (f.home_away) chips.push(chip('home_away', 'Location', f.home_away));
       if (f.result) chips.push(chip('result', 'Result', f.result));
@@ -465,7 +532,7 @@
         return;
       }
       const [type, value] = key.split(/:(.*)/s);
-      const map = { season: els.season, week: els.week, opponent: els.opponent, quarter: els.quarter, down: els.down, scoringTeam: els.scoringTeam };
+      const map = { season: els.season, week: els.week, opponent: els.opponent, quarter: els.quarter, down: els.down, playType: els.playType, player: els.player, scoringTeam: els.scoringTeam };
       if (map[type]) {
         Array.from(map[type].options).forEach(function (o) {
           if (o.value === value) o.selected = false;
@@ -499,7 +566,9 @@
         ['location', 'Location', false],
         ['patriots_score', 'Pats', true],
         ['opponent_score', 'Opp', true],
+        ['play_type_label', 'Type', true],
         ['detail', 'Detail', false],
+        ['players', 'Players', false],
       ];
       els.thead.innerHTML = '<tr>' + cols.map(function (c) {
         const sortable = c[2] ? ' cursor-pointer' : '';
@@ -518,7 +587,7 @@
       const pageRows = displayRows.slice(start, start + PER_PAGE);
 
       if (!total) {
-        els.tbody.innerHTML = '<tr><td colspan="11" class="text-center p-5">No plays match these filters.</td></tr>';
+        els.tbody.innerHTML = '<tr><td colspan="13" class="text-center p-5">No plays match these filters.</td></tr>';
         renderPagination(0, 0);
         return;
       }
@@ -535,10 +604,12 @@
           '<td class="p-2">' + escapeHtml(r.location) + '</td>' +
           '<td class="p-2">' + (r.patriots_score != null ? r.patriots_score : '') + '</td>' +
           '<td class="p-2">' + (r.opponent_score != null ? r.opponent_score : '') + '</td>' +
+          '<td class="p-2 whitespace-nowrap">' + escapeHtml(r.play_type_label) + '</td>' +
           '<td class="p-2">' + escapeHtml(r.detail) +
           (r.highlight_url ? ' <a href="' + escapeHtml(r.highlight_url) + '">&#9654; Watch</a>' : '') +
           (r.source_url ? ' <a href="' + escapeHtml(r.source_url) + '" target="_blank" rel="noopener" class="text-xs whitespace-nowrap">[source]</a>' : '') +
           '</td>' +
+          '<td class="p-2 whitespace-nowrap">' + renderPlayers(r.players) + '</td>' +
           '</tr>';
       }).join('');
 
@@ -583,6 +654,8 @@
       f.opponent.forEach(function (v) { params.append('opponent', v); });
       f.quarter.forEach(function (v) { params.append('quarter', v); });
       f.down.forEach(function (v) { params.append('down', v); });
+      f.playType.forEach(function (v) { params.append('play_type', v); });
+      f.player.forEach(function (v) { params.append('player', v); });
       f.scoringTeam.forEach(function (v) { params.append('scoring_team', v); });
       if (f.home_away) params.set('home_away', f.home_away);
       if (f.result) params.set('result', f.result);
@@ -606,6 +679,8 @@
       setMulti(els.opponent, params.getAll('opponent'));
       setMulti(els.quarter, params.getAll('quarter'));
       setMulti(els.down, params.getAll('down'));
+      setMulti(els.playType, params.getAll('play_type'));
+      setMulti(els.player, params.getAll('player'));
       setMulti(els.scoringTeam, params.getAll('scoring_team'));
       setToggle('home_away', params.get('home_away') || '');
       setToggle('result', params.get('result') || '');
@@ -646,6 +721,13 @@
         group.querySelector('.pbp-toggle[data-value=""]').classList.add('pbp-toggle-active');
       }
     }
+  }
+
+  function renderPlayers(players) {
+    if (!players || !players.length) return '';
+    return players.map(function (p) {
+      return '<div><span class="text-xs opacity-70">' + escapeHtml(p.role) + ':</span> ' + escapeHtml(p.name) + '</div>';
+    }).join('');
   }
 
   function escapeHtml(str) {

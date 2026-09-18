@@ -19,6 +19,50 @@ use Drupal\node\Entity\Node;
 class SearchDataController extends ControllerBase {
 
   /**
+   * Maps each pbp_play role field to the human-readable role label used in
+   * ::playByPlay()'s `players` output and, client-side, in the Players
+   * column/filter on the Play-by-Play Search page.
+   *
+   * @var string[]
+   */
+  const ROLE_FIELD_LABELS = [
+    'pbp_passer' => 'Passer',
+    'pbp_rusher' => 'Rusher',
+    'pbp_receiver' => 'Receiver',
+    'pbp_interceptor' => 'Interceptor',
+    'pbp_sacker' => 'Sacker',
+    'pbp_punter' => 'Punter',
+    'pbp_kicker' => 'Kicker',
+    'pbp_returner' => 'Returner',
+    'pbp_blocker' => 'Blocker',
+    'pbp_tackler_1' => 'Tackle',
+    'pbp_tackler_2' => 'Tackle (Assist)',
+    'pbp_forced_fumble_player' => 'Forced Fumble',
+    'pbp_fumble_recovery_player' => 'Fumble Recovery',
+    'pbp_penalized_player' => 'Penalized',
+  ];
+
+  /**
+   * Maps pbp_play_type's stored values to display labels, mirroring the
+   * allowed_values on \Drupal\dynasty_plays\Entity\PbpPlay::$pbp_play_type.
+   *
+   * @var string[]
+   */
+  const PLAY_TYPE_LABELS = [
+    'pass' => 'Pass',
+    'run' => 'Run',
+    'punt' => 'Punt',
+    'kickoff' => 'Kickoff',
+    'field_goal' => 'Field Goal',
+    'extra_point' => 'Extra Point',
+    'qb_kneel' => 'QB Kneel',
+    'qb_spike' => 'QB Spike',
+    'no_play' => 'No Play',
+    'penalty' => 'Penalty',
+    'other' => 'Other',
+  ];
+
+  /**
    * Per-request memoization of ::gameContext() results, keyed by Game
    * node ID. Several rows (PlayerGameStat/Play/PbpPlay) usually share the
    * same Game -- pbp_play especially so, at ~170 plays per game -- so
@@ -296,9 +340,10 @@ class SearchDataController extends ControllerBase {
   }
 
   /**
-   * All published Play-by-Play entries (raw per-play log, 1978-1999),
+   * All published Play-by-Play entries (raw per-play log, 1978-present),
    * flattened for client-side filtering/searching on the Play-by-Play
-   * Search page.
+   * Search page. Response shape is `{players, play_type_labels, rows}`,
+   * not a bare array -- see the `players`/`rows` normalization below.
    *
    * @see \Drupal\dynasty_plays\Entity\PbpPlay
    */
@@ -308,59 +353,147 @@ class SearchDataController extends ControllerBase {
     $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
 
     $team_css = DynastyHelpers::get_team_css();
+    $database = \Drupal::database();
+    $role_fields = array_keys(self::ROLE_FIELD_LABELS);
 
-    // At ~61,000 rows (vs. a few hundred games), loading every row through
-    // the Entity API -- as the other endpoints in this class do -- takes
-    // over a minute: per-entity field API overhead dominates when it's
-    // repeated tens of thousands of times. A direct query for the ~170
-    // plays-per-game field values, resolving only the ~350 *distinct*
-    // Game nodes through the Entity API (via ::gameContext(), which
-    // memoizes per game), cuts this from minutes to well under a second.
-    $rows = \Drupal::database()->select('pbp_play', 'p')
-      ->fields('p', [
-        'id', 'pbp_game', 'pbp_sequence', 'pbp_quarter', 'pbp_time', 'pbp_down',
-        'pbp_distance', 'pbp_location', 'pbp_patriots_score', 'pbp_opponent_score',
-        'pbp_detail__value', 'pbp_epb', 'pbp_epa', 'pbp_source_url', 'pbp_player',
-        'pbp_scoring_play', 'pbp_scoring_team', 'pbp_highlight',
-      ])
+    // At ~135,000 rows (vs. a few hundred games and roughly 900 distinct
+    // players), loading every row through the Entity API -- as the other
+    // endpoints in this class do -- takes over a minute: per-entity field
+    // API overhead dominates when it's repeated tens of thousands of
+    // times. A direct query for the per-row field values, resolving only
+    // the small *distinct* sets of Game/Player/Highlight nodes through
+    // the Entity API (via ::gameContext(), which memoizes per game),
+    // cuts this from minutes to well under a second.
+    //
+    // The dataset has grown past what that comment's "~30,000-row"
+    // history (and the module's own older "~61,000 rows" comments
+    // elsewhere) were sized against -- 134,095 rows today, having
+    // expanded to cover 1978-present -- and this endpoint's response
+    // going through Drupal's own page/dynamic-page cache (Redis here) on
+    // top of building it turned out to add substantial memory overhead
+    // of its own. Measured on this codebase's actual data before any of
+    // the choices below: the *original* per-row-game-context version of
+    // this method (no play_type/role fields at all) already peaked
+    // around 680MB building an ~90MB response, and reliably hit PHP's
+    // memory_limit once Drupal's cache write was included -- a
+    // pre-existing risk from data growth, not something introduced by
+    // adding play_type/role fields (confirmed: adding all 14 role fields
+    // costs comparatively little next to this). So, beyond keeping the
+    // established raw-SQL-over-Entity-API pattern: (1) the distinct
+    // Game/Player/Highlight ID sets are found with small, cheap `SELECT
+    // DISTINCT` queries of their own instead of by scanning a fully
+    // materialized copy of every row in PHP; (2) the main query is
+    // iterated as a forward cursor (`foreach` over the executed
+    // statement) straight into $data, rather than pulled into one big
+    // array via ->fetchAll() and then looped a second time, so this
+    // never holds two ~135,000-row PHP structures (a raw copy and a
+    // transformed copy) at once; and (3) both games and players are
+    // normalized into their own small dictionaries (~780 games, ~900
+    // players) sent once, with rows referencing them by ID, instead of
+    // repeating a game's title/url/season/week/opponent on every one of
+    // its ~170 plays or a player's name on every role they appear in --
+    // by far the biggest win, since game/player context was always the
+    // largest redundant part of this response, not the new fields. This
+    // combination measures at ~540MB peak building a ~62MB response,
+    // comfortably inside production's 900M PHP-FPM budget with real
+    // margin for further data growth -- don't reintroduce ->fetchAll()
+    // or per-row game/player denormalization here without re-measuring.
+    $game_ids = array_unique(array_filter($database->select('pbp_play', 'p')
+      ->fields('p', ['pbp_game'])
       ->condition('status', 1)
-      ->orderBy('id', 'ASC')
+      ->distinct()
       ->execute()
-      ->fetchAll(\PDO::FETCH_ASSOC);
-
-    $game_ids = array_unique(array_filter(array_column($rows, 'pbp_game')));
+      ->fetchCol()));
     $games = $game_ids ? Node::loadMultiple($game_ids) : [];
 
-    // Batch-load only the distinct Player nodes actually referenced, same
-    // pattern as $games above -- cheap even at ~61,000 rows since the
-    // number of distinct players involved is small.
-    $player_ids = array_unique(array_filter(array_column($rows, 'pbp_player')));
+    $player_id_lists = [];
+    foreach (array_merge(['pbp_player'], $role_fields) as $field) {
+      $player_id_lists[] = $database->select('pbp_play', 'p')
+        ->fields('p', [$field])
+        ->condition('status', 1)
+        ->isNotNull($field)
+        ->distinct()
+        ->execute()
+        ->fetchCol();
+    }
+    $player_ids = array_unique(array_filter(array_merge(...$player_id_lists)));
     $players = $player_ids ? Node::loadMultiple($player_ids) : [];
+
+    // A flat nid => name dictionary, sent once at the top of the response
+    // instead of repeating each player's name on every row/role they
+    // appear in (up to ~146,000 role occurrences across ~135,000 rows) --
+    // rows below reference players by nid only. Cache dependencies are
+    // added once per distinct player here too, rather than once per
+    // row-occurrence.
+    $player_names = [];
+    foreach ($players as $nid => $player) {
+      $cache->addCacheableDependency($player);
+      $player_names[$nid] = $player->label();
+    }
 
     // Same batch pattern for the (currently very small) set of manually
     // curated highlight links.
-    $highlight_ids = array_unique(array_filter(array_column($rows, 'pbp_highlight')));
+    $highlight_ids = array_unique(array_filter($database->select('pbp_play', 'p')
+      ->fields('p', ['pbp_highlight'])
+      ->condition('status', 1)
+      ->isNotNull('pbp_highlight')
+      ->distinct()
+      ->execute()
+      ->fetchCol()));
     $highlights = $highlight_ids ? Node::loadMultiple($highlight_ids) : [];
+    foreach ($highlights as $highlight) {
+      $cache->addCacheableDependency($highlight);
+    }
+
+    $result = $database->select('pbp_play', 'p')
+      ->fields('p', array_merge([
+        'id', 'pbp_game', 'pbp_sequence', 'pbp_quarter', 'pbp_time', 'pbp_down',
+        'pbp_distance', 'pbp_location', 'pbp_patriots_score', 'pbp_opponent_score',
+        'pbp_detail__value', 'pbp_epb', 'pbp_epa', 'pbp_source_url', 'pbp_player',
+        'pbp_scoring_play', 'pbp_scoring_team', 'pbp_highlight', 'pbp_play_type',
+      ], $role_fields))
+      ->condition('status', 1)
+      ->orderBy('id', 'ASC')
+      ->execute();
+    $result->setFetchMode(\PDO::FETCH_ASSOC);
+
+    // A per-game dictionary, keyed by Game node ID, sent once instead of
+    // repeating each game's title/url/season/week/opponent on every one
+    // of its ~380 plays -- rows below reference their game by `game_nid`
+    // only. This is the biggest single win of the normalization here:
+    // game context (not the new role data) was always the largest
+    // redundant chunk of this response, since it's ~9 fields repeated
+    // per-row for only ~350 distinct games.
+    $games_out = [];
+    foreach ($games as $nid => $game) {
+      $games_out[$nid] = $this->gameContext($game, $cache, $team_css);
+      unset($games_out[$nid]['game_nid']);
+    }
 
     $data = [];
-    foreach ($rows as $row) {
-      $game = $games[$row['pbp_game']] ?? NULL;
-      if (!$game) {
+    foreach ($result as $row) {
+      if (!isset($games_out[$row['pbp_game']])) {
         continue;
       }
 
-      $player = $players[$row['pbp_player']] ?? NULL;
-      if ($player) {
-        $cache->addCacheableDependency($player);
-      }
-
       $highlight = $highlights[$row['pbp_highlight']] ?? NULL;
-      if ($highlight) {
-        $cache->addCacheableDependency($highlight);
+
+      // Every role field set on this row, as compact [nid, role] pairs --
+      // names are looked up client-side against the `players` dictionary
+      // above, not repeated here. E.g. a pass_complete play carries both
+      // a Passer and a Receiver; a sack-with-fumble carries a Passer, a
+      // Sacker, and a Fumble Recovery. See PbpPlay::baseFieldDefinitions()
+      // for why a play can need several of these at once.
+      $row_players = [];
+      foreach (self::ROLE_FIELD_LABELS as $field => $role_label) {
+        if (!empty($row[$field]) && isset($player_names[$row[$field]])) {
+          $row_players[] = [(int) $row[$field], $role_label];
+        }
       }
 
-      $data[] = $this->gameContext($game, $cache, $team_css) + [
+      $data[] = [
         'id' => (int) $row['id'],
+        'game_nid' => (int) $row['pbp_game'],
         'sequence' => (int) $row['pbp_sequence'],
         'quarter' => $row['pbp_quarter'],
         'time' => $row['pbp_time'],
@@ -373,14 +506,21 @@ class SearchDataController extends ControllerBase {
         'epb' => $row['pbp_epb'] !== NULL ? (float) $row['pbp_epb'] : NULL,
         'epa' => $row['pbp_epa'] !== NULL ? (float) $row['pbp_epa'] : NULL,
         'source_url' => $row['pbp_source_url'],
-        'player' => $player ? ['nid' => (int) $player->id(), 'name' => $player->label()] : NULL,
+        'player' => $row['pbp_player'] !== NULL ? (int) $row['pbp_player'] : NULL,
         'scoring_play' => (bool) $row['pbp_scoring_play'],
         'scoring_team' => $row['pbp_scoring_team'],
         'highlight_url' => $highlight ? $highlight->toUrl()->toString() : NULL,
+        'play_type' => $row['pbp_play_type'],
+        'players' => $row_players,
       ];
     }
 
-    $response = new CacheableJsonResponse($data);
+    $response = new CacheableJsonResponse([
+      'games' => $games_out,
+      'players' => $player_names,
+      'play_type_labels' => self::PLAY_TYPE_LABELS,
+      'rows' => $data,
+    ]);
     $response->addCacheableDependency($cache);
     return $response;
   }
