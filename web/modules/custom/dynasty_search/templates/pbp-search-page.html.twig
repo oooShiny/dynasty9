@@ -37,6 +37,16 @@
   <select id="pbp-filter-down" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Down -","allowClear":true,"width":"100%"}'></select>
 {% endset %}
 
+{% set play_type_filter %}
+  <label for="pbp-filter-play-type" class="block text-sm mb-1">Play Type</label>
+  <select id="pbp-filter-play-type" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Play Type(s) -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
+{% set player_filter %}
+  <label for="pbp-filter-player" class="block text-sm mb-1">Player</label>
+  <select id="pbp-filter-player" multiple class="select2-widget w-full" data-select2-config='{"placeholder":"- Select Player(s) -","allowClear":true,"width":"100%"}'></select>
+{% endset %}
+
 {% set home_away_filter %}
   <div class="text-sm mb-1">Home/Away</div>
   <div class="pbp-toggle-group flex gap-1" data-filter="home_away">
@@ -127,6 +137,8 @@
         <div class="p-3">{{ opponent_filter }}</div>
         <div class="p-3">{{ quarter_filter }}</div>
         <div class="p-3">{{ down_filter }}</div>
+        <div class="p-3">{{ play_type_filter }}</div>
+        <div class="p-3">{{ player_filter }}</div>
         <div class="border border-white p-3 my-1">{{ game_type_group }}</div>
         <div class="border border-white p-3 my-1">{{ play_context_group }}</div>
         <div class="p-3">{{ reset_filter }}</div>

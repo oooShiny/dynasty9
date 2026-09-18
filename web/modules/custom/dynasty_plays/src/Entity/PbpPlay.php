@@ -12,12 +12,15 @@ use Drupal\user\UserInterface;
 /**
  * Defines the Play-by-Play entity.
  *
- * Stores a single raw play-by-play row (one row per play event, as scraped
- * from Pro Football Reference box scores) for pre-2000 seasons, where no
- * pre-aggregated per-player stat CSV exists. Unlike PlayerGameStat, this is
- * not broken down into structured per-player passing/rushing/receiving
- * numbers -- it's the original play text plus down/distance/score/time
- * context, meant for browsing and searching rather than summed reports.
+ * Stores a single raw play-by-play row (one row per play event, covering all
+ * imported seasons, pre- and post-2000). Unlike PlayerGameStat, this isn't a
+ * summed report -- it keeps the original play text (pbp_detail) plus down/
+ * distance/score/time context, meant for browsing and searching. It's also
+ * classified: pbp_play_type gives each row a canonical play type, and the
+ * pbp_passer/pbp_rusher/pbp_receiver/etc. fields tag the specific players
+ * involved by role (see the field definitions below for the full role
+ * list) -- both populated at import time from the source CSV, not derived
+ * from PlayerGameStat's aggregated numbers.
  *
  * @ingroup dynasty_plays
  *
@@ -619,6 +622,140 @@ class PbpPlay extends ContentEntityBase implements PbpPlayInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+
+    // Play Type field - the canonical play type, populated at import time
+    // either straight from nflfastR's own `play_type` column (2000+,
+    // already this exact vocabulary) or derived by regex against the PFR
+    // prose `detail` text (pre-2000, see
+    // scripts/ne_legacy_parser.py/enrich-legacy-pbp.py in the nfldata.org
+    // sibling project that produces the CSVs this module imports).
+    $fields['pbp_play_type'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Play Type'))
+      ->setDescription(t('The canonical play type for this play.'))
+      ->setSettings([
+        'allowed_values' => [
+          'pass' => t('Pass'),
+          'run' => t('Run'),
+          'punt' => t('Punt'),
+          'kickoff' => t('Kickoff'),
+          'field_goal' => t('Field Goal'),
+          'extra_point' => t('Extra Point'),
+          'qb_kneel' => t('QB Kneel'),
+          'qb_spike' => t('QB Spike'),
+          'no_play' => t('No Play'),
+          'penalty' => t('Penalty'),
+          'other' => t('Other'),
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'list_default',
+        'weight' => 17,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'options_select',
+        'weight' => 17,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Two Point Attempt field - whether this play was a two-point
+    // conversion try. pbp_play_type still reflects the underlying pass/
+    // run, same as nflfastR's own scheme (a two-point try isn't its own
+    // play_type, just a flag alongside one).
+    $fields['pbp_two_point_attempt'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Two Point Attempt'))
+      ->setDescription(t('Whether this play was a two-point conversion attempt.'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'boolean',
+        'weight' => 18,
+        'settings' => [
+          'format' => 'yes-no',
+        ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'weight' => 18,
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Per-role player fields. Each is a best-effort match (same
+    // GamePlayerMatcher::matchPlayer() used everywhere else in this
+    // module) of a player name that arrives from the source CSV already
+    // tagged with its role -- nflfastR's own passer_player_name/
+    // rusher_player_name/etc. columns for 2000+, or enrich-legacy-pbp.py's
+    // regex-captured equivalents for pre-2000 -- rather than parsed from
+    // free text at import time the way pbp_player above still is. A play
+    // can need several of these at once (e.g. a pass_complete has both a
+    // passer and a receiver; a rush with a fumble has a rusher plus
+    // forced_fumble_player/fumble_recovery_player), which is the "assign
+    // as many players as needed" this set of fields exists for.
+    //
+    // Each is deliberately single-value (no ->setCardinality() override)
+    // and NOT translatable, same reasoning as pbp_player/pbp_highlight
+    // above: this keeps every one of them a plain column on the
+    // `pbp_play` base table, so SearchDataController::playByPlay()'s raw
+    // SQL select can keep reading them directly -- no join, no per-row
+    // Entity API load -- at ~135,000 rows. A handful of rarer roles
+    // (a 3rd/4th assisted tackler, a split sack's second player) are
+    // dropped rather than modeled, the same fixed-columns tradeoff
+    // enrich-legacy-pbp.py/extract-patriots-pbp.py already made when
+    // producing the source CSVs.
+    $weight = 19;
+    foreach ([
+      'pbp_passer' => [t('Passer'), t('The player who threw the pass, on a pass play.')],
+      'pbp_rusher' => [t('Rusher'), t('The ball carrier, on a run play.')],
+      'pbp_receiver' => [t('Receiver'), t('The intended or actual receiver, on a pass play.')],
+      'pbp_interceptor' => [t('Interceptor'), t('The player who intercepted the pass, if any.')],
+      'pbp_sacker' => [t('Sacker'), t('The defender credited with the sack, if any.')],
+      'pbp_punter' => [t('Punter'), t('The punter, on a punt play.')],
+      'pbp_kicker' => [t('Kicker'), t('The kicker, on a kickoff/field goal/extra point play.')],
+      'pbp_returner' => [t('Returner'), t('The player who returned the kick/punt, if any.')],
+      'pbp_blocker' => [t('Blocker'), t('The defender who blocked the kick/punt, if any.')],
+      'pbp_tackler_1' => [t('Tackler 1'), t('The first player credited with the tackle, if any.')],
+      'pbp_tackler_2' => [t('Tackler 2'), t('The second player credited with the tackle (an assist), if any.')],
+      'pbp_forced_fumble_player' => [t('Forced Fumble By'), t('The defender who forced a fumble, if any.')],
+      'pbp_fumble_recovery_player' => [t('Fumble Recovered By'), t('The player who recovered a fumble, if any.')],
+      'pbp_penalized_player' => [t('Penalized Player'), t('The player a penalty was called on, if the source names one rather than just a team.')],
+    ] as $field_name => [$label, $description]) {
+      $fields[$field_name] = BaseFieldDefinition::create('entity_reference')
+        ->setLabel($label)
+        ->setDescription($description)
+        ->setSetting('target_type', 'node')
+        ->setSetting('handler', 'default:node')
+        ->setSetting('handler_settings', [
+          'target_bundles' => [
+            'player' => 'player',
+          ],
+        ])
+        ->setDisplayOptions('view', [
+          'label' => 'above',
+          'type' => 'entity_reference_label',
+          'weight' => $weight,
+          'settings' => [
+            'link' => TRUE,
+          ],
+        ])
+        ->setDisplayOptions('form', [
+          'type' => 'entity_reference_autocomplete',
+          'weight' => $weight,
+          'settings' => [
+            'match_operator' => 'CONTAINS',
+            'size' => '60',
+            'autocomplete_type' => 'tags',
+            'placeholder' => '',
+          ],
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+      $weight++;
+    }
 
     return $fields;
   }

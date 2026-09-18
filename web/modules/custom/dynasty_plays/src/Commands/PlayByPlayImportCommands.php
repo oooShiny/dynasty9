@@ -7,14 +7,46 @@ use Drupal\dynasty_plays\Service\GamePlayerMatcher;
 use Drush\Commands\DrushCommands;
 
 /**
- * Drush commands for importing the pre-2000 play-by-play CSVs.
+ * Drush commands for importing the play-by-play CSVs.
  *
- * Source: patriots_pbp_<season>.csv files (1978-1999), one row per play,
- * scraped from Pro Football Reference box scores. Unlike the 2000+
- * quarterly stats CSV, this is raw play text rather than pre-aggregated
- * per-player numbers -- see \Drupal\dynasty_plays\Entity\PbpPlay.
+ * Source: patriots_pbp_<season>.csv files (1978-present), one row per
+ * play. Unlike the quarterly stats CSV, this is raw play text (plus,
+ * since the enriched CSV format, a play_type and per-role player columns
+ * -- see ROLE_FIELD_MAP below) rather than pre-aggregated per-player
+ * numbers -- see \Drupal\dynasty_plays\Entity\PbpPlay.
  */
 class PlayByPlayImportCommands extends DrushCommands {
+
+  /**
+   * Maps a source CSV role column to its pbp_play entity field.
+   *
+   * Populated by enrich-legacy-pbp.py (pre-2000, regex-derived from the
+   * prose `detail` text) or extract-patriots-pbp.py (2000+, carried
+   * straight through from nflfastR's own passer_player_name/etc.
+   * columns) in the nfldata.org sibling project -- see PbpPlay's field
+   * definitions for what each role means. Absent from older CSVs that
+   * haven't been regenerated with these columns yet, in which case
+   * $data[$csv_column] is simply empty and the field is left unset, same
+   * as any other row with no confident match.
+   *
+   * @var string[]
+   */
+  const ROLE_FIELD_MAP = [
+    'passer' => 'pbp_passer',
+    'rusher' => 'pbp_rusher',
+    'receiver' => 'pbp_receiver',
+    'interceptor' => 'pbp_interceptor',
+    'sacker' => 'pbp_sacker',
+    'punter' => 'pbp_punter',
+    'kicker' => 'pbp_kicker',
+    'returner' => 'pbp_returner',
+    'blocker' => 'pbp_blocker',
+    'tackler_1' => 'pbp_tackler_1',
+    'tackler_2' => 'pbp_tackler_2',
+    'forced_fumble_player' => 'pbp_forced_fumble_player',
+    'fumble_recovery_player' => 'pbp_fumble_recovery_player',
+    'penalized_player' => 'pbp_penalized_player',
+  ];
 
   /**
    * The entity type manager.
@@ -94,6 +126,8 @@ class PlayByPlayImportCommands extends DrushCommands {
     $processed = 0;
     $missing_games = [];
     $player_matched = 0;
+    $role_matched = 0;
+    $play_types_found = 0;
     $scoring_plays_found = 0;
     $limit = $options['limit'] ? (int) $options['limit'] : NULL;
 
@@ -142,6 +176,30 @@ class PlayByPlayImportCommands extends DrushCommands {
         $player_nid = $this->matcher->matchPlayerInDetail($detail, $player_index);
         if ($player_nid) {
           $player_matched++;
+        }
+
+        // Per-role player matches, from whichever role columns this CSV
+        // has (see ROLE_FIELD_MAP). Each role name is resolved the same
+        // way as any other CSV player column -- matchPlayer() already
+        // handles both the "Initial.Surname" shorthand (2000+) and full
+        // "First Last" names (pre-2000) -- so this needs no era branch.
+        $role_values = [];
+        foreach (self::ROLE_FIELD_MAP as $csv_column => $field_name) {
+          $name = trim($data[$csv_column] ?? '');
+          if ($name === '') {
+            continue;
+          }
+          $role_nid = $this->matcher->matchPlayer($name, $player_index);
+          if ($role_nid) {
+            $role_values[$field_name] = $role_nid;
+            $role_matched++;
+          }
+        }
+
+        $play_type = trim($data['play_type'] ?? '') ?: NULL;
+        $two_point_attempt = trim($data['two_point_attempt'] ?? '') === '1';
+        if ($play_type) {
+          $play_types_found++;
         }
 
         if ($options['dry-run']) {
@@ -193,11 +251,15 @@ class PlayByPlayImportCommands extends DrushCommands {
           'pbp_source_url' => trim($data['boxscore_url'] ?? '') ?: NULL,
           'pbp_scoring_play' => $scoring_play,
           'pbp_scoring_team' => $scoring_team,
+          'pbp_play_type' => $play_type,
+          'pbp_two_point_attempt' => $two_point_attempt,
         ];
 
         if ($player_nid) {
           $values['pbp_player'] = $player_nid;
         }
+
+        $values += $role_values;
 
         if ($scoring_play) {
           $scoring_plays_found++;
@@ -215,12 +277,14 @@ class PlayByPlayImportCommands extends DrushCommands {
     }
 
     $this->logger()->success(sprintf(
-      '%s %d of %d rows across %d files. Players matched: %d. Scoring plays: %d. Games not found: %d distinct labels (%d rows).',
+      '%s %d of %d rows across %d files. Players matched: %d. Play types found: %d. Role players matched: %d. Scoring plays: %d. Games not found: %d distinct labels (%d rows).',
       $options['dry-run'] ? 'Checked' : 'Imported',
       $created,
       $processed,
       count($files),
       $player_matched,
+      $play_types_found,
+      $role_matched,
       $scoring_plays_found,
       count($missing_games),
       array_sum($missing_games)
