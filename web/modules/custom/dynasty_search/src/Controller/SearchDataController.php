@@ -526,6 +526,270 @@ class SearchDataController extends ControllerBase {
   }
 
   /**
+   * All podcast transcript segments, flattened for client-side searching on
+   * the Transcript Search page (`/transcripts/search`, dynasty_transcript
+   * module).
+   *
+   * Replaces dynasty_transcript's former Solr-backed search: the segment
+   * text lives in per-episode JSON files bundled in that module
+   * (data/../transcripts/<episode>.json, not entities or a database table
+   * -- neither `dynasty_transcript`'s own entity type nor a Search API
+   * index is populated by anything anymore), matched to `podcast_episode`
+   * nodes by filename the same way dynasty_transcript's own (now-retired)
+   * Solr importer did. At ~60,000 segments across ~120 episodes this is
+   * well within the same "flat JSON, filtered client-side" territory as
+   * this class's other endpoints -- and per-episode context (title/mp3/
+   * game) is normalized into its own small dictionary rather than
+   * repeated on every one of an episode's ~500 segments, the same
+   * lesson ::playByPlay() applies to game/player context (see that
+   * method's comments for why that matters at this row count).
+   */
+  public function transcripts(): CacheableJsonResponse {
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags(['node_list:podcast_episode']);
+    $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
+
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'podcast_episode')
+      ->condition('status', 1)
+      ->accessCheck(TRUE)
+      ->execute();
+
+    $transcripts_dir = \Drupal::service('extension.list.module')->getPath('dynasty_transcript') . '/transcripts';
+
+    $episodes_out = [];
+    $data = [];
+    foreach (Node::loadMultiple($nids) as $node) {
+      $cache->addCacheableDependency($node);
+
+      $game = $node->get('field_game')->entity;
+      if ($game) {
+        $cache->addCacheableDependency($game);
+      }
+
+      $filename = trim((string) $node->get('field_transcript_filename')->value);
+      if ($filename === '') {
+        $filename = $this->transcriptFilenameFor($node, $game);
+      }
+      $path = $transcripts_dir . '/' . $filename;
+      if ($filename === '' || !is_file($path)) {
+        // No transcript file for this episode (not yet transcribed, or an
+        // episode whose title doesn't match the source file naming) --
+        // skip it rather than emit an episode with no segments.
+        continue;
+      }
+
+      $segments = json_decode((string) file_get_contents($path), TRUE);
+      if (!is_array($segments)) {
+        continue;
+      }
+
+      $nid = (int) $node->id();
+      $episodes_out[$nid] = [
+        'title' => $node->label(),
+        'url' => $node->toUrl()->toString(),
+        'season' => $node->get('field_season')->value,
+        'episode' => $node->get('field_episode')->value,
+        'mp3' => $node->get('field_mp3')->value,
+        'game_url' => $game ? $game->toUrl()->toString() : NULL,
+        'game_title' => $game ? $game->label() : NULL,
+      ];
+
+      foreach ($segments as $segment) {
+        $timestamp = (string) ($segment['timestamp'] ?? '');
+        $data[] = [
+          'episode_nid' => $nid,
+          'speaker' => (string) ($segment['speaker'] ?? ''),
+          'timestamp' => $timestamp,
+          'start' => $this->timestampStartSeconds($timestamp),
+          'text' => (string) ($segment['text'] ?? ''),
+        ];
+      }
+    }
+
+    $response = new CacheableJsonResponse([
+      'episodes' => $episodes_out,
+      'rows' => $data,
+    ]);
+    $response->addCacheableDependency($cache);
+    return $response;
+  }
+
+  /**
+   * All published `podcast_episode` nodes, flattened for client-side
+   * searching on the Podcast Search page (`/podcast`).
+   *
+   * Replaces the former Views/Search API `podcast_search` view (Solr,
+   * same insecure server as ::transcripts() -- see that method for why
+   * both were migrated). At ~120 episodes this needs none of
+   * ::transcripts()'s normalization or ::playByPlay()'s raw-SQL
+   * treatment -- plain Entity API is exactly what ::highlights() above
+   * already does comfortably at this scale.
+   */
+  public function podcasts(): CacheableJsonResponse {
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags(['node_list:podcast_episode']);
+    $cache->setCacheMaxAge(\Drupal\Core\Cache\Cache::PERMANENT);
+
+    // `field_publication_date` exists on this content type but is empty
+    // on every episode (confirmed: zero rows in node__field_publication_date
+    // site-wide), so it can't drive the sort. `created` is used instead --
+    // this podcast publishes historical-season episodes in chronological
+    // order, and each node's creation time already tracks its real-world
+    // publish date closely enough to sort newest-first correctly.
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'podcast_episode')
+      ->condition('status', 1)
+      ->accessCheck(TRUE)
+      ->sort('created', 'DESC')
+      ->execute();
+
+    $data = [];
+    foreach (Node::loadMultiple($nids) as $node) {
+      $cache->addCacheableDependency($node);
+
+      $game = $node->get('field_game')->entity;
+      $opponent = NULL;
+      if ($game) {
+        $cache->addCacheableDependency($game);
+        $opponent = $game->get('field_opponent')->entity;
+        if ($opponent) {
+          $cache->addCacheableDependency($opponent);
+        }
+      }
+
+      $data[] = [
+        'nid' => (int) $node->id(),
+        'title' => $node->label(),
+        'url' => $node->toUrl()->toString(),
+        'subtitle' => $node->get('field_subtitle')->value,
+        'summary' => $this->plainTextSummary((string) $node->get('body')->value, 200),
+        'season' => $node->get('field_season')->value !== NULL ? (int) $node->get('field_season')->value : NULL,
+        'episode' => $node->get('field_episode')->value,
+        'duration' => $node->get('field_duration')->value,
+        'mp3' => $node->get('field_mp3')->value,
+        'guest' => $node->get('field_podcast_guest')->value,
+        'cover_image' => $node->get('field_episode_cover_image')->value,
+        'publication_date' => $node->get('field_publication_date')->value,
+        'total_downloads' => $node->get('field_total_downloads')->value !== NULL ? (int) $node->get('field_total_downloads')->value : NULL,
+        'game_url' => $game ? $game->toUrl()->toString() : NULL,
+        'game_title' => $game ? $game->label() : NULL,
+        'opponent' => $opponent ? $opponent->label() : NULL,
+      ];
+    }
+
+    $response = new CacheableJsonResponse($data);
+    $response->addCacheableDependency($cache);
+    return $response;
+  }
+
+  /**
+   * Strips HTML and trims to a maximum length on a word boundary,
+   * mirroring the `smart_trim` formatter the retired `podcast_search`
+   * view's "card" row display used for the episode body.
+   */
+  protected function plainTextSummary(string $html, int $max_length): string {
+    $text = trim(html_entity_decode(strip_tags($html), ENT_QUOTES));
+    if (mb_strlen($text) <= $max_length) {
+      return $text;
+    }
+    $trimmed = mb_substr($text, 0, $max_length);
+    $last_space = mb_strrpos($trimmed, ' ');
+    if ($last_space !== FALSE) {
+      $trimmed = mb_substr($trimmed, 0, $last_space);
+    }
+    return $trimmed . '…';
+  }
+
+  /**
+   * Derives a transcript JSON filename from an episode's title (or its
+   * linked Game's title, when there is one), for episodes with no
+   * `field_transcript_filename` override -- true for the large majority
+   * (confirmed: 118 of 121 published episodes as of this writing).
+   *
+   * Ported from (and must stay in sync with) the now-retired
+   * TranscriptCommands::generateFilename(), plus the `podcast_metadata`
+   * view's own filename-derivation field, which this replaces both
+   * callers of. Verified against every published podcast_episode node:
+   * matches an existing transcripts/*.json file for 111 of 121 (91.7%,
+   * on par with what that original logic already achieved) -- the
+   * remainder are genuinely un-transcribed episodes or pre-existing
+   * filename mismatches in the bundled data, not something this
+   * derivation can fix by being cleverer.
+   */
+  protected function transcriptFilenameFor($node, $game): string {
+    $source_title = $game ? $game->label() : $node->label();
+    $filename = $this->slugifyFilename($source_title);
+
+    if ($game) {
+      $upper_title = mb_strtoupper($node->label());
+      $suffix = '';
+      foreach (['PART 1' => '-part-1', 'PART 2' => '-part-2', 'PART 3' => '-part-3'] as $needle => $part_suffix) {
+        if (str_contains($upper_title, $needle)) {
+          $suffix = $part_suffix;
+          break;
+        }
+      }
+      if ($suffix !== '') {
+        $filename = rtrim($filename, '.json') . $suffix . '.json';
+      }
+    }
+
+    return $filename;
+  }
+
+  /**
+   * Slugifies a title into a `<slug>.json` filename, matching the exact
+   * character-replacement rules the bundled transcript files were
+   * originally named with.
+   */
+  protected function slugifyFilename(string $title): string {
+    if (class_exists('Normalizer')) {
+      $filename = \Normalizer::normalize($title, \Normalizer::FORM_D);
+      $filename = preg_replace('/[\x{0300}-\x{036f}]/u', '', $filename);
+    }
+    else {
+      $filename = $title;
+    }
+
+    $filename = mb_strtolower($filename, 'UTF-8');
+
+    $replacements = [
+      '&' => 'and', '@' => 'at', '+' => 'plus', "'" => '', "’" => '', '"' => '',
+      '“' => '', '”' => '', '–' => '-', '—' => '-', '…' => '', ':' => '', ';' => '',
+      ',' => '', '.' => '', '!' => '', '?' => '', '(' => '', ')' => '', '[' => '',
+      ']' => '', '/' => '-', '\\' => '-',
+    ];
+    $filename = str_replace(array_keys($replacements), array_values($replacements), $filename);
+
+    $filename = preg_replace('/[^a-z0-9\s\-]/', '', $filename);
+    $filename = preg_replace('/\s+/', '-', trim($filename));
+    $filename = preg_replace('/-+/', '-', $filename);
+    $filename = trim($filename, '-');
+
+    return $filename . '.json';
+  }
+
+  /**
+   * Converts a "MM:SS-MM:SS" (or "H:MM:SS-...") segment timestamp into
+   * its start time in seconds, for direct-to-timestamp audio playback
+   * (`<audio src="...mp3#t=123">`). Ported from the now-retired
+   * TranscriptCommands::parseTimestamp()/timeToSeconds().
+   */
+  protected function timestampStartSeconds(string $timestamp): int {
+    $start = explode('-', $timestamp)[0] ?? '0:00';
+    $parts = array_map('intval', explode(':', trim($start)));
+
+    if (count($parts) === 3) {
+      return ($parts[0] * 3600) + ($parts[1] * 60) + $parts[2];
+    }
+    if (count($parts) === 2) {
+      return ($parts[0] * 60) + $parts[1];
+    }
+    return 0;
+  }
+
+  /**
    * Builds the shared game-context fields (season, week, opponent, etc.)
    * used by ::stats() and ::playByPlay(), so they stay identical no matter
    * which entity type (PlayerGameStat, Play, or PbpPlay) a row came from.

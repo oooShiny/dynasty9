@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Podcast Search page shell. All data is loaded client-side from
+ * /dynasty/search/podcasts by js/podcast-search.js — this template only
+ * provides the search controls and empty result containers.
+ */
+#}
+
+<div id="podcast-search-app" class="max-w-4xl mx-auto p-4">
+  <h1 class="text-2xl font-extrabold uppercase mb-4">Patriots Dynasty Podcast</h1>
+
+  <div class="bg-white border-2 border-red-pats p-4 rounded-lg shadow-2xl sticky top-0 w-full z-10">
+    <div class="flex gap-2 mb-3">
+      <input
+        type="text"
+        id="ps-input"
+        placeholder="Search episodes..."
+        autocomplete="off"
+        class="flex-1 px-4 py-3 text-base border-2 border-gray-300 rounded-md outline-none transition-colors focus:border-blue-pats"
+      />
+      <button id="ps-search-btn" class="px-6 py-3 text-base bg-blue-pats text-white border-none rounded-md cursor-pointer transition-colors hover:bg-blue-900">
+        Search
+      </button>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mb-2 items-end">
+      <div>
+        <label for="ps-filter-season" class="block text-xs text-gray-500 uppercase tracking-wide mb-1">Season</label>
+        <select id="ps-filter-season" class="px-3 py-2 border border-gray-300 rounded-md text-sm bg-white min-w-[120px]">
+          <option value="">All Seasons</option>
+        </select>
+      </div>
+      <div>
+        <div class="block text-xs text-gray-500 uppercase tracking-wide mb-1">Episode Type</div>
+        <div id="ps-filter-type" class="flex gap-1">
+          <button type="button" class="ps-toggle px-3 py-2 border border-red-pats rounded-md text-sm bg-red-pats text-white" data-value="">All</button>
+          <button type="button" class="ps-toggle px-3 py-2 border border-gray-300 rounded-md text-sm bg-white text-gray-700" data-value="game">Game Episodes</button>
+          <button type="button" class="ps-toggle px-3 py-2 border border-gray-300 rounded-md text-sm bg-white text-gray-700" data-value="non-game">Non-Game</button>
+        </div>
+      </div>
+      <button id="ps-clear-filters" class="px-3 py-2 text-sm text-gray-600 hover:text-red-pats transition-colors hidden">
+        Clear Filters
+      </button>
+      <a href="/transcripts/search" class="ml-auto px-3 py-2 text-sm border-2 border-red-pats text-red-pats rounded hover:bg-red-pats hover:text-white transition-colors">
+        Transcript Search
+      </a>
+    </div>
+
+    <div id="ps-status" class="text-blue-pats text-sm"></div>
+  </div>
+
+  <div id="ps-results"></div>
+  <div id="ps-pagination" class="flex justify-center gap-2 mt-6"></div>
+</div>

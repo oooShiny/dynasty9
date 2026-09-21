@@ -46,6 +46,37 @@ dynasty_search.api_play_by_play:
     _access: 'TRUE'
   methods: [GET]
 
+dynasty_search.api_transcripts:
+  path: '/dynasty/search/transcripts'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchDataController::transcripts'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
+
+dynasty_search.transcripts_page_redirect:
+  path: '/search/transcripts'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::transcriptsPageRedirect'
+  requirements:
+    _access: 'TRUE'
+
+dynasty_search.api_podcasts:
+  path: '/dynasty/search/podcasts'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchDataController::podcasts'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
+
+dynasty_search.podcasts_page:
+  path: '/podcast'
+  defaults:
+    _controller: '\Drupal\dynasty_search\Controller\SearchPageController::podcastsPage'
+    _title: 'Patriots Dynasty Podcast'
+  requirements:
+    _access: 'TRUE'
+
 dynasty_search.plays_page:
   path: '/search/plays'
   defaults:
