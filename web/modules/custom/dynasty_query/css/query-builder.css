@@ -1,0 +1,11 @@
+#query-builder-app select,
+#query-builder-app input[type="number"] {
+  border: 1px solid #ccc;
+}
+
+#query-builder-app table th,
+#query-builder-app table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}

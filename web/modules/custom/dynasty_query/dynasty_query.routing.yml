@@ -1,0 +1,31 @@
+dynasty_query.api_schema:
+  path: '/dynasty/query/schema'
+  defaults:
+    _controller: '\Drupal\dynasty_query\Controller\QueryDataController::schema'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
+
+dynasty_query.api_options:
+  path: '/dynasty/query/options'
+  defaults:
+    _controller: '\Drupal\dynasty_query\Controller\QueryDataController::options'
+  requirements:
+    _access: 'TRUE'
+  methods: [GET]
+
+dynasty_query.api_run:
+  path: '/dynasty/query/run'
+  defaults:
+    _controller: '\Drupal\dynasty_query\Controller\QueryDataController::run'
+  requirements:
+    _access: 'TRUE'
+  methods: [POST]
+
+dynasty_query.page:
+  path: '/query'
+  defaults:
+    _controller: '\Drupal\dynasty_query\Controller\QueryPageController::page'
+    _title: 'Query Builder'
+  requirements:
+    _access: 'TRUE'
