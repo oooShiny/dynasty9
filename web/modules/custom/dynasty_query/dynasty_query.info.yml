@@ -1,0 +1,9 @@
+name: Dynasty Query Builder
+description: 'Ad-hoc group-by/aggregate query builder over Player Game Stats, Games, and Play-by-Play data.'
+package: Dynasty
+
+type: module
+core_version_requirement: ^8 || ^9 || ^10 || ^11
+dependencies:
+  - drupal:node
+  - dynasty_plays:dynasty_plays

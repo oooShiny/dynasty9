@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Ad-hoc group-by/aggregate Query Builder over Player Game Stats, Games,
+ * and Play-by-Play data.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function dynasty_query_theme() {
+  return [
+    'dynasty_query_page' => [
+      'variables' => [],
+      'template' => 'query-builder-page',
+    ],
+  ];
+}

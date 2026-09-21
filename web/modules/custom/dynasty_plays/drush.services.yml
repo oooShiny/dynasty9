@@ -14,3 +14,8 @@ services:
     arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher']
     tags:
       - { name: drush.command }
+  dynasty_plays.player_sync_commands:
+    class: Drupal\dynasty_plays\Commands\PlayerSyncCommands
+    arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher', '@http_client']
+    tags:
+      - { name: drush.command }

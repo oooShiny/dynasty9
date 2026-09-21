@@ -26,5 +26,9 @@ function dynasty_search_theme() {
       'variables' => ['player_nid' => NULL],
       'template' => 'player-highlight-search-block',
     ],
+    'dynasty_search_podcast_page' => [
+      'variables' => [],
+      'template' => 'podcast-search-page',
+    ],
   ];
 }

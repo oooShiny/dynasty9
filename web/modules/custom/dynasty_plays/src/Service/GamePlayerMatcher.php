@@ -69,7 +69,12 @@ class GamePlayerMatcher {
    *
    * @return array
    *   Array keyed by lowercase surname, valued by a list of
-   *   [nid, lowercase first name] pairs.
+   *   [nid, lowercase first name, seasons] entries, where `seasons` is the
+   *   player's `field_seasons_on_team` values (as ints) -- used by
+   *   ::matchPlayer()/::matchPlayerFullName()/::matchPlayerInDetail() to
+   *   disambiguate two players who'd otherwise tie on name alone (e.g.
+   *   "R.Moss" matching both Randy Moss and Roland Moss) by checking which
+   *   one actually played in the season being imported.
    */
   public function buildPlayerIndex() {
     $storage = $this->entityTypeManager->getStorage('node');
@@ -95,9 +100,28 @@ class GamePlayerMatcher {
       $index[$key][] = [
         'nid' => $player->id(),
         'first' => mb_strtolower($first),
+        'seasons' => array_map('intval', array_column($player->get('field_seasons_on_team')->getValue(), 'value')),
       ];
     }
     return $index;
+  }
+
+  /**
+   * Narrows a multi-candidate match list to the ones whose
+   * `field_seasons_on_team` includes $season, when that narrows the field
+   * to exactly one. Leaves $candidates unchanged if $season is unknown, if
+   * narrowing would eliminate every candidate (missing season data is more
+   * likely than a genuinely wrong match -- stay ambiguous rather than
+   * guess), or if more than one candidate remains.
+   */
+  protected function narrowBySeason(array $candidates, $season) {
+    if ($season === NULL || count($candidates) < 2) {
+      return $candidates;
+    }
+    $narrowed = array_filter($candidates, function ($candidate) use ($season) {
+      return in_array($season, $candidate['seasons'], TRUE);
+    });
+    return count($narrowed) === 1 ? $narrowed : $candidates;
   }
 
   /**
@@ -115,19 +139,25 @@ class GamePlayerMatcher {
    *   The raw player label from the CSV (e.g. "D. Bledsoe" or "Steve Grogan").
    * @param array $player_index
    *   The index built by ::buildPlayerIndex().
+   * @param int|null $season
+   *   The season the row belongs to, if known. When the initial-prefix
+   *   match is otherwise ambiguous (e.g. "R.Moss" matching both Randy Moss
+   *   and Roland Moss), this is used to narrow to whichever candidate(s)
+   *   actually have this season in `field_seasons_on_team` -- see
+   *   ::narrowBySeason().
    *
    * @return int|null
    *   The matched Player node ID, or NULL if no single confident match
    *   could be found.
    */
-  public function matchPlayer($name, array $player_index) {
+  public function matchPlayer($name, array $player_index, $season = NULL) {
     $name = trim($name);
     if ($name === '') {
       return NULL;
     }
 
     if (strpos($name, '.') === FALSE) {
-      return $this->matchPlayerFullName($name, $player_index);
+      return $this->matchPlayerFullName($name, $player_index, $season);
     }
 
     [$prefix, $rest] = explode('.', $name, 2);
@@ -142,6 +172,7 @@ class GamePlayerMatcher {
     $candidates = array_filter($player_index[$key], function ($candidate) use ($prefix) {
       return str_starts_with($candidate['first'], $prefix);
     });
+    $candidates = $this->narrowBySeason($candidates, $season);
 
     if (count($candidates) === 1) {
       return reset($candidates)['nid'];
@@ -165,12 +196,14 @@ class GamePlayerMatcher {
    *   A full player name, e.g. "Steve Grogan".
    * @param array $player_index
    *   The index built by ::buildPlayerIndex().
+   * @param int|null $season
+   *   The season the row belongs to, if known -- see ::narrowBySeason().
    *
    * @return int|null
    *   The matched Player node ID, or NULL if no single confident match
    *   could be found.
    */
-  protected function matchPlayerFullName($name, array $player_index) {
+  protected function matchPlayerFullName($name, array $player_index, $season = NULL) {
     $tokens = preg_split('/\s+/', $name);
     if (count($tokens) < 2) {
       return NULL;
@@ -188,6 +221,7 @@ class GamePlayerMatcher {
     $candidates = array_filter($player_index[$key], function ($candidate) use ($first_lower) {
       return $candidate['first'] === $first_lower;
     });
+    $candidates = $this->narrowBySeason($candidates, $season);
 
     return count($candidates) === 1 ? reset($candidates)['nid'] : NULL;
   }
@@ -278,12 +312,14 @@ class GamePlayerMatcher {
    *   The raw play-by-play detail text.
    * @param array $player_index
    *   The index built by ::buildPlayerIndex().
+   * @param int|null $season
+   *   The season the row belongs to, if known -- see ::narrowBySeason().
    *
    * @return int|null
    *   The matched Player node ID, or NULL if zero or more than one
    *   distinct player could be confidently identified.
    */
-  public function matchPlayerInDetail($detail, array $player_index) {
+  public function matchPlayerInDetail($detail, array $player_index, $season = NULL) {
     if ($detail === '' || empty($player_index)) {
       return NULL;
     }
@@ -303,6 +339,7 @@ class GamePlayerMatcher {
         $candidates = array_filter($player_index[$key], function ($candidate) use ($first_lower) {
           return $candidate['first'] === $first_lower;
         });
+        $candidates = $this->narrowBySeason($candidates, $season);
 
         if (count($candidates) === 1) {
           $resolved[reset($candidates)['nid']] = TRUE;
@@ -313,7 +350,7 @@ class GamePlayerMatcher {
     // 2000+ style: "<jersey>-<Initial(s)>.<Surname>" PFR box-score tokens.
     if (preg_match_all('/\d{1,2}-([A-Za-z]{1,4}\.[A-Za-z\'\-]+)/', $detail, $matches2)) {
       foreach ($matches2[1] as $token) {
-        $nid = $this->matchPlayer($token, $player_index);
+        $nid = $this->matchPlayer($token, $player_index, $season);
         if ($nid) {
           $resolved[$nid] = TRUE;
         }

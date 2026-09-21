@@ -1,0 +1,10 @@
+query_builder:
+  version: 1.x
+  css:
+    component:
+      css/query-builder.css: {}
+  js:
+    js/query-builder.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

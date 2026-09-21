@@ -96,4 +96,35 @@ class SearchPageController extends ControllerBase {
     return new RedirectResponse('/search/plays', 301);
   }
 
+  /**
+   * Redirects the retired Views/Search API Transcript Search URL to
+   * dynasty_transcript's page (now backed by
+   * SearchDataController::transcripts() instead of Solr).
+   */
+  public function transcriptsPageRedirect(): RedirectResponse {
+    return new RedirectResponse('/transcripts/search', 301);
+  }
+
+  /**
+   * Renders the Podcast Search page at the site's existing `/podcast` URL
+   * (the main-nav "Pod" link), replacing the former Views/Search API
+   * `podcast_search` view in place -- same URL, so nothing else on the
+   * site (menu link, inbound links) needs to change.
+   */
+  public function podcastsPage(): array {
+    return [
+      '#theme' => 'dynasty_search_podcast_page',
+      '#attached' => [
+        'library' => [
+          'dynasty_search/podcast_search',
+        ],
+      ],
+      '#cache' => [
+        'contexts' => [],
+        'tags' => [],
+        'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
+      ],
+    ];
+  }
+
 }

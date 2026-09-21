@@ -129,6 +129,9 @@ class PlayByPlayImportCommands extends DrushCommands {
     $role_matched = 0;
     $play_types_found = 0;
     $scoring_plays_found = 0;
+    $yards_gained_found = 0;
+    $fumble_recoveries_found = 0;
+    $fumble_return_yards_found = 0;
     $limit = $options['limit'] ? (int) $options['limit'] : NULL;
 
     foreach ($files as $file) {
@@ -173,7 +176,7 @@ class PlayByPlayImportCommands extends DrushCommands {
         }
 
         $detail = trim($data['detail'] ?? '');
-        $player_nid = $this->matcher->matchPlayerInDetail($detail, $player_index);
+        $player_nid = $this->matcher->matchPlayerInDetail($detail, $player_index, $season ?: NULL);
         if ($player_nid) {
           $player_matched++;
         }
@@ -183,13 +186,16 @@ class PlayByPlayImportCommands extends DrushCommands {
         // way as any other CSV player column -- matchPlayer() already
         // handles both the "Initial.Surname" shorthand (2000+) and full
         // "First Last" names (pre-2000) -- so this needs no era branch.
+        // Passing $season lets it disambiguate two players who share an
+        // initial+surname (e.g. "R.Moss" = Randy Moss vs. Roland Moss) by
+        // which of them actually played that season.
         $role_values = [];
         foreach (self::ROLE_FIELD_MAP as $csv_column => $field_name) {
           $name = trim($data[$csv_column] ?? '');
           if ($name === '') {
             continue;
           }
-          $role_nid = $this->matcher->matchPlayer($name, $player_index);
+          $role_nid = $this->matcher->matchPlayer($name, $player_index, $season ?: NULL);
           if ($role_nid) {
             $role_values[$field_name] = $role_nid;
             $role_matched++;
@@ -200,6 +206,19 @@ class PlayByPlayImportCommands extends DrushCommands {
         $two_point_attempt = trim($data['two_point_attempt'] ?? '') === '1';
         if ($play_type) {
           $play_types_found++;
+        }
+
+        $yards_gained = $this->parseYardsGained($detail);
+        if ($yards_gained !== NULL) {
+          $yards_gained_found++;
+        }
+        $fumble_return_yards = NULL;
+        if (trim($data['fumble_recovery_player'] ?? '') !== '') {
+          $fumble_recoveries_found++;
+          $fumble_return_yards = $this->parseFumbleReturnYards($detail);
+          if ($fumble_return_yards !== NULL) {
+            $fumble_return_yards_found++;
+          }
         }
 
         if ($options['dry-run']) {
@@ -253,6 +272,8 @@ class PlayByPlayImportCommands extends DrushCommands {
           'pbp_scoring_team' => $scoring_team,
           'pbp_play_type' => $play_type,
           'pbp_two_point_attempt' => $two_point_attempt,
+          'pbp_yards_gained' => $yards_gained,
+          'pbp_fumble_return_yards' => $fumble_return_yards,
         ];
 
         if ($player_nid) {
@@ -277,7 +298,7 @@ class PlayByPlayImportCommands extends DrushCommands {
     }
 
     $this->logger()->success(sprintf(
-      '%s %d of %d rows across %d files. Players matched: %d. Play types found: %d. Role players matched: %d. Scoring plays: %d. Games not found: %d distinct labels (%d rows).',
+      '%s %d of %d rows across %d files. Players matched: %d. Play types found: %d. Role players matched: %d. Scoring plays: %d. Yards gained parsed: %d. Fumble recoveries: %d (return yards parsed: %d). Games not found: %d distinct labels (%d rows).',
       $options['dry-run'] ? 'Checked' : 'Imported',
       $created,
       $processed,
@@ -286,6 +307,9 @@ class PlayByPlayImportCommands extends DrushCommands {
       $play_types_found,
       $role_matched,
       $scoring_plays_found,
+      $yards_gained_found,
+      $fumble_recoveries_found,
+      $fumble_return_yards_found,
       count($missing_games),
       array_sum($missing_games)
     ));
@@ -323,6 +347,82 @@ class PlayByPlayImportCommands extends DrushCommands {
   protected function floatOrNull($value) {
     $value = trim((string) $value);
     return $value === '' ? NULL : (float) $value;
+  }
+
+  /**
+   * Finds the first "for N yards"/"for no gain" clause at or after $offset.
+   *
+   * Neither era's source CSV carries a yardage column, but both eras'
+   * `detail` text follow the same PFR prose convention for describing a
+   * play's result, so this one parser covers 1978-present. Returns NULL
+   * (rather than 0) when the text has no such clause at all -- an
+   * incomplete pass, a touchback, a fair catch, or a made/missed kick has
+   * nothing to parse, and isn't the same as an explicit "no gain".
+   *
+   * @return array{0: int, 1: int}|null
+   *   [byte offset of the match, parsed yards] or NULL if not found.
+   */
+  protected function findYardageClause(string $text, int $offset = 0): ?array {
+    $number_pos = PHP_INT_MAX;
+    $number_value = NULL;
+    if (preg_match('/\bfor\s+(-?\d+)\s+yards?\b/i', $text, $matches, PREG_OFFSET_CAPTURE, $offset)) {
+      $number_pos = $matches[0][1];
+      $number_value = (int) $matches[1][0];
+    }
+    $no_gain_pos = PHP_INT_MAX;
+    if (preg_match('/\bfor\s+no\s+gain\b/i', $text, $matches, PREG_OFFSET_CAPTURE, $offset)) {
+      $no_gain_pos = $matches[0][1];
+    }
+    if ($number_pos === PHP_INT_MAX && $no_gain_pos === PHP_INT_MAX) {
+      return NULL;
+    }
+    return $no_gain_pos < $number_pos ? [$no_gain_pos, 0] : [$number_pos, $number_value];
+  }
+
+  /**
+   * Parses the play's own yards gained (negative for a loss) from detail.
+   */
+  protected function parseYardsGained(string $detail): ?int {
+    $clause = $this->findYardageClause($detail);
+    return $clause[1] ?? NULL;
+  }
+
+  /**
+   * Parses a fumble recoverer's return yardage from detail.
+   *
+   * Searches only the text after the first "recover(ed/s)" occurrence, so
+   * a fumble row's own pre-fumble yardage (already captured separately by
+   * parseYardsGained()) is never mistaken for the return distance. Covers
+   * both the modern "RECOVERED by ... at LOC. NAME to LOC2 for N yards"
+   * phrasing and the legacy "recovered by NAME at LOC and returned for N
+   * yards" phrasing with the same regex, since "returned for N yards"
+   * already contains a "for N yards" clause. Only meaningful for rows
+   * where pbp_fumble_recovery_player is set.
+   *
+   * One narrow exclusion: a botched snap recovered by the same player who
+   * then actually runs the play (e.g. a bad snap on a punt, recovered by
+   * the punter, who then punts and someone returns it) leaves an
+   * unrelated yardage clause after "recover" that belongs to that later
+   * play, not the fumble -- detected by a "punts"/"kicks" verb appearing
+   * between the recovery and the matched clause.
+   */
+  protected function parseFumbleReturnYards(string $detail): ?int {
+    if (!preg_match('/\brecover(?:ed|s)?\b/i', $detail, $matches, PREG_OFFSET_CAPTURE)) {
+      return NULL;
+    }
+    $offset = $matches[0][1] + strlen($matches[0][0]);
+
+    $clause = $this->findYardageClause($detail, $offset);
+    if ($clause === NULL) {
+      return NULL;
+    }
+
+    if (preg_match('/\b(?:punts|kicks)\b/i', $detail, $verb_matches, PREG_OFFSET_CAPTURE, $offset)
+      && $verb_matches[0][1] < $clause[0]) {
+      return NULL;
+    }
+
+    return $clause[1];
   }
 
 }

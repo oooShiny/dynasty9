@@ -146,7 +146,7 @@ class QuarterlyStatsImportCommands extends DrushCommands {
       }
 
       $player_name = trim($data['player'] ?? '');
-      $player_nid = $this->matcher->matchPlayer($player_name, $player_index);
+      $player_nid = $this->matcher->matchPlayer($player_name, $player_index, $season ?: NULL);
       if ($player_nid) {
         $player_matched++;
       }
