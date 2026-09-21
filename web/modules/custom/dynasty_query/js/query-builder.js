@@ -49,7 +49,7 @@
           opt.textContent = schema[factKey].label;
           els.fact.appendChild(opt);
         });
-        renderFactControls();
+        restoreFromUrl();
       })
       .catch(function () {
         showError('Could not load the query builder schema.');
@@ -59,7 +59,7 @@
       els.filters.innerHTML = '';
       renderFactControls();
     });
-    els.addFilter.addEventListener('click', addFilterRow);
+    els.addFilter.addEventListener('click', function () { addFilterRow(); });
     els.run.addEventListener('click', runQuery);
 
     function currentFact() {
@@ -126,10 +126,13 @@
       }
     }
 
-    function addFilterRow() {
+    // `initial`, when passed (restoring a shared URL), is `{field, value}`
+    // -- value pre-selection has to wait for loadFilterOptions()'s fetch to
+    // populate the <option>s, so this returns that promise.
+    function addFilterRow(initial) {
       const fact = currentFact();
       if (!fact) {
-        return;
+        return Promise.resolve();
       }
       const rowId = 'qb-filter-' + (filterRowCount++);
       const row = document.createElement('div');
@@ -146,6 +149,9 @@
         opt.textContent = dim.label;
         fieldSelect.appendChild(opt);
       });
+      if (initial && initial.field) {
+        fieldSelect.value = initial.field;
+      }
 
       const valueSelect = document.createElement('select');
       valueSelect.id = rowId + '-value';
@@ -176,13 +182,19 @@
       row.appendChild(removeBtn);
       els.filters.appendChild(row);
 
-      loadFilterOptions(fact, fieldSelect.value, valueSelect);
+      return loadFilterOptions(fact, fieldSelect.value, valueSelect).then(function () {
+        if (initial && initial.value) {
+          Array.from(valueSelect.options).forEach(function (o) {
+            o.selected = initial.value.indexOf(o.value) !== -1;
+          });
+        }
+      });
     }
 
     function loadFilterOptions(fact, dimensionKey, valueSelect) {
       valueSelect.innerHTML = '<option disabled>Loading&hellip;</option>';
       const url = OPTIONS_URL + '?fact=' + encodeURIComponent(els.fact.value) + '&dimension=' + encodeURIComponent(dimensionKey);
-      fetch(url)
+      return fetch(url)
         .then(function (r) { return r.json(); })
         .then(function (options) {
           valueSelect.innerHTML = '';
@@ -233,6 +245,8 @@
       if (els.sort.value) {
         body.sort = { key: els.sort.value, direction: els.sortDir.value };
       }
+
+      syncUrl(body);
 
       els.tbody.innerHTML = '<tr><td class="p-5 text-center">Running&hellip;</td></tr>';
 
@@ -294,6 +308,72 @@
 
     function hideError() {
       els.error.classList.add('hidden');
+    }
+
+    // --- URL state (shareable links) ---
+
+    function syncUrl(body) {
+      const params = new URLSearchParams();
+      params.set('fact', body.fact);
+      body.dimensions.forEach(function (v) { params.append('dim', v); });
+      body.measures.forEach(function (v) { params.append('measure', v); });
+      if (body.filters.length) {
+        params.set('filters', JSON.stringify(body.filters));
+      }
+      if (body.sort) {
+        params.set('sort', body.sort.key);
+        params.set('sort_dir', body.sort.direction);
+      }
+      params.set('limit', body.limit);
+      const qs = params.toString();
+      history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+    }
+
+    function restoreFromUrl() {
+      const params = new URLSearchParams(location.search);
+      const fact = params.get('fact');
+      if (fact && schema[fact]) {
+        els.fact.value = fact;
+      }
+      renderFactControls();
+
+      if (!fact || !schema[fact]) {
+        return;
+      }
+
+      checkAll(els.dimensions, params.getAll('dim'));
+      checkAll(els.measures, params.getAll('measure'));
+      updateSortOptions();
+
+      if (params.get('sort')) {
+        els.sort.value = params.get('sort');
+        els.sortDir.value = params.get('sort_dir') || 'desc';
+      }
+      if (params.get('limit')) {
+        els.limit.value = params.get('limit');
+      }
+
+      let filters = [];
+      if (params.get('filters')) {
+        try {
+          filters = JSON.parse(params.get('filters'));
+        }
+        catch (e) {
+          filters = [];
+        }
+      }
+
+      Promise.all(filters.map(function (f) { return addFilterRow(f); })).then(function () {
+        runQuery();
+      });
+    }
+
+    function checkAll(container, keys) {
+      Array.from(container.querySelectorAll('input[type="checkbox"]')).forEach(function (input) {
+        if (keys.indexOf(input.value) !== -1) {
+          input.checked = true;
+        }
+      });
     }
   }
 })(Drupal, once);
