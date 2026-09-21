@@ -751,3 +751,73 @@ function dynasty_plays_update_9009() {
     '@count' => count($fields_to_add),
   ]);
 }
+
+/**
+ * Add pbp_yards_gained and pbp_fumble_return_yards to the Play-by-Play
+ * entity.
+ *
+ * Neither field comes from a source CSV column -- no imported season's
+ * CSV carries yardage at all, for either era. Both are regex-parsed from
+ * pbp_detail at import time instead (see
+ * PlayByPlayImportCommands::parseYardsGained()/parseFumbleReturnYards()),
+ * since the pre- and post-2000 `detail` text both already follow the same
+ * PFR prose convention ("... for N yards"/"... for no gain"). Re-run
+ * `drush dynasty:import-play-by-play --wipe` after this to populate them
+ * on existing rows.
+ */
+function dynasty_plays_update_9010() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_id = 'pbp_play';
+  $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+
+  $fields_to_add = [];
+
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('pbp_yards_gained', $entity_type_id)) {
+    $fields_to_add['pbp_yards_gained'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Yards Gained'))
+      ->setDescription(t('Yards gained (negative for a loss) on the play, parsed from the detail text. NULL when the source text has no explicit yardage for this play (e.g. an incomplete pass, a touchback, a made/missed kick).'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => 33,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 33,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  if (!$entity_definition_update_manager->getFieldStorageDefinition('pbp_fumble_return_yards', $entity_type_id)) {
+    $fields_to_add['pbp_fumble_return_yards'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Fumble Return Yards'))
+      ->setDescription(t('Yards gained by the recovering player after a fumble, parsed from the detail text. NULL when no return distance is described in the source text.'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => 34,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 34,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  foreach ($fields_to_add as $field_name => $field_definition) {
+    $entity_definition_update_manager->installFieldStorageDefinition(
+      $field_name,
+      $entity_type_id,
+      'dynasty_plays',
+      $field_definition
+    );
+  }
+
+  return t('Added @count new field(s) to the Play-by-Play entity.', [
+    '@count' => count($fields_to_add),
+  ]);
+}

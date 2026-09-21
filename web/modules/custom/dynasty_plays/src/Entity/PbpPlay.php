@@ -757,6 +757,60 @@ class PbpPlay extends ContentEntityBase implements PbpPlayInterface {
       $weight++;
     }
 
+    // Yards Gained field - the yardage in the play's first "for N yards"/
+    // "for no gain" clause, regex-parsed from pbp_detail at import time
+    // (see PlayByPlayImportCommands::parseYardsGained()). Not present in
+    // any source CSV column for either era -- both eras' `detail` text
+    // happen to follow the same PFR prose convention, so one parser
+    // covers 1978-present. Reliable for run/qb_kneel (~100% matched) and
+    // reasonably so for pass/kickoff/punt returns/interception returns
+    // (yardage only appears in the text when the play actually gained/
+    // lost measurable yardage -- an incomplete pass, a touchback, a fair
+    // catch, or a made/missed kick has nothing to parse and is left NULL,
+    // not defaulted to 0). A no_play row still reports the as-played
+    // yardage before the penalty that nullified it, same as the source
+    // text does.
+    $fields['pbp_yards_gained'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Yards Gained'))
+      ->setDescription(t('Yards gained (negative for a loss) on the play, parsed from the detail text. NULL when the source text has no explicit yardage for this play (e.g. an incomplete pass, a touchback, a made/missed kick).'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    $weight++;
+
+    // Fumble Return Yards field - the yardage in the first "for N yards"/
+    // "for no gain" clause found AFTER the recovery is described (covers
+    // both "RECOVERED by ... at LOC. NAME to LOC2 for N yards" and the
+    // legacy "recovered by NAME at LOC and returned for N yards"
+    // phrasing), so it never picks up the pre-fumble play's own yardage.
+    // Only meaningful when pbp_fumble_recovery_player is set; NULL there
+    // too whenever the source text doesn't describe a return distance
+    // (recovered and downed with no stated return, rather than actually
+    // 0 yards returned -- same "leave it unset rather than guess"
+    // approach as pbp_player).
+    $fields['pbp_fumble_return_yards'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Fumble Return Yards'))
+      ->setDescription(t('Yards gained by the recovering player after a fumble, parsed from the detail text. NULL when no return distance is described in the source text.'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'number_integer',
+        'weight' => $weight,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => $weight,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     return $fields;
   }
 
