@@ -553,6 +553,8 @@
       return sortDir === 'asc' ? ' ▲' : ' ▼';
     }
 
+    const COLUMN_COUNT = 12;
+
     function renderThead() {
       if (!els.thead) return;
       const cols = [
@@ -567,7 +569,6 @@
         ['patriots_score', 'Pats', true],
         ['opponent_score', 'Opp', true],
         ['play_type_label', 'Type', true],
-        ['detail', 'Detail', false],
         ['players', 'Players', false],
       ];
       els.thead.innerHTML = '<tr>' + cols.map(function (c) {
@@ -587,13 +588,19 @@
       const pageRows = displayRows.slice(start, start + PER_PAGE);
 
       if (!total) {
-        els.tbody.innerHTML = '<tr><td colspan="13" class="text-center p-5">No plays match these filters.</td></tr>';
+        els.tbody.innerHTML = '<tr><td colspan="' + COLUMN_COUNT + '" class="text-center p-5">No plays match these filters.</td></tr>';
         renderPagination(0, 0);
         return;
       }
 
       els.tbody.innerHTML = pageRows.map(function (r) {
-        return '<tr class="border-b bg-white align-top">' +
+        return '<tr class="align-top">' +
+          '<td colspan="' + COLUMN_COUNT + '" class="p-2 pt-3 font-bold">' + escapeHtml(r.detail) +
+          (r.highlight_url ? ' <a href="' + escapeHtml(r.highlight_url) + '">&#9654; Watch</a>' : '') +
+          (r.source_url ? ' <a href="' + escapeHtml(r.source_url) + '" target="_blank" rel="noopener" class="text-xs whitespace-nowrap">[source]</a>' : '') +
+          '</td>' +
+          '</tr>' +
+          '<tr class="border-b bg-white align-top">' +
           '<td class="p-2">' + r.season + '</td>' +
           '<td class="p-2">' + escapeHtml(r.week ? r.week.label : '') + '</td>' +
           '<td class="p-2"><a href="' + escapeHtml(r.game_url) + '">' + escapeHtml(r.game_title) + '</a></td>' +
@@ -605,10 +612,6 @@
           '<td class="p-2">' + (r.patriots_score != null ? r.patriots_score : '') + '</td>' +
           '<td class="p-2">' + (r.opponent_score != null ? r.opponent_score : '') + '</td>' +
           '<td class="p-2 whitespace-nowrap">' + escapeHtml(r.play_type_label) + '</td>' +
-          '<td class="p-2">' + escapeHtml(r.detail) +
-          (r.highlight_url ? ' <a href="' + escapeHtml(r.highlight_url) + '">&#9654; Watch</a>' : '') +
-          (r.source_url ? ' <a href="' + escapeHtml(r.source_url) + '" target="_blank" rel="noopener" class="text-xs whitespace-nowrap">[source]</a>' : '') +
-          '</td>' +
           '<td class="p-2 whitespace-nowrap">' + renderPlayers(r.players) + '</td>' +
           '</tr>';
       }).join('');
