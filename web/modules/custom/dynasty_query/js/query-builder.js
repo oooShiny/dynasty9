@@ -271,18 +271,25 @@
 
     function renderResults(data) {
       const columns = data.columns.dimensions.concat(data.columns.measures);
+      const colCount = columns.length + (data.has_highlights ? 1 : 0);
+
       els.theadRow.innerHTML = '';
       columns.forEach(function (col) {
         const th = document.createElement('th');
         th.textContent = col.label;
         els.theadRow.appendChild(th);
       });
+      if (data.has_highlights) {
+        const th = document.createElement('th');
+        th.textContent = 'Highlight';
+        els.theadRow.appendChild(th);
+      }
 
       els.tbody.innerHTML = '';
       if (!data.rows.length) {
         const tr = document.createElement('tr');
         const td = document.createElement('td');
-        td.colSpan = columns.length || 1;
+        td.colSpan = colCount || 1;
         td.className = 'p-5 text-center';
         td.textContent = 'No results.';
         tr.appendChild(td);
@@ -294,9 +301,31 @@
         columns.forEach(function (col) {
           const td = document.createElement('td');
           const value = row[col.key];
-          td.textContent = (value === null || value === undefined) ? '' : value;
+          // A resolved node dimension (player, opponent) comes back as
+          // {label, url} rather than a plain scalar -- see
+          // QueryDataController::resolveRowLabels() -- so it can link to
+          // that node's own page instead of just showing its name.
+          if (value && typeof value === 'object') {
+            const a = document.createElement('a');
+            a.href = value.url;
+            a.textContent = value.label;
+            td.appendChild(a);
+          }
+          else {
+            td.textContent = (value === null || value === undefined) ? '' : value;
+          }
           tr.appendChild(td);
         });
+        if (data.has_highlights) {
+          const td = document.createElement('td');
+          if (row.highlight_url) {
+            const a = document.createElement('a');
+            a.href = row.highlight_url;
+            a.textContent = '▶ Watch';
+            td.appendChild(a);
+          }
+          tr.appendChild(td);
+        }
         els.tbody.appendChild(tr);
       });
     }

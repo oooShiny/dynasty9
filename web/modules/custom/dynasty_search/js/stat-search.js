@@ -441,6 +441,9 @@
       if (dim === 'game') {
         return '<a href="' + escapeHtml(r.game_url) + '">' + escapeHtml(r.game_title) + '</a>';
       }
+      if (dim === 'player' && r.player) {
+        return '<a href="' + escapeHtml(r.player.url) + '">' + escapeHtml(r.display_player) + '</a>';
+      }
       const v = dimensionValue(r, dim);
       return escapeHtml(v);
     }
@@ -643,7 +646,7 @@
           });
         }
         else {
-          cells += '<td class="p-2">' + (row.player ? '<a href="/node/' + row.player.nid + '">' + escapeHtml(row.player.name) + '</a>' : escapeHtml(row.player_name)) + '</td>';
+          cells += '<td class="p-2">' + (row.player ? '<a href="' + escapeHtml(row.player.url) + '">' + escapeHtml(row.player.name) + '</a>' : escapeHtml(row.player_name)) + '</td>';
           cells += '<td class="p-2"><a href="' + escapeHtml(row.game_url) + '">' + escapeHtml(row.game_title) + '</a></td>';
           cells += '<td class="p-2">' + row.season + '</td>';
           cells += '<td class="p-2">' + escapeHtml(row.quarter) + '</td>';

@@ -637,14 +637,16 @@
           '<td class="p-5"><a href="' + escapeHtml(g.url) + '">' + escapeHtml(g.title) + '</a></td>' +
           '<td class="ml-5">' + fmt(g.patriots_score) + '</td>' +
           '<td class="pr-5">' + fmt(g.opponent_score) + '</td>' +
-          '<td class="pr-5">' + (g.opponent ? '<a href="/node/' + g.opponent.nid + '">' + escapeHtml(g.opponent.name) + '</a>' : '') + '</td>' +
+          '<td class="pr-5">' + (g.opponent ? '<a href="' + escapeHtml(g.opponent.url) + '">' + escapeHtml(g.opponent.name) + '</a>' : '') + '</td>' +
           '<td>' + escapeHtml(g.opposing_coach || '') + '</td>' +
           '<td>' + escapeHtml(g.result || '') + '</td>' +
           '<td class="tw-px-5">' + escapeHtml(g.home_away || '') + '</td>' +
           '<td class="pr-5">' + escapeHtml(g.month || '') + '</td>' +
           '<td class="border-r pr-5">' + escapeHtml(g.weekday || '') + '</td>' +
-          '<td><div class="font-bold jersey text-blue-pats text-center text-xs uppercase">' + escapeHtml(lastName(g.starting_qb)) +
-            '</div><div class="font-bold jersey-number-blue text-3xl">' + (g.qb_jersey_number != null ? g.qb_jersey_number : '') + '</div></td>' +
+          '<td>' + (g.starting_qb_url ? '<a href="' + escapeHtml(g.starting_qb_url) + '">' : '') +
+            '<div class="font-bold jersey text-blue-pats text-center text-xs uppercase">' + escapeHtml(lastName(g.starting_qb)) +
+            '</div><div class="font-bold jersey-number-blue text-3xl">' + (g.qb_jersey_number != null ? g.qb_jersey_number : '') + '</div>' +
+            (g.starting_qb_url ? '</a>' : '') + '</td>' +
           '<td class="tw-px-5">' + fmt(g.brady_attempts) + '</td>' +
           '<td class="tw-pr-5">' + fmt(g.brady_completions) + '</td>' +
           '<td class="tw-pr-5">' + fmt(g.brady_yards) + '</td>' +

@@ -561,12 +561,23 @@
         ? '<a href="https://cdn.skiv.com/w/' + encodeURIComponent(p.video_file) + '/videos/video.mp4" download class="" title="Download video">' +
           DOWNLOAD_SVG + '<span class="sr-only">Download video</span></a>'
         : '';
+      const gameBadge = p.game_title
+        ? (p.game_url
+          ? '<a href="' + escapeHtml(p.game_url) + '" class="badge badge-outline">' + escapeHtml(p.game_title) + '</a>'
+          : '<p class="badge badge-outline">' + escapeHtml(p.game_title) + '</p>')
+        : '';
+      const playersHtml = (p.players_involved || []).length
+        ? '<p class="text-xs opacity-80">' + p.players_involved.map(function (pl) {
+            return pl.url ? '<a href="' + escapeHtml(pl.url) + '">' + escapeHtml(pl.name) + '</a>' : escapeHtml(pl.name);
+          }).join(', ') + '</p>'
+        : '';
       return '<div class="w-1/2 md:w-1/3 lg:w-1/4 ' + bg + ' m-3 shadow-lg max-h-80 flex flex-col justify-between">' +
         videoHtml +
         '<div class="p-2 ' + bg + ' text-white flex flex-col gap-4 justify-between">' +
         '<div><a href="' + escapeHtml(p.url) + '">' + escapeHtml(p.title) + '</a></div>' +
+        playersHtml +
         '<div class="flex justify-between">' +
-        '<p class="badge badge-outline">' + escapeHtml(p.game_title || '') + '</p>' +
+        gameBadge +
         downloadHtml +
         '</div></div></div>';
     }

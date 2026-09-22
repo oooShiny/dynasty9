@@ -115,23 +115,20 @@
     // same shape this file used before the endpoint was normalized.
     function denormalize(data) {
       const games = data.games || {};
-      const playerNames = data.players || {};
+      const players = data.players || {};
       const playTypeLabels = data.play_type_labels || {};
       return (data.rows || []).map(function (r) {
+        // `g` already carries game_title/game_url/season/week/opponent/
+        // home_away/playoff_game/result under those exact keys (see
+        // SearchDataController::gameContext()) -- spread it directly
+        // rather than remapping key-by-key.
         const g = games[r.game_nid] || {};
-        return Object.assign({}, r, {
-          game_title: g.title,
-          game_url: g.url,
-          season: g.season,
-          week: g.week,
-          opponent: g.opponent,
-          home_away: g.home_away,
-          playoff_game: g.playoff_game,
-          result: g.result,
+        return Object.assign({}, r, g, {
           play_type_label: playTypeLabels[r.play_type] || r.play_type,
-          player: (r.player != null) ? { nid: r.player, name: playerNames[r.player] } : null,
+          player: (r.player != null) ? { nid: r.player, name: (players[r.player] || {}).name, url: (players[r.player] || {}).url } : null,
           players: (r.players || []).map(function (p) {
-            return { nid: p[0], name: playerNames[p[0]], role: p[1] };
+            const pd = players[p[0]] || {};
+            return { nid: p[0], name: pd.name, url: pd.url, role: p[1] };
           }),
         });
       });
@@ -729,7 +726,8 @@
   function renderPlayers(players) {
     if (!players || !players.length) return '';
     return players.map(function (p) {
-      return '<div><span class="text-xs opacity-70">' + escapeHtml(p.role) + ':</span> ' + escapeHtml(p.name) + '</div>';
+      const name = p.url ? '<a href="' + escapeHtml(p.url) + '">' + escapeHtml(p.name) + '</a>' : escapeHtml(p.name);
+      return '<div><span class="text-xs opacity-70">' + escapeHtml(p.role) + ':</span> ' + name + '</div>';
     }).join('');
   }
 

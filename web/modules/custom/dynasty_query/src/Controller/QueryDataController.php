@@ -4,6 +4,8 @@ namespace Drupal\dynasty_query\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -256,7 +258,7 @@ class QueryDataController extends ControllerBase {
     $labels = $resolve ? $this->resolveLabels($resolve, $ids) : [];
     $options = [];
     foreach ($ids as $id) {
-      $options[] = ['value' => $id, 'label' => $labels[$id] ?? (string) $id];
+      $options[] = ['value' => $id, 'label' => $labels[$id]['label'] ?? (string) $id];
     }
     usort($options, fn($a, $b) => strnatcasecmp($a['label'], $b['label']));
 
@@ -325,15 +327,32 @@ class QueryDataController extends ControllerBase {
     $limit = max(1, min($limit, 500));
 
     $query = $this->buildQuery($fact, $dimension_keys, $measure_keys, $filters, $sort, $limit);
+
+    // When browsing raw, unaggregated `plays` rows (no measures -- e.g.
+    // "longest fumble recoveries"), each result row is one actual pbp_play
+    // entity, so a highlight clip can be attached if that play has one --
+    // the same "▶ Watch" link dynasty_search's Play-by-Play Search shows
+    // (see SearchDataController::playByPlay()). This has no meaning for a
+    // GROUP BY aggregate (a "row" there is a combination of dimension
+    // values, not one play), so it's scoped to that raw-row-list case only.
+    $include_highlights = ($fact_key === 'plays' && !$measure_keys);
+    if ($include_highlights) {
+      $query->addExpression($fact['base_alias'] . '.pbp_highlight', '_pbp_highlight');
+    }
+
     $result = $query->execute()->fetchAll(\PDO::FETCH_ASSOC);
 
     $rows = $this->resolveRowLabels($fact, $dimension_keys, $result);
+    if ($include_highlights) {
+      $rows = $this->attachHighlightUrls($rows);
+    }
 
     return new JsonResponse([
       'columns' => [
         'dimensions' => array_map(fn($k) => ['key' => $k, 'label' => $fact['dimensions'][$k]['label']], $dimension_keys),
         'measures' => array_map(fn($k) => ['key' => $k, 'label' => $fact['measures'][$k]['label']], $measure_keys),
       ],
+      'has_highlights' => $include_highlights,
       'rows' => $rows,
     ]);
   }
@@ -473,7 +492,11 @@ class QueryDataController extends ControllerBase {
    * Replaces raw dimension values (node/term IDs) in $rows with their
    * display labels, batching one lookup query per resolve-able dimension
    * across the whole (small, aggregated) result set rather than resolving
-   * per row.
+   * per row. A node-backed dimension (player, opponent, etc.) becomes a
+   * `{label, url}` object so the client can link it, e.g. to a player's own
+   * node page -- see resolveLabels(). Taxonomy-term-backed dimensions
+   * (week, coaches) don't have a meaningful page to link to, so they stay
+   * plain label strings, same as before.
    */
   protected function resolveRowLabels(array $fact, array $dimension_keys, array $rows): array {
     $to_resolve = [];
@@ -487,17 +510,22 @@ class QueryDataController extends ControllerBase {
       return $rows;
     }
 
-    $labels_by_key = [];
+    $info_by_key = [];
     foreach ($to_resolve as $key => $resolve) {
       $ids = array_unique(array_filter(array_column($rows, $key), fn($v) => $v !== NULL && $v !== ''));
-      $labels_by_key[$key] = $this->resolveLabels($resolve, array_values($ids));
+      $info_by_key[$key] = $this->resolveLabels($resolve, array_values($ids));
     }
 
     foreach ($rows as &$row) {
       foreach ($to_resolve as $key => $resolve) {
-        if (isset($row[$key]) && $row[$key] !== NULL) {
-          $row[$key] = $labels_by_key[$key][$row[$key]] ?? $row[$key];
+        if (!isset($row[$key]) || $row[$key] === NULL) {
+          continue;
         }
+        $info = $info_by_key[$key][$row[$key]] ?? NULL;
+        if ($info === NULL) {
+          continue;
+        }
+        $row[$key] = $info['url'] ? ['label' => $info['label'], 'url' => $info['url']] : $info['label'];
       }
     }
 
@@ -505,7 +533,11 @@ class QueryDataController extends ControllerBase {
   }
 
   /**
-   * Batch-resolves a list of node or taxonomy term IDs to display labels.
+   * Batch-resolves a list of node or taxonomy term IDs to
+   * `[id => ['label' => ..., 'url' => ...]]`. `url` is only populated for
+   * nodes (players, teams/opponents) -- taxonomy terms (week, coaches)
+   * don't have a page worth linking to here, so their `url` is NULL and
+   * resolveRowLabels() leaves them as plain text.
    */
   protected function resolveLabels(string $resolve, array $ids): array {
     $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
@@ -518,24 +550,50 @@ class QueryDataController extends ControllerBase {
         ->fields('n', ['nid', 'title'])
         ->condition('n.nid', $ids, 'IN')
         ->execute();
+      $labels = [];
+      foreach ($result as $record) {
+        $labels[(int) $record->nid] = [
+          'label' => $record->title,
+          'url' => Url::fromRoute('entity.node.canonical', ['node' => $record->nid])->toString(),
+        ];
+      }
+      return $labels;
     }
-    elseif ($resolve === 'taxonomy_term') {
+
+    if ($resolve === 'taxonomy_term') {
       $result = $this->database->select('taxonomy_term_field_data', 't')
         ->fields('t', ['tid', 'name'])
         ->condition('t.tid', $ids, 'IN')
         ->execute();
-    }
-    else {
-      return [];
+      $labels = [];
+      foreach ($result as $record) {
+        $labels[(int) $record->tid] = ['label' => $record->name, 'url' => NULL];
+      }
+      return $labels;
     }
 
-    $labels = [];
-    foreach ($result as $record) {
-      $id = $resolve === 'node' ? $record->nid : $record->tid;
-      $label = $resolve === 'node' ? $record->title : $record->name;
-      $labels[$id] = $label;
+    return [];
+  }
+
+  /**
+   * Attaches a `highlight_url` to each raw `plays` row, when that play has
+   * a matching highlight (see run()'s `$include_highlights`) -- mirrors
+   * SearchDataController::playByPlay()'s highlight_url resolution.
+   */
+  protected function attachHighlightUrls(array $rows): array {
+    $ids = array_unique(array_filter(array_map('intval', array_column($rows, '_pbp_highlight'))));
+    $urls = [];
+    if ($ids) {
+      foreach (Node::loadMultiple($ids) as $nid => $node) {
+        $urls[$nid] = $node->toUrl()->toString();
+      }
     }
-    return $labels;
+    foreach ($rows as &$row) {
+      $hid = $row['_pbp_highlight'] ?? NULL;
+      $row['highlight_url'] = $hid ? ($urls[(int) $hid] ?? NULL) : NULL;
+      unset($row['_pbp_highlight']);
+    }
+    return $rows;
   }
 
 }

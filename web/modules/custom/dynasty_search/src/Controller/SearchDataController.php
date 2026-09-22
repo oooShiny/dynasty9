@@ -132,6 +132,7 @@ class SearchDataController extends ControllerBase {
         'opponent' => $opponent ? [
           'nid' => (int) $opponent->id(),
           'name' => DynastyHelpers::check_name_alts($opponent, $season),
+          'url' => $opponent->toUrl()->toString(),
           'css_slug' => $team_css[$opponent->id()] ?? strtolower(str_replace(' ', '-', $opponent->label())),
         ] : NULL,
         'opposing_coach' => $coach_term ? $coach_term->label() : NULL,
@@ -149,6 +150,7 @@ class SearchDataController extends ControllerBase {
         'playoff_game' => (bool) $node->get('field_playoff_game')->value,
         'after_bye' => (bool) $node->get('field_after_bye')->value,
         'starting_qb' => $qb ? $qb->label() : NULL,
+        'starting_qb_url' => $qb ? $qb->toUrl()->toString() : NULL,
         'qb_jersey_number' => ($qb && !$qb->get('field_jersey_number')->isEmpty())
           ? (int) $qb->get('field_jersey_number')->value
           : NULL,
@@ -201,6 +203,7 @@ class SearchDataController extends ControllerBase {
         $players[] = [
           'nid' => (int) $player->id(),
           'name' => $player->label(),
+          'url' => $player->toUrl()->toString(),
         ];
         $cache->addCacheableDependency($player);
       }
@@ -237,6 +240,7 @@ class SearchDataController extends ControllerBase {
         'td_scored' => (bool) $node->get('field_td_scored')->value,
         'players_involved' => $players,
         'game_title' => $game ? $game->label() : NULL,
+        'game_url' => $game ? $game->toUrl()->toString() : NULL,
         'muse_id' => $node->get('field_muse_video_id')->value,
         'video_file' => $node->get('field_video_file_id')->value,
       ];
@@ -324,6 +328,7 @@ class SearchDataController extends ControllerBase {
         'player' => $player ? [
           'nid' => (int) $player->id(),
           'name' => $player->label(),
+          'url' => $player->toUrl()->toString(),
         ] : NULL,
         'quarter' => $row['stat_quarter'],
         'category' => $row['stat_category'],
@@ -419,16 +424,16 @@ class SearchDataController extends ControllerBase {
     $player_ids = array_unique(array_filter(array_merge(...$player_id_lists)));
     $players = $player_ids ? Node::loadMultiple($player_ids) : [];
 
-    // A flat nid => name dictionary, sent once at the top of the response
-    // instead of repeating each player's name on every row/role they
-    // appear in (up to ~146,000 role occurrences across ~135,000 rows) --
-    // rows below reference players by nid only. Cache dependencies are
-    // added once per distinct player here too, rather than once per
-    // row-occurrence.
+    // A flat nid => {name, url} dictionary, sent once at the top of the
+    // response instead of repeating each player's name/url on every
+    // row/role they appear in (up to ~146,000 role occurrences across
+    // ~135,000 rows) -- rows below reference players by nid only. Cache
+    // dependencies are added once per distinct player here too, rather
+    // than once per row-occurrence.
     $player_names = [];
     foreach ($players as $nid => $player) {
       $cache->addCacheableDependency($player);
-      $player_names[$nid] = $player->label();
+      $player_names[$nid] = ['name' => $player->label(), 'url' => $player->toUrl()->toString()];
     }
 
     // Same batch pattern for the (currently very small) set of manually
