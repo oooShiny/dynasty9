@@ -152,7 +152,7 @@ function dynasty_podcast_entity_presave(EntityInterface $entity) {
       }
       $record = "{$wins}-{$losses}";
       $entity->set('field_pats_record_vs_coach', [
-        'uri' => "/search/games?coach=" . rawurlencode($coach),
+        'uri' => "internal:/search/games?coach=" . rawurlencode($coach),
         'title' => "The Patriots are {$record} against {$coach} led teams.",
         'options' => [
           'attributes' => [

@@ -19,3 +19,13 @@ services:
     arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher', '@http_client']
     tags:
       - { name: drush.command }
+  dynasty_plays.pbp_fetch_commands:
+    class: Drupal\dynasty_plays\Commands\PbpFetchCommands
+    arguments: ['@http_client']
+    tags:
+      - { name: drush.command }
+  dynasty_plays.game_sync_commands:
+    class: Drupal\dynasty_plays\Commands\GameSyncCommands
+    arguments: ['@entity_type.manager', '@dynasty_plays.game_player_matcher', '@http_client']
+    tags:
+      - { name: drush.command }
