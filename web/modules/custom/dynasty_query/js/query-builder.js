@@ -271,9 +271,12 @@
 
     function renderResults(data) {
       const columns = data.columns.dimensions.concat(data.columns.measures);
-      const colCount = columns.length + (data.has_highlights ? 1 : 0);
+      const colCount = 1 + columns.length + (data.has_highlights ? 1 : 0);
 
       els.theadRow.innerHTML = '';
+      const numberTh = document.createElement('th');
+      numberTh.textContent = '#';
+      els.theadRow.appendChild(numberTh);
       columns.forEach(function (col) {
         const th = document.createElement('th');
         th.textContent = col.label;
@@ -296,8 +299,11 @@
         els.tbody.appendChild(tr);
         return;
       }
-      data.rows.forEach(function (row) {
+      data.rows.forEach(function (row, index) {
         const tr = document.createElement('tr');
+        const numberTd = document.createElement('td');
+        numberTd.textContent = index + 1;
+        tr.appendChild(numberTd);
         columns.forEach(function (col) {
           const td = document.createElement('td');
           const value = row[col.key];

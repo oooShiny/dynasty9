@@ -519,6 +519,16 @@ class QueryDataController extends ControllerBase {
     foreach ($rows as &$row) {
       foreach ($to_resolve as $key => $resolve) {
         if (!isset($row[$key]) || $row[$key] === NULL) {
+          // A NULL node-backed dimension isn't missing data -- it means
+          // there's no node to reference at all. In practice this is
+          // almost always a play's role field (rusher/passer/etc.)
+          // pointing at an opposing-team player, since this site's
+          // `player` nodes only cover Patriots players; unqualified blank
+          // cells here have been mistaken for a rendering bug before, so
+          // label it explicitly rather than leaving it empty.
+          if ($resolve === 'node') {
+            $row[$key] = '(Unidentified / opponent)';
+          }
           continue;
         }
         $info = $info_by_key[$key][$row[$key]] ?? NULL;
