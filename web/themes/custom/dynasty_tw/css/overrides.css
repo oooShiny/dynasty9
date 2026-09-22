@@ -1,5 +1,15 @@
 a:hover {
   text-decoration: underline;
+  color: #C60C30;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-color: #C60C30;
+}
+
+nav a:hover {
+  color: white;
 }
 
 h2.jersey-blue {
@@ -137,7 +147,7 @@ td.views-field.views-field-transcript {
 }
 
 .jersey {
-  height: 4em;
+  margin: 0 auto;
   width: 4em;
 }
 /**

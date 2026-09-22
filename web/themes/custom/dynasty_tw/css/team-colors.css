@@ -80,6 +80,7 @@
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: #C60C30;
   paint-order: stroke fill;
+  text-align: center;
 }
 
 .jersey-number-white {
@@ -87,6 +88,7 @@
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: #C60C30;
   paint-order: stroke fill;
+  text-align: center;
 }
 
 /* Team Colors */
