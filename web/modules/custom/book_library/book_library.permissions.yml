@@ -1,0 +1,8 @@
+access book library:
+  title: 'Search and read the book library'
+  description: 'View the /books search page, read book passages, and download the uploaded EPUB files.'
+  restrict access: true
+administer book library:
+  title: 'Administer the book library'
+  description: 'Upload, edit, re-index, and delete books.'
+  restrict access: true

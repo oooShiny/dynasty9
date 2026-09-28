@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the book_library module.
+ */
+
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_requirements().
+ *
+ * Books are copyrighted files that must never be reachable at a public URL,
+ * so refuse to install (and flag on the status report) unless Drupal's
+ * private file system is configured. Without it, the `epub` field's
+ * `private://` uploads would simply fail rather than fall back to public://,
+ * but an explicit error here says why.
+ */
+function book_library_requirements($phase) {
+  $requirements = [];
+  if (!in_array($phase, ['install', 'runtime'], TRUE)) {
+    return $requirements;
+  }
+  if (!Settings::get('file_private_path')) {
+    $requirements['book_library_private_path'] = [
+      'title' => t('Book Library private files'),
+      'value' => t('Not configured'),
+      'description' => t("Book Library stores EPUBs on the private file system. Set \$settings['file_private_path'] in settings.php to a writable directory outside the web root."),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Passages are derived data (re-created from the EPUB on every re-index),
+ * so they live in a plain table rather than as entities -- see
+ * \Drupal\book_library\PassageStore. The FULLTEXT index on `body` can't be
+ * expressed in the Schema API, so it's added in hook_install().
+ */
+function book_library_schema() {
+  $schema['book_library_passage'] = [
+    'description' => 'Searchable text passages extracted from library_book EPUBs.',
+    'fields' => [
+      'pid' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'book_id' => [
+        'description' => 'The library_book entity ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'position' => [
+        'description' => '0-based reading-order position of this passage within its book.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'chapter' => [
+        'description' => 'Chapter/section label from the EPUB table of contents.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'body' => [
+        'description' => 'Plain passage text; paragraphs separated by blank lines.',
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['pid'],
+    'unique keys' => [
+      'book_position' => ['book_id', 'position'],
+    ],
+  ];
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function book_library_install() {
+  $database = \Drupal::database();
+  // MySQL/MariaDB only, same as the rest of this site's raw-SQL search code.
+  $table = $database->prefixTables('{book_library_passage}');
+  $database->query("ALTER TABLE $table ADD FULLTEXT INDEX body_fulltext (body)");
+}

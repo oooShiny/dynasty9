@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Private, login-only full-text search over uploaded EPUB books.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function book_library_theme() {
+  return [
+    'book_library_search' => [
+      'variables' => [
+        'query' => '',
+        'books' => [],
+        'selected_book' => NULL,
+        'results' => [],
+        'total' => 0,
+        'message' => NULL,
+        'pager' => NULL,
+        'upload_url' => NULL,
+      ],
+    ],
+    'book_library_reader' => [
+      'variables' => [
+        'book_title' => '',
+        'author' => '',
+        'passages' => [],
+        'chapters' => [],
+        'highlight' => '',
+        'clear_highlight_url' => NULL,
+        'search_url' => NULL,
+        'download_url' => NULL,
+        'pager' => NULL,
+      ],
+    ],
+  ];
+}

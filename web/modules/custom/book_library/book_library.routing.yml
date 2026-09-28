@@ -1,0 +1,19 @@
+book_library.search:
+  path: '/books'
+  defaults:
+    _controller: '\Drupal\book_library\Controller\LibraryController::search'
+    _title: 'Book Library'
+  requirements:
+    _permission: 'access book library'
+
+# Declared here rather than left to the entity's route provider so the
+# reader (a paged passage view) can be a plain controller instead of an
+# entity view display.
+entity.library_book.canonical:
+  path: '/books/{library_book}'
+  defaults:
+    _controller: '\Drupal\book_library\Controller\LibraryController::read'
+    _title_callback: '\Drupal\book_library\Controller\LibraryController::readTitle'
+  requirements:
+    _entity_access: 'library_book.view'
+    library_book: \d+
