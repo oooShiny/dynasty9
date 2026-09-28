@@ -528,7 +528,9 @@ $settings['update_free_access'] = FALSE;
  * See https://www.drupal.org/documentation/modules/file for more information
  * about securing private files.
  */
-# $settings['file_private_path'] = '';
+// Outside the web root (web/), alongside it in the project root. Used by
+// book_library for uploaded EPUBs, which must never be publicly reachable.
+$settings['file_private_path'] = dirname(DRUPAL_ROOT) . '/private';
 
 /**
  * Temporary file path:

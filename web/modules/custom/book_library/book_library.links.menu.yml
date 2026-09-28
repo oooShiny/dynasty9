@@ -1,0 +1,5 @@
+entity.library_book.collection:
+  title: 'Books'
+  description: 'Upload and manage books in the private book library.'
+  route_name: entity.library_book.collection
+  parent: system.admin_content

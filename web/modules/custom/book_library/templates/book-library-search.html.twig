@@ -1,0 +1,104 @@
+{#
+/**
+ * @file
+ * The /books library page: search box, results, and the list of books.
+ *
+ * Available variables:
+ * - query: The raw search input.
+ * - books: Every book, each with id, title, author, passages, url, and hits
+ *   (matching passages for the current query).
+ * - selected_book: Book ID the results are limited to, or NULL.
+ * - results: Matches, each with book_title, author, chapter, snippet
+ *   (highlighted markup), and url (reader link scrolled to the passage).
+ * - total: Total matching passages.
+ * - message: A no-results/invalid-query message, or NULL.
+ * - pager: Pager render array, or NULL.
+ * - upload_url: "Upload book" link for administrators, or NULL.
+ */
+#}
+<div class="book-library max-w-4xl mx-auto px-4 py-6 [&_mark]:bg-yellow-200 [&_mark]:text-inherit dark:[&_mark]:bg-yellow-700 [&_mark]:rounded-sm [&_mark]:px-0.5">
+  <form method="get" action="" class="flex flex-col sm:flex-row gap-2 mb-6" role="search">
+    <label for="book-library-q" class="sr-only">{{ 'Search books'|t }}</label>
+    <input
+      type="search"
+      id="book-library-q"
+      name="q"
+      value="{{ query }}"
+      placeholder="{{ 'Search every book…'|t }}"
+      autocomplete="off"
+      class="flex-1 min-w-0 px-4 py-3 text-base border-2 border-gray-300 rounded-md outline-none focus:border-blue-pats bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-100"
+    />
+    {% if books|length > 1 %}
+      <label for="book-library-book" class="sr-only">{{ 'Limit to book'|t }}</label>
+      <select id="book-library-book" name="book" class="px-3 py-3 border-2 border-gray-300 rounded-md text-base bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-100 sm:max-w-[14rem]">
+        <option value="">{{ 'All books'|t }}</option>
+        {% for book in books %}
+          <option value="{{ book.id }}"{{ selected_book == book.id ? ' selected' }}>{{ book.title }}{{ query and book.hits ? ' (' ~ book.hits ~ ')' }}</option>
+        {% endfor %}
+      </select>
+    {% endif %}
+    <button type="submit" class="px-6 py-3 text-base bg-blue-pats text-white border-none rounded-md hover:bg-blue-900">{{ 'Search'|t }}</button>
+  </form>
+
+  {% if query %}
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+      {% if message %}
+        {{ message }}
+      {% else %}
+        {% trans %}1 matching passage{% plural total %}{{ total }} matching passages{% endtrans %}
+      {% endif %}
+      <span class="block mt-1 text-xs">{{ 'Tip: all words are required; use "quotes" for a phrase and -word to exclude.'|t }}</span>
+    </p>
+
+    {% if results %}
+      <ol class="space-y-4 mb-6">
+        {% for result in results %}
+          <li class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-900">
+            <a href="{{ result.url }}" class="block group no-underline!">
+              <span class="block font-semibold text-blue-pats dark:text-blue-300 group-hover:underline">{{ result.book_title }}</span>
+              <span class="block text-xs text-gray-500 dark:text-gray-400 mb-2">
+                {{- result.author -}}
+                {%- if result.author and result.chapter %} · {% endif -%}
+                {{- result.chapter -}}
+              </span>
+              <span class="block text-sm leading-relaxed text-gray-800 dark:text-gray-200">{{ result.snippet }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+      <div class="overflow-x-auto">{{ pager }}</div>
+    {% endif %}
+  {% endif %}
+
+  <section class="mt-8">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold">{{ 'Books'|t }} <span class="text-gray-500 dark:text-gray-400 font-normal">({{ books|length }})</span></h2>
+      {% if upload_url %}
+        <a href="{{ upload_url }}" class="text-sm text-blue-pats dark:text-blue-300 hover:underline">{{ '+ Upload book'|t }}</a>
+      {% endif %}
+    </div>
+    {% if books %}
+      <ul class="divide-y divide-gray-200 dark:divide-gray-700 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900">
+        {% for book in books %}
+          <li>
+            <a href="{{ book.url }}" class="flex items-baseline justify-between gap-4 px-4 py-3 no-underline! hover:bg-gray-50 dark:hover:bg-gray-800">
+              <span class="min-w-0">
+                <span class="block font-medium truncate">{{ book.title }}</span>
+                {% if book.author %}<span class="block text-xs text-gray-500 dark:text-gray-400 truncate">{{ book.author }}</span>{% endif %}
+              </span>
+              <span class="shrink-0 text-xs text-gray-500 dark:text-gray-400">
+                {% if book.passages %}
+                  {% trans %}1 passage{% plural book.passages %}{{ book.passages }} passages{% endtrans %}
+                {% else %}
+                  {{ 'Not indexed'|t }}
+                {% endif %}
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-gray-600 dark:text-gray-400">{{ 'No books yet.'|t }}</p>
+    {% endif %}
+  </section>
+</div>

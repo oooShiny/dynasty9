@@ -1,0 +1,18 @@
+entity.library_book.collection:
+  title: 'Books'
+  route_name: entity.library_book.collection
+  base_route: system.admin_content
+  weight: 20
+entity.library_book.canonical:
+  title: 'Read'
+  route_name: entity.library_book.canonical
+  base_route: entity.library_book.canonical
+entity.library_book.edit_form:
+  title: 'Edit'
+  route_name: entity.library_book.edit_form
+  base_route: entity.library_book.canonical
+entity.library_book.delete_form:
+  title: 'Delete'
+  route_name: entity.library_book.delete_form
+  base_route: entity.library_book.canonical
+  weight: 10

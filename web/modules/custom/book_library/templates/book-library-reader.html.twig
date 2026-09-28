@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Reader for one book, a page of passages at a time.
+ *
+ * Available variables:
+ * - book_title: The book's title (the page title is set separately).
+ * - author: The book's author.
+ * - passages: This page's passages, each with position (used as the
+ *   #passage-N anchor search results link to), chapter (label where it
+ *   changes, else NULL), and paragraphs (highlighted markup).
+ * - chapters: Table of contents, each with label and url.
+ * - highlight: The highlighted search terms, or ''.
+ * - clear_highlight_url: This page without highlighting, or NULL.
+ * - search_url: Back to /books, keeping the search terms.
+ * - download_url: The (access-checked, private) EPUB file URL, or NULL.
+ * - pager: Pager render array.
+ */
+#}
+<div class="book-library-reader max-w-3xl mx-auto px-4 py-6 [&_mark]:bg-yellow-200 [&_mark]:text-inherit dark:[&_mark]:bg-yellow-700 [&_mark]:rounded-sm [&_mark]:px-0.5">
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm mb-4">
+    <a href="{{ search_url }}" class="text-blue-pats dark:text-blue-300 hover:underline">{{ '← Book Library'|t }}</a>
+    {% if author %}<span class="text-gray-500 dark:text-gray-400">{{ author }}</span>{% endif %}
+    {% if download_url %}<a href="{{ download_url }}" class="text-blue-pats dark:text-blue-300 hover:underline">{{ 'Download EPUB'|t }}</a>{% endif %}
+  </div>
+
+  {% if highlight %}
+    <p class="text-sm mb-4 px-3 py-2 rounded-md bg-yellow-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+      {{ 'Highlighting: %terms'|t({'%terms': highlight}) }}
+      · <a href="{{ clear_highlight_url }}" class="text-blue-pats dark:text-blue-300 hover:underline">{{ 'clear'|t }}</a>
+    </p>
+  {% endif %}
+
+  {% if chapters|length > 1 %}
+    <details class="mb-6 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900">
+      <summary class="cursor-pointer px-4 py-2 font-medium">{{ 'Contents'|t }}</summary>
+      <ol class="px-4 pb-3 max-h-80 overflow-y-auto text-sm space-y-1">
+        {% for chapter in chapters %}
+          <li><a href="{{ chapter.url }}" class="text-blue-pats dark:text-blue-300 hover:underline">{{ chapter.label }}</a></li>
+        {% endfor %}
+      </ol>
+    </details>
+  {% endif %}
+
+  {% if passages %}
+    <article class="font-serif text-lg leading-relaxed text-gray-900 dark:text-gray-100">
+      {% for passage in passages %}
+        {% if passage.chapter %}
+          <h2 class="font-sans text-xl font-semibold mt-8 mb-4 text-blue-pats dark:text-blue-300">{{ passage.chapter }}</h2>
+        {% endif %}
+        <div id="passage-{{ passage.position }}" class="scroll-mt-24 target:bg-yellow-50 dark:target:bg-gray-800 target:rounded-md target:-mx-2 target:px-2">
+          {% for paragraph in passage.paragraphs %}
+            <p class="mb-4">{{ paragraph }}</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </article>
+    <div class="overflow-x-auto">{{ pager }}</div>
+  {% else %}
+    <p class="text-gray-600 dark:text-gray-400">{{ 'This book has no extracted text yet. Re-save it with "Re-extract passages" ticked.'|t }}</p>
+  {% endif %}
+</div>

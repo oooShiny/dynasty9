@@ -12,6 +12,7 @@ module:
   block: 0
   block_content: 0
   block_field: 0
+  book_library: 0
   breakpoint: 0
   ckeditor5: 0
   cloudflare_purge: 0

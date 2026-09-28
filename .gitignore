@@ -54,3 +54,6 @@ patreon.settings.yml
 
 # Local secrets for deploy-and-warm.sh (see .env.example)
 .env
+
+# Private file system (book_library EPUBs) -- see settings.php.
+/private/

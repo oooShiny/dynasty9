@@ -1,0 +1,7 @@
+name: 'Book Library'
+type: module
+description: 'Private, login-only full-text search over uploaded EPUB books.'
+package: Dynasty
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:file

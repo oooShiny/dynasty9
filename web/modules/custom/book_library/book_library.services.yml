@@ -1,0 +1,10 @@
+services:
+  book_library.epub_extractor:
+    class: Drupal\book_library\EpubExtractor
+    arguments: ['@file_system']
+  book_library.passage_store:
+    class: Drupal\book_library\PassageStore
+    arguments: ['@database']
+  book_library.indexer:
+    class: Drupal\book_library\BookIndexer
+    arguments: ['@book_library.epub_extractor', '@book_library.passage_store', '@cache_tags.invalidator']

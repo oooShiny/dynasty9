@@ -1,0 +1,5 @@
+library_book.add_form:
+  route_name: entity.library_book.add_form
+  title: 'Upload book'
+  appears_on:
+    - entity.library_book.collection

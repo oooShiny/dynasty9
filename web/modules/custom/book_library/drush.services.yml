@@ -1,0 +1,6 @@
+services:
+  book_library.commands:
+    class: Drupal\book_library\Commands\BookLibraryCommands
+    arguments: ['@entity_type.manager', '@book_library.indexer']
+    tags:
+      - { name: drush.command }
