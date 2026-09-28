@@ -57,3 +57,5 @@ patreon.settings.yml
 
 # Private file system (book_library EPUBs) -- see settings.php.
 /private/
+
+web/sites/default/settings.php
