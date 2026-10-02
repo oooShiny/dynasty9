@@ -48,8 +48,9 @@
   } only %}
 
   {# Previous/Next Game buttons — mobile only #}
-  <div class="block md:!hidden text-center text-xl">
-    {{ drupal_block('prev_next_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
+  <div class="flex justify-evenly md:!hidden text-center text-xl">
+    {{ drupal_block('prev_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
+    {{ drupal_block('next_game', {context_mapping: {node: '@node.node_route_context:node'}}) }}
   </div>
 
   {# Game date #}
