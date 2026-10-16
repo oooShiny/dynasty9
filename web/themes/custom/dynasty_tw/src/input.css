@@ -263,6 +263,7 @@ label[for*="max"] {
 
 .btn-pats {
   @apply bg-blue-pats p-3 my-1 text-center text-white border-2 border-red-pats cursor-pointer;
+  text-decoration: none !important;
 }
 
 /*
