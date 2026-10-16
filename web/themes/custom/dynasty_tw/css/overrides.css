@@ -8,6 +8,10 @@ a {
   text-decoration-color: #C60C30;
 }
 
+.team-circles a {
+  text-decoration: none;
+}
+
 nav a:hover {
   color: white;
 }
