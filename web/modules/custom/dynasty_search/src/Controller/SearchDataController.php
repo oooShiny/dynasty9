@@ -312,12 +312,13 @@ class SearchDataController extends ControllerBase {
 
     $data = [];
     foreach ($rows as $row) {
-      $game = $games[$row['stat_game']] ?? NULL;
+      $game = $row['stat_game'] !== NULL ? ($games[$row['stat_game']] ?? NULL) : NULL;
       if (!$game) {
         continue;
       }
 
-      $player = $players[$row['stat_player']] ?? NULL;
+      // stat_player can be NULL; a NULL array offset is deprecated as of PHP 8.5.
+      $player = $row['stat_player'] !== NULL ? ($players[$row['stat_player']] ?? NULL) : NULL;
       if ($player) {
         $cache->addCacheableDependency($player);
       }
@@ -481,7 +482,9 @@ class SearchDataController extends ControllerBase {
         continue;
       }
 
-      $highlight = $highlights[$row['pbp_highlight']] ?? NULL;
+      // pbp_highlight is NULL on most plays; a NULL array offset is deprecated
+      // as of PHP 8.5 and would log once per row (~140k) via Drupal's handler.
+      $highlight = $row['pbp_highlight'] !== NULL ? ($highlights[$row['pbp_highlight']] ?? NULL) : NULL;
 
       // Every role field set on this row, as compact [nid, role] pairs --
       // names are looked up client-side against the `players` dictionary
