@@ -76,3 +76,9 @@ Disallow: /index.php/user/login
 Disallow: /index.php/user/logout
 Disallow: /index.php/media/oembed
 Disallow: /index.php/*/media/oembed
+
+# Disallow faceted search query combinations — these generate thousands of
+# unique, expensive URLs that should not be indexed.
+Disallow: /podcast?f
+Disallow: /games?f
+Disallow: /highlight?f

@@ -227,7 +227,10 @@
             "locations": {
                 "web-root": "web/"
             },
-            "allowed-packages": ["drupal/claude_code"]
+            "allowed-packages": ["drupal/claude_code"],
+            "file-mapping": {
+                "[web-root]/robots.txt": false
+            }
         },
         "installer-paths": {
             "web/core": [
