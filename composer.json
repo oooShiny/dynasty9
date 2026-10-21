@@ -124,7 +124,7 @@
     ],
     "require": {
         "composer/installers": "^2.3",
-        "cweagans/composer-patches": "^1.7",
+        "cweagans/composer-patches": "^2.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/aggregator": "^2.2",
         "drupal/auto_entitylabel": "^3.2",
@@ -200,7 +200,7 @@
         "drupal/votingapi": "^4",
         "drush/drush": "^13",
         "hamstar/wikimate": "^1.1",
-        "mglaman/composer-drupal-lenient": "^1.0",
+        "mglaman/composer-drupal-lenient": "^2.0",
         "predis/predis": "^3.5",
         "symfony/finder": "^6 || ^7"
     },
