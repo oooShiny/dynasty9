@@ -169,7 +169,7 @@
         "drupal/patreon": "^4.0",
         "drupal/permissions_enhancer": "^1.0@dev",
         "drupal/plausible": "^2.1",
-        "drupal/quicklink": "^2.0",
+        "drupal/quicklink": "^3.0",
         "drupal/rate": "^3.2",
         "drupal/redirect": "^1.9",
         "drupal/redis": "^1.11",

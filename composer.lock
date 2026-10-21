@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ceec18ff64557b0514b86e11fe0cafa0",
+    "content-hash": "cca07e7aae47f792a1da5d377147856a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4664,26 +4664,26 @@
         },
         {
             "name": "drupal/quicklink",
-            "version": "2.0.5",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/quicklink.git",
-                "reference": "2.0.5"
+                "reference": "3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/quicklink-2.0.5.zip",
-                "reference": "2.0.5",
-                "shasum": "88e4a0ad6fe5bf34515484b5c4784f5af505b193"
+                "url": "https://ftp.drupal.org/files/projects/quicklink-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "bc18999379735917ddff4b3b5774f2a05a028815"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10.2 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.5",
-                    "datestamp": "1743615204",
+                    "version": "3.0.0",
+                    "datestamp": "1776035266",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
