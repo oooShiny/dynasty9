@@ -3,7 +3,6 @@
 namespace Drupal\dynasty_module\Commands;
 
 use Drupal\cloudflare_purge\Purge;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -16,15 +15,9 @@ class CloudflarePurgeCommands extends DrushCommands {
    */
   protected $purge;
 
-  /**
-   * @var \Drupal\Core\Messenger\MessengerInterface
-   */
-  protected $messenger;
-
-  public function __construct(Purge $purge, MessengerInterface $messenger) {
+  public function __construct(Purge $purge) {
     parent::__construct();
     $this->purge = $purge;
-    $this->messenger = $messenger;
   }
 
   /**
@@ -41,23 +34,25 @@ class CloudflarePurgeCommands extends DrushCommands {
    *   Purge a single URL from Cloudflare cache.
    */
   public function purge(string $url = '') {
-    $this->messenger->deleteAll();
-
+    // cloudflare_purge 3.x replaced Purge::purge($url) with purgeByUrls() /
+    // purgeEverything(), which return a CloudflarePurgeResult. showMessage is
+    // FALSE because we report the outcome through drush's own logger.
     if ($url) {
       $this->logger()->notice('Purging Cloudflare cache for: {url}', ['url' => $url]);
+      $result = $this->purge->purgeByUrls([$url], FALSE);
     }
     else {
       $this->logger()->notice('Purging entire Cloudflare cache...');
+      $result = $this->purge->purgeEverything(FALSE);
     }
 
-    $this->purge->purge($url);
-
-    $messages = $this->messenger->all();
-    $this->messenger->deleteAll();
-
-    if (!empty($messages[MessengerInterface::TYPE_ERROR])) {
-      foreach ($messages[MessengerInterface::TYPE_ERROR] as $msg) {
-        $this->logger()->error((string) $msg);
+    if (!$result->isSuccess()) {
+      $this->logger()->error('Cloudflare purge failed (HTTP {status}): {message}', [
+        'status' => $result->getStatusCode(),
+        'message' => $result->getMessage(),
+      ]);
+      foreach ($result->getErrors() as $error) {
+        $this->logger()->error(is_array($error) ? json_encode($error) : (string) $error);
       }
       throw new \Exception('Cloudflare purge failed.');
     }

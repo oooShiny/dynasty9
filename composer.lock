@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c47013f8416183050c39b78069d6a475",
+    "content-hash": "0bffbb6e43b9efd9726fe7c71cfb017d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1498,53 +1498,64 @@
         },
         {
             "name": "drupal/cloudflare_purge",
-            "version": "2.0.5",
+            "version": "3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/cloudflare_purge.git",
-                "reference": "2.0.5"
+                "reference": "3.1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/cloudflare_purge-2.0.5.zip",
-                "reference": "2.0.5",
-                "shasum": "e094161a167d84fd9bf4a0e58bbaa72869c2b6f2"
+                "url": "https://ftp.drupal.org/files/projects/cloudflare_purge-3.1.5.zip",
+                "reference": "3.1.5",
+                "shasum": "5df955ae77455f6ea1d4691b5ee712e958e7a2ab"
             },
             "require": {
-                "drupal/core": "^10.1 || ^11"
+                "drupal/core": "^10 || ^11 || ^12",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "drupal/core-dev": "^10 || ^11 || ^12",
+                "drupal/key": "^1.22"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.5",
-                    "datestamp": "1751212478",
+                    "version": "3.1.5",
+                    "datestamp": "1791765820",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
-            "autoload": {
-                "psr-4": {
-                    "Drupal\\cloudflare_purge\\": "src"
-                }
-            },
             "notification-url": "https://packages.drupal.org/8/downloads",
+            "scripts": {
+                "check-log-rendering": [
+                    "php scripts/check-log-message-rendering.php"
+                ]
+            },
             "license": [
                 "GPL-2.0-or-later"
             ],
             "authors": [
                 {
-                    "name": "Alaa Haddad (alaahaddad.com)",
-                    "homepage": "https://www.drupal.org/u/flashwebcenter",
+                    "name": "Alaa Haddad",
+                    "homepage": "https://alaahaddad.com",
+                    "email": "alaa@flashwebcenter.com",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "Flash Web Center LLC",
+                    "homepage": "https://flashwebcenter.com",
+                    "role": "Organization"
                 }
             ],
-            "description": "Allow customers to purge cached resources from Cloudflare.",
-            "homepage": "https://drupal.org/project/cloudflare_purge",
+            "description": "Cloudflare CDN cache purging via API with support for Bearer Token and API Key authentication methods.",
+            "homepage": "https://www.drupal.org/project/cloudflare_purge",
             "support": {
                 "source": "https://git.drupalcode.org/project/cloudflare_purge",
-                "issues": "https://drupal.org/project/issues/cloudflare_purge"
+                "issues": "https://www.drupal.org/project/issues/cloudflare_purge"
             }
         },
         {

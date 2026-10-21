@@ -131,7 +131,7 @@
         "drupal/better_exposed_filters": "^7.0",
         "drupal/block_field": "^1.0@RC",
         "drupal/charts": "^5.0",
-        "drupal/cloudflare_purge": "^2.0",
+        "drupal/cloudflare_purge": "^3.0",
         "drupal/color_field": "^3.0",
         "drupal/configurable_views_filter_block": "^1.0",
         "drupal/core-composer-scaffold": "^11",

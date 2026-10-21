@@ -1,0 +1,17 @@
+uuid: 7ef45124-8e73-45b7-b210-1978d9d8af00
+langcode: en
+status: true
+dependencies:
+  module:
+    - cloudflare_purge
+title: 'Default cron handler'
+id: cloudflare_purge_cron
+weight: 0
+module: cloudflare_purge
+callback: 'cloudflare_purge#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database
