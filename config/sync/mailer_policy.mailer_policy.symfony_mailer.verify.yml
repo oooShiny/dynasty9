@@ -1,10 +1,10 @@
-uuid: ff25d805-c51f-4cbb-8740-ca5646542aae
+uuid: 42d59b9c-56e1-4b34-ba50-b4db87ee0fcc
 langcode: en
 status: true
-dependencies: {  }
-_core:
-  default_config_hash: DFUx4b0nNPB5fhmZ-OpidH3bHbBGm3G0_3KmJIyl19g
-id: symfony_mailer.test
+dependencies:
+  module:
+    - symfony_mailer
+id: symfony_mailer.verify
 configuration:
   email_body:
     content:
