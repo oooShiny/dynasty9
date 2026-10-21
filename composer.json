@@ -139,7 +139,7 @@
         "drupal/core-recommended": "^11",
         "drupal/dashboard": "^2.2",
         "drupal/entity_browser": "^2.13",
-        "drupal/entity_usage": "^2.0@beta",
+        "drupal/entity_usage": "^5.0",
         "drupal/facets": "^3.0",
         "drupal/facets_block": "^2.0",
         "drupal/field_group": "^4.0",
