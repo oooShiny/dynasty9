@@ -82,3 +82,6 @@ Disallow: /index.php/*/media/oembed
 Disallow: /podcast?f
 Disallow: /games?f
 Disallow: /highlight?f
+
+# Sitemap
+Sitemap: https://patsdynasty.com/sitemap.xml
