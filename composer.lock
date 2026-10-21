@@ -2381,20 +2381,23 @@
         },
         {
             "name": "drupal/entity_usage",
-            "version": "2.1.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity_usage.git",
-                "reference": "8.x-2.1"
+                "reference": "8.x-2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_usage-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "6e581d6f8444584e810219918b811c543dae6d03"
+                "url": "https://ftp.drupal.org/files/projects/entity_usage-8.x-2.3.zip",
+                "reference": "8.x-2.3",
+                "shasum": "8e47e9d3140b55ae3a08e010a79c226545f8bfd2"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11"
+            },
+            "conflict": {
+                "drupal/trash": "< 3.0.30"
             },
             "require-dev": {
                 "drupal/block_field": "~1.0",
@@ -2413,8 +2416,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1782902223",
+                    "version": "8.x-2.3",
+                    "datestamp": "1789472341",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3537,17 +3540,17 @@
         },
         {
             "name": "drupal/layout_paragraphs",
-            "version": "2.1.3",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/layout_paragraphs.git",
-                "reference": "2.1.3"
+                "reference": "2.1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/layout_paragraphs-2.1.3.zip",
-                "reference": "2.1.3",
-                "shasum": "15241cabd39725e3bbfd2525bb195323dd9dca2f"
+                "url": "https://ftp.drupal.org/files/projects/layout_paragraphs-2.1.5.zip",
+                "reference": "2.1.5",
+                "shasum": "8685acefbaff33ecb49062160496b992582a3367"
             },
             "require": {
                 "drupal/core": "^10 || ^11",
@@ -3562,8 +3565,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.3",
-                    "datestamp": "1776262782",
+                    "version": "2.1.5",
+                    "datestamp": "1791575735",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
