@@ -3595,6 +3595,7 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
+                  no_reset: false
                   hide_label: false
               field_quarter_value:
                 plugin_id: default
@@ -3606,6 +3607,7 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
+                  no_reset: false
                   hide_label: false
               field_down_value:
                 plugin_id: default
@@ -3617,6 +3619,7 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
+                  no_reset: false
                   hide_label: false
       sorts:
         field_quarter_value:

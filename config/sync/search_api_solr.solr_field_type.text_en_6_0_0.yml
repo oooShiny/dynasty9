@@ -290,7 +290,7 @@ text_files:
     was
     will
     with
-  protwords: |
+  protwords: |+
 
   accents: |
     # À => A
