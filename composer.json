@@ -153,7 +153,7 @@
         "drupal/jquery_ui_slider": "^2.1",
         "drupal/jquery_ui_touch_punch": "^1.1",
         "drupal/key": "^1.19",
-        "drupal/layout_paragraphs": "^2.0",
+        "drupal/layout_paragraphs": "^3.0",
         "drupal/linkit": "^7",
         "drupal/mail_login": "^4.2",
         "drupal/markdownify": "^1.1",
