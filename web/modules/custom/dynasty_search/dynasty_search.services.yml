@@ -1,0 +1,6 @@
+services:
+  # Must run before page_cache (priority 200); see the class docblock.
+  http_middleware.dynasty_search_query_normalizer:
+    class: Drupal\dynasty_search\StackMiddleware\SearchPageQueryNormalizer
+    tags:
+      - { name: http_middleware, priority: 210 }
