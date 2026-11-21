@@ -64,7 +64,7 @@
       })
       .catch(function (err) {
         statusEl.textContent = '';
-        resultsEl.innerHTML = '<div class="text-red-600 p-4 bg-red-50 rounded-md">Failed to load episodes: ' + escapeHtml(err.message) + '</div>';
+        resultsEl.innerHTML = '<div class="text-red-600 p-4 bg-red-50 rounded-md dark:bg-red-900 dark:text-red-200">Failed to load episodes: ' + escapeHtml(err.message) + '</div>';
       });
 
     function populateSeasons() {
@@ -126,6 +126,11 @@
         b.classList.toggle('bg-white', !active);
         b.classList.toggle('text-gray-700', !active);
         b.classList.toggle('border-gray-300', !active);
+        // Inactive buttons' dark colors would otherwise override the active
+        // bg-red-pats/text-white in dark mode, so they toggle too.
+        b.classList.toggle('dark:bg-gray-900', !active);
+        b.classList.toggle('dark:text-gray-200', !active);
+        b.classList.toggle('dark:border-gray-600', !active);
       });
     }
 
@@ -171,7 +176,7 @@
 
       resultsEl.innerHTML = pageRows.length
         ? pageRows.map(function (r) { return renderCard(r, f.q); }).join('')
-        : '<div class="text-center p-8 text-gray-500">No episodes match your search.</div>';
+        : '<div class="text-center p-8 text-gray-500 dark:text-gray-400">No episodes match your search.</div>';
 
       renderPagination(currentPage, totalPages);
     }
@@ -181,7 +186,7 @@
       const audioId = 'pcast-' + Math.floor(Math.random() * 999999);
 
       return '\
-        <div class="py-5 flex border-b border-gray-300">\
+        <div class="py-5 flex border-b border-gray-300 dark:border-gray-700">\
           <div class="w-40 h-40 mr-5 flex-shrink-0 justify-center items-center flex" style="background-image:url(\'' + escapeHtml(coverImg) + '\');background-size:contain;background-repeat:no-repeat;background-position:center;">\
             <audio id="' + audioId + '" src="' + escapeHtml(r.mp3 || '') + '"></audio>\
             <div onclick="skipBackwards(\'' + audioId + '\')" class="my-auto text-white transition-all duration-300 ease-out opacity-0 -mr-6 scale-0 cursor-pointer">\
@@ -202,8 +207,8 @@
               </a>\
               ' + (r.duration ? '<span class="uppercase font-light text-l"> (' + escapeHtml(r.duration) + ')</span>' : '') + '\
             </h2>\
-            ' + (r.season ? '<div class="text-xs text-gray-500 uppercase tracking-wide">Season ' + escapeHtml(String(r.season)) + (r.opponent ? ' &middot; vs ' + escapeHtml(r.opponent) : '') + '</div>' : '') + '\
-            <div class="text-sm text-gray-700">' + highlight(r.summary, query) + '</div>\
+            ' + (r.season ? '<div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Season ' + escapeHtml(String(r.season)) + (r.opponent ? ' &middot; vs ' + escapeHtml(r.opponent) : '') + '</div>' : '') + '\
+            <div class="text-sm text-gray-700 dark:text-gray-300">' + highlight(r.summary, query) + '</div>\
             <div class="flex gap-2 mt-2">\
               <a href="' + escapeHtml(r.url) + '" class="btn btn-primary text-xs px-3 py-1">Episode Info</a>\
               ' + (r.game_url ? '<a href="' + escapeHtml(r.game_url) + '" class="btn btn-primary text-xs px-3 py-1">Game Info</a>' : '') + '\
@@ -219,7 +224,7 @@
       // query containing &/</> still matches correctly.
       const idx = text.toLowerCase().indexOf(query.toLowerCase());
       if (idx === -1) return escapeHtml(text);
-      return escapeHtml(text.slice(0, idx)) + '<mark class="bg-yellow-200">' + escapeHtml(text.slice(idx, idx + query.length)) + '</mark>' + escapeHtml(text.slice(idx + query.length));
+      return escapeHtml(text.slice(0, idx)) + '<mark class="bg-yellow-200 text-gray-900">' + escapeHtml(text.slice(idx, idx + query.length)) + '</mark>' + escapeHtml(text.slice(idx + query.length));
     }
 
     function renderPagination(page, totalPages) {
@@ -228,9 +233,9 @@
         return;
       }
       paginationEl.innerHTML =
-        '<button class="px-4 py-2 border border-gray-300 bg-white rounded cursor-pointer disabled:opacity-40" ' + (page <= 0 ? 'disabled' : '') + ' data-page="' + (page - 1) + '">&laquo;&laquo;</button>'
+        '<button class="px-4 py-2 border border-gray-300 bg-white rounded cursor-pointer disabled:opacity-40 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600" ' + (page <= 0 ? 'disabled' : '') + ' data-page="' + (page - 1) + '">&laquo;&laquo;</button>'
         + '<span class="px-2 py-2">Page ' + (page + 1) + ' of ' + totalPages + '</span>'
-        + '<button class="px-4 py-2 border border-gray-300 bg-white rounded cursor-pointer disabled:opacity-40" ' + (page >= totalPages - 1 ? 'disabled' : '') + ' data-page="' + (page + 1) + '">&raquo;&raquo;</button>';
+        + '<button class="px-4 py-2 border border-gray-300 bg-white rounded cursor-pointer disabled:opacity-40 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600" ' + (page >= totalPages - 1 ? 'disabled' : '') + ' data-page="' + (page + 1) + '">&raquo;&raquo;</button>';
 
       paginationEl.querySelectorAll('button[data-page]').forEach(function (btn) {
         btn.addEventListener('click', function () {
