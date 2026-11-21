@@ -1,18 +1,6 @@
 {
-    "_hash": "e22c26fc10c6511becf3596ff2509255b8ba0aa50b0def81460fb13259af3b81",
+    "_hash": "c59f504dae7a6823856c4bfd4d94c9588e5b5587d8c48fbb48f6eb02e73d1644",
     "patches": {
-        "drupal/facets": [
-            {
-                "package": "drupal/facets",
-                "description": "3446040: Select2 doesn't work with Facets 3",
-                "url": "https://git.drupalcode.org/project/facets/-/merge_requests/286/diffs.patch",
-                "sha256": "d305ba82900768765d172a4885a55a8e6539bb021d8c375e51f8e41340de398b",
-                "depth": 1,
-                "extra": {
-                    "provenance": "root"
-                }
-            }
-        ],
         "drupal/views_ajax_history": [
             {
                 "package": "drupal/views_ajax_history",

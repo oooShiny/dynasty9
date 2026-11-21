@@ -42,4 +42,3 @@ content:
 hidden:
   field_event_image: true
   langcode: true
-  search_api_excerpt: true

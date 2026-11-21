@@ -35,10 +35,7 @@ settings:
       season_select_block: season_select_block
       top_10_podcast_block: top_10_podcast_block
       total_podcast_downloads_block: total_podcast_downloads_block
-      facets_block: facets_block
       'views_block:highlight_player-block_1': 'views_block:highlight_player-block_1'
-      'views_block:podcast_search-block_1': 'views_block:podcast_search-block_1'
-      'views_block:podcast_transcript_search-block_1': 'views_block:podcast_transcript_search-block_1'
       'views_block:random_highlight-block_1': 'views_block:random_highlight-block_1'
       'views_block:top_plays-block_7': 'views_block:top_plays-block_7'
       'views_block:top_plays-block_2': 'views_block:top_plays-block_2'

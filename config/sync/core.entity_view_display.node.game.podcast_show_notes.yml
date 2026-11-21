@@ -652,4 +652,3 @@ content:
 hidden:
   field_game_screenshots: true
   langcode: true
-  search_api_excerpt: true

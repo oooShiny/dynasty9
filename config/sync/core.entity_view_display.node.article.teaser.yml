@@ -60,4 +60,3 @@ hidden:
   field_show_in_blog_listing: true
   field_tags: true
   langcode: true
-  search_api_excerpt: true

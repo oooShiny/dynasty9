@@ -48,4 +48,3 @@ hidden:
   field_pfr_id: true
   field_team_standings: true
   langcode: true
-  search_api_excerpt: true

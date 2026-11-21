@@ -35,7 +35,7 @@ Project URL: https://dynasty9.ddev.site (or http://dynasty9.ddev.site)
 - **Document Root**: `web/`
 
 ### Production
-A separate, resource-constrained production VPS exists (small: ~1.9GB RAM, PHP-FPM `memory_limit` tuned to 900M / `max_execution_time` to 60s specifically to give the two large flat-JSON search endpoints, above, room to complete their first computation after a cache invalidation -- that ini change lives only on the server, not in this repo). Connection details aren't recorded here; ask the user.
+A separate, resource-constrained production VPS exists (small: ~1.9GB RAM, PHP-FPM `memory_limit` tuned to 900M / `max_execution_time` to 60s specifically to give the two large flat-JSON search endpoints, above, room to complete their first computation after a cache invalidation -- that ini change lives only on the server, in `/etc/php/8.5/fpm/conf.d/99-dynasty.ini`, not in this repo). Production runs Ubuntu 26.04 with distro nginx/PHP 8.5 and unattended security upgrades. Its Redis has no persistence, so a reboot or Redis restart empties Drupal's cache just like `drush cr` (see below). Connection details aren't recorded here; ask the user.
 
 Two things that have caused real incidents there:
 - **`drush updb`/`drush cim` are not optional after a deploy.** Production once went 5 commits/several weeks without either running, so the code (which no longer had the retired `play` entity's PHP class) and the database (which still had `field_scoring_plays` referencing that now-nonexistent entity type) diverged enough to throw a live `FieldException` on every `game`/`highlight`/`player` page. If an update hook needs a since-deleted class to resolve an entity type (e.g. `getStorage('some_deleted_type')`), it may need the class file temporarily restored (from the commit that deleted it) to run at all, then removed again afterward -- don't delete a custom entity type's PHP classes and drop its update hook in the same deploy without running `updb` in between, or a later catch-up deploy can hit exactly this.
@@ -129,7 +129,7 @@ All custom modules are in `web/modules/custom/`:
 
   Missing/incomplete Player nodes (no node at all, or a node with a gap in `field_seasons_on_team`) are the recurring root cause of unmatched CSV rows -- run `drush dynasty_plays:sync-players --season=<YYYY|YYYY-YYYY> [--create-missing] [--dry-run]` (`src/Commands/PlayerSyncCommands.php`) after importing a new season's CSVs to close that gap: it cross-references nflverse-data's roster release (`github.com/nflverse/nflverse-data`, tag `rosters` -- one `roster_<season>.csv` per season, 1920-present, openly licensed) for that season's Patriots roster (team code `BOS` through 1970, `NE` from 1971 on), adds any missing season number to an existing Player node by exact full-name match, and reports (or, with `--create-missing`, creates) any roster name with no matching node at all. Pro Football Reference's roster pages were considered as a second source but are blocked by a Cloudflare JS challenge for any non-browser request, and nflverse-data's coverage already makes that unnecessary.
 
-- **dynasty_search**: JSON data endpoints + page shells for the site's search pages (Game Search, Highlight Search, and the merged Player Stats/All Plays search). Each dataset is served once as flat JSON (`/dynasty/search/*`) and filtered/sorted/paginated entirely client-side in vanilla JS (`js/*.js`) — used instead of Search API/Solr for these small-to-medium, bounded datasets. See Search Architecture below.
+- **dynasty_search**: JSON data endpoints + page shells for the site's search pages (Game Search, Highlight Search, the merged Player Stats/All Plays search, Podcast Search, and Transcript Search). Each dataset is served once as flat JSON (`/dynasty/search/*`) and filtered/sorted/paginated entirely client-side in vanilla JS (`js/*.js`). This is the site's only search mechanism: Search API, Solr, and Facets were fully removed in Nov 2026. See Search Architecture below.
 
 - **dynasty_query**: Ad-hoc group-by/aggregate Query Builder (`/query`) for questions dynasty_search's flat-JSON/client-filter pattern can't answer -- e.g. "QB stats by quarter," "Brady vs opposing DC," "longest fumble recoveries." `src/Controller/QueryDataController.php` holds a fixed PHP whitelist (`schemaDefinition()`) of every dimension/measure a client can request across three fact tables (`player_game_stats`, `games`, `plays`), and builds parameterized raw SQL from it via the Database API -- never from a raw column name or SQL fragment in the request. Game-level dimensions (season, opponent, coaches, result, etc.) all live in Drupal's default per-field storage (one `node__field_<name>` table per field) rather than a single base table; `gameFieldJoins()` is the shared join spec every fact table's `game_id_expr` (its own nid for `games`, `stat_game`/`pbp_game` for the other two) uses to pull those in, joined only when a request actually asks for one. `/dynasty/query/schema`, `/dynasty/query/options`, and `/dynasty/query/run` are the JSON endpoints; `/dynasty/query/run` returns a flat row list (no `GROUP BY`) when zero measures are requested, which is how "longest fumble recovery" style questions (sort+limit over raw rows) work without a separate query mode.
 
@@ -191,13 +191,13 @@ Configuration is stored in `config/sync/` directory and synced via Drush command
 
 The site has:
 - 59+ Views configurations
-- Faceted search using Search API + Solr, now scoped to podcast/transcript search only (`search_api.index.podcast_index`, `search_api.index.podcast_transcript_index`) -- Game/Highlight/Stat/Play search were migrated off Search API to the client-side flat-JSON pattern (see Search Architecture below); don't add a new Search API index for a similarly small/bounded dataset without considering that pattern first
+- No Search API, Solr, or Facets. All site search moved to the client-side flat-JSON pattern (see Search Architecture below). Podcast/transcript search, the last Solr user, moved in Sep 2026, and the modules, config, and Solr droplet were removed in Nov 2026. Don't reintroduce Search API/Solr for a small/bounded dataset; extend the flat-JSON pattern instead (or raw MySQL FULLTEXT, as `book_library` does, when the text is too big to ship to the browser)
 - Entity browsers for content selection
 - Paragraphs with layout paragraphs for flexible content
 - Gutenberg editor integration
 
 ### Search Architecture
-The site's own game/play/highlight/stat search pages (`dynasty_search` module) deliberately avoid Search API/Solr: each dataset is small and bounded, so the whole published dataset is served once as flat JSON (`/dynasty/search/games`, `/highlights`, `/stats`, `/play-by-play`) with a permanent cache, and all filtering/sorting/pagination happens client-side (select2 widgets + noUiSlider range sliders). Current pages:
+The site's search pages (`dynasty_search` module) deliberately avoid Search API/Solr: each dataset is small and bounded, so the whole published dataset is served once as flat JSON (`/dynasty/search/games`, `/highlights`, `/stats`, `/play-by-play`, `/podcasts`, `/transcripts`) with a permanent cache, and all filtering/sorting/pagination happens client-side (select2 widgets + noUiSlider range sliders). Current pages:
 - `/search/games`, `/search/highlights` — standalone pages, one dataset each.
 - `/search/plays` — a single page with two client-side modes, "Player Stats" (per-player Passing/Rushing/Receiving lines from `player_game_stat`) and "All Plays" (the raw `pbp_play` log, with Play Type and Player filters, a "Scoring Play" toggle, and a "Scoring Team" filter — Play Type/Player come from `pbp_play_type` and the role fields via `SearchDataController::ROLE_FIELD_LABELS`, not free-text parsing). Only the active mode's markup is live in the DOM at load; the other mode's identical markup sits inert inside a `<template>` tag until first switched to (`js/plays-search-toggle.js`), so only one of the two (large) datasets is ever fetched per visit unless a visitor asks for both. `/search/stats` and `/search/play-by-play` are legacy URLs that 301-redirect here.
 - The page shells' server-rendered HTML doesn't vary by query string (filters are read client-side from `location.search`), so `src/StackMiddleware/SearchPageQueryNormalizer.php` (http_middleware priority 210, before page_cache) strips the query from `/search/games`, `/search/highlights`, and `/search/plays` (keeping only `mode` on plays) before the page cache keys on it. Without it, every distinct filter URL becomes its own permanent page-cache entry: in Nov 2026 a botnet sending randomized old-format URLs grew production Redis to 1.8GB and took the site down. If a shell starts reading a query arg server-side, add that arg to `SearchPageQueryNormalizer::PATHS` or it will be silently dropped. Production nginx also 301s the retired Search API format (`season[...]`, `score_differential[...]`, `order=`) on `/search/games` before PHP runs (that config is server-only, not in this repo).
@@ -209,7 +209,7 @@ Notable modules (see `composer.json` for full list):
 
 - **UI/Theme**: gin, gin_login, gutenberg, ui_suite_daisyui, tailwindcss
 - **Content**: paragraphs, layout_paragraphs, entity_browser, inline_entity_form
-- **Search**: search_api, search_api_solr, facets
+- **Search**: select2 (library only, for the `dynasty_search` filter widgets). There is no Search API/Solr/Facets
 - **Migration**: migrate_plus, migrate_tools, migrate_source_csv
 - **SEO**: metatag, pathauto, simple_sitemap, redirect
 - **Analytics**: google_tag, plausible
@@ -222,7 +222,6 @@ Highcharts 6.1.0 is installed via custom repository definitions in composer.json
 
 ### Patches
 The project applies patches to:
-- `drupal/facets`: Select2 compatibility fix (#3446040)
 - `drupal/views_ajax_history`: jQuery $.unique deprecation fix (#3499860)
 
 ## Development Workflow

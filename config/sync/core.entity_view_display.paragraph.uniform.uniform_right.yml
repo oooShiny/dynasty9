@@ -53,4 +53,3 @@ content:
     region: content
 hidden:
   field_helmet_right: true
-  search_api_excerpt: true

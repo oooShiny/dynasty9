@@ -173,4 +173,3 @@ hidden:
   field_publication_date: true
   field_transcript_filename: true
   langcode: true
-  search_api_excerpt: true
